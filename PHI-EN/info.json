@@ -1,0 +1,15 @@
+{
+    "name": "PHIDIAS",
+    "version": "1.1.0",
+    "factorio_version": "1.1",
+    "date": "2022-12-01",
+    "title": "PHIDIAS",
+    "author": "PHIDIAS0303",
+    "contributers": "",
+    "homepage": "",
+    "description": "Additional Compound Solars, Accumulator",
+    "dependencies": [
+        "base >= 1.1.0",
+        "? PHI-EQ >= 1.1.0"
+    ]
+}
