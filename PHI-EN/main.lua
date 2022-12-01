@@ -21,9 +21,6 @@ local function EE(source, tier)
         item.energy_source.buffer_capacity = (base_battery_energy * 4 ^ (tier - 1)) .. "MJ"
         item.energy_source.input_flow_limit = (base_battery_flow * (4 ^ (tier - 1))) .. "kW"
         item.energy_source.output_flow_limit = (base_battery_flow * (4 ^ (tier - 1))) .. "kW"
-        item.energy_source.buffer_capacity = (base_battery_energy * 4 ^ (tier - 1)) .. "MJ"
-        item.energy_source.input_flow_limit = (base_battery_flow * (4 ^ (tier - 1))) .. "kW"
-        item.energy_source.output_flow_limit = (base_battery_flow * (4 ^ (tier - 1))) .. "kW"
         item.charge_animation.layers[1].layers[1].filename = item.picture.layers[1].filename
         item.charge_animation.layers[1].layers[1].tint = {r = 1, g = 1, b = 1, a = 1}
         item.charge_animation.layers[1].layers[1].hr_version.filename = item.picture.layers[1].hr_version.filename
