@@ -1,19 +1,6 @@
 data:extend(
 {
     {
-        type = "night-vision-equipment",
-        name = "night-vision-equipment-mk2",
-        sprite = {filename = "__base__/graphics/equipment/night-vision-equipment.png", width = 64, height = 64, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-night-vision-equipment.png", width = 128, height = 128, priority = "medium", scale = 0.5}},
-        shape = {width = 2, height = 2, type = "full"},
-        energy_source = {type = "electric", buffer_capacity = "120kJ", input_flow_limit = "240kW", usage_priority = "primary-input"},
-        energy_input = "10kW",
-        activate_sound = {filename = "__base__/sound/nightvision-on.ogg", volume = 0.5},
-        deactivate_sound = {filename = "__base__/sound/nightvision-off.ogg", volume = 0.5},
-        darkness_to_turn_on = 0,
-        color_lookup = {{0, "__core__/graphics/color_luts/lut-sunset.png"}},
-        categories = {"armor"}
-    },
-    {
         type = "energy-shield-equipment",
         name = "energy-shield-mk3-equipment",
         sprite = {filename = "__base__/graphics/equipment/energy-shield-mk2-equipment.png", width = 64, height = 64, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-energy-shield-mk2-equipment.png", width = 128, height = 128, priority = "medium", scale = 0.5}},
@@ -56,17 +43,5 @@ data:extend(
         charging_threshold_distance = 5,
         categories = {"armor"}
     },
-    {
-        type = "active-defense-equipment",
-        name = "personal-laser-defense-equipment-mk2",
-        sprite = {filename = "__base__/graphics/equipment/personal-laser-defense-equipment.png", width = 64, height = 64, priority = "medium", hr_version = { filename = "__base__/graphics/equipment/hr-personal-laser-defense-equipment.png", width = 128, height = 128, priority = "medium", scale = 0.5}},
-        shape = {width = 2, height = 2, type = "full"},
-        energy_source = {type = "electric", usage_priority = "secondary-input", buffer_capacity = "1000kJ"},
-        --source_direction_count = 64,
-        --source_offset = {0, -3.423489 / 4},
-        attack_parameters = {type = "beam", cooldown = 30, range = 24, damage_modifier = 4.5, ammo_type = {category = "laser", energy_consumption = "50kJ", action = {type = "direct", action_delivery = {type = "beam", beam = "laser-beam", max_length = 24, duration = 30, source_offset = {0, -1.31439}}}}},
-        automatic = true,
-        categories = {"armor"}
-    }
 }
 )
