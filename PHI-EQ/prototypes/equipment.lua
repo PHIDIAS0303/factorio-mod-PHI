@@ -1,69 +1,6 @@
 data:extend(
 {
     {
-        type = "solar-panel-equipment",
-        name = "solar-panel-equipment-mk2",
-        sprite = {filename = "__base__/graphics/equipment/solar-panel-equipment.png", width = 32, height = 32, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-solar-panel-equipment.png", width = 64, height = 64, priority = "medium", scale = 0.5}},
-        shape = {width = 1, height = 1, type = "full"},
-        power = "60kW",
-        energy_source = {type = "electric", usage_priority = "primary-output"},
-        categories = {"armor"}
-    },
-    {
-        type = "solar-panel-equipment",
-        name = "solar-panel-equipment-mk3",
-        sprite = {filename = "__base__/graphics/equipment/solar-panel-equipment.png", width = 32, height = 32, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-solar-panel-equipment.png", width = 64, height = 64, priority = "medium", scale = 0.5}},
-        shape = {width = 1, height = 1, type = "full"},
-        power = "120kW",
-        energy_source = {type = "electric", usage_priority = "primary-output"},
-        categories = {"armor"}
-    },
-    {
-        type = "solar-panel-equipment",
-        name = "solar-panel-equipment-mk4",
-        sprite = {filename = "__base__/graphics/equipment/solar-panel-equipment.png", width = 32, height = 32, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-solar-panel-equipment.png", width = 64, height = 64, priority = "medium", scale = 0.5}},
-        shape = {width = 1, height = 1, type = "full"},
-        power = "240kW",
-        energy_source = {type = "electric", usage_priority = "primary-output"},
-        categories = {"armor"}
-    },
-    {
-        type = "solar-panel-equipment",
-        name = "solar-panel-equipment-mk5",
-        sprite = {filename = "__base__/graphics/equipment/solar-panel-equipment.png", width = 32, height = 32, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-solar-panel-equipment.png", width = 64, height = 64, priority = "medium", scale = 0.5}},
-        shape = {width = 1, height = 1, type = "full"},
-        power = "480kW",
-        energy_source = {type = "electric", usage_priority = "primary-output"},
-        categories = {"armor"}
-    },
-    {
-        type = "solar-panel-equipment",
-        name = "solar-panel-equipment-mk6",
-        sprite = {filename = "__base__/graphics/equipment/solar-panel-equipment.png", width = 32, height = 32, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-solar-panel-equipment.png", width = 64, height = 64, priority = "medium", scale = 0.5}},
-        shape = {width = 1, height = 1, type = "full"},
-        power = "960kW",
-        energy_source = {type = "electric", usage_priority = "primary-output"},
-        categories = {"armor"}
-    },
-    {
-        type = "solar-panel-equipment",
-        name = "solar-panel-equipment-mk7",
-        sprite = {filename = "__base__/graphics/equipment/solar-panel-equipment.png", width = 32, height = 32, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-solar-panel-equipment.png", width = 64, height = 64, priority = "medium", scale = 0.5}},
-        shape = {width = 1, height = 1, type = "full"},
-        power = "1920kW",
-        energy_source = {type = "electric", usage_priority = "primary-output"},
-        categories = {"armor"}
-    },
-    {
-        type = "solar-panel-equipment",
-        name = "solar-panel-equipment-mk8",
-        sprite = {filename = "__base__/graphics/equipment/solar-panel-equipment.png", width = 32, height = 32, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-solar-panel-equipment.png", width = 64, height = 64, priority = "medium", scale = 0.5}},
-        shape = {width = 1, height = 1, type = "full"},
-        power = "3840kW",
-        energy_source = {type = "electric", usage_priority = "primary-output"},
-        categories = {"armor"}
-    },
-    {
         type = "battery-equipment",
         name = "battery-mk3-equipment",
         sprite = {filename = "__base__/graphics/equipment/battery-mk2-equipment.png", width = 32, height = 64, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-battery-mk2-equipment.png", width = 64, height = 128, priority = "medium", scale = 0.5}},
