@@ -4,7 +4,7 @@ local base_battery_flow = 300
 local base_solar_energy = 60
 local graphics_location = "__PHI-EN__/graphics/"
 
-local function EN(source, tier)
+local function EE(source, tier)
     local item = table.deepcopy(data.raw[source][source])
     item.name = source .. "-mk" .. tier
     item.place_result = source .. "-mk" .. tier
@@ -68,7 +68,7 @@ items = {"accumulator", "solar-panel"}
 
 for i=1, 2, 1 do
     for j=2, 8, 1 do
-        EN(items[i], j)
+        EE(items[i], j)
         ER(items[i], j)
     end
 end
