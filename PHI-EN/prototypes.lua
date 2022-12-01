@@ -47,11 +47,11 @@ local function EE(source, tier)
 end
 
 local function ER(source, tier)
-    name = source
+    na = source
 
     if (tier >= 3)
     then
-        name = name .. "-mk" .. (tier - 1)
+        na = na .. "-mk" .. (tier - 1)
     end
 
     data:extend({{
@@ -59,7 +59,7 @@ local function ER(source, tier)
         name = source .. "-mk" .. tier,
         energy_required = 5,
         enabled = "false",
-        ingredients = {{name, 4}},
+        ingredients = {{na, 4}},
         result = source .. "-mk" .. tier,
     }})
 end
