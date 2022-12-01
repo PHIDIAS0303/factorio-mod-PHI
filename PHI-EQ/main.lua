@@ -8,20 +8,20 @@ local items = {"solar-panel", "battery", "fusion-reactor", "personal-laser-defen
 -- equipment
 local function EE(source, tier)
     item = {}
-    item["name"] = source .. "-mk" .. tier
+    item["name"] = source .. "-mk" .. tier .. "-equipment"
     item["categories"] = armor
     local w = 1
     local h = 1
 
     if (source == "solar-panel")
     then
-        ty = source .. "-equipment"
+        ty = "solar-panel-equipment"
         item["power"] = (60 * (2 ^ (tier - 1))) .. "kW"
         item["energy_source"] = {type = "electric", usage_priority = "primary-output"}
     elseif (source == "battery")
     then
         h = 2
-        ty = source .. "-equipment"
+        ty = "battery-equipment"
         item["energy_source"] = {type = "electric", usage_priority = "tertiary", buffer_capacity= (100 * (2 ^ (tier - 1))) .. "MJ"}
     elseif (source == "fusion-reactor")
     then
@@ -98,8 +98,8 @@ end
 -- item
 local function EI(source, tier)
     local item = table.deepcopy(data.raw.item[source])
-    item.name = source .. "-mk" .. tier
-    item.placed_as_equipment_result = source .. "-mk" .. tier
+    item.name = source .. "-mk" .. tier .. "-equipment"
+    item.placed_as_equipment_result = source .. "-mk" .. tier .. "-equipment"
     item.max_health = 1000
     item.subgroup = "equipment"
     item.stack_size = 20
@@ -167,14 +167,14 @@ end
 local function ET(tier)
     if (tier == 2)
     then
-        prereq = {"solar-energy", "advanced-electronics", "electric-energy-accumulators"}
+        prereq = {"compound-energy", "solar-panel-equipment", "battery-mk2-equipment", "night-vision-equipment"}
     else
         prereq = {"compound-energy-" .. (tier - 2)}
     end
 
     data:extend({{
         type = "technology",
-        name = "compound-energy-" .. (tier - 1),
+        name = "compound-equipment-energy-" .. (tier - 1),
         icon_size = 256,
         icon = graphics_location .. "solar-energy" .. "-t.png",
         effects = {
