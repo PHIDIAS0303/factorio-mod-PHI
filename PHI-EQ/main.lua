@@ -25,10 +25,11 @@ local function EE(source, tier)
         item["energy_source"] = {type = "electric", usage_priority = "tertiary", buffer_capacity= (100 * (2 ^ (tier - 1))) .. "MJ"}
     elseif (source == "fusion-reactor")
     then
-        w = 1
-        h = 2
-        ty = source .. "-equipment"
-        item["energy_source"] = {type = "electric", usage_priority = "tertiary", buffer_capacity= (100 * (2 ^ (tier - 1))) .. "MJ"}
+        w = 4
+        h = 4
+        ty = "generator-equipment"
+        item["power"] = (750 * (2 ^ (tier - 1))) .. "kW"
+        item["energy_source"] = {type = "electric", usage_priority = "primary-output"}
     end
 
     item["type"] = ty
