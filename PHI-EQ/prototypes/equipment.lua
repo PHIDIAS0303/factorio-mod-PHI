@@ -67,56 +67,6 @@ data:extend(
         attack_parameters = {type = "beam", cooldown = 30, range = 24, damage_modifier = 4.5, ammo_type = {category = "laser", energy_consumption = "50kJ", action = {type = "direct", action_delivery = {type = "beam", beam = "laser-beam", max_length = 24, duration = 30, source_offset = {0, -1.31439}}}}},
         automatic = true,
         categories = {"armor"}
-    },
-    {
-        type = "generator-equipment",
-        name = "burner-generator-equipment",
-        sprite = {filename = "__base__/graphics/equipment/fusion-reactor-equipment.png", width = 128, height = 128, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-fusion-reactor-equipment.png", width = 256, height = 256, priority = "medium", scale = 0.5}},
-        shape = {width = 4, height = 4, type = "full"},
-        energy_source = {type = "burner", usage_priority = "secondary-output"},
-        burner = {fuel_category = "chemical", effectivity = 2, fuel_inventory_size = 3, burnt_inventory_size = 1, smoke = {{name = "smoke", deviation = {0.25, 0.25}, frequency = 50, position = {0, 0.5}, height = 1, starting_frame = 0, starting_frame_deviation = 60}}},
-        power = "800kW",
-        categories = {"armor"}
-    },
-    {
-        type = "generator-equipment",
-        name = "burner-generator-equipment-mk2",
-        sprite = {filename = "__base__/graphics/equipment/fusion-reactor-equipment.png", width = 128, height = 128, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-fusion-reactor-equipment.png", width = 256, height = 256, priority = "medium", scale = 0.5}},
-        shape = {width = 4, height = 4, type = "full"},
-        energy_source = {type = "burner", usage_priority = "secondary-output"},
-        burner = {fuel_category = "chemical", effectivity = 2, fuel_inventory_size = 3, burnt_inventory_size = 1, smoke = {{name = "smoke", deviation = {0.25, 0.25}, frequency = 50, position = {0, 0.5}, height = 1, starting_frame = 0, starting_frame_deviation = 60}}},
-        power = "1600kW",
-        categories = {"armor"}
-    },
-    {
-        type = "generator-equipment",
-        name = "burner-generator-equipment-mk3",
-        sprite = {filename = "__base__/graphics/equipment/fusion-reactor-equipment.png", width = 128, height = 128, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-fusion-reactor-equipment.png", width = 256, height = 256, priority = "medium", scale = 0.5}},
-        shape = {width = 4, height = 4, type = "full"},
-        energy_source = {type = "burner", usage_priority = "secondary-output"},
-        burner = {fuel_category = "chemical", effectivity = 2, fuel_inventory_size = 5, burnt_inventory_size = 2, smoke = {{name = "smoke", deviation = {0.25, 0.25}, frequency = 50, position = {0, 0.5}, height = 1, starting_frame = 0, starting_frame_deviation = 60}}},
-        power = "3200kW",
-        categories = {"armor"}
-    },
-    {
-        type = "generator-equipment",
-        name = "nuclear-generator-equipment",
-        sprite = {filename = "__base__/graphics/equipment/fusion-reactor-equipment.png", width = 128, height = 128, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-fusion-reactor-equipment.png", width = 256, height = 256, priority = "medium", scale = 0.5}},
-        shape = {width = 4, height = 4, type = "full"},
-        energy_source = {type = "burner", usage_priority = "secondary-output"},
-        burner = {fuel_category = "nuclear", effectivity = 2, fuel_inventory_size = 3, burnt_inventory_size = 3, smoke = {{name = "smoke", deviation = {0.25, 0.25}, frequency = 50, position = {0, 0.5}, height = 1, starting_frame = 0, starting_frame_deviation = 60}}},
-        power = "6400kW",
-        categories = {"armor"}
-    },
-    {
-        type = "generator-equipment",
-        name = "nuclear-generator-equipment-mk2",
-        sprite = {filename = "__base__/graphics/equipment/fusion-reactor-equipment.png", width = 128, height = 128, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-fusion-reactor-equipment.png", width = 256, height = 256, priority = "medium", scale = 0.5}},
-        shape = {width = 4, height = 4, type = "full"},
-        energy_source = {type = "burner", usage_priority = "secondary-output"},
-        burner = {fuel_category = "nuclear", effectivity = 2, fuel_inventory_size = 5, burnt_inventory_size = 5, smoke = {{name = "smoke", deviation = {0.25, 0.25}, frequency = 50, position = {0, 0.5}, height = 1, starting_frame = 0, starting_frame_deviation = 60}}},
-        power = "12800kW",
-        categories = {"armor"}
     }
 }
 )
