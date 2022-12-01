@@ -13,10 +13,6 @@ data:extend(
                 {
                     type = "unlock-recipe",
                     recipe = "night-vision-equipment-mk2"
-                },
-                {
-                    type = "unlock-recipe",
-                    recipe = "burner-generator-equipment"
                 }
             },
             prerequisites = {"compound-energy", "solar-panel-equipment", "battery-mk2-equipment", "night-vision-equipment"},
@@ -43,10 +39,6 @@ data:extend(
                 {
                     type = "unlock-recipe",
                     recipe = "battery-mk3-equipment"
-                },
-                {
-                    type = "unlock-recipe",
-                    recipe = "burner-generator-equipment-mk2"
                 }
             },
             prerequisites = {"compound-energy-2", "compound-equipment-energy", "personal-laser-defense-equipment"},
@@ -74,10 +66,6 @@ data:extend(
                 {
                     type = "unlock-recipe",
                     recipe = "battery-mk4-equipment"
-                },
-                {
-                    type = "unlock-recipe",
-                    recipe = "burner-generator-equipment-mk3"
                 }
             },
             prerequisites = {"compound-energy-3", "compound-equipment-energy-2"},
@@ -126,10 +114,6 @@ data:extend(
                     type = "unlock-recipe",
                     recipe = "exoskeleton-equipment-mk2"
                 },
-                {
-                    type = "unlock-recipe",
-                    recipe = "nuclear-generator-equipment"
-                }
             },
             prerequisites = {"compound-energy-4", "compound-equipment-energy-3", "fusion-reactor-equipment", "personal-roboport-mk2-equipment", "energy-shield-mk2-equipment", "exoskeleton-equipment"},
             unit = {
@@ -162,10 +146,6 @@ data:extend(
                     type = "unlock-recipe",
                     recipe = "fusion-reactor-equipment-mk3"
                 },
-                {
-                    type = "unlock-recipe",
-                    recipe = "nuclear-generator-equipment-mk2"
-                }
             },
             prerequisites = {"compound-energy-5", "compound-equipment-energy-4"},
             unit = {
