@@ -1,54 +1,6 @@
 data:extend(
 {
     {
-        type = "battery-equipment",
-        name = "battery-mk3-equipment",
-        sprite = {filename = "__base__/graphics/equipment/battery-mk2-equipment.png", width = 32, height = 64, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-battery-mk2-equipment.png", width = 64, height = 128, priority = "medium", scale = 0.5}},
-        shape = {width = 1, height = 2, type = "full"},
-        energy_source = {type = "electric", usage_priority = "tertiary", buffer_capacity="200MJ"},
-        categories = {"armor"}
-    },
-    {
-        type = "battery-equipment",
-        name = "battery-mk4-equipment",
-        sprite = {filename = "__base__/graphics/equipment/battery-mk2-equipment.png", width = 32, height = 64, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-battery-mk2-equipment.png", width = 64, height = 128, priority = "medium", scale = 0.5}},
-        shape = {width = 1, height = 2, type = "full"},
-        energy_source = {type = "electric", usage_priority = "tertiary", buffer_capacity="400MJ"},
-        categories = {"armor"}
-    },
-    {
-        type = "battery-equipment",
-        name = "battery-mk5-equipment",
-        sprite = {filename = "__base__/graphics/equipment/battery-mk2-equipment.png", width = 32, height = 64, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-battery-mk2-equipment.png", width = 64, height = 128, priority = "medium", scale = 0.5}},
-        shape = {width = 1, height = 2, type = "full"},
-        energy_source = {type = "electric", usage_priority = "tertiary", buffer_capacity="800MJ"},
-        categories = {"armor"}
-    },
-    {
-        type = "battery-equipment",
-        name = "battery-mk6-equipment",
-        sprite = {filename = "__base__/graphics/equipment/battery-mk2-equipment.png", width = 32, height = 64, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-battery-mk2-equipment.png", width = 64, height = 128, priority = "medium", scale = 0.5}},
-        shape = {width = 1, height = 2, type = "full"},
-        energy_source = {type = "electric", usage_priority = "tertiary", buffer_capacity="1600MJ"},
-        categories = {"armor"}
-    },
-    {
-        type = "battery-equipment",
-        name = "battery-mk7-equipment",
-        sprite = {filename = "__base__/graphics/equipment/battery-mk2-equipment.png", width = 32, height = 64, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-battery-mk2-equipment.png", width = 64, height = 128, priority = "medium", scale = 0.5}},
-        shape = {width = 1, height = 2, type = "full"},
-        energy_source = {type = "electric", usage_priority = "tertiary", buffer_capacity="3200MJ"},
-        categories = {"armor"}
-    },
-    {
-        type = "battery-equipment",
-        name = "battery-mk8-equipment",
-        sprite = {filename = "__base__/graphics/equipment/battery-mk2-equipment.png", width = 32, height = 64, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-battery-mk2-equipment.png", width = 64, height = 128, priority = "medium", scale = 0.5}},
-        shape = {width = 1, height = 2, type = "full"},
-        energy_source = {type = "electric", usage_priority = "tertiary", buffer_capacity="6400MJ"},
-        categories = {"armor"}
-    },
-    {
         type = "generator-equipment",
         name = "fusion-reactor-equipment-mk2",
         sprite = {filename = "__base__/graphics/equipment/fusion-reactor-equipment.png", width = 128, height = 128, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-fusion-reactor-equipment.png", width = 256, height = 256, priority = "medium", scale = 0.5}},
