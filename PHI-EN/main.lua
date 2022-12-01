@@ -1,4 +1,4 @@
-local alpha_order = {"b", "c", "d", "e", "f", "g", "h", "i"}
+local alpha_order = {"b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"}
 local base_battery_energy = 5
 local base_battery_flow = 300
 local base_solar_energy = 60
@@ -85,6 +85,43 @@ local function ER(source, tier)
     }})
 end
 
+-- technology
+local function ET(tier)
+    if (tier == 2)
+    then
+        prereq = {"solar-energy", "advanced-electronics", "electric-energy-accumulators"}
+    else
+        prereq = {"compound-energy" .. (tier - 2)}
+    end
+
+    data:extend({{
+        type = "technology",
+        name = "compound-energy-" .. (tier - 1),
+        icon_size = 256,
+        icon = graphics_location .. "solar-energy" .. "-t.png",
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "solar-panel-mk" .. tier
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "accumulator-mk" .. tier
+            }
+        },
+        prerequisites = prereq,
+        unit = {
+            count = 200 * (tier - 1),
+            ingredients = {
+                {"automation-science-pack", 1},
+                {"logistic-science-pack", 1}
+            },
+            time = 10 * (tier - 1)
+        },
+        order = "a-h-" .. alpha_order[tier + 1]
+    }})
+end
+
 items = {"accumulator", "solar-panel"}
 
 for i=1, 2, 1 do
@@ -92,5 +129,6 @@ for i=1, 2, 1 do
         EE(items[i], j)
         EI(items[i], j)
         ER(items[i], j)
+        ET(j)
     end
 end
