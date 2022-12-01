@@ -1,69 +1,6 @@
 data:extend(
 {
     {
-        type = "generator-equipment",
-        name = "fusion-reactor-equipment-mk2",
-        sprite = {filename = "__base__/graphics/equipment/fusion-reactor-equipment.png", width = 128, height = 128, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-fusion-reactor-equipment.png", width = 256, height = 256, priority = "medium", scale = 0.5}},
-        shape = {width = 4, height = 4, type = "full"},
-        energy_source = {type = "electric", usage_priority = "primary-output"},
-        power = "1500kW",
-        categories = {"armor"}
-    },
-    {
-        type = "generator-equipment",
-        name = "fusion-reactor-equipment-mk3",
-        sprite = {filename = "__base__/graphics/equipment/fusion-reactor-equipment.png", width = 128, height = 128, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-fusion-reactor-equipment.png", width = 256, height = 256, priority = "medium", scale = 0.5}},
-        shape = {width = 4, height = 4, type = "full"},
-        energy_source = {type = "electric", usage_priority = "primary-output"},
-        power = "3000kW",
-        categories = {"armor"}
-    },
-    {
-        type = "generator-equipment",
-        name = "fusion-reactor-equipment-mk4",
-        sprite = {filename = "__base__/graphics/equipment/fusion-reactor-equipment.png", width = 128, height = 128, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-fusion-reactor-equipment.png", width = 256, height = 256, priority = "medium", scale = 0.5}},
-        shape = {width = 4, height = 4, type = "full"},
-        energy_source = {type = "electric", usage_priority = "primary-output"},
-        power = "6000kW",
-        categories = {"armor"}
-    },
-    {
-        type = "generator-equipment",
-        name = "fusion-reactor-equipment-mk5",
-        sprite = {filename = "__base__/graphics/equipment/fusion-reactor-equipment.png", width = 128, height = 128, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-fusion-reactor-equipment.png", width = 256, height = 256, priority = "medium", scale = 0.5}},
-        shape = {width = 4, height = 4, type = "full"},
-        energy_source = {type = "electric", usage_priority = "primary-output"},
-        power = "12000kW",
-        categories = {"armor"}
-    },
-    {
-        type = "generator-equipment",
-        name = "fusion-reactor-equipment-mk6",
-        sprite = {filename = "__base__/graphics/equipment/fusion-reactor-equipment.png", width = 128, height = 128, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-fusion-reactor-equipment.png", width = 256, height = 256, priority = "medium", scale = 0.5}},
-        shape = {width = 4, height = 4, type = "full"},
-        energy_source = {type = "electric", usage_priority = "primary-output"},
-        power = "24000kW",
-        categories = {"armor"}
-    },
-    {
-        type = "generator-equipment",
-        name = "fusion-reactor-equipment-mk7",
-        sprite = {filename = "__base__/graphics/equipment/fusion-reactor-equipment.png", width = 128, height = 128, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-fusion-reactor-equipment.png", width = 256, height = 256, priority = "medium", scale = 0.5}},
-        shape = {width = 4, height = 4, type = "full"},
-        energy_source = {type = "electric", usage_priority = "primary-output"},
-        power = "48000kW",
-        categories = {"armor"}
-    },
-    {
-        type = "generator-equipment",
-        name = "fusion-reactor-equipment-mk8",
-        sprite = {filename = "__base__/graphics/equipment/fusion-reactor-equipment.png", width = 128, height = 128, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-fusion-reactor-equipment.png", width = 256, height = 256, priority = "medium", scale = 0.5}},
-        shape = {width = 4, height = 4, type = "full"},
-        energy_source = {type = "electric", usage_priority = "primary-output"},
-        power = "96000kW",
-        categories = {"armor"}
-    },
-    {
         type = "night-vision-equipment",
         name = "night-vision-equipment-mk2",
         sprite = {filename = "__base__/graphics/equipment/night-vision-equipment.png", width = 64, height = 64, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-night-vision-equipment.png", width = 128, height = 128, priority = "medium", scale = 0.5}},
