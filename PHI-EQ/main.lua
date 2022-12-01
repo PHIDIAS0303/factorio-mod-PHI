@@ -3,12 +3,15 @@ local base_battery_energy = 5
 local base_battery_flow = 300
 local base_solar_energy = 60
 local graphics_location = "__PHI-EQ__/graphics/"
+local items = {"solar-panel", "battery", "fusion-reactor", "personal-laser-defense", "energy-shield", "personal-roboport", "night-vision", "exoskeleton"}
 
 -- equipment
 local function EE(source, tier)
     item = {}
     item["name"] = source .. "-mk" .. tier
     item["categories"] = armor
+    local w = 1
+    local h = 1
 
     if (source == "solar-panel")
     then
@@ -117,13 +120,27 @@ local function ET(tier)
     }})
 end
 
-items = {"solar-panel", "battery", "fusion-reactor"}
-
-for i=1, 3, 1 do
-    for j=2, 8, 1 do
-        EE(items[i], j)
-        EI(items[i], j)
-        ER(items[i], j)
-        ET(j)
+for i=1, 8, 1 do
+    if (i <= 3)
+    then
+        for j=2, 8, 1 do
+            EE(items[i], j)
+            EI(items[i], j)
+            ER(items[i], j)
+            ET(j)
+        end
+    elseif (i == 4)
+    then
+        for j=2, 6, 1 do
+            EE(items[i], j)
+        end
+    elseif (i <= 6)
+    then
+        for j=3, 6, 1 do
+            EE(items[i], j)
+        end
+    elseif (i <= 8)
+    then
+        EE(items[i], 2)
     end
 end
