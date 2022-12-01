@@ -30,6 +30,34 @@ local function EE(source, tier)
         ty = "generator-equipment"
         item["power"] = (750 * (2 ^ (tier - 1))) .. "kW"
         item["energy_source"] = {type = "electric", usage_priority = "primary-output"}
+    elseif (source == "personal-laser-defense")
+    then
+        w = 2
+        h = 2
+        ty = "active-defense-equipment"
+        item["energy_source"] = {type = "electric", usage_priority = "secondary-input", buffer_capacity = (250 * (2 ^ (tier - 1))) .. "kJ"}
+        -- item["source_direction_count"] = 64
+        -- item["source_offset"] = {0, -3.423489 / 4}
+        item["attack_parameters"] = {type = "beam", cooldown = 60, range = (18 + tier), damage_modifier = (3 + 1.5 * (tier - 1)), ammo_type = {category = "laser", energy_consumption = (50 * (tier - 1)) .. "kJ", action = {type = "direct", action_delivery = {type = "beam", beam = "laser-beam", max_length = (18 + tier), duration = 60, source_offset = {0, -1.31439}}}}}
+        item["automatic"] = true
+    elseif (source == "night-vision")
+    then
+        w = 2
+        h = 2
+        ty = "night-vision-equipment"
+        item["energy_source"] = {type = "electric", usage_priority = "primary-input", buffer_capacity = "1MJ"}
+        item["energy_input"] = "10kW"
+        item["activate_sound"] = {filename = "__base__/sound/nightvision-on.ogg", volume = 0.5}
+        item["deactivate_sound"] = {filename = "__base__/sound/nightvision-off.ogg", volume = 0.5}
+        item["darkness_to_turn_on"] = 1
+        item["color_lookup"] = {{0, "__core__/graphics/color_luts/lut-sunset.png"}}
+    elseif (source == "exoskeleton")
+    then
+        w = 2
+        h = 4
+        ty = "movement-bonus-equipment"
+        item["energy_source"] = {type = "electric", usage_priority = "secondary-input", buffer_capacity = (250 * (2 ^ (tier - 1))) .. "kJ"}
+        item["automatic"] = true
     end
 
     item["type"] = ty
