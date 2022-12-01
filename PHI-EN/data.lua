@@ -1,2 +1,2 @@
-require("prototypes")
+require("main")
 require("technology-compound-power")
