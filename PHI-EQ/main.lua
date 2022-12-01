@@ -165,11 +165,33 @@ end
 
 -- technology
 local function ET(tier)
-    if (tier == 2)
+    -- "battery-mk2-equipment"
+    if (tier == 1)
     then
-        prereq = {"compound-energy", "solar-panel-equipment", "battery-mk2-equipment", "night-vision-equipment"}
-    else
-        prereq = {"compound-energy-" .. (tier - 2)}
+        prereq = {"compound-energy", "solar-panel-equipment", "night-vision-equipment"}
+        eff = {
+            {
+                type = "unlock-recipe",
+                recipe = "solar-panel-mk" .. tier .. "-equipment"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "night-vision-mk" .. tier .. "-equipment"
+            }
+        }
+    elseif (tier == 2)
+    then
+        prereq = {"compound-energy-" .. (tier - 2), "compound-equipment-energy-1"}
+        eff = {
+            {
+                type = "unlock-recipe",
+                recipe = "solar-panel-mk" .. tier .. "-equipment"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "night-vision-mk" .. tier .. "-equipment"
+            }
+        }
     end
 
     data:extend({{
@@ -177,16 +199,7 @@ local function ET(tier)
         name = "compound-equipment-energy-" .. (tier - 1),
         icon_size = 256,
         icon = graphics_location .. "solar-panel-equipment-t.png",
-        effects = {
-            {
-                type = "unlock-recipe",
-                recipe = "solar-panel-mk" .. tier
-            },
-            {
-                type = "unlock-recipe",
-                recipe = "accumulator-mk" .. tier
-            }
-        },
+        effects = eff,
         prerequisites = prereq,
         unit = {
             count = 200 * (tier - 1),
@@ -241,32 +254,6 @@ data:extend({
 
 data:extend(
     {
-        {
-            type = "technology",
-            name = "compound-equipment-energy",
-            icon_size = 256,
-            icon = "__base__/graphics/technology/solar-panel-equipment.png",
-            effects = {
-                {
-                    type = "unlock-recipe",
-                    recipe = "solar-panel-equipment-mk2"
-                },
-                {
-                    type = "unlock-recipe",
-                    recipe = "night-vision-equipment-mk2"
-                }
-            },
-            prerequisites = {"compound-energy", "solar-panel-equipment", "battery-mk2-equipment", "night-vision-equipment"},
-            unit = {
-                count = 1000,
-                ingredients = {
-                    {"automation-science-pack", 1},
-                    {"logistic-science-pack", 1}
-                },
-                time = 60
-            },
-            order = "g-e-c"
-        },
         {
             type = "technology",
             name = "compound-equipment-energy-2",
