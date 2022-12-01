@@ -30,13 +30,6 @@ local equipments = {
     {source = "battery-mk2-equipment", name = "battery-mk7-equipment", order = "b[battery]-bg[battery-equipment-mk7]", placed_as_equipment_result = "battery-mk7-equipment", icon_name = "__base__/graphics/icons/battery-mk2-equipment.png"},
     {source = "battery-mk2-equipment", name = "battery-mk8-equipment", order = "b[battery]-bh[battery-equipment-mk8]", placed_as_equipment_result = "battery-mk8-equipment", icon_name = "__base__/graphics/icons/battery-mk2-equipment.png"},
     
-    {source = "generator-equipment", name = "burner-generator-equipment", order = "a[energy-source]-b[burner-generator-equipment]", placed_as_equipment_result = "burner-generator-equipment", icon_name = "__base__/graphics/icons/fusion-reactor-equipment.png"},
-    {source = "generator-equipment", name = "burner-generator-equipment-mk2", order = "a[energy-source]-bb[burner-generator-equipment]", placed_as_equipment_result = "burner-generator-equipment-mk2", icon_name = "__base__/graphics/icons/fusion-reactor-equipment.png"},
-    {source = "generator-equipment", name = "burner-generator-equipment-mk3", order = "a[energy-source]-bc[burner-generator-equipment]", placed_as_equipment_result = "burner-generator-equipment-mk3", icon_name = "__base__/graphics/icons/fusion-reactor-equipment.png"},
-    
-    {source = "generator-equipment", name = "nuclear-generator-equipment", order = "a[energy-source]-c[nuclear-generator-equipment]", placed_as_equipment_result = "nuclear-generator-equipment", icon_name = "__base__/graphics/icons/fusion-reactor-equipment.png"},
-    {source = "generator-equipment", name = "nuclear-generator-equipment-mk2", order = "a[energy-source]-cb[nuclear-generator-equipment]", placed_as_equipment_result = "nuclear-generator-equipment-mk2", icon_name = "__base__/graphics/icons/fusion-reactor-equipment.png"},
-    
     {source = "generator-equipment", name = "fusion-reactor-equipment-mk2", order = "a[energy-source]-db[fusion-reactor]", placed_as_equipment_result = "fusion-reactor-equipment-mk2", icon_name = "__base__/graphics/icons/fusion-reactor-equipment.png"},
     {source = "generator-equipment", name = "fusion-reactor-equipment-mk3", order = "a[energy-source]-dc[fusion-reactor]", placed_as_equipment_result = "fusion-reactor-equipment-mk3", icon_name = "__base__/graphics/icons/fusion-reactor-equipment.png"},
     {source = "generator-equipment", name = "fusion-reactor-equipment-mk4", order = "a[energy-source]-dd[fusion-reactor]", placed_as_equipment_result = "fusion-reactor-equipment-mk4", icon_name = "__base__/graphics/icons/fusion-reactor-equipment.png"},
