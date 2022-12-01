@@ -176,7 +176,7 @@ local function ET(tier)
         type = "technology",
         name = "compound-equipment-energy-" .. (tier - 1),
         icon_size = 256,
-        icon = graphics_location .. "solar-energy" .. "-t.png",
+        icon = graphics_location .. "solar-panel-equipment-t.png",
         effects = {
             {
                 type = "unlock-recipe",
@@ -196,7 +196,7 @@ local function ET(tier)
             },
             time = 10 * (tier - 1)
         },
-        order = "a-h-" .. alpha_order[tier + 1]
+        order = "g-e-" .. alpha_order[tier + 1]
     }})
 end
 
