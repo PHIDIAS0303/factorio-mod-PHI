@@ -54,10 +54,10 @@ local function EI(source, tier)
 
     if (source == "accumulator")
     then
-        item.order = "d[" .. source .. "]-b" .. alpha_order[tier - 1] .. "[" .. source .. "-mk" .. tier .. "]"
+        item.order = "d[" .. source .. "]-a" .. alpha_order[tier - 1] .. "[" .. source .. "-mk" .. tier .. "]"
 
     else
-        item.order = "e[" .. source .. "]-b" .. alpha_order[tier - 1] .. "[" .. source .. "-mk" .. tier .. "]"
+        item.order = "e[" .. source .. "]-a" .. alpha_order[tier - 1] .. "[" .. source .. "-mk" .. tier .. "]"
     end
 
     data:extend({item})
