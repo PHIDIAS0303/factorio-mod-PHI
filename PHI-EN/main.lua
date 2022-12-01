@@ -3,6 +3,7 @@ local base_battery_energy = 5
 local base_battery_flow = 300
 local base_solar_energy = 60
 local graphics_location = "__PHI-EN__/graphics/"
+local items = {"accumulator", "solar-panel"}
 
 -- entity
 local function EE(source, tier)
@@ -65,7 +66,7 @@ end
 
 -- recipe
 local function ER(source, tier)
-    na = source
+    local na = source
 
     if (tier >= 3)
     then
@@ -86,9 +87,9 @@ end
 local function ET(tier)
     if (tier == 2)
     then
-        prereq = {"solar-energy", "advanced-electronics", "electric-energy-accumulators"}
+        local prereq = {"solar-energy", "advanced-electronics", "electric-energy-accumulators"}
     else
-        prereq = {"compound-energy-" .. (tier - 2)}
+        local prereq = {"compound-energy-" .. (tier - 2)}
     end
 
     data:extend({{
@@ -118,8 +119,6 @@ local function ET(tier)
         order = "a-h-" .. alpha_order[tier + 1]
     }})
 end
-
-items = {"accumulator", "solar-panel"}
 
 for i=1, 2, 1 do
     for j=2, 8, 1 do
