@@ -91,7 +91,7 @@ local function ET(tier)
     then
         prereq = {"solar-energy", "advanced-electronics", "electric-energy-accumulators"}
     else
-        prereq = {"compound-energy" .. (tier - 2)}
+        prereq = {"compound-energy-" .. (tier - 2)}
     end
 
     data:extend({{
