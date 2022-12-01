@@ -15,14 +15,11 @@ local function EE(source, tier)
 
     if (source == "solar-panel")
     then
-        w = 1
-        h = 1
         ty = source .. "-equipment"
         item["power"] = (60 * (2 ^ (tier - 1))) .. "kW"
         item["energy_source"] = {type = "electric", usage_priority = "primary-output"}
     elseif (source == "battery")
     then
-        w = 1
         h = 2
         ty = source .. "-equipment"
         item["energy_source"] = {type = "electric", usage_priority = "tertiary", buffer_capacity= (100 * (2 ^ (tier - 1))) .. "MJ"}
