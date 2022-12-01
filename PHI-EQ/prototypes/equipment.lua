@@ -1,16 +1,6 @@
 data:extend(
 {
     {
-        type = "energy-shield-equipment",
-        name = "energy-shield-mk3-equipment",
-        sprite = {filename = "__base__/graphics/equipment/energy-shield-mk2-equipment.png", width = 64, height = 64, priority = "medium", hr_version = {filename = "__base__/graphics/equipment/hr-energy-shield-mk2-equipment.png", width = 128, height = 128, priority = "medium", scale = 0.5}},
-        shape = {width = 2, height = 2, type = "full"},
-        max_shield_value = 300,
-        energy_source = {type = "electric", buffer_capacity = "480kJ", input_flow_limit = "960kW", usage_priority = "primary-input"},
-        energy_per_shield = "40kJ",
-        categories = {"armor"}
-    },
-    {
         type = "movement-bonus-equipment",
         name = "exoskeleton-equipment-mk2",
         sprite = {filename = "__base__/graphics/equipment/exoskeleton-equipment.png", width = 64, height = 128, priority = "medium", hr_version = { filename = "__base__/graphics/equipment/hr-exoskeleton-equipment.png", width = 128, height = 256, priority = "medium", scale = 0.5}},
