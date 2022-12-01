@@ -285,69 +285,6 @@ data:extend(
             {"power-armor-mk2", 2}
         },
         result = "power-armor-mk3"
-    },
-    {
-        type = "recipe",
-        name = "burner-generator-equipment",
-        energy_required = 10,
-        enabled = "false",
-        ingredients =
-        {
-            {"boiler", 2},
-            {"steam-engine", 4},
-            {"storage-tank", 2},
-            {"electronic-circuit", 10}
-        },
-        result = "burner-generator-equipment"
-    },
-    {
-        type = "recipe",
-        name = "burner-generator-equipment-mk2",
-        energy_required = 10,
-        enabled = "false",
-        ingredients =
-        {
-            {"burner-generator-equipment", 2}
-        },
-        result = "burner-generator-equipment-mk2"
-    },
-    {
-        type = "recipe",
-        name = "burner-generator-equipment-mk3",
-        energy_required = 10,
-        enabled = "false",
-        ingredients =
-        {
-            {"burner-generator-equipment-mk2", 2}
-        },
-        result = "burner-generator-equipment-mk3"
-    },
-    {
-        type = "recipe",
-        name = "nuclear-generator-equipment",
-        energy_required = 10,
-        enabled = "false",
-        ingredients =
-        {
-            {"nuclear-reactor", 1},
-            {"heat-pipe", 10},
-            {"heat-exchanger", 4},
-            {"steam-turbine", 8},
-            {"storage-tank", 4},
-            {"advanced-circuit", 100}
-        },
-        result = "nuclear-generator-equipment"
-    },
-    {
-        type = "recipe",
-        name = "nuclear-generator-equipment-mk2",
-        energy_required = 10,
-        enabled = "false",
-        ingredients =
-        {
-            {"nuclear-generator-equipment", 2}
-        },
-        result = "nuclear-generator-equipment-mk2"
     }
 }
 )
