@@ -141,7 +141,7 @@ local function EE(source, tier)
         item.crafting_speed = item.crafting_speed * (2 ^ (tier - item_min[source] + 1))
         item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (2 ^ (tier - item_min[source] + 1))
     end
-    
+
     item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - item_min[source] + 1)) .. 'kW'
     -- item.animation.layers[1].filename = graphics_location .. source .. '-e.png'
     -- item.animation.layers[1].hr_version.filename = graphics_location .. source ..'-eh.png'
@@ -238,13 +238,23 @@ for i=1, #recipe_list, 1 do
             end
         elseif (item.normal ~= nil) and (item.normal ~= false) then
             for k, v in pairs(item.normal.ingredients) do
-                item.normal.ingredients[k][2] = v[2] * 4
-                item_1.normal.ingredients[k][2] = v[2] * 16
+                if (v[1] ~= nil) and (v[2] ~= nil) then
+                    item.normal.ingredients[k][2] = v[2] * 4
+                    item_1.normal.ingredients[k][2] = v[2] * 16
+                else
+                    item.normal.ingredients[k].amount = v.amount * 4
+                    item_1.normal.ingredients[k].amount = v.amount * 16
+                end
             end
         elseif (item.expensive) ~= nil and (item.expensive ~= false) then
             for k, v in pairs(item.expensive.ingredients) do
-                item.expensive.ingredients[k][2] = v[2] * 4
-                item_1.expensive.ingredients[k][2] = v[2] * 16
+                if (v[1] ~= nil) and (v[2] ~= nil) then
+                    item.expensive.ingredients[k][2] = v[2] * 4
+                    item_1.expensive.ingredients[k][2] = v[2] * 16
+                else
+                    item.expensive.ingredients[k].amount = v.amount * 4
+                    item_1.expensive.ingredients[k].amount = v.amount * 16
+                end
             end
         end
         
