@@ -325,7 +325,10 @@ for i=1, #recipe_list, 1 do
                 end
             end
         end
-    
+        
+        item.name = item.name .. '-1'
+        item_1.name = item_1.name .. '-2'
+        
         data:extend({item, item_1})
     end
 end
