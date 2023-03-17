@@ -17,6 +17,8 @@ local function EE(source, tier)
         local item = table.deepcopy(data.raw['furnace']['electric-furnace'])
     elseif source == 'chemical-plant' then
         local item = table.deepcopy(data.raw['assembling-machine']['chemical-plant'])
+    elseif source == 'oil-refinery' then
+        local item = table.deepcopy(data.raw['assembling-machine']['oil-refinery'])
     else
         local item = table.deepcopy(data.raw[source][source])
     end
