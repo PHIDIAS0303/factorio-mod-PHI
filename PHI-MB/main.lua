@@ -98,9 +98,10 @@ local recipe_list = {
 
     'pipe',
     'fast-inserter',
+    'long-handed-inserter',
+    'filter-inserter',
     'stack-inserter',
     'stack-filter-inserter',
-    'filter-inserter',
 
     'underground-belt',
     'fast-transport-belt',
