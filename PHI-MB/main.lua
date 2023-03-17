@@ -192,45 +192,45 @@ table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-
 
 -- item.group == intermediate-product
 
-for _, recipe in pairs(data.raw['recipe']) do
-    if recipe_list[recipe.name] ~= nil then
+for i=1, #recipe_list, 1 do
+    if data.raw['recipe'][recipe_list[i]] ~= nil then
         local energy_required
         local ingredients_1 = {}
         local ingredients_2 = {}
         local results_1 = {}
         local results_2 = {}
 
-        if recipe.energy_required ~= nil then
-            energy_required = recipe.energy_required * 4
+        if data.raw['recipe'][recipe_list[i]].energy_required ~= nil then
+            energy_required = data.raw['recipe'][recipe_list[i]].energy_required * 4
         else
             energy_required = 2
         end
 
-        for k, v in pairs(recipe.ingredients) do
-            table.insert(ingredients_1, {recipe.ingredients[k], v * 4})
-            table.insert(ingredients_2, {recipe.ingredients[k], v * 16})
+        for k, v in pairs(data.raw['recipe'][recipe_list[i]].ingredients) do
+            table.insert(ingredients_1, {data.raw['recipe'][recipe_list[i]].ingredients[k], v * 4})
+            table.insert(ingredients_2, {data.raw['recipe'][recipe_list[i]].ingredients[k], v * 16})
         end
     
-        if recipe.results ~= nil then
-            for k, v in pairs(recipe.results) do
-                table.insert(results_1, {recipe.results[k], v * 4})
-                table.insert(results_2, {recipe.results[k], v * 16})
+        if data.raw['recipe'][recipe_list[i]].results ~= nil then
+            for k, v in pairs(data.raw['recipe'][recipe_list[i]].results) do
+                table.insert(results_1, {data.raw['recipe'][recipe_list[i]].results[k], v * 4})
+                table.insert(results_2, {data.raw['recipe'][recipe_list[i]].results[k], v * 16})
             end
 
             data:extend({{
                 type = 'recipe',
-                name = recipe.name .. ' 4x',
+                name = data.raw['recipe'][recipe_list[i]].name .. ' 4x',
                 energy_required = energy_required,
-                enabled = true,
+                enabled = false,
                 ingredients = ingredients_1,
                 results = results_1
             }})
         
             data:extend({{
                 type = 'recipe',
-                name = recipe.name .. ' 16x',
+                name = data.raw['recipe'][recipe_list[i]].name .. ' 16x',
                 energy_required = energy_required * 4,
-                enabled = true,
+                enabled = false,
                 ingredients = ingredients_2,
                 results = results_2
             }})
@@ -238,29 +238,33 @@ for _, recipe in pairs(data.raw['recipe']) do
         else
             data:extend({{
                 type = 'recipe',
-                name = recipe.name .. ' 4x',
+                name = data.raw['recipe'][recipe_list[i]].name .. ' 4x',
                 energy_required = energy_required,
-                enabled = true,
+                enabled = false,
                 ingredients = ingredients_1,
-                result = recipe.result,
-                result_count = recipe.result_count * 4
+                result = data.raw['recipe'][recipe_list[i]].result,
+                result_count = data.raw['recipe'][recipe_list[i]].result_count * 4
             }})
         
             data:extend({{
                 type = 'recipe',
-                name = recipe.name .. ' 16x',
+                name = data.raw['recipe'][recipe_list[i]].name .. ' 16x',
                 energy_required = energy_required * 4,
-                enabled = true,
+                enabled = false,
                 ingredients = ingredients_2,
-                result = recipe.result,
-                result_count = recipe.result_count * 16,
+                result = data.raw['recipe'][recipe_list[i]].result,
+                result_count = data.raw['recipe'][recipe_list[i]].result_count * 16,
             }})
         end
 
         table.insert(data.raw['technology']['automation'].effects, {type='unlock-recipe', recipe=recipe.name .. ' 4x'})
         table.insert(data.raw['technology']['automation'].effects, {type='unlock-recipe', recipe=recipe.name .. ' 16x'})
-    elseif (recipe.name == 'loader') or (recipe.name == 'fast-loader') or (recipe.name == 'express-loader') then
-        recipe.enabled = true
-        recipe.hidden = false
     end
 end
+
+data.raw['recipe']['loader'].hidden = false
+data.raw['recipe']['fast-loader'].hidden = false
+data.raw['recipe']['express-loader'].hidden = false
+table.insert(data.raw['technology']['logistics'].effects, {type='unlock-recipe', recipe='loader'})
+table.insert(data.raw['technology']['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
+table.insert(data.raw['technology']['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
