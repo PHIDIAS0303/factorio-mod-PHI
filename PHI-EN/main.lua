@@ -72,7 +72,7 @@ local function ER(source, tier)
         type = 'recipe',
         name = source .. '-mk' .. tier,
         energy_required = 5,
-        enabled = 'false',
+        enabled = false,
         ingredients = {{na, 4}},
         result = source .. '-mk' .. tier,
     }})
