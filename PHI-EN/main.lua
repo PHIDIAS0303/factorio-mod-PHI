@@ -45,7 +45,7 @@ local function EI(source, tier)
     local item = table.deepcopy(data.raw.item[source])
     item.name = source .. "-mk" .. tier
     item.place_result = source .. "-mk" .. tier
-    item.max_health = 150 * (2 ^ (tier - 1))
+    item.max_health = 200 * (2 ^ (tier - 1))
     item.subgroup = "energy"
     item.stack_size = 50
     item.default_request_amount = 50
