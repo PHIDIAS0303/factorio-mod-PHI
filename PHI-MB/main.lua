@@ -100,3 +100,9 @@ table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-
 table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe',recipe='electric-furnace-3'})
 table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe',recipe='chemical-plant-3'})
 table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe',recipe='oil-refinery-3'})
+
+for _, recipe in pairs(data.raw['recipe']) do
+    if recipe.category == 'oil-processing' then
+        recipe.energy_required = recipe.energy_required * 4
+    end
+end
