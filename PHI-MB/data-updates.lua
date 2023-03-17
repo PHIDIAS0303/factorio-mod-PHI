@@ -16,3 +16,13 @@ data.raw['assembling-machine']['chemical-plant-3'].fast_replaceable_group = data
 data.raw['assembling-machine']['oil-refinery'].fast_replaceable_group = 'oil-refinery'
 data.raw['assembling-machine']['oil-refinery-2'].fast_replaceable_group = data.raw['assembling-machine']['oil-refinery'].fast_replaceable_group
 data.raw['assembling-machine']['oil-refinery-3'].fast_replaceable_group = data.raw['assembling-machine']['oil-refinery-2'].fast_replaceable_group
+
+-- centrifuge
+data.raw['assembling-machine']['centrifuge'].fast_replaceable_group = 'centrifuge'
+data.raw['assembling-machine']['centrifuge-2'].fast_replaceable_group = data.raw['assembling-machine']['centrifuge'].fast_replaceable_group
+data.raw['assembling-machine']['centrifuge-3'].fast_replaceable_group = data.raw['assembling-machine']['centrifuge-2'].fast_replaceable_group
+
+-- lab
+data.raw['assembling-machine']['lab'].fast_replaceable_group = 'lab'
+data.raw['assembling-machine']['lab-2'].fast_replaceable_group = data.raw['assembling-machine']['lab'].fast_replaceable_group
+data.raw['assembling-machine']['lab-3'].fast_replaceable_group = data.raw['assembling-machine']['lab-2'].fast_replaceable_group
