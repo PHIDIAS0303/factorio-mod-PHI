@@ -193,32 +193,33 @@ table.insert(data.raw.technology['compound-energy-2'].effects, {type='unlock-rec
 
 for i=1, #recipe_list, 1 do
     if data.raw.recipe[recipe_list[i]] ~= nil then
+        local item = table.deepcopy(data.raw.recipe[recipe_list[i]])
         local energy_required
         local ingredients_1 = {}
         local ingredients_2 = {}
         local results_1 = {}
         local results_2 = {}
 
-        if data.raw.recipe[recipe_list[i]].energy_required ~= nil then
-            energy_required = data.raw.recipe[recipe_list[i]].energy_required * 4
+        if item.energy_required ~= nil then
+            energy_required = item.energy_required * 4
         else
             energy_required = 2
         end
 
-        for k, v in pairs(data.raw.recipe[recipe_list[i]].ingredients) do
-            table.insert(ingredients_1, {data.raw.recipe[recipe_list[i]].ingredients[k], v * 4})
-            table.insert(ingredients_2, {data.raw.recipe[recipe_list[i]].ingredients[k], v * 16})
+        for k, v in pairs(item.ingredients) do
+            table.insert(ingredients_1, {item.ingredients[k], v * 4})
+            table.insert(ingredients_2, {item.ingredients[k], v * 16})
         end
     
-        if data.raw.recipe[recipe_list[i]].results ~= nil then
-            for k, v in pairs(data.raw.recipe[recipe_list[i]].results) do
-                table.insert(results_1, {data.raw.recipe[recipe_list[i]].results[k], v * 4})
-                table.insert(results_2, {data.raw.recipe[recipe_list[i]].results[k], v * 16})
+        if item.results ~= nil then
+            for k, v in pairs(item.results) do
+                table.insert(results_1, {item.results[k], v * 4})
+                table.insert(results_2, {item.results[k], v * 16})
             end
 
             data:extend({{
                 type = 'recipe',
-                name = data.raw.recipe[recipe_list[i]].name .. ' 4x',
+                name = item.name .. ' 4x',
                 energy_required = energy_required,
                 enabled = false,
                 ingredients = ingredients_1,
@@ -227,7 +228,7 @@ for i=1, #recipe_list, 1 do
         
             data:extend({{
                 type = 'recipe',
-                name = data.raw.recipe[recipe_list[i]].name .. ' 16x',
+                name = item.name .. ' 16x',
                 energy_required = energy_required * 4,
                 enabled = false,
                 ingredients = ingredients_2,
@@ -236,27 +237,27 @@ for i=1, #recipe_list, 1 do
         else
             data:extend({{
                 type = 'recipe',
-                name = data.raw.recipe[recipe_list[i]].name .. ' 4x',
+                name = item.name .. ' 4x',
                 energy_required = energy_required,
                 enabled = false,
                 ingredients = ingredients_1,
-                result = data.raw.recipe[recipe_list[i]].result,
-                result_count = data.raw.recipe[recipe_list[i]].result_count * 4
+                result = item.result,
+                result_count = item.result_count * 4
             }})
         
             data:extend({{
                 type = 'recipe',
-                name = data.raw.recipe[recipe_list[i]].name .. ' 16x',
+                name = item.name .. ' 16x',
                 energy_required = energy_required * 4,
                 enabled = false,
                 ingredients = ingredients_2,
-                result = data.raw.recipe[recipe_list[i]].result,
-                result_count = data.raw.recipe[recipe_list[i]].result_count * 16,
+                result = item.result,
+                result_count = item.result_count * 16,
             }})
         end
 
-        table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe=recipe.name .. ' 4x'})
-        table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe=recipe.name .. ' 16x'})
+        table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe=item.name .. ' 4x'})
+        table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe=item.name .. ' 16x'})
     end
 end
 
