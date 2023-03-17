@@ -180,17 +180,16 @@ for i=1, #items, 1 do
     end
 end
 
-table.insert(data.raw['technology']['compound-energy-1'].effects, {type='unlock-recipe', recipe='assembling-machine-4'})
-table.insert(data.raw['technology']['compound-energy-1'].effects, {type='unlock-recipe', recipe='electric-furnace-2'})
-table.insert(data.raw['technology']['compound-energy-1'].effects, {type='unlock-recipe', recipe='chemical-plant-2'})
-table.insert(data.raw['technology']['compound-energy-1'].effects, {type='unlock-recipe', recipe='oil-refinery-2'})
+table.insert(data.raw.technology['compound-energy-1'].effects, {type='unlock-recipe', recipe='assembling-machine-4'})
+table.insert(data.raw.technology['compound-energy-1'].effects, {type='unlock-recipe', recipe='electric-furnace-2'})
+table.insert(data.raw.technology['compound-energy-1'].effects, {type='unlock-recipe', recipe='chemical-plant-2'})
+table.insert(data.raw.technology['compound-energy-1'].effects, {type='unlock-recipe', recipe='oil-refinery-2'})
 
-table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe', recipe='assembling-machine-5'})
-table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe', recipe='electric-furnace-3'})
-table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe', recipe='chemical-plant-3'})
-table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe', recipe='oil-refinery-3'})
+table.insert(data.raw.technology['compound-energy-2'].effects, {type='unlock-recipe', recipe='assembling-machine-5'})
+table.insert(data.raw.technology['compound-energy-2'].effects, {type='unlock-recipe', recipe='electric-furnace-3'})
+table.insert(data.raw.technology['compound-energy-2'].effects, {type='unlock-recipe', recipe='chemical-plant-3'})
+table.insert(data.raw.technology['compound-energy-2'].effects, {type='unlock-recipe', recipe='oil-refinery-3'})
 
--- item.group == intermediate-product
 
 for i=1, #recipe_list, 1 do
     if data.raw['recipe'][recipe_list[i]] ~= nil then
@@ -234,7 +233,6 @@ for i=1, #recipe_list, 1 do
                 ingredients = ingredients_2,
                 results = results_2
             }})
-
         else
             data:extend({{
                 type = 'recipe',
@@ -257,14 +255,14 @@ for i=1, #recipe_list, 1 do
             }})
         end
 
-        table.insert(data.raw['technology']['automation'].effects, {type='unlock-recipe', recipe=recipe.name .. ' 4x'})
-        table.insert(data.raw['technology']['automation'].effects, {type='unlock-recipe', recipe=recipe.name .. ' 16x'})
+        table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe=recipe.name .. ' 4x'})
+        table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe=recipe.name .. ' 16x'})
     end
 end
 
 data.raw['recipe']['loader'].hidden = false
 data.raw['recipe']['fast-loader'].hidden = false
 data.raw['recipe']['express-loader'].hidden = false
-table.insert(data.raw['technology']['logistics'].effects, {type='unlock-recipe', recipe='loader'})
-table.insert(data.raw['technology']['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
-table.insert(data.raw['technology']['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
+table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='loader'})
+table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
+table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
