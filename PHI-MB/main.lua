@@ -206,15 +206,15 @@ for i=1, #recipe_list, 1 do
             energy_required = 2
         end
 
-        for k, v in pairs(item.ingredients) do
-            table.insert(ingredients_1, {k, item.ingredients[k] * 4})
-            table.insert(ingredients_2, {k, item.ingredients[k] * 16})
+        for _, v in pairs(item.ingredients) do
+            table.insert(ingredients_1, {v[1], v[2] * 4})
+            table.insert(ingredients_2, {v[1], v[2] * 16})
         end
     
         if item.results ~= nil then
-            for k, v in pairs(item.results) do
-                table.insert(results_1, {k, item.ingredients[k] * 4})
-                table.insert(results_2, {k, item.ingredients[k] * 16})
+            for _, v in pairs(item.results) do
+                table.insert(results_1, {v[1], v[2]  * 4})
+                table.insert(results_2, {v[1], v[2]  * 16})
             end
 
             data:extend({{
