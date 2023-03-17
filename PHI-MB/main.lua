@@ -180,15 +180,15 @@ for i=1, #items, 1 do
     end
 end
 
-table.insert(data.raw['technology']['compound-energy-1'].effects, {type='unlock-recipe',recipe='assembling-machine-4'})
-table.insert(data.raw['technology']['compound-energy-1'].effects, {type='unlock-recipe',recipe='electric-furnace-2'})
-table.insert(data.raw['technology']['compound-energy-1'].effects, {type='unlock-recipe',recipe='chemical-plant-2'})
-table.insert(data.raw['technology']['compound-energy-1'].effects, {type='unlock-recipe',recipe='oil-refinery-2'})
+table.insert(data.raw['technology']['compound-energy-1'].effects, {type='unlock-recipe', recipe='assembling-machine-4'})
+table.insert(data.raw['technology']['compound-energy-1'].effects, {type='unlock-recipe', recipe='electric-furnace-2'})
+table.insert(data.raw['technology']['compound-energy-1'].effects, {type='unlock-recipe', recipe='chemical-plant-2'})
+table.insert(data.raw['technology']['compound-energy-1'].effects, {type='unlock-recipe', recipe='oil-refinery-2'})
 
-table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe',recipe='assembling-machine-5'})
-table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe',recipe='electric-furnace-3'})
-table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe',recipe='chemical-plant-3'})
-table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe',recipe='oil-refinery-3'})
+table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe', recipe='assembling-machine-5'})
+table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe', recipe='electric-furnace-3'})
+table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe', recipe='chemical-plant-3'})
+table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe', recipe='oil-refinery-3'})
 
 -- item.group == intermediate-product
 
