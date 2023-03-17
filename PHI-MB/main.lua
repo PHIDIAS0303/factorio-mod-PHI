@@ -2,6 +2,14 @@ local alpha_order = {'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'}
 local graphics_location = '__PHI-MB__/graphics/'
 
 local items = {'assembling-machine', 'electric-furnace', 'chemical-plant', 'oil-refinery'}
+
+local item_min = {
+    ['assembling-machine'] = 4,
+    ['electric-furnace'] = 2,
+    ['chemical-plant'] = 2,
+    ['oil-refinery'] = 2
+}
+
 local item_max = {
     ['assembling-machine'] = 5,
     ['electric-furnace'] = 3,
@@ -67,47 +75,10 @@ local function ER(source, tier)
     }})
 end
 
--- technology
-local function ET(tier)
-    if (tier == 2) then
-        local prereq = {'solar-energy', 'advanced-electronics', 'electric-energy-accumulators'}
-    else
-        local prereq = {'compound-energy-' .. (tier - 2)}
-    end
-
-    data:extend({{
-        type = 'technology',
-        name = 'compound-energy-' .. (tier - 1),
-        icon_size = 256,
-        icon = graphics_location .. 'solar-energy' .. '-t.png',
-        effects = {
-            {
-                type = 'unlock-recipe',
-                recipe = 'solar-panel-mk' .. tier
-            },
-            {
-                type = 'unlock-recipe',
-                recipe = 'accumulator-mk' .. tier
-            }
-        },
-        prerequisites = prereq,
-        unit = {
-            count = 200 * (2 ^ (tier - 1)),
-            ingredients = {
-                {'automation-science-pack', 1},
-                {'logistic-science-pack', 1}
-            },
-            time = 60
-        },
-        order = 'a-h-' .. alpha_order[tier + 1]
-    }})
-end
-
-for i=1, 2, 1 do
-    for j=2, 8, 1 do
+for i=1, #items, 1 do
+    for j=item_min[items[i]], item_max[items[i]], 1 do
         EE(items[i], j)
         EI(items[i], j)
         ER(items[i], j)
-        ET(j)
     end
 end
