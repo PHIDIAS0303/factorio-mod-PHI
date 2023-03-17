@@ -194,6 +194,7 @@ table.insert(data.raw.technology['compound-energy-2'].effects, {type='unlock-rec
 for i=1, #recipe_list, 1 do
     if data.raw.recipe[recipe_list[i]] ~= nil then
         local item = table.deepcopy(data.raw.recipe[recipe_list[i]])
+        local item_1 = item
         local energy_required = 1
         local ingredients_1 = {}
         local ingredients_2 = {}
@@ -201,30 +202,34 @@ for i=1, #recipe_list, 1 do
         local results_2 = {}
 
         if item.energy_required ~= nil then
-            energy_required = item.energy_required * 4
+            item.energy_required = item.energy_required * 4
+            item_1.energy_required = item.energy_required * 16
         else
-            energy_required = 2
+            item.energy_required = 2
+            item_1.energy_required = 8
         end
         
         if item.ingredients ~= nil then
             for _, v in pairs(item.ingredients) do
                 if (v[1] ~= nil) and (v[2] ~= nil) then
-                    table.insert(ingredients_1, {v[1], v[2] * 4})
-                    table.insert(ingredients_2, {v[1], v[2] * 16})
+                    -- table.insert(ingredients_2, {v[1], v[2] * 4})
+                    item.ingredients[k][2] = item.ingredients[k][2] * 4
+                    item_1.ingredients[k][2] = item_1.ingredients[k][2] * 16
                 else
-                    table.insert(ingredients_1, {type=v.type, name=v.name, amount=v.amount * 4, fluidbox_index=v.fluidbox_index})
-                    table.insert(ingredients_2, {type=v.type, name=v.name, amount=v.amount * 16, fluidbox_index=v.fluidbox_index})
+                    -- table.insert(ingredients_1, {type=v.type, name=v.name, amount=v.amount * 4, fluidbox_index=v.fluidbox_index})
+                    item.ingredients[k].amount = item.ingredients[k].amount * 4
+                    item_1.ingredients[k].amount = item_1.ingredients[k].amount * 16
                 end
             end
         else
             if item.normal ~= nil or item.normal ~= false then
                 for _, v in pairs(item.normal.ingredients) do
                     if (v[1] ~= nil) and (v[2] ~= nil) then
-                        table.insert(ingredients_1, {v[1], v[2] * 4})
-                        table.insert(ingredients_2, {v[1], v[2] * 16})
+                        item.normal.ingredients[k][2] = item.normal.ingredients[k][2] * 4
+                        item_1.normal.ingredients[k][2] = item_1.normal.ingredients[k][2] * 16
                     else
-                        table.insert(ingredients_1, {type=v.type, name=v.name, amount=v.amount * 4, fluidbox_index=v.fluidbox_index})
-                        table.insert(ingredients_2, {type=v.type, name=v.name, amount=v.amount * 16, fluidbox_index=v.fluidbox_index})
+                        item.normal.ingredients[k].amount = item.normal.ingredients[k].amount * 4
+                        item_1.normal.ingredients[k].amount = item_1.normal.ingredients[k].amount * 16
                     end
                 end
             end
@@ -232,72 +237,46 @@ for i=1, #recipe_list, 1 do
             if item.expensive ~= nil or item.expensive ~= false then
                 for _, v in pairs(item.expensive.ingredients) do
                     if (v[1] ~= nil) and (v[2] ~= nil) then
-                        table.insert(ingredients_1, {v[1], v[2] * 4})
-                        table.insert(ingredients_2, {v[1], v[2] * 16})
+                        item.expensive.ingredients[k][2] = item.expensive.ingredients[k][2] * 4
+                        item_1.expensive.ingredients[k][2] = item_1.expensive.ingredients[k][2] * 16
                     else
-                        table.insert(ingredients_1, {type=v.type, name=v.name, amount=v.amount * 4, fluidbox_index=v.fluidbox_index})
-                        table.insert(ingredients_2, {type=v.type, name=v.name, amount=v.amount * 16, fluidbox_index=v.fluidbox_index})
+                        item.expensive.ingredients[k].amount = item.expensive.ingredients[k].amount * 4
+                        item_1.expensive.ingredients[k].amount = item_1.expensive.ingredients[k].amount * 16
                     end
                 end
             end
         end
-    
+        
+        item.energy_required = energy_required
+        item.name = item.name .. '-4x'
+        item.enabled = true
+        item_1.name = item_1.name .. '-16x'
+        item_1.enabled = true
+
         if item.results ~= nil then
             for _, v in pairs(item.results) do
                 if (v[1] ~= nil) and (v[2] ~= nil) then
-                    table.insert(results_1, {v[1], v[2] * 4})
-                    table.insert(results_2, {v[1], v[2] * 16})
+                    item.results[k][2] = item.results[k][2] * 4
+                    item_1.results[k][2] = item_1.results[k][2] * 16
                 else
-                    table.insert(results_1, {type=v.type, name=v.name, amount=v.amount * 4, fluidbox_index=v.fluidbox_index})
-                    table.insert(results_2, {type=v.type, name=v.name, amount=v.amount * 16, fluidbox_index=v.fluidbox_index})            
+                    item.results[k].amount = item.results[k].amount * 4
+                    item_1.results[k].amount = item_1.results[k].amount * 16         
                 end
             end
 
-            data:extend({{
-                type = 'recipe',
-                name = item.name .. ' 4x',
-                energy_required = energy_required,
-                enabled = true,
-                ingredients = ingredients_1,
-                results = results_1
-            }})
-        
-            data:extend({{
-                type = 'recipe',
-                name = item.name .. ' 16x',
-                energy_required = energy_required * 4,
-                enabled = true,
-                ingredients = ingredients_2,
-                results = results_2
-            }})
+            data:extend({item, item_1})
         else
             local result_count
 
             if item.result_count ~= nil then
-                result_count = item.result_count
+                item.result_count = item.result_count * 4
+                item_1.result_count = item.result_count * 16
             else
-                result_count = 1
+                item.result_count = 4
+                item_1.result_count = 16
             end
 
-            data:extend({{
-                type = 'recipe',
-                name = item.name .. ' 4x',
-                energy_required = energy_required,
-                enabled = true,
-                ingredients = ingredients_1,
-                result = item.result,
-                result_count = result_count * 4
-            }})
-            
-            data:extend({{
-                type = 'recipe',
-                name = item.name .. ' 16x',
-                energy_required = energy_required * 4,
-                enabled = true,
-                ingredients = ingredients_2,
-                result = item.result,
-                result_count = result_count * 16,
-            }})
+            data:extend({item, item_1})
         end
     end
 end
