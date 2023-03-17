@@ -258,8 +258,7 @@ for i=1, #recipe_list, 1 do
                 end
             end
 
-            data:extend({item})
-            data:extend({item_1})
+            data:extend({item, item_1})
         else
             local result_count
 
@@ -271,8 +270,7 @@ for i=1, #recipe_list, 1 do
                 item_1.result_count = 16
             end
 
-            data:extend({item})
-            data:extend({item_1})
+            data:extend({item, item_1})
         end
     end
 end
