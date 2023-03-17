@@ -35,11 +35,11 @@ local function EE(source, tier)
     item.crafting_speed = item.crafting_speed * (2 ^ (tier - 1))
     item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute  * (2 ^ (tier - 1))
     item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - 1)) .. string.match(item.energy_usage, '%a')
-    item.animation.layers[1].filename = graphics_location .. source .. '-e.png'
-    item.animation.layers[1].hr_version.filename = graphics_location .. source ..'-eh.png'
-    item.icon = graphics_location .. source .. '-i.png'
-    item.icon_size = 64
-    item.icon_mipmaps = 4
+    -- item.animation.layers[1].filename = graphics_location .. source .. '-e.png'
+    -- item.animation.layers[1].hr_version.filename = graphics_location .. source ..'-eh.png'
+    -- item.icon = graphics_location .. source .. '-i.png'
+    -- item.icon_size = 64
+    -- item.icon_mipmaps = 4
 
     if (tier <= item_max[source] - 1) then
         item.next_upgrade = source .. '-' .. (tier + 1)
