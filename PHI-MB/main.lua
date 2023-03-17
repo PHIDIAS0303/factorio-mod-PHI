@@ -166,7 +166,7 @@ local function ER(source, tier)
         type = 'recipe',
         name = source .. '-' .. tier,
         energy_required = 5,
-        enabled = 'false',
+        enabled = false,
         ingredients = {{na, 2}},
         result = source .. '-' .. tier,
     }})
@@ -221,7 +221,7 @@ for _, recipe in pairs(data.raw['recipe']) do
                 type = 'recipe',
                 name = recipe.name .. ' 4x',
                 energy_required = energy_required,
-                enabled = 'true',
+                enabled = true,
                 ingredients = ingredients_1,
                 results = results_1
             }})
@@ -230,7 +230,7 @@ for _, recipe in pairs(data.raw['recipe']) do
                 type = 'recipe',
                 name = recipe.name .. ' 16x',
                 energy_required = energy_required * 4,
-                enabled = 'true',
+                enabled = true,
                 ingredients = ingredients_2,
                 results = results_2
             }})
@@ -240,7 +240,7 @@ for _, recipe in pairs(data.raw['recipe']) do
                 type = 'recipe',
                 name = recipe.name .. ' 4x',
                 energy_required = energy_required,
-                enabled = 'true',
+                enabled = true,
                 ingredients = ingredients_1,
                 result = recipe.result,
                 result_count = recipe.result_count * 4
@@ -250,14 +250,14 @@ for _, recipe in pairs(data.raw['recipe']) do
                 type = 'recipe',
                 name = recipe.name .. ' 16x',
                 energy_required = energy_required * 4,
-                enabled = 'true',
+                enabled = true,
                 ingredients = ingredients_2,
                 result = recipe.result,
                 result_count = recipe.result_count * 16,
             }})
         end
     elseif (recipe.name == 'loader') or (recipe.name == 'fast-loader') or (recipe.name == 'express-loader') then
-        recipe.enabled = 'true'
-        recipe.hidden = 'false'
+        recipe.enabled = true
+        recipe.hidden = false
     end
 end
