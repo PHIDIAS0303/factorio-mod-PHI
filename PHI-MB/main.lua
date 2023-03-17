@@ -207,14 +207,24 @@ for i=1, #recipe_list, 1 do
         end
 
         for _, v in pairs(item.ingredients) do
-            table.insert(ingredients_1, {v[1], v[2] * 4})
-            table.insert(ingredients_2, {v[1], v[2] * 16})
+            if (v[1] ~= nil) and (v[2] ~= nil) then
+                table.insert(ingredients_1, {v[1], v[2] * 4})
+                table.insert(ingredients_2, {v[1], v[2] * 16})
+            else
+                table.insert(ingredients_1, {type=v.type, name=v.name, amount=v.amount * 4, fluidbox_index=v.fluidbox_index})
+                table.insert(ingredients_2, {type=v.type, name=v.name, amount=v.amount * 16, fluidbox_index=v.fluidbox_index})
+            end
         end
     
         if item.results ~= nil then
             for _, v in pairs(item.results) do
-                table.insert(results_1, {v[1], v[2]  * 4})
-                table.insert(results_2, {v[1], v[2]  * 16})
+                if (v[1] ~= nil) and (v[2] ~= nil) then
+                    table.insert(results_1, {v[1], v[2] * 4})
+                    table.insert(results_2, {v[1], v[2] * 16})
+                else
+                    table.insert(results_1, {type=v.type, name=v.name, amount=v.amount * 4, fluidbox_index=v.fluidbox_index})
+                    table.insert(results_2, {type=v.type, name=v.name, amount=v.amount * 16, fluidbox_index=v.fluidbox_index})            
+                end
             end
 
             data:extend({{
@@ -235,6 +245,14 @@ for i=1, #recipe_list, 1 do
                 results = results_2
             }})
         else
+            local result_count
+
+            if item.result_count ~= nil then
+                result_count = item.result_count
+            else
+                result_count = 1
+            end
+
             data:extend({{
                 type = 'recipe',
                 name = item.name .. ' 4x',
@@ -242,9 +260,9 @@ for i=1, #recipe_list, 1 do
                 enabled = true,
                 ingredients = ingredients_1,
                 result = item.result,
-                result_count = item.result_count * 4
+                result_count = result_count * 4
             }})
-        
+            
             data:extend({{
                 type = 'recipe',
                 name = item.name .. ' 16x',
@@ -252,7 +270,7 @@ for i=1, #recipe_list, 1 do
                 enabled = true,
                 ingredients = ingredients_2,
                 result = item.result,
-                result_count = item.result_count * 16,
+                result_count = result_count * 16,
             }})
         end
     end
