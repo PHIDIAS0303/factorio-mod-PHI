@@ -205,14 +205,40 @@ for i=1, #recipe_list, 1 do
         else
             energy_required = 2
         end
+        
+        if item.ingredients ~= nil then
+            for _, v in pairs(item.ingredients) do
+                if (v[1] ~= nil) and (v[2] ~= nil) then
+                    table.insert(ingredients_1, {v[1], v[2] * 4})
+                    table.insert(ingredients_2, {v[1], v[2] * 16})
+                else
+                    table.insert(ingredients_1, {type=v.type, name=v.name, amount=v.amount * 4, fluidbox_index=v.fluidbox_index})
+                    table.insert(ingredients_2, {type=v.type, name=v.name, amount=v.amount * 16, fluidbox_index=v.fluidbox_index})
+                end
+            end
+        else
+            if item.normal ~= nil or item.normal ~= false then
+                for _, v in pairs(item.normal.ingredients) do
+                    if (v[1] ~= nil) and (v[2] ~= nil) then
+                        table.insert(ingredients_1, {v[1], v[2] * 4})
+                        table.insert(ingredients_2, {v[1], v[2] * 16})
+                    else
+                        table.insert(ingredients_1, {type=v.type, name=v.name, amount=v.amount * 4, fluidbox_index=v.fluidbox_index})
+                        table.insert(ingredients_2, {type=v.type, name=v.name, amount=v.amount * 16, fluidbox_index=v.fluidbox_index})
+                    end
+                end
+            end
 
-        for _, v in pairs(item.ingredients) do
-            if (v[1] ~= nil) and (v[2] ~= nil) then
-                table.insert(ingredients_1, {v[1], v[2] * 4})
-                table.insert(ingredients_2, {v[1], v[2] * 16})
-            else
-                table.insert(ingredients_1, {type=v.type, name=v.name, amount=v.amount * 4, fluidbox_index=v.fluidbox_index})
-                table.insert(ingredients_2, {type=v.type, name=v.name, amount=v.amount * 16, fluidbox_index=v.fluidbox_index})
+            if item.expensive ~= nil or item.expensive ~= false then
+                for _, v in pairs(item.expensive.ingredients) do
+                    if (v[1] ~= nil) and (v[2] ~= nil) then
+                        table.insert(ingredients_1, {v[1], v[2] * 4})
+                        table.insert(ingredients_2, {v[1], v[2] * 16})
+                    else
+                        table.insert(ingredients_1, {type=v.type, name=v.name, amount=v.amount * 4, fluidbox_index=v.fluidbox_index})
+                        table.insert(ingredients_2, {type=v.type, name=v.name, amount=v.amount * 16, fluidbox_index=v.fluidbox_index})
+                    end
+                end
             end
         end
     
