@@ -256,6 +256,9 @@ for _, recipe in pairs(data.raw['recipe']) do
                 result_count = recipe.result_count * 16,
             }})
         end
+
+        table.insert(data.raw['technology']['automation'].effects, {type='unlock-recipe', recipe=recipe.name .. ' 4x'})
+        table.insert(data.raw['technology']['automation'].effects, {type='unlock-recipe', recipe=recipe.name .. ' 16x'})
     elseif (recipe.name == 'loader') or (recipe.name == 'fast-loader') or (recipe.name == 'express-loader') then
         recipe.enabled = true
         recipe.hidden = false
