@@ -25,8 +25,6 @@ local function EE(source, tier)
         local item = table.deepcopy(data.raw['furnace']['electric-furnace'])
     elseif (source == 'chemical-plant') or (source == 'oil-refinery') then
         local item = table.deepcopy(data.raw['assembling-machine'][source])
-    else
-        local item = table.deepcopy(data.raw[source][source])
     end
     
     item.name = source .. '-' .. tier
@@ -49,7 +47,12 @@ end
 
 -- item
 local function EI(source, tier)
-    local item = table.deepcopy(data.raw.item[source])
+    if source == 'assembling-machine' then
+        local item = table.deepcopy(data.raw.item['assembling-machine-3'])
+    else
+        local item = table.deepcopy(data.raw.item[source])
+    end
+
     item.name = source .. '-' .. tier
     item.place_result = source .. '-' .. tier
     item.icons = {{icon = graphics_location .. source .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
