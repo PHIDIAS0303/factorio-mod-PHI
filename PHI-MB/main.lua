@@ -212,7 +212,7 @@ for _, recipe in pairs(data.raw['recipe']) do
         end
     
         if item.results ~= nil then
-            for k, v in pairs(item.results) do
+            for k, v in pairs(recipe.results) do
                 table.insert(results_1, {recipe.results[k], v * 4})
                 table.insert(results_2, {recipe.results[k], v * 16})
             end
@@ -253,7 +253,7 @@ for _, recipe in pairs(data.raw['recipe']) do
                 enabled = 'true',
                 ingredients = ingredients_2,
                 result = recipe.result,
-                result = recipe.result_count * 16,
+                result_count = recipe.result_count * 16,
             }})
         end
     elseif (recipe.name == 'loader') or (recipe.name == 'fast-loader') or (recipe.name == 'express-loader') then
