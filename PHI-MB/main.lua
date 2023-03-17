@@ -181,26 +181,34 @@ table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-
 
 for i=1, #recipe_list, 1 do
     local item = table.deepcopy(data.raw['recipe'][recipe_list[i]])
-    item.name = item.name .. 2
-    item.order = item.order .. 2
+    local item_1 = item
+    item.name = item.name .. ' 4x'
+    item_1.name = item_1.name .. ' 16x'
+    item.order = item.order .. '-2'
+    item_1.order = item_1.order .. '-3'
 
     if item.energy_required ~= nil then
         item.energy_required = item.energy_required * 4
+        item_1.energy_required = item.energy_required * 16
     else
         item.energy_required = 2
+        item_1.energy_required = 8
     end
 
-    for _, v in pairs(item.ingredients) do
-        v.amount = v.amount * 4
+    for k, _ in pairs(item.ingredients) do
+        item.ingredients[k].amount = item.ingredients[k].amount * 4
+        item_1.ingredients[k].amount = item.ingredients[k].amount * 16
     end
 
     if item.results ~= nil then
-        for _, v in pairs(item.results) do
-            v.amount = v.amount * 4
+        for k, _ in pairs(item.results) do
+            item.results[k].amount = item.results[k].amount * 4
+            item_1.results[k].amount = item.results[k].amount * 16
         end
     else
-        v.result_count = v.result_count * 4
+        item.result_count = item.result_count * 4
+        item_1.result_count = item.result_count * 16
     end
 
-    data:extend({{item}})
+    data:extend({{item, item_1}})
 end
