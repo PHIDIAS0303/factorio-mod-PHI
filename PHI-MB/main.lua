@@ -203,7 +203,7 @@ for i=1, #recipe_list, 1 do
 
         if item.energy_required ~= nil then
             item.energy_required = item.energy_required * 4
-            item_1.energy_required = item.energy_required * 16
+            item_1.energy_required = item_1.energy_required * 16
         else
             item.energy_required = 2
             item_1.energy_required = 8
@@ -214,11 +214,11 @@ for i=1, #recipe_list, 1 do
                 if (item.ingredients[k][1] ~= nil) and (item.ingredients[k][2] ~= nil) then
                     -- table.insert(ingredients_2, {v[1], v[2] * 4})
                     item.ingredients[k][2] = item.ingredients[k][2] * 4
-                    item_1.ingredients[k][2] = item.ingredients[k][2] * 16
+                    item_1.ingredients[k][2] = item_1.ingredients[k][2] * 16
                 else
                     -- table.insert(ingredients_1, {type=v.type, name=v.name, amount=v.amount * 4, fluidbox_index=v.fluidbox_index})
                     item.ingredients[k].amount = item.ingredients[k].amount * 4
-                    item_1.ingredients[k].amount = item.ingredients[k].amount * 16
+                    item_1.ingredients[k].amount = item_1.ingredients[k].amount * 16
                 end
             end
         else
@@ -226,10 +226,10 @@ for i=1, #recipe_list, 1 do
                 for k, _ in pairs(item.normal.ingredients) do
                     if (item.normal.ingredients[k][1] ~= nil) and (item.normal.ingredients[k][2] ~= nil) then
                         item.normal.ingredients[k][2] = item.normal.ingredients[k][2] * 4
-                        item_1.normal.ingredients[k][2] = item.normal.ingredients[k][2] * 16
+                        item_1.normal.ingredients[k][2] = item_1.normal.ingredients[k][2] * 16
                     else
                         item.normal.ingredients[k].amount = item.normal.ingredients[k].amount * 4
-                        item_1.normal.ingredients[k].amount = item.normal.ingredients[k].amount * 16
+                        item_1.normal.ingredients[k].amount = item_1.normal.ingredients[k].amount * 16
                     end
                 end
             end
@@ -238,16 +238,15 @@ for i=1, #recipe_list, 1 do
                 for k, _ in pairs(item.expensive.ingredients) do
                     if (item.expensive.ingredients[k][1] ~= nil) and (item.expensive.ingredients[k][2] ~= nil) then
                         item.expensive.ingredients[k][2] = item.expensive.ingredients[k][2] * 4
-                        item_1.expensive.ingredients[k][2] = item.expensive.ingredients[k][2] * 16
+                        item_1.expensive.ingredients[k][2] = item_1.expensive.ingredients[k][2] * 16
                     else
                         item.expensive.ingredients[k].amount = item.expensive.ingredients[k].amount * 4
-                        item_1.expensive.ingredients[k].amount = item.expensive.ingredients[k].amount * 16
+                        item_1.expensive.ingredients[k].amount = item_1.expensive.ingredients[k].amount * 16
                     end
                 end
             end
         end
         
-        item.energy_required = energy_required
         item.name = item.name .. '-4x'
         item.enabled = true
         item_1.name = item_1.name .. '-16x'
@@ -257,10 +256,10 @@ for i=1, #recipe_list, 1 do
             for k, _ in pairs(item.results) do
                 if (item.results[k][1] ~= nil) and (item.results[k][2] ~= nil) then
                     item.results[k][2] = item.results[k][2] * 4
-                    item_1.results[k][2] = item.results[k][2] * 16
+                    item_1.results[k][2] = item_1.results[k][2] * 16
                 else
                     item.results[k].amount = item.results[k].amount * 4
-                    item_1.results[k].amount = item.results[k].amount * 16         
+                    item_1.results[k].amount = item_1.results[k].amount * 16         
                 end
             end
 
@@ -270,7 +269,7 @@ for i=1, #recipe_list, 1 do
 
             if item.result_count ~= nil then
                 item.result_count = item.result_count * 4
-                item_1.result_count = item.result_count * 16
+                item_1.result_count = item_1.result_count * 16
             else
                 item.result_count = 4
                 item_1.result_count = 16
