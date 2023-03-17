@@ -197,15 +197,15 @@ for i=1, #recipe_list, 1 do
         item_1.energy_required = 8
     end
 
-    for k, _ in pairs(item.ingredients) do
-        item.ingredients[k].amount = item.ingredients[k].amount * 4
-        item_1.ingredients[k].amount = item.ingredients[k].amount * 16
+    for k, v in pairs(item.ingredients) do
+        item.ingredients[k] = v * 4
+        item_1.ingredients[k] = v * 16
     end
 
     if item.results ~= nil then
-        for k, _ in pairs(item.results) do
-            item.results[k].amount = item.results[k].amount * 4
-            item_1.results[k].amount = item.results[k].amount * 16
+        for k, v in pairs(item.results) do
+            item.results[k] = v * 4
+            item_1.results[k] = v * 16
         end
     else
         item.result_count = item.result_count * 4
