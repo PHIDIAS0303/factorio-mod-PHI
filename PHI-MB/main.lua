@@ -134,7 +134,12 @@ local function EE(source, tier)
     item.name = source .. '-' .. tier
     item.minable.result = source .. '-' .. tier
     item.max_health = item.max_health * (2 ^ (tier - item_min[source] + 1))
-    item.crafting_speed = item.crafting_speed * (2 ^ (tier - item_min[source] + 1))
+
+    if source == 'lab' then
+        item.researching_speed = item.researching_speed * (2 ^ (tier - item_min[source] + 1))
+    else
+        item.crafting_speed = item.crafting_speed * (2 ^ (tier - item_min[source] + 1))
+    end
     item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (2 ^ (tier - item_min[source] + 1))
     item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - item_min[source] + 1)) .. 'kW'
     -- item.animation.layers[1].filename = graphics_location .. source .. '-e.png'
