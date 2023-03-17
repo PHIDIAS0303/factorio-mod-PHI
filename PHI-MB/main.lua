@@ -184,14 +184,22 @@ for i=1, #recipe_list, 1 do
     item.name = item.name .. 2
     item.order = item.order .. 2
 
-    item.energy_required = item.energy_required * 4
+    if item.energy_required ~= nil then
+        item.energy_required = item.energy_required * 4
+    else
+        item.energy_required = 2
+    end
 
     for _, v in pairs(item.ingredients) do
         v.amount = v.amount * 4
     end
 
-    for _, v in pairs(item.results) do
-        v.amount = v.amount * 4
+    if item.results ~= nil then
+        for _, v in pairs(item.results) do
+            v.amount = v.amount * 4
+        end
+    else
+        v.result_count = v.result_count * 4
     end
 
     data:extend({{item}})
