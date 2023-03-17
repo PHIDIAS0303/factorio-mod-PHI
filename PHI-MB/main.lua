@@ -214,34 +214,22 @@ for i=1, #recipe_list, 1 do
         if item.ingredients ~= nil then
             for k, v in pairs(item.ingredients) do
                 if (v[1] ~= nil) and (v[2] ~= nil) then
-                    -- table.insert(ingredients_2, {v[1], v[2] * 4})
                     item.ingredients[k][2] = v[2] * 4
                     item_1.ingredients[k][2] = v[2] * 16
                 else
-                    -- table.insert(ingredients_1, {type=v.type, name=v.name, amount=v.amount * 4, fluidbox_index=v.fluidbox_index})
                     item.ingredients[k].amount = v.amount * 4
                     item_1.ingredients[k].amount = v.amount * 16
                 end
             end
         elseif (item.normal ~= nil) and (item.normal ~= false) then
             for k, v in pairs(item.normal.ingredients) do
-                if (v[1] ~= nil) and (v[2] ~= nil) then
-                    item.normal.ingredients[k][2] = v[2] * 4
-                    item_1.normal.ingredients[k][2] = v[2] * 16
-                else
-                    item.normal.ingredients[k].amount = v.amount * 4
-                    item_1.normal.ingredients[k].amount = v.amount * 16
-                end
+                item.normal.ingredients[k][2] = v[2] * 4
+                item_1.normal.ingredients[k][2] = v[2] * 16
             end
         elseif (item.expensive) ~= nil and (item.expensive ~= false) then
             for k, v in pairs(item.expensive.ingredients) do
-                if (v[1] ~= nil) and (v[2] ~= nil) then
-                    item.expensive.ingredients[k][2] = v[2] * 4
-                    item_1.expensive.ingredients[k][2] = v[2] * 16
-                else
-                    item.expensive.ingredients[k].amount = v.amount * 4
-                    item_1.expensive.ingredients[k].amount = v.amount * 16
-                end
+                item.expensive.ingredients[k][2] = v[2] * 4
+                item_1.expensive.ingredients[k][2] = v[2] * 16
             end
         end
         
