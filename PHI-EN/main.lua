@@ -10,15 +10,14 @@ local function EE(source, tier)
     local item = table.deepcopy(data.raw[source][source])
     item.name = source .. "-mk" .. tier
     item.minable.result = source .. "-mk" .. tier
-    item.max_health = 1000
+    item.max_health = 200 * (2 ^ (tier - 1))
     item.picture.layers[1].filename = graphics_location .. source .. "-e.png"
     item.picture.layers[1].hr_version.filename = graphics_location .. source .."-eh.png"
     item.icon = graphics_location .. source .. "-i.png"
     item.icon_size = 64
     item.icon_mipmaps = 4
 
-    if (source == "accumulator")
-    then
+    if (source == "accumulator") then
         item.energy_source.buffer_capacity = (base_battery_energy * 4 ^ (tier - 1)) .. "MJ"
         item.energy_source.input_flow_limit = (base_battery_flow * (4 ^ (tier - 1))) .. "kW"
         item.energy_source.output_flow_limit = (base_battery_flow * (4 ^ (tier - 1))) .. "kW"
@@ -34,8 +33,7 @@ local function EE(source, tier)
         item.production = (base_solar_energy * (4 ^ (tier - 1))) .. "kW"
     end
     
-    if (tier <= 7)
-    then
+    if (tier <= 7) then
         item.next_upgrade = source .. "-mk" .. (tier + 1)
     end
     
@@ -47,16 +45,14 @@ local function EI(source, tier)
     local item = table.deepcopy(data.raw.item[source])
     item.name = source .. "-mk" .. tier
     item.place_result = source .. "-mk" .. tier
-    item.max_health = 1000
+    item.max_health = 150 * (2 ^ (tier - 1))
     item.subgroup = "energy"
     item.stack_size = 50
     item.default_request_amount = 50
     item.icons = {{icon = graphics_location .. source .. "-i.png", icon_mipmaps = 4, icon_size = 64}}
 
-    if (source == "accumulator")
-    then
+    if (source == "accumulator") then
         item.order = "d[" .. source .. "]-a" .. alpha_order[tier - 1] .. "[" .. source .. "-mk" .. tier .. "]"
-
     else
         item.order = "e[" .. source .. "]-a" .. alpha_order[tier - 1] .. "[" .. source .. "-mk" .. tier .. "]"
     end
@@ -68,8 +64,7 @@ end
 local function ER(source, tier)
     local na = source
 
-    if (tier >= 3)
-    then
+    if (tier >= 3) then
         na = na .. "-mk" .. (tier - 1)
     end
 
@@ -85,8 +80,7 @@ end
 
 -- technology
 local function ET(tier)
-    if (tier == 2)
-    then
+    if (tier == 2) then
         local prereq = {"solar-energy", "advanced-electronics", "electric-energy-accumulators"}
     else
         local prereq = {"compound-energy-" .. (tier - 2)}
