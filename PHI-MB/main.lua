@@ -149,7 +149,7 @@ local function EI(source, tier)
 
     item.name = source .. '-' .. tier
     item.place_result = source .. '-' .. tier
-    item.icons = {{icon = graphics_location .. source .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
+    -- item.icons = {{icon = graphics_location .. source .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
     item.order = item.order .. tier
     data:extend({item})
 end
@@ -210,8 +210,8 @@ for i=1, #recipe_list, 1 do
         end
         
         if item.ingredients ~= nil then
-            for k, v in pairs(item.ingredients) do
-                if (v[1] ~= nil) and (v[2] ~= nil) then
+            for k, _ in pairs(item.ingredients) do
+                if (item.ingredients[k][1] ~= nil) and (item.ingredients[k][2] ~= nil) then
                     -- table.insert(ingredients_2, {v[1], v[2] * 4})
                     item.ingredients[k][2] = item.ingredients[k][2] * 4
                     item_1.ingredients[k][2] = item.ingredients[k][2] * 16
@@ -223,8 +223,8 @@ for i=1, #recipe_list, 1 do
             end
         else
             if item.normal ~= nil or item.normal ~= false then
-                for k, v in pairs(item.normal.ingredients) do
-                    if (v[1] ~= nil) and (v[2] ~= nil) then
+                for k, _ in pairs(item.normal.ingredients) do
+                    if (item.normal.ingredients[k][1] ~= nil) and (item.normal.ingredients[k][2] ~= nil) then
                         item.normal.ingredients[k][2] = item.normal.ingredients[k][2] * 4
                         item_1.normal.ingredients[k][2] = item.normal.ingredients[k][2] * 16
                     else
@@ -235,8 +235,8 @@ for i=1, #recipe_list, 1 do
             end
 
             if item.expensive ~= nil or item.expensive ~= false then
-                for k, v in pairs(item.expensive.ingredients) do
-                    if (v[1] ~= nil) and (v[2] ~= nil) then
+                for k, _ in pairs(item.expensive.ingredients) do
+                    if (item.expensive.ingredients[k][1] ~= nil) and (item.expensive.ingredients[k][2] ~= nil) then
                         item.expensive.ingredients[k][2] = item.expensive.ingredients[k][2] * 4
                         item_1.expensive.ingredients[k][2] = item.expensive.ingredients[k][2] * 16
                     else
@@ -254,8 +254,8 @@ for i=1, #recipe_list, 1 do
         item_1.enabled = true
 
         if item.results ~= nil then
-            for k, v in pairs(item.results) do
-                if (v[1] ~= nil) and (v[2] ~= nil) then
+            for k, _ in pairs(item.results) do
+                if (item.results[k][1] ~= nil) and (item.results[k][2] ~= nil) then
                     item.results[k][2] = item.results[k][2] * 4
                     item_1.results[k][2] = item.results[k][2] * 16
                 else
