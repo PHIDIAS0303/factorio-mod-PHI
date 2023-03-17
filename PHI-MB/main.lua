@@ -210,7 +210,7 @@ table.insert(data.raw.technology['compound-energy-2'].effects, {type='unlock-rec
 for i=1, #recipe_list, 1 do
     if data.raw.recipe[recipe_list[i]] ~= nil then
         local item = table.deepcopy(data.raw.recipe[recipe_list[i]])
-        local item_1 = item
+        local item_1 = table.deepcopy(data.raw.recipe[recipe_list[i]])
 
         if item.energy_required ~= nil then
             item.energy_required = item.energy_required * 4
