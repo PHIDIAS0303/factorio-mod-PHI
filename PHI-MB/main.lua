@@ -92,6 +92,7 @@ local recipe_list = {
     'effectivity-module-2',
     'effectivity-module-3',
 
+    'pipe',
     'fast-inserter',
     'stack-inserter',
     'stack-filter-inserter',
