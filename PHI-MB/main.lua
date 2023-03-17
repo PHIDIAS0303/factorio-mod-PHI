@@ -211,7 +211,7 @@ for _, recipe in pairs(data.raw['recipe']) do
             table.insert(ingredients_2, {recipe.ingredients[k], v * 16})
         end
     
-        if item.results ~= nil then
+        if recipe.results ~= nil then
             for k, v in pairs(recipe.results) do
                 table.insert(results_1, {recipe.results[k], v * 4})
                 table.insert(results_2, {recipe.results[k], v * 16})
