@@ -103,12 +103,12 @@ local function ET(tier)
         },
         prerequisites = prereq,
         unit = {
-            count = 200 * (tier - 1),
+            count = 200 * (2 ^ (tier - 1)),
             ingredients = {
                 {"automation-science-pack", 1},
                 {"logistic-science-pack", 1}
             },
-            time = 10 * (tier - 1)
+            time = 60
         },
         order = "a-h-" .. alpha_order[tier + 1]
     }})
