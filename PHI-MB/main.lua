@@ -104,7 +104,13 @@ local recipe_list = {
     'fast-splitter',
     'express-transport-belt',
     'express-underground-belt',
-    'express-splitter'
+    'express-splitter',
+
+    'uranium-rounds-magazine',
+    'explosive-cannon-shell',
+    'artillery-shell',
+    'rocket',
+    'explosive-rocket'
 }
 
 -- entity
