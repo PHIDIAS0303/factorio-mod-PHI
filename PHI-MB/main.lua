@@ -19,12 +19,14 @@ local item_max = {
 
 -- entity
 local function EE(source, tier)
+    local item 
+    
     if source == 'assembling-machine' then
-        local item = table.deepcopy(data.raw['assembling-machine']['assembling-machine-3'])
+        item = table.deepcopy(data.raw['assembling-machine']['assembling-machine-3'])
     elseif source == 'electric-furnace' then
-        local item = table.deepcopy(data.raw['furnace']['electric-furnace'])
+        item = table.deepcopy(data.raw['furnace']['electric-furnace'])
     else
-        local item = table.deepcopy(data.raw['assembling-machine'][source])
+        item = table.deepcopy(data.raw['assembling-machine'][source])
     end
     
     item.name = source .. '-' .. tier
