@@ -9,3 +9,7 @@ data.raw['furnace']['electric-furnace-3'].fast_replaceable_group = data.raw['fur
 -- chemical-plant
 data.raw['assembling-machine']['chemical-plant-2'].fast_replaceable_group = data.raw['assembling-machine']['chemical-plant'].fast_replaceable_group
 data.raw['assembling-machine']['chemical-plant-3'].fast_replaceable_group = data.raw['assembling-machine']['chemical-plant-2'].fast_replaceable_group
+
+-- oil-refinery
+data.raw['assembling-machine']['oil-refinery-2'].fast_replaceable_group = data.raw['assembling-machine']['oil-refinery'].fast_replaceable_group
+data.raw['assembling-machine']['oil-refinery-3'].fast_replaceable_group = data.raw['assembling-machine']['oil-refinery-2'].fast_replaceable_group
