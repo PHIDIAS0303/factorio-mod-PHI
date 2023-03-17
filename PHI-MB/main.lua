@@ -258,7 +258,7 @@ for i=1, #recipe_list, 1 do
             end
         end
         
-        item.name = item.name .. '-4x'
+        item.name = item.name .. '-04x'
         item.enabled = true
         item_1.name = item_1.name .. '-16x'
         item_1.enabled = true
