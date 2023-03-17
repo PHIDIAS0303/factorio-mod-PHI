@@ -33,6 +33,7 @@ local function EE(source, tier)
     item.minable.result = source .. '-' .. tier
     item.max_health = item.max_health * (2 ^ (tier - 1))
     item.crafting_speed = item.crafting_speed * (2 ^ (tier - 1))
+    item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute  * (2 ^ (tier - 1))
     item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - 1)) .. string.match(item.energy_usage, '%a')
     item.animation.layers[1].filename = graphics_location .. source .. '-e.png'
     item.animation.layers[1].hr_version.filename = graphics_location .. source ..'-eh.png'
