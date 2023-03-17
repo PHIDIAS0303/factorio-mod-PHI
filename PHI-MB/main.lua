@@ -71,7 +71,7 @@ local recipe_list = {
     'nuclear-fuel-reprocessing',
 
     'inserter',
-    'transport-belt'
+    'transport-belt',
     'grenade',
     'firearm-magazine',
     'piercing-rounds-magazine',
@@ -181,6 +181,8 @@ table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-
 
 for i=1, #recipe_list, 1 do
     local item = table.deepcopy(data.raw['recipe'][recipe_list[i]])
+    item.enabled = true
+
     local item_1 = item
     item.name = item.name .. ' 4x'
     item_1.name = item_1.name .. ' 16x'
