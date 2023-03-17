@@ -9,6 +9,7 @@
     "homepage": "",
     "description": "Additional Machines for Megabase",
     "dependencies": [
-        "base >= 1.1.0"
+        "base >= 1.1.0",
+        "PHI-EN >= 1.1.0"
     ]
 }
