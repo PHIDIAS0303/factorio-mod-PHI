@@ -210,5 +210,5 @@ for i=1, #recipe_list, 1 do
         item_1.result_count = item.result_count * 16
     end
 
-    data:extend({{item, item_1}})
+    data:extend({item, item_1})
 end
