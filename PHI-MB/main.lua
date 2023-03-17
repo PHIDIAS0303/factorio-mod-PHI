@@ -17,6 +17,82 @@ local item_max = {
     ['oil-refinery'] = 3
 }
 
+local recipe_list = {
+    'sulfuric-acid',
+    'basic-oil-processing',
+    'advanced-oil-processing',
+    'coal-liquefaction',
+    'heavy-oil-cracking',
+    'light-oil-cracking',
+    'solid-fuel-from-light-oil',
+    'solid-fuel-from-heavy-oil',
+    'solid-fuel-from-petroleum-gas',
+    'lubricant',
+
+    'iron-plate',
+    'copper-plate',
+    'steel-plate',
+    'stone-brick',
+
+    'sulfur',
+    'plastic-bar',
+    'explosives',
+    'battery',
+
+    'empty-barrel',
+    'copper-cable',
+    'iron-stick',
+    'iron-gear-wheel',
+
+    'electronic-circuit',
+    'advanced-circuit',
+    'processing-unit',
+
+    'engine-unit',
+    'electric-engine-unit',
+    'flying-robot-frame',
+
+    'low-density-structure',
+    'rocket-fuel',
+    'rocket-control-unit',
+    'rocket-part',
+
+    'automation-science-pack',
+    'logistic-science-pack',
+    'chemical-science-pack',
+    'military-science-pack',
+    'production-science-pack',
+    'utility-science-pack',
+
+    'uranium-processing',
+    'kovarex-enrichment-process',
+    'uranium-fuel-cell',
+    'nuclear-fuel',
+    'nuclear-fuel-reprocessing',
+
+    'inserter',
+    'transport-belt'
+    'grenade',
+    'firearm-magazine',
+    'piercing-rounds-magazine',
+    'stone-wall',
+    'rail',
+    'electric-furnace',
+    'solid-fuel-from-heavy-oil',
+    'solid-fuel-from-light-oil',
+    'solid-fuel-from-petroleum-gas',
+
+    'speed-module',
+    'speed-module-2',
+    'speed-module-3',
+    'productivity-module',
+    'productivity-module-2',
+    'productivity-module-3',
+    'effectivity-module',
+    'effectivity-module-2',
+    'effectivity-module-3'
+}
+
 -- entity
 local function EE(source, tier)
     local item
@@ -101,8 +177,22 @@ table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-
 table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe',recipe='chemical-plant-3'})
 table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-recipe',recipe='oil-refinery-3'})
 
-for _, recipe in pairs(data.raw['recipe']) do
-    if recipe.category == 'oil-processing' then
-        recipe.energy_required = recipe.energy_required * 4
+-- item.group == intermediate-product
+
+for i=1, #recipe_list, 1 do
+    local item = table.deepcopy(data.raw['recipe'][recipe_list[i]])
+    item.name = item.name .. 2
+    item.order = item.order .. 2
+
+    item.energy_required = item.energy_required * 4
+
+    for _, v in pairs(item.ingredients) do
+        v.amount = v.amount * 4
     end
+
+    for _, v in pairs(item.results) do
+        v.amount = v.amount * 4
+    end
+
+    data:extend({{item}})
 end
