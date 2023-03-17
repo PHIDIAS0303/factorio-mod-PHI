@@ -23,6 +23,6 @@ data.raw['assembling-machine']['centrifuge-2'].fast_replaceable_group = data.raw
 data.raw['assembling-machine']['centrifuge-3'].fast_replaceable_group = data.raw['assembling-machine']['centrifuge-2'].fast_replaceable_group
 
 -- lab
-data.raw['assembling-machine']['lab'].fast_replaceable_group = 'lab'
-data.raw['assembling-machine']['lab-2'].fast_replaceable_group = data.raw['assembling-machine']['lab'].fast_replaceable_group
-data.raw['assembling-machine']['lab-3'].fast_replaceable_group = data.raw['assembling-machine']['lab-2'].fast_replaceable_group
+data.raw['lab']['lab'].fast_replaceable_group = 'lab'
+data.raw['lab']['lab-2'].fast_replaceable_group = data.raw['lab']['lab'].fast_replaceable_group
+data.raw['lab']['lab-3'].fast_replaceable_group = data.raw['lab']['lab-2'].fast_replaceable_group
