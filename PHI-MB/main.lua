@@ -90,7 +90,20 @@ local recipe_list = {
     'productivity-module-3',
     'effectivity-module',
     'effectivity-module-2',
-    'effectivity-module-3'
+    'effectivity-module-3',
+
+    'fast-inserter',
+    'stack-inserter',
+    'stack-filter-inserter',
+    'filter-inserter',
+
+    'underground-belt',
+    'fast-transport-belt',
+    'fast-underground-belt',
+    'fast-splitter',
+    'express-transport-belt',
+    'express-underground-belt',
+    'express-splitter'
 }
 
 -- entity
@@ -179,38 +192,72 @@ table.insert(data.raw['technology']['compound-energy-2'].effects, {type='unlock-
 
 -- item.group == intermediate-product
 
-for i=1, #recipe_list, 1 do
-    local item = table.deepcopy(data.raw['recipe'][recipe_list[i]])
-    item.enabled = true
+for _, recipe in pairs(data.raw['recipe']) do
+    if recipe_list[recipe.name] ~= nil then
+        local energy_required
+        local ingredients_1 = {}
+        local ingredients_2 = {}
+        local results_1 = {}
+        local results_2 = {}
 
-    local item_1 = item
-    item.name = item.name .. ' 4x'
-    item_1.name = item_1.name .. ' 16x'
-    item.order = item.order .. '-2'
-    item_1.order = item_1.order .. '-3'
-
-    if item.energy_required ~= nil then
-        item.energy_required = item.energy_required * 4
-        item_1.energy_required = item.energy_required * 16
-    else
-        item.energy_required = 2
-        item_1.energy_required = 8
-    end
-
-    for k, v in pairs(item.ingredients) do
-        item.ingredients[k] = v * 4
-        item_1.ingredients[k] = v * 16
-    end
-
-    if item.results ~= nil then
-        for k, v in pairs(item.results) do
-            item.results[k] = v * 4
-            item_1.results[k] = v * 16
+        if recipe.energy_required ~= nil then
+            energy_required = recipe.energy_required * 4
+        else
+            energy_required = 2
         end
-    else
-        item.result_count = item.result_count * 4
-        item_1.result_count = item.result_count * 16
-    end
 
-    data:extend({item, item_1})
+        for k, v in pairs(recipe.ingredients) do
+            table.insert(ingredients_1, {recipe.ingredients[k], v * 4})
+            table.insert(ingredients_2, {recipe.ingredients[k], v * 16})
+        end
+    
+        if item.results ~= nil then
+            for k, v in pairs(item.results) do
+                table.insert(results_1, {recipe.results[k], v * 4})
+                table.insert(results_2, {recipe.results[k], v * 16})
+            end
+
+            data:extend({{
+                type = 'recipe',
+                name = recipe.name .. ' 4x',
+                energy_required = energy_required,
+                enabled = 'true',
+                ingredients = ingredients_1,
+                results = results_1
+            }})
+        
+            data:extend({{
+                type = 'recipe',
+                name = recipe.name .. ' 16x',
+                energy_required = energy_required * 4,
+                enabled = 'true',
+                ingredients = ingredients_2,
+                results = results_2
+            }})
+
+        else
+            data:extend({{
+                type = 'recipe',
+                name = recipe.name .. ' 4x',
+                energy_required = energy_required,
+                enabled = 'true',
+                ingredients = ingredients_1,
+                result = recipe.result,
+                result_count = recipe.result_count * 4
+            }})
+        
+            data:extend({{
+                type = 'recipe',
+                name = recipe.name .. ' 16x',
+                energy_required = energy_required * 4,
+                enabled = 'true',
+                ingredients = ingredients_2,
+                result = recipe.result,
+                result = recipe.result_count * 16,
+            }})
+        end
+    elseif (recipe.name == 'loader') or (recipe.name == 'fast-loader') or (recipe.name == 'express-loader') then
+        recipe.enabled = 'true'
+        recipe.hidden = 'false'
+    end
 end
