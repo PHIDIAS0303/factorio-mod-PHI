@@ -207,21 +207,21 @@ for i=1, #recipe_list, 1 do
         end
 
         for k, v in pairs(item.ingredients) do
-            table.insert(ingredients_1, {item.ingredients[k], v * 4})
-            table.insert(ingredients_2, {item.ingredients[k], v * 16})
+            table.insert(ingredients_1, {k, item.ingredients[k] * 4})
+            table.insert(ingredients_2, {k, item.ingredients[k] * 16})
         end
     
         if item.results ~= nil then
             for k, v in pairs(item.results) do
-                table.insert(results_1, {item.results[k], v * 4})
-                table.insert(results_2, {item.results[k], v * 16})
+                table.insert(results_1, {k, item.ingredients[k] * 4})
+                table.insert(results_2, {k, item.ingredients[k] * 16})
             end
 
             data:extend({{
                 type = 'recipe',
                 name = item.name .. ' 4x',
                 energy_required = energy_required,
-                enabled = false,
+                enabled = true,
                 ingredients = ingredients_1,
                 results = results_1
             }})
@@ -230,7 +230,7 @@ for i=1, #recipe_list, 1 do
                 type = 'recipe',
                 name = item.name .. ' 16x',
                 energy_required = energy_required * 4,
-                enabled = false,
+                enabled = true,
                 ingredients = ingredients_2,
                 results = results_2
             }})
@@ -239,7 +239,7 @@ for i=1, #recipe_list, 1 do
                 type = 'recipe',
                 name = item.name .. ' 4x',
                 energy_required = energy_required,
-                enabled = false,
+                enabled = true,
                 ingredients = ingredients_1,
                 result = item.result,
                 result_count = item.result_count * 4
@@ -249,15 +249,12 @@ for i=1, #recipe_list, 1 do
                 type = 'recipe',
                 name = item.name .. ' 16x',
                 energy_required = energy_required * 4,
-                enabled = false,
+                enabled = true,
                 ingredients = ingredients_2,
                 result = item.result,
                 result_count = item.result_count * 16,
             }})
         end
-
-        table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe=item.name .. ' 4x'})
-        table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe=item.name .. ' 16x'})
     end
 end
 
