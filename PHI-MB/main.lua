@@ -1,14 +1,15 @@
 local alpha_order = {'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'}
 local graphics_location = '__PHI-MB__/graphics/'
 
-local items = {'assembling-machine', 'electric-furnace', 'chemical-plant', 'oil-refinery', 'centrifuge'}
+local items = {'assembling-machine', 'electric-furnace', 'chemical-plant', 'oil-refinery', 'centrifuge', 'lab'}
 
 local item_min = {
     ['assembling-machine'] = 4,
     ['electric-furnace'] = 2,
     ['chemical-plant'] = 2,
     ['oil-refinery'] = 2,
-    ['centrifuge'] = 2
+    ['centrifuge'] = 2,
+    ['lab'] = 2
 }
 
 local item_max = {
@@ -16,7 +17,8 @@ local item_max = {
     ['electric-furnace'] = 3,
     ['chemical-plant'] = 3,
     ['oil-refinery'] = 3,
-    ['centrifuge'] = 3
+    ['centrifuge'] = 3,
+    ['lab'] = 3
 }
 
 local recipe_list = {
@@ -123,6 +125,8 @@ local function EE(source, tier)
         item = table.deepcopy(data.raw['assembling-machine']['assembling-machine-3'])
     elseif source == 'electric-furnace' then
         item = table.deepcopy(data.raw['furnace']['electric-furnace'])
+    elseif source == 'lab' then
+        item = table.deepcopy(data.raw['lab']['lab'])
     else
         item = table.deepcopy(data.raw['assembling-machine'][source])
     end
@@ -194,12 +198,14 @@ table.insert(data.raw.technology['compound-energy-1'].effects, {type='unlock-rec
 table.insert(data.raw.technology['compound-energy-1'].effects, {type='unlock-recipe', recipe='chemical-plant-2'})
 table.insert(data.raw.technology['compound-energy-1'].effects, {type='unlock-recipe', recipe='oil-refinery-2'})
 table.insert(data.raw.technology['compound-energy-1'].effects, {type='unlock-recipe', recipe='centrifuge-2'})
+table.insert(data.raw.technology['compound-energy-1'].effects, {type='unlock-recipe', recipe='lab-2'})
 
 table.insert(data.raw.technology['compound-energy-2'].effects, {type='unlock-recipe', recipe='assembling-machine-5'})
 table.insert(data.raw.technology['compound-energy-2'].effects, {type='unlock-recipe', recipe='electric-furnace-3'})
 table.insert(data.raw.technology['compound-energy-2'].effects, {type='unlock-recipe', recipe='chemical-plant-3'})
 table.insert(data.raw.technology['compound-energy-2'].effects, {type='unlock-recipe', recipe='oil-refinery-3'})
 table.insert(data.raw.technology['compound-energy-2'].effects, {type='unlock-recipe', recipe='centrifuge-3'})
+table.insert(data.raw.technology['compound-energy-2'].effects, {type='unlock-recipe', recipe='lab-3'})
 
 for i=1, #recipe_list, 1 do
     if data.raw.recipe[recipe_list[i]] ~= nil then
