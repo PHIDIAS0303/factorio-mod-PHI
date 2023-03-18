@@ -326,7 +326,7 @@ for i=1, #recipe_list, 1 do
     end
 end
 
-for t, _ in pairs(data.raw.technology) do
+for t=1, #data.raw.technology, 1 do
     for k, _ in pairs(data.raw.technology[t].effects) do
         if data.raw.technology[t].effects[k].type == 'unlock-recipe' then
             if data.raw.recipe[data.raw.technology[t].effects[k].recipe] ~= nil then
