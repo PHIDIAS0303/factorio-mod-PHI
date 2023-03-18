@@ -22,6 +22,7 @@ local item_max = {
 }
 
 local recipe_multiplier = {4, 8}
+local recipe_display = {true, false}
 
 local recipe_list = {
     'sulfuric-acid',
@@ -220,8 +221,7 @@ for i=1, #recipe_list, 1 do
     if data.raw.recipe[recipe_list[i]] ~= nil then
         for j=1, #recipe_multiplier, 1 do
             local item = table.deepcopy(data.raw.recipe[recipe_list[i]])
-
-            item.enabled = true
+            item.enabled = false
 
             if (item.normal ~= nil) and (item.normal ~= false) then
                 for k, v in pairs(item.normal.ingredients) do
@@ -322,6 +322,18 @@ for i=1, #recipe_list, 1 do
             
             item.name = item.name .. '-' .. j
             data:extend({item})
+        end
+    end
+end
+
+for _, tech in data.raw.technology do
+    for k, _ in pairs(tech.effects) do
+        if tech.effects[k].type == 'unlock-recipe' then
+            if data.raw.recipe[tech.effects[k].recipe] ~= nil then
+                for j=1, #recipe_multiplier, 1 do
+                    table.insert(tech.effects, {type='unlock-recipe', recipe= tech.effects[k].recipe .. '-' .. recipe_multiplier})
+                end
+            end
         end
     end
 end
