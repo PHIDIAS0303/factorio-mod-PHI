@@ -21,7 +21,7 @@ local item_max = {
     ['lab'] = 3
 }
 
-local recipe_multiplier = {4, 16}
+local recipe_multiplier = {4, 8}
 
 local recipe_list = {
     'sulfuric-acid',
@@ -254,7 +254,7 @@ for i=1, #recipe_list, 1 do
                 else
                     item.normal.energy_required = recipe_multiplier[j] / 2
                 end
-                
+
             elseif (item.expensive) ~= nil and (item.expensive ~= false) then
                 for k, v in pairs(item.expensive.ingredients) do
                     if (v[1] ~= nil) and (v[2] ~= nil) then
