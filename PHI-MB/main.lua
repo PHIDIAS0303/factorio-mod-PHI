@@ -223,12 +223,6 @@ for i=1, #recipe_list, 1 do
 
             item.enabled = true
 
-            if item.energy_required ~= nil then
-                item.energy_required = item.energy_required * recipe_multiplier[j]
-            else
-                item.energy_required = recipe_multiplier[j] / 2
-            end
-
             if (item.normal ~= nil) and (item.normal ~= false) then
                 for k, v in pairs(item.normal.ingredients) do
                     if (v[1] ~= nil) and (v[2] ~= nil) then
@@ -255,6 +249,11 @@ for i=1, #recipe_list, 1 do
                     end
                 end
 
+                if item.normal.energy_required ~= nil then
+                    item.normal.energy_required = item.normal.energy_required * recipe_multiplier[j]
+                else
+                    item.normal.energy_required = recipe_multiplier[j] / 2
+                end
             elseif (item.expensive) ~= nil and (item.expensive ~= false) then
                 for k, v in pairs(item.expensive.ingredients) do
                     if (v[1] ~= nil) and (v[2] ~= nil) then
@@ -281,6 +280,12 @@ for i=1, #recipe_list, 1 do
                     end
                 end
 
+                if item.expensive.energy_required ~= nil then
+                    item.expensive.energy_required = item.expensive.energy_required * recipe_multiplier[j]
+                else
+                    item.expensive.energy_required = recipe_multiplier[j] / 2
+                end
+
             else
                 for k, v in pairs(item.ingredients) do
                     if (v[1] ~= nil) and (v[2] ~= nil) then
@@ -305,6 +310,12 @@ for i=1, #recipe_list, 1 do
                     else
                         item.result_count = recipe_multiplier[j]
                     end
+                end
+
+                if item.energy_required ~= nil then
+                    item.energy_required = item.energy_required * recipe_multiplier[j]
+                else
+                    item.energy_required = recipe_multiplier[j] / 2
                 end
             end
             
