@@ -109,9 +109,9 @@ local recipe_list = {
     'fast-transport-belt',
     'fast-underground-belt',
     'fast-splitter',
-    'express-transport-belt',
-    'express-underground-belt',
-    'express-splitter',
+    --'express-transport-belt',
+    --'express-underground-belt',
+    --'express-splitter',
 
     'uranium-rounds-magazine',
     'explosive-cannon-shell',
