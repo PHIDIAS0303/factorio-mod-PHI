@@ -21,6 +21,8 @@ local item_max = {
     ['lab'] = 3
 }
 
+local recipe_multiplier = {4, 16}
+
 local recipe_list = {
     'sulfuric-acid',
     'basic-oil-processing',
@@ -216,121 +218,99 @@ table.insert(data.raw.technology['compound-energy-2'].effects, {type='unlock-rec
 
 for i=1, #recipe_list, 1 do
     if data.raw.recipe[recipe_list[i]] ~= nil then
-        local item = table.deepcopy(data.raw.recipe[recipe_list[i]])
-        local item_1 = table.deepcopy(data.raw.recipe[recipe_list[i]])
+        for j=1, #recipe_multiplier, 1 do
+            local item = table.deepcopy(data.raw.recipe[recipe_list[i]])
 
-        item.enabled = true
-        item_1.enabled = true
+            item.enabled = true
 
-        if item.energy_required ~= nil then
-            item.energy_required = item.energy_required * 4
-            item_1.energy_required = item_1.energy_required * 16
-        else
-            item.energy_required = 2
-            item_1.energy_required = 8
+            if item.energy_required ~= nil then
+                item.energy_required = item.energy_required * recipe_multiplier[j]
+            else
+                item.energy_required = recipe_multiplier[j] / 2
+            end
+
+            if (item.normal ~= nil) and (item.normal ~= false) then
+                for k, v in pairs(item.normal.ingredients) do
+                    if (v[1] ~= nil) and (v[2] ~= nil) then
+                        item.normal.ingredients[k][2] = v[2] * recipe_multiplier[j]
+                    else
+                        item.normal.ingredients[k].amount = v.amount * recipe_multiplier[j]
+                    end
+                end
+
+                if item.normal.results ~= nil then
+                    for k, v in pairs(item.normal.results) do
+                        if (v[1] ~= nil) and (v[2] ~= nil) then
+                            item.normal.results[k][2] = v[2] * recipe_multiplier[j]
+                        else
+                            item.normal.results[k].amount = v.amount * recipe_multiplier[j]        
+                        end
+                    end
+
+                else
+                    if item.normal.result_count ~= nil then
+                        item.normal.result_count = item.normal.result_count * recipe_multiplier[j]
+                    else
+                        item.normal.result_count = recipe_multiplier[j]
+                    end
+                end
+
+            elseif (item.expensive) ~= nil and (item.expensive ~= false) then
+                for k, v in pairs(item.expensive.ingredients) do
+                    if (v[1] ~= nil) and (v[2] ~= nil) then
+                        item.expensive.ingredients[k][2] = v[2] * recipe_multiplier[j]
+                    else
+                        item.expensive.ingredients[k].amount = v.amount * recipe_multiplier[j]
+                    end
+                end
+
+                if item.expensive.results ~= nil then
+                    for k, v in pairs(item.expensive.results) do
+                        if (v[1] ~= nil) and (v[2] ~= nil) then
+                            item.expensive.results[k][2] = v[2] * recipe_multiplier[j]
+                        else
+                            item.expensive.results[k].amount = v.amount * recipe_multiplier[j]        
+                        end
+                    end
+
+                else
+                    if item.expensive.result_count ~= nil then
+                        item.expensive.result_count = item.expensive.result_count * recipe_multiplier[j]
+                    else
+                        item.expensive.result_count = recipe_multiplier[j]
+                    end
+                end
+
+            else
+                for k, v in pairs(item.ingredients) do
+                    if (v[1] ~= nil) and (v[2] ~= nil) then
+                        item.ingredients[k][2] = v[2] * recipe_multiplier[j]
+                    else
+                        item.ingredients[k].amount = v.amount * recipe_multiplier[j]
+                    end
+                end
+
+                if item.results ~= nil then
+                    for k, v in pairs(item.results) do
+                        if (v[1] ~= nil) and (v[2] ~= nil) then
+                            item.results[k][2] = v[2] * recipe_multiplier[j]
+                        else
+                            item.results[k].amount = v.amount * recipe_multiplier[j]        
+                        end
+                    end
+
+                else
+                    if item.result_count ~= nil then
+                        item.result_count = item.result_count * recipe_multiplier[j]
+                    else
+                        item.result_count = recipe_multiplier[j]
+                    end
+                end
+            end
+            
+            item.name = item.name .. j
+            data:extend({item})
         end
-
-        if (item.normal ~= nil) and (item.normal ~= false) then
-            for k, v in pairs(item.normal.ingredients) do
-                if (v[1] ~= nil) and (v[2] ~= nil) then
-                    item.normal.ingredients[k][2] = v[2] * 4
-                    item_1.normal.ingredients[k][2] = v[2] * 16
-                else
-                    item.normal.ingredients[k].amount = v.amount * 4
-                    item_1.normal.ingredients[k].amount = v.amount * 16
-                end
-            end
-
-            if item.normal.results ~= nil then
-                for k, v in pairs(item.normal.results) do
-                    if (v[1] ~= nil) and (v[2] ~= nil) then
-                        item.normal.results[k][2] = v[2] * 4
-                        item_1.normal.results[k][2] = v[2] * 16
-                    else
-                        item.normal.results[k].amount = v.amount * 4
-                        item_1.normal.results[k].amount = v.amount * 16         
-                    end
-                end
-
-            else
-                if item.normal.result_count ~= nil then
-                    item.normal.result_count = item.normal.result_count * 4
-                    item_1.normal.result_count = item_1.normal.result_count * 16
-                else
-                    item.normal.result_count = 4
-                    item_1.normal.result_count = 16
-                end
-            end
-
-        elseif (item.expensive) ~= nil and (item.expensive ~= false) then
-            for k, v in pairs(item.expensive.ingredients) do
-                if (v[1] ~= nil) and (v[2] ~= nil) then
-                    item.expensive.ingredients[k][2] = v[2] * 4
-                    item_1.expensive.ingredients[k][2] = v[2] * 16
-                else
-                    item.expensive.ingredients[k].amount = v.amount * 4
-                    item_1.expensive.ingredients[k].amount = v.amount * 16
-                end
-            end
-
-            if item.expensive.results ~= nil then
-                for k, v in pairs(item.expensive.results) do
-                    if (v[1] ~= nil) and (v[2] ~= nil) then
-                        item.expensive.results[k][2] = v[2] * 4
-                        item_1.expensive.results[k][2] = v[2] * 16
-                    else
-                        item.expensive.results[k].amount = v.amount * 4
-                        item_1.expensive.results[k].amount = v.amount * 16         
-                    end
-                end
-
-            else
-                if item.expensive.result_count ~= nil then
-                    item.expensive.result_count = item.expensive.result_count * 4
-                    item_1.expensive.result_count = item_1.expensive.result_count * 16
-                else
-                    item.expensive.result_count = 4
-                    item_1.expensive.result_count = 16
-                end
-            end
-
-        else
-            for k, v in pairs(item.ingredients) do
-                if (v[1] ~= nil) and (v[2] ~= nil) then
-                    item.ingredients[k][2] = v[2] * 4
-                    item_1.ingredients[k][2] = v[2] * 16
-                else
-                    item.ingredients[k].amount = v.amount * 4
-                    item_1.ingredients[k].amount = v.amount * 16
-                end
-            end
-
-            if item.results ~= nil then
-                for k, v in pairs(item.results) do
-                    if (v[1] ~= nil) and (v[2] ~= nil) then
-                        item.results[k][2] = v[2] * 4
-                        item_1.results[k][2] = v[2] * 16
-                    else
-                        item.results[k].amount = v.amount * 4
-                        item_1.results[k].amount = v.amount * 16         
-                    end
-                end
-
-            else
-                if item.result_count ~= nil then
-                    item.result_count = item.result_count * 4
-                    item_1.result_count = item_1.result_count * 16
-                else
-                    item.result_count = 4
-                    item_1.result_count = 16
-                end
-            end
-        end
-        
-        item.name = item.name .. '-1'
-        item_1.name = item_1.name .. '-2'
-        
-        data:extend({item, item_1})
     end
 end
 
