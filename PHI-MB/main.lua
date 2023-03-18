@@ -326,12 +326,12 @@ for i=1, #recipe_list, 1 do
     end
 end
 
-for _, tech in pairs(data.raw.technology) do
-    for k, _ in pairs(tech.effects) do
-        if tech.effects[k].type == 'unlock-recipe' then
-            if data.raw.recipe[tech.effects[k].recipe] ~= nil then
+for t, _ in pairs(data.raw.technology) do
+    for k, _ in pairs(data.raw.technology[t].effects) do
+        if data.raw.technology[t].effects[k].type == 'unlock-recipe' then
+            if data.raw.recipe[data.raw.technology[t].effects[k].recipe] ~= nil then
                 for j=1, #recipe_multiplier, 1 do
-                    table.insert(tech.effects, {type='unlock-recipe', recipe= tech.effects[k].recipe .. '-' .. j})
+                    table.insert(data.raw.technology[t].effects, {type='unlock-recipe', recipe= data.raw.technology[t].effects[k].recipe .. '-' .. j})
                 end
             end
         end
