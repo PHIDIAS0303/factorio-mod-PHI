@@ -331,7 +331,7 @@ for _, tech in pairs(data.raw.technology) do
         if tech.effects[k].type == 'unlock-recipe' then
             if data.raw.recipe[tech.effects[k].recipe] ~= nil then
                 for j=1, #recipe_multiplier, 1 do
-                    table.insert(tech.effects, {type='unlock-recipe', recipe= tech.effects[k].recipe .. '-' .. recipe_multiplier})
+                    table.insert(tech.effects, {type='unlock-recipe', recipe= tech.effects[k].recipe .. '-' .. j})
                 end
             end
         end
