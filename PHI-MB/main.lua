@@ -341,9 +341,15 @@ end
 data.raw.recipe['loader'].hidden = false
 data.raw.recipe['fast-loader'].hidden = false
 data.raw.recipe['express-loader'].hidden = false
+
+table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='loader'})
+table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
+table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
+
 data.raw['module']['effectivity-module'].effect = {consumption = {bonus = -0.8}, pollution = {bonus = -0.1}}
 data.raw['module']['effectivity-module-2'].effect = {consumption = {bonus = -1.6}, pollution = {bonus = -0.15}}
 data.raw['module']['effectivity-module-3'].effect = {consumption = {bonus = -2.4}, pollution = {bonus = -0.2}}
+
 data.raw['construction-robot']['construction-robot'].max_health = 400
 data.raw['construction-robot']['construction-robot'].max_payload_size = 3
 data.raw['construction-robot']['construction-robot'].max_energy = '6MJ'
@@ -358,6 +364,21 @@ data.raw['logistic-robot']['logistic-robot'].speed = 0.12
 data.raw['logistic-robot']['logistic-robot'].speed_multiplier_when_out_of_energy = 0.4
 data.raw['logistic-robot']['logistic-robot'].energy_per_move = '10kJ'
 
-table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='loader'})
-table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
-table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
+data.raw['roboport']['roboport'].max_health = 1000
+data.raw['roboport']['roboport'].energy_usage = '100kW'
+data.raw['roboport']['roboport'].energy_source.input_flow_limit = '44MW'
+data.raw['roboport']['roboport'].energy_source.buffer_capacity = '100MJ'
+data.raw['roboport']['roboport'].recharge_minimum = '20MJ'
+data.raw['roboport']['roboport'].charging_energy = '4000kW'
+data.raw['roboport']['roboport'].logistics_radius = 50
+data.raw['roboport']['roboport'].construction_radius = 64
+data.raw['roboport']['roboport'].charging_offsets = {
+    {-1.5, -0.5},
+    {1.5, -0.5},
+    {1.5, 1.5},
+    {-1.5, 1.5},
+    {-2.5, -1.5},
+    {2.5, -1.5},
+    {2.5, 2.5},
+    {-2.5, 2.5}
+}
