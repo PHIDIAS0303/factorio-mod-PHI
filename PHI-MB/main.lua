@@ -191,8 +191,8 @@ boiler_entity.energy_source.usage_priority = 'secondary-input'
 boiler_entity.energy_source.light_flicker.color = {r=0.5, g=1, b=1, a=0.5}
 boiler_entity.energy_source.light_flicker.minimum_light_size = 0.1
 boiler_entity.energy_source.light_flicker.light_intensity_to_size_coefficient = 1
-boiler_entity.fire_flicker_enabled = false,
-boiler_entity.fire_glow_flicker_enabled = false,
+boiler_entity.fire_flicker_enabled = false
+boiler_entity.fire_glow_flicker_enabled = false
 boiler_entity.fire = {}
 
 data:extend({{
