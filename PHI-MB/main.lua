@@ -138,6 +138,20 @@ data.raw['module']['effectivity-module'].effect = {consumption = {bonus = -0.5},
 data.raw['module']['effectivity-module-2'].effect = {consumption = {bonus = -1.0}, pollution = {bonus = -0.15}}
 data.raw['module']['effectivity-module-3'].effect = {consumption = {bonus = -1.5}, pollution = {bonus = -0.2}}
 
+data.raw['pipe']['pipe'].fluid_box.height = 4
+data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.height = 4
+data.raw['pump']['pump'].fluid_box.height = 16
+data.raw['pump']['pump'].energy_usage = "116kW"
+data.raw['pump']['pump'].pumping_speed = 400
+data.raw['offshore-pump']['offshore-pump'].pumping_speed = 80
+data.raw['offshore-pump']['offshore-pump'].collision_mask = nil
+data.raw['offshore-pump']['offshore-pump'].center_collision_mask = nil
+data.raw['offshore-pump']['offshore-pump'].fluid_box_tile_collision_test = nil
+data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_test = nil
+data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_mask = nil
+data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_box = nil
+data.raw['storage-tank']['storage-tank'].fluid_box.base_area = 1000
+
 data.raw['construction-robot']['construction-robot'].max_health = 400
 data.raw['construction-robot']['construction-robot'].max_payload_size = 3
 data.raw['construction-robot']['construction-robot'].max_energy = '6MJ'
@@ -234,6 +248,3 @@ for i=1, #ups_chests, 1 do
         result = 'ups-' .. ups_chests[i],
     }})
 end
-
-data.raw['pipe']['pipe']
-data.raw['pipe-to-ground']['pipe-to-ground']
