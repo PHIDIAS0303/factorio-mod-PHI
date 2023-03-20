@@ -140,9 +140,7 @@ data.raw['module']['effectivity-module-3'].effect = {consumption = {bonus = -1.5
 
 data.raw['pipe']['pipe'].fluid_box.height = 4
 data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.height = 4
-data.raw['pump']['pump'].fluid_box.height = 16
-data.raw['pump']['pump'].energy_usage = '116kW'
-data.raw['pump']['pump'].pumping_speed = 400
+data.raw['pump']['pump'].energy_usage = '58kW'
 data.raw['offshore-pump']['offshore-pump'].pumping_speed = 80
 data.raw['offshore-pump']['offshore-pump'].collision_mask = nil
 data.raw['offshore-pump']['offshore-pump'].center_collision_mask = nil
@@ -254,7 +252,7 @@ for i=1, #ups_chests, 1 do
 
     item.name = 'ups-' .. ups_chests[i]
     item.place_result = 'ups-' .. ups_chests[i]
-    item.order = chest_item.order .. '-ups'
+    item.order = item.order .. '-ups'
     data:extend({item})
 
     entity.inventory_size = 1
