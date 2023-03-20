@@ -341,6 +341,9 @@ end
 data.raw.recipe['loader'].hidden = false
 data.raw.recipe['fast-loader'].hidden = false
 data.raw.recipe['express-loader'].hidden = false
+data.raw['module']['effectivity-module'].effect = {consumption = {bonus = -0.8}, pollution = {bonus = -0.1}}
+data.raw['module']['effectivity-module-2'].effect = {consumption = {bonus = -1.6}, pollution = {bonus = -0.15}}
+data.raw['module']['effectivity-module-3'].effect = {consumption = {bonus = -2.4}, pollution = {bonus = -0.2}}
 table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='loader'})
 table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
 table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
