@@ -173,29 +173,29 @@ data.raw['roboport']['roboport'].charging_offsets = {
     {-2.5, 2.5}
 }
 
-local boiler_item = table.deepcopy(data.raw['item']['boiler'])
-boiler_item.name = 'electric-boiler'
-boiler_item.place_result = 'electric-boiler'
-boiler_item.order = 'b[steam-power]-b[electric-boiler]'
-data:extend({boiler_item})
+local item = table.deepcopy(data.raw['item']['boiler'])
+item.name = 'electric-boiler'
+item.place_result = 'electric-boiler'
+item.order = 'b[steam-power]-b[electric-boiler]'
+data:extend({item})
 
-local boiler_entity = table.deepcopy(data.raw['boiler']['boiler'])
-boiler_entity.name = 'electric-boiler'
-boiler_entity.energy_consumption = '7200kW'
-boiler_entity.target_temperature = 165
-boiler_entity.minable = {hardness = 0.2, mining_time = 0.5, result = 'electric-boiler'}
-boiler_entity.emissions_per_minute = 0
-boiler_entity.energy_source.type = 'electric'
-boiler_entity.energy_source.fuel_inventory_size = 0
-boiler_entity.energy_source.input_priority = 'secondary'
-boiler_entity.energy_source.usage_priority = 'secondary-input'
-boiler_entity.energy_source.light_flicker.color = {r=0.5, g=1, b=1, a=0.5}
-boiler_entity.energy_source.light_flicker.minimum_light_size = 0.1
-boiler_entity.energy_source.light_flicker.light_intensity_to_size_coefficient = 1
-boiler_entity.fire_flicker_enabled = false
-boiler_entity.fire_glow_flicker_enabled = false
-boiler_entity.fire = {}
-data:extend({boiler_entity})
+local entity = table.deepcopy(data.raw['boiler']['boiler'])
+entity.name = 'electric-boiler'
+entity.energy_consumption = '7200kW'
+entity.target_temperature = 165
+entity.minable = {hardness = 0.2, mining_time = 0.5, result = 'electric-boiler'}
+entity.emissions_per_minute = 0
+entity.energy_source.type = 'electric'
+entity.energy_source.fuel_inventory_size = 0
+entity.energy_source.input_priority = 'secondary'
+entity.energy_source.usage_priority = 'secondary-input'
+entity.energy_source.light_flicker.color = {r=0.5, g=1, b=1, a=0.5}
+entity.energy_source.light_flicker.minimum_light_size = 0.1
+entity.energy_source.light_flicker.light_intensity_to_size_coefficient = 1
+entity.fire_flicker_enabled = false
+entity.fire_glow_flicker_enabled = false
+entity.fire = {}
+data:extend({entity})
 
 data:extend({{
     type = 'recipe',
@@ -207,23 +207,23 @@ data:extend({{
 }})
 
 for i=1, #ups_chests, 1 do
-    local chest_item = table.deepcopy(data.raw['item'][ups_chests[i]])
-    local chest_entity
+    local item = table.deepcopy(data.raw['item'][ups_chests[i]])
+    local entity
 
     if ups_chests[i] == 'steel-chest' then
-        chest_entity = table.deepcopy(data.raw['container'][ups_chests[i]])
+        entity = table.deepcopy(data.raw['container'][ups_chests[i]])
     else
-        chest_entity = table.deepcopy(data.raw['logistic-container'][ups_chests[i]])
+        entity = table.deepcopy(data.raw['logistic-container'][ups_chests[i]])
     end
 
-    chest_item.name = 'ups-' .. ups_chests[i]
-    chest_item.place_result = 'ups-' .. ups_chests[i]
-    chest_item.order = chest_item.order .. '-ups'
-    data:extend({chest_item})
+    item.name = 'ups-' .. ups_chests[i]
+    item.place_result = 'ups-' .. ups_chests[i]
+    item.order = chest_item.order .. '-ups'
+    data:extend({item})
 
-    chest_entity.inventory_size = 1
-    chest_entity.name = 'ups-' .. ups_chests[i]
-    data:extend({chest_entity})
+    entity.inventory_size = 1
+    entity.name = 'ups-' .. ups_chests[i]
+    data:extend({entity})
 
     data:extend({{
         type = 'recipe',
@@ -234,3 +234,6 @@ for i=1, #ups_chests, 1 do
         result = 'ups-' .. ups_chests[i],
     }})
 end
+
+data.raw['pipe']['pipe']
+data.raw['pipe-to-ground']['pipe-to-ground']
