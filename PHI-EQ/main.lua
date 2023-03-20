@@ -127,7 +127,7 @@ local function ER(source, tier)
     data:extend({{
         type = 'recipe',
         name = source .. '-mk' .. tier .. '-equipment',
-        energy_required = 5,
+        energy_required = 2,
         enabled = false,
         ingredients = {{na, 2}},
         result = source .. '-mk' .. tier .. '-equipment',
