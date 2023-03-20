@@ -151,6 +151,7 @@ data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_test = nil
 data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_mask = nil
 data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_box = nil
 data.raw['storage-tank']['storage-tank'].fluid_box.base_area = 1000
+data.raw['fluid-wagon']['fluid-wagon'].capacity = 100000
 
 data.raw['construction-robot']['construction-robot'].max_health = 400
 data.raw['construction-robot']['construction-robot'].max_payload_size = 3
