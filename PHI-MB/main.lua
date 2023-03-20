@@ -171,8 +171,10 @@ boiler_item.order = 'b[steam-power]-b[electric-boiler]'
 
 local boiler_entity = table.deepcopy(data.raw['boiler']['boiler'])
 boiler_entity.name = 'electric-boiler'
-boiler_entity.energy_consumption = '1800kW'
+boiler_entity.energy_consumption = '7200kW'
+boiler_entity.target_temperature = 165
 boiler_entity.minable = {hardness = 0.2, mining_time = 0.5, result = 'electric-boiler'}
+boiler_entity.emissions_per_minute = 0
 boiler_entity.energy_source.type = 'electric'
 boiler_entity.energy_source.fuel_inventory_size = 0
 boiler_entity.energy_source.input_priority = 'secondary'
