@@ -142,12 +142,11 @@ data.raw['pipe']['pipe'].fluid_box.height = 4
 data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.height = 4
 data.raw['pump']['pump'].energy_usage = '58kW'
 data.raw['offshore-pump']['offshore-pump'].pumping_speed = 80
-data.raw['offshore-pump']['offshore-pump'].collision_mask = nil
-data.raw['offshore-pump']['offshore-pump'].center_collision_mask = nil
-data.raw['offshore-pump']['offshore-pump'].fluid_box_tile_collision_test = nil
-data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_test = nil
+data.raw['offshore-pump']['offshore-pump'].flags = {'placeable-neutral', 'player-creation'}
+data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_box = {{-0.5, -0.25}, {0.5, 0.25}}
+data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
 data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_mask = nil
-data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_box = nil
+data.raw['offshore-pump']['offshore-pump'].placeable_position_visualization = nil
 data.raw['storage-tank']['storage-tank'].fluid_box.base_area = 1000
 
 data.raw['locomotive']['locomotive'].max_health = 2000
