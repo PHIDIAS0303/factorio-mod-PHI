@@ -134,9 +134,9 @@ table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', re
 table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
 table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
 
-data.raw['module']['effectivity-module'].effect = {consumption = {bonus = -0.8}, pollution = {bonus = -0.1}}
-data.raw['module']['effectivity-module-2'].effect = {consumption = {bonus = -1.6}, pollution = {bonus = -0.15}}
-data.raw['module']['effectivity-module-3'].effect = {consumption = {bonus = -2.4}, pollution = {bonus = -0.2}}
+data.raw['module']['effectivity-module'].effect = {consumption = {bonus = -0.5}, pollution = {bonus = -0.1}}
+data.raw['module']['effectivity-module-2'].effect = {consumption = {bonus = -1.0}, pollution = {bonus = -0.15}}
+data.raw['module']['effectivity-module-3'].effect = {consumption = {bonus = -1.5}, pollution = {bonus = -0.2}}
 
 data.raw['construction-robot']['construction-robot'].max_health = 400
 data.raw['construction-robot']['construction-robot'].max_payload_size = 3
