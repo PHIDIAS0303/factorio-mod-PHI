@@ -177,6 +177,7 @@ local boiler_item = table.deepcopy(data.raw['item']['boiler'])
 boiler_item.name = 'electric-boiler'
 boiler_item.place_result = 'electric-boiler'
 boiler_item.order = 'b[steam-power]-b[electric-boiler]'
+data:extend({boiler_item})
 
 local boiler_entity = table.deepcopy(data.raw['boiler']['boiler'])
 boiler_entity.name = 'electric-boiler'
@@ -194,6 +195,7 @@ boiler_entity.energy_source.light_flicker.light_intensity_to_size_coefficient = 
 boiler_entity.fire_flicker_enabled = false
 boiler_entity.fire_glow_flicker_enabled = false
 boiler_entity.fire = {}
+data:extend({boiler_entity})
 
 data:extend({{
     type = 'recipe',
@@ -202,7 +204,7 @@ data:extend({{
     enabled = true,
     ingredients = {{'boiler', 1}, {'electronic-circuit', 1}},
     result = 'electric-boiler',
-}}, {boiler_item}, {boiler_entity})
+}})
 
 for i=1, #ups_chests, 1 do
     local chest_item
@@ -219,9 +221,11 @@ for i=1, #ups_chests, 1 do
     chest_item.name = 'ups-' .. ups_chests[i]
     chest_item.place_result = 'ups-' .. ups_chests[i]
     chest_item.order = chest_item.order .. '-ups'
-
+    data:extend({chest_item})
+    
     chest_entity.inventory_size = 1
     chest_entity.name = 'ups-' .. ups_chests[i]
+    data:extend({chest_entity})
 
     data:extend({{
         type = 'recipe',
@@ -230,5 +234,5 @@ for i=1, #ups_chests, 1 do
         enabled = true,
         ingredients = {{'steel-plate', 8}},
         result = 'ups-' .. ups_chests[i],
-    }}, {chest_item}, {chest_entity})
+    }})
 end
