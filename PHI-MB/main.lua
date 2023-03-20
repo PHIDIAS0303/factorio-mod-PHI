@@ -221,7 +221,7 @@ for i=1, #recipe_list, 1 do
     if data.raw.recipe[recipe_list[i]] ~= nil then
         for j=1, #recipe_multiplier, 1 do
             local item = table.deepcopy(data.raw.recipe[recipe_list[i]])
-            item.enabled = false
+            item.enabled = true
 
             if (item.normal ~= nil) and (item.normal ~= false) then
                 for k, v in pairs(item.normal.ingredients) do
@@ -322,18 +322,6 @@ for i=1, #recipe_list, 1 do
             
             item.name = item.name .. '-' .. j
             data:extend({item})
-        end
-    end
-end
-
-for t=1, #data.raw.technology, 1 do
-    for k, _ in pairs(data.raw.technology[t].effects) do
-        if data.raw.technology[t].effects[k].type == 'unlock-recipe' then
-            if data.raw.recipe[data.raw.technology[t].effects[k].recipe] ~= nil then
-                for j=1, #recipe_multiplier, 1 do
-                    table.insert(data.raw.technology[t].effects, {type='unlock-recipe', recipe= data.raw.technology[t].effects[k].recipe .. '-' .. j})
-                end
-            end
         end
     end
 end
