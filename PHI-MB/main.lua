@@ -244,8 +244,17 @@ for i=1, #ups_chests, 1 do
         type = 'recipe',
         name = 'ups-' .. ups_chests[i],
         energy_required = 2,
-        enabled = true,
+        enabled = false,
         ingredients = {{'steel-plate', 8}},
         result = 'ups-' .. ups_chests[i],
     }})
 end
+
+table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='ups-steel-chest'})
+table.insert(data.raw.technology['construction-robotics'].effects, {type='unlock-recipe', recipe='ups-logistic-chest-passive-provider'})
+table.insert(data.raw.technology['construction-robotics'].effects, {type='unlock-recipe', recipe='ups-logistic-chest-storage'})
+table.insert(data.raw.technology['logistic-robotics'].effects, {type='unlock-recipe', recipe='ups-logistic-chest-passive-provider'})
+table.insert(data.raw.technology['logistic-robotics'].effects, {type='unlock-recipe', recipe='ups-logistic-chest-storage'})
+table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='ups-logistic-chest-active-provider'})
+table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='ups-logistic-chest-buffer'})
+table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='ups-logistic-chest-requester'})
