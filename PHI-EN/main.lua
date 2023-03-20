@@ -52,9 +52,9 @@ local function EI(source, tier)
     item.icons = {{icon = graphics_location .. source .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
 
     if (source == 'accumulator') then
-        item.order = 'd[' .. source .. ']-a' .. alpha_order[tier - 1] .. '[' .. source .. '-mk' .. tier .. ']'
+        item.order = 'd[' .. source .. ']-a' .. tier .. '[' .. source .. '-mk' .. tier .. ']'
     else
-        item.order = 'e[' .. source .. ']-a' .. alpha_order[tier - 1] .. '[' .. source .. '-mk' .. tier .. ']'
+        item.order = 'e[' .. source .. ']-a' .. tier .. '[' .. source .. '-mk' .. tier .. ']'
     end
 
     data:extend({item})
