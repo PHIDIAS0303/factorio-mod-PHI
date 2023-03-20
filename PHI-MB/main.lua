@@ -207,14 +207,12 @@ data:extend({{
 }})
 
 for i=1, #ups_chests, 1 do
-    local chest_item
-    local chest_entity
+    local chest_item = table.deepcopy(data.raw['item'][ups_chests[i]])
+    local chest_entity = nil
 
     if ups_chests[i] == 'steel-chest' then
-        chest_item = table.deepcopy(data.raw['item'][ups_chests[i]])
         chest_entity = table.deepcopy(data.raw['container'][ups_chests[i]])
     else
-        chest_item = table.deepcopy(data.raw['item'][ups_chests[i]])
         chest_entity = table.deepcopy(data.raw['logistic-container'][ups_chests[i]])
     end
 
@@ -222,14 +220,14 @@ for i=1, #ups_chests, 1 do
     chest_item.place_result = 'ups-' .. ups_chests[i]
     chest_item.order = chest_item.order .. '-ups'
     data:extend({chest_item})
-    
+
     chest_entity.inventory_size = 1
     chest_entity.name = 'ups-' .. ups_chests[i]
     data:extend({chest_entity})
 
     data:extend({{
         type = 'recipe',
-        name = 'electric-boiler',
+        name = 'ups-' .. ups_chests[i],
         energy_required = 2,
         enabled = true,
         ingredients = {{'steel-plate', 8}},
