@@ -22,7 +22,12 @@ local item_max = {
 }
 
 local ups_chests = {
-    'steel-chest'
+    'steel-chest',
+    'logistic-chest-passive-provider',
+    'logistic-chest-active-provider',
+    'logistic-chest-storage',
+    'logistic-chest-buffer',
+    'logistic-chest-requester'
 }
 
 -- entity
@@ -213,8 +218,7 @@ for i=1, #ups_chests, 1 do
 
     chest_item.name = 'ups-' .. ups_chests[i]
     chest_item.place_result = 'ups-' .. ups_chests[i]
-    
-    chest_item.order = 'b[steam-power]-b[electric-boiler]'
+    chest_item.order = chest_item.order .. '-ups'
 
     chest_entity.inventory_size = 1
     chest_entity.name = 'ups-' .. ups_chests[i]
