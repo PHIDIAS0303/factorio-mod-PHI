@@ -21,6 +21,10 @@ local item_max = {
     ['lab'] = 3
 }
 
+local ups_chests = {
+    'steel-chest'
+}
+
 -- entity
 local function EE(source, tier)
     local item
@@ -192,5 +196,35 @@ data:extend({{
     energy_required = 2,
     enabled = true,
     ingredients = {{'boiler', 1}, {'electronic-circuit', 1}},
-    result = source .. '-' .. tier,
+    result = 'electric-boiler',
 }}, {boiler_item}, {boiler_entity})
+
+for i=1, #ups_chests, 1 do
+    local chest_item
+    local chest_entity
+
+    if ups_chests[i] == 'steel-chest' then
+        chest_item = table.deepcopy(data.raw['item'][ups_chests[i]])
+        chest_entity = table.deepcopy(data.raw['container'][ups_chests[i]])
+    else
+        chest_item = table.deepcopy(data.raw['item'][ups_chests[i]])
+        chest_entity = table.deepcopy(data.raw['logistic-container'][ups_chests[i]])
+    end
+
+    chest_item.name = 'ups-' .. ups_chests[i]
+    chest_item.place_result = 'ups-' .. ups_chests[i]
+    
+    chest_item.order = 'b[steam-power]-b[electric-boiler]'
+
+    chest_entity.inventory_size = 1
+    chest_entity.name = 'ups-' .. ups_chests[i]
+
+    data:extend({{
+        type = 'recipe',
+        name = 'electric-boiler',
+        energy_required = 2,
+        enabled = true,
+        ingredients = {{'steel-plate', 8}},
+        result = 'ups-' .. ups_chests[i],
+    }}, {chest_item}, {chest_entity})
+end
