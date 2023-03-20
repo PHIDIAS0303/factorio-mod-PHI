@@ -163,3 +163,32 @@ data.raw['roboport']['roboport'].charging_offsets = {
     {2.5, 2.5},
     {-2.5, 2.5}
 }
+
+local boiler_item = table.deepcopy(data.raw['item']['boiler'])
+boiler_item.name = 'electric-boiler'
+boiler_item.place_result = 'electric-boiler'
+boiler_item.order = 'b[steam-power]-b[electric-boiler]'
+
+local boiler_entity = table.deepcopy(data.raw['boiler']['boiler'])
+boiler_entity.name = 'electric-boiler'
+boiler_entity.energy_consumption = '1800kW'
+boiler_entity.minable = {hardness = 0.2, mining_time = 0.5, result = 'electric-boiler'}
+boiler_entity.energy_source.type = 'electric'
+boiler_entity.energy_source.fuel_inventory_size = 0
+boiler_entity.energy_source.input_priority = 'secondary'
+boiler_entity.energy_source.usage_priority = 'secondary-input'
+boiler_entity.energy_source.light_flicker.color = {r=0.5, g=1, b=1, a=0.5}
+boiler_entity.energy_source.light_flicker.minimum_light_size = 0.1
+boiler_entity.energy_source.light_flicker.light_intensity_to_size_coefficient = 1
+boiler_entity.fire_flicker_enabled = false,
+boiler_entity.fire_glow_flicker_enabled = false,
+boiler_entity.fire = {}
+
+data:extend({{
+    type = 'recipe',
+    name = 'electric-boiler',
+    energy_required = 2,
+    enabled = true,
+    ingredients = {{'boiler', 1}, {'electronic-circuit', 1}},
+    result = source .. '-' .. tier,
+}}, {boiler_item}, {boiler_entity})
