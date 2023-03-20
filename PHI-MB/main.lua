@@ -208,7 +208,7 @@ data:extend({{
 
 for i=1, #ups_chests, 1 do
     local chest_item = table.deepcopy(data.raw['item'][ups_chests[i]])
-    local chest_entity = nil
+    local chest_entity
 
     if ups_chests[i] == 'steel-chest' then
         chest_entity = table.deepcopy(data.raw['container'][ups_chests[i]])
