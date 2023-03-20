@@ -141,7 +141,7 @@ data.raw['module']['effectivity-module-3'].effect = {consumption = {bonus = -1.5
 data.raw['pipe']['pipe'].fluid_box.height = 4
 data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.height = 4
 data.raw['pump']['pump'].fluid_box.height = 16
-data.raw['pump']['pump'].energy_usage = "116kW"
+data.raw['pump']['pump'].energy_usage = '116kW'
 data.raw['pump']['pump'].pumping_speed = 400
 data.raw['offshore-pump']['offshore-pump'].pumping_speed = 80
 data.raw['offshore-pump']['offshore-pump'].collision_mask = nil
@@ -151,7 +151,28 @@ data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_test = nil
 data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_mask = nil
 data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_box = nil
 data.raw['storage-tank']['storage-tank'].fluid_box.base_area = 1000
+
+data.raw['locomotive']['locomotive'].max_health = 2000
+data.raw['locomotive']['locomotive'].max_speed = 2
+data.raw['locomotive']['locomotive'].max_power = '1200kW'
+data.raw['locomotive']['locomotive'].reversing_power_modifier = 1
+data.raw['locomotive']['locomotive'].braking_force = 20
+data.raw['locomotive']['locomotive'].friction_force = 0.25
+data.raw['locomotive']['locomotive'].air_resistance = 0.004
+data.raw['locomotive']['locomotive'].burner.effectivity = 2
+data.raw['locomotive']['locomotive'].burner.fuel_inventory_size = 3
+data.raw['cargo-wagon']['cargo-wagon'].max_health = 1000
+data.raw['cargo-wagon']['cargo-wagon'].inventory_size = 80
+data.raw['cargo-wagon']['cargo-wagon'].max_speed = 3.5
+data.raw['cargo-wagon']['cargo-wagon'].braking_force = 5
+data.raw['cargo-wagon']['cargo-wagon'].friction_force = 0.25
+data.raw['cargo-wagon']['cargo-wagon'].air_resistance = 0.005
+data.raw['fluid-wagon']['fluid-wagon'].max_health = 1000
 data.raw['fluid-wagon']['fluid-wagon'].capacity = 100000
+data.raw['fluid-wagon']['fluid-wagon'].max_speed = 3.5
+data.raw['fluid-wagon']['fluid-wagon'].braking_force = 5
+data.raw['fluid-wagon']['fluid-wagon'].friction_force = 0.25
+data.raw['fluid-wagon']['fluid-wagon'].air_resistance = 0.005
 
 data.raw['construction-robot']['construction-robot'].max_health = 400
 data.raw['construction-robot']['construction-robot'].max_payload_size = 3
