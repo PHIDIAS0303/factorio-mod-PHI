@@ -140,7 +140,6 @@ data.raw['module']['effectivity-module-3'].effect = {consumption = {bonus = -1.5
 
 data.raw['pipe']['pipe'].fluid_box.height = 4
 data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.height = 4
-data.raw['pump']['pump'].energy_usage = '58kW'
 data.raw['offshore-pump']['offshore-pump'].pumping_speed = 80
 data.raw['offshore-pump']['offshore-pump'].flags = {'placeable-neutral', 'player-creation'}
 data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_box = {{-0.5, -0.25}, {0.5, 0.25}}
