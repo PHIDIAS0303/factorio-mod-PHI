@@ -154,10 +154,10 @@ data.raw['logistic-robot']['logistic-robot'].energy_per_move = '10kJ'
 
 data.raw['roboport']['roboport'].max_health = 1000
 data.raw['roboport']['roboport'].energy_usage = '100kW'
-data.raw['roboport']['roboport'].energy_source.input_flow_limit = '80MW'
+data.raw['roboport']['roboport'].energy_source.input_flow_limit = '40MW'
 data.raw['roboport']['roboport'].energy_source.buffer_capacity = '200MJ'
 data.raw['roboport']['roboport'].recharge_minimum = '40MJ'
-data.raw['roboport']['roboport'].charging_energy = '8000kW'
+data.raw['roboport']['roboport'].charging_energy = '4000kW'
 data.raw['roboport']['roboport'].robot_slots_count = 10
 data.raw['roboport']['roboport'].material_slots_count = 2
 -- data.raw['roboport']['roboport'].logistics_radius = 25
