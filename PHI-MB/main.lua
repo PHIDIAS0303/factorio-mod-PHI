@@ -140,6 +140,8 @@ data.raw['module']['effectivity-module-3'].effect = {consumption = {bonus = -1.5
 
 data.raw['pipe']['pipe'].fluid_box.height = 4
 data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.height = 4
+data.raw['pump']['pump'].fluid_box.height = 16
+data.raw['pump']['pump'].fluid_box.pumping_speed = 800
 data.raw['offshore-pump']['offshore-pump'].pumping_speed = 80
 data.raw['offshore-pump']['offshore-pump'].flags = {'placeable-neutral', 'player-creation'}
 data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_box = {{-0.5, -0.25}, {0.5, 0.25}}
@@ -148,6 +150,7 @@ data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_mask = nil
 data.raw['offshore-pump']['offshore-pump'].placeable_position_visualization = nil
 data.raw['storage-tank']['storage-tank'].fluid_box.base_area = 1000
 
+--[[
 data.raw['locomotive']['locomotive'].max_health = 2000
 data.raw['locomotive']['locomotive'].max_speed = 2
 data.raw['locomotive']['locomotive'].max_power = '1200kW'
@@ -169,6 +172,7 @@ data.raw['fluid-wagon']['fluid-wagon'].max_speed = 3.5
 data.raw['fluid-wagon']['fluid-wagon'].braking_force = 5
 data.raw['fluid-wagon']['fluid-wagon'].friction_force = 0.25
 data.raw['fluid-wagon']['fluid-wagon'].air_resistance = 0.005
+]]
 
 data.raw['construction-robot']['construction-robot'].max_health = 400
 data.raw['construction-robot']['construction-robot'].max_payload_size = 3
