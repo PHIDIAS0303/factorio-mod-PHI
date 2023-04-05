@@ -23,10 +23,14 @@ data.raw['module']['effectivity-module-2'].effect = {consumption = {bonus = -1.0
 data.raw['module']['effectivity-module-3'].effect = {consumption = {bonus = -1.5}, pollution = {bonus = -0.2}}
 
 data.raw['pipe']['pipe'].fluid_box.height = 4
+data.raw['pipe']['pipe'].fluid_box.base_area = 4
 data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.height = 4
+data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.base_area = 4
 data.raw['pump']['pump'].fluid_box.height = 16
-data.raw['pump']['pump'].fluid_box.pumping_speed = 800
+data.raw['pump']['pump'].pumping_speed = 800
 data.raw['offshore-pump']['offshore-pump'].pumping_speed = 80
+data.raw['offshore-pump']['offshore-pump'].fluid_box.base_area = 4
+data.raw['offshore-pump']['offshore-pump'].fluid_box.base_level = 4
 data.raw['offshore-pump']['offshore-pump'].flags = {'placeable-neutral', 'player-creation'}
 data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_box = {{-0.5, -0.25}, {0.5, 0.25}}
 data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
@@ -50,7 +54,7 @@ data.raw['cargo-wagon']['cargo-wagon'].braking_force = 5
 data.raw['cargo-wagon']['cargo-wagon'].friction_force = 0.25
 data.raw['cargo-wagon']['cargo-wagon'].air_resistance = 0.005
 data.raw['fluid-wagon']['fluid-wagon'].max_health = 1000
-data.raw['fluid-wagon']['fluid-wagon'].capacity = 100000
+data.raw['fluid-wagon']['fluid-wagon'].capacity = 50000
 data.raw['fluid-wagon']['fluid-wagon'].max_speed = 3.5
 data.raw['fluid-wagon']['fluid-wagon'].braking_force = 5
 data.raw['fluid-wagon']['fluid-wagon'].friction_force = 0.25
