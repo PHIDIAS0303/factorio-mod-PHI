@@ -56,7 +56,6 @@ data.raw['fluid-wagon']['fluid-wagon'].braking_force = 5
 data.raw['fluid-wagon']['fluid-wagon'].friction_force = 0.25
 data.raw['fluid-wagon']['fluid-wagon'].air_resistance = 0.005
 
-
 data.raw['construction-robot']['construction-robot'].max_health = 400
 data.raw['construction-robot']['construction-robot'].max_payload_size = 3
 data.raw['construction-robot']['construction-robot'].max_energy = '6MJ'
