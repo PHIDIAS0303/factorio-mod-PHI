@@ -21,15 +21,6 @@ local item_max = {
     ['lab'] = 3
 }
 
-local ups_chests = {
-    'steel-chest',
-    'logistic-chest-passive-provider',
-    'logistic-chest-active-provider',
-    'logistic-chest-storage',
-    'logistic-chest-buffer',
-    'logistic-chest-requester'
-}
-
 -- entity
 local function EE(source, tier)
     local item
