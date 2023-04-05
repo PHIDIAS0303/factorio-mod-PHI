@@ -26,7 +26,3 @@ data.raw['assembling-machine']['centrifuge-3'].fast_replaceable_group = data.raw
 data.raw['lab']['lab'].fast_replaceable_group = 'lab'
 data.raw['lab']['lab-2'].fast_replaceable_group = data.raw['lab']['lab'].fast_replaceable_group
 data.raw['lab']['lab-3'].fast_replaceable_group = data.raw['lab']['lab-2'].fast_replaceable_group
-
--- electric boiler
-data.raw['boiler']['boiler'].fast_replaceable_group = 'boiler'
-data.raw['boiler']['electric-boiler'].fast_replaceable_group = data.raw['boiler']['electric-boiler'].fast_replaceable_group
