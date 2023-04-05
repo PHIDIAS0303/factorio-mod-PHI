@@ -1,13 +1,13 @@
 local alpha_order = {'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'}
 local graphics_location = '__PHI-MB__/graphics/'
 
-local items = {'assembling-machine', 'electric-furnace', 'chemical-plant', 'oil-refinery', 'centrifuge', 'lab'}
+local items = {'assembling-machine', 'electric-furnace', 'oil-refinery', 'chemical-plant', 'centrifuge', 'lab'}
 
 local item_min = {
     ['assembling-machine'] = 4,
     ['electric-furnace'] = 2,
-    ['chemical-plant'] = 2,
     ['oil-refinery'] = 2,
+    ['chemical-plant'] = 2,
     ['centrifuge'] = 2,
     ['lab'] = 2
 }
@@ -15,8 +15,8 @@ local item_min = {
 local item_max = {
     ['assembling-machine'] = 5,
     ['electric-furnace'] = 3,
-    ['chemical-plant'] = 3,
     ['oil-refinery'] = 3,
+    ['chemical-plant'] = 3,
     ['centrifuge'] = 3,
     ['lab'] = 3
 }
