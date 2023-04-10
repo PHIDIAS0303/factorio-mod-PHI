@@ -1,13 +1,13 @@
 {
-    "name": "PHI-MI",
-    "version": "1.0.2",
+    "name": "PHI-XW",
+    "version": "1.0.0",
     "factorio_version": "1.1",
     "date": "2023-04-10",
-    "title": "Phidias Megabase Item",
+    "title": "PHIDIAS Water Pump",
     "author": "PHIDIAS0303",
     "contributers": "",
     "homepage": "",
-    "description": "Additional Items for Megabase",
+    "description": "Offshore water pump no longer require near water.",
     "dependencies": [
         "base >= 1.1.0"
     ]
