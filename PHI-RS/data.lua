@@ -110,23 +110,54 @@ local recipe_list = {
         name='processing-unit',
         tech='advanced-electronics-2'
     },
-
-
-    'engine-unit',
-    'electric-engine-unit',
-    'flying-robot-frame',
-
-    'low-density-structure',
-    'rocket-fuel',
-    'rocket-control-unit',
-    'rocket-part',
-
-    'automation-science-pack',
-    'logistic-science-pack',
-    'chemical-science-pack',
-    'military-science-pack',
-    'production-science-pack',
-    'utility-science-pack',
+    {
+        name='engine-unit',
+        tech='engine'
+    },
+    {
+        name='electric-engine-unit',
+        tech='electric-engine'
+    },
+    {
+        name='flying-robot-frame',
+        tech='robotics'
+    },
+    {
+        name='low-density-structure',
+        tech='low-density-structure'
+    },
+    {
+        name='rocket-fuel',
+        tech='rocket-fuel'
+    },
+    {
+        name='rocket-control-unit',
+        tech='rocket-control-unit'
+    },
+    {
+        name='automation-science-pack',
+        tech=nil
+    },
+    {
+        name='logistic-science-pack',
+        tech='logistic-science-pack'
+    },
+    {
+        name='chemical-science-pack',
+        tech='chemical-science-pack'
+    },
+    {
+        name='military-science-pack',
+        tech='military-science-pack'
+    },
+    {
+        name='production-science-pack',
+        tech='production-science-pack'
+    },
+    {
+        name='utility-science-pack',
+        tech='utility-science-pack'
+    },
 
     'uranium-processing',
     'kovarex-enrichment-process',
