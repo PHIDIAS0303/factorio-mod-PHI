@@ -1,5 +1,5 @@
 local alpha_order = {'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'}
-local graphics_location = '__PHI-MP__/graphics/'
+local graphics_location = '__PHI-MI__/graphics/'
 
 local ups_chests = {
     'steel-chest',
@@ -18,19 +18,19 @@ data.raw.recipe['loader'].ingredients = {
     {'iron-plate', 5},
     {'electronic-circuit', 5},
     {'transport-belt', 2},
-    {'inserter', 2},
+    {'inserter', 2}
 }
 data.raw.recipe['fast-loader'].ingredients = {
     {'iron-gear-wheel', 10},
     {'electronic-circuit', 10},
     {'advanced-circuit', 1},
-    {'loader', 1},
+    {'loader', 1}
 }
+
 data.raw.recipe['express-loader'].ingredients = {
     {'iron-gear-wheel', 10},
     {'advanced-circuit', 10},
-    {'fast-loader', 1},
-    {type='fluid', name='lubricant', amount=40}
+    {'fast-loader', 1}
 }
 
 table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='loader'})
