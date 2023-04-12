@@ -158,21 +158,62 @@ local recipe_list = {
         name='utility-science-pack',
         tech='utility-science-pack'
     },
-
-    'uranium-processing',
-    'kovarex-enrichment-process',
-    'uranium-fuel-cell',
-    'nuclear-fuel',
-    'nuclear-fuel-reprocessing',
-
-    'inserter',
-    'transport-belt',
-    'grenade',
-    'firearm-magazine',
-    'piercing-rounds-magazine',
-    'stone-wall',
-    'rail',
-    'electric-furnace',
+    {
+        name='inserter',
+        tech=nil
+    },
+    {
+        name='transport-belt',
+        tech=nil
+    },
+    {
+        name='grenade',
+        tech='military-2'
+    },
+    {
+        name='firearm-magazine',
+        tech=nil
+    },
+    {
+        name='piercing-rounds-magazine',
+        tech='military-2'
+    },
+    {
+        name='stone-wall',
+        tech='stone-wall'
+    },
+    {
+        name='rail',
+        tech='railway'
+    },
+    {
+        name='electric-furnace',
+        tech='advanced-material-processing-2'
+    },
+    {
+        name='concrete',
+        tech='concrete'
+    },
+    {
+        name='uranium-processing',
+        tech='uranium-processing'
+    },
+    {
+        name='uranium-fuel-cell',
+        tech='uranium-processing'
+    },
+    {
+        name='nuclear-fuel-reprocessing',
+        tech='nuclear-fuel-reprocessing'
+    },
+    {
+        name='kovarex-enrichment-process',
+        tech='kovarex-enrichment-process'
+    },
+    {
+        name='nuclear-fuel',
+        tech='kovarex-enrichment-process'
+    },
 
     'speed-module',
     'speed-module-2',
