@@ -214,22 +214,82 @@ local recipe_list = {
         name='nuclear-fuel',
         tech='kovarex-enrichment-process'
     },
-
-    'speed-module',
-    'speed-module-2',
-    'speed-module-3',
-    'productivity-module',
-    'productivity-module-2',
-    'productivity-module-3',
-    'effectivity-module',
-    'effectivity-module-2',
-    'effectivity-module-3',
-
-    'fast-inserter',
-    'long-handed-inserter',
-    'filter-inserter',
-    'stack-inserter',
-    'stack-filter-inserter',
+    {
+        name='speed-module',
+        tech='speed-module'
+    },
+    {
+        name='speed-module-2',
+        tech='speed-module-2'
+    },
+    {
+        name='speed-module-3',
+        tech='speed-module-3'
+    },
+    {
+        name='productivity-module',
+        tech='productivity-module'
+    },
+    {
+        name='productivity-module-2',
+        tech='productivity-module-2'
+    },
+    {
+        name='productivity-module-3',
+        tech='productivity-module-3'
+    },
+    {
+        name='effectivity-module',
+        tech='effectivity-module'
+    },
+    {
+        name='effectivity-module-2',
+        tech='effectivity-module-2'
+    },
+    {
+        name='effectivity-module-3',
+        tech='effectivity-module-3'
+    },
+    {
+        name='fast-inserter',
+        tech='fast-inserter'
+    },
+    {
+        name='filter-inserter',
+        tech='fast-inserter'
+    },
+    {
+        name='long-handed-inserter',
+        tech='automation'
+    },
+    {
+        name='stack-inserter',
+        tech='stack-inserter'
+    },
+    {
+        name='stack-filter-inserter',
+        tech='stack-inserter'
+    },
+    {
+        name='uranium-rounds-magazine',
+        tech='uranium-ammo'
+    },
+    {
+        name='explosive-cannon-shell',
+        tech='tank'
+    },
+    {
+        name='artillery-shell',
+        tech='artillery'
+    },
+    {
+        name='rocket',
+        tech='rocketry'
+    },
+    {
+        name='explosive-rocket',
+        tech='explosive-rocketry'
+    },
 
     'underground-belt',
     'fast-transport-belt',
@@ -238,12 +298,6 @@ local recipe_list = {
     --'express-transport-belt',
     --'express-underground-belt',
     --'express-splitter',
-
-    'uranium-rounds-magazine',
-    'explosive-cannon-shell',
-    'artillery-shell',
-    'rocket',
-    'explosive-rocket'
 }
 
 
@@ -351,6 +405,7 @@ for i=1, #recipe_list, 1 do
             end
             
             item.name = item.name .. '-' .. j
+            item.hide_from_player_crafting = true
             
             if recipe_list[i].tech ~= nil then
                 data:extend({item})
