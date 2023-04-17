@@ -87,10 +87,8 @@ local items = {
 if mods['space-exploration'] then
     items['solar-panel'].base = 40
 
-    items['fusion-reactor'].name = 'se-rtg'
     items['fusion-reactor'].tech = 'se-rtg-equipment'
     items['fusion-reactor'].base = 800
-    items['fusion-reactor'].graphics_source = '__space-exploration-graphics__/graphics/equipment/rtg-equipment.png'
 
     items['night-vision'].enabled = false
     items['exoskeleton'].enabled = false
