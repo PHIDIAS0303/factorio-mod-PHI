@@ -85,12 +85,10 @@ local items = {
 }
 
 if mods['space-exploration'] then
-    items['solar-panel'].min = 2
     items['solar-panel'].base = 40
 
     items['fusion-reactor'].name = 'se-rtg'
     items['fusion-reactor'].tech = 'se-rtg-equipment'
-    items['fusion-reactor'].min = 2
     items['fusion-reactor'].base = 800
     items['fusion-reactor'].graphics_source = '__space-exploration-graphics__/graphics/equipment/rtg-equipment.png'
 
@@ -234,7 +232,7 @@ local function EE(source, tier)
     item['shape'] = {width = w, height = h, type = 'full'}
 
     if source.graphics_source == nil then
-        item['sprite'] = {filename = graphics_location .. source .. '-equipment-e.png', width = w * 32, height = h * 32, priority = 'medium', hr_version = {filename = graphics_location .. source .. '-equipment-eh.png', width = w * 64, height = h *64, priority = 'medium', scale = 0.5}}
+        item['sprite'] = {filename = graphics_location .. source.name .. '-equipment-e.png', width = w * 32, height = h * 32, priority = 'medium', hr_version = {filename = graphics_location .. source.name .. '-equipment-eh.png', width = w * 64, height = h *64, priority = 'medium', scale = 0.5}}
     else
         item['sprite'] = {filename = source.graphics_source, width = w * 32, height = h * 32, priority = 'medium'}
     end
