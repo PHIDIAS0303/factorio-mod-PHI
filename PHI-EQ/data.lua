@@ -88,10 +88,13 @@ if game.active_mods['space-exploration'] then
     items['night-vision'].enabled = false
     items['exoskeleton'].enabled = false
 
-    items['personal-laser-defense'].min = 5
-    items['battery'].min = 4
-    items['energy-shield'].min = 7
-    items['personal-roboport'].min = 3
+    items['battery'].tech = 'battery-equipment'
+    items['battery'].base = 25
+
+    items['energy-shield'].tech = 'energy-shield-equipment'
+
+    items['personal-roboport'].tech = 'personal-roboport-equipment'
+    
 else
     data:extend({
         {
