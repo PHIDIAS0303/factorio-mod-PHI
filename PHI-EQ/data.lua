@@ -239,35 +239,9 @@ local function ER(source, tier)
     }})
 end
 
--- item
-local function EI(source, tier)
-    local item = table.deepcopy(data.raw.item[source .. '-equipment'])
-    item.name = source .. '-mk' .. tier .. '-equipment'
-    item.placed_as_equipment_result = source .. '-mk' .. tier .. '-equipment'
-    item.subgroup = 'equipment'
-    item.stack_size = 20
-    item.default_request_amount = 5
-    item.icons = {{icon = graphics_location .. source .. '-equipment-i.png', icon_mipmaps = 4, icon_size = 64}}
-
-    if (source == 'solar-panel') then
-        item.order = 'a[energy-source]-a' .. alpha_order[tier - 1] .. '[' .. source .. '-mk' .. tier .. ']'
-    elseif (source == 'battery') then
-        item.order = 'b[battery]-b' .. alpha_order[tier] .. '[' .. source .. 'equipment-mk' .. tier .. ']'
-    elseif (source == 'fusion-reactor') then
-        item.order = 'a[energy-source]-b' .. alpha_order[tier - 1] .. '[' .. source .. '-mk' .. tier .. ']'
-    elseif (source == 'personal-laser-defense') then
-        item.order = 'd[active-defense]-b' .. alpha_order[tier - 1] .. '[' .. source .. '-mk' .. tier .. ']'
-    elseif (source == 'energy-shield') then
-        item.order = 'b[shield]-c' .. alpha_order[tier - 1] .. '[' .. source .. '-equipment-mk' .. tier .. ']'
-    elseif (source == 'personal-roboport') then
-        item.order = 'e[robotics]-b' .. alpha_order[tier - 1] .. '[' .. source .. '-mk' .. tier .. '-equipment]'
-    elseif (source == 'night-vision') then
-        item.order = 'f[night-vision]-a' .. alpha_order[tier - 1] .. '[' .. source .. '-mk' .. tier .. ']'
-    elseif (source == 'exoskeleton') then
-        item.order = 'd[exoskeleton]-a' .. alpha_order[tier - 1] .. '[' .. source .. 'equipment-mk' .. tier .. ']'
-    end
-
-    data:extend({item})
+-- tech
+local function ET(source, tier)
+    table.insert(data.raw.technology[item_technology[source]].effects, {type='unlock-recipe', recipe=source .. '-mk' .. tier .. '-equipment'})
 end
 
 for i=1, #items, 1 do
@@ -275,54 +249,6 @@ for i=1, #items, 1 do
         EE(items[i], j)
         EI(items[i], j)
         ER(items[i], j)
+        ET(items[i], j)
     end
 end
-
-table.insert(data.raw.technology['night-vision-equipment'].effects, {type='unlock-recipe', recipe='night-vision-mk2-equipment'})
-
-table.insert(data.raw.technology['exoskeleton-equipment'].effects, {type='unlock-recipe', recipe='exoskeleton-mk2-equipment'})
-
-table.insert(data.raw.technology['solar-panel-equipment'].effects, {type='unlock-recipe', recipe='solar-panel-mk2-equipment'})
-table.insert(data.raw.technology['solar-panel-equipment'].effects, {type='unlock-recipe', recipe='solar-panel-mk3-equipment'})
-table.insert(data.raw.technology['solar-panel-equipment'].effects, {type='unlock-recipe', recipe='solar-panel-mk4-equipment'})
-table.insert(data.raw.technology['solar-panel-equipment'].effects, {type='unlock-recipe', recipe='solar-panel-mk5-equipment'})
-table.insert(data.raw.technology['solar-panel-equipment'].effects, {type='unlock-recipe', recipe='solar-panel-mk6-equipment'})
-table.insert(data.raw.technology['solar-panel-equipment'].effects, {type='unlock-recipe', recipe='solar-panel-mk7-equipment'})
-table.insert(data.raw.technology['solar-panel-equipment'].effects, {type='unlock-recipe', recipe='solar-panel-mk8-equipment'})
-
-table.insert(data.raw.technology['fusion-reactor-equipment'].effects, {type='unlock-recipe', recipe='fusion-reactor-mk2-equipment'})
-table.insert(data.raw.technology['fusion-reactor-equipment'].effects, {type='unlock-recipe', recipe='fusion-reactor-mk3-equipment'})
-table.insert(data.raw.technology['fusion-reactor-equipment'].effects, {type='unlock-recipe', recipe='fusion-reactor-mk4-equipment'})
-table.insert(data.raw.technology['fusion-reactor-equipment'].effects, {type='unlock-recipe', recipe='fusion-reactor-mk5-equipment'})
-table.insert(data.raw.technology['fusion-reactor-equipment'].effects, {type='unlock-recipe', recipe='fusion-reactor-mk6-equipment'})
-table.insert(data.raw.technology['fusion-reactor-equipment'].effects, {type='unlock-recipe', recipe='fusion-reactor-mk7-equipment'})
-table.insert(data.raw.technology['fusion-reactor-equipment'].effects, {type='unlock-recipe', recipe='fusion-reactor-mk8-equipment'})
-
-table.insert(data.raw.technology['battery-mk2-equipment'].effects, {type='unlock-recipe', recipe='battery-mk3-equipment'})
-table.insert(data.raw.technology['battery-mk2-equipment'].effects, {type='unlock-recipe', recipe='battery-mk4-equipment'})
-table.insert(data.raw.technology['battery-mk2-equipment'].effects, {type='unlock-recipe', recipe='battery-mk5-equipment'})
-table.insert(data.raw.technology['battery-mk2-equipment'].effects, {type='unlock-recipe', recipe='battery-mk6-equipment'})
-table.insert(data.raw.technology['battery-mk2-equipment'].effects, {type='unlock-recipe', recipe='battery-mk7-equipment'})
-table.insert(data.raw.technology['battery-mk2-equipment'].effects, {type='unlock-recipe', recipe='battery-mk8-equipment'})
-
-table.insert(data.raw.technology['personal-laser-defense-equipment'].effects, {type='unlock-recipe', recipe='personal-laser-defense-mk2-equipment'})
-table.insert(data.raw.technology['personal-laser-defense-equipment'].effects, {type='unlock-recipe', recipe='personal-laser-defense-mk3-equipment'})
-table.insert(data.raw.technology['personal-laser-defense-equipment'].effects, {type='unlock-recipe', recipe='personal-laser-defense-mk4-equipment'})
-table.insert(data.raw.technology['personal-laser-defense-equipment'].effects, {type='unlock-recipe', recipe='personal-laser-defense-mk5-equipment'})
-table.insert(data.raw.technology['personal-laser-defense-equipment'].effects, {type='unlock-recipe', recipe='personal-laser-defense-mk6-equipment'})
-table.insert(data.raw.technology['personal-laser-defense-equipment'].effects, {type='unlock-recipe', recipe='personal-laser-defense-mk7-equipment'})
-table.insert(data.raw.technology['personal-laser-defense-equipment'].effects, {type='unlock-recipe', recipe='personal-laser-defense-mk8-equipment'})
-
-table.insert(data.raw.technology['energy-shield-mk2-equipment'].effects, {type='unlock-recipe', recipe='energy-shield-mk3-equipment'})
-table.insert(data.raw.technology['energy-shield-mk2-equipment'].effects, {type='unlock-recipe', recipe='energy-shield-mk4-equipment'})
-table.insert(data.raw.technology['energy-shield-mk2-equipment'].effects, {type='unlock-recipe', recipe='energy-shield-mk5-equipment'})
-table.insert(data.raw.technology['energy-shield-mk2-equipment'].effects, {type='unlock-recipe', recipe='energy-shield-mk6-equipment'})
-table.insert(data.raw.technology['energy-shield-mk2-equipment'].effects, {type='unlock-recipe', recipe='energy-shield-mk7-equipment'})
-table.insert(data.raw.technology['energy-shield-mk2-equipment'].effects, {type='unlock-recipe', recipe='energy-shield-mk8-equipment'})
-
-table.insert(data.raw.technology['personal-roboport-mk2-equipment'].effects, {type='unlock-recipe', recipe='personal-roboport-mk3-equipment'})
-table.insert(data.raw.technology['personal-roboport-mk2-equipment'].effects, {type='unlock-recipe', recipe='personal-roboport-mk4-equipment'})
-table.insert(data.raw.technology['personal-roboport-mk2-equipment'].effects, {type='unlock-recipe', recipe='personal-roboport-mk5-equipment'})
-table.insert(data.raw.technology['personal-roboport-mk2-equipment'].effects, {type='unlock-recipe', recipe='personal-roboport-mk6-equipment'})
-table.insert(data.raw.technology['personal-roboport-mk2-equipment'].effects, {type='unlock-recipe', recipe='personal-roboport-mk7-equipment'})
-table.insert(data.raw.technology['personal-roboport-mk2-equipment'].effects, {type='unlock-recipe', recipe='personal-roboport-mk8-equipment'})
