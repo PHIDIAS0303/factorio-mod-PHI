@@ -8,7 +8,8 @@ local items = {
         tech = 'solar-panel-equipment',
         min = 2,
         max = 8,
-        base = 30
+        base = 30,
+        graphics_source = nil
     },
     ['fusion-reactor'] = {
         enabled = true,
@@ -16,7 +17,8 @@ local items = {
         tech = 'fusion-reactor-equipment',
         min = 2,
         max = 8,
-        base = 750
+        base = 750,
+        graphics_source = nil
     },
     ['personal-laser-defense'] = {
         enabled = true,
@@ -24,7 +26,8 @@ local items = {
         tech = 'personal-laser-defense-equipment',
         min = 2,
         max = 8,
-        base = 3
+        base = 3,
+        graphics_source = nil
     },
     ['battery'] = {
         enabled = true,
@@ -32,7 +35,8 @@ local items = {
         tech = 'battery-mk2-equipment',
         min = 3,
         max = 8,
-        base = 100
+        base = 100,
+        graphics_source = nil
     },
     ['personal-laser-defense'] = {
         enabled = true,
@@ -40,7 +44,8 @@ local items = {
         tech = 'personal-laser-defense-equipment',
         min = 2,
         max = 8,
-        base = 3
+        base = 3,
+        graphics_source = nil
     },
     ['energy-shield'] = {
         enabled = true,
@@ -48,7 +53,8 @@ local items = {
         tech = 'energy-shield-mk2-equipment',
         min = 3,
         max = 8,
-        base = 150
+        base = 150,
+        graphics_source = nil
     },
     ['personal-roboport'] = {
         enabled = true,
@@ -56,7 +62,8 @@ local items = {
         tech = 'personal-roboport-mk2-equipment',
         min = 3,
         max = 8,
-        base = 0.5
+        base = 0.5,
+        graphics_source = nil
     },
     ['night-vision'] = {
         enabled = true,
@@ -64,7 +71,8 @@ local items = {
         tech = 'night-vision-equipment',
         min = 2,
         max = 2,
-        base = 1
+        base = 1,
+        graphics_source = nil
     },
     ['exoskeleton'] = {
         enabled = true,
@@ -72,7 +80,8 @@ local items = {
         tech = 'exoskeleton-equipment',
         min = 2,
         max = 2,
-        base = 0.6
+        base = 0.6,
+        graphics_source = nil
     }
 }
 
@@ -80,10 +89,11 @@ if mods['space-exploration'] then
     items['solar-panel'].min = 2
     items['solar-panel'].base = 40
 
-    items['fusion-reactor'].name = 'se-rtg-equipment'
+    items['fusion-reactor'].name = 'se-rtg'
     items['fusion-reactor'].tech = 'se-rtg-equipment'
     items['fusion-reactor'].min = 2
     items['fusion-reactor'].base = 800
+    items['fusion-reactor'].graphics_source = '__space-exploration-graphics__/graphics/equipment/rtg-equipment.png'
 
     items['night-vision'].enabled = false
     items['exoskeleton'].enabled = false
@@ -93,7 +103,7 @@ if mods['space-exploration'] then
 
     items['energy-shield'].tech = 'energy-shield-equipment'
 
-    items['personal-roboport'].tech = 'personal-roboport-equipment'
+    items['personal-roboport'].tech = 'personal-roboport-equipment' 
 else
     data:extend({
         {
@@ -147,7 +157,7 @@ else
 end
 
 -- equipment
-local function EE(source, tier, base)
+local function EE(source, tier, base, graphics_source)
     local item = {}
     item['name'] = source .. '-mk' .. tier .. '-equipment'
     item['categories'] = {'armor'}
@@ -223,7 +233,13 @@ local function EE(source, tier, base)
     end
 
     item['shape'] = {width = w, height = h, type = 'full'}
-    item['sprite'] = {filename = graphics_location .. source .. '-equipment-e.png', width = w * 32, height = h * 32, priority = 'medium', hr_version = {filename = graphics_location .. source .. '-equipment-eh.png', width = w * 64, height = h *64, priority = 'medium', scale = 0.5}}
+
+    if graphics_source == nil then
+        item['sprite'] = {filename = graphics_location .. source .. '-equipment-e.png', width = w * 32, height = h * 32, priority = 'medium', hr_version = {filename = graphics_location .. source .. '-equipment-eh.png', width = w * 64, height = h *64, priority = 'medium', scale = 0.5}}
+    else
+        item['sprite'] = {filename = graphics_source, width = w * 32, height = h * 32, priority = 'medium', hr_version = {filename = graphics_location .. source .. '-equipment-eh.png', width = w * 64, height = h *64, priority = 'medium', scale = 0.5}}
+    end
+
     data:extend({item})
 end
 
@@ -235,7 +251,7 @@ local function EI(source, tier)
     item.subgroup = 'equipment'
     item.stack_size = 20
     item.default_request_amount = 5
-    -- item.icons = {{icon = graphics_location .. source .. '-equipment-i.png', icon_mipmaps = 4, icon_size = 64}}
+    item.icons = {{icon = graphics_location .. source .. '-equipment-i.png', icon_mipmaps = 4, icon_size = 64}}
 
     if (source == 'solar-panel') then
         item.order = 'a[energy-source]-a' .. alpha_order[tier - 1] .. '[' .. source .. '-mk' .. tier .. ']'
@@ -286,7 +302,7 @@ end
 for _, v in pairs(items) do
     if v.enabled then
         for j=v.min, v.max, 1 do
-            EE(v.name, j, v.base)
+            EE(v.name, j, v.base, v.graphics_source)
             EI(v.name, j)
             ER(v.name, j)
             ET(v.name, j, v.tech)
