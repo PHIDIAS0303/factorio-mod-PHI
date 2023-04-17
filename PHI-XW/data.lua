@@ -7,7 +7,7 @@ data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_test = {'grou
 data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_mask = nil
 data.raw['offshore-pump']['offshore-pump'].placeable_position_visualization = nil
 
-if data.raw.item['seafloor-pump'] then
+if mods['angelsrefining'] then
     data.raw['offshore-pump']['seafloor-pump'].pumping_speed = 25
     data.raw['offshore-pump']['seafloor-pump'].fluid_box.base_area = 5
     data.raw['offshore-pump']['seafloor-pump'].fluid_box.base_level = 5
