@@ -1,60 +1,97 @@
 local alpha_order = {'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'}
 local graphics_location = '__PHI-EQ__/graphics/'
-local items = {'solar-panel', 'fusion-reactor', 'personal-laser-defense', 'battery', 'energy-shield', 'personal-roboport', 'night-vision', 'exoskeleton'}
 
-local item_min = {
-    ['solar-panel'] = 2,
-    ['fusion-reactor'] = 2,
-    ['personal-laser-defense'] = 2,
-    ['battery'] = 3,
-    ['energy-shield'] = 3,
-    ['personal-roboport'] = 3,
-    ['night-vision'] = 2,
-    ['exoskeleton'] = 2
-}
-
-local item_max = {
-    ['solar-panel'] = 8,
-    ['fusion-reactor'] = 8,
-    ['personal-laser-defense'] = 8,
-    ['battery'] = 8,
-    ['energy-shield'] = 8,
-    ['personal-roboport'] = 8,
-    ['night-vision'] = 2,
-    ['exoskeleton'] = 2
-}
-
-local item_parameter = {
-    ['solar-panel'] = 30,
-    ['fusion-reactor'] = 750,
-    ['personal-laser-defense'] = 3,
-    ['battery'] = 100,
-    ['energy-shield'] = 150,
-    ['personal-roboport'] = 0.5,
-    ['night-vision'] = 1,
-    ['exoskeleton'] = 0.6
-}
-
-local item_technology = {
-    ['solar-panel'] = 'solar-panel-equipment',
-    ['fusion-reactor'] = 'fusion-reactor-equipment',
-    ['personal-laser-defense'] = 'personal-laser-defense-equipment',
-    ['battery'] = 'battery-mk2-equipment',
-    ['energy-shield'] = 'energy-shield-mk2-equipment',
-    ['personal-roboport'] = 'personal-roboport-mk2-equipment',
-    ['night-vision'] = 'night-vision-equipment',
-    ['exoskeleton'] = 'exoskeleton-equipment'
+local items = {
+    ['solar-panel'] = {
+        enabled = true,
+        name = 'solar-panel',
+        tech = 'solar-panel-equipment',
+        min = 2,
+        max = 8,
+        base = 30
+    },
+    ['fusion-reactor'] = {
+        enabled = true,
+        name = 'fusion-reactor',
+        tech = 'fusion-reactor-equipment',
+        min = 2,
+        max = 8,
+        base = 750
+    },
+    ['personal-laser-defense'] = {
+        enabled = true,
+        name = 'personal-laser-defense',
+        tech = 'personal-laser-defense-equipment',
+        min = 2,
+        max = 8,
+        base = 3
+    },
+    ['battery'] = {
+        enabled = true,
+        name = 'battery',
+        tech = 'battery-mk2-equipment',
+        min = 3,
+        max = 8,
+        base = 100
+    },
+    ['personal-laser-defense'] = {
+        enabled = true,
+        name = 'personal-laser-defense',
+        tech = 'personal-laser-defense-equipment',
+        min = 2,
+        max = 8,
+        base = 3
+    },
+    ['energy-shield'] = {
+        enabled = true,
+        name = 'energy-shield',
+        tech = 'energy-shield-mk2-equipment',
+        min = 3,
+        max = 8,
+        base = 150
+    },
+    ['personal-roboport'] = {
+        enabled = true,
+        name = 'personal-roboport',
+        tech = 'personal-roboport-mk2-equipment',
+        min = 3,
+        max = 8,
+        base = 0.5
+    },
+    ['night-vision'] = {
+        enabled = true,
+        name = 'night-vision',
+        tech = 'night-vision-equipment',
+        min = 2,
+        max = 2,
+        base = 1
+    },
+    ['exoskeleton'] = {
+        enabled = true,
+        name = 'exoskeleton',
+        tech = 'exoskeleton-equipment',
+        min = 2,
+        max = 2,
+        base = 0.6
+    }
 }
 
 if game.active_mods['space-exploration'] then
-    items = {'solar-panel', 'fusion-reactor', 'personal-laser-defense', 'battery', 'energy-shield', 'personal-roboport'}
+    items['solar-panel'].min = 2
+    items['solar-panel'].base = 40
 
-    item_min['solar-panel'] = 3
-    item_min['fusion-reactor'] = 3
-    item_min['personal-laser-defense'] = 5
-    item_min['battery'] = 4
-    item_min['energy-shield'] = 7
-    item_min['personal-roboport'] = 3
+    items['fusion-reactor'].name = 'se-rtg-equipment'
+    items['fusion-reactor'].tech = 'se-rtg-equipment'
+    items['fusion-reactor'].min = 2
+    items['fusion-reactor'].base = 800
+
+    items['night-vision'].enabled = false
+    items['exoskeleton'].enabled = false
+
+    items['personal-laser-defense'].min = 5
+    items['battery'].min = 4
+    items['energy-shield'].min = 7
+    items['personal-roboport'].min = 3
 else
     data:extend({
         {
@@ -117,17 +154,17 @@ local function EE(source, tier)
     
     if (source == 'solar-panel') then
         item['type'] = 'solar-panel-equipment'
-        item['power'] = (item_parameter[source] * (2 ^ (tier - 1))) .. 'kW'
+        item['power'] = (items[source].base * (2 ^ (tier - 1))) .. 'kW'
         item['energy_source'] = {type = 'electric', usage_priority = 'primary-output'}
     elseif (source == 'battery') then
         h = 2
         item['type'] = 'battery-equipment'
-        item['energy_source'] = {type = 'electric', usage_priority = 'tertiary', buffer_capacity= (item_parameter[source] * (2 ^ (tier - 2))) .. 'MJ'}
+        item['energy_source'] = {type = 'electric', usage_priority = 'tertiary', buffer_capacity= (items[source].base * (2 ^ (tier - 2))) .. 'MJ'}
     elseif (source == 'fusion-reactor') then
         w = 4
         h = 4
         item['type'] = 'generator-equipment'
-        item['power'] = (item_parameter[source] * (2 ^ (tier - 1))) .. 'kW'
+        item['power'] = (items[source].base * (2 ^ (tier - 1))) .. 'kW'
         item['energy_source'] = {type = 'electric', usage_priority = 'primary-output'}
     elseif (source == 'personal-laser-defense') then
         w = 2
@@ -136,20 +173,20 @@ local function EE(source, tier)
         item['energy_source'] = {type = 'electric', usage_priority = 'secondary-input', buffer_capacity = (250 * (2 ^ (tier - 1))) .. 'kJ'}
         -- item['source_direction_count'] = 64
         -- item['source_offset'] = {0, -3.423489 / 4}
-        item['attack_parameters'] = {type = 'beam', cooldown = 60, range = (18 + tier), damage_modifier = (item_parameter[source] * (2 ^ (tier - 1))), ammo_type = {category = 'laser', energy_consumption = (50 * (2 ^ (tier - 1))) .. 'kJ', action = {type = 'direct', action_delivery = {type = 'beam', beam = 'laser-beam', max_length = (18 + tier), duration = 60, source_offset = {0, -1.31439}}}}}
+        item['attack_parameters'] = {type = 'beam', cooldown = 60, range = (18 + tier), damage_modifier = (items[source].base * (2 ^ (tier - 1))), ammo_type = {category = 'laser', energy_consumption = (50 * (2 ^ (tier - 1))) .. 'kJ', action = {type = 'direct', action_delivery = {type = 'beam', beam = 'laser-beam', max_length = (18 + tier), duration = 60, source_offset = {0, -1.31439}}}}}
         item['automatic'] = true
     elseif (source == 'energy-shield') then
         w = 2
         h = 2
         item['type'] = 'energy-shield-equipment'
         item['energy_source'] = {type = 'electric', usage_priority = 'primary-input', input_flow_limit = (1000 * (2 ^ (tier - 1))) .. 'kW', buffer_capacity = (480 * (2 ^ (tier - 1))) .. 'kJ'}
-        item['max_shield_value'] = (item_parameter[source] * (2 ^ (tier - 2)))
+        item['max_shield_value'] = (items[source].base * (2 ^ (tier - 2)))
         item['energy_per_shield'] = '80kJ'
     elseif (source == 'personal-roboport') then
         w = 2
         h = 2
         item['type'] = 'roboport-equipment'
-        item['energy_source'] = {type = 'electric', usage_priority = 'secondary-input', buffer_capacity = (item_parameter[source] * 32 * (2 ^ (tier - 1))) .. 'MJ'}
+        item['energy_source'] = {type = 'electric', usage_priority = 'secondary-input', buffer_capacity = (items[source].base * 32 * (2 ^ (tier - 1))) .. 'MJ'}
         item['robot_limit'] = 50
         item['construction_radius'] = 32
         item['spawn_and_station_height'] = 0.4
@@ -161,7 +198,7 @@ local function EE(source, tier)
         item['stationing_offset'] = {0, -0.6}
         item['charging_station_shift'] = {0, 0.5}
         item['charging_station_count'] = 16
-        item['charging_energy'] = (item_parameter[source] * (2 ^ (tier - 2))) .. 'MW'
+        item['charging_energy'] = (items[source].base * (2 ^ (tier - 2))) .. 'MW'
         item['charging_distance'] = 1.6
         item['charging_threshold_distance'] = 5
     elseif (source == 'night-vision') then
@@ -172,7 +209,7 @@ local function EE(source, tier)
         item['energy_input'] = '20kW'
         item['activate_sound'] = {filename = '__base__/sound/nightvision-on.ogg', volume = 0.5}
         item['deactivate_sound'] = {filename = '__base__/sound/nightvision-off.ogg', volume = 0.5}
-        item['darkness_to_turn_on'] = item_parameter[source]
+        item['darkness_to_turn_on'] = items[source].base
         item['color_lookup'] = {{0, '__core__/graphics/color_luts/lut-sunset.png'}}
     elseif (source == 'exoskeleton') then
         w = 2
@@ -180,7 +217,7 @@ local function EE(source, tier)
         item['type'] = 'movement-bonus-equipment'
         item['energy_source'] = {type = 'electric', usage_priority = 'secondary-input', buffer_capacity = '10MJ'}
         item['energy_consumption'] = '400kW'
-        item['movement_bonus'] = item_parameter[source]
+        item['movement_bonus'] = items[source].base
     end
 
     item['shape'] = {width = w, height = h, type = 'full'}
@@ -241,14 +278,16 @@ end
 
 -- tech
 local function ET(source, tier)
-    table.insert(data.raw.technology[item_technology[source]].effects, {type='unlock-recipe', recipe=source .. '-mk' .. tier .. '-equipment'})
+    table.insert(data.raw.technology[items[source].tech].effects, {type='unlock-recipe', recipe=source .. '-mk' .. tier .. '-equipment'})
 end
 
 for i=1, #items, 1 do
-    for j=item_min[items[i]], item_max[items[i]], 1 do
-        EE(items[i], j)
-        EI(items[i], j)
-        ER(items[i], j)
-        ET(items[i], j)
+    for j=items[i].min, items[i].max, 1 do
+        if items[i].enabled then
+            EE(items[i].name, j)
+            EI(items[i].name, j)
+            ER(items[i].name, j)
+            ET(items[i].name, j)
+        end
     end
 end
