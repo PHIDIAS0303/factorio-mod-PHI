@@ -292,7 +292,6 @@ local recipe_list = {
     },
 }
 
-
 for i=1, #recipe_list, 1 do
     if data.raw.recipe[recipe_list[i].name] ~= nil then
         for j=1, #recipe_multiplier, 1 do
@@ -396,101 +395,10 @@ for i=1, #recipe_list, 1 do
                 end
             end
             
-            item.name = item.name .. '-' .. j
-            item.hide_from_player_crafting = true
+            item.name = item.name .. '-s' .. j
 
-            if item.category == 'crafting' then
-                item.category = 'scaled-crafting'
-
-            elseif item.category == 'basic-crafting' then
-                item.category = 'scaled-basic-crafting'
-
-            elseif item.category == 'advanced-crafting' then
-                item.category = 'scaled-advanced-crafting'
-
-            elseif item.category == 'crafting-with-fluid' then
-                item.category = 'scaled-crafting-with-fluid'
-
-            elseif item.category == 'smelting' then
-                item.category = 'scaled-smelting'
-
-            elseif item.category == 'chemistry' then
-                item.category = 'scaled-chemistry'
-
-            elseif item.category == 'oil-processing' then
-                item.category = 'scaled-oil-processing'
-
-            elseif item.category == 'centrifuging' then
-                item.category = 'scaled-centrifuging'
-            end
-            
             data:extend({item})
             table.insert(data.raw.technology[recipe_list[i].tech].effects, {type='unlock-recipe', recipe=item.name})
         end
     end
-end
-
-data:extend(
-{
-  {
-    type = 'recipe-category',
-    name = 'scaled-crafting'
-  },
-  {
-    type = 'recipe-category',
-    name = 'scaled-basic-crafting'
-  },
-  {
-    type = 'recipe-category',
-    name = 'scaled-advanced-crafting'
-  },
-  {
-    type = 'recipe-category',
-    name = 'scaled-crafting-with-fluid'
-  },
-  {
-    type = 'recipe-category',
-    name = 'scaled-smelting'
-  },
-  {
-    type = 'recipe-category',
-    name = 'scaled-chemistry'
-  },
-  {
-    type = 'recipe-category',
-    name = 'scaled-oil-processing'
-  },
-  {
-    type = 'recipe-category',
-    name = 'scaled-centrifuging'
-  },
-}
-)
-
-for _, v in pairs(data.raw['assembling-machine']) do
-    if v.crafting_categories['crafting'] then
-        table.insert(v.crafting_categories, 'scaled-crafting')
-
-    elseif v.crafting_categories['basic-crafting'] then
-        table.insert(v.crafting_categories, 'scaled-basic-crafting')
-
-    elseif v.crafting_categories['advanced-crafting'] then
-        table.insert(v.crafting_categories, 'scaled-advanced-crafting')
-
-    elseif v.crafting_categories['crafting-with-fluid'] then
-        table.insert(v.crafting_categories, 'scaled-crafting-with-fluid')
-
-    elseif v.crafting_categories['chemistry'] then
-        table.insert(v.crafting_categories, 'scaled-chemistry')
-
-    elseif v.crafting_categories['oil-processing'] then
-        table.insert(v.crafting_categories, 'scaled-oil-processing')
-
-    elseif v.crafting_categories['centrifuging'] then
-        table.insert(v.crafting_categories, 'scaled-centrifuging')
-    end
-end
-
-for _, v in pairs(data.raw['furnace']) do
-    table.insert(v.crafting_categories, 'scaled-smelting')
 end

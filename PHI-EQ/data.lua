@@ -2,6 +2,79 @@ local alpha_order = {'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'}
 local graphics_location = '__PHI-EQ__/graphics/'
 local items = {'solar-panel', 'fusion-reactor', 'personal-laser-defense', 'battery', 'energy-shield', 'personal-roboport', 'night-vision', 'exoskeleton'}
 
+local item_min = {
+    ['solar-panel'] = 2,
+    ['fusion-reactor'] = 2,
+    ['personal-laser-defense'] = 2,
+    ['battery'] = 3,
+    ['energy-shield'] = 3,
+    ['personal-roboport'] = 3,
+    ['night-vision'] = 2,
+    ['exoskeleton'] = 2
+}
+
+local item_max = {
+    ['solar-panel'] = 8,
+    ['fusion-reactor'] = 8,
+    ['personal-laser-defense'] = 8,
+    ['battery'] = 8,
+    ['energy-shield'] = 8,
+    ['personal-roboport'] = 8,
+    ['night-vision'] = 2,
+    ['exoskeleton'] = 2
+}
+
+if game.active_mods['space-exploration'] then
+    items = {'solar-panel', 'fusion-reactor', 'personal-laser-defense', 'battery', 'energy-shield', 'personal-roboport'}
+
+    item_min['solar-panel'] = 3
+    item_min['fusion-reactor'] = 3
+    item_min['personal-laser-defense'] = 5
+    item_min['battery'] = 4
+    item_min['energy-shield'] = 7
+    item_min['personal-roboport'] = 3
+else
+    data:extend({
+        {
+            type = 'equipment-grid',
+            name = 'equipment-grid-14x14',
+            width = 14,
+            height = 14,
+            equipment_categories = {'armor'}
+        },
+        {
+            type = 'armor',
+            name = 'power-armor-mk3',
+            icon = '__base__/graphics/icons/power-armor-mk2.png',
+            icon_size = 64, icon_mipmaps = 4,
+            resistances = {{type = 'physical', decrease = 20, percent = 50}, {type = 'acid', decrease = 20, percent = 80},
+            {type = 'explosion', decrease = 70, percent = 60}, {type = 'fire', decrease = 20, percent = 80},
+            {type = 'laser', decrease = 20, percent = 50}, {type = 'electric', decrease = 20, percent = 50},
+            {type = 'impact', decrease = 20, percent = 50}, {type = 'poison', decrease = 20, percent = 50}},
+            subgroup = 'armor',
+            order = 'eb[power-armor-mk3]',
+            stack_size = 1,
+            infinite = true,
+            equipment_grid = 'equipment-grid-14x14',
+            inventory_size_bonus = 40,
+            open_sound = {filename =  '__base__/sound/armor-open.ogg', volume = 1},
+            close_sound = {filename = '__base__/sound/armor-close.ogg', volume = 1}
+        }
+    })
+
+    data:extend({{
+        type = 'recipe',
+        name = 'power-armor-mk3',
+        energy_required = 5,
+        enabled = 'false',
+        ingredients = {{'power-armor-mk2', 2}},
+        result = 'power-armor-mk3'
+    }})
+
+    table.insert(data.raw.technology['power-armor-mk2'].effects, {type='unlock-recipe', recipe='power-armor-mk3'})
+
+end
+
 -- equipment
 local function EE(source, tier)
     local item = {}
@@ -145,64 +218,14 @@ for _, animation in ipairs(data.raw['character']['character']['animations']) do
     end
 end
 
-data:extend({
-    {
-        type = 'equipment-grid',
-        name = 'equipment-grid-14x14',
-        width = 14,
-        height = 14,
-        equipment_categories = {'armor'}
-    },
-    {
-        type = 'armor',
-        name = 'power-armor-mk3',
-        icon = '__base__/graphics/icons/power-armor-mk2.png',
-        icon_size = 64, icon_mipmaps = 4,
-        resistances = {{type = 'physical', decrease = 20, percent = 50}, {type = 'acid', decrease = 20, percent = 80},
-        {type = 'explosion', decrease = 70, percent = 60}, {type = 'fire', decrease = 20, percent = 80},
-        {type = 'laser', decrease = 20, percent = 50}, {type = 'electric', decrease = 20, percent = 50},
-        {type = 'impact', decrease = 20, percent = 50}, {type = 'poison', decrease = 20, percent = 50}},
-        subgroup = 'armor',
-        order = 'eb[power-armor-mk3]',
-        stack_size = 1,
-        infinite = true,
-        equipment_grid = 'equipment-grid-14x14',
-        inventory_size_bonus = 40,
-        open_sound = {filename =  '__base__/sound/armor-open.ogg', volume = 1},
-        close_sound = {filename = '__base__/sound/armor-close.ogg', volume = 1}
-    }
-})
-
-data:extend({{
-    type = 'recipe',
-    name = 'power-armor-mk3',
-    energy_required = 5,
-    enabled = 'false',
-    ingredients = {{'power-armor-mk2', 2}},
-    result = 'power-armor-mk3'
-}})
-
-for i=1, 8, 1 do
-    if (i <= 3) then
-        for j=2, 8, 1 do
-            EE(items[i], j)
-            EI(items[i], j)
-            ER(items[i], j)
-        end
-    elseif (i <= 6) then
-        for j=3, 8, 1 do
-            EE(items[i], j)
-            EI(items[i], j)
-            ER(items[i], j)
-        end
-    elseif (i <= 8) then
-        EE(items[i], 2)
-        EI(items[i], 2)
-        ER(items[i], 2)
+for i=1, #items, 1 do
+    for j=item_min[items[i]], item_max[items[i]], 1 do
+        EE(items[i], j)
+        EI(items[i], j)
+        ER(items[i], j)
     end
 end
 
-table.insert(data.raw.technology['power-armor-mk2'].effects, {type='unlock-recipe', recipe='power-armor-mk3'})
 
 table.insert(data.raw.technology['night-vision-equipment'].effects, {type='unlock-recipe', recipe='night-vision-mk2-equipment'})
 
