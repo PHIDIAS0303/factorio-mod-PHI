@@ -6,6 +6,7 @@ local items = {
         enabled = true,
         type = 'assembling-machine',
         name = 'assembling-machine',
+        ref_name = 'assembling-machine-3',
         tech = 'automation-3',
         min = 4,
         max = 5
@@ -14,6 +15,7 @@ local items = {
         enabled = true,
         type = 'furnace',
         name = 'electric-furnace',
+        ref_name = 'electric-furnace',
         tech = 'advanced-material-processing-2',
         min = 2,
         max = 3
@@ -22,6 +24,7 @@ local items = {
         enabled = true,
         type = 'assembling-machine',
         name = 'oil-refinery',
+        ref_name = 'oil-refinery',
         tech = 'oil-processing',
         min = 2,
         max = 3
@@ -30,6 +33,7 @@ local items = {
         enabled = true,
         type = 'assembling-machine',
         name = 'chemical-plant',
+        ref_name = 'chemical-plant',
         tech = 'oil-processing',
         min = 2,
         max = 3
@@ -38,6 +42,7 @@ local items = {
         enabled = true,
         type = 'assembling-machine',
         name = 'centrifuge',
+        ref_name = 'centrifuge',
         tech = 'uranium-processing',
         min = 2,
         max = 3
@@ -46,6 +51,7 @@ local items = {
         enabled = true,
         type = 'lab',
         name = 'lab',
+        ref_name = 'lab',
         tech = 'automation',
         min = 2,
         max = 3
@@ -54,7 +60,7 @@ local items = {
 
 -- entity
 local function EE(source, tier)
-    local item = table.deepcopy(data.raw[source.type][source.name])
+    local item = table.deepcopy(data.raw[source.type][source.ref_name])
     
     item.name = source.name .. '-' .. tier
     item.minable.result = source.name .. '-' .. tier
@@ -83,13 +89,7 @@ end
 
 -- item
 local function EI(source, tier)
-    local item
-
-    if source.name == 'assembling-machine' then
-        item = table.deepcopy(data.raw.item['assembling-machine-3'])
-    else
-        item = table.deepcopy(data.raw.item[source.name])
-    end
+    local item = table.deepcopy(data.raw.item[source.ref_name])
 
     item.name = source.name .. '-' .. tier
     item.place_result = source.name .. '-' .. tier
@@ -102,9 +102,7 @@ end
 local function ER(source, tier)
     local na = source.name
 
-    if source.min == tier then
-        na = source.name
-    elseif (tier >= 2) then
+    if tier > 2 then
         na = na .. '-' .. (tier - 1)
     end
 
