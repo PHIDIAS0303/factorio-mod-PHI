@@ -58,6 +58,18 @@ local items = {
     }
 }
 
+if mods['space-exploration'] then
+    items['se-space-assembling-machine'] = {
+        enabled = true,
+        type = 'assembling-machine',
+        name = 'se-space-assembling-machine',
+        ref_name = 'se-space-assembling-machine',
+        tech = 'automation',
+        min = 2,
+        max = 3
+    }
+end
+
 -- entity
 local function EE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])

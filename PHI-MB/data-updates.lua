@@ -26,3 +26,10 @@ data.raw['assembling-machine']['centrifuge-3'].fast_replaceable_group = data.raw
 data.raw['lab']['lab'].fast_replaceable_group = 'lab'
 data.raw['lab']['lab-2'].fast_replaceable_group = data.raw['lab']['lab'].fast_replaceable_group
 data.raw['lab']['lab-3'].fast_replaceable_group = data.raw['lab']['lab-2'].fast_replaceable_group
+
+-- se
+if mods['space-exploration'] then
+    data.raw['assembling-machine']['se-space-assembling-machine'].fast_replaceable_group  = 'space-assembling-machine'
+    data.raw['assembling-machine']['se-space-assembling-machine-2'].fast_replaceable_group = data.raw['assembling-machine']['se-space-assembling-machine'].fast_replaceable_group
+    data.raw['assembling-machine']['se-space-assembling-machine-3'].fast_replaceable_group = data.raw['assembling-machine']['se-space-assembling-machine-2'].fast_replaceable_group
+end

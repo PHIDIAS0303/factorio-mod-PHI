@@ -1,14 +1,15 @@
 {
     "name": "PHI-MB",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "factorio_version": "1.1",
-    "date": "2023-04-13",
+    "date": "2023-04-19",
     "title": "Phidias Megabase",
     "author": "PHIDIAS0303",
     "contributers": "",
     "homepage": "",
     "description": "Additional Machines for Megabase",
     "dependencies": [
-        "base >= 1.1.0"
+        "base >= 1.1.0",
+        "? space-exploration >= 0.6.0"
     ]
 }
