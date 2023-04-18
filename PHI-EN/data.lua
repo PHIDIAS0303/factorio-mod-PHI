@@ -5,6 +5,29 @@ local base_solar_energy = 60
 local graphics_location = '__PHI-EN__/graphics/'
 local items = {'accumulator', 'solar-panel'}
 
+local items = {
+    ['solar-panel'] = {
+        enabled = true,
+        type = 'solar-panel',
+        name = 'solar-panel',
+        tech = 'solar-panel-equipment',
+        min = 2,
+        max = 8,
+        base = 30,
+        graphics_source = nil
+    },
+    ['accumulator'] = {
+        enabled = true,
+        type = 'solar-panel',
+        name = 'solar-panel',
+        tech = 'solar-panel-equipment',
+        min = 2,
+        max = 8,
+        base = 30,
+        graphics_source = nil
+    }
+}
+
 -- entity
 local function EE(source, tier)
     local item = table.deepcopy(data.raw[source][source])
