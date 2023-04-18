@@ -1,14 +1,15 @@
 {
     "name": "PHI-EN",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "factorio_version": "1.1",
-    "date": "2023-04-13",
+    "date": "2023-04-18",
     "title": "Phidias Energy",
     "author": "PHIDIAS0303",
     "contributers": "",
     "homepage": "",
     "description": "Additional Compound Solars, Accumulator",
     "dependencies": [
-        "base >= 1.1.0"
+        "base >= 1.1.0",
+        "? space-exploration >= 0.6.0"
     ]
 }

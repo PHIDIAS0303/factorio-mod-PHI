@@ -87,7 +87,6 @@ local items = {
 if mods['space-exploration'] then
     items['solar-panel'].base = 40
 
-    items['fusion-reactor'].name = 'se-rtg-equipment'
     items['fusion-reactor'].tech = 'se-rtg-equipment'
     items['fusion-reactor'].base = 800
 
@@ -231,7 +230,7 @@ local function EE(source, tier)
     item['shape'] = {width = w, height = h, type = 'full'}
 
     if source.graphics_source == nil then
-        item['sprite'] = {filename = graphics_location .. source.type .. '-equipment-e.png', width = w * 32, height = h * 32, priority = 'medium', hr_version = {filename = graphics_location .. source.type .. '-equipment-eh.png', width = w * 64, height = h *64, priority = 'medium', scale = 0.5}}
+        item['sprite'] = {filename = graphics_location .. source.name .. '-equipment-e.png', width = w * 32, height = h * 32, priority = 'medium', hr_version = {filename = graphics_location .. source.name .. '-equipment-eh.png', width = w * 64, height = h *64, priority = 'medium', scale = 0.5}}
     else
         item['sprite'] = {filename = source.graphics_source, width = w * 32, height = h * 32, priority = 'medium'}
     end
@@ -247,7 +246,7 @@ local function EI(source, tier)
     item.subgroup = 'equipment'
     item.stack_size = 20
     item.default_request_amount = 5
-    item.icons = {{icon = graphics_location .. source.type .. '-equipment-i.png', icon_mipmaps = 4, icon_size = 64}}
+    item.icons = {{icon = graphics_location .. source.name .. '-equipment-i.png', icon_mipmaps = 4, icon_size = 64}}
 
     if (source.type == 'solar-panel') then
         item.order = 'a[energy-source]-a' .. alpha_order[tier - 1] .. '[' .. source.name .. '-mk' .. tier .. ']'
