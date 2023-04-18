@@ -29,7 +29,13 @@ data.raw['lab']['lab-3'].fast_replaceable_group = data.raw['lab']['lab-2'].fast_
 
 -- se
 if mods['space-exploration'] then
+    -- space-assembling-machine
     data.raw['assembling-machine']['se-space-assembling-machine'].fast_replaceable_group  = 'space-assembling-machine'
     data.raw['assembling-machine']['se-space-assembling-machine-2'].fast_replaceable_group = data.raw['assembling-machine']['se-space-assembling-machine'].fast_replaceable_group
     data.raw['assembling-machine']['se-space-assembling-machine-3'].fast_replaceable_group = data.raw['assembling-machine']['se-space-assembling-machine-2'].fast_replaceable_group
+    
+    -- space-manufactory
+    data.raw['assembling-machine']['se-space-manufactory'].fast_replaceable_group  = 'space-manufactory'
+    data.raw['assembling-machine']['se-space-manufactory-2'].fast_replaceable_group = data.raw['assembling-machine']['se-space-manufactory'].fast_replaceable_group
+    data.raw['assembling-machine']['se-space-manufactory-3'].fast_replaceable_group = data.raw['assembling-machine']['se-space-manufactory-2'].fast_replaceable_group
 end

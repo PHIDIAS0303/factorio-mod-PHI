@@ -64,7 +64,17 @@ if mods['space-exploration'] then
         type = 'assembling-machine',
         name = 'se-space-assembling-machine',
         ref_name = 'se-space-assembling-machine',
-        tech = 'automation',
+        tech = 'se-space-assembling-machine',
+        min = 2,
+        max = 3
+    }
+
+    items['se-space-manufactory'] = {
+        enabled = true,
+        type = 'assembling-machine',
+        name = 'se-se-space-manufactory',
+        ref_name = 'se-se-space-manufactory',
+        tech = 'se-se-space-manufactory',
         min = 2,
         max = 3
     }
