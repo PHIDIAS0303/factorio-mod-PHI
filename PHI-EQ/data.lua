@@ -105,7 +105,7 @@ if mods['space-exploration'] then
 
     items['fusion-reactor'].tech = 'se-rtg-equipment'
     items['fusion-reactor'].base_name = 'se-rtg'
-    items['fusion-reactor'].base = 375
+    items['fusion-reactor'].base = 400
 
     items['battery'].tech = 'battery-equipment'
     items['battery'].min = 2
@@ -118,56 +118,6 @@ if mods['space-exploration'] then
     items['personal-roboport'].tech = 'personal-roboport-equipment'
     items['personal-roboport'].min = 2
     items['personal-roboport'].base = 0.5
-else
-    data:extend({
-        {
-            type = 'equipment-grid',
-            name = 'equipment-grid-14x14',
-            width = 14,
-            height = 14,
-            equipment_categories = {'armor'}
-        },
-        {
-            type = 'armor',
-            name = 'power-armor-mk3',
-            icon = '__base__/graphics/icons/power-armor-mk2.png',
-            icon_size = 64, icon_mipmaps = 4,
-            resistances = {{type = 'physical', decrease = 20, percent = 50}, {type = 'acid', decrease = 20, percent = 80},
-            {type = 'explosion', decrease = 70, percent = 60}, {type = 'fire', decrease = 20, percent = 80},
-            {type = 'laser', decrease = 20, percent = 50}, {type = 'electric', decrease = 20, percent = 50},
-            {type = 'impact', decrease = 20, percent = 50}, {type = 'poison', decrease = 20, percent = 50}},
-            subgroup = 'armor',
-            order = 'eb[power-armor-mk3]',
-            stack_size = 1,
-            infinite = true,
-            equipment_grid = 'equipment-grid-14x14',
-            inventory_size_bonus = 40,
-            open_sound = {filename =  '__base__/sound/armor-open.ogg', volume = 1},
-            close_sound = {filename = '__base__/sound/armor-close.ogg', volume = 1}
-        }
-    })
-
-    data:extend({{
-        type = 'recipe',
-        name = 'power-armor-mk3',
-        energy_required = 5,
-        enabled = 'false',
-        ingredients = {{'power-armor-mk2', 2}},
-        result = 'power-armor-mk3'
-    }})
-
-    for _, animation in ipairs(data.raw['character']['character']['animations']) do
-        if animation.armors then
-            for _, armor in ipairs(animation.armors) do
-                if armor == 'power-armor-mk2' then
-                    animation.armors[#animation.armors + 1] = 'power-armor-mk3'
-                    break
-                end
-            end
-        end
-    end
-    
-    table.insert(data.raw.technology['power-armor-mk2'].effects, {type='unlock-recipe', recipe='power-armor-mk3'})
 end
 
 -- equipment
@@ -205,7 +155,7 @@ local function EE(source, tier)
         w = 2
         h = 2
         item['type'] = 'energy-shield-equipment'
-        item['energy_source'] = {type = 'electric', usage_priority = 'primary-input', input_flow_limit = (1000 * (2 ^ (tier - 1))) .. 'kW', buffer_capacity = (480 * (2 ^ (tier - 1))) .. 'kJ'}
+        item['energy_source'] = {type = 'electric', usage_priority = 'primary-input', input_flow_limit = (source.base * 4 * (2 ^ (tier - 1))) .. 'kW', buffer_capacity = (source.base * 2 * (2 ^ (tier - 1))) .. 'kJ'}
         item['max_shield_value'] = (source.base * (2 ^ (tier - 2)))
         item['energy_per_shield'] = '80kJ'
     elseif (source.type == 'personal-roboport') then
@@ -314,6 +264,56 @@ end
 local function ET(source, tier)
     table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.name .. '-mk' .. tier .. '-equipment'})
 end
+
+data:extend({
+    {
+        type = 'equipment-grid',
+        name = 'equipment-grid-14x14',
+        width = 14,
+        height = 14,
+        equipment_categories = {'armor'}
+    },
+    {
+        type = 'armor',
+        name = 'power-armor-mk3',
+        icon = '__base__/graphics/icons/power-armor-mk2.png',
+        icon_size = 64, icon_mipmaps = 4,
+        resistances = {{type = 'physical', decrease = 20, percent = 50}, {type = 'acid', decrease = 20, percent = 80},
+        {type = 'explosion', decrease = 70, percent = 60}, {type = 'fire', decrease = 20, percent = 80},
+        {type = 'laser', decrease = 20, percent = 50}, {type = 'electric', decrease = 20, percent = 50},
+        {type = 'impact', decrease = 20, percent = 50}, {type = 'poison', decrease = 20, percent = 50}},
+        subgroup = 'armor',
+        order = 'eb[power-armor-mk3]',
+        stack_size = 1,
+        infinite = true,
+        equipment_grid = 'equipment-grid-14x14',
+        inventory_size_bonus = 40,
+        open_sound = {filename =  '__base__/sound/armor-open.ogg', volume = 1},
+        close_sound = {filename = '__base__/sound/armor-close.ogg', volume = 1}
+    }
+})
+
+data:extend({{
+    type = 'recipe',
+    name = 'power-armor-mk3',
+    energy_required = 5,
+    enabled = 'false',
+    ingredients = {{'power-armor-mk2', 2}},
+    result = 'power-armor-mk3'
+}})
+
+for _, animation in ipairs(data.raw['character']['character']['animations']) do
+    if animation.armors then
+        for _, armor in ipairs(animation.armors) do
+            if armor == 'power-armor-mk2' then
+                animation.armors[#animation.armors + 1] = 'power-armor-mk3'
+                break
+            end
+        end
+    end
+end
+
+table.insert(data.raw.technology['power-armor-mk2'].effects, {type='unlock-recipe', recipe='power-armor-mk3'})
 
 for _, v in pairs(items) do
     if v.enabled then
