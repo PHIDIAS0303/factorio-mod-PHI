@@ -36,7 +36,7 @@ local items = {
     },
     ['centrifuge'] = {
         enabled = true,
-        type = 'electric-furnace',
+        type = 'assembling-machine',
         name = 'centrifuge',
         tech = 'uranium-processing',
         min = 2,
