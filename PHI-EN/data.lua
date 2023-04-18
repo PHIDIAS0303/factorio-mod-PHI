@@ -37,7 +37,7 @@ local function EE(source, tier)
     item.icon_size = 64
     item.icon_mipmaps = 4
 
-    if (source == 'accumulator') then
+    if (source.type == 'accumulator') then
         item.energy_source.buffer_capacity = (source.base * 4 ^ (tier - 1)) .. 'MJ'
         item.energy_source.input_flow_limit = (source.base * 60 * (4 ^ (tier - 1))) .. 'kW'
         item.energy_source.output_flow_limit = (source.base * 60 * (4 ^ (tier - 1))) .. 'kW'
