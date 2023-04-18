@@ -62,7 +62,7 @@ end
 
 -- item
 local function EI(source, tier)
-    local item = table.deepcopy(data.raw.item[source])
+    local item = table.deepcopy(data.raw.item[source.type])
     item.name = source.name .. '-mk' .. tier
     item.place_result = source.name .. '-mk' .. tier
     item.max_health = 200 * (2 ^ (tier - 1))
