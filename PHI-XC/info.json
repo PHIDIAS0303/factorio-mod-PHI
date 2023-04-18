@@ -1,0 +1,14 @@
+{
+    "name": "PHI-XC",
+    "version": "1.0.0",
+    "factorio_version": "1.1",
+    "date": "2023-04-19",
+    "title": "Phidias Clock",
+    "author": "PHIDIAS0303",
+    "contributers": "",
+    "homepage": "",
+    "description": "In game playtime",
+    "dependencies": [
+        "base >= 1.1.0"
+    ]
+}
