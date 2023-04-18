@@ -6,6 +6,7 @@ local items = {
         enabled = true,
         type = 'solar-panel',
         name = 'solar-panel',
+        base_name = 'solar-panel',
         tech = 'solar-panel-equipment',
         min = 2,
         max = 8,
@@ -17,6 +18,7 @@ local items = {
         enabled = true,
         type = 'fusion-reactor',
         name = 'fusion-reactor',
+        base_name = 'fusion-reactor',
         tech = 'fusion-reactor-equipment',
         min = 2,
         max = 8,
@@ -28,6 +30,7 @@ local items = {
         enabled = true,
         type = 'battery',
         name = 'battery',
+        base_name = 'battery',
         tech = 'battery-mk2-equipment',
         min = 3,
         max = 8,
@@ -39,6 +42,7 @@ local items = {
         enabled = true,
         type = 'personal-laser-defense',
         name = 'personal-laser-defense',
+        base_name = 'personal-laser-defense',
         tech = 'personal-laser-defense-equipment',
         min = 2,
         max = 8,
@@ -50,6 +54,7 @@ local items = {
         enabled = true,
         type = 'energy-shield',
         name = 'energy-shield',
+        base_name = 'energy-shield',
         tech = 'energy-shield-mk2-equipment',
         min = 3,
         max = 8,
@@ -61,6 +66,7 @@ local items = {
         enabled = true,
         type = 'personal-roboport',
         name = 'personal-roboport',
+        base_name = 'personal-roboport',
         tech = 'personal-roboport-mk2-equipment',
         min = 3,
         max = 8,
@@ -72,6 +78,7 @@ local items = {
         enabled = true,
         type = 'night-vision',
         name = 'night-vision',
+        base_name = 'night-vision',
         tech = 'night-vision-equipment',
         min = 2,
         max = 2,
@@ -83,6 +90,7 @@ local items = {
         enabled = true,
         type = 'exoskeleton',
         name = 'exoskeleton',
+        base_name = 'exoskeleton',
         tech = 'exoskeleton-equipment',
         min = 2,
         max = 2,
@@ -93,10 +101,11 @@ local items = {
 }
 
 if mods['space-exploration'] then
-    items['solar-panel'].base = 40
+    items['solar-panel'].base = 30
 
     items['fusion-reactor'].tech = 'se-rtg-equipment'
-    items['fusion-reactor'].base = 800
+    items['fusion-reactor'].base_name = 'se-rtg'
+    items['fusion-reactor'].base = 375
 
     items['battery'].tech = 'battery-equipment'
     items['battery'].min = 2
@@ -104,11 +113,11 @@ if mods['space-exploration'] then
 
     items['energy-shield'].tech = 'energy-shield-equipment'
     items['energy-shield'].min = 2
-    items['energy-shield'].base = 250
+    items['energy-shield'].base = 200
 
     items['personal-roboport'].tech = 'personal-roboport-equipment'
     items['personal-roboport'].min = 2
-    items['personal-roboport'].base = 0.25
+    items['personal-roboport'].base = 0.5
 else
     data:extend({
         {
@@ -283,7 +292,9 @@ end
 local function ER(source, tier)
     na = source.name
 
-    if (tier == 2) then
+    if source.min == tier then
+        na = source.base_name .. '-equipment'
+    elseif (tier == 2) then
         na = source.name .. '-equipment'
     elseif (tier >= 3) then
         na = source.name .. '-mk' .. (tier - 1) .. '-equipment'
