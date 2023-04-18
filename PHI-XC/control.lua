@@ -1,4 +1,8 @@
 local function clock_display(sec)
+	if sec == nil then
+		return 0
+	end
+	
 	local sym = ''
 
 	if sec < 0 then
