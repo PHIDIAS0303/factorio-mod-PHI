@@ -64,7 +64,7 @@ if mods['space-exploration'] then
         type = 'assembling-machine',
         name = 'se-space-assembling-machine',
         ref_name = 'se-space-assembling-machine',
-        tech = 'se-space-assembling-machine',
+        tech = 'automation-3',
         min = 2,
         max = 3
     }
@@ -74,7 +74,7 @@ if mods['space-exploration'] then
         type = 'assembling-machine',
         name = 'se-space-manufactory',
         ref_name = 'se-space-manufactory',
-        tech = 'se-space-manufactory',
+        tech = 'automation-3',
         min = 2,
         max = 3
     }
