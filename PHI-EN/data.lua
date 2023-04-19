@@ -20,9 +20,12 @@ local items = {
     }
 }
 
-if mods['space-exploration'] then
+if mods['Krastorio2'] then
     items['solar-panel'].base = 100
     items['accumulator'].base = 10
+elseif mods['space-exploration'] then
+    items['solar-panel'].base = 60
+    items['accumulator'].base = 5
 end
 
 -- entity
@@ -123,12 +126,13 @@ local function ET(tier)
         },
         prerequisites = prereq,
         unit = {
-            count = 100 * (2 * (tier - 1)),
+            count = 100,
+            -- count = 50 * tier,
             ingredients = {
-                {'automation-science-pack', 1},
-                {'logistic-science-pack', 1}
+                {'automation-science-pack', 2},
+                {'logistic-science-pack', 2}
             },
-            time = 60
+            time = 120
         },
         order = 'a-h-' .. alpha_order[tier + 1]
     }})
