@@ -216,26 +216,6 @@ local function EI(source, tier)
     item.stack_size = 20
     item.default_request_amount = 5
     item.icons = {{icon = graphics_location .. source.graphics_name .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
-
-    --[[
-    if (source.type == 'solar-panel') then
-        item.order = 'a[energy-source]-a' .. alpha_order[tier - 1] .. '[' .. source.name .. '-mk' .. tier .. ']'
-    elseif (source.type == 'battery') then
-        item.order = 'b[battery]-b' .. alpha_order[tier] .. '[' .. source.name .. 'equipment-mk' .. tier .. ']'
-    elseif (source.type == 'fusion-reactor') then
-        item.order = 'a[energy-source]-b' .. alpha_order[tier - 1] .. '[' .. source.name .. '-mk' .. tier .. ']'
-    elseif (source.type == 'personal-laser-defense') then
-        item.order = 'd[active-defense]-b' .. alpha_order[tier - 1] .. '[' .. source.name .. '-mk' .. tier .. ']'
-    elseif (source.type == 'energy-shield') then
-        item.order = 'b[shield]-c' .. alpha_order[tier - 1] .. '[' .. source.name .. '-equipment-mk' .. tier .. ']'
-    elseif (source.type == 'personal-roboport') then
-        item.order = 'e[robotics]-b' .. alpha_order[tier - 1] .. '[' .. source.name .. '-mk' .. tier .. '-equipment]'
-    elseif (source.type == 'night-vision') then
-        item.order = 'f[night-vision]-a' .. alpha_order[tier - 1] .. '[' .. source.name .. '-mk' .. tier .. ']'
-    elseif (source.type == 'exoskeleton') then
-        item.order = 'd[exoskeleton]-a' .. alpha_order[tier - 1] .. '[' .. source.name .. 'equipment-mk' .. tier .. ']'
-    end
-    ]]
     item.order = item.order .. tier
     data:extend({item})
 end

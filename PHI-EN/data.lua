@@ -73,13 +73,7 @@ local function EI(source, tier)
     item.stack_size = 50
     item.default_request_amount = 50
     item.icons = {{icon = graphics_location .. source.name .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
-
-    if (source.type == 'accumulator') then
-        item.order = 'd[' .. source.type .. ']-a' .. tier .. '[' .. source.name .. '-mk' .. tier .. ']'
-    else
-        item.order = 'e[' .. source.type .. ']-a' .. tier .. '[' .. source.name .. '-mk' .. tier .. ']'
-    end
-
+    item.order = item.order .. tier
     data:extend({item})
 end
 
