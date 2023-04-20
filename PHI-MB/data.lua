@@ -68,6 +68,16 @@ if mods['aai-industry'] then
         min = 2,
         max = 3
     }
+
+    items['fuel-processor'] = {
+        enabled = true,
+        type = 'assembling-machine',
+        name = 'fuel-processor',
+        ref_name = 'fuel-processor',
+        tech = 'automation',
+        min = 2,
+        max = 3
+    }
 end
 
 if mods['space-exploration'] then

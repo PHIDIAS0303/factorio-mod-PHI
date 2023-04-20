@@ -33,6 +33,10 @@ if mods['aai-industry'] then
     data.raw['assembling-machine']['industrial-furnace'].fast_replaceable_group = 'industrial-furnace'
     data.raw['assembling-machine']['industrial-furnace-2'].fast_replaceable_group = data.raw['assembling-machine']['industrial-furnace'].fast_replaceable_group
     data.raw['assembling-machine']['industrial-furnace-3'].fast_replaceable_group = data.raw['assembling-machine']['industrial-furnace-2'].fast_replaceable_group
+
+    data.raw['assembling-machine']['fuel-processor'].fast_replaceable_group = 'fuel-processor'
+    data.raw['assembling-machine']['fuel-processor-2'].fast_replaceable_group = data.raw['assembling-machine']['fuel-processor'].fast_replaceable_group
+    data.raw['assembling-machine']['fuel-processor-3'].fast_replaceable_group = data.raw['assembling-machine']['fuel-processor-2'].fast_replaceable_group
 end
 
 -- se
