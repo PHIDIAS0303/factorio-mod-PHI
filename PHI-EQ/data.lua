@@ -217,6 +217,7 @@ local function EI(source, tier)
     item.default_request_amount = 5
     item.icons = {{icon = graphics_location .. source.graphics_name .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
 
+    --[[
     if (source.type == 'solar-panel') then
         item.order = 'a[energy-source]-a' .. alpha_order[tier - 1] .. '[' .. source.name .. '-mk' .. tier .. ']'
     elseif (source.type == 'battery') then
@@ -234,7 +235,8 @@ local function EI(source, tier)
     elseif (source.type == 'exoskeleton') then
         item.order = 'd[exoskeleton]-a' .. alpha_order[tier - 1] .. '[' .. source.name .. 'equipment-mk' .. tier .. ']'
     end
-
+    ]]
+    item.order = item.order .. tier
     data:extend({item})
 end
 
