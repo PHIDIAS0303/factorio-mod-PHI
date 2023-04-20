@@ -58,6 +58,18 @@ local items = {
     }
 }
 
+if mods['aai-industry'] then
+    items['industrial-furnace'] = {
+        enabled = true,
+        type = 'assembling-machine',
+        name = 'industrial-furnace',
+        ref_name = 'industrial-furnace',
+        tech = 'automation-3',
+        min = 2,
+        max = 3
+    }
+end
+
 if mods['space-exploration'] then
     items['se-space-assembling-machine'] = {
         enabled = true,
@@ -74,6 +86,16 @@ if mods['space-exploration'] then
         type = 'assembling-machine',
         name = 'se-space-manufactory',
         ref_name = 'se-space-manufactory',
+        tech = 'automation-3',
+        min = 2,
+        max = 3
+    }
+
+    items['se-casting-machine'] = {
+        enabled = true,
+        type = 'assembling-machine',
+        name = 'se-casting-machine',
+        ref_name = 'se-casting-machine',
         tech = 'automation-3',
         min = 2,
         max = 3
