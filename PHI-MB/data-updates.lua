@@ -55,4 +55,9 @@ if mods['space-exploration'] then
     data.raw['assembling-machine']['se-casting-machine'].fast_replaceable_group  = 'casting-machine'
     data.raw['assembling-machine']['se-casting-machine-2'].fast_replaceable_group = data.raw['assembling-machine']['se-casting-machine'].fast_replaceable_group
     data.raw['assembling-machine']['se-casting-machine-3'].fast_replaceable_group = data.raw['assembling-machine']['se-casting-machine-2'].fast_replaceable_group
+
+    -- pulveriser
+    data.raw['assembling-machine']['se-pulveriser'].fast_replaceable_group  = 'pulveriser'
+    data.raw['assembling-machine']['se-pulveriser-2'].fast_replaceable_group = data.raw['assembling-machine']['se-pulveriser'].fast_replaceable_group
+    data.raw['assembling-machine']['se-pulveriser-3'].fast_replaceable_group = data.raw['assembling-machine']['se-pulveriser-2'].fast_replaceable_group
 end
