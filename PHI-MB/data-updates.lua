@@ -27,6 +27,14 @@ data.raw['lab']['lab'].fast_replaceable_group = 'lab'
 data.raw['lab']['lab-2'].fast_replaceable_group = data.raw['lab']['lab'].fast_replaceable_group
 data.raw['lab']['lab-3'].fast_replaceable_group = data.raw['lab']['lab-2'].fast_replaceable_group
 
+-- aai
+if mods['aai-industry'] then
+    -- industrial-furnace
+    data.raw['furnace']['industrial-furnace'].fast_replaceable_group = 'industrial-furnace'
+    data.raw['furnace']['industrial-furnace-2'].fast_replaceable_group = data.raw['furnace']['industrial-furnace'].fast_replaceable_group
+    data.raw['furnace']['industrial-furnace-3'].fast_replaceable_group = data.raw['furnace']['industrial-furnace-2'].fast_replaceable_group
+end
+
 -- se
 if mods['space-exploration'] then
     -- space-assembling-machine
@@ -38,4 +46,9 @@ if mods['space-exploration'] then
     data.raw['assembling-machine']['se-space-manufactory'].fast_replaceable_group  = 'space-manufactory'
     data.raw['assembling-machine']['se-space-manufactory-2'].fast_replaceable_group = data.raw['assembling-machine']['se-space-manufactory'].fast_replaceable_group
     data.raw['assembling-machine']['se-space-manufactory-3'].fast_replaceable_group = data.raw['assembling-machine']['se-space-manufactory-2'].fast_replaceable_group
+
+    -- casting machine
+    data.raw['assembling-machine']['se-casting-machine'].fast_replaceable_group  = 'casting-machine'
+    data.raw['assembling-machine']['se-casting-machine-2'].fast_replaceable_group = data.raw['assembling-machine']['se-casting-machine'].fast_replaceable_group
+    data.raw['assembling-machine']['se-casting-machine-3'].fast_replaceable_group = data.raw['assembling-machine']['se-casting-machine-2'].fast_replaceable_group
 end
