@@ -30,9 +30,9 @@ data.raw['lab']['lab-3'].fast_replaceable_group = data.raw['lab']['lab-2'].fast_
 -- aai
 if mods['aai-industry'] then
     -- industrial-furnace
-    data.raw['furnace']['industrial-furnace'].fast_replaceable_group = 'industrial-furnace'
-    data.raw['furnace']['industrial-furnace-2'].fast_replaceable_group = data.raw['furnace']['industrial-furnace'].fast_replaceable_group
-    data.raw['furnace']['industrial-furnace-3'].fast_replaceable_group = data.raw['furnace']['industrial-furnace-2'].fast_replaceable_group
+    data.raw['assembling-machine']['industrial-furnace'].fast_replaceable_group = 'industrial-furnace'
+    data.raw['assembling-machine']['industrial-furnace-2'].fast_replaceable_group = data.raw['assembling-machine']['industrial-furnace'].fast_replaceable_group
+    data.raw['assembling-machine']['industrial-furnace-3'].fast_replaceable_group = data.raw['assembling-machine']['industrial-furnace-2'].fast_replaceable_group
 end
 
 -- se
