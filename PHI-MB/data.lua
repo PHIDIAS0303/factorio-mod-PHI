@@ -120,6 +120,26 @@ if mods['space-exploration'] then
         min = 2,
         max = 3
     }
+
+    items['se-lifesupport-facility'] = {
+        enabled = true,
+        type = 'assembling-machine',
+        name = 'se-lifesupport-facility',
+        ref_name = 'se-lifesupport-facility',
+        tech = 'automation-2',
+        min = 2,
+        max = 3
+    }
+
+    items['se-fuel-refinery'] = {
+        enabled = true,
+        type = 'assembling-machine',
+        name = 'se-fuel-refinery',
+        ref_name = 'se-fuel-refinery',
+        tech = 'automation',
+        min = 2,
+        max = 3
+    }
 end
 
 -- entity
