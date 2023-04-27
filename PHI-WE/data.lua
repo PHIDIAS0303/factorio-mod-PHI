@@ -6,7 +6,28 @@ local items = {
         ref_name = 'laser-turret',
         tech = 'laser-turret',
         min = 2,
-        max = 3
+        max = 3,
+        range = 24
+    },
+    ['gun-turret'] = {
+        enabled = true,
+        type = 'ammo-turret',
+        name = 'gun-turret',
+        ref_name = 'gun-turret',
+        tech = 'gun-turret',
+        min = 2,
+        max = 3,
+        range = 18
+    },
+    ['flamethrower-turret'] = {
+        enabled = true,
+        type = 'fluid-turret',
+        name = 'flamethrower-turret',
+        ref_name = 'flamethrower-turret',
+        tech = 'flamethrower',
+        min = 2,
+        max = 3,
+        range = 30
     }
 }
 
@@ -17,12 +38,19 @@ local function EE(source, tier)
     item.name = source.name .. '-' .. tier
     item.minable.result = source.name .. '-' .. tier
     item.max_health = item.max_health * tier
-    item.attack_parameters.damage_modifier = 2 * (2 ^ (tier - source.min + 1))
+    item.attack_parameters.damage_modifier = (2 ^ (tier - 1))
+    item.attack_parameters.range = source.range + (2 * (tier - 1))
+    item.call_for_help_radius = 40 + (2 * (tier - 1))
 
     if source.type == 'electric-turret' then
-        item.energy_source.input_flow_limit = tonumber(string.match(item.energy_source.input_flow_limit, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
-        item.energy_source.buffer_capacity = tonumber(string.match(item.energy_source.buffer_capacity, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
+        item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * 2
         item.glow_light_intensity = 1
+        item.attack_parameters.ammo_type.action.action_delivery.max_length = source.range + (2 * (tier - 1))
+        item.attack_parameters.ammo_type.energy_consumption = 800 * (2 ^ (tier - 1)) .. 'kJ'
+        item.energy_source.input_flow_limit = 9600 * (2 ^ (tier - 1)) .. 'kW'
+        item.energy_source.buffer_capacity = 12816 * (2 ^ (tier - 1)) .. 'kJ'
+    elseif source.type == 'fluid-turret' then
+        item.prepare_range = 35 + (2 * (tier - 1))
     end
 
     -- item.animation.layers[1].filename = graphics_location .. source .. '-e.png'

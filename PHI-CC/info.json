@@ -1,13 +1,13 @@
 {
-    "name": "PHI-WE",
-    "version": "1.0.1",
+    "name": "PHI-CC",
+    "version": "1.0.0",
     "factorio_version": "1.1",
-    "date": "2023-04-27",
-    "title": "Phidias Warfare",
+    "date": "2023-04-25",
+    "title": "Phidias Circuit Combinator",
     "author": "PHIDIAS0303",
     "contributers": "",
     "homepage": "",
-    "description": "Warfare",
+    "description": "",
     "dependencies": [
         "base >= 1.1.0"
     ]
