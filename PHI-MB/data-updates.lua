@@ -7,11 +7,6 @@ data.raw['furnace']['electric-furnace'].fast_replaceable_group = 'electric-furna
 data.raw['furnace']['electric-furnace-2'].fast_replaceable_group = data.raw['furnace']['electric-furnace'].fast_replaceable_group
 data.raw['furnace']['electric-furnace-3'].fast_replaceable_group = data.raw['furnace']['electric-furnace-2'].fast_replaceable_group
 
-if mods['space-exploration'] then
-    data.raw['furnace']['electric-furnace-2'].crafting_categories = data.raw['furnace']['electric-furnace'].crafting_categories
-    data.raw['furnace']['electric-furnace-3'].crafting_categories = data.raw['furnace']['electric-furnace'].crafting_categories
-end
-
 -- chemical plant
 data.raw['assembling-machine']['chemical-plant'].fast_replaceable_group = 'chemical-plant'
 data.raw['assembling-machine']['chemical-plant-2'].fast_replaceable_group = data.raw['assembling-machine']['chemical-plant'].fast_replaceable_group
@@ -47,6 +42,10 @@ end
 
 -- se
 if mods['space-exploration'] then
+    -- electric furnace
+    data.raw['furnace']['electric-furnace-2'].crafting_categories = data.raw['furnace']['electric-furnace'].crafting_categories
+    data.raw['furnace']['electric-furnace-3'].crafting_categories = data.raw['furnace']['electric-furnace'].crafting_categories
+
     -- space assembling machine
     data.raw['assembling-machine']['se-space-assembling-machine'].fast_replaceable_group  = 'space-assembling-machine'
     data.raw['assembling-machine']['se-space-assembling-machine-2'].fast_replaceable_group = data.raw['assembling-machine']['se-space-assembling-machine'].fast_replaceable_group
