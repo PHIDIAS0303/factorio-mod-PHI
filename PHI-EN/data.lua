@@ -97,10 +97,11 @@ end
 
 -- technology
 local function ET(tier)
+    local prereq
     if (tier == 2) then
-        local prereq = {'solar-energy', 'advanced-electronics', 'electric-energy-accumulators'}
+        prereq = {'solar-energy', 'advanced-electronics', 'electric-energy-accumulators'}
     else
-        local prereq = {'compound-energy-' .. (tier - 2)}
+        prereq = {'compound-energy-' .. (tier - 2)}
     end
 
     data:extend({{

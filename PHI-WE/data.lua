@@ -46,7 +46,7 @@ local function EE(source, tier)
         item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * 2
         item.glow_light_intensity = 1
         item.attack_parameters.ammo_type.action.action_delivery.max_length = source.range + (2 * (tier - 1))
-        item.attack_parameters.ammo_type.energy_consumption = 800 * (2 ^ (tier - 1)) .. 'kJ'
+        -- item.attack_parameters.ammo_type.energy_consumption = 800 * (2 ^ (tier - 1)) .. 'kJ'
         item.energy_source.input_flow_limit = 9600 * (2 ^ (tier - 1)) .. 'kW'
         item.energy_source.buffer_capacity = 12816 * (2 ^ (tier - 1)) .. 'kJ'
     elseif source.type == 'fluid-turret' then
