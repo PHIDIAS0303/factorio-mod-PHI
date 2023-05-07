@@ -394,7 +394,7 @@ for i=1, #recipe_list, 1 do
                     item.energy_required = recipe_multiplier[j] / 2
                 end
             end
-            
+        
             item.name = item.name .. '-s' .. j
 
             data:extend({item})
@@ -403,18 +403,24 @@ for i=1, #recipe_list, 1 do
     end
 end
 
+items = {
+    ['electric-filter-furnace'] = {
+        enabled = true,
+        type = 'furnace',
+        new_type = 'assembling-machine',
+        name = 'electric-filter-furnace',
+        ref_name = 'electric-furnace',
+        tech = 'advanced-material-processing-2'
+    }
+}
+
 -- entity
 local function EE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
 
     item.name = source.name .. '-' .. tier
     item.minable.result = source.name .. '-' .. tier
-    item.max_health = item.max_health * (2 ^ (tier - source.min + 1))
 
-    item.crafting_speed = item.crafting_speed * (2 ^ (tier - source.min + 1))
-    item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (2 ^ (tier - source.min + 1))
-
-    item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
     -- item.animation.layers[1].filename = graphics_location .. source .. '-e.png'
     -- item.animation.layers[1].hr_version.filename = graphics_location .. source ..'-eh.png'
     -- item.icon = graphics_location .. source .. '-i.png'
@@ -441,47 +447,26 @@ end
 
 -- recipe
 local function ER(source, tier)
-    local na = source.name
-
-    if tier > 2 then
-        na = na .. '-' .. (tier - 1)
-    end
-
     data:extend({{
         type = 'recipe',
         name = source.name .. '-' .. tier,
         energy_required = 2,
         enabled = false,
-        ingredients = {{na, 2}},
+        ingredients = {{'steel-plate', 10}, {'advanced-circuit', 5}, {'stone-brick', 10}},
         result = source.name .. '-' .. tier,
     }})
 end
 
 -- tech
 local function ET(source, tier)
-    table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.ref_name .. '-' .. tier})
+    table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
 end
-
-items = {
-    ['electric-filter-furnace'] = {
-        enabled = true,
-        type = 'furnace',
-        new_type = 'assembling-machine',
-        name = 'electric-filter-furnace',
-        ref_name = 'electric-furnace',
-        tech = 'advanced-material-processing-2',
-        min = 1,
-        max = 1
-    }
-}
 
 for _, v in pairs(items) do
     if v.enabled then
-        for j=v.min, v.max, 1 do
-            EE(v, j)
-            EI(v, j)
-            ER(v, j)
-            ET(v, j)
-        end
+        EE(v, 1)
+        EI(v, 1)
+        ER(v, 1)
+        ET(v, 1)
     end
 end
