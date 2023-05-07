@@ -1,13 +1,13 @@
 {
-    "name": "PHI-RS",
+    "name": "PHI-PB",
     "version": "1.0.2",
     "factorio_version": "1.1",
-    "date": "2023-05-07",
-    "title": "Phidias Recipe Scaling",
+    "date": "2023-05-06",
+    "title": "Phidias Player Bonus",
     "author": "PHIDIAS0303",
     "contributers": "",
     "homepage": "",
-    "description": "Recipe Scaling",
+    "description": "",
     "dependencies": [
         "base >= 1.1.0"
     ]

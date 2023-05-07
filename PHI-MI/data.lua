@@ -45,8 +45,11 @@ data.raw['module']['effectivity-module'].effect = {consumption = {bonus = -0.5},
 data.raw['module']['effectivity-module-2'].effect = {consumption = {bonus = -1.0}, pollution = {bonus = -0.15}}
 data.raw['module']['effectivity-module-3'].effect = {consumption = {bonus = -1.5}, pollution = {bonus = -0.2}}
 
-data.raw['pipe']['pipe'].fluid_box.base_area = 4
-data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.base_area = 4
+data.raw['arithmetic-combinator']['arithmetic-combinator'].energy_source.usage_priority = 'primary-input'
+data.raw['decider-combinator']['decider-combinator'].energy_source.usage_priority = 'primary-input'
+
+data.raw['pipe']['pipe'].fluid_box.height = 4
+data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.height = 4
 data.raw['pump']['pump'].fluid_box.height = 16
 data.raw['pump']['pump'].pumping_speed = 800
 data.raw['storage-tank']['storage-tank'].fluid_box.base_area = 500

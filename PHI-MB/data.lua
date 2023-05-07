@@ -27,7 +27,11 @@ local function EE(source, tier)
     if (tier <= source.max - 1) then
         item.next_upgrade = source.name .. '-' .. (tier + 1)
     end
-    
+
+    if (source.new_type ~= nil) then
+        item.type = source.new_type
+    end
+
     data:extend({item})
 end
 
@@ -62,7 +66,7 @@ end
 
 -- tech
 local function ET(source, tier)
-    table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
+    table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.ref_name .. '-' .. tier})
 end
 
 for _, v in pairs(items) do
