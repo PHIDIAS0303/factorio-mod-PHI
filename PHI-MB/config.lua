@@ -63,7 +63,7 @@ local items = {
 
 if mods['PHI-RS'] then
     items['electric-filter-furnace'] = {
-        enabled = false,
+        enabled = true,
         stage = 2,
         type = 'assembling-machine',
         name = 'electric-filter-furnace',

@@ -109,15 +109,14 @@ data.raw['lab']['lab'].fast_replaceable_group = 'lab'
 data.raw['lab']['lab-2'].fast_replaceable_group = data.raw['lab']['lab'].fast_replaceable_group
 data.raw['lab']['lab-3'].fast_replaceable_group = data.raw['lab']['lab-2'].fast_replaceable_group
 
---[[
 if mods['PHI-RS'] then
-    data.raw['assembling-machine']['electric-filter-furnace-2'].fast_replaceable_group = data.raw['assembling-machine']['electric-filter-furnace-1'].fast_replaceable_group
+    data.raw['assembling-machine']['electric-filter-furnace-2'].fast_replaceable_group = data.raw['assembling-machine']['electric-filter-furnace'].fast_replaceable_group
     data.raw['assembling-machine']['electric-filter-furnace-3'].fast_replaceable_group = data.raw['assembling-machine']['electric-filter-furnace-2'].fast_replaceable_group
 
     data.raw['assembling-machine']['electric-filter-furnace-2'].crafting_categories = data.raw['furnace']['electric-furnace'].crafting_categories
     data.raw['assembling-machine']['electric-filter-furnace-3'].crafting_categories = data.raw['furnace']['electric-furnace'].crafting_categories
 end
-]]
+
 -- aai
 if mods['aai-industry'] then
     -- industrial furnace

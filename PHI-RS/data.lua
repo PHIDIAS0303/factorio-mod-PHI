@@ -415,11 +415,11 @@ items = {
 }
 
 -- entity
-local function EE(source, tier)
+local function EE(source)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
 
-    item.name = source.name .. '-' .. tier
-    item.minable.result = source.name .. '-' .. tier
+    item.name = source.name
+    item.minable.result = source.name
 
     -- item.animation.layers[1].filename = graphics_location .. source .. '-e.png'
     -- item.animation.layers[1].hr_version.filename = graphics_location .. source ..'-eh.png'
@@ -435,38 +435,38 @@ local function EE(source, tier)
 end
 
 -- item
-local function EI(source, tier)
+local function EI(source)
     local item = table.deepcopy(data.raw.item[source.ref_name])
 
-    item.name = source.name .. '-' .. tier
-    item.place_result = source.name .. '-' .. tier
+    item.name = source.name
+    item.place_result = source.ref_name
     -- item.icons = {{icon = graphics_location .. source .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
-    item.order = item.order .. tier
+    item.order = item.order .. 'B'
     data:extend({item})
 end
 
 -- recipe
-local function ER(source, tier)
+local function ER(source)
     data:extend({{
         type = 'recipe',
-        name = source.name .. '-' .. tier,
+        name = source.name,
         energy_required = 2,
         enabled = false,
         ingredients = {{'steel-plate', 10}, {'advanced-circuit', 5}, {'stone-brick', 10}},
-        result = source.name .. '-' .. tier,
+        result = source.name,
     }})
 end
 
 -- tech
-local function ET(source, tier)
-    table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
+local function ET(source)
+    table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.name})
 end
 
 for _, v in pairs(items) do
     if v.enabled then
-        EE(v, 1)
-        EI(v, 1)
-        ER(v, 1)
-        ET(v, 1)
+        EE(v)
+        EI(v)
+        ER(v)
+        ET(v)
     end
 end
