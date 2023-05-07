@@ -161,6 +161,7 @@ for i=1, #ups_chests, 1 do
 
     entity.inventory_size = 1
     entity.name = 'ups-' .. ups_chests[i]
+    entity.minable.result = 'ups-' .. ups_chests[i]
     data:extend({entity})
 
     data:extend({{
