@@ -5,7 +5,7 @@ local items = require 'config'
 -- entity
 local function EE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
-    
+
     item.name = source.name .. '-' .. tier
     item.minable.result = source.name .. '-' .. tier
     item.max_health = item.max_health * (2 ^ (tier - source.min + 1))
@@ -66,16 +66,18 @@ end
 
 -- tech
 local function ET(source, tier)
-    table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.ref_name .. '-' .. tier})
+    table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
 end
 
 for _, v in pairs(items) do
     if v.enabled then
-        for j=v.min, v.max, 1 do
-            EE(v, j)
-            EI(v, j)
-            ER(v, j)
-            ET(v, j)
+        if v.stage == 1 then
+            for j=v.min, v.max, 1 do
+                EE(v, j)
+                EI(v, j)
+                ER(v, j)
+                ET(v, j)
+            end
         end
     end
 end
