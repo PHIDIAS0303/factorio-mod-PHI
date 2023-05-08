@@ -21,13 +21,11 @@ local function EE(source, tier)
         for k, _ in pairs(item.fluid_boxes) do
             if item.fluid_boxes[k] ~= false and item.fluid_boxes[k] ~= true then
                 if item.fluid_boxes[k].production_type ~= nil then
-                    if item.fluid_boxes[k].base_area == nil then
-                        item.fluid_boxes[k].base_area = 20
-                    else
-                        item.fluid_boxes[k].base_area = item.fluid_boxes[k].base_area * 2
+                    item.fluid_boxes[k].height = 4
+
+                    if item.fluid_boxes[k].base_level ~= nil then
+                        item.fluid_boxes[k].base_level = item.fluid_boxes[k].base_level * 4
                     end
-                    
-                    item.fluid_boxes[k].height = 2
                 end
             end
         end

@@ -1,5 +1,4 @@
 local recipe_multiplier = {4, 8}
-local recipe_display = {true, false}
 
 local recipe_list = {
     {
@@ -344,7 +343,7 @@ for i=1, #recipe_list, 1 do
                         if (v[1] ~= nil) and (v[2] ~= nil) then
                             item.expensive.results[k][2] = v[2] * recipe_multiplier[j]
                         else
-                            item.expensive.results[k].amount = v.amount * recipe_multiplier[j]        
+                            item.expensive.results[k].amount = v.amount * recipe_multiplier[j]  
                         end
                     end
 
@@ -394,7 +393,13 @@ for i=1, #recipe_list, 1 do
                     item.energy_required = recipe_multiplier[j] / 2
                 end
             end
-        
+
+            for _, v in pairs(data.raw.module) do
+                if v.limitation and string.find(item.name, 'productivity', 1, true) then
+                    table.insert(v.limitation, item.name .. '-s' .. j)
+                end
+            end
+
             item.name = item.name .. '-s' .. j
 
             data:extend({item})
