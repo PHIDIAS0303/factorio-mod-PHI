@@ -8,12 +8,15 @@ local function EE(source, tier)
     item.name = source.name .. '-' .. tier
     item.minable.result = source.name .. '-' .. tier
     item.max_health = 200 * (2 ^ (tier - 1))
+
+    --[[
     item.picture.layers[1].filename = graphics_location .. source.name .. '-e.png'
     item.picture.layers[1].hr_version.filename = graphics_location .. source.name ..'-eh.png'
     item.icon = graphics_location .. source.type .. '-i.png'
     item.icon_size = 64
     item.icon_mipmaps = 4
-
+    ]]
+    
     if (source.type == 'accumulator') then
         item.energy_source.buffer_capacity = (source.base * 4 ^ (tier - 1)) .. 'MJ'
         item.energy_source.input_flow_limit = (source.base * 60 * (4 ^ (tier - 1))) .. 'kW'

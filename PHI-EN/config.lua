@@ -27,8 +27,7 @@ local items = {
         type = 'accumulator',
         name = 'accumulator',
         min = 2,
-        max = 8,
-        base = 5
+        max = 8
     }
 }
 
