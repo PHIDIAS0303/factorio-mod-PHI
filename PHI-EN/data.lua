@@ -85,7 +85,7 @@ local function ET(tier)
         type = 'technology',
         name = 'compound-energy-' .. (tier - 1),
         icon_size = 256,
-        icon = graphics_location .. 'solar-energy' .. '-t.png',
+        icon = '__base__/graphics/technology/solar-energy.png',
         effects = {
             {
                 type = 'unlock-recipe',
