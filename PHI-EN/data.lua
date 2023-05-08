@@ -54,7 +54,7 @@ end
 
 -- item
 local function EI(source, tier)
-    local item = table.deepcopy(data.raw.item[source.type])
+    local item = table.deepcopy(data.raw.item[source.ref_name])
     item.name = source.name .. '-' .. tier
     item.place_result = source.name .. '-' .. tier
     item.max_health = 200 * (2 ^ (tier - 1))
@@ -114,7 +114,7 @@ local function ET(source, tier)
     if tier <= source.max then
         table.insert(item.effects, {
             type = 'unlock-recipe',
-            recipe = source.name .. tier
+            recipe = source.name .. '-' .. tier
         })
     end
 

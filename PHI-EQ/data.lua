@@ -11,7 +11,6 @@ local items = {
         min = 2,
         max = 8,
         base = 30,
-        graphics_source = nil,
         graphics_name = 'solar-panel-equipment'
     },
     ['fusion-reactor'] = {
@@ -23,7 +22,6 @@ local items = {
         min = 2,
         max = 8,
         base = 750,
-        graphics_source = nil,
         graphics_name = 'fusion-reactor-equipment'
     },
     ['battery'] = {
@@ -35,8 +33,7 @@ local items = {
         min = 3,
         max = 8,
         base = 100,
-        graphics_source = nil,
-        graphics_name = 'battery-equipment'
+        graphics_name = 'battery-mk2-equipment'
     },
     ['personal-laser-defense'] = {
         enabled = true,
@@ -47,7 +44,6 @@ local items = {
         min = 2,
         max = 8,
         base = 3,
-        graphics_source = nil,
         graphics_name = 'personal-laser-defense-equipment'
     },
     ['energy-shield'] = {
@@ -59,8 +55,7 @@ local items = {
         min = 3,
         max = 8,
         base = 150,
-        graphics_source = nil,
-        graphics_name = 'energy-shield-equipment'
+        graphics_name = 'energy-shield-mk2-equipment'
     },
     ['personal-roboport'] = {
         enabled = true,
@@ -71,8 +66,7 @@ local items = {
         min = 3,
         max = 8,
         base = 0.5,
-        graphics_source = nil,
-        graphics_name = 'personal-roboport-equipment'
+        graphics_name = 'personal-roboport-mk2-equipment'
     },
     ['night-vision'] = {
         enabled = true,
@@ -83,7 +77,6 @@ local items = {
         min = 2,
         max = 2,
         base = 1,
-        graphics_source = nil,
         graphics_name = 'night-vision-equipment'
     },
     ['exoskeleton'] = {
@@ -95,7 +88,6 @@ local items = {
         min = 2,
         max = 2,
         base = 0.6,
-        graphics_source = nil,
         graphics_name = 'exoskeleton-equipment'
     }
 }
@@ -197,15 +189,8 @@ local function EE(source, tier)
     end
 
     item['shape'] = {width = w, height = h, type = 'full'}
+    item['sprite'] = {filename = '__base__/graphics/equipment/' .. source.graphics_name .. '.png', width = w * 32, height = h * 32, priority = 'medium', hr_version = {filename = '__base__/graphics/equipment/hr-' .. source.graphics_name .. '.png', width = w * 64, height = h *64, priority = 'medium', scale = 0.5}}
 
-    --[[
-    if source.graphics_source == nil then
-        item['sprite'] = {filename = graphics_location .. source.graphics_name .. '-e.png', width = w * 32, height = h * 32, priority = 'medium', hr_version = {filename = graphics_location .. source.graphics_name .. '-eh.png', width = w * 64, height = h *64, priority = 'medium', scale = 0.5}}
-    else
-        item['sprite'] = {filename = source.graphics_source, width = w * 32, height = h * 32, priority = 'medium'}
-    end
-    ]]
-    
     data:extend({item})
 end
 
