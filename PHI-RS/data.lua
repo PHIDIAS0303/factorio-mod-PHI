@@ -291,6 +291,13 @@ local recipe_list = {
     },
 }
 
+local module_limitation = table.deepcopy(data.raw.module['productivity-module']['limitation'])
+local module_limitation_key = {}
+
+for k, v in pairs(module_limitation) do
+    module_limitation_key[v] = k
+end
+
 for i=1, #recipe_list, 1 do
     if data.raw.recipe[recipe_list[i].name] ~= nil then
         for j=1, #recipe_multiplier, 1 do
@@ -394,10 +401,8 @@ for i=1, #recipe_list, 1 do
                 end
             end
 
-            for _, v in pairs(data.raw.module) do
-                if v.limitation and string.find(item.name, 'productivity', 1, true) then
-                    table.insert(v.limitation, item.name .. '-s' .. j)
-                end
+            if module_limitation_key[item.name] ~= nil then
+                table.insert(module_limitation, item.name .. '-s' .. j)
             end
 
             item.name = item.name .. '-s' .. j
@@ -405,6 +410,12 @@ for i=1, #recipe_list, 1 do
             data:extend({item})
             table.insert(data.raw.technology[recipe_list[i].tech].effects, {type='unlock-recipe', recipe=item.name})
         end
+    end
+end
+
+for _, v in pairs(data.raw.module) do
+    if v.limitation and string.find(v.name, 'productivity', 1, true) then
+        v.limitation = module_limitation
     end
 end
 
