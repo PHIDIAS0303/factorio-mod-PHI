@@ -69,30 +69,24 @@ end
 -- recipe
 local function ER(source, tier)
     local na = source.name
+    local n = 2
 
     if tier > 2 then
         na = na .. '-' .. (tier - 1)
     end
 
-    if source.type == 'solar-panel' or ource.type == 'accumulator' then
-        data:extend({{
-            type = 'recipe',
-            name = source.name .. '-' .. tier,
-            energy_required = 2,
-            enabled = false,
-            ingredients = {{na, 4}},
-            result = source.name .. '-' .. tier,
-        }})
-    else
-        data:extend({{
-            type = 'recipe',
-            name = source.name .. '-' .. tier,
-            energy_required = 2,
-            enabled = false,
-            ingredients = {{na, 2}},
-            result = source.name .. '-' .. tier,
-        }})
+    if source.type == 'solar-panel' or source.type == 'accumulator' then
+        n = 4
     end
+
+    data:extend({{
+        type = 'recipe',
+        name = source.name .. '-' .. tier,
+        energy_required = 2,
+        enabled = false,
+        ingredients = {{na, n}},
+        result = source.name .. '-' .. tier,
+    }})
 end
 
 -- technology
