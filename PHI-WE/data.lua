@@ -66,7 +66,7 @@ local function EE(source, tier)
     elseif source.type == 'radar' then
         item.max_distance_of_sector_revealed = item.max_distance_of_sector_revealed + (2 * tier)
         item.max_distance_of_nearby_sector_revealed = item.max_distance_of_nearby_sector_revealed + (2 * tier)
-        item.energy_usage = 300 * (1 + (0.5 * tier)) .. 'kW'
+        item.energy_usage = 300 * (1 + (0.5 * (tier - 1))) .. 'kW'
     end
 
     -- item.animation.layers[1].filename = graphics_location .. source .. '-e.png'
