@@ -12,6 +12,8 @@ local function EE(source, tier)
 
     if source.type == 'lab' then
         item.researching_speed = item.researching_speed * (2 ^ (tier - source.min + 1))
+    elseif source.type == 'mining-drill' then
+        item.mining_speed = item.mining_speed * (2 ^ (tier - source.min + 1))
     else
         item.crafting_speed = item.crafting_speed * (2 ^ (tier - source.min + 1))
         item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (2 ^ (tier - source.min + 1))

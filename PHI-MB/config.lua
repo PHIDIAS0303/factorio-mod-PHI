@@ -58,6 +58,26 @@ local items = {
         tech = 'automation',
         min = 2,
         max = 3
+    },
+    ['electric-mining-drill'] = {
+        enabled = true,
+        stage = 1,
+        type = 'mining-drill',
+        name = 'electric-mining-drill',
+        ref_name = 'electric-mining-drill',
+        tech = 'automation',
+        min = 2,
+        max = 3
+    },
+    ['pumpjack'] = {
+        enabled = true,
+        stage = 1,
+        type = 'mining-drill',
+        name = 'pumpjack',
+        ref_name = 'pumpjack',
+        tech = 'automation',
+        min = 2,
+        max = 3
     }
 }
 

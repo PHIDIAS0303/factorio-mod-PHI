@@ -10,6 +10,8 @@ local function EE(source, tier)
 
     if source.type == 'lab' then
         item.researching_speed = item.researching_speed * (2 ^ (tier - source.min + 1))
+    elseif source.type == 'mining-drill' then
+        item.mining_speed = item.mining_speed * (2 ^ (tier - source.min + 1))
     else
         item.crafting_speed = item.crafting_speed * (2 ^ (tier - source.min + 1))
         item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (2 ^ (tier - source.min + 1))
@@ -108,6 +110,17 @@ data.raw['assembling-machine']['centrifuge-3'].fast_replaceable_group = data.raw
 data.raw['lab']['lab'].fast_replaceable_group = 'lab'
 data.raw['lab']['lab-2'].fast_replaceable_group = data.raw['lab']['lab'].fast_replaceable_group
 data.raw['lab']['lab-3'].fast_replaceable_group = data.raw['lab']['lab-2'].fast_replaceable_group
+
+-- electric-mining-drill
+data.raw['mining-drill']['electric-mining-drill'].fast_replaceable_group = 'mining-drill'
+data.raw['mining-drill']['electric-mining-drill-2'].fast_replaceable_group = data.raw['mining-drill']['electric-mining-drill'].fast_replaceable_group
+data.raw['mining-drill']['electric-mining-drill-3'].fast_replaceable_group = data.raw['mining-drill']['electric-mining-drill-2'].fast_replaceable_group
+
+-- pumpjack
+data.raw['mining-drill']['pumpjack'].fast_replaceable_group = 'pumpjack'
+data.raw['mining-drill']['pumpjack-2'].fast_replaceable_group = data.raw['mining-drill']['pumpjack'].fast_replaceable_group
+data.raw['mining-drill']['pumpjack-3'].fast_replaceable_group = data.raw['mining-drill']['pumpjack-2'].fast_replaceable_group
+
 
 if mods['PHI-RS'] then
     data.raw['assembling-machine']['electric-filter-furnace-2'].fast_replaceable_group = data.raw['assembling-machine']['electric-filter-furnace'].fast_replaceable_group

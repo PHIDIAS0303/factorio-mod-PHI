@@ -24,6 +24,16 @@ if technologies['automation'].researched then
     recipes['lab-2'].reload()
     recipes['lab-3'].enabled = true
     recipes['lab-3'].reload()
+
+    recipes['electric-mining-drill-2'].enabled = true
+    recipes['electric-mining-drill-2'].reload()
+    recipes['electric-mining-drill-3'].enabled = true
+    recipes['electric-mining-drill-3'].reload()
+
+    recipes['pumpjack-2'].enabled = true
+    recipes['pumpjack-2'].reload()
+    recipes['pumpjack-3'].enabled = true
+    recipes['pumpjack-3'].reload()
 end
 
 if technologies['automation-3'].researched then
