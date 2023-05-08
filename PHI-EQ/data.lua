@@ -92,7 +92,7 @@ local function EI(source, tier)
     item.subgroup = 'equipment'
     item.stack_size = 20
     item.default_request_amount = 5
-    -- item.icons = {{icon = graphics_location .. source.graphics_name .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
+    item.icons = {{icon = '__base__/graphics/icons/' .. source.graphics_name .. '.png', icon_mipmaps = 4, icon_size = 64}}
     item.order = item.order .. tier
     data:extend({item})
 end
