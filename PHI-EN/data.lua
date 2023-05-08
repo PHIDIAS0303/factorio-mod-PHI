@@ -35,14 +35,14 @@ local function EE(source, tier)
     elseif (source.type == 'solar-panel') then
         item.production = (source.base * (4 ^ (tier - 1))) .. 'kW'
     elseif (source.type == 'boiler') then
-        item.target_temperature = 15 + (150 * tier)
+        item.target_temperature = 15 + (150 * (2 ^ (tier - source.min + 1)))
         item.fluid_box.height = 4
         item.output_fluid_box.height = 4
         item.output_fluid_box.base_level = 5
         item.energy_consumption = 1.8 * tier .. 'MW'
     elseif (source.type == 'generator') then
         item.fluid_box.height = 4
-        item.maximum_temperature = 15 + (150 * tier)
+        item.maximum_temperature = 15 + (150 * (2 ^ (tier - source.min + 1)))
     end
 
     if (tier <= source.max - 1) then
@@ -74,51 +74,63 @@ local function ER(source, tier)
         na = na .. '-' .. (tier - 1)
     end
 
-    data:extend({{
-        type = 'recipe',
-        name = source.name .. '-' .. tier,
-        energy_required = 2,
-        enabled = false,
-        ingredients = {{na, 4}},
-        result = source.name .. '-' .. tier,
-    }})
+    if source.type == 'solar-panel' or ource.type == 'accumulator' then
+        data:extend({{
+            type = 'recipe',
+            name = source.name .. '-' .. tier,
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{na, 4}},
+            result = source.name .. '-' .. tier,
+        }})
+    else
+        data:extend({{
+            type = 'recipe',
+            name = source.name .. '-' .. tier,
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{na, 2}},
+            result = source.name .. '-' .. tier,
+        }})
+    end
 end
 
 -- technology
 local function ET(source, tier)
-    local prereq
-    if (tier == 2) then
-        prereq = {'solar-energy', 'advanced-electronics', 'electric-energy-accumulators'}
-    else
-        prereq = {'compound-energy-' .. (tier - 2)}
-    end
+    if data.raw.technology['compound-energy-' .. (tier - 1)] == nil then
+        local prereq
+        if (tier == 2) then
+            prereq = {'solar-energy', 'advanced-electronics', 'electric-energy-accumulators'}
+        else
+            prereq = {'compound-energy-' .. (tier - 2)}
+        end
 
-    local item = {
-        type = 'technology',
-        name = 'compound-energy-' .. (tier - 1),
-        icon_size = 256,
-        icon = '__base__/graphics/technology/solar-energy.png',
-        effects = {},
-        prerequisites = prereq,
-        unit = {
-            count = 100,
-            ingredients = {
-                {'automation-science-pack', 2},
-                {'logistic-science-pack', 2}
+        local item = {
+            type = 'technology',
+            name = 'compound-energy-' .. (tier - 1),
+            icon_size = 256,
+            icon = '__base__/graphics/technology/solar-energy.png',
+            effects = {
+                {type='unlock-recipe', recipe=source.name .. '-' .. tier}
             },
-            time = 120
-        },
-        order = 'a-h-' .. alpha_order[tier + 1]
-    }
+            prerequisites = prereq,
+            unit = {
+                count = 100,
+                ingredients = {
+                    {'automation-science-pack', 2},
+                    {'logistic-science-pack', 2}
+                },
+                time = 120
+            },
+            order = 'a-h-' .. alpha_order[tier + 1]
+        }
 
-    if tier <= source.max then
-        table.insert(item.effects, {
-            type = 'unlock-recipe',
-            recipe = source.name .. '-' .. tier
-        })
+        data:extend({item})
+    else
+        if tier <= source.max then
+            table.insert(data.raw.technology['compound-energy-' .. (tier - 1)].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
+        end
     end
-
-    data:extend({item})
 end
 
 for _, v in pairs(items) do
