@@ -90,7 +90,7 @@ local function ER(source, tier)
                 name = source.name .. '-' .. tier,
                 energy_required = 2,
                 enabled = false,
-                ingredients = {{na, 1}},
+                ingredients = {{na, 2}},
                 result = source.name .. '-' .. tier,
             }})
         else
