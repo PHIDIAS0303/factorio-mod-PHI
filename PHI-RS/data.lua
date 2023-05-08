@@ -454,7 +454,7 @@ local function EI(source)
     local item = table.deepcopy(data.raw.item[source.ref_name])
 
     item.name = source.name
-    item.place_result = source.ref_name
+    item.place_result = source.name
     -- item.icons = {{icon = graphics_location .. source .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
     item.order = item.order .. 'B'
     data:extend({item})
