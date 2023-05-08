@@ -16,7 +16,7 @@ local function EE(source, tier)
     item.icon_size = 64
     item.icon_mipmaps = 4
     ]]
-    
+
     if (source.type == 'accumulator') then
         item.energy_source.buffer_capacity = (source.base * 4 ^ (tier - 1)) .. 'MJ'
         item.energy_source.input_flow_limit = (source.base * 60 * (4 ^ (tier - 1))) .. 'kW'
@@ -49,7 +49,7 @@ local function EI(source, tier)
     item.subgroup = 'energy'
     item.stack_size = 50
     item.default_request_amount = 50
-    item.icons = {{icon = graphics_location .. source.name .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
+    -- item.icons = {{icon = graphics_location .. source.name .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
     item.order = item.order .. tier
     data:extend({item})
 end

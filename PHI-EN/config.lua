@@ -20,14 +20,14 @@ local items = {
         type = 'boiler',
         name = 'boiler',
         min = 2,
-        max = 8
+        max = 5
     },
     ['steam-engine'] = {
         enabled = true,
-        type = 'accumulator',
-        name = 'accumulator',
+        type = 'generator',
+        name = 'steam-engine',
         min = 2,
-        max = 8
+        max = 5
     }
 }
 
