@@ -35,14 +35,14 @@ local function EE(source, tier)
     elseif (source.type == 'solar-panel') then
         item.production = (source.base * (4 ^ (tier - 1))) .. 'kW'
     elseif (source.type == 'boiler') then
-        item.target_temperature = 15 + (150 * (2 ^ (tier - source.min + 1)))
+        item.target_temperature = 15 + (150 * tier)
         item.fluid_box.height = 4
         item.output_fluid_box.height = 4
         item.output_fluid_box.base_level = 5
         item.energy_consumption = 1.8 * tier .. 'MW'
     elseif (source.type == 'generator') then
         item.fluid_box.height = 4
-        item.maximum_temperature = 15 + (150 * (2 ^ (tier - source.min + 1)))
+        item.maximum_temperature = 15 + (150 * tier)
     end
 
     if (tier <= source.max - 1) then
@@ -69,24 +69,30 @@ end
 -- recipe
 local function ER(source, tier)
     local na = source.name
-    local n = 2
 
     if tier > 2 then
         na = na .. '-' .. (tier - 1)
     end
 
     if source.type == 'solar-panel' or source.type == 'accumulator' then
-        n = 4
+        data:extend({{
+            type = 'recipe',
+            name = source.name .. '-' .. tier,
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{na, 4}},
+            result = source.name .. '-' .. tier,
+        }})
+    else
+        data:extend({{
+            type = 'recipe',
+            name = source.name .. '-' .. tier,
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{na, 1}, {source.name, 1}},
+            result = source.name .. '-' .. tier,
+        }})
     end
-
-    data:extend({{
-        type = 'recipe',
-        name = source.name .. '-' .. tier,
-        energy_required = 2,
-        enabled = false,
-        ingredients = {{na, n}},
-        result = source.name .. '-' .. tier,
-    }})
 end
 
 -- technology
