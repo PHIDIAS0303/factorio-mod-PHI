@@ -291,12 +291,7 @@ local recipe_list = {
     },
 }
 
-local module_limitation = table.deepcopy(data.raw.module['productivity-module']['limitation'])
-local module_limitation_key = {}
 
-for k, v in pairs(module_limitation) do
-    module_limitation_key[v] = k
-end
 
 for i=1, #recipe_list, 1 do
     if data.raw.recipe[recipe_list[i].name] ~= nil then
@@ -401,10 +396,6 @@ for i=1, #recipe_list, 1 do
                 end
             end
 
-            if module_limitation_key[item.name] ~= nil then
-                table.insert(module_limitation, item.name .. '-s' .. j)
-            end
-
             item.name = item.name .. '-s' .. j
 
             data:extend({item})
@@ -413,9 +404,17 @@ for i=1, #recipe_list, 1 do
     end
 end
 
+local module_limitation = table.deepcopy(data.raw.module['productivity-module']['limitation'])
+
 for _, v in pairs(data.raw.module) do
     if v.limitation and string.find(v.name, 'productivity', 1, true) then
-        v.limitation = module_limitation
+        for j=1, #recipe_multiplier, 1 do
+            for k, _ in pairs(module_limitation) do
+                if data.raw.recipe[module_limitation[k] .. '-s' .. j] ~= nil then
+                    table.insert(v.limitation, module_limitation[k] .. '-s' .. j)
+                end
+            end
+        end
     end
 end
 
