@@ -81,109 +81,111 @@ local items = {
     }
 }
 
-if mods['PHI-RS'] then
-    items['electric-filter-furnace'] = {
-        enabled = true,
-        stage = 2,
-        type = 'assembling-machine',
-        name = 'electric-filter-furnace',
-        ref_name = 'electric-filter-furnace',
-        tech = 'advanced-material-processing-2',
-        min = 2,
-        max = 3
-    }
-end
+if mods ~= nil then
+    if mods['PHI-RS'] then
+        items['electric-filter-furnace'] = {
+            enabled = true,
+            stage = 2,
+            type = 'assembling-machine',
+            name = 'electric-filter-furnace',
+            ref_name = 'electric-filter-furnace',
+            tech = 'advanced-material-processing-2',
+            min = 2,
+            max = 3
+        }
+    end
 
-if mods['aai-industry'] then
-    items['industrial-furnace'] = {
-        enabled = true,
-        stage = 2,
-        type = 'assembling-machine',
-        name = 'industrial-furnace',
-        ref_name = 'industrial-furnace',
-        tech = 'industrial-furnace',
-        min = 2,
-        max = 3
-    }
+    if mods['aai-industry'] then
+        items['industrial-furnace'] = {
+            enabled = true,
+            stage = 2,
+            type = 'assembling-machine',
+            name = 'industrial-furnace',
+            ref_name = 'industrial-furnace',
+            tech = 'industrial-furnace',
+            min = 2,
+            max = 3
+        }
 
-    items['fuel-processor'] = {
-        enabled = true,
-        stage = 2,
-        type = 'assembling-machine',
-        name = 'fuel-processor',
-        ref_name = 'fuel-processor',
-        tech = 'fuel-processing',
-        min = 2,
-        max = 3
-    }
-end
+        items['fuel-processor'] = {
+            enabled = true,
+            stage = 2,
+            type = 'assembling-machine',
+            name = 'fuel-processor',
+            ref_name = 'fuel-processor',
+            tech = 'fuel-processing',
+            min = 2,
+            max = 3
+        }
+    end
 
-if mods['space-exploration'] then
-    items['se-space-assembling-machine'] = {
-        enabled = true,
-        stage = 2,
-        type = 'assembling-machine',
-        name = 'se-space-assembling-machine',
-        ref_name = 'se-space-assembling-machine',
-        tech = 'se-space-assembling',
-        min = 2,
-        max = 3
-    }
+    if mods['space-exploration'] then
+        items['se-space-assembling-machine'] = {
+            enabled = true,
+            stage = 2,
+            type = 'assembling-machine',
+            name = 'se-space-assembling-machine',
+            ref_name = 'se-space-assembling-machine',
+            tech = 'se-space-assembling',
+            min = 2,
+            max = 3
+        }
 
-    items['se-space-manufactory'] = {
-        enabled = true,
-        stage = 2,
-        type = 'assembling-machine',
-        name = 'se-space-manufactory',
-        ref_name = 'se-space-manufactory',
-        tech = 'se-space-manufactory',
-        min = 2,
-        max = 3
-    }
+        items['se-space-manufactory'] = {
+            enabled = true,
+            stage = 2,
+            type = 'assembling-machine',
+            name = 'se-space-manufactory',
+            ref_name = 'se-space-manufactory',
+            tech = 'se-space-manufactory',
+            min = 2,
+            max = 3
+        }
 
-    items['se-casting-machine'] = {
-        enabled = true,
-        stage = 2,
-        type = 'assembling-machine',
-        name = 'se-casting-machine',
-        ref_name = 'se-casting-machine',
-        tech = 'se-pyroflux-smelting',
-        min = 2,
-        max = 3
-    }
+        items['se-casting-machine'] = {
+            enabled = true,
+            stage = 2,
+            type = 'assembling-machine',
+            name = 'se-casting-machine',
+            ref_name = 'se-casting-machine',
+            tech = 'se-pyroflux-smelting',
+            min = 2,
+            max = 3
+        }
 
-    items['se-pulveriser'] = {
-        enabled = true,
-        stage = 2,
-        type = 'assembling-machine',
-        name = 'se-pulveriser',
-        ref_name = 'se-pulveriser',
-        tech = 'se-pulveriser',
-        min = 2,
-        max = 3
-    }
+        items['se-pulveriser'] = {
+            enabled = true,
+            stage = 2,
+            type = 'assembling-machine',
+            name = 'se-pulveriser',
+            ref_name = 'se-pulveriser',
+            tech = 'se-pulveriser',
+            min = 2,
+            max = 3
+        }
 
-    items['se-lifesupport-facility'] = {
-        enabled = true,
-        stage = 2,
-        type = 'assembling-machine',
-        name = 'se-lifesupport-facility',
-        ref_name = 'se-lifesupport-facility',
-        tech = 'se-lifesupport-facility',
-        min = 2,
-        max = 3
-    }
+        items['se-lifesupport-facility'] = {
+            enabled = true,
+            stage = 2,
+            type = 'assembling-machine',
+            name = 'se-lifesupport-facility',
+            ref_name = 'se-lifesupport-facility',
+            tech = 'se-lifesupport-facility',
+            min = 2,
+            max = 3
+        }
 
-    items['se-fuel-refinery'] = {
-        enabled = true,
-        stage = 2,
-        type = 'assembling-machine',
-        name = 'se-fuel-refinery',
-        ref_name = 'se-fuel-refinery',
-        tech = 'se-fuel-refining',
-        min = 2,
-        max = 3
-    }
+        items['se-fuel-refinery'] = {
+            enabled = true,
+            stage = 2,
+            type = 'assembling-machine',
+            name = 'se-fuel-refinery',
+            ref_name = 'se-fuel-refinery',
+            tech = 'se-fuel-refining',
+            min = 2,
+            max = 3
+        }
+    end
 end
 
 return items

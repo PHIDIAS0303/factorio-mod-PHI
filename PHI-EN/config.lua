@@ -35,12 +35,14 @@ local items = {
     }
 }
 
-if mods['Krastorio2'] then
-    items['solar-panel'].base = 100
-    items['accumulator'].base = 10
-elseif mods['space-exploration'] then
-    items['solar-panel'].base = 60
-    items['accumulator'].base = 5
+if mods ~= nil then
+    if mods['Krastorio2'] then
+        items['solar-panel'].base = 100
+        items['accumulator'].base = 10
+    elseif mods['space-exploration'] then
+        items['solar-panel'].base = 60
+        items['accumulator'].base = 5
+    end
 end
 
 return items

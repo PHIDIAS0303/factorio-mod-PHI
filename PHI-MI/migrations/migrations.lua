@@ -1,7 +1,7 @@
 for index, force in pairs(game.forces) do
     local technologies = force.technologies
     local recipes = force.recipes
-    
+
     if technologies['steel-processing'].researched then
         recipes['ups-steel-chest'].enabled = true
         recipes['ups-steel-chest'].reload()
