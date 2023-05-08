@@ -5,8 +5,8 @@ local items = require 'config'
 -- entity
 local function EE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.name])
-    item.name = source.name .. '-mk' .. tier
-    item.minable.result = source.name .. '-mk' .. tier
+    item.name = source.name .. '-' .. tier
+    item.minable.result = source.name .. '-' .. tier
     item.max_health = 200 * (2 ^ (tier - 1))
     item.picture.layers[1].filename = graphics_location .. source.name .. '-e.png'
     item.picture.layers[1].hr_version.filename = graphics_location .. source.name ..'-eh.png'
@@ -26,12 +26,12 @@ local function EE(source, tier)
         item.discharge_animation.layers[1].layers[1].tint = {r = 1, g = 1, b = 1, a = 1}
         item.discharge_animation.layers[1].layers[1].hr_version.filename = item.picture.layers[1].hr_version.filename
         item.discharge_animation.layers[1].layers[1].hr_version.tint = {r = 1, g = 1, b = 1, a = 1}
-    else
+    elseif (source.type == 'solar-panel') then
         item.production = (source.base * (4 ^ (tier - 1))) .. 'kW'
     end
-    
-    if (tier <= 7) then
-        item.next_upgrade = source.name .. '-mk' .. (tier + 1)
+
+    if (tier <= source.max - 1) then
+        item.next_upgrade = source.name .. '-' .. (tier + 1)
     end
     
     data:extend({item})
@@ -40,8 +40,8 @@ end
 -- item
 local function EI(source, tier)
     local item = table.deepcopy(data.raw.item[source.type])
-    item.name = source.name .. '-mk' .. tier
-    item.place_result = source.name .. '-mk' .. tier
+    item.name = source.name .. '-' .. tier
+    item.place_result = source.name .. '-' .. tier
     item.max_health = 200 * (2 ^ (tier - 1))
     item.subgroup = 'energy'
     item.stack_size = 50
@@ -55,17 +55,17 @@ end
 local function ER(source, tier)
     local na = source.name
 
-    if (tier >= 3) then
-        na = na .. '-mk' .. (tier - 1)
+    if tier > 2 then
+        na = na .. '-' .. (tier - 1)
     end
 
     data:extend({{
         type = 'recipe',
-        name = source.name .. '-mk' .. tier,
+        name = source.name .. '-' .. tier,
         energy_required = 2,
         enabled = false,
         ingredients = {{na, 4}},
-        result = source.name .. '-mk' .. tier,
+        result = source.name .. '-' .. tier,
     }})
 end
 
@@ -86,11 +86,11 @@ local function ET(tier)
         effects = {
             {
                 type = 'unlock-recipe',
-                recipe = 'solar-panel-mk' .. tier
+                recipe = 'solar-panel-' .. tier
             },
             {
                 type = 'unlock-recipe',
-                recipe = 'accumulator-mk' .. tier
+                recipe = 'accumulator-' .. tier
             }
         },
         prerequisites = prereq,
