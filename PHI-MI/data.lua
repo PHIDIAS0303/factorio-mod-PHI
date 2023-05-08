@@ -48,11 +48,16 @@ data.raw['module']['effectivity-module-3'].effect = {consumption = {bonus = -1.5
 data.raw['arithmetic-combinator']['arithmetic-combinator'].energy_source.usage_priority = 'primary-input'
 data.raw['decider-combinator']['decider-combinator'].energy_source.usage_priority = 'primary-input'
 
-data.raw['pipe']['pipe'].fluid_box.height = 4
-data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.height = 4
-data.raw['pump']['pump'].fluid_box.height = 16
+data.raw['pipe']['pipe'].fluid_box.base_area = 2
+data.raw['pipe']['pipe'].fluid_box.height = 2
+data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.base_area = 2
+data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.height = 2
+data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.pipe_connections = {{position = {0, -1}}, {position = {0, 1}, max_underground_distance = 20}}
+data.raw['pump']['pump'].fluid_box.base_area = 2
+data.raw['pump']['pump'].fluid_box.height = 8
 data.raw['pump']['pump'].pumping_speed = 800
 data.raw['storage-tank']['storage-tank'].fluid_box.base_area = 500
+data.raw['storage-tank']['storage-tank'].fluid_box.height = 2
 
 data.raw['locomotive']['locomotive'].max_health = 2000
 data.raw['locomotive']['locomotive'].max_speed = 2
@@ -81,14 +86,14 @@ data.raw['construction-robot']['construction-robot'].max_payload_size = 3
 data.raw['construction-robot']['construction-robot'].max_energy = '6MJ'
 data.raw['construction-robot']['construction-robot'].speed = 0.12
 data.raw['construction-robot']['construction-robot'].speed_multiplier_when_out_of_energy = 0.4
-data.raw['construction-robot']['construction-robot'].energy_per_move = '10kJ'
+data.raw['construction-robot']['construction-robot'].energy_per_move = '1kJ'
 
 data.raw['logistic-robot']['logistic-robot'].max_health = 400
 data.raw['logistic-robot']['logistic-robot'].max_payload_size = 3
 data.raw['logistic-robot']['logistic-robot'].max_energy = '6MJ'
 data.raw['logistic-robot']['logistic-robot'].speed = 0.12
 data.raw['logistic-robot']['logistic-robot'].speed_multiplier_when_out_of_energy = 0.4
-data.raw['logistic-robot']['logistic-robot'].energy_per_move = '10kJ'
+data.raw['logistic-robot']['logistic-robot'].energy_per_move = '1kJ'
 
 data.raw['roboport']['roboport'].max_health = 1000
 data.raw['roboport']['roboport'].energy_usage = '100kW'
@@ -121,6 +126,10 @@ local entity = table.deepcopy(data.raw['boiler']['boiler'])
 entity.name = 'electric-boiler'
 entity.energy_consumption = '7200kW'
 entity.target_temperature = 165
+entity.fluid_box.base_area = 2
+entity.fluid_box.height = 4
+entity.output_fluid_box.base_area = 2
+entity.output_fluid_box.height = 4
 entity.minable = {hardness = 0.2, mining_time = 0.5, result = 'electric-boiler'}
 entity.emissions_per_minute = 0
 entity.energy_source.type = 'electric'

@@ -17,6 +17,15 @@ local function EE(source, tier)
         item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (2 ^ (tier - source.min + 1))
     end
 
+    if item.fluid_boxes ~= nil then
+        for k, _ in pairs(item.fluid_boxes) do
+            if item.fluid_boxes[k].production_type ~= nil then
+                item.fluid_boxes[k].base_area = item.fluid_boxes[k].base_area * 2
+                item.fluid_boxes[k].height = 2
+            end
+        end
+    end
+
     item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
     -- item.animation.layers[1].filename = graphics_location .. source .. '-e.png'
     -- item.animation.layers[1].hr_version.filename = graphics_location .. source ..'-eh.png'
