@@ -127,6 +127,7 @@ entity.energy_consumption = '7200kW'
 entity.target_temperature = 165
 entity.fluid_box.height = 4
 entity.output_fluid_box.height = 4
+entity.output_fluid_box.base_level = 5
 entity.minable = {hardness = 0.2, mining_time = 0.5, result = 'electric-boiler'}
 entity.emissions_per_minute = 0
 entity.energy_source.type = 'electric'

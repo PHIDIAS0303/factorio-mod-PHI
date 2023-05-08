@@ -1,19 +1,19 @@
 -- accumulator
 data.raw['accumulator']['accumulator'].fast_replaceable_group = 'accumulator'
-data.raw['accumulator']['accumulator-mk2'].fast_replaceable_group = data.raw['accumulator']['accumulator'].fast_replaceable_group
-data.raw['accumulator']['accumulator-mk3'].fast_replaceable_group = data.raw['accumulator']['accumulator'].fast_replaceable_group
-data.raw['accumulator']['accumulator-mk4'].fast_replaceable_group = data.raw['accumulator']['accumulator'].fast_replaceable_group
-data.raw['accumulator']['accumulator-mk5'].fast_replaceable_group = data.raw['accumulator']['accumulator'].fast_replaceable_group
-data.raw['accumulator']['accumulator-mk6'].fast_replaceable_group = data.raw['accumulator']['accumulator'].fast_replaceable_group
-data.raw['accumulator']['accumulator-mk7'].fast_replaceable_group = data.raw['accumulator']['accumulator'].fast_replaceable_group
-data.raw['accumulator']['accumulator-mk8'].fast_replaceable_group = data.raw['accumulator']['accumulator'].fast_replaceable_group
+data.raw['accumulator']['accumulator-2'].fast_replaceable_group = data.raw['accumulator']['accumulator'].fast_replaceable_group
+data.raw['accumulator']['accumulator-3'].fast_replaceable_group = data.raw['accumulator']['accumulator-2'].fast_replaceable_group
+data.raw['accumulator']['accumulator-4'].fast_replaceable_group = data.raw['accumulator']['accumulator-3'].fast_replaceable_group
+data.raw['accumulator']['accumulator-5'].fast_replaceable_group = data.raw['accumulator']['accumulator-4'].fast_replaceable_group
+data.raw['accumulator']['accumulator-6'].fast_replaceable_group = data.raw['accumulator']['accumulator-5'].fast_replaceable_group
+data.raw['accumulator']['accumulator-7'].fast_replaceable_group = data.raw['accumulator']['accumulator-6'].fast_replaceable_group
+data.raw['accumulator']['accumulator-8'].fast_replaceable_group = data.raw['accumulator']['accumulator-7'].fast_replaceable_group
 
 -- solar-panel
 data.raw['solar-panel']['solar-panel'].fast_replaceable_group = 'solar-panel'
-data.raw['solar-panel']['solar-panel-mk2'].fast_replaceable_group = data.raw['solar-panel']['solar-panel'].fast_replaceable_group
-data.raw['solar-panel']['solar-panel-mk3'].fast_replaceable_group = data.raw['solar-panel']['solar-panel'].fast_replaceable_group
-data.raw['solar-panel']['solar-panel-mk4'].fast_replaceable_group = data.raw['solar-panel']['solar-panel'].fast_replaceable_group
-data.raw['solar-panel']['solar-panel-mk5'].fast_replaceable_group = data.raw['solar-panel']['solar-panel'].fast_replaceable_group
-data.raw['solar-panel']['solar-panel-mk6'].fast_replaceable_group = data.raw['solar-panel']['solar-panel'].fast_replaceable_group
-data.raw['solar-panel']['solar-panel-mk7'].fast_replaceable_group = data.raw['solar-panel']['solar-panel'].fast_replaceable_group
-data.raw['solar-panel']['solar-panel-mk8'].fast_replaceable_group = data.raw['solar-panel']['solar-panel'].fast_replaceable_group
+data.raw['solar-panel']['solar-panel-2'].fast_replaceable_group = data.raw['solar-panel']['solar-panel'].fast_replaceable_group
+data.raw['solar-panel']['solar-panel-3'].fast_replaceable_group = data.raw['solar-panel']['solar-panel-2'].fast_replaceable_group
+data.raw['solar-panel']['solar-panel-4'].fast_replaceable_group = data.raw['solar-panel']['solar-panel-3'].fast_replaceable_group
+data.raw['solar-panel']['solar-panel-5'].fast_replaceable_group = data.raw['solar-panel']['solar-panel-4'].fast_replaceable_group
+data.raw['solar-panel']['solar-panel-6'].fast_replaceable_group = data.raw['solar-panel']['solar-panel-5'].fast_replaceable_group
+data.raw['solar-panel']['solar-panel-7'].fast_replaceable_group = data.raw['solar-panel']['solar-panel-6'].fast_replaceable_group
+data.raw['solar-panel']['solar-panel-8'].fast_replaceable_group = data.raw['solar-panel']['solar-panel-7'].fast_replaceable_group

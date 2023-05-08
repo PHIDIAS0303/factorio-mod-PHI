@@ -21,6 +21,8 @@ local function EE(source, tier)
         item.energy_source.buffer_capacity = (source.base * 4 ^ (tier - 1)) .. 'MJ'
         item.energy_source.input_flow_limit = (source.base * 60 * (4 ^ (tier - 1))) .. 'kW'
         item.energy_source.output_flow_limit = (source.base * 60 * (4 ^ (tier - 1))) .. 'kW'
+
+        --[[
         item.charge_animation.layers[1].layers[1].filename = item.picture.layers[1].filename
         item.charge_animation.layers[1].layers[1].tint = {r = 1, g = 1, b = 1, a = 1}
         item.charge_animation.layers[1].layers[1].hr_version.filename = item.picture.layers[1].hr_version.filename
@@ -29,14 +31,24 @@ local function EE(source, tier)
         item.discharge_animation.layers[1].layers[1].tint = {r = 1, g = 1, b = 1, a = 1}
         item.discharge_animation.layers[1].layers[1].hr_version.filename = item.picture.layers[1].hr_version.filename
         item.discharge_animation.layers[1].layers[1].hr_version.tint = {r = 1, g = 1, b = 1, a = 1}
+        ]]
     elseif (source.type == 'solar-panel') then
         item.production = (source.base * (4 ^ (tier - 1))) .. 'kW'
+    elseif (source.type == 'boiler') then
+        item.target_temperature = 15 + (150 * tier)
+        item.fluid_box.height = 4
+        item.output_fluid_box.height = 4
+        item.output_fluid_box.base_level = 5
+        item.energy_consumption = 1.8 * tier .. 'MW'
+    elseif (source.type == 'generator') then
+        item.fluid_box.height = 4
+        item.maximum_temperature = 15 + (150 * tier)
     end
 
     if (tier <= source.max - 1) then
         item.next_upgrade = source.name .. '-' .. (tier + 1)
     end
-    
+
     data:extend({item})
 end
 
@@ -46,9 +58,9 @@ local function EI(source, tier)
     item.name = source.name .. '-' .. tier
     item.place_result = source.name .. '-' .. tier
     item.max_health = 200 * (2 ^ (tier - 1))
-    item.subgroup = 'energy'
-    item.stack_size = 50
-    item.default_request_amount = 50
+    -- item.subgroup = 'energy'
+    -- item.stack_size = 50
+    -- item.default_request_amount = 50
     -- item.icons = {{icon = graphics_location .. source.name .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
     item.order = item.order .. tier
     data:extend({item})
@@ -73,7 +85,7 @@ local function ER(source, tier)
 end
 
 -- technology
-local function ET(tier)
+local function ET(source, tier)
     local prereq
     if (tier == 2) then
         prereq = {'solar-energy', 'advanced-electronics', 'electric-energy-accumulators'}
@@ -81,25 +93,15 @@ local function ET(tier)
         prereq = {'compound-energy-' .. (tier - 2)}
     end
 
-    data:extend({{
+    local item = {
         type = 'technology',
         name = 'compound-energy-' .. (tier - 1),
         icon_size = 256,
         icon = '__base__/graphics/technology/solar-energy.png',
-        effects = {
-            {
-                type = 'unlock-recipe',
-                recipe = 'solar-panel-' .. tier
-            },
-            {
-                type = 'unlock-recipe',
-                recipe = 'accumulator-' .. tier
-            }
-        },
+        effects = {},
         prerequisites = prereq,
         unit = {
             count = 100,
-            -- count = 50 * tier,
             ingredients = {
                 {'automation-science-pack', 2},
                 {'logistic-science-pack', 2}
@@ -107,7 +109,16 @@ local function ET(tier)
             time = 120
         },
         order = 'a-h-' .. alpha_order[tier + 1]
-    }})
+    }
+
+    if tier <= source.max then
+        table.insert(item.effects, {
+            type = 'unlock-recipe',
+            recipe = source.name .. tier
+        })
+    end
+
+    data:extend({item})
 end
 
 for _, v in pairs(items) do
@@ -116,7 +127,7 @@ for _, v in pairs(items) do
             EE(v, j)
             EI(v, j)
             ER(v, j)
-            ET(j)
+            ET(v, j)
         end
     end
 end
