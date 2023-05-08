@@ -28,6 +28,15 @@ local items = {
         min = 2,
         max = 3,
         range = 30
+    },
+    ['radar'] = {
+        enabled = true,
+        type = 'radar',
+        name = 'radar',
+        ref_name = 'radar',
+        tech = 'automation',
+        min = 2,
+        max = 3
     }
 }
 
@@ -38,9 +47,12 @@ local function EE(source, tier)
     item.name = source.name .. '-' .. tier
     item.minable.result = source.name .. '-' .. tier
     item.max_health = item.max_health * tier
-    item.attack_parameters.damage_modifier = (2 ^ (tier - 1))
-    item.attack_parameters.range = source.range + (2 * (tier - 1))
-    item.call_for_help_radius = 40 + (2 * (tier - 1))
+
+    if source.type == 'electric-turret' or source.type == 'ammo-turret' or source.type == 'fluid-turret' then
+        item.attack_parameters.damage_modifier = (2 ^ (tier - 1))
+        item.attack_parameters.range = source.range + (2 * (tier - 1))
+        item.call_for_help_radius = 40 + (2 * (tier - 1))
+    end
 
     if source.type == 'electric-turret' then
         item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * 2
@@ -51,6 +63,10 @@ local function EE(source, tier)
         item.energy_source.buffer_capacity = 12816 * (2 ^ (tier - 1)) .. 'kJ'
     elseif source.type == 'fluid-turret' then
         item.prepare_range = 35 + (2 * (tier - 1))
+    elseif source.type == 'radar' then
+        item.max_distance_of_sector_revealed = item.max_distance_of_sector_revealed + (2 * tier)
+        item.max_distance_of_nearby_sector_revealed = item.max_distance_of_nearby_sector_revealed + (2 * tier)
+        item.energy_usage = item.energy_usage * (1 + (0.5 * tier))
     end
 
     -- item.animation.layers[1].filename = graphics_location .. source .. '-e.png'
