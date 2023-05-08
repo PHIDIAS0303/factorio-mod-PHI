@@ -84,14 +84,25 @@ local function ER(source, tier)
             result = source.name .. '-' .. tier,
         }})
     else
-        data:extend({{
-            type = 'recipe',
-            name = source.name .. '-' .. tier,
-            energy_required = 2,
-            enabled = false,
-            ingredients = {{na, 1}, {source.name, 1}},
-            result = source.name .. '-' .. tier,
-        }})
+        if tier == 2 then
+            data:extend({{
+                type = 'recipe',
+                name = source.name .. '-' .. tier,
+                energy_required = 2,
+                enabled = false,
+                ingredients = {{na, 1}},
+                result = source.name .. '-' .. tier,
+            }})
+        else
+            data:extend({{
+                type = 'recipe',
+                name = source.name .. '-' .. tier,
+                energy_required = 2,
+                enabled = false,
+                ingredients = {{na, 1}, {source.name, 1}},
+                result = source.name .. '-' .. tier,
+            }})
+        end
     end
 end
 
