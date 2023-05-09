@@ -49,7 +49,7 @@ end
 -- recipe
 local function ER(source, tier)
     local na = source.name
-    
+
     if tier > 2 then
         na = na .. '-' .. (tier - 1)
     end
