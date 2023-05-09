@@ -49,7 +49,7 @@ end
 -- recipe
 local function ER(source, tier)
     local na = source.name
-
+    
     if tier > 2 then
         na = na .. '-' .. (tier - 1)
     end
@@ -178,4 +178,9 @@ if mods['space-exploration'] then
     data.raw['assembling-machine']['se-fuel-refinery'].fast_replaceable_group  = 'fuel-refinery'
     data.raw['assembling-machine']['se-fuel-refinery-2'].fast_replaceable_group = data.raw['assembling-machine']['se-fuel-refinery'].fast_replaceable_group
     data.raw['assembling-machine']['se-fuel-refinery-3'].fast_replaceable_group = data.raw['assembling-machine']['se-fuel-refinery-2'].fast_replaceable_group
+
+    -- electric mining drill
+    data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'core-miner-drill'
+    data.raw['mining-drill']['se-core-miner-drill-2'].fast_replaceable_group = data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group
+    data.raw['mining-drill']['se-core-miner-drill-3'].fast_replaceable_group = data.raw['mining-drill']['se-core-miner-drill-2'].fast_replaceable_group
 end
