@@ -141,6 +141,11 @@ if mods['aai-industry'] then
     data.raw['assembling-machine']['fuel-processor'].fast_replaceable_group = 'fuel-processor'
     data.raw['assembling-machine']['fuel-processor-2'].fast_replaceable_group = data.raw['assembling-machine']['fuel-processor'].fast_replaceable_group
     data.raw['assembling-machine']['fuel-processor-3'].fast_replaceable_group = data.raw['assembling-machine']['fuel-processor-2'].fast_replaceable_group
+
+    -- electric mining drill
+    data.raw['mining-drill']['area-mining-drill'].fast_replaceable_group = 'area-mining-drill'
+    data.raw['mining-drill']['area-mining-drill-2'].fast_replaceable_group = data.raw['mining-drill']['area-mining-drill'].fast_replaceable_group
+    data.raw['mining-drill']['area-mining-drill-3'].fast_replaceable_group = data.raw['mining-drill']['area-mining-drill-2'].fast_replaceable_group
 end
 
 -- se
@@ -178,9 +183,4 @@ if mods['space-exploration'] then
     data.raw['assembling-machine']['se-fuel-refinery'].fast_replaceable_group  = 'fuel-refinery'
     data.raw['assembling-machine']['se-fuel-refinery-2'].fast_replaceable_group = data.raw['assembling-machine']['se-fuel-refinery'].fast_replaceable_group
     data.raw['assembling-machine']['se-fuel-refinery-3'].fast_replaceable_group = data.raw['assembling-machine']['se-fuel-refinery-2'].fast_replaceable_group
-
-    -- electric mining drill
-    data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'core-miner-drill'
-    data.raw['mining-drill']['se-core-miner-drill-2'].fast_replaceable_group = data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group
-    data.raw['mining-drill']['se-core-miner-drill-3'].fast_replaceable_group = data.raw['mining-drill']['se-core-miner-drill-2'].fast_replaceable_group
 end
