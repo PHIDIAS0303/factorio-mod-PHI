@@ -186,6 +186,10 @@ if mods ~= nil then
             max = 3
         }
     end
+
+    if mods['Atomic_Overhaul'] then
+        items['centrifuge'].stage = 2
+    end
 end
 
 return items
