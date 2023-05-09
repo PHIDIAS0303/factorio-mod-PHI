@@ -117,6 +117,17 @@ if mods ~= nil then
             min = 2,
             max = 3
         }
+
+        items['area-mining-drill'] = {
+            enabled = true,
+            stage = 2,
+            type = 'mining-drill',
+            name = 'area-mining-drill',
+            ref_name = 'area-mining-drill',
+            tech = 'area-mining-drill',
+            min = 2,
+            max = 3
+        }
     end
 
     if mods['space-exploration'] then
