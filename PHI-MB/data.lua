@@ -54,7 +54,7 @@ end
 -- item
 local function EI(source, tier)
     local item = table.deepcopy(data.raw.item[source.ref_name])
-
+    
     item.name = source.name .. '-' .. tier
     item.place_result = source.name .. '-' .. tier
     -- item.icons = {{icon = graphics_location .. source .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
