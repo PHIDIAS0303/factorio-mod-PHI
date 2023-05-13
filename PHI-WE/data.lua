@@ -1,5 +1,37 @@
 local items = require 'config'
 
+local research_modifier = {
+    --[[
+    ['electric-turret'] = {
+        'energy-weapons-damage-1',
+        'energy-weapons-damage-2',
+        'energy-weapons-damage-3',
+        'energy-weapons-damage-4',
+        'energy-weapons-damage-5',
+        'energy-weapons-damage-6',
+        'energy-weapons-damage-7'
+    },
+    ]]
+    ['ammo-turret'] = {
+        'physical-projectile-damage-1',
+        'physical-projectile-damage-2',
+        'physical-projectile-damage-3',
+        'physical-projectile-damage-4',
+        'physical-projectile-damage-5',
+        'physical-projectile-damage-6',
+        'physical-projectile-damage-7'
+    },
+    ['fluid-turret'] = {
+        'refined-flammables-1',
+        'refined-flammables-2',
+        'refined-flammables-3',
+        'refined-flammables-4',
+        'refined-flammables-5',
+        'refined-flammables-6',
+        'refined-flammables-7'
+    }
+}
+
 -- entity
 local function EE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
@@ -74,6 +106,18 @@ end
 -- tech
 local function ET(source, tier)
     table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
+
+    if source.type == 'ammo-turret' or source.type == 'fluid-turret' then
+        for i=1, #research_modifier[source.type], 1 do
+            for j=1, #data.raw.technology[research_modifier[source.type][i]].effects, 1 do
+                if (data.raw.technology[research_modifier[source.type][i]].effects[j].type == 'turret-attack') then
+                    if (data.raw.technology[research_modifier[source.type][i]].effects[j].turret_id == source.ref_name) then
+                        table.insert(data.raw.technology[research_modifier[source.type][i]].effects, {type='turret-attack', turret_id=source.name .. '-' .. tier, modifier=data.raw.technology[research_modifier[source.type][i]].effects[j].modifier})
+                    end
+                end
+            end
+        end
+    end
 end
 
 for _, v in pairs(items) do

@@ -93,7 +93,7 @@ local function EI(source, tier)
     item.stack_size = 20
     item.default_request_amount = 5
     item.icons = {{icon = '__base__/graphics/icons/' .. source.graphics_name .. '.png', icon_mipmaps = 4, icon_size = 64}}
-    item.order = item.order .. tier
+    item.order = source.order .. tier
     data:extend({item})
 end
 

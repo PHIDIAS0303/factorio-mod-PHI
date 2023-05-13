@@ -8,6 +8,7 @@ local items = {
         min = 2,
         max = 8,
         base = 30,
+        order = 'a[energy-source]-a[solar-panel]',
         graphics_name = 'solar-panel-equipment'
     },
     ['fusion-reactor'] = {
@@ -19,6 +20,7 @@ local items = {
         min = 2,
         max = 8,
         base = 750,
+        order = 'a[energy-source]-b[fusion-reactor]',
         graphics_name = 'fusion-reactor-equipment'
     },
     ['battery'] = {
@@ -30,6 +32,7 @@ local items = {
         min = 3,
         max = 8,
         base = 100,
+        order = 'b[battery]-b[battery-equipment-mk2]',
         graphics_name = 'battery-mk2-equipment'
     },
     ['personal-laser-defense'] = {
@@ -41,6 +44,7 @@ local items = {
         min = 2,
         max = 8,
         base = 3,
+        order = 'b[active-defense]-a[personal-laser-defense-equipment]',
         graphics_name = 'personal-laser-defense-equipment'
     },
     ['energy-shield'] = {
@@ -52,6 +56,7 @@ local items = {
         min = 3,
         max = 8,
         base = 150,
+        order = 'a[shield]-b[energy-shield-equipment-mk2]',
         graphics_name = 'energy-shield-mk2-equipment'
     },
     ['personal-roboport'] = {
@@ -63,6 +68,7 @@ local items = {
         min = 3,
         max = 8,
         base = 0.5,
+        order = 'e[robotics]-b[personal-roboport-equipment-mk2]',
         graphics_name = 'personal-roboport-mk2-equipment'
     },
     ['night-vision'] = {
@@ -74,6 +80,7 @@ local items = {
         min = 2,
         max = 2,
         base = 1,
+        order = 'f[night-vision]-a[night-vision-equipment]',
         graphics_name = 'night-vision-equipment'
     },
     ['exoskeleton'] = {
@@ -85,6 +92,7 @@ local items = {
         min = 2,
         max = 2,
         base = 0.6,
+        order = 'd[exoskeleton]-a[exoskeleton-equipment]',
         graphics_name = 'exoskeleton-equipment'
     }
 }
