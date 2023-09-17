@@ -40,32 +40,25 @@ local function EE(source, tier)
         item.fluid_box.height = 4
         item.output_fluid_box.height = 4
         item.output_fluid_box.base_level = 5
+        item.energy_consumption = source.base * tier .. 'kW'
+        item.target_temperature = 15 + (source.temp * tier)
+        item.fluid_usage_per_tick = source.fluid
 
-        if (source.name == 'boiler') then
-            item.target_temperature = 15 + (150 * tier)
-            item.energy_consumption = 1.8 * tier .. 'MW'
-
-        elseif (source.name == 'heat-exchanger') then
-            item.target_temperature = 15 + (485 * tier)
-            item.energy_consumption = 10 * tier .. 'MW'
-            item.energy_source.min_working_temperature = 15 + (485 * tier)
-            item.energy_source.max_temperature = 500 + (500 * tier)
+        if (source.name == 'heat-exchanger') then
+            item.energy_source.min_working_temperature = 15 + (source.temp * tier)
+            item.energy_source.max_temperature = source.temp * (tier + 1)
             item.energy_source.max_transfer = 2000 + (2000 * tier) .. 'MW'
         end
 
     elseif (source.type == 'generator') then
         item.fluid_box.height = 4
-
-        if (source.name == 'steam-engine') then
-            item.maximum_temperature = 15 + (150 * tier)
-
-        elseif (source.name == 'steam-turbine') then
-            item.maximum_temperature = 15 + (485 * tier)
-        end
+        item.maximum_temperature = 15 + (source.base * tier)
+        item.fluid_usage_per_tick = source.fluid
 
     elseif (source.type == 'reactor') then
-        item.consumption = 40 * tier .. 'MW'
-        item.heat_buffer.max_temperature = 500 + (500 * tier)
+        item.consumption = source.base * tier .. 'MW'
+        item.neighbour_bonus = source.bonus
+        item.heat_buffer.max_temperature = source.temp * (tier + 1)
         item.heat_buffer.max_transfer = 10 + (10 * tier) .. 'GW'
 
     elseif (source.type == 'heat-pipe') then
