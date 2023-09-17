@@ -63,7 +63,7 @@ local function EE(source, tier)
         end
 
     elseif (source.type == 'reactor') then
-        item.consumption = 40 * tier
+        item.consumption = 40 * tier .. 'MW'
         item.heat_buffer.max_temperature = 500 + (500 * tier)
         item.heat_buffer.max_transfer = 5 + (5 * tier) .. 'GW'
 
