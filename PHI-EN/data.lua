@@ -59,11 +59,11 @@ local function EE(source, tier)
         item.consumption = source.base * tier .. 'MW'
         item.neighbour_bonus = source.bonus
         item.heat_buffer.max_temperature = source.temp * (tier + 1)
-        item.heat_buffer.max_transfer = 10 + (10 * tier) .. 'GW'
+        item.heat_buffer.max_transfer = source.temp * (tier + 1) * 0.02 .. 'GW'
 
     elseif (source.type == 'heat-pipe') then
-        item.heat_buffer.max_temperature = 500 + (500 * tier)
-        item.heat_buffer.max_transfer = 1 + (1 * tier) .. 'GW'
+        item.heat_buffer.max_temperature = source.temp * (tier + 1)
+        item.heat_buffer.max_transfer = source.temp * (tier + 1) * 0.01 .. 'GW'
     end
 
     if (tier <= source.max - 1) then
