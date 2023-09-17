@@ -59,3 +59,5 @@ data.raw['generator']['steam-turbine-2'].fast_replaceable_group = data.raw['gene
 data.raw['generator']['steam-turbine-3'].fast_replaceable_group = data.raw['generator']['steam-turbine-2'].fast_replaceable_group
 data.raw['generator']['steam-turbine-4'].fast_replaceable_group = data.raw['generator']['steam-turbine-3'].fast_replaceable_group
 data.raw['generator']['steam-turbine-5'].fast_replaceable_group = data.raw['generator']['steam-turbine-4'].fast_replaceable_group
+
+data.raw['fluid']['steam'].max_temperature = 3000

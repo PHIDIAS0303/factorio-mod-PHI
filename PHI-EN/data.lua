@@ -48,8 +48,9 @@ local function EE(source, tier)
         elseif (source.name == 'heat-exchanger') then
             item.target_temperature = 15 + (485 * tier)
             item.energy_consumption = 10 * tier .. 'MW'
-            item.energy_source.max_temperature = 15 + (485 * tier)
-            item.energy_source.max_transfer = 1500 + (500 * tier) .. 'MW'
+            item.energy_source.min_working_temperature = 15 + (485 * tier)
+            item.energy_source.max_temperature = 500 + (500 * tier)
+            item.energy_source.max_transfer = 2000 + (2000 * tier) .. 'MW'
         end
 
     elseif (source.type == 'generator') then
@@ -65,11 +66,11 @@ local function EE(source, tier)
     elseif (source.type == 'reactor') then
         item.consumption = 40 * tier .. 'MW'
         item.heat_buffer.max_temperature = 500 + (500 * tier)
-        item.heat_buffer.max_transfer = 5 + (5 * tier) .. 'GW'
+        item.heat_buffer.max_transfer = 10 + (10 * tier) .. 'GW'
 
     elseif (source.type == 'heat-pipe') then
         item.heat_buffer.max_temperature = 500 + (500 * tier)
-        item.heat_buffer.max_transfer = 500 + (500 * tier) .. 'MW'
+        item.heat_buffer.max_transfer = 1 + (1 * tier) .. 'GW'
     end
 
     if (tier <= source.max - 1) then
