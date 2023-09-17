@@ -1,4 +1,38 @@
 local items = {
+    ['setting'] = {
+        ['PHI-EQ-SOLAR-TIER'] = {
+            type = 'max',
+            effect = {'solar-panel'}
+        },
+        ['PHI-EQ-BATTERY-TIER'] = {
+            type = 'max',
+            effect = {'battery'}
+        },
+        ['PHI-EQ-REACTOR-TIER'] = {
+            type = 'max',
+            effect = {'fusion-reactor'}
+        },
+        ['PHI-EQ-LASER-TIER'] = {
+            type = 'max',
+            effect = {'personal-laser-defense'}
+        },
+        ['PHI-EQ-ROBOPORT-TIER'] = {
+            type = 'max',
+            effect = {'personal-roboport'}
+        },
+        ['PHI-EQ-SHIELD-TIER'] = {
+            type = 'max',
+            effect = {'energy-shield'}
+        },
+        ['PHI-EQ-NIGHT-TIER'] = {
+            type = 'max',
+            effect = {'night-vision'}
+        },
+        ['PHI-EQ-EXO-TIER'] = {
+            type = 'max',
+            effect = {'exoskeleton'}
+        }
+    },
     ['solar-panel'] = {
         enabled = true,
         type = 'solar-panel',

@@ -1,17 +1,5 @@
 local items = {
     ['setting'] = {
-        ['PHI-EN-SOLAR'] = {
-            type = 'enabled',
-            effect = {'solar-panel', 'accumulator'}
-        },
-        ['PHI-EN-STEAM'] = {
-            type = 'enabled',
-            effect = {'boiler', 'steam-engine'}
-        },
-        ['PHI-EN-NUCLEAR'] = {
-            type = 'enabled',
-            effect = {'nuclear-reactor', 'heat-pipe', 'heat-exchanger', 'steam-turbine'}
-        },
         ['PHI-EN-SOLAR-TIER'] = {
             type = 'max',
             effect = {'solar-panel', 'accumulator'}
