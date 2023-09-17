@@ -23,3 +23,7 @@ for k, v in pairs(items) do
         end
     end
 end
+
+if items['nuclear-reactor'].enabled then
+    data.raw['fluid']['steam'].max_temperature = 5000
+end
