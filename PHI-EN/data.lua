@@ -165,13 +165,22 @@ local function ET(source, tier)
     end
 end
 
-for _, v in pairs(items) do
-    if v.enabled then
-        for j=v.min, v.max, 1 do
-            EE(v, j)
-            EI(v, j)
-            ER(v, j)
-            ET(v, j)
+
+for k, v in pairs(items['setting']) do
+    for k2=1, #v.effect do
+        items[v.effect[k2]][v.type] = settings.startup[k].value
+    end
+end
+
+for k, v in pairs(items) do
+    if k ~= 'setting' then
+        if v.enabled then
+            for j=v.min, v.max, 1 do
+                EE(v, j)
+                EI(v, j)
+                ER(v, j)
+                ET(v, j)
+            end
         end
     end
 end
