@@ -31,3 +31,31 @@ data.raw['generator']['steam-engine-2'].fast_replaceable_group = data.raw['gener
 data.raw['generator']['steam-engine-3'].fast_replaceable_group = data.raw['generator']['steam-engine-2'].fast_replaceable_group
 data.raw['generator']['steam-engine-4'].fast_replaceable_group = data.raw['generator']['steam-engine-3'].fast_replaceable_group
 data.raw['generator']['steam-engine-5'].fast_replaceable_group = data.raw['generator']['steam-engine-4'].fast_replaceable_group
+
+-- nuclear-reactor
+data.raw['reactor']['nuclear-reactor'].fast_replaceable_group = 'reactor'
+data.raw['reactor']['nuclear-reactor-2'].fast_replaceable_group = data.raw['reactor']['nuclear-reactor'].fast_replaceable_group
+data.raw['reactor']['nuclear-reactor-3'].fast_replaceable_group = data.raw['reactor']['nuclear-reactor-2'].fast_replaceable_group
+data.raw['reactor']['nuclear-reactor-4'].fast_replaceable_group = data.raw['reactor']['nuclear-reactor-3'].fast_replaceable_group
+data.raw['reactor']['nuclear-reactor-5'].fast_replaceable_group = data.raw['reactor']['nuclear-reactor-4'].fast_replaceable_group
+
+-- heat-pipe
+data.raw['heat-pipe']['heat-pipe'].fast_replaceable_group = 'heat-pipe'
+data.raw['heat-pipe']['heat-pipe-2'].fast_replaceable_group = data.raw['heat-pipe']['heat-pipe'].fast_replaceable_group
+data.raw['heat-pipe']['heat-pipe-3'].fast_replaceable_group = data.raw['heat-pipe']['heat-pipe-2'].fast_replaceable_group
+data.raw['heat-pipe']['heat-pipe-4'].fast_replaceable_group = data.raw['heat-pipe']['heat-pipe-3'].fast_replaceable_group
+data.raw['heat-pipe']['heat-pipe-5'].fast_replaceable_group = data.raw['heat-pipe']['heat-pipe-4'].fast_replaceable_group
+
+-- heat-exchanger
+data.raw['boiler']['heat-exchanger'].fast_replaceable_group = 'heat-exchanger'
+data.raw['boiler']['heat-exchanger-2'].fast_replaceable_group = data.raw['boiler']['heat-exchanger'].fast_replaceable_group
+data.raw['boiler']['heat-exchanger-3'].fast_replaceable_group = data.raw['boiler']['heat-exchanger-2'].fast_replaceable_group
+data.raw['boiler']['heat-exchanger-4'].fast_replaceable_group = data.raw['boiler']['heat-exchanger-3'].fast_replaceable_group
+data.raw['boiler']['heat-exchanger-5'].fast_replaceable_group = data.raw['boiler']['heat-exchanger-4'].fast_replaceable_group
+
+-- steam-turbine
+data.raw['generator']['steam-turbine'].fast_replaceable_group = 'steam-engine'
+data.raw['generator']['steam-turbine-2'].fast_replaceable_group = data.raw['generator']['steam-turbine'].fast_replaceable_group
+data.raw['generator']['steam-turbine-3'].fast_replaceable_group = data.raw['generator']['steam-turbine-2'].fast_replaceable_group
+data.raw['generator']['steam-turbine-4'].fast_replaceable_group = data.raw['generator']['steam-turbine-3'].fast_replaceable_group
+data.raw['generator']['steam-turbine-5'].fast_replaceable_group = data.raw['generator']['steam-turbine-4'].fast_replaceable_group

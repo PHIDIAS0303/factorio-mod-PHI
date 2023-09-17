@@ -32,17 +32,44 @@ local function EE(source, tier)
         item.discharge_animation.layers[1].layers[1].hr_version.filename = item.picture.layers[1].hr_version.filename
         item.discharge_animation.layers[1].layers[1].hr_version.tint = {r = 1, g = 1, b = 1, a = 1}
         ]]
+
     elseif (source.type == 'solar-panel') then
         item.production = (source.base * (4 ^ (tier - 1))) .. 'kW'
+
     elseif (source.type == 'boiler') then
-        item.target_temperature = 15 + (150 * tier)
         item.fluid_box.height = 4
         item.output_fluid_box.height = 4
         item.output_fluid_box.base_level = 5
-        item.energy_consumption = 1.8 * tier .. 'MW'
+
+        if (source.name == 'boiler') then
+            item.target_temperature = 15 + (150 * tier)
+            item.energy_consumption = 1.8 * tier .. 'MW'
+
+        elseif (source.name == 'heat-exchanger') then
+            item.target_temperature = 15 + (485 * tier)
+            item.energy_consumption = 10 * tier .. 'MW'
+            item.energy_source.max_temperature = 15 + (485 * tier)
+            item.energy_source.max_transfer = 1500 + (500 * tier) .. 'MW'
+        end
+
     elseif (source.type == 'generator') then
         item.fluid_box.height = 4
-        item.maximum_temperature = 15 + (150 * tier)
+
+        if (source.name == 'steam-engine') then
+            item.maximum_temperature = 15 + (150 * tier)
+
+        elseif (source.name == 'steam-turbine') then
+            item.maximum_temperature = 15 + (485 * tier)
+        end
+
+    elseif (source.type == 'reactor') then
+        item.consumption = 40 * tier
+        item.heat_buffer.max_temperature = 500 + (500 * tier)
+        item.heat_buffer.max_transfer = 5 + (5 * tier) .. 'GW'
+
+    elseif (source.type == 'heat-pipe') then
+        item.heat_buffer.max_temperature = 500 + (500 * tier)
+        item.heat_buffer.max_transfer = 500 + (500 * tier) .. 'MW'
     end
 
     if (tier <= source.max - 1) then

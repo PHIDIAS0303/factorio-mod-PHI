@@ -32,6 +32,38 @@ local items = {
         ref_name = 'steam-engine',
         min = 2,
         max = 5
+    },
+    ['nuclear-reactor'] = {
+        enabled = true,
+        type = 'reactor',
+        name = 'nuclear-reactor',
+        ref_name = 'nuclear-reactor',
+        min = 2,
+        max = 5
+    },
+    ['heat-pipe'] = {
+        enabled = true,
+        type = 'heat-pipe',
+        name = 'heat-pipe',
+        ref_name = 'heat-pipe',
+        min = 2,
+        max = 5
+    },
+    ['heat-exchanger'] = {
+        enabled = true,
+        type = 'boiler',
+        name = 'heat-exchanger',
+        ref_name = 'heat-exchanger',
+        min = 2,
+        max = 5
+    },
+    ['steam-turbine'] = {
+        enabled = true,
+        type = 'generator',
+        name = 'steam-turbine',
+        ref_name = 'steam-turbine',
+        min = 2,
+        max = 5
     }
 }
 
