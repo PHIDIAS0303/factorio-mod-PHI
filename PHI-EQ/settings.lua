@@ -14,42 +14,42 @@ data:extend({{
     order = 'A2'
   }, {
     type = 'int-setting',
-    name = 'PHI-EN-REACTOR-TIER',
+    name = 'PHI-EQ-REACTOR-TIER',
     setting_type = 'startup',
     default_value = 8,
     allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
     order = 'A3'
   }, {
     type = 'int-setting',
-    name = 'PHI-EN-LASER-TIER',
+    name = 'PHI-EQ-LASER-TIER',
     setting_type = 'startup',
     default_value = 8,
     allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
     order = 'A4'
   }, {
     type = 'int-setting',
-    name = 'PHI-EN-ROBOPORT-TIER',
+    name = 'PHI-EQ-ROBOPORT-TIER',
     setting_type = 'startup',
     default_value = 8,
     allowed_values = {2, 3, 4, 5, 6, 7, 8},
     order = 'A5'
   }, {
     type = 'int-setting',
-    name = 'PHI-EN-SHIELD-TIER',
+    name = 'PHI-EQ-SHIELD-TIER',
     setting_type = 'startup',
     default_value = 8,
     allowed_values = {2, 3, 4, 5, 6, 7, 8},
     order = 'A6'
   }, {
     type = 'int-setting',
-    name = 'PHI-EN-NIGHT-TIER',
+    name = 'PHI-EQ-NIGHT-TIER',
     setting_type = 'startup',
     default_value = 2,
     allowed_values = {1, 2},
     order = 'A7'
   }, {
     type = 'int-setting',
-    name = 'PHI-EN-EXO-TIER',
+    name = 'PHI-EQ-EXO-TIER',
     setting_type = 'startup',
     default_value = 2,
     allowed_values = {1, 2},
