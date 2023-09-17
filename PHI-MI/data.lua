@@ -47,8 +47,11 @@ data.raw['module']['effectivity-module-3'].effect = {consumption = {bonus = -1.5
 
 data.raw['arithmetic-combinator']['arithmetic-combinator'].energy_source.usage_priority = 'primary-input'
 data.raw['decider-combinator']['decider-combinator'].energy_source.usage_priority = 'primary-input'
+
 data.raw['repair-tool']['repair-pack'].speed = 4
 data.raw['repair-tool']['repair-pack'].durability = 600
+
+data.raw['reactor']['nuclear-reactor'].scale_energy_usage = true
 
 data.raw['pipe']['pipe'].fluid_box.height = 4
 data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.height = 4
