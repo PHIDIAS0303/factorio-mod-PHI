@@ -1,19 +1,31 @@
--- laser turret
-data.raw['electric-turret']['laser-turret'].fast_replaceable_group = 'laser-turret'
-data.raw['electric-turret']['laser-turret-2'].fast_replaceable_group = data.raw['electric-turret']['laser-turret'].fast_replaceable_group
-data.raw['electric-turret']['laser-turret-3'].fast_replaceable_group = data.raw['electric-turret']['laser-turret-2'].fast_replaceable_group
+local items = require 'config'
 
--- gun turret
-data.raw['ammo-turret']['gun-turret'].fast_replaceable_group = 'gun-turret'
-data.raw['ammo-turret']['gun-turret-2'].fast_replaceable_group = data.raw['ammo-turret']['gun-turret'].fast_replaceable_group
-data.raw['ammo-turret']['gun-turret-3'].fast_replaceable_group = data.raw['ammo-turret']['gun-turret-2'].fast_replaceable_group
+for k, v in pairs(items['setting']) do
+    for k2=1, #v.effect do
+        if items[v.effect[k2]] ~= nil then
+            if settings.startup[k].value < items[v.effect[k2]].min then
+                items[v.effect[k2]].enabled = false
+            end
 
--- gun turret
-data.raw['fluid-turret']['flamethrower-turret'].fast_replaceable_group = 'flamethrower-turret'
-data.raw['fluid-turret']['flamethrower-turret-2'].fast_replaceable_group = data.raw['fluid-turret']['flamethrower-turret'].fast_replaceable_group
-data.raw['fluid-turret']['flamethrower-turret-3'].fast_replaceable_group = data.raw['fluid-turret']['flamethrower-turret-2'].fast_replaceable_group
+            items[v.effect[k2]][v.type] = settings.startup[k].value
+        end
+    end
+end
 
--- radar
-data.raw['radar']['radar'].fast_replaceable_group = 'radar'
-data.raw['radar']['radar-2'].fast_replaceable_group = data.raw['radar']['radar'].fast_replaceable_group
-data.raw['radar']['radar-3'].fast_replaceable_group = data.raw['radar']['radar-2'].fast_replaceable_group
+for k, v in pairs(items) do
+    if k ~= 'setting' then
+        if v.enabled then
+            data.raw[v.type][v.ref_name].fast_replaceable_group = v.type
+
+            if v.max > 2 then
+                data.raw[v.type][v.name .. '-' .. 2].fast_replaceable_group = data.raw[v.type][v.ref_name].fast_replaceable_group
+            end
+
+            if v.max > v.min then
+                for j=v.min + 1, v.max do
+                    data.raw[v.type][v.name .. '-' .. j].fast_replaceable_group = data.raw[v.type][v.name .. '-' .. (j - 1)].fast_replaceable_group
+                end
+            end
+        end
+    end
+end

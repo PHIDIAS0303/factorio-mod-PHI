@@ -1,4 +1,22 @@
 local items = {
+    ['setting'] = {
+        ['PHI-WE-LASER-TIER'] = {
+            type = 'max',
+            effect = {'laser-turret'}
+        },
+        ['PHI-WE-FLAME-TIER'] = {
+            type = 'max',
+            effect = {'flamethrower-turret'}
+        },
+        ['PHI-WE-GUN-TIER'] = {
+            type = 'max',
+            effect = {'gun-turret'}
+        },
+        ['PHI-WE-RADAR-TIER'] = {
+            type = 'max',
+            effect = {'radar'}
+        }
+    },
     ['laser-turret'] = {
         enabled = true,
         type = 'electric-turret',
