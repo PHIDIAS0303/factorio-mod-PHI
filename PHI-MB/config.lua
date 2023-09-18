@@ -1,4 +1,34 @@
 local items = {
+    ['setting'] = {
+        ['PHI-MB-ASSEMBLING-TIER'] = {
+            type = 'max',
+            effect = {'assembling-machine'}
+        },
+        ['PHI-MB-FURNACE-TIER'] = {
+            type = 'max',
+            effect = {'electric-furnace', 'electric-filter-furnace', 'industrial-furnace'}
+        },
+        ['PHI-MB-OIL-TIER'] = {
+            type = 'max',
+            effect = {'oil-refinery', 'chemical-plant', 'fuel-processor', 'se-fuel-refinery'}
+        },
+        ['PHI-MB-CENTRIFUGE-TIER'] = {
+            type = 'max',
+            effect = {'centrifuge'}
+        },
+        ['PHI-MB-LAB-TIER'] = {
+            type = 'max',
+            effect = {'lab'}
+        },
+        ['PHI-MB-MINING-TIER'] = {
+            type = 'max',
+            effect = {'electric-mining-drill', 'pumpjack', 'area-mining-drill'}
+        },
+        ['PHI-MB-SE-ASSEMBLING-TIER'] = {
+            type = 'max',
+            effect = {'se-space-assembling-machine', 'se-space-manufactory', 'se-casting-machine', 'se-pulveriser', 'se-lifesupport-facility'}
+        }
+    },
     ['assembling-machine'] = {
         enabled = true,
         stage = 1,

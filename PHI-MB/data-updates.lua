@@ -1,5 +1,18 @@
 local items = require 'config'
 
+for k, v in pairs(items['setting']) do
+    for k2=1, #v.effect do
+        if items[v.effect[k2]] ~= nil then
+            if settings.startup[k].value < items[v.effect[k2]].min then
+                items[v.effect[k2]].enabled = false
+            end
+
+            items[v.effect[k2]][v.type] = settings.startup[k].value
+        end
+    end
+end
+
+
 -- entity
 local function EE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
@@ -82,6 +95,25 @@ for _, v in pairs(items) do
     end
 end
 
+for k, v in pairs(items) do
+    if k ~= 'setting' then
+        if v.enabled then
+            data.raw[v.type][v.ref_name].fast_replaceable_group = v.type
+
+            if v.max > 2 then
+                data.raw[v.type][v.name .. '-' .. 2].fast_replaceable_group = data.raw[v.type][v.ref_name].fast_replaceable_group
+            end
+
+            if v.max > v.min then
+                for j=v.min + 1, v.max do
+                    data.raw[v.type][v.name .. '-' .. j].fast_replaceable_group = data.raw[v.type][v.name .. '-' .. (j - 1)].fast_replaceable_group
+                end
+            end
+        end
+    end
+end
+
+--[[
 -- assembling machine
 data.raw['assembling-machine']['assembling-machine-4'].fast_replaceable_group = data.raw['assembling-machine']['assembling-machine-3'].fast_replaceable_group
 data.raw['assembling-machine']['assembling-machine-5'].fast_replaceable_group = data.raw['assembling-machine']['assembling-machine-4'].fast_replaceable_group
@@ -184,3 +216,4 @@ if mods['space-exploration'] then
     data.raw['assembling-machine']['se-fuel-refinery-2'].fast_replaceable_group = data.raw['assembling-machine']['se-fuel-refinery'].fast_replaceable_group
     data.raw['assembling-machine']['se-fuel-refinery-3'].fast_replaceable_group = data.raw['assembling-machine']['se-fuel-refinery-2'].fast_replaceable_group
 end
+]]

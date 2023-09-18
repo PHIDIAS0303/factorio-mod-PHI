@@ -2,11 +2,13 @@ local items = require 'config'
 
 for k, v in pairs(items['setting']) do
     for k2=1, #v.effect do
-        if settings.startup[k].value < items[v.effect[k2]].min then
-            items[v.effect[k2]].enabled = false
-        end
+        if items[v.effect[k2]] ~= nil then
+            if settings.startup[k].value < items[v.effect[k2]].min then
+                items[v.effect[k2]].enabled = false
+            end
 
-        items[v.effect[k2]][v.type] = settings.startup[k].value
+            items[v.effect[k2]][v.type] = settings.startup[k].value
+        end
     end
 end
 
