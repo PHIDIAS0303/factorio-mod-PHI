@@ -1,5 +1,50 @@
-local recipe_multiplier = {4, 8}
+local recipe_multiplier = {settings.startup['PHI-RS-RECIPE-1'].value, settings.startup['PHI-RS-RECIPE-2'].value}
 local items = require 'config'
+
+if recipe_multiplier[1] == 1 then
+    recipe_multiplier[1] = nil
+end
+
+if settings.startup['PHI-RS-MODULE'].value == true then
+    table.insert(items, {
+        name='speed-module',
+        tech='speed-module'
+    })
+    table.insert(items, {
+        name='speed-module-2',
+        tech='speed-module-2'
+    })
+    table.insert(items, {
+        name='speed-module-3',
+        tech='speed-module-3'
+    })
+    table.insert(items, {
+        name='productivity-module',
+        tech='productivity-module'
+    })
+    table.insert(items, {
+        name='productivity-module-2',
+        tech='productivity-module-2'
+    })
+    table.insert(items, {
+        name='productivity-module-3',
+        tech='productivity-module-3'
+    })
+    table.insert(items, {
+        name='effectivity-module',
+        tech='effectivity-module'
+    })
+    table.insert(items, {
+        name='effectivity-module-2',
+        tech='effectivity-module-2'
+    })
+    table.insert(items, {
+        name='effectivity-module-3',
+        tech='effectivity-module-3'
+    })
+end
+
+
 
 for i=1, #items, 1 do
     if data.raw.recipe[items[i].name] ~= nil then

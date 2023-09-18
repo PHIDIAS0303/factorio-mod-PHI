@@ -212,42 +212,6 @@ local items = {
         tech='kovarex-enrichment-process'
     },
     {
-        name='speed-module',
-        tech='speed-module'
-    },
-    {
-        name='speed-module-2',
-        tech='speed-module-2'
-    },
-    {
-        name='speed-module-3',
-        tech='speed-module-3'
-    },
-    {
-        name='productivity-module',
-        tech='productivity-module'
-    },
-    {
-        name='productivity-module-2',
-        tech='productivity-module-2'
-    },
-    {
-        name='productivity-module-3',
-        tech='productivity-module-3'
-    },
-    {
-        name='effectivity-module',
-        tech='effectivity-module'
-    },
-    {
-        name='effectivity-module-2',
-        tech='effectivity-module-2'
-    },
-    {
-        name='effectivity-module-3',
-        tech='effectivity-module-3'
-    },
-    {
         name='fast-inserter',
         tech='fast-inserter'
     },
