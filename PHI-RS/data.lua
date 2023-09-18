@@ -44,8 +44,6 @@ if settings.startup['PHI-RS-MODULE'].value == true then
     })
 end
 
-
-
 for i=1, #items, 1 do
     if data.raw.recipe[items[i].name] ~= nil then
         for j=1, #recipe_multiplier, 1 do
