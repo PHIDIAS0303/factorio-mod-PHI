@@ -1,4 +1,4 @@
-local items = require '__PHI-MB__/config'
+local items = require '__PHI-WE__/config'
 
 for _, force in pairs(game.forces) do
     local technologies = force.technologies
