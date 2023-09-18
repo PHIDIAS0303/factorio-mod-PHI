@@ -12,10 +12,14 @@ for index, force in pairs(game.forces) do
     for _, v in pairs(items) do
         if technologies[v.tech] ~= nil then
             if technologies[v.tech].researched then
-                recipes[v.name .. '-s1'].enabled = true
-                recipes[v.name .. '-s1'].reload()
-                recipes[v.name .. '-s2'].enabled = true
-                recipes[v.name .. '-s2'].reload()
+                if recipes[v.name .. '-s1'] ~= nil then
+                    recipes[v.name .. '-s1'].enabled = true
+                    recipes[v.name .. '-s1'].reload()
+                end
+                if recipes[v.name .. '-s2'] ~= nil then
+                    recipes[v.name .. '-s2'].enabled = true
+                    recipes[v.name .. '-s2'].reload()
+                end
             end
         end
     end

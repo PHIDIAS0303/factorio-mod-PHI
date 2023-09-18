@@ -10,8 +10,10 @@ for _, force in pairs(game.forces) do
                 if technologies[v.tech] ~= nil then
                     if technologies[v.tech].researched then
                         for j=v.min, v.max, 1 do
-                            recipes[v.name .. '-' .. j].enabled = true
-                            recipes[v.name .. '-' .. j].reload()
+                            if recipes[v.name .. '-' .. j] ~= nil then
+                                recipes[v.name .. '-' .. j].enabled = true
+                                recipes[v.name .. '-' .. j].reload()
+                            end
                         end
                     end
                 end
