@@ -26,7 +26,7 @@ for k, _ in pairs(data.raw) do
                 if data.raw[k].fluid_boxes[k1] ~= false and data.raw[k].fluid_boxes[k1] ~= true then
                     if data.raw[k].fluid_boxes[k1].production_type ~= nil then
                         data.raw[k].fluid_boxes[k1].height = 4
-    
+
                         if data.raw[k].fluid_boxes[k1].base_level ~= nil then
                             data.raw[k].fluid_boxes[k1].base_level = data.raw[k].fluid_boxes[k1].base_level * 4
                         end
