@@ -12,7 +12,8 @@
     ],
     "Lua.workspace.userThirdParty": [
         "c:\\Users\\admin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\dc51ebede133ecdead910d8af67219c2\\justarandomgeek.factoriomod-debug\\sumneko-3rd",
-        "c:\\Users\\admin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\5f9b62c56848df862779e58e85e99848\\justarandomgeek.factoriomod-debug\\sumneko-3rd"
+        "c:\\Users\\admin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\5f9b62c56848df862779e58e85e99848\\justarandomgeek.factoriomod-debug\\sumneko-3rd",
+        "c:\\Users\\admin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\00279ca4e68da000b47c38e6a14132b7\\justarandomgeek.factoriomod-debug\\sumneko-3rd"
     ],
     "Lua.runtime.builtin": {
         "io": "disable",
