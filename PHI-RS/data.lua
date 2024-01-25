@@ -5,7 +5,7 @@ if recipe_multiplier[1] == 1 then
     recipe_multiplier[1] = nil
 end
 
-data.raw['utility-constants'].default.dynamic_recipe_overload_factor = settings.startup['PHI-RS-RECIPE-DROF'].value
+data.raw['utility-constants'].default.dynamic_recipe_overload_factor = settings.startup['PHI-RS-RECIPE-DROF'].value / 100
 
 if settings.startup['PHI-RS-MODULE'].value == true then
     table.insert(items, {
