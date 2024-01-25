@@ -18,4 +18,12 @@ data:extend({{
     setting_type = 'startup',
     default_value = true,
     order = 'A3'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-RS-RECIPE-3',
+    setting_type = 'startup',
+    default_value = 117,
+    minimum_value = 50,
+    maximum_value = 10000,
+    order = 'A4'
   }})
