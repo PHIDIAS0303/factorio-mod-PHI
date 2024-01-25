@@ -22,8 +22,8 @@ data:extend({{
     type = 'int-setting',
     name = 'PHI-RS-RECIPE-DROF',
     setting_type = 'startup',
-    default_value = 100,
-    minimum_value = 50,
-    maximum_value = 10000,
+    default_value = 1,
+    minimum_value = 1,
+    maximum_value = 100,
     order = 'A4'
   }})
