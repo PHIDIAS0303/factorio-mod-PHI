@@ -1,7 +1,12 @@
 local recipe_multiplier = {settings.startup['PHI-RS-RECIPE-1'].value, settings.startup['PHI-RS-RECIPE-2'].value}
 local items = require 'config'
 
-data.raw['utility-constants'].default.dynamic_recipe_overload_factor = settings.startup['PHI-RS-RECIPE-DROF'].value
+if settings.startup['PHI-RS-RECIPE-DROF'].value == 1 then
+    data.raw['utility-constants'].default.dynamic_recipe_overload_factor = 1.17
+
+else
+    data.raw['utility-constants'].default.dynamic_recipe_overload_factor = settings.startup['PHI-RS-RECIPE-DROF'].value
+end
 
 if settings.startup['PHI-RS-MODULE'].value == true then
     table.insert(items, {
