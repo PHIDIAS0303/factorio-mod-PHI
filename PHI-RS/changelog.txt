@@ -1,6 +1,13 @@
 ---------------------------------------------------------------------------------------------------
-Version: 1.1.0
-Date: 2022-12-01
+Version: 1.1.1
+Date: 2024-01-25
 
 Added:
-    - Compound Solar Panel and Accumulator
+    - Dynamic Recipe Overload Factor
+
+---------------------------------------------------------------------------------------------------
+Version: 1.1.0
+Date: 2023-09-19
+
+Added:
+    - Recipe scaling, filter furnace
