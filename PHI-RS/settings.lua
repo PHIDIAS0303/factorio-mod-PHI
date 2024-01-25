@@ -3,14 +3,14 @@ data:extend({{
     name = 'PHI-RS-RECIPE-1',
     setting_type = 'startup',
     default_value = 4,
-    allowed_values = {1, 2, 3, 4, 5, 6},
+    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
     order = 'A1'
   }, {
     type = 'int-setting',
     name = 'PHI-RS-RECIPE-2',
     setting_type = 'startup',
     default_value = 8,
-    allowed_values = {2, 3, 4, 5, 6, 7, 8, 9, 10},
+    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
     order = 'A2'
   }, {
     type = 'bool-setting',
@@ -20,7 +20,7 @@ data:extend({{
     order = 'A3'
   }, {
     type = 'int-setting',
-    name = 'PHI-RS-RECIPE-3',
+    name = 'PHI-RS-RECIPE-DROF',
     setting_type = 'startup',
     default_value = 117,
     minimum_value = 50,
