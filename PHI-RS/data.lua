@@ -8,6 +8,9 @@ else
     data.raw['utility-constants'].default.dynamic_recipe_overload_factor = settings.startup['PHI-RS-RECIPE-DROF'].value
 end
 
+data.raw['utility-constants'].default.minimum_recipe_overload_multiplier = settings.startup['PHI-RS-RECIPE-MINROM'].value
+data.raw['utility-constants'].default.maximum_recipe_overload_multiplier = settings.startup['PHI-RS-RECIPE-MAXROM'].value
+
 if settings.startup['PHI-RS-MODULE'].value == true then
     table.insert(items, {
         name='speed-module',

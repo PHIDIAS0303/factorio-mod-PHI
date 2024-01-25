@@ -26,4 +26,20 @@ data:extend({{
     minimum_value = 1,
     maximum_value = 100,
     order = 'A4'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-RS-RECIPE-MINROM',
+    setting_type = 'startup',
+    default_value = 2,
+    minimum_value = 1,
+    maximum_value = 100,
+    order = 'A5'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-RS-RECIPE-MAXROM',
+    setting_type = 'startup',
+    default_value = 100,
+    minimum_value = 1,
+    maximum_value = 100,
+    order = 'A6'
   }})
