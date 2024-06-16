@@ -7,6 +7,13 @@ data:extend({
     order = 'A1'
   },
   {
+    type = 'bool-setting',
+    name = 'PHI-MB',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'A2'
+  },
+  {
     type = 'int-setting',
     name = 'PHI-EN-SOLAR-TIER',
     setting_type = 'startup',
@@ -27,4 +34,55 @@ data:extend({
     default_value = 5,
     allowed_values = {1, 2, 3, 4, 5},
     order = 'B3'
-  }})
+  }, {
+    type = 'int-setting',
+    name = 'PHI-MB-ASSEMBLING-TIER',
+    setting_type = 'startup',
+    default_value = 5,
+    allowed_values = {3, 4, 5},
+    order = 'C1'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-MB-FURNACE-TIER',
+    setting_type = 'startup',
+    default_value = 3,
+    allowed_values = {1, 2, 3},
+    order = 'C2'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-MB-OIL-TIER',
+    setting_type = 'startup',
+    default_value = 3,
+    allowed_values = {1, 2, 3},
+    order = 'C3'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-MB-CENTRIFUGE-TIER',
+    setting_type = 'startup',
+    default_value = 3,
+    allowed_values = {1, 2, 3},
+    order = 'C4'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-MB-LAB-TIER',
+    setting_type = 'startup',
+    default_value = 3,
+    allowed_values = {1, 2, 3},
+    order = 'C5'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-MB-MINING-TIER',
+    setting_type = 'startup',
+    default_value = 3,
+    allowed_values = {1, 2, 3},
+    order = 'C6'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-MB-SE-ASSEMBLING-TIER',
+    setting_type = 'startup',
+    default_value = 3,
+    allowed_values = {1, 2, 3},
+    order = 'C7'
+  }
+}
+)

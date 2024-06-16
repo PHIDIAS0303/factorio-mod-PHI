@@ -1,4 +1,5 @@
-data:extend({{
+data:extend({
+  {
     type = 'int-setting',
     name = 'PHI-MB-ASSEMBLING-TIER',
     setting_type = 'startup',

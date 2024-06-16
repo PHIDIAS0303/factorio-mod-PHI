@@ -10,7 +10,9 @@
     "description": "Additional compound entities and items. Including power item like solar panel, accumulator.",
     "dependencies": [
         "base >= 1.1.0",
+        "? aai-industry >= 0.5.0",
         "? Krastorio2 >= 1.3.0",
-        "? space-exploration >= 0.6.0"
+        "? space-exploration >= 0.6.0",
+        "? Atomic_Overhaul >= 1.3.0" 
     ]
 }

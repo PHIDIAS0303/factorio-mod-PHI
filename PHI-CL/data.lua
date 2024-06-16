@@ -127,43 +127,37 @@ local function ER(source, tier)
         ingredient_name = ingredient_name .. '-' .. (tier - 1)
     end
 
+    local ingredient_amount = 2
+
     if (source.type == 'solar-panel') or (source.type == 'accumulator') then
+        ingredient_amount = 4
+    end
+
+    if ((source.type == 'boiler') or (source.type == 'steam-engine') or (source.type == 'nuclear-reactor') or (source.type == 'heat-pipe') or (source.type == 'heat-exchanger') or (source.type == 'steam-turbine')) and (tier > 2) then
         data:extend({{
             type = 'recipe',
             name = source.name .. '-' .. tier,
             energy_required = 2,
             enabled = false,
-            ingredients = {{ingredient_name, 4}},
+            ingredients = {{ingredient_name, 1}, {source.name, 1}},
             result = source.name .. '-' .. tier,
         }})
 
     else
-        if ((source.type == 'boiler') or (source.type == 'steam-engine') or (source.type == 'nuclear-reactor') or (source.type == 'heat-pipe') or (source.type == 'heat-exchanger') or (source.type == 'steam-turbine')) and (tier == 2) then
-            data:extend({{
-                type = 'recipe',
-                name = source.name .. '-' .. tier,
-                energy_required = 2,
-                enabled = false,
-                ingredients = {{ingredient_name, 1}, {source.name, 1}},
-                result = source.name .. '-' .. tier,
-            }})
-
-        else
-            data:extend({{
-                type = 'recipe',
-                name = source.name .. '-' .. tier,
-                energy_required = 2,
-                enabled = false,
-                ingredients = {{ingredient_name, 2}},
-                result = source.name .. '-' .. tier,
-            }})
-        end
+        data:extend({{
+            type = 'recipe',
+            name = source.name .. '-' .. tier,
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{ingredient_name, ingredient_amount}},
+            result = source.name .. '-' .. tier,
+        }})
     end
 end
 
 -- technology
 local function ET(source, tier)
-    if (source.type == 'solar-panel') or (source.type == 'accumulator') or (source.type == 'boiler') or (source.type == 'steam-engine') or (source.type == 'nuclear-reactor') or (source.type == 'heat-pipe') or (source.type == 'heat-exchanger') or (source.type == 'steam-turbine') then
+    if (source.tech == 'compound-energy') then
         if not data.raw.technology['compound-energy-' .. (tier - 1)] then
             local prereq
 
@@ -201,7 +195,7 @@ local function ET(source, tier)
             end
         end
 
-    else
+    elseif data.raw.technology[source.tech] then
         table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
     end
 end
