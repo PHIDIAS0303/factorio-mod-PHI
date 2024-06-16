@@ -14,6 +14,21 @@ data:extend({
     order = 'A2'
   },
   {
+    type = 'bool-setting',
+    name = 'PHI-WE',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'A3'
+  },
+  {
+    type = 'int-setting',
+    name = 'PHI-XW-WATER',
+    setting_type = 'startup',
+    default_value = 1,
+    allowed_values = {0, 1, 2, 3, 4, 5},
+    order = 'A7'
+  },
+  {
     type = 'int-setting',
     name = 'PHI-EN-SOLAR-TIER',
     setting_type = 'startup',
@@ -83,6 +98,42 @@ data:extend({
     default_value = 3,
     allowed_values = {1, 2, 3},
     order = 'C7'
+  },
+  {
+    type = 'int-setting',
+    name = 'PHI-WE-LASER-TIER',
+    setting_type = 'startup',
+    default_value = 3,
+    allowed_values = {1, 2, 3},
+    order = 'D1'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-WE-FLAME-TIER',
+    setting_type = 'startup',
+    default_value = 3,
+    allowed_values = {1, 2, 3},
+    order = 'D2'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-WE-GUN-TIER',
+    setting_type = 'startup',
+    default_value = 3,
+    allowed_values = {1, 2, 3},
+    order = 'D3'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-WE-RADAR-TIER',
+    setting_type = 'startup',
+    default_value = 3,
+    allowed_values = {1, 2, 3},
+    order = 'D4'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-XW-WATER',
+    setting_type = 'startup',
+    default_value = 5,
+    allowed_values = {1, 2, 3, 4, 5},
+    order = 'H1'
   }
 }
 )
