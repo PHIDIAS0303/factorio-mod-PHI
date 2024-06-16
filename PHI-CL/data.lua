@@ -244,6 +244,7 @@ local function ER(source, tier)
 
         new_name = ingredient_name .. '-mk' .. tier .. '-equipment'
         result_name = ingredient_name .. '-mk' .. tier .. '-equipment'
+
     else
         if tier > 2 then
             ingredient_name = ingredient_name .. '-' .. (tier - 1)
