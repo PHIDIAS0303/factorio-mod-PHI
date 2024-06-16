@@ -3,48 +3,47 @@ local graphics_location = '__PHI-EQ__/graphics/'
 local items = require 'config'
 
 -- equipment
-local function EE(source, tier)
+local function EEQ(source, tier)
     local item = {}
     item['name'] = source.name .. '-mk' .. tier .. '-equipment'
     item['categories'] = {'armor'}
     local w = 1
     local h = 1
 
-    if (source.type == 'solar-panel') then
-        item['type'] = 'solar-panel-equipment'
-        item['power'] = (source.base * (2 ^ (tier - 1))) .. 'kW'
+    if (source.name == 'solar-panel') then
+        item['power'] = (source.base * (2 ^ (tier - source.min + 1))) .. 'kW'
         item['energy_source'] = {type = 'electric', usage_priority = 'primary-output'}
-    elseif (source.type == 'battery') then
+
+    elseif (source.name == 'battery') then
         h = 2
-        item['type'] = 'battery-equipment'
-        item['energy_source'] = {type = 'electric', usage_priority = 'tertiary', buffer_capacity= (source.base * (2 ^ (tier - 2))) .. 'MJ'}
+        item['energy_source'] = {type = 'electric', usage_priority = 'tertiary', buffer_capacity= (source.base * (2 ^ (tier - source.min + 1))) .. 'MJ'}
+
     elseif (source.type == 'fusion-reactor') then
         w = 4
         h = 4
-        item['type'] = 'generator-equipment'
-        item['power'] = (source.base * (2 ^ (tier - 1))) .. 'kW'
+        item['power'] = (source.base * (2 ^ (tier - source.min + 1))) .. 'kW'
         item['energy_source'] = {type = 'electric', usage_priority = 'primary-output'}
+
     elseif (source.type == 'personal-laser-defense') then
         w = 2
         h = 2
-        item['type'] = 'active-defense-equipment'
-        item['energy_source'] = {type = 'electric', usage_priority = 'secondary-input', buffer_capacity = (250 * (2 ^ (tier - 1))) .. 'kJ'}
+        item['energy_source'] = {type = 'electric', usage_priority = 'secondary-input', buffer_capacity = (250 * (2 ^ (tier - source.min + 1))) .. 'kJ'}
         -- item['source_direction_count'] = 64
         -- item['source_offset'] = {0, -3.423489 / 4}
-        item['attack_parameters'] = {type = 'beam', cooldown = 40, range = (18 + tier), damage_modifier = (source.base * (2 ^ (tier - 1))), ammo_type = {category = 'laser', energy_consumption = (50 * (2 ^ (tier - 1))) .. 'kJ', action = {type = 'direct', action_delivery = {type = 'beam', beam = 'laser-beam', max_length = (18 + tier), duration = 60, source_offset = {0, -1.31439}}}}}
+        item['attack_parameters'] = {type = 'beam', cooldown = 40, range = (18 + tier), damage_modifier = (source.base * (2 ^ (tier - source.min + 1))), ammo_type = {category = 'laser', energy_consumption = (50 * (2 ^ (tier - 1))) .. 'kJ', action = {type = 'direct', action_delivery = {type = 'beam', beam = 'laser-beam', max_length = (18 + tier), duration = 60, source_offset = {0, -1.31439}}}}}
         item['automatic'] = true
+
     elseif (source.type == 'energy-shield') then
         w = 2
         h = 2
-        item['type'] = 'energy-shield-equipment'
-        item['energy_source'] = {type = 'electric', usage_priority = 'primary-input', input_flow_limit = (source.base * 4 * (2 ^ (tier - 1))) .. 'kW', buffer_capacity = (source.base * 2 * (2 ^ (tier - 1))) .. 'kJ'}
+        item['energy_source'] = {type = 'electric', usage_priority = 'primary-input', input_flow_limit = (source.base * 4 * (2 ^ (tier - source.min + 1))) .. 'kW', buffer_capacity = (source.base * 2 * (2 ^ (tier - 1))) .. 'kJ'}
         item['max_shield_value'] = (source.base * (2 ^ (tier - 2)))
         item['energy_per_shield'] = '80kJ'
+
     elseif (source.type == 'personal-roboport') then
         w = 2
         h = 2
-        item['type'] = 'roboport-equipment'
-        item['energy_source'] = {type = 'electric', usage_priority = 'secondary-input', buffer_capacity = (source.base * 32 * (2 ^ (tier - 1))) .. 'MJ'}
+        item['energy_source'] = {type = 'electric', usage_priority = 'secondary-input', buffer_capacity = (source.base * 32 * (2 ^ (tier - source.min + 1))) .. 'MJ'}
         item['robot_limit'] = 50
         item['construction_radius'] = 32
         item['spawn_and_station_height'] = 0.4
@@ -56,23 +55,23 @@ local function EE(source, tier)
         item['stationing_offset'] = {0, -0.6}
         item['charging_station_shift'] = {0, 0.5}
         item['charging_station_count'] = 16
-        item['charging_energy'] = (source.base * (2 ^ (tier - 2))) .. 'MW'
+        item['charging_energy'] = (source.base * (2 ^ (tier - source.min + 1))) .. 'MW'
         item['charging_distance'] = 1.6
         item['charging_threshold_distance'] = 5
+
     elseif (source.type == 'night-vision') then
         w = 2
         h = 2
-        item['type'] = 'night-vision-equipment'
         item['energy_source'] = {type = 'electric', usage_priority = 'primary-input', buffer_capacity = '1MJ'}
         item['energy_input'] = '20kW'
         item['activate_sound'] = {filename = '__base__/sound/nightvision-on.ogg', volume = 0.5}
         item['deactivate_sound'] = {filename = '__base__/sound/nightvision-off.ogg', volume = 0.5}
         item['darkness_to_turn_on'] = source.base
         item['color_lookup'] = {{0, '__core__/graphics/color_luts/lut-sunset.png'}}
+
     elseif (source.type == 'exoskeleton') then
         w = 2
         h = 4
-        item['type'] = 'movement-bonus-equipment'
         item['energy_source'] = {type = 'electric', usage_priority = 'secondary-input', buffer_capacity = '10MJ'}
         item['energy_consumption'] = '400kW'
         item['movement_bonus'] = source.base
@@ -93,7 +92,7 @@ local function EI(source, tier)
     item.stack_size = 20
     item.default_request_amount = 5
     item.icons = {{icon = '__base__/graphics/icons/' .. source.graphics_name .. '.png', icon_mipmaps = 4, icon_size = 64}}
-    item.order = source.order .. tier
+    item.order = item.order .. tier
     data:extend({item})
 end
 
@@ -102,9 +101,8 @@ local function ER(source, tier)
     local na = source.name
 
     if (tier == 1) then
-        na = source.base_name .. '-equipment'
-    elseif (tier == 2) then
         na = source.name .. '-equipment'
+
     else
         na = source.name .. '-mk' .. (tier - 1) .. '-equipment'
     end
@@ -192,7 +190,7 @@ for k, v in pairs(items) do
     if k ~= 'setting' then
         if v.enabled then
             for j=v.min, v.max, 1 do
-                EE(v, j)
+                EEQ(v, j)
                 EI(v, j)
                 ER(v, j)
                 ET(v, j)

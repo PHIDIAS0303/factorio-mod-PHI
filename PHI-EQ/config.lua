@@ -35,7 +35,7 @@ local items = {
     },
     ['solar-panel'] = {
         enabled = true,
-        type = 'solar-panel',
+        type = 'solar-panel-equipment',
         name = 'solar-panel',
         base_name = 'solar-panel',
         tech = 'solar-panel-equipment',

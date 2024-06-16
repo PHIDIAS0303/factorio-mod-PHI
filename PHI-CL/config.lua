@@ -58,6 +58,19 @@ local items = {
                 'se-space-mechanical-laboratory'
             }
         },
+        ['PHI-EQ'] = {
+            type = 'enabled',
+            effect = {
+                'solar-panel-equipment',
+                'battery-equipment',
+                'fusion-reactor-equipment',
+                'energy-shield-equipment',
+                'personal-laser-defense-equipment',
+                'personal-roboport-equipment',
+                'night-vision-equipment',
+                'exoskeleton-equipment'
+            }
+        },
         ['PHI-EN-SOLAR-TIER'] = {
             type = 'max',
             effect = {
@@ -178,6 +191,54 @@ local items = {
             type = 'max',
             effect = {
                 'radar'
+            }
+        },
+        ['PHI-EQ-SOLAR-TIER'] = {
+            type = 'max',
+            effect = {
+                'solar-panel'
+            }
+        },
+        ['PHI-EQ-BATTERY-TIER'] = {
+            type = 'max',
+            effect = {
+                'battery'
+            }
+        },
+        ['PHI-EQ-REACTOR-TIER'] = {
+            type = 'max',
+            effect = {
+                'fusion-reactor'
+            }
+        },
+        ['PHI-EQ-LASER-TIER'] = {
+            type = 'max',
+            effect = {
+                'personal-laser-defense'
+            }
+        },
+        ['PHI-EQ-ROBOPORT-TIER'] = {
+            type = 'max',
+            effect = {
+                'personal-roboport'
+            }
+        },
+        ['PHI-EQ-SHIELD-TIER'] = {
+            type = 'max',
+            effect = {
+                'energy-shield'
+            }
+        },
+        ['PHI-EQ-NIGHT-TIER'] = {
+            type = 'max',
+            effect = {
+                'night-vision'
+            }
+        },
+        ['PHI-EQ-EXO-TIER'] = {
+            type = 'max',
+            effect = {
+                'exoskeleton'
             }
         }
     },
@@ -427,6 +488,96 @@ local items = {
             tech = 'automation',
             min = 2,
             max = 3
+        }
+    },
+    ['equipment'] = {
+        ['solar-panel-equipment'] = {
+            enabled = true,
+            type = 'solar-panel-equipment',
+            name = 'solar-panel',
+            ref_name = 'solar-panel-equipment',
+            tech = 'solar-panel-equipment',
+            min = 2,
+            max = 8,
+            base = 30,
+            graphics_name = 'solar-panel-equipment'
+        },
+        ['fusion-reactor-equipment'] = {
+            enabled = true,
+            type = 'generator-equipment',
+            name = 'fusion-reactor',
+            ref_name = 'fusion-reactor-equipment',
+            tech = 'fusion-reactor-equipment',
+            min = 2,
+            max = 8,
+            base = 750,
+            graphics_name = 'fusion-reactor-equipment'
+        },
+        ['battery-equipment'] = {
+            enabled = true,
+            type = 'battery-equipment',
+            name = 'battery',
+            ref_name = 'battery-mk2-equipment',
+            tech = 'battery-mk2-equipment',
+            min = 3,
+            max = 8,
+            base = 100,
+            graphics_name = 'battery-mk2-equipment'
+        },
+        ['personal-laser-defense-equipment'] = {
+            enabled = true,
+            type = 'active-defense-equipment',
+            name = 'personal-laser-defense',
+            ref_name = 'personal-laser-defense-equipment',
+            tech = 'personal-laser-defense-equipment',
+            min = 2,
+            max = 8,
+            base = 3,
+            graphics_name = 'personal-laser-defense-equipment'
+        },
+        ['energy-shield-equipment'] = {
+            enabled = true,
+            type = 'energy-shield-equipment',
+            name = 'energy-shield',
+            ref_name = 'energy-shield-mk2-equipment',
+            tech = 'energy-shield-mk2-equipment',
+            min = 3,
+            max = 8,
+            base = 150,
+            graphics_name = 'energy-shield-mk2-equipment'
+        },
+        ['personal-roboport-equipment'] = {
+            enabled = true,
+            type = 'roboport-equipment',
+            name = 'personal-roboport',
+            ref_name = 'personal-roboport-mk2-equipment',
+            tech = 'personal-roboport-mk2-equipment',
+            min = 3,
+            max = 8,
+            base = 0.5,
+            graphics_name = 'personal-roboport-mk2-equipment'
+        },
+        ['night-vision-equipment'] = {
+            enabled = true,
+            type = 'night-vision-equipment',
+            name = 'night-vision',
+            ref_name = 'night-vision-equipment',
+            tech = 'night-vision-equipment',
+            min = 2,
+            max = 2,
+            base = 1,
+            graphics_name = 'night-vision-equipment'
+        },
+        ['exoskeleton-equipment'] = {
+            enabled = true,
+            type = 'movement-bonus-equipment',
+            name = 'exoskeleton',
+            ref_name = 'exoskeleton-equipment',
+            tech = 'exoskeleton-equipment',
+            min = 2,
+            max = 2,
+            base = 0.6,
+            graphics_name = 'exoskeleton-equipment'
         }
     }
 }
@@ -825,6 +976,24 @@ if mods ~= nil then
             min = 2,
             max = 3
         }
+
+        items['equipment']['solar-panel'].base = 30
+
+        items['equipment']['fusion-reactor'].tech = 'se-rtg-equipment'
+        items['equipment']['fusion-reactor'].base_name = 'se-rtg'
+        items['equipment']['fusion-reactor'].base = 400
+
+        items['equipment']['battery'].tech = 'battery-equipment'
+        items['equipment']['battery'].min = 2
+        items['equipment']['battery'].base = 100
+
+        items['equipment']['energy-shield'].tech = 'energy-shield-equipment'
+        items['equipment']['energy-shield'].min = 2
+        items['equipment']['energy-shield'].base = 200
+
+        items['equipment']['personal-roboport'].tech = 'personal-roboport-equipment'
+        items['equipment']['personal-roboport'].min = 2
+        items['equipment']['personal-roboport'].base = 0.5
     end
 end
 

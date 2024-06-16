@@ -1,4 +1,5 @@
-data:extend({{
+data:extend({
+  {
     type = 'int-setting',
     name = 'PHI-EQ-SOLAR-TIER',
     setting_type = 'startup',

@@ -21,10 +21,20 @@ for _, force in pairs(game.forces) do
             else
                 if technologies[v.tech] then
                     if technologies[v.tech].researched then
-                        for j=v.min, v.max, 1 do
-                            if recipes[v.name .. '-' .. j] ~= nil then
-                                recipes[v.name .. '-' .. j].enabled = true
-                                recipes[v.name .. '-' .. j].reload()
+                        if string.find(v.type, '-equipment') then
+                            for j=v.min, v.max, 1 do
+                                if recipes[v.name .. '-mk' .. j .. '-equipment'] then
+                                    recipes[v.name .. '-mk' .. j .. '-equipment'].enabled = true
+                                    recipes[v.name .. '-mk' .. j .. '-equipment'].reload()
+                                end
+                            end
+
+                        else
+                            for j=v.min, v.max, 1 do
+                                if recipes[v.name .. '-' .. j] then
+                                    recipes[v.name .. '-' .. j].enabled = true
+                                    recipes[v.name .. '-' .. j].reload()
+                                end
                             end
                         end
 
@@ -45,5 +55,10 @@ for _, force in pairs(game.forces) do
                 end
             end
         end
+    end
+
+    if technologies['power-armor-mk2'].researched and settings.startup['PHI-EQ-ARMOR'].value then
+        recipes['power-armor-mk3'].enabled = true
+        recipes['power-armor-mk3'].reload()
     end
 end

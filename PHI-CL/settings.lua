@@ -21,6 +21,13 @@ data:extend({
     order = 'A3'
   },
   {
+    type = 'bool-setting',
+    name = 'PHI-EQ',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'A6'
+  },
+  {
     type = 'int-setting',
     name = 'PHI-XW-WATER',
     setting_type = 'startup',
@@ -127,6 +134,68 @@ data:extend({
     default_value = 3,
     allowed_values = {1, 2, 3},
     order = 'D4'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-EQ-SOLAR-TIER',
+    setting_type = 'startup',
+    default_value = 8,
+    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
+    order = 'G1'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-EQ-BATTERY-TIER',
+    setting_type = 'startup',
+    default_value = 8,
+    allowed_values = {2, 3, 4, 5, 6, 7, 8},
+    order = 'G2'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-EQ-REACTOR-TIER',
+    setting_type = 'startup',
+    default_value = 8,
+    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
+    order = 'G3'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-EQ-LASER-TIER',
+    setting_type = 'startup',
+    default_value = 8,
+    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
+    order = 'G4'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-EQ-ROBOPORT-TIER',
+    setting_type = 'startup',
+    default_value = 8,
+    allowed_values = {2, 3, 4, 5, 6, 7, 8},
+    order = 'G5'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-EQ-SHIELD-TIER',
+    setting_type = 'startup',
+    default_value = 8,
+    allowed_values = {2, 3, 4, 5, 6, 7, 8},
+    order = 'G6'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-EQ-NIGHT-TIER',
+    setting_type = 'startup',
+    default_value = 2,
+    allowed_values = {1, 2},
+    order = 'G7'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-EQ-EXO-TIER',
+    setting_type = 'startup',
+    default_value = 2,
+    allowed_values = {1, 2},
+    order = 'G8'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-EQ-ARMOR',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'G9'
   }, {
     type = 'int-setting',
     name = 'PHI-XW-WATER',
