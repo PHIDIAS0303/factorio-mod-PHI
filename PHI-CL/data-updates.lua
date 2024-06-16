@@ -1,6 +1,7 @@
 local items = require 'config'
 local file_stage = 2
 
+
 -- entity
 local function EEE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
@@ -211,7 +212,7 @@ end
 local function EI(source, tier)
     local item = table.deepcopy(data.raw.item[source.ref_name])
 
-    if string.find(source.type, '-equipment') then
+    if source.category == 'equipment' then
         item.name = source.name .. '-mk' .. tier .. '-equipment'
         item.placed_as_equipment_result = source.name .. '-mk' .. tier .. '-equipment'
 
@@ -232,7 +233,7 @@ local function ER(source, tier)
     local ingredient_name = source.name
     local result_name = source.name
 
-    if string.find(source.type, '-equipment') then
+    if source.category == 'equipment' then
         if (tier == 1) then
             ingredient_name = ingredient_name .. '-equipment'
 
@@ -320,7 +321,7 @@ local function ET(source, tier)
         end
 
     elseif data.raw.technology[source.tech] then
-        if string.find(source.type, '-equipment') then
+        if source.category == 'equipment' then
             table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.name .. '-mk' .. tier .. '-equipment'})
 
         else
@@ -361,6 +362,8 @@ end
 for _, v in pairs(items['item']) do
     if v.enabled then
         if v.stage == file_stage then
+            v.category = 'item'
+
             for j=v.min, v.max, 1 do
                 EEE(v, j)
                 EI(v, j)
@@ -376,6 +379,8 @@ end
 for _, v in pairs(items['equipment']) do
     if v.enabled then
         if v.stage == file_stage then
+            v.category = 'equipment'
+
             for j=v.min, v.max, 1 do
                 EEQ(v, j)
                 EI(v, j)
