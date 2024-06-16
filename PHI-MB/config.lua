@@ -451,7 +451,7 @@ if mods ~= nil then
         }
 
         items['se-space-radiator'] = {
-            enabled = false,
+            enabled = true,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-radiator',

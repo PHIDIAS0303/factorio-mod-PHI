@@ -95,15 +95,19 @@ local function ET(source, tier)
     table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
 end
 
-for _, v in pairs(items) do
-    if v.enabled then
-        if v.stage == 2 then
-            for j=v.min, v.max, 1 do
-                EE(v, j)
-                EI(v, j)
-                ER(v, j)
-                ET(v, j)
-            end
+-- fast replace group
+local function EL(source)
+    if not data.raw[source.type][source.ref_name].fast_replaceable_group then
+        data.raw[source.type][source.ref_name].fast_replaceable_group = source.type
+    end
+
+    if source.max > 2 then
+        data.raw[source.type][source.name .. '-' .. 2].fast_replaceable_group = data.raw[source.type][source.ref_name].fast_replaceable_group
+    end
+
+    if source.max > source.min then
+        for j=source.min + 1, source.max do
+            data.raw[source.type][source.name .. '-' .. j].fast_replaceable_group = data.raw[source.type][source.name .. '-' .. (j - 1)].fast_replaceable_group
         end
     end
 end
@@ -111,16 +115,15 @@ end
 for k, v in pairs(items) do
     if k ~= 'setting' then
         if v.enabled then
-            data.raw[v.type][v.ref_name].fast_replaceable_group = v.type
-
-            if v.max > 2 then
-                data.raw[v.type][v.name .. '-' .. 2].fast_replaceable_group = data.raw[v.type][v.ref_name].fast_replaceable_group
-            end
-
-            if v.max > v.min then
-                for j=v.min + 1, v.max do
-                    data.raw[v.type][v.name .. '-' .. j].fast_replaceable_group = data.raw[v.type][v.name .. '-' .. (j - 1)].fast_replaceable_group
+            if v.stage == 2 then
+                for j=v.min, v.max, 1 do
+                    EE(v, j)
+                    EI(v, j)
+                    ER(v, j)
+                    ET(v, j)
                 end
+
+                EL(v)
             end
         end
     end
