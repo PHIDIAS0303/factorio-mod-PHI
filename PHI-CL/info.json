@@ -7,7 +7,7 @@
     "author": "PHIDIAS0303",
     "contributers": "",
     "homepage": "",
-    "description": "Additional compound entities and items. Including power item like solar panel, accumulator.",
+    "description": "Additional compound entities and items.\nIncluding power item like solar panel, accumulator.",
     "dependencies": [
         "base >= 1.1.0",
         "? aai-industry >= 0.5.0",
