@@ -1,3 +1,5 @@
+-- local alpha_order = {'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'}
+-- local graphics_location = '__PHI-MB__/graphics/'
 local items = require 'config'
 
 for k, v in pairs(items['setting']) do
@@ -12,7 +14,6 @@ for k, v in pairs(items['setting']) do
     end
 end
 
-
 -- entity
 local function EE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
@@ -23,11 +24,27 @@ local function EE(source, tier)
 
     if source.type == 'lab' then
         item.researching_speed = item.researching_speed * (2 ^ (tier - source.min + 1))
+
     elseif source.type == 'mining-drill' then
         item.mining_speed = item.mining_speed * (2 ^ (tier - source.min + 1))
+
     else
         item.crafting_speed = item.crafting_speed * (2 ^ (tier - source.min + 1))
         item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (2 ^ (tier - source.min + 1))
+    end
+
+    if item.fluid_boxes ~= nil then
+        for k, _ in pairs(item.fluid_boxes) do
+            if item.fluid_boxes[k] ~= false and item.fluid_boxes[k] ~= true then
+                if item.fluid_boxes[k].production_type ~= nil then
+                    item.fluid_boxes[k].height = 4
+
+                    if item.fluid_boxes[k].base_level ~= nil then
+                        item.fluid_boxes[k].base_level = item.fluid_boxes[k].base_level * 4
+                    end
+                end
+            end
+        end
     end
 
     item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
@@ -37,12 +54,8 @@ local function EE(source, tier)
     -- item.icon_size = 64
     -- item.icon_mipmaps = 4
 
-    if (tier <= source.max - 1) then
+    if tier < source.max then
         item.next_upgrade = source.name .. '-' .. (tier + 1)
-    end
-
-    if (source.new_type ~= nil) then
-        item.type = source.new_type
     end
 
     data:extend({item})
@@ -51,9 +64,9 @@ end
 -- item
 local function EI(source, tier)
     local item = table.deepcopy(data.raw.item[source.ref_name])
-
     item.name = source.name .. '-' .. tier
     item.place_result = source.name .. '-' .. tier
+
     -- item.icons = {{icon = graphics_location .. source .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
     item.order = item.order .. tier
     data:extend({item})
@@ -61,10 +74,10 @@ end
 
 -- recipe
 local function ER(source, tier)
-    local na = source.name
+    local ingredient_name = source.name
 
     if tier > 2 then
-        na = na .. '-' .. (tier - 1)
+        ingredient_name = ingredient_name .. '-' .. (tier - 1)
     end
 
     data:extend({{
@@ -72,7 +85,7 @@ local function ER(source, tier)
         name = source.name .. '-' .. tier,
         energy_required = 2,
         enabled = false,
-        ingredients = {{na, 2}},
+        ingredients = {{ingredient_name, 2}},
         result = source.name .. '-' .. tier,
     }})
 end
