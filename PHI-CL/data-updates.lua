@@ -241,16 +241,16 @@ local function ER(source, tier)
             ingredient_name = ingredient_name .. '-mk' .. (tier - 1) .. '-equipment'
         end
 
-        new_name = ingredient_name .. '-mk' .. tier .. '-equipment'
-        result_name = ingredient_name .. '-mk' .. tier .. '-equipment'
+        new_name = new_name .. '-mk' .. tier .. '-equipment'
+        result_name = result_name .. '-mk' .. tier .. '-equipment'
 
     else
         if tier > 2 then
             ingredient_name = ingredient_name .. '-' .. (tier - 1)
         end
 
-        new_name = ingredient_name .. '-' .. tier
-        result_name = ingredient_name .. '-' .. tier
+        new_name = new_name .. '-' .. tier
+        result_name = result_name .. '-' .. tier
     end
 
     local ingredient_amount = 2
