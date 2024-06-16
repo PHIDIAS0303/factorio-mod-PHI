@@ -64,6 +64,22 @@ local function EE(source, tier)
     elseif (source.type == 'mining-drill') then
         item.mining_speed = item.mining_speed * (2 ^ (tier - source.min + 1))
 
+    elseif source.type == 'electric-turret' then
+        item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * 2
+        item.glow_light_intensity = 1
+        item.attack_parameters.ammo_type.action.action_delivery.max_length = source.range + (2 * (tier - source.min + 1))
+        -- item.attack_parameters.ammo_type.energy_consumption = 800 * (2 ^ (tier - source.min + 1)) .. 'kJ'
+        item.energy_source.input_flow_limit = 9600 * (2 ^ (tier - source.min + 1)) .. 'kW'
+        item.energy_source.buffer_capacity = 12816 * (2 ^ (tier - source.min + 1)) .. 'kJ'
+
+    elseif source.type == 'fluid-turret' then
+        item.prepare_range = 35 + (2 * (tier - source.min + 1))
+
+    elseif source.type == 'radar' then
+        item.max_distance_of_sector_revealed = item.max_distance_of_sector_revealed + (2 * tier)
+        item.max_distance_of_nearby_sector_revealed = item.max_distance_of_nearby_sector_revealed + (2 * tier)
+        item.energy_usage = 300 * (1 + (0.5 * (tier - source.min + 1))) .. 'kW'
+
     else
         if item.crafting_speed then
             item.crafting_speed = item.crafting_speed * (2 ^ (tier - source.min + 1))
@@ -72,6 +88,12 @@ local function EE(source, tier)
         if item.energy_source.emissions_per_minute then
             item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (2 ^ (tier - source.min + 1))
         end
+    end
+
+    if source.type == 'electric-turret' or source.type == 'ammo-turret' or source.type == 'fluid-turret' then
+        item.attack_parameters.damage_modifier = (2 ^ (tier - source.min + 1))
+        item.attack_parameters.range = source.range + (2 * (tier - source.min + 1))
+        item.call_for_help_radius = 40 + (2 * (tier - source.min + 1))
     end
 
     if item.fluid_boxes then
@@ -197,6 +219,18 @@ local function ET(source, tier)
 
     elseif data.raw.technology[source.tech] then
         table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
+
+        if source.type == 'ammo-turret' or source.type == 'fluid-turret' then
+            for i=1, #items['research_modifier'][source.type], 1 do
+                for j=1, #data.raw.technology[items['research_modifier'][source.type][i]].effects, 1 do
+                    if (data.raw.technology[items['research_modifier'][source.type][i]].effects[j].type == 'turret-attack') then
+                        if (data.raw.technology[items['research_modifier'][source.type][i]].effects[j].turret_id == source.ref_name) then
+                            table.insert(data.raw.technology[items['research_modifier'][source.type][i]].effects, {type='turret-attack', turret_id=source.name .. '-' .. tier, modifier=data.raw.technology[items['research_modifier'][source.type][i]].effects[j].modifier})
+                        end
+                    end
+                end
+            end
+        end
     end
 end
 

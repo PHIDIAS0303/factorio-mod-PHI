@@ -155,6 +155,61 @@ local items = {
                 'se-space-telescope-xray',
                 'se-space-mechanical-laboratory'
             }
+        },
+        ['PHI-WE-LASER-TIER'] = {
+            type = 'max',
+            effect = {
+                'laser-turret'
+            }
+        },
+        ['PHI-WE-FLAME-TIER'] = {
+            type = 'max',
+            effect = {
+                'flamethrower-turret'
+            }
+        },
+        ['PHI-WE-GUN-TIER'] = {
+            type = 'max',
+            effect = {
+                'gun-turret'
+        }
+        },
+        ['PHI-WE-RADAR-TIER'] = {
+            type = 'max',
+            effect = {
+                'radar'
+            }
+        }
+    },
+    ['research_modifier'] = {
+        --[[
+        ['electric-turret'] = {
+            'energy-weapons-damage-1',
+            'energy-weapons-damage-2',
+            'energy-weapons-damage-3',
+            'energy-weapons-damage-4',
+            'energy-weapons-damage-5',
+            'energy-weapons-damage-6',
+            'energy-weapons-damage-7'
+        },
+        ]]
+        ['ammo-turret'] = {
+            'physical-projectile-damage-1',
+            'physical-projectile-damage-2',
+            'physical-projectile-damage-3',
+            'physical-projectile-damage-4',
+            'physical-projectile-damage-5',
+            'physical-projectile-damage-6',
+            'physical-projectile-damage-7'
+        },
+        ['fluid-turret'] = {
+            'refined-flammables-1',
+            'refined-flammables-2',
+            'refined-flammables-3',
+            'refined-flammables-4',
+            'refined-flammables-5',
+            'refined-flammables-6',
+            'refined-flammables-7'
         }
     },
     ['item'] = {
@@ -330,6 +385,45 @@ local items = {
             type = 'mining-drill',
             name = 'pumpjack',
             ref_name = 'pumpjack',
+            tech = 'automation',
+            min = 2,
+            max = 3
+        },
+        ['laser-turret'] = {
+            enabled = true,
+            type = 'electric-turret',
+            name = 'laser-turret',
+            ref_name = 'laser-turret',
+            tech = 'laser-turret',
+            min = 2,
+            max = 3,
+            range = 24
+        },
+        ['gun-turret'] = {
+            enabled = true,
+            type = 'ammo-turret',
+            name = 'gun-turret',
+            ref_name = 'gun-turret',
+            tech = 'gun-turret',
+            min = 2,
+            max = 3,
+            range = 18
+        },
+        ['flamethrower-turret'] = {
+            enabled = true,
+            type = 'fluid-turret',
+            name = 'flamethrower-turret',
+            ref_name = 'flamethrower-turret',
+            tech = 'flamethrower',
+            min = 2,
+            max = 3,
+            range = 30
+        },
+        ['radar'] = {
+            enabled = true,
+            type = 'radar',
+            name = 'radar',
+            ref_name = 'radar',
             tech = 'automation',
             min = 2,
             max = 3

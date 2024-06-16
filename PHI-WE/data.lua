@@ -35,7 +35,7 @@ local research_modifier = {
 -- entity
 local function EE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
-    
+
     item.name = source.name .. '-' .. tier
     item.minable.result = source.name .. '-' .. tier
     item.max_health = item.max_health * tier
