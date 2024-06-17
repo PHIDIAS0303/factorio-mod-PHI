@@ -25,7 +25,6 @@ if settings.startup['PHI-XW-WATER'].value > 0 then
         data.raw['offshore-pump']['seafloor-pump'].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
         data.raw['offshore-pump']['seafloor-pump'].adjacent_tile_collision_mask = nil
         data.raw['offshore-pump']['seafloor-pump'].placeable_position_visualization = nil
-        data.raw['offshore-pump']['seafloor-pump'].max_health = 400
     end
 end
 
