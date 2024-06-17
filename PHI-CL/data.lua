@@ -88,15 +88,25 @@ if settings.startup['PHI-RS'].value then
         })
     end
 
-    local recipe_multiplier = {settings.startup['PHI-RS-RECIPE-1'].value, settings.startup['PHI-RS-RECIPE-2'].value}
+    local recipe_multiplier = {}
 
-    for j=1, 2, 1 do
-        if recipe_multiplier[j] ~= 1 then
-            for i=1, #items, 1 do
-                if data.raw.recipe[items[i].name] then
-                    item = table.deepcopy(data.raw.recipe[items[i].name])
-                    item.enabled = false
+    if settings.startup['PHI-RS-RECIPE-1'].value > 1 then
+        table.insert(recipe_multiplier, settings.startup['PHI-RS-RECIPE-1'].value)
+    end
 
+    if settings.startup['PHI-RS-RECIPE-2'].value > 1 then
+        if settings.startup['PHI-RS-RECIPE-1'].value ~= settings.startup['PHI-RS-RECIPE-2'].value then
+            table.insert(recipe_multiplier, settings.startup['PHI-RS-RECIPE-2'].value)
+        end
+    end
+
+    if #recipe_multiplier > 0 then
+        for i=1, #items['recipe'], 1 do
+            if data.raw.recipe[items['recipe'][i].name] then
+                item = table.deepcopy(data.raw.recipe[items['recipe'][i].name])
+                item.enabled = false
+
+                for j=1, #recipe_multiplier, 1 do
                     if item.normal and item.normal then
                         for k, v in pairs(item.normal.ingredients) do
                             if v[1] and v[2] then
