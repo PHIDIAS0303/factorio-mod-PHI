@@ -11,6 +11,14 @@ function main.EEE(source, tier)
     item.minable.result = source.name .. '-' .. tier
     item.max_health = item.max_health * (2 ^ (tier - source.min + 1))
 
+    if item.energy_usage then
+        item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
+    end
+
+    if (tier < source.max) then
+        item.next_upgrade = source.name .. '-' .. (tier + 1)
+    end
+
     if (source.type == 'accumulator') then
         item.energy_source.buffer_capacity = (source.base * 4 ^ (tier - source.min + 1)) .. 'MJ'
         item.energy_source.input_flow_limit = (source.base * 60 * (4 ^ (tier - source.min + 1))) .. 'kW'
@@ -79,7 +87,6 @@ function main.EEE(source, tier)
     elseif source.type == 'radar' then
         item.max_distance_of_sector_revealed = item.max_distance_of_sector_revealed + (2 * tier)
         item.max_distance_of_nearby_sector_revealed = item.max_distance_of_nearby_sector_revealed + (2 * tier)
-        item.energy_usage = 300 * (1 + (0.5 * (tier - source.min + 1))) .. 'kW'
 
     else
         if item.crafting_speed then
@@ -111,19 +118,11 @@ function main.EEE(source, tier)
         end
     end
 
-    if item.energy_usage then
-        item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
-    end
-
     -- item.animation.layers[1].filename = graphics_location .. source .. '-e.png'
     -- item.animation.layers[1].hr_version.filename = graphics_location .. source ..'-eh.png'
     -- item.icon = graphics_location .. source .. '-i.png'
     -- item.icon_size = 64
     -- item.icon_mipmaps = 4
-
-    if (tier < source.max) then
-        item.next_upgrade = source.name .. '-' .. (tier + 1)
-    end
 
     data:extend({item})
 end
