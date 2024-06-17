@@ -12,7 +12,7 @@ if settings.startup['PHI-RS'].value then
     item = table.deepcopy(data.raw.item['electric-furnace'])
     item.name = 'electric-filter-furnace'
     item.place_result = 'electric-filter-furnace'
-    item.order = item.order .. 'B'
+    item.order = item.order .. '2'
     data:extend({item})
 
     data:extend({{
