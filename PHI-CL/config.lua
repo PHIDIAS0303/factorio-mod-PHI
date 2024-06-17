@@ -1,76 +1,5 @@
 local items = {
     ['setting'] = {
-        ['PHI-EN'] = {
-            type = 'enabled',
-            effect = {
-                'solar-panel',
-                'accumulator',
-                'boiler',
-                'steam-engine',
-                'nuclear-reactor',
-                'heat-pipe',
-                'heat-exchanger',
-                'steam-turbine'
-            }
-        },
-        ['PHI-MB'] = {
-            type = 'enabled',
-            effect = {
-                'assembling-machine',
-                'electric-furnace',
-                'electric-filter-furnace',
-                'industrial-furnace',
-                'oil-refinery',
-                'chemical-plant',
-                'fuel-processor',
-                'se-fuel-refinery',
-                'centrifuge',
-                'lab',
-                'se-space-science-lab',
-                'electric-mining-drill',
-                'pumpjack',
-                'area-mining-drill',
-                'se-core-miner',
-                'se-space-assembling-machine',
-                'se-space-manufactory',
-                'se-casting-machine',
-                'se-pulveriser',
-                'se-lifesupport-facility',
-                'se-space-decontamination-facility',
-                'se-space-genetics-facility',
-                'se-space-growth-facility',
-                'se-space-biochemical-laboratory',
-                'se-space-radiation-laboratory',
-                'se-space-electromagnetics-laboratory',
-                'se-space-laser-laboratory',
-                'se-space-material-fabricator',
-                'se-space-particle-accelerator',
-                'se-space-particle-collider',
-                'se-space-plasma-generator',
-                'se-space-hypercooler',
-                'se-space-astrometrics-laboratory',
-                'se-space-gravimetrics-laboratory',
-                'se-space-telescope',
-                'se-space-telescope-gammaray',
-                'se-space-telescope-microwave',
-                'se-space-telescope-radio',
-                'se-space-telescope-xray',
-                'se-space-mechanical-laboratory'
-            }
-        },
-        ['PHI-EQ'] = {
-            type = 'enabled',
-            effect = {
-                'solar-panel-equipment',
-                'battery-equipment',
-                'fusion-reactor-equipment',
-                'energy-shield-equipment',
-                'personal-laser-defense-equipment',
-                'personal-roboport-equipment',
-                'night-vision-equipment',
-                'exoskeleton-equipment'
-            }
-        },
         ['PHI-EN-SOLAR-TIER'] = {
             type = 'max',
             effect = {
@@ -275,7 +204,7 @@ local items = {
     },
     ['item'] = {
         ['solar-panel'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-EN'].value,
             stage = 1,
             type = 'solar-panel',
             name = 'solar-panel',
@@ -286,7 +215,7 @@ local items = {
             base = 60
         },
         ['accumulator'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-EN'].value,
             stage = 1,
             type = 'accumulator',
             name = 'accumulator',
@@ -297,7 +226,7 @@ local items = {
             base = 5
         },
         ['boiler'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-EN'].value,
             stage = 1,
             type = 'boiler',
             name = 'boiler',
@@ -310,7 +239,7 @@ local items = {
             fluid = 1
         },
         ['steam-engine'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-EN'].value,
             stage = 1,
             type = 'generator',
             name = 'steam-engine',
@@ -322,7 +251,7 @@ local items = {
             fluid = 1 / 2
         },
         ['nuclear-reactor'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-EN'].value,
             stage = 1,
             type = 'reactor',
             name = 'nuclear-reactor',
@@ -335,7 +264,7 @@ local items = {
             temp = 500
         },
         ['heat-pipe'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-EN'].value,
             stage = 1,
             type = 'heat-pipe',
             name = 'heat-pipe',
@@ -346,7 +275,7 @@ local items = {
             temp = 500
         },
         ['heat-exchanger'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-EN'].value,
             stage = 1,
             type = 'boiler',
             name = 'heat-exchanger',
@@ -359,7 +288,7 @@ local items = {
             fluid = 103 / 60
         },
         ['steam-turbine'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-EN'].value,
             stage = 1,
             type = 'generator',
             name = 'steam-turbine',
@@ -371,7 +300,7 @@ local items = {
             fluid = 1
         },
         ['assembling-machine'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 1,
             type = 'assembling-machine',
             name = 'assembling-machine',
@@ -381,7 +310,7 @@ local items = {
             max = 5
         },
         ['electric-furnace'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 1,
             type = 'furnace',
             name = 'electric-furnace',
@@ -391,7 +320,7 @@ local items = {
             max = 3
         },
         ['oil-refinery'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 1,
             type = 'assembling-machine',
             name = 'oil-refinery',
@@ -401,7 +330,7 @@ local items = {
             max = 3
         },
         ['chemical-plant'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 1,
             type = 'assembling-machine',
             name = 'chemical-plant',
@@ -411,7 +340,7 @@ local items = {
             max = 3
         },
         ['centrifuge'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 1,
             type = 'assembling-machine',
             name = 'centrifuge',
@@ -421,7 +350,7 @@ local items = {
             max = 3
         },
         ['lab'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 1,
             type = 'lab',
             name = 'lab',
@@ -431,7 +360,7 @@ local items = {
             max = 3
         },
         ['electric-mining-drill'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 1,
             type = 'mining-drill',
             name = 'electric-mining-drill',
@@ -441,7 +370,7 @@ local items = {
             max = 3
         },
         ['pumpjack'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 1,
             type = 'mining-drill',
             name = 'pumpjack',
@@ -451,7 +380,7 @@ local items = {
             max = 3
         },
         ['laser-turret'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-WE'].value,
             type = 'electric-turret',
             name = 'laser-turret',
             ref_name = 'laser-turret',
@@ -461,7 +390,7 @@ local items = {
             range = 24
         },
         ['gun-turret'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-WE'].value,
             type = 'ammo-turret',
             name = 'gun-turret',
             ref_name = 'gun-turret',
@@ -471,7 +400,7 @@ local items = {
             range = 18
         },
         ['flamethrower-turret'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-WE'].value,
             type = 'fluid-turret',
             name = 'flamethrower-turret',
             ref_name = 'flamethrower-turret',
@@ -481,7 +410,7 @@ local items = {
             range = 30
         },
         ['radar'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-WE'].value,
             type = 'radar',
             name = 'radar',
             ref_name = 'radar',
@@ -492,7 +421,7 @@ local items = {
     },
     ['equipment'] = {
         ['solar-panel-equipment'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-EQ'].value,
             type = 'solar-panel-equipment',
             name = 'solar-panel',
             ref_name = 'solar-panel-equipment',
@@ -503,7 +432,7 @@ local items = {
             graphics_name = 'solar-panel-equipment'
         },
         ['fusion-reactor-equipment'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-EQ'].value,
             type = 'generator-equipment',
             name = 'fusion-reactor',
             ref_name = 'fusion-reactor-equipment',
@@ -514,7 +443,7 @@ local items = {
             graphics_name = 'fusion-reactor-equipment'
         },
         ['battery-equipment'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-EQ'].value,
             type = 'battery-equipment',
             name = 'battery',
             ref_name = 'battery-mk2-equipment',
@@ -525,7 +454,7 @@ local items = {
             graphics_name = 'battery-mk2-equipment'
         },
         ['personal-laser-defense-equipment'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-EQ'].value,
             type = 'active-defense-equipment',
             name = 'personal-laser-defense',
             ref_name = 'personal-laser-defense-equipment',
@@ -536,7 +465,7 @@ local items = {
             graphics_name = 'personal-laser-defense-equipment'
         },
         ['energy-shield-equipment'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-EQ'].value,
             type = 'energy-shield-equipment',
             name = 'energy-shield',
             ref_name = 'energy-shield-mk2-equipment',
@@ -547,7 +476,7 @@ local items = {
             graphics_name = 'energy-shield-mk2-equipment'
         },
         ['personal-roboport-equipment'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-EQ'].value,
             type = 'roboport-equipment',
             name = 'personal-roboport',
             ref_name = 'personal-roboport-mk2-equipment',
@@ -558,7 +487,7 @@ local items = {
             graphics_name = 'personal-roboport-mk2-equipment'
         },
         ['night-vision-equipment'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-EQ'].value,
             type = 'night-vision-equipment',
             name = 'night-vision',
             ref_name = 'night-vision-equipment',
@@ -569,7 +498,7 @@ local items = {
             graphics_name = 'night-vision-equipment'
         },
         ['exoskeleton-equipment'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-EQ'].value,
             type = 'movement-bonus-equipment',
             name = 'exoskeleton',
             ref_name = 'exoskeleton-equipment',
@@ -585,7 +514,7 @@ local items = {
 if mods ~= nil then
     if mods['PHI-RS'] then
         items['item']['electric-filter-furnace'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'electric-filter-furnace',
@@ -598,7 +527,7 @@ if mods ~= nil then
 
     if mods['aai-industry'] then
         items['item']['industrial-furnace'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'industrial-furnace',
@@ -609,7 +538,7 @@ if mods ~= nil then
         }
 
         items['item']['fuel-processor'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'fuel-processor',
@@ -620,7 +549,7 @@ if mods ~= nil then
         }
 
         items['item']['area-mining-drill'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'mining-drill',
             name = 'area-mining-drill',
@@ -659,7 +588,7 @@ if mods ~= nil then
 
     if mods['space-exploration'] then
         items['item']['se-space-assembling-machine'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-assembling-machine',
@@ -670,7 +599,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-manufactory'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-manufactory',
@@ -681,7 +610,7 @@ if mods ~= nil then
         }
 
         items['item']['se-casting-machine'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-casting-machine',
@@ -692,7 +621,7 @@ if mods ~= nil then
         }
 
         items['item']['se-pulveriser'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-pulveriser',
@@ -703,7 +632,7 @@ if mods ~= nil then
         }
 
         items['item']['se-lifesupport-facility'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-lifesupport-facility',
@@ -714,7 +643,7 @@ if mods ~= nil then
         }
 
         items['item']['se-fuel-refinery'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-fuel-refinery',
@@ -736,7 +665,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-decontamination-facility'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-decontamination-facility',
@@ -747,7 +676,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-genetics-laboratory'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-genetics-laboratory',
@@ -758,7 +687,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-growth-facility'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-growth-facility',
@@ -769,7 +698,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-biochemical-laboratory'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-biochemical-laboratory',
@@ -780,7 +709,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-radiation-laboratory'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-radiation-laboratory',
@@ -791,7 +720,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-electromagnetics-laboratory'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-electromagnetics-laboratory',
@@ -802,7 +731,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-laser-laboratory'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-laser-laboratory',
@@ -813,7 +742,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-astrometrics-laboratory'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-astrometrics-laboratory',
@@ -824,7 +753,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-gravimetrics-laboratory'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-gravimetrics-laboratory',
@@ -835,7 +764,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-mechanical-laboratory'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-mechanical-laboratory',
@@ -846,7 +775,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-material-fabricator'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-material-fabricator',
@@ -857,7 +786,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-particle-accelerator'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-particle-accelerator',
@@ -868,7 +797,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-particle-collider'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-particle-collider',
@@ -879,7 +808,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-plasma-generator'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-plasma-generator',
@@ -890,7 +819,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-hypercooler'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-hypercooler',
@@ -901,7 +830,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-radiator'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-radiator',
@@ -912,7 +841,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-telescope'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-telescope',
@@ -923,7 +852,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-telescope-gammaray'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-telescope-gammaray',
@@ -934,7 +863,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-telescope-microwave'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-telescope-microwave',
@@ -945,7 +874,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-telescope-radio'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-telescope-radio',
@@ -956,7 +885,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-telescope-xray'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'assembling-machine',
             name = 'se-space-telescope-xray',
@@ -967,7 +896,7 @@ if mods ~= nil then
         }
 
         items['item']['se-space-science-lab'] = {
-            enabled = true,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'lab',
             name = 'se-space-science-lab',
