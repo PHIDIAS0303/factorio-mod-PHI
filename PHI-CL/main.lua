@@ -223,12 +223,12 @@ function main.EI(source, tier)
     local item = table.deepcopy(data.raw.item[source.ref_name])
 
     if source.category == 'equipment' then
-        item.name = source.name .. '-mk' .. tier .. '-equipment'
+        item['name'] = source.name .. '-mk' .. tier .. '-equipment'
         item.placed_as_equipment_result = source.name .. '-mk' .. tier .. '-equipment'
-        item.subgroup = 'equipment'
-        item.stack_size = 20
-        item.default_request_amount = 5
-        item.icons = {{icon = '__base__/graphics/icons/' .. source.graphics_name .. '.png', icon_mipmaps = 4, icon_size = 64}}
+        -- item.subgroup = 'equipment'
+        -- item.stack_size = 20
+        -- item.default_request_amount = 5
+        -- item.icons = {{icon = '__base__/graphics/icons/' .. source.graphics_name .. '.png', icon_mipmaps = 4, icon_size = 64}}
 
     else
         item.name = source.name .. '-' .. tier
@@ -248,7 +248,7 @@ function main.ER(source, tier)
     local result_name = source.name
 
     if source.category == 'equipment' then
-        if (tier == 1) then
+        if (tier == 2) then
             ingredient_name = ingredient_name .. '-equipment'
 
         else
