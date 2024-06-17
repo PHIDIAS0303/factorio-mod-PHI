@@ -33,7 +33,7 @@ if settings.startup['PHI-RS'].value then
         result = 'electric-furnace',
     }})
 
-    table.insert(data.raw.technology[items['item']['electric-filter-furnace'].tech].effects, {type='unlock-recipe', recipe='electric-furnace'})
+    table.insert(data.raw.technology[items['item']['electric-filter-furnace'].tech].effects, {type='unlock-recipe', recipe='electric-filter-furnace'})
     table.insert(data.raw.technology[items['item']['electric-filter-furnace'].tech].effects, {type='unlock-recipe', recipe='electric-furnace-return'})
     data.raw['furnace']['electric-furnace'].fast_replaceable_group = 'electric-furnace'
     data.raw['assembling-machine']['electric-filter-furnace'].fast_replaceable_group = data.raw['furnace']['electric-furnace'].fast_replaceable_group
