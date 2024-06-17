@@ -744,6 +744,7 @@ local items = {
             name='nuclear-fuel',
             tech='kovarex-enrichment-process'
         },
+        --[[
         {
             name='fast-inserter',
             tech='fast-inserter'
@@ -764,6 +765,7 @@ local items = {
             name='stack-filter-inserter',
             tech='stack-inserter'
         },
+        ]]
         {
             name='uranium-rounds-magazine',
             tech='uranium-ammo'

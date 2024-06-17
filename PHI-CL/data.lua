@@ -103,10 +103,10 @@ if settings.startup['PHI-RS'].value then
     if #recipe_multiplier > 0 then
         for i=1, #items['recipe'], 1 do
             if data.raw.recipe[items['recipe'][i].name] then
-                item = table.deepcopy(data.raw.recipe[items['recipe'][i].name])
-                item.enabled = false
-
                 for j=1, #recipe_multiplier, 1 do
+                    item = table.deepcopy(data.raw.recipe[items['recipe'][i].name])
+                    item.enabled = false
+
                     if item.normal and item.normal then
                         for k, v in pairs(item.normal.ingredients) do
                             if v[1] and v[2] then
@@ -215,10 +215,10 @@ if settings.startup['PHI-RS'].value then
                         end
                     end
 
-                    item.name = item.name .. '-s' .. j
+                    item.name = items['recipe'][i].name .. '-s' .. j
 
                     data:extend({item})
-                    table.insert(data.raw.technology[items[i].tech].effects, {type='unlock-recipe', recipe=item.name})
+                    table.insert(data.raw.technology[items['recipe'][i].tech].effects, {type='unlock-recipe', recipe=item.name})
                 end
             end
         end
