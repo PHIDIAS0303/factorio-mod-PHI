@@ -9,20 +9,32 @@ data:extend({
     type = 'bool-setting',
     name = 'PHI-MB',
     setting_type = 'startup',
-    default_value = true,
+    default_value = false,
     order = 'A2'
   }, {
     type = 'bool-setting',
     name = 'PHI-WE',
     setting_type = 'startup',
-    default_value = true,
+    default_value = false,
     order = 'A3'
   }, {
     type = 'bool-setting',
     name = 'PHI-EQ',
     setting_type = 'startup',
-    default_value = true,
+    default_value = false,
     order = 'A4'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-MI',
+    setting_type = 'startup',
+    default_value = false,
+    order = 'A5'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-RS',
+    setting_type = 'startup',
+    default_value = false,
+    order = 'A6'
   }, {
     type = 'int-setting',
     name = 'PHI-XW-WATER',
