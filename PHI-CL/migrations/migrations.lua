@@ -37,20 +37,6 @@ for _, force in pairs(game.forces) do
                                 end
                             end
                         end
-
-                        if v.type == 'ammo-turret' or v.type == 'fluid-turret' then
-                            for i=1, #items['research_modifier'][v.type], 1 do
-                                for j=1, #data.raw.technology[items['research_modifier'][v.type][i]].effects, 1 do
-                                    if (data.raw.technology[items['research_modifier'][v.type][i]].effects[j].type == 'turret-attack') then
-                                        if (data.raw.technology[items['research_modifier'][v.type][i]].effects[j].turret_id == v.ref_name) then
-                                            for j=v.min, v.max, 1 do
-                                                table.insert(data.raw.technology[items['research_modifier'][v.type][i]].effects, {type='turret-attack', turret_id=v.name .. '-' .. j, modifier=data.raw.technology[items['research_modifier'][v.type][i]].effects[j].modifier})
-                                            end
-                                        end
-                                    end
-                                end
-                            end
-                        end
                     end
                 end
             end
