@@ -511,7 +511,7 @@ local items = {
     }
 }
 
-if mods ~= nil then
+if mods then
     if mods['PHI-RS'] then
         items['item']['electric-filter-furnace'] = {
             enabled = settings.startup['PHI-MB'].value,
