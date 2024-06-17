@@ -336,7 +336,7 @@ function main.ET(source, tier)
             recipe_name = recipe_name .. '-mk' .. tier .. '-equipment'
 
         else
-            recipe_name = recipe_name .. tier
+            recipe_name = recipe_name .. '-' .. tier
         end
 
         table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=recipe_name})
