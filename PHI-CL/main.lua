@@ -132,13 +132,7 @@ end
 function main.EEQ(source, tier)
     local item = {}
 
-    if tier == 1 then
-        item['name'] = source.name .. '-equipment'
-
-    else
-        item['name'] = source.name .. '-mk' .. tier .. '-equipment'
-    end
-
+    item['name'] = source.name .. '-mk' .. tier .. '-equipment'
     item['type'] = source.type
     item['categories'] = {'armor'}
 
@@ -345,7 +339,7 @@ function main.ET(source, tier)
             recipe_name = recipe_name .. tier
         end
 
-        table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
+        table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=recipe_name})
 
         if source.type == 'ammo-turret' or source.type == 'fluid-turret' then
             for i=1, #items['research_modifier'][source.type], 1 do
