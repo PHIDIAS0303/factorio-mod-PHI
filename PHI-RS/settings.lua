@@ -1,4 +1,5 @@
-data:extend({{
+data:extend({
+  {
     type = 'int-setting',
     name = 'PHI-RS-RECIPE-1',
     setting_type = 'startup',

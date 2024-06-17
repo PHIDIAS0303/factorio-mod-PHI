@@ -23,8 +23,7 @@ data:extend({
     setting_type = 'startup',
     default_value = false,
     order = 'A4'
-  },
-  --[[{
+  }, {
     type = 'bool-setting',
     name = 'PHI-MI',
     setting_type = 'startup',
@@ -36,8 +35,7 @@ data:extend({
     setting_type = 'startup',
     default_value = false,
     order = 'A6'
-  }, ]]
-  {
+  }, {
     type = 'int-setting',
     name = 'PHI-XW-WATER',
     setting_type = 'startup',
@@ -210,6 +208,50 @@ data:extend({
     setting_type = 'startup',
     default_value = true,
     order = 'E9'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-RS-RECIPE-1',
+    setting_type = 'startup',
+    default_value = 4,
+    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+    order = 'G1'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-RS-RECIPE-2',
+    setting_type = 'startup',
+    default_value = 8,
+    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+    order = 'G2'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-RS-MODULE',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'G3'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-RS-RECIPE-DROF',
+    setting_type = 'startup',
+    default_value = 1,
+    minimum_value = 1,
+    maximum_value = 100,
+    order = 'G4'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-RS-RECIPE-MINROM',
+    setting_type = 'startup',
+    default_value = 2,
+    minimum_value = 1,
+    maximum_value = 100,
+    order = 'G5'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-RS-RECIPE-MAXROM',
+    setting_type = 'startup',
+    default_value = 100,
+    minimum_value = 1,
+    maximum_value = 100,
+    order = 'G6'
   }, {
     type = 'int-setting',
     name = 'PHI-XW-WATER',
