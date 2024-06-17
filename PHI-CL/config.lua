@@ -379,6 +379,16 @@ local items = {
             min = 2,
             max = 3
         },
+        ['electric-filter-furnace'] = {
+            enabled = settings.startup['PHI-MB'].value,
+            stage = 2,
+            type = 'assembling-machine',
+            name = 'electric-filter-furnace',
+            ref_name = 'electric-filter-furnace',
+            tech = 'advanced-material-processing-2',
+            min = 2,
+            max = 3
+        },
         ['laser-turret'] = {
             enabled = settings.startup['PHI-WE'].value,
             stage = 1,
@@ -791,16 +801,7 @@ local items = {
 
 if mods then
     if mods['PHI-RS'] then
-        items['item']['electric-filter-furnace'] = {
-            enabled = settings.startup['PHI-MB'].value,
-            stage = 2,
-            type = 'assembling-machine',
-            name = 'electric-filter-furnace',
-            ref_name = 'electric-filter-furnace',
-            tech = 'advanced-material-processing-2',
-            min = 2,
-            max = 3
-        }
+
     end
 
     if mods['aai-industry'] then
