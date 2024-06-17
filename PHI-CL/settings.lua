@@ -23,7 +23,8 @@ data:extend({
     setting_type = 'startup',
     default_value = false,
     order = 'A4'
-  }, {
+  },
+  --[[{
     type = 'bool-setting',
     name = 'PHI-MI',
     setting_type = 'startup',
@@ -35,7 +36,8 @@ data:extend({
     setting_type = 'startup',
     default_value = false,
     order = 'A6'
-  }, {
+  }, ]]
+  {
     type = 'int-setting',
     name = 'PHI-XW-WATER',
     setting_type = 'startup',
