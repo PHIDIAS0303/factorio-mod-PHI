@@ -42,8 +42,6 @@ for _, v in pairs(items['equipment']) do
                 main.ER(v, j)
                 main.ET(v, j)
             end
-
-            main.EL(v)
         end
     end
 end

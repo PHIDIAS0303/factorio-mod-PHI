@@ -2,7 +2,6 @@ local items = require 'config'
 local main = require 'main'
 local file_stage = 2
 
-
 for _, v in pairs(items['item']) do
     if v.enabled then
         if v.stage == file_stage then
@@ -31,8 +30,6 @@ for _, v in pairs(items['equipment']) do
                 main.ER(v, j)
                 main.ET(v, j)
             end
-
-            main.EL(v)
         end
     end
 end

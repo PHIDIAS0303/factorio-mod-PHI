@@ -144,13 +144,13 @@ function main.EEQ(source, tier)
         h = 2
         item['energy_source'] = {type = 'electric', usage_priority = 'tertiary', buffer_capacity= (source.base * (2 ^ (tier - source.min + 1))) .. 'MJ'}
 
-    elseif (source.type == 'fusion-reactor') then
+    elseif (source.name == 'fusion-reactor') then
         w = 4
         h = 4
         item['power'] = (source.base * (2 ^ (tier - source.min + 1))) .. 'kW'
         item['energy_source'] = {type = 'electric', usage_priority = 'primary-output'}
 
-    elseif (source.type == 'personal-laser-defense') then
+    elseif (source.name == 'personal-laser-defense') then
         w = 2
         h = 2
         item['energy_source'] = {type = 'electric', usage_priority = 'secondary-input', buffer_capacity = (250 * (2 ^ (tier - source.min + 1))) .. 'kJ'}
@@ -159,14 +159,14 @@ function main.EEQ(source, tier)
         item['attack_parameters'] = {type = 'beam', cooldown = 40, range = (18 + tier), damage_modifier = (source.base * (2 ^ (tier - source.min + 1))), ammo_type = {category = 'laser', energy_consumption = (50 * (2 ^ (tier - 1))) .. 'kJ', action = {type = 'direct', action_delivery = {type = 'beam', beam = 'laser-beam', max_length = (18 + tier), duration = 60, source_offset = {0, -1.31439}}}}}
         item['automatic'] = true
 
-    elseif (source.type == 'energy-shield') then
+    elseif (source.name == 'energy-shield') then
         w = 2
         h = 2
         item['energy_source'] = {type = 'electric', usage_priority = 'primary-input', input_flow_limit = (source.base * 4 * (2 ^ (tier - source.min + 1))) .. 'kW', buffer_capacity = (source.base * 2 * (2 ^ (tier - 1))) .. 'kJ'}
         item['max_shield_value'] = (source.base * (2 ^ (tier - 2)))
         item['energy_per_shield'] = '80kJ'
 
-    elseif (source.type == 'personal-roboport') then
+    elseif (source.name == 'personal-roboport') then
         w = 2
         h = 2
         item['energy_source'] = {type = 'electric', usage_priority = 'secondary-input', buffer_capacity = (source.base * 32 * (2 ^ (tier - source.min + 1))) .. 'MJ'}
@@ -185,7 +185,7 @@ function main.EEQ(source, tier)
         item['charging_distance'] = 1.6
         item['charging_threshold_distance'] = 5
 
-    elseif (source.type == 'night-vision') then
+    elseif (source.name == 'night-vision') then
         w = 2
         h = 2
         item['energy_source'] = {type = 'electric', usage_priority = 'primary-input', buffer_capacity = '1MJ'}
@@ -195,7 +195,7 @@ function main.EEQ(source, tier)
         item['darkness_to_turn_on'] = source.base
         item['color_lookup'] = {{0, '__core__/graphics/color_luts/lut-sunset.png'}}
 
-    elseif (source.type == 'exoskeleton') then
+    elseif (source.name == 'exoskeleton') then
         w = 2
         h = 4
         item['energy_source'] = {type = 'electric', usage_priority = 'secondary-input', buffer_capacity = '10MJ'}
@@ -216,6 +216,10 @@ function main.EI(source, tier)
     if source.category == 'equipment' then
         item.name = source.name .. '-mk' .. tier .. '-equipment'
         item.placed_as_equipment_result = source.name .. '-mk' .. tier .. '-equipment'
+        item.subgroup = 'equipment'
+        item.stack_size = 20
+        item.default_request_amount = 5
+        item.icons = {{icon = '__base__/graphics/icons/' .. source.graphics_name .. '.png', icon_mipmaps = 4, icon_size = 64}}
 
     else
         item.name = source.name .. '-' .. tier
@@ -260,7 +264,7 @@ function main.ER(source, tier)
         ingredient_amount = 4
     end
 
-    if ((source.type == 'boiler') or (source.type == 'steam-engine') or (source.type == 'nuclear-reactor') or (source.type == 'heat-pipe') or (source.type == 'heat-exchanger') or (source.type == 'steam-turbine')) and (tier > 2) then
+    if (source.tech == 'compound-energy') and (tier > 2) then
         data:extend({{
             type = 'recipe',
             name = new_name ,
