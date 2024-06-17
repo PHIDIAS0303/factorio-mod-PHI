@@ -33,7 +33,7 @@ data:extend({
     type = 'bool-setting',
     name = 'PHI-RS',
     setting_type = 'startup',
-    default_value = true,
+    default_value = false,
     order = 'A6'
   }, {
     type = 'int-setting',

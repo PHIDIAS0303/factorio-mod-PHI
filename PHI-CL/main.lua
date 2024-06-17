@@ -379,10 +379,10 @@ function main.EL(source)
     local min = source.min
     local max = source.max
 
-    if (max - min) == 0 then
+    if (max - min) < 1 then
         return
 
-    elseif max > 2 then
+    elseif ((max - min) > 0) and (min > 1) then
         min = 2
     end
 
