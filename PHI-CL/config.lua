@@ -380,13 +380,13 @@ local items = {
             max = 3
         },
         ['electric-filter-furnace'] = {
-            enabled = settings.startup['PHI-MB'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-RS'].value,
             stage = 2,
             type = 'furnace',
             name = 'electric-filter-furnace',
-            ref_name = 'electric-furnace',
+            ref_name = 'electric-filter-furnace',
             tech = 'advanced-material-processing-2',
-            min = 1,
+            min = 2,
             max = 3
         },
         ['laser-turret'] = {

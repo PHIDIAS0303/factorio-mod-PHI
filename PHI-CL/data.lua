@@ -238,3 +238,38 @@ if module_limitation then
         end
     end
 end
+
+if settings.startup['PHI-RS'].value then
+    local item = table.deepcopy(data.raw['furnace']['electric-furnace'])
+    item.name = 'electric-filter-furnace'
+    item.minable.result = 'electric-filter-furnace'
+    item.type = 'assembling-machine'
+    data:extend({item})
+
+    item = table.deepcopy(data.raw.item['electric-furnace'])
+    item.name = 'electric-filter-furnace'
+    item.place_result = 'electric-filter-furnace'
+    item.order = item.order .. 'B'
+    data:extend({item})
+
+    data:extend({{
+        type = 'recipe',
+        name = 'electric-filter-furnace',
+        energy_required = 2,
+        enabled = false,
+        ingredients = {{'electric-furnace', 1}},
+        result = 'electric-filter-furnace',
+    }})
+
+    data:extend({{
+        type = 'recipe',
+        name = 'electric-furnace-return',
+        energy_required = 2,
+        enabled = false,
+        ingredients = {{'electric-filter-furnace', 1}},
+        result = 'electric-furnace',
+    }})
+
+    table.insert(data.raw.technology[items['item']['electric-filter-furnace'].tech].effects, {type='unlock-recipe', recipe='electric-furnace'})
+    table.insert(data.raw.technology[items['item']['electric-filter-furnace'].tech].effects, {type='unlock-recipe', recipe='electric-furnace-return'})
+end

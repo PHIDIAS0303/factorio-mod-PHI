@@ -292,25 +292,6 @@ function main.ER(source, tier)
             result = result_name,
         }})
 
-    elseif source.name == 'electric-filter-furnace' and tier == 1 then
-        data:extend({{
-            type = 'recipe',
-            name = 'electric-filter-furnace',
-            energy_required = 2,
-            enabled = false,
-            ingredients = {{'electric-furnace', 1}},
-            result = 'electric-filter-furnace',
-        }})
-
-        data:extend({{
-            type = 'recipe',
-            name = 'electric-furnace-return',
-            energy_required = 2,
-            enabled = false,
-            ingredients = {{'electric-filter-furnace', 1}},
-            result = 'electric-furnace',
-        }})
-
     else
         data:extend({{
             type = 'recipe',
