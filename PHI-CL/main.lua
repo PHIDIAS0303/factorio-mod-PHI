@@ -382,14 +382,14 @@ function main.EL(source)
     local new_name = source.name
 
     if (source.max - source.min) > 0 then
-        for j=source.min, source.max - 1 do
+        for j=source.min + 1, source.max do
             if source.name == 'electric-filter-furnace' then
                 new_type = 'assembling-machine'
             end
 
             if source.min > 2 then
                 new_name = source.name .. '-' .. j
-                base_name = source.name .. '-' .. (j + 1)
+                base_name = source.name .. '-' .. (j - 1)
             end
 
             data.raw[new_type][new_name].fast_replaceable_group = data.raw[base_type][base_name].fast_replaceable_group
