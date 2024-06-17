@@ -11,12 +11,12 @@ function main.EEE(source, tier)
     item.minable.result = source.name .. '-' .. tier
     item.max_health = item.max_health * (2 ^ (tier - source.min + 1))
 
-    if item.energy_usage then
-        item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
-    end
-
     if (tier < source.max) then
         item.next_upgrade = source.name .. '-' .. (tier + 1)
+    end
+
+    if item.energy_usage then
+        item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
     end
 
     if source.type == 'electric-turret' or source.type == 'ammo-turret' or source.type == 'fluid-turret' then
