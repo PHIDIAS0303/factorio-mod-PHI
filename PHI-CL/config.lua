@@ -800,10 +800,6 @@ local items = {
 }
 
 if mods then
-    if mods['PHI-RS'] then
-
-    end
-
     if mods['aai-industry'] then
         items['item']['industrial-furnace'] = {
             enabled = settings.startup['PHI-MB'].value,
