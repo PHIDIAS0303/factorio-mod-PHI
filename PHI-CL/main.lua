@@ -376,24 +376,23 @@ function main.EL(source)
         data.raw[source.type][source.ref_name].fast_replaceable_group = source.ref_name
     end
 
+    local base_type = source.type
+    local base_name = source.ref_name
+    local new_type = source.type
+    local new_name = source.name
+
     if (source.max - source.min) > 0 then
         for j=source.min, source.max - 1 do
-            if source.min == 2 then
-                if source.name == 'electric-filter-furnace' then
-                    data.raw['assembling-machine'][source.name .. '-' .. j].fast_replaceable_group = data.raw[source.type][source.ref_name].fast_replaceable_group
-
-                else
-                    data.raw[source.type][source.name .. '-' .. j].fast_replaceable_group = data.raw[source.type][source.ref_name].fast_replaceable_group
-                end
-
-            else
-                if source.name == 'electric-filter-furnace' then
-                    data.raw['assembling-machine'][source.name .. '-' .. j].fast_replaceable_group = data.raw[source.type][source.name .. '-' .. (j + 1)].fast_replaceable_group
-
-                else
-                    data.raw[source.type][source.name .. '-' .. j].fast_replaceable_group = data.raw[source.type][source.name .. '-' .. (j + 1)].fast_replaceable_group
-                end
+            if source.name == 'electric-filter-furnace' then
+                new_type = 'assembling-machine'
             end
+
+            if source.min > 2 then
+                new_name = source.name .. '-' .. j
+                base_name = source.name .. '-' .. (j + 1)
+            end
+
+            data.raw[new_type][new_name].fast_replaceable_group = data.raw[base_type][base_name].fast_replaceable_group
         end
     end
 end
