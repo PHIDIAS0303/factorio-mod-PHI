@@ -7,15 +7,8 @@ local main = {}
 function main.EEE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
 
-    if tier > 1 then
-        item.name = source.name
-        item.minable.result = source.name
-
-    else
-        item.name = source.name .. '-' .. tier
-        item.minable.result = source.name .. '-' .. tier
-    end
-
+    item.name = source.name .. '-' .. tier
+    item.minable.result = source.name .. '-' .. tier
     item.max_health = item.max_health * (2 ^ (tier - source.min + 1))
 
     if item.energy_usage then
