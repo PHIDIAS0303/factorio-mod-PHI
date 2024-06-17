@@ -7,8 +7,15 @@ local main = {}
 function main.EEE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
 
-    item.name = source.name .. '-' .. tier
-    item.minable.result = source.name .. '-' .. tier
+    if tier > 1 then
+        item.name = source.name
+        item.minable.result = source.name
+
+    else
+        item.name = source.name .. '-' .. tier
+        item.minable.result = source.name .. '-' .. tier
+    end
+
     item.max_health = item.max_health * (2 ^ (tier - source.min + 1))
 
     if item.energy_usage then
@@ -118,6 +125,10 @@ function main.EEE(source, tier)
         end
     end
 
+    if source.name == 'electric-filter-furnace' then
+        item.type = 'assembling-machine'
+    end
+
     -- item.animation.layers[1].filename = graphics_location .. source .. '-e.png'
     -- item.animation.layers[1].hr_version.filename = graphics_location .. source ..'-eh.png'
     -- item.icon = graphics_location .. source .. '-i.png'
@@ -224,10 +235,15 @@ function main.EI(source, tier)
         -- item.icons = {{icon = '__base__/graphics/icons/' .. source.graphics_name .. '.png', icon_mipmaps = 4, icon_size = 64}}
 
     else
-        item.name = source.name .. '-' .. tier
-        item.place_result = source.name .. '-' .. tier
+        if tier > 1 then
+            item.name = source.name .. '-' .. tier
+            item.place_result = source.name .. '-' .. tier
 
-        -- item.icons = {{icon = graphics_location .. source.name .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
+        else
+            item.name = source.name
+            item.place_result = source.name
+            -- item.icons = {{icon = graphics_location .. source.name .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
+        end
     end
 
     item.order = item.order .. tier
@@ -274,6 +290,25 @@ function main.ER(source, tier)
             enabled = false,
             ingredients = {{ingredient_name, 1}, {source.name, 1}},
             result = result_name,
+        }})
+
+    elseif source.name == 'electric-filter-furnace' and tier == 1 then
+        data:extend({{
+            type = 'recipe',
+            name = 'electric-filter-furnace',
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{'electric-furnace', 1}},
+            result = 'electric-filter-furnace',
+        }})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'electric-furnace-return',
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{'electric-filter-furnace', 1}},
+            result = 'electric-furnace',
         }})
 
     else

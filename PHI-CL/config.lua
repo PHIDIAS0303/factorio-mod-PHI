@@ -382,11 +382,11 @@ local items = {
         ['electric-filter-furnace'] = {
             enabled = settings.startup['PHI-MB'].value,
             stage = 2,
-            type = 'assembling-machine',
+            type = 'furnace',
             name = 'electric-filter-furnace',
-            ref_name = 'electric-filter-furnace',
+            ref_name = 'electric-furnace',
             tech = 'advanced-material-processing-2',
-            min = 2,
+            min = 1,
             max = 3
         },
         ['laser-turret'] = {

@@ -201,7 +201,7 @@ local function EE(source)
     -- item.icon_size = 64
     -- item.icon_mipmaps = 4
 
-    if (source.new_type ~= nil) then
+    if source.new_type then
         item.type = source.new_type
     end
 
@@ -214,7 +214,6 @@ local function EI(source)
 
     item.name = source.name
     item.place_result = source.name
-    -- item.icons = {{icon = graphics_location .. source .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
     item.order = item.order .. 'B'
     data:extend({item})
 end
