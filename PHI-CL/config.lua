@@ -381,6 +381,7 @@ local items = {
         },
         ['laser-turret'] = {
             enabled = settings.startup['PHI-WE'].value,
+            stage = 1,
             type = 'electric-turret',
             name = 'laser-turret',
             ref_name = 'laser-turret',
@@ -391,6 +392,7 @@ local items = {
         },
         ['gun-turret'] = {
             enabled = settings.startup['PHI-WE'].value,
+            stage = 1,
             type = 'ammo-turret',
             name = 'gun-turret',
             ref_name = 'gun-turret',
@@ -401,6 +403,7 @@ local items = {
         },
         ['flamethrower-turret'] = {
             enabled = settings.startup['PHI-WE'].value,
+            stage = 1,
             type = 'fluid-turret',
             name = 'flamethrower-turret',
             ref_name = 'flamethrower-turret',
@@ -411,6 +414,7 @@ local items = {
         },
         ['radar'] = {
             enabled = settings.startup['PHI-WE'].value,
+            stage = 1,
             type = 'radar',
             name = 'radar',
             ref_name = 'radar',
@@ -422,6 +426,7 @@ local items = {
     ['equipment'] = {
         ['solar-panel-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
             type = 'solar-panel-equipment',
             name = 'solar-panel',
             ref_name = 'solar-panel-equipment',
@@ -433,6 +438,7 @@ local items = {
         },
         ['fusion-reactor-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
             type = 'generator-equipment',
             name = 'fusion-reactor',
             ref_name = 'fusion-reactor-equipment',
@@ -444,6 +450,7 @@ local items = {
         },
         ['battery-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
             type = 'battery-equipment',
             name = 'battery',
             ref_name = 'battery-mk2-equipment',
@@ -455,6 +462,7 @@ local items = {
         },
         ['personal-laser-defense-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
             type = 'active-defense-equipment',
             name = 'personal-laser-defense',
             ref_name = 'personal-laser-defense-equipment',
@@ -466,6 +474,7 @@ local items = {
         },
         ['energy-shield-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
             type = 'energy-shield-equipment',
             name = 'energy-shield',
             ref_name = 'energy-shield-mk2-equipment',
@@ -477,6 +486,7 @@ local items = {
         },
         ['personal-roboport-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
             type = 'roboport-equipment',
             name = 'personal-roboport',
             ref_name = 'personal-roboport-mk2-equipment',
@@ -488,6 +498,7 @@ local items = {
         },
         ['night-vision-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
             type = 'night-vision-equipment',
             name = 'night-vision',
             ref_name = 'night-vision-equipment',
@@ -499,6 +510,7 @@ local items = {
         },
         ['exoskeleton-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
             type = 'movement-bonus-equipment',
             name = 'exoskeleton',
             ref_name = 'exoskeleton-equipment',
