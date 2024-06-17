@@ -10,7 +10,7 @@ for index, force in pairs(game.forces) do
     end
 
     for _, v in pairs(items) do
-        if technologies[v.tech] ~= nil then
+        if technologies[v.tech] then
             if technologies[v.tech].researched then
                 if recipes[v.name .. '-s1'] ~= nil then
                     recipes[v.name .. '-s1'].enabled = true

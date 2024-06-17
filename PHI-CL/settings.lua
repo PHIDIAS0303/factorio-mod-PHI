@@ -22,7 +22,7 @@ data:extend({
     name = 'PHI-EQ',
     setting_type = 'startup',
     default_value = true,
-    order = 'A6'
+    order = 'A4'
   }, {
     type = 'int-setting',
     name = 'PHI-XW-WATER',
@@ -140,62 +140,62 @@ data:extend({
     setting_type = 'startup',
     default_value = 8,
     allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'G1'
+    order = 'E1'
   }, {
     type = 'int-setting',
     name = 'PHI-EQ-BATTERY-TIER',
     setting_type = 'startup',
     default_value = 8,
     allowed_values = {2, 3, 4, 5, 6, 7, 8},
-    order = 'G2'
+    order = 'E2'
   }, {
     type = 'int-setting',
     name = 'PHI-EQ-REACTOR-TIER',
     setting_type = 'startup',
     default_value = 8,
     allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'G3'
+    order = 'E3'
   }, {
     type = 'int-setting',
     name = 'PHI-EQ-LASER-TIER',
     setting_type = 'startup',
     default_value = 8,
     allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'G4'
+    order = 'E4'
   }, {
     type = 'int-setting',
     name = 'PHI-EQ-ROBOPORT-TIER',
     setting_type = 'startup',
     default_value = 8,
     allowed_values = {2, 3, 4, 5, 6, 7, 8},
-    order = 'G5'
+    order = 'E5'
   }, {
     type = 'int-setting',
     name = 'PHI-EQ-SHIELD-TIER',
     setting_type = 'startup',
     default_value = 8,
     allowed_values = {2, 3, 4, 5, 6, 7, 8},
-    order = 'G6'
+    order = 'E6'
   }, {
     type = 'int-setting',
     name = 'PHI-EQ-NIGHT-TIER',
     setting_type = 'startup',
     default_value = 2,
     allowed_values = {1, 2},
-    order = 'G7'
+    order = 'E7'
   }, {
     type = 'int-setting',
     name = 'PHI-EQ-EXO-TIER',
     setting_type = 'startup',
     default_value = 2,
     allowed_values = {1, 2},
-    order = 'G8'
+    order = 'E8'
   }, {
     type = 'bool-setting',
     name = 'PHI-EQ-ARMOR',
     setting_type = 'startup',
     default_value = true,
-    order = 'G9'
+    order = 'E9'
   }, {
     type = 'int-setting',
     name = 'PHI-XW-WATER',

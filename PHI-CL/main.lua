@@ -19,6 +19,26 @@ function main.EEE(source, tier)
         item.next_upgrade = source.name .. '-' .. (tier + 1)
     end
 
+    if source.type == 'electric-turret' or source.type == 'ammo-turret' or source.type == 'fluid-turret' then
+        item.attack_parameters.damage_modifier = (2 ^ (tier - source.min + 1))
+        item.attack_parameters.range = source.range + (2 * (tier - source.min + 1))
+        item.call_for_help_radius = 40 + (2 * (tier - source.min + 1))
+    end
+
+    if item.fluid_boxes then
+        for k, _ in pairs(item.fluid_boxes) do
+            if (item.fluid_boxes[k] and (not item.fluid_boxes[k])) then
+                if item.fluid_boxes[k].production_type then
+                    item.fluid_boxes[k].height = 4
+
+                    if item.fluid_boxes[k].base_level then
+                        item.fluid_boxes[k].base_level = item.fluid_boxes[k].base_level * 4
+                    end
+                end
+            end
+        end
+    end
+
     if (source.type == 'accumulator') then
         item.energy_source.buffer_capacity = (source.base * 4 ^ (tier - source.min + 1)) .. 'MJ'
         item.energy_source.input_flow_limit = (source.base * 60 * (4 ^ (tier - source.min + 1))) .. 'kW'
@@ -77,9 +97,9 @@ function main.EEE(source, tier)
         item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * 2
         item.glow_light_intensity = 1
         item.attack_parameters.ammo_type.action.action_delivery.max_length = source.range + (2 * (tier - source.min + 1))
-        -- item.attack_parameters.ammo_type.energy_consumption = 800 * (2 ^ (tier - source.min + 1)) .. 'kJ'
-        item.energy_source.input_flow_limit = 9600 * (2 ^ (tier - source.min + 1)) .. 'kW'
-        item.energy_source.buffer_capacity = 12816 * (2 ^ (tier - source.min + 1)) .. 'kJ'
+        item.attack_parameters.ammo_type.energy_consumption = tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kJ'
+        item.energy_source.input_flow_limit = tonumber(string.match(item.energy_source.input_flow_limit, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
+        item.energy_source.buffer_capacity = tonumber(string.match(item.energy_source.buffer_capacity, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kJ'
 
     elseif source.type == 'fluid-turret' then
         item.prepare_range = 35 + (2 * (tier - source.min + 1))
@@ -95,26 +115,6 @@ function main.EEE(source, tier)
 
         if item.energy_source and item.energy_source.emissions_per_minute then
             item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (2 ^ (tier - source.min + 1))
-        end
-    end
-
-    if source.type == 'electric-turret' or source.type == 'ammo-turret' or source.type == 'fluid-turret' then
-        item.attack_parameters.damage_modifier = (2 ^ (tier - source.min + 1))
-        item.attack_parameters.range = source.range + (2 * (tier - source.min + 1))
-        item.call_for_help_radius = 40 + (2 * (tier - source.min + 1))
-    end
-
-    if item.fluid_boxes then
-        for k, _ in pairs(item.fluid_boxes) do
-            if (item.fluid_boxes[k] and (not item.fluid_boxes[k])) then
-                if item.fluid_boxes[k].production_type then
-                    item.fluid_boxes[k].height = 4
-
-                    if item.fluid_boxes[k].base_level then
-                        item.fluid_boxes[k].base_level = item.fluid_boxes[k].base_level * 4
-                    end
-                end
-            end
         end
     end
 

@@ -11,7 +11,7 @@ end
 data.raw['utility-constants'].default.minimum_recipe_overload_multiplier = settings.startup['PHI-RS-RECIPE-MINROM'].value
 data.raw['utility-constants'].default.maximum_recipe_overload_multiplier = settings.startup['PHI-RS-RECIPE-MAXROM'].value
 
-if settings.startup['PHI-RS-MODULE'].value == true then
+if settings.startup['PHI-RS-MODULE'].value then
     table.insert(items, {
         name='speed-module',
         tech='speed-module'
