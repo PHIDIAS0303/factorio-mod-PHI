@@ -19,10 +19,22 @@ function main.EEE(source, tier)
         item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
     end
 
-    if source.type == 'electric-turret' or source.type == 'ammo-turret' or source.type == 'fluid-turret' then
+    if (source.type == 'electric-turret') or (source.type == 'ammo-turret') or (source.type == 'fluid-turret') then
         item.attack_parameters.damage_modifier = (2 ^ (tier - source.min + 1))
         item.attack_parameters.range = source.range + (2 * (tier - source.min + 1))
         item.call_for_help_radius = 40 + (2 * (tier - source.min + 1))
+
+        if source.type == 'electric-turret' then
+            item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * 2
+            item.glow_light_intensity = 1
+            item.attack_parameters.ammo_type.action.action_delivery.max_length = source.range + (2 * (tier - source.min + 1))
+            item.attack_parameters.ammo_type.energy_consumption = tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kJ'
+            item.energy_source.input_flow_limit = tonumber(string.match(item.energy_source.input_flow_limit, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
+            item.energy_source.buffer_capacity = tonumber(string.match(item.energy_source.buffer_capacity, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kJ'
+
+        elseif source.type == 'fluid-turret' then
+            item.prepare_range = 35 + (2 * (tier - source.min + 1))
+        end
     end
 
     if item.fluid_boxes then
@@ -39,81 +51,74 @@ function main.EEE(source, tier)
         end
     end
 
-    if (source.type == 'accumulator') then
-        item.energy_source.buffer_capacity = (source.base * 4 ^ (tier - source.min + 1)) .. 'MJ'
-        item.energy_source.input_flow_limit = (source.base * 60 * (4 ^ (tier - source.min + 1))) .. 'kW'
-        item.energy_source.output_flow_limit = (source.base * 60 * (4 ^ (tier - source.min + 1))) .. 'kW'
+    if source.tech == 'compound-energy' then
+        if (source.type == 'accumulator') then
+            item.energy_source.buffer_capacity = (source.base * 4 ^ (tier - source.min + 1)) .. 'MJ'
+            item.energy_source.input_flow_limit = (source.base * 60 * (4 ^ (tier - source.min + 1))) .. 'kW'
+            item.energy_source.output_flow_limit = (source.base * 60 * (4 ^ (tier - source.min + 1))) .. 'kW'
 
-        --[[
-        item.charge_animation.layers[1].layers[1].filename = item.picture.layers[1].filename
-        item.charge_animation.layers[1].layers[1].tint = {r = 1, g = 1, b = 1, a = 1}
-        item.charge_animation.layers[1].layers[1].hr_version.filename = item.picture.layers[1].hr_version.filename
-        item.charge_animation.layers[1].layers[1].hr_version.tint = {r = 1, g = 1, b = 1, a = 1}
-        item.discharge_animation.layers[1].layers[1].filename = item.picture.layers[1].filename
-        item.discharge_animation.layers[1].layers[1].tint = {r = 1, g = 1, b = 1, a = 1}
-        item.discharge_animation.layers[1].layers[1].hr_version.filename = item.picture.layers[1].hr_version.filename
-        item.discharge_animation.layers[1].layers[1].hr_version.tint = {r = 1, g = 1, b = 1, a = 1}
-        ]]
+            --[[
+            item.charge_animation.layers[1].layers[1].filename = item.picture.layers[1].filename
+            item.charge_animation.layers[1].layers[1].tint = {r = 1, g = 1, b = 1, a = 1}
+            item.charge_animation.layers[1].layers[1].hr_version.filename = item.picture.layers[1].hr_version.filename
+            item.charge_animation.layers[1].layers[1].hr_version.tint = {r = 1, g = 1, b = 1, a = 1}
+            item.discharge_animation.layers[1].layers[1].filename = item.picture.layers[1].filename
+            item.discharge_animation.layers[1].layers[1].tint = {r = 1, g = 1, b = 1, a = 1}
+            item.discharge_animation.layers[1].layers[1].hr_version.filename = item.picture.layers[1].hr_version.filename
+            item.discharge_animation.layers[1].layers[1].hr_version.tint = {r = 1, g = 1, b = 1, a = 1}
+            ]]
 
-    elseif (source.type == 'solar-panel') then
-        item.production = (source.base * (4 ^ (tier - source.min + 1))) .. 'kW'
+        elseif (source.type == 'solar-panel') then
+            item.production = (source.base * (4 ^ (tier - source.min + 1))) .. 'kW'
 
-    elseif (source.type == 'boiler') then
-        item.fluid_box.height = 4
-        item.output_fluid_box.height = 4
-        item.output_fluid_box.base_level = 5
-        item.energy_consumption = source.base * tier .. 'kW'
-        item.target_temperature = 15 + (source.temp * tier)
-        item.fluid_usage_per_tick = source.fluid
+        elseif (source.type == 'boiler') then
+            item.fluid_box.height = 4
+            item.output_fluid_box.height = 4
+            item.output_fluid_box.base_level = 5
+            item.energy_consumption = source.base * tier .. 'kW'
+            item.target_temperature = 15 + (source.temp * tier)
+            item.fluid_usage_per_tick = source.fluid
 
-        if (source.name == 'heat-exchanger') then
-            item.energy_source.min_working_temperature = 15 + (source.temp * tier)
-            item.energy_source.max_temperature = source.temp * (tier + 1)
-            item.energy_source.max_transfer = 2000 + (2000 * tier) .. 'MW'
+            if (source.name == 'heat-exchanger') then
+                item.energy_source.min_working_temperature = 15 + (source.temp * tier)
+                item.energy_source.max_temperature = source.temp * (tier + 1)
+                item.energy_source.max_transfer = 2000 + (2000 * tier) .. 'MW'
+            end
+
+        elseif (source.type == 'generator') then
+            item.fluid_box.height = 4
+            item.maximum_temperature = 15 + (source.base * tier)
+            item.fluid_usage_per_tick = source.fluid
+
+        elseif (source.type == 'reactor') then
+            item.consumption = source.base * tier .. 'MW'
+            item.neighbour_bonus = source.bonus
+            item.heat_buffer.max_temperature = source.temp * (tier + 1)
+            item.heat_buffer.max_transfer = source.temp * (tier + 1) * 0.02 .. 'GW'
+
+        elseif (source.type == 'heat-pipe') then
+            item.heat_buffer.max_temperature = source.temp * (tier + 1)
+            item.heat_buffer.max_transfer = source.temp * (tier + 1) * 0.01 .. 'GW'
         end
+    end
 
-    elseif (source.type == 'generator') then
-        item.fluid_box.height = 4
-        item.maximum_temperature = 15 + (source.base * tier)
-        item.fluid_usage_per_tick = source.fluid
-
-    elseif (source.type == 'reactor') then
-        item.consumption = source.base * tier .. 'MW'
-        item.neighbour_bonus = source.bonus
-        item.heat_buffer.max_temperature = source.temp * (tier + 1)
-        item.heat_buffer.max_transfer = source.temp * (tier + 1) * 0.02 .. 'GW'
-
-    elseif (source.type == 'heat-pipe') then
-        item.heat_buffer.max_temperature = source.temp * (tier + 1)
-        item.heat_buffer.max_transfer = source.temp * (tier + 1) * 0.01 .. 'GW'
-
-    elseif (source.type == 'lab') then
+    if (source.type == 'lab') then
         item.researching_speed = item.researching_speed * (2 ^ (tier - source.min + 1))
 
     elseif (source.type == 'mining-drill') then
         item.mining_speed = item.mining_speed * (2 ^ (tier - source.min + 1))
 
-    elseif source.type == 'electric-turret' then
-        item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * 2
-        item.glow_light_intensity = 1
-        item.attack_parameters.ammo_type.action.action_delivery.max_length = source.range + (2 * (tier - source.min + 1))
-        item.attack_parameters.ammo_type.energy_consumption = tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kJ'
-        item.energy_source.input_flow_limit = tonumber(string.match(item.energy_source.input_flow_limit, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
-        item.energy_source.buffer_capacity = tonumber(string.match(item.energy_source.buffer_capacity, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kJ'
-
-    elseif source.type == 'fluid-turret' then
-        item.prepare_range = 35 + (2 * (tier - source.min + 1))
-
     elseif source.type == 'radar' then
         item.max_distance_of_sector_revealed = item.max_distance_of_sector_revealed + (2 * tier)
         item.max_distance_of_nearby_sector_revealed = item.max_distance_of_nearby_sector_revealed + (2 * tier)
+    end
 
-    else
-        if item.crafting_speed then
-            item.crafting_speed = item.crafting_speed * (2 ^ (tier - source.min + 1))
-        end
+    if item.crafting_speed then
+        item.crafting_speed = item.crafting_speed * (2 ^ (tier - source.min + 1))
+    end
 
-        if item.energy_source and item.energy_source.emissions_per_minute then
+    if item.energy_source then
+        if item.energy_source.emissions_per_minute then
             item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (2 ^ (tier - source.min + 1))
         end
     end
