@@ -86,7 +86,7 @@ function main.EEE(source, tier)
             item.crafting_speed = item.crafting_speed * (2 ^ (tier - source.min + 1))
         end
 
-        if item.energy_source.emissions_per_minute then
+        if item.energy_source and item.energy_source.emissions_per_minute then
             item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (2 ^ (tier - source.min + 1))
         end
     end
@@ -132,6 +132,7 @@ end
 function main.EEQ(source, tier)
     local item = {}
     item['name'] = source.name .. '-mk' .. tier .. '-equipment'
+    item['type'] = source.type
     item['categories'] = {'armor'}
     local w = 1
     local h = 1
