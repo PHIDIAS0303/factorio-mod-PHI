@@ -131,9 +131,16 @@ end
 -- equipment
 function main.EEQ(source, tier)
     local item = {}
-    item['name'] = source.name .. '-mk' .. tier .. '-equipment'
+
+    if tier == 1 then
+        item['name'] = source.name .. '-equipment'
+    else
+        item['name'] = source.name .. '-mk' .. tier .. '-equipment'
+    end
+
     item['type'] = source.type
     item['categories'] = {'armor'}
+
     local w = 1
     local h = 1
 
