@@ -323,19 +323,23 @@ function main.ET(source, tier)
         end
 
     elseif data.raw.technology[source.tech] then
+        local recipe_name = source.name
+
         if source.category == 'equipment' then
-            table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.name .. '-mk' .. tier .. '-equipment'})
+            recipe_name = recipe_name .. '-mk' .. tier .. '-equipment'
 
         else
-            table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
+            recipe_name = recipe_name .. tier
+        end
 
-            if source.type == 'ammo-turret' or source.type == 'fluid-turret' then
-                for i=1, #items['research_modifier'][source.type], 1 do
-                    for j=1, #data.raw.technology[items['research_modifier'][source.type][i]].effects, 1 do
-                        if (data.raw.technology[items['research_modifier'][source.type][i]].effects[j].type == 'turret-attack') then
-                            if (data.raw.technology[items['research_modifier'][source.type][i]].effects[j].turret_id == source.ref_name) then
-                                table.insert(data.raw.technology[items['research_modifier'][source.type][i]].effects, {type='turret-attack', turret_id=source.name .. '-' .. tier, modifier=data.raw.technology[items['research_modifier'][source.type][i]].effects[j].modifier})
-                            end
+        table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
+
+        if source.type == 'ammo-turret' or source.type == 'fluid-turret' then
+            for i=1, #items['research_modifier'][source.type], 1 do
+                for j=1, #data.raw.technology[items['research_modifier'][source.type][i]].effects, 1 do
+                    if (data.raw.technology[items['research_modifier'][source.type][i]].effects[j].type == 'turret-attack') then
+                        if (data.raw.technology[items['research_modifier'][source.type][i]].effects[j].turret_id == source.ref_name) then
+                            table.insert(data.raw.technology[items['research_modifier'][source.type][i]].effects, {type='turret-attack', turret_id=source.name .. '-' .. tier, modifier=data.raw.technology[items['research_modifier'][source.type][i]].effects[j].modifier})
                         end
                     end
                 end
