@@ -2,38 +2,7 @@ local items = require 'config'
 local main = require 'main'
 local file_stage = 2
 
-for _, v in pairs(items['item']) do
-    if v.enabled then
-        if v.stage == file_stage then
-            v.category = 'item'
-
-            for j=v.min, v.max, 1 do
-                main.EEE(v, j)
-                main.EI(v, j)
-                main.ER(v, j)
-                main.ET(v, j)
-            end
-
-            main.EL(v)
-        end
-    end
-end
-
-for _, v in pairs(items['equipment']) do
-    if v.enabled then
-        if v.stage == file_stage then
-            v.category = 'equipment'
-
-            for j=v.min, v.max, 1 do
-                main.EEQ(v, j)
-                main.EI(v, j)
-                main.ER(v, j)
-                main.ET(v, j)
-            end
-        end
-    end
-end
-if items['item']['nuclear-reactor'].enabled then
+if settings.startup['PHI-EN'] and settings.startup['PHI-EN-NUCLEAR-TIER'].value > 1 then
     data.raw['fluid']['steam'].max_temperature = 5000
 end
 
@@ -110,4 +79,36 @@ if settings.startup['PHI-EQ-ARMOR'].value then
     end
 
     table.insert(data.raw.technology['power-armor-mk2'].effects, {type='unlock-recipe', recipe='power-armor-mk3'})
+end
+
+for _, v in pairs(items['item']) do
+    if v.enabled then
+        if v.stage == file_stage then
+            v.category = 'item'
+
+            for j=v.min, v.max, 1 do
+                main.EEE(v, j)
+                main.EI(v, j)
+                main.ER(v, j)
+                main.ET(v, j)
+            end
+
+            main.EL(v)
+        end
+    end
+end
+
+for _, v in pairs(items['equipment']) do
+    if v.enabled then
+        if v.stage == file_stage then
+            v.category = 'equipment'
+
+            for j=v.min, v.max, 1 do
+                main.EEQ(v, j)
+                main.EI(v, j)
+                main.ER(v, j)
+                main.ET(v, j)
+            end
+        end
+    end
 end

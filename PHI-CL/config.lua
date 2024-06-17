@@ -381,7 +381,7 @@ local items = {
         },
         ['electric-filter-furnace'] = {
             enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-RS'].value,
-            stage = 2,
+            stage = 1,
             type = 'furnace',
             name = 'electric-filter-furnace',
             ref_name = 'electric-filter-furnace',
