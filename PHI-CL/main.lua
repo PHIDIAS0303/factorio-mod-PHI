@@ -134,6 +134,7 @@ function main.EEQ(source, tier)
 
     if tier == 1 then
         item['name'] = source.name .. '-equipment'
+
     else
         item['name'] = source.name .. '-mk' .. tier .. '-equipment'
     end
