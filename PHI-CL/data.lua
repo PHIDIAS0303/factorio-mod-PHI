@@ -50,39 +50,39 @@ if settings.startup['PHI-RS'].value then
     data.raw['utility-constants'].default.maximum_recipe_overload_multiplier = settings.startup['PHI-RS-RECIPE-MAXROM'].value
 
     if settings.startup['PHI-RS-MODULE'].value then
-        table.insert(items, {
+        table.insert(items['recipe'], {
             name='speed-module',
             tech='speed-module'
         })
-        table.insert(items, {
+        table.insert(items['recipe'], {
             name='speed-module-2',
             tech='speed-module-2'
         })
-        table.insert(items, {
+        table.insert(items['recipe'], {
             name='speed-module-3',
             tech='speed-module-3'
         })
-        table.insert(items, {
+        table.insert(items['recipe'], {
             name='productivity-module',
             tech='productivity-module'
         })
-        table.insert(items, {
+        table.insert(items['recipe'], {
             name='productivity-module-2',
             tech='productivity-module-2'
         })
-        table.insert(items, {
+        table.insert(items['recipe'], {
             name='productivity-module-3',
             tech='productivity-module-3'
         })
-        table.insert(items, {
+        table.insert(items['recipe'], {
             name='effectivity-module',
             tech='effectivity-module'
         })
-        table.insert(items, {
+        table.insert(items['recipe'], {
             name='effectivity-module-2',
             tech='effectivity-module-2'
         })
-        table.insert(items, {
+        table.insert(items['recipe'], {
             name='effectivity-module-3',
             tech='effectivity-module-3'
         })
