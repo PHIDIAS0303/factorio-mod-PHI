@@ -977,23 +977,23 @@ if mods ~= nil then
             max = 3
         }
 
-        items['equipment']['solar-panel'].base = 30
+        items['equipment']['solar-panel-equipment'].base = 30
 
-        items['equipment']['fusion-reactor'].tech = 'se-rtg-equipment'
-        items['equipment']['fusion-reactor'].base_name = 'se-rtg'
-        items['equipment']['fusion-reactor'].base = 400
+        items['equipment']['fusion-reactor-equipment'].tech = 'se-rtg-equipment'
+        items['equipment']['fusion-reactor-equipment'].base_name = 'se-rtg'
+        items['equipment']['fusion-reactor-equipment'].base = 400
 
-        items['equipment']['battery'].tech = 'battery-equipment'
-        items['equipment']['battery'].min = 2
-        items['equipment']['battery'].base = 100
+        items['equipment']['battery-equipment'].tech = 'battery-equipment'
+        items['equipment']['battery-equipment'].min = 2
+        items['equipment']['battery-equipment'].base = 100
 
-        items['equipment']['energy-shield'].tech = 'energy-shield-equipment'
-        items['equipment']['energy-shield'].min = 2
-        items['equipment']['energy-shield'].base = 200
+        items['equipment']['energy-shield-equipment'].tech = 'energy-shield-equipment'
+        items['equipment']['energy-shield-equipment'].min = 2
+        items['equipment']['energy-shield-equipment'].base = 200
 
-        items['equipment']['personal-roboport'].tech = 'personal-roboport-equipment'
-        items['equipment']['personal-roboport'].min = 2
-        items['equipment']['personal-roboport'].base = 0.5
+        items['equipment']['personal-roboport-equipment'].tech = 'personal-roboport-equipment'
+        items['equipment']['personal-roboport-equipment'].min = 2
+        items['equipment']['personal-roboport-equipment'].base = 0.5
     end
 end
 
