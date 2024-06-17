@@ -231,7 +231,6 @@ if settings.startup['PHI-RS'].value then
     end
 end
 
-
 for k, v in pairs(items['setting']) do
     for k2=1, #v.effect do
         if items[v.effect[k2]] ~= nil then
