@@ -303,6 +303,14 @@ data:extend({
     default_value = 5,
     allowed_values = {1, 2, 3, 4, 5},
     order = 'H1'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-PB-CMMS',
+    setting_type = 'startup',
+    default_value = 2,
+    minimum_value = 1,
+    maximum_value = 10,
+    order = 'I1'
   }
 }
 )

@@ -536,69 +536,58 @@ local items = {
             {
                 name = 'character_mining_speed_modifier',
                 enabled = true,
-                min = 0,
-                max = 2
+                value = 2
             },
             {
                 name = 'character_running_speed_modifier',
                 enabled = true,
-                min = 0,
-                max = 1.5
+                value = 1.5
             },
             {
                 name = 'character_crafting_speed_modifier',
                 enabled = true,
-                min = 0,
-                max = 5
+                value = 5
             },
             {
                 name = 'character_inventory_slots_bonus',
                 enabled = true,
-                min = 0,
-                max = 100
+                value = 100
             },
             {
                 name = 'character_health_bonus',
                 enabled = true,
-                min = 0,
-                max = 200
+                value = 200
             }
             --[[
             {
                 name = 'character_reach_distance_bonus',
                 enabled = true,
-                min = 0,
-                max = 10
+                value = 10
             },
             {
                 name = 'character_resource_reach_distance_bonus',
                 enabled = true,
-                min = 0,
-                max = 10
+                value = 10
             },
             {
                 name = 'character_build_distance_bonus',
                 enabled = true,
-                min = 0,
-                max = 10
+                value = 10
             },
             {
                 name = 'character_item_pickup_distance_bonus',
                 enabled = false,
-                min = 0,
-                max = 0
+                value = 0
             },
             {
                 name = 'character_loot_pickup_distance_bonus',
                 enabled = false,
-                min = 0,
-                max = 0
+                value = 0
             },
             {
                 name = 'character_item_drop_distance_bonus',
                 enabled = false,
-                min = 0,
-                max = 5
+                value = 5
             },
             ]]
         },
