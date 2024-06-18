@@ -216,6 +216,7 @@ if settings.startup['PHI-RS'].value then
                     end
 
                     item.name = items['recipe'][i].name .. '-s' .. j
+                    item.hide_from_player_crafting = true
 
                     data:extend({item})
                     table.insert(data.raw.technology[items['recipe'][i].tech].effects, {type='unlock-recipe', recipe=item.name})
