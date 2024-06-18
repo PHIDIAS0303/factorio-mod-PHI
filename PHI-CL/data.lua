@@ -360,7 +360,7 @@ if settings.startup['PHI-MI'].value then
         local item = table.deepcopy(data.raw['item']['boiler'])
         item.name = 'electric-boiler'
         item.place_result = 'electric-boiler'
-        item.order = 'b[steam-power]-b[electric-boiler]'
+        item.order = 'b[steam-power]-a[electric-boiler]'
         data:extend({item})
 
         local entity = table.deepcopy(data.raw['boiler']['boiler'])
