@@ -1,5 +1,5 @@
 local alpha_order = {'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'}
--- local graphics_location = '__PHI-EN__/graphics/'
+-- local graphics_location = '__PHI-CL__/graphics/'
 local items = require 'config'
 local main = {}
 
