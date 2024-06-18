@@ -421,7 +421,7 @@ if settings.startup['PHI-MI'].value then
 
             item.name = 'basic-' .. chests[i]
             item.place_result = 'basic-' .. chests[i]
-            item.order = item.order .. '-basic'
+            item.order = 'b[storage]-d[basic-' .. item.order .. ']'
             data:extend({item})
 
             entity.inventory_size = 1
