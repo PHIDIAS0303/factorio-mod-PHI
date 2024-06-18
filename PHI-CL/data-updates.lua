@@ -80,6 +80,43 @@ if settings.startup['PHI-EQ-ARMOR'].value then
     table.insert(data.raw.technology['power-armor-mk2'].effects, {type='unlock-recipe', recipe='power-armor-mk3'})
 end
 
+--[[
+for k, _ in pairs(data.raw) do
+    if data.raw[k] ~= nil then
+        if data.raw[k].fluid_box ~= nil then
+            if data.raw[k].fluid_box.height < 4 then
+                data.raw[k].fluid_box.height = 4
+            end
+            if data.raw[k].fluid_box.base_level < 5 then
+                data.raw[k].fluid_box.base_level = 5
+            end
+        end
+        if data.raw[k].output_fluid_box ~= nil then
+            if data.raw[k].output_fluid_box.height < 4 then
+                data.raw[k].output_fluid_box.height = 4
+            end
+            if data.raw[k].output_fluid_box.base_level > -5 then
+                data.raw[k].output_fluid_box.base_level = -5
+            end
+        end
+
+        if data.raw[k].fluid_boxes ~= nil then
+            for k1, _ in pairs(data.raw[k].fluid_boxes) do
+                if data.raw[k].fluid_boxes[k1] ~= false and data.raw[k].fluid_boxes[k1] ~= true then
+                    if data.raw[k].fluid_boxes[k1].production_type ~= nil then
+                        data.raw[k].fluid_boxes[k1].height = 4
+
+                        if data.raw[k].fluid_boxes[k1].base_level ~= nil then
+                            data.raw[k].fluid_boxes[k1].base_level = data.raw[k].fluid_boxes[k1].base_level * 4
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+]]
+
 for _, v in pairs(items['item']) do
     if v.enabled then
         if v.stage == file_stage then

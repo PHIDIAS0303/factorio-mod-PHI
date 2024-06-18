@@ -391,9 +391,13 @@ if settings.startup['PHI-MI'].value then
             ingredients = {{'boiler', 1}, {'electronic-circuit', 1}},
             result = 'electric-boiler',
         }})
+
+        -- electric boiler
+        data.raw['boiler']['boiler'].fast_replaceable_group = 'boiler'
+        data.raw['boiler']['electric-boiler'].fast_replaceable_group = data.raw['boiler']['electric-boiler'].fast_replaceable_group
     end
 
-    if settings.startup['PHI-MI-BOILER'].value then
+    if settings.startup['PHI-MI-CHEST'].value then
         local chests = {
             'steel-chest',
             'logistic-chest-passive-provider',
@@ -402,6 +406,55 @@ if settings.startup['PHI-MI'].value then
             'logistic-chest-buffer',
             'logistic-chest-requester'
         }
+
+        for i=1, #chests, 1 do
+            local item = table.deepcopy(data.raw['item'][chests[i]])
+            local entity
+
+            if chests[i] == 'steel-chest' then
+                entity = table.deepcopy(data.raw['container'][chests[i]])
+
+            else
+                entity = table.deepcopy(data.raw['logistic-container'][chests[i]])
+            end
+
+            item.name = 'basic-' .. chests[i]
+            item.place_result = 'basic-' .. chests[i]
+            item.order = item.order .. '-basic'
+            data:extend({item})
+
+            entity.inventory_size = 1
+            entity.name = 'basic-' .. chests[i]
+            entity.minable.result = 'basic-' .. chests[i]
+            data:extend({entity})
+
+            data:extend({{
+                type = 'recipe',
+                name = 'basic-' .. chests[i],
+                energy_required = 2,
+                enabled = false,
+                ingredients = {{chests[i], 1}},
+                result = 'basic-' .. chests[i],
+            }})
+
+            data:extend({{
+                type = 'recipe',
+                name = 'basic-' .. chests[i] .. '-return',
+                energy_required = 2,
+                enabled = false,
+                ingredients = {{'basic-' .. chests[i], 1}},
+                result = chests[i],
+            }})
+        end
+
+        table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='basic-steel-chest'})
+        table.insert(data.raw.technology['construction-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-passive-provider'})
+        table.insert(data.raw.technology['construction-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-storage'})
+        table.insert(data.raw.technology['logistic-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-passive-provider'})
+        table.insert(data.raw.technology['logistic-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-storage'})
+        table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-active-provider'})
+        table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-buffer'})
+        table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-requester'})
     end
 end
 
