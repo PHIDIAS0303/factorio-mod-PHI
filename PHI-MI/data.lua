@@ -1,14 +1,4 @@
-local alpha_order = {'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'}
-local graphics_location = '__PHI-MI__/graphics/'
 
-local ups_chests = {
-    'steel-chest',
-    'logistic-chest-passive-provider',
-    'logistic-chest-active-provider',
-    'logistic-chest-storage',
-    'logistic-chest-buffer',
-    'logistic-chest-requester'
-}
 
 for i=1, #ups_chests, 1 do
     local item = table.deepcopy(data.raw['item'][ups_chests[i]])

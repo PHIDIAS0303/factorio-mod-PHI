@@ -241,6 +241,12 @@ data:extend({
     default_value = true,
     order = 'F5'
   }, {
+    type = 'bool-setting',
+    name = 'PHI-MI-CHEST',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'F6'
+  }, {
     type = 'int-setting',
     name = 'PHI-RS-RECIPE-1',
     setting_type = 'startup',

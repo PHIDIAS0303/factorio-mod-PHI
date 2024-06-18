@@ -392,6 +392,17 @@ if settings.startup['PHI-MI'].value then
             result = 'electric-boiler',
         }})
     end
+
+    if settings.startup['PHI-MI-BOILER'].value then
+        local chests = {
+            'steel-chest',
+            'logistic-chest-passive-provider',
+            'logistic-chest-active-provider',
+            'logistic-chest-storage',
+            'logistic-chest-buffer',
+            'logistic-chest-requester'
+        }
+    end
 end
 
 for k, v in pairs(items['setting']) do
