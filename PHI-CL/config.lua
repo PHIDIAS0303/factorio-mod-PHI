@@ -552,6 +552,19 @@ local items = {
                 max = 5
             },
             {
+                name = 'character_inventory_slots_bonus',
+                enabled = true,
+                min = 0,
+                max = 100
+            },
+            {
+                name = 'character_health_bonus',
+                enabled = true,
+                min = 0,
+                max = 200
+            }
+            --[[
+            {
                 name = 'character_reach_distance_bonus',
                 enabled = true,
                 min = 0,
@@ -587,18 +600,7 @@ local items = {
                 min = 0,
                 max = 5
             },
-            {
-                name = 'character_inventory_slots_bonus',
-                enabled = true,
-                min = 0,
-                max = 100
-            },
-            {
-                name = 'character_health_bonus',
-                enabled = true,
-                min = 0,
-                max = 200
-            }
+            ]]
         },
         force_bonus = {
             {
@@ -616,6 +618,17 @@ local items = {
                 enabled = false,
                 value = 5
             },
+            {
+                name = 'character_inventory_slots_bonus',
+                enabled = false,
+                value = 100
+            },
+            {
+                name = 'character_health_bonus',
+                enabled = false,
+                value = 200
+            },
+            --[[
             {
                 name = 'character_reach_distance_bonus',
                 enabled = false,
@@ -646,16 +659,7 @@ local items = {
                 enabled = false,
                 value = 5
             },
-            {
-                name = 'character_inventory_slots_bonus',
-                enabled = false,
-                value = 100
-            },
-            {
-                name = 'character_health_bonus',
-                enabled = false,
-                value = 200
-            },
+            ]]
             {
                 name = 'worker_robots_speed_modifier',
                 enabled = false,
