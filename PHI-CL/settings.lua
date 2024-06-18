@@ -209,6 +209,38 @@ data:extend({
     default_value = true,
     order = 'E9'
   }, {
+    type = 'bool-setting',
+    name = 'PHI-MI-LOADER',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'F1'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-MI-LANDFILL',
+    setting_type = 'startup',
+    default_value = true,
+    minimum_value = 1,
+    maximum_value = 40,
+    order = 'F2'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-MI-EFFCY',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'F3'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-MI-NUCLEAR',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'F4'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-MI-BOILER',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'F5'
+  }, {
     type = 'int-setting',
     name = 'PHI-RS-RECIPE-1',
     setting_type = 'startup',
