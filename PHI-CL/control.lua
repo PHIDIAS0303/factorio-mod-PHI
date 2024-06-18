@@ -51,7 +51,7 @@ if settings.startup['PHI-PB'].value then
 
         for _, v in pairs(items['bonus']['player_bonus']) do
             if v.enabled then
-                game.players[command.player_index][v.name] = game.players[command.player_index][v.name] + (bonus / 10)
+                game.players[command.player_index][v.name] = game.players[command.player_index][v.name] + (bonus / 10 * v.value)
             end
         end
 
