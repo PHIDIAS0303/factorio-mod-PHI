@@ -308,25 +308,41 @@ data:extend({
     name = 'PHI-PB-CMMS',
     setting_type = 'startup',
     default_value = 2,
-    minimum_value = 1,
+    minimum_value = 0,
     maximum_value = 10,
     order = 'I1'
   }, {
-    type = 'int-setting',
+    type = 'float-setting',
     name = 'PHI-PB-CRS',
     setting_type = 'startup',
-    default_value = 2,
-    minimum_value = 1,
+    default_value = 1.5,
+    minimum_value = 0,
     maximum_value = 10,
     order = 'I2'
   }, {
     type = 'int-setting',
     name = 'PHI-PB-CCS',
     setting_type = 'startup',
-    default_value = 2,
-    minimum_value = 1,
-    maximum_value = 10,
+    default_value = 5,
+    minimum_value = 0,
+    maximum_value = 20,
     order = 'I3'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-PB-CISB',
+    setting_type = 'startup',
+    default_value = 100,
+    minimum_value = 0,
+    maximum_value = 200,
+    order = 'I4'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-PB-CHB',
+    setting_type = 'startup',
+    default_value = 200,
+    minimum_value = 0,
+    maximum_value = 1000,
+    order = 'I5'
   }
 }
 )
