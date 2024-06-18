@@ -311,6 +311,22 @@ data:extend({
     minimum_value = 1,
     maximum_value = 10,
     order = 'I1'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-PB-CRS',
+    setting_type = 'startup',
+    default_value = 2,
+    minimum_value = 1,
+    maximum_value = 10,
+    order = 'I2'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-PB-CCS',
+    setting_type = 'startup',
+    default_value = 2,
+    minimum_value = 1,
+    maximum_value = 10,
+    order = 'I3'
   }
 }
 )
