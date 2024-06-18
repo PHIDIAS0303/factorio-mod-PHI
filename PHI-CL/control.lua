@@ -48,10 +48,16 @@ if settings.startup['PHI-PB'].value then
             player.print('Parameter need to be in range of 0 - 10')
             return
         end
-    
+
         for _, v in pairs(items['bonus']['player_bonus']) do
             if v.enabled then
                 game.players[command.player_index][v.name] = game.players[command.player_index][v.name] + (bonus / 10)
+            end
+        end
+
+        if (bonus > 0) then
+            if (player.character) then
+                player.ticks_to_respawn = 120
             end
         end
     end)
