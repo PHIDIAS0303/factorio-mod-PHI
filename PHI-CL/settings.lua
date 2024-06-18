@@ -49,6 +49,12 @@ data:extend({
     default_value = false,
     order = 'A8'
   }, {
+    type = 'bool-setting',
+    name = 'PHI-PB',
+    setting_type = 'startup',
+    default_value = false,
+    order = 'A9'
+  }, {
     type = 'int-setting',
     name = 'PHI-EN-SOLAR-TIER',
     setting_type = 'startup',
