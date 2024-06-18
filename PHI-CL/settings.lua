@@ -39,7 +39,7 @@ data:extend({
     type = 'int-setting',
     name = 'PHI-XW-WATER',
     setting_type = 'startup',
-    default_value = 1,
+    default_value = 0,
     allowed_values = {0, 1, 2, 3, 4, 5},
     order = 'A7'
   }, {
