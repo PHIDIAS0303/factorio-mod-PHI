@@ -43,8 +43,47 @@ for _, force in pairs(game.forces) do
         end
     end
 
-    if technologies['power-armor-mk2'].researched and settings.startup['PHI-EQ-ARMOR'].value then
-        recipes['power-armor-mk3'].enabled = true
-        recipes['power-armor-mk3'].reload()
+
+    if technologies['power-armor-mk2'].researched then
+        if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value then
+            recipes['power-armor-mk3'].enabled = true
+            recipes['power-armor-mk3'].reload()
+        end
+    end
+
+    if technologies['steel-processing'].researched then
+        if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value then
+            recipes['basic-steel-chest'].enabled = true
+            recipes['basic-steel-chest'].reload()
+        end
+    end
+
+    if technologies['construction-robotics'].researched then
+        if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value then
+            recipes['basic-logistic-chest-passive-provider'].enabled = true
+            recipes['basic-logistic-chest-passive-provider'].reload()
+            recipes['basic-logistic-chest-storage'].enabled = true
+            recipes['basic-logistic-chest-storage'].reload()
+        end
+    end
+
+    if technologies['logistic-robotics'].researched then
+        if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value then
+            recipes['basic-logistic-chest-passive-provider'].enabled = true
+            recipes['basic-logistic-chest-passive-provider'].reload()
+            recipes['basic-logistic-chest-storage'].enabled = true
+            recipes['basic-logistic-chest-storage'].reload()
+        end
+    end
+
+    if technologies['logistic-system'].researched then
+        if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value then
+            recipes['basic-logistic-chest-active-provider'].enabled = true
+            recipes['basic-logistic-chest-active-provider'].reload()
+            recipes['basic-logistic-chest-buffer'].enabled = true
+            recipes['basic-logistic-chest-buffer'].reload()
+            recipes['basic-logistic-chest-requester'].enabled = true
+            recipes['basic-logistic-chest-requester'].reload()
+        end
     end
 end
