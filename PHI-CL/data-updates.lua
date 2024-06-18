@@ -2,7 +2,7 @@ local items = require 'config'
 local main = require 'main'
 local file_stage = 2
 
-if settings.startup['PHI-EN'] and settings.startup['PHI-EN-NUCLEAR-TIER'].value > 1 then
+if settings.startup['PHI-EN'].value and settings.startup['PHI-EN-NUCLEAR-TIER'].value > 1 then
     data.raw['fluid']['steam'].max_temperature = 5000
 end
 

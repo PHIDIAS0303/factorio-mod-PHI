@@ -931,7 +931,7 @@ if mods then
         }
 
         items['item']['se-core-miner-drill'] = {
-            enabled = false,
+            enabled = settings.startup['PHI-MB'].value,
             stage = 2,
             type = 'mining-drill',
             name = 'se-core-miner-drill',

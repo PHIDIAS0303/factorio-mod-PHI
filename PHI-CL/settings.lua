@@ -3,13 +3,13 @@ data:extend({
     type = 'bool-setting',
     name = 'PHI-EN',
     setting_type = 'startup',
-    default_value = false,
+    default_value = true,
     order = 'A1'
   }, {
     type = 'bool-setting',
     name = 'PHI-MB',
     setting_type = 'startup',
-    default_value = true,
+    default_value = false,
     order = 'A2'
   }, {
     type = 'bool-setting',
@@ -46,7 +46,7 @@ data:extend({
     type = 'bool-setting',
     name = 'PHI-XC',
     setting_type = 'startup',
-    default_value = true,
+    default_value = false,
     order = 'A8'
   }, {
     type = 'int-setting',
