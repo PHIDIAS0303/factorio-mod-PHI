@@ -1,5 +1,4 @@
 local items = require 'config'
-local main = require 'main'
 
 local function clock_display(sec)
 	local s = math.floor(sec) % 60

@@ -600,7 +600,7 @@ local items = {
             {
                 name = 'character_running_speed_modifier',
                 enabled = false,
-                value = 1
+                value = 1.5
             },
             {
                 name = 'character_crafting_speed_modifier',
@@ -616,6 +616,26 @@ local items = {
                 name = 'character_health_bonus',
                 enabled = false,
                 value = 200
+            },
+            {
+                name = 'worker_robots_speed_modifier',
+                enabled = false,
+                value = 1.3
+            },
+            {
+                name = 'worker_robots_battery_modifier',
+                enabled = true,
+                value = 1
+            },
+            {
+                name = 'worker_robots_storage_bonus',
+                enabled = true,
+                value = 1
+            },
+            {
+                name = 'following_robots_lifetime_modifier',
+                enabled = true,
+                value = 1
             },
             --[[
             {
@@ -647,27 +667,6 @@ local items = {
                 name = 'character_item_drop_distance_bonus',
                 enabled = false,
                 value = 5
-            },
-            ]]
-            {
-                name = 'worker_robots_speed_modifier',
-                enabled = false,
-                value = 1.3
-            },
-            {
-                name = 'worker_robots_battery_modifier',
-                enabled = true,
-                value = 1
-            },
-            {
-                name = 'worker_robots_storage_bonus',
-                enabled = true,
-                value = 1
-            },
-            {
-                name = 'following_robots_lifetime_modifier',
-                enabled = true,
-                value = 1
             },
             {
                 name = 'character_trash_slot_count',
@@ -709,7 +708,9 @@ local items = {
                 enabled = false,
                 value = 0
             }
-        },
+            ]]
+        }
+        --[[
         surface_bonus = {
             {
                 name = 'solar_power_multiplier',
@@ -717,6 +718,7 @@ local items = {
                 value = 0
             }
         }
+        ]]
     },
     ['recipe'] = {
         {

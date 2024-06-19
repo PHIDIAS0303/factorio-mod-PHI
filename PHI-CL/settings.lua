@@ -310,7 +310,7 @@ data:extend({
     default_value = 2,
     minimum_value = 0,
     maximum_value = 10,
-    order = 'I1'
+    order = 'IA1'
   }, {
     type = 'float-setting',
     name = 'PHI-PB-CRS',
@@ -318,7 +318,7 @@ data:extend({
     default_value = 1.5,
     minimum_value = 0,
     maximum_value = 10,
-    order = 'I2'
+    order = 'IA2'
   }, {
     type = 'int-setting',
     name = 'PHI-PB-CCS',
@@ -326,7 +326,7 @@ data:extend({
     default_value = 5,
     minimum_value = 0,
     maximum_value = 20,
-    order = 'I3'
+    order = 'IA3'
   }, {
     type = 'int-setting',
     name = 'PHI-PB-CISB',
@@ -334,7 +334,7 @@ data:extend({
     default_value = 100,
     minimum_value = 0,
     maximum_value = 200,
-    order = 'I4'
+    order = 'IA4'
   }, {
     type = 'int-setting',
     name = 'PHI-PB-CHB',
@@ -342,7 +342,79 @@ data:extend({
     default_value = 200,
     minimum_value = 0,
     maximum_value = 1000,
-    order = 'I5'
+    order = 'IA5'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-PB-FMMS',
+    setting_type = 'startup',
+    default_value = 2,
+    minimum_value = 0,
+    maximum_value = 10,
+    order = 'IB1'
+  }, {
+    type = 'float-setting',
+    name = 'PHI-PB-FRS',
+    setting_type = 'startup',
+    default_value = 1.5,
+    minimum_value = 0,
+    maximum_value = 10,
+    order = 'IB2'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-PB-FCS',
+    setting_type = 'startup',
+    default_value = 5,
+    minimum_value = 0,
+    maximum_value = 20,
+    order = 'IB3'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-PB-FISB',
+    setting_type = 'startup',
+    default_value = 100,
+    minimum_value = 0,
+    maximum_value = 200,
+    order = 'IB4'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-PB-FHB',
+    setting_type = 'startup',
+    default_value = 200,
+    minimum_value = 0,
+    maximum_value = 1000,
+    order = 'IB5'
+  }, {
+    type = 'float-setting',
+    name = 'PHI-PB-FWRSM',
+    setting_type = 'startup',
+    default_value = 1.3,
+    minimum_value = 0,
+    maximum_value = 20,
+    order = 'IB6'
+  }, {
+    type = 'float-setting',
+    name = 'PHI-PB-FWRBM',
+    setting_type = 'startup',
+    default_value = 1,
+    minimum_value = 0,
+    maximum_value = 20,
+    order = 'IB7'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-PB-FWRSB',
+    setting_type = 'startup',
+    default_value = 1,
+    minimum_value = 0,
+    maximum_value = 40,
+    order = 'IB8'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-PB-FFRLM',
+    setting_type = 'startup',
+    default_value = 1,
+    minimum_value = 0,
+    maximum_value = 20,
+    order = 'IB9'
   }
 }
 )
