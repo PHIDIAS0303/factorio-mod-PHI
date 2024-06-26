@@ -309,15 +309,15 @@ data:extend({
     setting_type = 'startup',
     default_value = 2,
     minimum_value = 0,
-    maximum_value = 10,
+    maximum_value = 4,
     order = 'IA1'
   }, {
-    type = 'float-setting',
+    type = 'double-setting',
     name = 'PHI-PB-CRS',
     setting_type = 'startup',
     default_value = 1.5,
     minimum_value = 0,
-    maximum_value = 10,
+    maximum_value = 5,
     order = 'IA2'
   }, {
     type = 'int-setting',
@@ -325,7 +325,7 @@ data:extend({
     setting_type = 'startup',
     default_value = 5,
     minimum_value = 0,
-    maximum_value = 20,
+    maximum_value = 10,
     order = 'IA3'
   }, {
     type = 'int-setting',
@@ -333,7 +333,7 @@ data:extend({
     setting_type = 'startup',
     default_value = 100,
     minimum_value = 0,
-    maximum_value = 200,
+    maximum_value = 120,
     order = 'IA4'
   }, {
     type = 'int-setting',
@@ -341,9 +341,18 @@ data:extend({
     setting_type = 'startup',
     default_value = 200,
     minimum_value = 0,
-    maximum_value = 1000,
+    maximum_value = 400,
     order = 'IA5'
   }, {
+    type = 'int-setting',
+    name = 'PHI-PB-CRDB',
+    setting_type = 'startup',
+    default_value = 10,
+    minimum_value = 0,
+    maximum_value = 20,
+    order = 'IA6'
+  }
+  --[[, {
     type = 'int-setting',
     name = 'PHI-PB-FMMS',
     setting_type = 'startup',
@@ -352,7 +361,7 @@ data:extend({
     maximum_value = 10,
     order = 'IB1'
   }, {
-    type = 'float-setting',
+    type = 'double-setting',
     name = 'PHI-PB-FRS',
     setting_type = 'startup',
     default_value = 1.5,
@@ -384,7 +393,7 @@ data:extend({
     maximum_value = 1000,
     order = 'IB5'
   }, {
-    type = 'float-setting',
+    type = 'double-setting',
     name = 'PHI-PB-FWRSM',
     setting_type = 'startup',
     default_value = 1.3,
@@ -392,7 +401,7 @@ data:extend({
     maximum_value = 20,
     order = 'IB6'
   }, {
-    type = 'float-setting',
+    type = 'double-setting',
     name = 'PHI-PB-FWRBM',
     setting_type = 'startup',
     default_value = 1,
@@ -416,5 +425,6 @@ data:extend({
     maximum_value = 20,
     order = 'IB9'
   }
+  ]]
 }
 )

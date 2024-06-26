@@ -36,21 +36,25 @@ if settings.startup['PHI-PB'].value then
             return
         end
 
+        local bonus = tonumber(command.parameter)
+
         if type(command.parameter) ~= 'number' then
             player.print('Parameter need to be number')
             return
         end
-
-        local bonus = tonumber(command.parameter)
 
         if (bonus < 0) or (bonus > 10) then
             player.print('Parameter need to be in range of 0 - 10')
             return
         end
 
-        for _, v in pairs(items['bonus']['player_bonus']) do
-            if v.enabled then
-                game.players[command.player_index][v.name] = game.players[command.player_index][v.name] + (bonus / 10 * v.value)
+        for k, v in pairs(items['bonus']['player_bonus']) do
+            game.players[command.player_index][k] = bonus / 10 * v.value
+
+            if v.combined_bonus then
+                for i=1, #v.combined_bonus, 1 do
+                    game.players[command.player_index][v.combined_bonus[i]] = bonus / 10 * v.value
+                end
             end
         end
 
