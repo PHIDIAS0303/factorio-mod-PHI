@@ -35,6 +35,7 @@ if settings.startup['PHI-PB'].value then
             game.print('Command Error')
             return
         end
+
         local bonus = tonumber(command.parameter)
 
         if type(bonus) ~= 'number' then
@@ -56,11 +57,9 @@ if settings.startup['PHI-PB'].value then
                 end
             end
         end
+    end)
 
-        if (bonus > 0) then
-            if (player.character) then
-                player.ticks_to_respawn = 120
-            end
-        end
+    script.on_event(defines.events.on_player_died, function(event)
+        game.players[event.player_index].ticks_to_respawn = 120
     end)
 end
