@@ -25,7 +25,7 @@ if settings.startup['PHI-XC'].value then
 end
 
 if settings.startup['PHI-PB'].value then
-    commands.add_command('bonus', nil, function(command)
+    commands.add_command('phi-pb-bonus', nil, function(command)
         local player
 
         if command.player_index then
