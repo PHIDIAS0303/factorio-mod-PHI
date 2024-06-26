@@ -35,10 +35,9 @@ if settings.startup['PHI-PB'].value then
             game.print('Command Error')
             return
         end
-
         local bonus = tonumber(command.parameter)
 
-        if type(command.parameter) ~= 'number' then
+        if type(bonus) ~= 'number' then
             player.print('Parameter need to be number')
             return
         end
