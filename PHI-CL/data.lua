@@ -90,7 +90,7 @@ if settings.startup['PHI-MI'].value then
         data.raw['repair-tool']['repair-pack'].durability = 300 * settings.startup['PHI-MI-REPAIR'].value
     end
 
-    if settings.startup['PHI-CT-LOADER'].value then
+    if settings.startup['PHI-MI-LOADER'].value then
         data.raw.recipe['loader'].hidden = false
         data.raw.recipe['fast-loader'].hidden = false
         data.raw.recipe['express-loader'].hidden = false
