@@ -3,6 +3,51 @@ local alpha_order = {'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'}
 local items = require 'config'
 local main = {}
 
+local tint = {
+    ['2'] = {
+        r = 0.2,
+        g = 0.9,
+        b = 0.2,
+        a = 0.7
+    },
+    ['3'] = {
+        r = 0.2,
+        g = 0.2,
+        b = 0.9,
+        a = 0.7
+    },
+    ['4'] = {
+        r = 0.2,
+        g = 0.9,
+        b = 0.9,
+        a = 0.7
+    },
+    ['5'] = {
+        r = 0.5,
+        g = 0,
+        b = 0.5,
+        a = 0.5
+    },
+    ['6'] = {
+        r = 0.9,
+        g = 0.7,
+        b = 0.2,
+        a = 0.7
+    },
+    ['7'] = {
+        r = 0.5,
+        g = 0.2,
+        b = 0,
+        a = 0.2
+    },
+    ['8'] = {
+        r = 0.5,
+        g = 0.2,
+        b = 0.5,
+        a = 0.2
+    },
+}
+
 -- entity
 function main.EEE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
@@ -37,14 +82,16 @@ function main.EEE(source, tier)
         end
     end
 
-    if item.fluid_boxes then
-        for k, _ in pairs(item.fluid_boxes) do
-            if (item.fluid_boxes[k] and (not item.fluid_boxes[k])) then
-                if item.fluid_boxes[k].production_type then
-                    item.fluid_boxes[k].height = 4
+    if settings.startup['PHI-MI-PIPE'].value then
+        if item.fluid_boxes then
+            for k, _ in pairs(item.fluid_boxes) do
+                if (item.fluid_boxes[k] and (not item.fluid_boxes[k])) then
+                    if item.fluid_boxes[k].production_type then
+                        item.fluid_boxes[k].height = settings.startup['PHI-MI-PIPE'].value
 
-                    if item.fluid_boxes[k].base_level then
-                        item.fluid_boxes[k].base_level = item.fluid_boxes[k].base_level * 4
+                        if item.fluid_boxes[k].base_level then
+                            item.fluid_boxes[k].base_level = item.fluid_boxes[k].base_level + settings.startup['PHI-MI-PIPE'].value
+                        end
                     end
                 end
             end
@@ -72,9 +119,12 @@ function main.EEE(source, tier)
             item.production = (source.base * (4 ^ (tier - source.min + 1))) .. 'kW'
 
         elseif (source.type == 'boiler') then
-            item.fluid_box.height = 4
-            item.output_fluid_box.height = 4
-            item.output_fluid_box.base_level = 5
+            if settings.startup['PHI-MI-PIPE'].value then
+                item.fluid_box.height = settings.startup['PHI-MI-PIPE'].value
+                item.output_fluid_box.height = settings.startup['PHI-MI-PIPE'].value
+                item.output_fluid_box.base_level = item.output_fluid_box.base_level + settings.startup['PHI-MI-PIPE'].value
+            end
+
             item.energy_consumption = source.base * tier .. 'kW'
             item.target_temperature = 15 + (source.temp * tier)
             item.fluid_usage_per_tick = source.fluid
@@ -86,6 +136,10 @@ function main.EEE(source, tier)
             end
 
         elseif (source.type == 'generator') then
+            if settings.startup['PHI-MI-PIPE'].value then
+                item.fluid_box.height = settings.startup['PHI-MI-PIPE'].value
+            end
+
             item.fluid_box.height = 4
             item.maximum_temperature = 15 + (source.base * tier)
             item.fluid_usage_per_tick = source.fluid
@@ -126,6 +180,24 @@ function main.EEE(source, tier)
     if source.name == 'electric-filter-furnace' then
         item.type = 'assembling-machine'
     end
+
+    --[[
+    if item.picture.layers then
+        if item.picture.layers[1][1].tint then
+            item.picture.layers[1][1].tint = tint[tier]
+        end
+
+        if item.picture.layers[1][1].hr_version then
+            item.picture.layers[1][1].hr_version.tint = tint[tier]
+        end
+    end
+
+    if tier > 1 then
+        if item.icons and item.icons[1] and item.icons[1][1] then
+            item.icons[1][1].tint = tint[tier]
+        end
+    end
+    ]]
 
     -- item.animation.layers[1].filename = graphics_location .. source .. '-e.png'
     -- item.animation.layers[1].hr_version.filename = graphics_location .. source ..'-eh.png'
@@ -199,11 +271,11 @@ function main.EEQ(source, tier)
     elseif (source.name == 'night-vision') then
         w = 2
         h = 2
-        item['energy_source'] = {type = 'electric', usage_priority = 'primary-input', buffer_capacity = '1MJ'}
+        item['energy_source'] = {type = 'electric', usage_priority = 'primary-input', buffer_capacity = '240kJ'}
         item['energy_input'] = '20kW'
         item['activate_sound'] = {filename = '__base__/sound/nightvision-on.ogg', volume = 0.5}
         item['deactivate_sound'] = {filename = '__base__/sound/nightvision-off.ogg', volume = 0.5}
-        item['darkness_to_turn_on'] = source.base
+        item['darkness_to_turn_on'] = 0
         item['color_lookup'] = {{0, '__core__/graphics/color_luts/lut-sunset.png'}}
 
     elseif (source.name == 'exoskeleton') then
@@ -215,7 +287,21 @@ function main.EEQ(source, tier)
     end
 
     item['shape'] = {width = w, height = h, type = 'full'}
-    item['sprite'] = {filename = '__base__/graphics/equipment/' .. source.graphics_name .. '.png', width = w * 32, height = h * 32, priority = 'medium', hr_version = {filename = '__base__/graphics/equipment/hr-' .. source.graphics_name .. '.png', width = w * 64, height = h * 64, priority = 'medium', scale = 0.5}}
+    item['sprite'] = {
+        filename = '__base__/graphics/equipment/' .. source.graphics_name .. '.png',
+        width = w * 32,
+        height = h * 32,
+        priority = 'medium',
+        -- tint = tint[tier],
+        hr_version = {
+            filename = '__base__/graphics/equipment/hr-' .. source.graphics_name .. '.png',
+            width = w * 64,
+            height = h * 64,
+            priority = 'medium',
+            -- tint = tint[tier],
+            scale = 0.5
+        }
+    }
 
     data:extend({item})
 end
@@ -240,7 +326,12 @@ function main.EI(source, tier)
         else
             item.name = source.name
             item.place_result = source.name
-            -- item.icons = {{icon = graphics_location .. source.name .. '-i.png', icon_mipmaps = 4, icon_size = 64}}
+
+            --[[
+            if item.icons then
+                item.icons[1][1].tint = tint[tier]
+            end
+            ]]
         end
     end
 
@@ -274,21 +365,27 @@ function main.ER(source, tier)
         result_name = result_name .. '-' .. tier
     end
 
-    local ingredient_amount = 2
-
-    if (source.type == 'solar-panel') or (source.type == 'accumulator') then
-        ingredient_amount = 4
-    end
-
     if (source.tech == 'compound-energy') and (tier > 2) then
-        data:extend({{
-            type = 'recipe',
-            name = new_name ,
-            energy_required = 2,
-            enabled = false,
-            ingredients = {{ingredient_name, 1}, {source.name, 1}},
-            result = result_name,
-        }})
+        if (source.type == 'solar-panel') or (source.type == 'accumulator') then
+            data:extend({{
+                type = 'recipe',
+                name = new_name ,
+                energy_required = 2,
+                enabled = false,
+                ingredients = {{name=ingredient_name, amount=4}},
+                result = result_name,
+            }})
+
+        else
+            data:extend({{
+                type = 'recipe',
+                name = new_name ,
+                energy_required = 2,
+                enabled = false,
+                ingredients = {{name=ingredient_name, amount=1}, {name=source.name, amount=1}},
+                result = result_name,
+            }})
+        end
 
     else
         data:extend({{
@@ -296,7 +393,7 @@ function main.ER(source, tier)
             name = new_name,
             energy_required = 2,
             enabled = false,
-            ingredients = {{ingredient_name, ingredient_amount}},
+            ingredients = {{name=ingredient_name, amount=2}},
             result = result_name,
         }})
     end

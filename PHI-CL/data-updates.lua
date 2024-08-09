@@ -28,6 +28,133 @@ if settings.startup['PHI-XW-WATER'].value > 0 then
     end
 end
 
+if settings.startup['PHI-CT'].value then
+    if settings.startup['PHI-CT-OIL'].value then
+        local item = table.deepcopy(data.raw['item']['offshore-pump'])
+        item.name = 'oil-pump'
+        item.place_result = 'oil-pump'
+        item.order = 'b[fluids]-a[offshore-pump]-2'
+        data:extend({item})
+
+        local entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
+        entity.name = 'oil-pump'
+        entity.minable.result = 'oil-pump'
+        entity.fluid = 'crude-oil'
+        entity.fluid_box.filter = 'crude-oil'
+        data:extend({entity})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'oil-pump',
+            energy_required = 2,
+            enabled = true,
+            ingredients = {{'electronic-circuit', 2}, {'pipe', 1}, {'iron-gear-wheel', 1}},
+            result = 'oil-pump'
+        }})
+    end
+
+    if settings.startup['PHI-CT-RADAR'].value then
+        local item = table.deepcopy(data.raw['item']['radar'])
+        item.name = 'super-radar'
+        item.place_result = 'super-radar'
+        item.order = 'd[radar]-b[radar]'
+        data:extend({item})
+
+        local entity = table.deepcopy(data.raw['radar']['radar'])
+        entity.name = 'super-radar'
+        entity.minable.result = 'super-radar'
+        entity.max_distance_of_sector_revealed = 30
+        entity.max_distance_of_nearby_sector_revealed = 30
+        data:extend({entity})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'super-radar',
+            energy_required = 2,
+            enabled = true,
+            ingredients = {{'electronic-circuit', 5}, {'iron-gear-wheel', 5}, {'iron-plate', 10}},
+            result = 'super-radar'
+        }})
+    end
+
+    if settings.startup['PHI-CT-TRASH'].value then
+        local item = table.deepcopy(data.raw['item']['steel-chest'])
+        item.name = 'trash-chest'
+        item.place_result = 'trash-chest'
+        item.order = 'b[storage]-e[trash-chest]'
+        data:extend({item})
+
+        local entity = table.deepcopy(data.raw['container']['steel-chest'])
+        entity.name = 'trash-chest'
+        entity.minable.result = 'trash-chest'
+        entity.inventory_size = 1
+        entity.type = 'infinity-container'
+        entity.gui_mode = 'none'
+        entity.erase_contents_when_mined = true
+        entity.logistic_mode = nil
+
+        data:extend({entity})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'trash-chest',
+            energy_required = 2,
+            enabled = true,
+            ingredients = {{'steel-chest', 1}},
+            result = 'trash-chest'
+        }})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'trash-chest-return',
+            energy_required = 2,
+            enabled = true,
+            ingredients = {{'trash-chest', 1}},
+            result = 'steel-chest'
+        }})
+
+        table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='trash-chest'})
+        table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='trash-chest-return'})
+
+        item = table.deepcopy(data.raw['item']['pipe'])
+        item.name = 'trash-pipe'
+        item.place_result = 'trash-pipe'
+        item.order = 'a[pipe]-c[trash-pipe]'
+        data:extend({item})
+
+        entity = table.deepcopy(data.raw['pipe']['pipe'])
+        entity.name = 'trash-pipe'
+        entity.minable.result = 'trash-pipe'
+        entity.inventory_size = 1
+        entity.type = 'infinity-pipe'
+        entity.gui_mode = 'none'
+        entity.erase_contents_when_mined = true
+
+        data:extend({entity})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'trash-pipe',
+            energy_required = 2,
+            enabled = true,
+            ingredients = {{'iron-plate', 1}},
+            result = 'trash-pipe'
+        }})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'trash-pipe-return',
+            energy_required = 2,
+            enabled = true,
+            ingredients = {{'trash-pipe', 1}},
+            result = 'iron-plate'
+        }})
+
+        table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe='trash-pipe'})
+        table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe='trash-pipe-return'})
+    end
+end
+
 if settings.startup['PHI-EQ-ARMOR'].value then
     data:extend({
         {
@@ -42,10 +169,48 @@ if settings.startup['PHI-EQ-ARMOR'].value then
             name = 'power-armor-mk3',
             icon = '__base__/graphics/icons/power-armor-mk2.png',
             icon_size = 64, icon_mipmaps = 4,
-            resistances = {{type = 'physical', decrease = 20, percent = 50}, {type = 'acid', decrease = 20, percent = 80},
-            {type = 'explosion', decrease = 70, percent = 60}, {type = 'fire', decrease = 20, percent = 80},
-            {type = 'laser', decrease = 20, percent = 50}, {type = 'electric', decrease = 20, percent = 50},
-            {type = 'impact', decrease = 20, percent = 50}, {type = 'poison', decrease = 20, percent = 50}},
+            resistances = {
+                {
+                    type = 'physical',
+                    decrease = 20,
+                    percent = 50
+                },
+                {
+                    type = 'acid',
+                    decrease = 20,
+                    percent = 80
+                },
+                {
+                    type = 'explosion',
+                    decrease = 70,
+                    percent = 60
+                },
+                {
+                    type = 'fire',
+                    decrease = 20,
+                    percent = 80
+                },
+                {
+                    type = 'laser',
+                    decrease = 20,
+                    percent = 50
+                },
+                {
+                    type = 'electric',
+                    decrease = 20,
+                    percent = 50
+                },
+                {
+                    type = 'impact',
+                    decrease = 20,
+                    percent = 50
+                },
+                {
+                    type = 'poison',
+                    decrease = 20,
+                    percent = 50
+                }
+            },
             subgroup = 'armor',
             order = 'eb[power-armor-mk3]',
             stack_size = 1,
@@ -60,9 +225,9 @@ if settings.startup['PHI-EQ-ARMOR'].value then
     data:extend({{
         type = 'recipe',
         name = 'power-armor-mk3',
-        energy_required = 5,
-        enabled = 'false',
-        ingredients = {{'power-armor-mk2', 2}},
+        energy_required = 2,
+        enabled = false,
+        ingredients = {{name='power-armor-mk2', amount=2}},
         result = 'power-armor-mk3'
     }})
 
@@ -98,7 +263,7 @@ if settings.startup['PHI-RS'].value then
         name = 'electric-filter-furnace',
         energy_required = 2,
         enabled = false,
-        ingredients = {{'electric-furnace', 1}},
+        ingredients = {{name='electric-furnace', amount=1}},
         result = 'electric-filter-furnace',
     }})
 
@@ -107,7 +272,7 @@ if settings.startup['PHI-RS'].value then
         name = 'electric-furnace-return',
         energy_required = 2,
         enabled = false,
-        ingredients = {{'electric-filter-furnace', 1}},
+        ingredients = {{name='electric-filter-furnace', amount=1}},
         result = 'electric-furnace',
     }})
 
@@ -128,42 +293,15 @@ if settings.startup['PHI-RS'].value then
     data.raw['utility-constants'].default.maximum_recipe_overload_multiplier = settings.startup['PHI-RS-RECIPE-MAXROM'].value
 
     if settings.startup['PHI-RS-MODULE'].value then
-        table.insert(items['recipe'], {
-            name='speed-module',
-            tech='speed-module'
-        })
-        table.insert(items['recipe'], {
-            name='speed-module-2',
-            tech='speed-module-2'
-        })
-        table.insert(items['recipe'], {
-            name='speed-module-3',
-            tech='speed-module-3'
-        })
-        table.insert(items['recipe'], {
-            name='productivity-module',
-            tech='productivity-module'
-        })
-        table.insert(items['recipe'], {
-            name='productivity-module-2',
-            tech='productivity-module-2'
-        })
-        table.insert(items['recipe'], {
-            name='productivity-module-3',
-            tech='productivity-module-3'
-        })
-        table.insert(items['recipe'], {
-            name='effectivity-module',
-            tech='effectivity-module'
-        })
-        table.insert(items['recipe'], {
-            name='effectivity-module-2',
-            tech='effectivity-module-2'
-        })
-        table.insert(items['recipe'], {
-            name='effectivity-module-3',
-            tech='effectivity-module-3'
-        })
+        items['recipe']['speed-module'].enabled = true
+        items['recipe']['speed-module-2'].enabled = true
+        items['recipe']['speed-module-3'].enabled = true
+        items['recipe']['productivity-module'].enabled = true
+        items['recipe']['productivity-module-2'].enabled = true
+        items['recipe']['productivity-module-3'].enabled = true
+        items['recipe']['effectivity-module'].enabled = true
+        items['recipe']['effectivity-module-2'].enabled = true
+        items['recipe']['effectivity-module-3'].enabled = true
     end
 
     local recipe_multiplier = {}
@@ -179,29 +317,48 @@ if settings.startup['PHI-RS'].value then
     end
 
     if #recipe_multiplier > 0 then
-        for i=1, #items['recipe'], 1 do
-            if data.raw.recipe[items['recipe'][i].name] then
+        local prod_module_list = {}
+
+        for k, v in pairs(data.raw.module) do
+            if v.limitation and string.find(v.name, 'productivity', 1, true) then
+                table.insert(prod_module_list, k)
+            end
+        end
+
+        for k, v in pairs(items['recipe']) do
+            if v.enabled and data.raw.recipe[k] then
                 for j=1, #recipe_multiplier, 1 do
-                    item = table.deepcopy(data.raw.recipe[items['recipe'][i].name])
+                    item = table.deepcopy(data.raw.recipe[k])
                     item.enabled = false
+                    item.name = k .. '-s' .. j
+                    item.hide_from_player_crafting = true
 
-                    if item.normal and item.normal then
-                        for k, v in pairs(item.normal.ingredients) do
-                            if v[1] and v[2] then
-                                item.normal.ingredients[k][2] = v[2] * recipe_multiplier[j]
+                    if item.energy_required then
+                        item.energy_required = item.energy_required * recipe_multiplier[j]
 
-                            else
-                                item.normal.ingredients[k].amount = v.amount * recipe_multiplier[j]
+                    else
+                        item.energy_required = recipe_multiplier[j]
+                    end
+
+                    if item.normal then
+                        if item.normal.ingredients then
+                            for ik, iv in pairs(item.normal.ingredients) do
+                                if iv[1] and iv[2] then
+                                    item.normal.ingredients[ik][2] = iv[2] * recipe_multiplier[j]
+
+                                else
+                                    item.normal.ingredients[ik].amount = iv.amount * recipe_multiplier[j]
+                                end
                             end
                         end
 
                         if item.normal.results then
-                            for k, v in pairs(item.normal.results) do
-                                if v[1] and v[2] then
-                                    item.normal.results[k][2] = v[2] * recipe_multiplier[j]
+                            for rk, rv in pairs(item.normal.results) do
+                                if rv[1] and rv[2] then
+                                    item.normal.results[rk][2] = rv[2] * recipe_multiplier[j]
 
                                 else
-                                    item.normal.results[k].amount = v.amount * recipe_multiplier[j]
+                                    item.normal.results[rk].amount = rv.amount * recipe_multiplier[j]
                                 end
                             end
 
@@ -213,31 +370,27 @@ if settings.startup['PHI-RS'].value then
                                 item.normal.result_count = recipe_multiplier[j]
                             end
                         end
+                    end
 
-                        if item.normal.energy_required then
-                            item.normal.energy_required = item.normal.energy_required * recipe_multiplier[j]
+                    if item.expensive then
+                        if item.expensive.ingredients then
+                            for ik, iv in pairs(item.expensive.ingredients) do
+                                if iv[1] and iv[2] then
+                                    item.expensive.ingredients[ik][2] = iv[2] * recipe_multiplier[j]
 
-                        else
-                            item.normal.energy_required = recipe_multiplier[j] / 2
-                        end
-
-                    elseif item.expensive and item.expensive then
-                        for k, v in pairs(item.expensive.ingredients) do
-                            if v[1] and v[2] then
-                                item.expensive.ingredients[k][2] = v[2] * recipe_multiplier[j]
-
-                            else
-                                item.expensive.ingredients[k].amount = v.amount * recipe_multiplier[j]
+                                else
+                                    item.expensive.ingredients[ik].amount = iv.amount * recipe_multiplier[j]
+                                end
                             end
                         end
 
                         if item.expensive.results then
-                            for k, v in pairs(item.expensive.results) do
-                                if v[1] and v[2] then
-                                    item.expensive.results[k][2] = v[2] * recipe_multiplier[j]
+                            for rk, rv in pairs(item.expensive.results) do
+                                if rv[1] and rv[2] then
+                                    item.expensive.results[rk][2] = rv[2] * recipe_multiplier[j]
 
                                 else
-                                    item.expensive.results[k].amount = v.amount * recipe_multiplier[j]
+                                    item.expensive.results[rk].amount = rv.amount * recipe_multiplier[j]
                                 end
                             end
 
@@ -249,69 +402,82 @@ if settings.startup['PHI-RS'].value then
                                 item.expensive.result_count = recipe_multiplier[j]
                             end
                         end
+                    end
 
-                        if item.expensive.energy_required then
-                            item.expensive.energy_required = item.expensive.energy_required * recipe_multiplier[j]
+                    if item.ingredients then
+                        for ik, iv in pairs(item.ingredients) do
+                            if iv[1] and iv[2] then
+                                item.ingredients[ik][2] = iv[2] * recipe_multiplier[j]
 
-                        else
-                            item.expensive.energy_required = recipe_multiplier[j] / 2
+                            else
+                                item.ingredients[ik].amount = iv.amount * recipe_multiplier[j]
+                            end
+                        end
+                    end
+
+                    if item.results then
+                        for rk, rv in pairs(item.results) do
+                            if rv[1] and rv[2] then
+                                item.results[rk][2] = rv[2] * recipe_multiplier[j]
+
+                            else
+                                item.results[rk].amount = rv.amount * recipe_multiplier[j]
+                            end
                         end
 
                     else
-                        for k, v in pairs(item.ingredients) do
-                            if v[1] and v[2] then
-                                item.ingredients[k][2] = v[2] * recipe_multiplier[j]
-
-                            else
-                                item.ingredients[k].amount = v.amount * recipe_multiplier[j]
-                            end
-                        end
-                            if item.results then
-                            for k, v in pairs(item.results) do
-                                if v[1] and v[2] then
-                                    item.results[k][2] = v[2] * recipe_multiplier[j]
-
-                                else
-                                    item.results[k].amount = v.amount * recipe_multiplier[j]
-                                end
-                            end
+                        if item.result_count then
+                            item.result_count = item.result_count * recipe_multiplier[j]
 
                         else
-                            if item.result_count then
-                                item.result_count = item.result_count * recipe_multiplier[j]
-
-                            else
-                                item.result_count = recipe_multiplier[j]
-                            end
-                        end
-
-                        if item.energy_required then
-                            item.energy_required = item.energy_required * recipe_multiplier[j]
-
-                        else
-                            item.energy_required = recipe_multiplier[j] / 2
+                            item.result_count = recipe_multiplier[j]
                         end
                     end
-
-                    item.name = items['recipe'][i].name .. '-s' .. j
-                    item.hide_from_player_crafting = true
 
                     data:extend({item})
-                    table.insert(data.raw.technology[items['recipe'][i].tech].effects, {type='unlock-recipe', recipe=item.name})
+                    table.insert(data.raw.technology[v.tech].effects, {type='unlock-recipe', recipe=item.name})
+
+                    for l=1, #prod_module_list, 1 do
+                        table.insert(data.raw.module[prod_module_list[l]].limitation, item.name)
+                    end
                 end
             end
         end
     end
+end
 
-    local module_limitation = table.deepcopy(data.raw.module['productivity-module']['limitation'])
+if settings.startup['PHI-MI-PIPE'].value then
+    for k, _ in pairs(data.raw) do
+        if data.raw[k] then
+            if data.raw[k].fluid_box then
+                if data.raw[k].fluid_box.height < settings.startup['PHI-MI-PIPE'].value then
+                    data.raw[k].fluid_box.height = settings.startup['PHI-MI-PIPE'].value
+                end
 
-    if module_limitation then
-        for _, v in pairs(data.raw.module) do
-            if v.limitation and string.find(v.name, 'productivity', 1, true) then
-                for j=1, #recipe_multiplier, 1 do
-                    for k, _ in pairs(module_limitation) do
-                        if data.raw.recipe[module_limitation[k] .. '-s' .. j] ~= nil then
-                            table.insert(v.limitation, module_limitation[k] .. '-s' .. j)
+                if data.raw[k].fluid_box.base_level < (1 + settings.startup['PHI-MI-PIPE'].value) then
+                    data.raw[k].fluid_box.base_level = 1 + settings.startup['PHI-MI-PIPE'].value
+                end
+            end
+
+            if data.raw[k].output_fluid_box then
+                if data.raw[k].output_fluid_box.height < settings.startup['PHI-MI-PIPE'].value then
+                    data.raw[k].output_fluid_box.height = settings.startup['PHI-MI-PIPE'].value
+                end
+
+                if data.raw[k].output_fluid_box.base_level > (-1 - settings.startup['PHI-MI-PIPE'].value) then
+                    data.raw[k].output_fluid_box.base_level = (-1 - settings.startup['PHI-MI-PIPE'].value)
+                end
+            end
+
+            if data.raw[k].fluid_boxes then
+                for k1, _ in pairs(data.raw[k].fluid_boxes) do
+                    if data.raw[k].fluid_boxes[k1] ~= false and data.raw[k].fluid_boxes[k1] ~= true then
+                        if data.raw[k].fluid_boxes[k1].production_type then
+                            data.raw[k].fluid_boxes[k1].height = settings.startup['PHI-MI-PIPE'].value
+
+                            if data.raw[k].fluid_boxes[k1].base_level then
+                                data.raw[k].fluid_boxes[k1].base_level = 1 + settings.startup['PHI-MI-PIPE'].value
+                            end
                         end
                     end
                 end
@@ -320,42 +486,52 @@ if settings.startup['PHI-RS'].value then
     end
 end
 
---[[
-for k, _ in pairs(data.raw) do
-    if data.raw[k] ~= nil then
-        if data.raw[k].fluid_box ~= nil then
-            if data.raw[k].fluid_box.height < 4 then
-                data.raw[k].fluid_box.height = 4
-            end
-            if data.raw[k].fluid_box.base_level < 5 then
-                data.raw[k].fluid_box.base_level = 5
-            end
-        end
-        if data.raw[k].output_fluid_box ~= nil then
-            if data.raw[k].output_fluid_box.height < 4 then
-                data.raw[k].output_fluid_box.height = 4
-            end
-            if data.raw[k].output_fluid_box.base_level > -5 then
-                data.raw[k].output_fluid_box.base_level = -5
-            end
-        end
+if settings.startup['PHI-MB'].value then
+    if settings.startup['PHI-MB-MINING-TIER'].value > 1 then
+        data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'se-core-miner-drill'
 
-        if data.raw[k].fluid_boxes ~= nil then
-            for k1, _ in pairs(data.raw[k].fluid_boxes) do
-                if data.raw[k].fluid_boxes[k1] ~= false and data.raw[k].fluid_boxes[k1] ~= true then
-                    if data.raw[k].fluid_boxes[k1].production_type ~= nil then
-                        data.raw[k].fluid_boxes[k1].height = 4
+        local se = {
+            type = 'mining-drill',
+            name = 'se-core-miner-drill',
+            ref_name = 'se-core-miner-drill',
+            min = 2,
+            max = 3
+        }
 
-                        if data.raw[k].fluid_boxes[k1].base_level ~= nil then
-                            data.raw[k].fluid_boxes[k1].base_level = data.raw[k].fluid_boxes[k1].base_level * 4
-                        end
-                    end
-                end
+        for i=2, settings.startup['PHI-MB-MINING-TIER'].value do
+            local miner_name = 'se-core-miner-' .. i
+            local drill_name = 'se-core-miner-drill-' .. i
+
+            main.EEE(se, i)
+            data.raw['mining-drill'][drill_name].minable.result = miner_name
+            data.raw['mining-drill'][drill_name].placeable_by.item = miner_name
+
+            local item = table.deepcopy(data.raw['item']['se-core-miner'])
+            item.name = 'se-core-miner-' .. i
+            item.place_result = drill_name
+            item.order = 'zzzz-core-miner-' .. i
+            data:extend({item})
+
+            local ing_n = 'se-core-miner'
+
+            if i > 2 then
+                ing_n = ing_n .. '-' .. i
             end
+
+            data:extend({{
+                type = 'recipe',
+                name = miner_name,
+                energy_required = 2,
+                enabled = false,
+                ingredients = {{ing_n, 2}},
+                result = miner_name
+            }})
+
+            data.raw['mining-drill'][drill_name].fast_replaceable_group = data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group
+            table.insert(data.raw.technology['se-core-miner'].effects, {type='unlock-recipe', recipe=miner_name})
         end
     end
 end
-]]
 
 for _, v in pairs(items['item']) do
     if v.enabled then

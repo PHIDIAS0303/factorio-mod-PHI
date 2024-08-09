@@ -86,4 +86,28 @@ for _, force in pairs(game.forces) do
             recipes['basic-logistic-chest-requester'].reload()
         end
     end
+
+    if settings.startup['PHI-CT'].value then
+        recipes['wood-production'].enabled = true
+        recipes['wood-production'].reload()
+        recipes['fish-production'].enabled = true
+        recipes['fish-production'].reload()
+
+        if settings.startup['PHI-CT-OIL'].value then
+            recipes['oil-pump'].enabled = true
+            recipes['oil-pump'].reload()
+        end
+
+        if settings.startup['PHI-CT-RADAR'].value then
+            recipes['super-radar'].enabled = true
+            recipes['super-radar'].reload()
+        end
+
+        if settings.startup['PHI-CT-TRASH'].value then
+            recipes['trash-chest'].enabled = true
+            recipes['trash-chest'].reload()
+            recipes['trash-pipe'].enabled = true
+            recipes['trash-pipe'].reload()
+        end
+    end
 end

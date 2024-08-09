@@ -515,7 +515,6 @@ local items = {
             tech = 'night-vision-equipment',
             min = 2,
             max = 2,
-            base = 1,
             graphics_name = 'night-vision-equipment'
         },
         ['exoskeleton-equipment'] = {
@@ -558,271 +557,305 @@ local items = {
         }
     },
     ['recipe'] = {
-        {
-            name='iron-plate',
-            tech='automation'
-        },
-        {
-            name='copper-plate',
-            tech='automation'
-        },
-        {
-            name='stone-brick',
-            tech='automation'
-        },
-        {
-            name='steel-plate',
-            tech='steel-processing'
-        },
-        {
-            name='basic-oil-processing',
-            tech='oil-processing'
-        },
-        {
-            name='advanced-oil-processing',
-            tech='advanced-oil-processing'
-        },
-        {
-            name='heavy-oil-cracking',
-            tech='advanced-oil-processing'
-        },
-        {
-            name='light-oil-cracking',
-            tech='advanced-oil-processing'
-        },
-        {
-            name='solid-fuel-from-light-oil',
-            tech='advanced-oil-processing'
-        },
-        {
-            name='solid-fuel-from-heavy-oil',
-            tech='advanced-oil-processing'
-        },
-        {
-            name='solid-fuel-from-petroleum-gas',
-            tech='oil-processing'
-        },
-        {
-            name='coal-liquefaction',
-            tech='coal-liquefaction'
-        },
-        {
-            name='sulfur',
-            tech='sulfur-processing'
-        },
-        {
-            name='sulfuric-acid',
-            tech='sulfur-processing'
-        },
-        {
-            name='lubricant',
-            tech='lubricant'
-        },
-        {
-            name='plastic-bar',
-            tech='plastics'
-        },
-        {
-            name='battery',
-            tech='battery'
-        },
-        {
-            name='explosives',
-            tech='explosives'
-        },
-        {
-            name='cliff-explosives',
-            tech='cliff-explosives'
-        },
-        {
-            name='empty-barrel',
-            tech='fluid-handling'
-        },
-        {
-            name='copper-cable',
-            tech='automation'
-        },
-        {
-            name='iron-stick',
-            tech='automation'
-        },
-        {
-            name='iron-gear-wheel',
-            tech='automation'
-        },
-        {
-            name='pipe',
-            tech='automation'
-        },
-        {
-            name='electronic-circuit',
-            tech='automation'
-        },
-        {
-            name='advanced-circuit',
-            tech='advanced-electronics'
-        },
-        {
-            name='processing-unit',
-            tech='advanced-electronics-2'
-        },
-        {
-            name='engine-unit',
-            tech='engine'
-        },
-        {
-            name='electric-engine-unit',
-            tech='electric-engine'
-        },
-        {
-            name='flying-robot-frame',
-            tech='robotics'
-        },
-        {
-            name='low-density-structure',
-            tech='low-density-structure'
-        },
-        {
-            name='rocket-fuel',
-            tech='rocket-fuel'
-        },
-        {
-            name='rocket-control-unit',
-            tech='rocket-control-unit'
-        },
-        {
-            name='automation-science-pack',
-            tech='automation'
-        },
-        {
-            name='logistic-science-pack',
-            tech='logistic-science-pack'
-        },
-        {
-            name='chemical-science-pack',
-            tech='chemical-science-pack'
-        },
-        {
-            name='military-science-pack',
-            tech='military-science-pack'
-        },
-        {
-            name='production-science-pack',
-            tech='production-science-pack'
-        },
-        {
-            name='utility-science-pack',
-            tech='utility-science-pack'
-        },
-        {
-            name='inserter',
-            tech='automation'
-        },
-        {
-            name='transport-belt',
-            tech='automation'
-        },
-        {
-            name='grenade',
-            tech='military-2'
-        },
-        {
-            name='firearm-magazine',
-            tech='automation'
-        },
-        {
-            name='piercing-rounds-magazine',
-            tech='military-2'
-        },
-        {
-            name='stone-wall',
-            tech='stone-wall'
-        },
-        {
-            name='rail',
-            tech='railway'
-        },
-        {
-            name='electric-furnace',
-            tech='advanced-material-processing-2'
-        },
-        {
-            name='concrete',
-            tech='concrete'
-        },
-        {
-            name='uranium-processing',
-            tech='uranium-processing'
-        },
-        {
-            name='uranium-fuel-cell',
-            tech='uranium-processing'
-        },
-        {
-            name='nuclear-fuel-reprocessing',
-            tech='nuclear-fuel-reprocessing'
-        },
-        {
-            name='kovarex-enrichment-process',
-            tech='kovarex-enrichment-process'
-        },
-        {
-            name='nuclear-fuel',
-            tech='kovarex-enrichment-process'
-        },
-        --[[
-        {
-            name='fast-inserter',
-            tech='fast-inserter'
-        },
-        {
-            name='filter-inserter',
-            tech='fast-inserter'
-        },
-        {
-            name='long-handed-inserter',
-            tech='automation'
-        },
-        {
-            name='stack-inserter',
-            tech='stack-inserter'
-        },
-        {
-            name='stack-filter-inserter',
-            tech='stack-inserter'
-        },
-        ]]
-        {
-            name='uranium-rounds-magazine',
-            tech='uranium-ammo'
-        },
-        {
-            name='explosive-cannon-shell',
-            tech='tank'
-        },
-        {
-            name='artillery-shell',
-            tech='artillery'
-        },
-        {
-            name='rocket',
-            tech='rocketry'
-        },
-        {
-            name='explosive-rocket',
-            tech='explosive-rocketry'
-        },
-        {
-            name='solar-panel',
-            tech='solar-energy'
-        },
-        {
-            name='accumulator',
-            tech='electric-energy-accumulators'
-        },
-        {
-            name='radar',
-            tech='automation'
+        ['iron-plate'] = {
+            enabled = true,
+            tech = 'automation'
+        },
+        ['copper-plate'] = {
+            enabled = true,
+            tech = 'automation'
+        },
+        ['stone-brick'] = {
+            enabled = true,
+            tech = 'automation'
+        },
+        ['steel-plate'] = {
+            enabled = true,
+            tech = 'steel-processing'
+        },
+        ['electronic-circuit'] = {
+            enabled = true,
+            tech = 'automation'
+        },
+        ['advanced-circuit'] = {
+            enabled = true,
+            tech = 'advanced-electronics'
+        },
+        ['processing-unit'] = {
+            enabled = true,
+            tech = 'advanced-electronics-2'
+        },
+        ['copper-cable'] = {
+            enabled = true,
+            tech = 'automation'
+        },
+        ['iron-stick'] = {
+            enabled = true,
+            tech = 'automation'
+        },
+        ['iron-gear-wheel'] = {
+            enabled = true,
+            tech = 'automation'
+        },
+        ['pipe'] = {
+            enabled = true,
+            tech = 'automation'
+        },
+        ['engine-unit'] = {
+            enabled = true,
+            tech = 'engine'
+        },
+        ['electric-engine-unit'] = {
+            enabled = true,
+            tech = 'electric-engine'
+        },
+        ['flying-robot-frame'] = {
+            enabled = true,
+            tech = 'robotics'
+        },
+        ['low-density-structure'] = {
+            enabled = true,
+            tech = 'low-density-structure'
+        },
+        ['rocket-fuel'] = {
+            enabled = true,
+            tech = 'rocket-fuel'
+        },
+        ['rocket-control-unit'] = {
+            enabled = true,
+            tech = 'rocket-control-unit'
+        },
+        ['basic-oil-processing'] = {
+            enabled = true,
+            tech = 'oil-processing'
+        },
+        ['advanced-oil-processing'] = {
+            enabled = true,
+            tech = 'advanced-oil-processing'
+        },
+        ['heavy-oil-cracking'] = {
+            enabled = true,
+            tech = 'advanced-oil-processing'
+        },
+        ['light-oil-cracking'] = {
+            enabled = true,
+            tech = 'advanced-oil-processing'
+        },
+        ['solid-fuel-from-light-oil'] = {
+            enabled = true,
+            tech = 'advanced-oil-processing'
+        },
+        ['solid-fuel-from-heavy-oil'] = {
+            enabled = true,
+            tech = 'advanced-oil-processing'
+        },
+        ['solid-fuel-from-petroleum-gas'] = {
+            enabled = true,
+            tech = 'oil-processing'
+        },
+        ['coal-liquefaction'] = {
+            enabled = true,
+            tech = 'coal-liquefaction'
+        },
+        ['sulfur'] = {
+            enabled = true,
+            tech = 'sulfur-processing'
+        },
+        ['sulfuric-acid'] = {
+            enabled = true,
+            tech = 'sulfur-processing'
+        },
+        ['lubricant'] = {
+            enabled = true,
+            tech = 'lubricant'
+        },
+        ['plastic-bar'] = {
+            enabled = true,
+            tech = 'plastics'
+        },
+        ['battery'] = {
+            enabled = true,
+            tech = 'battery'
+        },
+        ['explosives'] = {
+            enabled = true,
+            tech = 'explosives'
+        },
+        ['cliff-explosives'] = {
+            enabled = true,
+            tech = 'cliff-explosives'
+        },
+        ['empty-barrel'] = {
+            enabled = true,
+            tech = 'fluid-handling'
+        },
+        ['automation-science-pack'] = {
+            enabled = true,
+            tech = 'automation'
+        },
+        ['logistic-science-pack'] = {
+            enabled = true,
+            tech = 'logistic-science-pack'
+        },
+        ['chemical-science-pack'] = {
+            enabled = true,
+            tech = 'chemical-science-pack'
+        },
+        ['military-science-pack'] = {
+            enabled = true,
+            tech = 'military-science-pack'
+        },
+        ['production-science-pack'] = {
+            enabled = true,
+            tech = 'production-science-pack'
+        },
+        ['utility-science-pack'] = {
+            enabled = true,
+            tech = 'utility-science-pack'
+        },
+        ['fast-inserter'] = {
+            enabled = false,
+            tech = 'fast-inserter'
+        },
+        ['filter-inserter'] = {
+            enabled = false,
+            tech = 'fast-inserter'
+        },
+        ['long-handed-inserter'] = {
+            enabled = false,
+            tech = 'automation'
+        },
+        ['stack-inserter'] = {
+            enabled = false,
+            tech = 'stack-inserter'
+        },
+        ['stack-filter-inserter'] = {
+            enabled = false,
+            tech = 'stack-inserter'
+        },
+        ['inserter'] = {
+            enabled = true,
+            tech = 'automation'
+        },
+        ['transport-belt'] = {
+            enabled = true,
+            tech = 'automation'
+        },
+        ['grenade'] = {
+            enabled = true,
+            tech = 'military-2'
+        },
+        ['firearm-magazine'] = {
+            enabled = true,
+            tech = 'automation'
+        },
+        ['piercing-rounds-magazine'] = {
+            enabled = true,
+            tech = 'military-2'
+        },
+        ['stone-wall'] = {
+            enabled = true,
+            tech = 'stone-wall'
+        },
+        ['rail'] = {
+            enabled = true,
+            tech = 'railway'
+        },
+        ['electric-furnace'] = {
+            enabled = true,
+            tech = 'advanced-material-processing-2'
+        },
+        ['concrete'] = {
+            enabled = true,
+            tech = 'concrete'
+        },
+        ['uranium-processing'] = {
+            enabled = true,
+            tech = 'uranium-processing'
+        },
+        ['uranium-fuel-cell'] = {
+            enabled = true,
+            tech = 'uranium-processing'
+        },
+        ['nuclear-fuel-reprocessing'] = {
+            enabled = true,
+            tech = 'nuclear-fuel-reprocessing'
+        },
+        ['kovarex-enrichment-process'] = {
+            enabled = true,
+            tech = 'kovarex-enrichment-process'
+        },
+        ['nuclear-fuel'] = {
+            enabled = true,
+            tech = 'kovarex-enrichment-process'
+        },
+        ['uranium-rounds-magazine'] = {
+            enabled = true,
+            tech = 'uranium-ammo'
+        },
+        ['explosive-cannon-shell'] = {
+            enabled = true,
+            tech = 'tank'
+        },
+        ['artillery-shell'] = {
+            enabled = true,
+            tech = 'artillery'
+        },
+        ['rocket'] = {
+            enabled = true,
+            tech = 'rocketry'
+        },
+        ['explosive-rocket'] = {
+            enabled = true,
+            tech = 'explosive-rocketry'
+        },
+        ['solar-panel'] = {
+            enabled = true,
+            tech = 'solar-energy'
+        },
+        ['accumulator'] = {
+            enabled = true,
+            tech = 'electric-energy-accumulators'
+        },
+        ['radar'] = {
+            enabled = true,
+            tech = 'automation'
+        },
+        ['speed-module'] = {
+            enabled = false,
+            tech = 'speed-module'
+        },
+        ['speed-module-2'] = {
+            enabled = false,
+            tech = 'speed-module-2'
+        },
+        ['speed-module-3'] = {
+            enabled = false,
+            tech = 'speed-module-3'
+        },
+        ['productivity-module'] = {
+            enabled = false,
+            tech = 'productivity-module'
+        },
+        ['productivity-module-2'] = {
+            enabled = false,
+            tech = 'productivity-module-2'
+        },
+        ['productivity-module-3'] = {
+            enabled = false,
+            tech = 'productivity-module-3'
+        },
+        ['effectivity-module'] = {
+            enabled = false,
+            tech = 'effectivity-module'
+        },
+        ['effectivity-module-2'] = {
+            enabled = false,
+            tech = 'effectivity-module-2'
+        },
+        ['effectivity-module-3'] = {
+            enabled = false,
+            tech = 'effectivity-module-3'
         }
     }
 }
@@ -952,17 +985,6 @@ if mods then
             name = 'se-fuel-refinery',
             ref_name = 'se-fuel-refinery',
             tech = 'se-fuel-refining',
-            min = 2,
-            max = 3
-        }
-
-        items['item']['se-core-miner-drill'] = {
-            enabled = settings.startup['PHI-MB'].value,
-            stage = 2,
-            type = 'mining-drill',
-            name = 'se-core-miner-drill',
-            ref_name = 'se-core-miner-drill',
-            tech = 'se-core-miner',
             min = 2,
             max = 3
         }
