@@ -217,19 +217,10 @@ if settings.startup['PHI-CT'].value then
         --[[
         item = table.deepcopy(data.raw['item']['linked-belt'])
         item.name = 'linked-belt'
+        item.place_result = 'linked-belt'
         item.supgroup = 'transport'
         item.order = 'a[transport-belt]-d[linked-belt]-1'
         item.tint = {r=170, g=126, b=103, a=1}
-        data:extend({item})
-
-        item.name = 'fast-linked-belt'
-        item.order = 'a[transport-belt]-d[linked-belt]-2'
-        item.tint = {r=255, g=0, b=0, a=1}
-        data:extend({item})
-
-        item.name = 'express-linked-belt'
-        item.order = 'a[transport-belt]-d[linked-belt]-3'
-        item.tint = {r=0, g=0, b=255, a=1}
         data:extend({item})
 
         entity = table.deepcopy(data.raw['linked-belt']['linked-belt'])
@@ -245,6 +236,17 @@ if settings.startup['PHI-CT'].value then
 
         data:extend({entity})
 
+        data.raw.recipe['linked-belt'].hidden = false
+
+        item = table.deepcopy(data.raw['item']['linked-belt'])
+        item.name = 'fast-linked-belt'
+        item.place_result = 'fast-linked-belt'
+        item.supgroup = 'transport'
+        item.order = 'a[transport-belt]-d[linked-belt]-2'
+        item.tint = {r=255, g=0, b=0, a=1}
+        data:extend({item})
+
+        entity = table.deepcopy(data.raw['linked-belt']['linked-belt'])
         entity.name = 'fast-linked-belt'
         entity.speed = 0.0625
         entity.next_upgrade = 'express-linked-belt'
@@ -257,6 +259,24 @@ if settings.startup['PHI-CT'].value then
 
         data:extend({entity})
 
+        data:extend({{
+            type = 'recipe',
+            name = 'fast-linked-belt',
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{'linked-belt', 2}},
+            result = 'fast-linked-belt'
+        }})
+
+        item = table.deepcopy(data.raw['item']['linked-belt'])
+        item.name = 'express-linked-belt'
+        item.place_result = 'express-linked-belt'
+        item.supgroup = 'transport'
+        item.order = 'a[transport-belt]-d[linked-belt]-3'
+        item.tint = {r=0, g=0, b=255, a=1}
+        data:extend({item})
+
+        entity = table.deepcopy(data.raw['linked-belt']['linked-belt'])
         entity.name = 'express-linked-belt'
         entity.speed = 0.09375
         entity.next_upgrade = nil
@@ -271,28 +291,10 @@ if settings.startup['PHI-CT'].value then
 
         data:extend({{
             type = 'recipe',
-            name = 'linked-belt',
-            energy_required = 2,
-            enabled = false,
-            ingredients = {{'underground-belt', 4}},
-            result = 'linked-belt'
-        }})
-
-        data:extend({{
-            type = 'recipe',
-            name = 'fast-linked-belt',
-            energy_required = 2,
-            enabled = false,
-            ingredients = {{'linked-belt', 2}},
-            result = 'fast-linked-belt'
-        }})
-
-        data:extend({{
-            type = 'recipe',
             name = 'express-linked-belt',
             energy_required = 2,
             enabled = false,
-            ingredients = {{'fast-linked-belt', 2}},
+            ingredients = {{'fast-linked-belt', 1}, {'linked-belt', 1}},
             result = 'express-linked-belt'
         }})
 

@@ -13,7 +13,7 @@ if settings.startup['PHI-CT'].value then
         icon_mipmaps = 4,
         subgroup = 'intermediate-product',
         order = 'za',
-        ingredients = {{'wood', 60}},
+        ingredients = {{'wood', 10}},
         results = {
             {
                 name = 'wood',
@@ -48,7 +48,7 @@ if settings.startup['PHI-CT'].value then
         icon_mipmaps = 4,
         subgroup = 'intermediate-product',
         order = 'zb',
-        ingredients = {{'raw-fish', 60}},
+        ingredients = {{'raw-fish', 10}},
         results = {
             {
                 name = 'raw-fish',
