@@ -109,5 +109,10 @@ for _, force in pairs(game.forces) do
             recipes['trash-pipe'].enabled = true
             recipes['trash-pipe'].reload()
         end
+
+        if settings.startup['PHI-CT-MINER'].value then
+            recipes['large-area-electric-mining-drill'].enabled = true
+            recipes['large-area-electric-mining-drill'].reload()
+        end
     end
 end

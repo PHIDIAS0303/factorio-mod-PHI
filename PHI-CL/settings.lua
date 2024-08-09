@@ -480,6 +480,12 @@ data:extend({
     order = 'JA03'
   }, {
     type = 'bool-setting',
+    name = 'PHI-CT-MINER',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'JA04'
+  }, {
+    type = 'bool-setting',
     name = 'PHI-CT-TILE',
     setting_type = 'startup',
     default_value = false,

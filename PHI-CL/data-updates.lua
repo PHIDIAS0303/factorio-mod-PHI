@@ -153,6 +153,34 @@ if settings.startup['PHI-CT'].value then
         table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe='trash-pipe'})
         table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe='trash-pipe-return'})
     end
+
+    if settings.startup['PHI-CT-MINER'].value then
+        local item = table.deepcopy(data.raw['item']['electric-mining-drill'])
+        item.name = 'large-area-electric-mining-drill'
+        item.place_result = 'large-area-electric-mining-drill'
+        item.order = 'zc'
+        data:extend({item})
+
+        local entity = table.deepcopy(data.raw['mining-drill']['electric-mining-drill'])
+        entity.name = 'large-area-electric-mining-drill'
+        entity.minable.result = 'large-area-electric-mining-drill'
+        entity.max_health = entity.max_health * 16
+        entity.energy_usage = (tonumber(string.match(entity.energy_usage, '%d+')) * 16) .. 'kW'
+        entity.resource_searching_radius = 12.49
+        entity.mining_speed = entity.mining_speed * 16
+        entity.energy_source.emissions_per_minute = entity.energy_source.emissions_per_minute * 16
+        entity.module_specification.module_slots = 8
+        data:extend({entity})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'large-area-electric-mining-drill',
+            energy_required = 2,
+            enabled = true,
+            ingredients = {{'electric-mining-drill', 16}},
+            result = 'large-area-electric-mining-drill'
+        }})
+    end
 end
 
 if settings.startup['PHI-EQ-ARMOR'].value then
