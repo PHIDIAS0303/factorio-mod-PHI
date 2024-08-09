@@ -492,6 +492,12 @@ data:extend({
     order = 'JA06'
   }, {
     type = 'bool-setting',
+    name = 'PHI-CT-RECIPE',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'JA07'
+  }, {
+    type = 'bool-setting',
     name = 'PHI-CT-TILE',
     setting_type = 'startup',
     default_value = false,

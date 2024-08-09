@@ -88,10 +88,12 @@ for _, force in pairs(game.forces) do
     end
 
     if settings.startup['PHI-CT'].value then
-        recipes['wood-production'].enabled = true
-        recipes['wood-production'].reload()
-        recipes['fish-production'].enabled = true
-        recipes['fish-production'].reload()
+        if settings.startup['PHI-CT-RECIPE'].value then
+            recipes['wood-production'].enabled = true
+            recipes['wood-production'].reload()
+            recipes['fish-production'].enabled = true
+            recipes['fish-production'].reload()
+        end
 
         if settings.startup['PHI-CT-OIL'].value then
             recipes['oil-pump'].enabled = true

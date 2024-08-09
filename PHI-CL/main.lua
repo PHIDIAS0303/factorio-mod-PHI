@@ -359,7 +359,7 @@ function main.ER(source, tier)
         result_name = result_name .. '-' .. tier
     end
 
-    if (source.tech == 'compound-energy') and (tier > 2) then
+    if (source.tech == 'compound-energy') then
         if (source.type == 'solar-panel') or (source.type == 'accumulator') then
             data:extend({{
                 type = 'recipe',
@@ -371,14 +371,26 @@ function main.ER(source, tier)
             }})
 
         else
-            data:extend({{
-                type = 'recipe',
-                name = new_name ,
-                energy_required = 2,
-                enabled = false,
-                ingredients = {{name=ingredient_name, amount=1}, {name=source.name, amount=1}},
-                result = result_name,
-            }})
+            if tier > 2 then
+                data:extend({{
+                    type = 'recipe',
+                    name = new_name ,
+                    energy_required = 2,
+                    enabled = false,
+                    ingredients = {{name=ingredient_name, amount=1}, {name=source.name, amount=1}},
+                    result = result_name,
+                }})
+
+            else
+                data:extend({{
+                    type = 'recipe',
+                    name = new_name ,
+                    energy_required = 2,
+                    enabled = false,
+                    ingredients = {{name=ingredient_name, amount=2}},
+                    result = result_name,
+                }})
+            end
         end
 
     else
@@ -416,7 +428,7 @@ function main.ET(source, tier)
                 },
                 prerequisites = prereq,
                 unit = {
-                    count = 100,
+                    count = 200 * (tier - 1),
                     ingredients = {
                         {'automation-science-pack', 2},
                         {'logistic-science-pack', 2}

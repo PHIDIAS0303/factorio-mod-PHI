@@ -3,80 +3,82 @@ local main = require 'main'
 local file_stage = 1
 
 if settings.startup['PHI-CT'].value then
-    data:extend({{
-        type = 'recipe',
-        name = 'wood-production',
-        energy_required = 10,
-        enabled = true,
-        icon = '__base__/graphics/icons/wood.png',
-        icon_size = 64,
-        icon_mipmaps = 4,
-        subgroup = 'intermediate-product',
-        order = 'za',
-        ingredients = {{'wood', 10}},
-        results = {
-            {
-                name = 'wood',
-                probability = 0.5,
-                amount = 10
-            },
-            {
-                name = 'wood',
-                probability = 0.5,
-                amount = 10
-            },
-            {
-                name = 'wood',
-                probability = 0.5,
-                amount = 10
-            },
-            {
-                name = 'wood',
-                probability = 0.5,
-                amount = 10
+    if settings.startup['PHI-CT-RECIPE'].value then
+        data:extend({{
+            type = 'recipe',
+            name = 'wood-production',
+            energy_required = 10,
+            enabled = true,
+            icon = '__base__/graphics/icons/wood.png',
+            icon_size = 64,
+            icon_mipmaps = 4,
+            subgroup = 'intermediate-product',
+            order = 'za',
+            ingredients = {{'wood', 10}},
+            results = {
+                {
+                    name = 'wood',
+                    probability = 0.5,
+                    amount = 10
+                },
+                {
+                    name = 'wood',
+                    probability = 0.5,
+                    amount = 10
+                },
+                {
+                    name = 'wood',
+                    probability = 0.5,
+                    amount = 10
+                },
+                {
+                    name = 'wood',
+                    probability = 0.5,
+                    amount = 10
+                }
             }
-        }
-    }})
+        }})
 
-    data:extend({{
-        type = 'recipe',
-        name = 'fish-production',
-        energy_required = 10,
-        enabled = true,
-        icon = '__base__/graphics/icons/fish.png',
-        icon_size = 64,
-        icon_mipmaps = 4,
-        subgroup = 'intermediate-product',
-        order = 'zb',
-        ingredients = {{'raw-fish', 10}},
-        results = {
-            {
-                name = 'raw-fish',
-                probability = 0.5,
-                amount = 10
-            },
-            {
-                name = 'raw-fish',
-                probability = 0.5,
-                amount = 10
-            },
-            {
-                name = 'raw-fish',
-                probability = 0.5,
-                amount = 10
-            },
-            {
-                name = 'raw-fish',
-                probability = 0.5,
-                amount = 10
+        data:extend({{
+            type = 'recipe',
+            name = 'fish-production',
+            energy_required = 10,
+            enabled = true,
+            icon = '__base__/graphics/icons/fish.png',
+            icon_size = 64,
+            icon_mipmaps = 4,
+            subgroup = 'intermediate-product',
+            order = 'zb',
+            ingredients = {{'raw-fish', 10}},
+            results = {
+                {
+                    name = 'raw-fish',
+                    probability = 0.5,
+                    amount = 10
+                },
+                {
+                    name = 'raw-fish',
+                    probability = 0.5,
+                    amount = 10
+                },
+                {
+                    name = 'raw-fish',
+                    probability = 0.5,
+                    amount = 10
+                },
+                {
+                    name = 'raw-fish',
+                    probability = 0.5,
+                    amount = 10
+                }
             }
-        }
-    }})
+        }})
 
-    for k, v in pairs(data.raw.module) do
-        if v.limitation and string.find(v.name, 'productivity', 1, true) then
-            table.insert(v.limitation, 'wood-production')
-            table.insert(v.limitation, 'fish-production')
+        for k, v in pairs(data.raw.module) do
+            if v.limitation and string.find(v.name, 'productivity', 1, true) then
+                table.insert(v.limitation, 'wood-production')
+                table.insert(v.limitation, 'fish-production')
+            end
         end
     end
 end
@@ -262,6 +264,7 @@ if settings.startup['PHI-MI'].value then
             item.order = 'b[storage]-d[basic-' .. item.order .. ']'
             data:extend({item})
 
+            entity.inventory_type = 'with_filters_and_bar'
             entity.inventory_size = 1
             entity.name = 'basic-' .. chests[i]
             entity.minable.result = 'basic-' .. chests[i]

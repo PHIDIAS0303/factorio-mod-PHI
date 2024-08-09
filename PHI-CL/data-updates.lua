@@ -87,6 +87,7 @@ if settings.startup['PHI-CT'].value then
         local entity = table.deepcopy(data.raw['container']['steel-chest'])
         entity.name = 'trash-chest'
         entity.minable.result = 'trash-chest'
+        entity.inventory_type = 'with_filters_and_bar'
         entity.inventory_size = 1
         entity.type = 'infinity-container'
         entity.gui_mode = 'none'
@@ -166,7 +167,7 @@ if settings.startup['PHI-CT'].value then
         entity.minable.result = 'large-area-electric-mining-drill'
         entity.max_health = entity.max_health * 16
         entity.energy_usage = (tonumber(string.match(entity.energy_usage, '%d+')) * 16) .. 'kW'
-        entity.resource_searching_radius = 12.49
+        entity.resource_searching_radius = 9.99
         entity.mining_speed = entity.mining_speed * 16
         entity.energy_source.emissions_per_minute = entity.energy_source.emissions_per_minute * 16
         entity.module_specification.module_slots = 8
@@ -189,6 +190,10 @@ if settings.startup['PHI-CT'].value then
         data:extend({item})
 
         local entity = table.deepcopy(data.raw['linked-container']['linked-chest'])
+        entity.circuit_wire_connection_point = data.raw['container']['steel-chest'].circuit_wire_connection_point
+        entity.circuit_connector_sprites = data.raw['container']['steel-chest'].circuit_connector_sprites
+        entity.circuit_wire_max_distance = data.raw['container']['steel-chest'].circuit_wire_max_distance
+        entity.inventory_type = 'with_filters_and_bar'
         entity.inventory_size = 48
         entity.gui_mode = 'all'
         data:extend({entity})
