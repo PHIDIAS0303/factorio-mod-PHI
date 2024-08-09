@@ -221,71 +221,65 @@ data:extend({
     default_value = true,
     order = 'E09'
   }, {
-    type = 'bool-setting',
-    name = 'PHI-MI-LOADER',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'F01'
-  }, {
     type = 'int-setting',
     name = 'PHI-MI-LANDFILL',
     setting_type = 'startup',
     default_value = 20,
     minimum_value = 1,
     maximum_value = 40,
-    order = 'F02'
+    order = 'F01'
   }, {
     type = 'bool-setting',
     name = 'PHI-MI-EFFCY',
     setting_type = 'startup',
     default_value = true,
-    order = 'F03'
+    order = 'F02'
   }, {
     type = 'bool-setting',
     name = 'PHI-MI-NUCLEAR',
     setting_type = 'startup',
     default_value = true,
-    order = 'F04'
+    order = 'F03'
   }, {
     type = 'bool-setting',
     name = 'PHI-MI-BOILER',
     setting_type = 'startup',
     default_value = true,
-    order = 'F05'
+    order = 'F04'
   }, {
     type = 'bool-setting',
     name = 'PHI-MI-CHEST',
     setting_type = 'startup',
     default_value = true,
-    order = 'F06'
+    order = 'F05'
   }, {
     type = 'int-setting',
     name = 'PHI-MI-REPAIR',
     setting_type = 'startup',
     default_value = 1,
     allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'F07'
+    order = 'F06'
   }, {
     type = 'int-setting',
     name = 'PHI-MI-PIPE',
     setting_type = 'startup',
     default_value = 1,
     allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'F08'
+    order = 'F07'
   }, {
     type = 'int-setting',
     name = 'PHI-MI-ROBOT',
     setting_type = 'startup',
     default_value = 1,
     allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'F09'
+    order = 'F08'
   }, {
     type = 'int-setting',
     name = 'PHI-MI-TRAIN',
     setting_type = 'startup',
     default_value = 1,
     allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'F10'
+    order = 'F09'
   }, {
     type = 'int-setting',
     name = 'PHI-RS-RECIPE-1',
@@ -484,6 +478,18 @@ data:extend({
     setting_type = 'startup',
     default_value = true,
     order = 'JA04'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-CT-LINKED',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'JA05'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-MI-LOADER',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'JA06'
   }, {
     type = 'bool-setting',
     name = 'PHI-CT-TILE',

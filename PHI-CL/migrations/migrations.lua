@@ -114,5 +114,22 @@ for _, force in pairs(game.forces) do
             recipes['large-area-electric-mining-drill'].enabled = true
             recipes['large-area-electric-mining-drill'].reload()
         end
+
+        if settings.startup['PHI-CT-LOADER'].value then
+            if technologies['logistics'].researched then
+                recipes['loader'].enabled = true
+                recipes['loader'].reload()
+            end
+
+            if technologies['logistics-2'].researched then
+                recipes['fast-loader'].enabled = true
+                recipes['fast-loader'].reload()
+            end
+
+            if technologies['logistics-3'].researched then
+                recipes['express-loader'].enabled = true
+                recipes['express-loader'].reload()
+            end
+        end
     end
 end

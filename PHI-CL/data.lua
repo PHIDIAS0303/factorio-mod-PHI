@@ -90,35 +90,6 @@ if settings.startup['PHI-MI'].value then
         data.raw['repair-tool']['repair-pack'].durability = 300 * settings.startup['PHI-MI-REPAIR'].value
     end
 
-    if settings.startup['PHI-MI-LOADER'].value then
-        data.raw.recipe['loader'].hidden = false
-        data.raw.recipe['fast-loader'].hidden = false
-        data.raw.recipe['express-loader'].hidden = false
-
-        data.raw.recipe['loader'].ingredients = {
-            {'iron-plate', 5},
-            {'electronic-circuit', 5},
-            {'transport-belt', 2},
-            {'inserter', 2}
-        }
-        data.raw.recipe['fast-loader'].ingredients = {
-            {'iron-gear-wheel', 10},
-            {'electronic-circuit', 10},
-            {'advanced-circuit', 1},
-            {'loader', 1}
-        }
-
-        data.raw.recipe['express-loader'].ingredients = {
-            {'iron-gear-wheel', 10},
-            {'advanced-circuit', 10},
-            {'fast-loader', 1}
-        }
-
-        table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='loader'})
-        table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
-        table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
-    end
-
     data.raw.recipe['landfill'].ingredients = {{'stone', tonumber(settings.startup['PHI-MI-LANDFILL'].value)}}
 
     if settings.startup['PHI-MI-EFFCY'].value then

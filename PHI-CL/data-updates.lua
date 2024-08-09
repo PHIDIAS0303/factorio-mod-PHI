@@ -181,6 +181,67 @@ if settings.startup['PHI-CT'].value then
             result = 'large-area-electric-mining-drill'
         }})
     end
+
+    if settings.startup['PHI-CT-LINKED'].value then
+        local item = table.deepcopy(data.raw['item']['linked-chest'])
+        item.order = 'a[items]-d[linked-chest]'
+        data:extend({item})
+
+        local entity = table.deepcopy(data.raw['linked-container']['linked-chest'])
+        entity.inventory_size = 48
+        entity.gui_mode = 'all'
+        data:extend({entity})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'linked-chest',
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{'steel-chest', 1}},
+            result = 'linked-chest'
+        }})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'linked-chest-return',
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{'linked-chest', 1}},
+            result = 'steel-chest'
+        }})
+
+        table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='linked-chest'})
+        table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='linked-chest-return'})
+    end
+
+    if settings.startup['PHI-CT-LOADER'].value then
+        data.raw.recipe['loader'].hidden = false
+        data.raw.recipe['fast-loader'].hidden = false
+        data.raw.recipe['express-loader'].hidden = false
+
+        data.raw.recipe['loader'].ingredients = {
+            {'iron-plate', 5},
+            {'electronic-circuit', 5},
+            {'transport-belt', 2},
+            {'inserter', 2}
+        }
+        data.raw.recipe['fast-loader'].ingredients = {
+            {'iron-gear-wheel', 10},
+            {'electronic-circuit', 10},
+            {'advanced-circuit', 1},
+            {'loader', 1}
+        }
+
+        data.raw.recipe['express-loader'].ingredients = {
+            {'iron-gear-wheel', 10},
+            {'advanced-circuit', 10},
+            {'fast-loader', 1}
+        }
+
+        table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='loader'})
+        table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
+        table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
+    end
 end
 
 if settings.startup['PHI-EQ-ARMOR'].value then
