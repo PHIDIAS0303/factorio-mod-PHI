@@ -296,7 +296,6 @@ if settings.startup['PHI-CT'].value then
             result = 'express-linked-belt'
         }})
 
-        data.raw['linked-belt']['linked-belt'].fast_replaceable_group = 'linked-belt'
         data.raw['linked-belt']['fast-linked-belt'].fast_replaceable_group = data.raw['linked-belt']['linked-belt'].fast_replaceable_group
         data.raw['linked-belt']['express-linked-belt'].fast_replaceable_group = data.raw['linked-belt']['fast-linked-belt'].fast_replaceable_group
 
