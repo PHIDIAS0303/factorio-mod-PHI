@@ -4,46 +4,46 @@ local items = require 'config'
 local main = {}
 
 local tint = {
-    ['2'] = {
-        r = 0.2,
-        g = 0.9,
-        b = 0.2,
+    [2] = {
+        r = 51,
+        g = 229,
+        b = 51,
         a = 0.7
     },
-    ['3'] = {
-        r = 0.2,
-        g = 0.2,
-        b = 0.9,
+    [3] = {
+        r = 51,
+        g = 51,
+        b = 229,
         a = 0.7
     },
-    ['4'] = {
-        r = 0.2,
-        g = 0.9,
-        b = 0.9,
+    [4] = {
+        r = 51,
+        g = 229,
+        b = 229,
         a = 0.7
     },
-    ['5'] = {
-        r = 0.5,
+    [5] = {
+        r = 127,
         g = 0,
-        b = 0.5,
+        b = 127,
         a = 0.5
     },
-    ['6'] = {
-        r = 0.9,
-        g = 0.7,
-        b = 0.2,
+    [6] = {
+        r = 229,
+        g = 178,
+        b = 51,
         a = 0.7
     },
-    ['7'] = {
-        r = 0.5,
-        g = 0.2,
+    [7] = {
+        r = 127,
+        g = 51,
         b = 0,
         a = 0.2
     },
-    ['8'] = {
-        r = 0.5,
-        g = 0.2,
-        b = 0.5,
+    [8] = {
+        r = 127,
+        g = 51,
+        b = 127,
         a = 0.2
     },
 }
@@ -181,29 +181,25 @@ function main.EEE(source, tier)
         item.type = 'assembling-machine'
     end
 
-    --[[
-    if item.picture.layers then
-        if item.picture.layers[1][1].tint then
-            item.picture.layers[1][1].tint = tint[tier]
-        end
+    if item.picture then
+        if item.picture.layers then
+            item.picture.layers[1].tint = tint[tier]
 
-        if item.picture.layers[1][1].hr_version then
-            item.picture.layers[1][1].hr_version.tint = tint[tier]
-        end
-    end
-
-    if tier > 1 then
-        if item.icons and item.icons[1] and item.icons[1][1] then
-            item.icons[1][1].tint = tint[tier]
+            if item.picture.layers[1].hr_version then
+                item.picture.layers[1].hr_version.tint = tint[tier]
+            end
         end
     end
-    ]]
 
-    -- item.animation.layers[1].filename = graphics_location .. source .. '-e.png'
-    -- item.animation.layers[1].hr_version.filename = graphics_location .. source ..'-eh.png'
-    -- item.icon = graphics_location .. source .. '-i.png'
-    -- item.icon_size = 64
-    -- item.icon_mipmaps = 4
+    if item.pictures then
+        if item.pictures.layers then
+            item.pictures.layers[1].tint = tint[tier]
+
+            if item.pictures.layers[1].hr_version then
+                item.pictures.layers[1].hr_version.tint = tint[tier]
+            end
+        end
+    end
 
     data:extend({item})
 end
@@ -326,13 +322,11 @@ function main.EI(source, tier)
         else
             item.name = source.name
             item.place_result = source.name
-
-            --[[
-            if item.icons then
-                item.icons[1][1].tint = tint[tier]
-            end
-            ]]
         end
+    end
+
+    if item.icons then
+        item.icons[1].tint = tint[tier]
     end
 
     item.order = item.order .. tier

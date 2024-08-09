@@ -486,7 +486,7 @@ data:extend({
     order = 'JA05'
   }, {
     type = 'bool-setting',
-    name = 'PHI-MI-LOADER',
+    name = 'PHI-CT-LOADER',
     setting_type = 'startup',
     default_value = true,
     order = 'JA06'

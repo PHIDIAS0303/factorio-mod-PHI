@@ -184,6 +184,7 @@ if settings.startup['PHI-CT'].value then
 
     if settings.startup['PHI-CT-LINKED'].value then
         local item = table.deepcopy(data.raw['item']['linked-chest'])
+        item.supgroup = 'storage'
         item.order = 'a[items]-d[linked-chest]'
         data:extend({item})
 
@@ -212,6 +213,97 @@ if settings.startup['PHI-CT'].value then
 
         table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='linked-chest'})
         table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='linked-chest-return'})
+
+        --[[
+        item = table.deepcopy(data.raw['item']['linked-belt'])
+        item.name = 'linked-belt'
+        item.supgroup = 'transport'
+        item.order = 'a[transport-belt]-d[linked-belt]-1'
+        item.tint = {r=170, g=126, b=103, a=1}
+        data:extend({item})
+
+        item.name = 'fast-linked-belt'
+        item.order = 'a[transport-belt]-d[linked-belt]-2'
+        item.tint = {r=255, g=0, b=0, a=1}
+        data:extend({item})
+
+        item.name = 'express-linked-belt'
+        item.order = 'a[transport-belt]-d[linked-belt]-3'
+        item.tint = {r=0, g=0, b=255, a=1}
+        data:extend({item})
+
+        entity = table.deepcopy(data.raw['linked-belt']['linked-belt'])
+        entity.name = 'linked-belt'
+        entity.speed = 0.03125
+        entity.next_upgrade = 'fast-linked-belt'
+        entity.minable.result = 'linked-belt'
+
+        for _,v in pairs(entity.structure) do
+            v.sheet.tint = {r=170, g=126, b=103, a=1}
+            v.sheet.hr_version.tint = {r=170, g=126, b=103, a=1}
+        end
+
+        data:extend({entity})
+
+        entity.name = 'fast-linked-belt'
+        entity.speed = 0.0625
+        entity.next_upgrade = 'express-linked-belt'
+        entity.minable.result = 'fast-linked-belt'
+
+        for _,v in pairs(entity.structure) do
+            v.sheet.tint = {r=255, g=0, b=0, a=1}
+            v.sheet.hr_version.tint = {r=255, g=0, b=0, a=1}
+        end
+
+        data:extend({entity})
+
+        entity.name = 'express-linked-belt'
+        entity.speed = 0.09375
+        entity.next_upgrade = nil
+        entity.minable.result = 'express-linked-belt'
+
+        for _,v in pairs(entity.structure) do
+            v.sheet.tint = {r=0, g=0, b=255, a=1}
+            v.sheet.hr_version.tint = {r=0, g=0, b=255, a=1}
+        end
+
+        data:extend({entity})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'linked-belt',
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{'underground-belt', 4}},
+            result = 'linked-belt'
+        }})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'fast-linked-belt',
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{'linked-belt', 2}},
+            result = 'fast-linked-belt'
+        }})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'express-linked-belt',
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{'fast-linked-belt', 2}},
+            result = 'express-linked-belt'
+        }})
+
+        data.raw['linked-belt']['linked-belt'].fast_replaceable_group = 'linked-belt'
+        data.raw['linked-belt']['fast-linked-belt'].fast_replaceable_group = data.raw['linked-belt']['linked-belt'].fast_replaceable_group
+        data.raw['linked-belt']['express-linked-belt'].fast_replaceable_group = data.raw['linked-belt']['fast-linked-belt'].fast_replaceable_group
+
+        table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='linked-belt'})
+        table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-linked-belt'})
+        table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-linked-belt'})
+        ]]
     end
 
     if settings.startup['PHI-CT-LOADER'].value then
