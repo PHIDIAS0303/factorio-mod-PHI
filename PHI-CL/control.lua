@@ -97,7 +97,6 @@ if settings.startup['PHI-PB'].value then
     end)
 end
 
--- {{filter='name', name='trash-chest', mode='or'}, {filter='name', name='trash-pipe', mode='or'}}
 if settings.startup['PHI-CT'].value then
     if settings.startup['PHI-CT-TRASH'].value then
         script.on_init(trash_check)

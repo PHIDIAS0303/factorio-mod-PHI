@@ -1,8 +1,8 @@
 {
     "name": "PHI-CL",
-    "version": "2.0.15",
+    "version": "2.0.23",
     "factorio_version": "1.1",
-    "date": "2024-08-11",
+    "date": "2024-08-21",
     "title": "Phidias Collection",
     "author": "PHIDIAS0303",
     "contributers": "",
@@ -11,9 +11,11 @@
     "dependencies": [
         "base >= 1.1.0",
         "? aai-industry >= 0.5.0",
+        "? big-mining-drill >= 0.1.0",
         "? Krastorio2 >= 1.3.0",
         "? space-exploration >= 0.6.0",
         "? angelsrefining >= 0.12.0",
-        "? Atomic_Overhaul >= 1.3.0" 
+        "? exotic-industries >= 0.6.0",
+        "? Atomic_Overhaul >= 1.3.0"
     ]
 }

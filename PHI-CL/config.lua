@@ -883,7 +883,9 @@ if mods then
             min = 2,
             max = 3
         }
+    end
 
+    if mods['aai-industry'] or mods['big-mining-drill'] then
         items['item']['area-mining-drill'] = {
             enabled = settings.startup['PHI-MB'].value,
             stage = 2,

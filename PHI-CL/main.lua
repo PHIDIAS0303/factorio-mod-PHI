@@ -4,48 +4,44 @@ local items = require 'config'
 local main = {}
 
 local tint = {
-    [2] = {
-        r = 51,
-        g = 229,
-        b = 51,
-        a = 0.7
+    [2] = {r=140, g=142, b=200},
+    [3] = {r=242, g=161, b=26},
+    [4] = {r=255, g=254, b=42},
+    [5] = {r=54, g=228, b=255},
+    [6] = {r=253, g=0, b=97},
+    [7] = {r=0, g=209, b=102},
+    [8] = {r=233, g=63, b=233}
+}
+
+local entity_tint = {
+    'picture',
+    'pictures',
+    'animation',
+    'vertical_animation',
+    'structure',
+    'heat_glow_sprites',
+    'integration_patch'
+}
+
+local entity_mining_tint = {
+    'graphics_set',
+    'wet_mining_graphics_set'
+}
+
+local entity_lab_tint = {
+    {
+        ['a'] = 'on_animation',
+        ['n'] = 3
     },
-    [3] = {
-        r = 51,
-        g = 51,
-        b = 229,
-        a = 0.7
-    },
-    [4] = {
-        r = 51,
-        g = 229,
-        b = 229,
-        a = 0.7
-    },
-    [5] = {
-        r = 127,
-        g = 0,
-        b = 127,
-        a = 0.5
-    },
-    [6] = {
-        r = 229,
-        g = 178,
-        b = 51,
-        a = 0.7
-    },
-    [7] = {
-        r = 127,
-        g = 51,
-        b = 0,
-        a = 0.2
-    },
-    [8] = {
-        r = 127,
-        g = 51,
-        b = 127,
-        a = 0.2
-    },
+    {
+        ['a'] = 'off_animation',
+        ['n'] = 2
+    }
+}
+
+local entity_accumulator_tint = {
+    'charge_animation',
+    'discharge_animation'
 }
 
 -- entity
@@ -53,8 +49,8 @@ function main.EEE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
 
     item.name = source.name .. '-' .. tier
-    item.minable.result = source.name .. '-' .. tier
-    item.max_health = item.max_health * (2 ^ (tier - source.min + 1))
+    item.minable.result = item.name
+    item.max_health = item.max_health * (tier - source.min + 1)
 
     if (tier < source.max) then
         item.next_upgrade = source.name .. '-' .. (tier + 1)
@@ -104,16 +100,25 @@ function main.EEE(source, tier)
             item.energy_source.input_flow_limit = (source.base * 60 * (4 ^ (tier - source.min + 1))) .. 'kW'
             item.energy_source.output_flow_limit = (source.base * 60 * (4 ^ (tier - source.min + 1))) .. 'kW'
 
-            --[[
-            item.charge_animation.layers[1].layers[1].filename = item.picture.layers[1].filename
-            item.charge_animation.layers[1].layers[1].tint = {r = 1, g = 1, b = 1, a = 1}
-            item.charge_animation.layers[1].layers[1].hr_version.filename = item.picture.layers[1].hr_version.filename
-            item.charge_animation.layers[1].layers[1].hr_version.tint = {r = 1, g = 1, b = 1, a = 1}
-            item.discharge_animation.layers[1].layers[1].filename = item.picture.layers[1].filename
-            item.discharge_animation.layers[1].layers[1].tint = {r = 1, g = 1, b = 1, a = 1}
-            item.discharge_animation.layers[1].layers[1].hr_version.filename = item.picture.layers[1].hr_version.filename
-            item.discharge_animation.layers[1].layers[1].hr_version.tint = {r = 1, g = 1, b = 1, a = 1}
-            ]]
+            for _, v in pairs(entity_accumulator_tint) do
+                if item[v] and item[v].layers then
+                    if item[v].layers[1] and item[v].layers[1].layers and item[v].layers[1].layers[1] then
+                        item[v].layers[1].layers[1].tint = tint[tier]
+
+                        if item[v].layers[1].layers[1].hr_version then
+                            item[v].layers[1].layers[1].hr_version.tint = tint[tier]
+                        end
+                    end
+
+                    if item[v].layers[2] then
+                        item[v].layers[2].tint = tint[tier]
+
+                        if item[v].layers[2].hr_version then
+                            item[v].layers[2].hr_version.tint = tint[tier]
+                        end
+                    end
+                end
+            end
 
         elseif (source.type == 'solar-panel') then
             item.production = (source.base * (4 ^ (tier - source.min + 1))) .. 'kW'
@@ -181,23 +186,98 @@ function main.EEE(source, tier)
         item.type = 'assembling-machine'
     end
 
-    if item.picture then
-        if item.picture.layers then
-            item.picture.layers[1].tint = tint[tier]
+    for _, ve in pairs(entity_tint) do
+        if item[ve] then
+            if item[ve].layers and item[ve].layers[1] then
+                item[ve].layers[1].tint = tint[tier]
 
-            if item.picture.layers[1].hr_version then
-                item.picture.layers[1].hr_version.tint = tint[tier]
+                if item[ve].layers[1].hr_version then
+                    item[ve].layers[1].hr_version.tint = tint[tier]
+                end
+            end
+
+            for _, v in pairs(item[ve]) do
+                if v.layers then
+                    if v.layers[1] then
+                        v.layers[1].tint = tint[tier]
+
+                        if v.layers[1].hr_version then
+                            v.layers[1].hr_version.tint = tint[tier]
+                        end
+                    end
+                end
+
+                for i=1, #v, 1 do
+                    if v[i].layers and v[i].layers[1] then
+                        v[i].layers[1].tint = tint[tier]
+
+                        if v[i].layers[1].hr_version then
+                            v[i].layers[1].hr_version.tint = tint[tier]
+                        end
+                    end
+                end
             end
         end
     end
 
-    if item.pictures then
-        if item.pictures.layers then
-            item.pictures.layers[1].tint = tint[tier]
+    if item.idle_animation and item.idle_animation.layers then
+        local i = 1
 
-            if item.pictures.layers[1].hr_version then
-                item.pictures.layers[1].hr_version.tint = tint[tier]
+        while i < #item.idle_animation.layers do
+            if item.idle_animation.layers[i] then
+                item.idle_animation.layers[i].tint = tint[tier]
+
+                if item.idle_animation.layers[i].hr_version then
+                    item.idle_animation.layers[i].hr_version.tint = tint[tier]
+                end
             end
+
+            i = i + 2
+
+            if not item.idle_animation.layers[i] then
+                break
+            end
+        end
+    end
+
+    for _, v in pairs(entity_lab_tint) do
+        if item[v['a']] and item[v['a']].layers then
+            for i=1, v['n'], 1 do
+                if item[v['a']].layers[i] then
+                    item[v['a']].layers[i].tint = tint[tier]
+
+                    if item[v['a']].layers[i].hr_version then
+                        item[v['a']].layers[i].hr_version.tint = tint[tier]
+                    end
+                end
+            end
+        end
+    end
+
+    for _, e in pairs(entity_mining_tint) do
+        if item[e] and item[e].animation then
+            for _, d in pairs(item[e].animation) do
+                if d.layers then
+                    d.layers[1].tint = tint[tier]
+                    d.layers[2].tint = tint[tier]
+
+                    if d.layers[1].hr_version then
+                        d.layers[1].hr_version.tint = tint[tier]
+                    end
+
+                    if d.layers[2].hr_version then
+                        d.layers[2].hr_version.tint = tint[tier]
+                    end
+                end
+            end
+        end
+    end
+
+    if item.base_picture and item.base_picture.sheets then
+        item.base_picture.sheets[1].tint = tint[tier]
+
+        if item.base_picture.sheets[1].hr_version then
+            item.base_picture.sheets[1].hr_version.tint = tint[tier]
         end
     end
 
@@ -288,14 +368,14 @@ function main.EEQ(source, tier)
         width = w * 32,
         height = h * 32,
         priority = 'medium',
-        -- tint = tint[tier],
+        tint = tint[tier],
         hr_version = {
             filename = '__base__/graphics/equipment/hr-' .. source.graphics_name .. '.png',
             width = w * 64,
             height = h * 64,
             priority = 'medium',
-            -- tint = tint[tier],
-            scale = 0.5
+            scale = 0.5,
+            tint = tint[tier]
         }
     }
 
@@ -309,10 +389,6 @@ function main.EI(source, tier)
     if source.category == 'equipment' then
         item['name'] = source.name .. '-mk' .. tier .. '-equipment'
         item.placed_as_equipment_result = source.name .. '-mk' .. tier .. '-equipment'
-        -- item.subgroup = 'equipment'
-        -- item.stack_size = 20
-        -- item.default_request_amount = 5
-        -- item.icons = {{icon = '__base__/graphics/icons/' .. source.graphics_name .. '.png', icon_mipmaps = 4, icon_size = 64}}
 
     else
         if tier > 1 then
@@ -325,8 +401,28 @@ function main.EI(source, tier)
         end
     end
 
-    if item.icons then
+    if item.icons and item.icons[1] then
         item.icons[1].tint = tint[tier]
+
+    elseif item.icon then
+        item.icons = {
+            {
+                icon = item.icon,
+                tint = tint[tier]
+            }
+        }
+
+        item.icon = nil
+
+        if item.icon_size then
+            item.icons[1].icon_size = item.icon_size
+            item.icon_size = nil
+        end
+
+        if item.icon_mipmaps then
+            item.icons[1].icon_mipmaps = item.icon_mipmaps
+            item.icon_mipmaps = nil
+        end
     end
 
     item.order = item.order .. tier

@@ -15,16 +15,28 @@ if settings.startup['PHI-XW-WATER'].value > 0 then
     data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
     data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_mask = nil
     data.raw['offshore-pump']['offshore-pump'].placeable_position_visualization = nil
+    data.raw['offshore-pump']['offshore-pump'].se_allow_in_space = true
 
     if mods['angelsrefining'] then
         data.raw['offshore-pump']['seafloor-pump'].pumping_speed = settings.startup['PHI-XW-WATER'].value * 20
         data.raw['offshore-pump']['seafloor-pump'].fluid_box.height = 4
-        data.raw['offshore-pump']['offshore-pump'].fluid_box.level = 5
+        data.raw['offshore-pump']['seafloor-pump'].fluid_box.level = 5
         data.raw['offshore-pump']['seafloor-pump'].flags = {'placeable-neutral', 'player-creation', 'filter-directions'}
         data.raw['offshore-pump']['seafloor-pump'].adjacent_tile_collision_box = {{-2, -3}, {2, -2}}
         data.raw['offshore-pump']['seafloor-pump'].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
         data.raw['offshore-pump']['seafloor-pump'].adjacent_tile_collision_mask = nil
         data.raw['offshore-pump']['seafloor-pump'].placeable_position_visualization = nil
+    end
+
+    if mods['exotic-industries'] then
+        data.raw['offshore-pump']['ei_gaia-pump'].pumping_speed = settings.startup['PHI-XW-WATER'].value * 20
+        data.raw['offshore-pump']['ei_gaia-pump'].fluid_box.height = 4
+        data.raw['offshore-pump']['ei_gaia-pump'].fluid_box.level = 5
+        data.raw['offshore-pump']['ei_gaia-pump'].flags = {'placeable-neutral', 'player-creation'}
+        data.raw['offshore-pump']['ei_gaia-pump'].adjacent_tile_collision_box = {{-0.5, -0.25}, {0.5, 0.25}}
+        data.raw['offshore-pump']['ei_gaia-pump'].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
+        data.raw['offshore-pump']['ei_gaia-pump'].adjacent_tile_collision_mask = nil
+        data.raw['offshore-pump']['ei_gaia-pump'].placeable_position_visualization = nil
     end
 end
 
@@ -41,6 +53,7 @@ if settings.startup['PHI-CT'].value then
         entity.minable.result = 'oil-pump'
         entity.fluid = 'crude-oil'
         entity.fluid_box.filter = 'crude-oil'
+        entity.se_allow_in_space = true
         data:extend({entity})
 
         data:extend({{
@@ -65,6 +78,7 @@ if settings.startup['PHI-CT'].value then
         entity.minable.result = 'super-radar'
         entity.max_distance_of_sector_revealed = 30
         entity.max_distance_of_nearby_sector_revealed = 30
+        entity.se_allow_in_space = true
         data:extend({entity})
 
         data:extend({{
@@ -93,7 +107,9 @@ if settings.startup['PHI-CT'].value then
         entity.gui_mode = 'none'
         entity.erase_contents_when_mined = true
         entity.logistic_mode = nil
-
+        entity.next_upgrade = nil
+        entity.fast_replaceable_group = nil
+        entity.se_allow_in_space = true
         data:extend({entity})
 
         data:extend({{
@@ -130,7 +146,9 @@ if settings.startup['PHI-CT'].value then
         entity.type = 'infinity-pipe'
         entity.gui_mode = 'none'
         entity.erase_contents_when_mined = true
-
+        entity.next_upgrade = nil
+        entity.fast_replaceable_group = nil
+        entity.se_allow_in_space = true
         data:extend({entity})
 
         data:extend({{
@@ -171,6 +189,7 @@ if settings.startup['PHI-CT'].value then
         entity.mining_speed = entity.mining_speed * 16
         entity.energy_source.emissions_per_minute = entity.energy_source.emissions_per_minute * 16
         entity.module_specification.module_slots = 8
+        entity.se_allow_in_space = true
         data:extend({entity})
 
         data:extend({{
@@ -196,6 +215,7 @@ if settings.startup['PHI-CT'].value then
         entity.inventory_type = 'with_filters_and_bar'
         entity.inventory_size = 48
         entity.gui_mode = 'all'
+        entity.se_allow_in_space = true
         data:extend({entity})
 
         data:extend({{
@@ -218,98 +238,6 @@ if settings.startup['PHI-CT'].value then
 
         table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='linked-chest'})
         table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='linked-chest-return'})
-
-        --[[
-        item = table.deepcopy(data.raw['item']['linked-belt'])
-        item.name = 'linked-belt'
-        item.place_result = 'linked-belt'
-        item.supgroup = 'transport'
-        item.order = 'a[transport-belt]-d[linked-belt]-1'
-        item.tint = {r=170, g=126, b=103, a=1}
-        data:extend({item})
-
-        entity = table.deepcopy(data.raw['linked-belt']['linked-belt'])
-        entity.name = 'linked-belt'
-        entity.speed = 0.03125
-        entity.next_upgrade = 'fast-linked-belt'
-        entity.minable.result = 'linked-belt'
-
-        for _,v in pairs(entity.structure) do
-            v.sheet.tint = {r=170, g=126, b=103, a=1}
-            v.sheet.hr_version.tint = {r=170, g=126, b=103, a=1}
-        end
-
-        data:extend({entity})
-
-        data.raw.recipe['linked-belt'].hidden = false
-
-        item = table.deepcopy(data.raw['item']['linked-belt'])
-        item.name = 'fast-linked-belt'
-        item.place_result = 'fast-linked-belt'
-        item.supgroup = 'transport'
-        item.order = 'a[transport-belt]-d[linked-belt]-2'
-        item.tint = {r=255, g=0, b=0, a=1}
-        data:extend({item})
-
-        entity = table.deepcopy(data.raw['linked-belt']['linked-belt'])
-        entity.name = 'fast-linked-belt'
-        entity.speed = 0.0625
-        entity.next_upgrade = 'express-linked-belt'
-        entity.minable.result = 'fast-linked-belt'
-
-        for _,v in pairs(entity.structure) do
-            v.sheet.tint = {r=255, g=0, b=0, a=1}
-            v.sheet.hr_version.tint = {r=255, g=0, b=0, a=1}
-        end
-
-        data:extend({entity})
-
-        data:extend({{
-            type = 'recipe',
-            name = 'fast-linked-belt',
-            energy_required = 2,
-            enabled = false,
-            ingredients = {{'linked-belt', 2}},
-            result = 'fast-linked-belt'
-        }})
-
-        item = table.deepcopy(data.raw['item']['linked-belt'])
-        item.name = 'express-linked-belt'
-        item.place_result = 'express-linked-belt'
-        item.supgroup = 'transport'
-        item.order = 'a[transport-belt]-d[linked-belt]-3'
-        item.tint = {r=0, g=0, b=255, a=1}
-        data:extend({item})
-
-        entity = table.deepcopy(data.raw['linked-belt']['linked-belt'])
-        entity.name = 'express-linked-belt'
-        entity.speed = 0.09375
-        entity.next_upgrade = nil
-        entity.minable.result = 'express-linked-belt'
-
-        for _,v in pairs(entity.structure) do
-            v.sheet.tint = {r=0, g=0, b=255, a=1}
-            v.sheet.hr_version.tint = {r=0, g=0, b=255, a=1}
-        end
-
-        data:extend({entity})
-
-        data:extend({{
-            type = 'recipe',
-            name = 'express-linked-belt',
-            energy_required = 2,
-            enabled = false,
-            ingredients = {{'fast-linked-belt', 1}, {'linked-belt', 1}},
-            result = 'express-linked-belt'
-        }})
-
-        data.raw['linked-belt']['fast-linked-belt'].fast_replaceable_group = data.raw['linked-belt']['linked-belt'].fast_replaceable_group
-        data.raw['linked-belt']['express-linked-belt'].fast_replaceable_group = data.raw['linked-belt']['fast-linked-belt'].fast_replaceable_group
-
-        table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='linked-belt'})
-        table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-linked-belt'})
-        table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-linked-belt'})
-        ]]
     end
 
     if settings.startup['PHI-CT-LOADER'].value then
@@ -339,6 +267,37 @@ if settings.startup['PHI-CT'].value then
         table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='loader'})
         table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
         table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
+    end
+
+    if settings.startup['PHI-CT-ENERGY'].value then
+        local item = table.deepcopy(data.raw['item']['electric-energy-interface'])
+        item.name = 'passive-energy-void'
+        item.place_result = 'passive-energy-void'
+        data:extend({item})
+
+        local entity = table.deepcopy(data.raw['electric-energy-interface']['electric-energy-interface'])
+        entity.name = 'passive-energy-void'
+        entity.minable.result = 'passive-energy-void'
+        entity.energy_source.usage_priority = 'tertiary'
+        entity.energy_source.emissions_per_minute = 0
+        entity.energy_source.input_flow_limit = '1TW'
+        entity.energy_source.output_flow_limit = '0W'
+        entity.energy_production = '0W'
+        entity.energy_usage = '1TW'
+        entity.gui_mode = 'none'
+        entity.se_allow_in_space = true
+        data:extend({entity})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'passive-energy-void',
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{'accumulator', 1}},
+            result = 'passive-energy-void'
+        }})
+
+        table.insert(data.raw.technology['electric-energy-accumulators'].effects, {type='unlock-recipe', recipe='passive-energy-void'})
     end
 end
 
@@ -673,7 +632,7 @@ if settings.startup['PHI-MI-PIPE'].value then
     end
 end
 
-if settings.startup['PHI-MB'].value then
+if settings.startup['PHI-MB'].value and mods['space-exploration'] then
     if settings.startup['PHI-MB-MINING-TIER'].value > 1 then
         data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'se-core-miner-drill'
 

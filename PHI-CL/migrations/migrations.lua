@@ -43,7 +43,6 @@ for _, force in pairs(game.forces) do
         end
     end
 
-
     if technologies['power-armor-mk2'].researched then
         if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value then
             recipes['power-armor-mk3'].enabled = true
@@ -131,6 +130,22 @@ for _, force in pairs(game.forces) do
             if technologies['logistics-3'].researched then
                 recipes['express-loader'].enabled = true
                 recipes['express-loader'].reload()
+            end
+        end
+
+        if settings.startup['PHI-CT-ENERGY'].value then
+            if technologies['electric-energy-accumulators'].researched then
+                recipes['passive-energy-void'].enabled = true
+                recipes['passive-energy-void'].reload()
+            end
+        end
+    end
+
+    if settings.startup['PHI-MB'].value and mods['space-exploration'] then
+        if technologies['se-core-miner'].researched then
+            for i=1, settings.startup['PHI-MB-MINING-TIER'].value do
+                recipes['se-core-miner-' .. i].enabled = true
+                recipes['se-core-miner-' .. i].reload()
             end
         end
     end
