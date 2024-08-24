@@ -57,7 +57,12 @@ function main.EEE(source, tier)
     end
 
     if item.energy_usage then
-        item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
+        if source.ref_name ~= 'se-core-miner-drill' then
+            item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
+
+        else
+            item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'MW'
+        end
     end
 
     if (source.type == 'electric-turret') or (source.type == 'ammo-turret') or (source.type == 'fluid-turret') then
