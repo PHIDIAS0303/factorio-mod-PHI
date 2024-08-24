@@ -50,7 +50,7 @@ function main.EEE(source, tier)
 
     item.name = source.name .. '-' .. tier
     item.minable.result = item.name
-    item.max_health = item.max_health * (tier - source.min + 1)
+    item.max_health = item.max_health * (tier - source.min + 2)
 
     if (tier < source.max) then
         item.next_upgrade = source.name .. '-' .. (tier + 1)
@@ -197,22 +197,26 @@ function main.EEE(source, tier)
             end
 
             for _, v in pairs(item[ve]) do
-                if v.layers then
-                    if v.layers[1] then
-                        v.layers[1].tint = tint[tier]
+                if type(v) == 'table' then
+                    if v.layers then
+                        if v.layers[1] then
+                            v.layers[1].tint = tint[tier]
 
-                        if v.layers[1].hr_version then
-                            v.layers[1].hr_version.tint = tint[tier]
+                            if v.layers[1].hr_version then
+                                v.layers[1].hr_version.tint = tint[tier]
+                            end
                         end
                     end
-                end
 
-                for i=1, #v, 1 do
-                    if v[i].layers and v[i].layers[1] then
-                        v[i].layers[1].tint = tint[tier]
+                    for i=1, #v, 1 do
+                        if v[i] and type(v[i]) == 'table' then
+                            if v[i].layers and v[i].layers[1] then
+                                v[i].layers[1].tint = tint[tier]
 
-                        if v[i].layers[1].hr_version then
-                            v[i].layers[1].hr_version.tint = tint[tier]
+                                if v[i].layers[1].hr_version then
+                                    v[i].layers[1].hr_version.tint = tint[tier]
+                                end
+                            end
                         end
                     end
                 end
