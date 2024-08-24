@@ -931,9 +931,10 @@ if mods then
             type = 'solar-panel',
             name = 'se-space-solar-panel',
             ref_name = 'se-space-solar-panel',
-            tech = 'se-space-solar-panel',
+            tech = 'compound-energy',
             min = 4,
-            max = 8
+            max = 8,
+            base = 400
         }
 
         items['item']['se-space-assembling-machine'] = {

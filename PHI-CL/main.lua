@@ -126,7 +126,12 @@ function main.EEE(source, tier)
             end
 
         elseif (source.type == 'solar-panel') then
-            item.production = (source.base * (4 ^ (tier - source.min + 1))) .. 'kW'
+            if (source.ref_name == 'solar-panel') then
+                item.production = (source.base * (4 ^ (tier - source.min + 1))) .. 'kW'
+
+            elseif (source.ref_name == 'se-space-solar-panel') then
+                item.production = (source.base * (4 ^ (tier - source.min + 2))) .. 'kW'
+            end
 
         elseif (source.type == 'boiler') then
             if settings.startup['PHI-MI-PIPE'].value then
