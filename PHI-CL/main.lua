@@ -185,10 +185,19 @@ function main.EEE(source, tier)
     if item.crafting_speed then
         item.crafting_speed = item.crafting_speed * (2 ^ (tier - source.min + 1))
     end
-
     if item.energy_source then
         if item.energy_source.emissions_per_minute then
-            item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (2 ^ (tier - source.min + 1))
+            if source.tech == 'compound-energy' then
+                if (source.type == 'boiler') then
+                    item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (tier - source.min + 2)
+
+                else
+                    item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (2 ^ (tier - source.min + 1))
+                end
+
+            else
+                item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (2 ^ (tier - source.min + 1))
+            end
         end
     end
 
