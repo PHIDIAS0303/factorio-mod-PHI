@@ -925,6 +925,17 @@ if mods then
     end
 
     if mods['space-exploration'] then
+        items['item']['se-space-solar-panel'] = {
+            enabled = settings.startup['PHI-EN'].value,
+            stage = 2,
+            type = 'solar-panel',
+            name = 'se-space-solar-panel',
+            ref_name = 'se-space-solar-panel',
+            tech = 'se-space-solar-panel',
+            min = 4,
+            max = 8
+        }
+
         items['item']['se-space-assembling-machine'] = {
             enabled = settings.startup['PHI-MB'].value,
             stage = 2,
