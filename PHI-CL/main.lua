@@ -3,16 +3,6 @@ local alpha_order = {'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'}
 local items = require 'config'
 local main = {}
 
-local tint = {
-    [2] = {r=140, g=142, b=200},
-    [3] = {r=242, g=161, b=26},
-    [4] = {r=255, g=254, b=42},
-    [5] = {r=54, g=228, b=255},
-    [6] = {r=253, g=0, b=97},
-    [7] = {r=0, g=209, b=102},
-    [8] = {r=233, g=63, b=233}
-}
-
 local entity_tint = {
     'picture',
     'pictures',
@@ -108,18 +98,18 @@ function main.EEE(source, tier)
             for _, v in pairs(entity_accumulator_tint) do
                 if item[v] and item[v].layers then
                     if item[v].layers[1] and item[v].layers[1].layers and item[v].layers[1].layers[1] then
-                        item[v].layers[1].layers[1].tint = tint[tier]
+                        item[v].layers[1].layers[1].tint = items['tint'][tier]
 
                         if item[v].layers[1].layers[1].hr_version then
-                            item[v].layers[1].layers[1].hr_version.tint = tint[tier]
+                            item[v].layers[1].layers[1].hr_version.tint = items['tint'][tier]
                         end
                     end
 
                     if item[v].layers[2] then
-                        item[v].layers[2].tint = tint[tier]
+                        item[v].layers[2].tint = items['tint'][tier]
 
                         if item[v].layers[2].hr_version then
-                            item[v].layers[2].hr_version.tint = tint[tier]
+                            item[v].layers[2].hr_version.tint = items['tint'][tier]
                         end
                     end
                 end
@@ -155,7 +145,6 @@ function main.EEE(source, tier)
                 item.fluid_box.height = settings.startup['PHI-MI-PIPE'].value
             end
 
-            item.fluid_box.height = 4
             item.maximum_temperature = 15 + (source.base * tier)
             item.fluid_usage_per_tick = source.fluid
 
@@ -208,10 +197,10 @@ function main.EEE(source, tier)
     for _, ve in pairs(entity_tint) do
         if item[ve] then
             if item[ve].layers and item[ve].layers[1] then
-                item[ve].layers[1].tint = tint[tier]
+                item[ve].layers[1].tint = items['tint'][tier]
 
                 if item[ve].layers[1].hr_version then
-                    item[ve].layers[1].hr_version.tint = tint[tier]
+                    item[ve].layers[1].hr_version.tint = items['tint'][tier]
                 end
             end
 
@@ -219,10 +208,10 @@ function main.EEE(source, tier)
                 if type(v) == 'table' then
                     if v.layers then
                         if v.layers[1] then
-                            v.layers[1].tint = tint[tier]
+                            v.layers[1].tint = items['tint'][tier]
 
                             if v.layers[1].hr_version then
-                                v.layers[1].hr_version.tint = tint[tier]
+                                v.layers[1].hr_version.tint = items['tint'][tier]
                             end
                         end
                     end
@@ -230,10 +219,10 @@ function main.EEE(source, tier)
                     for i=1, #v, 1 do
                         if v[i] and type(v[i]) == 'table' then
                             if v[i].layers and v[i].layers[1] then
-                                v[i].layers[1].tint = tint[tier]
+                                v[i].layers[1].tint = items['tint'][tier]
 
                                 if v[i].layers[1].hr_version then
-                                    v[i].layers[1].hr_version.tint = tint[tier]
+                                    v[i].layers[1].hr_version.tint = items['tint'][tier]
                                 end
                             end
                         end
@@ -248,10 +237,10 @@ function main.EEE(source, tier)
 
         while i < #item.idle_animation.layers do
             if item.idle_animation.layers[i] then
-                item.idle_animation.layers[i].tint = tint[tier]
+                item.idle_animation.layers[i].tint = items['tint'][tier]
 
                 if item.idle_animation.layers[i].hr_version then
-                    item.idle_animation.layers[i].hr_version.tint = tint[tier]
+                    item.idle_animation.layers[i].hr_version.tint = items['tint'][tier]
                 end
             end
 
@@ -267,10 +256,10 @@ function main.EEE(source, tier)
         if item[v['a']] and item[v['a']].layers then
             for i=1, v['n'], 1 do
                 if item[v['a']].layers[i] then
-                    item[v['a']].layers[i].tint = tint[tier]
+                    item[v['a']].layers[i].tint = items['tint'][tier]
 
                     if item[v['a']].layers[i].hr_version then
-                        item[v['a']].layers[i].hr_version.tint = tint[tier]
+                        item[v['a']].layers[i].hr_version.tint = items['tint'][tier]
                     end
                 end
             end
@@ -281,15 +270,15 @@ function main.EEE(source, tier)
         if item[e] and item[e].animation then
             for _, d in pairs(item[e].animation) do
                 if d.layers then
-                    d.layers[1].tint = tint[tier]
-                    d.layers[2].tint = tint[tier]
+                    d.layers[1].tint = items['tint'][tier]
+                    d.layers[2].tint = items['tint'][tier]
 
                     if d.layers[1].hr_version then
-                        d.layers[1].hr_version.tint = tint[tier]
+                        d.layers[1].hr_version.tint = items['tint'][tier]
                     end
 
                     if d.layers[2].hr_version then
-                        d.layers[2].hr_version.tint = tint[tier]
+                        d.layers[2].hr_version.tint = items['tint'][tier]
                     end
                 end
             end
@@ -297,10 +286,10 @@ function main.EEE(source, tier)
     end
 
     if item.base_picture and item.base_picture.sheets then
-        item.base_picture.sheets[1].tint = tint[tier]
+        item.base_picture.sheets[1].tint = items['tint'][tier]
 
         if item.base_picture.sheets[1].hr_version then
-            item.base_picture.sheets[1].hr_version.tint = tint[tier]
+            item.base_picture.sheets[1].hr_version.tint = items['tint'][tier]
         end
     end
 
@@ -391,14 +380,14 @@ function main.EEQ(source, tier)
         width = w * 32,
         height = h * 32,
         priority = 'medium',
-        tint = tint[tier],
+        tint = items['tint'][tier],
         hr_version = {
             filename = '__base__/graphics/equipment/hr-' .. source.graphics_name .. '.png',
             width = w * 64,
             height = h * 64,
             priority = 'medium',
             scale = 0.5,
-            tint = tint[tier]
+            tint = items['tint'][tier]
         }
     }
 
@@ -425,13 +414,13 @@ function main.EI(source, tier)
     end
 
     if item.icons and item.icons[1] then
-        item.icons[1].tint = tint[tier]
+        item.icons[1].tint = items['tint'][tier]
 
     elseif item.icon then
         item.icons = {
             {
                 icon = item.icon,
-                tint = tint[tier]
+                tint = items['tint'][tier]
             }
         }
 

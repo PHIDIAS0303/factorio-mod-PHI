@@ -111,7 +111,6 @@ if settings.startup['PHI-MI'].value then
         data.raw['pump']['pump'].fluid_box.height = 4 * settings.startup['PHI-MI-PIPE'].value
         data.raw['pump']['pump'].pumping_speed = 200 * settings.startup['PHI-MI-PIPE'].value
         data.raw['storage-tank']['storage-tank'].fluid_box.height = settings.startup['PHI-MI-PIPE'].value
-        -- data.raw['storage-tank']['storage-tank'].fluid_box.base_area = 500
     end
 
     if settings.startup['PHI-MI-ROBOT'].value then
@@ -119,15 +118,11 @@ if settings.startup['PHI-MI'].value then
         data.raw['construction-robot']['construction-robot'].max_health = 100 * settings.startup['PHI-MI-ROBOT'].value
         data.raw['construction-robot']['construction-robot'].max_payload_size = settings.startup['PHI-MI-ROBOT'].value
         data.raw['construction-robot']['construction-robot'].max_energy = (1.5 * settings.startup['PHI-MI-ROBOT'].value) .. 'MJ'
-        data.raw['construction-robot']['construction-robot'].energy_per_move = '2kJ'
-        data.raw['construction-robot']['construction-robot'].speed_multiplier_when_out_of_energy = 0.2 + (0.05 * (settings.startup['PHI-MI-ROBOT'].value))
 
         data.raw['logistic-robot']['logistic-robot'].speed = 0.06 * settings.startup['PHI-MI-ROBOT'].value
         data.raw['logistic-robot']['logistic-robot'].max_health = 100 * settings.startup['PHI-MI-ROBOT'].value
         data.raw['logistic-robot']['logistic-robot'].max_payload_size = settings.startup['PHI-MI-ROBOT'].value
         data.raw['logistic-robot']['logistic-robot'].max_energy = (1.5 * settings.startup['PHI-MI-ROBOT'].value) .. 'MJ'
-        data.raw['logistic-robot']['logistic-robot'].energy_per_move = '2kJ'
-        data.raw['logistic-robot']['logistic-robot'].speed_multiplier_when_out_of_energy = 0.2 + (0.05 * (settings.startup['PHI-MI-ROBOT'].value))
 
         data.raw['roboport']['roboport'].max_health = 500 * settings.startup['PHI-MI-ROBOT'].value
         data.raw['roboport']['roboport'].energy_usage = 50 * settings.startup['PHI-MI-ROBOT'].value .. 'kW'
@@ -224,15 +219,6 @@ if settings.startup['PHI-MI'].value then
             result = 'electric-boiler',
         }})
 
-        data:extend({{
-            type = 'recipe',
-            name = 'boiler-return',
-            energy_required = 2,
-            enabled = true,
-            ingredients = {{name='electric-boiler', amount=1}},
-            result = 'boiler',
-        }})
-
         -- electric boiler
         data.raw['boiler']['boiler'].fast_replaceable_group = 'boiler'
         data.raw['boiler']['electric-boiler'].fast_replaceable_group = data.raw['boiler']['electric-boiler'].fast_replaceable_group
@@ -278,33 +264,16 @@ if settings.startup['PHI-MI'].value then
                 ingredients = {{chests[i], 1}},
                 result = 'basic-' .. chests[i],
             }})
-
-            data:extend({{
-                type = 'recipe',
-                name = 'basic-' .. chests[i] .. '-return',
-                energy_required = 2,
-                enabled = false,
-                ingredients = {{'basic-' .. chests[i], 1}},
-                result = chests[i],
-            }})
         end
 
         table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='basic-steel-chest'})
-        table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='basic-steel-chest-return'})
         table.insert(data.raw.technology['construction-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-passive-provider'})
         table.insert(data.raw.technology['construction-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-storage'})
-        table.insert(data.raw.technology['construction-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-passive-provider-return'})
-        table.insert(data.raw.technology['construction-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-storage-return'})
         table.insert(data.raw.technology['logistic-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-passive-provider'})
         table.insert(data.raw.technology['logistic-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-storage'})
-        table.insert(data.raw.technology['logistic-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-passive-provider-return'})
-        table.insert(data.raw.technology['logistic-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-storage-return'})
         table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-active-provider'})
         table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-buffer'})
         table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-requester'})
-        table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-active-provider-return'})
-        table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-buffer-return'})
-        table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-requester-return'})
     end
 end
 

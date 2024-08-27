@@ -45,7 +45,21 @@ if settings.startup['PHI-CT'].value then
         local item = table.deepcopy(data.raw['item']['offshore-pump'])
         item.name = 'oil-pump'
         item.place_result = 'oil-pump'
-        item.order = 'b[fluids]-a[offshore-pump]-2'
+        item.order = 'b[fluids]-a[offshore-pump]-o'
+
+        item.icons = {
+            {
+                icon = item.icon,
+                tint = items['tint'][2],
+                icon_size = item.icon_size,
+                icon_mipmaps = item.icon_mipmaps
+            }
+        }
+
+        item.icon = nil
+        item.icon_size = nil
+        item.icon_mipmaps = nil
+
         data:extend({item})
 
         local entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
@@ -71,6 +85,19 @@ if settings.startup['PHI-CT'].value then
         item.name = 'super-radar'
         item.place_result = 'super-radar'
         item.order = 'd[radar]-b[radar]'
+
+        item.icons = {
+            {
+                icon = item.icon,
+                tint = items['tint'][8],
+                icon_size = item.icon_size,
+                icon_mipmaps = item.icon_mipmaps
+            }
+        }
+
+        item.icon = nil
+        item.icon_size = nil
+        item.icon_mipmaps = nil
         data:extend({item})
 
         local entity = table.deepcopy(data.raw['radar']['radar'])
@@ -78,6 +105,8 @@ if settings.startup['PHI-CT'].value then
         entity.minable.result = 'super-radar'
         entity.max_distance_of_sector_revealed = 30
         entity.max_distance_of_nearby_sector_revealed = 30
+        entity.pictures.layers[1].tint = items['tint'][8]
+        entity.pictures.layers[1].hr_version.tint = items['tint'][8]
         entity.se_allow_in_space = true
         data:extend({entity})
 
@@ -96,6 +125,19 @@ if settings.startup['PHI-CT'].value then
         item.name = 'trash-chest'
         item.place_result = 'trash-chest'
         item.order = 'b[storage]-e[trash-chest]'
+
+        item.icons = {
+            {
+                icon = item.icon,
+                tint = items['tint'][8],
+                icon_size = item.icon_size,
+                icon_mipmaps = item.icon_mipmaps
+            }
+        }
+
+        item.icon = nil
+        item.icon_size = nil
+        item.icon_mipmaps = nil
         data:extend({item})
 
         local entity = table.deepcopy(data.raw['container']['steel-chest'])
@@ -109,6 +151,8 @@ if settings.startup['PHI-CT'].value then
         entity.logistic_mode = nil
         entity.next_upgrade = nil
         entity.fast_replaceable_group = nil
+        entity.picture.layers[1].tint = items['tint'][8]
+        entity.picture.layers[1].hr_version.tint = items['tint'][8]
         entity.se_allow_in_space = true
         data:extend({entity})
 
@@ -121,22 +165,25 @@ if settings.startup['PHI-CT'].value then
             result = 'trash-chest'
         }})
 
-        data:extend({{
-            type = 'recipe',
-            name = 'trash-chest-return',
-            energy_required = 2,
-            enabled = true,
-            ingredients = {{'trash-chest', 1}},
-            result = 'steel-chest'
-        }})
-
         table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='trash-chest'})
-        table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='trash-chest-return'})
 
         item = table.deepcopy(data.raw['item']['pipe'])
         item.name = 'trash-pipe'
         item.place_result = 'trash-pipe'
         item.order = 'a[pipe]-c[trash-pipe]'
+
+        item.icons = {
+            {
+                icon = item.icon,
+                tint = items['tint'][8],
+                icon_size = item.icon_size,
+                icon_mipmaps = item.icon_mipmaps
+            }
+        }
+
+        item.icon = nil
+        item.icon_size = nil
+        item.icon_mipmaps = nil
         data:extend({item})
 
         entity = table.deepcopy(data.raw['pipe']['pipe'])
@@ -148,6 +195,15 @@ if settings.startup['PHI-CT'].value then
         entity.erase_contents_when_mined = true
         entity.next_upgrade = nil
         entity.fast_replaceable_group = nil
+
+        for _, v in pairs(entity.pictures) do
+            v.tint = items['tint'][8]
+
+            if v.hr_version then
+                v.hr_version.tint = items['tint'][8]
+            end
+        end
+
         entity.se_allow_in_space = true
         data:extend({entity})
 
@@ -160,17 +216,7 @@ if settings.startup['PHI-CT'].value then
             result = 'trash-pipe'
         }})
 
-        data:extend({{
-            type = 'recipe',
-            name = 'trash-pipe-return',
-            energy_required = 2,
-            enabled = true,
-            ingredients = {{'trash-pipe', 1}},
-            result = 'iron-plate'
-        }})
-
         table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe='trash-pipe'})
-        table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe='trash-pipe-return'})
     end
 
     if settings.startup['PHI-CT-MINER'].value then
@@ -227,17 +273,7 @@ if settings.startup['PHI-CT'].value then
             result = 'linked-chest'
         }})
 
-        data:extend({{
-            type = 'recipe',
-            name = 'linked-chest-return',
-            energy_required = 2,
-            enabled = false,
-            ingredients = {{'linked-chest', 1}},
-            result = 'steel-chest'
-        }})
-
         table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='linked-chest'})
-        table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='linked-chest-return'})
     end
 
     if settings.startup['PHI-CT-LOADER'].value then
