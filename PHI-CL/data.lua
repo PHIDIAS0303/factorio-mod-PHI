@@ -81,6 +81,13 @@ if settings.startup['PHI-CT'].value then
             end
         end
     end
+
+    if settings.startup['PHI-CT-LAMP'].value then
+        data.raw['lamp']['small-lamp'].darkness_for_all_lamps_on = 0
+        data.raw['lamp']['small-lamp'].darkness_for_all_lamps_off = nil
+        table.insert(data.raw['lamp']['small-lamp'].signal_to_color_mapping, {type='virtual', name='signal-grey', color={r=128, g=128, b=128}})
+        table.insert(data.raw['lamp']['small-lamp'].signal_to_color_mapping, {type='virtual', name='signal-black', color={r=0, g=0, b=0}})
+    end
 end
 
 if settings.startup['PHI-MI'].value then

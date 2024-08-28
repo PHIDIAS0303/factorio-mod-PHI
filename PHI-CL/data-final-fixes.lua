@@ -4,10 +4,6 @@ local file_stage = 3
 
 data.raw['utility-constants'].default.zoom_to_world_effect_strength = 0
 data.raw['utility-constants'].default.zoom_to_world_can_use_nightvision = true
-data.raw['lamp']['small-lamp'].darkness_for_all_lamps_on = 0
-data.raw['lamp']['small-lamp'].darkness_for_all_lamps_off = 0
-table.insert(data.raw['lamp']['small-lamp'].signal_to_color_mapping, {type='virtual', name='signal-grey', color={r=128, g=128, b=128}})
-table.insert(data.raw['lamp']['small-lamp'].signal_to_color_mapping, {type='virtual', name='signal-black', color={r=0, g=0, b=0}})
 
 for _,name in pairs({'furnace', 'lab', 'beacon'}) do
 	local entities = {}

@@ -504,6 +504,12 @@ data:extend({
     order = 'JA08'
   }, {
     type = 'bool-setting',
+    name = 'PHI-CT-LAMP',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'JA09'
+  }, {
+    type = 'bool-setting',
     name = 'PHI-CT-TILE',
     setting_type = 'startup',
     default_value = true,
