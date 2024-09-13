@@ -1,9 +1,12 @@
-local items = require 'config'
-local main = require 'main'
-local file_stage = 3
+-- local items = require 'config'
+-- local main = require 'main'
+-- local file_stage = 3
 
 data.raw['utility-constants'].default.zoom_to_world_effect_strength = 0
 data.raw['utility-constants'].default.zoom_to_world_can_use_nightvision = true
+
+data.raw['arithmetic-combinator']['arithmetic-combinator'].energy_source.usage_priority = 'primary-input'
+data.raw['decider-combinator']['decider-combinator'].energy_source.usage_priority = 'primary-input'
 
 for _,name in pairs({'furnace', 'lab', 'beacon'}) do
 	local entities = {}
@@ -17,7 +20,7 @@ for _,name in pairs({'furnace', 'lab', 'beacon'}) do
 	end
 end
 
-if settings.startup['PHI-CT-TILE'].value then
+if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TILE'].value then
 	for _, tile in pairs (data.raw.tile) do
 		tile.autoplace = nil
 	end

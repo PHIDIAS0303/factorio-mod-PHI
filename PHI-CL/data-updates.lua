@@ -30,7 +30,7 @@ if settings.startup['PHI-XW-WATER'].value > 0 then
     end
 end
 
-if settings.startup['PHI-EQ-ARMOR'].value then
+if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value then
     data:extend({
         {
             type = 'equipment-grid',
@@ -321,7 +321,7 @@ if settings.startup['PHI-RS'].value then
     end
 end
 
-if settings.startup['PHI-MI-PIPE'].value then
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
     for k, _ in pairs(data.raw) do
         if data.raw[k] then
             if data.raw[k].fluid_box then
@@ -361,50 +361,66 @@ if settings.startup['PHI-MI-PIPE'].value then
     end
 end
 
-if settings.startup['PHI-MB'].value and mods['space-exploration'] then
-    if settings.startup['PHI-MB-MINING-TIER'].value > 1 then
-        data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'se-core-miner-drill'
+if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.startup['PHI-MB-MINING-TIER'].value > 1 then
+    data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'se-core-miner-drill'
 
-        local se = {
-            type = 'mining-drill',
-            name = 'se-core-miner-drill',
-            ref_name = 'se-core-miner-drill',
-            min = 2,
-            max = 3
+    local se = {
+        type = 'mining-drill',
+        name = 'se-core-miner-drill',
+        ref_name = 'se-core-miner-drill',
+        min = 2,
+        max = 3
+    }
+
+    for i=2, settings.startup['PHI-MB-MINING-TIER'].value do
+        local miner_name = 'se-core-miner-' .. i
+        local drill_name = 'se-core-miner-drill-' .. i
+
+        main.EEE(se, i)
+        data.raw['mining-drill'][drill_name].minable.result = miner_name
+        data.raw['mining-drill'][drill_name].placeable_by.item = miner_name
+
+        local item = table.deepcopy(data.raw['item']['se-core-miner'])
+        item.name = 'se-core-miner-' .. i
+        item.place_result = drill_name
+        item.order = 'zzzz-core-miner-' .. i
+
+        item.icons = {
+            {
+                icon = '__space-exploration-graphics__/graphics/icons/core-miner.png',
+                tint = items['tint'][i],
+                icon_size = 64,
+            }
         }
 
-        for i=2, settings.startup['PHI-MB-MINING-TIER'].value do
-            local miner_name = 'se-core-miner-' .. i
-            local drill_name = 'se-core-miner-drill-' .. i
+        item.icon = nil
+        item.icon_size = nil
 
-            main.EEE(se, i)
-            data.raw['mining-drill'][drill_name].minable.result = miner_name
-            data.raw['mining-drill'][drill_name].placeable_by.item = miner_name
+        data:extend({item})
 
-            local item = table.deepcopy(data.raw['item']['se-core-miner'])
-            item.name = 'se-core-miner-' .. i
-            item.place_result = drill_name
-            item.order = 'zzzz-core-miner-' .. i
-            data:extend({item})
-
-            local ing_n = 'se-core-miner'
-
-            if i > 2 then
-                ing_n = ing_n .. '-' .. i
-            end
-
+        if i > 2 then
             data:extend({{
                 type = 'recipe',
                 name = miner_name,
                 energy_required = 2,
                 enabled = false,
-                ingredients = {{ing_n, 2}},
+                ingredients = {{name='se-core-miner-' .. (i - 1), amount=1}, {name='se-core-miner', amount=1}},
                 result = miner_name
             }})
 
-            data.raw['mining-drill'][drill_name].fast_replaceable_group = data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group
-            table.insert(data.raw.technology['se-core-miner'].effects, {type='unlock-recipe', recipe=miner_name})
+        else
+            data:extend({{
+                type = 'recipe',
+                name = miner_name,
+                energy_required = 2,
+                enabled = false,
+                ingredients = {{name='se-core-miner', amount=2}},
+                result = miner_name
+            }})
         end
+
+        data.raw['mining-drill'][drill_name].fast_replaceable_group = data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group
+        table.insert(data.raw.technology['se-core-miner'].effects, {type='unlock-recipe', recipe=miner_name})
     end
 end
 
