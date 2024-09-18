@@ -1,4 +1,5 @@
 local items = require 'config'
+local graphics_location = '__PHI-CL__/graphics/'
 local main = require 'main'
 local file_stage = 1
 
@@ -367,7 +368,7 @@ end
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRAIN'].value then
     local item = table.deepcopy(data.raw['item']['used-up-uranium-fuel-cell'])
     item.name = 'empty-train-battery'
-    item.icon = '__PHI-CL__/graphics/battery.png'
+    item.icon = graphics_location .. 'battery.png'
     item.order = 'qa'
     item.stack_size = 100
     data:extend({item})
@@ -377,7 +378,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRAIN'].value t
         name = 'empty-train-battery',
         energy_required = 30,
         enabled = true,
-        icon = '__PHI-CL__/graphics/battery.png',
+        icon = graphics_location .. 'battery.png',
         icon_size = 64,
         icon_mipmaps = 4,
         subgroup = 'intermediate-product',
@@ -401,7 +402,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRAIN'].value t
     item.name = 'charged-train-battery'
     item.burnt_result = 'empty-train-battery'
     item.fuel_value = '1GJ'
-    item.icon = '__PHI-CL__/graphics/battery.png'
+    item.icon = graphics_location .. 'battery.png'
     item.order = 'qb'
     item.stack_size = 10
     data:extend({item})
@@ -411,7 +412,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRAIN'].value t
         name = 'charged-train-battery',
         energy_required = 60,
         enabled = true,
-        icon = '__PHI-CL__/graphics/battery.png',
+        icon = graphics_location .. 'battery.png',
         icon_size = 64,
         icon_mipmaps = 4,
         subgroup = 'intermediate-product',
@@ -616,7 +617,7 @@ end
 
 for _, v in pairs(items['item']) do
     if v.stage == file_stage then
-        if v['setting'] then
+        if v.enabled and v['setting'] then
             local v2 = settings.startup[v['setting']].value
 
             if v2 >= v.min then
@@ -637,7 +638,7 @@ end
 
 for _, v in pairs(items['equipment']) do
     if v.stage == file_stage then
-        if v['setting'] then
+        if v.enabled and v['setting'] then
             local v2 = settings.startup[v['setting']].value
 
             if v2 >= v.min then
