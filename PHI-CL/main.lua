@@ -47,12 +47,9 @@ function main.EEE(source, tier)
     end
 
     if item.energy_usage then
-        if source.ref_name ~= 'se-core-miner-drill' then
-            item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
-
-        else
-            item.energy_usage = tonumber(string.match(item.energy_usage, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'MW'
-        end
+        local eu = tonumber(string.match(item.energy_usage, '[%d%.]+'))
+        local euu = string.match(item.energy_usage, '%a+')
+        item.energy_usage = eu * (2 ^ (tier - source.min + 1)) .. euu
     end
 
     if (source.type == 'electric-turret') or (source.type == 'ammo-turret') or (source.type == 'fluid-turret') then
@@ -145,8 +142,14 @@ function main.EEE(source, tier)
                 item.fluid_box.height = settings.startup['PHI-MI-PIPE'].value
             end
 
-            item.maximum_temperature = 15 + (source.base * tier)
-            item.fluid_usage_per_tick = source.fluid
+            if source.name == 'kr-gas-power-station' then
+                item.fluid_usage_per_tick = source.base * tier
+                item.max_power_output = (tonumber(string.match(item.max_power_output, '[%d%.]+')) * (tier - source.min + 2)) .. 'kW'
+
+            else
+                item.maximum_temperature = 15 + (source.base * tier)
+                item.fluid_usage_per_tick = source.fluid
+            end
 
         elseif (source.type == 'reactor') then
             item.consumption = source.base * tier .. 'MW'

@@ -75,13 +75,6 @@ data:extend({
     allowed_values = {1, 2, 3},
     order = 'B06'
   }, {
-    type = 'int-setting',
-    name = 'PHI-MB-SE-ASSEMBLING-TIER',
-    setting_type = 'startup',
-    default_value = 3,
-    allowed_values = {1, 2, 3},
-    order = 'B07'
-  }, {
     type = 'bool-setting',
     name = 'PHI-WE',
     setting_type = 'startup',
@@ -270,19 +263,13 @@ data:extend({
     allowed_values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
     order = 'F02'
   }, {
-    type = 'bool-setting',
-    name = 'PHI-RS-MODULE',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'F03'
-  }, {
     type = 'int-setting',
     name = 'PHI-RS-RECIPE-DROF',
     setting_type = 'startup',
     default_value = 1,
     minimum_value = 1,
     maximum_value = 100,
-    order = 'F04'
+    order = 'F03'
   }, {
     type = 'int-setting',
     name = 'PHI-RS-RECIPE-MINROM',
@@ -290,7 +277,7 @@ data:extend({
     default_value = 2,
     minimum_value = 1,
     maximum_value = 100,
-    order = 'F05'
+    order = 'F04'
   }, {
     type = 'int-setting',
     name = 'PHI-RS-RECIPE-MAXROM',
@@ -298,12 +285,18 @@ data:extend({
     default_value = 100,
     minimum_value = 1,
     maximum_value = 100,
+    order = 'F05'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-RS-MODULE',
+    setting_type = 'startup',
+    default_value = true,
     order = 'F06'
   }, {
     type = 'int-setting',
     name = 'PHI-XW-WATER',
     setting_type = 'startup',
-    default_value = 0,
+    default_value = 1,
     allowed_values = {0, 1, 2, 3, 4, 5},
     order = 'G00'
   }, {
@@ -366,8 +359,8 @@ data:extend({
     minimum_value = 0,
     maximum_value = 20,
     order = 'IA06'
-  }, 
-    --[[ {
+  },
+  --[[ {
     type = 'int-setting',
     name = 'PHI-PB-FMMS',
     setting_type = 'startup',
@@ -461,58 +454,64 @@ data:extend({
     order = 'J02'
   }, {
     type = 'bool-setting',
-    name = 'PHI-CT-TRASH',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'J03'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-CT-MINER',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'J04'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-CT-LINKED',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'J05'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-CT-LOADER',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'J06'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-CT-RECIPE',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'J07'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-CT-ENERGY',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'J08'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-CT-LAMP',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'J09'
-  }, {
-    type = 'bool-setting',
     name = 'PHI-CT-TILE',
     setting_type = 'startup',
     default_value = true,
-    order = 'J10'
+    order = 'J03'
   }, {
     type = 'string-setting',
     name = 'PHI-CT-TILE-CHOICE',
     setting_type = 'startup',
     default_value = 'grass-1',
     allowed_values = {'concrete', 'deepwater', 'deepwater-green', 'dirt-1', 'dirt-2', 'dirt-3', 'dirt-4', 'dirt-5', 'dirt-6', 'dirt-7', 'dry-dirt', 'grass-1', 'grass-2', 'grass-3', 'grass-4', 'hazard-concrete-left', 'hazard-concrete-right', 'lab-dark-1', 'lab-dark-2', 'lab-white', 'landfill', 'out-of-map', 'red-desert-0', 'red-desert-1', 'red-desert-2', 'red-desert-3', 'refined-concrete', 'refined-hazard-concrete-left', 'refined-hazard-concrete-right', 'sand-1', 'sand-2', 'sand-3', 'stone-path', 'tutorial-grid', 'water', 'water-green', 'water-mud', 'water-shallow'},
+    order = 'J04'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-CT-TRASH',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'J05'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-CT-MINER',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'J06'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-CT-LINKED',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'J07'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-CT-LOADER',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'J08'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-CT-RECIPE',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'J09'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-CT-ENERGY',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'J10'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-CT-LAMP',
+    setting_type = 'startup',
+    default_value = true,
     order = 'J11'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-CT-TRAIN',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'J12'
   }
 })

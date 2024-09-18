@@ -142,17 +142,7 @@ if settings.startup['PHI-RS'].value then
         result = 'electric-filter-furnace',
     }})
 
-    data:extend({{
-        type = 'recipe',
-        name = 'electric-furnace-return',
-        energy_required = 2,
-        enabled = false,
-        ingredients = {{name='electric-filter-furnace', amount=1}},
-        result = 'electric-furnace',
-    }})
-
     table.insert(data.raw.technology[items['item']['electric-filter-furnace'].tech].effects, {type='unlock-recipe', recipe='electric-filter-furnace'})
-    table.insert(data.raw.technology[items['item']['electric-filter-furnace'].tech].effects, {type='unlock-recipe', recipe='electric-furnace-return'})
     data.raw['furnace']['electric-furnace'].fast_replaceable_group = 'electric-furnace'
     data.raw['assembling-machine']['electric-filter-furnace'].fast_replaceable_group = data.raw['furnace']['electric-furnace'].fast_replaceable_group
     data.raw['assembling-machine']['electric-filter-furnace'].crafting_categories = data.raw['furnace']['electric-furnace'].crafting_categories
@@ -206,16 +196,10 @@ if settings.startup['PHI-RS'].value then
                     item = table.deepcopy(data.raw.recipe[k])
                     item.enabled = false
                     item.name = k .. '-s' .. j
-                    item.hide_from_player_crafting = true
-
-                    if item.energy_required then
-                        item.energy_required = item.energy_required * recipe_multiplier[j]
-
-                    else
-                        item.energy_required = recipe_multiplier[j]
-                    end
 
                     if item.normal then
+                        item.normal.hide_from_player_crafting = true
+
                         if item.normal.ingredients then
                             for ik, iv in pairs(item.normal.ingredients) do
                                 if iv[1] and iv[2] then
@@ -245,9 +229,28 @@ if settings.startup['PHI-RS'].value then
                                 item.normal.result_count = recipe_multiplier[j]
                             end
                         end
+
+                        if item.normal.energy_required then
+                            item.normal.energy_required = item.normal.energy_required * recipe_multiplier[j]
+
+                        else
+                            item.normal.energy_required = recipe_multiplier[j]
+                        end
+
+                    else
+                        item.hide_from_player_crafting = true
+
+                        if item.energy_required then
+                            item.energy_required = item.energy_required * recipe_multiplier[j]
+
+                        else
+                            item.energy_required = recipe_multiplier[j]
+                        end
                     end
 
                     if item.expensive then
+                        item.expensive.hide_from_player_crafting = true
+
                         if item.expensive.ingredients then
                             for ik, iv in pairs(item.expensive.ingredients) do
                                 if iv[1] and iv[2] then
@@ -276,6 +279,13 @@ if settings.startup['PHI-RS'].value then
                             else
                                 item.expensive.result_count = recipe_multiplier[j]
                             end
+                        end
+
+                        if item.expensive.energy_required then
+                            item.expensive.energy_required = item.expensive.energy_required * recipe_multiplier[j]
+
+                        else
+                            item.expensive.energy_required = recipe_multiplier[j]
                         end
                     end
 

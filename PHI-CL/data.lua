@@ -76,8 +76,8 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-RADAR'].value t
     local entity = table.deepcopy(data.raw['radar']['radar'])
     entity.name = 'super-radar'
     entity.minable.result = 'super-radar'
-    entity.max_distance_of_sector_revealed = 30
-    entity.max_distance_of_nearby_sector_revealed = 30
+    entity.max_distance_of_sector_revealed = 35
+    entity.max_distance_of_nearby_sector_revealed = 35
     entity.pictures.layers[1].tint = items['tint'][8]
     entity.pictures.layers[1].hr_version.tint = items['tint'][8]
     entity.se_allow_in_space = true
@@ -293,23 +293,8 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-RECIPE'].value 
         results = {
             {
                 name = 'wood',
-                probability = 0.5,
-                amount = 10
-            },
-            {
-                name = 'wood',
-                probability = 0.5,
-                amount = 10
-            },
-            {
-                name = 'wood',
-                probability = 0.5,
-                amount = 10
-            },
-            {
-                name = 'wood',
-                probability = 0.5,
-                amount = 10
+                amount_min = 5,
+                amount_max = 40
             }
         }
     }})
@@ -328,28 +313,13 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-RECIPE'].value 
         results = {
             {
                 name = 'raw-fish',
-                probability = 0.5,
-                amount = 10
-            },
-            {
-                name = 'raw-fish',
-                probability = 0.5,
-                amount = 10
-            },
-            {
-                name = 'raw-fish',
-                probability = 0.5,
-                amount = 10
-            },
-            {
-                name = 'raw-fish',
-                probability = 0.5,
-                amount = 10
+                amount_min = 5,
+                amount_max = 40
             }
         }
     }})
 
-    for k, v in pairs(data.raw.module) do
+    for _, v in pairs(data.raw.module) do
         if v.limitation and string.find(v.name, 'productivity', 1, true) then
             table.insert(v.limitation, 'wood-production')
             table.insert(v.limitation, 'fish-production')
@@ -394,6 +364,76 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-LAMP'].value th
     data.raw['lamp']['small-lamp'].always_on = true
     table.insert(data.raw['lamp']['small-lamp'].signal_to_color_mapping, {type='virtual', name='signal-grey', color={r=128, g=128, b=128}})
     table.insert(data.raw['lamp']['small-lamp'].signal_to_color_mapping, {type='virtual', name='signal-black', color={r=0, g=0, b=0}})
+end
+
+if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRAIN'].value then
+    local item = table.deepcopy(data.raw['item']['used-up-uranium-fuel-cell'])
+    item.name = 'empty-train-battery'
+    item.icon = '__PHI-CL__/graphics/battery.png'
+    item.order = 'qa'
+    item.stack_size = 100
+    data:extend({item})
+
+    data:extend({{
+        type = 'recipe',
+        name = 'empty-train-battery',
+        energy_required = 30,
+        enabled = true,
+        icon = '__PHI-CL__/graphics/battery.png',
+        icon_size = 64,
+        icon_mipmaps = 4,
+        subgroup = 'intermediate-product',
+        order = 'zc',
+        ingredients = {{'battery', 50}},
+        results = {
+            {
+                name = 'empty-train-battery',
+                amount = 1
+            }
+        }
+    }})
+
+    for _, v in pairs(data.raw.module) do
+        if v.limitation and string.find(v.name, 'productivity', 1, true) then
+            table.insert(v.limitation, 'empty-train-battery')
+        end
+    end
+
+    item = table.deepcopy(data.raw['item']['nuclear-fuel'])
+    item.name = 'charged-train-battery'
+    item.burnt_result = 'empty-train-battery'
+    item.fuel_value = '1GJ'
+    item.icon = '__PHI-CL__/graphics/battery.png'
+    item.order = 'qb'
+    item.stack_size = 10
+    data:extend({item})
+
+    data:extend({{
+        type = 'recipe',
+        name = 'charged-train-battery',
+        energy_required = 60,
+        enabled = true,
+        icon = '__PHI-CL__/graphics/battery.png',
+        icon_size = 64,
+        icon_mipmaps = 4,
+        subgroup = 'intermediate-product',
+        order = 'zd',
+        ingredients = {{'empty-train-battery', 1}},
+        results = {
+            {
+                name = 'charged-train-battery',
+                probability = 0.995,
+                amount = 1
+            },
+            {
+                name = 'battery',
+                probability = 0.005,
+                amount = 5
+            }
+        }
+    }})
+
+    data.raw['locomotive']['locomotive'].burner.burnt_inventory_size = 1
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-REPAIR'].value then
@@ -465,7 +505,6 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value th
     data.raw['locomotive']['locomotive'].friction_force = 0.50 - (0.05 * settings.startup['PHI-MI-TRAIN'].value)
     data.raw['locomotive']['locomotive'].air_resistance = 0.0075 - (0.0007 * settings.startup['PHI-MI-TRAIN'].value)
     data.raw['locomotive']['locomotive'].burner.effectivity = 0.5 + (0.5 * settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['locomotive']['locomotive'].burner.fuel_inventory_size = 3
 
     data.raw['cargo-wagon']['cargo-wagon'].max_health = 300 * (1 + settings.startup['PHI-MI-TRAIN'].value)
     data.raw['cargo-wagon']['cargo-wagon'].max_speed = 0.6 * (2 + settings.startup['PHI-MI-TRAIN'].value)
