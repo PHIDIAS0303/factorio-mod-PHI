@@ -95,7 +95,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRASH'].value t
     local item = table.deepcopy(data.raw['item']['steel-chest'])
     item.name = 'trash-chest'
     item.place_result = 'trash-chest'
-    item.order = 'b[storage]-e[trash-chest]'
+    item.order = 'b[storage]-h[trash-chest]'
 
     item.icons = {
         {
@@ -585,7 +585,7 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value t
 
         item.name = 'basic-' .. chests[i]
         item.place_result = 'basic-' .. chests[i]
-        item.order = 'b[storage]-e[basic-' .. chests[i] .. ']'
+        item.order = 'b[storage]-h[basic-' .. chests[i] .. ']'
         data:extend({item})
 
         entity.inventory_type = 'with_filters_and_bar'
@@ -616,8 +616,8 @@ end
 
 for _, v in pairs(items['item']) do
     if v.stage == file_stage then
-        if items['item']['setting'] then
-            local v2 = settings.startup[items['item']['setting']].value
+        if v['setting'] then
+            local v2 = settings.startup[v['setting']].value
 
             if v2 >= v.min then
                 v.category = 'item'
@@ -637,8 +637,8 @@ end
 
 for _, v in pairs(items['equipment']) do
     if v.stage == file_stage then
-        if items['item']['setting'] then
-            local v2 = settings.startup[items['item']['setting']].value
+        if v['setting'] then
+            local v2 = settings.startup[v['setting']].value
 
             if v2 >= v.min then
                 v.category = 'equipment'

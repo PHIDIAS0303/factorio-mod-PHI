@@ -392,8 +392,8 @@ end
 
 for _, v in pairs(items['item']) do
     if v.stage == file_stage then
-        if items['item']['setting'] then
-            local v2 = settings.startup[items['item']['setting']].value
+        if v['setting'] then
+            local v2 = settings.startup[v['setting']].value
 
             if v2 >= v.min then
                 v.category = 'item'
@@ -413,8 +413,8 @@ end
 
 for _, v in pairs(items['equipment']) do
     if v.stage == file_stage then
-        if items['item']['setting'] then
-            local v2 = settings.startup[items['item']['setting']].value
+        if v['setting'] then
+            local v2 = settings.startup[v['setting']].value
 
             if v2 >= v.min then
                 v.category = 'equipment'
