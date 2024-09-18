@@ -4,8 +4,6 @@ local file_stage = 1
 
 if settings.startup['PHI-XW-WATER'].value > 0 then
     data.raw['offshore-pump']['offshore-pump'].pumping_speed = settings.startup['PHI-XW-WATER'].value * 20
-    data.raw['offshore-pump']['offshore-pump'].fluid_box.height = 4
-    data.raw['offshore-pump']['offshore-pump'].fluid_box.level = 5
     data.raw['offshore-pump']['offshore-pump'].flags = {'placeable-neutral', 'player-creation'}
     data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_box = {{-0.5, -0.25}, {0.5, 0.25}}
     data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
@@ -456,12 +454,8 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-NUCLEAR'].value
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
-    data.raw['pipe']['pipe'].fluid_box.height = settings.startup['PHI-MI-PIPE'].value
-    data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.height = settings.startup['PHI-MI-PIPE'].value
-    data.raw['pipe-to-ground']['pipe-to-ground'].fluid_box.pipe_connections = {{position = {0, -1}}, {position = {0, 1}, max_underground_distance = 10}}
     data.raw['pump']['pump'].fluid_box.height = 4 * settings.startup['PHI-MI-PIPE'].value
     data.raw['pump']['pump'].pumping_speed = 200 * settings.startup['PHI-MI-PIPE'].value
-    data.raw['storage-tank']['storage-tank'].fluid_box.height = settings.startup['PHI-MI-PIPE'].value
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-ROBOT'].value then
@@ -496,33 +490,33 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-ROBOT'].value t
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
-    data.raw['locomotive']['locomotive'].max_health = 500 * (1 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['locomotive']['locomotive'].max_speed = 0.6 * (1 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['locomotive']['locomotive'].max_power = (600 * settings.startup['PHI-MI-TRAIN'].value) .. 'kW'
+    data.raw['locomotive']['locomotive'].max_health = 250 * (3 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw['locomotive']['locomotive'].max_speed = 0.3 * (3 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw['locomotive']['locomotive'].max_power = 300 * (1 + settings.startup['PHI-MI-TRAIN'].value) .. 'kW'
     data.raw['locomotive']['locomotive'].reversing_power_modifier = 1
-    data.raw['locomotive']['locomotive'].energy_per_hit_point = 4 + settings.startup['PHI-MI-TRAIN'].value
-    data.raw['locomotive']['locomotive'].braking_force = 5 * (1 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw['locomotive']['locomotive'].energy_per_hit_point = 2.5 * (1 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw['locomotive']['locomotive'].braking_force = 1.25 * (7 + settings.startup['PHI-MI-TRAIN'].value)
     data.raw['locomotive']['locomotive'].friction_force = 0.50 - (0.05 * settings.startup['PHI-MI-TRAIN'].value)
     data.raw['locomotive']['locomotive'].air_resistance = 0.0075 - (0.0007 * settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['locomotive']['locomotive'].burner.effectivity = 0.5 + (0.5 * settings.startup['PHI-MI-TRAIN'].value)
+    data.raw['locomotive']['locomotive'].burner.effectivity = 0.10 * (9 + settings.startup['PHI-MI-TRAIN'].value)
 
-    data.raw['cargo-wagon']['cargo-wagon'].max_health = 300 * (1 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw['cargo-wagon']['cargo-wagon'].max_health = 200 * (2 + settings.startup['PHI-MI-TRAIN'].value)
     data.raw['cargo-wagon']['cargo-wagon'].max_speed = 0.6 * (2 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['cargo-wagon']['cargo-wagon'].braking_force = 1.5 * (1 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw['cargo-wagon']['cargo-wagon'].braking_force = 1 * (2 + settings.startup['PHI-MI-TRAIN'].value)
     data.raw['cargo-wagon']['cargo-wagon'].friction_force = 0.50 - (0.05 * settings.startup['PHI-MI-TRAIN'].value)
     data.raw['cargo-wagon']['cargo-wagon'].air_resistance = 0.01 - (0.001 * settings.startup['PHI-MI-TRAIN'].value)
     data.raw['cargo-wagon']['cargo-wagon'].inventory_size = 5 * (7 + settings.startup['PHI-MI-TRAIN'].value)
 
-    data.raw['fluid-wagon']['fluid-wagon'].max_health = 300 * (1 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw['fluid-wagon']['fluid-wagon'].max_health = 200 * (2 + settings.startup['PHI-MI-TRAIN'].value)
     data.raw['fluid-wagon']['fluid-wagon'].max_speed = 0.6 * (2 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['fluid-wagon']['fluid-wagon'].braking_force = 1.5 * (1 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw['fluid-wagon']['fluid-wagon'].braking_force = 1 * (2 + settings.startup['PHI-MI-TRAIN'].value)
     data.raw['fluid-wagon']['fluid-wagon'].friction_force = 0.50 - (0.05 * settings.startup['PHI-MI-TRAIN'].value)
     data.raw['fluid-wagon']['fluid-wagon'].air_resistance = 0.01 - (0.001 * settings.startup['PHI-MI-TRAIN'].value)
     data.raw['fluid-wagon']['fluid-wagon'].capacity = 3125 * (7 + settings.startup['PHI-MI-TRAIN'].value)
 
-    data.raw['artillery-wagon']['artillery-wagon'].max_health = 300 * (1 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw['artillery-wagon']['artillery-wagon'].max_health = 200 * (2 + settings.startup['PHI-MI-TRAIN'].value)
     data.raw['artillery-wagon']['artillery-wagon'].max_speed = 0.6 * (2 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['artillery-wagon']['artillery-wagon'].braking_force = 1.5 * (1 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw['artillery-wagon']['artillery-wagon'].braking_force = 1 * (2 + settings.startup['PHI-MI-TRAIN'].value)
     data.raw['artillery-wagon']['artillery-wagon'].friction_force = 0.50 - (0.05 * settings.startup['PHI-MI-TRAIN'].value)
     data.raw['artillery-wagon']['artillery-wagon'].air_resistance = 0.015 - (0.0015 * settings.startup['PHI-MI-TRAIN'].value)
     data.raw['artillery-wagon']['artillery-wagon'].turret_rotation_speed = 0.0005 * (1 + settings.startup['PHI-MI-TRAIN'].value)
@@ -539,12 +533,6 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value th
     entity.name = 'electric-boiler'
     entity.energy_consumption = '7200kW'
     entity.target_temperature = 165
-
-    if settings.startup['PHI-MI-PIPE'].value then
-        entity.fluid_box.height = settings.startup['PHI-MI-PIPE'].value
-        entity.output_fluid_box.height = settings.startup['PHI-MI-PIPE'].value
-        entity.output_fluid_box.base_level = entity.output_fluid_box.base_level + settings.startup['PHI-MI-PIPE'].value
-    end
 
     entity.minable = {hardness = 0.2, mining_time = 0.5, result = 'electric-boiler'}
     entity.emissions_per_minute = 0
@@ -597,7 +585,7 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value t
 
         item.name = 'basic-' .. chests[i]
         item.place_result = 'basic-' .. chests[i]
-        item.order = 'b[storage]-d[basic-' .. item.order .. ']'
+        item.order = 'b[storage]-e[basic-' .. chests[i] .. ']'
         data:extend({item})
 
         entity.inventory_type = 'with_filters_and_bar'
@@ -626,45 +614,41 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value t
     table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-requester'})
 end
 
-for k, v in pairs(items['setting']) do
-    for k2=1, #v.effect do
-        if items[v.effect[k2]] then
-            if settings.startup[k].value < items[v.effect[k2]].min then
-                items[v.effect[k2]].enabled = false
-            end
-
-            items[v.effect[k2]][v.type] = settings.startup[k].value
-        end
-    end
-end
-
 for _, v in pairs(items['item']) do
-    if v.enabled then
-        if v.stage == file_stage then
-            v.category = 'item'
+    if v.stage == file_stage then
+        if items['item']['setting'] then
+            local v2 = settings.startup[items['item']['setting']].value
 
-            for j=v.min, v.max, 1 do
-                main.EEE(v, j)
-                main.EI(v, j)
-                main.ER(v, j)
-                main.ET(v, j)
+            if v2 >= v.min then
+                v.category = 'item'
+
+                for j=v.min, v2, 1 do
+                    main.EEE(v, j)
+                    main.EI(v, j)
+                    main.ER(v, j)
+                    main.ET(v, j)
+                end
+
+                main.EL(v)
             end
-
-            main.EL(v)
         end
     end
 end
 
 for _, v in pairs(items['equipment']) do
-    if v.enabled then
-        if v.stage == file_stage then
-            v.category = 'equipment'
+    if v.stage == file_stage then
+        if items['item']['setting'] then
+            local v2 = settings.startup[items['item']['setting']].value
 
-            for j=v.min, v.max, 1 do
-                main.EEQ(v, j)
-                main.EI(v, j)
-                main.ER(v, j)
-                main.ET(v, j)
+            if v2 >= v.min then
+                v.category = 'equipment'
+
+                for j=v.min, v2, 1 do
+                    main.EEQ(v, j)
+                    main.EI(v, j)
+                    main.ER(v, j)
+                    main.ET(v, j)
+                end
             end
         end
     end

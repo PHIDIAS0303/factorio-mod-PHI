@@ -1,146 +1,4 @@
 local items = {
-    ['setting'] = {
-        ['PHI-EN-SOLAR-TIER'] = {
-            type = 'max',
-            effect = {
-                'solar-panel',
-                'accumulator'
-            }
-        },
-        ['PHI-EN-STEAM-TIER'] = {
-            type = 'max',
-            effect = {
-                'boiler',
-                'steam-engine'
-            }
-        },
-        ['PHI-EN-NUCLEAR-TIER'] = {
-            type = 'max',
-            effect = {
-                'nuclear-reactor',
-                'heat-pipe',
-                'heat-exchanger',
-                'steam-turbine'
-            }
-        },
-        ['PHI-MB-ASSEMBLING-TIER'] = {
-            type = 'max',
-            effect = {
-                'assembling-machine'
-            }
-        },
-        ['PHI-MB-FURNACE-TIER'] = {
-            type = 'max',
-            effect = {
-                'electric-furnace',
-                'electric-filter-furnace',
-                'industrial-furnace'
-            }
-        },
-        ['PHI-MB-OIL-TIER'] = {
-            type = 'max',
-            effect = {
-                'oil-refinery',
-                'chemical-plant',
-                'fuel-processor',
-                'se-fuel-refinery'
-            }
-        },
-        ['PHI-MB-CENTRIFUGE-TIER'] = {
-            type = 'max',
-            effect = {
-                'centrifuge'
-                }
-        },
-        ['PHI-MB-LAB-TIER'] = {
-            type = 'max',
-            effect = {
-                'lab',
-                'se-space-science-lab'
-                }
-        },
-        ['PHI-MB-MINING-TIER'] = {
-            type = 'max',
-            effect = {
-                'electric-mining-drill',
-                'pumpjack',
-                'area-mining-drill',
-                'se-core-miner'
-                }
-        },
-        ['PHI-WE-LASER-TIER'] = {
-            type = 'max',
-            effect = {
-                'laser-turret'
-            }
-        },
-        ['PHI-WE-FLAME-TIER'] = {
-            type = 'max',
-            effect = {
-                'flamethrower-turret'
-            }
-        },
-        ['PHI-WE-GUN-TIER'] = {
-            type = 'max',
-            effect = {
-                'gun-turret'
-        }
-        },
-        ['PHI-WE-RADAR-TIER'] = {
-            type = 'max',
-            effect = {
-                'radar'
-            }
-        },
-        ['PHI-EQ-SOLAR-TIER'] = {
-            type = 'max',
-            effect = {
-                'solar-panel'
-            }
-        },
-        ['PHI-EQ-BATTERY-TIER'] = {
-            type = 'max',
-            effect = {
-                'battery'
-            }
-        },
-        ['PHI-EQ-REACTOR-TIER'] = {
-            type = 'max',
-            effect = {
-                'fusion-reactor'
-            }
-        },
-        ['PHI-EQ-LASER-TIER'] = {
-            type = 'max',
-            effect = {
-                'personal-laser-defense'
-            }
-        },
-        ['PHI-EQ-ROBOPORT-TIER'] = {
-            type = 'max',
-            effect = {
-                'personal-roboport'
-            }
-        },
-        ['PHI-EQ-SHIELD-TIER'] = {
-            type = 'max',
-            effect = {
-                'energy-shield'
-            }
-        },
-        ['PHI-EQ-NIGHT-TIER'] = {
-            type = 'max',
-            effect = {
-                'night-vision'
-            }
-        },
-        ['PHI-EQ-EXO-TIER'] = {
-            type = 'max',
-            effect = {
-                'exoskeleton'
-            }
-        }
-    },
     ['research_modifier'] = {
         --[[
         ['electric-turret'] = {
@@ -191,7 +49,8 @@ local items = {
             tech = 'compound-energy',
             min = 2,
             max = 8,
-            base = 60
+            base = 60,
+            setting = 'PHI-EN-SOLAR-TIER'
         },
         ['accumulator'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -202,7 +61,8 @@ local items = {
             tech = 'compound-energy',
             min = 2,
             max = 8,
-            base = 5
+            base = 5,
+            setting = 'PHI-EN-SOLAR-TIER'
         },
         ['boiler'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -215,7 +75,8 @@ local items = {
             max = 5,
             base = 1800,
             temp = 150,
-            fluid = 1
+            fluid = 1,
+            setting = 'PHI-EN-STEAM-TIER'
         },
         ['steam-engine'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -227,7 +88,8 @@ local items = {
             min = 2,
             max = 5,
             base = 150,
-            fluid = 1 / 2
+            fluid = 1 / 2,
+            setting = 'PHI-EN-STEAM-TIER'
         },
         ['nuclear-reactor'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -240,7 +102,8 @@ local items = {
             max = 5,
             base = 40,
             bonus = 1,
-            temp = 500
+            temp = 500,
+            setting = 'PHI-EN-NUCLEAR-TIER'
         },
         ['heat-pipe'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -251,7 +114,8 @@ local items = {
             tech = 'compound-energy',
             min = 2,
             max = 5,
-            temp = 500
+            temp = 500,
+            setting = 'PHI-EN-NUCLEAR-TIER'
         },
         ['heat-exchanger'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -264,7 +128,8 @@ local items = {
             max = 5,
             base = 10000,
             temp = 485,
-            fluid = 103 / 60
+            fluid = 103 / 60,
+            setting = 'PHI-EN-NUCLEAR-TIER'
         },
         ['steam-turbine'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -276,7 +141,8 @@ local items = {
             min = 2,
             max = 5,
             base = 485,
-            fluid = 1
+            fluid = 1,
+            setting = 'PHI-EN-NUCLEAR-TIER'
         },
         ['assembling-machine'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -286,7 +152,8 @@ local items = {
             ref_name = 'assembling-machine-3',
             tech = 'automation-3',
             min = 4,
-            max = 5
+            max = 5,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         },
         ['electric-furnace'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -296,7 +163,8 @@ local items = {
             ref_name = 'electric-furnace',
             tech = 'advanced-material-processing-2',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-FURNACE-TIER'
         },
         ['oil-refinery'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -306,7 +174,8 @@ local items = {
             ref_name = 'oil-refinery',
             tech = 'oil-processing',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-OIL-TIER'
         },
         ['chemical-plant'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -316,7 +185,8 @@ local items = {
             ref_name = 'chemical-plant',
             tech = 'oil-processing',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-OIL-TIER'
         },
         ['centrifuge'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -326,7 +196,8 @@ local items = {
             ref_name = 'centrifuge',
             tech = 'uranium-processing',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-CENTRIFUGE-TIER'
         },
         ['lab'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -336,7 +207,8 @@ local items = {
             ref_name = 'lab',
             tech = 'automation',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-LAB-TIER'
         },
         ['electric-mining-drill'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -346,7 +218,8 @@ local items = {
             ref_name = 'electric-mining-drill',
             tech = 'automation',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-MINING-TIER'
         },
         ['pumpjack'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -356,7 +229,8 @@ local items = {
             ref_name = 'pumpjack',
             tech = 'automation',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-MINING-TIER'
         },
         ['electric-filter-furnace'] = {
             enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-RS'].value,
@@ -366,7 +240,8 @@ local items = {
             ref_name = 'electric-filter-furnace',
             tech = 'advanced-material-processing-2',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-FURNACE-TIER'
         },
         ['laser-turret'] = {
             enabled = settings.startup['PHI-WE'].value,
@@ -377,18 +252,8 @@ local items = {
             tech = 'laser-turret',
             min = 2,
             max = 3,
-            range = 24
-        },
-        ['gun-turret'] = {
-            enabled = settings.startup['PHI-WE'].value,
-            stage = 1,
-            type = 'ammo-turret',
-            name = 'gun-turret',
-            ref_name = 'gun-turret',
-            tech = 'gun-turret',
-            min = 2,
-            max = 3,
-            range = 18
+            range = 24,
+            setting = 'PHI-WE-LASER-TIER'
         },
         ['flamethrower-turret'] = {
             enabled = settings.startup['PHI-WE'].value,
@@ -399,7 +264,20 @@ local items = {
             tech = 'flamethrower',
             min = 2,
             max = 3,
-            range = 30
+            range = 30,
+            setting = 'PHI-WE-FLAME-TIER'
+        },
+        ['gun-turret'] = {
+            enabled = settings.startup['PHI-WE'].value,
+            stage = 1,
+            type = 'ammo-turret',
+            name = 'gun-turret',
+            ref_name = 'gun-turret',
+            tech = 'gun-turret',
+            min = 2,
+            max = 3,
+            range = 18,
+            setting = 'PHI-WE-GUN-TIER'
         },
         ['radar'] = {
             enabled = settings.startup['PHI-WE'].value,
@@ -409,7 +287,8 @@ local items = {
             ref_name = 'radar',
             tech = 'automation',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-WE-RADAR-TIER'
         }
     },
     ['equipment'] = {
@@ -423,7 +302,8 @@ local items = {
             min = 2,
             max = 8,
             base = 30,
-            graphics_name = 'solar-panel-equipment'
+            graphics_name = 'solar-panel-equipment',
+            setting = 'PHI-EQ-SOLAR-TIER'
         },
         ['fusion-reactor-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -435,7 +315,8 @@ local items = {
             min = 2,
             max = 8,
             base = 750,
-            graphics_name = 'fusion-reactor-equipment'
+            graphics_name = 'fusion-reactor-equipment',
+            setting = 'PHI-EQ-REACTOR-TIER'
         },
         ['battery-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -447,7 +328,8 @@ local items = {
             min = 3,
             max = 8,
             base = 100,
-            graphics_name = 'battery-mk2-equipment'
+            graphics_name = 'battery-mk2-equipment',
+            setting = 'PHI-EQ-BATTERY-TIER'
         },
         ['personal-laser-defense-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -459,7 +341,8 @@ local items = {
             min = 2,
             max = 8,
             base = 3,
-            graphics_name = 'personal-laser-defense-equipment'
+            graphics_name = 'personal-laser-defense-equipment',
+            setting = 'PHI-EQ-LASER-TIER'
         },
         ['energy-shield-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -471,7 +354,8 @@ local items = {
             min = 3,
             max = 8,
             base = 150,
-            graphics_name = 'energy-shield-mk2-equipment'
+            graphics_name = 'energy-shield-mk2-equipment',
+            setting = 'PHI-EQ-SHIELD-TIER'
         },
         ['personal-roboport-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -483,7 +367,8 @@ local items = {
             min = 3,
             max = 8,
             base = 0.5,
-            graphics_name = 'personal-roboport-mk2-equipment'
+            graphics_name = 'personal-roboport-mk2-equipment',
+            setting = 'PHI-EQ-ROBOPORT-TIER'
         },
         ['night-vision-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -494,7 +379,8 @@ local items = {
             tech = 'night-vision-equipment',
             min = 2,
             max = 2,
-            graphics_name = 'night-vision-equipment'
+            graphics_name = 'night-vision-equipment',
+            setting = 'PHI-EQ-NIGHT-TIER'
         },
         ['exoskeleton-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -506,7 +392,8 @@ local items = {
             min = 2,
             max = 2,
             base = 0.6,
-            graphics_name = 'exoskeleton-equipment'
+            graphics_name = 'exoskeleton-equipment',
+            setting = 'PHI-EQ-EXO-TIER'
         }
     },
     ['bonus'] = {
@@ -849,7 +736,8 @@ if mods then
             ref_name = 'industrial-furnace',
             tech = 'industrial-furnace',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-FURNACE-TIER'
         }
 
         items['item']['fuel-processor'] = {
@@ -860,7 +748,8 @@ if mods then
             ref_name = 'fuel-processor',
             tech = 'fuel-processing',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-OIL-TIER'
         }
     end
 
@@ -873,7 +762,8 @@ if mods then
             ref_name = 'area-mining-drill',
             tech = 'area-mining-drill',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-MINING-TIER'
         }
     end
 
@@ -908,7 +798,8 @@ if mods then
             tech = 'compound-energy',
             min = 2,
             max = 5,
-            base = 0.1
+            base = 0.1,
+            setting = 'PHI-EN-STEAM-TIER'
         }
 
         items['item']['kr-crusher'] = {
@@ -919,7 +810,8 @@ if mods then
             ref_name = 'kr-crusher',
             tech = 'kr-crusher',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['kr-fluid-burner'] = {
@@ -930,7 +822,8 @@ if mods then
             ref_name = 'kr-fluid-burner',
             tech = 'kr-fluid-excess-handling',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['kr-air-purifier'] = {
@@ -941,7 +834,8 @@ if mods then
             ref_name = 'kr-air-purifier',
             tech = 'kr-air-purification',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['kr-advanced-furnace'] = {
@@ -952,7 +846,8 @@ if mods then
             ref_name = 'kr-advanced-furnace',
             tech = 'kr-advanced-furnace',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-FURNACE-TIER'
         }
 
         items['item']['kr-advanced-chemical-plant'] = {
@@ -963,7 +858,8 @@ if mods then
             ref_name = 'kr-advanced-chemical-plant',
             tech = 'kr-advanced-chemical-plant',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-OIL-TIER'
         }
 
         items['item']['kr-advanced-assembling-machine'] = {
@@ -974,7 +870,8 @@ if mods then
             ref_name = 'kr-advanced-assembling-machine',
             tech = 'kr-automation',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['kr-greenhouse'] = {
@@ -985,7 +882,8 @@ if mods then
             ref_name = 'kr-greenhouse',
             tech = 'kr-greenhouse',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['kr-bio-lab'] = {
@@ -996,7 +894,8 @@ if mods then
             ref_name = 'kr-bio-lab',
             tech = 'kr-bio-processing',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['kr-electrolysis-plant'] = {
@@ -1007,7 +906,8 @@ if mods then
             ref_name = 'kr-electrolysis-plant',
             tech = 'kr-fluids-chemistry',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['kr-filtration-plant'] = {
@@ -1018,7 +918,8 @@ if mods then
             ref_name = 'kr-filtration-plant',
             tech = 'kr-fluids-chemistry',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['kr-fuel-refinery'] = {
@@ -1029,7 +930,8 @@ if mods then
             ref_name = 'kr-fuel-refinery',
             tech = 'kr-fuel',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['kr-atmospheric-condenser'] = {
@@ -1040,7 +942,8 @@ if mods then
             ref_name = 'kr-atmospheric-condenser',
             tech = 'kr-atmosphere-condensation',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['kr-advanced-lab'] = {
@@ -1051,7 +954,8 @@ if mods then
             ref_name = 'biusart-lab',
             tech = 'kr-advanced-lab',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-LAB-TIER'
         }
 
         items['item']['kr-singularity-lab'] = {
@@ -1062,7 +966,8 @@ if mods then
             ref_name = 'kr-singularity-lab',
             tech = 'kr-singularity-lab',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-LAB-TIER'
         }
 
         items['item']['kr-research-server'] = {
@@ -1073,7 +978,8 @@ if mods then
             ref_name = 'kr-research-server',
             tech = 'kr-research-server',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['kr-quantum-computer'] = {
@@ -1084,7 +990,8 @@ if mods then
             ref_name = 'kr-quantum-computer',
             tech = 'kr-quantum-computer',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['kr-matter-plant'] = {
@@ -1095,7 +1002,8 @@ if mods then
             ref_name = 'kr-matter-plant',
             tech = 'kr-matter-processing',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['kr-matter-assembler'] = {
@@ -1106,7 +1014,8 @@ if mods then
             ref_name = 'kr-matter-assembler',
             tech = 'kr-matter-processing',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['kr-quarry-drill'] = {
@@ -1117,7 +1026,8 @@ if mods then
             ref_name = 'kr-quarry-drill',
             tech = 'kr-quarry-minerals-extraction',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-MINING-TIER'
         }
     end
 
@@ -1136,7 +1046,8 @@ if mods then
             tech = 'compound-energy',
             min = 4,
             max = 8,
-            base = 400
+            base = 400,
+            setting = 'PHI-EN-SOLAR-TIER'
         }
 
         items['item']['se-space-assembling-machine'] = {
@@ -1147,7 +1058,8 @@ if mods then
             ref_name = 'se-space-assembling-machine',
             tech = 'se-space-assembling',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-manufactory'] = {
@@ -1158,7 +1070,8 @@ if mods then
             ref_name = 'se-space-manufactory',
             tech = 'se-space-manufactory',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-casting-machine'] = {
@@ -1169,7 +1082,8 @@ if mods then
             ref_name = 'se-casting-machine',
             tech = 'se-pyroflux-smelting',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-pulveriser'] = {
@@ -1180,7 +1094,8 @@ if mods then
             ref_name = 'se-pulveriser',
             tech = 'se-pulveriser',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-lifesupport-facility'] = {
@@ -1191,7 +1106,8 @@ if mods then
             ref_name = 'se-lifesupport-facility',
             tech = 'se-lifesupport-facility',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-fuel-refinery'] = {
@@ -1202,7 +1118,8 @@ if mods then
             ref_name = 'se-fuel-refinery',
             tech = 'se-fuel-refining',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-OIL-TIER'
         }
 
         items['item']['se-space-decontamination-facility'] = {
@@ -1213,7 +1130,8 @@ if mods then
             ref_name = 'se-space-decontamination-facility',
             tech = 'se-space-decontamination-facility',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-genetics-laboratory'] = {
@@ -1224,7 +1142,8 @@ if mods then
             ref_name = 'se-space-genetics-laboratory',
             tech = 'se-space-genetics-laboratory',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-growth-facility'] = {
@@ -1235,7 +1154,8 @@ if mods then
             ref_name = 'se-space-growth-facility',
             tech = 'se-space-growth-facility',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-biochemical-laboratory'] = {
@@ -1246,7 +1166,8 @@ if mods then
             ref_name = 'se-space-biochemical-laboratory',
             tech = 'se-space-biochemical-laboratory',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-radiation-laboratory'] = {
@@ -1257,7 +1178,8 @@ if mods then
             ref_name = 'se-space-radiation-laboratory',
             tech = 'se-space-radiation-laboratory',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-electromagnetics-laboratory'] = {
@@ -1268,7 +1190,8 @@ if mods then
             ref_name = 'se-space-electromagnetics-laboratory',
             tech = 'se-space-electromagnetics-laboratory',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-laser-laboratory'] = {
@@ -1279,7 +1202,8 @@ if mods then
             ref_name = 'se-space-laser-laboratory',
             tech = 'se-space-laser-laboratory',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-astrometrics-laboratory'] = {
@@ -1290,7 +1214,8 @@ if mods then
             ref_name = 'se-space-astrometrics-laboratory',
             tech = 'se-space-astrometrics-laboratory',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-gravimetrics-laboratory'] = {
@@ -1301,7 +1226,8 @@ if mods then
             ref_name = 'se-space-gravimetrics-laboratory',
             tech = 'se-space-gravimetrics-laboratory',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-mechanical-laboratory'] = {
@@ -1312,7 +1238,8 @@ if mods then
             ref_name = 'se-space-mechanical-laboratory',
             tech = 'se-space-mechanical-laboratory',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-material-fabricator'] = {
@@ -1323,7 +1250,8 @@ if mods then
             ref_name = 'se-space-material-fabricator',
             tech = 'se-space-material-fabricator',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-particle-accelerator'] = {
@@ -1334,7 +1262,8 @@ if mods then
             ref_name = 'se-space-particle-accelerator',
             tech = 'se-space-particle-accelerator',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-particle-collider'] = {
@@ -1345,7 +1274,8 @@ if mods then
             ref_name = 'se-space-particle-collider',
             tech = 'se-space-particle-collider',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-plasma-generator'] = {
@@ -1356,7 +1286,8 @@ if mods then
             ref_name = 'se-space-plasma-generator',
             tech = 'se-space-plasma-generator',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-hypercooler'] = {
@@ -1367,7 +1298,8 @@ if mods then
             ref_name = 'se-space-hypercooler',
             tech = 'se-space-hypercooling-1',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-radiator'] = {
@@ -1378,7 +1310,8 @@ if mods then
             ref_name = 'se-space-radiator-2',
             tech = 'se-space-radiator-2',
             min = 3,
-            max = 4
+            max = 4,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-telescope'] = {
@@ -1389,7 +1322,8 @@ if mods then
             ref_name = 'se-space-telescope',
             tech = 'se-space-telescope',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-telescope-gammaray'] = {
@@ -1400,7 +1334,8 @@ if mods then
             ref_name = 'se-space-telescope-gammaray',
             tech = 'se-space-telescope-gammaray',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-telescope-microwave'] = {
@@ -1411,7 +1346,8 @@ if mods then
             ref_name = 'se-space-telescope-microwave',
             tech = 'se-space-telescope-microwave',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-telescope-radio'] = {
@@ -1422,7 +1358,8 @@ if mods then
             ref_name = 'se-space-telescope-radio',
             tech = 'se-space-telescope-radio',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-telescope-xray'] = {
@@ -1433,7 +1370,8 @@ if mods then
             ref_name = 'se-space-telescope-xray',
             tech = 'se-space-telescope-xray',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-ASSEMBLING-TIER'
         }
 
         items['item']['se-space-science-lab'] = {
@@ -1444,7 +1382,8 @@ if mods then
             ref_name = 'se-space-science-lab',
             tech = 'se-space-science-lab',
             min = 2,
-            max = 3
+            max = 3,
+            setting = 'PHI-MB-LAB-TIER'
         }
 
         items['equipment']['solar-panel-equipment'].base = 30

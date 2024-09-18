@@ -7,9 +7,14 @@ local entity_tint = {
     'picture',
     'pictures',
     'animation',
+    'horizontal_animation',
     'vertical_animation',
     'structure',
+    'connection_sprites',
     'heat_glow_sprites',
+    'heat_connection_patches_connected',
+    'heat_connection_patches_disconnected',
+    'lower_layer_picture',
     'integration_patch'
 }
 

@@ -8,9 +8,7 @@ end
 
 if settings.startup['PHI-XW-WATER'].value > 0 then
     if mods['angelsrefining'] then
-        data.raw['offshore-pump']['seafloor-pump'].pumping_speed = settings.startup['PHI-XW-WATER'].value * 20
-        data.raw['offshore-pump']['seafloor-pump'].fluid_box.height = 4
-        data.raw['offshore-pump']['seafloor-pump'].fluid_box.level = 5
+        data.raw['offshore-pump']['seafloor-pump'].pumping_speed = settings.startup['PHI-XW-WATER'].value * 2
         data.raw['offshore-pump']['seafloor-pump'].flags = {'placeable-neutral', 'player-creation', 'filter-directions'}
         data.raw['offshore-pump']['seafloor-pump'].adjacent_tile_collision_box = {{-2, -3}, {2, -2}}
         data.raw['offshore-pump']['seafloor-pump'].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
@@ -20,8 +18,6 @@ if settings.startup['PHI-XW-WATER'].value > 0 then
 
     if mods['exotic-industries'] then
         data.raw['offshore-pump']['ei_gaia-pump'].pumping_speed = settings.startup['PHI-XW-WATER'].value * 20
-        data.raw['offshore-pump']['ei_gaia-pump'].fluid_box.height = 4
-        data.raw['offshore-pump']['ei_gaia-pump'].fluid_box.level = 5
         data.raw['offshore-pump']['ei_gaia-pump'].flags = {'placeable-neutral', 'player-creation'}
         data.raw['offshore-pump']['ei_gaia-pump'].adjacent_tile_collision_box = {{-0.5, -0.25}, {0.5, 0.25}}
         data.raw['offshore-pump']['ei_gaia-pump'].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
@@ -331,46 +327,6 @@ if settings.startup['PHI-RS'].value then
     end
 end
 
-if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
-    for k, _ in pairs(data.raw) do
-        if data.raw[k] then
-            if data.raw[k].fluid_box then
-                if data.raw[k].fluid_box.height < settings.startup['PHI-MI-PIPE'].value then
-                    data.raw[k].fluid_box.height = settings.startup['PHI-MI-PIPE'].value
-                end
-
-                if data.raw[k].fluid_box.base_level < (1 + settings.startup['PHI-MI-PIPE'].value) then
-                    data.raw[k].fluid_box.base_level = 1 + settings.startup['PHI-MI-PIPE'].value
-                end
-            end
-
-            if data.raw[k].output_fluid_box then
-                if data.raw[k].output_fluid_box.height < settings.startup['PHI-MI-PIPE'].value then
-                    data.raw[k].output_fluid_box.height = settings.startup['PHI-MI-PIPE'].value
-                end
-
-                if data.raw[k].output_fluid_box.base_level > (-1 - settings.startup['PHI-MI-PIPE'].value) then
-                    data.raw[k].output_fluid_box.base_level = (-1 - settings.startup['PHI-MI-PIPE'].value)
-                end
-            end
-
-            if data.raw[k].fluid_boxes then
-                for k1, _ in pairs(data.raw[k].fluid_boxes) do
-                    if data.raw[k].fluid_boxes[k1] ~= false and data.raw[k].fluid_boxes[k1] ~= true then
-                        if data.raw[k].fluid_boxes[k1].production_type then
-                            data.raw[k].fluid_boxes[k1].height = settings.startup['PHI-MI-PIPE'].value
-
-                            if data.raw[k].fluid_boxes[k1].base_level then
-                                data.raw[k].fluid_boxes[k1].base_level = 1 + settings.startup['PHI-MI-PIPE'].value
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
-end
-
 if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.startup['PHI-MB-MINING-TIER'].value > 1 then
     data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'se-core-miner-drill'
 
@@ -435,32 +391,40 @@ if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.s
 end
 
 for _, v in pairs(items['item']) do
-    if v.enabled then
-        if v.stage == file_stage then
-            v.category = 'item'
+    if v.stage == file_stage then
+        if items['item']['setting'] then
+            local v2 = settings.startup[items['item']['setting']].value
 
-            for j=v.min, v.max, 1 do
-                main.EEE(v, j)
-                main.EI(v, j)
-                main.ER(v, j)
-                main.ET(v, j)
+            if v2 >= v.min then
+                v.category = 'item'
+
+                for j=v.min, v2, 1 do
+                    main.EEE(v, j)
+                    main.EI(v, j)
+                    main.ER(v, j)
+                    main.ET(v, j)
+                end
+
+                main.EL(v)
             end
-
-            main.EL(v)
         end
     end
 end
 
 for _, v in pairs(items['equipment']) do
-    if v.enabled then
-        if v.stage == file_stage then
-            v.category = 'equipment'
+    if v.stage == file_stage then
+        if items['item']['setting'] then
+            local v2 = settings.startup[items['item']['setting']].value
 
-            for j=v.min, v.max, 1 do
-                main.EEQ(v, j)
-                main.EI(v, j)
-                main.ER(v, j)
-                main.ET(v, j)
+            if v2 >= v.min then
+                v.category = 'equipment'
+
+                for j=v.min, v2, 1 do
+                    main.EEQ(v, j)
+                    main.EI(v, j)
+                    main.ER(v, j)
+                    main.ET(v, j)
+                end
             end
         end
     end

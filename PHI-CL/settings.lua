@@ -244,6 +244,12 @@ data:extend({
     order = 'E09'
   }, {
     type = 'bool-setting',
+    name = 'PHI-MI-ARTILLERY',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'E10'
+  }, {
+    type = 'bool-setting',
     name = 'PHI-RS',
     setting_type = 'startup',
     default_value = false,
