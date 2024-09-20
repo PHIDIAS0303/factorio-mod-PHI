@@ -58,19 +58,19 @@ function main.EEE(source, tier)
 
     if (source.type == 'electric-turret') or (source.type == 'ammo-turret') or (source.type == 'fluid-turret') then
         item.attack_parameters.damage_modifier = (2 ^ (tier - source.min + 1))
-        item.attack_parameters.range = source.range + (2 * (tier - source.min + 1))
-        item.call_for_help_radius = 40 + (2 * (tier - source.min + 1))
+        item.attack_parameters.range = item.attack_parameters.range + (2 * (tier - source.min))
+        item.call_for_help_radius = item.call_for_help_radius + (2 * (tier - source.min))
 
         if source.type == 'electric-turret' then
             item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * 2
             item.glow_light_intensity = 1
-            item.attack_parameters.ammo_type.action.action_delivery.max_length = source.range + (2 * (tier - source.min + 1))
-            item.attack_parameters.ammo_type.energy_consumption = tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kJ'
-            item.energy_source.input_flow_limit = tonumber(string.match(item.energy_source.input_flow_limit, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kW'
-            item.energy_source.buffer_capacity = tonumber(string.match(item.energy_source.buffer_capacity, '%d+')) * (2 ^ (tier - source.min + 1)) .. 'kJ'
+            item.attack_parameters.ammo_type.action.action_delivery.max_length = item.attack_parameters.ammo_type.action.action_delivery.max_length + (2 * (tier - source.min))
+            item.attack_parameters.ammo_type.energy_consumption = tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+')
+            item.energy_source.input_flow_limit = tonumber(string.match(item.energy_source.input_flow_limit, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_source.input_flow_limit, '%a+')
+            item.energy_source.buffer_capacity = tonumber(string.match(item.energy_source.buffer_capacity, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_source.buffer_capacity, '%a+')
 
         elseif source.type == 'fluid-turret' then
-            item.prepare_range = 35 + (2 * (tier - source.min + 1))
+            item.prepare_range = item.prepare_range + (2 * (tier - source.min))
         end
     end
 

@@ -36,8 +36,8 @@ data:extend({
     type = 'int-setting',
     name = 'PHI-MB-ASSEMBLING-TIER',
     setting_type = 'startup',
-    default_value = 5,
-    allowed_values = {3, 4, 5},
+    default_value = 3,
+    allowed_values = {1, 2, 3},
     order = 'B01'
   }, {
     type = 'int-setting',

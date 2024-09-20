@@ -22,15 +22,11 @@ end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-ARTILLERY'].value then
 	for _, v in pairs(data.raw['artillery-turret']) do
-		for _, v2 in pairs(v) do
-			v.manual_range_modifier = 1
-		end
+		v.manual_range_modifier = 1
 	end
 
 	for _, v in pairs(data.raw['artillery-wagon']) do
-		for _, v2 in pairs(v) do
-			v.manual_range_modifier = 1
-		end
+		v.manual_range_modifier = 1
 	end
 end
 

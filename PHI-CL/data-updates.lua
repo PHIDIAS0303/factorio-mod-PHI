@@ -391,41 +391,29 @@ if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.s
 end
 
 for _, v in pairs(items['item']) do
-    if v.stage == file_stage then
-        if v.enabled and v['setting'] then
-            local v2 = settings.startup[v['setting']].value
+    if (v.stage == file_stage) and v.enabled and (v.max >= v.min) then
+        v.category = 'item'
 
-            if v2 >= v.min then
-                v.category = 'item'
-
-                for j=v.min, v2, 1 do
-                    main.EEE(v, j)
-                    main.EI(v, j)
-                    main.ER(v, j)
-                    main.ET(v, j)
-                end
-
-                main.EL(v)
-            end
+        for j=v.min, v.max, 1 do
+            main.EEE(v, j)
+            main.EI(v, j)
+            main.ER(v, j)
+            main.ET(v, j)
         end
+
+        main.EL(v)
     end
 end
 
 for _, v in pairs(items['equipment']) do
-    if v.stage == file_stage then
-        if v.enabled and v['setting'] then
-            local v2 = settings.startup[v['setting']].value
+    if (v.stage == file_stage) and v.enabled and (v.max >= v.min) then
+        v.category = 'equipment'
 
-            if v2 >= v.min then
-                v.category = 'equipment'
-
-                for j=v.min, v2, 1 do
-                    main.EEQ(v, j)
-                    main.EI(v, j)
-                    main.ER(v, j)
-                    main.ET(v, j)
-                end
-            end
+        for j=v.min, v.max, 1 do
+            main.EEQ(v, j)
+            main.EI(v, j)
+            main.ER(v, j)
+            main.ET(v, j)
         end
     end
 end
