@@ -186,6 +186,16 @@ local items = {
             min = 2,
             max = settings.startup['PHI-MB-CENTRIFUGE-TIER'].value
         },
+        ['rocket-silo'] = {
+            enabled = settings.startup['PHI-MB'].value,
+            stage = 1,
+            type = 'rocket-silo',
+            name = 'rocket-silo',
+            ref_name = 'rocket-silo',
+            tech = 'rocket-silo',
+            min = 2,
+            max = settings.startup['PHI-MB-ASSEMBLING-TIER'].value
+        },
         ['lab'] = {
             enabled = settings.startup['PHI-MB'].value,
             stage = 1,

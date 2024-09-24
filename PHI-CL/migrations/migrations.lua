@@ -146,11 +146,18 @@ for _, force in pairs(game.forces) do
         recipes['electric-filter-furnace'].reload()
     end
 
-    if settings.startup['PHI-MB'].value and script.active_mods['space-exploration'] then
-        if technologies['se-core-miner'].researched then
-            for i=2, settings.startup['PHI-MB-MINING-TIER'].value do
-                recipes['se-core-miner-' .. i].enabled = true
-                recipes['se-core-miner-' .. i].reload()
+    if settings.startup['PHI-MB'].value then
+        recipes['satellite-2'].enabled = true
+        recipes['satellite-2'].reload()
+        recipes['satellite-3'].enabled = true
+        recipes['satellite-3'].reload()
+
+        if script.active_mods['space-exploration'] then
+            if technologies['se-core-miner'].researched then
+                for i=2, settings.startup['PHI-MB-MINING-TIER'].value do
+                    recipes['se-core-miner-' .. i].enabled = true
+                    recipes['se-core-miner-' .. i].reload()
+                end
             end
         end
     end

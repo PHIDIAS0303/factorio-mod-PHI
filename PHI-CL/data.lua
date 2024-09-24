@@ -403,7 +403,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRAIN'].value t
     item.burnt_result = 'empty-train-battery'
     item.fuel_value = '1GJ'
     item.icon = graphics_location .. 'battery.png'
-    item.order = 'qb'
     item.stack_size = 10
     data:extend({item})
 
@@ -416,7 +415,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRAIN'].value t
         icon_size = 64,
         icon_mipmaps = 4,
         subgroup = 'intermediate-product',
-        order = 'zd',
         ingredients = {{'empty-train-battery', 1}},
         results = {
             {
@@ -433,6 +431,54 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRAIN'].value t
     }})
 
     data.raw['locomotive']['locomotive'].burner.burnt_inventory_size = 1
+end
+
+if settings.startup['PHI-MB'].value then
+    local recipe_multiplier = {2, 4}
+
+    for j=1, #recipe_multiplier, 1 do
+        item = table.deepcopy(data.raw['item']['satellite'])
+        item.name = 'satellite-' .. (j + 1)
+        item.rocket_launch_product = {type='item', name='space-science-pack', amount=1000 * recipe_multiplier[j]}
+        item.icons = {
+            {
+                icon = '__base__/graphics/icons/satellite.png',
+                tint = items['tint'][j + 1],
+                icon_size = 64,
+                icon_mipmaps = 4
+            }
+        }
+        item.order = 'm[satellite]-' .. (j + 1)
+
+        data:extend({item})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'satellite-' .. (j + 1),
+            energy_required = 5 * recipe_multiplier[j],
+            enabled = false,
+            icon = '__base__/graphics/icons/satellite.png',
+            icon_size = 64,
+            icon_mipmaps = 4,
+            category = 'crafting',
+            ingredients = {
+                {'low-density-structure', 100 * recipe_multiplier[j]},
+                {'solar-panel', 100 * recipe_multiplier[j]},
+                {'accumulator', 100 * recipe_multiplier[j]},
+                {'radar', 5 * recipe_multiplier[j]},
+                {'processing-unit', 100 * recipe_multiplier[j]},
+                {'rocket-fuel', 50 * recipe_multiplier[j]}
+            },
+            results = {
+                {
+                    name = 'satellite-' .. (j + 1),
+                    amount = 1
+                }
+            }
+        }})
+
+        table.insert(data.raw.technology['space-science-pack'].effects, {type='unlock-recipe', recipe='satellite-' .. (j + 1)})
+    end
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-REPAIR'].value then
@@ -474,8 +520,9 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-ROBOT'].value t
     data.raw['roboport']['roboport'].energy_usage = 50 * settings.startup['PHI-MI-ROBOT'].value .. 'kW'
     data.raw['roboport']['roboport'].energy_source.input_flow_limit = (10 * settings.startup['PHI-MI-ROBOT'].value) .. 'MW'
     data.raw['roboport']['roboport'].energy_source.buffer_capacity = (200 * settings.startup['PHI-MI-ROBOT'].value) .. 'MJ'
-    data.raw['roboport']['roboport'].recharge_minimum = (80 * settings.startup['PHI-MI-ROBOT'].value) .. 'MJ'
+    data.raw['roboport']['roboport'].recharge_minimum = (40 * settings.startup['PHI-MI-ROBOT'].value) .. 'MJ'
     data.raw['roboport']['roboport'].charging_energy = (5 * settings.startup['PHI-MI-ROBOT'].value) .. 'MW'
+    data.raw['roboport']['roboport'].material_slots_count = 2
     -- data.raw['roboport']['roboport'].logistics_radius = 25
     -- data.raw['roboport']['roboport'].construction_radius = 55
     data.raw['roboport']['roboport'].charging_offsets = {
@@ -591,6 +638,7 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value t
 
         entity.inventory_type = 'with_filters_and_bar'
         entity.inventory_size = 1
+        entity.max_logistic_slots = 1
         entity.name = 'basic-' .. chests[i]
         entity.minable.result = 'basic-' .. chests[i]
         data:extend({entity})

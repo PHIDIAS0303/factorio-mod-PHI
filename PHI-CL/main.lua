@@ -164,6 +164,7 @@ function main.EEE(source, tier)
         elseif (source.type == 'heat-pipe') then
             item.heat_buffer.max_temperature = source.temp * (tier + 1)
             item.heat_buffer.max_transfer = source.temp * (tier + 1) * 0.01 .. 'GW'
+
         end
     end
 
@@ -176,6 +177,13 @@ function main.EEE(source, tier)
     elseif source.type == 'radar' then
         item.max_distance_of_sector_revealed = item.max_distance_of_sector_revealed + (2 * tier)
         item.max_distance_of_nearby_sector_revealed = item.max_distance_of_nearby_sector_revealed + (2 * tier)
+
+    elseif (source.type == 'rocket-silo') then
+        local eu = tonumber(string.match(item.active_energy_usage, '[%d%.]+'))
+        local euu = string.match(item.active_energy_usage, '%a+')
+        item.active_energy_usage = eu * (2 ^ (tier - source.min + 1)) .. euu
+        item.rocket_parts_required = 200 * (tier - source.min + 1)
+        item.rocket_result_inventory_size = math.ceil(data.raw['item']['satellite'].rocket_launch_product[2] * 3 * (tier - source.min + 1) / data.raw['tool']['space-science-pack'].stack_size)
     end
 
     if item.crafting_speed then
