@@ -434,51 +434,62 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRAIN'].value t
 end
 
 if settings.startup['PHI-MB'].value then
-    local recipe_multiplier = {2, 4}
-
-    for j=1, #recipe_multiplier, 1 do
-        item = table.deepcopy(data.raw['item']['satellite'])
-        item.name = 'satellite-' .. (j + 1)
-        item.rocket_launch_product = {type='item', name='space-science-pack', amount=1000 * recipe_multiplier[j]}
-        item.icons = {
-            {
-                icon = '__base__/graphics/icons/satellite.png',
-                tint = items['tint'][j + 1],
-                icon_size = 64,
-                icon_mipmaps = 4
-            }
-        }
-        item.order = 'm[satellite]-' .. (j + 1)
-
-        data:extend({item})
-
-        data:extend({{
-            type = 'recipe',
-            name = 'satellite-' .. (j + 1),
-            energy_required = 5 * recipe_multiplier[j],
-            enabled = false,
+    item = table.deepcopy(data.raw['item']['satellite'])
+    item.name = 'satellite-2'
+    item.rocket_launch_product = {type='item', name='space-science-pack', amount=2000}
+    item.icons = {
+        {
             icon = '__base__/graphics/icons/satellite.png',
+            tint = items['tint'][2],
             icon_size = 64,
-            icon_mipmaps = 4,
-            category = 'crafting',
-            ingredients = {
-                {'low-density-structure', 100 * recipe_multiplier[j]},
-                {'solar-panel', 100 * recipe_multiplier[j]},
-                {'accumulator', 100 * recipe_multiplier[j]},
-                {'radar', 5 * recipe_multiplier[j]},
-                {'processing-unit', 100 * recipe_multiplier[j]},
-                {'rocket-fuel', 50 * recipe_multiplier[j]}
-            },
-            results = {
-                {
-                    name = 'satellite-' .. (j + 1),
-                    amount = 1
-                }
-            }
-        }})
+            icon_mipmaps = 4
+        }
+    }
+    item.order = 'm[satellite]-2'
+    data:extend({item})
 
-        table.insert(data.raw.technology['space-science-pack'].effects, {type='unlock-recipe', recipe='satellite-' .. (j + 1)})
-    end
+    item = table.deepcopy(data.raw['item']['satellite'])
+    item.name = 'satellite-3'
+    item.rocket_launch_product = {type='item', name='space-science-pack', amount=4000}
+    item.icons = {
+        {
+            icon = '__base__/graphics/icons/satellite.png',
+            tint = items['tint'][3],
+            icon_size = 64,
+            icon_mipmaps = 4
+        }
+    }
+    item.order = 'm[satellite]-2'
+    data:extend({item})
+
+    data:extend({{
+        type = 'recipe',
+        name = 'satellite-2',
+        energy_required = 5,
+        enabled = false,
+        icon = '__base__/graphics/icons/satellite.png',
+        icon_size = 64,
+        icon_mipmaps = 4,
+        category = 'crafting',
+        ingredients = {{'satellite', 2}},
+        results = {{name = 'satellite-2', amount = 1}}
+    }})
+
+    data:extend({{
+        type = 'recipe',
+        name = 'satellite-3',
+        energy_required = 5,
+        enabled = false,
+        icon = '__base__/graphics/icons/satellite.png',
+        icon_size = 64,
+        icon_mipmaps = 4,
+        category = 'crafting',
+        ingredients = {{'satellite-2', 2}},
+        results = {{name = 'satellite-3', amount = 1}}
+    }})
+
+    table.insert(data.raw.technology['space-science-pack'].effects, {type='unlock-recipe', recipe='satellite-2'})
+    table.insert(data.raw.technology['space-science-pack'].effects, {type='unlock-recipe', recipe='satellite-3'})
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-REPAIR'].value then
