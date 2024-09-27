@@ -102,7 +102,7 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
         enabled = false,
         ingredients = {{name='power-armor-mk2', amount=2}},
         result = 'power-armor-mk3',
-        localised_name = {'name.power-armor-mk2'},
+        localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, 3},
         localised_description = {'description.power-armor-mk2'}
     }})
 
@@ -128,7 +128,7 @@ if settings.startup['PHI-RS'].value then
     item.localised_name = {'name.electric-filter-furnace'}
     item.localised_description = {'description.electric-filter-furnace'}
     data:extend({item})
-    
+
     local entity = table.deepcopy(data.raw['furnace']['electric-furnace'])
     entity.name = 'electric-filter-furnace'
     entity.minable.result = 'electric-filter-furnace'
