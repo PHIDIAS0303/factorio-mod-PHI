@@ -89,7 +89,9 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
             equipment_grid = 'equipment-grid-14x14',
             inventory_size_bonus = 40,
             open_sound = {filename =  '__base__/sound/armor-open.ogg', volume = 1},
-            close_sound = {filename = '__base__/sound/armor-close.ogg', volume = 1}
+            close_sound = {filename = '__base__/sound/armor-close.ogg', volume = 1},
+            localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, 3},
+            localised_description = {'description.power-armor-mk2'}
         }
     })
 
@@ -99,7 +101,9 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
         energy_required = 2,
         enabled = false,
         ingredients = {{name='power-armor-mk2', amount=2}},
-        result = 'power-armor-mk3'
+        result = 'power-armor-mk3',
+        localised_name = {'name.power-armor-mk2'},
+        localised_description = {'description.power-armor-mk2'}
     }})
 
     for _, animation in ipairs(data.raw['character']['character']['animations']) do
@@ -117,17 +121,21 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
 end
 
 if settings.startup['PHI-RS'].value then
-    local item = table.deepcopy(data.raw['furnace']['electric-furnace'])
-    item.name = 'electric-filter-furnace'
-    item.minable.result = 'electric-filter-furnace'
-    item.type = 'assembling-machine'
-    data:extend({item})
-
-    item = table.deepcopy(data.raw.item['electric-furnace'])
+    local item = table.deepcopy(data.raw.item['electric-furnace'])
     item.name = 'electric-filter-furnace'
     item.place_result = 'electric-filter-furnace'
     item.order = item.order .. '2'
+    item.localised_name = {'name.electric-filter-furnace'}
+    item.localised_description = {'description.electric-filter-furnace'}
     data:extend({item})
+    
+    local entity = table.deepcopy(data.raw['furnace']['electric-furnace'])
+    entity.name = 'electric-filter-furnace'
+    entity.minable.result = 'electric-filter-furnace'
+    entity.type = 'assembling-machine'
+    entity.localised_name = {'name.electric-filter-furnace'}
+    entity.localised_description = {'description.electric-filter-furnace'}
+    data:extend({entity})
 
     data:extend({{
         type = 'recipe',
@@ -136,6 +144,8 @@ if settings.startup['PHI-RS'].value then
         enabled = false,
         ingredients = {{name='electric-furnace', amount=1}},
         result = 'electric-filter-furnace',
+        localised_name = {'name.electric-filter-furnace'},
+        localised_description = {'description.electric-filter-furnace'}
     }})
 
     table.insert(data.raw.technology[items['item']['electric-filter-furnace'].tech].effects, {type='unlock-recipe', recipe='electric-filter-furnace'})
@@ -192,6 +202,8 @@ if settings.startup['PHI-RS'].value then
                     item = table.deepcopy(data.raw.recipe[k])
                     item.enabled = false
                     item.name = k .. '-s' .. j
+                    item.localised_name = {'name.'} .. k
+                    item.localised_description = {'description.'} .. k
 
                     if item.normal then
                         item.normal.hide_from_player_crafting = true
@@ -361,7 +373,8 @@ if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.s
 
         item.icon = nil
         item.icon_size = nil
-
+        item.localised_name = {'name.se-core-miner-drill'}
+        item.localised_description = {'description.se-core-miner-drill'}
         data:extend({item})
 
         if i > 2 then
@@ -371,7 +384,9 @@ if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.s
                 energy_required = 2,
                 enabled = false,
                 ingredients = {{name='se-core-miner-' .. (i - 1), amount=1}, {name='se-core-miner', amount=1}},
-                result = miner_name
+                result = miner_name,
+                localised_name = {'name.se-core-miner-drill'},
+                localised_description = {'description.se-core-miner-drill'}
             }})
 
         else
@@ -381,7 +396,9 @@ if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.s
                 energy_required = 2,
                 enabled = false,
                 ingredients = {{name='se-core-miner', amount=2}},
-                result = miner_name
+                result = miner_name,
+                localised_name = {'name.se-core-miner-drill'},
+                localised_description = {'description.se-core-miner-drill'}
             }})
         end
 

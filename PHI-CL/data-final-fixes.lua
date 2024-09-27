@@ -10,6 +10,10 @@ data.raw['decider-combinator']['decider-combinator'].energy_source.usage_priorit
 
 data.raw['active-defense-equipment']['discharge-defense-equipment'].automatic = true
 
+for _, t in pairs(data.raw['tree']) do
+	t.collision_box = {{-0.05, -0.05}, {0.05, 0.05}}
+end
+
 for _,name in pairs({'furnace', 'lab', 'beacon'}) do
 	local entities = {}
 

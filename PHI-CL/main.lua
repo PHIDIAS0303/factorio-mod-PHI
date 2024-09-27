@@ -283,6 +283,15 @@ function main.EEE(source, tier)
         end
     end
 
+    if tier > 1 then
+        item.localised_name = {'phi-cl.combine', {'name.' .. source.ref_name}, tier}
+
+    else
+        item.localised_name = {'name.' .. source.ref_name}
+    end
+
+    item.localised_description = {'description.' .. source.ref_name}
+
     data:extend({item})
 end
 
@@ -381,6 +390,9 @@ function main.EEQ(source, tier)
         }
     }
 
+    item.localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tier}
+    item.localised_description = {'description.' .. source.ref_name}
+
     data:extend({item})
 end
 
@@ -428,6 +440,16 @@ function main.EI(source, tier)
     end
 
     item.order = item.order .. tier
+
+    if tier > 1 then
+        item.localised_name = {'phi-cl.combine', {'name.' .. source.ref_name}, tier}
+
+    else
+        item.localised_name = {'name.' .. source.ref_name}
+    end
+
+    item.localised_description = {'description.' .. source.ref_name}
+
     data:extend({item})
 end
 
@@ -436,6 +458,8 @@ function main.ER(source, tier)
     local new_name = source.name
     local ingredient_name = source.name
     local result_name = source.name
+    local localised_name
+    local localised_description = {'description.' .. source.ref_name}
 
     if source.category == 'equipment' then
         if (tier == 2) then
@@ -448,6 +472,8 @@ function main.ER(source, tier)
         new_name = new_name .. '-mk' .. tier .. '-equipment'
         result_name = result_name .. '-mk' .. tier .. '-equipment'
 
+        localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tier}
+
     else
         if tier > 2 then
             ingredient_name = ingredient_name .. '-' .. (tier - 1)
@@ -455,6 +481,13 @@ function main.ER(source, tier)
 
         new_name = new_name .. '-' .. tier
         result_name = result_name .. '-' .. tier
+
+        if tier > 1 then
+            localised_name = {'phi-cl.combine', {'name.' .. source.ref_name}, tier}
+
+        else
+            localised_name = {'name.' .. source.ref_name}
+        end
     end
 
     if (source.tech == 'compound-energy') then
@@ -466,6 +499,8 @@ function main.ER(source, tier)
                 enabled = false,
                 ingredients = {{name=ingredient_name, amount=4}},
                 result = result_name,
+                localised_name = localised_name,
+                localised_description = localised_description
             }})
 
         else
@@ -477,6 +512,8 @@ function main.ER(source, tier)
                     enabled = false,
                     ingredients = {{name=ingredient_name, amount=1}, {name=source.name, amount=1}},
                     result = result_name,
+                    localised_name = localised_name,
+                    localised_description = localised_description
                 }})
 
             else
@@ -487,6 +524,8 @@ function main.ER(source, tier)
                     enabled = false,
                     ingredients = {{name=ingredient_name, amount=2}},
                     result = result_name,
+                    localised_name = localised_name,
+                    localised_description = localised_description
                 }})
             end
         end
@@ -499,6 +538,8 @@ function main.ER(source, tier)
             enabled = false,
             ingredients = {{name=ingredient_name, amount=2}},
             result = result_name,
+            localised_name = localised_name,
+            localised_description = localised_description
         }})
     end
 end
@@ -506,42 +547,7 @@ end
 -- technology
 function main.ET(source, tier)
     if (source.tech == 'compound-energy') then
-        if not data.raw.technology['compound-energy-' .. (tier - 1)] then
-            local prereq
-
-            if (tier == 2) then
-                prereq = {'solar-energy', 'advanced-electronics', 'electric-energy-accumulators'}
-
-            else
-                prereq = {'compound-energy-' .. (tier - 2)}
-            end
-
-            local item = {
-                type = 'technology',
-                name = 'compound-energy-' .. (tier - 1),
-                icon_size = 256,
-                icon = '__base__/graphics/technology/solar-energy.png',
-                effects = {
-                    {type='unlock-recipe', recipe=source.name .. '-' .. tier}
-                },
-                prerequisites = prereq,
-                unit = {
-                    count = 200 * (tier - 1),
-                    ingredients = {
-                        {'automation-science-pack', 2},
-                        {'logistic-science-pack', 2}
-                    },
-                    time = 120
-                },
-                order = 'a-h-' .. alpha_order[tier + 1]
-            }
-
-            data:extend({item})
-        else
-            if tier <= source.max then
-                table.insert(data.raw.technology['compound-energy-' .. (tier - 1)].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
-            end
-        end
+        table.insert(data.raw.technology['compound-energy-' .. (tier - 1)].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
 
     elseif data.raw.technology[source.tech] then
         local recipe_name = source.name
