@@ -8,6 +8,8 @@ data.raw['utility-constants'].default.zoom_to_world_can_use_nightvision = true
 data.raw['arithmetic-combinator']['arithmetic-combinator'].energy_source.usage_priority = 'primary-input'
 data.raw['decider-combinator']['decider-combinator'].energy_source.usage_priority = 'primary-input'
 
+data.raw['active-defense-equipment']['discharge-defense-equipment'].automatic = true
+
 for _,name in pairs({'furnace', 'lab', 'beacon'}) do
 	local entities = {}
 
@@ -55,7 +57,7 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value th
 
             if data.raw[k].fluid_boxes then
                 for k1, _ in pairs(data.raw[k].fluid_boxes) do
-                    if data.raw[k].fluid_boxes[k1] ~= false and data.raw[k].fluid_boxes[k1] ~= true then
+                    if data.raw[k].fluid_boxes[k1] ~= true and data.raw[k].fluid_boxes[k1] ~= false then
                         if data.raw[k].fluid_boxes[k1].production_type then
                             data.raw[k].fluid_boxes[k1].height = settings.startup['PHI-MI-PIPE'].value
 

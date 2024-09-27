@@ -434,62 +434,45 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRAIN'].value t
 end
 
 if settings.startup['PHI-MB'].value then
-    item = table.deepcopy(data.raw['item']['satellite'])
-    item.name = 'satellite-2'
-    item.rocket_launch_product = {type='item', name='space-science-pack', amount=2000}
-    item.icons = {
-        {
-            icon = '__base__/graphics/icons/satellite.png',
-            tint = items['tint'][2],
-            icon_size = 64,
-            icon_mipmaps = 4
+    for i=2, 3 do
+        item = table.deepcopy(data.raw['item']['satellite'])
+        item.name = 'satellite-' .. i
+        item.rocket_launch_product = {type='item', name='space-science-pack', amount=1000 * (2 ^ (i - 1))}
+        item.icons = {
+            {
+                icon = '__base__/graphics/icons/satellite.png',
+                tint = items['tint'][i],
+                icon_size = 64,
+                icon_mipmaps = 4
+            }
         }
-    }
-    item.order = 'm[satellite]-2'
-    data:extend({item})
+        item.order = 'm[satellite]-' .. i
+        data:extend({item})
 
-    item = table.deepcopy(data.raw['item']['satellite'])
-    item.name = 'satellite-3'
-    item.rocket_launch_product = {type='item', name='space-science-pack', amount=4000}
-    item.icons = {
-        {
+        local inn
+
+        if i == 2 then
+            inn = 'satellite'
+
+        else
+            inn = 'satellite-' .. (i - 1)
+        end
+
+        data:extend({{
+            type = 'recipe',
+            name = 'satellite-' .. i,
+            energy_required = 5,
+            enabled = false,
             icon = '__base__/graphics/icons/satellite.png',
-            tint = items['tint'][3],
             icon_size = 64,
-            icon_mipmaps = 4
-        }
-    }
-    item.order = 'm[satellite]-2'
-    data:extend({item})
+            icon_mipmaps = 4,
+            category = 'crafting',
+            ingredients = {{inn, 2}},
+            results = {{name = 'satellite-' .. i, amount = 1}}
+        }})
 
-    data:extend({{
-        type = 'recipe',
-        name = 'satellite-2',
-        energy_required = 5,
-        enabled = false,
-        icon = '__base__/graphics/icons/satellite.png',
-        icon_size = 64,
-        icon_mipmaps = 4,
-        category = 'crafting',
-        ingredients = {{'satellite', 2}},
-        results = {{name = 'satellite-2', amount = 1}}
-    }})
-
-    data:extend({{
-        type = 'recipe',
-        name = 'satellite-3',
-        energy_required = 5,
-        enabled = false,
-        icon = '__base__/graphics/icons/satellite.png',
-        icon_size = 64,
-        icon_mipmaps = 4,
-        category = 'crafting',
-        ingredients = {{'satellite-2', 2}},
-        results = {{name = 'satellite-3', amount = 1}}
-    }})
-
-    table.insert(data.raw.technology['space-science-pack'].effects, {type='unlock-recipe', recipe='satellite-2'})
-    table.insert(data.raw.technology['space-science-pack'].effects, {type='unlock-recipe', recipe='satellite-3'})
+        table.insert(data.raw.technology['space-science-pack'].effects, {type='unlock-recipe', recipe='satellite-' .. i})
+    end
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-REPAIR'].value then

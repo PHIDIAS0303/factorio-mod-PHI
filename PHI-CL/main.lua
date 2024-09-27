@@ -9,34 +9,55 @@ local entity_tint = {
     'horizontal_animation',
     'vertical_animation',
     'structure',
-    'connection_sprites',
-    'heat_glow_sprites',
-    'heat_connection_patches_connected',
-    'heat_connection_patches_disconnected',
-    'lower_layer_picture',
     'integration_patch'
 }
 
-local entity_mining_tint = {
-    'graphics_set',
-    'wet_mining_graphics_set'
+local tint_handle_c = {
+    'layers',
+    'sheets'
 }
 
-local entity_lab_tint = {
-    {
-        ['a'] = 'on_animation',
-        ['n'] = 3
-    },
-    {
-        ['a'] = 'off_animation',
-        ['n'] = 2
-    }
-}
+local function tint_handle(item, tier, tl)
+    for _, ve in pairs(tl) do
+        if item[ve] then
+            for _, tc in pairs(tint_handle_c) do
+                if item[ve][tc] and item[ve][tc][1] then
+                    item[ve][tc][1].tint = items['tint'][tier]
 
-local entity_accumulator_tint = {
-    'charge_animation',
-    'discharge_animation'
-}
+                    if item[ve][tc][1].hr_version then
+                        item[ve][tc][1].hr_version.tint = items['tint'][tier]
+                    end
+                end
+
+                for _, v in pairs(item[ve]) do
+                    if type(v) == 'table' then
+                        if v[tc] then
+                            if v[tc][1] then
+                                v[tc][1].tint = items['tint'][tier]
+
+                                if v[tc][1].hr_version then
+                                    v[tc][1].hr_version.tint = items['tint'][tier]
+                                end
+                            end
+                        end
+
+                        for i=1, #v, 1 do
+                            if v[i] and type(v[i]) == 'table' then
+                                if v[i][tc] and v[i][tc][1] then
+                                    v[i][tc][1].tint = items['tint'][tier]
+
+                                    if v[i][tc][1].hr_version then
+                                        v[i][tc][1].hr_version.tint = items['tint'][tier]
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
 
 -- entity
 function main.EEE(source, tier)
@@ -96,7 +117,7 @@ function main.EEE(source, tier)
             item.energy_source.input_flow_limit = (source.base * 60 * (4 ^ (tier - source.min + 1))) .. 'kW'
             item.energy_source.output_flow_limit = (source.base * 60 * (4 ^ (tier - source.min + 1))) .. 'kW'
 
-            for _, v in pairs(entity_accumulator_tint) do
+            for _, v in pairs({'charge_animation', 'discharge_animation'}) do
                 if item[v] and item[v].layers then
                     if item[v].layers[1] and item[v].layers[1].layers and item[v].layers[1].layers[1] then
                         item[v].layers[1].layers[1].tint = items['tint'][tier]
@@ -161,18 +182,54 @@ function main.EEE(source, tier)
             item.heat_buffer.max_temperature = source.temp * (tier + 1)
             item.heat_buffer.max_transfer = source.temp * (tier + 1) * 0.02 .. 'GW'
 
+            tint_handle(item, tier, {'connection_patches_connected', 'connection_patches_disconnected', 'heat_connection_patches_connected', 'heat_connection_patches_disconnected', 'lower_layer_picture'})
+
         elseif (source.type == 'heat-pipe') then
             item.heat_buffer.max_temperature = source.temp * (tier + 1)
             item.heat_buffer.max_transfer = source.temp * (tier + 1) * 0.01 .. 'GW'
 
+            tint_handle(item, tier, {'connection_sprites', 'heat_glow_sprites'})
         end
     end
 
     if (source.type == 'lab') then
         item.researching_speed = item.researching_speed * (2 ^ (tier - source.min + 1))
 
+        for _, v in pairs({{['a'] = 'on_animation', ['n'] = 3}, {['a'] = 'off_animation', ['n'] = 2}}) do
+            if item[v['a']] and item[v['a']].layers then
+                for i=1, v['n'], 1 do
+                    if item[v['a']].layers[i] then
+                        item[v['a']].layers[i].tint = items['tint'][tier]
+
+                        if item[v['a']].layers[i].hr_version then
+                            item[v['a']].layers[i].hr_version.tint = items['tint'][tier]
+                        end
+                    end
+                end
+            end
+        end
+
     elseif (source.type == 'mining-drill') then
         item.mining_speed = item.mining_speed * (2 ^ (tier - source.min + 1))
+
+        for _, e in pairs({'graphics_set', 'wet_mining_graphics_set'}) do
+            if item[e] and item[e].animation then
+                for _, d in pairs(item[e].animation) do
+                    if d.layers then
+                        d.layers[1].tint = items['tint'][tier]
+                        d.layers[2].tint = items['tint'][tier]
+
+                        if d.layers[1].hr_version then
+                            d.layers[1].hr_version.tint = items['tint'][tier]
+                        end
+
+                        if d.layers[2].hr_version then
+                            d.layers[2].hr_version.tint = items['tint'][tier]
+                        end
+                    end
+                end
+            end
+        end
 
     elseif source.type == 'radar' then
         item.max_distance_of_sector_revealed = item.max_distance_of_sector_revealed + (2 * tier)
@@ -184,6 +241,8 @@ function main.EEE(source, tier)
         item.active_energy_usage = eu * (2 ^ (tier - source.min + 1)) .. euu
         item.rocket_parts_required = 200 * (tier - source.min + 1)
         item.rocket_result_inventory_size = math.ceil(data.raw['item']['satellite'].rocket_launch_product[2] * 3 * (tier - source.min + 1) / data.raw['tool']['space-science-pack'].stack_size)
+
+        tint_handle(item, tier, {'arm_01_back_animation', 'arm_02_right_animation', 'arm_03_front_animation', 'base_day_sprite', 'base_front_sprite', 'door_back_sprite', 'door_front_sprite', 'hole_sprite', 'rocket_glow_overlay_sprite', 'rocket_shadow_overlay_sprite', 'satellite_animation'})
     end
 
     if item.crafting_speed then
@@ -209,43 +268,7 @@ function main.EEE(source, tier)
         item.type = 'assembling-machine'
     end
 
-    for _, ve in pairs(entity_tint) do
-        if item[ve] then
-            if item[ve].layers and item[ve].layers[1] then
-                item[ve].layers[1].tint = items['tint'][tier]
-
-                if item[ve].layers[1].hr_version then
-                    item[ve].layers[1].hr_version.tint = items['tint'][tier]
-                end
-            end
-
-            for _, v in pairs(item[ve]) do
-                if type(v) == 'table' then
-                    if v.layers then
-                        if v.layers[1] then
-                            v.layers[1].tint = items['tint'][tier]
-
-                            if v.layers[1].hr_version then
-                                v.layers[1].hr_version.tint = items['tint'][tier]
-                            end
-                        end
-                    end
-
-                    for i=1, #v, 1 do
-                        if v[i] and type(v[i]) == 'table' then
-                            if v[i].layers and v[i].layers[1] then
-                                v[i].layers[1].tint = items['tint'][tier]
-
-                                if v[i].layers[1].hr_version then
-                                    v[i].layers[1].hr_version.tint = items['tint'][tier]
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
+    tint_handle(item, tier, entity_tint)
 
     if item.idle_animation and item.idle_animation.layers then
         local i = 1
@@ -263,39 +286,6 @@ function main.EEE(source, tier)
 
             if not item.idle_animation.layers[i] then
                 break
-            end
-        end
-    end
-
-    for _, v in pairs(entity_lab_tint) do
-        if item[v['a']] and item[v['a']].layers then
-            for i=1, v['n'], 1 do
-                if item[v['a']].layers[i] then
-                    item[v['a']].layers[i].tint = items['tint'][tier]
-
-                    if item[v['a']].layers[i].hr_version then
-                        item[v['a']].layers[i].hr_version.tint = items['tint'][tier]
-                    end
-                end
-            end
-        end
-    end
-
-    for _, e in pairs(entity_mining_tint) do
-        if item[e] and item[e].animation then
-            for _, d in pairs(item[e].animation) do
-                if d.layers then
-                    d.layers[1].tint = items['tint'][tier]
-                    d.layers[2].tint = items['tint'][tier]
-
-                    if d.layers[1].hr_version then
-                        d.layers[1].hr_version.tint = items['tint'][tier]
-                    end
-
-                    if d.layers[2].hr_version then
-                        d.layers[2].hr_version.tint = items['tint'][tier]
-                    end
-                end
             end
         end
     end
