@@ -2,25 +2,10 @@ local alpha_order = {'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'}
 local items = require 'config'
 local main = {}
 
-local entity_tint = {
-    'picture',
-    'pictures',
-    'animation',
-    'horizontal_animation',
-    'vertical_animation',
-    'structure',
-    'integration_patch'
-}
-
-local tint_handle_c = {
-    'layers',
-    'sheets'
-}
-
 local function tint_handle(item, tier, tl)
     for _, ve in pairs(tl) do
         if item[ve] then
-            for _, tc in pairs(tint_handle_c) do
+            for _, tc in pairs({'layers', 'sheets'}) do
                 if item[ve][tc] and item[ve][tc][1] then
                     item[ve][tc][1].tint = items['tint'][tier]
 
@@ -268,7 +253,7 @@ function main.EEE(source, tier)
         item.type = 'assembling-machine'
     end
 
-    tint_handle(item, tier, entity_tint)
+    tint_handle(item, tier, {'picture', 'pictures', 'animation', 'horizontal_animation', 'vertical_animation', 'structure', 'integration_patch'})
 
     if item.idle_animation and item.idle_animation.layers then
         local i = 1
