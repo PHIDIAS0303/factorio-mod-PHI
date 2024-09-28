@@ -51,13 +51,15 @@ if settings.startup['PHI-EN'].value and settings.startup['PHI-EN-SOLAR-TIER'].va
 end
 
 if settings.startup['PHI-XW-WATER'].value > 0 then
-    data.raw['offshore-pump']['offshore-pump'].pumping_speed = settings.startup['PHI-XW-WATER'].value * 20
-    data.raw['offshore-pump']['offshore-pump'].flags = {'placeable-neutral', 'player-creation'}
-    data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_box = {{-0.5, -0.25}, {0.5, 0.25}}
-    data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
-    data.raw['offshore-pump']['offshore-pump'].adjacent_tile_collision_mask = nil
-    data.raw['offshore-pump']['offshore-pump'].placeable_position_visualization = nil
-    data.raw['offshore-pump']['offshore-pump'].se_allow_in_space = true
+    local ofs = 'offshore-pump'
+
+    data.raw[ofs][ofs].pumping_speed = settings.startup['PHI-XW-WATER'].value * 20
+    data.raw[ofs][ofs].flags = {'placeable-neutral', 'player-creation'}
+    data.raw[ofs][ofs].adjacent_tile_collision_box = {{-0.5, -0.25}, {0.5, 0.25}}
+    data.raw[ofs][ofs].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
+    data.raw[ofs][ofs].adjacent_tile_collision_mask = nil
+    data.raw[ofs][ofs].placeable_position_visualization = nil
+    data.raw[ofs][ofs].se_allow_in_space = true
 end
 
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-OIL'].value then

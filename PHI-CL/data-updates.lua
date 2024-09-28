@@ -8,21 +8,27 @@ end
 
 if settings.startup['PHI-XW-WATER'].value > 0 then
     if mods['angelsrefining'] then
-        data.raw['offshore-pump']['seafloor-pump'].pumping_speed = settings.startup['PHI-XW-WATER'].value * 2
-        data.raw['offshore-pump']['seafloor-pump'].flags = {'placeable-neutral', 'player-creation', 'filter-directions'}
-        data.raw['offshore-pump']['seafloor-pump'].adjacent_tile_collision_box = {{-2, -3}, {2, -2}}
-        data.raw['offshore-pump']['seafloor-pump'].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
-        data.raw['offshore-pump']['seafloor-pump'].adjacent_tile_collision_mask = nil
-        data.raw['offshore-pump']['seafloor-pump'].placeable_position_visualization = nil
+        local ocfs = 'offshore-pump'
+        local ofs = 'seafloor-pump'
+
+        data.raw[ocfs][ofs].pumping_speed = settings.startup['PHI-XW-WATER'].value * 2
+        data.raw[ocfs][ofs].flags = {'placeable-neutral', 'player-creation', 'filter-directions'}
+        data.raw[ocfs][ofs].adjacent_tile_collision_box = {{-2, -3}, {2, -2}}
+        data.raw[ocfs][ofs].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
+        data.raw[ocfs][ofs].adjacent_tile_collision_mask = nil
+        data.raw[ocfs][ofs].placeable_position_visualization = nil
     end
 
     if mods['exotic-industries'] then
-        data.raw['offshore-pump']['ei_gaia-pump'].pumping_speed = settings.startup['PHI-XW-WATER'].value * 20
-        data.raw['offshore-pump']['ei_gaia-pump'].flags = {'placeable-neutral', 'player-creation'}
-        data.raw['offshore-pump']['ei_gaia-pump'].adjacent_tile_collision_box = {{-0.5, -0.25}, {0.5, 0.25}}
-        data.raw['offshore-pump']['ei_gaia-pump'].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
-        data.raw['offshore-pump']['ei_gaia-pump'].adjacent_tile_collision_mask = nil
-        data.raw['offshore-pump']['ei_gaia-pump'].placeable_position_visualization = nil
+        local ocfs = 'offshore-pump'
+        local ofs = 'ei_gaia-pump'
+
+        data.raw[ocfs][ofs].pumping_speed = settings.startup['PHI-XW-WATER'].value * 20
+        data.raw[ocfs][ofs].flags = {'placeable-neutral', 'player-creation'}
+        data.raw[ocfs][ofs].adjacent_tile_collision_box = {{-0.5, -0.25}, {0.5, 0.25}}
+        data.raw[ocfs][ofs].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
+        data.raw[ocfs][ofs].adjacent_tile_collision_mask = nil
+        data.raw[ocfs][ofs].placeable_position_visualization = nil
     end
 end
 

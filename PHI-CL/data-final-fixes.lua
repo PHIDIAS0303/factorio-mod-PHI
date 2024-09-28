@@ -83,22 +83,16 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TILE'].value th
 
 	data.raw.tile[settings.startup['PHI-CT-TILE-CHOICE'].value].autoplace = {}
 
-	for _, simple in pairs (data.raw['simple-entity']) do
-        simple.autoplace = nil
-    end
-
-	for _, decor in pairs (data.raw['optimized-decorative']) do
-        decor.autoplace = nil
-    end
-
-	for _, fish in pairs (data.raw['fish']) do
-        fish.autoplace = nil
+	for _, t in pairs({data.raw['simple-entity'], data.raw['optimized-decorative'], data.raw['fish']}) do
+		for _, e in pairs(t) do
+			e.autoplace = nil
+		end
     end
 
 	local autoplace_controls = {}
 
-	for key, _ in pairs (data.raw['autoplace-control']) do
-		autoplace_controls[key] = {
+	for k, _ in pairs (data.raw['autoplace-control']) do
+		autoplace_controls[k] = {
 			size = 'none'
 		}
 	end
@@ -116,15 +110,9 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TILE'].value th
 			}
 		},
 		advanced_settings = {
-			pollution = {
-				enabled = false
-			},
-			enemy_evolution = {
-				enabled=false,
-			},
-			enemy_expansion = {
-				enabled=false
-			}
+			pollution = {enabled = false},
+			enemy_evolution = {enabled = false},
+			enemy_expansion = {enabled = false}
 		}
 	}
 end
