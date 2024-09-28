@@ -50,50 +50,6 @@ if settings.startup['PHI-EN'].value and settings.startup['PHI-EN-SOLAR-TIER'].va
     end
 end
 
-if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-OIL'].value then
-    local item = table.deepcopy(data.raw['item']['offshore-pump'])
-    item.name = 'oil-pump'
-    item.place_result = 'oil-pump'
-    item.order = 'b[fluids]-a[offshore-pump]-o'
-
-    item.icons = {
-        {
-            icon = '__base__/graphics/icons/offshore-pump.png',
-            tint = items['tint'][2],
-            icon_size = 64,
-            icon_mipmaps = 4
-        }
-    }
-
-    item.icon = nil
-    item.icon_size = nil
-    item.icon_mipmaps = nil
-    item.localised_name = {'name.oil-pump'}
-    item.localised_description = {'description.oil-pump'}
-    data:extend({item})
-
-    local entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
-    entity.name = 'oil-pump'
-    entity.minable.result = 'oil-pump'
-    entity.fluid = 'crude-oil'
-    entity.fluid_box.filter = 'crude-oil'
-    entity.se_allow_in_space = true
-    entity.localised_name = {'name.oil-pump'}
-    entity.localised_description = {'description.oil-pump'}
-    data:extend({entity})
-
-    data:extend({{
-        type = 'recipe',
-        name = 'oil-pump',
-        energy_required = 2,
-        enabled = true,
-        ingredients = {{'electronic-circuit', 2}, {'pipe', 1}, {'iron-gear-wheel', 1}},
-        result = 'oil-pump',
-        localised_name = {'name.oil-pump'},
-        localised_description = {'description.oil-pump'}
-    }})
-end
-
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-RADAR'].value then
     local item = table.deepcopy(data.raw['item']['radar'])
     item.name = 'super-radar'

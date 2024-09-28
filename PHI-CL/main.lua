@@ -48,6 +48,10 @@ end
 function main.EEE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
 
+    if not (item or item.name) then
+        assert('ERROR - trying to load ' .. source.type .. ' / ' .. source.ref_name)
+    end
+
     item.name = source.name .. '-' .. tier
     item.minable.result = item.name
     item.max_health = item.max_health * (tier - source.min + 2)
