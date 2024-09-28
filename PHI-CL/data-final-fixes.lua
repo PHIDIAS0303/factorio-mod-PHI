@@ -4,11 +4,14 @@
 
 data.raw['utility-constants'].default.zoom_to_world_effect_strength = 0
 data.raw['utility-constants'].default.zoom_to_world_can_use_nightvision = true
+data.raw['utility-constants'].default.train_inactivity_wait_condition_default = 60
 
 data.raw['arithmetic-combinator']['arithmetic-combinator'].energy_source.usage_priority = 'primary-input'
 data.raw['decider-combinator']['decider-combinator'].energy_source.usage_priority = 'primary-input'
 
 data.raw['active-defense-equipment']['discharge-defense-equipment'].automatic = true
+
+-- data.raw['utility-constants'].select_group_row_count
 
 for _, t in pairs(data.raw['tree']) do
 	t.collision_box = {{-0.05, -0.05}, {0.05, 0.05}}
@@ -27,13 +30,13 @@ for _,name in pairs({'furnace', 'lab', 'beacon'}) do
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-ARTILLERY'].value then
-	for _, v in pairs(data.raw['artillery-turret']) do
-		v.manual_range_modifier = 1
+	for _, t in pairs({data.raw['artillery-turret'], data.raw['artillery-wagon']}) do
+		for _, v in pairs(t) do
+			v.manual_range_modifier = 1
+		end
 	end
 
-	for _, v in pairs(data.raw['artillery-wagon']) do
-		v.manual_range_modifier = 1
-	end
+	-- data.raw['artillery-projectile']['artillery-projectile'].reveal_map = false
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then

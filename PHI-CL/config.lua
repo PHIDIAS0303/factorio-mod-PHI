@@ -42,7 +42,7 @@ local items = {
     ['item'] = {
         ['solar-panel'] = {
             enabled = settings.startup['PHI-EN'].value,
-            stage = 1,
+            stage = 2,
             type = 'solar-panel',
             name = 'solar-panel',
             ref_name = 'solar-panel',
@@ -53,7 +53,7 @@ local items = {
         },
         ['accumulator'] = {
             enabled = settings.startup['PHI-EN'].value,
-            stage = 1,
+            stage = 2,
             type = 'accumulator',
             name = 'accumulator',
             ref_name = 'accumulator',
@@ -64,7 +64,7 @@ local items = {
         },
         ['boiler'] = {
             enabled = settings.startup['PHI-EN'].value,
-            stage = 1,
+            stage = 2,
             type = 'boiler',
             name = 'boiler',
             ref_name = 'boiler',
@@ -77,7 +77,7 @@ local items = {
         },
         ['steam-engine'] = {
             enabled = settings.startup['PHI-EN'].value,
-            stage = 1,
+            stage = 2,
             type = 'generator',
             name = 'steam-engine',
             ref_name = 'steam-engine',
@@ -89,7 +89,7 @@ local items = {
         },
         ['nuclear-reactor'] = {
             enabled = settings.startup['PHI-EN'].value,
-            stage = 1,
+            stage = 2,
             type = 'reactor',
             name = 'nuclear-reactor',
             ref_name = 'nuclear-reactor',
@@ -102,7 +102,7 @@ local items = {
         },
         ['heat-pipe'] = {
             enabled = settings.startup['PHI-EN'].value,
-            stage = 1,
+            stage = 2,
             type = 'heat-pipe',
             name = 'heat-pipe',
             ref_name = 'heat-pipe',
@@ -113,7 +113,7 @@ local items = {
         },
         ['heat-exchanger'] = {
             enabled = settings.startup['PHI-EN'].value,
-            stage = 1,
+            stage = 2,
             type = 'boiler',
             name = 'heat-exchanger',
             ref_name = 'heat-exchanger',
@@ -126,7 +126,7 @@ local items = {
         },
         ['steam-turbine'] = {
             enabled = settings.startup['PHI-EN'].value,
-            stage = 1,
+            stage = 2,
             type = 'generator',
             name = 'steam-turbine',
             ref_name = 'steam-turbine',
@@ -138,7 +138,7 @@ local items = {
         },
         ['assembling-machine'] = {
             enabled = settings.startup['PHI-MB'].value,
-            stage = 1,
+            stage = 2,
             type = 'assembling-machine',
             name = 'assembling-machine',
             ref_name = 'assembling-machine-3',
@@ -148,7 +148,7 @@ local items = {
         },
         ['electric-furnace'] = {
             enabled = settings.startup['PHI-MB'].value,
-            stage = 1,
+            stage = 2,
             type = 'furnace',
             name = 'electric-furnace',
             ref_name = 'electric-furnace',
@@ -158,7 +158,7 @@ local items = {
         },
         ['oil-refinery'] = {
             enabled = settings.startup['PHI-MB'].value,
-            stage = 1,
+            stage = 2,
             type = 'assembling-machine',
             name = 'oil-refinery',
             ref_name = 'oil-refinery',
@@ -168,7 +168,7 @@ local items = {
         },
         ['chemical-plant'] = {
             enabled = settings.startup['PHI-MB'].value,
-            stage = 1,
+            stage = 2,
             type = 'assembling-machine',
             name = 'chemical-plant',
             ref_name = 'chemical-plant',
@@ -178,7 +178,7 @@ local items = {
         },
         ['centrifuge'] = {
             enabled = settings.startup['PHI-MB'].value,
-            stage = 1,
+            stage = 2,
             type = 'assembling-machine',
             name = 'centrifuge',
             ref_name = 'centrifuge',
@@ -188,7 +188,7 @@ local items = {
         },
         ['rocket-silo'] = {
             enabled = settings.startup['PHI-MB'].value,
-            stage = 1,
+            stage = 2,
             type = 'rocket-silo',
             name = 'rocket-silo',
             ref_name = 'rocket-silo',
@@ -198,7 +198,7 @@ local items = {
         },
         ['lab'] = {
             enabled = settings.startup['PHI-MB'].value,
-            stage = 1,
+            stage = 2,
             type = 'lab',
             name = 'lab',
             ref_name = 'lab',
@@ -208,7 +208,7 @@ local items = {
         },
         ['electric-mining-drill'] = {
             enabled = settings.startup['PHI-MB'].value,
-            stage = 1,
+            stage = 2,
             type = 'mining-drill',
             name = 'electric-mining-drill',
             ref_name = 'electric-mining-drill',
@@ -218,7 +218,7 @@ local items = {
         },
         ['pumpjack'] = {
             enabled = settings.startup['PHI-MB'].value,
-            stage = 1,
+            stage = 2,
             type = 'mining-drill',
             name = 'pumpjack',
             ref_name = 'pumpjack',
@@ -238,7 +238,7 @@ local items = {
         },
         ['laser-turret'] = {
             enabled = settings.startup['PHI-WE'].value,
-            stage = 1,
+            stage = 2,
             type = 'electric-turret',
             name = 'laser-turret',
             ref_name = 'laser-turret',
@@ -248,7 +248,7 @@ local items = {
         },
         ['flamethrower-turret'] = {
             enabled = settings.startup['PHI-WE'].value,
-            stage = 1,
+            stage = 2,
             type = 'fluid-turret',
             name = 'flamethrower-turret',
             ref_name = 'flamethrower-turret',
@@ -258,7 +258,7 @@ local items = {
         },
         ['gun-turret'] = {
             enabled = settings.startup['PHI-WE'].value,
-            stage = 1,
+            stage = 2,
             type = 'ammo-turret',
             name = 'gun-turret',
             ref_name = 'gun-turret',
@@ -268,7 +268,7 @@ local items = {
         },
         ['radar'] = {
             enabled = settings.startup['PHI-WE'].value,
-            stage = 1,
+            stage = 2,
             type = 'radar',
             name = 'radar',
             ref_name = 'radar',
@@ -280,7 +280,7 @@ local items = {
     ['equipment'] = {
         ['solar-panel-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
+            stage = 2,
             type = 'solar-panel-equipment',
             name = 'solar-panel',
             ref_name = 'solar-panel-equipment',
@@ -292,7 +292,7 @@ local items = {
         },
         ['fusion-reactor-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
+            stage = 2,
             type = 'generator-equipment',
             name = 'fusion-reactor',
             ref_name = 'fusion-reactor-equipment',
@@ -304,7 +304,7 @@ local items = {
         },
         ['battery-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
+            stage = 2,
             type = 'battery-equipment',
             name = 'battery',
             ref_name = 'battery-mk2-equipment',
@@ -316,7 +316,7 @@ local items = {
         },
         ['personal-laser-defense-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
+            stage = 2,
             type = 'active-defense-equipment',
             name = 'personal-laser-defense',
             ref_name = 'personal-laser-defense-equipment',
@@ -328,7 +328,7 @@ local items = {
         },
         ['energy-shield-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
+            stage = 2,
             type = 'energy-shield-equipment',
             name = 'energy-shield',
             ref_name = 'energy-shield-mk2-equipment',
@@ -340,7 +340,7 @@ local items = {
         },
         ['personal-roboport-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
+            stage = 2,
             type = 'roboport-equipment',
             name = 'personal-roboport',
             ref_name = 'personal-roboport-mk2-equipment',
@@ -352,7 +352,7 @@ local items = {
         },
         ['night-vision-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
+            stage = 2,
             type = 'night-vision-equipment',
             name = 'night-vision',
             ref_name = 'night-vision-equipment',
@@ -363,7 +363,7 @@ local items = {
         },
         ['exoskeleton-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
+            stage = 2,
             type = 'movement-bonus-equipment',
             name = 'exoskeleton',
             ref_name = 'exoskeleton-equipment',
@@ -740,10 +740,6 @@ if mods then
             min = 2,
             max = settings.startup['PHI-MB-MINING-TIER'].value
         }
-    end
-
-    if mods['Atomic_Overhaul'] then
-        items['item']['centrifuge'].stage = 2
     end
 
     if mods['Krastorio2'] then

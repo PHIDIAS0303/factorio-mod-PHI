@@ -577,7 +577,9 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-REPAIR'].value 
 end
 
 if settings.startup['PHI-MI'].value and (tonumber(settings.startup['PHI-MI-LANDFILL'].value) ~= 20) then
-    data.raw.recipe['landfill'].ingredients = {{'stone', tonumber(settings.startup['PHI-MI-LANDFILL'].value)}}
+    data.raw.recipe['landfill'].ingredients = {
+        {'stone', tonumber(settings.startup['PHI-MI-LANDFILL'].value)}
+    }
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-EFFCY'].value then
@@ -595,7 +597,7 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value th
     data.raw['pump']['pump'].pumping_speed = 200 * settings.startup['PHI-MI-PIPE'].value
 end
 
-if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-ROBOT'].value then
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-ROBOT'].value > 1 then
     data.raw['construction-robot']['construction-robot'].speed = 0.06 * settings.startup['PHI-MI-ROBOT'].value
     data.raw['construction-robot']['construction-robot'].max_health = 100 * settings.startup['PHI-MI-ROBOT'].value
     data.raw['construction-robot']['construction-robot'].max_payload_size = settings.startup['PHI-MI-ROBOT'].value
@@ -627,40 +629,44 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-ROBOT'].value t
     }
 end
 
-if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
-    data.raw['locomotive']['locomotive'].max_health = 250 * (3 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['locomotive']['locomotive'].max_speed = 0.3 * (3 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['locomotive']['locomotive'].max_power = 300 * (1 + settings.startup['PHI-MI-TRAIN'].value) .. 'kW'
-    data.raw['locomotive']['locomotive'].reversing_power_modifier = 1
-    data.raw['locomotive']['locomotive'].energy_per_hit_point = 2.5 * (1 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['locomotive']['locomotive'].braking_force = 1.25 * (7 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['locomotive']['locomotive'].friction_force = 0.50 - (0.05 * settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['locomotive']['locomotive'].air_resistance = 0.0075 - (0.0007 * settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['locomotive']['locomotive'].burner.effectivity = 0.10 * (9 + settings.startup['PHI-MI-TRAIN'].value)
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-TRAIN'].value > 1 then
+    local lo = 'locomotive'
+    data.raw[lo][lo].max_health = 250 * (3 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[lo][lo].max_speed = 0.3 * (3 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[lo][lo].max_power = 300 * (1 + settings.startup['PHI-MI-TRAIN'].value) .. 'kW'
+    data.raw[lo][lo].reversing_power_modifier = 1
+    data.raw[lo][lo].energy_per_hit_point = 2.5 * (1 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[lo][lo].braking_force = 1.25 * (7 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[lo][lo].friction_force = 0.50 - (0.05 * settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[lo][lo].air_resistance = 0.0075 - (0.0007 * settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[lo][lo].burner.effectivity = 0.10 * (9 + settings.startup['PHI-MI-TRAIN'].value)
 
-    data.raw['cargo-wagon']['cargo-wagon'].max_health = 200 * (2 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['cargo-wagon']['cargo-wagon'].max_speed = 0.6 * (2 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['cargo-wagon']['cargo-wagon'].braking_force = 1 * (2 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['cargo-wagon']['cargo-wagon'].friction_force = 0.50 - (0.05 * settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['cargo-wagon']['cargo-wagon'].air_resistance = 0.01 - (0.001 * settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['cargo-wagon']['cargo-wagon'].inventory_size = 5 * (7 + settings.startup['PHI-MI-TRAIN'].value)
+    local cw = 'cargo-wagon'
+    data.raw[cw][cw].max_health = 200 * (2 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[cw][cw].max_speed = 0.6 * (2 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[cw][cw].braking_force = 1 * (2 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[cw][cw].friction_force = 0.50 - (0.05 * settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[cw][cw].air_resistance = 0.01 - (0.001 * settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[cw][cw].inventory_size = 5 * (7 + settings.startup['PHI-MI-TRAIN'].value)
 
-    data.raw['fluid-wagon']['fluid-wagon'].max_health = 200 * (2 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['fluid-wagon']['fluid-wagon'].max_speed = 0.6 * (2 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['fluid-wagon']['fluid-wagon'].braking_force = 1 * (2 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['fluid-wagon']['fluid-wagon'].friction_force = 0.50 - (0.05 * settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['fluid-wagon']['fluid-wagon'].air_resistance = 0.01 - (0.001 * settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['fluid-wagon']['fluid-wagon'].capacity = 3125 * (7 + settings.startup['PHI-MI-TRAIN'].value)
+    local fw = 'fluid-wagon'
+    data.raw[fw][fw].max_health = 200 * (2 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[fw][fw].max_speed = 0.6 * (2 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[fw][fw].braking_force = 1 * (2 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[fw][fw].friction_force = 0.50 - (0.05 * settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[fw][fw].air_resistance = 0.01 - (0.001 * settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[fw][fw].capacity = 3125 * (7 + settings.startup['PHI-MI-TRAIN'].value)
 
-    data.raw['artillery-wagon']['artillery-wagon'].max_health = 200 * (2 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['artillery-wagon']['artillery-wagon'].max_speed = 0.6 * (2 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['artillery-wagon']['artillery-wagon'].braking_force = 1 * (2 + settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['artillery-wagon']['artillery-wagon'].friction_force = 0.50 - (0.05 * settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['artillery-wagon']['artillery-wagon'].air_resistance = 0.015 - (0.0015 * settings.startup['PHI-MI-TRAIN'].value)
-    data.raw['artillery-wagon']['artillery-wagon'].turret_rotation_speed = 0.0005 * (1 + settings.startup['PHI-MI-TRAIN'].value)
+    local aw = 'artillery-wagon'
+    data.raw[aw][aw].max_health = 200 * (2 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[aw][aw].max_speed = 0.6 * (2 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[aw][aw].braking_force = 1 * (2 + settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[aw][aw].friction_force = 0.50 - (0.05 * settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[aw][aw].air_resistance = 0.015 - (0.0015 * settings.startup['PHI-MI-TRAIN'].value)
+    data.raw[aw][aw].turret_rotation_speed = 0.0005 * (1 + settings.startup['PHI-MI-TRAIN'].value)
 end
 
-if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-BOILER'].value then
     local item = table.deepcopy(data.raw['item']['boiler'])
     item.name = 'electric-boiler'
     item.place_result = 'electric-boiler'
@@ -672,17 +678,27 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value th
     local entity = table.deepcopy(data.raw['boiler']['boiler'])
     entity.name = 'electric-boiler'
     entity.energy_consumption = '7200kW'
+    entity.buffer_capacity = '14400kJ'
     entity.target_temperature = 165
-
-    entity.minable = {hardness = 0.2, mining_time = 0.5, result = 'electric-boiler'}
     entity.emissions_per_minute = 0
-    entity.energy_source.type = 'electric'
-    entity.energy_source.fuel_inventory_size = 0
-    entity.energy_source.input_priority = 'secondary'
-    entity.energy_source.usage_priority = 'secondary-input'
-    entity.energy_source.light_flicker.color = {r=0.5, g=1, b=1, a=0.5}
-    entity.energy_source.light_flicker.minimum_light_size = 0.1
-    entity.energy_source.light_flicker.light_intensity_to_size_coefficient = 1
+
+    entity.minable = {
+        hardness = 0.2,
+        mining_time = 0.5,
+        result = 'electric-boiler'
+    }
+
+    entity.energy_source = {
+        type = 'electric',
+        usage_priority = 'secondary-input',
+        buffer_capacity = '14400kJ',
+        light_flicker = {
+            color = {r=0.5, g=1, b=1, a=0.5},
+            minimum_light_size = 0.1,
+            light_intensity_to_size_coefficient = 1
+        }
+    }
+
     entity.fire_flicker_enabled = false
     entity.fire_glow_flicker_enabled = false
     entity.fire = {}
@@ -730,8 +746,8 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value t
         item.name = 'basic-' .. chests[i]
         item.place_result = 'basic-' .. chests[i]
         item.order = 'b[storage]-h[basic-' .. chests[i] .. ']'
-        item.localised_name = {'name.'} .. chests[i]
-        item.localised_description = {'description.'} .. chests[i]
+        item.localised_name = {'name.'.. chests[i]}
+        item.localised_description = {'description.'.. chests[i]}
         data:extend({item})
 
         entity.inventory_type = 'with_filters_and_bar'
@@ -739,8 +755,8 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value t
         entity.max_logistic_slots = 1
         entity.name = 'basic-' .. chests[i]
         entity.minable.result = 'basic-' .. chests[i]
-        entity.localised_name = {'name.'} .. chests[i]
-        entity.localised_description = {'description.'} .. chests[i]
+        entity.localised_name = {'name.'.. chests[i]}
+        entity.localised_description = {'description.'.. chests[i]}
         data:extend({entity})
 
         data:extend({{
@@ -750,8 +766,8 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value t
             enabled = false,
             ingredients = {{chests[i], 1}},
             result = 'basic-' .. chests[i],
-            localised_name = {'name.'} .. chests[i],
-            localised_description = {'description.'} .. chests[i]
+            localised_name = {'name.'.. chests[i]},
+            localised_description = {'description.'.. chests[i]}
         }})
     end
 
