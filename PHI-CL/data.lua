@@ -50,18 +50,6 @@ if settings.startup['PHI-EN'].value and settings.startup['PHI-EN-SOLAR-TIER'].va
     end
 end
 
-if settings.startup['PHI-XW-WATER'].value > 0 then
-    local ofs = 'offshore-pump'
-
-    data.raw[ofs][ofs].pumping_speed = settings.startup['PHI-XW-WATER'].value * 20
-    data.raw[ofs][ofs].flags = {'placeable-neutral', 'player-creation'}
-    data.raw[ofs][ofs].adjacent_tile_collision_box = {{-0.5, -0.25}, {0.5, 0.25}}
-    data.raw[ofs][ofs].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
-    data.raw[ofs][ofs].adjacent_tile_collision_mask = nil
-    data.raw[ofs][ofs].placeable_position_visualization = nil
-    data.raw[ofs][ofs].se_allow_in_space = true
-end
-
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-OIL'].value then
     local item = table.deepcopy(data.raw['item']['offshore-pump'])
     item.name = 'oil-pump'
@@ -525,52 +513,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRAIN'].value t
     data.raw['locomotive']['locomotive'].burner.burnt_inventory_size = 1
 end
 
-if settings.startup['PHI-MB'].value then
-    for i=2, 3 do
-        item = table.deepcopy(data.raw['item']['satellite'])
-        item.name = 'satellite-' .. i
-        item.rocket_launch_product = {type='item', name='space-science-pack', amount=1000 * (2 ^ (i - 1))}
-        item.icons = {
-            {
-                icon = '__base__/graphics/icons/satellite.png',
-                tint = items['tint'][i],
-                icon_size = 64,
-                icon_mipmaps = 4
-            }
-        }
-        item.order = 'm[satellite]-' .. i
-        item.localised_name = {'name.satellite'}
-        item.localised_description = {'description.satellite'}
-        data:extend({item})
-
-        local inn
-
-        if i == 2 then
-            inn = 'satellite'
-
-        else
-            inn = 'satellite-' .. (i - 1)
-        end
-
-        data:extend({{
-            type = 'recipe',
-            name = 'satellite-' .. i,
-            energy_required = 5,
-            enabled = false,
-            icon = '__base__/graphics/icons/satellite.png',
-            icon_size = 64,
-            icon_mipmaps = 4,
-            category = 'crafting',
-            ingredients = {{inn, 2}},
-            results = {{name = 'satellite-' .. i, amount = 1}},
-            localised_name = {'name.satellite'},
-            localised_description = {'description.satellite'}
-        }})
-
-        table.insert(data.raw.technology['space-science-pack'].effects, {type='unlock-recipe', recipe='satellite-' .. i})
-    end
-end
-
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-REPAIR'].value then
     data.raw['repair-tool']['repair-pack'].speed = 2 * settings.startup['PHI-MI-REPAIR'].value
     data.raw['repair-tool']['repair-pack'].durability = 300 * settings.startup['PHI-MI-REPAIR'].value
@@ -746,8 +688,8 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value t
         item.name = 'basic-' .. chests[i]
         item.place_result = 'basic-' .. chests[i]
         item.order = 'b[storage]-h[basic-' .. chests[i] .. ']'
-        item.localised_name = {'name.'.. chests[i]}
-        item.localised_description = {'description.'.. chests[i]}
+        item.localised_name = {'name.basic-'.. chests[i]}
+        item.localised_description = {'description.basic-'.. chests[i]}
         data:extend({item})
 
         entity.inventory_type = 'with_filters_and_bar'
@@ -755,8 +697,8 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value t
         entity.max_logistic_slots = 1
         entity.name = 'basic-' .. chests[i]
         entity.minable.result = 'basic-' .. chests[i]
-        entity.localised_name = {'name.'.. chests[i]}
-        entity.localised_description = {'description.'.. chests[i]}
+        entity.localised_name = {'name.basic-'.. chests[i]}
+        entity.localised_description = {'description.basic-'.. chests[i]}
         data:extend({entity})
 
         data:extend({{
@@ -765,9 +707,9 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value t
             energy_required = 2,
             enabled = false,
             ingredients = {{chests[i], 1}},
-            result = 'basic-' .. chests[i],
-            localised_name = {'name.'.. chests[i]},
-            localised_description = {'description.'.. chests[i]}
+            results = {{name = 'basic-' .. chests[i], amount = 1}},
+            localised_name = {'name.basic-'.. chests[i]},
+            localised_description = {'description.basic-'.. chests[i]}
         }})
     end
 

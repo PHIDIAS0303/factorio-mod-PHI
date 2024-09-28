@@ -6,31 +6,121 @@ if settings.startup['PHI-EN'].value and settings.startup['PHI-EN-NUCLEAR-TIER'].
     data.raw['fluid']['steam'].max_temperature = 5000
 end
 
-if settings.startup['PHI-XW-WATER'].value > 0 then
-    if mods['angelsrefining'] then
-        local ocfs = 'offshore-pump'
-        local ofs = 'seafloor-pump'
+if settings.startup['PHI-MB'].value then
+    for i=2, 3 do
+        item = table.deepcopy(data.raw['item']['satellite'])
+        item.name = 'satellite-' .. i
+        item.rocket_launch_product = {type='item', name='space-science-pack', amount=1000 * (2 ^ (i - 1))}
+        item.icons = {
+            {
+                icon = '__base__/graphics/icons/satellite.png',
+                tint = items['tint'][i],
+                icon_size = 64,
+                icon_mipmaps = 4
+            }
+        }
+        item.order = 'm[satellite]-' .. i
+        item.localised_name = {'name.satellite'}
+        item.localised_description = {'description.satellite'}
+        data:extend({item})
 
-        data.raw[ocfs][ofs].pumping_speed = settings.startup['PHI-XW-WATER'].value * 2
-        data.raw[ocfs][ofs].flags = {'placeable-neutral', 'player-creation', 'filter-directions'}
-        data.raw[ocfs][ofs].adjacent_tile_collision_box = {{-2, -3}, {2, -2}}
-        data.raw[ocfs][ofs].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
-        data.raw[ocfs][ofs].adjacent_tile_collision_mask = nil
-        data.raw[ocfs][ofs].placeable_position_visualization = nil
-    end
+        local inn
 
-    if mods['exotic-industries'] then
-        local ocfs = 'offshore-pump'
-        local ofs = 'ei_gaia-pump'
+        if i == 2 then
+            inn = 'satellite'
 
-        data.raw[ocfs][ofs].pumping_speed = settings.startup['PHI-XW-WATER'].value * 20
-        data.raw[ocfs][ofs].flags = {'placeable-neutral', 'player-creation'}
-        data.raw[ocfs][ofs].adjacent_tile_collision_box = {{-0.5, -0.25}, {0.5, 0.25}}
-        data.raw[ocfs][ofs].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
-        data.raw[ocfs][ofs].adjacent_tile_collision_mask = nil
-        data.raw[ocfs][ofs].placeable_position_visualization = nil
+        else
+            inn = 'satellite-' .. (i - 1)
+        end
+
+        data:extend({{
+            type = 'recipe',
+            name = 'satellite-' .. i,
+            energy_required = 5,
+            enabled = false,
+            icon = '__base__/graphics/icons/satellite.png',
+            icon_size = 64,
+            icon_mipmaps = 4,
+            category = 'crafting',
+            ingredients = {{inn, 2}},
+            results = {{name = 'satellite-' .. i, amount = 1}},
+            localised_name = {'name.satellite'},
+            localised_description = {'description.satellite'}
+        }})
+
+        table.insert(data.raw.technology['space-science-pack'].effects, {type='unlock-recipe', recipe='satellite-' .. i})
     end
 end
+
+
+if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.startup['PHI-MB-MINING-TIER'].value > 1 then
+    data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'se-core-miner-drill'
+
+    local se = {
+        type = 'mining-drill',
+        name = 'se-core-miner-drill',
+        ref_name = 'se-core-miner-drill',
+        min = 2,
+        max = 3
+    }
+
+    for i=2, settings.startup['PHI-MB-MINING-TIER'].value do
+        local miner_name = 'se-core-miner-' .. i
+        local drill_name = 'se-core-miner-drill-' .. i
+
+        main.EEE(se, i)
+        data.raw['mining-drill'][drill_name].minable.result = miner_name
+        data.raw['mining-drill'][drill_name].placeable_by.item = miner_name
+
+        local item = table.deepcopy(data.raw['item']['se-core-miner'])
+        item.name = 'se-core-miner-' .. i
+        item.place_result = drill_name
+        item.order = 'zzzz-core-miner-' .. i
+
+        item.icons = {
+            {
+                icon = '__space-exploration-graphics__/graphics/icons/core-miner.png',
+                tint = items['tint'][i],
+                icon_size = 64,
+            }
+        }
+
+        item.icon = nil
+        item.icon_size = nil
+        item.localised_name = {'name.se-core-miner-drill'}
+        item.localised_description = {'description.se-core-miner-drill'}
+        data:extend({item})
+
+        if i > 2 then
+            data:extend({{
+                type = 'recipe',
+                name = miner_name,
+                energy_required = 2,
+                enabled = false,
+                ingredients = {{name='se-core-miner-' .. (i - 1), amount=1}, {name='se-core-miner', amount=1}},
+                result = miner_name,
+                localised_name = {'name.se-core-miner-drill'},
+                localised_description = {'description.se-core-miner-drill'}
+            }})
+
+        else
+            data:extend({{
+                type = 'recipe',
+                name = miner_name,
+                energy_required = 2,
+                enabled = false,
+                ingredients = {{name='se-core-miner', amount=2}},
+                result = miner_name,
+                localised_name = {'name.se-core-miner-drill'},
+                localised_description = {'description.se-core-miner-drill'}
+            }})
+        end
+
+        data.raw['mining-drill'][drill_name].fast_replaceable_group = data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group
+        table.insert(data.raw.technology['se-core-miner'].effects, {type='unlock-recipe', recipe=miner_name})
+    end
+end
+
 
 if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value then
     data:extend({
@@ -345,71 +435,37 @@ if settings.startup['PHI-RS'].value then
     end
 end
 
-if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.startup['PHI-MB-MINING-TIER'].value > 1 then
-    data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'se-core-miner-drill'
+if settings.startup['PHI-XW-WATER'].value > 0 then
+    local ocfs = 'offshore-pump'
 
-    local se = {
-        type = 'mining-drill',
-        name = 'se-core-miner-drill',
-        ref_name = 'se-core-miner-drill',
-        min = 2,
-        max = 3
-    }
+    data.raw[ocfs][ocfs].pumping_speed = settings.startup['PHI-XW-WATER'].value * 20
+    data.raw[ocfs][ocfs].flags = {'placeable-neutral', 'player-creation'}
+    data.raw[ocfs][ocfs].adjacent_tile_collision_box = {{-0.5, -0.25}, {0.5, 0.25}}
+    data.raw[ocfs][ocfs].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
+    data.raw[ocfs][ocfs].adjacent_tile_collision_mask = nil
+    data.raw[ocfs][ocfs].placeable_position_visualization = nil
+    data.raw[ocfs][ocfs].se_allow_in_space = true
 
-    for i=2, settings.startup['PHI-MB-MINING-TIER'].value do
-        local miner_name = 'se-core-miner-' .. i
-        local drill_name = 'se-core-miner-drill-' .. i
+    if mods['angelsrefining'] then
+        local ofs = 'seafloor-pump'
 
-        main.EEE(se, i)
-        data.raw['mining-drill'][drill_name].minable.result = miner_name
-        data.raw['mining-drill'][drill_name].placeable_by.item = miner_name
+        data.raw[ocfs][ofs].pumping_speed = settings.startup['PHI-XW-WATER'].value * 2
+        data.raw[ocfs][ofs].flags = {'placeable-neutral', 'player-creation', 'filter-directions'}
+        data.raw[ocfs][ofs].adjacent_tile_collision_box = {{-2, -3}, {2, -2}}
+        data.raw[ocfs][ofs].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
+        data.raw[ocfs][ofs].adjacent_tile_collision_mask = nil
+        data.raw[ocfs][ofs].placeable_position_visualization = nil
+    end
 
-        local item = table.deepcopy(data.raw['item']['se-core-miner'])
-        item.name = 'se-core-miner-' .. i
-        item.place_result = drill_name
-        item.order = 'zzzz-core-miner-' .. i
+    if mods['exotic-industries'] then
+        local ofs = 'ei_gaia-pump'
 
-        item.icons = {
-            {
-                icon = '__space-exploration-graphics__/graphics/icons/core-miner.png',
-                tint = items['tint'][i],
-                icon_size = 64,
-            }
-        }
-
-        item.icon = nil
-        item.icon_size = nil
-        item.localised_name = {'name.se-core-miner-drill'}
-        item.localised_description = {'description.se-core-miner-drill'}
-        data:extend({item})
-
-        if i > 2 then
-            data:extend({{
-                type = 'recipe',
-                name = miner_name,
-                energy_required = 2,
-                enabled = false,
-                ingredients = {{name='se-core-miner-' .. (i - 1), amount=1}, {name='se-core-miner', amount=1}},
-                result = miner_name,
-                localised_name = {'name.se-core-miner-drill'},
-                localised_description = {'description.se-core-miner-drill'}
-            }})
-
-        else
-            data:extend({{
-                type = 'recipe',
-                name = miner_name,
-                energy_required = 2,
-                enabled = false,
-                ingredients = {{name='se-core-miner', amount=2}},
-                result = miner_name,
-                localised_name = {'name.se-core-miner-drill'},
-                localised_description = {'description.se-core-miner-drill'}
-            }})
-        end
-
-        data.raw['mining-drill'][drill_name].fast_replaceable_group = data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group
-        table.insert(data.raw.technology['se-core-miner'].effects, {type='unlock-recipe', recipe=miner_name})
+        data.raw[ocfs][ofs].pumping_speed = settings.startup['PHI-XW-WATER'].value * 20
+        data.raw[ocfs][ofs].flags = {'placeable-neutral', 'player-creation'}
+        data.raw[ocfs][ofs].adjacent_tile_collision_box = {{-0.5, -0.25}, {0.5, 0.25}}
+        data.raw[ocfs][ofs].adjacent_tile_collision_test = {'ground-tile', 'water-tile', 'object-layer'}
+        data.raw[ocfs][ofs].adjacent_tile_collision_mask = nil
+        data.raw[ocfs][ofs].placeable_position_visualization = nil
     end
 end
 
