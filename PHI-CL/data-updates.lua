@@ -217,6 +217,17 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
 end
 
 if settings.startup['PHI-RS'].value then
+    local other_recipe_name = {
+        ['basic-oil-processing'] = true,
+        ['advanced-oil-processing'] = true,
+        ['light-oil-cracking'] = true,
+        ['heavy-oil-cracking'] = true,
+        ['uranium-processing'] = true,
+        ['kovarex-enrichment-process'] = true,
+        ['nuclear-fuel-reprocessing'] = true,
+        ['coal-liquefaction'] = true
+    }
+
     local item = table.deepcopy(data.raw.item['electric-furnace'])
     item.name = 'electric-filter-furnace'
     item.place_result = 'electric-filter-furnace'
@@ -298,8 +309,11 @@ if settings.startup['PHI-RS'].value then
                     item = table.deepcopy(data.raw.recipe[k])
                     item.enabled = false
                     item.name = k .. '-s' .. j
-                    item.localised_name = {'name.'} .. k
-                    item.localised_description = {'description.'} .. k
+                    
+                    if other_recipe_name[k] then
+                        item.localised_name = {'phi-cl.combine', {'name.' .. k}, j}
+                        item.localised_description = {'description.' .. k}
+                    end
 
                     if item.normal then
                         item.normal.hide_from_player_crafting = true

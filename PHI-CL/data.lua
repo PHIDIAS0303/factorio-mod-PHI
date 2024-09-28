@@ -674,53 +674,56 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value t
         'logistic-chest-requester'
     }
 
-    for i=1, #chests, 1 do
-        local item = table.deepcopy(data.raw['item'][chests[i]])
+    for _, c in pairs(chests) do
+        local item = table.deepcopy(data.raw['item'][c])
         local entity
 
-        if chests[i] == 'steel-chest' then
-            entity = table.deepcopy(data.raw['container'][chests[i]])
+        if c == 'steel-chest' then
+            entity = table.deepcopy(data.raw['container'][c])
 
         else
-            entity = table.deepcopy(data.raw['logistic-container'][chests[i]])
+            entity = table.deepcopy(data.raw['logistic-container'][c])
         end
 
-        item.name = 'basic-' .. chests[i]
-        item.place_result = 'basic-' .. chests[i]
-        item.order = 'b[storage]-h[basic-' .. chests[i] .. ']'
-        item.localised_name = {'name.basic-'.. chests[i]}
-        item.localised_description = {'description.basic-'.. chests[i]}
+        item.name = 'basic-' .. c
+        item.place_result = 'basic-' .. c
+        item.order = 'b[storage]-h[basic-' .. c .. ']'
+        item.localised_name = {'name.basic-'.. c}
+        item.localised_description = {'description.basic-'.. c}
         data:extend({item})
 
         entity.inventory_type = 'with_filters_and_bar'
         entity.inventory_size = 1
         entity.max_logistic_slots = 1
-        entity.name = 'basic-' .. chests[i]
-        entity.minable.result = 'basic-' .. chests[i]
-        entity.localised_name = {'name.basic-'.. chests[i]}
-        entity.localised_description = {'description.basic-'.. chests[i]}
+        entity.name = 'basic-' .. c
+        entity.minable.result = 'basic-' .. c
+        entity.localised_name = {'name.basic-'.. c}
+        entity.localised_description = {'description.basic-'.. c}
         data:extend({entity})
 
         data:extend({{
             type = 'recipe',
-            name = 'basic-' .. chests[i],
+            name = 'basic-' .. c,
             energy_required = 2,
             enabled = false,
-            ingredients = {{chests[i], 1}},
-            results = {{name = 'basic-' .. chests[i], amount = 1}},
-            localised_name = {'name.basic-'.. chests[i]},
-            localised_description = {'description.basic-'.. chests[i]}
+            ingredients = {{c, 1}},
+            results = {{name = 'basic-' .. c, amount = 1}},
+            localised_name = {'name.basic-'.. c},
+            localised_description = {'description.basic-'.. c}
         }})
     end
 
     table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='basic-steel-chest'})
-    table.insert(data.raw.technology['construction-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-passive-provider'})
-    table.insert(data.raw.technology['construction-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-storage'})
-    table.insert(data.raw.technology['logistic-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-passive-provider'})
-    table.insert(data.raw.technology['logistic-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-storage'})
-    table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-active-provider'})
-    table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-buffer'})
-    table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-requester'})
+
+    for _, t in pairs({'construction', 'logistic'}) do
+        for _, r in pairs({'passive-provider', 'storage'}) do
+            table.insert(data.raw.technology[t .. '-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-' .. r})
+        end
+    end
+
+    for _, r in pairs({'active-provider', 'buffer', 'requester'}) do
+        table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-' .. r})
+    end
 end
 
 for _, v in pairs(items['item']) do
