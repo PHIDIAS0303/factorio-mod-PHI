@@ -125,7 +125,7 @@ function main.EEE(source, tier)
             if (source.name == 'heat-exchanger') then
                 item.target_temperature = 15 + (485 * tier)
                 item.energy_source.min_working_temperature = 15 + (485 * tier)
-                item.energy_source.max_temperature = math.ceil(item.energy_source.max_temperature / 2 * (tier + 1))
+                item.energy_source.max_temperature = item.energy_source.max_temperature * tier
                 item.energy_source.max_transfer = tostring(tonumber(string.match(item.energy_source.max_transfer, '[%d%.]+')) * tier) .. string.match(item.energy_source.max_transfer, '%a+')
 
             else
@@ -145,14 +145,14 @@ function main.EEE(source, tier)
 
         elseif (source.type == 'reactor') then
             item.consumption = tostring(tonumber(string.match(item.consumption, '[%d%.]+')) * tier) .. string.match(item.consumption, '%a+')
-            item.heat_buffer.max_temperature = math.ceil(item.heat_buffer.max_temperature / 2 * (tier + 1))
-            item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * (tier + 1))  .. string.match(item.heat_buffer.max_transfer, '%a+')
+            item.heat_buffer.max_temperature = item.heat_buffer.max_temperature * tier
+            item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * tier)  .. string.match(item.heat_buffer.max_transfer, '%a+')
 
             tint_handle(item, tier, {'connection_patches_connected', 'connection_patches_disconnected', 'heat_connection_patches_connected', 'heat_connection_patches_disconnected', 'lower_layer_picture'})
 
         elseif (source.type == 'heat-pipe') then
-            item.heat_buffer.max_temperature = math.ceil(item.heat_buffer.max_temperature / 2 * (tier + 1))
-            item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * (tier + 1))  .. string.match(item.heat_buffer.max_transfer, '%a+')
+            item.heat_buffer.max_temperature = item.heat_buffer.max_temperature * tier
+            item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * tier)  .. string.match(item.heat_buffer.max_transfer, '%a+')
 
             tint_handle(item, tier, {'connection_sprites', 'heat_glow_sprites'})
         end
