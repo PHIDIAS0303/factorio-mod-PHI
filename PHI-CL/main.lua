@@ -48,10 +48,6 @@ end
 function main.EEE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
 
-    if not item then
-        return
-    end
-
     item.name = source.name .. '-' .. tier
     item.minable.result = item.name
     item.max_health = item.max_health * (tier - source.min + 2)
@@ -199,7 +195,7 @@ function main.EEE(source, tier)
         local eu = tonumber(string.match(item.active_energy_usage, '[%d%.]+'))
         local euu = string.match(item.active_energy_usage, '%a+')
         item.active_energy_usage = eu * (2 ^ (tier - source.min + 1)) .. euu
-        item.rocket_parts_required = 200 * (tier - source.min + 1)
+        item.rocket_parts_required = item.rocket_parts_required * (tier - source.min + 2)
         item.rocket_result_inventory_size = math.ceil(data.raw['item']['satellite'].rocket_launch_product[2] * 3 * (tier - source.min + 1) / data.raw['tool']['space-science-pack'].stack_size)
 
         tint_handle(item, tier, {'arm_01_back_animation', 'arm_02_right_animation', 'arm_03_front_animation', 'base_day_sprite', 'base_front_sprite', 'door_back_sprite', 'door_front_sprite', 'hole_sprite', 'rocket_glow_overlay_sprite', 'rocket_shadow_overlay_sprite', 'satellite_animation'})
@@ -374,10 +370,6 @@ end
 -- item
 function main.EI(source, tier)
     local item = table.deepcopy(data.raw.item[source.ref_name])
-
-    if not item then
-        return
-    end
 
     if source.category == 'equipment' then
         item['name'] = source.name .. '-mk' .. tier .. '-equipment'
@@ -556,10 +548,6 @@ end
 
 -- fast replace group
 function main.EL(source)
-    if not data.raw[source.type][source.ref_name] then
-        return
-    end
-
     if not data.raw[source.type][source.ref_name].fast_replaceable_group then
         data.raw[source.type][source.ref_name].fast_replaceable_group = source.ref_name
     end
