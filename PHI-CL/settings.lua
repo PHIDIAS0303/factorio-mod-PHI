@@ -222,11 +222,18 @@ data:extend({
     allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
     order = 'E06'
   }, {
+    type = 'int-setting',
+    name = 'PHI-MI-PIPE',
+    setting_type = 'startup',
+    default_value = 1,
+    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
+    order = 'E07'
+  }, {
     type = 'bool-setting',
     name = 'PHI-MI-ARTILLERY',
     setting_type = 'startup',
     default_value = true,
-    order = 'E07'
+    order = 'E08'
   }, {
     type = 'bool-setting',
     name = 'PHI-RS',

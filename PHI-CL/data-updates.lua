@@ -82,6 +82,14 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-NUCLEAR'].value
     data.raw['reactor']['nuclear-reactor'].scale_energy_usage = true
 end
 
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
+    for _, t in pairs({data.raw['pipe'], data.raw['pipe-to-ground']}) do
+        for _, v in pairs(t) do
+            v.height = v.height * ((1 + settings.startup['PHI-MI-PIPE'].value) / 2)
+        end
+    end
+end
+
 if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.startup['PHI-MB-MINING-TIER'].value > 1 then
     data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'se-core-miner-drill'
 
