@@ -742,10 +742,6 @@ if mods then
         }
     end
 
-    if mods['Atomic_Overhaul'] then
-        items['item']['centrifuge'].stage = 2
-    end
-
     if mods['Krastorio2'] then
         items['item']['solar-panel'].base = 100
         items['item']['accumulator'].base = 10
@@ -763,6 +759,17 @@ if mods then
         items['item']['heat-pipe'].temp = 400
 
         items['item']['lab'].stage = 2
+
+        items['item']['kr-mineral-water-pumpjack'] = {
+            enabled = settings.startup['PHI-MB'].value,
+            stage = 2,
+            type = 'mining-drill',
+            name = 'kr-mineral-water-pumpjack',
+            ref_name = 'kr-mineral-water-pumpjack',
+            tech = 'kr-mineral-water-gathering',
+            min = 2,
+            max = settings.startup['PHI-MB-MINING-TIER'].value
+        }
 
         items['item']['kr-gas-power-station'] = {
             enabled = settings.startup['PHI-EN'].value,
