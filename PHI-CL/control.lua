@@ -1,26 +1,23 @@
 local items = require 'config'
 
 if settings.startup['PHI-XC'].value then
-    local function clock_display(sec)
-        local s = math.floor(sec) % 60
-        local m = math.floor(sec / 60) % 60
+    script.on_nth_tick(60, function(event)
+        local ts = math.floor(event.tick / 60)
+        local c
 
-        if sec > 3599 then
-            local h = math.floor(sec / 3600)
-            return string.format('%d:%02d:%02d', h, m, s)
+        if ts > 3599 then
+            c = string.format('%d:%02d:%02d', math.floor(ts / 3600), math.floor(ts / 60) % 60, math.floor(ts) % 60)
 
         else
-            return string.format('%d:%02d', m, s)
+            c = string.format('%d:%02d', math.floor(ts / 60) % 60, math.floor(ts) % 60)
         end
-    end
 
-    script.on_nth_tick(60, function(event)
-        for _, player in pairs(game.connected_players) do
-            if player.gui.top.phi_clock == nil then
-                player.gui.top.add{type='button', name='phi_clock'}
+        for _, p in pairs(game.connected_players) do
+            if p.gui.top.phi_clock == nil then
+                p.gui.top.add{type='button', name='phi_clock'}
             end
 
-            player.gui.top.phi_clock.caption = clock_display(math.floor(event.tick / 60))
+            p.gui.top.phi_clock.caption = c
         end
     end)
 end
