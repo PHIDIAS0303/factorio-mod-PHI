@@ -10,7 +10,14 @@ if settings.startup['PHI-MB'].value then
     for i=2, 3 do
         item = table.deepcopy(data.raw['item']['satellite'])
         item.name = 'satellite-' .. i
-        item.rocket_launch_product = {type='item', name='space-science-pack', amount=1000 * (2 ^ (i - 1))}
+
+        if mods['space-exploration'] then
+            item.rocket_launch_product = {'se-satellite-telemetry', 100 * (2 ^ (i - 1))}
+
+        else
+            item.rocket_launch_product[2] = item.rocket_launch_product[2] * (2 ^ (i - 1))
+        end
+
         item.icons = {
             {
                 icon = '__base__/graphics/icons/satellite.png',
@@ -52,6 +59,28 @@ if settings.startup['PHI-MB'].value then
     end
 end
 
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-REPAIR'].value then
+    for _, v in pairs(data.raw['repair-tool']) do
+        v.speed = v.speed * settings.startup['PHI-MI-REPAIR'].value
+        v.durability = v.durability * settings.startup['PHI-MI-REPAIR'].value
+    end
+end
+
+if settings.startup['PHI-MI'].value and (tonumber(settings.startup['PHI-MI-LANDFILL'].value) ~= 20) then
+    data.raw.recipe['landfill'].ingredients = {
+        {'stone', tonumber(settings.startup['PHI-MI-LANDFILL'].value)}
+    }
+end
+
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-EFFCY'].value then
+    data.raw['module']['effectivity-module'].effect = {consumption = {bonus = -0.5}, pollution = {bonus = -0.1}}
+    data.raw['module']['effectivity-module-2'].effect = {consumption = {bonus = -1.0}, pollution = {bonus = -0.15}}
+    data.raw['module']['effectivity-module-3'].effect = {consumption = {bonus = -1.5}, pollution = {bonus = -0.2}}
+end
+
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-NUCLEAR'].value then
+    data.raw['reactor']['nuclear-reactor'].scale_energy_usage = true
+end
 
 if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.startup['PHI-MB-MINING-TIER'].value > 1 then
     data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'se-core-miner-drill'
@@ -120,7 +149,6 @@ if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.s
         table.insert(data.raw.technology['se-core-miner'].effects, {type='unlock-recipe', recipe=miner_name})
     end
 end
-
 
 if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value then
     data:extend({

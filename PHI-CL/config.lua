@@ -48,8 +48,7 @@ local items = {
             ref_name = 'solar-panel',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-SOLAR-TIER'].value,
-            base = 60
+            max = settings.startup['PHI-EN-SOLAR-TIER'].value
         },
         ['accumulator'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -59,8 +58,7 @@ local items = {
             ref_name = 'accumulator',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-SOLAR-TIER'].value,
-            base = 5
+            max = settings.startup['PHI-EN-SOLAR-TIER'].value
         },
         ['boiler'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -70,10 +68,7 @@ local items = {
             ref_name = 'boiler',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-STEAM-TIER'].value,
-            base = 1800,
-            temp = 150,
-            fluid = 1
+            max = settings.startup['PHI-EN-STEAM-TIER'].value
         },
         ['steam-engine'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -83,9 +78,7 @@ local items = {
             ref_name = 'steam-engine',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-STEAM-TIER'].value,
-            base = 150,
-            fluid = 0.5
+            max = settings.startup['PHI-EN-STEAM-TIER'].value
         },
         ['nuclear-reactor'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -95,10 +88,7 @@ local items = {
             ref_name = 'nuclear-reactor',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-NUCLEAR-TIER'].value,
-            base = 40,
-            bonus = 1,
-            temp = 500
+            max = settings.startup['PHI-EN-NUCLEAR-TIER'].value
         },
         ['heat-pipe'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -108,8 +98,7 @@ local items = {
             ref_name = 'heat-pipe',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-NUCLEAR-TIER'].value,
-            temp = 500
+            max = settings.startup['PHI-EN-NUCLEAR-TIER'].value
         },
         ['heat-exchanger'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -119,10 +108,7 @@ local items = {
             ref_name = 'heat-exchanger',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-NUCLEAR-TIER'].value,
-            base = 10000,
-            temp = 485,
-            fluid = 103 / 60
+            max = settings.startup['PHI-EN-NUCLEAR-TIER'].value
         },
         ['steam-turbine'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -132,9 +118,7 @@ local items = {
             ref_name = 'steam-turbine',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-NUCLEAR-TIER'].value,
-            base = 485,
-            fluid = 1
+            max = settings.startup['PHI-EN-NUCLEAR-TIER'].value
         },
         ['assembling-machine'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -743,21 +727,6 @@ if mods then
     end
 
     if mods['Krastorio2'] then
-        items['item']['solar-panel'].base = 100
-        items['item']['accumulator'].base = 10
-        items['item']['boiler'].base = 1500
-        items['item']['boiler'].temp = 150
-        items['item']['boiler'].fluid = 1 / 3
-        items['item']['steam-engine'].fluid = 1 / 6
-        items['item']['nuclear-reactor'].base = 250
-        items['item']['nuclear-reactor'].bonus = 0.25
-        items['item']['heat-exchanger'].base = 50000
-        items['item']['heat-exchanger'].temp = 400
-        items['item']['heat-exchanger'].fluid = 25 / 6
-        items['item']['steam-turbine'].base = 400
-        items['item']['steam-turbine'].fluid = 5 / 6
-        items['item']['heat-pipe'].temp = 400
-
         items['item']['lab'].stage = 2
 
         items['item']['kr-mineral-water-pumpjack'] = {
@@ -779,8 +748,7 @@ if mods then
             ref_name = 'kr-gas-power-station',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-STEAM-TIER'].value,
-            base = 0.1
+            max = settings.startup['PHI-EN-STEAM-TIER'].value
         }
 
         items['item']['kr-crusher'] = {
@@ -993,11 +961,6 @@ if mods then
         }
     end
 
-    if (not mods['Krastorio2']) and mods['space-exploration'] then
-        items['item']['solar-panel'].base = 60
-        items['item']['accumulator'].base = 5
-    end
-
     if mods['space-exploration'] then
         items['item']['se-space-solar-panel'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -1007,8 +970,7 @@ if mods then
             ref_name = 'se-space-solar-panel',
             tech = 'compound-energy',
             min = 4,
-            max = settings.startup['PHI-EN-SOLAR-TIER'].value,
-            base = 400
+            max = settings.startup['PHI-EN-SOLAR-TIER'].value
         }
 
         items['item']['se-space-assembling-machine'] = {

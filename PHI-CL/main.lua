@@ -48,6 +48,10 @@ end
 function main.EEE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
 
+    if not item then
+        return
+    end
+
     item.name = source.name .. '-' .. tier
     item.minable.result = item.name
     item.max_health = item.max_health * (tier - source.min + 2)
@@ -80,27 +84,11 @@ function main.EEE(source, tier)
         end
     end
 
-    if settings.startup['PHI-MI-PIPE'].value then
-        if item.fluid_boxes then
-            for k, _ in pairs(item.fluid_boxes) do
-                if (item.fluid_boxes[k] and (not item.fluid_boxes[k])) then
-                    if item.fluid_boxes[k].production_type then
-                        item.fluid_boxes[k].height = settings.startup['PHI-MI-PIPE'].value
-
-                        if item.fluid_boxes[k].base_level then
-                            item.fluid_boxes[k].base_level = item.fluid_boxes[k].base_level + settings.startup['PHI-MI-PIPE'].value
-                        end
-                    end
-                end
-            end
-        end
-    end
-
     if source.tech == 'compound-energy' then
         if (source.type == 'accumulator') then
-            item.energy_source.buffer_capacity = (source.base * 4 ^ (tier - source.min + 1)) .. 'MJ'
-            item.energy_source.input_flow_limit = (source.base * 60 * (4 ^ (tier - source.min + 1))) .. 'kW'
-            item.energy_source.output_flow_limit = (source.base * 60 * (4 ^ (tier - source.min + 1))) .. 'kW'
+            item.energy_source.buffer_capacity = tostring(tonumber(string.match(item.energy_source.buffer_capacity, '[%d%.]+')) * (4 ^ (tier - source.min + 1))) .. string.match(item.energy_source.buffer_capacity, '%a+')
+            item.energy_source.input_flow_limit = tostring(tonumber(string.match(item.energy_source.input_flow_limit, '[%d%.]+')) * (4 ^ (tier - source.min + 1))) .. string.match(item.energy_source.input_flow_limit, '%a+')
+            item.energy_source.output_flow_limit = tostring(tonumber(string.match(item.energy_source.output_flow_limit, '[%d%.]+')) * (4 ^ (tier - source.min + 1))) .. string.match(item.energy_source.output_flow_limit, '%a+')
 
             for _, v in pairs({'charge_animation', 'discharge_animation'}) do
                 if item[v] and item[v].layers then
@@ -124,54 +112,47 @@ function main.EEE(source, tier)
 
         elseif (source.type == 'solar-panel') then
             if (source.ref_name == 'solar-panel') then
-                item.production = (source.base * (4 ^ (tier - source.min + 1))) .. 'kW'
+                item.production = tostring(tonumber(string.match(item.production, '[%d%.]+')) * (4 ^ (tier - source.min + 1))) .. string.match(item.production, '%a+')
+
 
             elseif (source.ref_name == 'se-space-solar-panel') then
-                item.production = (source.base * (4 ^ (tier - source.min + 2))) .. 'kW'
+                item.production = tostring(tonumber(string.match(item.production, '[%d%.]+')) * (4 ^ (tier - source.min + 2))) .. string.match(item.production, '%a+')
             end
 
         elseif (source.type == 'boiler') then
-            if settings.startup['PHI-MI-PIPE'].value then
-                item.fluid_box.height = settings.startup['PHI-MI-PIPE'].value
-                item.output_fluid_box.height = settings.startup['PHI-MI-PIPE'].value
-                item.output_fluid_box.base_level = item.output_fluid_box.base_level + settings.startup['PHI-MI-PIPE'].value
-            end
-
-            item.energy_consumption = source.base * tier .. 'kW'
-            item.target_temperature = 15 + (source.temp * tier)
-            item.fluid_usage_per_tick = source.fluid
+            item.energy_consumption = tostring(tonumber(string.match(item.energy_consumption, '[%d%.]+')) * tier) .. string.match(item.energy_consumption, '%a+')
 
             if (source.name == 'heat-exchanger') then
-                item.energy_source.min_working_temperature = 15 + (source.temp * tier)
-                item.energy_source.max_temperature = source.temp * (tier + 1)
-                item.energy_source.max_transfer = 2000 + (2000 * tier) .. 'MW'
+                item.target_temperature = 15 + (485 * tier)
+                item.energy_source.min_working_temperature = 15 + (485 * tier)
+                item.energy_source.max_temperature = math.ceil(item.energy_source.max_temperature / 2 * (tier + 1))
+                item.energy_source.max_transfer = tostring(tonumber(string.match(item.energy_source.max_transfer, '[%d%.]+')) * tier) .. string.match(item.energy_source.max_transfer, '%a+')
+
+            else
+                item.target_temperature = 15 + (150 * tier)
             end
 
         elseif (source.type == 'generator') then
-            if settings.startup['PHI-MI-PIPE'].value then
-                item.fluid_box.height = settings.startup['PHI-MI-PIPE'].value
-            end
-
             if source.name == 'kr-gas-power-station' then
-                item.fluid_usage_per_tick = source.base * tier
                 item.max_power_output = (tonumber(string.match(item.max_power_output, '[%d%.]+')) * (tier - source.min + 2)) .. 'kW'
 
+            elseif (source.name == 'steam-turbine') then
+                item.maximum_temperature = 15 + (485 * tier)
+
             else
-                item.maximum_temperature = 15 + (source.base * tier)
-                item.fluid_usage_per_tick = source.fluid
+                item.maximum_temperature = 15 + (150 * tier)
             end
 
         elseif (source.type == 'reactor') then
-            item.consumption = source.base * tier .. 'MW'
-            item.neighbour_bonus = source.bonus
-            item.heat_buffer.max_temperature = source.temp * (tier + 1)
-            item.heat_buffer.max_transfer = source.temp * (tier + 1) * 0.02 .. 'GW'
+            item.consumption = tostring(tonumber(string.match(item.consumption, '[%d%.]+')) * tier) .. string.match(item.consumption, '%a+')
+            item.heat_buffer.max_temperature = math.ceil(item.heat_buffer.max_temperature / 2 * (tier + 1))
+            item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * (tier + 1))  .. string.match(item.heat_buffer.max_transfer, '%a+')
 
             tint_handle(item, tier, {'connection_patches_connected', 'connection_patches_disconnected', 'heat_connection_patches_connected', 'heat_connection_patches_disconnected', 'lower_layer_picture'})
 
         elseif (source.type == 'heat-pipe') then
-            item.heat_buffer.max_temperature = source.temp * (tier + 1)
-            item.heat_buffer.max_transfer = source.temp * (tier + 1) * 0.01 .. 'GW'
+            item.heat_buffer.max_temperature = math.ceil(item.heat_buffer.max_temperature / 2 * (tier + 1))
+            item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * (tier + 1))  .. string.match(item.heat_buffer.max_transfer, '%a+')
 
             tint_handle(item, tier, {'connection_sprites', 'heat_glow_sprites'})
         end
@@ -400,6 +381,10 @@ end
 function main.EI(source, tier)
     local item = table.deepcopy(data.raw.item[source.ref_name])
 
+    if not item then
+        return
+    end
+
     if source.category == 'equipment' then
         item['name'] = source.name .. '-mk' .. tier .. '-equipment'
         item.placed_as_equipment_result = source.name .. '-mk' .. tier .. '-equipment'
@@ -577,6 +562,10 @@ end
 
 -- fast replace group
 function main.EL(source)
+    if not data.raw[source.type][source.ref_name] then
+        return
+    end
+
     if not data.raw[source.type][source.ref_name].fast_replaceable_group then
         data.raw[source.type][source.ref_name].fast_replaceable_group = source.ref_name
     end
@@ -589,6 +578,45 @@ function main.EL(source)
         for j=source.min + 1, source.max do
             data.raw[source.type][source.name .. '-' .. j].fast_replaceable_group = data.raw[source.type][source.name .. '-' .. (j - 1)].fast_replaceable_group
         end
+    end
+end
+
+-- entity category
+function main.EEEC(source, tier)
+    local category_name = source.type
+
+    if source.name == 'electric-filter-furnace' then
+        category_name = 'assembling-machine'
+    end
+
+    local item_name = source.name .. '-' .. tier
+
+    if not data.raw[category_name][source.ref_name] then
+        return
+    end
+
+    if data.raw[category_name][source.ref_name].crafting_categories then
+        data.raw[category_name][item_name].crafting_categories = {}
+
+        for i=1, #data.raw[category_name][source.ref_name].crafting_categories do
+            table.insert(data.raw[category_name][item_name].crafting_categories, data.raw[category_name][source.ref_name].crafting_categories[i])
+        end
+    end
+
+    if data.raw[category_name][source.ref_name].resource_categories then
+        data.raw[category_name][item_name].resource_categories = {}
+
+        for i=1, #data.raw[category_name][source.ref_name].resource_categories do
+            table.insert(data.raw[category_name][item_name].resource_categories, data.raw[category_name][source.ref_name].resource_categories[i])
+        end
+    end
+
+    if data.raw[category_name][source.ref_name].fuel_categories then
+        data.raw[category_name][item_name].fuel_categories = table.deepcopy(data.raw[category_name][source.ref_name].fuel_categories)
+    end
+
+    if data.raw[category_name][source.ref_name].allowed_effects then
+        data.raw[category_name][item_name].allowed_effects = table.deepcopy(data.raw[category_name][source.ref_name].allowed_effects)
     end
 end
 

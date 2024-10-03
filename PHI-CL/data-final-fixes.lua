@@ -1,6 +1,6 @@
--- local items = require 'config'
--- local main = require 'main'
--- local file_stage = 3
+local items = require 'config'
+local main = require 'main'
+local file_stage = 3
 
 data.raw['utility-constants'].default.zoom_to_world_effect_strength = 0
 data.raw['utility-constants'].default.zoom_to_world_can_use_nightvision = true
@@ -37,46 +37,6 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-ARTILLERY'].val
 	end
 
 	-- data.raw['artillery-projectile']['artillery-projectile'].reveal_map = false
-end
-
-if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
-    for k, _ in pairs(data.raw) do
-        if data.raw[k] then
-            if data.raw[k].fluid_box then
-                if data.raw[k].fluid_box.height < settings.startup['PHI-MI-PIPE'].value then
-                    data.raw[k].fluid_box.height = settings.startup['PHI-MI-PIPE'].value
-                end
-
-                if data.raw[k].fluid_box.base_level < (1 + settings.startup['PHI-MI-PIPE'].value) then
-                    data.raw[k].fluid_box.base_level = 1 + settings.startup['PHI-MI-PIPE'].value
-                end
-            end
-
-            if data.raw[k].output_fluid_box then
-                if data.raw[k].output_fluid_box.height < settings.startup['PHI-MI-PIPE'].value then
-                    data.raw[k].output_fluid_box.height = settings.startup['PHI-MI-PIPE'].value
-                end
-
-                if data.raw[k].output_fluid_box.base_level > (-1 - settings.startup['PHI-MI-PIPE'].value) then
-                    data.raw[k].output_fluid_box.base_level = (-1 - settings.startup['PHI-MI-PIPE'].value)
-                end
-            end
-
-            if data.raw[k].fluid_boxes then
-                for k1, _ in pairs(data.raw[k].fluid_boxes) do
-                    if data.raw[k].fluid_boxes[k1] ~= true and data.raw[k].fluid_boxes[k1] ~= false then
-                        if data.raw[k].fluid_boxes[k1].production_type then
-                            data.raw[k].fluid_boxes[k1].height = settings.startup['PHI-MI-PIPE'].value
-
-                            if data.raw[k].fluid_boxes[k1].base_level then
-                                data.raw[k].fluid_boxes[k1].base_level = 1 + settings.startup['PHI-MI-PIPE'].value
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
 end
 
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TILE'].value then
@@ -118,4 +78,14 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TILE'].value th
 			enemy_expansion = {enabled = false}
 		}
 	}
+end
+
+for _, v in pairs(items['item']) do
+    if (v.stage <= file_stage) and v.enabled and (v.max >= v.min) then
+        v.category = 'item'
+
+        for j=v.min, v.max, 1 do
+            main.EEEC(v, j)
+        end
+    end
 end
