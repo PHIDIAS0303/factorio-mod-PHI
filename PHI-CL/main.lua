@@ -121,26 +121,20 @@ function main.EEE(source, tier)
 
         elseif (source.type == 'boiler') then
             item.energy_consumption = tostring(tonumber(string.match(item.energy_consumption, '[%d%.]+')) * tier) .. string.match(item.energy_consumption, '%a+')
+            item.target_temperature = 15 + ((item.target_temperature - 15) * tier)
 
             if (source.name == 'heat-exchanger') then
-                item.target_temperature = 15 + (485 * tier)
-                item.energy_source.min_working_temperature = 15 + (485 * tier)
+                item.energy_source.min_working_temperature = 15 + ((item.energy_source.min_working_temperature - 15) * tier)
                 item.energy_source.max_temperature = item.energy_source.max_temperature * tier
                 item.energy_source.max_transfer = tostring(tonumber(string.match(item.energy_source.max_transfer, '[%d%.]+')) * tier) .. string.match(item.energy_source.max_transfer, '%a+')
-
-            else
-                item.target_temperature = 15 + (150 * tier)
             end
 
         elseif (source.type == 'generator') then
             if source.name == 'kr-gas-power-station' then
-                item.max_power_output = (tonumber(string.match(item.max_power_output, '[%d%.]+')) * (tier - source.min + 2)) .. 'kW'
-
-            elseif (source.name == 'steam-turbine') then
-                item.maximum_temperature = 15 + (485 * tier)
+                item.max_power_output = (tonumber(string.match(item.max_power_output, '[%d%.]+')) * (tier - source.min + 2)) .. string.match(item.max_power_output, '%a+')
 
             else
-                item.maximum_temperature = 15 + (150 * tier)
+                item.maximum_temperature = 15 + ((item.maximum_temperature - 15) * tier)
             end
 
         elseif (source.type == 'reactor') then
