@@ -1,13 +1,13 @@
 {
     "name": "PHI-CL",
-    "version": "2.0.43",
+    "version": "2.0.45",
     "factorio_version": "1.1",
-    "date": "2024-09-29",
+    "date": "2024-10-03",
     "title": "Phidias Collection",
     "author": "PHIDIAS0303",
     "contributers": "",
     "homepage": "",
-    "description": "Additional compound entities and items\nPower item like solar panel, accumulator\nWeapon like laser turret\nPersonal Equipment like fusion reactor\nRecipe scaling\nWater pump placement anywhere",
+    "description": "Additional compound entities and items to reduce the space needed\nSuch as better solar panel, accumulator\nAnd other feature such as water pump placement anywhere, large range radar, trash chest and pipe, passive power void, linked chest, empty world generation",
     "dependencies": [
         "base >= 1.1.0",
         "? aai-industry >= 0.5.0",
@@ -15,7 +15,6 @@
         "? space-exploration >= 0.6.0",
         "(?) big-mining-drill >= 0.1.0",
         "(?) angelsrefining >= 0.12.0",
-        "(?) exotic-industries >= 0.6.0",
-        "(?) Atomic_Overhaul >= 1.3.0"
+        "(?) exotic-industries >= 0.6.0"
     ]
 }
