@@ -229,11 +229,25 @@ data:extend({
     allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
     order = 'E07'
   }, {
+    type = 'int-setting',
+    name = 'PHI-MI-ROBOT',
+    setting_type = 'startup',
+    default_value = 1,
+    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
+    order = 'E08'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-MI-TRAIN',
+    setting_type = 'startup',
+    default_value = 1,
+    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
+    order = 'E09'
+  }, {
     type = 'bool-setting',
     name = 'PHI-MI-ARTILLERY',
     setting_type = 'startup',
     default_value = true,
-    order = 'E08'
+    order = 'E10'
   }, {
     type = 'bool-setting',
     name = 'PHI-RS',

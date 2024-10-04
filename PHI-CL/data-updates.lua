@@ -83,15 +83,47 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-NUCLEAR'].value
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
+    local s = (1 + settings.startup['PHI-MI-PIPE'].value) / 2
+
     for _, t in pairs({data.raw['pipe'], data.raw['pipe-to-ground']}) do
         for _, v in pairs(t) do
-            v.fluid_box.height = v.fluid_box.height * ((1 + settings.startup['PHI-MI-PIPE'].value) / 2)
+            v.fluid_box.height = v.fluid_box.height * s
         end
     end
 
     for _, v in pairs(data.raw['pump']) do
-        v.fluid_box.height = v.fluid_box.height * ((1 + settings.startup['PHI-MI-PIPE'].value) / 2)
-        v.pumping_speed = v.pumping_speed * ((1 + settings.startup['PHI-MI-PIPE'].value) / 2)
+        v.fluid_box.height = v.fluid_box.height * s
+        v.pumping_speed = v.pumping_speed * s
+    end
+end
+
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-ROBOT'].value then
+    local s = (1 + settings.startup['PHI-MI-ROBOT'].value) / 2
+    local sn = (17 - settings.startup['PHI-MI-ROBOT'].value) / 16
+
+    for _, t in pairs({data.raw['construction-robot'], data.raw['logistic-robot']}) do
+        for _, v in pairs(t) do
+            v.speed = v.speed * s
+            v.energy_per_tick = tostring(tonumber(string.match(v.energy_per_tick, '[%d%.]+')) * sn) .. string.match(v.energy_per_tick, '%a+')
+            v.energy_per_move = tostring(tonumber(string.match(v.energy_per_move, '[%d%.]+')) * sn) .. string.match(v.energy_per_move, '%a+')
+        end
+    end
+end
+
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-TRAIN'].value then
+    local s = (7 + settings.startup['PHI-MI-TRAIN'].value) / 8
+
+    for _, t in pairs({data.raw['locomotive'], data.raw['cargo-wagon'], data.raw['fluid-wagon'], data.raw['artillery-wagon']}) do
+        for _, v in pairs(t) do
+            v.max_health = v.max_health * s
+            v.max_speed = v.max_speed * s
+            v.braking_force = v.braking_force * s
+
+            if v.max_power then
+                v.max_power = tostring(tonumber(string.match(v.max_power, '[%d%.]+')) * s) .. string.match(v.max_power, '%a+')
+                v.reversing_power_modifier = 1
+            end
+        end
     end
 end
 
