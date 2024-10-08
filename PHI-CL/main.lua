@@ -276,74 +276,77 @@ function main.EEQ(source, tier)
 
     item.name = source.name .. '-mk' .. tier .. '-equipment'
 
-    if (source.type == 'solar-equipment') or (source.type == 'fusion-equipment') then
+    if item.power then
         item.power = tostring(tonumber(string.match(item.power, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.power, '%a+')
-
-    elseif (source.type == 'battery-equipment') then
-        item['energy_source']['buffer_capacity'] = tostring(tonumber(string.match(item['energy_source']['buffer_capacity'], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item['energy_source']['buffer_capacity'], '%a+')
     end
 
-    --[[
-    elseif (source.name == 'personal-laser-defense') then
-        item['energy_source'] = {type = 'electric', usage_priority = 'secondary-input', buffer_capacity = (250 * (2 ^ (tier - source.min + 1))) .. 'kJ'}
-        -- item['source_direction_count'] = 64
-        -- item['source_offset'] = {0, -3.423489 / 4}
-        item['attack_parameters'] = {type = 'beam', cooldown = 40, range = (18 + tier), damage_modifier = (source.base * (2 ^ (tier - source.min + 1))), ammo_type = {category = 'laser', energy_consumption = (50 * (2 ^ (tier - 1))) .. 'kJ', action = {type = 'direct', action_delivery = {type = 'beam', beam = 'laser-beam', max_length = (18 + tier), duration = 60, source_offset = {0, -1.31439}}}}}
-        item['automatic'] = true
+    if item.energy_source then
+        if item.energy_source.buffer_capacity then
+            item.energy_source.buffer_capacity = tostring(tonumber(string.match(item.energy_source.buffer_capacity, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source.buffer_capacity, '%a+')
+        end
 
-    elseif (source.name == 'energy-shield') then
-        item['energy_source'] = {type = 'electric', usage_priority = 'primary-input', input_flow_limit = (source.base * 4 * (2 ^ (tier - source.min + 1))) .. 'kW', buffer_capacity = (source.base * 2 * (2 ^ (tier - 1))) .. 'kJ'}
-        item['max_shield_value'] = (source.base * (2 ^ (tier - 2)))
-        item['energy_per_shield'] = '80kJ'
-
-    elseif (source.name == 'personal-roboport') then
-        item['energy_source'] = {type = 'electric', usage_priority = 'secondary-input', buffer_capacity = (source.base * 32 * (2 ^ (tier - source.min + 1))) .. 'MJ'}
-        item['robot_limit'] = 50
-        item['construction_radius'] = 32
-        item['spawn_and_station_height'] = 0.4
-        item['spawn_and_station_shadow_height_offset'] = 0.5
-        item['charge_approach_distance'] = 2.6
-        item['robots_shrink_when_entering_and_exiting'] = true
-        item['recharging_animation'] = {filename = '__base__/graphics/entity/roboport/roboport-recharging.png', draw_as_glow = true, priority = 'high', width = 37, height = 35, frame_count = 16, scale = 1.5, animation_speed = 0.5}
-        item['recharging_light'] = {intensity = 0.2, size = 3, color = {r = 0.5, g = 0.5, b = 1.0}}
-        item['stationing_offset'] = {0, -0.6}
-        item['charging_station_shift'] = {0, 0.5}
-        item['charging_station_count'] = 16
-        item['charging_energy'] = (source.base * (2 ^ (tier - source.min + 1))) .. 'MW'
-        item['charging_distance'] = 1.6
-        item['charging_threshold_distance'] = 5
-
-    elseif (source.name == 'night-vision') then
-        item['energy_source'] = {type = 'electric', usage_priority = 'primary-input', buffer_capacity = '240kJ'}
-        item['energy_input'] = '20kW'
-        item['activate_sound'] = {filename = '__base__/sound/nightvision-on.ogg', volume = 0.5}
-        item['deactivate_sound'] = {filename = '__base__/sound/nightvision-off.ogg', volume = 0.5}
-        item['darkness_to_turn_on'] = 0
-        item['color_lookup'] = {{0, '__core__/graphics/color_luts/lut-sunset.png'}}
-
-    elseif (source.name == 'exoskeleton') then
-        item['energy_source'] = {type = 'electric', usage_priority = 'secondary-input', buffer_capacity = '10MJ'}
-        item['energy_consumption'] = '400kW'
-        item['movement_bonus'] = source.base
+        if item.energy_source.input_flow_limit then
+            item.energy_source.input_flow_limit = tostring(tonumber(string.match(item.energy_source.input_flow_limit, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source.input_flow_limit, '%a+')
+        end
     end
 
-    item['shape'] = {width = w, height = h, type = 'full'}
-    item['sprite'] = {
-        filename = '__base__/graphics/equipment/' .. source.graphics_name .. '.png',
-        width = w * 32,
-        height = h * 32,
-        priority = 'medium',
-        tint = items['tint'][tier],
-        hr_version = {
-            filename = '__base__/graphics/equipment/hr-' .. source.graphics_name .. '.png',
-            width = w * 64,
-            height = h * 64,
-            priority = 'medium',
-            scale = 0.5,
-            tint = items['tint'][tier]
-        }
-    }
-    ]]
+    if item.energy_consumption then
+        item.energy_consumption = tostring(tonumber(string.match(item.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_consumption, '%a+')
+
+    elseif item.energy_input then
+        item.energy_input = tostring(tonumber(string.match(item.energy_input, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_input, '%a+')
+    end
+
+    if item.darkness_to_turn_on and item.color_lookup then
+        item.darkness_to_turn_on = 0
+        item.color_lookup = {{0, '__core__/graphics/color_luts/lut-sunset.png'}}
+
+    elseif item.attack_parameters then
+        if item.attack_parameters.cooldown then
+            item.attack_parameters.cooldown = math.floor(item.attack_parameters.cooldown * ((32 - tier) / 32))
+        end
+
+        if item.attack_parameters.damage_modifier then
+            item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * (2 ^ (tier - source.min + 1))
+        end
+
+        if item.attack_parameters.ammo_type then
+            if item.attack_parameters.ammo_type.energy_consumption then
+                item.attack_parameters.ammo_type.energy_consumption = tostring(tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+')
+            end
+
+            if item.attack_parameters.ammo_type.action_delivery then
+
+                if item.attack_parameters.ammo_type.action_delivery then
+                    item.attack_parameters.ammo_type.action_delivery.max_length = item.attack_parameters.ammo_type.action_delivery.max_length + tier
+                end
+            end
+        end
+
+        if item.attack_parameters.range then
+            item.attack_parameters.range = item.attack_parameters.range + tier
+        end
+
+    elseif item.max_shield_value then
+        item.max_shield_value = item.max_shield_value * (2 ^ (tier - source.min + 1))
+
+    elseif item.movement_bonus then
+        item.movement_bonus = item.movement_bonus * (2 ^ (tier - source.min + 1))
+
+    elseif item.charging_energy then
+        item.charging_energy = tostring(tonumber(string.match(item.charging_energy, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.charging_energy, '%a+')
+
+        if item.charging_station_count then
+            item.charging_station_count = math.max(item.charging_station_count, 16)
+        end
+    end
+
+    item.sprite.tint = items['tint'][tier]
+
+    if item.sprite.hr_version then
+        item.sprite.hr_version.tint = items['tint'][tier]
+    end
+
     item.localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tier}
     item.localised_description = {'description.' .. source.ref_name}
 
@@ -355,7 +358,7 @@ function main.EI(source, tier)
     local item = table.deepcopy(data.raw.item[source.ref_name])
 
     if source.category == 'equipment' then
-        item['name'] = source.name .. '-mk' .. tier .. '-equipment'
+        item.name = source.name .. '-mk' .. tier .. '-equipment'
         item.placed_as_equipment_result = source.name .. '-mk' .. tier .. '-equipment'
 
     else

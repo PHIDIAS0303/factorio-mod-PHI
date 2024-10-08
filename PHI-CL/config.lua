@@ -285,9 +285,7 @@ local items = {
             ref_name = 'fusion-reactor-equipment',
             tech = 'fusion-reactor-equipment',
             min = 2,
-            max = settings.startup['PHI-EQ-REACTOR-TIER'].value,
-            base = 750,
-            graphics_name = 'fusion-reactor-equipment'
+            max = settings.startup['PHI-EQ-REACTOR-TIER'].value
         },
         ['battery-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -297,9 +295,7 @@ local items = {
             ref_name = 'battery-mk2-equipment',
             tech = 'battery-mk2-equipment',
             min = 3,
-            max = settings.startup['PHI-EQ-BATTERY-TIER'].value,
-            base = 100,
-            graphics_name = 'battery-mk2-equipment'
+            max = settings.startup['PHI-EQ-BATTERY-TIER'].value
         },
         ['personal-laser-defense-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -309,9 +305,7 @@ local items = {
             ref_name = 'personal-laser-defense-equipment',
             tech = 'personal-laser-defense-equipment',
             min = 2,
-            max = settings.startup['PHI-EQ-LASER-TIER'].value,
-            base = 3,
-            graphics_name = 'personal-laser-defense-equipment'
+            max = settings.startup['PHI-EQ-LASER-TIER'].value
         },
         ['energy-shield-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -321,9 +315,7 @@ local items = {
             ref_name = 'energy-shield-mk2-equipment',
             tech = 'energy-shield-mk2-equipment',
             min = 3,
-            max = settings.startup['PHI-EQ-SHIELD-TIER'].value,
-            base = 150,
-            graphics_name = 'energy-shield-mk2-equipment'
+            max = settings.startup['PHI-EQ-SHIELD-TIER'].value
         },
         ['personal-roboport-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -333,9 +325,7 @@ local items = {
             ref_name = 'personal-roboport-mk2-equipment',
             tech = 'personal-roboport-mk2-equipment',
             min = 3,
-            max = settings.startup['PHI-EQ-ROBOPORT-TIER'].value,
-            base = 0.5,
-            graphics_name = 'personal-roboport-mk2-equipment'
+            max = settings.startup['PHI-EQ-ROBOPORT-TIER'].value
         },
         ['night-vision-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -345,8 +335,7 @@ local items = {
             ref_name = 'night-vision-equipment',
             tech = 'night-vision-equipment',
             min = 2,
-            max = settings.startup['PHI-EQ-NIGHT-TIER'].value,
-            graphics_name = 'night-vision-equipment'
+            max = settings.startup['PHI-EQ-NIGHT-TIER'].value
         },
         ['exoskeleton-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -356,9 +345,7 @@ local items = {
             ref_name = 'exoskeleton-equipment',
             tech = 'exoskeleton-equipment',
             min = 2,
-            max = settings.startup['PHI-EQ-EXO-TIER'].value,
-            base = 0.6,
-            graphics_name = 'exoskeleton-equipment'
+            max = settings.startup['PHI-EQ-EXO-TIER'].value
         }
     },
     ['bonus'] = {
