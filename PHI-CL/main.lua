@@ -288,6 +288,10 @@ function main.EEQ(source, tier)
         if item.energy_source.input_flow_limit then
             item.energy_source.input_flow_limit = tostring(tonumber(string.match(item.energy_source.input_flow_limit, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source.input_flow_limit, '%a+')
         end
+
+        if item.energy_source.output_flow_limit then
+            item.energy_source.output_flow_limit = tostring(tonumber(string.match(item.energy_source.output_flow_limit, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source.output_flow_limit, '%a+')
+        end
     end
 
     if item.energy_consumption then
@@ -335,7 +339,7 @@ function main.EEQ(source, tier)
         item.movement_bonus = item.movement_bonus * (2 ^ (tier - source.min + 1))
 
     elseif item.charging_energy and item.charging_station_count then
-        item.charging_station_count = math.max(item.charging_station_count, 8)
+        item.charging_station_count = math.max(item.charging_station_count, 4)
         item.charging_energy = tostring(tonumber(string.match(item.charging_energy, '[%d%.]+')) * (2 ^ (tier - source.min + 2))) .. string.match(item.charging_energy, '%a+')
     end
 
