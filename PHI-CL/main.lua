@@ -303,7 +303,7 @@ function main.EEQ(source, tier)
 
     elseif item.attack_parameters then
         if item.attack_parameters.cooldown then
-            item.attack_parameters.cooldown = math.floor(item.attack_parameters.cooldown * ((32 - tier) / 32))
+            item.attack_parameters.cooldown = math.floor(item.attack_parameters.cooldown * ((32 - (tier - source.min + 1)) / 32))
         end
 
         if item.attack_parameters.damage_modifier then
@@ -318,25 +318,25 @@ function main.EEQ(source, tier)
             if item.attack_parameters.ammo_type.action_delivery then
 
                 if item.attack_parameters.ammo_type.action_delivery then
-                    item.attack_parameters.ammo_type.action_delivery.max_length = item.attack_parameters.ammo_type.action_delivery.max_length + tier - 1
+                    item.attack_parameters.ammo_type.action_delivery.max_length = item.attack_parameters.ammo_type.action_delivery.max_length + (tier - source.min + 1)
                 end
             end
         end
 
         if item.attack_parameters.range then
-            item.attack_parameters.range = item.attack_parameters.range + tier - 1
+            item.attack_parameters.range = item.attack_parameters.range + (tier - source.min + 1)
         end
 
     elseif item.max_shield_value and item.energy_per_shield then
         item.max_shield_value = item.max_shield_value * (2 ^ (tier - source.min + 1))
-        item.energy_per_shield = math.floor(item.energy_per_shield * ((32 - tier) / 32))
+        item.energy_per_shield = tostring(math.floor(tonumber(string.match(item.energy_per_shield, '[%d%.]+')) * ((32 - (tier - source.min + 1)) / 32))) .. string.match(item.energy_per_shield, '%a+')
 
     elseif item.movement_bonus then
         item.movement_bonus = item.movement_bonus * (2 ^ (tier - source.min + 1))
 
     elseif item.charging_energy and item.charging_station_count then
-        item.charging_energy = tostring(tonumber(string.match(item.charging_energy, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.charging_energy, '%a+')
         item.charging_station_count = math.max(item.charging_station_count, 8)
+        item.charging_energy = tostring(tonumber(string.match(item.charging_energy, '[%d%.]+')) * (2 ^ (tier - source.min + 2))) .. string.match(item.charging_energy, '%a+')
     end
 
     if item.sprite then

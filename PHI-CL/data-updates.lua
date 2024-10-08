@@ -783,10 +783,12 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
             type = 'armor',
             name = 'power-armor-mk3',
             icons = {
-                icon = '__base__/graphics/icons/power-armor-mk2.png',
-                tint = items['tint'][2],
-                icon_size = 64,
-                icon_mipmaps = 4
+                {
+                    icon = '__base__/graphics/icons/power-armor-mk2.png',
+                    tint = items['tint'][2],
+                    icon_size = 64,
+                    icon_mipmaps = 4
+                }
             },
             resistances = {
                 {
@@ -961,7 +963,7 @@ if settings.startup['PHI-RS'].value then
                     item = table.deepcopy(data.raw.recipe[k])
                     item.enabled = false
                     item.name = k .. '-s' .. j
-                    
+
                     if other_recipe_name[k] then
                         item.localised_name = {'phi-cl.combine', {'name.' .. k}, j}
                         item.localised_description = {'description.' .. k}
