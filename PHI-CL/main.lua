@@ -272,19 +272,21 @@ end
 
 -- equipment
 function main.EEQ(source, tier)
-    local item = {}
+    local item = table.deepcopy(data.raw[source.type][source.ref_name])
+    -- local item = {}
 
     item['name'] = source.name .. '-mk' .. tier .. '-equipment'
     item['type'] = source.type
     item['categories'] = {'armor'}
 
-    local w = 1
-    local h = 1
+    -- local w = 1
+    -- local h = 1
 
     if (source.name == 'solar-panel') then
-        item['power'] = (source.base * (2 ^ (tier - source.min + 1))) .. 'kW'
-        item['energy_source'] = {type = 'electric', usage_priority = 'primary-output'}
-
+        item.power = tostring(tonumber(string.match(item.power, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.power, '%a+')
+        -- item['energy_source'] = {type = 'electric', usage_priority = 'primary-output'}
+    end
+    --[[
     elseif (source.name == 'battery') then
         h = 2
         item['energy_source'] = {type = 'electric', usage_priority = 'tertiary', buffer_capacity= (source.base * (2 ^ (tier - source.min + 1))) .. 'MJ'}
@@ -364,7 +366,7 @@ function main.EEQ(source, tier)
             tint = items['tint'][tier]
         }
     }
-
+    ]]
     item.localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tier}
     item.localised_description = {'description.' .. source.ref_name}
 
