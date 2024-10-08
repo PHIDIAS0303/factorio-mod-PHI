@@ -126,8 +126,12 @@ function main.EEE(source, tier)
             end
 
         elseif (source.type == 'generator') then
-            if source.name == 'kr-gas-power-station' then
+            if item.max_power_output then
                 item.max_power_output = (tonumber(string.match(item.max_power_output, '[%d%.]+')) * (tier - source.min + 2)) .. string.match(item.max_power_output, '%a+')
+            end
+
+            if source.name == 'kr-gas-power-station' then
+                item.fluid_usage_per_tick = item.fluid_usage_per_tick * (tier - source.min + 2)
 
             else
                 item.maximum_temperature = 15 + ((item.maximum_temperature - 15) * tier)
@@ -207,7 +211,7 @@ function main.EEE(source, tier)
     if item.energy_source then
         if item.energy_source.emissions_per_minute then
             if source.tech == 'compound-energy' then
-                if (source.type == 'boiler') then
+                if (source.type == 'boiler') or (source.name == 'kr-gas-power-station') then
                     item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (tier - source.min + 2)
 
                 else

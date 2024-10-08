@@ -728,6 +728,12 @@ if mods then
 
     if mods['Krastorio2'] then
         items['item']['lab'].stage = 2
+        items['item']['boiler'].stage = 2
+        items['item']['steam-engine'].stage = 2
+        items['item']['nuclear-reactor'].stage = 2
+        items['item']['heat-pipe'].stage = 2
+        items['item']['heat-exchanger'].stage = 2
+        items['item']['steam-turbine'].stage = 2
 
         items['item']['kr-mineral-water-pumpjack'] = {
             enabled = settings.startup['PHI-MB'].value,

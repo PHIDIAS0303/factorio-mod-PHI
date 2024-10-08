@@ -80,6 +80,14 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TILE'].value th
 	}
 end
 
+if settings.startup['PHI-RS'].value then
+    data.raw['assembling-machine']['electric-filter-furnace'].crafting_categories = {}
+
+    for i=1, #data.raw['furnace']['electric-furnace'].crafting_categories do
+        table.insert(data.raw['assembling-machine']['electric-filter-furnace'].crafting_categories, data.raw['furnace']['electric-furnace'].crafting_categories[i])
+    end
+end
+
 for _, v in pairs(items['item']) do
     if (v.stage <= file_stage) and v.enabled and (v.max >= v.min) then
         v.category = 'item'
