@@ -57,10 +57,10 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-RADAR'].value t
 
     item.icons = {
         {
-            icon = '__base__/graphics/icons/radar.png',
+            icon = item.icon or '__base__/graphics/icons/radar.png',
             tint = items['tint'][8],
-            icon_size = 64,
-            icon_mipmaps = 4
+            icon_size = item.icon_size or 64,
+            icon_mipmaps = item.icon_mipmaps or 4
         }
     }
 
@@ -103,10 +103,10 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRASH'].value t
 
     item.icons = {
         {
-            icon = '__base__/graphics/icons/steel-chest.png',
+            icon = item.icon or '__base__/graphics/icons/steel-chest.png',
             tint = items['tint'][8],
-            icon_size = 64,
-            icon_mipmaps = 4
+            icon_size = item.icon_size or 64,
+            icon_mipmaps = item.icon_mipmaps or 4
         }
     }
 
@@ -155,10 +155,10 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRASH'].value t
 
     item.icons = {
         {
-            icon = '__base__/graphics/icons/pipe.png',
+            icon = item.icon or '__base__/graphics/icons/pipe.png',
             tint = items['tint'][8],
-            icon_size = 64,
-            icon_mipmaps = 4
+            icon_size = item.icon_size or 64,
+            icon_mipmaps = item.icon_mipmaps or 4
         }
     }
 
