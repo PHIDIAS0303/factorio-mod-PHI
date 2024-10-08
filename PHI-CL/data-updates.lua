@@ -274,30 +274,9 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-LOADER'].value 
     data.raw.recipe['fast-loader'].hidden = false
     data.raw.recipe['express-loader'].hidden = false
 
-    --[[
-    data.raw.recipe['loader'].ingredients = {
-        {'iron-plate', 5},
-        {'electronic-circuit', 5},
-        {'transport-belt', 2},
-        {'inserter', 2}
-    }
-    data.raw.recipe['fast-loader'].ingredients = {
-        {'iron-gear-wheel', 10},
-        {'electronic-circuit', 10},
-        {'advanced-circuit', 1},
-        {'loader', 1}
-    }
-
-    data.raw.recipe['express-loader'].ingredients = {
-        {'iron-gear-wheel', 10},
-        {'advanced-circuit', 10},
-        {'fast-loader', 1}
-    }
-
     table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='loader'})
     table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
     table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
-    ]]
 end
 
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-RECIPE'].value then
@@ -803,8 +782,12 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
         {
             type = 'armor',
             name = 'power-armor-mk3',
-            icon = '__base__/graphics/icons/power-armor-mk2.png',
-            icon_size = 64, icon_mipmaps = 4,
+            icons = {
+                icon = '__base__/graphics/icons/power-armor-mk2.png',
+                tint = items['tint'][2],
+                icon_size = 64,
+                icon_mipmaps = 4
+            },
             resistances = {
                 {
                     type = 'physical',

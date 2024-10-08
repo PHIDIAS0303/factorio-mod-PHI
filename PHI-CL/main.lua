@@ -318,33 +318,33 @@ function main.EEQ(source, tier)
             if item.attack_parameters.ammo_type.action_delivery then
 
                 if item.attack_parameters.ammo_type.action_delivery then
-                    item.attack_parameters.ammo_type.action_delivery.max_length = item.attack_parameters.ammo_type.action_delivery.max_length + tier
+                    item.attack_parameters.ammo_type.action_delivery.max_length = item.attack_parameters.ammo_type.action_delivery.max_length + tier - 1
                 end
             end
         end
 
         if item.attack_parameters.range then
-            item.attack_parameters.range = item.attack_parameters.range + tier
+            item.attack_parameters.range = item.attack_parameters.range + tier - 1
         end
 
-    elseif item.max_shield_value then
+    elseif item.max_shield_value and item.energy_per_shield then
         item.max_shield_value = item.max_shield_value * (2 ^ (tier - source.min + 1))
+        item.energy_per_shield = math.floor(item.energy_per_shield * ((32 - tier) / 32))
 
     elseif item.movement_bonus then
         item.movement_bonus = item.movement_bonus * (2 ^ (tier - source.min + 1))
 
-    elseif item.charging_energy then
+    elseif item.charging_energy and item.charging_station_count then
         item.charging_energy = tostring(tonumber(string.match(item.charging_energy, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.charging_energy, '%a+')
-
-        if item.charging_station_count then
-            item.charging_station_count = math.max(item.charging_station_count, 16)
-        end
+        item.charging_station_count = math.max(item.charging_station_count, 8)
     end
 
-    item.sprite.tint = items['tint'][tier]
+    if item.sprite then
+        item.sprite.tint = items['tint'][tier]
 
-    if item.sprite.hr_version then
-        item.sprite.hr_version.tint = items['tint'][tier]
+        if item.sprite.hr_version then
+            item.sprite.hr_version.tint = items['tint'][tier]
+        end
     end
 
     item.localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tier}
