@@ -22,46 +22,6 @@ if settings.startup['PHI-XC'].value then
     end)
 end
 
-if settings.startup['PHI-PB'].value then
-    commands.add_command('phi-pb-bonus', nil, function(command)
-        if not command.player_index then
-            game.print('Command Error - PHI-PB-BONUS')
-            return
-        end
-
-        local player = game.get_player(command.player_index)
-        local bonus = tonumber(command.parameter)
-
-        if not player then
-            return
-        end
-
-        if type(bonus) ~= 'number' then
-            player.print('Parameter need to be number')
-            return
-        end
-
-        if (bonus < 0) or (bonus > 10) then
-            player.print('Parameter need to be in range of 0 - 10')
-            return
-        end
-
-        for k, v in pairs(items['bonus']['player_bonus']) do
-            game.players[command.player_index][k] = bonus / 10 * v.value
-
-            if v.combined_bonus then
-                for i=1, #v.combined_bonus, 1 do
-                    game.players[command.player_index][v.combined_bonus[i]] = bonus / 10 * v.value
-                end
-            end
-        end
-    end)
-
-    script.on_event(defines.events.on_player_died, function(event)
-        game.players[event.player_index].ticks_to_respawn = 120
-    end)
-end
-
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRASH'].value then
     local function trash_creation(event)
         local entity = event.created_entity or event.entity

@@ -36,19 +36,19 @@ function main.EEE(source, tier)
 
     if (source.type == 'electric-turret') or (source.type == 'ammo-turret') or (source.type == 'fluid-turret') then
         item.attack_parameters.damage_modifier = (2 ^ (tier - source.min + 1))
-        item.attack_parameters.range = item.attack_parameters.range + (2 * (tier - source.min))
-        item.call_for_help_radius = item.call_for_help_radius + (2 * (tier - source.min))
+        item.attack_parameters.range = item.attack_parameters.range + (2 * (tier - source.min + 1))
+        item.call_for_help_radius = item.call_for_help_radius + (2 * (tier - source.min + 1))
 
         if source.type == 'electric-turret' then
             item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * 2
             item.glow_light_intensity = 1
-            item.attack_parameters.ammo_type.action.action_delivery.max_length = item.attack_parameters.ammo_type.action.action_delivery.max_length + (2 * (tier - source.min))
+            item.attack_parameters.ammo_type.action.action_delivery.max_length = item.attack_parameters.ammo_type.action.action_delivery.max_length + (2 * (tier - source.min + 1))
             item.attack_parameters.ammo_type.energy_consumption = tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+')
             item.energy_source.input_flow_limit = tonumber(string.match(item.energy_source.input_flow_limit, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_source.input_flow_limit, '%a+')
             item.energy_source.buffer_capacity = tonumber(string.match(item.energy_source.buffer_capacity, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_source.buffer_capacity, '%a+')
 
         elseif source.type == 'fluid-turret' then
-            item.prepare_range = item.prepare_range + (2 * (tier - source.min))
+            item.prepare_range = item.prepare_range + (2 * (tier - source.min + 1))
         end
     end
 
@@ -209,94 +209,6 @@ function main.EEE(source, tier)
         item.localised_name = {'name.' .. source.ref_name}
     end
 
-    item.localised_description = item.localised_description
-
-    data:extend({item})
-end
-
--- equipment
-function main.EEQ(source, tier)
-    local item = table.deepcopy(data.raw[source.type][source.ref_name])
-
-    item.name = source.name .. '-mk' .. tier .. '-equipment'
-    item.take_result = item.name
-
-    if item.power then
-        item.power = tostring(tonumber(string.match(item.power, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.power, '%a+')
-    end
-
-    if item.energy_source then
-        if item.energy_source.buffer_capacity then
-            item.energy_source.buffer_capacity = tostring(tonumber(string.match(item.energy_source.buffer_capacity, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source.buffer_capacity, '%a+')
-        end
-
-        if item.energy_source.input_flow_limit then
-            item.energy_source.input_flow_limit = tostring(tonumber(string.match(item.energy_source.input_flow_limit, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source.input_flow_limit, '%a+')
-        end
-
-        if item.energy_source.output_flow_limit then
-            item.energy_source.output_flow_limit = tostring(tonumber(string.match(item.energy_source.output_flow_limit, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source.output_flow_limit, '%a+')
-        end
-    end
-
-    if item.energy_consumption then
-        item.energy_consumption = tostring(tonumber(string.match(item.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_consumption, '%a+')
-
-    elseif item.energy_input then
-        item.energy_input = tostring(tonumber(string.match(item.energy_input, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_input, '%a+')
-    end
-
-    if item.darkness_to_turn_on and item.color_lookup then
-        item.darkness_to_turn_on = 0
-        item.color_lookup = {{0, '__core__/graphics/color_luts/lut-sunset.png'}}
-
-    elseif item.attack_parameters then
-        if item.attack_parameters.cooldown then
-            item.attack_parameters.cooldown = math.floor(item.attack_parameters.cooldown * ((32 - (tier - source.min + 1)) / 32))
-        end
-
-        if item.attack_parameters.damage_modifier then
-            item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * (2 ^ (tier - source.min + 1))
-        end
-
-        if item.attack_parameters.ammo_type then
-            if item.attack_parameters.ammo_type.energy_consumption then
-                item.attack_parameters.ammo_type.energy_consumption = tostring(tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+')
-            end
-
-            if item.attack_parameters.ammo_type.action_delivery then
-
-                if item.attack_parameters.ammo_type.action_delivery then
-                    item.attack_parameters.ammo_type.action_delivery.max_length = item.attack_parameters.ammo_type.action_delivery.max_length + (tier - source.min + 1)
-                end
-            end
-        end
-
-        if item.attack_parameters.range then
-            item.attack_parameters.range = item.attack_parameters.range + (tier - source.min + 1)
-        end
-
-    elseif item.max_shield_value and item.energy_per_shield then
-        item.max_shield_value = item.max_shield_value * (2 ^ (tier - source.min + 1))
-        item.energy_per_shield = tostring(math.floor(tonumber(string.match(item.energy_per_shield, '[%d%.]+')) * ((32 - (tier - source.min + 1)) / 32))) .. string.match(item.energy_per_shield, '%a+')
-
-    elseif item.movement_bonus then
-        item.movement_bonus = item.movement_bonus * (2 ^ (tier - source.min + 1))
-
-    elseif item.charging_energy and item.charging_station_count then
-        item.charging_station_count = math.max(item.charging_station_count, 4)
-        item.charging_energy = tostring(tonumber(string.match(item.charging_energy, '[%d%.]+')) * (2 ^ (tier - source.min + 2))) .. string.match(item.charging_energy, '%a+')
-    end
-
-    if item.sprite then
-        item.sprite.tint = items['tint'][tier]
-
-        if item.sprite.hr_version then
-            item.sprite.hr_version.tint = items['tint'][tier]
-        end
-    end
-
-    item.localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tostring(tier)}
     item.localised_description = item.localised_description
 
     data:extend({item})

@@ -243,120 +243,9 @@ local items = {
             min = 2,
             max = settings.startup['PHI-WE-RADAR-TIER'].value
         }
-    },
-    ['equipment'] = {
-        ['solar-panel-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'solar-panel-equipment',
-            name = 'solar-panel',
-            ref_name = 'solar-panel-equipment',
-            tech = 'solar-panel-equipment',
-            min = 2,
-            max = settings.startup['PHI-EQ-SOLAR-TIER'].value,
-            base = 30,
-            graphics_name = 'solar-panel-equipment'
-        },
-        ['fusion-reactor-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'generator-equipment',
-            name = 'fusion-reactor',
-            ref_name = 'fusion-reactor-equipment',
-            tech = 'fusion-reactor-equipment',
-            min = 2,
-            max = settings.startup['PHI-EQ-REACTOR-TIER'].value
-        },
-        ['battery-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'battery-equipment',
-            name = 'battery',
-            ref_name = 'battery-mk3-equipment',
-            tech = 'battery-mk3-equipment',
-            min = 4,
-            max = settings.startup['PHI-EQ-BATTERY-TIER'].value
-        },
-        ['personal-laser-defense-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'active-defense-equipment',
-            name = 'personal-laser-defense',
-            ref_name = 'personal-laser-defense-equipment',
-            tech = 'personal-laser-defense-equipment',
-            min = 2,
-            max = settings.startup['PHI-EQ-LASER-TIER'].value
-        },
-        ['energy-shield-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'energy-shield-equipment',
-            name = 'energy-shield',
-            ref_name = 'energy-shield-mk2-equipment',
-            tech = 'energy-shield-mk2-equipment',
-            min = 3,
-            max = settings.startup['PHI-EQ-SHIELD-TIER'].value
-        },
-        ['personal-roboport-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'roboport-equipment',
-            name = 'personal-roboport',
-            ref_name = 'personal-roboport-mk2-equipment',
-            tech = 'personal-roboport-mk2-equipment',
-            min = 3,
-            max = settings.startup['PHI-EQ-ROBOPORT-TIER'].value
-        },
-        ['night-vision-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'night-vision-equipment',
-            name = 'night-vision',
-            ref_name = 'night-vision-equipment',
-            tech = 'night-vision-equipment',
-            min = 2,
-            max = settings.startup['PHI-EQ-NIGHT-TIER'].value
-        },
-        ['exoskeleton-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'movement-bonus-equipment',
-            name = 'exoskeleton',
-            ref_name = 'exoskeleton-equipment',
-            tech = 'exoskeleton-equipment',
-            min = 2,
-            max = settings.startup['PHI-EQ-EXO-TIER'].value
-        }
-    },
-    ['bonus'] = {
-        player_bonus = {
-            ['character_mining_speed_modifier'] = {
-                value = settings.startup['PHI-PB-CMMS'].value
-            },
-            ['character_running_speed_modifier'] = {
-                value = settings.startup['PHI-PB-CRS'].value
-            },
-            ['character_crafting_speed_modifier'] = {
-                value = settings.startup['PHI-PB-CCS'].value
-            },
-            ['character_inventory_slots_bonus'] = {
-                value = settings.startup['PHI-PB-CISB'].value
-            },
-            ['character_health_bonus'] = {
-                value = settings.startup['PHI-PB-CHB'].value
-            },
-            ['character_reach_distance_bonus'] = {
-                value = settings.startup['PHI-PB-CRDB'].value,
-                combined_bonus = {
-                    'character_resource_reach_distance_bonus',
-                    'character_build_distance_bonus'
-                }
-            }
-        }
     }
 }
 
---[[
 if mods['space-age'] then
     items['item']['fusion-reactor'] = {
         enabled = settings.startup['PHI-EN'].value,
@@ -391,6 +280,42 @@ if mods['space-age'] then
         max = settings.startup['PHI-EN-NUCLEAR-TIER'].value
     }
 
+    items['item']['railgun-turret'] = {
+        enabled = settings.startup['PHI-WE'].value,
+        stage = 2,
+        type = 'ammo-turret',
+        name = 'railgun-turret',
+        ref_name = 'railgun-turret',
+        tech = 'railgun',
+        min = 2,
+        max = settings.startup['PHI-WE-GUN-TIER'].value
+    }
+
+    items['item']['rocket-turret'] = {
+        enabled = settings.startup['PHI-WE'].value,
+        stage = 2,
+        type = 'ammo-turret',
+        name = 'rocket-turret',
+        ref_name = 'rocket-turret',
+        tech = 'rocket-turret',
+        min = 2,
+        max = settings.startup['PHI-WE-GUN-TIER'].value
+    }
+
+    items['item']['tesla-turret'] = {
+        enabled = settings.startup['PHI-WE'].value,
+        stage = 2,
+        type = 'electric-turret',
+        name = 'tesla-turret',
+        ref_name = 'tesla-turret',
+        tech = 'tesla-weapons',
+        min = 2,
+        max = settings.startup['PHI-WE-LASER-TIER'].value
+    }
+end
+
+--[[
+if mods['space-age'] then
     items['item']['foundry'] = {
         enabled = settings.startup['PHI-MB'].value,
         stage = 2,
@@ -400,7 +325,7 @@ if mods['space-age'] then
         tech = 'foundry',
         min = 2,
         max = settings.startup['PHI-MB-FURNACE-TIER'].value
-    }
+    
 
     items['item']['big-mining-drill'] = {
         enabled = settings.startup['PHI-MB'].value,
@@ -433,39 +358,6 @@ if mods['space-age'] then
         tech = 'space-platform',
         min = 2,
         max = settings.startup['PHI-MB-ASSEMBLING-TIER'].value
-    }
-
-    items['item']['railgun-turret'] = {
-        enabled = settings.startup['PHI-WE'].value,
-        stage = 2,
-        type = 'ammo-turret',
-        name = 'railgun-turret',
-        ref_name = 'railgun-turret',
-        tech = 'railgun',
-        min = 2,
-        max = settings.startup['PHI-WE-GUN-TIER'].value
-    }
-
-    items['item']['rocket-turret'] = {
-        enabled = settings.startup['PHI-WE'].value,
-        stage = 2,
-        type = 'ammo-turret',
-        name = 'rocket-turret',
-        ref_name = 'rocket-turret',
-        tech = 'rocket-turret',
-        min = 2,
-        max = settings.startup['PHI-WE-GUN-TIER'].value
-    }
-
-    items['item']['tesla-turret'] = {
-        enabled = settings.startup['PHI-WE'].value,
-        stage = 2,
-        type = 'electric-turret',
-        name = 'tesla-turret',
-        ref_name = 'tesla-turret',
-        tech = 'tesla-weapons',
-        min = 2,
-        max = settings.startup['PHI-WE-LASER-TIER'].value
     }
 
     items['item']['biolab'] = {

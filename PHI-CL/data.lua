@@ -411,6 +411,7 @@ if settings.startup['PHI-MI'].value and (settings.startup['PHI-MI-LANDFILL'].val
     data.raw.recipe['landfill'].ingredients = {{type='item', name='stone', amount=settings.startup['PHI-MI-LANDFILL'].value}}
 end
 
+--[[
 if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value then
     data:extend({
         {
@@ -511,68 +512,67 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
 
     table.insert(data.raw.technology['power-armor-mk2'].effects, {type='unlock-recipe', recipe='power-armor-mk3'})
 end
-
-if settings.startup['PHI-XW-WATER'].value > 0 then
-    local ocfs = 'offshore-pump'
-
-    data.raw[ocfs][ocfs].pumping_speed = settings.startup['PHI-XW-WATER'].value * 20
-    data.raw[ocfs][ocfs].flags = {'placeable-neutral', 'player-creation'}
-    data.raw[ocfs][ocfs].layers = {
-        item = true,
-        object = true,
-        player = true,
-        water_tile = true,
-        elevated_rail = true
-    }
-    data.raw[ocfs][ocfs].adjacent_tile_collision_mask = nil
-    data.raw[ocfs][ocfs].adjacent_tile_collision_test = {'ground-tile'}
-    data.raw[ocfs][ocfs].tile_buildability_rules = nil
-    data.raw[ocfs][ocfs].water_reflection = nil
-end
+]]
 
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-OIL'].value then
-    local item = table.deepcopy(data.raw['item']['offshore-pump'])
+    for _, v in pairs({'water', 'crude-oil', 'lava'}) do
+        if data.raw.fluid[v] then
+            local item = table.deepcopy(data.raw['item']['offshore-pump'])
 
-    item.name = 'oil-pump'
-    item.place_result = 'oil-pump'
-    item.order = 'b[fluids]-a[offshore-pump]-o'
+            item.pumping_speed = 20
+            item.adjacent_tile_collision_mask = nil
+            item.adjacent_tile_collision_test = {'ground-tile'}
+            item.tile_buildability_rules = nil
+            item.water_reflection = nil
+            item.layers = {
+                item = true,
+                object = true,
+                player = true,
+                water_tile = true,
+                elevated_rail = true
+            }
+            item.name = v .. '-pump'
+            item.place_result = v .. '-pump'
+            item.order = 'b[fluids]-a[offshore-pump]-o'
 
-    item.icons = {
-        {
-            icon = '__base__/graphics/icons/offshore-pump.png',
-            tint = items['tint'][2],
-            icon_size = 64,
-            icon_mipmaps = 4
-        }
-    }
+            item.icons = {
+                {
+                    icon = '__base__/graphics/icons/offshore-pump.png',
+                    tint = items['tint'][2],
+                    icon_size = 64,
+                    icon_mipmaps = 4
+                }
+            }
 
-    item.icon = nil
-    item.icon_size = nil
-    item.icon_mipmaps = nil
-    item.localised_name = {'name.oil-pump'}
-    item.localised_description = {'description.oil-pump'}
-    data:extend({item})
+            item.icon = nil
+            item.icon_size = nil
+            item.icon_mipmaps = nil
+            item.localised_name = {'name.' .. v .. '-pump'}
+            item.localised_description = {'description.' .. v .. '-pump'}
+            data:extend({item})
 
-    local entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
-    entity.name = 'oil-pump'
-    entity.minable.result = 'oil-pump'
-    entity.fluid = 'crude-oil'
-    entity.fluid_box.filter = 'crude-oil'
-    entity.localised_name = {'name.oil-pump'}
-    entity.localised_description = {'description.oil-pump'}
-    data:extend({entity})
+            local entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
+            entity.name = v .. '-pump'
+            entity.minable.result = v .. '-pump'
+            entity.fluid = 'crude-oil'
+            entity.fluid_box.filter = 'crude-oil'
+            entity.localised_name = {'name.' .. v .. '-pump'}
+            entity.localised_description = {'description.' .. v .. '-pump'}
+            data:extend({entity})
 
-    data:extend({{
-        type = 'recipe',
-        name = 'oil-pump',
-        energy_required = 2,
-        enabled = true,
-        ingredients = {{type='item', name='electronic-circuit', amount=2}, {type='item', name='pipe', amount=1}, {type='item', name='iron-gear-wheel', amount=1}},
-        results = {{type='item', name='oil-pump', amount=1}},
-        main_product = 'oil-pump',
-        localised_name = {'name.oil-pump'},
-        localised_description = {'description.oil-pump'}
-    }})
+            data:extend({{
+                type = 'recipe',
+                name = v .. '-pump',
+                energy_required = 2,
+                enabled = true,
+                ingredients = {{type='item', name='electronic-circuit', amount=2}, {type='item', name='pipe', amount=1}, {type='item', name='iron-gear-wheel', amount=1}},
+                results = {{type='item', name= v .. '-pump', amount=1}},
+                main_product = v .. '-pump',
+                localised_name = {'name.' .. v .. '-pump'},
+                localised_description = {'description.' .. v .. '-pump'}
+            }})
+        end
+    end
 end
 
 for _, v in pairs(items['item']) do
@@ -587,18 +587,5 @@ for _, v in pairs(items['item']) do
         end
 
         main.EL(v)
-    end
-end
-
-for _, v in pairs(items['equipment']) do
-    if (v.stage == file_stage) and v.enabled and (v.max >= v.min) then
-        v.category = 'equipment'
-
-        for j=v.min, v.max, 1 do
-            main.EEQ(v, j)
-            main.EI(v, j)
-            main.ER(v, j)
-            main.ET(v, j)
-        end
     end
 end

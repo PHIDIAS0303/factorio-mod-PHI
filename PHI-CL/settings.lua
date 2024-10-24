@@ -115,68 +115,6 @@ data:extend({
     default_value = false,
     order = 'D00'
   }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-SOLAR-TIER',
-    setting_type = 'startup',
-    default_value = 8,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'D01'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-BATTERY-TIER',
-    setting_type = 'startup',
-    default_value = 8,
-    allowed_values = {2, 3, 4, 5, 6, 7, 8},
-    order = 'D02'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-REACTOR-TIER',
-    setting_type = 'startup',
-    default_value = 8,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'D03'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-LASER-TIER',
-    setting_type = 'startup',
-    default_value = 8,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'D04'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-ROBOPORT-TIER',
-    setting_type = 'startup',
-    default_value = 8,
-    allowed_values = {2, 3, 4, 5, 6, 7, 8},
-    order = 'D05'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-SHIELD-TIER',
-    setting_type = 'startup',
-    default_value = 8,
-    allowed_values = {2, 3, 4, 5, 6, 7, 8},
-    order = 'D06'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-NIGHT-TIER',
-    setting_type = 'startup',
-    default_value = 2,
-    allowed_values = {1, 2},
-    order = 'D07'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-EXO-TIER',
-    setting_type = 'startup',
-    default_value = 2,
-    allowed_values = {1, 2},
-    order = 'D08'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-EQ-ARMOR',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'D09'
-  }, {
     type = 'bool-setting',
     name = 'PHI-MI',
     setting_type = 'startup',
@@ -203,72 +141,11 @@ data:extend({
     default_value = false,
     order = 'E05'
   }, {
-    type = 'int-setting',
-    name = 'PHI-XW-WATER',
-    setting_type = 'startup',
-    default_value = 1,
-    allowed_values = {0, 1, 2, 3, 4, 5},
-    order = 'G00'
-  }, {
     type = 'bool-setting',
     name = 'PHI-XC',
     setting_type = 'startup',
     default_value = false,
     order = 'H00'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-PB',
-    setting_type = 'startup',
-    default_value = false,
-    order = 'I00'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-PB-CMMS',
-    setting_type = 'startup',
-    default_value = 2,
-    minimum_value = 0,
-    maximum_value = 4,
-    order = 'IA01'
-  }, {
-    type = 'double-setting',
-    name = 'PHI-PB-CRS',
-    setting_type = 'startup',
-    default_value = 1.5,
-    minimum_value = 0,
-    maximum_value = 5,
-    order = 'IA02'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-PB-CCS',
-    setting_type = 'startup',
-    default_value = 5,
-    minimum_value = 0,
-    maximum_value = 10,
-    order = 'IA03'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-PB-CISB',
-    setting_type = 'startup',
-    default_value = 100,
-    minimum_value = 0,
-    maximum_value = 120,
-    order = 'IA04'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-PB-CHB',
-    setting_type = 'startup',
-    default_value = 200,
-    minimum_value = 0,
-    maximum_value = 400,
-    order = 'IA05'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-PB-CRDB',
-    setting_type = 'startup',
-    default_value = 10,
-    minimum_value = 0,
-    maximum_value = 20,
-    order = 'IA06'
   }, {
     type = 'bool-setting',
     name = 'PHI-CT',
