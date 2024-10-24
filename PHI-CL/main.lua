@@ -5,41 +5,15 @@ local main = {}
 local function tint_handle(item, tier, tl)
     for _, ve in pairs(tl) do
         if item[ve] then
-            for _, tc in pairs({'layers', 'sheets'}) do
-                if item[ve][tc] and item[ve][tc][1] then
-                    item[ve][tc][1].tint = items['tint'][tier]
-
-                    if item[ve][tc][1].hr_version then
-                        item[ve][tc][1].hr_version.tint = items['tint'][tier]
-                    end
-                end
-
-                for _, v in pairs(item[ve]) do
-                    if type(v) == 'table' then
-                        if v[tc] then
-                            if v[tc][1] then
-                                v[tc][1].tint = items['tint'][tier]
-
-                                if v[tc][1].hr_version then
-                                    v[tc][1].hr_version.tint = items['tint'][tier]
-                                end
-                            end
-                        end
-
-                        for i=1, #v, 1 do
-                            if v[i] and type(v[i]) == 'table' then
-                                if v[i][tc] and v[i][tc][1] then
-                                    v[i][tc][1].tint = items['tint'][tier]
-
-                                    if v[i][tc][1].hr_version then
-                                        v[i][tc][1].hr_version.tint = items['tint'][tier]
-                                    end
-                                end
-                            end
-                        end
+            for _, tc in pairs({'layers', 'sheets', 'structure'}) do
+                if item[ve][tc] and type(item[ve][tc]) == 'table' then
+                    for i=1, #item[ve][tc], 1 do
+                        item[ve][tc][i].tint = items['tint'][tier]
                     end
                 end
             end
+
+            item[ve].tint = items['tint'][tier]
         end
     end
 end
@@ -198,7 +172,7 @@ function main.EEE(source, tier)
         end
     end
 
-    tint_handle(item, tier, {'picture', 'pictures', 'structure', 'frames', 'working_visualisations', 'animation', 'horizontal_animation', 'vertical_animation', 'structure', 'integration_patch'})
+    tint_handle(item, tier, {'picture', 'pictures', 'frames', 'working_visualisations', 'animation', 'horizontal_animation', 'vertical_animation', 'structure', 'integration_patch'})
 
     if item.idle_animation and item.idle_animation.layers then
         local i = 1
@@ -235,7 +209,7 @@ function main.EEE(source, tier)
         item.localised_name = {'name.' .. source.ref_name}
     end
 
-    item.localised_description = {'description.' .. source.ref_name}
+    item.localised_description = item.localised_description
 
     data:extend({item})
 end
@@ -245,6 +219,7 @@ function main.EEQ(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
 
     item.name = source.name .. '-mk' .. tier .. '-equipment'
+    item.take_result = item.name
 
     if item.power then
         item.power = tostring(tonumber(string.match(item.power, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.power, '%a+')
@@ -322,7 +297,7 @@ function main.EEQ(source, tier)
     end
 
     item.localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tostring(tier)}
-    item.localised_description = {'description.' .. source.ref_name}
+    item.localised_description = item.localised_description
 
     data:extend({item})
 end
@@ -374,7 +349,7 @@ function main.EI(source, tier)
         item.localised_name = {'name.' .. source.ref_name}
     end
 
-    item.localised_description = {'description.' .. source.ref_name}
+    item.localised_description = item.localised_description
 
     data:extend({item})
 end
@@ -384,8 +359,6 @@ function main.ER(source, tier)
     local new_name = source.name
     local ingredient_name = source.name
     local result_name = source.name
-    local localised_name
-    local localised_description = {'description.' .. source.ref_name}
     local icons = {
         {
             icon = data.raw.item[source.ref_name].icon,
@@ -404,8 +377,6 @@ function main.ER(source, tier)
         new_name = new_name .. '-mk' .. tier .. '-equipment'
         result_name = result_name .. '-mk' .. tier .. '-equipment'
 
-        localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tostring(tier)}
-
     else
         if tier > 2 then
             ingredient_name = ingredient_name .. '-' .. (tier - 1)
@@ -413,13 +384,6 @@ function main.ER(source, tier)
 
         new_name = new_name .. '-' .. tier
         result_name = result_name .. '-' .. tier
-
-        if tier > 1 then
-            localised_name = {'phi-cl.combine', {'name.' .. source.ref_name}, tostring(tier)}
-
-        else
-            localised_name = {'name.' .. source.ref_name}
-        end
     end
 
     if (source.tech == 'compound-energy') then
@@ -433,8 +397,8 @@ function main.ER(source, tier)
                 ingredients = {{type='item', name=ingredient_name, amount=4}},
                 results = {{type='item', name=result_name, amount=1}},
                 main_product = result_name,
-                localised_name = localised_name,
-                localised_description = localised_description
+                localised_name = data.raw[source.type][new_name].localised_name,
+                localised_description = data.raw[source.type][new_name].localised_description
             }})
 
         else
@@ -448,8 +412,8 @@ function main.ER(source, tier)
                     ingredients = {{type='item', name=ingredient_name, amount=1}, {type='item', name=source.name, amount=1}},
                     results = {{type='item', name=result_name, amount=1}},
                     main_product = result_name,
-                    localised_name = localised_name,
-                    localised_description = localised_description
+                    localised_name = data.raw[source.type][new_name].localised_name,
+                    localised_description = data.raw[source.type][new_name].localised_description
                 }})
 
             else
@@ -462,8 +426,8 @@ function main.ER(source, tier)
                     ingredients = {{type='item', name=ingredient_name, amount=2}},
                     results = {{type='item', name=result_name, amount=1}},
                     main_product = result_name,
-                    localised_name = localised_name,
-                    localised_description = localised_description
+                    localised_name = data.raw[source.type][new_name].localised_name,
+                    localised_description = data.raw[source.type][new_name].localised_description
                 }})
             end
         end
@@ -478,8 +442,8 @@ function main.ER(source, tier)
             ingredients = {{type='item', name=ingredient_name, amount=2}},
             results = {{type='item', name=result_name, amount=1}},
             main_product = result_name,
-            localised_name = localised_name,
-            localised_description = localised_description
+            localised_name = data.raw[source.type][new_name].localised_name,
+            localised_description = data.raw[source.type][new_name].localised_description
         }})
     end
 end

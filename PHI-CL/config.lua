@@ -356,7 +356,162 @@ local items = {
     }
 }
 
-if mods then
+--[[
+if mods['space-age'] then
+    items['item']['fusion-reactor'] = {
+        enabled = settings.startup['PHI-EN'].value,
+        stage = 2,
+        type = 'fusion-reactor',
+        name = 'fusion-reactor',
+        ref_name = 'fusion-reactor',
+        tech = 'fusion-reactor',
+        min = 2,
+        max = settings.startup['PHI-EN-NUCLEAR-TIER'].value
+    }
+
+    items['item']['fusion-generator'] = {
+        enabled = settings.startup['PHI-EN'].value,
+        stage = 2,
+        type = 'fusion-generator',
+        name = 'fusion-generator',
+        ref_name = 'fusion-generator',
+        tech = 'fusion-reactor',
+        min = 2,
+        max = settings.startup['PHI-EN-NUCLEAR-TIER'].value
+    }
+
+    items['item']['heating-tower'] = {
+        enabled = settings.startup['PHI-EN'].value,
+        stage = 2,
+        type = 'reactor',
+        name = 'heating-tower',
+        ref_name = 'heating-tower',
+        tech = 'heating-tower',
+        min = 2,
+        max = settings.startup['PHI-EN-NUCLEAR-TIER'].value
+    }
+
+    items['item']['foundry'] = {
+        enabled = settings.startup['PHI-MB'].value,
+        stage = 2,
+        type = 'assembling-machine',
+        name = 'foundry',
+        ref_name = 'foundry',
+        tech = 'foundry',
+        min = 2,
+        max = settings.startup['PHI-MB-FURNACE-TIER'].value
+    }
+
+    items['item']['big-mining-drill'] = {
+        enabled = settings.startup['PHI-MB'].value,
+        stage = 2,
+        type = 'mining-drill',
+        name = 'big-mining-drill',
+        ref_name = 'big-mining-drill',
+        tech = 'big-mining-drill',
+        min = 2,
+        max = settings.startup['PHI-MB-MINING-TIER'].value
+    }
+
+    items['item']['biochamber'] = {
+        enabled = settings.startup['PHI-MB'].value,
+        stage = 2,
+        type = 'assembling-machine',
+        name = 'biochamber',
+        ref_name = 'biochamber',
+        tech = 'biochamber',
+        min = 2,
+        max = settings.startup['PHI-MB-ASSEMBLING-TIER'].value
+    }
+
+    items['item']['crusher'] = {
+        enabled = settings.startup['PHI-MB'].value,
+        stage = 2,
+        type = 'furnace',
+        name = 'crusher',
+        ref_name = 'crusher',
+        tech = 'space-platform',
+        min = 2,
+        max = settings.startup['PHI-MB-ASSEMBLING-TIER'].value
+    }
+
+    items['item']['railgun-turret'] = {
+        enabled = settings.startup['PHI-WE'].value,
+        stage = 2,
+        type = 'ammo-turret',
+        name = 'railgun-turret',
+        ref_name = 'railgun-turret',
+        tech = 'railgun',
+        min = 2,
+        max = settings.startup['PHI-WE-GUN-TIER'].value
+    }
+
+    items['item']['rocket-turret'] = {
+        enabled = settings.startup['PHI-WE'].value,
+        stage = 2,
+        type = 'ammo-turret',
+        name = 'rocket-turret',
+        ref_name = 'rocket-turret',
+        tech = 'rocket-turret',
+        min = 2,
+        max = settings.startup['PHI-WE-GUN-TIER'].value
+    }
+
+    items['item']['tesla-turret'] = {
+        enabled = settings.startup['PHI-WE'].value,
+        stage = 2,
+        type = 'electric-turret',
+        name = 'tesla-turret',
+        ref_name = 'tesla-turret',
+        tech = 'tesla-weapons',
+        min = 2,
+        max = settings.startup['PHI-WE-LASER-TIER'].value
+    }
+
+    items['item']['biolab'] = {
+        enabled = settings.startup['PHI-MB'].value,
+        stage = 2,
+        type = 'lab',
+        name = 'biolab',
+        ref_name = 'biolab',
+        tech = 'biolab',
+        min = 2,
+        max = settings.startup['PHI-MB-LAB-TIER'].value
+    }
+
+    items['item']['agricultural-tower'] = {
+        enabled = settings.startup['PHI-MB'].value,
+        stage = 2,
+        type = 'agricultural-tower',
+        name = 'agricultural-tower',
+        ref_name = 'agricultural-tower',
+        tech = 'agriculture',
+        min = 2,
+        max = settings.startup['PHI-MB-ASSEMBLING-TIER'].value
+    }
+
+    items['item']['cryogenic-plant'] = {
+        enabled = settings.startup['PHI-MB'].value,
+        stage = 2,
+        type = 'assembling-machine',
+        name = 'cryogenic-plant',
+        ref_name = 'cryogenic-plant',
+        tech = 'cryogenic-plant',
+        min = 2,
+        max = settings.startup['PHI-MB-ASSEMBLING-TIER'].value
+    }
+
+    items['item']['electromagnetic-plant'] = {
+        enabled = settings.startup['PHI-MB'].value,
+        stage = 2,
+        type = 'assembling-machine',
+        name = 'electromagnetic-plant',
+        ref_name = 'electromagnetic-plant',
+        tech = 'electromagnetic-plant',
+        min = 2,
+        max = settings.startup['PHI-MB-ASSEMBLING-TIER'].value
+    }
 end
+]]
 
 return items

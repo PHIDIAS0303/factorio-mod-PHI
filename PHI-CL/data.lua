@@ -240,6 +240,11 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-LOADER'].value 
     table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='loader'})
     table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
     table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
+
+    if mods['space-age'] then
+        data.raw.recipe['turbo-loader'].hidden = false
+        table.insert(data.raw.technology['turbo-transport-belt'].effects, {type='unlock-recipe', recipe='turbo-loader'})
+    end
 end
 
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-ENERGY'].value then
@@ -390,12 +395,12 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value t
 
     for _, t in pairs({'construction', 'logistic'}) do
         for _, r in pairs({'passive-provider', 'storage'}) do
-            table.insert(data.raw.technology[t .. '-robotics'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-' .. r})
+            table.insert(data.raw.technology[t .. '-robotics'].effects, {type='unlock-recipe', recipe='basic-' .. r .. '-chest'})
         end
     end
 
     for _, r in pairs({'active-provider', 'buffer', 'requester'}) do
-        table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-logistic-chest-' .. r})
+        table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-' .. r .. '-chest'})
     end
 end
 if settings.startup['PHI-EN'].value and settings.startup['PHI-EN-NUCLEAR-TIER'].value > 1 then
