@@ -2,8 +2,8 @@ local items = require 'config'
 local main = require 'main'
 local file_stage = 1
 
-if settings.startup['PHI-EN'].value and settings.startup['PHI-EN-SOLAR-TIER'].value and settings.startup['PHI-EN-STEAM-TIER'].value and settings.startup['PHI-EN-NUCLEAR-TIER'].value then
-    local ml = math.max(settings.startup['PHI-EN-SOLAR-TIER'].value, settings.startup['PHI-EN-STEAM-TIER'].value, settings.startup['PHI-EN-NUCLEAR-TIER'].value)
+if settings.startup['PHI-EN'].value and settings.startup['PHI-EN-SOLAR-TIER'].value and settings.startup['PHI-EN-POWER-TIER'].value and settings.startup['PHI-EN-POWER-TIER'].value then
+    local ml = math.max(settings.startup['PHI-EN-SOLAR-TIER'].value, settings.startup['PHI-EN-POWER-TIER'].value, settings.startup['PHI-EN-POWER-TIER'].value)
 
     for i=1, 7 do
         local tn = 'compound-energy-' .. i
@@ -403,7 +403,7 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-CHEST'].value t
         table.insert(data.raw.technology['logistic-system'].effects, {type='unlock-recipe', recipe='basic-' .. r .. '-chest'})
     end
 end
-if settings.startup['PHI-EN'].value and settings.startup['PHI-EN-NUCLEAR-TIER'].value > 1 then
+if settings.startup['PHI-EN'].value and settings.startup['PHI-EN-POWER-TIER'].value > 1 then
     data.raw['fluid']['steam'].max_temperature = 5000
 end
 

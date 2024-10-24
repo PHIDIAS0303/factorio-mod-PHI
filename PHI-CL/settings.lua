@@ -14,18 +14,11 @@ data:extend({
     order = 'A01'
   }, {
     type = 'int-setting',
-    name = 'PHI-EN-STEAM-TIER',
+    name = 'PHI-EN-POWER-TIER',
     setting_type = 'startup',
     default_value = 5,
     allowed_values = {1, 2, 3, 4, 5},
     order = 'A02'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EN-NUCLEAR-TIER',
-    setting_type = 'startup',
-    default_value = 5,
-    allowed_values = {1, 2, 3, 4, 5},
-    order = 'A03'
   }, {
     type = 'bool-setting',
     name = 'PHI-MB',

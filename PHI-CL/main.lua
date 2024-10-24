@@ -35,17 +35,25 @@ function main.EEE(source, tier)
     end
 
     if (source.type == 'electric-turret') or (source.type == 'ammo-turret') or (source.type == 'fluid-turret') then
-        item.attack_parameters.damage_modifier = (2 ^ (tier - source.min + 1))
+        item.attack_parameters.damage_modifier = 2 ^ (tier - source.min + 1)
         item.attack_parameters.range = item.attack_parameters.range + (2 * (tier - source.min + 1))
         item.call_for_help_radius = item.call_for_help_radius + (2 * (tier - source.min + 1))
 
         if source.type == 'electric-turret' then
-            item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * 2
             item.glow_light_intensity = 1
             item.attack_parameters.ammo_type.action.action_delivery.max_length = item.attack_parameters.ammo_type.action.action_delivery.max_length + (2 * (tier - source.min + 1))
             item.attack_parameters.ammo_type.energy_consumption = tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+')
             item.energy_source.input_flow_limit = tonumber(string.match(item.energy_source.input_flow_limit, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_source.input_flow_limit, '%a+')
             item.energy_source.buffer_capacity = tonumber(string.match(item.energy_source.buffer_capacity, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_source.buffer_capacity, '%a+')
+
+        elseif source.type == 'ammo-turret' then
+            if item.energy_per_shot then
+                item.energy_per_shot = tonumber(string.match(item.energy_per_shot, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_per_shot, '%a+')
+            end
+
+            if item.energy_source and item.energy_source.input_flow_limit then
+                item.energy_source.input_flow_limit = tonumber(string.match(item.energy_source.input_flow_limit, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_source.input_flow_limit, '%a+')
+            end
 
         elseif source.type == 'fluid-turret' then
             item.prepare_range = item.prepare_range + (2 * (tier - source.min + 1))
@@ -98,6 +106,14 @@ function main.EEE(source, tier)
             item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * tier)  .. string.match(item.heat_buffer.max_transfer, '%a+')
 
             tint_handle(item, tier, {'connection_patches_connected', 'connection_patches_disconnected', 'heat_connection_patches_connected', 'heat_connection_patches_disconnected', 'lower_layer_picture'})
+
+        elseif (source.type == 'fusion-reactor') then
+            item.consumption = tostring(tonumber(string.match(item.consumption, '[%d%.]+')) * tier) .. string.match(item.consumption, '%a+')
+            item.max_fluid_usage = item.max_fluid_usage * (2 ^ (tier - source.min + 1))
+
+        elseif (source.type == 'fusion-generator') then
+            item.max_power_output = tostring(tonumber(string.match(item.max_power_output, '[%d%.]+')) * tier) .. string.match(item.max_power_output, '%a+')
+            item.max_fluid_usage = item.max_fluid_usage * (2 ^ (tier - source.min + 1))
 
         elseif (source.type == 'heat-pipe') then
             item.heat_buffer.max_temperature = item.heat_buffer.max_temperature * tier

@@ -71,7 +71,7 @@ local items = {
             ref_name = 'boiler',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-STEAM-TIER'].value
+            max = settings.startup['PHI-EN-POWER-TIER'].value
         },
         ['steam-engine'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -81,7 +81,7 @@ local items = {
             ref_name = 'steam-engine',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-STEAM-TIER'].value
+            max = settings.startup['PHI-EN-POWER-TIER'].value
         },
         ['nuclear-reactor'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -91,7 +91,7 @@ local items = {
             ref_name = 'nuclear-reactor',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-NUCLEAR-TIER'].value
+            max = settings.startup['PHI-EN-POWER-TIER'].value
         },
         ['heat-pipe'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -101,7 +101,7 @@ local items = {
             ref_name = 'heat-pipe',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-NUCLEAR-TIER'].value
+            max = settings.startup['PHI-EN-POWER-TIER'].value
         },
         ['heat-exchanger'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -111,7 +111,7 @@ local items = {
             ref_name = 'heat-exchanger',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-NUCLEAR-TIER'].value
+            max = settings.startup['PHI-EN-POWER-TIER'].value
         },
         ['steam-turbine'] = {
             enabled = settings.startup['PHI-EN'].value,
@@ -121,7 +121,7 @@ local items = {
             ref_name = 'steam-turbine',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-NUCLEAR-TIER'].value
+            max = settings.startup['PHI-EN-POWER-TIER'].value
         },
         ['assembling-machine'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -246,7 +246,7 @@ local items = {
     }
 }
 
-if mods['space-age'] then
+if mods and mods['space-age'] then
     items['item']['fusion-reactor'] = {
         enabled = settings.startup['PHI-EN'].value,
         stage = 2,
@@ -255,7 +255,7 @@ if mods['space-age'] then
         ref_name = 'fusion-reactor',
         tech = 'fusion-reactor',
         min = 2,
-        max = settings.startup['PHI-EN-NUCLEAR-TIER'].value
+        max = settings.startup['PHI-EN-POWER-TIER'].value
     }
 
     items['item']['fusion-generator'] = {
@@ -266,7 +266,7 @@ if mods['space-age'] then
         ref_name = 'fusion-generator',
         tech = 'fusion-reactor',
         min = 2,
-        max = settings.startup['PHI-EN-NUCLEAR-TIER'].value
+        max = settings.startup['PHI-EN-POWER-TIER'].value
     }
 
     items['item']['heating-tower'] = {
@@ -277,7 +277,7 @@ if mods['space-age'] then
         ref_name = 'heating-tower',
         tech = 'heating-tower',
         min = 2,
-        max = settings.startup['PHI-EN-NUCLEAR-TIER'].value
+        max = settings.startup['PHI-EN-ASSEMBLING-TIER'].value
     }
 
     items['item']['railgun-turret'] = {
