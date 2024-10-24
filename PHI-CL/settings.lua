@@ -27,46 +27,11 @@ data:extend({
     order = 'B00'
   }, {
     type = 'int-setting',
-    name = 'PHI-MB-ASSEMBLING-TIER',
+    name = 'PHI-MB-MACHINE-TIER',
     setting_type = 'startup',
     default_value = 3,
     allowed_values = {1, 2, 3},
     order = 'B01'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-MB-FURNACE-TIER',
-    setting_type = 'startup',
-    default_value = 3,
-    allowed_values = {1, 2, 3},
-    order = 'B02'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-MB-OIL-TIER',
-    setting_type = 'startup',
-    default_value = 3,
-    allowed_values = {1, 2, 3},
-    order = 'B03'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-MB-CENTRIFUGE-TIER',
-    setting_type = 'startup',
-    default_value = 3,
-    allowed_values = {1, 2, 3},
-    order = 'B04'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-MB-LAB-TIER',
-    setting_type = 'startup',
-    default_value = 3,
-    allowed_values = {1, 2, 3},
-    order = 'B05'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-MB-MINING-TIER',
-    setting_type = 'startup',
-    default_value = 3,
-    allowed_values = {1, 2, 3},
-    order = 'B06'
   }, {
     type = 'bool-setting',
     name = 'PHI-WE',

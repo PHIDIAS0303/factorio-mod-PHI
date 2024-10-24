@@ -131,7 +131,7 @@ local items = {
             ref_name = 'assembling-machine-3',
             tech = 'automation-3',
             min = 4,
-            max = settings.startup['PHI-MB-ASSEMBLING-TIER'].value + 2
+            max = settings.startup['PHI-MB-MACHINE-TIER'].value + 2
         },
         ['electric-furnace'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -141,7 +141,7 @@ local items = {
             ref_name = 'electric-furnace',
             tech = 'advanced-material-processing-2',
             min = 2,
-            max = settings.startup['PHI-MB-FURNACE-TIER'].value
+            max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['oil-refinery'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -151,7 +151,7 @@ local items = {
             ref_name = 'oil-refinery',
             tech = 'oil-processing',
             min = 2,
-            max = settings.startup['PHI-MB-OIL-TIER'].value
+            max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['chemical-plant'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -161,7 +161,7 @@ local items = {
             ref_name = 'chemical-plant',
             tech = 'oil-processing',
             min = 2,
-            max = settings.startup['PHI-MB-OIL-TIER'].value
+            max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['centrifuge'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -171,7 +171,7 @@ local items = {
             ref_name = 'centrifuge',
             tech = 'uranium-processing',
             min = 2,
-            max = settings.startup['PHI-MB-CENTRIFUGE-TIER'].value
+            max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['lab'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -181,7 +181,7 @@ local items = {
             ref_name = 'lab',
             tech = 'automation',
             min = 2,
-            max = settings.startup['PHI-MB-LAB-TIER'].value
+            max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['electric-mining-drill'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -191,7 +191,7 @@ local items = {
             ref_name = 'electric-mining-drill',
             tech = 'automation',
             min = 2,
-            max = settings.startup['PHI-MB-MINING-TIER'].value
+            max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['pumpjack'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -201,7 +201,7 @@ local items = {
             ref_name = 'pumpjack',
             tech = 'automation',
             min = 2,
-            max = settings.startup['PHI-MB-MINING-TIER'].value
+            max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['laser-turret'] = {
             enabled = settings.startup['PHI-WE'].value,
@@ -324,7 +324,7 @@ if mods['space-age'] then
         ref_name = 'foundry',
         tech = 'foundry',
         min = 2,
-        max = settings.startup['PHI-MB-FURNACE-TIER'].value
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
     
 
     items['item']['big-mining-drill'] = {
@@ -335,7 +335,7 @@ if mods['space-age'] then
         ref_name = 'big-mining-drill',
         tech = 'big-mining-drill',
         min = 2,
-        max = settings.startup['PHI-MB-MINING-TIER'].value
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
     items['item']['biochamber'] = {
@@ -346,7 +346,7 @@ if mods['space-age'] then
         ref_name = 'biochamber',
         tech = 'biochamber',
         min = 2,
-        max = settings.startup['PHI-MB-ASSEMBLING-TIER'].value
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
     items['item']['crusher'] = {
@@ -357,7 +357,7 @@ if mods['space-age'] then
         ref_name = 'crusher',
         tech = 'space-platform',
         min = 2,
-        max = settings.startup['PHI-MB-ASSEMBLING-TIER'].value
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
     items['item']['biolab'] = {
@@ -368,7 +368,7 @@ if mods['space-age'] then
         ref_name = 'biolab',
         tech = 'biolab',
         min = 2,
-        max = settings.startup['PHI-MB-LAB-TIER'].value
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
     items['item']['agricultural-tower'] = {
@@ -379,7 +379,7 @@ if mods['space-age'] then
         ref_name = 'agricultural-tower',
         tech = 'agriculture',
         min = 2,
-        max = settings.startup['PHI-MB-ASSEMBLING-TIER'].value
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
     items['item']['cryogenic-plant'] = {
@@ -390,7 +390,7 @@ if mods['space-age'] then
         ref_name = 'cryogenic-plant',
         tech = 'cryogenic-plant',
         min = 2,
-        max = settings.startup['PHI-MB-ASSEMBLING-TIER'].value
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
     items['item']['electromagnetic-plant'] = {
@@ -401,7 +401,7 @@ if mods['space-age'] then
         ref_name = 'electromagnetic-plant',
         tech = 'electromagnetic-plant',
         min = 2,
-        max = settings.startup['PHI-MB-ASSEMBLING-TIER'].value
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 end
 ]]
