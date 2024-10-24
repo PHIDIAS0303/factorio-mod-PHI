@@ -57,9 +57,7 @@ function main.EEE(source, tier)
     end
 
     if item.energy_usage then
-        local eu = tonumber(string.match(item.energy_usage, '[%d%.]+'))
-        local euu = string.match(item.energy_usage, '%a+')
-        item.energy_usage = eu * (2 ^ (tier - source.min + 1)) .. euu
+        item.energy_usage = tonumber(string.match(item.energy_usage, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_usage, '%a+')
     end
 
     if (source.type == 'electric-turret') or (source.type == 'ammo-turret') or (source.type == 'fluid-turret') then
@@ -86,34 +84,20 @@ function main.EEE(source, tier)
             item.energy_source.input_flow_limit = tostring(tonumber(string.match(item.energy_source.input_flow_limit, '[%d%.]+')) * (4 ^ (tier - source.min + 1))) .. string.match(item.energy_source.input_flow_limit, '%a+')
             item.energy_source.output_flow_limit = tostring(tonumber(string.match(item.energy_source.output_flow_limit, '[%d%.]+')) * (4 ^ (tier - source.min + 1))) .. string.match(item.energy_source.output_flow_limit, '%a+')
 
-            for _, v in pairs({'charge_animation', 'discharge_animation'}) do
-                if item[v] and item[v].layers then
-                    if item[v].layers[1] and item[v].layers[1].layers and item[v].layers[1].layers[1] then
-                        item[v].layers[1].layers[1].tint = items['tint'][tier]
+            if item['chargable_graphics'] then
+                if item['chargable_graphics']['picture'].layers and item['chargable_graphics']['picture'].layers[1] then
+                    item['chargable_graphics']['picture'].layers[1].tint = items['tint'][tier]
+                end
 
-                        if item[v].layers[1].layers[1].hr_version then
-                            item[v].layers[1].layers[1].hr_version.tint = items['tint'][tier]
-                        end
-                    end
-
-                    if item[v].layers[2] then
-                        item[v].layers[2].tint = items['tint'][tier]
-
-                        if item[v].layers[2].hr_version then
-                            item[v].layers[2].hr_version.tint = items['tint'][tier]
-                        end
+                for _, v in pairs({item['chargable_graphics']['charge_animation'], item['chargable_graphics']['discharge_animation']}) do
+                    if v.layers and v.layers[1] and v.layers[1].layers and v.layers[1].layers[1] then
+                        v.layers[1].layers[1].tint = items['tint'][tier]
                     end
                 end
             end
 
         elseif (source.type == 'solar-panel') then
-            if (source.ref_name == 'solar-panel') then
-                item.production = tostring(tonumber(string.match(item.production, '[%d%.]+')) * (4 ^ (tier - source.min + 1))) .. string.match(item.production, '%a+')
-
-
-            elseif (source.ref_name == 'se-space-solar-panel') then
-                item.production = tostring(tonumber(string.match(item.production, '[%d%.]+')) * (4 ^ (tier - source.min + 2))) .. string.match(item.production, '%a+')
-            end
+            item.production = tostring(tonumber(string.match(item.production, '[%d%.]+')) * (4 ^ (tier - source.min + 1))) .. string.match(item.production, '%a+')
 
         elseif (source.type == 'boiler') then
             item.energy_consumption = tostring(tonumber(string.match(item.energy_consumption, '[%d%.]+')) * tier) .. string.match(item.energy_consumption, '%a+')
@@ -130,10 +114,7 @@ function main.EEE(source, tier)
                 item.max_power_output = (tonumber(string.match(item.max_power_output, '[%d%.]+')) * (tier - source.min + 2)) .. string.match(item.max_power_output, '%a+')
             end
 
-            if source.name == 'kr-gas-power-station' then
-                item.fluid_usage_per_tick = item.fluid_usage_per_tick * (tier - source.min + 2)
-
-            else
+            if item.maximum_temperature then
                 item.maximum_temperature = 15 + ((item.maximum_temperature - 15) * tier)
             end
 
@@ -195,40 +176,29 @@ function main.EEE(source, tier)
         item.max_distance_of_sector_revealed = item.max_distance_of_sector_revealed + (2 * tier)
         item.max_distance_of_nearby_sector_revealed = item.max_distance_of_nearby_sector_revealed + (2 * tier)
 
-    elseif (source.type == 'rocket-silo') then
-        local eu = tonumber(string.match(item.active_energy_usage, '[%d%.]+'))
-        local euu = string.match(item.active_energy_usage, '%a+')
-        item.active_energy_usage = eu * (2 ^ (tier - source.min + 1)) .. euu
-        item.rocket_parts_required = item.rocket_parts_required * (tier - source.min + 2)
-        item.rocket_result_inventory_size = math.ceil(data.raw['item']['satellite'].rocket_launch_product[2] * 3 * (tier - source.min + 1) / data.raw['tool']['space-science-pack'].stack_size)
-
-        tint_handle(item, tier, {'arm_01_back_animation', 'arm_02_right_animation', 'arm_03_front_animation', 'base_day_sprite', 'base_front_sprite', 'door_back_sprite', 'door_front_sprite', 'hole_sprite', 'rocket_glow_overlay_sprite', 'rocket_shadow_overlay_sprite', 'satellite_animation'})
     end
 
     if item.crafting_speed then
         item.crafting_speed = item.crafting_speed * (2 ^ (tier - source.min + 1))
     end
+
     if item.energy_source then
         if item.energy_source.emissions_per_minute then
             if source.tech == 'compound-energy' then
                 if (source.type == 'boiler') or (source.name == 'kr-gas-power-station') then
-                    item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (tier - source.min + 2)
+                    item.energy_source.emissions_per_minute.pollution = item.energy_source.emissions_per_minute.pollution * (tier - source.min + 2)
 
                 else
-                    item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (2 ^ (tier - source.min + 1))
+                    item.energy_source.emissions_per_minute.pollution = item.energy_source.emissions_per_minute.pollution * (2 ^ (tier - source.min + 1))
                 end
 
             else
-                item.energy_source.emissions_per_minute = item.energy_source.emissions_per_minute * (2 ^ (tier - source.min + 1))
+                item.energy_source.emissions_per_minute.pollution = item.energy_source.emissions_per_minute.pollution * (2 ^ (tier - source.min + 1))
             end
         end
     end
 
-    if source.name == 'electric-filter-furnace' then
-        item.type = 'assembling-machine'
-    end
-
-    tint_handle(item, tier, {'picture', 'pictures', 'animation', 'horizontal_animation', 'vertical_animation', 'structure', 'integration_patch'})
+    tint_handle(item, tier, {'picture', 'pictures', 'structure', 'frames', 'working_visualisations', 'animation', 'horizontal_animation', 'vertical_animation', 'structure', 'integration_patch'})
 
     if item.idle_animation and item.idle_animation.layers then
         local i = 1
@@ -259,7 +229,7 @@ function main.EEE(source, tier)
     end
 
     if tier > 1 then
-        item.localised_name = {'phi-cl.combine', {'name.' .. source.ref_name}, tier}
+        item.localised_name = {'phi-cl.combine', {'name.' .. source.ref_name}, tostring(tier)}
 
     else
         item.localised_name = {'name.' .. source.ref_name}
@@ -351,7 +321,7 @@ function main.EEQ(source, tier)
         end
     end
 
-    item.localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tier}
+    item.localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tostring(tier)}
     item.localised_description = {'description.' .. source.ref_name}
 
     data:extend({item})
@@ -393,17 +363,12 @@ function main.EI(source, tier)
             item.icons[1].icon_size = item.icon_size
             item.icon_size = nil
         end
-
-        if item.icon_mipmaps then
-            item.icons[1].icon_mipmaps = item.icon_mipmaps
-            item.icon_mipmaps = nil
-        end
     end
 
     item.order = item.order .. tier
 
     if tier > 1 then
-        item.localised_name = {'phi-cl.combine', {'name.' .. source.ref_name}, tier}
+        item.localised_name = {'phi-cl.combine', {'name.' .. source.ref_name}, tostring(tier)}
 
     else
         item.localised_name = {'name.' .. source.ref_name}
@@ -421,6 +386,12 @@ function main.ER(source, tier)
     local result_name = source.name
     local localised_name
     local localised_description = {'description.' .. source.ref_name}
+    local icons = {
+        {
+            icon = data.raw.item[source.ref_name].icon,
+            tint = items['tint'][tier]
+        }
+    }
 
     if source.category == 'equipment' then
         if (tier == 2) then
@@ -433,7 +404,7 @@ function main.ER(source, tier)
         new_name = new_name .. '-mk' .. tier .. '-equipment'
         result_name = result_name .. '-mk' .. tier .. '-equipment'
 
-        localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tier}
+        localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tostring(tier)}
 
     else
         if tier > 2 then
@@ -444,7 +415,7 @@ function main.ER(source, tier)
         result_name = result_name .. '-' .. tier
 
         if tier > 1 then
-            localised_name = {'phi-cl.combine', {'name.' .. source.ref_name}, tier}
+            localised_name = {'phi-cl.combine', {'name.' .. source.ref_name}, tostring(tier)}
 
         else
             localised_name = {'name.' .. source.ref_name}
@@ -455,11 +426,13 @@ function main.ER(source, tier)
         if (source.type == 'solar-panel') or (source.type == 'accumulator') then
             data:extend({{
                 type = 'recipe',
-                name = new_name ,
+                name = new_name,
+                icons = icons,
                 energy_required = 2,
                 enabled = false,
-                ingredients = {{name=ingredient_name, amount=4}},
-                result = result_name,
+                ingredients = {{type='item', name=ingredient_name, amount=4}},
+                results = {{type='item', name=result_name, amount=1}},
+                main_product = result_name,
                 localised_name = localised_name,
                 localised_description = localised_description
             }})
@@ -468,11 +441,13 @@ function main.ER(source, tier)
             if tier > 2 then
                 data:extend({{
                     type = 'recipe',
-                    name = new_name ,
+                    name = new_name,
+                    icons = icons,
                     energy_required = 2,
                     enabled = false,
-                    ingredients = {{name=ingredient_name, amount=1}, {name=source.name, amount=1}},
-                    result = result_name,
+                    ingredients = {{type='item', name=ingredient_name, amount=1}, {type='item', name=source.name, amount=1}},
+                    results = {{type='item', name=result_name, amount=1}},
+                    main_product = result_name,
                     localised_name = localised_name,
                     localised_description = localised_description
                 }})
@@ -480,11 +455,13 @@ function main.ER(source, tier)
             else
                 data:extend({{
                     type = 'recipe',
-                    name = new_name ,
+                    name = new_name,
+                    icons = icons,
                     energy_required = 2,
                     enabled = false,
-                    ingredients = {{name=ingredient_name, amount=2}},
-                    result = result_name,
+                    ingredients = {{type='item', name=ingredient_name, amount=2}},
+                    results = {{type='item', name=result_name, amount=1}},
+                    main_product = result_name,
                     localised_name = localised_name,
                     localised_description = localised_description
                 }})
@@ -495,10 +472,12 @@ function main.ER(source, tier)
         data:extend({{
             type = 'recipe',
             name = new_name,
+            icons = icons,
             energy_required = 2,
             enabled = false,
-            ingredients = {{name=ingredient_name, amount=2}},
-            result = result_name,
+            ingredients = {{type='item', name=ingredient_name, amount=2}},
+            results = {{type='item', name=result_name, amount=1}},
+            main_product = result_name,
             localised_name = localised_name,
             localised_description = localised_description
         }})

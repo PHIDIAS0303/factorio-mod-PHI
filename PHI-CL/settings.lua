@@ -186,22 +186,10 @@ data:extend({
     type = 'int-setting',
     name = 'PHI-MI-LANDFILL',
     setting_type = 'startup',
-    default_value = 20,
+    default_value = 50,
     minimum_value = 1,
-    maximum_value = 40,
+    maximum_value = 100,
     order = 'E01'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-MI-EFFCY',
-    setting_type = 'startup',
-    default_value = false,
-    order = 'E02'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-MI-NUCLEAR',
-    setting_type = 'startup',
-    default_value = false,
-    order = 'E03'
   }, {
     type = 'bool-setting',
     name = 'PHI-MI-BOILER',
@@ -214,90 +202,6 @@ data:extend({
     setting_type = 'startup',
     default_value = false,
     order = 'E05'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-MI-REPAIR',
-    setting_type = 'startup',
-    default_value = 1,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'E06'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-MI-PIPE',
-    setting_type = 'startup',
-    default_value = 1,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'E07'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-MI-ROBOT',
-    setting_type = 'startup',
-    default_value = 1,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'E08'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-MI-TRAIN',
-    setting_type = 'startup',
-    default_value = 1,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'E09'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-MI-ARTILLERY',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'E10'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-RS',
-    setting_type = 'startup',
-    default_value = false,
-    order = 'F00'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-RS-RECIPE-1',
-    setting_type = 'startup',
-    default_value = 4,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
-    order = 'F01'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-RS-RECIPE-2',
-    setting_type = 'startup',
-    default_value = 8,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
-    order = 'F02'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-RS-RECIPE-DROF',
-    setting_type = 'startup',
-    default_value = 1,
-    minimum_value = 1,
-    maximum_value = 100,
-    order = 'F03'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-RS-RECIPE-MINROM',
-    setting_type = 'startup',
-    default_value = 2,
-    minimum_value = 1,
-    maximum_value = 100,
-    order = 'F04'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-RS-RECIPE-MAXROM',
-    setting_type = 'startup',
-    default_value = 100,
-    minimum_value = 1,
-    maximum_value = 100,
-    order = 'F05'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-RS-MODULE',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'F06'
   }, {
     type = 'int-setting',
     name = 'PHI-XW-WATER',
@@ -365,82 +269,7 @@ data:extend({
     minimum_value = 0,
     maximum_value = 20,
     order = 'IA06'
-  },
-  --[[ {
-    type = 'int-setting',
-    name = 'PHI-PB-FMMS',
-    setting_type = 'startup',
-    default_value = 2,
-    minimum_value = 0,
-    maximum_value = 10,
-    order = 'IB01'
   }, {
-    type = 'double-setting',
-    name = 'PHI-PB-FRS',
-    setting_type = 'startup',
-    default_value = 1.5,
-    minimum_value = 0,
-    maximum_value = 10,
-    order = 'IB02'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-PB-FCS',
-    setting_type = 'startup',
-    default_value = 5,
-    minimum_value = 0,
-    maximum_value = 20,
-    order = 'IB03'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-PB-FISB',
-    setting_type = 'startup',
-    default_value = 100,
-    minimum_value = 0,
-    maximum_value = 200,
-    order = 'IB04'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-PB-FHB',
-    setting_type = 'startup',
-    default_value = 200,
-    minimum_value = 0,
-    maximum_value = 1000,
-    order = 'IB05'
-  }, {
-    type = 'double-setting',
-    name = 'PHI-PB-FWRSM',
-    setting_type = 'startup',
-    default_value = 1.3,
-    minimum_value = 0,
-    maximum_value = 20,
-    order = 'IB06'
-  }, {
-    type = 'double-setting',
-    name = 'PHI-PB-FWRBM',
-    setting_type = 'startup',
-    default_value = 1,
-    minimum_value = 0,
-    maximum_value = 20,
-    order = 'IB07'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-PB-FWRSB',
-    setting_type = 'startup',
-    default_value = 1,
-    minimum_value = 0,
-    maximum_value = 40,
-    order = 'IB08'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-PB-FFRLM',
-    setting_type = 'startup',
-    default_value = 1,
-    minimum_value = 0,
-    maximum_value = 20,
-    order = 'IB09'
-  },
-  ]]
-  {
     type = 'bool-setting',
     name = 'PHI-CT',
     setting_type = 'startup',
@@ -479,12 +308,6 @@ data:extend({
     order = 'J05'
   }, {
     type = 'bool-setting',
-    name = 'PHI-CT-MINER',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'J06'
-  }, {
-    type = 'bool-setting',
     name = 'PHI-CT-LINKED',
     setting_type = 'startup',
     default_value = true,
@@ -497,22 +320,10 @@ data:extend({
     order = 'J08'
   }, {
     type = 'bool-setting',
-    name = 'PHI-CT-RECIPE',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'J09'
-  }, {
-    type = 'bool-setting',
     name = 'PHI-CT-ENERGY',
     setting_type = 'startup',
     default_value = true,
     order = 'J10'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-CT-LAMP',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'J11'
   }, {
     type = 'bool-setting',
     name = 'PHI-CT-TRAIN',
