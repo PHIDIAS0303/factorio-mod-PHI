@@ -515,62 +515,81 @@ end
 ]]
 
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-OIL'].value then
-    for _, v in pairs({'water', 'crude-oil', 'lava'}) do
-        if data.raw.fluid[v] then
-            local item = table.deepcopy(data.raw['item']['offshore-pump'])
-            item.name = v .. '-pump'
-            item.place_result = v .. '-pump'
-            item.order = 'b[fluids]-a[offshore-pump]-o'
+    data:extend({{type='recipe-category', name='fluid'}})
 
-            item.icons = {
-                {
-                    icon = '__base__/graphics/icons/offshore-pump.png',
-                    tint = items['tint'][2],
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }
-            }
+    local item = table.deepcopy(data.raw['item']['offshore-pump'])
+    item.name = 'super-pump'
+    item.place_result = 'super-pump'
+    item.order = 'b[fluids]-a[super-pump]-o'
 
-            item.icon = nil
-            item.icon_size = nil
-            item.icon_mipmaps = nil
-            item.localised_name = {'name.' .. v .. '-pump'}
-            item.localised_description = {'description.' .. v .. '-pump'}
-            data:extend({item})
+    item.icons = {
+        {
+            icon = '__base__/graphics/icons/offshore-pump.png',
+            tint = items['tint'][2],
+            icon_size = 64,
+            icon_mipmaps = 4
+        }
+    }
 
-            local entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
-            entity.name = v .. '-pump'
-            entity.minable.result = v .. '-pump'
-            entity.fluid = v
-            entity.fluid_box.filter = v
-            entity.pumping_speed = 20
-            entity.adjacent_tile_collision_mask = nil
-            entity.adjacent_tile_collision_test = {'ground-tile'}
-            entity.tile_buildability_rules = nil
-            entity.water_reflection = nil
-            entity.layers = {
-                item = true,
-                object = true,
-                player = true,
-                water_tile = true,
-                elevated_rail = true
-            }
-            entity.localised_name = {'name.' .. v .. '-pump'}
-            entity.localised_description = {'description.' .. v .. '-pump'}
-            data:extend({entity})
+    item.icon = nil
+    item.icon_size = nil
+    item.icon_mipmaps = nil
+    item.localised_name = {'name.super-pump'}
+    item.localised_description = nil
+    data:extend({item})
 
-            data:extend({{
-                type = 'recipe',
-                name = v .. '-pump',
-                energy_required = 2,
-                enabled = true,
-                ingredients = {{type='item', name='electronic-circuit', amount=2}, {type='item', name='pipe', amount=1}, {type='item', name='iron-gear-wheel', amount=1}},
-                results = {{type='item', name= v .. '-pump', amount=1}},
-                main_product = v .. '-pump',
-                localised_name = {'name.' .. v .. '-pump'},
-                localised_description = {'description.' .. v .. '-pump'}
-            }})
-        end
+    local entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
+    entity.type = 'assembling-machine'
+    entity.crafting_categories = {'fluid'}
+    entity.crafting_speed = 1
+    entity.energy_source = {type = 'void'}
+    entity.name = 'super-pump'
+    entity.minable.result = 'super-pump'
+    entity.pumping_speed = nil
+    entity.adjacent_tile_collision_mask = nil
+    entity.adjacent_tile_collision_test = {'ground-tile'}
+    entity.tile_buildability_rules = nil
+    entity.water_reflection = nil
+    entity.layers = {
+        item = true,
+        object = true,
+        player = true,
+        water_tile = true,
+        elevated_rail = true
+    }
+    entity.localised_name = {'name.super-pump'}
+    entity.localised_description = nil
+    data:extend({entity})
+
+    data:extend({{
+        type = 'recipe',
+        name = 'super-pump',
+        energy_required = 2,
+        enabled = true,
+        ingredients = {{type='item', name='electronic-circuit', amount=2}, {type='item', name='pipe', amount=1}, {type='item', name='iron-gear-wheel', amount=1}},
+        results = {{type='item', name='super-pump', amount=1}},
+        main_product = 'super-pump',
+        localised_name = {'name.super-pump'},
+        localised_description = nil
+    }})
+
+    for _, v in pairs(data.raw.fluid) do
+        data:extend({{
+            type = 'recipe',
+            name = v.name,
+            category = 'fluid',
+            energy_required = 1,
+            enabled = true,
+            ingredients = {},
+            results = {{type='fluid', name=v.name, amount=10000}},
+            main_product = v.name,
+            hide_from_stats = true,
+            hide_from_player_crafting = true,
+            allow_decomposition = false,
+            allow_as_intermediate = false,
+            localised_name = v.localised_name,
+            localised_description = nil
+        }})
     end
 end
 

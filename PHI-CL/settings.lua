@@ -40,32 +40,18 @@ data:extend({
     order = 'C00'
   }, {
     type = 'int-setting',
-    name = 'PHI-WE-LASER-TIER',
+    name = 'PHI-WE-TURRET-TIER',
     setting_type = 'startup',
     default_value = 3,
     allowed_values = {1, 2, 3},
     order = 'C01'
   }, {
     type = 'int-setting',
-    name = 'PHI-WE-FLAME-TIER',
-    setting_type = 'startup',
-    default_value = 3,
-    allowed_values = {1, 2, 3},
-    order = 'C02'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-WE-GUN-TIER',
-    setting_type = 'startup',
-    default_value = 3,
-    allowed_values = {1, 2, 3},
-    order = 'C03'
-  }, {
-    type = 'int-setting',
     name = 'PHI-WE-RADAR-TIER',
     setting_type = 'startup',
     default_value = 3,
     allowed_values = {1, 2, 3},
-    order = 'C04'
+    order = 'C02'
   }, {
     type = 'bool-setting',
     name = 'PHI-EQ',

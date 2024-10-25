@@ -109,11 +109,11 @@ function main.EEE(source, tier)
 
         elseif (source.type == 'fusion-reactor') then
             item.power_input = tostring(tonumber(string.match(item.power_input, '[%d%.]+')) * tier) .. string.match(item.power_input, '%a+')
-            item.max_fluid_usage = item.max_fluid_usage * (2 ^ (tier - source.min + 1))
+            item.max_fluid_usage = item.max_fluid_usage * tier
 
         elseif (source.type == 'fusion-generator') then
             item.energy_source.output_flow_limit = tostring(tonumber(string.match(item.energy_source.output_flow_limit, '[%d%.]+')) * tier) .. string.match(item.energy_source.output_flow_limit, '%a+')
-            item.max_fluid_usage = item.max_fluid_usage * (2 ^ (tier - source.min + 1))
+            item.max_fluid_usage = item.max_fluid_usage * tier
 
         elseif (source.type == 'heat-pipe') then
             item.heat_buffer.max_temperature = item.heat_buffer.max_temperature * tier
@@ -154,6 +154,12 @@ function main.EEE(source, tier)
         item.max_distance_of_sector_revealed = item.max_distance_of_sector_revealed + (2 * tier)
         item.max_distance_of_nearby_sector_revealed = item.max_distance_of_nearby_sector_revealed + (2 * tier)
 
+    elseif source.type == 'thruster' then
+        item.min_performance.fluid_usage = item.min_performance.fluid_usage * (2 ^ (tier - source.min + 1))
+        item.max_performance.fluid_usage = item.max_performance.fluid_usage * (2 ^ (tier - source.min + 1))
+
+    elseif source.type == 'reactor' and source.name == 'heating-tower' then
+        item.consumption = tostring(tonumber(string.match(item.consumption, '[%d%.]+')) * tier) .. string.match(item.consumption, '%a+')
     end
 
     if item.crafting_speed then
@@ -163,19 +169,19 @@ function main.EEE(source, tier)
     if item.energy_source and item.energy_source.emissions_per_minute then
         if source.tech == 'compound-energy' then
             if (source.type == 'boiler') or (source.name == 'kr-gas-power-station') then
-                for _, v in pairs(item.energy_source.emissions_per_minute) do
-                    v = v * (tier - source.min + 2)
+                for k, _ in pairs(item.energy_source.emissions_per_minute) do
+                    item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (tier - source.min + 2)
                 end
 
             else
-                for _, v in pairs(item.energy_source.emissions_per_minute) do
-                    v = v * (2 ^ (tier - source.min + 1))
+                for k, _ in pairs(item.energy_source.emissions_per_minute) do
+                    item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (2 ^ (tier - source.min + 1))
                 end
             end
 
         else
-            for _, v in pairs(item.energy_source.emissions_per_minute) do
-                v = v * (2 ^ (tier - source.min + 1))
+            for k, _ in pairs(item.energy_source.emissions_per_minute) do
+                item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (2 ^ (tier - source.min + 1))
             end
         end
     end

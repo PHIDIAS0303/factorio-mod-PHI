@@ -211,7 +211,7 @@ local items = {
             ref_name = 'laser-turret',
             tech = 'laser-turret',
             min = 2,
-            max = settings.startup['PHI-WE-LASER-TIER'].value
+            max = settings.startup['PHI-WE-TURRET-TIER'].value
         },
         ['flamethrower-turret'] = {
             enabled = settings.startup['PHI-WE'].value,
@@ -221,7 +221,7 @@ local items = {
             ref_name = 'flamethrower-turret',
             tech = 'flamethrower',
             min = 2,
-            max = settings.startup['PHI-WE-FLAME-TIER'].value
+            max = settings.startup['PHI-WE-TURRET-TIER'].value
         },
         ['gun-turret'] = {
             enabled = settings.startup['PHI-WE'].value,
@@ -231,7 +231,7 @@ local items = {
             ref_name = 'gun-turret',
             tech = 'gun-turret',
             min = 2,
-            max = settings.startup['PHI-WE-GUN-TIER'].value
+            max = settings.startup['PHI-WE-TURRET-TIER'].value
         },
         ['radar'] = {
             enabled = settings.startup['PHI-WE'].value,
@@ -288,7 +288,7 @@ if mods and mods['space-age'] then
         ref_name = 'railgun-turret',
         tech = 'railgun',
         min = 2,
-        max = settings.startup['PHI-WE-GUN-TIER'].value
+        max = settings.startup['PHI-WE-TURRET-TIER'].value
     }
 
     items['item']['rocket-turret'] = {
@@ -299,7 +299,7 @@ if mods and mods['space-age'] then
         ref_name = 'rocket-turret',
         tech = 'rocket-turret',
         min = 2,
-        max = settings.startup['PHI-WE-GUN-TIER'].value
+        max = settings.startup['PHI-WE-TURRET-TIER'].value
     }
 
     items['item']['tesla-turret'] = {
@@ -310,7 +310,7 @@ if mods and mods['space-age'] then
         ref_name = 'tesla-turret',
         tech = 'tesla-weapons',
         min = 2,
-        max = settings.startup['PHI-WE-LASER-TIER'].value
+        max = settings.startup['PHI-WE-TURRET-TIER'].value
     }
 
     items['item']['foundry'] = {
@@ -368,17 +368,6 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['agricultural-tower'] = {
-        enabled = settings.startup['PHI-MB'].value,
-        stage = 2,
-        type = 'agricultural-tower',
-        name = 'agricultural-tower',
-        ref_name = 'agricultural-tower',
-        tech = 'agriculture',
-        min = 2,
-        max = settings.startup['PHI-MB-MACHINE-TIER'].value
-    }
-
     items['item']['cryogenic-plant'] = {
         enabled = settings.startup['PHI-MB'].value,
         stage = 2,
@@ -397,6 +386,17 @@ if mods and mods['space-age'] then
         name = 'electromagnetic-plant',
         ref_name = 'electromagnetic-plant',
         tech = 'electromagnetic-plant',
+        min = 2,
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
+    }
+
+    items['item']['thruster'] = {
+        enabled = settings.startup['PHI-MB'].value,
+        stage = 2,
+        type = 'thruster',
+        name = 'thruster',
+        ref_name = 'thruster',
+        tech = 'space-platform-thruster',
         min = 2,
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
