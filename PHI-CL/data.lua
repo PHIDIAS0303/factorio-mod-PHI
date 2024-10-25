@@ -594,6 +594,8 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-OIL'].value the
                 main_product = v.name,
                 hide_from_stats = true,
                 hide_from_player_crafting = true,
+                allow_decomposition = false,
+                allow_as_intermediate = false,
                 localised_name = v.localised_name,
                 localised_description = nil
             }})
