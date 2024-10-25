@@ -411,6 +411,10 @@ if settings.startup['PHI-MI'].value and (settings.startup['PHI-MI-LANDFILL'].val
     data.raw.recipe['landfill'].ingredients = {{type='item', name='stone', amount=settings.startup['PHI-MI-LANDFILL'].value}}
 end
 
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-NUCLEAR'].value then
+    data.raw['reactor']['nuclear-reactor'].scale_energy_usage = true
+end
+
 --[[
 if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value then
     data:extend({
@@ -514,7 +518,7 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
 end
 ]]
 
-if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-OIL'].value then
+if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-FLUID'].value then
     data:extend({{type='recipe-category', name='fluid'}})
 
     local item = table.deepcopy(data.raw['item']['offshore-pump'])

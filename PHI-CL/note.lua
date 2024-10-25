@@ -1230,13 +1230,7 @@ end
     setting_type = 'startup',
     default_value = false,
     order = 'E02'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-MI-NUCLEAR',
-    setting_type = 'startup',
-    default_value = false,
-    order = 'E03'
-  },
+  }, 
   
         "? aai-industry >= 0.5.0",
         "? Krastorio2 >= 1.3.0",

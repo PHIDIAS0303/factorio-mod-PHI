@@ -74,6 +74,12 @@ data:extend({
     order = 'E01'
   }, {
     type = 'bool-setting',
+    name = 'PHI-MI-NUCLEAR',
+    setting_type = 'startup',
+    default_value = false,
+    order = 'E03'
+  }, {
+    type = 'bool-setting',
     name = 'PHI-MI-BOILER',
     setting_type = 'startup',
     default_value = false,
@@ -86,19 +92,13 @@ data:extend({
     order = 'E05'
   }, {
     type = 'bool-setting',
-    name = 'PHI-XC',
-    setting_type = 'startup',
-    default_value = false,
-    order = 'H00'
-  }, {
-    type = 'bool-setting',
     name = 'PHI-CT',
     setting_type = 'startup',
     default_value = false,
     order = 'J00'
   },  {
     type = 'bool-setting',
-    name = 'PHI-CT-OIL',
+    name = 'PHI-CT-FLUID',
     setting_type = 'startup',
     default_value = true,
     order = 'J01'
@@ -132,24 +132,24 @@ data:extend({
     name = 'PHI-CT-LINKED',
     setting_type = 'startup',
     default_value = true,
-    order = 'J07'
+    order = 'J06'
   }, {
     type = 'bool-setting',
     name = 'PHI-CT-LOADER',
     setting_type = 'startup',
     default_value = true,
-    order = 'J08'
+    order = 'J07'
   }, {
     type = 'bool-setting',
     name = 'PHI-CT-ENERGY',
     setting_type = 'startup',
     default_value = true,
-    order = 'J10'
+    order = 'J08'
   }, {
     type = 'bool-setting',
     name = 'PHI-CT-TRAIN',
     setting_type = 'startup',
     default_value = true,
-    order = 'J12'
+    order = 'J09'
   }
 })

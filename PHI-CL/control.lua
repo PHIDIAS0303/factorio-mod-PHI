@@ -1,27 +1,5 @@
 local items = require 'config'
 
-if settings.startup['PHI-XC'].value then
-    script.on_nth_tick(60, function(event)
-        local ts = math.floor(event.tick / 60)
-        local c
-
-        if ts > 3599 then
-            c = string.format('%d:%02d:%02d', math.floor(ts / 3600), math.floor(ts / 60) % 60, math.floor(ts) % 60)
-
-        else
-            c = string.format('%d:%02d', math.floor(ts / 60) % 60, math.floor(ts) % 60)
-        end
-
-        for _, p in pairs(game.connected_players) do
-            if p.gui.top.phi_clock == nil then
-                p.gui.top.add{type='button', name='phi_clock'}
-            end
-
-            p.gui.top.phi_clock.caption = c
-        end
-    end)
-end
-
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRASH'].value then
     local function trash_creation(event)
         local entity = event.created_entity or event.entity
