@@ -545,7 +545,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-OIL'].value the
     entity.energy_source = {type = 'void'}
     entity.name = 'super-pump'
     entity.minable.result = 'super-pump'
-    entity.pumping_speed = nil
     entity.adjacent_tile_collision_mask = nil
     entity.adjacent_tile_collision_test = {'ground-tile'}
     entity.tile_buildability_rules = nil
@@ -574,22 +573,31 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-OIL'].value the
     }})
 
     for _, v in pairs(data.raw.fluid) do
-        data:extend({{
-            type = 'recipe',
-            name = v.name,
-            category = 'fluid',
-            energy_required = 1,
-            enabled = true,
-            ingredients = {},
-            results = {{type='fluid', name=v.name, amount=10000}},
-            main_product = v.name,
-            hide_from_stats = true,
-            hide_from_player_crafting = true,
-            allow_decomposition = false,
-            allow_as_intermediate = false,
-            localised_name = v.localised_name,
-            localised_description = nil
-        }})
+        if v.subgroup == 'fluid' then
+            local temp
+
+            if v.max_temperature then
+                temp = v.max_temperature
+
+            else
+                temp = v.default_temperature
+            end
+
+            data:extend({{
+                type = 'recipe',
+                name = v.name,
+                category = 'fluid',
+                energy_required = 1,
+                enabled = true,
+                ingredients = nil,
+                results = {{type='fluid', name=v.name, amount=2000, temperature=temp}},
+                main_product = v.name,
+                hide_from_stats = true,
+                hide_from_player_crafting = true,
+                localised_name = v.localised_name,
+                localised_description = nil
+            }})
+        end
     end
 end
 
