@@ -275,7 +275,7 @@ if mods and mods['space-age'] then
         type = 'reactor',
         name = 'heating-tower',
         ref_name = 'heating-tower',
-        tech = 'compound-energy',
+        tech = 'heating-tower',
         min = 2,
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
