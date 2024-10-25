@@ -253,7 +253,7 @@ if mods and mods['space-age'] then
         type = 'fusion-reactor',
         name = 'fusion-reactor',
         ref_name = 'fusion-reactor',
-        tech = 'fusion-reactor',
+        tech = 'compound-energy',
         min = 2,
         max = settings.startup['PHI-EN-POWER-TIER'].value
     }
@@ -264,7 +264,7 @@ if mods and mods['space-age'] then
         type = 'fusion-generator',
         name = 'fusion-generator',
         ref_name = 'fusion-generator',
-        tech = 'fusion-reactor',
+        tech = 'compound-energy',
         min = 2,
         max = settings.startup['PHI-EN-POWER-TIER'].value
     }
@@ -275,9 +275,9 @@ if mods and mods['space-age'] then
         type = 'reactor',
         name = 'heating-tower',
         ref_name = 'heating-tower',
-        tech = 'heating-tower',
+        tech = 'compound-energy',
         min = 2,
-        max = settings.startup['PHI-EN-ASSEMBLING-TIER'].value
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
     items['item']['railgun-turret'] = {
@@ -312,10 +312,7 @@ if mods and mods['space-age'] then
         min = 2,
         max = settings.startup['PHI-WE-LASER-TIER'].value
     }
-end
 
---[[
-if mods['space-age'] then
     items['item']['foundry'] = {
         enabled = settings.startup['PHI-MB'].value,
         stage = 2,
@@ -325,7 +322,7 @@ if mods['space-age'] then
         tech = 'foundry',
         min = 2,
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
-    
+    }
 
     items['item']['big-mining-drill'] = {
         enabled = settings.startup['PHI-MB'].value,
@@ -352,7 +349,7 @@ if mods['space-age'] then
     items['item']['crusher'] = {
         enabled = settings.startup['PHI-MB'].value,
         stage = 2,
-        type = 'furnace',
+        type = 'assembling-machine',
         name = 'crusher',
         ref_name = 'crusher',
         tech = 'space-platform',
@@ -404,6 +401,5 @@ if mods['space-age'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 end
-]]
 
 return items

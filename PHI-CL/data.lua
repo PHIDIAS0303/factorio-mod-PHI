@@ -518,19 +518,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-OIL'].value the
     for _, v in pairs({'water', 'crude-oil', 'lava'}) do
         if data.raw.fluid[v] then
             local item = table.deepcopy(data.raw['item']['offshore-pump'])
-
-            item.pumping_speed = 20
-            item.adjacent_tile_collision_mask = nil
-            item.adjacent_tile_collision_test = {'ground-tile'}
-            item.tile_buildability_rules = nil
-            item.water_reflection = nil
-            item.layers = {
-                item = true,
-                object = true,
-                player = true,
-                water_tile = true,
-                elevated_rail = true
-            }
             item.name = v .. '-pump'
             item.place_result = v .. '-pump'
             item.order = 'b[fluids]-a[offshore-pump]-o'
@@ -554,8 +541,20 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-OIL'].value the
             local entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
             entity.name = v .. '-pump'
             entity.minable.result = v .. '-pump'
-            entity.fluid = 'crude-oil'
-            entity.fluid_box.filter = 'crude-oil'
+            entity.fluid = v
+            entity.fluid_box.filter = v
+            entity.pumping_speed = 20
+            entity.adjacent_tile_collision_mask = nil
+            entity.adjacent_tile_collision_test = {'ground-tile'}
+            entity.tile_buildability_rules = nil
+            entity.water_reflection = nil
+            entity.layers = {
+                item = true,
+                object = true,
+                player = true,
+                water_tile = true,
+                elevated_rail = true
+            }
             entity.localised_name = {'name.' .. v .. '-pump'}
             entity.localised_description = {'description.' .. v .. '-pump'}
             data:extend({entity})

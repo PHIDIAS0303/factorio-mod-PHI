@@ -108,11 +108,11 @@ function main.EEE(source, tier)
             tint_handle(item, tier, {'connection_patches_connected', 'connection_patches_disconnected', 'heat_connection_patches_connected', 'heat_connection_patches_disconnected', 'lower_layer_picture'})
 
         elseif (source.type == 'fusion-reactor') then
-            item.consumption = tostring(tonumber(string.match(item.consumption, '[%d%.]+')) * tier) .. string.match(item.consumption, '%a+')
+            item.power_input = tostring(tonumber(string.match(item.power_input, '[%d%.]+')) * tier) .. string.match(item.power_input, '%a+')
             item.max_fluid_usage = item.max_fluid_usage * (2 ^ (tier - source.min + 1))
 
         elseif (source.type == 'fusion-generator') then
-            item.max_power_output = tostring(tonumber(string.match(item.max_power_output, '[%d%.]+')) * tier) .. string.match(item.max_power_output, '%a+')
+            item.energy_source.output_flow_limit = tostring(tonumber(string.match(item.energy_source.output_flow_limit, '[%d%.]+')) * tier) .. string.match(item.energy_source.output_flow_limit, '%a+')
             item.max_fluid_usage = item.max_fluid_usage * (2 ^ (tier - source.min + 1))
 
         elseif (source.type == 'heat-pipe') then
@@ -131,10 +131,6 @@ function main.EEE(source, tier)
                 for i=1, v['n'], 1 do
                     if item[v['a']].layers[i] then
                         item[v['a']].layers[i].tint = items['tint'][tier]
-
-                        if item[v['a']].layers[i].hr_version then
-                            item[v['a']].layers[i].hr_version.tint = items['tint'][tier]
-                        end
                     end
                 end
             end
@@ -149,14 +145,6 @@ function main.EEE(source, tier)
                     if d.layers then
                         d.layers[1].tint = items['tint'][tier]
                         d.layers[2].tint = items['tint'][tier]
-
-                        if d.layers[1].hr_version then
-                            d.layers[1].hr_version.tint = items['tint'][tier]
-                        end
-
-                        if d.layers[2].hr_version then
-                            d.layers[2].hr_version.tint = items['tint'][tier]
-                        end
                     end
                 end
             end
@@ -172,18 +160,22 @@ function main.EEE(source, tier)
         item.crafting_speed = item.crafting_speed * (2 ^ (tier - source.min + 1))
     end
 
-    if item.energy_source then
-        if item.energy_source.emissions_per_minute then
-            if source.tech == 'compound-energy' then
-                if (source.type == 'boiler') or (source.name == 'kr-gas-power-station') then
-                    item.energy_source.emissions_per_minute.pollution = item.energy_source.emissions_per_minute.pollution * (tier - source.min + 2)
-
-                else
-                    item.energy_source.emissions_per_minute.pollution = item.energy_source.emissions_per_minute.pollution * (2 ^ (tier - source.min + 1))
+    if item.energy_source and item.energy_source.emissions_per_minute then
+        if source.tech == 'compound-energy' then
+            if (source.type == 'boiler') or (source.name == 'kr-gas-power-station') then
+                for _, v in pairs(item.energy_source.emissions_per_minute) do
+                    v = v * (tier - source.min + 2)
                 end
 
             else
-                item.energy_source.emissions_per_minute.pollution = item.energy_source.emissions_per_minute.pollution * (2 ^ (tier - source.min + 1))
+                for _, v in pairs(item.energy_source.emissions_per_minute) do
+                    v = v * (2 ^ (tier - source.min + 1))
+                end
+            end
+
+        else
+            for _, v in pairs(item.energy_source.emissions_per_minute) do
+                v = v * (2 ^ (tier - source.min + 1))
             end
         end
     end
@@ -196,10 +188,6 @@ function main.EEE(source, tier)
         while i < #item.idle_animation.layers do
             if item.idle_animation.layers[i] then
                 item.idle_animation.layers[i].tint = items['tint'][tier]
-
-                if item.idle_animation.layers[i].hr_version then
-                    item.idle_animation.layers[i].hr_version.tint = items['tint'][tier]
-                end
             end
 
             i = i + 2
@@ -212,10 +200,6 @@ function main.EEE(source, tier)
 
     if item.base_picture and item.base_picture.sheets then
         item.base_picture.sheets[1].tint = items['tint'][tier]
-
-        if item.base_picture.sheets[1].hr_version then
-            item.base_picture.sheets[1].hr_version.tint = items['tint'][tier]
-        end
     end
 
     if tier > 1 then
