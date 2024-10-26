@@ -539,7 +539,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-FLUID'].value t
     item.icon_size = nil
     item.icon_mipmaps = nil
     item.localised_name = {'name.super-pump'}
-    item.localised_description = nil
+    item.localised_description = item.localised_description
     data:extend({item})
 
     local entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
@@ -564,7 +564,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-FLUID'].value t
     entity.layers = nil
     entity.fluid_source_offset = nil
     entity.localised_name = {'name.super-pump'}
-    entity.localised_description = nil
+    entity.localised_description = entity.localised_description
     data:extend({entity})
 
     data:extend({{
@@ -596,7 +596,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-FLUID'].value t
                 category = 'fluid',
                 energy_required = 1,
                 enabled = true,
-                ingredients = nil,
+                ingredients = {},
                 results = {{type='fluid', name=v.name, amount=2000, temperature=temp}},
                 main_product = v.name,
                 hide_from_stats = true,
