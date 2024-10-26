@@ -519,7 +519,7 @@ end
 ]]
 
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-FLUID'].value then
-    data:extend({{type='recipe-category', name='fluid-s'}})
+    data:extend({{type='recipe-category', name='fluid'}})
 
     local item = table.deepcopy(data.raw['item']['offshore-pump'])
     item.name = 'super-pump'
@@ -546,7 +546,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-FLUID'].value t
     entity.name = 'super-pump'
     entity.minable.result = 'super-pump'
     entity.type = 'assembling-machine'
-    entity.crafting_categories = {'fluid-s'}
+    entity.crafting_categories = {'fluid'}
     entity.crafting_speed = 1
     entity.energy_source = {type = 'void'}
     entity.effect_receiver = {uses_module_effects=false, uses_beacon_effects=false}
@@ -555,7 +555,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-FLUID'].value t
     entity.tile_buildability_rules = nil
     entity.fluid_box.filter = nil
     entity.fluid_box.production_type = 'output'
-    entity.fluid_box.pipe_connections = {{position = {0, 0}, direction = defines.direction.south, flow_direction = 'output'}}
+    entity.fluid_box.pipe_connections = {{position = {0, 0}, direction=defines.direction.south, flow_direction='output'}}
     entity.layers = {
         item = true,
         object = true,
@@ -594,7 +594,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-FLUID'].value t
             data:extend({{
                 type = 'recipe',
                 name = v.name,
-                category = 'fluid-s',
+                category = 'fluid',
                 energy_required = 1,
                 enabled = true,
                 ingredients = {},
