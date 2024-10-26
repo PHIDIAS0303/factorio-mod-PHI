@@ -186,7 +186,7 @@ function main.EEE(source, tier)
         end
     end
 
-    tint_handle(item, tier, {'picture', 'pictures', 'frames', 'working_visualisations', 'animation', 'horizontal_animation', 'vertical_animation', 'structure', 'integration_patch'})
+    tint_handle(item, tier, {'picture', 'pictures', 'frames', 'working_visualisations', 'animation', 'horizontal_animation', 'vertical_animation', 'structure', 'integration_patch', 'graphics_set'})
 
     if item.idle_animation and item.idle_animation.layers then
         local i = 1
