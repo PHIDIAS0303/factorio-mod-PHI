@@ -553,9 +553,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-FLUID'].value t
     entity.allowed_effects = {'consumption'}
     entity.collision_mask = nil
     entity.tile_buildability_rules = nil
-    entity.fluid_box.filter = nil
-    entity.fluid_box.production_type = 'output'
-    entity.fluid_box.pipe_connections = {{position = {0, 0}, direction=defines.direction.south, flow_direction='output'}}
     entity.layers = {
         item = true,
         object = true,
