@@ -519,7 +519,7 @@ end
 ]]
 
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-FLUID'].value then
-    data:extend({{type='recipe-category', name='fluid'}})
+    data:extend({{type='recipe-category', name='fluid-s'}})
 
     local item = table.deepcopy(data.raw['item']['offshore-pump'])
     item.name = 'super-pump'
@@ -546,22 +546,23 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-FLUID'].value t
     entity.name = 'super-pump'
     entity.minable.result = 'super-pump'
     entity.type = 'assembling-machine'
-    entity.crafting_categories = {'fluid'}
+    entity.crafting_categories = {'fluid-s'}
     entity.crafting_speed = 1
     entity.energy_source = {type = 'void'}
-    entity.effect_receiver = {
-        uses_module_effects = false,
-        uses_beacon_effects = false,
-        uses_surface_effects = true
-    }
-    entity.allowed_effects = {
-        'consumption'
-    }
-    entity.module_slots = 0
-    entity.fluid_boxes_off_when_no_fluid_recipe = false
+    entity.effect_receiver = {uses_module_effects=false, uses_beacon_effects=false}
+    entity.allowed_effects = {'consumption'}
     entity.collision_mask = nil
     entity.tile_buildability_rules = nil
-    entity.layers = nil
+    entity.fluid_box.filter = nil
+    entity.fluid_box.production_type = 'output'
+    entity.fluid_box.pipe_connections = {{position = {0, 0}, direction = defines.direction.south, flow_direction = 'output'}}
+    entity.layers = {
+        item = true,
+        object = true,
+        player = true,
+        water_tile = true,
+        elevated_rail = true
+    }
     entity.fluid_source_offset = nil
     entity.localised_name = {'name.super-pump'}
     entity.localised_description = entity.localised_description
@@ -593,16 +594,14 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-FLUID'].value t
             data:extend({{
                 type = 'recipe',
                 name = v.name,
-                category = 'fluid',
+                category = 'fluid-s',
                 energy_required = 1,
                 enabled = true,
                 ingredients = {},
                 results = {{type='fluid', name=v.name, amount=2000, temperature=temp}},
                 main_product = v.name,
-                hide_from_stats = true,
                 hide_from_player_crafting = true,
-                allow_decomposition = false,
-                allow_as_intermediate = false,
+                allow_productivity = false,
                 localised_name = v.localised_name,
                 localised_description = nil
             }})

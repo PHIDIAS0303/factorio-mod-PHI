@@ -416,40 +416,34 @@ end
 
 -- entity category
 function main.EEEC(source, tier)
-    local category_name = source.type
-
-    if source.name == 'electric-filter-furnace' then
-        category_name = 'assembling-machine'
-    end
-
     local item_name = source.name .. '-' .. tier
 
-    if not data.raw[category_name][source.ref_name] then
+    if not data.raw[source.type][source.ref_name] then
         return
     end
 
-    if data.raw[category_name][source.ref_name].crafting_categories then
-        data.raw[category_name][item_name].crafting_categories = {}
+    if data.raw[source.type][source.ref_name].crafting_categories then
+        data.raw[source.type][item_name].crafting_categories = {}
 
-        for i=1, #data.raw[category_name][source.ref_name].crafting_categories do
-            table.insert(data.raw[category_name][item_name].crafting_categories, data.raw[category_name][source.ref_name].crafting_categories[i])
+        for i=1, #data.raw[source.type][source.ref_name].crafting_categories do
+            table.insert(data.raw[source.type][item_name].crafting_categories, data.raw[source.type][source.ref_name].crafting_categories[i])
         end
     end
 
-    if data.raw[category_name][source.ref_name].resource_categories then
-        data.raw[category_name][item_name].resource_categories = {}
+    if data.raw[source.type][source.ref_name].resource_categories then
+        data.raw[source.type][item_name].resource_categories = {}
 
-        for i=1, #data.raw[category_name][source.ref_name].resource_categories do
-            table.insert(data.raw[category_name][item_name].resource_categories, data.raw[category_name][source.ref_name].resource_categories[i])
+        for i=1, #data.raw[source.type][source.ref_name].resource_categories do
+            table.insert(data.raw[source.type][item_name].resource_categories, data.raw[source.type][source.ref_name].resource_categories[i])
         end
     end
 
-    if data.raw[category_name][source.ref_name].fuel_categories then
-        data.raw[category_name][item_name].fuel_categories = table.deepcopy(data.raw[category_name][source.ref_name].fuel_categories)
+    if data.raw[source.type][source.ref_name].fuel_categories then
+        data.raw[source.type][item_name].fuel_categories = table.deepcopy(data.raw[source.type][source.ref_name].fuel_categories)
     end
 
-    if data.raw[category_name][source.ref_name].allowed_effects then
-        data.raw[category_name][item_name].allowed_effects = table.deepcopy(data.raw[category_name][source.ref_name].allowed_effects)
+    if data.raw[source.type][source.ref_name].allowed_effects then
+        data.raw[source.type][item_name].allowed_effects = table.deepcopy(data.raw[source.type][source.ref_name].allowed_effects)
     end
 end
 
