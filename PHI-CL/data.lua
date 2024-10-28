@@ -549,17 +549,14 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-FLUID'].value t
     entity.crafting_categories = {'fluid'}
     entity.crafting_speed = 1
     entity.energy_source = {type = 'void'}
+    entity.fluid_box.volume = 4000
+    entity.fluid_boxes = {table.deepcopy(entity.fluid_box)}
+    entity.fluid_box = nil
+    entity.fluid_boxes_off_when_no_fluid_recipe = false
     entity.effect_receiver = {uses_module_effects=false, uses_beacon_effects=false}
     entity.allowed_effects = {'consumption'}
     entity.collision_mask = nil
     entity.tile_buildability_rules = nil
-    entity.layers = {
-        item = true,
-        object = true,
-        player = true,
-        water_tile = true,
-        elevated_rail = true
-    }
     entity.fluid_source_offset = nil
     entity.localised_name = {'name.super-pump'}
     entity.localised_description = entity.localised_description
@@ -595,7 +592,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-FLUID'].value t
                 energy_required = 1,
                 enabled = true,
                 ingredients = {},
-                results = {{type='fluid', name=v.name, amount=2000, temperature=temp}},
+                results = {{type='fluid', name=v.name, amount=16000, temperature=temp}},
                 main_product = v.name,
                 hide_from_player_crafting = true,
                 allow_productivity = false,

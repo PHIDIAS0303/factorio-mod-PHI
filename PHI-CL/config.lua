@@ -400,6 +400,17 @@ if mods and mods['space-age'] then
         min = 2,
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
+
+    items['item']['recycler'] = {
+        enabled = settings.startup['PHI-MB'].value,
+        stage = 2,
+        type = 'furnace',
+        name = 'recycler',
+        ref_name = 'recycler',
+        tech = 'recycling',
+        min = 2,
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
+    }
 end
 
 return items
