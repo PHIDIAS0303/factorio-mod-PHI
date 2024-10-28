@@ -285,9 +285,9 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-ENERGY'].value 
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-EFFCY'].value then
-    data.raw['module']['efficiency-module'].effect = {consumption = {bonus = -0.5}, pollution = {bonus = -0.1}}
-    data.raw['module']['efficiency-module-2'].effect = {consumption = {bonus = -1.0}, pollution = {bonus = -0.15}}
-    data.raw['module']['efficiency-module-3'].effect = {consumption = {bonus = -1.5}, pollution = {bonus = -0.2}}
+    data.raw['module']['efficiency-module'].effect = {consumption=-0.4, pollution=-0.4}
+    data.raw['module']['efficiency-module-2'].effect = {consumption=-0.8, pollution=-0.8}
+    data.raw['module']['efficiency-module-3'].effect = {consumption=-1.2, pollution=-1.2}
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-BOILER'].value then
