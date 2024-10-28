@@ -54,12 +54,6 @@ data:extend({
     order = 'C02'
   }, {
     type = 'bool-setting',
-    name = 'PHI-EQ',
-    setting_type = 'startup',
-    default_value = false,
-    order = 'D00'
-  }, {
-    type = 'bool-setting',
     name = 'PHI-MI',
     setting_type = 'startup',
     default_value = false,
@@ -72,6 +66,12 @@ data:extend({
     minimum_value = 1,
     maximum_value = 100,
     order = 'E01'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-MI-EFFCY',
+    setting_type = 'startup',
+    default_value = false,
+    order = 'E02'
   }, {
     type = 'bool-setting',
     name = 'PHI-MI-NUCLEAR',

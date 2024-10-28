@@ -979,12 +979,6 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-REPAIR'].value 
     end
 end
 
-if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-EFFCY'].value then
-    data.raw['module']['efficiency-module'].effect = {consumption = {bonus = -0.5}, pollution = {bonus = -0.1}}
-    data.raw['module']['efficiency-module-2'].effect = {consumption = {bonus = -1.0}, pollution = {bonus = -0.15}}
-    data.raw['module']['efficiency-module-3'].effect = {consumption = {bonus = -1.5}, pollution = {bonus = -0.2}}
-end
-
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
     local s = (1 + settings.startup['PHI-MI-PIPE'].value) / 2
 
@@ -1126,6 +1120,13 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TILE'].value th
 end
 
 ** SETTING
+{
+    type = 'bool-setting',
+    name = 'PHI-EQ',
+    setting_type = 'startup',
+    default_value = false,
+    order = 'D00'
+  }, 
 , {
     type = 'int-setting',
     name = 'PHI-EQ-SOLAR-TIER',
@@ -1223,13 +1224,6 @@ end
     setting_type = 'startup',
     default_value = true,
     order = 'E10'
-  }, 
-  , {
-    type = 'bool-setting',
-    name = 'PHI-MI-EFFCY',
-    setting_type = 'startup',
-    default_value = false,
-    order = 'E02'
   }, 
   
         "? aai-industry >= 0.5.0",

@@ -3,7 +3,7 @@ local main = require 'main'
 local file_stage = 1
 
 if settings.startup['PHI-EN'].value and settings.startup['PHI-EN-SOLAR-TIER'].value and settings.startup['PHI-EN-POWER-TIER'].value and settings.startup['PHI-EN-POWER-TIER'].value then
-    local ml = math.max(settings.startup['PHI-EN-SOLAR-TIER'].value, settings.startup['PHI-EN-POWER-TIER'].value, settings.startup['PHI-EN-POWER-TIER'].value)
+    local ml = math.max(settings.startup['PHI-EN-SOLAR-TIER'].value, settings.startup['PHI-EN-POWER-TIER'].value)
 
     for i=1, 7 do
         local tn = 'compound-energy-' .. i
@@ -282,6 +282,12 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-ENERGY'].value 
     }})
 
     table.insert(data.raw.technology['electric-energy-accumulators'].effects, {type='unlock-recipe', recipe='passive-energy-void'})
+end
+
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-EFFCY'].value then
+    data.raw['module']['efficiency-module'].effect = {consumption = {bonus = -0.5}, pollution = {bonus = -0.1}}
+    data.raw['module']['efficiency-module-2'].effect = {consumption = {bonus = -1.0}, pollution = {bonus = -0.15}}
+    data.raw['module']['efficiency-module-3'].effect = {consumption = {bonus = -1.5}, pollution = {bonus = -0.2}}
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-BOILER'].value then
@@ -596,6 +602,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-FLUID'].value t
                 main_product = v.name,
                 hide_from_player_crafting = true,
                 allow_productivity = false,
+                crafting_machine_tint = v.flow_color,
                 localised_name = v.localised_name,
                 localised_description = nil
             }})
