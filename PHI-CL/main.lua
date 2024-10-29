@@ -347,10 +347,6 @@ function main.EI(source, tier)
         end
     end
 
-    if item.ingredient_to_weight_coefficient then
-        item.ingredient_to_weight_coefficient = nil
-    end
-
     item.order = item.order .. tier
 
     if tier > 1 then
