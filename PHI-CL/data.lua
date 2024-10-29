@@ -104,10 +104,11 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
     entity.minable.result = 'passive-energy-void'
     entity.energy_source.usage_priority = 'tertiary'
     entity.energy_source.emissions_per_minute = {pollution = 0}
-    entity.energy_source.input_flow_limit = '1TW'
+    entity.energy_source.input_flow_limit = '1PW'
     entity.energy_source.output_flow_limit = '0W'
+    entity.energy_source.buffer_capacity = '1PJ'
     entity.energy_production = '0W'
-    entity.energy_usage = '1TW'
+    entity.energy_usage = '1PW'
     entity.gui_mode = 'none'
     entity.localised_name = {'name.passive-energy-void'}
     entity.localised_description = {'description.passive-energy-void'}

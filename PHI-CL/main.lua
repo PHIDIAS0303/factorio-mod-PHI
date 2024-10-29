@@ -34,10 +34,6 @@ function main.EEE(source, tier)
         item.energy_usage = tonumber(string.match(item.energy_usage, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_usage, '%a+')
     end
 
-    if item.ingredient_to_weight_coefficient then
-        item.ingredient_to_weight_coefficient = nil
-    end
-
     if (source.type == 'electric-turret') or (source.type == 'ammo-turret') or (source.type == 'fluid-turret') then
         item.attack_parameters.damage_modifier = 2 ^ (tier - source.min + 1)
         item.attack_parameters.range = item.attack_parameters.range + (2 * (tier - source.min + 1))
@@ -349,6 +345,10 @@ function main.EI(source, tier)
             item.icons[1].icon_size = item.icon_size
             item.icon_size = nil
         end
+    end
+
+    if item.ingredient_to_weight_coefficient then
+        item.ingredient_to_weight_coefficient = nil
     end
 
     item.order = item.order .. tier
