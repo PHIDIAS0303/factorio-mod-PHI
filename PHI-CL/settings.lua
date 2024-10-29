@@ -114,63 +114,27 @@ data:extend({
     order = 'E03'
   }, {
     type = 'bool-setting',
-    name = 'PHI-MI-BOILER',
-    setting_type = 'startup',
-    default_value = false,
-    order = 'E04'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-MI-CHEST',
-    setting_type = 'startup',
-    default_value = false,
-    order = 'E05'
-  }, {
-    type = 'bool-setting',
     name = 'PHI-CT',
     setting_type = 'startup',
     default_value = false,
     order = 'J00'
   },  {
     type = 'bool-setting',
-    name = 'PHI-CT-FLUID',
+    name = 'PHI-CT-TOOL',
     setting_type = 'startup',
     default_value = true,
     order = 'J01'
   }, {
     type = 'bool-setting',
-    name = 'PHI-CT-RADAR',
+    name = 'PHI-CT-UTILITY',
     setting_type = 'startup',
     default_value = true,
     order = 'J02'
   }, {
     type = 'bool-setting',
-    name = 'PHI-CT-TRASH',
+    name = 'PHI-CT-HIDDEN',
     setting_type = 'startup',
     default_value = true,
-    order = 'J05'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-CT-LINKED',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'J06'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-CT-LOADER',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'J07'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-CT-ENERGY',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'J08'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-CT-TRAIN',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'J09'
+    order = 'J03'
   }
 })

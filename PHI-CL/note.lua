@@ -659,6 +659,107 @@
         end
 
 ** DATA
+if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value then
+    data:extend({
+        {
+            type = 'equipment-grid',
+            name = 'equipment-grid-14x14',
+            width = 14,
+            height = 14,
+            equipment_categories = {'armor'}
+        },
+        {
+            type = 'armor',
+            name = 'power-armor-mk3',
+            icons = {
+                {
+                    icon = '__base__/graphics/icons/power-armor-mk2.png',
+                    tint = items['tint'][2],
+                    icon_size = 64,
+                    icon_mipmaps = 4
+                }
+            },
+            resistances = {
+                {
+                    type = 'physical',
+                    decrease = 20,
+                    percent = 50
+                },
+                {
+                    type = 'acid',
+                    decrease = 20,
+                    percent = 80
+                },
+                {
+                    type = 'explosion',
+                    decrease = 70,
+                    percent = 60
+                },
+                {
+                    type = 'fire',
+                    decrease = 20,
+                    percent = 80
+                },
+                {
+                    type = 'laser',
+                    decrease = 20,
+                    percent = 50
+                },
+                {
+                    type = 'electric',
+                    decrease = 20,
+                    percent = 50
+                },
+                {
+                    type = 'impact',
+                    decrease = 20,
+                    percent = 50
+                },
+                {
+                    type = 'poison',
+                    decrease = 20,
+                    percent = 50
+                }
+            },
+            subgroup = 'armor',
+            order = 'eb[power-armor-mk3]',
+            stack_size = 1,
+            infinite = true,
+            equipment_grid = 'equipment-grid-14x14',
+            inventory_size_bonus = 40,
+            open_sound = {filename =  '__base__/sound/armor-open.ogg', volume = 1},
+            close_sound = {filename = '__base__/sound/armor-close.ogg', volume = 1},
+            localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'},
+            localised_description = {'description.power-armor-mk2'}
+        }
+    })
+
+    data:extend({{
+        type = 'recipe',
+        name = 'power-armor-mk3',
+        energy_required = 2,
+        enabled = false,
+        ingredients = {{type='item', name='power-armor-mk2', amount=2}},
+        results = {{type='item', name='power-armor-mk3', amount=1}},
+        main_product = 'power-armor-mk3',
+        localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'},
+        localised_description = {'description.power-armor-mk2'}
+    }})
+
+    for _, animation in ipairs(data.raw['character']['character']['animations']) do
+        if animation.armors then
+            for _, armor in ipairs(animation.armors) do
+                if armor == 'power-armor-mk2' then
+                    animation.armors[#animation.armors + 1] = 'power-armor-mk3'
+                    break
+                end
+            end
+        end
+    end
+
+    table.insert(data.raw.technology['power-armor-mk2'].effects, {type='unlock-recipe', recipe='power-armor-mk3'})
+end
+
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRAIN'].value then
     local item = table.deepcopy(data.raw['item']['used-up-uranium-fuel-cell'])
     item.name = 'empty-train-battery'
@@ -930,6 +1031,24 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TILE'].value th
 	}
 end
 
+for _, c in pairs(data.raw) do
+    for _, t in pairs(c) do
+        if t.surface_conditions then
+            t.surface_conditions = nil
+        end
+    end
+end
+
+** MIGRATION
+        if script.active_mods['space-exploration'] then
+            if technologies['se-core-miner'].researched then
+                for i=2, settings.startup['PHI-MB-MINING-TIER'].value do
+                    recipes['se-core-miner-' .. i].enabled = true
+                    recipes['se-core-miner-' .. i].reload()
+                end
+            end
+        end
+
 ** SETTING
    {
     type = 'int-setting',
@@ -970,14 +1089,14 @@ end
     name = 'PHI-CT-TILE',
     setting_type = 'startup',
     default_value = true,
-    order = 'J03'
+    order = 'J04'
   }, {
     type = 'string-setting',
     name = 'PHI-CT-TILE-CHOICE',
     setting_type = 'startup',
     default_value = 'grass-1',
     allowed_values = {'concrete', 'deepwater', 'deepwater-green', 'dirt-1', 'dirt-2', 'dirt-3', 'dirt-4', 'dirt-5', 'dirt-6', 'dirt-7', 'dry-dirt', 'grass-1', 'grass-2', 'grass-3', 'grass-4', 'hazard-concrete-left', 'hazard-concrete-right', 'lab-dark-1', 'lab-dark-2', 'lab-white', 'landfill', 'out-of-map', 'red-desert-0', 'red-desert-1', 'red-desert-2', 'red-desert-3', 'refined-concrete', 'refined-hazard-concrete-left', 'refined-hazard-concrete-right', 'sand-1', 'sand-2', 'sand-3', 'stone-path', 'tutorial-grid', 'water', 'water-green', 'water-mud', 'water-shallow'},
-    order = 'J04'
+    order = 'J05'
   }, 
   
         "? aai-industry >= 0.5.0",
