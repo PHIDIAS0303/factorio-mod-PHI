@@ -11,92 +11,7 @@
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
     
-['equipment'] = {
-        ['solar-panel-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'solar-panel-equipment',
-            name = 'solar-panel',
-            ref_name = 'solar-panel-equipment',
-            tech = 'solar-panel-equipment',
-            min = 2,
-            max = settings.startup['PHI-EQ-SOLAR-TIER'].value,
-            base = 30,
-            graphics_name = 'solar-panel-equipment'
-        },
-        ['fusion-reactor-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'generator-equipment',
-            name = 'fusion-reactor',
-            ref_name = 'fusion-reactor-equipment',
-            tech = 'fusion-reactor-equipment',
-            min = 2,
-            max = settings.startup['PHI-EQ-REACTOR-TIER'].value
-        },
-        ['battery-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'battery-equipment',
-            name = 'battery',
-            ref_name = 'battery-mk3-equipment',
-            tech = 'battery-mk3-equipment',
-            min = 4,
-            max = settings.startup['PHI-EQ-BATTERY-TIER'].value
-        },
-        ['personal-laser-defense-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'active-defense-equipment',
-            name = 'personal-laser-defense',
-            ref_name = 'personal-laser-defense-equipment',
-            tech = 'personal-laser-defense-equipment',
-            min = 2,
-            max = settings.startup['PHI-EQ-LASER-TIER'].value
-        },
-        ['energy-shield-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'energy-shield-equipment',
-            name = 'energy-shield',
-            ref_name = 'energy-shield-mk2-equipment',
-            tech = 'energy-shield-mk2-equipment',
-            min = 3,
-            max = settings.startup['PHI-EQ-SHIELD-TIER'].value
-        },
-        ['personal-roboport-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'roboport-equipment',
-            name = 'personal-roboport',
-            ref_name = 'personal-roboport-mk2-equipment',
-            tech = 'personal-roboport-mk2-equipment',
-            min = 3,
-            max = settings.startup['PHI-EQ-ROBOPORT-TIER'].value
-        },
-        ['night-vision-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'night-vision-equipment',
-            name = 'night-vision',
-            ref_name = 'night-vision-equipment',
-            tech = 'night-vision-equipment',
-            min = 2,
-            max = settings.startup['PHI-EQ-NIGHT-TIER'].value
-        },
-        ['exoskeleton-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'movement-bonus-equipment',
-            name = 'exoskeleton',
-            ref_name = 'exoskeleton-equipment',
-            tech = 'exoskeleton-equipment',
-            min = 2,
-            max = settings.startup['PHI-EQ-EXO-TIER'].value
-        }
-    },
-
-        if mods['aai-industry'] then
+    if mods['aai-industry'] then
         items['item']['industrial-furnace'] = {
             enabled = settings.startup['PHI-MB'].value,
             stage = 2,
@@ -700,96 +615,6 @@
     end
 
 ** MAIN
-
--- equipment
-function main.EEQ(source, tier)
-    local item = table.deepcopy(data.raw[source.type][source.ref_name])
-
-    item.name = source.name .. '-mk' .. tier .. '-equipment'
-    item.take_result = source.name .. '-mk' .. tier .. '-equipment'
-
-    if item.power then
-        item.power = tostring(tonumber(string.match(item.power, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.power, '%a+')
-    end
-
-    if item.energy_source then
-        if item.energy_source.buffer_capacity then
-            item.energy_source.buffer_capacity = tostring(tonumber(string.match(item.energy_source.buffer_capacity, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source.buffer_capacity, '%a+')
-        end
-
-        if item.energy_source.input_flow_limit then
-            item.energy_source.input_flow_limit = tostring(tonumber(string.match(item.energy_source.input_flow_limit, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source.input_flow_limit, '%a+')
-        end
-
-        if item.energy_source.output_flow_limit then
-            item.energy_source.output_flow_limit = tostring(tonumber(string.match(item.energy_source.output_flow_limit, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source.output_flow_limit, '%a+')
-        end
-    end
-
-    if item.energy_consumption then
-        item.energy_consumption = tostring(tonumber(string.match(item.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_consumption, '%a+')
-
-    elseif item.energy_input then
-        item.energy_input = tostring(tonumber(string.match(item.energy_input, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_input, '%a+')
-    end
-
-    if item.darkness_to_turn_on and item.color_lookup then
-        item.darkness_to_turn_on = 0
-        item.color_lookup = {{0, '__core__/graphics/color_luts/lut-sunset.png'}}
-
-    elseif item.attack_parameters then
-        if item.attack_parameters.cooldown then
-            item.attack_parameters.cooldown = math.floor(item.attack_parameters.cooldown * ((32 - (tier - source.min + 1)) / 32))
-        end
-
-        if item.attack_parameters.damage_modifier then
-            item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * (2 ^ (tier - source.min + 1))
-        end
-
-        if item.attack_parameters.ammo_type then
-            if item.attack_parameters.ammo_type.energy_consumption then
-                item.attack_parameters.ammo_type.energy_consumption = tostring(tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+')
-            end
-
-            if item.attack_parameters.ammo_type.action_delivery then
-
-                if item.attack_parameters.ammo_type.action_delivery then
-                    item.attack_parameters.ammo_type.action_delivery.max_length = item.attack_parameters.ammo_type.action_delivery.max_length + (tier - source.min + 1)
-                end
-            end
-        end
-
-        if item.attack_parameters.range then
-            item.attack_parameters.range = item.attack_parameters.range + (tier - source.min + 1)
-        end
-
-    elseif item.max_shield_value and item.energy_per_shield then
-        item.max_shield_value = item.max_shield_value * (2 ^ (tier - source.min + 1))
-        item.energy_per_shield = tostring(math.floor(tonumber(string.match(item.energy_per_shield, '[%d%.]+')) * ((32 - (tier - source.min + 1)) / 32))) .. string.match(item.energy_per_shield, '%a+')
-
-    elseif item.movement_bonus then
-        item.movement_bonus = item.movement_bonus * (2 ^ (tier - source.min + 1))
-
-    elseif item.charging_energy and item.charging_station_count then
-        item.charging_station_count = math.max(item.charging_station_count, 4)
-        item.charging_energy = tostring(tonumber(string.match(item.charging_energy, '[%d%.]+')) * (2 ^ (tier - source.min + 2))) .. string.match(item.charging_energy, '%a+')
-    end
-
-    if item.sprite then
-        item.sprite.tint = items['tint'][tier]
-
-        if item.sprite.hr_version then
-            item.sprite.hr_version.tint = items['tint'][tier]
-        end
-    end
-
-    item.localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tostring(tier)}
-    item.localised_description = item.localised_description
-
-    data:extend({item})
-end
-
-
             for _, tc in pairs({'layers', 'sheets'}) do
                 if item[ve][tc] and item[ve][tc][1] then
                     item[ve][tc][1].tint = items['tint'][tier]
@@ -834,20 +659,6 @@ end
         end
 
 ** DATA
-for _, v in pairs(items['equipment']) do
-    if (v.stage == file_stage) and v.enabled and (v.max >= v.min) then
-        v.category = 'equipment'
-
-        for j=v.min, v.max, 1 do
-            main.EEQ(v, j)
-            main.EI(v, j)
-            main.ER(v, j)
-            main.ET(v, j)
-        end
-    end
-end
-
-
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRAIN'].value then
     local item = table.deepcopy(data.raw['item']['used-up-uranium-fuel-cell'])
     item.name = 'empty-train-battery'
@@ -1120,76 +931,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TILE'].value th
 end
 
 ** SETTING
-{
-    type = 'bool-setting',
-    name = 'PHI-EQ',
-    setting_type = 'startup',
-    default_value = false,
-    order = 'D00'
-  }, 
-, {
-    type = 'int-setting',
-    name = 'PHI-EQ-SOLAR-TIER',
-    setting_type = 'startup',
-    default_value = 8,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'D01'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-BATTERY-TIER',
-    setting_type = 'startup',
-    default_value = 8,
-    allowed_values = {2, 3, 4, 5, 6, 7, 8},
-    order = 'D02'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-REACTOR-TIER',
-    setting_type = 'startup',
-    default_value = 8,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'D03'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-LASER-TIER',
-    setting_type = 'startup',
-    default_value = 8,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'D04'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-ROBOPORT-TIER',
-    setting_type = 'startup',
-    default_value = 8,
-    allowed_values = {2, 3, 4, 5, 6, 7, 8},
-    order = 'D05'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-SHIELD-TIER',
-    setting_type = 'startup',
-    default_value = 8,
-    allowed_values = {2, 3, 4, 5, 6, 7, 8},
-    order = 'D06'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-NIGHT-TIER',
-    setting_type = 'startup',
-    default_value = 2,
-    allowed_values = {1, 2},
-    order = 'D07'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-EXO-TIER',
-    setting_type = 'startup',
-    default_value = 2,
-    allowed_values = {1, 2},
-    order = 'D08'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-EQ-ARMOR',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'D09'
-  }, 
    {
     type = 'int-setting',
     name = 'PHI-MI-REPAIR',
@@ -1224,6 +965,19 @@ end
     setting_type = 'startup',
     default_value = true,
     order = 'E10'
+  }, {
+    type = 'bool-setting',
+    name = 'PHI-CT-TILE',
+    setting_type = 'startup',
+    default_value = true,
+    order = 'J03'
+  }, {
+    type = 'string-setting',
+    name = 'PHI-CT-TILE-CHOICE',
+    setting_type = 'startup',
+    default_value = 'grass-1',
+    allowed_values = {'concrete', 'deepwater', 'deepwater-green', 'dirt-1', 'dirt-2', 'dirt-3', 'dirt-4', 'dirt-5', 'dirt-6', 'dirt-7', 'dry-dirt', 'grass-1', 'grass-2', 'grass-3', 'grass-4', 'hazard-concrete-left', 'hazard-concrete-right', 'lab-dark-1', 'lab-dark-2', 'lab-white', 'landfill', 'out-of-map', 'red-desert-0', 'red-desert-1', 'red-desert-2', 'red-desert-3', 'refined-concrete', 'refined-hazard-concrete-left', 'refined-hazard-concrete-right', 'sand-1', 'sand-2', 'sand-3', 'stone-path', 'tutorial-grid', 'water', 'water-green', 'water-mud', 'water-shallow'},
+    order = 'J04'
   }, 
   
         "? aai-industry >= 0.5.0",

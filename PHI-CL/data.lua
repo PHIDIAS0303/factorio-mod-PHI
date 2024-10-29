@@ -8,7 +8,6 @@ if settings.startup['PHI-EN'].value and settings.startup['PHI-EN-SOLAR-TIER'].va
     for i=1, 7 do
         local tn = 'compound-energy-' .. i
         local prereq
-        local e = true
 
         if i > 1 then
             prereq = {'compound-energy-' .. (i - 1)}
@@ -17,14 +16,10 @@ if settings.startup['PHI-EN'].value and settings.startup['PHI-EN-SOLAR-TIER'].va
             prereq = {'solar-energy', 'advanced-circuit', 'electric-energy-accumulators'}
         end
 
-        if i > ml then
-            e = false
-        end
-
         data:extend({{
             type = 'technology',
             name = tn,
-            enabled = e,
+            enabled = (i <= ml),
             prerequisites = prereq,
             effects = {},
             unit = {
@@ -602,7 +597,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-FLUID'].value t
                 main_product = v.name,
                 hide_from_player_crafting = true,
                 allow_productivity = false,
-                crafting_machine_tint = v.flow_color,
+                crafting_machine_tint = {primary=v.flow_color},
                 localised_name = v.localised_name,
                 localised_description = nil
             }})
@@ -622,5 +617,18 @@ for _, v in pairs(items['item']) do
         end
 
         main.EL(v)
+    end
+end
+
+for _, v in pairs(items['equipment']) do
+    if (v.stage == file_stage) and v.enabled and (v.max >= v.min) then
+        v.category = 'equipment'
+
+        for j=v.min, v.max, 1 do
+            main.EEQ(v, j)
+            main.EI(v, j)
+            main.ER(v, j)
+            main.ET(v, j)
+        end
     end
 end
