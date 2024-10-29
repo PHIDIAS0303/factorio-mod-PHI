@@ -1,5 +1,88 @@
 --[[
 ** CONFIG
+['solar-panel-equipment'] = {
+            enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
+            type = 'solar-panel-equipment',
+            name = 'solar-panel',
+            ref_name = 'solar-panel-equipment',
+            tech = 'solar-panel-equipment',
+            min = 2,
+            max = settings.startup['PHI-EQ-POWER-TIER'].value,
+            base = 30,
+            graphics_name = 'solar-panel-equipment'
+        },
+        ['fusion-reactor-equipment'] = {
+            enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
+            type = 'generator-equipment',
+            name = 'fusion-reactor',
+            ref_name = 'fusion-reactor-equipment',
+            tech = 'fusion-reactor-equipment',
+            min = 2,
+            max = settings.startup['PHI-EQ-POWER-TIER'].value
+        },
+        ['battery-equipment'] = {
+            enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
+            type = 'battery-equipment',
+            name = 'battery',
+            ref_name = 'battery-mk3-equipment',
+            tech = 'battery-mk3-equipment',
+            min = 4,
+            max = settings.startup['PHI-EQ-POWER-TIER'].value
+        },
+        ['personal-laser-defense-equipment'] = {
+            enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
+            type = 'active-defense-equipment',
+            name = 'personal-laser-defense',
+            ref_name = 'personal-laser-defense-equipment',
+            tech = 'personal-laser-defense-equipment',
+            min = 2,
+            max = settings.startup['PHI-EQ-DEFENSE-TIER'].value
+        },
+        ['energy-shield-equipment'] = {
+            enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
+            type = 'energy-shield-equipment',
+            name = 'energy-shield',
+            ref_name = 'energy-shield-mk2-equipment',
+            tech = 'energy-shield-mk2-equipment',
+            min = 3,
+            max = settings.startup['PHI-EQ-DEFENSE-TIER'].value
+        },
+        ['personal-roboport-equipment'] = {
+            enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
+            type = 'roboport-equipment',
+            name = 'personal-roboport',
+            ref_name = 'personal-roboport-mk2-equipment',
+            tech = 'personal-roboport-mk2-equipment',
+            min = 3,
+            max = settings.startup['PHI-EQ-TOOL-TIER'].value
+        },
+        ['night-vision-equipment'] = {
+            enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
+            type = 'night-vision-equipment',
+            name = 'night-vision',
+            ref_name = 'night-vision-equipment',
+            tech = 'night-vision-equipment',
+            min = 2,
+            max = settings.startup['PHI-EQ-UTILITY-TIER'].value
+        },
+        ['exoskeleton-equipment'] = {
+            enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
+            type = 'movement-bonus-equipment',
+            name = 'exoskeleton',
+            ref_name = 'exoskeleton-equipment',
+            tech = 'exoskeleton-equipment',
+            min = 2,
+            max = settings.startup['PHI-EQ-UTILITY-TIER'].value
+        }
+        
     items['item']['agricultural-tower'] = {
         enabled = settings.startup['PHI-MB'].value,
         stage = 2,
@@ -1050,6 +1133,42 @@ end
         end
 
 ** SETTING
+{
+    type = 'bool-setting',
+    name = 'PHI-EQ',
+    setting_type = 'startup',
+    default_value = false,
+    order = 'D00'
+  }, 
+{
+    type = 'int-setting',
+    name = 'PHI-EQ-POWER-TIER',
+    setting_type = 'startup',
+    default_value = 8,
+    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
+    order = 'D01'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-EQ-DEFENSE-TIER',
+    setting_type = 'startup',
+    default_value = 8,
+    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
+    order = 'D02'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-EQ-TOOL-TIER',
+    setting_type = 'startup',
+    default_value = 8,
+    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
+    order = 'D03'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-EQ-UTILITY-TIER',
+    setting_type = 'startup',
+    default_value = 2,
+    allowed_values = {1, 2},
+    order = 'D04'
+  }, 
    {
     type = 'int-setting',
     name = 'PHI-MI-REPAIR',
@@ -1089,14 +1208,14 @@ end
     name = 'PHI-CT-TILE',
     setting_type = 'startup',
     default_value = true,
-    order = 'J04'
+    order = 'F04'
   }, {
     type = 'string-setting',
     name = 'PHI-CT-TILE-CHOICE',
     setting_type = 'startup',
     default_value = 'grass-1',
     allowed_values = {'concrete', 'deepwater', 'deepwater-green', 'dirt-1', 'dirt-2', 'dirt-3', 'dirt-4', 'dirt-5', 'dirt-6', 'dirt-7', 'dry-dirt', 'grass-1', 'grass-2', 'grass-3', 'grass-4', 'hazard-concrete-left', 'hazard-concrete-right', 'lab-dark-1', 'lab-dark-2', 'lab-white', 'landfill', 'out-of-map', 'red-desert-0', 'red-desert-1', 'red-desert-2', 'red-desert-3', 'refined-concrete', 'refined-hazard-concrete-left', 'refined-hazard-concrete-right', 'sand-1', 'sand-2', 'sand-3', 'stone-path', 'tutorial-grid', 'water', 'water-green', 'water-mud', 'water-shallow'},
-    order = 'J05'
+    order = 'F05'
   }, 
   
         "? aai-industry >= 0.5.0",

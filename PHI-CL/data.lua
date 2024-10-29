@@ -506,6 +506,7 @@ for _, v in pairs(items['item']) do
     end
 end
 
+--[[
 for _, v in pairs(items['equipment']) do
     if (v.stage == file_stage) and v.enabled and (v.max >= v.min) then
         v.category = 'equipment'
@@ -518,3 +519,4 @@ for _, v in pairs(items['equipment']) do
         end
     end
 end
+]]

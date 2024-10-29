@@ -23,7 +23,7 @@ data:extend({
     type = 'bool-setting',
     name = 'PHI-MB',
     setting_type = 'startup',
-    default_value = false,
+    default_value = true,
     order = 'B00'
   }, {
     type = 'int-setting',
@@ -36,7 +36,7 @@ data:extend({
     type = 'bool-setting',
     name = 'PHI-WE',
     setting_type = 'startup',
-    default_value = false,
+    default_value = true,
     order = 'C00'
   }, {
     type = 'int-setting',
@@ -52,40 +52,6 @@ data:extend({
     default_value = 3,
     allowed_values = {1, 2, 3},
     order = 'C02'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-EQ',
-    setting_type = 'startup',
-    default_value = false,
-    order = 'D00'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-POWER-TIER',
-    setting_type = 'startup',
-    default_value = 8,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'D01'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-DEFENSE-TIER',
-    setting_type = 'startup',
-    default_value = 8,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'D02'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-TOOL-TIER',
-    setting_type = 'startup',
-    default_value = 8,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'D03'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-EQ-UTILITY-TIER',
-    setting_type = 'startup',
-    default_value = 2,
-    allowed_values = {1, 2},
-    order = 'D04'
   }, {
     type = 'bool-setting',
     name = 'PHI-MI',
@@ -116,25 +82,41 @@ data:extend({
     type = 'bool-setting',
     name = 'PHI-CT',
     setting_type = 'startup',
-    default_value = false,
-    order = 'J00'
+    default_value = true,
+    order = 'F00'
   },  {
     type = 'bool-setting',
     name = 'PHI-CT-TOOL',
     setting_type = 'startup',
-    default_value = true,
-    order = 'J01'
+    default_value = false,
+    order = 'F01'
   }, {
     type = 'bool-setting',
     name = 'PHI-CT-UTILITY',
     setting_type = 'startup',
     default_value = true,
-    order = 'J02'
+    order = 'F02'
   }, {
     type = 'bool-setting',
     name = 'PHI-CT-HIDDEN',
     setting_type = 'startup',
-    default_value = true,
-    order = 'J03'
+    default_value = false,
+    order = 'F03'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-CT-ROCKET-CAPACITY',
+    setting_type = 'startup',
+    default_value = 10,
+    minimum_value = 1,
+    maximum_value = 10000,
+    order = 'F04'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-CT-CARGO-WEIGHT',
+    setting_type = 'startup',
+    default_value = 100,
+    minimum_value = 1,
+    maximum_value = 1000,
+    order = 'F05'
   }
 })

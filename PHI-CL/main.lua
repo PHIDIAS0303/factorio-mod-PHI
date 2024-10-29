@@ -34,6 +34,10 @@ function main.EEE(source, tier)
         item.energy_usage = tonumber(string.match(item.energy_usage, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_usage, '%a+')
     end
 
+    if item.ingredient_to_weight_coefficient then
+        item.ingredient_to_weight_coefficient = nil
+    end
+
     if (source.type == 'electric-turret') or (source.type == 'ammo-turret') or (source.type == 'fluid-turret') then
         item.attack_parameters.damage_modifier = 2 ^ (tier - source.min + 1)
         item.attack_parameters.range = item.attack_parameters.range + (2 * (tier - source.min + 1))
@@ -247,16 +251,18 @@ function main.EEQ(source, tier)
 
     if item.energy_consumption then
         item.energy_consumption = tostring(tonumber(string.match(item.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_consumption, '%a+')
+    end
 
-    elseif item.energy_input then
+    if item.energy_input then
         item.energy_input = tostring(tonumber(string.match(item.energy_input, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_input, '%a+')
     end
 
     if item.darkness_to_turn_on and item.color_lookup then
         item.darkness_to_turn_on = 0
         item.color_lookup = {{0, '__core__/graphics/color_luts/lut-sunset.png'}}
+    end
 
-    elseif item.attack_parameters then
+    if item.attack_parameters then
         if item.attack_parameters.cooldown then
             item.attack_parameters.cooldown = math.floor(item.attack_parameters.cooldown * ((32 - (tier - source.min + 1)) / 32))
         end
@@ -281,25 +287,24 @@ function main.EEQ(source, tier)
         if item.attack_parameters.range then
             item.attack_parameters.range = item.attack_parameters.range + (tier - source.min + 1)
         end
+    end
 
-    elseif item.max_shield_value and item.energy_per_shield then
+    if item.max_shield_value and item.energy_per_shield then
         item.max_shield_value = item.max_shield_value * (2 ^ (tier - source.min + 1))
         item.energy_per_shield = tostring(math.floor(tonumber(string.match(item.energy_per_shield, '[%d%.]+')) * ((32 - (tier - source.min + 1)) / 32))) .. string.match(item.energy_per_shield, '%a+')
+    end
 
-    elseif item.movement_bonus then
+    if item.movement_bonus then
         item.movement_bonus = item.movement_bonus * (2 ^ (tier - source.min + 1))
+    end
 
-    elseif item.charging_energy and item.charging_station_count then
+    if item.charging_energy and item.charging_station_count then
         item.charging_station_count = math.max(item.charging_station_count, 4)
         item.charging_energy = tostring(tonumber(string.match(item.charging_energy, '[%d%.]+')) * (2 ^ (tier - source.min + 2))) .. string.match(item.charging_energy, '%a+')
     end
 
     if item.sprite then
         item.sprite.tint = items['tint'][tier]
-
-        if item.sprite.hr_version then
-            item.sprite.hr_version.tint = items['tint'][tier]
-        end
     end
 
     item.localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tostring(tier)}
