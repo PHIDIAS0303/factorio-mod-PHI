@@ -285,8 +285,6 @@ function main.EEQ(source, tier)
         end
     end
 
-    item.weight = 1
-
     if item.max_shield_value and item.energy_per_shield then
         item.max_shield_value = item.max_shield_value * (2 ^ (tier - source.min + 1))
         item.energy_per_shield = tostring(math.floor(tonumber(string.match(item.energy_per_shield, '[%d%.]+')) * ((32 - (tier - source.min + 1)) / 32))) .. string.match(item.energy_per_shield, '%a+')
