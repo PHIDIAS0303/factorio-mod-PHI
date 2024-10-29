@@ -273,10 +273,7 @@ function main.EEQ(source, tier)
             end
 
             if item.attack_parameters.ammo_type.action_delivery then
-
-                if item.attack_parameters.ammo_type.action_delivery then
-                    item.attack_parameters.ammo_type.action_delivery.max_length = item.attack_parameters.ammo_type.action_delivery.max_length + (tier - source.min + 1)
-                end
+                item.attack_parameters.ammo_type.action_delivery.max_length = item.attack_parameters.ammo_type.action_delivery.max_length + (tier - source.min + 1)
             end
         end
 

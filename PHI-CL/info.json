@@ -1,8 +1,8 @@
 {
     "name": "PHI-CL",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "factorio_version": "2.0",
-    "date": "2024-10-29",
+    "date": "2024-10-30",
     "title": "Phidias Collection",
     "author": "PHIDIAS0303",
     "contributers": "",
@@ -13,5 +13,11 @@
         "? space-age",
         "? quality >= 2.0.0",
         "? elevated-rails > 2.0.0"
-    ]
+    ],
+    "quality_required": false,
+    "space_travel_required": false,
+    "spoiling_required": false,
+    "freezing_required": false,
+    "segmented_units_required": false,
+    "expansion_shaders_required": false
 }
