@@ -21,13 +21,15 @@ if settings.startup['PHI-CT'].value then
             end
         end
 
-        for _, tile in pairs (data.raw.tile) do
-            tile.autoplace = nil
+        for _, t in pairs (data.raw.tile) do
+            if t.type and t.type == 'tile' and t.subgroup == 'nauvis-tiles' and t.autoplace and t.autoplace.probability_expression then
+                t.autoplace.probability_expression = '0'
+            end
         end
 
-        data.raw.tile[settings.startup['PHI-CT-TILE-CHOICE'].value].autoplace = {
-            probability_expression = 1
-        }
+        if data.raw.tile[settings.startup['PHI-CT-TILE-CHOICE'].value] and data.raw.tile[settings.startup['PHI-CT-TILE-CHOICE'].value].autoplace and data.raw.tile[settings.startup['PHI-CT-TILE-CHOICE'].value].autoplace.probability_expression then
+            data.raw.tile[settings.startup['PHI-CT-TILE-CHOICE'].value].autoplace.probability_expression = '1'
+        end
 
         for _, t in pairs({data.raw['simple-entity'], data.raw['optimized-decorative'], data.raw['fish']}) do
             for _, e in pairs(t) do
