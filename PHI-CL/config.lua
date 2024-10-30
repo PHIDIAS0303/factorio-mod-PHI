@@ -517,20 +517,20 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-EQ-POWER-TIER'].value
     }
 
-    items['equipment']['toolbar-equipment'] = {
+    items['equipment']['toolbelt-equipment'] = {
         enabled = settings.startup['PHI-EQ'].value,
         stage = 1,
         type = 'inventory-bonus-equipment',
-        name = 'toolbar',
-        ref_name = 'toolbar-equipment',
-        tech = 'toolbar-equipment',
+        name = 'toolbelt',
+        ref_name = 'toolbelt-equipment',
+        tech = 'toolbelt-equipment',
         min = 2,
         max = settings.startup['PHI-EQ-UTILITY-TIER'].value
     }
 
     items['equipment']['battery-equipment'].ref_name = 'battery-mk3-equipment'
     items['equipment']['battery-equipment'].tech = 'battery-mk3-equipment'
-    items['equipment']['battery-equipment'].min = 3
+    items['equipment']['battery-equipment'].min = 4
 end
 
 return items
