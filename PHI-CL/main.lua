@@ -30,7 +30,7 @@ function main.EEE(source, tier)
         item.next_upgrade = source.name .. '-' .. (tier + 1)
     end
 
-    for _, v in pairs({'production', 'energy_usage', 'heating_energy', 'crane_energy_usage', 'energy_per_shot'}) do
+    for _, v in pairs({'energy_usage', 'heating_energy', 'crane_energy_usage', 'energy_per_shot'}) do
         if item[v] then
             item[v] = tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. (string.match(item[v], '%a+') or '')
         end
@@ -97,6 +97,9 @@ function main.EEE(source, tier)
                 end
             end
 
+        elseif (source.type == 'solar-panel') then
+            item.production = tostring(tonumber(string.match(item.production, '[%d%.]+')) * (4 ^ (tier - source.min + 1))) .. string.match(item.production, '%a+')
+            
         elseif (source.type == 'boiler') then
             item.energy_consumption = tostring(tonumber(string.match(item.energy_consumption, '[%d%.]+')) * tier) .. string.match(item.energy_consumption, '%a+')
             item.target_temperature = 15 + ((item.target_temperature - 15) * tier)
@@ -178,6 +181,16 @@ function main.EEE(source, tier)
 
     elseif source.type == 'agricultural-tower' then
         item.radius = item.radius + (1 * (tier - source.min + 1))
+
+        local s = (4 + (tier - source.min + 1)) / 4
+
+        for _, v in pairs(item.crane.speed) do
+            for _, v2 in pairs(v) do
+                if type(v2) == 'number' then
+                    v2 = v2 * s
+                end
+            end
+        end
     end
 
     tint_handle(item, tier, {'picture', 'pictures', 'frames', 'working_visualisations', 'animation', 'horizontal_animation', 'vertical_animation', 'structure', 'integration_patch', 'graphics_set'})
