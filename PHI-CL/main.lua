@@ -312,7 +312,7 @@ function main.EI(source, tier)
 
     if source.category == 'equipment' then
         item.name = source.name .. '-mk' .. tier .. '-equipment'
-        item.placed_as_equipment_result = source.name .. '-mk' .. tier .. '-equipment'
+        item.place_as_equipment_result = source.name .. '-mk' .. tier .. '-equipment'
 
     else
         if tier > 1 then
