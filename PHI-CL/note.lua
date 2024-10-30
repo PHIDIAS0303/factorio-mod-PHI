@@ -701,32 +701,18 @@
             for _, tc in pairs({'layers', 'sheets'}) do
                 if item[ve][tc] and item[ve][tc][1] then
                     item[ve][tc][1].tint = items['tint'][tier]
-
-                    if item[ve][tc][1].hr_version then
-                        item[ve][tc][1].hr_version.tint = items['tint'][tier]
-                    end
                 end
 
                 for _, v in pairs(item[ve]) do
                     if type(v) == 'table' then
-                        if v[tc] then
-                            if v[tc][1] then
-                                v[tc][1].tint = items['tint'][tier]
-
-                                if v[tc][1].hr_version then
-                                    v[tc][1].hr_version.tint = items['tint'][tier]
-                                end
-                            end
+                        if v[tc] and v[tc][1] then
+                            v[tc][1].tint = items['tint'][tier]
                         end
 
                         for i=1, #v, 1 do
                             if v[i] and type(v[i]) == 'table' then
                                 if v[i][tc] and v[i][tc][1] then
                                     v[i][tc][1].tint = items['tint'][tier]
-
-                                    if v[i][tc][1].hr_version then
-                                        v[i][tc][1].hr_version.tint = items['tint'][tier]
-                                    end
                                 end
                             end
                         end
@@ -977,25 +963,7 @@ end
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
     local s = (1 + settings.startup['PHI-MI-PIPE'].value) / 2
 
-    for _, t in pairs({data.raw['pipe'], data.raw['pipe-to-ground']}) do
-        for _, v in pairs(t) do
-            if v.fluid_box.height then
-                v.fluid_box.height = v.fluid_box.height * s
-
-            else
-                v.fluid_box.height = s
-            end
-        end
-    end
-
     for _, v in pairs(data.raw['pump']) do
-        if v.fluid_box.height then
-            v.fluid_box.height = v.fluid_box.height * s
-
-        else
-            v.fluid_box.height = s
-        end
-
         v.pumping_speed = v.pumping_speed * s
     end
 end
@@ -1031,19 +999,13 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-TRAIN'].value t
 end
 
 ** DATA FINAL FIXES
-data.raw['utility-constants'].default.zoom_to_world_effect_strength = 0
-data.raw['utility-constants'].default.zoom_to_world_can_use_nightvision = true
 data.raw['utility-constants'].default.train_inactivity_wait_condition_default = 60
-
-data.raw['arithmetic-combinator']['arithmetic-combinator'].energy_source.usage_priority = 'primary-input'
-data.raw['decider-combinator']['decider-combinator'].energy_source.usage_priority = 'primary-input'
-
 data.raw['active-defense-equipment']['discharge-defense-equipment'].automatic = true
 
-data.raw['gui-style']['default'].machine_slots_scroll_pane.maximal_height = nil
-data.raw['gui-style']['default'].machine_ingredients_scroll_pane.maximal_height = nil
-data.raw['gui-style']['default'].machine_outputs_scroll_pane.maximal_height = nil
-data.raw['gui-style']['default'].module_inventory_scroll_pane.maximal_height = nil
+data.raw['gui-style'].default.machine_slots_scroll_pane.maximal_height = nil
+data.raw['gui-style'].default.machine_ingredients_scroll_pane.maximal_height = nil
+data.raw['gui-style'].default.machine_outputs_scroll_pane.maximal_height = nil
+data.raw['gui-style'].default.module_inventory_scroll_pane.maximal_height = nil
 data.raw['utility-constants'].select_group_row_count
 
 for _,name in pairs({'furnace', 'lab', 'beacon'}) do
@@ -1061,65 +1023,6 @@ end
 
 for _, t in pairs(data.raw['tree']) do
 	t.collision_box = {{-0.05, -0.05}, {0.05, 0.05}}
-end
-
-if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-ARTILLERY'].value then
-	for _, t in pairs({data.raw['artillery-turret'], data.raw['artillery-wagon']}) do
-		for _, v in pairs(t) do
-			v.manual_range_modifier = 1
-		end
-	end
-
-	-- data.raw['artillery-projectile']['artillery-projectile'].reveal_map = false
-end
-
-if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TILE'].value then
-	for _, tile in pairs (data.raw.tile) do
-		tile.autoplace = nil
-	end
-
-	data.raw.tile[settings.startup['PHI-CT-TILE-CHOICE'].value].autoplace = {}
-
-	for _, t in pairs({data.raw['simple-entity'], data.raw['optimized-decorative'], data.raw['fish']}) do
-		for _, e in pairs(t) do
-			e.autoplace = nil
-		end
-    end
-
-	local autoplace_controls = {}
-
-	for k, _ in pairs (data.raw['autoplace-control']) do
-		autoplace_controls[k] = {
-			size = 'none'
-		}
-	end
-
-	data.raw['map-gen-presets']['default']['empty-world'] = {
-		order = 'zz',
-		basic_settings = {
-			autoplace_controls = autoplace_controls,
-			water = 'none',
-			cliff_settings = {
-				name = 'none',
-				cliff_elevation_interval = 100,
-				cliff_elevation_0 = 100,
-				richness = 0
-			}
-		},
-		advanced_settings = {
-			pollution = {enabled = false},
-			enemy_evolution = {enabled = false},
-			enemy_expansion = {enabled = false}
-		}
-	}
-end
-
-for _, c in pairs(data.raw) do
-    for _, t in pairs(c) do
-        if t.surface_conditions then
-            t.surface_conditions = nil
-        end
-    end
 end
 
 ** MIGRATION
@@ -1197,25 +1100,6 @@ end
     default_value = 1,
     allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
     order = 'E09'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-MI-ARTILLERY',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'E10'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-CT-TILE',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'F04'
-  }, {
-    type = 'string-setting',
-    name = 'PHI-CT-TILE-CHOICE',
-    setting_type = 'startup',
-    default_value = 'grass-1',
-    allowed_values = {'concrete', 'deepwater', 'deepwater-green', 'dirt-1', 'dirt-2', 'dirt-3', 'dirt-4', 'dirt-5', 'dirt-6', 'dirt-7', 'dry-dirt', 'grass-1', 'grass-2', 'grass-3', 'grass-4', 'hazard-concrete-left', 'hazard-concrete-right', 'lab-dark-1', 'lab-dark-2', 'lab-white', 'landfill', 'out-of-map', 'red-desert-0', 'red-desert-1', 'red-desert-2', 'red-desert-3', 'refined-concrete', 'refined-hazard-concrete-left', 'refined-hazard-concrete-right', 'sand-1', 'sand-2', 'sand-3', 'stone-path', 'tutorial-grid', 'water', 'water-green', 'water-mud', 'water-shallow'},
-    order = 'F05'
   }, 
   
         "? aai-industry >= 0.5.0",
