@@ -54,6 +54,40 @@ data:extend({
     order = 'C02'
   }, {
     type = 'bool-setting',
+    name = 'PHI-EQ',
+    setting_type = 'startup',
+    default_value = false,
+    order = 'D00'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-EQ-POWER-TIER',
+    setting_type = 'startup',
+    default_value = 8,
+    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
+    order = 'D01'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-EQ-DEFENSE-TIER',
+    setting_type = 'startup',
+    default_value = 8,
+    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
+    order = 'D02'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-EQ-TOOL-TIER',
+    setting_type = 'startup',
+    default_value = 8,
+    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
+    order = 'D03'
+  }, {
+    type = 'int-setting',
+    name = 'PHI-EQ-UTILITY-TIER',
+    setting_type = 'startup',
+    default_value = 2,
+    allowed_values = {1, 2},
+    order = 'D04'
+  }, {
+    type = 'bool-setting',
     name = 'PHI-MI',
     setting_type = 'startup',
     default_value = false,
@@ -118,18 +152,5 @@ data:extend({
     minimum_value = 1,
     maximum_value = 1000,
     order = 'F05'
-  }, {
-    type = 'bool-setting',
-    name = 'PHI-CT-TILE',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'F06'
-  }, {
-    type = 'string-setting',
-    name = 'PHI-CT-TILE-CHOICE',
-    setting_type = 'startup',
-    default_value = 'grass-1',
-    allowed_values = {'concrete', 'deepwater', 'deepwater-green', 'dirt-1', 'dirt-2', 'dirt-3', 'dirt-4', 'dirt-5', 'dirt-6', 'dirt-7', 'dry-dirt', 'grass-1', 'grass-2', 'grass-3', 'grass-4', 'hazard-concrete-left', 'hazard-concrete-right', 'lab-dark-1', 'lab-dark-2', 'lab-white', 'landfill', 'out-of-map', 'red-desert-0', 'red-desert-1', 'red-desert-2', 'red-desert-3', 'refined-concrete', 'refined-hazard-concrete-left', 'refined-hazard-concrete-right', 'sand-1', 'sand-2', 'sand-3', 'stone-path', 'tutorial-grid', 'water', 'water-green', 'water-mud', 'water-shallow'},
-    order = 'F07'
-  }, 
+  }
 })

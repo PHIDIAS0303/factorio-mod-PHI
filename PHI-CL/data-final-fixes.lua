@@ -11,65 +11,6 @@ if settings.startup['PHI-CT'].value then
             data.raw[t][t].energy_source.usage_priority = 'primary-input'
         end
     end
-
-    if settings.startup['PHI-CT-TILE'].value then
-        for _, v in pairs(data.raw) do
-            for _, e in pairs(v) do
-                if e.surface_conditions then
-                    e.surface_conditions = nil
-                end
-            end
-        end
-
-        for _, t in pairs (data.raw.tile) do
-            if t.type and t.type == 'tile' and t.subgroup == 'nauvis-tiles' and t.autoplace and t.autoplace.probability_expression then
-                t.autoplace.probability_expression = '0'
-            end
-        end
-
-        if data.raw.tile[settings.startup['PHI-CT-TILE-CHOICE'].value] and data.raw.tile[settings.startup['PHI-CT-TILE-CHOICE'].value].autoplace and data.raw.tile[settings.startup['PHI-CT-TILE-CHOICE'].value].autoplace.probability_expression then
-            data.raw.tile[settings.startup['PHI-CT-TILE-CHOICE'].value].autoplace.probability_expression = '1'
-        end
-
-        for _, t in pairs({data.raw['simple-entity'], data.raw['optimized-decorative'], data.raw['fish']}) do
-            for _, e in pairs(t) do
-                e.autoplace = nil
-            end
-        end
-
-        local autoplace_controls = {}
-
-        for k, _ in pairs (data.raw['autoplace-control']) do
-            autoplace_controls[k] = {
-                size = 'none'
-            }
-        end
-
-        data.raw['map-gen-presets']['default']['empty-world'] = {
-            order = 'zz',
-            basic_settings = {
-                autoplace_controls = autoplace_controls,
-                water = 'none',
-                cliff_settings = {
-                    name = 'none',
-                    cliff_elevation_interval = 100,
-                    cliff_elevation_0 = 100,
-                    richness = 0
-                }
-            },
-            advanced_settings = {
-                pollution = {
-                    enabled = false
-                },
-                enemy_evolution = {
-                    enabled = false
-                },
-                enemy_expansion = {
-                    enabled = false
-                }
-            }
-        }
-    end
 end
 
 for _, v in pairs(items['item']) do
