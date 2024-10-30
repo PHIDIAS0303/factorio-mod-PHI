@@ -644,6 +644,10 @@
         item.production = tostring(tonumber(string.match(item.production, '[%d%.]+')) * (4 ^ (tier - source.min + 2))) .. string.match(item.production, '%a+')
         end
 
+            if item.energy_per_shield then
+        item.energy_per_shield = tostring(math.floor(tonumber(string.match(item.energy_per_shield, '[%d%.]+')) * ((32 - (tier - source.min + 1)) / 32))) .. string.match(item.energy_per_shield, '%a+')
+    end
+    
 ** DATA
 if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value then
     data:extend({

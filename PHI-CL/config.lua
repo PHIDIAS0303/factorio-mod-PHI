@@ -245,47 +245,15 @@ local items = {
         }
     },
     ['equipment'] = {
-        ['solar-panel-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'solar-panel-equipment',
-            name = 'solar-panel',
-            ref_name = 'solar-panel-equipment',
-            tech = 'solar-panel-equipment',
-            min = 2,
-            max = settings.startup['PHI-EQ-POWER-TIER'].value,
-            base = 30,
-            graphics_name = 'solar-panel-equipment'
-        },
-        ['fusion-reactor-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'generator-equipment',
-            name = 'fusion-reactor',
-            ref_name = 'fusion-reactor-equipment',
-            tech = 'fusion-reactor-equipment',
-            min = 2,
-            max = settings.startup['PHI-EQ-POWER-TIER'].value
-        },
         ['battery-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
             stage = 1,
             type = 'battery-equipment',
             name = 'battery',
-            ref_name = 'battery-mk3-equipment',
-            tech = 'battery-mk3-equipment',
-            min = 4,
+            ref_name = 'battery-mk2-equipment',
+            tech = 'battery-mk2-equipment',
+            min = 3,
             max = settings.startup['PHI-EQ-POWER-TIER'].value
-        },
-        ['personal-laser-defense-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'active-defense-equipment',
-            name = 'personal-laser-defense',
-            ref_name = 'personal-laser-defense-equipment',
-            tech = 'personal-laser-defense-equipment',
-            min = 2,
-            max = settings.startup['PHI-EQ-DEFENSE-TIER'].value
         },
         ['energy-shield-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -295,6 +263,46 @@ local items = {
             ref_name = 'energy-shield-mk2-equipment',
             tech = 'energy-shield-mk2-equipment',
             min = 3,
+            max = settings.startup['PHI-EQ-DEFENSE-TIER'].value
+        },
+        ['exoskeleton-equipment'] = {
+            enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
+            type = 'movement-bonus-equipment',
+            name = 'exoskeleton',
+            ref_name = 'exoskeleton-equipment',
+            tech = 'exoskeleton-equipment',
+            min = 2,
+            max = settings.startup['PHI-EQ-UTILITY-TIER'].value
+        },
+        ['fission-reactor-equipment'] = {
+            enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
+            type = 'generator-equipment',
+            name = 'fission-reactor',
+            ref_name = 'fission-reactor-equipment',
+            tech = 'fission-reactor-equipment',
+            min = 2,
+            max = settings.startup['PHI-EQ-POWER-TIER'].value
+        },
+        ['night-vision-equipment'] = {
+            enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
+            type = 'night-vision-equipment',
+            name = 'night-vision',
+            ref_name = 'night-vision-equipment',
+            tech = 'night-vision-equipment',
+            min = 2,
+            max = settings.startup['PHI-EQ-UTILITY-TIER'].value
+        },
+        ['personal-laser-defense-equipment'] = {
+            enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
+            type = 'active-defense-equipment',
+            name = 'personal-laser-defense',
+            ref_name = 'personal-laser-defense-equipment',
+            tech = 'personal-laser-defense-equipment',
+            min = 2,
             max = settings.startup['PHI-EQ-DEFENSE-TIER'].value
         },
         ['personal-roboport-equipment'] = {
@@ -307,25 +315,17 @@ local items = {
             min = 3,
             max = settings.startup['PHI-EQ-TOOL-TIER'].value
         },
-        ['night-vision-equipment'] = {
+        ['solar-panel-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
             stage = 1,
-            type = 'night-vision-equipment',
-            name = 'night-vision',
-            ref_name = 'night-vision-equipment',
-            tech = 'night-vision-equipment',
+            type = 'solar-panel-equipment',
+            name = 'solar-panel',
+            ref_name = 'solar-panel-equipment',
+            tech = 'solar-panel-equipment',
             min = 2,
-            max = settings.startup['PHI-EQ-UTILITY-TIER'].value
-        },
-        ['exoskeleton-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
-            stage = 1,
-            type = 'movement-bonus-equipment',
-            name = 'exoskeleton',
-            ref_name = 'exoskeleton-equipment',
-            tech = 'exoskeleton-equipment',
-            min = 2,
-            max = settings.startup['PHI-EQ-UTILITY-TIER'].value
+            max = settings.startup['PHI-EQ-POWER-TIER'].value,
+            base = 30,
+            graphics_name = 'solar-panel-equipment'
         }
     }
 }
@@ -361,7 +361,7 @@ if mods and mods['space-age'] then
         ref_name = 'heating-tower',
         tech = 'heating-tower',
         min = 2,
-        max = settings.startup['PHI-MB-MACHINE-TIER'].value
+        max = settings.startup['PHI-EN-POWER-TIER'].value
     }
 
     items['item']['railgun-turret'] = {
@@ -495,6 +495,32 @@ if mods and mods['space-age'] then
         min = 2,
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
+
+    items['equipment']['fusion-reactor-equipment'] = {
+        enabled = settings.startup['PHI-EQ'].value,
+        stage = 2,
+        type = 'generator-equipment',
+        name = 'fusion-reactor',
+        ref_name = 'fusion-reactor-equipment',
+        tech = 'fusion-reactor-equipment',
+        min = 2,
+        max = settings.startup['PHI-EQ-POWER-TIER'].value
+    }
+
+    items['equipment']['toolbar-equipment'] = {
+        enabled = settings.startup['PHI-EQ'].value,
+        stage = 2,
+        type = 'inventory-bonus-equipment',
+        name = 'toolbar',
+        ref_name = 'toolbar-equipment',
+        tech = 'toolbar-equipment',
+        min = 2,
+        max = settings.startup['PHI-EQ-UTILITY-TIER'].value
+    }
+
+    items['equipment']['battery-equipment'].ref_name = 'battery-mk3-equipment'
+    items['equipment']['battery-equipment'].tech = 'battery-mk3-equipment'
+    items['equipment']['battery-equipment'].min = 3
 end
 
 return items

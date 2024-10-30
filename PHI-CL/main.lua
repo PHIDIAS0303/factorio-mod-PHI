@@ -155,8 +155,11 @@ function main.EEE(source, tier)
         item.max_distance_of_nearby_sector_revealed = item.max_distance_of_nearby_sector_revealed + (2 * tier)
 
     elseif source.type == 'thruster' then
-        item.min_performance.fluid_usage = item.min_performance.fluid_usage * (2 ^ (tier - source.min + 1))
-        item.max_performance.fluid_usage = item.max_performance.fluid_usage * (2 ^ (tier - source.min + 1))
+        for _, v in pairs({'min_performance', 'max_performance'}) do
+            if item[v] and item[v].fluid_usage then
+                item[v].fluid_usage = item[v].fluid_usage * (2 ^ (tier - source.min + 1))
+            end
+        end
 
     elseif source.type == 'reactor' and source.name == 'heating-tower' then
         item.consumption = tostring(tonumber(string.match(item.consumption, '[%d%.]+')) * tier) .. string.match(item.consumption, '%a+')
@@ -227,30 +230,24 @@ function main.EEQ(source, tier)
     item.name = source.name .. '-mk' .. tier .. '-equipment'
     item.take_result = source.name .. '-mk' .. tier .. '-equipment'
 
-    if item.power then
-        item.power = tostring(tonumber(string.match(item.power, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.power, '%a+')
+    for _, v in pairs({'power', 'energy_consumption', 'energy_input', 'charging_energy'}) do
+        if item[v] then
+            item[v] = tostring(tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item[v], '%a+')
+        end
     end
 
     if item.energy_source then
-        if item.energy_source.buffer_capacity then
-            item.energy_source.buffer_capacity = tostring(tonumber(string.match(item.energy_source.buffer_capacity, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source.buffer_capacity, '%a+')
-        end
-
-        if item.energy_source.input_flow_limit then
-            item.energy_source.input_flow_limit = tostring(tonumber(string.match(item.energy_source.input_flow_limit, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source.input_flow_limit, '%a+')
-        end
-
-        if item.energy_source.output_flow_limit then
-            item.energy_source.output_flow_limit = tostring(tonumber(string.match(item.energy_source.output_flow_limit, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source.output_flow_limit, '%a+')
+        for _, v in pairs({'buffer_capacity', 'input_flow_limit', 'output_flow_limit'}) do
+            if item.energy_source[v] then
+                item.energy_source[v] = tostring(tonumber(string.match(item.energy_source[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source[v], '%a+')
+            end
         end
     end
 
-    if item.energy_consumption then
-        item.energy_consumption = tostring(tonumber(string.match(item.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_consumption, '%a+')
-    end
-
-    if item.energy_input then
-        item.energy_input = tostring(tonumber(string.match(item.energy_input, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_input, '%a+')
+    for _, v in pairs({'max_shield_value', 'movement_bonus', 'inventory_size_bonus'}) do
+        if item[v] then
+            item[v] = item[v] * (2 ^ (tier - source.min + 1))
+        end
     end
 
     if item.darkness_to_turn_on and item.color_lookup then
@@ -280,20 +277,6 @@ function main.EEQ(source, tier)
         if item.attack_parameters.range then
             item.attack_parameters.range = item.attack_parameters.range + (tier - source.min + 1)
         end
-    end
-
-    if item.max_shield_value and item.energy_per_shield then
-        item.max_shield_value = item.max_shield_value * (2 ^ (tier - source.min + 1))
-        item.energy_per_shield = tostring(math.floor(tonumber(string.match(item.energy_per_shield, '[%d%.]+')) * ((32 - (tier - source.min + 1)) / 32))) .. string.match(item.energy_per_shield, '%a+')
-    end
-
-    if item.movement_bonus then
-        item.movement_bonus = item.movement_bonus * (2 ^ (tier - source.min + 1))
-    end
-
-    if item.charging_energy and item.charging_station_count then
-        item.charging_station_count = math.max(item.charging_station_count, 4)
-        item.charging_energy = tostring(tonumber(string.match(item.charging_energy, '[%d%.]+')) * (2 ^ (tier - source.min + 2))) .. string.match(item.charging_energy, '%a+')
     end
 
     if item.sprite then

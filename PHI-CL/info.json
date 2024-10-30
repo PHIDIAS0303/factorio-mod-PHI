@@ -10,9 +10,9 @@
     "description": "Additional compound entities and items to reduce the space needed\nSuch as better solar panel, accumulator\nAnd other feature such as large range radar, trash chest and pipe, passive power void, linked chest, empty world generation",
     "dependencies": [
         "base >= 2.0.0",
-        "? space-age",
+        "? space-age >= 2.0.0",
         "? quality >= 2.0.0",
-        "? elevated-rails > 2.0.0"
+        "? elevated-rails >= 2.0.0"
     ],
     "quality_required": false,
     "space_travel_required": true,
