@@ -255,6 +255,16 @@ local items = {
             min = 3,
             max = settings.startup['PHI-EQ-POWER-TIER'].value
         },
+        ['discharge-defense-equipment'] = {
+            enabled = settings.startup['PHI-EQ'].value,
+            stage = 1,
+            type = 'active-defense-equipment',
+            name = 'discharge-defense',
+            ref_name = 'discharge-defense-equipment',
+            tech = 'discharge-defense-equipment',
+            min = 2,
+            max = settings.startup['PHI-EQ-DEFENSE-TIER'].value
+        },
         ['energy-shield-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
             stage = 1,
@@ -333,7 +343,7 @@ local items = {
 if mods and mods['space-age'] then
     items['item']['fusion-reactor'] = {
         enabled = settings.startup['PHI-EN'].value,
-        stage = 2,
+        stage = 1,
         type = 'fusion-reactor',
         name = 'fusion-reactor',
         ref_name = 'fusion-reactor',
@@ -344,7 +354,7 @@ if mods and mods['space-age'] then
 
     items['item']['fusion-generator'] = {
         enabled = settings.startup['PHI-EN'].value,
-        stage = 2,
+        stage = 1,
         type = 'fusion-generator',
         name = 'fusion-generator',
         ref_name = 'fusion-generator',
@@ -355,7 +365,7 @@ if mods and mods['space-age'] then
 
     items['item']['heating-tower'] = {
         enabled = settings.startup['PHI-EN'].value,
-        stage = 2,
+        stage = 1,
         type = 'reactor',
         name = 'heating-tower',
         ref_name = 'heating-tower',
@@ -366,7 +376,7 @@ if mods and mods['space-age'] then
 
     items['item']['railgun-turret'] = {
         enabled = settings.startup['PHI-WE'].value,
-        stage = 2,
+        stage = 1,
         type = 'ammo-turret',
         name = 'railgun-turret',
         ref_name = 'railgun-turret',
@@ -377,7 +387,7 @@ if mods and mods['space-age'] then
 
     items['item']['rocket-turret'] = {
         enabled = settings.startup['PHI-WE'].value,
-        stage = 2,
+        stage = 1,
         type = 'ammo-turret',
         name = 'rocket-turret',
         ref_name = 'rocket-turret',
@@ -388,7 +398,7 @@ if mods and mods['space-age'] then
 
     items['item']['tesla-turret'] = {
         enabled = settings.startup['PHI-WE'].value,
-        stage = 2,
+        stage = 1,
         type = 'electric-turret',
         name = 'tesla-turret',
         ref_name = 'tesla-turret',
@@ -399,7 +409,7 @@ if mods and mods['space-age'] then
 
     items['item']['foundry'] = {
         enabled = settings.startup['PHI-MB'].value,
-        stage = 2,
+        stage = 1,
         type = 'assembling-machine',
         name = 'foundry',
         ref_name = 'foundry',
@@ -410,7 +420,7 @@ if mods and mods['space-age'] then
 
     items['item']['big-mining-drill'] = {
         enabled = settings.startup['PHI-MB'].value,
-        stage = 2,
+        stage = 1,
         type = 'mining-drill',
         name = 'big-mining-drill',
         ref_name = 'big-mining-drill',
@@ -421,7 +431,7 @@ if mods and mods['space-age'] then
 
     items['item']['biochamber'] = {
         enabled = settings.startup['PHI-MB'].value,
-        stage = 2,
+        stage = 1,
         type = 'assembling-machine',
         name = 'biochamber',
         ref_name = 'biochamber',
@@ -432,7 +442,7 @@ if mods and mods['space-age'] then
 
     items['item']['crusher'] = {
         enabled = settings.startup['PHI-MB'].value,
-        stage = 2,
+        stage = 1,
         type = 'assembling-machine',
         name = 'crusher',
         ref_name = 'crusher',
@@ -443,7 +453,7 @@ if mods and mods['space-age'] then
 
     items['item']['biolab'] = {
         enabled = settings.startup['PHI-MB'].value,
-        stage = 2,
+        stage = 1,
         type = 'lab',
         name = 'biolab',
         ref_name = 'biolab',
@@ -454,7 +464,7 @@ if mods and mods['space-age'] then
 
     items['item']['cryogenic-plant'] = {
         enabled = settings.startup['PHI-MB'].value,
-        stage = 2,
+        stage = 1,
         type = 'assembling-machine',
         name = 'cryogenic-plant',
         ref_name = 'cryogenic-plant',
@@ -465,7 +475,7 @@ if mods and mods['space-age'] then
 
     items['item']['electromagnetic-plant'] = {
         enabled = settings.startup['PHI-MB'].value,
-        stage = 2,
+        stage = 1,
         type = 'assembling-machine',
         name = 'electromagnetic-plant',
         ref_name = 'electromagnetic-plant',
@@ -476,7 +486,7 @@ if mods and mods['space-age'] then
 
     items['item']['thruster'] = {
         enabled = settings.startup['PHI-MB'].value,
-        stage = 2,
+        stage = 1,
         type = 'thruster',
         name = 'thruster',
         ref_name = 'thruster',
@@ -487,7 +497,7 @@ if mods and mods['space-age'] then
 
     items['item']['recycler'] = {
         enabled = settings.startup['PHI-MB'].value,
-        stage = 2,
+        stage = 1,
         type = 'furnace',
         name = 'recycler',
         ref_name = 'recycler',
@@ -498,7 +508,7 @@ if mods and mods['space-age'] then
 
     items['equipment']['fusion-reactor-equipment'] = {
         enabled = settings.startup['PHI-EQ'].value,
-        stage = 2,
+        stage = 1,
         type = 'generator-equipment',
         name = 'fusion-reactor',
         ref_name = 'fusion-reactor-equipment',
@@ -509,7 +519,7 @@ if mods and mods['space-age'] then
 
     items['equipment']['toolbar-equipment'] = {
         enabled = settings.startup['PHI-EQ'].value,
-        stage = 2,
+        stage = 1,
         type = 'inventory-bonus-equipment',
         name = 'toolbar',
         ref_name = 'toolbar-equipment',

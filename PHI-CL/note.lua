@@ -921,7 +921,6 @@ end
 
 ** DATA FINAL FIXES
 data.raw['utility-constants'].default.train_inactivity_wait_condition_default = 60
-data.raw['active-defense-equipment']['discharge-defense-equipment'].automatic = true
 
 data.raw['gui-style'].default.machine_slots_scroll_pane.maximal_height = nil
 data.raw['gui-style'].default.machine_ingredients_scroll_pane.maximal_height = nil
