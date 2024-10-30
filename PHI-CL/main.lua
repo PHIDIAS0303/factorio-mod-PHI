@@ -181,14 +181,6 @@ function main.EEE(source, tier)
 
     elseif source.type == 'agricultural-tower' then
         item.radius = item.radius + (1 * (tier - source.min + 1))
-
-        local s = (8 + (tier - source.min + 1)) / 8
-
-        for _, v in pairs({item.crane.speed.arm, item.crane.speed.grappler}) do
-            if type(v) == 'number' then
-                v = v * s
-            end
-        end
     end
 
     tint_handle(item, tier, {'picture', 'pictures', 'frames', 'working_visualisations', 'animation', 'horizontal_animation', 'vertical_animation', 'structure', 'integration_patch', 'graphics_set'})
