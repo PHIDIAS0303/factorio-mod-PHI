@@ -1,16 +1,5 @@
 --[[
-** CONFIG        
-    items['item']['agricultural-tower'] = {
-        enabled = settings.startup['PHI-MB'].value,
-        stage = 2,
-        type = 'agricultural-tower',
-        name = 'agricultural-tower',
-        ref_name = 'agricultural-tower',
-        tech = 'agriculture',
-        min = 2,
-        max = settings.startup['PHI-MB-MACHINE-TIER'].value
-    }
-    
+** CONFIG  
     if mods['aai-industry'] then
         items['item']['industrial-furnace'] = {
             enabled = settings.startup['PHI-MB'].value,
@@ -939,7 +928,6 @@ for _,name in pairs({'furnace', 'lab', 'beacon'}) do
 		entity.additional_pastable_entities = entities
 	end
 end
-
 
 for _, t in pairs(data.raw['tree']) do
 	t.collision_box = {{-0.05, -0.05}, {0.05, 0.05}}

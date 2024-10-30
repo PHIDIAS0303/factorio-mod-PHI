@@ -30,8 +30,38 @@ function main.EEE(source, tier)
         item.next_upgrade = source.name .. '-' .. (tier + 1)
     end
 
-    if item.energy_usage then
-        item.energy_usage = tonumber(string.match(item.energy_usage, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_usage, '%a+')
+    for _, v in pairs({'production', 'energy_usage', 'heating_energy', 'crane_energy_usage', 'energy_per_shot', 'researching_speed', 'mining_speed', 'crafting_speed'}) do
+        if item[v] then
+            item[v] = tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item[v], '%a+')
+        end
+    end
+
+    if item.energy_source then
+        for _, v in pairs({'buffer_capacity', 'input_flow_limit', 'output_flow_limit'}) do
+            if item.energy_source[v] then
+                item.energy_source[v] = tonumber(string.match(item.energy_source[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_source[v], '%a+')
+            end
+        end
+
+        if item.energy_source.emissions_per_minute then
+            if source.tech == 'compound-energy' then
+                if (source.type == 'boiler') or (source.name == 'kr-gas-power-station') then
+                    for k, _ in pairs(item.energy_source.emissions_per_minute) do
+                        item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (tier - source.min + 2)
+                    end
+    
+                else
+                    for k, _ in pairs(item.energy_source.emissions_per_minute) do
+                        item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (2 ^ (tier - source.min + 1))
+                    end
+                end
+
+            else
+                for k, _ in pairs(item.energy_source.emissions_per_minute) do
+                    item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (2 ^ (tier - source.min + 1))
+                end
+            end
+        end
     end
 
     if (source.type == 'electric-turret') or (source.type == 'ammo-turret') or (source.type == 'fluid-turret') then
@@ -43,17 +73,6 @@ function main.EEE(source, tier)
             item.glow_light_intensity = 1
             item.attack_parameters.ammo_type.action.action_delivery.max_length = item.attack_parameters.ammo_type.action.action_delivery.max_length + (2 * (tier - source.min + 1))
             item.attack_parameters.ammo_type.energy_consumption = tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+')
-            item.energy_source.input_flow_limit = tonumber(string.match(item.energy_source.input_flow_limit, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_source.input_flow_limit, '%a+')
-            item.energy_source.buffer_capacity = tonumber(string.match(item.energy_source.buffer_capacity, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_source.buffer_capacity, '%a+')
-
-        elseif source.type == 'ammo-turret' then
-            if item.energy_per_shot then
-                item.energy_per_shot = tonumber(string.match(item.energy_per_shot, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_per_shot, '%a+')
-            end
-
-            if item.energy_source and item.energy_source.input_flow_limit then
-                item.energy_source.input_flow_limit = tonumber(string.match(item.energy_source.input_flow_limit, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_source.input_flow_limit, '%a+')
-            end
 
         elseif source.type == 'fluid-turret' then
             item.prepare_range = item.prepare_range + (2 * (tier - source.min + 1))
@@ -61,25 +80,16 @@ function main.EEE(source, tier)
     end
 
     if source.tech == 'compound-energy' then
-        if (source.type == 'accumulator') then
-            item.energy_source.buffer_capacity = tostring(tonumber(string.match(item.energy_source.buffer_capacity, '[%d%.]+')) * (4 ^ (tier - source.min + 1))) .. string.match(item.energy_source.buffer_capacity, '%a+')
-            item.energy_source.input_flow_limit = tostring(tonumber(string.match(item.energy_source.input_flow_limit, '[%d%.]+')) * (4 ^ (tier - source.min + 1))) .. string.match(item.energy_source.input_flow_limit, '%a+')
-            item.energy_source.output_flow_limit = tostring(tonumber(string.match(item.energy_source.output_flow_limit, '[%d%.]+')) * (4 ^ (tier - source.min + 1))) .. string.match(item.energy_source.output_flow_limit, '%a+')
-
-            if item['chargable_graphics'] then
-                if item['chargable_graphics']['picture'].layers and item['chargable_graphics']['picture'].layers[1] then
-                    item['chargable_graphics']['picture'].layers[1].tint = items['tint'][tier]
-                end
-
-                for _, v in pairs({item['chargable_graphics']['charge_animation'], item['chargable_graphics']['discharge_animation']}) do
-                    if v.layers and v.layers[1] and v.layers[1].layers and v.layers[1].layers[1] then
-                        v.layers[1].layers[1].tint = items['tint'][tier]
-                    end
-                end
+        if (source.type == 'accumulator') and item['chargable_graphics'] then
+            if item['chargable_graphics']['picture'].layers and item['chargable_graphics']['picture'].layers[1] then
+                item['chargable_graphics']['picture'].layers[1].tint = items['tint'][tier]
             end
 
-        elseif (source.type == 'solar-panel') then
-            item.production = tostring(tonumber(string.match(item.production, '[%d%.]+')) * (4 ^ (tier - source.min + 1))) .. string.match(item.production, '%a+')
+            for _, v in pairs({item['chargable_graphics']['charge_animation'], item['chargable_graphics']['discharge_animation']}) do
+                if v.layers and v.layers[1] and v.layers[1].layers and v.layers[1].layers[1] then
+                    v.layers[1].layers[1].tint = items['tint'][tier]
+                end
+            end
 
         elseif (source.type == 'boiler') then
             item.energy_consumption = tostring(tonumber(string.match(item.energy_consumption, '[%d%.]+')) * tier) .. string.match(item.energy_consumption, '%a+')
@@ -124,8 +134,6 @@ function main.EEE(source, tier)
     end
 
     if (source.type == 'lab') then
-        item.researching_speed = item.researching_speed * (2 ^ (tier - source.min + 1))
-
         for _, v in pairs({{['a'] = 'on_animation', ['n'] = 3}, {['a'] = 'off_animation', ['n'] = 2}}) do
             if item[v['a']] and item[v['a']].layers then
                 for i=1, v['n'], 1 do
@@ -137,8 +145,6 @@ function main.EEE(source, tier)
         end
 
     elseif (source.type == 'mining-drill') then
-        item.mining_speed = item.mining_speed * (2 ^ (tier - source.min + 1))
-
         for _, e in pairs({'graphics_set', 'wet_mining_graphics_set'}) do
             if item[e] and item[e].animation then
                 for _, d in pairs(item[e].animation) do
@@ -163,30 +169,10 @@ function main.EEE(source, tier)
 
     elseif source.type == 'reactor' and source.name == 'heating-tower' then
         item.consumption = tostring(tonumber(string.match(item.consumption, '[%d%.]+')) * tier) .. string.match(item.consumption, '%a+')
-    end
 
-    if item.crafting_speed then
-        item.crafting_speed = item.crafting_speed * (2 ^ (tier - source.min + 1))
-    end
-
-    if item.energy_source and item.energy_source.emissions_per_minute then
-        if source.tech == 'compound-energy' then
-            if (source.type == 'boiler') or (source.name == 'kr-gas-power-station') then
-                for k, _ in pairs(item.energy_source.emissions_per_minute) do
-                    item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (tier - source.min + 2)
-                end
-
-            else
-                for k, _ in pairs(item.energy_source.emissions_per_minute) do
-                    item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (2 ^ (tier - source.min + 1))
-                end
-            end
-
-        else
-            for k, _ in pairs(item.energy_source.emissions_per_minute) do
-                item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (2 ^ (tier - source.min + 1))
-            end
-        end
+    elseif source.type == 'agricultural-tower' then
+        item.max_distance_of_sector_revealed = item.max_distance_of_sector_revealed + (2 * tier)
+        item.max_distance_of_nearby_sector_revealed = item.max_distance_of_nearby_sector_revealed + (2 * tier)
     end
 
     tint_handle(item, tier, {'picture', 'pictures', 'frames', 'working_visualisations', 'animation', 'horizontal_animation', 'vertical_animation', 'structure', 'integration_patch', 'graphics_set'})

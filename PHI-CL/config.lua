@@ -506,6 +506,17 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
+    items['item']['agricultural-tower'] = {
+        enabled = settings.startup['PHI-MB'].value,
+        stage = 2,
+        type = 'agricultural-tower',
+        name = 'agricultural-tower',
+        ref_name = 'agricultural-tower',
+        tech = 'agriculture',
+        min = 2,
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
+    }
+
     items['equipment']['fusion-reactor-equipment'] = {
         enabled = settings.startup['PHI-EQ'].value,
         stage = 1,
