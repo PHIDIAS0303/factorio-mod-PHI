@@ -99,7 +99,7 @@ function main.EEE(source, tier)
 
         elseif (source.type == 'solar-panel') then
             item.production = tostring(tonumber(string.match(item.production, '[%d%.]+')) * (4 ^ (tier - source.min + 1))) .. string.match(item.production, '%a+')
-            
+
         elseif (source.type == 'boiler') then
             item.energy_consumption = tostring(tonumber(string.match(item.energy_consumption, '[%d%.]+')) * tier) .. string.match(item.energy_consumption, '%a+')
             item.target_temperature = 15 + ((item.target_temperature - 15) * tier)
@@ -182,13 +182,11 @@ function main.EEE(source, tier)
     elseif source.type == 'agricultural-tower' then
         item.radius = item.radius + (1 * (tier - source.min + 1))
 
-        local s = (4 + (tier - source.min + 1)) / 4
+        local s = (8 + (tier - source.min + 1)) / 8
 
-        for _, v in pairs(item.crane.speed) do
-            for _, v2 in pairs(v) do
-                if type(v2) == 'number' then
-                    v2 = v2 * s
-                end
+        for _, v in pairs({item.crane.speed.arm, item.crane.speed.grappler}) do
+            if type(v) == 'number' then
+                v = v * s
             end
         end
     end
