@@ -49,7 +49,7 @@ function main.EEE(source, tier)
                     for k, _ in pairs(item.energy_source.emissions_per_minute) do
                         item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (tier - source.min + 2)
                     end
-    
+
                 else
                     for k, _ in pairs(item.energy_source.emissions_per_minute) do
                         item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (2 ^ (tier - source.min + 1))
@@ -157,8 +157,8 @@ function main.EEE(source, tier)
         end
 
     elseif source.type == 'radar' then
-        item.max_distance_of_sector_revealed = item.max_distance_of_sector_revealed + (2 * tier)
-        item.max_distance_of_nearby_sector_revealed = item.max_distance_of_nearby_sector_revealed + (2 * tier)
+        item.max_distance_of_sector_revealed = item.max_distance_of_sector_revealed + (2 * (tier - source.min + 1))
+        item.max_distance_of_nearby_sector_revealed = item.max_distance_of_nearby_sector_revealed + (2 * (tier - source.min + 1))
 
     elseif source.type == 'thruster' then
         for _, v in pairs({'min_performance', 'max_performance'}) do
@@ -171,8 +171,7 @@ function main.EEE(source, tier)
         item.consumption = tostring(tonumber(string.match(item.consumption, '[%d%.]+')) * tier) .. string.match(item.consumption, '%a+')
 
     elseif source.type == 'agricultural-tower' then
-        item.max_distance_of_sector_revealed = item.max_distance_of_sector_revealed + (2 * tier)
-        item.max_distance_of_nearby_sector_revealed = item.max_distance_of_nearby_sector_revealed + (2 * tier)
+        item.radius = item.radius + (1 * (tier - source.min + 1))
     end
 
     tint_handle(item, tier, {'picture', 'pictures', 'frames', 'working_visualisations', 'animation', 'horizontal_animation', 'vertical_animation', 'structure', 'integration_patch', 'graphics_set'})
