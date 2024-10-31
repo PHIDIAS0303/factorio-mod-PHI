@@ -77,7 +77,7 @@ function main.EEE(source, tier)
     end
 
     if (source.type == 'electric-turret') or (source.type == 'ammo-turret') or (source.type == 'fluid-turret') then
-        item.attack_parameters.damage_modifier = 2 ^ (tier - source.min + 1)
+        item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * (2 ^ (tier - source.min + 1))
         item.attack_parameters.range = item.attack_parameters.range + (2 * (tier - source.min + 1))
         item.call_for_help_radius = item.call_for_help_radius + (2 * (tier - source.min + 1))
 
