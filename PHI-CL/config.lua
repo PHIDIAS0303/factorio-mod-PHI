@@ -340,7 +340,7 @@ local items = {
     }
 }
 
-if mods and mods['space-age'] then
+if mods['space-age'] then
     items['item']['fusion-reactor'] = {
         enabled = settings.startup['PHI-EN'].value,
         stage = 1,
@@ -495,17 +495,6 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['recycler'] = {
-        enabled = settings.startup['PHI-MB'].value,
-        stage = 1,
-        type = 'furnace',
-        name = 'recycler',
-        ref_name = 'recycler',
-        tech = 'recycling',
-        min = 2,
-        max = settings.startup['PHI-MB-MACHINE-TIER'].value
-    }
-
     items['item']['agricultural-tower'] = {
         enabled = settings.startup['PHI-MB'].value,
         stage = 2,
@@ -542,6 +531,19 @@ if mods and mods['space-age'] then
     items['equipment']['battery-equipment'].ref_name = 'battery-mk3-equipment'
     items['equipment']['battery-equipment'].tech = 'battery-mk3-equipment'
     items['equipment']['battery-equipment'].min = 4
+end
+
+if mods['quality'] then
+    items['item']['recycler'] = {
+        enabled = settings.startup['PHI-MB'].value,
+        stage = 1,
+        type = 'furnace',
+        name = 'recycler',
+        ref_name = 'recycler',
+        tech = 'recycling',
+        min = 2,
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
+    }
 end
 
 return items

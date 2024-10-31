@@ -108,7 +108,7 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
 
     table.insert(data.raw.technology['power-armor-mk2'].effects, {type='unlock-recipe', recipe='power-armor-mk3'})
 
-    if mods and mods['space-age'] then
+    if mods['space-age'] then
         grid = table.deepcopy(data.raw['equipment-grid']['large-equipment-grid'])
         grid.name = 'equipment-grid-15x16'
         grid.width = 15
@@ -181,7 +181,15 @@ if settings.startup['PHI-MI'].value and (settings.startup['PHI-MI-LANDFILL'].val
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-NUCLEAR'].value then
-    data.raw['reactor']['nuclear-reactor'].scale_energy_usage = true
+    for _, v in pairs(data.raw['reactor']) do
+        v.scale_energy_usage = settings.startup['PHI-MI-NUCLEAR'].value
+    end
+
+    if mods['space-age'] then
+        for _, v in pairs(data.raw['fusion-reactor']) do
+            v.scale_energy_usage = settings.startup['PHI-MI-NUCLEAR'].value
+        end
+    end
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then

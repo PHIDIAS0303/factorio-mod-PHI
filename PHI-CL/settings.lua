@@ -56,7 +56,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-EQ',
   setting_type = 'startup',
-  default_value = false,
+  default_value = true,
   order = 'D00'
 }, {
   type = 'int-setting',
@@ -90,7 +90,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-EQ-ARMOR',
   setting_type = 'startup',
-  default_value = false,
+  default_value = true,
   order = 'D05'
 }, {
   type = 'bool-setting',
@@ -102,7 +102,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-MI',
   setting_type = 'startup',
-  default_value = false,
+  default_value = true,
   order = 'E00'
 }, {
   type = 'int-setting',
@@ -122,7 +122,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-MI-NUCLEAR',
   setting_type = 'startup',
-  default_value = false,
+  default_value = true,
   order = 'E03'
 }, {
   type = 'int-setting',
