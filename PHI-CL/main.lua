@@ -2,22 +2,18 @@ local alpha_order = {'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'}
 local items = require 'config'
 local main = {}
 
-local function tint_apply(item, tier)
-    item.tint = items['tint'][tier]
-end
-
 local function tint_handle(item, tier, tl)
     for _, ve in pairs(tl) do
         if item[ve] then
             for _, tc in pairs({'layers', 'sheets', 'structure', 'frames'}) do
                 if item[ve][tc] and type(item[ve][tc]) == 'table' then
                     for i=1, #item[ve][tc], 1 do
-                        tint_apply(item[ve][tc][i], tier)
+                        item[ve][tc][i].tint = items['tint'][tier]
                     end
                 end
             end
 
-            tint_apply(item[ve], tier)
+            item[ve].tint = items['tint'][tier]
         end
     end
 end

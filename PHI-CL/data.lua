@@ -51,7 +51,7 @@ end
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value then
     local item = table.deepcopy(data.raw['item']['radar'])
     item.name = 'super-radar'
-    item.place_result = 'super-radar'
+    item.place_result = item.name
     item.order = 'd[radar]-b[radar]'
 
     item.icons = {
@@ -72,7 +72,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
 
     local entity = table.deepcopy(data.raw['radar']['radar'])
     entity.name = 'super-radar'
-    entity.minable.result = 'super-radar'
+    entity.minable.result = entity.name
     entity.max_distance_of_sector_revealed = 35
     entity.max_distance_of_nearby_sector_revealed = 35
     entity.pictures.layers[1].tint = items['tint'][8]
@@ -92,13 +92,13 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
 
     item = table.deepcopy(data.raw['item']['electric-energy-interface'])
     item.name = 'passive-energy-void'
-    item.place_result = 'passive-energy-void'
+    item.place_result = item.name
     item.localised_name = {'name.passive-energy-void'}
     data:extend({item})
 
     entity = table.deepcopy(data.raw['electric-energy-interface']['electric-energy-interface'])
     entity.name = 'passive-energy-void'
-    entity.minable.result = 'passive-energy-void'
+    entity.minable.result = entity.name
     entity.energy_source.usage_priority = 'tertiary'
     entity.energy_source.emissions_per_minute = {pollution = 0}
     entity.energy_source.input_flow_limit = '1PW'
@@ -126,7 +126,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
 
     item = table.deepcopy(data.raw['item']['offshore-pump'])
     item.name = 'super-pump'
-    item.place_result = 'super-pump'
+    item.place_result = item.name
     item.order = 'b[fluids]-a[super-pump]-o'
 
     item.icons = {
@@ -146,7 +146,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
 
     entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
     entity.name = 'super-pump'
-    entity.minable.result = 'super-pump'
+    entity.minable.result = entity.name
     entity.type = 'assembling-machine'
     entity.crafting_categories = {'fluid'}
     entity.crafting_speed = 1
@@ -206,7 +206,7 @@ end
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value then
     local item = table.deepcopy(data.raw['item']['steel-chest'])
     item.name = 'trash-chest'
-    item.place_result = 'trash-chest'
+    item.place_result = item.name
     item.order = 'b[storage]-h[trash-chest]'
 
     item.icons = {
@@ -226,7 +226,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
 
     local entity = table.deepcopy(data.raw['container']['steel-chest'])
     entity.name = 'trash-chest'
-    entity.minable.result = 'trash-chest'
+    entity.minable.result = entity.name
     entity.inventory_type = 'with_filters_and_bar'
     entity.inventory_size = 1
     entity.type = 'infinity-container'
@@ -253,7 +253,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
 
     item = table.deepcopy(data.raw['item']['pipe'])
     item.name = 'trash-pipe'
-    item.place_result = 'trash-pipe'
+    item.place_result = item.name
     item.order = 'a[pipe]-c[trash-pipe]'
 
     item.icons = {
@@ -273,7 +273,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
 
     entity = table.deepcopy(data.raw['pipe']['pipe'])
     entity.name = 'trash-pipe'
-    entity.minable.result = 'trash-pipe'
+    entity.minable.result = entity.name
     entity.inventory_size = 1
     entity.type = 'infinity-pipe'
     entity.gui_mode = 'none'
@@ -307,7 +307,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
 
     item = table.deepcopy(data.raw['item']['boiler'])
     item.name = 'electric-boiler'
-    item.place_result = 'electric-boiler'
+    item.place_result = item.name
     item.order = 'b[steam-power]-a[electric-boiler]'
     item.localised_name = {'name.electric-boiler'}
     data:extend({item})
@@ -318,13 +318,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
     entity.buffer_capacity = '14400kJ'
     entity.target_temperature = 165
     entity.emissions_per_minute = {pollution = 0}
-
-    entity.minable = {
-        hardness = 0.2,
-        mining_time = 0.5,
-        result = 'electric-boiler'
-    }
-
+    entity.minable.result = entity.name
     entity.energy_source = {
         type = 'electric',
         usage_priority = 'secondary-input',
@@ -377,16 +371,16 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
         end
 
         item.name = 'basic-' .. c
-        item.place_result = 'basic-' .. c
+        item.place_result = item.name
         item.order = 'b[storage]-h[basic-' .. c .. ']'
         item.localised_name = {'name.basic-'.. c}
         data:extend({item})
 
+        entity.name = 'basic-' .. c
+        entity.minable.result = entity.name
         entity.inventory_type = 'with_filters_and_bar'
         entity.inventory_size = 1
         entity.max_logistic_slots = 1
-        entity.name = 'basic-' .. c
-        entity.minable.result = 'basic-' .. c
         entity.localised_name = {'name.basic-'.. c}
         data:extend({entity})
 
