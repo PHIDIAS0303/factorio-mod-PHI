@@ -77,7 +77,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
     entity.max_distance_of_nearby_sector_revealed = 35
     entity.pictures.layers[1].tint = items['tint'][8]
     entity.localised_name = {'name.super-radar'}
-    entity.localised_description = {'description.super-radar'}
     data:extend({entity})
 
     data:extend({{
@@ -88,15 +87,13 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
         ingredients = {{type='item', name='electronic-circuit', amount=5}, {type='item', name='iron-gear-wheel', amount=5}, {type='item', name='iron-plate', amount=10}},
         results = {{type='item', name='super-radar', amount=1}},
         main_product = 'super-radar',
-        localised_name = {'name.super-radar'},
-        localised_description = {'description.super-radar'}
+        localised_name = {'name.super-radar'}
     }})
 
     item = table.deepcopy(data.raw['item']['electric-energy-interface'])
     item.name = 'passive-energy-void'
     item.place_result = 'passive-energy-void'
     item.localised_name = {'name.passive-energy-void'}
-    item.localised_description = {'description.passive-energy-void'}
     data:extend({item})
 
     entity = table.deepcopy(data.raw['electric-energy-interface']['electric-energy-interface'])
@@ -111,7 +108,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
     entity.energy_usage = '1PW'
     entity.gui_mode = 'none'
     entity.localised_name = {'name.passive-energy-void'}
-    entity.localised_description = {'description.passive-energy-void'}
     data:extend({entity})
 
     data:extend({{
@@ -122,8 +118,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
         ingredients = {{type='item', name='accumulator', amount=1}},
         results = {{type='item', name='passive-energy-void', amount=1}},
         main_product = 'passive-energy-void',
-        localised_name = {'name.passive-energy-void'},
-        localised_description = {'description.passive-energy-void'}
+        localised_name = {'name.passive-energy-void'}
     }})
 
     table.insert(data.raw.technology['electric-energy-accumulators'].effects, {type='unlock-recipe', recipe='passive-energy-void'})
@@ -147,7 +142,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
     item.icon_size = nil
     item.icon_mipmaps = nil
     item.localised_name = {'name.super-pump'}
-    item.localised_description = item.localised_description
     data:extend({item})
 
     entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
@@ -167,7 +161,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
     entity.tile_buildability_rules = nil
     entity.fluid_source_offset = nil
     entity.localised_name = {'name.super-pump'}
-    entity.localised_description = entity.localised_description
     data:extend({entity})
 
     data:extend({{
@@ -178,8 +171,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
         ingredients = {{type='item', name='electronic-circuit', amount=2}, {type='item', name='pipe', amount=1}, {type='item', name='iron-gear-wheel', amount=1}},
         results = {{type='item', name='super-pump', amount=1}},
         main_product = 'super-pump',
-        localised_name = {'name.super-pump'},
-        localised_description = nil
+        localised_name = {'name.super-pump'}
     }})
 
     for _, v in pairs(data.raw.fluid) do
@@ -205,8 +197,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
                 hide_from_player_crafting = true,
                 allow_productivity = false,
                 crafting_machine_tint = {primary=v.flow_color},
-                localised_name = v.localised_name,
-                localised_description = nil
+                localised_name = v.localised_name
             }})
         end
     end
@@ -231,7 +222,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
     item.icon_size = nil
     item.icon_mipmaps = nil
     item.localised_name = {'name.trash-chest'}
-    item.localised_description = {'description.trash-chest'}
     data:extend({item})
 
     local entity = table.deepcopy(data.raw['container']['steel-chest'])
@@ -246,7 +236,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
     entity.next_upgrade = nil
     entity.picture.layers[1].tint = items['tint'][8]
     entity.localised_name = {'name.trash-chest'}
-    entity.localised_description = {'description.trash-chest'}
     data:extend({entity})
 
     data:extend({{
@@ -257,8 +246,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
         ingredients = {{type='item', name='steel-chest', amount=1}},
         results = {{type='item', name='trash-chest', amount=1}},
         main_product = 'trash-chest',
-        localised_name = {'name.trash-chest'},
-        localised_description = {'description.trash-chest'}
+        localised_name = {'name.trash-chest'}
     }})
 
     table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='trash-chest'})
@@ -281,7 +269,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
     item.icon_size = nil
     item.icon_mipmaps = nil
     item.localised_name = {'name.trash-pipe'}
-    item.localised_description = {'description.trash-pipe'}
     data:extend({item})
 
     entity = table.deepcopy(data.raw['pipe']['pipe'])
@@ -303,7 +290,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
 
     entity.se_allow_in_space = true
     entity.localised_name = {'name.trash-pipe'}
-    entity.localised_description = {'description.trash-pipe'}
     data:extend({entity})
 
     data:extend({{
@@ -314,8 +300,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
         ingredients = {{type='item', name='iron-plate', amount=1}},
         results = {{type='item', name='trash-pipe', amount=1}},
         main_product = 'trash-pipe',
-        localised_name = {'name.trash-pipe'},
-        localised_description = {'description.trash-pipe'}
+        localised_name = {'name.trash-pipe'}
     }})
 
     table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe='trash-pipe'})
@@ -325,7 +310,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
     item.place_result = 'electric-boiler'
     item.order = 'b[steam-power]-a[electric-boiler]'
     item.localised_name = {'name.electric-boiler'}
-    item.localised_description = {'description.electric-boiler'}
     data:extend({item})
 
     entity = table.deepcopy(data.raw['boiler']['boiler'])
@@ -356,7 +340,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
     entity.fire_glow_flicker_enabled = false
     entity.fire = {}
     entity.localised_name = {'name.electric-boiler'}
-    entity.localised_description = {'description.electric-boiler'}
     data:extend({entity})
 
     data:extend({{
@@ -367,8 +350,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
         ingredients = {{type='item', name='boiler', amount=1}, {type='item', name='electronic-circuit', amount=1}},
         results = {{type='item', name='electric-boiler', amount=1}},
         main_product = 'electric-boiler',
-        localised_name = {'name.electric-boiler'},
-        localised_description = {'description.electric-boiler'}
+        localised_name = {'name.electric-boiler'}
     }})
 
     -- electric boiler
@@ -398,7 +380,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
         item.place_result = 'basic-' .. c
         item.order = 'b[storage]-h[basic-' .. c .. ']'
         item.localised_name = {'name.basic-'.. c}
-        item.localised_description = {'description.basic-'.. c}
         data:extend({item})
 
         entity.inventory_type = 'with_filters_and_bar'
@@ -407,7 +388,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
         entity.name = 'basic-' .. c
         entity.minable.result = 'basic-' .. c
         entity.localised_name = {'name.basic-'.. c}
-        entity.localised_description = {'description.basic-'.. c}
         data:extend({entity})
 
         data:extend({{
@@ -418,8 +398,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
             ingredients = {{type='item', name=c, amount=1}},
             results = {{type='item', name='basic-' .. c, amount=1}},
             main_product = 'basic-' .. c,
-            localised_name = {'name.basic-' .. c},
-            localised_description = {'description.basic-' .. c}
+            localised_name = {'name.basic-' .. c}
         }})
     end
 

@@ -185,6 +185,10 @@ function main.EEE(source, tier)
 
     tint_handle(item, tier, {'picture', 'pictures', 'frames', 'working_visualisations', 'animation', 'horizontal_animation', 'vertical_animation', 'structure', 'integration_patch', 'graphics_set'})
 
+    if item.graphics_set and item.graphics_set.working_visualisations and item.graphics_set.working_visualisations.animation then
+        tint_handle(item.graphics_set.working_visualisations.animation, tier, {'frames'})
+    end
+
     if item.idle_animation and item.idle_animation.layers then
         local i = 1
 
@@ -211,8 +215,6 @@ function main.EEE(source, tier)
     else
         item.localised_name = {'name.' .. source.ref_name}
     end
-
-    item.localised_description = item.localised_description
 
     data:extend({item})
 end
@@ -278,7 +280,6 @@ function main.EEQ(source, tier)
     end
 
     item.localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tostring(tier)}
-    item.localised_description = item.localised_description
 
     data:extend({item})
 end
@@ -330,8 +331,6 @@ function main.EI(source, tier)
         item.localised_name = {'name.' .. source.ref_name}
     end
 
-    item.localised_description = item.localised_description
-
     data:extend({item})
 end
 
@@ -378,8 +377,7 @@ function main.ER(source, tier)
                 ingredients = {{type='item', name=ingredient_name, amount=4}},
                 results = {{type='item', name=result_name, amount=1}},
                 main_product = result_name,
-                localised_name = data.raw[source.type][new_name].localised_name,
-                localised_description = data.raw[source.type][new_name].localised_description
+                localised_name = {'phi-cl.combine', data.raw[source.type][new_name].localised_name, ''}
             }})
 
         else
@@ -393,8 +391,7 @@ function main.ER(source, tier)
                     ingredients = {{type='item', name=ingredient_name, amount=1}, {type='item', name=source.name, amount=1}},
                     results = {{type='item', name=result_name, amount=1}},
                     main_product = result_name,
-                    localised_name = data.raw[source.type][new_name].localised_name,
-                    localised_description = data.raw[source.type][new_name].localised_description
+                    localised_name = {'phi-cl.combine', data.raw[source.type][new_name].localised_name, ''}
                 }})
 
             else
@@ -407,8 +404,7 @@ function main.ER(source, tier)
                     ingredients = {{type='item', name=ingredient_name, amount=2}},
                     results = {{type='item', name=result_name, amount=1}},
                     main_product = result_name,
-                    localised_name = data.raw[source.type][new_name].localised_name,
-                    localised_description = data.raw[source.type][new_name].localised_description
+                    localised_name = {'phi-cl.combine', data.raw[source.type][new_name].localised_name, ''}
                 }})
             end
         end
@@ -423,8 +419,7 @@ function main.ER(source, tier)
             ingredients = {{type='item', name=ingredient_name, amount=2}},
             results = {{type='item', name=result_name, amount=1}},
             main_product = result_name,
-            localised_name = data.raw[source.type][new_name].localised_name,
-            localised_description = data.raw[source.type][new_name].localised_description
+            localised_name = {'phi-cl.combine', data.raw[source.type][new_name].localised_name, ''}
         }})
     end
 end

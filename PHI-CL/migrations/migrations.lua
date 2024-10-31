@@ -60,19 +60,19 @@ for _, force in pairs(game.forces) do
             end
 
             if (technologies['construction-robotics'] and technologies['construction-robotics'].researched) or (technologies['logistic-robotics'] and technologies['logistic-robotics'].researched) then
-                recipes['basic-logistic-chest-passive-provider'].enabled = true
-                recipes['basic-logistic-chest-passive-provider'].reload()
-                recipes['basic-logistic-chest-storage'].enabled = true
-                recipes['basic-logistic-chest-storage'].reload()
+                recipes['basic-passive-provider-chest'].enabled = true
+                recipes['basic-passive-provider-chest'].reload()
+                recipes['basic-storage-chest'].enabled = true
+                recipes['basic-storage-chest'].reload()
             end
 
             if technologies['logistic-system'] and technologies['logistic-system'].researched then
-                recipes['basic-logistic-chest-active-provider'].enabled = true
-                recipes['basic-logistic-chest-active-provider'].reload()
-                recipes['basic-logistic-chest-buffer'].enabled = true
-                recipes['basic-logistic-chest-buffer'].reload()
-                recipes['basic-logistic-chest-requester'].enabled = true
-                recipes['basic-logistic-chest-requester'].reload()
+                recipes['basic-active-provider-chest'].enabled = true
+                recipes['basic-active-provider-chest'].reload()
+                recipes['basic-buffer-chest'].enabled = true
+                recipes['basic-buffer-chest'].reload()
+                recipes['basic-requester-chest'].enabled = true
+                recipes['basic-requester-chest'].reload()
             end
         end
 
