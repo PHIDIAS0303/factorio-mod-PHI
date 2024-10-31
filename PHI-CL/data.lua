@@ -49,79 +49,40 @@ if settings.startup['PHI-EN'].value then
 end
 
 if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value then
-    data:extend({
+    local grid = table.deepcopy(data.raw['equipment-grid']['large-equipment-grid'])
+    grid.name = 'equipment-grid-14x14'
+    grid.width = 14
+    grid.height = 14
+    data:extend({grid})
+
+    local armor = table.deepcopy(data.raw['armor']['power-armor-mk2'])
+    armor.name = 'power-armor-mk3'
+    armor.icons = {
         {
-            type = 'equipment-grid',
-            name = 'equipment-grid-14x14',
-            width = 14,
-            height = 14,
-            equipment_categories = {'armor'}
-        },
-        {
-            type = 'armor',
-            name = 'power-armor-mk3',
-            icons = {
-                {
-                    icon = '__base__/graphics/icons/power-armor-mk2.png',
-                    tint = items['tint'][2],
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }
-            },
-            resistances = {
-                {
-                    type = 'physical',
-                    decrease = 20,
-                    percent = 50
-                },
-                {
-                    type = 'acid',
-                    decrease = 20,
-                    percent = 80
-                },
-                {
-                    type = 'explosion',
-                    decrease = 70,
-                    percent = 60
-                },
-                {
-                    type = 'fire',
-                    decrease = 20,
-                    percent = 80
-                },
-                {
-                    type = 'laser',
-                    decrease = 20,
-                    percent = 50
-                },
-                {
-                    type = 'electric',
-                    decrease = 20,
-                    percent = 50
-                },
-                {
-                    type = 'impact',
-                    decrease = 20,
-                    percent = 50
-                },
-                {
-                    type = 'poison',
-                    decrease = 20,
-                    percent = 50
-                }
-            },
-            subgroup = 'armor',
-            order = 'eb[power-armor-mk3]',
-            stack_size = 1,
-            infinite = true,
-            equipment_grid = 'equipment-grid-14x14',
-            inventory_size_bonus = 40,
-            open_sound = {filename =  '__base__/sound/armor-open.ogg', volume = 1},
-            close_sound = {filename = '__base__/sound/armor-close.ogg', volume = 1},
-            localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'},
-            localised_description = {'description.power-armor-mk2'}
+            icon = armor.icon,
+            tint = items['tint'][2],
+            icon_size = armor.icon_size
         }
-    })
+    }
+    armor.icon = nil
+    armor.icon_size = nil
+
+    for _, v in pairs(armor.resistances) do
+        v.decrease = v.decrease + 10
+
+        if v.percent < 90 then
+            v.percent = v.percent + 10
+
+        else
+            v.decrease = 100
+        end
+    end
+
+    armor.order = armor.order .. '2'
+    armor.equipment_grid = grid.name
+    armor.inventory_size_bonus = armor.inventory_size_bonus + 10
+    armor.localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'}
+    data:extend({armor})
 
     data:extend({{
         type = 'recipe',
@@ -131,15 +92,14 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
         ingredients = {{type='item', name='power-armor-mk2', amount=2}},
         results = {{type='item', name='power-armor-mk3', amount=1}},
         main_product = 'power-armor-mk3',
-        localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'},
-        localised_description = {'description.power-armor-mk2'}
+        localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'}
     }})
 
-    for _, animation in ipairs(data.raw['character']['character']['animations']) do
-        if animation.armors then
-            for _, armor in ipairs(animation.armors) do
-                if armor == 'power-armor-mk2' then
-                    animation.armors[#animation.armors + 1] = 'power-armor-mk3'
+    for _, an in ipairs(data.raw['character']['character']['animations']) do
+        if an.armors then
+            for _, ar in ipairs(an.armors) do
+                if ar == 'power-armor-mk2' then
+                    an.armors[#an.armors + 1] = 'power-armor-mk3'
                     break
                 end
             end
@@ -147,6 +107,67 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
     end
 
     table.insert(data.raw.technology['power-armor-mk2'].effects, {type='unlock-recipe', recipe='power-armor-mk3'})
+
+    if mods and mods['space-age'] then
+        grid = table.deepcopy(data.raw['equipment-grid']['large-equipment-grid'])
+        grid.name = 'equipment-grid-15x16'
+        grid.width = 15
+        grid.height = 16
+        data:extend({grid})
+
+        armor = table.deepcopy(data.raw['armor']['mech-armor'])
+        armor.name = 'mech-armor-mk2'
+        armor.icons = {
+            {
+                icon = armor.icon,
+                tint = items['tint'][2],
+                icon_size = armor.icon_size
+            }
+        }
+        armor.icon = nil
+        armor.icon_size = nil
+
+        for _, v in pairs(armor.resistances) do
+            v.decrease = v.decrease + 10
+
+            if v.percent < 90 then
+                v.percent = v.percent + 10
+
+            else
+                v.decrease = 100
+            end
+        end
+
+        armor.order = armor.order .. '2'
+        armor.equipment_grid = grid.name
+        armor.inventory_size_bonus = armor.inventory_size_bonus + 10
+        armor.localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'}
+        data:extend({armor})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'mech-armor-mk2',
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{type='item', name='mech-armor', amount=2}},
+            results = {{type='item', name='mech-armor-mk2', amount=1}},
+            main_product = 'mech-armor-mk2',
+            localised_name = {'phi-cl.combine-gen', {'name.mech-armor'}, '2'}
+        }})
+
+        for _, an in ipairs(data.raw['character']['character']['animations']) do
+            if an.armors then
+                for _, ar in ipairs(an.armors) do
+                    if ar == 'mech-armor' then
+                        an.armors[#an.armors + 1] = 'mech-armor-mk2'
+                        break
+                    end
+                end
+            end
+        end
+
+        table.insert(data.raw.technology['mech-armor'].effects, {type='unlock-recipe', recipe='mech-armor-mk2'})
+    end
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-EFFCY'].value then
@@ -194,7 +215,6 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-ROBOT'].value t
     end
 end
 
-
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value then
     local item = table.deepcopy(data.raw['item']['radar'])
     item.name = 'super-radar'
@@ -218,8 +238,8 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
     data:extend({item})
 
     local entity = table.deepcopy(data.raw['radar']['radar'])
-    entity.name = 'super-radar'
-    entity.minable.result = entity.name
+    entity.name = item.name
+    entity.minable.result = item.name
     entity.max_distance_of_sector_revealed = 35
     entity.max_distance_of_nearby_sector_revealed = 35
     entity.pictures.layers[1].tint = items['tint'][8]
@@ -228,13 +248,13 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
 
     data:extend({{
         type = 'recipe',
-        name = 'super-radar',
+        name = item.name,
         energy_required = 2,
         enabled = true,
         ingredients = {{type='item', name='electronic-circuit', amount=5}, {type='item', name='iron-gear-wheel', amount=5}, {type='item', name='iron-plate', amount=10}},
-        results = {{type='item', name='super-radar', amount=1}},
-        main_product = 'super-radar',
-        localised_name = {'name.super-radar'}
+        results = {{type='item', name=item.name, amount=1}},
+        main_product = item.name,
+        localised_name = {'name.' .. item.name}
     }})
 
     item = table.deepcopy(data.raw['item']['electric-energy-interface'])

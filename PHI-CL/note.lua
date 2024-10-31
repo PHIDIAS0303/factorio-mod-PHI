@@ -852,6 +852,11 @@ end
         end
 
 ** SETTING
+                {type = 'laser', decrease = 20, percent = 50},
+                {type = 'electric', decrease = 20, percent = 50},
+                {type = 'impact', decrease = 20, percent = 50},
+                {type = 'poison', decrease = 20, percent = 50}
+                
    {
     type = 'bool-setting',
     name = 'PHI-CT-TILE',
