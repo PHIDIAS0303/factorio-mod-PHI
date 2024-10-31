@@ -5,7 +5,7 @@ local main = {}
 local function tint_handle(item, tier, tl)
     for _, ve in pairs(tl) do
         if item[ve] then
-            for _, tc in pairs({'layers', 'sheets', 'structure'}) do
+            for _, tc in pairs({'layers', 'sheets', 'structure', 'frames'}) do
                 if item[ve][tc] and type(item[ve][tc]) == 'table' then
                     for _, v2 in pairs(item[ve][tc]) do
                         v2.tint = items['tint'][tier]
@@ -189,17 +189,7 @@ function main.EEE(source, tier)
         item.radius = item.radius + (1 * (tier - source.min + 1))
     end
 
-    if item.picture then
-        item.picture.tint = items['tint'][tier]
-    end
-
-    tint_handle(item, tier, {'pictures', 'animation', 'structure', 'integration_patch'})
-
-    for _, v in pairs({'horizontal_animation', 'vertical_animation'}) do
-        if item[v] then
-            tint_handle(item[v], tier, {'frames'})
-        end
-    end
+    tint_handle(item, tier, {'picture', 'pictures', 'animation', 'structure', 'integration_patch', 'horizontal_animation', 'vertical_animation'})
 
     for _, v in pairs({'graphics_set', 'graphics_set_flipped'}) do
         if item[v] then

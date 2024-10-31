@@ -863,13 +863,6 @@ if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.s
     end
 end
 
-if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-REPAIR'].value then
-    for _, v in pairs(data.raw['repair-tool']) do
-        v.speed = v.speed * settings.startup['PHI-MI-REPAIR'].value
-        v.durability = v.durability * settings.startup['PHI-MI-REPAIR'].value
-    end
-end
-
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
     local s = (1 + settings.startup['PHI-MI-PIPE'].value) / 2
 
@@ -1005,32 +998,25 @@ end
 ** SETTING
    {
     type = 'int-setting',
-    name = 'PHI-MI-REPAIR',
-    setting_type = 'startup',
-    default_value = 1,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'E06'
-  }, {
-    type = 'int-setting',
     name = 'PHI-MI-PIPE',
     setting_type = 'startup',
     default_value = 1,
     allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'E07'
+    order = 'E04'
   }, {
     type = 'int-setting',
     name = 'PHI-MI-ROBOT',
     setting_type = 'startup',
     default_value = 1,
     allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'E08'
+    order = 'E05'
   }, {
     type = 'int-setting',
     name = 'PHI-MI-TRAIN',
     setting_type = 'startup',
     default_value = 1,
     allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'E09'
+    order = 'E06'
   }, {
     type = 'bool-setting',
     name = 'PHI-CT-TILE',
