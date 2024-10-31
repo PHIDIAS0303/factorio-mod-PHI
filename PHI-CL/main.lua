@@ -190,7 +190,7 @@ function main.EEE(source, tier)
             tint_handle(item[v], tier, {'animation', 'idle_animation', 'frozen_patch'})
 
             if item[v].working_visualisations then
-                tint_handle(item[v].working_visualisations[v2], tier, {'north_animation', 'east_animation', 'south_animation', 'west_animation', 'animation'})
+                tint_handle(item[v].working_visualisations, tier, {'north_animation', 'east_animation', 'south_animation', 'west_animation', 'animation'})
             end
         end
     end
