@@ -82,7 +82,10 @@ function main.EEE(source, tier)
         item.call_for_help_radius = item.call_for_help_radius + (2 * (tier - source.min + 1))
 
         if source.type == 'electric-turret' then
-            item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * 2
+            if source.name == 'laser-turret' then
+                item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * 2
+            end
+
             item.glow_light_intensity = 1
             item.attack_parameters.ammo_type.action.action_delivery.max_length = item.attack_parameters.ammo_type.action.action_delivery.max_length + (2 * (tier - source.min + 1))
             item.attack_parameters.ammo_type.energy_consumption = tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+')
