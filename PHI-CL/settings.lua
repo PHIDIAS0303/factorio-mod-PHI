@@ -88,6 +88,12 @@ data:extend({
   order = 'D04'
 }, {
   type = 'bool-setting',
+  name = 'PHI-EQ-ARMOR',
+  setting_type = 'startup',
+  default_value = false,
+  order = 'D05'
+}, {
+  type = 'bool-setting',
   name = 'PHI-EQ-SIZE',
   setting_type = 'startup',
   default_value = false,
