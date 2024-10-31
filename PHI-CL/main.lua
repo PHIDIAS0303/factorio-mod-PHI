@@ -5,7 +5,7 @@ local main = {}
 local function tint_handle(item, tier, tl)
     for _, ve in pairs(tl) do
         if item[ve] then
-            for _, tc in pairs({'layers', 'sheets', 'structure'}) do
+            for _, tc in pairs({'layers', 'sheets', 'structure', 'frames'}) do
                 if item[ve][tc] and type(item[ve][tc]) == 'table' then
                     for i=1, #item[ve][tc], 1 do
                         item[ve][tc][i].tint = items['tint'][tier]
@@ -183,10 +183,16 @@ function main.EEE(source, tier)
         item.radius = item.radius + (1 * (tier - source.min + 1))
     end
 
-    tint_handle(item, tier, {'picture', 'pictures', 'frames', 'working_visualisations', 'animation', 'horizontal_animation', 'vertical_animation', 'structure', 'integration_patch', 'graphics_set'})
+    tint_handle(item, tier, {'picture', 'pictures', 'frames', 'working_visualisations', 'animation', 'horizontal_animation', 'vertical_animation', 'structure', 'integration_patch', })
 
-    if item.graphics_set and item.graphics_set.working_visualisations and item.graphics_set.working_visualisations.animation then
-        tint_handle(item.graphics_set.working_visualisations.animation, tier, {'frames'})
+    for _, v in pairs({'graphics_set', 'graphics_set_flipped'}) do
+        if item[v] then
+            tint_handle(item[v], tier, {'animation', 'idle_animation', 'frozen_patch'})
+
+            if item[v].working_visualisations then
+                tint_handle(item[v].working_visualisations[v2], tier, {'north_animation', 'east_animation', 'south_animation', 'west_animation', 'animation'})
+            end
+        end
     end
 
     if item.idle_animation and item.idle_animation.layers then
