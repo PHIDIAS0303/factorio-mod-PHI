@@ -193,7 +193,7 @@ function main.EEE(source, tier)
         item.picture.tint = items['tint'][tier]
     end
 
-    tint_handle(item, tier, {'pictures', 'frames', 'animation', 'structure', 'integration_patch', })
+    tint_handle(item, tier, {'pictures', 'animation', 'structure', 'integration_patch'})
 
     for _, v in pairs({'horizontal_animation', 'vertical_animation'}) do
         if item[v] then
