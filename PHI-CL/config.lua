@@ -340,7 +340,7 @@ local items = {
     }
 }
 
-if mods['space-age'] then
+if mods and mods['space-age'] then
     items['item']['fusion-reactor'] = {
         enabled = settings.startup['PHI-EN'].value,
         stage = 1,
@@ -533,7 +533,7 @@ if mods['space-age'] then
     items['equipment']['battery-equipment'].min = 4
 end
 
-if mods['quality'] then
+if mods and mods['quality'] then
     items['item']['recycler'] = {
         enabled = settings.startup['PHI-MB'].value,
         stage = 1,
