@@ -293,6 +293,15 @@ function main.EEQ(source, tier)
 
     item.localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tostring(tier)}
 
+    if settings.startup['PHI-EQ-SIZE'].value then
+        item.shape = {
+            width = 1,
+            height = 1,
+            type = 'full',
+            points = {{0, 0}}
+        }
+    end
+
     data:extend({item})
 end
 

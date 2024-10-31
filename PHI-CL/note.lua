@@ -604,28 +604,6 @@
     end
 
 ** MAIN
-            for _, tc in pairs({'layers', 'sheets'}) do
-                if item[ve][tc] and item[ve][tc][1] then
-                    item[ve][tc][1].tint = items['tint'][tier]
-                end
-
-                for _, v in pairs(item[ve]) do
-                    if type(v) == 'table' then
-                        if v[tc] and v[tc][1] then
-                            v[tc][1].tint = items['tint'][tier]
-                        end
-
-                        for i=1, #v, 1 do
-                            if v[i] and type(v[i]) == 'table' then
-                                if v[i][tc] and v[i][tc][1] then
-                                    v[i][tc][1].tint = items['tint'][tier]
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-            
     if source.name == 'kr-gas-power-station' then
         item.fluid_usage_per_tick = item.fluid_usage_per_tick * (tier - source.min + 2)
 
@@ -633,7 +611,7 @@
         item.production = tostring(tonumber(string.match(item.production, '[%d%.]+')) * (4 ^ (tier - source.min + 2))) .. string.match(item.production, '%a+')
         end
 
-            if item.energy_per_shield then
+    if item.energy_per_shield then
         item.energy_per_shield = tostring(math.floor(tonumber(string.match(item.energy_per_shield, '[%d%.]+')) * ((32 - (tier - source.min + 1)) / 32))) .. string.match(item.energy_per_shield, '%a+')
     end
     
@@ -863,27 +841,6 @@ if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.s
     end
 end
 
-if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
-    local s = (1 + settings.startup['PHI-MI-PIPE'].value) / 2
-
-    for _, v in pairs(data.raw['pump']) do
-        v.pumping_speed = v.pumping_speed * s
-    end
-end
-
-if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-ROBOT'].value then
-    local s = (1 + settings.startup['PHI-MI-ROBOT'].value) / 2
-    local sn = (17 - settings.startup['PHI-MI-ROBOT'].value) / 16
-
-    for _, t in pairs({data.raw['construction-robot'], data.raw['logistic-robot']}) do
-        for _, v in pairs(t) do
-            v.speed = v.speed * s
-            v.energy_per_tick = tostring(tonumber(string.match(v.energy_per_tick, '[%d%.]+')) * sn) .. string.match(v.energy_per_tick, '%a+')
-            v.energy_per_move = tostring(tonumber(string.match(v.energy_per_move, '[%d%.]+')) * sn) .. string.match(v.energy_per_move, '%a+')
-        end
-    end
-end
-
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-TRAIN'].value then
     local s = (7 + settings.startup['PHI-MI-TRAIN'].value) / 8
 
@@ -988,7 +945,7 @@ end
 ** MIGRATION
         if script.active_mods['space-exploration'] then
             if technologies['se-core-miner'].researched then
-                for i=2, settings.startup['PHI-MB-MINING-TIER'].value do
+                for i=2, settings.startup['PHI-MB-MACHINE-TIER'].value do
                     recipes['se-core-miner-' .. i].enabled = true
                     recipes['se-core-miner-' .. i].reload()
                 end
@@ -997,20 +954,6 @@ end
 
 ** SETTING
    {
-    type = 'int-setting',
-    name = 'PHI-MI-PIPE',
-    setting_type = 'startup',
-    default_value = 1,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'E04'
-  }, {
-    type = 'int-setting',
-    name = 'PHI-MI-ROBOT',
-    setting_type = 'startup',
-    default_value = 1,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'E05'
-  }, {
     type = 'int-setting',
     name = 'PHI-MI-TRAIN',
     setting_type = 'startup',

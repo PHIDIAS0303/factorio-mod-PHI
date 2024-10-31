@@ -465,6 +465,37 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-NUCLEAR'].value
     data.raw['reactor']['nuclear-reactor'].scale_energy_usage = true
 end
 
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
+    local s = (1 + settings.startup['PHI-MI-PIPE'].value) / 2
+
+    for _, t in pairs({data.raw['offshore-pump'], data.raw['pump']}) do
+        for _, v in pairs(t) do
+            v.pumping_speed = v.pumping_speed * s
+        end
+    end
+end
+
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-ROBOT'].value then
+    local s = (1 + settings.startup['PHI-MI-ROBOT'].value) / 2
+    local sn = (17 - settings.startup['PHI-MI-ROBOT'].value) / 16
+
+    for _, t in pairs({data.raw['construction-robot'], data.raw['logistic-robot']}) do
+        for _, v in pairs(t) do
+            v.speed = v.speed * s
+
+            if settings.startup['PHI-MI-ROBOT-ENERGY'].value then
+                v.energy_per_tick = '0J'
+                v.energy_per_move = '0J'
+                v.speed_multiplier_when_out_of_energy = 1
+
+            else
+                v.energy_per_tick = tostring(tonumber(string.match(v.energy_per_tick, '[%d%.]+')) * sn) .. string.match(v.energy_per_tick, '%a+')
+                v.energy_per_move = tostring(tonumber(string.match(v.energy_per_move, '[%d%.]+')) * sn) .. string.match(v.energy_per_move, '%a+')
+            end
+        end
+    end
+end
+
 for _, v in pairs(items['item']) do
     if (v.stage == file_stage) and v.enabled and (v.max >= v.min) then
         v.category = 'item'
