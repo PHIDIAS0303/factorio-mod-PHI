@@ -184,12 +184,6 @@ if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-NUCLEAR'].value
     for _, v in pairs(data.raw['reactor']) do
         v.scale_energy_usage = settings.startup['PHI-MI-NUCLEAR'].value
     end
-
-    if mods['space-age'] then
-        for _, v in pairs(data.raw['fusion-reactor']) do
-            v.scale_energy_usage = settings.startup['PHI-MI-NUCLEAR'].value
-        end
-    end
 end
 
 if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
