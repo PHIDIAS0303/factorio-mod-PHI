@@ -48,6 +48,153 @@ if settings.startup['PHI-EN'].value then
     end
 end
 
+if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value then
+    data:extend({
+        {
+            type = 'equipment-grid',
+            name = 'equipment-grid-14x14',
+            width = 14,
+            height = 14,
+            equipment_categories = {'armor'}
+        },
+        {
+            type = 'armor',
+            name = 'power-armor-mk3',
+            icons = {
+                {
+                    icon = '__base__/graphics/icons/power-armor-mk2.png',
+                    tint = items['tint'][2],
+                    icon_size = 64,
+                    icon_mipmaps = 4
+                }
+            },
+            resistances = {
+                {
+                    type = 'physical',
+                    decrease = 20,
+                    percent = 50
+                },
+                {
+                    type = 'acid',
+                    decrease = 20,
+                    percent = 80
+                },
+                {
+                    type = 'explosion',
+                    decrease = 70,
+                    percent = 60
+                },
+                {
+                    type = 'fire',
+                    decrease = 20,
+                    percent = 80
+                },
+                {
+                    type = 'laser',
+                    decrease = 20,
+                    percent = 50
+                },
+                {
+                    type = 'electric',
+                    decrease = 20,
+                    percent = 50
+                },
+                {
+                    type = 'impact',
+                    decrease = 20,
+                    percent = 50
+                },
+                {
+                    type = 'poison',
+                    decrease = 20,
+                    percent = 50
+                }
+            },
+            subgroup = 'armor',
+            order = 'eb[power-armor-mk3]',
+            stack_size = 1,
+            infinite = true,
+            equipment_grid = 'equipment-grid-14x14',
+            inventory_size_bonus = 40,
+            open_sound = {filename =  '__base__/sound/armor-open.ogg', volume = 1},
+            close_sound = {filename = '__base__/sound/armor-close.ogg', volume = 1},
+            localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'},
+            localised_description = {'description.power-armor-mk2'}
+        }
+    })
+
+    data:extend({{
+        type = 'recipe',
+        name = 'power-armor-mk3',
+        energy_required = 2,
+        enabled = false,
+        ingredients = {{type='item', name='power-armor-mk2', amount=2}},
+        results = {{type='item', name='power-armor-mk3', amount=1}},
+        main_product = 'power-armor-mk3',
+        localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'},
+        localised_description = {'description.power-armor-mk2'}
+    }})
+
+    for _, animation in ipairs(data.raw['character']['character']['animations']) do
+        if animation.armors then
+            for _, armor in ipairs(animation.armors) do
+                if armor == 'power-armor-mk2' then
+                    animation.armors[#animation.armors + 1] = 'power-armor-mk3'
+                    break
+                end
+            end
+        end
+    end
+
+    table.insert(data.raw.technology['power-armor-mk2'].effects, {type='unlock-recipe', recipe='power-armor-mk3'})
+end
+
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-EFFCY'].value then
+    data.raw['module']['efficiency-module'].effect = {consumption=-0.4, pollution=-0.4}
+    data.raw['module']['efficiency-module-2'].effect = {consumption=-0.8, pollution=-0.8}
+    data.raw['module']['efficiency-module-3'].effect = {consumption=-1.2, pollution=-1.2}
+end
+
+if settings.startup['PHI-MI'].value and (settings.startup['PHI-MI-LANDFILL'].value ~= 50) then
+    data.raw.recipe['landfill'].ingredients = {{type='item', name='stone', amount=settings.startup['PHI-MI-LANDFILL'].value}}
+end
+
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-NUCLEAR'].value then
+    data.raw['reactor']['nuclear-reactor'].scale_energy_usage = true
+end
+
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
+    local s = (1 + settings.startup['PHI-MI-PIPE'].value) / 2
+
+    for _, t in pairs({data.raw['offshore-pump'], data.raw['pump']}) do
+        for _, v in pairs(t) do
+            v.pumping_speed = v.pumping_speed * s
+        end
+    end
+end
+
+if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-ROBOT'].value then
+    local s = (1 + settings.startup['PHI-MI-ROBOT'].value) / 2
+    local sn = (17 - settings.startup['PHI-MI-ROBOT'].value) / 16
+
+    for _, t in pairs({data.raw['construction-robot'], data.raw['logistic-robot']}) do
+        for _, v in pairs(t) do
+            v.speed = v.speed * s
+
+            if settings.startup['PHI-MI-ROBOT-ENERGY'].value then
+                v.energy_per_tick = '0J'
+                v.energy_per_move = '0J'
+                v.speed_multiplier_when_out_of_energy = 1
+
+            else
+                v.energy_per_tick = tostring(tonumber(string.match(v.energy_per_tick, '[%d%.]+')) * sn) .. string.match(v.energy_per_tick, '%a+')
+                v.energy_per_move = tostring(tonumber(string.match(v.energy_per_move, '[%d%.]+')) * sn) .. string.match(v.energy_per_move, '%a+')
+            end
+        end
+    end
+end
+
+
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value then
     local item = table.deepcopy(data.raw['item']['radar'])
     item.name = 'super-radar'
@@ -448,51 +595,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-HIDDEN'].value 
     if mods['space-age'] then
         data.raw.recipe['turbo-loader'].hidden = false
         table.insert(data.raw.technology['turbo-transport-belt'].effects, {type='unlock-recipe', recipe='turbo-loader'})
-    end
-end
-
-if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-EFFCY'].value then
-    data.raw['module']['efficiency-module'].effect = {consumption=-0.4, pollution=-0.4}
-    data.raw['module']['efficiency-module-2'].effect = {consumption=-0.8, pollution=-0.8}
-    data.raw['module']['efficiency-module-3'].effect = {consumption=-1.2, pollution=-1.2}
-end
-
-if settings.startup['PHI-MI'].value and (settings.startup['PHI-MI-LANDFILL'].value ~= 50) then
-    data.raw.recipe['landfill'].ingredients = {{type='item', name='stone', amount=settings.startup['PHI-MI-LANDFILL'].value}}
-end
-
-if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-NUCLEAR'].value then
-    data.raw['reactor']['nuclear-reactor'].scale_energy_usage = true
-end
-
-if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
-    local s = (1 + settings.startup['PHI-MI-PIPE'].value) / 2
-
-    for _, t in pairs({data.raw['offshore-pump'], data.raw['pump']}) do
-        for _, v in pairs(t) do
-            v.pumping_speed = v.pumping_speed * s
-        end
-    end
-end
-
-if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-ROBOT'].value then
-    local s = (1 + settings.startup['PHI-MI-ROBOT'].value) / 2
-    local sn = (17 - settings.startup['PHI-MI-ROBOT'].value) / 16
-
-    for _, t in pairs({data.raw['construction-robot'], data.raw['logistic-robot']}) do
-        for _, v in pairs(t) do
-            v.speed = v.speed * s
-
-            if settings.startup['PHI-MI-ROBOT-ENERGY'].value then
-                v.energy_per_tick = '0J'
-                v.energy_per_move = '0J'
-                v.speed_multiplier_when_out_of_energy = 1
-
-            else
-                v.energy_per_tick = tostring(tonumber(string.match(v.energy_per_tick, '[%d%.]+')) * sn) .. string.match(v.energy_per_tick, '%a+')
-                v.energy_per_move = tostring(tonumber(string.match(v.energy_per_move, '[%d%.]+')) * sn) .. string.match(v.energy_per_move, '%a+')
-            end
-        end
     end
 end
 

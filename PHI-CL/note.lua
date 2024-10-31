@@ -616,107 +616,6 @@
     end
     
 ** DATA
-if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value then
-    data:extend({
-        {
-            type = 'equipment-grid',
-            name = 'equipment-grid-14x14',
-            width = 14,
-            height = 14,
-            equipment_categories = {'armor'}
-        },
-        {
-            type = 'armor',
-            name = 'power-armor-mk3',
-            icons = {
-                {
-                    icon = '__base__/graphics/icons/power-armor-mk2.png',
-                    tint = items['tint'][2],
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }
-            },
-            resistances = {
-                {
-                    type = 'physical',
-                    decrease = 20,
-                    percent = 50
-                },
-                {
-                    type = 'acid',
-                    decrease = 20,
-                    percent = 80
-                },
-                {
-                    type = 'explosion',
-                    decrease = 70,
-                    percent = 60
-                },
-                {
-                    type = 'fire',
-                    decrease = 20,
-                    percent = 80
-                },
-                {
-                    type = 'laser',
-                    decrease = 20,
-                    percent = 50
-                },
-                {
-                    type = 'electric',
-                    decrease = 20,
-                    percent = 50
-                },
-                {
-                    type = 'impact',
-                    decrease = 20,
-                    percent = 50
-                },
-                {
-                    type = 'poison',
-                    decrease = 20,
-                    percent = 50
-                }
-            },
-            subgroup = 'armor',
-            order = 'eb[power-armor-mk3]',
-            stack_size = 1,
-            infinite = true,
-            equipment_grid = 'equipment-grid-14x14',
-            inventory_size_bonus = 40,
-            open_sound = {filename =  '__base__/sound/armor-open.ogg', volume = 1},
-            close_sound = {filename = '__base__/sound/armor-close.ogg', volume = 1},
-            localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'},
-            localised_description = {'description.power-armor-mk2'}
-        }
-    })
-
-    data:extend({{
-        type = 'recipe',
-        name = 'power-armor-mk3',
-        energy_required = 2,
-        enabled = false,
-        ingredients = {{type='item', name='power-armor-mk2', amount=2}},
-        results = {{type='item', name='power-armor-mk3', amount=1}},
-        main_product = 'power-armor-mk3',
-        localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'},
-        localised_description = {'description.power-armor-mk2'}
-    }})
-
-    for _, animation in ipairs(data.raw['character']['character']['animations']) do
-        if animation.armors then
-            for _, armor in ipairs(animation.armors) do
-                if armor == 'power-armor-mk2' then
-                    animation.armors[#animation.armors + 1] = 'power-armor-mk3'
-                    break
-                end
-            end
-        end
-    end
-
-    table.insert(data.raw.technology['power-armor-mk2'].effects, {type='unlock-recipe', recipe='power-armor-mk3'})
-end
-
 if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRAIN'].value then
     local item = table.deepcopy(data.raw['item']['used-up-uranium-fuel-cell'])
     item.name = 'empty-train-battery'
@@ -954,13 +853,6 @@ end
 
 ** SETTING
    {
-    type = 'int-setting',
-    name = 'PHI-MI-TRAIN',
-    setting_type = 'startup',
-    default_value = 1,
-    allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-    order = 'E06'
-  }, {
     type = 'bool-setting',
     name = 'PHI-CT-TILE',
     setting_type = 'startup',

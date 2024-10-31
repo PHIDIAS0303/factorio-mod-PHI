@@ -131,12 +131,19 @@ data:extend({
   setting_type = 'startup',
   default_value = 1,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-  order = 'E05'
+  order = 'E05A'
 }, {
   type = 'bool-setting',
   name = 'PHI-MI-ROBOT-ENERGY',
   setting_type = 'startup',
   default_value = true,
+  order = 'E05B'
+}, {
+  type = 'int-setting',
+  name = 'PHI-MI-TRAIN',
+  setting_type = 'startup',
+  default_value = 1,
+  allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
   order = 'E06'
 }, {
   type = 'bool-setting',
