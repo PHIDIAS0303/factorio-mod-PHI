@@ -696,9 +696,7 @@ if settings.startup['PHI-CT'].value then
         if mods['quality'] then
             for _, v in pairs(data.raw['module']) do
                 if v.category and v.category == 'quality' then
-                    for _, v2 in pairs(v.effect) do
-                        v2 = v2 * 4
-                    end
+                    v.effect.quality = v.effect.quality * 4
                 end
             end
         end

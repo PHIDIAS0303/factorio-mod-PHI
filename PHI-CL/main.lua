@@ -36,7 +36,7 @@ function main.EEE(source, tier)
         item.next_upgrade = source.name .. '-' .. (tier + 1)
     end
 
-    for _, v in pairs({'energy_usage', 'heating_energy', 'crane_energy_usage', 'energy_per_shot'}) do
+    for _, v in pairs({'production', 'energy_usage', 'heating_energy', 'crane_energy_usage', 'energy_per_shot'}) do
         if item[v] then
             item[v] = tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. (string.match(item[v], '%a+') or '')
         end
@@ -107,8 +107,14 @@ function main.EEE(source, tier)
                 end
             end
 
+            for _, v in pairs({'buffer_capacity', 'input_flow_limit', 'output_flow_limit'}) do
+                if item.energy_source[v] then
+                    item.energy_source[v] = tonumber(string.match(item.energy_source[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_source[v], '%a+')
+                end
+            end
+
         elseif (source.type == 'solar-panel') then
-            item.production = tostring(tonumber(string.match(item.production, '[%d%.]+')) * (4 ^ (tier - source.min + 1))) .. string.match(item.production, '%a+')
+            item.production = tostring(tonumber(string.match(item.production, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.production, '%a+')
 
         elseif (source.type == 'boiler') then
             item.energy_consumption = tostring(tonumber(string.match(item.energy_consumption, '[%d%.]+')) * tier) .. string.match(item.energy_consumption, '%a+')
