@@ -635,7 +635,7 @@ if settings.startup['PHI-CT'].value then
         end
     end
 
-    if not settings.startup['PHI-CT-SPOIL'].value then
+    if (not settings.startup['PHI-CT-SPOIL'].value) and mods['space-age'] then
         local function spoil_handle(i)
             i.spoil_ticks = nil
             i.spoil_result = nil
@@ -644,7 +644,7 @@ if settings.startup['PHI-CT'].value then
 
         -- spoil_handle(data.raw['item']['iron-bacteria'])
         -- spoil_handle(data.raw['item']['copper-bacteria'])
-    spoil_handle(data.raw['item']['nutrients'])
+        spoil_handle(data.raw['item']['nutrients'])
         spoil_handle(data.raw['item']['captive-biter-spawner'])
         spoil_handle(data.raw['item']['biter-egg'])
         spoil_handle(data.raw['item']['pentapod-egg'])
@@ -679,6 +679,7 @@ if settings.startup['PHI-CT'].value then
                 {type='item', name='grenade', amount=1},
                 {type='item', name='barrel', amount=1}
             }
+            recipe.localised_name = {'phi-cl.combine', '', ''}
 
             data:extend({recipe})
             table.insert(data.raw.technology['cliff-explosives'].effects, {type='unlock-recipe', recipe=recipe.name})
@@ -690,6 +691,16 @@ if settings.startup['PHI-CT'].value then
                 {'logistic-science-pack', 1}
             }
             data.raw.technology['elevated-rail'].unit.count = 200
+        end
+
+        if mods['quality'] then
+            for _, v in pairs(data.raw['module']) do
+                if v.category and v.category == 'quality' then
+                    for _, v2 in pairs(v.effect) do
+                        v2 = v2 * 4
+                    end
+                end
+            end
         end
     end
 
