@@ -142,7 +142,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-MI-ROBOT-ENERGY',
   setting_type = 'startup',
-  default_value = true,
+  default_value = false,
   order = 'E05B'
 }, {
   type = 'int-setting',
@@ -191,5 +191,11 @@ data:extend({
   minimum_value = 1,
   maximum_value = 1000,
   order = 'F05'
+}, {
+  type = 'bool-setting',
+  name = 'PHI-CT-SPOIL',
+  setting_type = 'startup',
+  default_value = true,
+  order = 'F06'
 }
 })

@@ -86,12 +86,12 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
 
     data:extend({{
         type = 'recipe',
-        name = 'power-armor-mk3',
+        name = armor.name,
         energy_required = 2,
         enabled = false,
         ingredients = {{type='item', name='power-armor-mk2', amount=2}},
-        results = {{type='item', name='power-armor-mk3', amount=1}},
-        main_product = 'power-armor-mk3',
+        results = {{type='item', name=armor.name, amount=1}},
+        main_product = armor.name,
         localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'}
     }})
 
@@ -99,14 +99,14 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
         if an.armors then
             for _, ar in ipairs(an.armors) do
                 if ar == 'power-armor-mk2' then
-                    an.armors[#an.armors + 1] = 'power-armor-mk3'
+                    an.armors[#an.armors + 1] = armor.name
                     break
                 end
             end
         end
     end
 
-    table.insert(data.raw.technology['power-armor-mk2'].effects, {type='unlock-recipe', recipe='power-armor-mk3'})
+    table.insert(data.raw.technology['power-armor-mk2'].effects, {type='unlock-recipe', recipe=armor.name})
 
     if mods['space-age'] then
         grid = table.deepcopy(data.raw['equipment-grid']['large-equipment-grid'])
@@ -141,17 +141,17 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
         armor.order = armor.order .. '2'
         armor.equipment_grid = grid.name
         armor.inventory_size_bonus = armor.inventory_size_bonus + 10
-        armor.localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'}
+        armor.localised_name = {'phi-cl.combine-gen', {'name.mech-armor'}, '2'}
         data:extend({armor})
 
         data:extend({{
             type = 'recipe',
-            name = 'mech-armor-mk2',
+            name = armor.name,
             energy_required = 2,
             enabled = false,
             ingredients = {{type='item', name='mech-armor', amount=2}},
-            results = {{type='item', name='mech-armor-mk2', amount=1}},
-            main_product = 'mech-armor-mk2',
+            results = {{type='item', name=armor.name, amount=1}},
+            main_product = armor.name,
             localised_name = {'phi-cl.combine-gen', {'name.mech-armor'}, '2'}
         }})
 
@@ -159,14 +159,14 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
             if an.armors then
                 for _, ar in ipairs(an.armors) do
                     if ar == 'mech-armor' then
-                        an.armors[#an.armors + 1] = 'mech-armor-mk2'
+                        an.armors[#an.armors + 1] = armor.name
                         break
                     end
                 end
             end
         end
 
-        table.insert(data.raw.technology['mech-armor'].effects, {type='unlock-recipe', recipe='mech-armor-mk2'})
+        table.insert(data.raw.technology['mech-armor'].effects, {type='unlock-recipe', recipe=armor.name})
     end
 end
 
@@ -236,7 +236,6 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
     item.icon_size = nil
     item.icon_mipmaps = nil
     item.localised_name = {'name.super-radar'}
-    item.localised_description = {'description.super-radar'}
     data:extend({item})
 
     local entity = table.deepcopy(data.raw['radar']['radar'])
@@ -245,7 +244,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
     entity.max_distance_of_sector_revealed = 35
     entity.max_distance_of_nearby_sector_revealed = 35
     entity.pictures.layers[1].tint = items['tint'][8]
-    entity.localised_name = {'name.super-radar'}
+    entity.localised_name = item.localised_name
     data:extend({entity})
 
     data:extend({{
@@ -266,8 +265,8 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
     data:extend({item})
 
     entity = table.deepcopy(data.raw['electric-energy-interface']['electric-energy-interface'])
-    entity.name = 'passive-energy-void'
-    entity.minable.result = entity.name
+    entity.name = item.name
+    entity.minable.result = item.name
     entity.energy_source.usage_priority = 'tertiary'
     entity.energy_source.emissions_per_minute = {pollution = 0}
     entity.energy_source.input_flow_limit = '1PW'
@@ -276,21 +275,21 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
     entity.energy_production = '0W'
     entity.energy_usage = '1PW'
     entity.gui_mode = 'none'
-    entity.localised_name = {'name.passive-energy-void'}
+    entity.localised_name = item.localised_name
     data:extend({entity})
 
     data:extend({{
         type = 'recipe',
-        name = 'passive-energy-void',
+        name = item.name,
         energy_required = 2,
         enabled = false,
         ingredients = {{type='item', name='accumulator', amount=1}},
-        results = {{type='item', name='passive-energy-void', amount=1}},
-        main_product = 'passive-energy-void',
-        localised_name = {'name.passive-energy-void'}
+        results = {{type='item', name=item.name, amount=1}},
+        main_product = item.name,
+        localised_name = item.localised_name
     }})
 
-    table.insert(data.raw.technology['electric-energy-accumulators'].effects, {type='unlock-recipe', recipe='passive-energy-void'})
+    table.insert(data.raw.technology['electric-energy-accumulators'].effects, {type='unlock-recipe', recipe=item.name})
     data:extend({{type='recipe-category', name='fluid'}})
 
     item = table.deepcopy(data.raw['item']['offshore-pump'])
@@ -314,8 +313,8 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
     data:extend({item})
 
     entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
-    entity.name = 'super-pump'
-    entity.minable.result = entity.name
+    entity.name = item.name
+    entity.minable.result = item.name
     entity.type = 'assembling-machine'
     entity.crafting_categories = {'fluid'}
     entity.crafting_speed = 1
@@ -329,18 +328,18 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value th
     entity.collision_mask = nil
     entity.tile_buildability_rules = nil
     entity.fluid_source_offset = nil
-    entity.localised_name = {'name.super-pump'}
+    entity.localised_name = item.localised_name
     data:extend({entity})
 
     data:extend({{
         type = 'recipe',
-        name = 'super-pump',
+        name = item.name,
         energy_required = 2,
         enabled = true,
         ingredients = {{type='item', name='electronic-circuit', amount=2}, {type='item', name='pipe', amount=1}, {type='item', name='iron-gear-wheel', amount=1}},
-        results = {{type='item', name='super-pump', amount=1}},
-        main_product = 'super-pump',
-        localised_name = {'name.super-pump'}
+        results = {{type='item', name=item.name, amount=1}},
+        main_product = item.name,
+        localised_name = item.localised_name
     }})
 
     for _, v in pairs(data.raw.fluid) do
@@ -394,8 +393,8 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
     data:extend({item})
 
     local entity = table.deepcopy(data.raw['container']['steel-chest'])
-    entity.name = 'trash-chest'
-    entity.minable.result = entity.name
+    entity.name = item.name
+    entity.minable.result = item.name
     entity.inventory_type = 'with_filters_and_bar'
     entity.inventory_size = 1
     entity.type = 'infinity-container'
@@ -404,21 +403,21 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
     entity.logistic_mode = nil
     entity.next_upgrade = nil
     entity.picture.layers[1].tint = items['tint'][8]
-    entity.localised_name = {'name.trash-chest'}
+    entity.localised_name = item.localised_name
     data:extend({entity})
 
     data:extend({{
         type = 'recipe',
-        name = 'trash-chest',
+        name = item.name,
         energy_required = 2,
         enabled = false,
         ingredients = {{type='item', name='steel-chest', amount=1}},
-        results = {{type='item', name='trash-chest', amount=1}},
-        main_product = 'trash-chest',
-        localised_name = {'name.trash-chest'}
+        results = {{type='item', name=item.name, amount=1}},
+        main_product = item.name,
+        localised_name = item.localised_name
     }})
 
-    table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='trash-chest'})
+    table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe=item.name})
 
     item = table.deepcopy(data.raw['item']['pipe'])
     item.name = 'trash-pipe'
@@ -441,8 +440,8 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
     data:extend({item})
 
     entity = table.deepcopy(data.raw['pipe']['pipe'])
-    entity.name = 'trash-pipe'
-    entity.minable.result = entity.name
+    entity.name = item.name
+    entity.minable.result = item.name
     entity.inventory_size = 1
     entity.type = 'infinity-pipe'
     entity.gui_mode = 'none'
@@ -457,22 +456,21 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
         end
     end
 
-    entity.se_allow_in_space = true
-    entity.localised_name = {'name.trash-pipe'}
+    entity.localised_name = item.localised_name
     data:extend({entity})
 
     data:extend({{
         type = 'recipe',
-        name = 'trash-pipe',
+        name = item.name,
         energy_required = 2,
         enabled = false,
         ingredients = {{type='item', name='iron-plate', amount=1}},
-        results = {{type='item', name='trash-pipe', amount=1}},
-        main_product = 'trash-pipe',
-        localised_name = {'name.trash-pipe'}
+        results = {{type='item', name=item.name, amount=1}},
+        main_product = item.name,
+        localised_name = item.localised_name
     }})
 
-    table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe='trash-pipe'})
+    table.insert(data.raw.technology['automation'].effects, {type='unlock-recipe', recipe=item.name})
 
     item = table.deepcopy(data.raw['item']['boiler'])
     item.name = 'electric-boiler'
@@ -482,7 +480,7 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
     data:extend({item})
 
     entity = table.deepcopy(data.raw['boiler']['boiler'])
-    entity.name = 'electric-boiler'
+    entity.name = item.name
     entity.energy_consumption = '7200kW'
     entity.buffer_capacity = '14400kJ'
     entity.target_temperature = 165
@@ -502,18 +500,18 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
     entity.fire_flicker_enabled = false
     entity.fire_glow_flicker_enabled = false
     entity.fire = {}
-    entity.localised_name = {'name.electric-boiler'}
+    entity.localised_name = item.localised_name
     data:extend({entity})
 
     data:extend({{
         type = 'recipe',
-        name = 'electric-boiler',
+        name = item.name,
         energy_required = 2,
         enabled = true,
         ingredients = {{type='item', name='boiler', amount=1}, {type='item', name='electronic-circuit', amount=1}},
-        results = {{type='item', name='electric-boiler', amount=1}},
-        main_product = 'electric-boiler',
-        localised_name = {'name.electric-boiler'}
+        results = {{type='item', name=item.name, amount=1}},
+        main_product = item.name,
+        localised_name = item.localised_name
     }})
 
     -- electric boiler
@@ -545,23 +543,28 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value
         item.localised_name = {'name.basic-'.. c}
         data:extend({item})
 
-        entity.name = 'basic-' .. c
-        entity.minable.result = entity.name
+        entity.name = item.name
+        entity.minable.result = item.name
         entity.inventory_type = 'with_filters_and_bar'
         entity.inventory_size = 1
-        entity.max_logistic_slots = 1
-        entity.localised_name = {'name.basic-'.. c}
+
+        if c ~= 'steel-chest' then
+            entity.max_logistic_slots = 1
+            entity.trash_inventory_size = 1
+        end
+
+        entity.localised_name = item.localised_name
         data:extend({entity})
 
         data:extend({{
             type = 'recipe',
-            name = 'basic-' .. c,
+            name = item.name,
             energy_required = 2,
             enabled = false,
             ingredients = {{type='item', name=c, amount=1}},
-            results = {{type='item', name='basic-' .. c, amount=1}},
-            main_product = 'basic-' .. c,
-            localised_name = {'name.basic-' .. c}
+            results = {{type='item', name=item.name, amount=1}},
+            main_product = item.name,
+            localised_name = item.localised_name
         }})
     end
 
@@ -591,20 +594,19 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-HIDDEN'].value 
     entity.inventory_type = 'with_filters_and_bar'
     entity.inventory_size = 48
     entity.gui_mode = 'all'
-    entity.se_allow_in_space = true
     data:extend({entity})
 
     data:extend({{
         type = 'recipe',
-        name = 'linked-chest',
+        name = item.name,
         energy_required = 2,
         enabled = false,
         ingredients = {{type='item', name='steel-chest', amount=1}},
-        results = {{type='item', name='linked-chest', amount=1}},
-        main_product = 'linked-chest'
+        results = {{type='item', name=item.name, amount=1}},
+        main_product = item.name
     }})
 
-    table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe='linked-chest'})
+    table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe=item.name})
 
     data.raw.recipe['loader'].hidden = false
     data.raw.recipe['fast-loader'].hidden = false
@@ -618,6 +620,63 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-HIDDEN'].value 
         data.raw.recipe['turbo-loader'].hidden = false
         table.insert(data.raw.technology['turbo-transport-belt'].effects, {type='unlock-recipe', recipe='turbo-loader'})
     end
+end
+
+if settings.startup['PHI-CT'].value then
+    data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-CT-ROCKET-CAPACITY'].value * 100000
+    data.raw['utility-constants'].default.default_item_weight = settings.startup['PHI-CT-CARGO-WEIGHT'].value
+
+    --[[
+        data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = true
+        data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 20
+        data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 20
+        data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 20
+    ]]
+
+    if settings.startup['PHI-CT-UTILITY'].value then
+        for _, t in pairs({'arithmetic-combinator', 'decider-combinator', 'programmable-speaker', 'selector-combinator'}) do
+            data.raw[t][t].energy_source.usage_priority = 'primary-input'
+        end
+    end
+end
+
+if settings.startup['PHI-CT'].value and mods['space-age'] and (not settings.startup['PHI-CT-SPOIL'].value) then
+    local function spoil_handle(i)
+        i.spoil_ticks = nil
+        i.spoil_result = nil
+        i.spoil_to_trigger_result = nil
+    end
+
+    -- spoil_handle(data.raw['item']['iron-bacteria'])
+    -- spoil_handle(data.raw['item']['copper-bacteria'])
+    spoil_handle(data.raw['item']['nutrients'])
+    spoil_handle(data.raw['item']['captive-biter-spawner'])
+    spoil_handle(data.raw['item']['biter-egg'])
+    spoil_handle(data.raw['item']['pentapod-egg'])
+    spoil_handle(data.raw['capsule']['raw-fish'])
+    spoil_handle(data.raw['capsule']['yumako-mash'])
+    spoil_handle(data.raw['capsule']['yumako'])
+    spoil_handle(data.raw['capsule']['jelly'])
+    spoil_handle(data.raw['capsule']['jellynut'])
+    spoil_handle(data.raw['capsule']['bioflux'])
+    spoil_handle(data.raw['tool']['agricultural-science-pack'])
+
+    data:extend({{
+        type = 'recipe',
+        name = 'spoilage-from-nutrients',
+        energy_required = 1,
+        enabled = false,
+        ingredients = {{type='item', name='nutrients', amount=1}},
+        results = {{type='item', name='spoilage', amount=10}},
+        main_product = 'spoilage',
+        localised_name = data.raw['item']['spoilage'].localised_name
+    }})
+
+    table.insert(data.raw.technology['agriculture'].effects, {type='unlock-recipe', recipe='spoilage-from-nutrients'})
+end
+
+for _, v in pairs(data.raw['active-defense-equipment']) do
+    v.automatic = true
 end
 
 for _, v in pairs(items['item']) do
