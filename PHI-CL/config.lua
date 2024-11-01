@@ -2,16 +2,6 @@ local items = {
     ['general'] = {
         ['graphics_location'] = '__PHI-CL__/graphics/'
     },
-    ['handle'] = {
-        [2] = {
-            ['item'] = false,
-            ['equipment'] = false,
-        },
-        [3] = {
-            ['item'] = false,
-            ['equipment'] = false,
-        }
-    },
     ['research_modifier'] = {
         --[[
         ['electric-turret'] = {

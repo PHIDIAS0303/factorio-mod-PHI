@@ -729,9 +729,6 @@ for _, v in pairs(items['item']) do
         end
 
         main.EL(v)
-
-    else
-        items['handle'][v.stage]['item'] = true
     end
 end
 
@@ -745,8 +742,5 @@ for _, v in pairs(items['equipment']) do
             main.ER(v, j)
             main.ET(v, j)
         end
-
-    else
-        items['handle'][v.stage]['equipment'] = true
     end
 end
