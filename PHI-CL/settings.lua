@@ -203,5 +203,13 @@ data:extend({
   setting_type = 'startup',
   default_value = false,
   order = 'F07'
+}, {
+  type = 'int-setting',
+  name = 'PHI-CT-QUALITY',
+  setting_type = 'startup',
+  default_value = 10,
+  minimum_value = 1,
+  maximum_value = 50,
+  order = 'F08'
 }
 })
