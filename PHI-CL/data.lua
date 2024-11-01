@@ -619,10 +619,6 @@ if settings.startup['PHI-CT'].value then
         data.raw.recipe['fast-loader'].hidden = false
         data.raw.recipe['express-loader'].hidden = false
 
-        data.raw['loader']['loader'].max_belt_stack_size = 4
-        data.raw['loader']['fast-loader'].max_belt_stack_size = 4
-        data.raw['loader']['express-loader'].max_belt_stack_size = 4
-
         table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='loader'})
         table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
         table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
@@ -630,6 +626,12 @@ if settings.startup['PHI-CT'].value then
         if mods['space-age'] then
             data.raw.recipe['turbo-loader'].hidden = false
             table.insert(data.raw.technology['turbo-transport-belt'].effects, {type='unlock-recipe', recipe='turbo-loader'})
+
+            local s = data.raw['inserter']['stack-inserter'].max_belt_stack_size
+            data.raw['loader']['loader'].max_belt_stack_size = s
+            data.raw['loader']['fast-loader'].max_belt_stack_size = s
+            data.raw['loader']['express-loader'].max_belt_stack_size = s
+            data.raw['loader']['turbo-loader'].max_belt_stack_size = s
         end
     end
 
@@ -670,22 +672,16 @@ if settings.startup['PHI-CT'].value then
 
     if settings.startup['PHI-CT-SA'].value then
         if mods['space-age'] then
-            data:extend({{
-                type = 'recipe',
-                name = 'cliff-explosives-o',
-                energy_required = 1,
-                enabled = false,
-                ingredients = {
-                    {type='item', name='explosives', amount=10},
-                    {type='item', name='grenade', amount=1},
-                    {type='item', name='barrel', amount=1}
-                },
-                results = {{type='item', name='cliff-explosives', amount=1}},
-                main_product = 'cliff-explosives',
-                localised_name = data.raw['recipe']['cliff-explosives'].localised_name
-            }})
+            local recipe = table.deepcopy(data.raw['recipe']['cliff-explosives'])
+            recipe.name = 'cliff-explosives-o'
+            recipe.ingredients = {
+                {type='item', name='explosives', amount=10},
+                {type='item', name='grenade', amount=1},
+                {type='item', name='barrel', amount=1}
+            }
 
-            table.insert(data.raw.technology['cliff-explosives'].effects, {type='unlock-recipe', recipe='cliff-explosives-o'})
+            data:extend({recipe})
+            table.insert(data.raw.technology['cliff-explosives'].effects, {type='unlock-recipe', recipe=recipe.name})
         end
 
         if mods['elevated-rails'] then
@@ -693,6 +689,7 @@ if settings.startup['PHI-CT'].value then
                 {'automation-science-pack', 1},
                 {'logistic-science-pack', 1}
             }
+            data.raw.technology['elevated-rail'].unit.count = 200
         end
     end
 
