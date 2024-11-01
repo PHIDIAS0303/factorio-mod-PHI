@@ -4,6 +4,11 @@ local file_stage = 2
 
 if mods['space-age'] then
     if settings.startup['PHI-CT'].value then
+        if settings.startup['PHI-CT-HIDDEN'].value then
+            data.raw.recipe['turbo-loader'].hidden = false
+            table.insert(data.raw.technology['turbo-transport-belt'].effects, {type='unlock-recipe', recipe='turbo-loader'})
+        end
+
         if not settings.startup['PHI-CT-SPOIL'].value then
             local function spoil_handle(i)
                 i.spoil_ticks = nil
