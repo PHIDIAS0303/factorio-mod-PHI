@@ -375,6 +375,10 @@ if settings.startup['PHI-CT'].value then
     end
 
     if settings.startup['PHI-CT-UTILITY'].value then
+        for _, t in pairs({'arithmetic-combinator', 'decider-combinator', 'programmable-speaker', 'selector-combinator'}) do
+            data.raw[t][t].energy_source.usage_priority = 'primary-input'
+        end
+
         local item = table.deepcopy(data.raw['item']['steel-chest'])
         item.name = 'trash-chest'
         item.place_result = item.name
@@ -622,12 +626,6 @@ if settings.startup['PHI-CT'].value then
         table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='loader'})
         table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
         table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
-    end
-
-    if settings.startup['PHI-CT-UTILITY'].value then
-        for _, t in pairs({'arithmetic-combinator', 'decider-combinator', 'programmable-speaker', 'selector-combinator'}) do
-            data.raw[t][t].energy_source.usage_priority = 'primary-input'
-        end
     end
 
     data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-CT-ROCKET-CAPACITY'].value * 100000
