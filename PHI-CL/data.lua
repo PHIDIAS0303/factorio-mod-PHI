@@ -612,6 +612,10 @@ if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-HIDDEN'].value 
     data.raw.recipe['fast-loader'].hidden = false
     data.raw.recipe['express-loader'].hidden = false
 
+    data.raw['loader']['loader'].max_belt_stack_size = 4
+    data.raw['loader']['fast-loader'].max_belt_stack_size = 4
+    data.raw['loader']['express-loader'].max_belt_stack_size = 4
+
     table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='loader'})
     table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
     table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
@@ -669,7 +673,7 @@ if settings.startup['PHI-CT'].value and mods['space-age'] and (not settings.star
         ingredients = {{type='item', name='nutrients', amount=1}},
         results = {{type='item', name='spoilage', amount=10}},
         main_product = 'spoilage',
-        localised_name = data.raw['item']['spoilage'].localised_name
+        localised_name = {'phi-cl.combine', '', ''}
     }})
 
     table.insert(data.raw.technology['agriculture'].effects, {type='unlock-recipe', recipe='spoilage-from-nutrients'})
