@@ -77,18 +77,37 @@ function main.EEE(source, tier)
     end
 
     if (source.type == 'electric-turret') or (source.type == 'ammo-turret') or (source.type == 'fluid-turret') then
-        item.attack_parameters.damage_modifier = 2 ^ (tier - source.min + 1)
-        item.attack_parameters.range = item.attack_parameters.range + (2 * (tier - source.min + 1))
-        item.call_for_help_radius = item.call_for_help_radius + (2 * (tier - source.min + 1))
+        if item.attack_parameters then
+            item.attack_parameters.damage_modifier = 2 ^ (tier - source.min + 1)
+            item.attack_parameters.range = item.attack_parameters.range + (2 * (tier - source.min + 1))
+
+            if item.attack_parameters.cooldown then
+                item.attack_parameters.cooldown = item.attack_parameters.cooldown * ((24 - tier + source.min) / 25)
+            end
+        end
+
+        if item.call_for_help_radius then
+            item.call_for_help_radius = item.call_for_help_radius + (2 * (tier - source.min + 1))
+        end
 
         if source.type == 'electric-turret' then
-            if source.name == 'laser-turret' then
-                item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * 2
-            end
-
             item.glow_light_intensity = 1
-            item.attack_parameters.ammo_type.action.action_delivery.max_length = item.attack_parameters.ammo_type.action.action_delivery.max_length + (2 * (tier - source.min + 1))
-            item.attack_parameters.ammo_type.energy_consumption = tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+')
+
+            if item.attack_parameters then
+                if item.attack_parameters.damage_modifier and source.name == 'laser-turret' then
+                    item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * 2
+                end
+
+                if item.attack_parameters.ammo_type then
+                    if item.attack_parameters.ammo_type.action and item.attack_parameters.ammo_type.action.action_delivery and item.attack_parameters.ammo_type.action.action_delivery.max_length then
+                        item.attack_parameters.ammo_type.action.action_delivery.max_length = item.attack_parameters.ammo_type.action.action_delivery.max_length + (2 * (tier - source.min + 1))
+                    end
+
+                    if item.attack_parameters.ammo_type.energy_consumption then
+                        item.attack_parameters.ammo_type.energy_consumption = tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+')
+                    end
+                end
+            end
 
         elseif source.type == 'fluid-turret' then
             item.prepare_range = item.prepare_range + (2 * (tier - source.min + 1))
@@ -275,7 +294,7 @@ function main.EEQ(source, tier)
 
     if item.attack_parameters then
         if item.attack_parameters.cooldown then
-            item.attack_parameters.cooldown = math.floor(item.attack_parameters.cooldown * ((32 - (tier - source.min + 1)) / 32))
+            item.attack_parameters.cooldown = item.attack_parameters.cooldown * ((24 - tier + source.min) / 25)
         end
 
         if item.attack_parameters.damage_modifier then

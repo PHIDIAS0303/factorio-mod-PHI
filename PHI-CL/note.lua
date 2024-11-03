@@ -740,23 +740,6 @@ if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.s
     end
 end
 
-if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-TRAIN'].value then
-    local s = (7 + settings.startup['PHI-MI-TRAIN'].value) / 8
-
-    for _, t in pairs({data.raw['locomotive'], data.raw['cargo-wagon'], data.raw['fluid-wagon'], data.raw['artillery-wagon']}) do
-        for _, v in pairs(t) do
-            v.max_health = v.max_health * s
-            v.max_speed = v.max_speed * s
-            v.braking_force = v.braking_force * s
-
-            if v.max_power then
-                v.max_power = tostring(tonumber(string.match(v.max_power, '[%d%.]+')) * s) .. string.match(v.max_power, '%a+')
-                v.reversing_power_modifier = 1
-            end
-        end
-    end
-end
-
 ** DATA FINAL FIXES
 data.raw['utility-constants'].default.train_inactivity_wait_condition_default = 60
 

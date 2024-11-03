@@ -217,6 +217,23 @@ if settings.startup['PHI-MI'].value then
             end
         end
     end
+
+    if settings.startup['PHI-MI-TRAIN'].value then
+        local s = (7 + settings.startup['PHI-MI-TRAIN'].value) / 8
+
+        for _, t in pairs({data.raw['locomotive'], data.raw['cargo-wagon'], data.raw['fluid-wagon'], data.raw['artillery-wagon']}) do
+            for _, v in pairs(t) do
+                v.max_health = v.max_health * s
+                v.max_speed = v.max_speed * s
+                v.braking_force = v.braking_force * s
+
+                if v.max_power then
+                    v.max_power = tostring(tonumber(string.match(v.max_power, '[%d%.]+')) * s) .. string.match(v.max_power, '%a+')
+                    v.reversing_power_modifier = 1
+                end
+            end
+        end
+    end
 end
 
 if settings.startup['PHI-CT'].value then
@@ -619,12 +636,22 @@ if settings.startup['PHI-CT'].value then
         data.raw.recipe['fast-loader'].hidden = false
         data.raw.recipe['express-loader'].hidden = false
 
+        data.raw['loader']['loader'].filter_count = 2
+        data.raw['loader']['fast-loader'].filter_count = 2
+        data.raw['loader']['express-loader'].filter_count = 2
+
+        data.raw['loader']['loader'].per_lane_filters = true
+        data.raw['loader']['fast-loader'].per_lane_filters = true
+        data.raw['loader']['express-loader'].per_lane_filters = true
+
         table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='loader'})
         table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
         table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
 
         if mods['space-age'] then
             data.raw.recipe['turbo-loader'].hidden = false
+            data.raw['loader']['turbo-loader'].filter_count = 2
+            data.raw['loader']['turbo-loader'].per_lane_filters = true
             table.insert(data.raw.technology['turbo-transport-belt'].effects, {type='unlock-recipe', recipe='turbo-loader'})
 
             local s = data.raw['inserter']['stack-inserter'].max_belt_stack_size
@@ -672,6 +699,13 @@ if settings.startup['PHI-CT'].value then
 
     if settings.startup['PHI-CT-SA'].value then
         if mods['space-age'] then
+            data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
+            data.raw.technology['cliff-explosives'].unit.count = 200
+            data.raw.technology['cliff-explosives'].unit.ingredients = {
+                {'automation-science-pack', 1},
+                {'logistic-science-pack', 1}
+            }
+
             local recipe = table.deepcopy(data.raw['recipe']['cliff-explosives'])
             recipe.name = 'cliff-explosives-o'
             recipe.ingredients = {
@@ -686,11 +720,12 @@ if settings.startup['PHI-CT'].value then
         end
 
         if mods['elevated-rails'] then
+            data.raw.technology['elevated-rail'].prerequisites = {'concrete'}
+            data.raw.technology['elevated-rail'].unit.count = 200
             data.raw.technology['elevated-rail'].unit.ingredients = {
                 {'automation-science-pack', 1},
                 {'logistic-science-pack', 1}
             }
-            data.raw.technology['elevated-rail'].unit.count = 200
         end
 
         if mods['quality'] then
