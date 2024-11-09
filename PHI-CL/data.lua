@@ -816,10 +816,10 @@ if settings.startup['PHI-CT'].value then
             data.raw.technology['epic-quality'] = nil
             data.raw.technology['legendary-quality'] = nil
 
-            data.raw.quality['uncommon'] = nil
-            data.raw.quality['rare'] = nil
-            data.raw.quality['epic'] = nil
-            data.raw.quality['legendary'] = nil
+            data.raw.quality.uncommon = nil
+            data.raw.quality.rare = nil
+            data.raw.quality.epic = nil
+            data.raw.quality.legendary = nil
 
             data.raw['tips-and-tricks-item']['quality'] = nil
             data.raw['tips-and-tricks-item']['quality-modules'] = nil
