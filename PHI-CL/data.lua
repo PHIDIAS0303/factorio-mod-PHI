@@ -27,12 +27,12 @@ if settings.startup['PHI-EN'].value then
             prerequisites = prereq,
             effects = {},
             unit = {
-                count = math.floor(100 * (i ^ 1.6)),
+                count = math.floor(75 * (i ^ 2)),
                 ingredients = {
                     {'automation-science-pack', 1},
                     {'logistic-science-pack', 1}
                 },
-                time = 60
+                time = 30
             },
             icons = {
                 {
@@ -171,6 +171,16 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
 end
 
 if settings.startup['PHI-MI'].value then
+    for _, v in pairs(data.raw['active-defense-equipment']) do
+        v.automatic = true
+    end
+    
+    data.raw['mining-drill']['electric-mining-drill'].filter_count = 5
+    
+    if mods['space-age'] then
+        data.raw['mining-drill']['big-mining-drill'].filter_count = 5
+    end
+
     if settings.startup['PHI-MI-EFFCY'].value then
         data.raw['module']['efficiency-module'].effect = {consumption=-0.4, pollution=-0.4}
         data.raw['module']['efficiency-module-2'].effect = {consumption=-0.8, pollution=-0.8}
@@ -706,7 +716,7 @@ if settings.startup['PHI-CT'].value then
                 {'logistic-science-pack', 1}
             }
 
-            local recipe = table.deepcopy(data.raw['recipe']['cliff-explosives'])
+            local recipe = table.deepcopy(data.raw.recipe['cliff-explosives'])
             recipe.name = 'cliff-explosives-o'
             recipe.ingredients = {
                 {type='item', name='explosives', amount=10},
@@ -717,6 +727,58 @@ if settings.startup['PHI-CT'].value then
 
             data:extend({recipe})
             table.insert(data.raw.technology['cliff-explosives'].effects, {type='unlock-recipe', recipe=recipe.name})
+
+            data.raw.technology['rail-support-foundations'].prerequisites = {'elevated-rail'}
+            data.raw.technology['rail-support-foundations'].unit.count = 600
+            data.raw.technology['rail-support-foundations'].unit.ingredients = {
+                {'automation-science-pack', 1},
+                {'logistic-science-pack', 1},
+                {'chemical-science-pack', 1},
+                {'production-science-pack', 1},
+                {'utility-science-pack', 1}
+            }
+
+            data.raw.technology['foundation'].prerequisites = {'elevated-rail', 'rail-support-foundations'}
+            data.raw.technology['foundation'].unit.count_formula = '1000'
+            data.raw.technology['foundation'].unit.ingredients = {
+                {'automation-science-pack', 1},
+                {'logistic-science-pack', 1},
+                {'chemical-science-pack', 1},
+                {'production-science-pack', 1},
+                {'utility-science-pack', 1}
+            }
+
+            recipe = table.deepcopy(data.raw.recipe['foundation'])
+            recipe.name = 'foundation-o'
+            recipe.ingredients = {
+                {type='item', name='stone', amount=40},
+                {type='item', name='refined-concrete', amount=20},
+                {type='item', name='steel-plate', amount=20}
+            }
+            recipe.results = {
+                {type='item', name='foundation', amount=10}
+            }
+            recipe.localised_name = {'phi-cl.combine', '', ''}
+
+            data:extend({recipe})
+            table.insert(data.raw.technology['foundation'].effects, {type='unlock-recipe', recipe=recipe.name})
+
+            data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier = 2
+            data.raw['space-platform-hub']['space-platform-hub'].inventory_size = 119
+            data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus = 40
+
+            -- data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 20
+            data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 60
+            data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 60
+
+            for _, v in pairs(data.raw.recipe) do
+                if v.maximum_productivity then
+                    v.maximum_productivity = nil
+                end
+            end
+
+            data.raw.roboport.roboport.charging_station_count_affected_by_quality = true
+            data.raw['roboport-equipment']['personal-roboport-equipment'].charging_station_count_affected_by_quality = true
         end
 
         if mods['elevated-rails'] then
@@ -727,29 +789,63 @@ if settings.startup['PHI-CT'].value then
                 {'logistic-science-pack', 1}
             }
         end
+    end
 
+    if settings.startup['PHI-CT-QUALITY'].value then
         if mods['quality'] then
-            for _, v in pairs(data.raw['module']) do
+            for _, v in pairs(data.raw.module) do
                 if v.category and v.category == 'quality' then
                     v.effect.quality = v.effect.quality * settings.startup['PHI-CT-QUALITY'].value / 10
+
+                elseif v.category and v.category == 'speed' then
+                    v.effect.quality = nil
                 end
             end
         end
     end
 
+    if settings.startup['PHI-CT-NO-QUALITY'].value then
+        if mods['quality'] then
+            for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
+                data.raw.technology[v] = nil
+                data.raw.module[v] = nil
+                data.raw.recipe[v] = nil
+                data.raw.recipe[v .. '-recycling'] = nil
+            end
+
+            data.raw.technology['epic-quality'] = nil
+            data.raw.technology['legendary-quality'] = nil
+
+            data.raw.quality['uncommon'] = nil
+            data.raw.quality['rare'] = nil
+            data.raw.quality['epic'] = nil
+            data.raw.quality['legendary'] = nil
+
+            data.raw['tips-and-tricks-item']['quality'] = nil
+            data.raw['tips-and-tricks-item']['quality-modules'] = nil
+            data.raw['tips-and-tricks-item']['quality-factoriopedia'] = nil
+            data.raw['tips-and-tricks-item']['quality-probabilities'] = nil
+
+            data.raw['produce-achievement']['crafting-with-quality'] = nil
+            data.raw['module-transfer-achievement']['make-it-better'] = nil
+            data.raw['produce-achievement']['my-modules-are-legendary'] = nil
+            data.raw['equip-armor-achievement']['look-at-my-shiny-rare-armor'] = nil
+            data.raw['use-item-achievement']['todays-fish-is-trout-a-la-creme'] = nil
+            data.raw['place-equipment-achievement']['no-room-for-more'] = nil
+
+            data.raw.quality.normal.level = 5
+            data.raw.quality.normal.next = nil
+            data.raw.quality.normal.next_probability = nil
+            data.raw.quality.normal.hidden = true
+            data.raw.quality.normal.hidden_in_factoriopedia = true
+            data.raw.quality.normal.beacon_power_usage_multiplier = 1 / 6
+            data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1 / 6
+            data.raw.quality.normal.science_pack_drain_multiplier = 19 / 20
+        end
+    end
+
     data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-CT-ROCKET-CAPACITY'].value * 100000
     data.raw['utility-constants'].default.default_item_weight = settings.startup['PHI-CT-CARGO-WEIGHT'].value
-
-    --[[
-        data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = true
-        data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 20
-        data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 20
-        data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 20
-    ]]
-end
-
-for _, v in pairs(data.raw['active-defense-equipment']) do
-    v.automatic = true
 end
 
 for _, v in pairs(items['item']) do

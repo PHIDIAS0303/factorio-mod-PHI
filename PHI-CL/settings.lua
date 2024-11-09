@@ -209,7 +209,13 @@ data:extend({
   setting_type = 'startup',
   default_value = 10,
   minimum_value = 1,
-  maximum_value = 50,
+  maximum_value = 100,
   order = 'F08'
+}, {
+  type = 'bool-setting',
+  name = 'PHI-CT-NO-QUALITY',
+  setting_type = 'startup',
+  default_value = false,
+  order = 'F09'
 }
 })
