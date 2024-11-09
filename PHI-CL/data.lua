@@ -777,6 +777,8 @@ if settings.startup['PHI-CT'].value then
                 end
             end
 
+            data.raw.recipe['atomic-bomb'].ingredients[3] = {type='item', name='uranium-235', amount=30}
+
             data.raw.roboport.roboport.charging_station_count_affected_by_quality = true
             data.raw['roboport-equipment']['personal-roboport-equipment'].charging_station_count_affected_by_quality = true
         end
@@ -834,6 +836,8 @@ if settings.startup['PHI-CT'].value then
             data.raw['place-equipment-achievement']['no-room-for-more'] = nil
 
             data.raw.quality.normal.level = 5
+            data.raw.quality.normal.color = {178, 104, 0}
+            data.raw.quality.normal.icon = '__quality__/graphics/icons/quality-legendary.png'
             data.raw.quality.normal.next = nil
             data.raw.quality.normal.next_probability = nil
             data.raw.quality.normal.hidden = true
