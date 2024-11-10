@@ -153,69 +153,75 @@ data:extend({
   order = 'E06'
 }, {
   type = 'bool-setting',
-  name = 'PHI-CT',
+  name = 'PHI-SA',
   setting_type = 'startup',
   default_value = true,
   order = 'F00'
+}, {
+  type = 'int-setting',
+  name = 'PHI-SA-ROCKET-CAPACITY',
+  setting_type = 'startup',
+  default_value = 10,
+  minimum_value = 1,
+  maximum_value = 10000,
+  order = 'F01'
+}, {
+  type = 'int-setting',
+  name = 'PHI-SA-CARGO-WEIGHT',
+  setting_type = 'startup',
+  default_value = 100,
+  minimum_value = 1,
+  maximum_value = 1000,
+  order = 'F02'
+}, {
+  type = 'bool-setting',
+  name = 'PHI-SA-SPOIL',
+  setting_type = 'startup',
+  default_value = false,
+  order = 'F03'
+}, {
+  type = 'bool-setting',
+  name = 'PHI-SA-GENERIC',
+  setting_type = 'startup',
+  default_value = true,
+  order = 'F04'
+}, {
+  type = 'int-setting',
+  name = 'PHI-SA-QUALITY',
+  setting_type = 'startup',
+  default_value = 10,
+  minimum_value = 1,
+  maximum_value = 100,
+  order = 'F05'
+}, {
+  type = 'bool-setting',
+  name = 'PHI-SA-NO-QUALITY',
+  setting_type = 'startup',
+  default_value = false,
+  order = 'F06'
+}, {
+  type = 'bool-setting',
+  name = 'PHI-CT',
+  setting_type = 'startup',
+  default_value = true,
+  order = 'G00'
 },  {
   type = 'bool-setting',
   name = 'PHI-CT-TOOL',
   setting_type = 'startup',
   default_value = false,
-  order = 'F01'
+  order = 'G01'
 }, {
   type = 'bool-setting',
   name = 'PHI-CT-UTILITY',
   setting_type = 'startup',
   default_value = true,
-  order = 'F02'
+  order = 'G02'
 }, {
   type = 'bool-setting',
   name = 'PHI-CT-HIDDEN',
   setting_type = 'startup',
   default_value = false,
-  order = 'F03'
-}, {
-  type = 'int-setting',
-  name = 'PHI-CT-ROCKET-CAPACITY',
-  setting_type = 'startup',
-  default_value = 10,
-  minimum_value = 1,
-  maximum_value = 10000,
-  order = 'F04'
-}, {
-  type = 'int-setting',
-  name = 'PHI-CT-CARGO-WEIGHT',
-  setting_type = 'startup',
-  default_value = 100,
-  minimum_value = 1,
-  maximum_value = 1000,
-  order = 'F05'
-}, {
-  type = 'bool-setting',
-  name = 'PHI-CT-SPOIL',
-  setting_type = 'startup',
-  default_value = true,
-  order = 'F06'
-}, {
-  type = 'bool-setting',
-  name = 'PHI-CT-SA',
-  setting_type = 'startup',
-  default_value = false,
-  order = 'F07'
-}, {
-  type = 'int-setting',
-  name = 'PHI-CT-QUALITY',
-  setting_type = 'startup',
-  default_value = 10,
-  minimum_value = 1,
-  maximum_value = 100,
-  order = 'F08'
-}, {
-  type = 'bool-setting',
-  name = 'PHI-CT-NO-QUALITY',
-  setting_type = 'startup',
-  default_value = false,
-  order = 'F09'
+  order = 'G03'
 }
 })
