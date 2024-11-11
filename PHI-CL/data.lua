@@ -266,7 +266,7 @@ if settings.startup['PHI-SA'].value then
         spoil_handle(data.raw['capsule']['jelly'])
         spoil_handle(data.raw['capsule']['jellynut'])
         spoil_handle(data.raw['capsule']['bioflux'])
-        spoil_handle(data.raw['tool']['agricultural-science-pack'])
+        spoil_handle(data.raw.tool['agricultural-science-pack'])
 
         data:extend({{
             type = 'recipe',
@@ -434,13 +434,29 @@ if settings.startup['PHI-SA'].value then
         end
 
         if mods['space-age'] then
-            local planet_map_gen = require('__base__/prototypes/planet/planet-map-gen')
+            --[[
+            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['vulcanus_coal'] = nil
+            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['sulfuric_acid_geyser'] = nil
+            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['tungsten_ore'] = nil
+            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['calcite'] = nil
+            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['vulcanus_volcanism'] = nil
+            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['gleba_stone'] = nil
+            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['gleba_plants'] = nil
+            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['gleba_enemy_base'] = nil
+            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['gleba_water'] = nil
+            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['gleba_cliff'] = nil
+            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['scrap'] = nil
+            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['fulgora_islands'] = nil
+            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['fulgora_cliff'] = nil
+            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['lithium_brine'] = nil
+            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['fluorine_vent'] = nil
+            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['aquilo_crude_oil'] = nil
+            ]]
 
             for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
                 -- data.raw.planet[v] = nil
                 data.raw.planet[v].hidden = true
                 data.raw.planet[v].hidden_in_factoriopedia = true
-                planet_map_gen[v] = nil
             end
 
             for k, v in pairs(data.raw['space-location']) do
@@ -563,7 +579,9 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['refined-flammables-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
             data.raw.technology['refined-flammables-7'].prerequisites = {'refined-flammables-6'}
             data.raw.technology['refined-flammables-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['worker-robots-speed-7'].prerequisites = {'worker-robots-speed-6'}
+            data.raw.technology['worker-robots-speed-6'].prerequisites = {'worker-robots-speed-5'}
+            data.raw.technology['worker-robots-speed-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+            data.raw.technology['worker-robots-speed-7'].prerequisites = {'worker-robots-speed-6', 'space-science-pack'}
             data.raw.technology['worker-robots-speed-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
             data.raw.technology['rocket-silo'].effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}}
             data.raw.technology['space-science-pack'].research_trigger = nil
@@ -573,7 +591,7 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['atomic-bomb'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
             data.raw.technology['energy-shield-mk2-equipment'].prerequisites = {'energy-shield-equipment', 'military-4', 'power-armor'}
             data.raw.technology['personal-roboport-mk2-equipment'].prerequisites = {'personal-roboport-equipment'}
-            data.raw.technology['coal-liquefaction'].prerequisites = nil
+            data.raw.technology['coal-liquefaction'].prerequisites = {'advanced-oil-processing'}
             data.raw.technology['coal-liquefaction'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
             data.raw.technology['speed-module-2'].prerequisites = {'speed-module'}
             data.raw.technology['speed-module-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
@@ -613,7 +631,7 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['big-mining-drill'].unit = {count = 800, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
             data.raw.technology['big-mining-drill'].research_trigger = nil
             data.raw.technology['turbo-transport-belt'].prerequisites = {'logistics-3'}
-            data.raw.technology['railgun'].prerequisites = nil
+            data.raw.technology['railgun'].prerequisites = {'military-4'}
             data.raw.technology['railgun'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
             data.raw.technology['tesla-weapons'].prerequisites = {'military-4'}
             data.raw.technology['tesla-weapons'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
@@ -621,25 +639,25 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['mech-armor'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
             data.raw.technology['stack-inserter'].prerequisites = {'bulk-inserter'}
             data.raw.technology['stack-inserter'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['health'].prerequisites = nil
+            data.raw.technology['health'].prerequisites = {'utility-science-pack'}
             data.raw.technology['health'].unit.ingredients = {{'military-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['research-productivity'].prerequisites = nil
+            data.raw.technology['research-productivity'].prerequisites = {'space-science-pack'}
             data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['processing-unit-productivity'].prerequisites = nil
+            data.raw.technology['processing-unit-productivity'].prerequisites = {'processing-unit'}
             data.raw.technology['processing-unit-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
-            data.raw.technology['steel-plate-productivity'].prerequisites = nil
+            data.raw.technology['steel-plate-productivity'].prerequisites = {'steel-processing'}
             data.raw.technology['steel-plate-productivity'].effects = {{type='change-recipe-productivity', recipe='steel-plate', change=0.1}}
             data.raw.technology['steel-plate-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
-            data.raw.technology['low-density-structure-productivity'].prerequisites = nil
+            data.raw.technology['low-density-structure-productivity'].prerequisites = {'low-density-structure'}
             data.raw.technology['low-density-structure-productivity'].effects = {{type='change-recipe-productivity', recipe='low-density-structure', change=0.1}}
             data.raw.technology['low-density-structure-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
-            data.raw.technology['plastic-bar-productivity'].prerequisites = nil
+            data.raw.technology['plastic-bar-productivity'].prerequisites = {'plastics'}
             data.raw.technology['plastic-bar-productivity'].effects = {{type='change-recipe-productivity', recipe='plastic-bar', change=0.1}}
             data.raw.technology['plastic-bar-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
-            data.raw.technology['rocket-fuel-productivity'].prerequisites = nil
+            data.raw.technology['rocket-fuel-productivity'].prerequisites = {'rocket-fuel'}
             data.raw.technology['rocket-fuel-productivity'].effects = {{type='change-recipe-productivity', recipe='rocket-fuel', change=0.1}}
             data.raw.technology['rocket-fuel-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
-            data.raw.technology['rocket-part-productivity'].prerequisites = nil
+            data.raw.technology['rocket-part-productivity'].prerequisites = {'rocket-silo'}
             data.raw.technology['rocket-part-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
 
             data.raw.recipe['big-mining-drill'].category = nil
@@ -670,13 +688,70 @@ if settings.startup['PHI-SA'].value then
             data.raw.recipe['artillery-shell'].ingredients = {{type='item', name='explosive-cannon-shell', amount=4}, {type='item', name='radar', amount=1}, {type='item', name='explosives', amount=8}}
             data.raw.recipe['cliff-explosives'].ingredients = {{type='item', name='explosives', amount=10}, {type='item', name='grenade', amount=1}, {type='item', name='barrel', amount=1}}
             data.raw.recipe['cliff-explosives-o'] = nil
+            data.raw.recipe['tesla-ammo'].category = 'crafting-with-fluid'
             data.raw.recipe['tesla-ammo'].ingredients = {{type='item', name='battery', amount=1}, {type='item', name='plastic-bar', amount=1}, {type='fluid', name='sulfuric-acid', amount=10}}
+            data.raw.recipe['teslagun'].category = 'crafting-with-fluid'
             data.raw.recipe['teslagun'].ingredients = {{type='item', name='steel-plate', amount=10}, {type='item', name='processing-unit', amount=10}, {type='item', name='plastic-bar', amount=1}, {type='fluid', name='sulfuric-acid', amount=100}}
+            data.raw.recipe['tesla-turret'].category = 'crafting-with-fluid'
             data.raw.recipe['tesla-turret'].ingredients = {{type='item', name='teslagun', amount=1}, {type='item', name='steel-plate', amount=10}, {type='item', name='processing-unit', amount=10}, {type='fluid', name='sulfuric-acid', amount=500}}
             data.raw.recipe['mech-armor'].ingredients = {{type='item', name='power-armor-mk2', amount=1}, {type='item', name='processing-unit', amount=100}, {type='item', name='steel-plate', amount=200}, {type='item', name='battery', amount=50}}
+            data.raw.recipe['railgun'].category = 'crafting-with-fluid'
             data.raw.recipe['railgun'].ingredients = {{type='item', name='steel-plate', amount=10}, {type='item', name='processing-unit', amount=20}, {type='item', name='battery', amount=10}, {type='fluid', name='sulfuric-acid', amount=10}}
+            data.raw.recipe['railgun-turret'].category = 'crafting-with-fluid'
             data.raw.recipe['railgun-turret'].ingredients = {{type='item', name='steel-plate', amount=30}, {type='item', name='processing-unit', amount=50}, {type='item', name='battery', amount=50}, {type='fluid', name='sulfuric-acid', amount=100}}
+            data.raw.recipe['rocket-turret'].category = 'crafting'
             data.raw.recipe['rocket-turret'].ingredients = {{type='item', name='rocket-launcher', amount=4}, {type='item', name='steel-plate', amount=40}, {type='item', name='processing-unit', amount=4}, {type='item', name='iron-gear-wheel', amount=20}}
+
+            data.raw['assembling-machine']['biochamber'].hidden = true
+            data.raw['assembling-machine']['biochamber'].hidden_in_factoriopedia = true
+            data.raw['assembling-machine']['captive-biter-spawner'].hidden = true
+            data.raw['assembling-machine']['captive-biter-spawner'].hidden_in_factoriopedia = true
+            data.raw['assembling-machine']['crusher'].hidden = true
+            data.raw['assembling-machine']['crusher'].hidden_in_factoriopedia = true
+            data.raw['assembling-machine']['cryogenic-plant'].hidden = true
+            data.raw['assembling-machine']['cryogenic-plant'].hidden_in_factoriopedia = true
+            data.raw['assembling-machine']['electromagnetic-plant'].hidden = true
+            data.raw['assembling-machine']['electromagnetic-plant'].hidden_in_factoriopedia = true
+            data.raw['assembling-machine']['foundry'].hidden = true
+            data.raw['assembling-machine']['foundry'].hidden_in_factoriopedia = true
+
+            data.raw.tool['agricultural-science-pack'].hidden = true
+            data.raw.tool['agricultural-science-pack'].hidden_in_factoriopedia = true
+            data.raw.tool['cryogenic-science-pack'].hidden = true
+            data.raw.tool['cryogenic-science-pack'].hidden_in_factoriopedia = true
+            data.raw.tool['electromagnetic-science-pack'].hidden = true
+            data.raw.tool['electromagnetic-science-pack'].hidden_in_factoriopedia = true
+            data.raw.tool['metallurgic-science-pack'].hidden = true
+            data.raw.tool['metallurgic-science-pack'].hidden_in_factoriopedia = true
+            data.raw.tool['promethium-science-pack'].hidden = true
+            data.raw.tool['promethium-science-pack'].hidden_in_factoriopedia = true
+
+            data.raw.item['carbon'].hidden = true
+            data.raw.item['carbon'].hidden_in_factoriopedia = true
+            data.raw.capsule['bioflux'].hidden = true
+            data.raw.capsule['bioflux'].hidden_in_factoriopedia = true
+            data.raw.capsule['jelly'].hidden = true
+            data.raw.capsule['jelly'].hidden_in_factoriopedia = true
+            data.raw.capsule['jellynut'].hidden = true
+            data.raw.capsule['jellynut'].hidden_in_factoriopedia = true
+            data.raw.capsule['yumako'].hidden = true
+            data.raw.capsule['yumako'].hidden_in_factoriopedia = true
+            data.raw.capsule['yumako-mash'].hidden = true
+            data.raw.capsule['yumako-mash'].hidden_in_factoriopedia = true
+            data.raw.item['biter-egg'].hidden = true
+            data.raw.item['biter-egg'].hidden_in_factoriopedia = true
+            data.raw.item['jellynut-seed'].hidden = true
+            data.raw.item['jellynut-seed'].hidden_in_factoriopedia = true
+            data.raw.item['nutrients'].hidden = true
+            data.raw.item['nutrients'].hidden_in_factoriopedia = true
+            data.raw.item['pentapod-egg'].hidden = true
+            data.raw.item['pentapod-egg'].hidden_in_factoriopedia = true
+            data.raw.item['spoilage'].hidden = true
+            data.raw.item['spoilage'].hidden_in_factoriopedia = true
+            data.raw.item['tree-seed'].hidden = true
+            data.raw.item['tree-seed'].hidden_in_factoriopedia = true
+            data.raw.item['yumako-seed'].hidden = true
+            data.raw.item['yumako-seed'].hidden_in_factoriopedia = true
 
             data.raw['tips-and-tricks-item']['fulgora-briefing'] = nil
             data.raw['tips-and-tricks-item']['lightning-mechanics'] = nil
