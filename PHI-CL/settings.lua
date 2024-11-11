@@ -201,6 +201,12 @@ data:extend({
   order = 'F06'
 }, {
   type = 'bool-setting',
+  name = 'PHI-SA-VANILLA',
+  setting_type = 'startup',
+  default_value = false,
+  order = 'F07'
+}, {
+  type = 'bool-setting',
   name = 'PHI-CT',
   setting_type = 'startup',
   default_value = true,
