@@ -873,10 +873,13 @@ if settings.startup['PHI-SA'].value then
             data.raw['simple-entity']['lithium-iceberg-medium'] = nil
             data.raw['simple-entity']['lithium-iceberg-big'] = nil
             data.raw['simple-entity']['lithium-iceberg-huge'] = nil
-
-            data.raw.resource['tungsten-ore'] = nil
-            data.raw.resource['calcite'] = nil
-            data.raw.resource['scrap'] = nil
+            
+            data.raw.resource['tungsten-ore'].hidden = true
+            data.raw.resource['tungsten-ore'].hidden_in_factoriopedia = true
+            data.raw.resource['calcite'].hidden = true
+            data.raw.resource['calcite'].hidden_in_factoriopedia = true
+            data.raw.resource['scrap'].hidden = true
+            data.raw.resource['scrap'].hidden_in_factoriopedia = true
             ]]
 
             data.raw['unit-spawner']['biter-spawner'].captured_spawner_entity = nil
