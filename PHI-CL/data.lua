@@ -427,45 +427,27 @@ if settings.startup['PHI-SA'].value then
     end
 
     if settings.startup['PHI-SA-VANILLA'].value then
-        for _, v in pairs(items['item']) do
-            if v.enabled and v.mod and v.mod == 'space-age' then
-                v.enabled = false
-            end
-        end
-
         if mods['space-age'] then
-            --[[
-            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['vulcanus_coal'] = nil
-            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['sulfuric_acid_geyser'] = nil
-            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['tungsten_ore'] = nil
-            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['calcite'] = nil
-            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['vulcanus_volcanism'] = nil
-            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['gleba_stone'] = nil
-            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['gleba_plants'] = nil
-            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['gleba_enemy_base'] = nil
-            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['gleba_water'] = nil
-            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['gleba_cliff'] = nil
-            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['scrap'] = nil
-            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['fulgora_islands'] = nil
-            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['fulgora_cliff'] = nil
-            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['lithium_brine'] = nil
-            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['fluorine_vent'] = nil
-            data.raw['map-gen-presets']['default']['default']['basic_settings']['autoplace_controls']['aquilo_crude_oil'] = nil
-            ]]
-
             for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
-                -- data.raw.planet[v] = nil
+                --[[
+                for _, v2 in pairs(data.raw.planet[v].map_gen_settings.autoplace_controls) do
+                    v2.frequency = 0
+                    v2.size = 0
+                    v2.richness = 0
+                end
+                ]]
+
                 data.raw.planet[v].hidden = true
                 data.raw.planet[v].hidden_in_factoriopedia = true
             end
 
-            for k, v in pairs(data.raw['space-location']) do
+            for _, v in pairs(data.raw['space-location']) do
                 -- data.raw['space-location'][k] = nil
                 v.hidden = true
                 v.hidden_in_factoriopedia = true
             end
 
-            for k, v in pairs(data.raw['space-connection']) do
+            for _, v in pairs(data.raw['space-connection']) do
                 -- data.raw['space-connection'][k] = nil
                 v.hidden = true
                 v.hidden_in_factoriopedia = true
@@ -659,6 +641,13 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['rocket-fuel-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
             data.raw.technology['rocket-part-productivity'].prerequisites = {'rocket-silo'}
             data.raw.technology['rocket-part-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
+            data.raw.technology['artillery'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+            data.raw.technology['turbo-transport-belt'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+            data.raw.technology['personal-roboport-mk2-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+            data.raw.technology['energy-shield-mk2-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+            data.raw.technology['transport-belt-capacity-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+            data.raw.technology['transport-belt-capacity-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+            data.raw.technology['spidertron'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
 
             data.raw.recipe['big-mining-drill'].category = nil
             data.raw.recipe['big-mining-drill'].surface_conditions = nil
@@ -794,6 +783,14 @@ if settings.startup['PHI-SA'].value then
             data.raw['kill-achievement']['size-doesnt-matter'] = nil
             data.raw['complete-objective-achievement']['work-around-the-clock'] = nil
             data.raw['complete-objective-achievement']['express-delivery'] = nil
+
+            for _, v in pairs(items['item']) do
+                if v.enabled and v.mod and v.mod == 'space-age' then
+                    if not data.raw.technology[v.tech] then
+                        v.enabled = false
+                    end
+                end
+            end
         end
 
         if mods['quality'] then

@@ -526,11 +526,11 @@ end
 function main.EEEC(source, tier)
     local item_name = source.name .. '-' .. tier
 
-    if not data.raw[source.type][source.ref_name] then
+    if not (data.raw[source.type][source.ref_name] and data.raw[source.type][item_name]) then
         return
     end
 
-    if data.raw[source.type][source.ref_name].crafting_categories then
+    if data.raw[source.type][source.ref_name].crafting_categories and data.raw[source.type][item_name].crafting_categories then
         data.raw[source.type][item_name].crafting_categories = {}
 
         for i=1, #data.raw[source.type][source.ref_name].crafting_categories do
@@ -538,7 +538,7 @@ function main.EEEC(source, tier)
         end
     end
 
-    if data.raw[source.type][source.ref_name].resource_categories then
+    if data.raw[source.type][source.ref_name].resource_categories and data.raw[source.type][item_name].resource_categories then
         data.raw[source.type][item_name].resource_categories = {}
 
         for i=1, #data.raw[source.type][source.ref_name].resource_categories do
