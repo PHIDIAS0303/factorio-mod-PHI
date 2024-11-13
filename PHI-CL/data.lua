@@ -544,7 +544,7 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['asteroid-productivity'] = nil
             data.raw.technology['scrap-recycling-productivity'] = nil
             data.raw.technology['recycling'] = nil
-            data.raw.technology['cliff-explosives'].effects = {{type='unlock-recipe', recipe='cliff-explosives'}}
+            data.raw.technology['cliff-explosives'].effects = {{type='unlock-recipe', recipe='cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
             data.raw.technology['logistic-system'].prerequisites = {'logistic-robotics'}
             data.raw.technology['logistic-system'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
             data.raw.technology['stronger-explosives-5'].prerequisites = {'stronger-explosives-4'}
