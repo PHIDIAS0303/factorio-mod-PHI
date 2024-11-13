@@ -950,6 +950,51 @@ if settings.startup['PHI-SA'].value then
             data.raw.item['fusion-reactor'] = nil
             data.raw.item['fusion-generator'] = nil
 
+            data.raw.item['metallic-asteroid-chunk'].hidden = true
+            data.raw.item['metallic-asteroid-chunk'].hidden_in_factoriopedia = true
+            data.raw.item['carbonic-asteroid-chunk'].hidden = true
+            data.raw.item['carbonic-asteroid-chunk'].hidden_in_factoriopedia = true
+            data.raw.item['oxide-asteroid-chunk'].hidden = true
+            data.raw.item['oxide-asteroid-chunk'].hidden_in_factoriopedia = true
+            data.raw.item['promethium-asteroid-chunk'].hidden = true
+            data.raw.item['promethium-asteroid-chunk'].hidden_in_factoriopedia = true
+            data.raw.item['calcite'].hidden = true
+            data.raw.item['calcite'].hidden_in_factoriopedia = true
+            data.raw.item['tungsten-ore'].hidden = true
+            data.raw.item['tungsten-ore'].hidden_in_factoriopedia = true
+            data.raw.item['tungsten-plate'].hidden = true
+            data.raw.item['tungsten-plate'].hidden_in_factoriopedia = true
+            data.raw.item['tungsten-carbide'].hidden = true
+            data.raw.item['tungsten-carbide'].hidden_in_factoriopedia = true
+            data.raw.item['lithium'].hidden = true
+            data.raw.item['lithium'].hidden_in_factoriopedia = true
+            data.raw.item['lithium-plate'].hidden = true
+            data.raw.item['lithium-plate'].hidden_in_factoriopedia = true
+            data.raw.item['quantum-processor'].hidden = true
+            data.raw.item['quantum-processor'].hidden_in_factoriopedia = true
+            data.raw.item['fusion-power-cell'].hidden = true
+            data.raw.item['fusion-power-cell'].hidden = true
+            data.raw.item['holmium-ore'].hidden = true
+            data.raw.item['holmium-ore'].hidden_in_factoriopedia = true
+            data.raw.item['holmium-plate'].hidden = true
+            data.raw.item['holmium-plate'].hidden_in_factoriopedia = true
+            data.raw.item['scrap'].hidden = true
+            data.raw.item['scrap'].hidden_in_factoriopedia = true
+            data.raw.item['lightning-rod'].hidden = true
+            data.raw.item['lightning-rod'].hidden_in_factoriopedia = true
+            data.raw.item['lightning-collector'].hidden = true
+            data.raw.item['lightning-collector'].hidden_in_factoriopedia = true
+            data.raw.item['superconductor'].hidden = true
+            data.raw.item['superconductor'].hidden_in_factoriopedia = true
+            data.raw.item['supercapacitor'].hidden = true
+            data.raw.item['supercapacitor'].hidden_in_factoriopedia = true
+            data.raw.item['carbon-fiber'].hidden = true
+            data.raw.item['carbon-fiber'].hidden_in_factoriopedia = true
+            data.raw.item['foundation'].hidden = true
+            data.raw.item['foundation'].hidden_in_factoriopedia = true
+            data.raw.item['space-platform-foundation'].hidden = true
+            data.raw.item['space-platform-foundation'].hidden_in_factoriopedia = true
+
             --[[
             data.raw.item['metallic-asteroid-chunk'] = nil
             data.raw.item['carbonic-asteroid-chunk'] = nil
@@ -987,8 +1032,6 @@ if settings.startup['PHI-SA'].value then
             data.raw.item['tesla-turret'].default_import_location = nil
             data.raw.item['stack-inserter'].default_import_location = nil
             data.raw.item['fusion-reactor-equipment'] = nil
-            -- data.raw.item['foundation'] = nil
-            -- data.raw.item['space-platform-foundation'] = nil
 
             data.raw.gun['teslagun'].default_import_location = nil
             data.raw.ammo['capture-robot-rocket'] = nil
