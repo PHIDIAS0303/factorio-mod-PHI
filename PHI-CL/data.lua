@@ -434,10 +434,6 @@ if settings.startup['PHI-SA'].value then
                 data.raw.planet[v].hidden_in_factoriopedia = true
             end
 
-            --[[
-            data.raw.planet.nauvis.asteroid_spawn_influence = nil
-            data.raw.planet.nauvis.asteroid_spawn_definitions = nil
-            ]]
 
             for _, v in pairs(data.raw['space-location']) do
                 v.hidden = true
@@ -591,26 +587,24 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['rocket-part-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
             data.raw.technology['artillery'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
             data.raw.technology['turbo-transport-belt'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['personal-roboport-mk2-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['energy-shield-mk2-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['transport-belt-capacity-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['transport-belt-capacity-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['spidertron'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+            -- data.raw.technology['personal-roboport-mk2-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+            -- data.raw.technology['energy-shield-mk2-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+            -- data.raw.technology['transport-belt-capacity-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+            -- data.raw.technology['transport-belt-capacity-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+            -- data.raw.technology['spidertron'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
 
-            --[[
             for _, v in pairs(data.raw.technology) do
                 if v.unit and v.unit.ingredients then
-                    for k2, v2 in ipairs(v.unit.ingredients) do
-                        if v2[1] == 'agricultural-science-pack' or v2[1] == 'cryogenic-science-pack' or v2[1] == 'electromagnetic-science-pack' or v2[1] == 'metallurgic-science-pack' or v2[1] == 'promethium-science-pack' then
-                            v.unit.ingredients[k2] = nil
+                    for i=#v.unit.ingredients, 1, -1 do
+                        if items['space-age']['recipe'][v.unit.ingredients[i][1]] then
+                            table.remove(v.unit.ingredients, i)
 
-                        elseif v2[1] == 'space-science-pack' and v.max_level ~= 'infinite' then
-                            v.unit.ingredients[k2] = nil
+                        elseif v.unit.ingredients[i][1] == 'space-science-pack' and v.max_level ~= 'infinite' then
+                            table.remove(v.unit.ingredients, i)
                         end
                     end
                 end
             end
-            ]]
 
             data.raw.recipe['cliff-explosives-o'] = nil
             data.raw.recipe['big-mining-drill'].category = nil

@@ -368,6 +368,13 @@ local items = {
         }
     },
     ['space-age'] = {
+        ['science'] = {
+            ['agricultural-science-pack'] = true,
+            ['cryogenic-science-pack'] = true,
+            ['electromagnetic-science-pack'] = true,
+            ['metallurgic-science-pack'] = true,
+            ['promethium-science-pack'] = true
+        },
         ['technology'] = {
             'planet-discovery-vulcanus',
             'planet-discovery-gleba',
