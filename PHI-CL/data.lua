@@ -652,6 +652,8 @@ if settings.startup['PHI-SA'].value then
             data.raw['assembling-machine']['captive-biter-spawner'].surface_conditions = nil
             data.raw['agricultural-tower']['agricultural-tower'].surface_conditions = nil
             data.raw['asteroid-collector']['asteroid-collector'].surface_conditions = nil
+            data.raw['rocket-silo']['rocket-silo'].surface_conditions = nil
+            data.raw['cargo-landing-pad']['cargo-landing-pad'].surface_conditions = nil
             data.raw['reactor']['heating-tower'].surface_conditions = nil
             data.raw['furnace']['recycler'].surface_conditions = nil
             data.raw['fusion-reactor']['fusion-reactor'].surface_conditions = nil
