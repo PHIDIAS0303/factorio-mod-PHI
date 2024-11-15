@@ -16,14 +16,14 @@ data:extend({
   type = 'int-setting',
   name = 'PHI-EN-POWER-TIER',
   setting_type = 'startup',
-  default_value = 5,
+  default_value = 1,
   allowed_values = {1, 2, 3, 4, 5},
   order = 'A02'
 }, {
   type = 'bool-setting',
   name = 'PHI-MB',
   setting_type = 'startup',
-  default_value = true,
+  default_value = false,
   order = 'B00'
 }, {
   type = 'int-setting',
@@ -36,7 +36,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-WE',
   setting_type = 'startup',
-  default_value = true,
+  default_value = false,
   order = 'C00'
 }, {
   type = 'int-setting',

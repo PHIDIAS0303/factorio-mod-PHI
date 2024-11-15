@@ -576,7 +576,7 @@ if settings.startup['PHI-SA'].value then
                         end
                     end
 
-                    if v.max_level and v.max_level == 'infinite' and (not string.find(v.name, 'productivity')) then
+                    if v.max_level and v.max_level == 'infinite' and (not (string.find(v.name, 'productivity') or v.name == 'health')) then
                         table.insert(v.unit.ingredients, {'space-science-pack', 1})
                     end
                 end
