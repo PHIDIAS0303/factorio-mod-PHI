@@ -799,9 +799,9 @@ if settings.startup['PHI-SA'].value then
                 v.surface_conditions = nil
             end
 
-            for k, v in pairs(items['item']) do
+            for _, v in pairs(items['item']) do
                 if v.enabled and v.mod and (v.mod == 'space-age' or v.mod == 'quality') then
-                    if data.raw.technology[v.tech].hidden or data.raw.recipe[k].hidden then
+                    if (data.raw.technology[v.tech] and data.raw.technology[v.tech].hidden) or (data.raw.recipe[v.name] and data.raw.recipe[v.name].hidden) then
                         v.enabled = false
                     end
                 end
