@@ -571,7 +571,7 @@ if settings.startup['PHI-SA'].value then
                         end
                     end
 
-                    if v.max_level and v.max_level == 'infinite' then
+                    if v.max_level and v.max_level == 'infinite' and (not string.find(v.name, 'productivity')) then
                         table.insert(v.unit.ingredients, {'space-science-pack', 1})
                     end
                 end
@@ -580,6 +580,7 @@ if settings.startup['PHI-SA'].value then
             table.insert(data.raw.technology['kovarex-enrichment-process'].unit.ingredients, {'production-science-pack', 1})
             table.insert(data.raw.technology['mech-armor'].unit.ingredients, {'space-science-pack', 1})
             table.insert(data.raw.technology['transport-belt-capacity-2'].unit.ingredients, {'space-science-pack', 1})
+            table.insert(data.raw.technology['research-productivity'].unit.ingredients, {'space-science-pack', 1})
             data.raw.technology['electric-weapons-damage-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
             data.raw.technology['electric-weapons-damage-2'].prerequisites = {'electric-weapons-damage-1'}
             data.raw.technology['electric-weapons-damage-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
