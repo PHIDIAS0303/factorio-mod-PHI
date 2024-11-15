@@ -429,23 +429,22 @@ if settings.startup['PHI-SA'].value then
     if settings.startup['PHI-SA-VANILLA'].value then
         if mods['space-age'] then
             for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
-                -- data.raw.planet[v] = nil
                 data.raw.planet[v].map_gen_settings = nil
                 data.raw.planet[v].hidden = true
                 data.raw.planet[v].hidden_in_factoriopedia = true
             end
 
+            --[[
             data.raw.planet.nauvis.asteroid_spawn_influence = nil
             data.raw.planet.nauvis.asteroid_spawn_definitions = nil
+            ]]
 
-            for k, v in pairs(data.raw['space-location']) do
-                -- data.raw['space-location'][k] = nil
+            for _, v in pairs(data.raw['space-location']) do
                 v.hidden = true
                 v.hidden_in_factoriopedia = true
             end
 
-            for k, v in pairs(data.raw['space-connection']) do
-                -- data.raw['space-connection'][k] = nil
+            for _, v in pairs(data.raw['space-connection']) do
                 v.hidden = true
                 v.hidden_in_factoriopedia = true
             end
@@ -497,53 +496,6 @@ if settings.startup['PHI-SA'].value then
                 }
             })
 
-            data.raw.technology['planet-discovery-vulcanus'] = nil
-            data.raw.technology['planet-discovery-gleba'] = nil
-            data.raw.technology['planet-discovery-fulgora'] = nil
-            data.raw.technology['planet-discovery-aquilo'] = nil
-            data.raw.technology['space-platform'] = nil
-            data.raw.technology['space-platform-thruster'] = nil
-            data.raw.technology['calcite-processing'] = nil
-            data.raw.technology['tungsten-carbide'] = nil
-            data.raw.technology['foundry'] = nil
-            data.raw.technology['tungsten-steel'] = nil
-            data.raw.technology['metallurgic-science-pack'] = nil
-            data.raw.technology['agriculture'] = nil
-            data.raw.technology['yumako'] = nil
-            data.raw.technology['biochamber'] = nil
-            data.raw.technology['jellynut'] = nil
-            data.raw.technology['bioflux'] = nil
-            data.raw.technology['artificial-soil'] = nil
-            data.raw.technology['overgrowth-soil'] = nil
-            data.raw.technology['bacteria-cultivation'] = nil
-            data.raw.technology['bioflux-processing'] = nil
-            data.raw.technology['agricultural-science-pack'] = nil
-            data.raw.technology['tree-seeding'] = nil
-            data.raw.technology['captivity'] = nil
-            data.raw.technology['biolab'] = nil
-            data.raw.technology['biter-egg-handling'] = nil
-            data.raw.technology['carbon-fiber'] = nil
-            data.raw.technology['fish-breeding'] = nil
-            data.raw.technology['holmium-processing'] = nil
-            data.raw.technology['electromagnetic-plant'] = nil
-            data.raw.technology['electromagnetic-science-pack'] = nil
-            data.raw.technology['lightning-collector'] = nil
-            data.raw.technology['rail-support-foundations'] = nil
-            data.raw.technology['heating-tower'] = nil
-            data.raw.technology['lithium-processing'] = nil
-            data.raw.technology['cryogenic-plant'] = nil
-            data.raw.technology['asteroid-reprocessing'] = nil
-            data.raw.technology['advanced-asteroid-processing'] = nil
-            data.raw.technology['quantum-processor'] = nil
-            data.raw.technology['cryogenic-science-pack'] = nil
-            data.raw.technology['fusion-reactor'] = nil
-            data.raw.technology['fusion-reactor-equipment'] = nil
-            data.raw.technology['captive-biter-spawner'] = nil
-            data.raw.technology['promethium-science-pack'] = nil
-            data.raw.technology['foundation'] = nil
-            data.raw.technology['asteroid-productivity'] = nil
-            data.raw.technology['scrap-recycling-productivity'] = nil
-            data.raw.technology['recycling'] = nil
             data.raw.technology['cliff-explosives'].effects = {{type='unlock-recipe', recipe='cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
             data.raw.technology['logistic-system'].prerequisites = {'logistic-robotics'}
             data.raw.technology['logistic-system'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
@@ -645,6 +597,22 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['transport-belt-capacity-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
             data.raw.technology['spidertron'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
 
+            --[[
+            for _, v in pairs(data.raw.technology) do
+                if v.unit and v.unit.ingredients then
+                    for k2, v2 in ipairs(v.unit.ingredients) do
+                        if v2[1] == 'agricultural-science-pack' or v2[1] == 'cryogenic-science-pack' or v2[1] == 'electromagnetic-science-pack' or v2[1] == 'metallurgic-science-pack' or v2[1] == 'promethium-science-pack' then
+                            v.unit.ingredients[k2] = nil
+
+                        elseif v2[1] == 'space-science-pack' and v.max_level ~= 'infinite' then
+                            v.unit.ingredients[k2] = nil
+                        end
+                    end
+                end
+            end
+            ]]
+
+            data.raw.recipe['cliff-explosives-o'] = nil
             data.raw.recipe['big-mining-drill'].category = nil
             data.raw.recipe['big-mining-drill'].ingredients = {{type='item', name='electric-mining-drill', amount=1}, {type='item', name='steel-plate', amount=20}, {type='item', name='electric-engine-unit', amount=10}, {type='item', name='advanced-circuit', amount=10}}
             data.raw.recipe['turbo-transport-belt'].category = 'crafting-with-fluid'
@@ -668,7 +636,6 @@ if settings.startup['PHI-SA'].value then
             data.raw.recipe['artillery-wagon'].ingredients = {{type='item', name='engine-unit', amount=64}, {type='item', name='iron-gear-wheel', amount=10}, {type='item', name='steel-plate', amount=40}, {type='item', name='pipe', amount=16}, {type='item', name='advanced-circuit', amount=20}}
             data.raw.recipe['artillery-shell'].ingredients = {{type='item', name='explosive-cannon-shell', amount=4}, {type='item', name='radar', amount=1}, {type='item', name='explosives', amount=8}}
             data.raw.recipe['cliff-explosives'].ingredients = {{type='item', name='explosives', amount=10}, {type='item', name='grenade', amount=1}, {type='item', name='barrel', amount=1}}
-            data.raw.recipe['cliff-explosives-o'] = nil
             data.raw.recipe['tesla-ammo'].category = 'crafting-with-fluid'
             data.raw.recipe['tesla-ammo'].ingredients = {{type='item', name='battery', amount=1}, {type='item', name='plastic-bar', amount=1}, {type='fluid', name='sulfuric-acid', amount=10}}
             data.raw.recipe['teslagun'].category = 'crafting-with-fluid'
@@ -682,132 +649,21 @@ if settings.startup['PHI-SA'].value then
             data.raw.recipe['railgun-turret'].ingredients = {{type='item', name='steel-plate', amount=30}, {type='item', name='processing-unit', amount=50}, {type='item', name='battery', amount=50}, {type='fluid', name='sulfuric-acid', amount=100}}
             data.raw.recipe['rocket-turret'].category = 'crafting'
             data.raw.recipe['rocket-turret'].ingredients = {{type='item', name='rocket-launcher', amount=4}, {type='item', name='steel-plate', amount=40}, {type='item', name='processing-unit', amount=4}, {type='item', name='iron-gear-wheel', amount=20}}
-            data.raw.recipe['agricultural-science-pack'] = nil
-            data.raw.recipe['cryogenic-science-pack'] = nil
-            data.raw.recipe['electromagnetic-science-pack'] = nil
-            data.raw.recipe['metallurgic-science-pack'] = nil
-            data.raw.recipe['promethium-science-pack'] = nil
-            data.raw.recipe['space-science-pack'] = nil
-            data.raw.recipe['burnt-spoilage'] = nil
-            data.raw.recipe['fish-breeding'] = nil
-            data.raw.recipe['nutrients-from-fish'] = nil
-            data.raw.recipe['nutrients-from-biter-egg'] = nil
-            data.raw.recipe['wood-processing'] = nil
-            data.raw.recipe['yumako-processing'] = nil
-            data.raw.recipe['jellynut-processing'] = nil
-            data.raw.recipe['copper-bacteria'] = nil
-            data.raw.recipe['copper-bacteria-cultivation'] = nil
-            data.raw.recipe['iron-bacteria'] = nil
-            data.raw.recipe['iron-bacteria-cultivation'] = nil
-            data.raw.recipe['nutrients-from-spoilage'] = nil
-            data.raw.recipe['nutrients-from-yumako-mash'] = nil
-            data.raw.recipe['nutrients-from-bioflux'] = nil
-            data.raw.recipe['pentapod-egg'] = nil
-            data.raw.recipe['rocket-fuel-from-jelly'] = nil
-            data.raw.recipe['bioflux'] = nil
-            data.raw.recipe['bioplastic'] = nil
-            data.raw.recipe['biosulfur'] = nil
-            data.raw.recipe['biolubricant'] = nil
-            data.raw.recipe['carbon-fiber'] = nil
-            data.raw.recipe['artificial-yumako-soil'] = nil
-            data.raw.recipe['overgrowth-yumako-soil'] = nil
-            data.raw.recipe['artificial-jellynut-soil'] = nil
-            data.raw.recipe['overgrowth-jellynut-soil'] = nil
-            data.raw.recipe['biochamber'] = nil
-            data.raw.recipe['capture-robot-rocket'] = nil
-            data.raw.recipe['captive-biter-spawner'] = nil
-            data.raw.recipe['biter-egg'] = nil
-            data.raw.recipe['pentapod-egg'] = nil
-            data.raw.recipe['nutrients-from-spoilage'] = nil
-            data.raw.recipe['spoilage-from-nutrients'] = nil
-            data.raw.recipe['crusher'] = nil
-            data.raw.recipe['cryogenic-plant'] = nil
-            data.raw.recipe['electromagnetic-plant'] = nil
-            data.raw.recipe['foundry'] = nil
-            data.raw.recipe['metallic-asteroid-crushing'] = nil
-            data.raw.recipe['carbonic-asteroid-crushing'] = nil
-            data.raw.recipe['oxide-asteroid-crushing'] = nil
-            data.raw.recipe['advanced-metallic-asteroid-crushing'] = nil
-            data.raw.recipe['advanced-carbonic-asteroid-crushing'] = nil
-            data.raw.recipe['advanced-oxide-asteroid-crushing'] = nil
-            data.raw.recipe['metallic-asteroid-reprocessing'] = nil
-            data.raw.recipe['carbonic-asteroid-reprocessing'] = nil
-            data.raw.recipe['oxide-asteroid-reprocessing'] = nil
-            data.raw.recipe['thruster'] = nil
-            data.raw.recipe['thruster-fuel'] = nil
-            data.raw.recipe['thruster-oxidizer'] = nil
-            data.raw.recipe['advanced-thruster-fuel'] = nil
-            data.raw.recipe['advanced-thruster-oxidizer'] = nil
-            data.raw.recipe['tungsten-carbide'] = nil
-            data.raw.recipe['tungsten-plate'] = nil
-            data.raw.recipe['carbon'] = nil
-            data.raw.recipe['coal-synthesis'] = nil
-            data.raw.recipe['agricultural-tower'] = nil
-            data.raw.recipe['biolab'] = nil
-            data.raw.recipe['spoilage-recycling'] = nil
-            data.raw.recipe['asteroid-collector'] = nil
-            data.raw.recipe['heating-tower'] = nil
-            data.raw.recipe['fusion-reactor'] = nil
-            data.raw.recipe['fusion-generator'] = nil
-            data.raw.recipe['recycler'] = nil
-            data.raw.recipe['ammoniacal-solution-separation'] = nil
-            data.raw.recipe['lithium'] = nil
-            data.raw.recipe['lithium-plate'] = nil
-            data.raw.recipe['fluoroketone'] = nil
-            data.raw.recipe['fusion-power-cell'] = nil
-            data.raw.recipe['fusion-reactor-equipment'] = nil
-            data.raw.recipe['ice-platform'] = nil
-            data.raw.recipe['solid-fuel-from-ammonia'] = nil
-            data.raw.recipe['ammonia-rocket-fuel'] = nil
-            data.raw.recipe['fluoroketone-cooling'] = nil
-            data.raw.recipe['quantum-processor'] = nil
-            data.raw.recipe['holmium-solution'] = nil
-            data.raw.recipe['holmium-plate'] = nil
-            data.raw.recipe['electrolyte'] = nil
-            data.raw.recipe['supercapacitor'] = nil
-            data.raw.recipe['superconductor'] = nil
-            data.raw.recipe['lightning-collector'] = nil
-            data.raw.recipe['lightning-rod'] = nil
-            data.raw.recipe['molten-iron-from-lava'] = nil
-            data.raw.recipe['molten-copper-from-lava'] = nil
-            data.raw.recipe['molten-iron'] = nil
-            data.raw.recipe['molten-copper'] = nil
-            data.raw.recipe['casting-iron'] = nil
-            data.raw.recipe['casting-steel'] = nil
-            data.raw.recipe['casting-copper'] = nil
-            data.raw.recipe['casting-iron-gear-wheel'] = nil
-            data.raw.recipe['casting-iron-stick'] = nil
-            data.raw.recipe['casting-pipe'] = nil
-            data.raw.recipe['casting-pipe-to-ground'] = nil
-            data.raw.recipe['casting-low-density-structure'] = nil
-            data.raw.recipe['concrete-from-molten-iron'] = nil
-            data.raw.recipe['casting-copper-cable'] = nil
-            data.raw.recipe['acid-neutralisation'] = nil
-            data.raw.recipe['simple-coal-liquefaction'] = nil
-            data.raw.recipe['scrap-recycling'] = nil
-            data.raw.recipe['foundation'] = nil
-            data.raw.recipe['foundation-o'] = nil
-            data.raw.recipe['space-platform-foundation'] = nil
-            data.raw.recipe['space-platform-starter-pack'] = nil
 
-            data.raw['assembling-machine']['captive-biter-spawner'] = nil
-
-            --[[
-            data.raw['agricultural-tower']['agricultural-tower'] = nil
-            data.raw['asteroid-collector']['asteroid-collector'] = nil
-            data.raw['reactor']['heating-tower'] = nil
-            data.raw['furnace']['recycler'] = nil
-            data.raw['fusion-reactor']['fusion-reactor'] = nil
-            data.raw['fusion-generator']['fusion-generator'] = nil
-            data.raw['thruster']['thruster'] = nil
-            data.raw['assembling-machine']['biochamber'] = nil
-            data.raw['assembling-machine']['crusher'] = nil
-            data.raw['assembling-machine']['cryogenic-plant'] = nil
-            data.raw['assembling-machine']['electromagnetic-plant'] = nil
-            data.raw['assembling-machine']['foundry'] = nil
-            data.raw['lab']['biolab'] = nil
-            ]]
-
+            data.raw['assembling-machine']['captive-biter-spawner'].surface_conditions = nil
+            data.raw['agricultural-tower']['agricultural-tower'].surface_conditions = nil
+            data.raw['asteroid-collector']['asteroid-collector'].surface_conditions = nil
+            data.raw['reactor']['heating-tower'].surface_conditions = nil
+            data.raw['furnace']['recycler'].surface_conditions = nil
+            data.raw['fusion-reactor']['fusion-reactor'].surface_conditions = nil
+            data.raw['fusion-generator']['fusion-generator'].surface_conditions = nil
+            data.raw['thruster']['thruster'].surface_conditions = nil
+            data.raw['assembling-machine']['biochamber'].surface_conditions = nil
+            data.raw['assembling-machine']['crusher'].surface_conditions = nil
+            data.raw['assembling-machine']['cryogenic-plant'].surface_conditions = nil
+            data.raw['assembling-machine']['electromagnetic-plant'].surface_conditions = nil
+            data.raw['assembling-machine']['foundry'].surface_conditions = nil
+            data.raw['lab']['biolab'].surface_conditions = nil
             data.raw['fluid-turret']['flamethrower-turret'].surface_conditions = nil
             data.raw['furnace']['stone-furnace'].surface_conditions = nil
             data.raw['mining-drill']['burner-mining-drill'].surface_conditions = nil
@@ -845,225 +701,16 @@ if settings.startup['PHI-SA'].value then
             data.raw['logistic-container']['storage-chest'].surface_conditions = nil
             data.raw['logistic-container']['buffer-chest'].surface_conditions = nil
             data.raw['logistic-container']['requester-chest'].surface_conditions = nil
-
-            data.raw['simple-entity']['small-stomper-shell'] = nil
-            data.raw['simple-entity']['medium-stomper-shell'] = nil
-            data.raw['simple-entity']['big-stomper-shell'] = nil
-            data.raw['simple-entity']['copper-stromatolite'] = nil
-            data.raw['simple-entity']['iron-stromatolite'] = nil
-
-            --[[
-            data.raw['simple-entity']['small-demolisher-corpse'] = nil
-            data.raw['simple-entity']['medium-demolisher-corpse'] = nil
-            data.raw['simple-entity']['big-demolisher-corpse'] = nil
-            data.raw['simple-entity']['big-volcanic-rock'] = nil
-            data.raw['simple-entity']['huge-volcanic-rock'] = nil
-            data.raw['simple-entity']['fulgoran-ruin-small'] = nil
-            data.raw['simple-entity']['fulgoran-ruin-medium'] = nil
-            data.raw['simple-entity']['fulgoran-ruin-big'] = nil
-            data.raw['simple-entity']['fulgoran-ruin-huge'] = nil
-            data.raw['simple-entity']['fulgoran-ruin-stonehenge'] = nil
-            data.raw['simple-entity']['fulgoran-ruin-colossal'] = nil
-            data.raw['simple-entity']['fulgoran-ruin-vault'] = nil
-            data.raw['simple-entity']['fulgurite-small'] = nil
-            data.raw['simple-entity']['fulgurite-medium'] = nil
-            data.raw['simple-entity']['fulgurite'] = nil
-            data.raw['simple-entity']['lithium-iceberg-small'] = nil
-            data.raw['simple-entity']['lithium-iceberg-medium'] = nil
-            data.raw['simple-entity']['lithium-iceberg-big'] = nil
-            data.raw['simple-entity']['lithium-iceberg-huge'] = nil
-            
-            data.raw.resource['tungsten-ore'].hidden = true
-            data.raw.resource['tungsten-ore'].hidden_in_factoriopedia = true
-            data.raw.resource['calcite'].hidden = true
-            data.raw.resource['calcite'].hidden_in_factoriopedia = true
-            data.raw.resource['scrap'].hidden = true
-            data.raw.resource['scrap'].hidden_in_factoriopedia = true
-            ]]
-
-            data.raw['unit-spawner']['biter-spawner'].captured_spawner_entity = nil
-            data.raw['unit-spawner']['spitter-spawner'].captured_spawner_entity = nil
-            data.raw['unit-spawner']['gleba-spawner'] = nil
-            data.raw['unit-spawner']['gleba-spawner-small'] = nil
-            data.raw['corpse']['gleba-spawner-corpse'] = nil
-            data.raw['corpse']['gleba-spawner-corpse-small'] = nil
-            data.raw['spider-unit']['small-stomper-pentapod'] = nil
-            data.raw['spider-unit']['medium-stomper-pentapod'] = nil
-            data.raw['spider-unit']['big-stomper-pentapod'] = nil
-
             data.raw['plant']['yumako-tree'].hidden = true
             data.raw['plant']['yumako-tree'].hidden_in_factoriopedia = true
             data.raw['plant']['jellystem'].hidden = true
             data.raw['plant']['jellystem'].hidden_in_factoriopedia = true
 
-            --[[
-            data.raw['asteroid-chunk']['metallic-asteroid-chunk'] = nil
-            data.raw['asteroid-chunk']['oxide-asteroid-chunk'] = nil
-            data.raw['asteroid-chunk']['carbonic-asteroid-chunk'] = nil
-            data.raw['asteroid-chunk']['promethium-asteroid-chunk'] = nil
-            ]]
+            data.raw['unit-spawner']['biter-spawner'].captured_spawner_entity = nil
+            data.raw['unit-spawner']['spitter-spawner'].captured_spawner_entity = nil
 
             data.raw.fluid['fluoroketone-cold'].auto_barrel = false
             data.raw.fluid['fluoroketone-hot'].auto_barrel = false
-
-            --[[
-            data.raw.fluid['ammoniacal-solution'] = nil
-            data.raw.fluid['ammonia'] = nil
-            data.raw.fluid['fluorine'] = nil
-            data.raw.fluid['holmium-solution'] = nil
-            data.raw.fluid['electrolyte'] = nil
-            data.raw.fluid['lithium-brine'] = nil
-            data.raw.fluid['lava'] = nil
-            data.raw.fluid['molten-iron'] = nil
-            data.raw.fluid['molten-copper'] = nil
-            data.raw.fluid['thruster-fuel'] = nil
-            data.raw.fluid['thruster-oxidizer'] = nil
-            data.raw.fluid['fusion-plasma'] = nil
-            data.raw.fluid['fluoroketone-cold'] = nil
-            data.raw.fluid['fluoroketone-hot'] = nil
-            
-            data.raw.tile['space-platform-foundation'] = nil
-            data.raw.tile['empty-space'] = nil
-            ]]
-
-            data.raw.item['captive-biter-spawner'] = nil
-            data.raw.item['biter-egg'] = nil
-            data.raw.item['pentapod-egg'] = nil
-
-            data.raw.item['agricultural-tower'].hidden = true
-            data.raw.item['agricultural-tower'].hidden_in_factoriopedia = true
-            data.raw.item['biochamber'].hidden = true
-            data.raw.item['biochamber'].hidden_in_factoriopedia = true
-            data.raw.item['crusher'].hidden = true
-            data.raw.item['crusher'].hidden_in_factoriopedia = true
-            data.raw.item['cryogenic-plant'].hidden = true
-            data.raw.item['cryogenic-plant'].hidden_in_factoriopedia = true
-            data.raw.item['electromagnetic-plant'].hidden = true
-            data.raw.item['electromagnetic-plant'].hidden_in_factoriopedia = true
-            data.raw.item['foundry'].hidden = true
-            data.raw.item['foundry'].hidden_in_factoriopedia = true
-            data.raw.item['biolab'].hidden = true
-            data.raw.item['biolab'].hidden_in_factoriopedia = true
-            data.raw.item['jellynut-seed'].hidden = true
-            data.raw.item['jellynut-seed'].hidden_in_factoriopedia = true
-            data.raw.item['nutrients'].hidden = true
-            data.raw.item['nutrients'].hidden_in_factoriopedia = true
-            data.raw.item['spoilage'].hidden = true
-            data.raw.item['spoilage'].hidden_in_factoriopedia = true
-            data.raw.item['tree-seed'].hidden = true
-            data.raw.item['tree-seed'].hidden_in_factoriopedia = true
-            data.raw.item['yumako-seed'].hidden = true
-            data.raw.item['yumako-seed'].hidden_in_factoriopedia = true
-            data.raw.item['copper-bacteria'].hidden = true
-            data.raw.item['copper-bacteria'].hidden_in_factoriopedia = true
-            data.raw.item['iron-bacteria'].hidden = true
-            data.raw.item['iron-bacteria'].hidden_in_factoriopedia = true
-            data.raw.item['carbon'].hidden = true
-            data.raw.item['carbon'].hidden_in_factoriopedia = true
-            data.raw.item['recycler'].hidden = true
-            data.raw.item['recycler'].hidden_in_factoriopedia = true
-            data.raw.item['asteroid-collector'].hidden = true
-            data.raw.item['asteroid-collector'].hidden_in_factoriopedia = true
-            data.raw.item['thruster'].hidden = true
-            data.raw.item['thruster'].hidden_in_factoriopedia = true
-            data.raw.item['heating-tower'].hidden = true
-            data.raw.item['heating-tower'].hidden_in_factoriopedia = true
-            data.raw.item['fusion-reactor'].hidden = true
-            data.raw.item['fusion-reactor'].hidden_in_factoriopedia = true
-            data.raw.item['fusion-generator'].hidden = true
-            data.raw.item['fusion-generator'].hidden_in_factoriopedia = true
-
-            --[[
-            data.raw.item['agricultural-tower'] = nil
-            data.raw.item['biochamber'] = nil
-            data.raw.item['crusher'] = nil
-            data.raw.item['cryogenic-plant'] = nil
-            data.raw.item['electromagnetic-plant'] = nil
-            data.raw.item['foundry'] = nil
-            data.raw.item['biolab'] = nil
-            data.raw.item['jellynut-seed'] = nil
-            data.raw.item['nutrients'] = nil
-            data.raw.item['spoilage'] = nil
-            data.raw.item['tree-seed'] = nil
-            data.raw.item['yumako-seed'] = nil
-            data.raw.item['copper-bacteria'] = nil
-            data.raw.item['iron-bacteria'] = nil
-            data.raw.item['carbon'] = nil
-            data.raw.item['recycler'] = nil
-            data.raw.item['asteroid-collector'] = nil
-            data.raw.item['thruster'] = nil
-            data.raw.item['heating-tower'] = nil
-            data.raw.item['fusion-reactor'] = nil
-            data.raw.item['fusion-generator'] = nil
-            ]]
-
-            data.raw.item['metallic-asteroid-chunk'].hidden = true
-            data.raw.item['metallic-asteroid-chunk'].hidden_in_factoriopedia = true
-            data.raw.item['carbonic-asteroid-chunk'].hidden = true
-            data.raw.item['carbonic-asteroid-chunk'].hidden_in_factoriopedia = true
-            data.raw.item['oxide-asteroid-chunk'].hidden = true
-            data.raw.item['oxide-asteroid-chunk'].hidden_in_factoriopedia = true
-            data.raw.item['promethium-asteroid-chunk'].hidden = true
-            data.raw.item['promethium-asteroid-chunk'].hidden_in_factoriopedia = true
-            data.raw.item['calcite'].hidden = true
-            data.raw.item['calcite'].hidden_in_factoriopedia = true
-            data.raw.item['tungsten-ore'].hidden = true
-            data.raw.item['tungsten-ore'].hidden_in_factoriopedia = true
-            data.raw.item['tungsten-plate'].hidden = true
-            data.raw.item['tungsten-plate'].hidden_in_factoriopedia = true
-            data.raw.item['tungsten-carbide'].hidden = true
-            data.raw.item['tungsten-carbide'].hidden_in_factoriopedia = true
-            data.raw.item['lithium'].hidden = true
-            data.raw.item['lithium'].hidden_in_factoriopedia = true
-            data.raw.item['lithium-plate'].hidden = true
-            data.raw.item['lithium-plate'].hidden_in_factoriopedia = true
-            data.raw.item['quantum-processor'].hidden = true
-            data.raw.item['quantum-processor'].hidden_in_factoriopedia = true
-            data.raw.item['fusion-power-cell'].hidden = true
-            data.raw.item['fusion-power-cell'].hidden = true
-            data.raw.item['holmium-ore'].hidden = true
-            data.raw.item['holmium-ore'].hidden_in_factoriopedia = true
-            data.raw.item['holmium-plate'].hidden = true
-            data.raw.item['holmium-plate'].hidden_in_factoriopedia = true
-            data.raw.item['scrap'].hidden = true
-            data.raw.item['scrap'].hidden_in_factoriopedia = true
-            data.raw.item['lightning-rod'].hidden = true
-            data.raw.item['lightning-rod'].hidden_in_factoriopedia = true
-            data.raw.item['lightning-collector'].hidden = true
-            data.raw.item['lightning-collector'].hidden_in_factoriopedia = true
-            data.raw.item['superconductor'].hidden = true
-            data.raw.item['superconductor'].hidden_in_factoriopedia = true
-            data.raw.item['supercapacitor'].hidden = true
-            data.raw.item['supercapacitor'].hidden_in_factoriopedia = true
-            data.raw.item['carbon-fiber'].hidden = true
-            data.raw.item['carbon-fiber'].hidden_in_factoriopedia = true
-            data.raw.item['foundation'].hidden = true
-            data.raw.item['foundation'].hidden_in_factoriopedia = true
-            data.raw.item['space-platform-foundation'].hidden = true
-            data.raw.item['space-platform-foundation'].hidden_in_factoriopedia = true
-
-            --[[
-            data.raw.item['metallic-asteroid-chunk'] = nil
-            data.raw.item['carbonic-asteroid-chunk'] = nil
-            data.raw.item['oxide-asteroid-chunk'] = nil
-            data.raw.item['promethium-asteroid-chunk'] = nil
-            data.raw.item['calcite'] = nil
-            data.raw.item['tungsten-ore'] = nil
-            data.raw.item['tungsten-plate'] = nil
-            data.raw.item['tungsten-carbide'] = nil
-            data.raw.item['lithium'] = nil
-            data.raw.item['lithium-plate'] = nil
-            data.raw.item['quantum-processor'] = nil
-            data.raw.item['fusion-power-cell'] = nil
-            data.raw.item['holmium-ore'] = nil
-            data.raw.item['holmium-plate'] = nil
-            data.raw.item['scrap'] = nil
-            data.raw.item['lightning-rod'] = nil
-            data.raw.item['lightning-collector'] = nil
-            data.raw.item['superconductor'] = nil
-            data.raw.item['supercapacitor'] = nil
-            data.raw.item['carbon-fiber'] = nil
-            ]]
 
             data.raw.item['artificial-yumako-soil'].default_import_location = nil
             data.raw.item['overgrowth-yumako-soil'].default_import_location = nil
@@ -1078,19 +725,19 @@ if settings.startup['PHI-SA'].value then
             data.raw.item['railgun-turret'].default_import_location = nil
             data.raw.item['tesla-turret'].default_import_location = nil
             data.raw.item['stack-inserter'].default_import_location = nil
-            data.raw.item['fusion-reactor-equipment'] = nil
-
             data.raw.gun['teslagun'].default_import_location = nil
-            data.raw.ammo['capture-robot-rocket'] = nil
             data.raw.ammo['tesla-ammo'].default_import_location = nil
 
-            data.raw['generator-equipment']['fusion-reactor-equipment'] = nil
-
-            data.raw.tool['agricultural-science-pack'] = nil
-            data.raw.tool['cryogenic-science-pack'] = nil
-            data.raw.tool['electromagnetic-science-pack'] = nil
-            data.raw.tool['metallurgic-science-pack'] = nil
-            data.raw.tool['promethium-science-pack'] = nil
+            data.raw.tool['agricultural-science-pack'].hidden = true
+            data.raw.tool['agricultural-science-pack'].hidden_in_factoriopedia = true
+            data.raw.tool['cryogenic-science-pack'].hidden = true
+            data.raw.tool['cryogenic-science-pack'].hidden_in_factoriopedia = true
+            data.raw.tool['electromagnetic-science-pack'].hidden = true
+            data.raw.tool['electromagnetic-science-pack'].hidden_in_factoriopedia = true
+            data.raw.tool['metallurgic-science-pack'].hidden = true
+            data.raw.tool['metallurgic-science-pack'].hidden_in_factoriopedia = true
+            data.raw.tool['promethium-science-pack'].hidden = true
+            data.raw.tool['promethium-science-pack'].hidden_in_factoriopedia = true
 
             data.raw.capsule['bioflux'].hidden = true
             data.raw.capsule['bioflux'].hidden_in_factoriopedia = true
@@ -1102,14 +749,6 @@ if settings.startup['PHI-SA'].value then
             data.raw.capsule['yumako'].hidden_in_factoriopedia = true
             data.raw.capsule['yumako-mash'].hidden = true
             data.raw.capsule['yumako-mash'].hidden_in_factoriopedia = true
-
-            --[[
-            data.raw.capsule['bioflux'] = nil
-            data.raw.capsule['jelly'] = nil
-            data.raw.capsule['jellynut'] = nil
-            data.raw.capsule['yumako'] = nil
-            data.raw.capsule['yumako-mash'] = nil
-            ]]
 
             data.raw['tips-and-tricks-item']['fulgora-briefing'] = nil
             data.raw['tips-and-tricks-item']['lightning-mechanics'] = nil
@@ -1161,7 +800,17 @@ if settings.startup['PHI-SA'].value then
                 end
             end
 
-            for _, v in pairs(data.raw.recipe) do
+            for _, v in pairs(items['space-age']['technology']) do
+                data.raw.technology[v].hidden = true
+                data.raw.technology[v].hidden_in_factoriopedia = true
+            end
+
+            for k, v in pairs(data.raw.recipe) do
+                if items['space-age']['recipe'][k] then
+                    data.raw.recipe[k].hidden = true
+                    data.raw.recipe[k].hidden_in_factoriopedia = true
+                end
+
                 v.surface_conditions = nil
             end
 
@@ -1174,16 +823,6 @@ if settings.startup['PHI-SA'].value then
                     v.minable.results = {{type='item', name='wood', amount=4}}
                 end
             end
-
-            --[[
-            for k, v in pairs(data.raw.tile) do
-                if v.subgroup then
-                    if v.subgroup == 'aquilo' or v.subgroup == 'fulgora' or v.subgroup == 'gleba' or v.subgroup == 'vulcanus' then
-                        data.raw.tile[k] = nil
-                    end
-                end
-            end
-            ]]
         end
 
         if mods['quality'] then
@@ -1530,6 +1169,7 @@ if settings.startup['PHI-CT'].value then
             entity.minable.result = item.name
             entity.inventory_type = 'with_filters_and_bar'
             entity.inventory_size = 1
+            entity.quality_affects_inventory_size = false
 
             if c ~= 'steel-chest' then
                 entity.max_logistic_slots = 1
@@ -1576,6 +1216,7 @@ if settings.startup['PHI-CT'].value then
         entity.circuit_wire_max_distance = data.raw['container']['steel-chest'].circuit_wire_max_distance
         entity.inventory_type = 'with_filters_and_bar'
         entity.inventory_size = 48
+        entity.quality_affects_inventory_size = true
         entity.gui_mode = 'all'
         data:extend({entity})
 
