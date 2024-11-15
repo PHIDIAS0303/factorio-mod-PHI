@@ -373,7 +373,8 @@ local items = {
             ['cryogenic-science-pack'] = true,
             ['electromagnetic-science-pack'] = true,
             ['metallurgic-science-pack'] = true,
-            ['promethium-science-pack'] = true
+            ['promethium-science-pack'] = true,
+            ['space-science-pack'] = true
         },
         ['technology'] = {
             'planet-discovery-vulcanus',
