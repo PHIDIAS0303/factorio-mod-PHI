@@ -550,6 +550,7 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['tesla-weapons'].prerequisites = {'military-4'}
             data.raw.technology['mech-armor'].prerequisites = {'power-armor-mk2'}
             data.raw.technology['stack-inserter'].prerequisites = {'bulk-inserter'}
+            data.raw.technology['power-armor-mk2'].prerequisites = {'power-armor', 'military-4', 'speed-module-2', 'efficiency-module-2'}
             data.raw.technology['health'].prerequisites = {'utility-science-pack'}
             data.raw.technology['research-productivity'].prerequisites = {'space-science-pack'}
             data.raw.technology['processing-unit-productivity'].prerequisites = {'processing-unit'}
