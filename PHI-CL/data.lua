@@ -536,6 +536,8 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['efficiency-module-3'].unit.count = 400
             data.raw.technology['efficiency-module-3'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
             data.raw.technology['kovarex-enrichment-process'].prerequisites = {'uranium-processing'}
+            data.raw.technology['fusion-reactor'].prerequisites = {'nuclear-power', 'space-science-pack'}
+            data.raw.technology['fusion-reactor-equipment'].prerequisites = {'fission-reactor-equipment', 'fusion-reactor'}
             data.raw.technology['artillery'].prerequisites = {'military-4', 'radar'}
             data.raw.technology['battery-mk3-equipment'].prerequisites = {'battery-mk2-equipment'}
             data.raw.technology['rocket-turret'].effects = {{type='unlock-recipe', recipe='rocket-turret'}}
@@ -581,6 +583,8 @@ if settings.startup['PHI-SA'].value then
             table.insert(data.raw.technology['kovarex-enrichment-process'].unit.ingredients, {'production-science-pack', 1})
             table.insert(data.raw.technology['mech-armor'].unit.ingredients, {'space-science-pack', 1})
             table.insert(data.raw.technology['transport-belt-capacity-2'].unit.ingredients, {'space-science-pack', 1})
+            table.insert(data.raw.technology['fusion-reactor'].unit.ingredients, {'space-science-pack', 1})
+            table.insert(data.raw.technology['fusion-reactor-equipment'].unit.ingredients, {'space-science-pack', 1})
             table.insert(data.raw.technology['research-productivity'].unit.ingredients, {'space-science-pack', 1})
             data.raw.technology['electric-weapons-damage-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
             data.raw.technology['electric-weapons-damage-2'].prerequisites = {'electric-weapons-damage-1'}
@@ -624,6 +628,19 @@ if settings.startup['PHI-SA'].value then
             data.raw.recipe['railgun-turret'].ingredients = {{type='item', name='steel-plate', amount=30}, {type='item', name='processing-unit', amount=50}, {type='item', name='battery', amount=50}, {type='fluid', name='sulfuric-acid', amount=100}}
             data.raw.recipe['rocket-turret'].category = 'crafting'
             data.raw.recipe['rocket-turret'].ingredients = {{type='item', name='rocket-launcher', amount=4}, {type='item', name='steel-plate', amount=40}, {type='item', name='processing-unit', amount=4}, {type='item', name='iron-gear-wheel', amount=20}}
+            data.raw.recipe['fusion-reactor'].category = 'crafting'
+            data.raw.recipe['fusion-reactor'].ingredients = {{type='item', name='nuclear-reactor', amount=1}, {type='item', name='steel-plate', amount=200}, {type='item', name='processing-unit', amount=450}}
+            data.raw.recipe['fusion-generator'].category = 'crafting'
+            data.raw.recipe['fusion-generator'].ingredients = {{type='item', name='steam-turbine', amount=1}, {type='item', name='steel-plate', amount=100}, {type='item', name='processing-unit', amount=150}}
+            data.raw.recipe['fusion-power-cell'].category = 'crafting-with-fluid'
+            data.raw.recipe['fusion-power-cell'].ingredients = {{type='item', name='steel-plate', amount=5}, {type='fluid', name='petroleum-gas', amount=100}}
+            data.raw.recipe['fusion-reactor-equipment'].category = 'crafting'
+            data.raw.recipe['fusion-reactor-equipment'].ingredients = {{type='item', name='fission-reactor-equipment', amount=1}, {type='item', name='fusion-power-cell', amount=10}, {type='item', name='steel-plate', amount=350}, {type='item', name='processing-unit', amount=275}}
+            data.raw.recipe['fluoroketone'].category = 'chemistry'
+            data.raw.recipe['fluoroketone'].ingredients = {{type='fluid', name='light-oil', amount=50}, {type='fluid', name='petroleum-gas', amount=50}, {type='item', name='steel-plate', amount=1}}
+            data.raw.recipe['fluoroketone-cooling'].category = 'chemistry'
+            data.raw.recipe['fusion-power-cell'].category = 'crafting-with-fluid'
+            data.raw.recipe['fusion-power-cell'].ingredients = {{type='item', name='steel-plate', amount=5}, {type='fluid', name='petroleum-gas', amount=100}}
 
             data.raw['assembling-machine']['captive-biter-spawner'].surface_conditions = nil
             data.raw['agricultural-tower']['agricultural-tower'].surface_conditions = nil
@@ -700,6 +717,8 @@ if settings.startup['PHI-SA'].value then
             data.raw.item['railgun-turret'].default_import_location = nil
             data.raw.item['tesla-turret'].default_import_location = nil
             data.raw.item['stack-inserter'].default_import_location = nil
+            data.raw.item['fusion-reactor'].default_import_location = nil
+            data.raw.item['fusion-generator'].default_import_location = nil
             data.raw.gun['teslagun'].default_import_location = nil
             data.raw.ammo['tesla-ammo'].default_import_location = nil
 
@@ -769,7 +788,7 @@ if settings.startup['PHI-SA'].value then
 
             for _, v in pairs(items['item']) do
                 if v.enabled and v.mod and v.mod == 'space-age' then
-                    if not data.raw.technology[v.tech] then
+                    if not data.raw.technology[v.tech] or data.raw.technology[v.tech].hidden then
                         v.enabled = false
                     end
                 end
