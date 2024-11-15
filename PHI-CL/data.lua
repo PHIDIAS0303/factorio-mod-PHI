@@ -537,6 +537,8 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['efficiency-module-3'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
             data.raw.technology['kovarex-enrichment-process'].prerequisites = {'uranium-processing'}
             data.raw.technology['fusion-reactor'].prerequisites = {'nuclear-power', 'space-science-pack'}
+            table.insert(data.raw.technology['fusion-reactor'].effects, {type='unlock-recipe', recipe='fluoroketone'})
+            table.insert(data.raw.technology['fusion-reactor'].effects, {type='unlock-recipe', recipe='fluoroketone-cooling'})
             data.raw.technology['fusion-reactor-equipment'].prerequisites = {'fission-reactor-equipment', 'fusion-reactor'}
             data.raw.technology['artillery'].prerequisites = {'military-4', 'radar'}
             data.raw.technology['battery-mk3-equipment'].prerequisites = {'battery-mk2-equipment'}
@@ -577,6 +579,11 @@ if settings.startup['PHI-SA'].value then
                     if v.max_level and v.max_level == 'infinite' and (not string.find(v.name, 'productivity')) then
                         table.insert(v.unit.ingredients, {'space-science-pack', 1})
                     end
+                end
+
+                if items['space-age']['technology'][v.name] then
+                    data.raw.technology[v.name].hidden = true
+                    data.raw.technology[v.name].hidden_in_factoriopedia = true
                 end
             end
 
@@ -787,22 +794,17 @@ if settings.startup['PHI-SA'].value then
             data.raw['complete-objective-achievement']['express-delivery'] = nil
 
             for _, v in pairs(items['item']) do
-                if v.enabled and v.mod and v.mod == 'space-age' then
-                    if not data.raw.technology[v.tech] or data.raw.technology[v.tech].hidden then
+                if v.enabled and v.mod and (v.mod == 'space-age' or v.mod == 'quality') then
+                    if (not data.raw.technology[v.tech]) or data.raw.technology[v.tech].hidden then
                         v.enabled = false
                     end
                 end
             end
 
-            for _, v in pairs(items['space-age']['technology']) do
-                data.raw.technology[v].hidden = true
-                data.raw.technology[v].hidden_in_factoriopedia = true
-            end
-
-            for k, v in pairs(data.raw.recipe) do
-                if items['space-age']['recipe'][k] then
-                    data.raw.recipe[k].hidden = true
-                    data.raw.recipe[k].hidden_in_factoriopedia = true
+            for _, v in pairs(data.raw.recipe) do
+                if items['space-age']['recipe'][v.name] then
+                    data.raw.recipe[v.name].hidden = true
+                    data.raw.recipe[v.name].hidden_in_factoriopedia = true
                 end
 
                 v.surface_conditions = nil
