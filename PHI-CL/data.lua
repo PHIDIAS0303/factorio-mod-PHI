@@ -769,7 +769,6 @@ if settings.startup['PHI-SA'].value then
             data.raw['tips-and-tricks-item']['spoilables-research'] = nil
 
             data.raw['dont-build-entity-achievement']['logistic-network-embargo'].research_with = nil
-            data.raw['use-entity-in-energy-production-achievement']['fusion-power'] = nil
             data.raw['create-platform-achievement']['reach-for-the-stars'] = nil
             data.raw['change-surface-achievement']['visit-fulgora'] = nil
             data.raw['change-surface-achievement']['visit-gleba'] = nil
@@ -790,16 +789,6 @@ if settings.startup['PHI-SA'].value then
             data.raw['kill-achievement']['if-it-bleeds'] = nil
             data.raw['kill-achievement']['we-need-bigger-guns'] = nil
             data.raw['kill-achievement']['size-doesnt-matter'] = nil
-            data.raw['complete-objective-achievement']['work-around-the-clock'] = nil
-            data.raw['complete-objective-achievement']['express-delivery'] = nil
-
-            for _, v in pairs(items['item']) do
-                if v.enabled and v.mod and (v.mod == 'space-age' or v.mod == 'quality') then
-                    if (not data.raw.technology[v.tech]) or data.raw.technology[v.tech].hidden then
-                        v.enabled = false
-                    end
-                end
-            end
 
             for _, v in pairs(data.raw.recipe) do
                 if items['space-age']['recipe'][v.name] then
@@ -808,6 +797,14 @@ if settings.startup['PHI-SA'].value then
                 end
 
                 v.surface_conditions = nil
+            end
+
+            for k, v in pairs(items['item']) do
+                if v.enabled and v.mod and (v.mod == 'space-age' or v.mod == 'quality') then
+                    if data.raw.technology[v.tech].hidden or data.raw.recipe[k].hidden then
+                        v.enabled = false
+                    end
+                end
             end
 
             for _, v in pairs(data.raw.lab) do

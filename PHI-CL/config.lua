@@ -400,7 +400,6 @@ local items = {
            ['biter-egg-handling'] = true,
            ['carbon-fiber'] = true,
            ['fish-breeding'] = true,
-           ['calcite-processing'] = true,
            ['holmium-processing'] = true,
            ['electromagnetic-plant'] = true,
            ['electromagnetic-science-pack'] = true,
@@ -492,11 +491,9 @@ local items = {
             ['ammoniacal-solution-separation'] = true,
             ['lithium'] = true,
             ['lithium-plate'] = true,
-            ['fluoroketone'] = true,
             ['ice-platform'] = true,
             ['solid-fuel-from-ammonia'] = true,
             ['ammonia-rocket-fuel'] = true,
-            ['fluoroketone-cooling'] = true,
             ['quantum-processor'] = true,
             ['holmium-solution'] = true,
             ['holmium-plate'] = true,
@@ -525,7 +522,9 @@ local items = {
             ['foundation'] = true,
             ['foundation-o'] = true,
             ['space-platform-foundation'] = true,
-            ['space-platform-starter-pack'] = true
+            ['space-platform-starter-pack'] = true,
+            ['steam-condensation'] = true,
+            ['ice-melting'] = true
         }
     }
 }
