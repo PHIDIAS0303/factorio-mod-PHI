@@ -198,7 +198,7 @@ if settings.startup['PHI-MI'].value then
     end
 
     if settings.startup['PHI-MI-PIPE'].value then
-        local s = (1 + settings.startup['PHI-MI-PIPE'].value) / 2
+        local s = settings.startup['PHI-MI-PIPE'].value
 
         for _, t in pairs({data.raw['offshore-pump'], data.raw['pump']}) do
             for _, v in pairs(t) do
