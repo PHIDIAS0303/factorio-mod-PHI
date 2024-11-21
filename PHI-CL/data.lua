@@ -246,7 +246,7 @@ if settings.startup['PHI-MI'].value then
     end
 end
 
-if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-REQUIREMENT'].value) then
+if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) or (settings.startup['PHI-SA'].value and (settings.startup['PHI-SA-REQUIREMENT'].value or settings.startup['PHI-SA-VANILLA'].value)) then
     data:extend({{type='recipe-category', name='fluid'}})
 
     item = table.deepcopy(data.raw['item']['offshore-pump'])
@@ -351,7 +351,7 @@ if settings.startup['PHI-SA'].value then
         table.insert(data.raw.technology['agriculture'].effects, {type='unlock-recipe', recipe='spoilage-from-nutrients'})
     end
 
-    if ((not settings.startup['PHI-SA-REQUIREMENT'].value) or settings.startup['PHI-SA-VANILLA'].value) and mods['space-age'] then
+    if (settings.startup['PHI-SA-REQUIREMENT'].value or settings.startup['PHI-SA-VANILLA'].value) and mods['space-age'] then
         data.raw['assembling-machine']['captive-biter-spawner'].surface_conditions = nil
         data.raw['agricultural-tower']['agricultural-tower'].surface_conditions = nil
         data.raw['asteroid-collector']['asteroid-collector'].surface_conditions = nil
@@ -410,7 +410,7 @@ if settings.startup['PHI-SA'].value then
             v.surface_conditions = nil
         end
 
-        for _, v in pairs({'heavy-oil', 'lava', 'ammonia-solution'}) do
+        for _, v in pairs({'heavy-oil', 'lava', 'ammoniacal-solution'}) do
             if data.raw.fluid[v] then
                 data:extend({{
                     type = 'recipe',
