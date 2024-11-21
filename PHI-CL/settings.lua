@@ -183,7 +183,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-SA-REQUIREMENT',
   setting_type = 'startup',
-  default_value = false,
+  default_value = true,
   order = 'F04'
 }, {
   type = 'bool-setting',

@@ -246,7 +246,7 @@ if settings.startup['PHI-MI'].value then
     end
 end
 
-if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) or (settings.startup['PHI-SA'].value and (settings.startup['PHI-SA-REQUIREMENT'].value or settings.startup['PHI-SA-VANILLA'].value)) then
+if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) or (settings.startup['PHI-MI'].value) or (settings.startup['PHI-SA'].value and (settings.startup['PHI-SA-REQUIREMENT'].value or settings.startup['PHI-SA-VANILLA'].value)) then
     data:extend({{type='recipe-category', name='fluid'}})
 
     item = table.deepcopy(data.raw['item']['offshore-pump'])
@@ -585,7 +585,6 @@ if settings.startup['PHI-SA'].value then
                 data.raw.planet[v].hidden_in_factoriopedia = true
             end
 
-
             for _, v in pairs(data.raw['space-location']) do
                 v.hidden = true
                 v.hidden_in_factoriopedia = true
@@ -889,10 +888,10 @@ if settings.startup['PHI-SA'].value then
             data.raw['kill-achievement']['we-need-bigger-guns'] = nil
             data.raw['kill-achievement']['size-doesnt-matter'] = nil
 
-            for _, v in pairs(data.raw.recipe) do
-                if items['space-age']['recipe'][v.name] then
-                    data.raw.recipe[v.name].hidden = true
-                    data.raw.recipe[v.name].hidden_in_factoriopedia = true
+            for k, v in pairs(items['space-age']['recipe']) do
+                if data.raw.recipe[k] then
+                    data.raw.recipe[k].hidden = v
+                    data.raw.recipe[k].hidden_in_factoriopedia = v
                 end
             end
 
