@@ -246,6 +246,77 @@ if settings.startup['PHI-MI'].value then
     end
 end
 
+if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-REQUIREMENT'].value) then
+    data:extend({{type='recipe-category', name='fluid'}})
+
+    item = table.deepcopy(data.raw['item']['offshore-pump'])
+    item.name = 'super-pump'
+    item.place_result = item.name
+    item.order = 'b[fluids]-a[super-pump]-o'
+
+    item.icons = {
+        {
+            icon = '__base__/graphics/icons/offshore-pump.png',
+            tint = items['tint'][2],
+            icon_size = 64,
+            icon_mipmaps = 4
+        }
+    }
+
+    item.icon = nil
+    item.icon_size = nil
+    item.icon_mipmaps = nil
+    item.localised_name = {'name.super-pump'}
+    data:extend({item})
+
+    entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
+    entity.name = item.name
+    entity.minable.result = item.name
+    entity.type = 'assembling-machine'
+    entity.crafting_categories = {'fluid'}
+    entity.crafting_speed = 1
+    entity.energy_source = {type = 'void'}
+    entity.fluid_box.volume = 4000
+    entity.fluid_boxes = {table.deepcopy(entity.fluid_box)}
+    entity.fluid_box = nil
+    entity.fluid_boxes_off_when_no_fluid_recipe = false
+    entity.effect_receiver = {uses_module_effects=false, uses_beacon_effects=false}
+    entity.allowed_effects = {'consumption'}
+    entity.collision_mask = nil
+    entity.tile_buildability_rules = nil
+    entity.fluid_source_offset = nil
+    entity.localised_name = item.localised_name
+    data:extend({entity})
+
+    data:extend({{
+        type = 'recipe',
+        name = item.name,
+        energy_required = 2,
+        enabled = true,
+        ingredients = {{type='item', name='electronic-circuit', amount=2}, {type='item', name='pipe', amount=1}, {type='item', name='iron-gear-wheel', amount=1}},
+        results = {{type='item', name=item.name, amount=1}},
+        main_product = item.name,
+        localised_name = item.localised_name
+    }})
+
+    if data.raw.fluid['water'] then
+        data:extend({{
+            type = 'recipe',
+            name = 'water',
+            category = 'fluid',
+            energy_required = 1,
+            enabled = true,
+            ingredients = {},
+            results = {{type='fluid', name='water', amount=16000, temperature=data.raw.fluid['water'].default_temperature}},
+            main_product = 'water',
+            hide_from_player_crafting = true,
+            allow_productivity = false,
+            crafting_machine_tint = {primary=data.raw.fluid['water'].flow_color},
+            localised_name = data.raw.fluid['water'].localised_name
+        }})
+    end
+end
+
 if settings.startup['PHI-SA'].value then
     if (not settings.startup['PHI-SA-SPOIL'].value) and mods['space-age'] then
         local function spoil_handle(i)
@@ -337,6 +408,25 @@ if settings.startup['PHI-SA'].value then
 
         for _, v in pairs(data.raw.recipe) do
             v.surface_conditions = nil
+        end
+
+        for _, v in pairs({'heavy-oil', 'lava', 'ammonia-solution'}) do
+            if data.raw.fluid[v] then
+                data:extend({{
+                    type = 'recipe',
+                    name = v,
+                    category = 'fluid',
+                    energy_required = 1,
+                    enabled = true,
+                    ingredients = {},
+                    results = {{type='fluid', name=v, amount=16000, temperature=data.raw.fluid[v].default_temperature}},
+                    main_product = v,
+                    hide_from_player_crafting = true,
+                    allow_productivity = false,
+                    crafting_machine_tint = {primary=data.raw.fluid[v].flow_color},
+                    localised_name = data.raw.fluid[v].localised_name
+                }})
+            end
         end
     end
 
@@ -908,60 +998,9 @@ if settings.startup['PHI-CT'].value then
         }})
 
         table.insert(data.raw.technology['electric-energy-accumulators'].effects, {type='unlock-recipe', recipe=item.name})
-        data:extend({{type='recipe-category', name='fluid'}})
-
-        item = table.deepcopy(data.raw['item']['offshore-pump'])
-        item.name = 'super-pump'
-        item.place_result = item.name
-        item.order = 'b[fluids]-a[super-pump]-o'
-
-        item.icons = {
-            {
-                icon = '__base__/graphics/icons/offshore-pump.png',
-                tint = items['tint'][2],
-                icon_size = 64,
-                icon_mipmaps = 4
-            }
-        }
-
-        item.icon = nil
-        item.icon_size = nil
-        item.icon_mipmaps = nil
-        item.localised_name = {'name.super-pump'}
-        data:extend({item})
-
-        entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
-        entity.name = item.name
-        entity.minable.result = item.name
-        entity.type = 'assembling-machine'
-        entity.crafting_categories = {'fluid'}
-        entity.crafting_speed = 1
-        entity.energy_source = {type = 'void'}
-        entity.fluid_box.volume = 4000
-        entity.fluid_boxes = {table.deepcopy(entity.fluid_box)}
-        entity.fluid_box = nil
-        entity.fluid_boxes_off_when_no_fluid_recipe = false
-        entity.effect_receiver = {uses_module_effects=false, uses_beacon_effects=false}
-        entity.allowed_effects = {'consumption'}
-        entity.collision_mask = nil
-        entity.tile_buildability_rules = nil
-        entity.fluid_source_offset = nil
-        entity.localised_name = item.localised_name
-        data:extend({entity})
-
-        data:extend({{
-            type = 'recipe',
-            name = item.name,
-            energy_required = 2,
-            enabled = true,
-            ingredients = {{type='item', name='electronic-circuit', amount=2}, {type='item', name='pipe', amount=1}, {type='item', name='iron-gear-wheel', amount=1}},
-            results = {{type='item', name=item.name, amount=1}},
-            main_product = item.name,
-            localised_name = item.localised_name
-        }})
 
         for _, v in pairs(data.raw.fluid) do
-            if v.subgroup == 'fluid' then
+            if v.subgroup == 'fluid' and (not data.raw[v.name]) then
                 local temp
 
                 if v.max_temperature then
