@@ -181,10 +181,16 @@ data:extend({
   order = 'F03'
 }, {
   type = 'bool-setting',
+  name = 'PHI-SA-REQUIREMENT',
+  setting_type = 'startup',
+  default_value = false,
+  order = 'F04'
+}, {
+  type = 'bool-setting',
   name = 'PHI-SA-GENERIC',
   setting_type = 'startup',
   default_value = true,
-  order = 'F04'
+  order = 'F05'
 }, {
   type = 'int-setting',
   name = 'PHI-SA-QUALITY',
@@ -192,19 +198,19 @@ data:extend({
   default_value = 10,
   minimum_value = 1,
   maximum_value = 100,
-  order = 'F05'
+  order = 'F06'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-NO-QUALITY',
   setting_type = 'startup',
   default_value = false,
-  order = 'F06'
+  order = 'F07'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-VANILLA',
   setting_type = 'startup',
   default_value = false,
-  order = 'F07'
+  order = 'F08'
 }, {
   type = 'bool-setting',
   name = 'PHI-CT',

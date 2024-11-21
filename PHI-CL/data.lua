@@ -280,6 +280,66 @@ if settings.startup['PHI-SA'].value then
         table.insert(data.raw.technology['agriculture'].effects, {type='unlock-recipe', recipe='spoilage-from-nutrients'})
     end
 
+    if ((not settings.startup['PHI-SA-REQUIREMENT'].value) or settings.startup['PHI-SA-VANILLA'].value) and mods['space-age'] then
+        data.raw['assembling-machine']['captive-biter-spawner'].surface_conditions = nil
+        data.raw['agricultural-tower']['agricultural-tower'].surface_conditions = nil
+        data.raw['asteroid-collector']['asteroid-collector'].surface_conditions = nil
+        data.raw['rocket-silo']['rocket-silo'].surface_conditions = nil
+        data.raw['cargo-landing-pad']['cargo-landing-pad'].surface_conditions = nil
+        data.raw['reactor']['heating-tower'].surface_conditions = nil
+        data.raw['furnace']['recycler'].surface_conditions = nil
+        data.raw['fusion-reactor']['fusion-reactor'].surface_conditions = nil
+        data.raw['fusion-generator']['fusion-generator'].surface_conditions = nil
+        data.raw['thruster']['thruster'].surface_conditions = nil
+        data.raw['assembling-machine']['biochamber'].surface_conditions = nil
+        data.raw['assembling-machine']['crusher'].surface_conditions = nil
+        data.raw['assembling-machine']['cryogenic-plant'].surface_conditions = nil
+        data.raw['assembling-machine']['electromagnetic-plant'].surface_conditions = nil
+        data.raw['assembling-machine']['foundry'].surface_conditions = nil
+        data.raw['lab']['biolab'].surface_conditions = nil
+        data.raw['fluid-turret']['flamethrower-turret'].surface_conditions = nil
+        data.raw['furnace']['stone-furnace'].surface_conditions = nil
+        data.raw['mining-drill']['burner-mining-drill'].surface_conditions = nil
+        data.raw['furnace']['steel-furnace'].surface_conditions = nil
+        data.raw['boiler']['boiler'].surface_conditions = nil
+        data.raw['roboport']['roboport'].surface_conditions = nil
+        data.raw['inserter']['burner-inserter'].surface_conditions = nil
+        data.raw['car']['car'].surface_conditions = nil
+        data.raw['car']['tank'].surface_conditions = nil
+        data.raw['spider-vehicle']['spidertron'].surface_conditions = nil
+        data.raw['legacy-curved-rail']['legacy-curved-rail'].surface_conditions = nil
+        data.raw['legacy-straight-rail']['legacy-straight-rail'].surface_conditions = nil
+        data.raw['locomotive']['locomotive'].surface_conditions = nil
+        data.raw['cargo-wagon']['cargo-wagon'].surface_conditions = nil
+        data.raw['fluid-wagon']['fluid-wagon'].surface_conditions = nil
+        data.raw['artillery-wagon']['artillery-wagon'].surface_conditions = nil
+        data.raw['train-stop']['train-stop'].surface_conditions = nil
+        data.raw['rail-signal']['rail-signal'].surface_conditions = nil
+        data.raw['rail-chain-signal']['rail-chain-signal'].surface_conditions = nil
+        data.raw['curved-rail-b']['curved-rail-b'].surface_conditions = nil
+        data.raw['curved-rail-a']['curved-rail-a'].surface_conditions = nil
+        data.raw['half-diagonal-rail']['half-diagonal-rail'].surface_conditions = nil
+        data.raw['straight-rail']['straight-rail'].surface_conditions = nil
+        data.raw['rail-ramp']['rail-ramp'].surface_conditions = nil
+        data.raw['elevated-straight-rail']['elevated-straight-rail'].surface_conditions = nil
+        data.raw['elevated-half-diagonal-rail']['elevated-half-diagonal-rail'].surface_conditions = nil
+        data.raw['elevated-curved-rail-a']['elevated-curved-rail-a'].surface_conditions = nil
+        data.raw['elevated-curved-rail-b']['elevated-curved-rail-b'].surface_conditions = nil
+        data.raw['rail-support']['rail-support'].surface_conditions = nil
+        data.raw['container']['wooden-chest'].surface_conditions = nil
+        data.raw['container']['iron-chest'].surface_conditions = nil
+        data.raw['container']['steel-chest'].surface_conditions = nil
+        data.raw['logistic-container']['passive-provider-chest'].surface_conditions = nil
+        data.raw['logistic-container']['active-provider-chest'].surface_conditions = nil
+        data.raw['logistic-container']['storage-chest'].surface_conditions = nil
+        data.raw['logistic-container']['buffer-chest'].surface_conditions = nil
+        data.raw['logistic-container']['requester-chest'].surface_conditions = nil
+
+        for _, v in pairs(data.raw.recipe) do
+            v.surface_conditions = nil
+        end
+    end
+
     if settings.startup['PHI-SA-GENERIC'].value or settings.startup['PHI-SA-VANILLA'].value then
         data.raw['mining-drill']['electric-mining-drill'].filter_count = 5
 
@@ -649,59 +709,6 @@ if settings.startup['PHI-SA'].value then
             data.raw.recipe['fusion-power-cell'].category = 'crafting-with-fluid'
             data.raw.recipe['fusion-power-cell'].ingredients = {{type='item', name='steel-plate', amount=5}, {type='fluid', name='petroleum-gas', amount=100}}
 
-            data.raw['assembling-machine']['captive-biter-spawner'].surface_conditions = nil
-            data.raw['agricultural-tower']['agricultural-tower'].surface_conditions = nil
-            data.raw['asteroid-collector']['asteroid-collector'].surface_conditions = nil
-            data.raw['rocket-silo']['rocket-silo'].surface_conditions = nil
-            data.raw['cargo-landing-pad']['cargo-landing-pad'].surface_conditions = nil
-            data.raw['reactor']['heating-tower'].surface_conditions = nil
-            data.raw['furnace']['recycler'].surface_conditions = nil
-            data.raw['fusion-reactor']['fusion-reactor'].surface_conditions = nil
-            data.raw['fusion-generator']['fusion-generator'].surface_conditions = nil
-            data.raw['thruster']['thruster'].surface_conditions = nil
-            data.raw['assembling-machine']['biochamber'].surface_conditions = nil
-            data.raw['assembling-machine']['crusher'].surface_conditions = nil
-            data.raw['assembling-machine']['cryogenic-plant'].surface_conditions = nil
-            data.raw['assembling-machine']['electromagnetic-plant'].surface_conditions = nil
-            data.raw['assembling-machine']['foundry'].surface_conditions = nil
-            data.raw['lab']['biolab'].surface_conditions = nil
-            data.raw['fluid-turret']['flamethrower-turret'].surface_conditions = nil
-            data.raw['furnace']['stone-furnace'].surface_conditions = nil
-            data.raw['mining-drill']['burner-mining-drill'].surface_conditions = nil
-            data.raw['furnace']['steel-furnace'].surface_conditions = nil
-            data.raw['boiler']['boiler'].surface_conditions = nil
-            data.raw['roboport']['roboport'].surface_conditions = nil
-            data.raw['inserter']['burner-inserter'].surface_conditions = nil
-            data.raw['car']['car'].surface_conditions = nil
-            data.raw['car']['tank'].surface_conditions = nil
-            data.raw['spider-vehicle']['spidertron'].surface_conditions = nil
-            data.raw['legacy-curved-rail']['legacy-curved-rail'].surface_conditions = nil
-            data.raw['legacy-straight-rail']['legacy-straight-rail'].surface_conditions = nil
-            data.raw['locomotive']['locomotive'].surface_conditions = nil
-            data.raw['cargo-wagon']['cargo-wagon'].surface_conditions = nil
-            data.raw['fluid-wagon']['fluid-wagon'].surface_conditions = nil
-            data.raw['artillery-wagon']['artillery-wagon'].surface_conditions = nil
-            data.raw['train-stop']['train-stop'].surface_conditions = nil
-            data.raw['rail-signal']['rail-signal'].surface_conditions = nil
-            data.raw['rail-chain-signal']['rail-chain-signal'].surface_conditions = nil
-            data.raw['curved-rail-b']['curved-rail-b'].surface_conditions = nil
-            data.raw['curved-rail-a']['curved-rail-a'].surface_conditions = nil
-            data.raw['half-diagonal-rail']['half-diagonal-rail'].surface_conditions = nil
-            data.raw['straight-rail']['straight-rail'].surface_conditions = nil
-            data.raw['rail-ramp']['rail-ramp'].surface_conditions = nil
-            data.raw['elevated-straight-rail']['elevated-straight-rail'].surface_conditions = nil
-            data.raw['elevated-half-diagonal-rail']['elevated-half-diagonal-rail'].surface_conditions = nil
-            data.raw['elevated-curved-rail-a']['elevated-curved-rail-a'].surface_conditions = nil
-            data.raw['elevated-curved-rail-b']['elevated-curved-rail-b'].surface_conditions = nil
-            data.raw['rail-support']['rail-support'].surface_conditions = nil
-            data.raw['container']['wooden-chest'].surface_conditions = nil
-            data.raw['container']['iron-chest'].surface_conditions = nil
-            data.raw['container']['steel-chest'].surface_conditions = nil
-            data.raw['logistic-container']['passive-provider-chest'].surface_conditions = nil
-            data.raw['logistic-container']['active-provider-chest'].surface_conditions = nil
-            data.raw['logistic-container']['storage-chest'].surface_conditions = nil
-            data.raw['logistic-container']['buffer-chest'].surface_conditions = nil
-            data.raw['logistic-container']['requester-chest'].surface_conditions = nil
             data.raw['plant']['yumako-tree'].hidden = true
             data.raw['plant']['yumako-tree'].hidden_in_factoriopedia = true
             data.raw['plant']['jellystem'].hidden = true
@@ -797,8 +804,6 @@ if settings.startup['PHI-SA'].value then
                     data.raw.recipe[v.name].hidden = true
                     data.raw.recipe[v.name].hidden_in_factoriopedia = true
                 end
-
-                v.surface_conditions = nil
             end
 
             for _, v in pairs(items['item']) do
