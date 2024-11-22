@@ -765,64 +765,7 @@ for _, t in pairs(data.raw['tree']) do
 	t.collision_box = {{-0.05, -0.05}, {0.05, 0.05}}
 end
 
-    if settings.startup['PHI-CT-TILE'].value then
-        for _, v in pairs(data.raw) do
-            for _, e in pairs(v) do
-                if e.surface_conditions then
-                    e.surface_conditions = nil
-                end
-            end
-        end
-
-        for _, t in pairs (data.raw.tile) do
-            if t.type and t.type == 'tile' and t.subgroup == 'nauvis-tiles' and t.autoplace and t.autoplace.probability_expression then
-                t.autoplace.probability_expression = '0'
-            end
-        end
-
-        if data.raw.tile[settings.startup['PHI-CT-TILE-CHOICE'].value] and data.raw.tile[settings.startup['PHI-CT-TILE-CHOICE'].value].autoplace and data.raw.tile[settings.startup['PHI-CT-TILE-CHOICE'].value].autoplace.probability_expression then
-            data.raw.tile[settings.startup['PHI-CT-TILE-CHOICE'].value].autoplace.probability_expression = '1'
-        end
-
-        for _, t in pairs({data.raw['simple-entity'], data.raw['optimized-decorative'], data.raw['fish']}) do
-            for _, e in pairs(t) do
-                e.autoplace = nil
-            end
-        end
-
-        local autoplace_controls = {}
-
-        for k, _ in pairs (data.raw['autoplace-control']) do
-            autoplace_controls[k] = {
-                size = 'none'
-            }
-        end
-
-        data.raw['map-gen-presets']['default']['empty-world'] = {
-            order = 'zz',
-            basic_settings = {
-                autoplace_controls = autoplace_controls,
-                water = 'none',
-                cliff_settings = {
-                    name = 'none',
-                    cliff_elevation_interval = 100,
-                    cliff_elevation_0 = 100,
-                    richness = 0
-                }
-            },
-            advanced_settings = {
-                pollution = {
-                    enabled = false
-                },
-                enemy_evolution = {
-                    enabled = false
-                },
-                enemy_expansion = {
-                    enabled = false
-                }
-            }
-        }
-    end
+    
 
 ** MIGRATION
         if script.active_mods['space-exploration'] then
@@ -840,21 +783,6 @@ end
                 {type = 'impact', decrease = 20, percent = 50},
                 {type = 'poison', decrease = 20, percent = 50}
                 
-   {
-    type = 'bool-setting',
-    name = 'PHI-CT-TILE',
-    setting_type = 'startup',
-    default_value = true,
-    order = 'G04'
-  }, {
-    type = 'string-setting',
-    name = 'PHI-CT-TILE-CHOICE',
-    setting_type = 'startup',
-    default_value = 'grass-1',
-    allowed_values = {'concrete', 'deepwater', 'deepwater-green', 'dirt-1', 'dirt-2', 'dirt-3', 'dirt-4', 'dirt-5', 'dirt-6', 'dirt-7', 'dry-dirt', 'grass-1', 'grass-2', 'grass-3', 'grass-4', 'hazard-concrete-left', 'hazard-concrete-right', 'lab-dark-1', 'lab-dark-2', 'lab-white', 'landfill', 'out-of-map', 'red-desert-0', 'red-desert-1', 'red-desert-2', 'red-desert-3', 'refined-concrete', 'refined-hazard-concrete-left', 'refined-hazard-concrete-right', 'sand-1', 'sand-2', 'sand-3', 'stone-path', 'tutorial-grid', 'water', 'water-green', 'water-mud', 'water-shallow'},
-    order = 'G05'
-  }
-  
         "? aai-industry >= 0.5.0",
         "? Krastorio2 >= 1.3.0",
         "? space-exploration >= 0.6.0",

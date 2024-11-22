@@ -349,6 +349,10 @@ if settings.startup['PHI-SA'].value then
         }})
 
         table.insert(data.raw.technology['agriculture'].effects, {type='unlock-recipe', recipe='spoilage-from-nutrients'})
+
+        data.raw['tips-and-tricks-item']['spoilables'] = nil
+        data.raw['tips-and-tricks-item']['spoilables-result'] = nil
+        data.raw['tips-and-tricks-item']['spoilables-research'] = nil
     end
 
     if (settings.startup['PHI-SA-REQUIREMENT'].value or settings.startup['PHI-SA-VANILLA'].value) and mods['space-age'] then
@@ -428,6 +432,137 @@ if settings.startup['PHI-SA'].value then
                 }})
             end
         end
+
+        for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
+            data.raw.planet[v].map_gen_settings = nil
+            data.raw.planet[v].hidden = true
+            data.raw.planet[v].hidden_in_factoriopedia = true
+        end
+
+        for _, v in pairs(data.raw['space-location']) do
+            v.hidden = true
+            v.hidden_in_factoriopedia = true
+        end
+
+        for _, v in pairs(data.raw['space-connection']) do
+            v.hidden = true
+            v.hidden_in_factoriopedia = true
+        end
+
+        data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = false
+        data.raw['rocket-silo']['rocket-silo'].rocket_parts_required = 100
+        data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 1
+        data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 0
+        data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 0
+
+        local item_sounds = require('__base__/prototypes/item_sounds')
+
+        data:extend({
+            {
+                type = 'item',
+                name = 'satellite',
+                icon = '__base__/graphics/icons/satellite.png',
+                subgroup = 'space-related',
+                order = 'd[rocket-parts]-e[satellite]',
+                inventory_move_sound = item_sounds.mechanical_inventory_move,
+                pick_sound = item_sounds.mechanical_inventory_pickup,
+                drop_sound = item_sounds.mechanical_inventory_move,
+                stack_size = 1,
+                weight = 1 * tons,
+                rocket_launch_products = {{type='item', name='space-science-pack', amount=1000}},
+                send_to_orbit_mode = 'automated'
+            },
+            {
+                type = 'recipe',
+                name = 'satellite',
+                energy_required = 5,
+                enabled = false,
+                category = 'crafting',
+                ingredients =
+                {
+                  {type='item', name='low-density-structure', amount=100},
+                  {type='item', name='solar-panel', amount=100},
+                  {type='item', name='accumulator', amount=100},
+                  {type='item', name='radar', amount=5},
+                  {type='item', name='processing-unit', amount=100},
+                  {type='item', name='rocket-fuel', amount=50}
+                },
+                results = {{type='item', name='satellite', amount=1}},
+                requester_paste_multiplier = 1
+            }
+        })
+
+        data.raw.technology['rocket-silo'].effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}}
+        data.raw.technology['space-science-pack'].research_trigger = nil
+        data.raw.technology['space-science-pack'].prerequisites = {'rocket-silo'}
+        data.raw.technology['space-science-pack'].effects = {{type='unlock-recipe', recipe='satellite'}}
+        data.raw.technology['space-science-pack'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+
+        for k, v in pairs(items['space-age']['technology_1']) do
+            if data.raw.technology[k] then
+                data.raw.technology[k].hidden = v
+                data.raw.technology[k].hidden_in_factoriopedia = v
+            end
+        end
+
+        data.raw['autoplace-control']['vulcanus_coal'] = nil
+        data.raw['autoplace-control']['sulfuric_acid_geyser'] = nil
+        data.raw['autoplace-control']['gleba_stone'] = nil
+        data.raw['autoplace-control']['aquilo_crude_oil'] = nil
+
+        data.raw['autoplace-control']['gleba_water'] = nil
+        data.raw['autoplace-control']['fulgora_islands'] = nil
+        data.raw['autoplace-control']['gleba_cliffs'] = nil
+        data.raw['autoplace-control']['fulgora_cliffs'] = nil
+
+        -- 'sulfuric_acid_geyser'
+
+        for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'tungsten_ore'}) do
+            data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v] = {}
+            data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v:gsub('_', '-')] = {}
+        end
+
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = {}
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_plants'] = {}
+
+        for _, v in pairs({'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut', 'lowland-brown-blubber', 'lowland-olive-blubber', 'lowland-olive-blubber-2', 'lowland-olive-blubber-3', 'lowland-cream-red', 'lowland-red-vein', 'lowland-red-vein-2', 'lowland-red-vein-3', 'lowland-red-vein-4', 'lowland-red-vein-dead', 'lowland-red-infection', 'ammoniacal-ocean', 'ammoniacal-ocean-2'}) do
+            data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = {}
+        end
+
+        data.raw.planet['nauvis'].map_gen_settings.territory_settings = {
+            units = {'small-demolisher', 'medium-demolisher', 'big-demolisher'},
+            territory_index_expression = 'demolisher_territory_expression',
+            territory_variation_expression = 'demolisher_variation_expression',
+            minimum_territory_size = 10
+        }
+
+        for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
+            data.raw['utility-constants']['default'].main_menu_simulations[v] = nil
+        end
+
+        data.raw['tips-and-tricks-item']['fulgora-briefing'] = nil
+        data.raw['tips-and-tricks-item']['lightning-mechanics'] = nil
+        data.raw['tips-and-tricks-item']['gleba-briefing'] = nil
+        data.raw['tips-and-tricks-item']['vulcanus-briefing'] = nil
+        data.raw['tips-and-tricks-item']['aquilo-briefing'] = nil
+        data.raw['tips-and-tricks-item']['heating-mechanics'] = nil
+        data.raw['tips-and-tricks-item']['space-platform'] = nil
+        data.raw['tips-and-tricks-item']['orbital-logistics'] = nil
+        data.raw['tips-and-tricks-item']['removing-trash-in-space'] = nil
+        data.raw['tips-and-tricks-item']['space-science'] = nil
+        data.raw['tips-and-tricks-item']['asteroid-defense'] = nil
+
+        data.raw['dont-build-entity-achievement']['logistic-network-embargo'].research_with = nil
+        data.raw['create-platform-achievement']['reach-for-the-stars'] = nil
+        data.raw['change-surface-achievement']['visit-fulgora'] = nil
+        data.raw['change-surface-achievement']['visit-gleba'] = nil
+        data.raw['change-surface-achievement']['visit-vulcanus'] = nil
+        data.raw['change-surface-achievement']['visit-aquilo'] = nil
+        data.raw['complete-objective-achievement']['second-star-to-the-right-and-straight-on-till-morning'] = nil
+        data.raw['space-connection-distance-traveled-achievement']['shattered-planet-1'] = nil
+        data.raw['space-connection-distance-traveled-achievement']['shattered-planet-2'] = nil
+        data.raw['space-connection-distance-traveled-achievement']['shattered-planet-3'] = nil
+        data.raw['dont-research-before-researching-achievement']['rush-to-space'] = nil
     end
 
     if settings.startup['PHI-SA-GENERIC'].value or settings.startup['PHI-SA-VANILLA'].value then
@@ -579,69 +714,23 @@ if settings.startup['PHI-SA'].value then
 
     if settings.startup['PHI-SA-VANILLA'].value then
         if mods['space-age'] then
-            for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
-                data.raw.planet[v].map_gen_settings = nil
-                data.raw.planet[v].hidden = true
-                data.raw.planet[v].hidden_in_factoriopedia = true
+            for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'tungsten_ore'}) do
+                data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v] = nil
+                data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v:gsub('_', '-')] = nil
             end
 
-            for _, v in pairs(data.raw['space-location']) do
-                v.hidden = true
-                v.hidden_in_factoriopedia = true
-            end
+            data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = nil
+            data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_plants'] = nil
 
-            for _, v in pairs(data.raw['space-connection']) do
-                v.hidden = true
-                v.hidden_in_factoriopedia = true
+            for _, v in pairs({'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut', 'lowland-brown-blubber', 'lowland-olive-blubber', 'lowland-olive-blubber-2', 'lowland-olive-blubber-3', 'lowland-cream-red', 'lowland-red-vein', 'lowland-red-vein-2', 'lowland-red-vein-3', 'lowland-red-vein-4', 'lowland-red-vein-dead', 'lowland-red-infection', 'ammoniacal-ocean', 'ammoniacal-ocean-2'}) do
+                data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = nil
             end
-
-            data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = false
-            data.raw['rocket-silo']['rocket-silo'].rocket_parts_required = 100
-            data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 1
-            data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 0
-            data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 0
 
             if settings.startup['PHI-MI-LANDFILL'].value > 20 then
                 data.raw.recipe['landfill'].ingredients = {{type='item', name='stone', amount=20}}
             end
 
-            local item_sounds = require('__base__/prototypes/item_sounds')
-
-            data:extend({
-                {
-                    type = 'item',
-                    name = 'satellite',
-                    icon = '__base__/graphics/icons/satellite.png',
-                    subgroup = 'space-related',
-                    order = 'd[rocket-parts]-e[satellite]',
-                    inventory_move_sound = item_sounds.mechanical_inventory_move,
-                    pick_sound = item_sounds.mechanical_inventory_pickup,
-                    drop_sound = item_sounds.mechanical_inventory_move,
-                    stack_size = 1,
-                    weight = 1 * tons,
-                    rocket_launch_products = {{type='item', name='space-science-pack', amount=1000}},
-                    send_to_orbit_mode = 'automated'
-                },
-                {
-                    type = 'recipe',
-                    name = 'satellite',
-                    energy_required = 5,
-                    enabled = false,
-                    category = 'crafting',
-                    ingredients =
-                    {
-                      {type='item', name='low-density-structure', amount=100},
-                      {type='item', name='solar-panel', amount=100},
-                      {type='item', name='accumulator', amount=100},
-                      {type='item', name='radar', amount=5},
-                      {type='item', name='processing-unit', amount=100},
-                      {type='item', name='rocket-fuel', amount=50}
-                    },
-                    results = {{type='item', name='satellite', amount=1}},
-                    requester_paste_multiplier = 1
-                }
-            })
-
+            data.raw.technology['space-science-pack'].unit = {count = 2000, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
             data.raw.technology['cliff-explosives'].effects = {{type='unlock-recipe', recipe='cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
             data.raw.technology['logistic-system'].prerequisites = {'logistic-robotics'}
             data.raw.technology['logistic-system'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
@@ -659,11 +748,6 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['worker-robots-speed-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
             data.raw.technology['worker-robots-speed-7'].prerequisites = {'worker-robots-speed-6', 'space-science-pack'}
             data.raw.technology['worker-robots-speed-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['rocket-silo'].effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}}
-            data.raw.technology['space-science-pack'].research_trigger = nil
-            data.raw.technology['space-science-pack'].prerequisites = {'rocket-silo'}
-            data.raw.technology['space-science-pack'].effects = {{type='unlock-recipe', recipe='satellite'}}
-            data.raw.technology['space-science-pack'].unit = {count = 2000, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
             data.raw.technology['atomic-bomb'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
             data.raw.technology['energy-shield-mk2-equipment'].prerequisites = {'energy-shield-equipment', 'military-4', 'power-armor'}
             data.raw.technology['personal-roboport-mk2-equipment'].prerequisites = {'personal-roboport-equipment'}
@@ -730,7 +814,7 @@ if settings.startup['PHI-SA'].value then
                     end
                 end
 
-                if items['space-age']['technology'][v.name] then
+                if items['space-age']['technology_2'][v.name] then
                     data.raw.technology[v.name].hidden = true
                     data.raw.technology[v.name].hidden_in_factoriopedia = true
                 end
@@ -849,41 +933,16 @@ if settings.startup['PHI-SA'].value then
             data.raw.capsule['yumako-mash'].hidden = true
             data.raw.capsule['yumako-mash'].hidden_in_factoriopedia = true
 
-            data.raw['tips-and-tricks-item']['fulgora-briefing'] = nil
-            data.raw['tips-and-tricks-item']['lightning-mechanics'] = nil
-            data.raw['tips-and-tricks-item']['gleba-briefing'] = nil
             data.raw['tips-and-tricks-item']['agriculture'] = nil
-            data.raw['tips-and-tricks-item']['vulcanus-briefing'] = nil
             data.raw['tips-and-tricks-item']['lava-processing'] = nil
-            data.raw['tips-and-tricks-item']['aquilo-briefing'] = nil
-            data.raw['tips-and-tricks-item']['heating-mechanics'] = nil
-            data.raw['tips-and-tricks-item']['space-platform'] = nil
-            data.raw['tips-and-tricks-item']['orbital-logistics'] = nil
-            data.raw['tips-and-tricks-item']['removing-trash-in-space'] = nil
-            data.raw['tips-and-tricks-item']['space-science'] = nil
-            data.raw['tips-and-tricks-item']['asteroid-defense'] = nil
-            data.raw['tips-and-tricks-item']['spoilables'] = nil
-            data.raw['tips-and-tricks-item']['spoilables-result'] = nil
-            data.raw['tips-and-tricks-item']['spoilables-research'] = nil
 
-            data.raw['dont-build-entity-achievement']['logistic-network-embargo'].research_with = nil
-            data.raw['create-platform-achievement']['reach-for-the-stars'] = nil
-            data.raw['change-surface-achievement']['visit-fulgora'] = nil
-            data.raw['change-surface-achievement']['visit-gleba'] = nil
-            data.raw['change-surface-achievement']['visit-vulcanus'] = nil
-            data.raw['change-surface-achievement']['visit-aquilo'] = nil
-            data.raw['complete-objective-achievement']['second-star-to-the-right-and-straight-on-till-morning'] = nil
             data.raw['group-attack-achievement']['it-stinks-and-they-do-like-it'] = nil
             data.raw['group-attack-achievement']['get-off-my-lawn'] = nil
-            data.raw['space-connection-distance-traveled-achievement']['shattered-planet-1'] = nil
-            data.raw['space-connection-distance-traveled-achievement']['shattered-planet-2'] = nil
-            data.raw['space-connection-distance-traveled-achievement']['shattered-planet-3'] = nil
             data.raw['research-with-science-pack-achievement']['research-with-metallurgics'] = nil
             data.raw['research-with-science-pack-achievement']['research-with-agriculture'] = nil
             data.raw['research-with-science-pack-achievement']['research-with-electromagnetics'] = nil
             data.raw['research-with-science-pack-achievement']['research-with-cryogenics'] = nil
             data.raw['research-with-science-pack-achievement']['research-with-promethium'] = nil
-            data.raw['dont-research-before-researching-achievement']['rush-to-space'] = nil
             data.raw['kill-achievement']['if-it-bleeds'] = nil
             data.raw['kill-achievement']['we-need-bigger-guns'] = nil
             data.raw['kill-achievement']['size-doesnt-matter'] = nil
@@ -892,6 +951,13 @@ if settings.startup['PHI-SA'].value then
                 if data.raw.recipe[k] then
                     data.raw.recipe[k].hidden = v
                     data.raw.recipe[k].hidden_in_factoriopedia = v
+                end
+            end
+
+            for k, v in pairs(items['space-age']['resource']) do
+                if data.raw.resource[k] then
+                    data.raw.resource[k].hidden = v
+                    data.raw.resource[k].hidden_in_factoriopedia = v
                 end
             end
 
@@ -1299,6 +1365,76 @@ if settings.startup['PHI-CT'].value then
             data.raw['loader']['express-loader'].max_belt_stack_size = s
             data.raw['loader']['turbo-loader'].max_belt_stack_size = s
         end
+    end
+
+    if settings.startup['PHI-CT-TILE'].value then
+        for _, v in pairs(data.raw.planet) do
+            if v.map_gen_settings and v.map_gen_settings.autoplace_settings then
+                if v.map_gen_settings.autoplace_settings.tile and v.map_gen_settings.autoplace_settings.tile.settings then
+                    for _, e in pairs (v.map_gen_settings.autoplace_settings.tile.settings) do
+                        e.frequency = 0.0
+                        e.size = 0.0
+                        e.richness = 0.0
+                    end
+
+                    v.map_gen_settings.autoplace_settings.tile.settings[settings.startup['PHI-CT-TILE-CHOICE'].value] = {
+                        frequency = 1.0,
+                        size = 1.0,
+                        richness = 1.0
+                    }
+                end
+
+                if v.map_gen_settings.autoplace_settings.decorative and v.map_gen_settings.autoplace_settings.decorative.settings then
+                    for _, e in pairs(v.map_gen_settings.autoplace_settings.decorative.settings) do
+                        e.frequency = 0.0
+                        e.size = 0.0
+                        e.richness = 0.0
+                    end
+                end
+
+                if v.map_gen_settings.autoplace_settings.entity and v.map_gen_settings.autoplace_settings.entity.settings then
+                    for _, e in pairs(v.map_gen_settings.autoplace_settings.entity.settings) do
+                        e.frequency = 0.0
+                        e.size = 0.0
+                        e.richness = 0.0
+                    end
+                end
+            end
+        end
+
+        local autoplace_controls = {}
+
+        for k, _ in pairs (data.raw['autoplace-control']) do
+            autoplace_controls[k] = {
+                frequency = 0.0,
+                size = 0.0,
+                richness = 0.0
+            }
+        end
+
+        data.raw['map-gen-presets']['default']['empty-world'] = {
+            order = 'zz',
+            basic_settings = {
+                autoplace_controls = autoplace_controls,
+                cliff_settings = {
+                    name = 'none',
+                    cliff_elevation_interval = 100,
+                    cliff_elevation_0 = 100,
+                    richness = 0
+                }
+            },
+            advanced_settings = {
+                pollution = {
+                    enabled = false
+                },
+                enemy_evolution = {
+                    enabled = false
+                },
+                enemy_expansion = {
+                    enabled = false
+                }
+            }
+        }
     end
 end
 
