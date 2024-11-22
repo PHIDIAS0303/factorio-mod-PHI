@@ -765,28 +765,26 @@ for _, t in pairs(data.raw['tree']) do
 	t.collision_box = {{-0.05, -0.05}, {0.05, 0.05}}
 end
 
-    
-
 ** MIGRATION
-        if script.active_mods['space-exploration'] then
-            if technologies['se-core-miner'].researched then
-                for i=2, settings.startup['PHI-MB-MACHINE-TIER'].value do
-                    recipes['se-core-miner-' .. i].enabled = true
-                    recipes['se-core-miner-' .. i].reload()
-                end
-            end
+if script.active_mods['space-exploration'] then
+    if technologies['se-core-miner'].researched then
+        for i=2, settings.startup['PHI-MB-MACHINE-TIER'].value do
+            recipes['se-core-miner-' .. i].enabled = true
+            recipes['se-core-miner-' .. i].reload()
         end
+    end
+end
 
 ** SETTING
-                {type = 'laser', decrease = 20, percent = 50},
-                {type = 'electric', decrease = 20, percent = 50},
-                {type = 'impact', decrease = 20, percent = 50},
-                {type = 'poison', decrease = 20, percent = 50}
+{type = 'laser', decrease = 20, percent = 50},
+{type = 'electric', decrease = 20, percent = 50},
+{type = 'impact', decrease = 20, percent = 50},
+{type = 'poison', decrease = 20, percent = 50}
                 
-        "? aai-industry >= 0.5.0",
-        "? Krastorio2 >= 1.3.0",
-        "? space-exploration >= 0.6.0",
-        "(?) big-mining-drill >= 0.1.0",
-        "(?) angelsrefining >= 0.12.0",
-        "(?) exotic-industries >= 0.6.0"
+"? aai-industry >= 0.5.0",
+"? Krastorio2 >= 1.3.0",
+"? space-exploration >= 0.6.0",
+"(?) big-mining-drill >= 0.1.0",
+"(?) angelsrefining >= 0.12.0",
+"(?) exotic-industries >= 0.6.0"
 ]]

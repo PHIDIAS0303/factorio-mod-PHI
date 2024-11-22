@@ -505,17 +505,31 @@ if settings.startup['PHI-SA'].value then
             end
         end
 
+        for k, v in pairs(items['space-age']['recipe_1']) do
+            if data.raw.recipe[k] then
+                data.raw.recipe[k].hidden = v
+                data.raw.recipe[k].hidden_in_factoriopedia = v
+            end
+        end
+
+        data.raw.recipe['promethium-science-pack'].ingredients = {{type='item', name='quantum-processor', amount=1}, {type='item', name='biter-egg', amount=10}}
+
         data.raw['autoplace-control']['vulcanus_coal'] = nil
         data.raw['autoplace-control']['sulfuric_acid_geyser'] = nil
         data.raw['autoplace-control']['gleba_stone'] = nil
         data.raw['autoplace-control']['aquilo_crude_oil'] = nil
 
-        data.raw['autoplace-control']['gleba_water'] = nil
-        data.raw['autoplace-control']['fulgora_islands'] = nil
-        data.raw['autoplace-control']['gleba_cliffs'] = nil
-        data.raw['autoplace-control']['fulgora_cliffs'] = nil
+        data.raw['autoplace-control']['gleba_water'].hidden = true
+        data.raw['autoplace-control']['fulgora_islands'].hidden = true
 
-        -- 'sulfuric_acid_geyser'
+        --[[
+        'gleba_water'
+        'fulgora_islands'
+        'gleba_cliffs'
+        'fulgora_cliffs'
+
+        'sulfuric_acid_geyser'
+        ]]
 
         for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'tungsten_ore'}) do
             data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v] = {}
@@ -525,8 +539,38 @@ if settings.startup['PHI-SA'].value then
         data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = {}
         data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_plants'] = {}
 
-        for _, v in pairs({'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut', 'lowland-brown-blubber', 'lowland-olive-blubber', 'lowland-olive-blubber-2', 'lowland-olive-blubber-3', 'lowland-cream-red', 'lowland-red-vein', 'lowland-red-vein-2', 'lowland-red-vein-3', 'lowland-red-vein-4', 'lowland-red-vein-dead', 'lowland-red-infection', 'ammoniacal-ocean', 'ammoniacal-ocean-2'}) do
+        local resource_autoplace = require('resource-autoplace')
+
+        data.raw.resource['calcite'].autoplace = resource_autoplace.resource_autoplace_settings{
+            name = 'calcite',
+            order = 'c',
+            base_density = 0.9,
+            base_spots_per_km2 = 1.25,
+            has_starting_area_placement = false,
+            random_spot_size_minimum = 2,
+            random_spot_size_maximum = 4,
+            regular_rq_factor_multiplier = 1
+        }
+
+        data.raw.resource['tungsten-ore'].autoplace = {
+            order = 'c',
+            has_starting_area_placement = false,
+            probability_expression = 'vulcanus_tungsten_ore_probability',
+            richness_expression = 'vulcanus_tungsten_ore_richness'
+        }
+
+        for _, v in pairs({'ammoniacal-ocean', 'ammoniacal-ocean-2', 'oil-ocean-shallow', 'oil-ocean-deep', 'lava', 'lava-hot'}) do
             data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = {}
+            data.raw.tile[v].autoplace = resource_autoplace.resource_autoplace_settings{
+              name = v,
+              order = 'a',
+              base_density = 8.3,
+              base_spots_per_km2 = 0.15,
+              random_probability = 1,
+              random_spot_size_minimum = 0.3,
+              random_spot_size_maximum = 1,
+              has_starting_area_placement = false,
+            }
         end
 
         data.raw.planet['nauvis'].map_gen_settings.territory_settings = {
@@ -539,6 +583,26 @@ if settings.startup['PHI-SA'].value then
         for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
             data.raw['utility-constants']['default'].main_menu_simulations[v] = nil
         end
+
+        local gleba_tiles = {}
+
+        for _, v in pairs(items['space-age']['gleba_tile']) do
+            if data.raw.tile[v] then
+                data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = {}
+                table.insert(gleba_tiles, v)
+            end
+        end
+
+        data.raw.tree['cuttlepop'].autoplace['tile_restriction'] = gleba_land_tiles
+        data.raw.tree['sunnycomb'].autoplace['tile_restriction'] = gleba_land_tiles
+        data.raw.tree['slipstack'].autoplace['tile_restriction'] = gleba_land_tiles
+        data.raw.tree['funneltrunk'].autoplace['tile_restriction'] = gleba_land_tiles
+        data.raw.tree['hairyclubnub'].autoplace['tile_restriction'] = gleba_land_tiles
+        data.raw.tree['teflilly'].autoplace['tile_restriction'] = gleba_land_tiles
+        data.raw.tree['lickmaw'].autoplace['tile_restriction'] = gleba_land_tiles
+        data.raw.tree['stingfrond'].autoplace['tile_restriction'] = gleba_land_tiles
+        data.raw.tree['boompuff'].autoplace['tile_restriction'] = gleba_land_tiles
+        data.raw.tree['water-cane'].autoplace['tile_restriction'] = gleba_land_tiles
 
         data.raw['tips-and-tricks-item']['fulgora-briefing'] = nil
         data.raw['tips-and-tricks-item']['lightning-mechanics'] = nil
@@ -563,6 +627,14 @@ if settings.startup['PHI-SA'].value then
         data.raw['space-connection-distance-traveled-achievement']['shattered-planet-2'] = nil
         data.raw['space-connection-distance-traveled-achievement']['shattered-planet-3'] = nil
         data.raw['dont-research-before-researching-achievement']['rush-to-space'] = nil
+
+        for _, v in pairs(items['item']) do
+            if v.enabled and v.mod and (v.mod == 'space-age' or v.mod == 'quality') then
+                if (data.raw.technology[v.tech] and data.raw.technology[v.tech].hidden) or (data.raw.recipe[v.name] and data.raw.recipe[v.name].hidden) then
+                    v.enabled = false
+                end
+            end
+        end
     end
 
     if settings.startup['PHI-SA-GENERIC'].value or settings.startup['PHI-SA-VANILLA'].value then
@@ -947,13 +1019,6 @@ if settings.startup['PHI-SA'].value then
             data.raw['kill-achievement']['we-need-bigger-guns'] = nil
             data.raw['kill-achievement']['size-doesnt-matter'] = nil
 
-            for k, v in pairs(items['space-age']['recipe']) do
-                if data.raw.recipe[k] then
-                    data.raw.recipe[k].hidden = v
-                    data.raw.recipe[k].hidden_in_factoriopedia = v
-                end
-            end
-
             for k, v in pairs(items['space-age']['resource']) do
                 if data.raw.resource[k] then
                     data.raw.resource[k].hidden = v
@@ -961,7 +1026,14 @@ if settings.startup['PHI-SA'].value then
                 end
             end
 
-            for _, v in pairs(items['item']) do
+            for k, v in pairs(items['space-age']['recipe_2']) do
+                if data.raw.recipe[k] then
+                    data.raw.recipe[k].hidden = v
+                    data.raw.recipe[k].hidden_in_factoriopedia = v
+                end
+            end
+
+            for _, v in pairs(items['item_2']) do
                 if v.enabled and v.mod and (v.mod == 'space-age' or v.mod == 'quality') then
                     if (data.raw.technology[v.tech] and data.raw.technology[v.tech].hidden) or (data.raw.recipe[v.name] and data.raw.recipe[v.name].hidden) then
                         v.enabled = false
