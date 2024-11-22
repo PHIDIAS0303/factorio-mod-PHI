@@ -376,6 +376,18 @@ local items = {
             ['promethium-science-pack'] = true,
             ['space-science-pack'] = true
         },
+        ['gleba_tree'] = {
+            ['cuttlepop'] = true,
+            ['sunnycomb'] = true,
+            ['slipstack'] = true,
+            ['funneltrunk'] = true,
+            ['hairyclubnub'] = true,
+            ['teflilly'] = true,
+            ['lickmaw'] = true,
+            ['stingfrond'] = true,
+            ['boompuff'] = true,
+            ['water-cane'] = true
+        },
         ['gleba_tile'] = {
             ['natural-yumako-soil'] = true,
             ['natural-jellynut-soil'] = true,

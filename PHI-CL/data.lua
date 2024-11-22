@@ -497,6 +497,19 @@ if settings.startup['PHI-SA'].value then
         data.raw.technology['space-science-pack'].prerequisites = {'rocket-silo'}
         data.raw.technology['space-science-pack'].effects = {{type='unlock-recipe', recipe='satellite'}}
         data.raw.technology['space-science-pack'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+        data.raw.technology['tungsten-carbide'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+        data.raw.technology['tungsten-carbide'].research_trigger = nil
+        --data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+        --data.raw.technology['argiculture'].research_trigger = nil
+        data.raw.technology['bacteria-cultivation'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+        data.raw.technology['bacteria-cultivation'].research_trigger = nil
+        data.raw.technology['heating-tower'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+        data.raw.technology['heating-tower'].research_trigger = nil
+        data.raw.technology['recycling'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+        data.raw.technology['recycling'].research_trigger = nil
+        data.raw.technology['lithium-processing'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+        data.raw.technology['lithium-processing'].research_trigger = nil
+        data.raw.technology['promethium-science-pack'].effects = {{type='unlock-recipe', recipe='promethium-science-pack'}}
 
         for k, v in pairs(items['space-age']['technology_1']) do
             if data.raw.technology[k] then
@@ -519,15 +532,7 @@ if settings.startup['PHI-SA'].value then
         data.raw['autoplace-control']['gleba_stone'] = nil
         data.raw['autoplace-control']['aquilo_crude_oil'] = nil
 
-        data.raw['autoplace-control']['gleba_water'].hidden = true
-        data.raw['autoplace-control']['fulgora_islands'].hidden = true
-
         --[[
-        'gleba_water'
-        'fulgora_islands'
-        'gleba_cliffs'
-        'fulgora_cliffs'
-
         'sulfuric_acid_geyser'
         ]]
 
@@ -559,6 +564,7 @@ if settings.startup['PHI-SA'].value then
             richness_expression = 'vulcanus_tungsten_ore_richness'
         }
 
+        --[[
         for _, v in pairs({'ammoniacal-ocean', 'ammoniacal-ocean-2', 'oil-ocean-shallow', 'oil-ocean-deep', 'lava', 'lava-hot'}) do
             data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = {}
             data.raw.tile[v].autoplace = resource_autoplace.resource_autoplace_settings{
@@ -579,30 +585,26 @@ if settings.startup['PHI-SA'].value then
             territory_variation_expression = 'demolisher_variation_expression',
             minimum_territory_size = 10
         }
+        ]]
 
         for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
             data.raw['utility-constants']['default'].main_menu_simulations[v] = nil
         end
 
-        local gleba_tiles = {}
+        local gleba_tile = {}
 
         for _, v in pairs(items['space-age']['gleba_tile']) do
             if data.raw.tile[v] then
                 data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = {}
-                table.insert(gleba_tiles, v)
+                table.insert(gleba_tile, v)
             end
         end
 
-        data.raw.tree['cuttlepop'].autoplace['tile_restriction'] = gleba_land_tiles
-        data.raw.tree['sunnycomb'].autoplace['tile_restriction'] = gleba_land_tiles
-        data.raw.tree['slipstack'].autoplace['tile_restriction'] = gleba_land_tiles
-        data.raw.tree['funneltrunk'].autoplace['tile_restriction'] = gleba_land_tiles
-        data.raw.tree['hairyclubnub'].autoplace['tile_restriction'] = gleba_land_tiles
-        data.raw.tree['teflilly'].autoplace['tile_restriction'] = gleba_land_tiles
-        data.raw.tree['lickmaw'].autoplace['tile_restriction'] = gleba_land_tiles
-        data.raw.tree['stingfrond'].autoplace['tile_restriction'] = gleba_land_tiles
-        data.raw.tree['boompuff'].autoplace['tile_restriction'] = gleba_land_tiles
-        data.raw.tree['water-cane'].autoplace['tile_restriction'] = gleba_land_tiles
+        for _, v in pairs(items['space-age']['gleba_tree']) do
+            if data.raw.tree[v] then
+                data.raw.tree[v].autoplace['tile_restriction'] = gleba_tile
+            end
+        end
 
         data.raw['tips-and-tricks-item']['fulgora-briefing'] = nil
         data.raw['tips-and-tricks-item']['lightning-mechanics'] = nil
