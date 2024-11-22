@@ -593,16 +593,16 @@ if settings.startup['PHI-SA'].value then
 
         local gleba_tile = {}
 
-        for _, v in pairs(items['space-age']['gleba_tile']) do
-            if data.raw.tile[v] then
-                data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = {}
-                table.insert(gleba_tile, v)
+        for k, _ in pairs(items['space-age']['gleba_tile']) do
+            if data.raw.tile[k] then
+                data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings[k] = {}
+                table.insert(gleba_tile, k)
             end
         end
 
-        for _, v in pairs(items['space-age']['gleba_tree']) do
-            if data.raw.tree[v] then
-                data.raw.tree[v].autoplace['tile_restriction'] = gleba_tile
+        for k, _ in pairs(items['space-age']['gleba_tree']) do
+            if data.raw.tree[k] then
+                data.raw.tree[k].autoplace['tile_restriction'] = gleba_tile
             end
         end
 
