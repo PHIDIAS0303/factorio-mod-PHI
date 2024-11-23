@@ -276,7 +276,7 @@ if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) 
     entity.crafting_categories = {'fluid'}
     entity.crafting_speed = 1
     entity.energy_source = {type = 'void'}
-    entity.fluid_box.volume = 4000
+    entity.fluid_box.volume = 6000
     entity.fluid_boxes = {table.deepcopy(entity.fluid_box)}
     entity.fluid_box = nil
     entity.fluid_boxes_off_when_no_fluid_recipe = false
@@ -307,7 +307,7 @@ if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) 
             energy_required = 1,
             enabled = true,
             ingredients = {},
-            results = {{type='fluid', name='water', amount=16000, temperature=data.raw.fluid['water'].default_temperature}},
+            results = {{type='fluid', name='water', amount=12000, temperature=data.raw.fluid['water'].default_temperature}},
             main_product = 'water',
             hide_from_player_crafting = true,
             allow_productivity = false,
@@ -1035,7 +1035,7 @@ if settings.startup['PHI-SA'].value then
                 end
             end
 
-            for _, v in pairs(items['item_2']) do
+            for _, v in pairs(items['item']) do
                 if v.enabled and v.mod and (v.mod == 'space-age' or v.mod == 'quality') then
                     if (data.raw.technology[v.tech] and data.raw.technology[v.tech].hidden) or (data.raw.recipe[v.name] and data.raw.recipe[v.name].hidden) then
                         v.enabled = false

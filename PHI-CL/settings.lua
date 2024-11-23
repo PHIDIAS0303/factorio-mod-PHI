@@ -56,7 +56,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-EQ',
   setting_type = 'startup',
-  default_value = true,
+  default_value = false,
   order = 'D00'
 }, {
   type = 'int-setting',
@@ -116,7 +116,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-MI-EFFCY',
   setting_type = 'startup',
-  default_value = false,
+  default_value = true,
   order = 'E02'
 }, {
   type = 'bool-setting',
@@ -135,7 +135,7 @@ data:extend({
   type = 'int-setting',
   name = 'PHI-MI-ROBOT',
   setting_type = 'startup',
-  default_value = 1,
+  default_value = 2,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
   order = 'E05A'
 }, {
@@ -183,7 +183,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-SA-REQUIREMENT',
   setting_type = 'startup',
-  default_value = true,
+  default_value = false,
   order = 'F04'
 }, {
   type = 'bool-setting',
