@@ -527,12 +527,11 @@ if settings.startup['PHI-SA'].value then
 
         data.raw.recipe['promethium-science-pack'].ingredients = {{type='item', name='quantum-processor', amount=1}, {type='item', name='biter-egg', amount=10}}
 
+        --[[
         data.raw['autoplace-control']['vulcanus_coal'] = nil
         data.raw['autoplace-control']['sulfuric_acid_geyser'] = nil
         data.raw['autoplace-control']['gleba_stone'] = nil
         data.raw['autoplace-control']['aquilo_crude_oil'] = nil
-
-        --[[
         'sulfuric_acid_geyser'
         ]]
 
