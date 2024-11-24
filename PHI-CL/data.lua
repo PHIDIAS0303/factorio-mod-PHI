@@ -282,7 +282,6 @@ if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) 
     entity.fluid_boxes_off_when_no_fluid_recipe = false
     entity.effect_receiver = {uses_module_effects=false, uses_beacon_effects=false}
     entity.allowed_effects = {'consumption'}
-    entity.collision_mask = nil
     entity.tile_buildability_rules = nil
     entity.fluid_source_offset = nil
     entity.localised_name = item.localised_name
@@ -526,14 +525,6 @@ if settings.startup['PHI-SA'].value then
         end
 
         data.raw.recipe['promethium-science-pack'].ingredients = {{type='item', name='quantum-processor', amount=1}, {type='item', name='biter-egg', amount=10}}
-
-        --[[
-        data.raw['autoplace-control']['vulcanus_coal'] = nil
-        data.raw['autoplace-control']['sulfuric_acid_geyser'] = nil
-        data.raw['autoplace-control']['gleba_stone'] = nil
-        data.raw['autoplace-control']['aquilo_crude_oil'] = nil
-        'sulfuric_acid_geyser'
-        ]]
 
         for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'tungsten_ore'}) do
             data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v] = {}
