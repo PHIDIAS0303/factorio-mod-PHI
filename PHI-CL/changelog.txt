@@ -1,6 +1,16 @@
 ---------------------------------------------------------------------------------------------------
+Version: 3.0.38
+Date: 2024-11-26
+
+  Changes:
+    - [MI] Added some check to the code.
+
+---------------------------------------------------------------------------------------------------
 Version: 3.0.37
 Date: 2024-11-26
+
+  Features:
+    - [CT] Reintroduced the somewhat electric train.
 
   Changes:
     - [CL] Some general cleanup of details.

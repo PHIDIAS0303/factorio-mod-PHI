@@ -614,62 +614,6 @@
     if item.energy_per_shield then
         item.energy_per_shield = tostring(math.floor(tonumber(string.match(item.energy_per_shield, '[%d%.]+')) * ((32 - (tier - source.min + 1)) / 32))) .. string.match(item.energy_per_shield, '%a+')
     end
-    
-** DATA
-if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TRAIN'].value then
-    local item = table.deepcopy(data.raw['item']['used-up-uranium-fuel-cell'])
-    item.name = 'empty-train-battery'
-    item.icon = items['general']['graphics_location'] .. 'battery.png'
-    item.order = 'qa'
-    item.stack_size = 100
-    item.localised_name = {'name.empty-train-battery'}
-    item.localised_description = {'description.empty-train-battery'}
-    data:extend({item})
-
-    data:extend({{
-        type = 'recipe',
-        name = 'empty-train-battery',
-        energy_required = 30,
-        enabled = true,
-        icon = items['general']['graphics_location'] .. 'battery.png',
-        icon_size = 64,
-        subgroup = 'intermediate-product',
-        order = 'zc',
-        allow_productivity = true,
-        ingredients = {{type='item', name='battery', amount=50}},
-        results = {{type='item', name='empty-train-battery', amount=1}},
-        main_product = 'empty-train-battery',
-        localised_name = {'name.empty-train-battery'},
-        localised_description = {'description.empty-train-battery'}
-    }})
-
-    item = table.deepcopy(data.raw['item']['nuclear-fuel'])
-    item.name = 'charged-train-battery'
-    item.burnt_result = 'empty-train-battery'
-    item.fuel_value = '1GJ'
-    item.icon = items['general']['graphics_location'] .. 'battery.png'
-    item.stack_size = 10
-    item.localised_name = {'name.charged-train-battery'}
-    item.localised_description = {'description.charged-train-battery'}
-    data:extend({item})
-
-    data:extend({{
-        type = 'recipe',
-        name = 'charged-train-battery',
-        energy_required = 60,
-        enabled = true,
-        icon = items['general']['graphics_location'] .. 'battery.png',
-        icon_size = 64,
-        subgroup = 'intermediate-product',
-        ingredients = {{type='item', name='empty-train-battery', amount=1}},
-        results = {{type='item', name='charged-train-battery', probability=0.995, amount=1}, {type='item', name='battery', probability=0.005, amount=5}},
-        main_product = 'charged-train-battery',
-        localised_name = {'name.charged-train-battery'},
-        localised_description = {'description.charged-train-battery'}
-    }})
-
-    data.raw['locomotive']['locomotive'].burner.burnt_inventory_size = 1
-end
 
 ** DATA UPDATE
 if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.startup['PHI-MB-MINING-TIER'].value > 1 then
