@@ -219,11 +219,11 @@ if settings.startup['PHI-MI'].value then
                     if v.energy_per_tick then
                         v.energy_per_tick = '0J'
                     end
-                    
+
                     if v.energy_per_move then
                         v.energy_per_move = '0J'
                     end
-                    
+
                     if v.speed_multiplier_when_out_of_energy then
                         v.speed_multiplier_when_out_of_energy = 1
                     end
@@ -232,7 +232,7 @@ if settings.startup['PHI-MI'].value then
                     if v.energy_per_tick then
                         v.energy_per_tick = tostring(tonumber(string.match(v.energy_per_tick, '[%d%.]+')) * sn) .. string.match(v.energy_per_tick, '%a+')
                     end
-                    
+
                     if v.energy_per_move then
                         v.energy_per_move = tostring(tonumber(string.match(v.energy_per_move, '[%d%.]+')) * sn) .. string.match(v.energy_per_move, '%a+')
                     end
