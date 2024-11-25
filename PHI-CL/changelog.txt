@@ -1,48 +1,280 @@
 ---------------------------------------------------------------------------------------------------
+Version: 3.0.37
+Date: 2024-11-26
+
+  Changes:
+    - [CL] Some general cleanup of details.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.36
+Date: 2024-11-25
+
+  Changes:
+    - [CT, MI, SA] Changed the collision mask of super-pump
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.35
+Date: 2024-11-23
+
+  Changes:
+    - [CT, MI, SA] Increased the fluid volume of super-pump. could help when using larger pipes.
+    - [SA] Disabled the removal of autoplace control of ores
+    - [SA] Moved the code block to reuse more part of the code.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.34
+Date: 2024-11-22
+
+  Features:
+    - [CT] Reintroduced the empty world generation again.
+
+  Changes:
+    - [SA] Changed the space age specific config into two for the two parts in mod settings.
+    - [SA] Moved the code block to reuse more part of the code.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.33
+Date: 2024-11-22
+
+  Changes:
+    - [CT, MI, SA] Changed the logic of setting the super-pump prototype from the mod setting setup.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.32
+Date: 2024-11-22
+
+  Features:
+    - [SA] Introduced no requirement, that is space age on the main planet.
+
+  Changes:
+    - [CT, SA] Moved the code block to reuse more part of the code.
+    - [MI] Changed pipe setting to be 1 times per setting value instead.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.31
+Date: 2024-11-15
+
+  Changes:
+    - [SA] Added more changes to technology, recipe.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.30
+Date: 2024-11-15
+
+  Changes:
+    - [SA] Changed power armor mk2 requirements.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.29
+Date: 2024-11-15
+
+  Changes:
+    - [SA] Moved some of the code to config.
+    - [CT] Quality no longer affect 1 slot chests.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.28
+Date: 2024-11-15
+
+  Changes:
+    - [SA] Added and changed some of the item from simply set them to nil, to be hidden instead.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.27
+Date: 2024-11-13
+
+  Changes:
+    - [SA] Added and changed some of the item from simply set them to nil, to be hidden instead.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.26
+Date: 2024-11-13
+
+  Bugfixes:
+    - [SA] Fixed the issue for cliff deconstruction was not enabled after research.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.24
+Date: 2024-11-12
+
+  Changes:
+    - [SA] Added more changes for the sa vanilla settings.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.22
+Date: 2024-11-11
+
+  Features:
+    - [SA] Introduced sa vanilla, that is vanilla 2.0 with some of the contents, researches of space age, like recipe productivity.
+
+  Changes:
+    - [CT, SA] Moved some settings out from CT to be SA category instead.
+    - [SA] Moved the code block to reuse more part of the code.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.21
+Date: 2024-11-11
+
+  Changes:
+    - [CT] Changed some code of quality settings
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.20
+Date: 2024-11-09
+
+  Features:
+    - [MI] Added automatic charge defense.
+    - [MI] Added mining drill filter count.
+
+  Changes:
+    - [EN] Changed the research formula for compound energy.
+    - [CT] Added some changes for space age generic settings to move some researches or recipe more front or cheaper.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.14
+Date: 2024-11-03
+
+  Features:
+    - [MI] Added per lane filter for loaders.
+
+  Changes:
+    - [MI] Changed some calculations for train.
+    - [WE] Changed some calculations for turret.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.10
+Date: 2024-11-02
+
+  Changes:
+    - [CL] Changed some main library handle methods.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.9
+Date: 2024-11-01
+
+  Features:
+    - [CT] Introduced the belt stacking for loader.
+    - [CT] Introduced the quality module multiplier to allow easier rank up.
+    - [CT] Introduced the changes for space age generic settings to move some researches or recipe more front or cheaper.
+
+  Changes:
+    - [CL] Moved the code block to allow better flow or to allow reuse.
+    - [EN] Changed some calculations for solar and accumulator data.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.8
+Date: 2024-10-31
+
+  Changes:
+    - [EN] Changed the fuel saving settings for reactors.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.7
+Date: 2024-10-31
+
+  Changes:
+    - [CL] Changed some main library handle methods.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.6
+Date: 2024-10-31
+
+  Features:
+    - [EQ] Added one more tier for the armor.
+    - [EQ] Added 1x1 size settings for the armor equipments.
+    - [MI] Added pump speed settings.
+    - [MI] Added robot speed settings.
+    - [MI] Added robot energy usage settings.
+
+  Changes:
+    - [CL] Changed some main library handle methods.
+    - [EQ] Added one more tier for the armor.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.5
+Date: 2024-10-31
+
+  Changes:
+    - [CL] Changed some main library handle methods.
+    - [CL] Changed some migration code.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.4
+Date: 2024-10-31
+
+  Changes:
+    - [CL] Changed some main library handle methods.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.3
+Date: 2024-10-30
+
+  Changes:
+    - [CL] Changed some main library handle methods.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.2
+Date: 2024-10-30
+
+  Changes:
+    - [CL] Changed some main library handle methods.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.1
+Date: 2024-10-29
+
+  Features:
+    - [CT] Added space age rocket capacity settings.
+    - [CT] Added space age cargo weight settings.
+
+  Changes:
+    - [CL] Changed some main library handle methods.
+
+---------------------------------------------------------------------------------------------------
 Version: 3.0.0
 Date: 2024-10-16
 
-Added:
+  Changes:
     - Updated for 2.0
 
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.1
 Date: 2024-06-20
 
-Added:
+  Changes:
     - Combined PHI-PB also.
 
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.0
 Date: 2024-06-18
 
-Added:
+  Changes:
     - Combined other mod into one.
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.3.0
 Date: 2023-09-18
 
-Added:
+  Changes:
     - Compound Nuclear Power
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.2.0
 Date: 2023-05-09
 
-Added:
+  Changes:
     - Renamed Solar Panel from using like solar-panel-mk2 into solar-panel-2
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.0
 Date: 2022-12-01
 
-Added:
+  Changes:
     - Compound Solar Panel and Accumulator
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.0
 Date: 2021-08-12
 
-Added:
+  Changes:
     - Initial
