@@ -181,7 +181,7 @@ data:extend({
   order = 'F03'
 }, {
   type = 'bool-setting',
-  name = 'PHI-SA-REQUIREMENT',
+  name = 'PHI-SA-RESTRICTION',
   setting_type = 'startup',
   default_value = false,
   order = 'F04'
