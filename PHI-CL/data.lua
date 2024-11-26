@@ -594,7 +594,7 @@ if settings.startup['PHI-SA'].value then
 
         data.raw.recipe['promethium-science-pack'].ingredients = {{type='item', name='quantum-processor', amount=1}, {type='item', name='biter-egg', amount=10}}
 
-        for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'tungsten_ore'}) do
+        for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'sulfuric_acid_geyser', 'tungsten_ore'}) do
             data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v] = {}
             data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v:gsub('_', '-')] = {}
         end
