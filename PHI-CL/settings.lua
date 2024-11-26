@@ -108,7 +108,7 @@ data:extend({
   type = 'int-setting',
   name = 'PHI-MI-LANDFILL',
   setting_type = 'startup',
-  default_value = 50,
+  default_value = 20,
   minimum_value = 1,
   maximum_value = 100,
   order = 'E01'
