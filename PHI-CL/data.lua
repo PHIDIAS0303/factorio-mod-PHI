@@ -170,15 +170,17 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
     end
 end
 
-if settings.startup['PHI-MI'].value then
-    for _, v in pairs(data.raw['active-defense-equipment']) do
-        v.automatic = true
-    end
-
+if settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and (settings.startup['PHI-SA-GENERIC'].value or settings.startup['PHI-SA-VANILLA'].value)) then
     data.raw['mining-drill']['electric-mining-drill'].filter_count = 5
 
     if mods['space-age'] then
         data.raw['mining-drill']['big-mining-drill'].filter_count = 5
+    end
+end
+
+if settings.startup['PHI-MI'].value then
+    for _, v in pairs(data.raw['active-defense-equipment']) do
+        v.automatic = true
     end
 
     if settings.startup['PHI-MI-EFFCY'].value then
@@ -314,7 +316,7 @@ if settings.startup['PHI-MI'].value then
     end
 end
 
-if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) or (settings.startup['PHI-MI'].value) or (settings.startup['PHI-SA'].value and (settings.startup['PHI-SA-REQUIREMENT'].value or settings.startup['PHI-SA-VANILLA'].value)) then
+if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) or (settings.startup['PHI-MI'].value) or (settings.startup['PHI-SA'].value and (settings.startup['PHI-SA-RESTRICTION'].value or settings.startup['PHI-SA-VANILLA'].value)) then
     data:extend({{type='recipe-category', name='fluid'}})
 
     item = table.deepcopy(data.raw['item']['offshore-pump'])
@@ -422,7 +424,7 @@ if settings.startup['PHI-SA'].value then
         data.raw['tips-and-tricks-item']['spoilables-research'] = nil
     end
 
-    if (settings.startup['PHI-SA-REQUIREMENT'].value or settings.startup['PHI-SA-VANILLA'].value) and mods['space-age'] then
+    if (settings.startup['PHI-SA-RESTRICTION'].value or settings.startup['PHI-SA-VANILLA'].value) and mods['space-age'] then
         data.raw['assembling-machine']['captive-biter-spawner'].surface_conditions = nil
         data.raw['agricultural-tower']['agricultural-tower'].surface_conditions = nil
         data.raw['asteroid-collector']['asteroid-collector'].surface_conditions = nil
@@ -698,11 +700,7 @@ if settings.startup['PHI-SA'].value then
     end
 
     if settings.startup['PHI-SA-GENERIC'].value or settings.startup['PHI-SA-VANILLA'].value then
-        data.raw['mining-drill']['electric-mining-drill'].filter_count = 5
-
         if mods['space-age'] then
-            data.raw['mining-drill']['big-mining-drill'].filter_count = 5
-
             data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
             data.raw.technology['cliff-explosives'].unit.count = 200
             data.raw.technology['cliff-explosives'].unit.ingredients = {
