@@ -5,6 +5,7 @@ Date: 2024-11-28
   Changes:
     - [CL] Changed some locale and settings values.
     - [SA] Changed the map generation for single planet run.
+    - [SA] Changed the starting speed of railgun to make the speed research effect work.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.39

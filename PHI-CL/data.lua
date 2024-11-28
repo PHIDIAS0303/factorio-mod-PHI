@@ -852,6 +852,10 @@ if settings.startup['PHI-SA'].value then
 
             data.raw.roboport.roboport.charging_station_count_affected_by_quality = true
             data.raw['roboport-equipment']['personal-roboport-equipment'].charging_station_count_affected_by_quality = true
+
+            data.raw['ammo-turret']['railgun-turret'].starting_attack_speed = 1
+            data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_secondary = 1
+            data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_when_killed = 1
         end
 
         if mods['elevated-rails'] then
@@ -873,6 +877,11 @@ if settings.startup['PHI-SA'].value then
                 elseif v.category and v.category == 'speed' then
                     v.effect.quality = nil
                 end
+            end
+
+            for _, v in pairs(data.raw['inserter']) do
+                v.extension_speed = v.extension_speed * 2.5
+                v.rotation_speed = v.rotation_speed * 2.5
             end
         end
     end
