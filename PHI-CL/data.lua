@@ -528,6 +528,12 @@ if settings.startup['PHI-SA'].value then
 
         for _, v in pairs(data.raw['asteroid']) do
             v.mass = 1
+
+            for _, v2 in pairs(v.resistances) do
+                if v2.percent > 98 then
+                    v2.percent = 98
+                end
+            end
         end
 
         local asteroid_util = require('__space-age__.prototypes.planet.asteroid-spawn-definitions')
