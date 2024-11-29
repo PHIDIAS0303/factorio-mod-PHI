@@ -746,6 +746,12 @@ if settings.startup['PHI-SA'].value then
             end
         end
 
+        for _, v in pairs({'artificial-yumako-soil', 'overgrowth-yumako-soil', 'artificial-jellynut-soil', 'overgrowth-jellynut-soil'}) do
+            data.raw.tile[v].sprite_usage_surface = 'any'
+            data.raw.item[v].place_as_tile.condition = {layers={water_tile=true}}
+            data.raw.item[v].place_as_tile.tile_condition = nil
+        end
+
         data.raw['tips-and-tricks-item']['fulgora-briefing'] = nil
         data.raw['tips-and-tricks-item']['lightning-mechanics'] = nil
         data.raw['tips-and-tricks-item']['gleba-briefing'] = nil
@@ -856,6 +862,17 @@ if settings.startup['PHI-SA'].value then
             data.raw['ammo-turret']['railgun-turret'].starting_attack_speed = 1
             data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_secondary = 1
             data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_when_killed = 1
+
+            for _, v in pairs({'carbonic-asteroid-chunk', 'metallic-asteroid-chunk', 'promethium-asteroid-chunk', 'oxide-asteroid-chunk'}) do
+                if data.raw.item[v] then
+                    data.raw.item[v].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
+                end
+            end
+
+            for _, v in pairs({'water', 'water-green', 'deepwater', 'deepwater-green'}) do
+                data.raw.tile[v].destroys_dropped_items = true
+                data.raw.tile[v].default_destroyed_dropped_item_trigger = nil
+            end
         end
 
         if mods['elevated-rails'] then
@@ -877,11 +894,6 @@ if settings.startup['PHI-SA'].value then
                 elseif v.category and v.category == 'speed' then
                     v.effect.quality = nil
                 end
-            end
-
-            for _, v in pairs(data.raw['inserter']) do
-                v.extension_speed = v.extension_speed * 2.5
-                v.rotation_speed = v.rotation_speed * 2.5
             end
         end
     end
@@ -923,6 +935,11 @@ if settings.startup['PHI-SA'].value then
             data.raw.quality.normal.beacon_power_usage_multiplier = 1 / 6
             data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1 / 6
             data.raw.quality.normal.science_pack_drain_multiplier = 19 / 20
+
+            for _, v in pairs(data.raw['inserter']) do
+                v.extension_speed = v.extension_speed * 2.5
+                v.rotation_speed = v.rotation_speed * 2.5
+            end
         end
     end
 

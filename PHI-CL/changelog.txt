@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 3.0.41
+Date: 2024-11-29
+
+  Features:
+    - [SA] Introduced stacking for asteroid chunk.
+    - [SA] Introduced dumping trash to water.
+
+  Changes:
+    - [SA] Fixed the non nauvis tile logic of placement.
+
+---------------------------------------------------------------------------------------------------
 Version: 3.0.40
 Date: 2024-11-28
 
