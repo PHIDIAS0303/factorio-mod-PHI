@@ -4,6 +4,7 @@ Date: 2024-11-30
 
   Changes:
     - [SA] Changed some tile logic.
+    - [SA] Changed the no restriction and vanilla set up logic.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.41

@@ -518,54 +518,7 @@ if settings.startup['PHI-SA'].value then
             v.hidden_in_factoriopedia = true
         end
 
-        data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = false
-        data.raw['rocket-silo']['rocket-silo'].rocket_parts_required = 100
-        data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 1
-        data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 0
-        data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 0
-
-        local item_sounds = require('__base__/prototypes/item_sounds')
-
-        data:extend({
-            {
-                type = 'item',
-                name = 'satellite',
-                icon = '__base__/graphics/icons/satellite.png',
-                subgroup = 'space-related',
-                order = 'd[rocket-parts]-e[satellite]',
-                inventory_move_sound = item_sounds.mechanical_inventory_move,
-                pick_sound = item_sounds.mechanical_inventory_pickup,
-                drop_sound = item_sounds.mechanical_inventory_move,
-                stack_size = 1,
-                weight = 1 * tons,
-                rocket_launch_products = {{type='item', name='space-science-pack', amount=1000}},
-                send_to_orbit_mode = 'automated'
-            },
-            {
-                type = 'recipe',
-                name = 'satellite',
-                energy_required = 5,
-                enabled = false,
-                category = 'crafting',
-                ingredients =
-                {
-                  {type='item', name='low-density-structure', amount=100},
-                  {type='item', name='solar-panel', amount=100},
-                  {type='item', name='accumulator', amount=100},
-                  {type='item', name='radar', amount=5},
-                  {type='item', name='processing-unit', amount=100},
-                  {type='item', name='rocket-fuel', amount=50}
-                },
-                results = {{type='item', name='satellite', amount=1}},
-                requester_paste_multiplier = 1
-            }
-        })
-
         data.raw.technology['rocket-silo'].effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}}
-        data.raw.technology['space-science-pack'].research_trigger = nil
-        data.raw.technology['space-science-pack'].prerequisites = {'rocket-silo'}
-        data.raw.technology['space-science-pack'].effects = {{type='unlock-recipe', recipe='satellite'}}
-        data.raw.technology['space-science-pack'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
         data.raw.technology['tungsten-carbide'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
         data.raw.technology['tungsten-carbide'].research_trigger = nil
         --data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
@@ -950,6 +903,54 @@ if settings.startup['PHI-SA'].value then
 
     if settings.startup['PHI-SA-VANILLA'].value then
         if mods['space-age'] then
+            data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = false
+            data.raw['rocket-silo']['rocket-silo'].rocket_parts_required = 100
+            data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 1
+            data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 0
+            data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 0
+
+            local item_sounds = require('__base__/prototypes/item_sounds')
+
+            data:extend({
+                {
+                    type = 'item',
+                    name = 'satellite',
+                    icon = '__base__/graphics/icons/satellite.png',
+                    subgroup = 'space-related',
+                    order = 'd[rocket-parts]-e[satellite]',
+                    inventory_move_sound = item_sounds.mechanical_inventory_move,
+                    pick_sound = item_sounds.mechanical_inventory_pickup,
+                    drop_sound = item_sounds.mechanical_inventory_move,
+                    stack_size = 1,
+                    weight = 1 * tons,
+                    rocket_launch_products = {{type='item', name='space-science-pack', amount=1000}},
+                    send_to_orbit_mode = 'automated'
+                },
+                {
+                    type = 'recipe',
+                    name = 'satellite',
+                    energy_required = 5,
+                    enabled = false,
+                    category = 'crafting',
+                    ingredients =
+                    {
+                    {type='item', name='low-density-structure', amount=100},
+                    {type='item', name='solar-panel', amount=100},
+                    {type='item', name='accumulator', amount=100},
+                    {type='item', name='radar', amount=5},
+                    {type='item', name='processing-unit', amount=100},
+                    {type='item', name='rocket-fuel', amount=50}
+                    },
+                    results = {{type='item', name='satellite', amount=1}},
+                    requester_paste_multiplier = 1
+                }
+            })
+
+            data.raw.technology['space-science-pack'].research_trigger = nil
+            data.raw.technology['space-science-pack'].prerequisites = {'rocket-silo'}
+            data.raw.technology['space-science-pack'].effects = {{type='unlock-recipe', recipe='satellite'}}
+            data.raw.technology['space-science-pack'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+
             for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'tungsten_ore'}) do
                 data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v] = nil
                 data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v:gsub('_', '-')] = nil
