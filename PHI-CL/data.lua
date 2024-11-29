@@ -532,7 +532,38 @@ if settings.startup['PHI-SA'].value then
 
         local asteroid_util = require('__space-age__.prototypes.planet.asteroid-spawn-definitions')
         data.raw.planet['nauvis'].asteroid_spawn_influence = 1
-        data.raw.planet['nauvis'].asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.shattered_planet_trip, 0.8)
+
+        local pb = {
+            has_promethium_asteroids = true,
+            probability_on_range_chunk = {
+                {position=0.001, probability=asteroid_util.system_edge_huge * 5, angle_when_stopped=asteroid_util.chunk_angle},
+                {position=0.999, probability=asteroid_util.system_edge_huge, angle_when_stopped=asteroid_util.chunk_angle}
+            },
+            probability_on_range_small = {
+                {position=0.001, probability=asteroid_util.system_edge_huge * 4, angle_when_stopped=asteroid_util.small_angle},
+                {position=0.999, probability=asteroid_util.system_edge_huge * 2, angle_when_stopped=asteroid_util.small_angle}
+            },
+            probability_on_range_medium = {
+                {position=0.001, probability=asteroid_util.system_edge_huge * 3, angle_when_stopped=asteroid_util.medium_angle},
+                {position=0.999, probability=asteroid_util.system_edge_huge * 3, angle_when_stopped=asteroid_util.medium_angle}
+            },
+            probability_on_range_big = {
+                {position=0.001, probability=asteroid_util.system_edge_huge * 2, angle_when_stopped=asteroid_util.big_angle},
+                {position=0.999, probability=asteroid_util.system_edge_huge * 4, angle_when_stopped=asteroid_util.big_angle}
+            },
+            probability_on_range_huge = {
+                {position=0.001, probability=asteroid_util.system_edge_huge, angle_when_stopped=asteroid_util.huge_angle},
+                {position=0.999, probability=asteroid_util.system_edge_huge * 5, angle_when_stopped=asteroid_util.huge_angle}
+            },
+            type_ratios = {
+                {position=0.001, ratios={1, 1, 1, 1}},
+                {position=0.999, ratios={1, 1, 1, 1}}
+            }
+        }
+
+        data.raw.planet['nauvis'].asteroid_spawn_definitions = asteroid_util.spawn_definitions(pb, 0.001)
+
+        table.insert(data.raw['space-platform-starter-pack']['space-platform-starter-pack'].initial_items, {type='item',name='railgun-turret', amount=6})
 
         data.raw.technology['tungsten-carbide'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
         data.raw.technology['tungsten-carbide'].research_trigger = nil
@@ -547,6 +578,8 @@ if settings.startup['PHI-SA'].value then
         data.raw.technology['lithium-processing'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
         data.raw.technology['lithium-processing'].research_trigger = nil
         data.raw.technology['promethium-science-pack'].effects = {{type='unlock-recipe', recipe='promethium-science-pack'}}
+        data.raw.technology['railgun'].prerequisites = {'military-3', 'utility-science-pack'}
+        data.raw.technology['railgun'].unit = {count = 1000, time = 60, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}}
 
         for k, v in pairs(items['space-age']['technology_1']) do
             if data.raw.technology[k] then
@@ -743,14 +776,6 @@ if settings.startup['PHI-SA'].value then
         data.raw['space-connection-distance-traveled-achievement']['shattered-planet-2'] = nil
         data.raw['space-connection-distance-traveled-achievement']['shattered-planet-3'] = nil
         data.raw['dont-research-before-researching-achievement']['rush-to-space'] = nil
-
-        for _, v in pairs(items['item']) do
-            if v.enabled and v.mod and (v.mod == 'space-age' or v.mod == 'quality') then
-                if (data.raw.technology[v.tech] and data.raw.technology[v.tech].hidden) or (data.raw.recipe[v.name] and data.raw.recipe[v.name].hidden) then
-                    v.enabled = false
-                end
-            end
-        end
     end
 
     if settings.startup['PHI-SA-GENERIC'].value or settings.startup['PHI-SA-VANILLA'].value then
@@ -1225,14 +1250,6 @@ if settings.startup['PHI-SA'].value then
                 end
             end
 
-            for _, v in pairs(items['item']) do
-                if v.enabled and v.mod and (v.mod == 'space-age' or v.mod == 'quality') then
-                    if (data.raw.technology[v.tech] and data.raw.technology[v.tech].hidden) or (data.raw.recipe[v.name] and data.raw.recipe[v.name].hidden) then
-                        v.enabled = false
-                    end
-                end
-            end
-
             for _, v in pairs(data.raw.lab) do
                 v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
             end
@@ -1252,7 +1269,6 @@ if settings.startup['PHI-SA'].value then
         end
     end
 end
-
 if settings.startup['PHI-CT'].value then
     if settings.startup['PHI-CT-TOOL'].value then
         local item = table.deepcopy(data.raw['item']['radar'])
@@ -1356,7 +1372,7 @@ if settings.startup['PHI-CT'].value then
             end
         end
 
-        data.raw['assembling-machine']['super-pump'].fluid_box.pipe_connections.connection_category = {'default', 'fusion-plasma'}
+        data.raw['assembling-machine']['super-pump'].fluid_boxes[1].pipe_connections.connection_category = {'default', 'fusion-plasma'}
     end
 
     if settings.startup['PHI-CT-UTILITY'].value then
@@ -1701,6 +1717,14 @@ if settings.startup['PHI-CT'].value then
                 }
             }
         }
+    end
+end
+
+for _, v in pairs(items['item']) do
+    if v.enabled and v.mod and (v.mod == 'space-age' or v.mod == 'quality') then
+        if (data.raw.technology[v.tech] and data.raw.technology[v.tech].hidden) or (data.raw.recipe[v.name] and data.raw.recipe[v.name].hidden) then
+            v.enabled = false
+        end
     end
 end
 
