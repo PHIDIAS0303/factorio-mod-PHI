@@ -8,33 +8,27 @@ for _, force in pairs(game.forces) do
         if v.enabled then
             if (v.tech == 'compound-energy') then
                 for j=v.min, v.max, 1 do
-                    if technologies['compound-energy-' .. j] ~= nil then
-                        if technologies['compound-energy-' .. j].researched then
-                            if recipes[v.name .. '-' .. j] ~= nil then
-                                recipes[v.name .. '-' .. j].enabled = true
-                                recipes[v.name .. '-' .. j].reload()
-                            end
-                        end
+                    if technologies['compound-energy-' .. j] and technologies['compound-energy-' .. j].researched and recipes[v.name .. '-' .. j] then
+                        recipes[v.name .. '-' .. j].enabled = true
+                        recipes[v.name .. '-' .. j].reload()
                     end
                 end
 
             else
-                if technologies[v.tech] then
-                    if technologies[v.tech].researched then
-                        if string.find(v.type, '-equipment') then
-                            for j=v.min, v.max, 1 do
-                                if recipes[v.name .. '-mk' .. j .. '-equipment'] then
-                                    recipes[v.name .. '-mk' .. j .. '-equipment'].enabled = true
-                                    recipes[v.name .. '-mk' .. j .. '-equipment'].reload()
-                                end
+                if technologies[v.tech] and technologies[v.tech].researched then
+                    if string.find(v.type, '-equipment') then
+                        for j=v.min, v.max, 1 do
+                            if recipes[v.name .. '-mk' .. j .. '-equipment'] then
+                                recipes[v.name .. '-mk' .. j .. '-equipment'].enabled = true
+                                recipes[v.name .. '-mk' .. j .. '-equipment'].reload()
                             end
+                        end
 
-                        else
-                            for j=v.min, v.max, 1 do
-                                if recipes[v.name .. '-' .. j] then
-                                    recipes[v.name .. '-' .. j].enabled = true
-                                    recipes[v.name .. '-' .. j].reload()
-                                end
+                    else
+                        for j=v.min, v.max, 1 do
+                            if recipes[v.name .. '-' .. j] then
+                                recipes[v.name .. '-' .. j].enabled = true
+                                recipes[v.name .. '-' .. j].reload()
                             end
                         end
                     end
