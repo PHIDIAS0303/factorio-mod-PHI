@@ -526,11 +526,13 @@ if settings.startup['PHI-SA'].value then
             v.hidden_in_factoriopedia = true
         end
 
+        for _, v in pairs(data.raw['asteroid']) do
+            v.mass = 1
+        end
+
         local asteroid_util = require('__space-age__.prototypes.planet.asteroid-spawn-definitions')
         data.raw.planet['nauvis'].asteroid_spawn_influence = 1
-        -- data.raw.planet['nauvis'].asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.aquilo_solar_system_edge, 0.9)
         data.raw.planet['nauvis'].asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.shattered_planet_trip, 0.8)
-        data.raw.tile['space-platform-foundation'].dying_explosion = nil
 
         data.raw.technology['tungsten-carbide'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
         data.raw.technology['tungsten-carbide'].research_trigger = nil

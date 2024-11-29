@@ -2,6 +2,9 @@
 Version: 3.0.42
 Date: 2024-11-30
 
+  Features:
+    - [SA] Introduced nauvis platform with safe asteroid from shatter planet.
+
   Changes:
     - [MI] Changed better train setting logic.
     - [SA] Changed some tile logic.
