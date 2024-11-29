@@ -311,6 +311,14 @@ if settings.startup['PHI-MI'].value then
                         v.energy_source.burnt_inventory_size = 1
                     end
                 end
+
+                if v.inventory_size then
+                    v.inventory_size = math.ceil(v.inventory_size * s)
+                end
+
+                if v.capacity then
+                    v.capacity = math.ceil(v.capacity * s)
+                end
             end
         end
     end
@@ -518,10 +526,16 @@ if settings.startup['PHI-SA'].value then
             v.hidden_in_factoriopedia = true
         end
 
+        local asteroid_util = require('__space-age__.prototypes.planet.asteroid-spawn-definitions')
+        data.raw.planet['nauvis'].asteroid_spawn_influence = 1
+        -- data.raw.planet['nauvis'].asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.aquilo_solar_system_edge, 0.9)
+        data.raw.planet['nauvis'].asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.shattered_planet_trip, 0.8)
+        data.raw.tile['space-platform-foundation'].dying_explosion = nil
+
         data.raw.technology['tungsten-carbide'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
         data.raw.technology['tungsten-carbide'].research_trigger = nil
-        --data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        --data.raw.technology['argiculture'].research_trigger = nil
+        -- data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+        -- data.raw.technology['argiculture'].research_trigger = nil
         data.raw.technology['bacteria-cultivation'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
         data.raw.technology['bacteria-cultivation'].research_trigger = nil
         data.raw.technology['heating-tower'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
@@ -888,9 +902,19 @@ if settings.startup['PHI-SA'].value then
             data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1 / 6
             data.raw.quality.normal.science_pack_drain_multiplier = 19 / 20
 
+            local new_scale = 1 + (0.3 * data.raw.quality.normal.level)
+
             for _, v in pairs(data.raw['inserter']) do
-                v.extension_speed = v.extension_speed * 2.5
-                v.rotation_speed = v.rotation_speed * 2.5
+                v.extension_speed = v.extension_speed * new_scale
+                v.rotation_speed = v.rotation_speed * new_scale
+            end
+
+            for _, v in pairs(data.raw['cargo-wagon']) do
+                v.inventory_size = math.ceil(v.inventory_size * new_scale)
+            end
+
+            for _, v in pairs(data.raw['fluid-wagon']) do
+                v.capacity = math.ceil(v.capacity * new_scale)
             end
         end
     end
@@ -1329,6 +1353,8 @@ if settings.startup['PHI-CT'].value then
                 }})
             end
         end
+
+        data.raw['assembling-machine']['super-pump'].fluid_box.pipe_connections.connection_category = {'default', 'fusion-plasma'}
     end
 
     if settings.startup['PHI-CT-UTILITY'].value then

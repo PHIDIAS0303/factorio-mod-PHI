@@ -3,8 +3,10 @@ Version: 3.0.42
 Date: 2024-11-30
 
   Changes:
+    - [MI] Changed better train setting logic.
     - [SA] Changed some tile logic.
     - [SA] Changed the no restriction and vanilla set up logic.
+    - [SA] Changed the quality effect of train inventory size when playing with no quality.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.41
