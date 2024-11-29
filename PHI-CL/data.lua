@@ -536,15 +536,15 @@ if settings.startup['PHI-SA'].value then
         local pb = {
             has_promethium_asteroids = true,
             probability_on_range_chunk = {
-                {position=0.001, probability=asteroid_util.system_edge_huge * 5, angle_when_stopped=asteroid_util.chunk_angle},
+                {position=0.001, probability=asteroid_util.system_edge_huge * 8, angle_when_stopped=asteroid_util.chunk_angle},
                 {position=0.999, probability=asteroid_util.system_edge_huge, angle_when_stopped=asteroid_util.chunk_angle}
             },
             probability_on_range_small = {
-                {position=0.001, probability=asteroid_util.system_edge_huge * 4, angle_when_stopped=asteroid_util.small_angle},
+                {position=0.001, probability=asteroid_util.system_edge_huge * 6, angle_when_stopped=asteroid_util.small_angle},
                 {position=0.999, probability=asteroid_util.system_edge_huge * 2, angle_when_stopped=asteroid_util.small_angle}
             },
             probability_on_range_medium = {
-                {position=0.001, probability=asteroid_util.system_edge_huge * 3, angle_when_stopped=asteroid_util.medium_angle},
+                {position=0.001, probability=asteroid_util.system_edge_huge * 4, angle_when_stopped=asteroid_util.medium_angle},
                 {position=0.999, probability=asteroid_util.system_edge_huge * 3, angle_when_stopped=asteroid_util.medium_angle}
             },
             probability_on_range_big = {
@@ -562,8 +562,7 @@ if settings.startup['PHI-SA'].value then
         }
 
         data.raw.planet['nauvis'].asteroid_spawn_definitions = asteroid_util.spawn_definitions(pb, 0.001)
-
-        table.insert(data.raw['space-platform-starter-pack']['space-platform-starter-pack'].initial_items, {type='item',name='railgun-turret', amount=6})
+        data.raw.tile['space-platform-foundation'].max_health = data.raw.tile['space-platform-foundation'].max_health * 2
 
         data.raw.technology['tungsten-carbide'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
         data.raw.technology['tungsten-carbide'].research_trigger = nil
@@ -578,8 +577,12 @@ if settings.startup['PHI-SA'].value then
         data.raw.technology['lithium-processing'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
         data.raw.technology['lithium-processing'].research_trigger = nil
         data.raw.technology['promethium-science-pack'].effects = {{type='unlock-recipe', recipe='promethium-science-pack'}}
+
+        --[[
         data.raw.technology['railgun'].prerequisites = {'military-3', 'utility-science-pack'}
         data.raw.technology['railgun'].unit = {count = 1000, time = 60, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}}
+        table.insert(data.raw['space-platform-starter-pack']['space-platform-starter-pack'].initial_items, {type='item',name='railgun-turret', amount=6})
+        ]]
 
         for k, v in pairs(items['space-age']['technology_1']) do
             if data.raw.technology[k] then
