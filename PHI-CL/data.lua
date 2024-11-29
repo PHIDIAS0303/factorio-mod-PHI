@@ -518,7 +518,6 @@ if settings.startup['PHI-SA'].value then
             v.hidden_in_factoriopedia = true
         end
 
-        data.raw.technology['rocket-silo'].effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}}
         data.raw.technology['tungsten-carbide'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
         data.raw.technology['tungsten-carbide'].research_trigger = nil
         --data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
@@ -903,6 +902,8 @@ if settings.startup['PHI-SA'].value then
 
     if settings.startup['PHI-SA-VANILLA'].value then
         if mods['space-age'] then
+            data.raw.technology['rocket-silo'].effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}}
+
             data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = false
             data.raw['rocket-silo']['rocket-silo'].rocket_parts_required = 100
             data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 1
