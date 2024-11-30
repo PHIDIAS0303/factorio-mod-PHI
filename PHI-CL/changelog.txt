@@ -4,6 +4,7 @@ Date: 2024-11-30
 
   Changes:
     - [CL] Changed some existing code structure and logic.
+    - [CL] Changed the artillery shell max stack size.
     - [SA] Changed the minimum damage for the asteroid.
     - [SA] Changed the artillery related content in generic settings.
 

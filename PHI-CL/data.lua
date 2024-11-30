@@ -834,15 +834,8 @@ if settings.startup['PHI-SA'].value then
                 {'utility-science-pack', 1}
             }
 
-            data.raw.technology['artillery-shell-range-1'].unit.ingredients = {
-                {'automation-science-pack', 1},
-                {'logistic-science-pack', 1},
-                {'chemical-science-pack', 1},
-                {'military-science-pack', 1},
-                {'utility-science-pack', 1},
-                {'space-science-pack', 1}
-            }
-
+            data.raw.technology['artillery-shell-range-1'].unit.ingredients = data.raw.technology['artillery'].unit.ingredients
+            table.insert(data.raw.technology['artillery-shell-range-1'].unit.ingredients, {'space-science-pack', 1})
             data.raw.technology['artillery-shell-speed-1'].unit.ingredients = data.raw.technology['artillery-shell-range-1'].unit.ingredients
             data.raw.technology['artillery-shell-damage-1'].unit.ingredients = data.raw.technology['artillery-shell-range-1'].unit.ingredients
 
@@ -944,7 +937,7 @@ if settings.startup['PHI-SA'].value then
             data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_secondary = 1
             data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_when_killed = 1
 
-            for _, v in pairs({'carbonic-asteroid-chunk', 'metallic-asteroid-chunk', 'promethium-asteroid-chunk', 'oxide-asteroid-chunk'}) do
+            for _, v in pairs({'carbonic-asteroid-chunk', 'metallic-asteroid-chunk', 'promethium-asteroid-chunk', 'oxide-asteroid-chunk', 'artillery-shell'}) do
                 if data.raw.item[v] then
                     data.raw.item[v].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
                 end
