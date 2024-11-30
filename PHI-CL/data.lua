@@ -354,8 +354,24 @@ if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) 
     entity.crafting_categories = {'fluid'}
     entity.crafting_speed = 1
     entity.energy_source = {type = 'void'}
-    entity.fluid_box.volume = 6000
-    entity.fluid_boxes = {table.deepcopy(entity.fluid_box)}
+
+    local cc = {'default'}
+
+    if mods['space-age'] then
+        cc = {'default', 'fusion-plasma'}
+    end
+
+    entity.fluid_boxes = {{
+        production_type = 'output',
+        pipe_covers = table.deepcopy(entity.fluid_box.pipe_covers),
+        volume = 6000,
+        pipe_connections = {{
+            flow_direction = 'output',
+            connection_category = cc,
+            direction = defines.direction.south,
+            position = {0, 0}
+        }}
+    }}
     entity.fluid_box = nil
     entity.fluid_boxes_off_when_no_fluid_recipe = false
     entity.effect_receiver = {uses_module_effects=false, uses_beacon_effects=false}
@@ -542,24 +558,24 @@ if settings.startup['PHI-SA'].value then
         local pb = {
             has_promethium_asteroids = true,
             probability_on_range_chunk = {
-                {position=0.001, probability=asteroid_util.system_edge_huge * 8, angle_when_stopped=asteroid_util.chunk_angle},
-                {position=0.999, probability=asteroid_util.system_edge_huge, angle_when_stopped=asteroid_util.chunk_angle}
+                {position=0.001, probability=0.1250, angle_when_stopped=asteroid_util.chunk_angle},
+                {position=0.999, probability=0.0625, angle_when_stopped=asteroid_util.chunk_angle}
             },
             probability_on_range_small = {
-                {position=0.001, probability=asteroid_util.system_edge_huge * 6, angle_when_stopped=asteroid_util.small_angle},
-                {position=0.999, probability=asteroid_util.system_edge_huge * 2, angle_when_stopped=asteroid_util.small_angle}
+                {position=0.001, probability=0.1094, angle_when_stopped=asteroid_util.small_angle},
+                {position=0.999, probability=0.0781, angle_when_stopped=asteroid_util.small_angle}
             },
             probability_on_range_medium = {
-                {position=0.001, probability=asteroid_util.system_edge_huge * 4, angle_when_stopped=asteroid_util.medium_angle},
-                {position=0.999, probability=asteroid_util.system_edge_huge * 3, angle_when_stopped=asteroid_util.medium_angle}
+                {position=0.001, probability=0.0938, angle_when_stopped=asteroid_util.medium_angle},
+                {position=0.999, probability=0.0938, angle_when_stopped=asteroid_util.medium_angle}
             },
             probability_on_range_big = {
-                {position=0.001, probability=asteroid_util.system_edge_huge * 2, angle_when_stopped=asteroid_util.big_angle},
-                {position=0.999, probability=asteroid_util.system_edge_huge * 4, angle_when_stopped=asteroid_util.big_angle}
+                {position=0.001, probability=0.0781, angle_when_stopped=asteroid_util.big_angle},
+                {position=0.999, probability=0.1094, angle_when_stopped=asteroid_util.big_angle}
             },
             probability_on_range_huge = {
-                {position=0.001, probability=asteroid_util.system_edge_huge, angle_when_stopped=asteroid_util.huge_angle},
-                {position=0.999, probability=asteroid_util.system_edge_huge * 5, angle_when_stopped=asteroid_util.huge_angle}
+                {position=0.001, probability=0.0625, angle_when_stopped=asteroid_util.huge_angle},
+                {position=0.999, probability=0.1250, angle_when_stopped=asteroid_util.huge_angle}
             },
             type_ratios = {
                 {position=0.001, ratios={1, 1, 1, 1}},
@@ -808,6 +824,67 @@ if settings.startup['PHI-SA'].value then
             data:extend({recipe})
             table.insert(data.raw.technology['cliff-explosives'].effects, {type='unlock-recipe', recipe=recipe.name})
 
+            data.raw.technology['artillery'].prerequisites = {'military-4', 'tank', 'concrete', 'radar'}
+            data.raw.technology['artillery'].unit.count = 2000
+            data.raw.technology['artillery'].unit.ingredients = {
+                {'automation-science-pack', 1},
+                {'logistic-science-pack', 1},
+                {'chemical-science-pack', 1},
+                {'military-science-pack', 1},
+                {'utility-science-pack', 1}
+            }
+
+            data.raw.technology['artillery-shell-range-1'].unit.ingredients = {
+                {'automation-science-pack', 1},
+                {'logistic-science-pack', 1},
+                {'chemical-science-pack', 1},
+                {'military-science-pack', 1},
+                {'utility-science-pack', 1},
+                {'space-science-pack', 1}
+            }
+
+            data.raw.technology['artillery-shell-speed-1'].unit.ingredients = data.raw.technology['artillery-shell-range-1'].unit.ingredients
+            data.raw.technology['artillery-shell-damage-1'].unit.ingredients = data.raw.technology['artillery-shell-range-1'].unit.ingredients
+
+            recipe = table.deepcopy(data.raw.recipe['artillery-turret'])
+            recipe.name = 'artillery-turret-o'
+            recipe.ingredients = {
+                {type='item', name='steel-plate', amount=60},
+                {type='item', name='concrete', amount=60},
+                {type='item', name='iron-gear-wheel', amount=40},
+                {type='item', name='advanced-circuit', amount=20}
+            }
+            recipe.localised_name = {'phi-cl.combine', '', ''}
+
+            data:extend({recipe})
+            table.insert(data.raw.technology['artillery'].effects, {type='unlock-recipe', recipe=recipe.name})
+
+            recipe = table.deepcopy(data.raw.recipe['artillery-shell'])
+            recipe.name = 'artillery-shell-o'
+            recipe.ingredients = {
+                {type='item', name='explosive-cannon-shell', amount=4},
+                {type='item', name='radar', amount=1},
+                {type='item', name='explosives', amount=8}
+            }
+            recipe.localised_name = {'phi-cl.combine', '', ''}
+
+            data:extend({recipe})
+            table.insert(data.raw.technology['artillery'].effects, {type='unlock-recipe', recipe=recipe.name})
+
+            recipe = table.deepcopy(data.raw.recipe['artillery-wagon'])
+            recipe.name = 'artillery-wagon-o'
+            recipe.ingredients = {
+                {type='item', name='engine-unit', amount=64},
+                {type='item', name='iron-gear-wheel', amount=10},
+                {type='item', name='steel-plate', amount=40},
+                {type='item', name='pipe', amount=16},
+                {type='item', name='advanced-circuit', amount=20}
+            }
+            recipe.localised_name = {'phi-cl.combine', '', ''}
+
+            data:extend({recipe})
+            table.insert(data.raw.technology['artillery'].effects, {type='unlock-recipe', recipe=recipe.name})
+
             data.raw.technology['rail-support-foundations'].prerequisites = {'elevated-rail'}
             data.raw.technology['rail-support-foundations'].unit.count = 600
             data.raw.technology['rail-support-foundations'].unit.ingredients = {
@@ -860,6 +937,8 @@ if settings.startup['PHI-SA'].value then
 
             data.raw.roboport.roboport.charging_station_count_affected_by_quality = true
             data.raw['roboport-equipment']['personal-roboport-equipment'].charging_station_count_affected_by_quality = true
+
+            data.raw.item['space-platform-foundation'].stack_size = 100
 
             data.raw['ammo-turret']['railgun-turret'].starting_attack_speed = 1
             data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_secondary = 1
@@ -1380,8 +1459,6 @@ if settings.startup['PHI-CT'].value then
                 }})
             end
         end
-
-        data.raw['assembling-machine']['super-pump'].fluid_boxes[1].pipe_connections.connection_category = {'default', 'fusion-plasma'}
     end
 
     if settings.startup['PHI-CT-UTILITY'].value then
@@ -1607,8 +1684,7 @@ if settings.startup['PHI-CT'].value then
         data:extend({item})
 
         local entity = table.deepcopy(data.raw['linked-container']['linked-chest'])
-        entity.circuit_wire_connection_point = data.raw['container']['steel-chest'].circuit_wire_connection_point
-        entity.circuit_connector_sprites = data.raw['container']['steel-chest'].circuit_connector_sprites
+        entity.circuit_connector = table.deepcopy(data.raw['container']['steel-chest'].circuit_connector)
         entity.circuit_wire_max_distance = data.raw['container']['steel-chest'].circuit_wire_max_distance
         entity.quality_affects_inventory_size = false
         entity.inventory_type = 'with_filters_and_bar'

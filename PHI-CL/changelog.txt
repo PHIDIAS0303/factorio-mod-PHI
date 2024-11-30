@@ -3,7 +3,9 @@ Version: 3.0.43
 Date: 2024-11-30
 
   Changes:
+    - [CL] Changed some existing code structure and logic.
     - [SA] Changed the minimum damage for the asteroid.
+    - [SA] Changed the artillery related content in generic settings.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.42
