@@ -816,6 +816,10 @@ if settings.startup['PHI-SA'].value then
             data.raw.item[v].place_as_tile.tile_condition = nil
         end
 
+        for _, v in pairs({'yumako-tree', 'jellystem', 'tree-plant'}) do
+            table.insert(data.raw['plant'][v].autoplace.tile_restriction, 'space-platform-foundation')
+        end
+
         for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
             data.raw.planet[v].map_gen_settings = nil
             data.raw.planet[v].hidden = true
@@ -849,26 +853,50 @@ if settings.startup['PHI-SA'].value then
             has_promethium_asteroids = true,
             probability_on_range_chunk = {
                 {position=0.001, probability=0.0625, angle_when_stopped=asteroid_util.chunk_angle},
+                {position=0.199, probability=0.0563, angle_when_stopped=asteroid_util.chunk_angle},
+                {position=0.399, probability=0.0501, angle_when_stopped=asteroid_util.chunk_angle},
+                {position=0.599, probability=0.0439, angle_when_stopped=asteroid_util.chunk_angle},
+                {position=0.799, probability=0.0377, angle_when_stopped=asteroid_util.chunk_angle},
                 {position=0.999, probability=0.0312, angle_when_stopped=asteroid_util.chunk_angle}
             },
             probability_on_range_small = {
                 {position=0.001, probability=0.0547, angle_when_stopped=asteroid_util.small_angle},
+                {position=0.199, probability=0.0516, angle_when_stopped=asteroid_util.small_angle},
+                {position=0.399, probability=0.0485, angle_when_stopped=asteroid_util.small_angle},
+                {position=0.599, probability=0.0454, angle_when_stopped=asteroid_util.small_angle},
+                {position=0.799, probability=0.0423, angle_when_stopped=asteroid_util.small_angle},
                 {position=0.999, probability=0.0390, angle_when_stopped=asteroid_util.small_angle}
             },
             probability_on_range_medium = {
                 {position=0.001, probability=0.0469, angle_when_stopped=asteroid_util.medium_angle},
+                {position=0.199, probability=0.0469, angle_when_stopped=asteroid_util.medium_angle},
+                {position=0.399, probability=0.0469, angle_when_stopped=asteroid_util.medium_angle},
+                {position=0.599, probability=0.0469, angle_when_stopped=asteroid_util.medium_angle},
+                {position=0.799, probability=0.0469, angle_when_stopped=asteroid_util.medium_angle},
                 {position=0.999, probability=0.0469, angle_when_stopped=asteroid_util.medium_angle}
             },
             probability_on_range_big = {
                 {position=0.001, probability=0.0390, angle_when_stopped=asteroid_util.big_angle},
+                {position=0.199, probability=0.0423, angle_when_stopped=asteroid_util.big_angle},
+                {position=0.399, probability=0.0454, angle_when_stopped=asteroid_util.big_angle},
+                {position=0.599, probability=0.0485, angle_when_stopped=asteroid_util.big_angle},
+                {position=0.799, probability=0.0516, angle_when_stopped=asteroid_util.big_angle},
                 {position=0.999, probability=0.0547, angle_when_stopped=asteroid_util.big_angle}
             },
             probability_on_range_huge = {
                 {position=0.001, probability=0.0312, angle_when_stopped=asteroid_util.huge_angle},
+                {position=0.199, probability=0.0377, angle_when_stopped=asteroid_util.huge_angle},
+                {position=0.399, probability=0.0439, angle_when_stopped=asteroid_util.huge_angle},
+                {position=0.599, probability=0.0501, angle_when_stopped=asteroid_util.huge_angle},
+                {position=0.799, probability=0.0563, angle_when_stopped=asteroid_util.huge_angle},
                 {position=0.999, probability=0.0625, angle_when_stopped=asteroid_util.huge_angle}
             },
             type_ratios = {
                 {position=0.001, ratios={1, 1, 1, 1}},
+                {position=0.199, ratios={1, 1, 1, 1}},
+                {position=0.399, ratios={1, 1, 1, 1}},
+                {position=0.599, ratios={1, 1, 1, 1}},
+                {position=0.799, ratios={1, 1, 1, 1}},
                 {position=0.999, ratios={1, 1, 1, 1}}
             }
         }

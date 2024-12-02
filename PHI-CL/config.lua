@@ -393,11 +393,11 @@ local items = {
             ['planet-discovery-gleba'] = true,
             ['planet-discovery-fulgora'] = true,
             ['planet-discovery-aquilo'] = true,
+            ['space-platform-thruster'] = true,
             ['lightning-collector'] = true
         },
         ['technology_2'] = {
             ['space-platform'] = true,
-            ['space-platform-thruster'] = true,
             ['asteroid-reprocessing'] = true,
             ['advanced-asteroid-processing'] = true,
             ['asteroid-productivity'] = true,
@@ -444,7 +444,7 @@ local items = {
             ['advanced-thruster-fuel'] = true,
             ['advanced-thruster-oxidizer'] = true,
             ['lightning-collector'] = true,
-            ['lightning-rod'] = true
+            ['lightning-rod'] = true,
         },
         ['recipe_2'] = {
             ['metallic-asteroid-crushing'] = true,
