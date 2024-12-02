@@ -594,17 +594,11 @@ if settings.startup['PHI-SA'].value then
         end
 
         data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = {}
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_plants'] = {}
+        -- data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_plants'] = {}
         data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['vulcanus_volcanism'] = {}
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['oil_ocean'] = {}
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['ammoniacal_ocean'] = {}
 
         data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings['lava'] = {}
         data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings['lava-hot'] = {}
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings['oil-ocean-shallow'] = {}
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings['oil-ocean-deep'] = {}
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings['ammoniacal-ocean'] = {}
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings['ammoniacal-ocean-2'] = {}
 
         data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:tungsten-ore:probability'] = 'vulcanus_tungsten_ore_probability'
         data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:tungsten-ore:richness'] = 'vulcanus_tungsten_ore_richness'
@@ -613,33 +607,9 @@ if settings.startup['PHI-SA'].value then
         data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:sulfuric-acid-geyser:probability'] = 'vulcanus_sulfuric_acid_geyser_probability'
         data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:sulfuric-acid-geyser:richness'] = 'vulcanus_sulfuric_acid_geyser_richness'
 
-        data:extend({{
-            type = 'autoplace-control',
-            category = 'resource',
-            name = 'oil_ocean',
-            richness = false
-        }})
-
-        data:extend({{
-            type = 'autoplace-control',
-            category = 'resource',
-            name = 'ammoniacal_ocean',
-            richness = false
-        }})
-
         local resource_autoplace = require('resource-autoplace')
 
         --[[
-        data.raw.tile['oil-ocean-shallow'].autoplace = {
-            ['probability_expression'] = 'water_base(-2, 200)',
-            ['control'] = 'oil_ocean'
-        }
-
-        data.raw.tile['oil-ocean-deep'].autoplace = {
-            ['probability_expression'] = 'water_base(-2, 200)',
-            ['control'] = 'oil_ocean'
-        }
-
         data.raw.tile['lava'].autoplace = {
             ['probability_expression'] = 'water_base(-2, 200)',
             ['control'] = 'vulcanus_volcanism'
@@ -648,16 +618,6 @@ if settings.startup['PHI-SA'].value then
         data.raw.tile['lava-hot'].autoplace = {
             ['probability_expression'] = 'water_base(-2, 200)',
             ['control'] = 'vulcanus_volcanism'
-        }
-
-        data.raw.tile['ammoniacal-ocean'].autoplace = {
-            ['probability_expression'] = 'water_base(-2, 200)',
-            ['control'] = 'ammoniacal_ocean'
-        }
-
-        data.raw.tile['ammoniacal-ocean-2'].autoplace = {
-            ['probability_expression'] = 'water_base(-2, 200)',
-            ['control'] = 'ammoniacal_ocean'
         }
 
         data.raw.resource['sulfuric-acid-geyser'].autoplace = {
@@ -712,30 +672,6 @@ if settings.startup['PHI-SA'].value then
             regular_rq_factor_multiplier = 1
         }
 
-        data.raw.tile['oil-ocean-shallow'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'oil-ocean-shallow',
-            order = 'a',
-            base_density = 7,
-            base_spots_per_km2 = 0.02,
-            random_probability = 1,
-            random_spot_size_minimum = 0.02,
-            random_spot_size_maximum = 0.03,
-            has_starting_area_placement = false,
-            autoplace_control_name = 'oil_ocean'
-        }
-
-        data.raw.tile['oil-ocean-deep'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'oil-ocean-deep',
-            order = 'a',
-            base_density = 7,
-            base_spots_per_km2 = 0.02,
-            random_probability = 1,
-            random_spot_size_minimum = 0.02,
-            random_spot_size_maximum = 0.03,
-            has_starting_area_placement = false,
-            autoplace_control_name = 'oil_ocean'
-        }
-
         data.raw.tile['lava'].autoplace = resource_autoplace.resource_autoplace_settings{
             name = 'lava',
             order = 'a',
@@ -758,30 +694,6 @@ if settings.startup['PHI-SA'].value then
             random_spot_size_maximum = 0.6,
             has_starting_area_placement = false,
             autoplace_control_name = 'vulcanus_volcanism'
-        }
-
-        data.raw.tile['ammoniacal-ocean'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'ammoniacal-ocean',
-            order = 'a',
-            base_density = 8.2,
-            base_spots_per_km2 = 0.15,
-            random_probability = 1,
-            random_spot_size_minimum = 0.3,
-            random_spot_size_maximum = 1,
-            has_starting_area_placement = false,
-            autoplace_control_name = 'ammoniacal_ocean'
-        }
-
-        data.raw.tile['ammoniacal-ocean-2'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'ammoniacal-ocean-2',
-            order = 'a',
-            base_density = 8.3,
-            base_spots_per_km2 = 0.15,
-            random_probability = 1,
-            random_spot_size_minimum = 0.3,
-            random_spot_size_maximum = 1,
-            has_starting_area_placement = false,
-            autoplace_control_name = 'ammoniacal_ocean'
         }
 
         data.raw['noise-expression']['demolisher_starting_area']['demolisher_starting_area'] = '0 < starting_spot_at_angle{angle = vulcanus_mountains_angle - 5 * vulcanus_starting_direction, distance = 128 * vulcanus_starting_area_radius + 32, radius = 24 * 32, x_distortion = 0, y_distortion = 0}'
