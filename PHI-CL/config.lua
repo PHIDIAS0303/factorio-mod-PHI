@@ -388,16 +388,6 @@ local items = {
             ['boompuff'] = true,
             ['water-cane'] = true
         },
-        ['gleba_tile'] = {
-            ['natural-yumako-soil'] = true,
-            ['natural-jellynut-soil'] = true,
-            ['wetland-yumako'] = true,
-            ['wetland-jellynut'] = true
-        },
-        ['resource'] = {
-            ['tungsten-ore'] = true,
-            ['calcite'] = true
-        },
         ['technology_1'] = {
             ['planet-discovery-vulcanus'] = true,
             ['planet-discovery-gleba'] = true,

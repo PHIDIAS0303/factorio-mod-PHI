@@ -526,66 +526,6 @@ if settings.startup['PHI-SA'].value then
             end
         end
 
-        for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
-            data.raw.planet[v].map_gen_settings = nil
-            data.raw.planet[v].hidden = true
-            data.raw.planet[v].hidden_in_factoriopedia = true
-        end
-
-        for _, v in pairs(data.raw['space-location']) do
-            v.hidden = true
-            v.hidden_in_factoriopedia = true
-        end
-
-        for _, v in pairs(data.raw['space-connection']) do
-            v.hidden = true
-            v.hidden_in_factoriopedia = true
-        end
-
-        for _, v in pairs(data.raw['asteroid']) do
-            v.mass = 1
-
-            for _, v2 in pairs(v.resistances) do
-                if v2.percent > 98 then
-                    v2.percent = 98
-                end
-            end
-        end
-
-        local asteroid_util = require('__space-age__.prototypes.planet.asteroid-spawn-definitions')
-        data.raw.planet['nauvis'].asteroid_spawn_influence = 1
-
-        local pb = {
-            has_promethium_asteroids = true,
-            probability_on_range_chunk = {
-                {position=0.001, probability=0.1250, angle_when_stopped=asteroid_util.chunk_angle},
-                {position=0.999, probability=0.0625, angle_when_stopped=asteroid_util.chunk_angle}
-            },
-            probability_on_range_small = {
-                {position=0.001, probability=0.1094, angle_when_stopped=asteroid_util.small_angle},
-                {position=0.999, probability=0.0781, angle_when_stopped=asteroid_util.small_angle}
-            },
-            probability_on_range_medium = {
-                {position=0.001, probability=0.0938, angle_when_stopped=asteroid_util.medium_angle},
-                {position=0.999, probability=0.0938, angle_when_stopped=asteroid_util.medium_angle}
-            },
-            probability_on_range_big = {
-                {position=0.001, probability=0.0781, angle_when_stopped=asteroid_util.big_angle},
-                {position=0.999, probability=0.1094, angle_when_stopped=asteroid_util.big_angle}
-            },
-            probability_on_range_huge = {
-                {position=0.001, probability=0.0625, angle_when_stopped=asteroid_util.huge_angle},
-                {position=0.999, probability=0.1250, angle_when_stopped=asteroid_util.huge_angle}
-            },
-            type_ratios = {
-                {position=0.001, ratios={1, 1, 1, 1}},
-                {position=0.999, ratios={1, 1, 1, 1}}
-            }
-        }
-
-        data.raw.planet['nauvis'].asteroid_spawn_definitions = asteroid_util.spawn_definitions(pb, 0.001)
-        data.raw.tile['space-platform-foundation'].max_health = data.raw.tile['space-platform-foundation'].max_health * 2
-
         data.raw.technology['tungsten-carbide'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
         data.raw.technology['tungsten-carbide'].research_trigger = nil
         -- data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
@@ -600,11 +540,9 @@ if settings.startup['PHI-SA'].value then
         data.raw.technology['lithium-processing'].research_trigger = nil
         data.raw.technology['promethium-science-pack'].effects = {{type='unlock-recipe', recipe='promethium-science-pack'}}
 
-        --[[
         data.raw.technology['railgun'].prerequisites = {'military-3', 'utility-science-pack'}
         data.raw.technology['railgun'].unit = {count = 1000, time = 60, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}}
         table.insert(data.raw['space-platform-starter-pack']['space-platform-starter-pack'].initial_items, {type='item',name='railgun-turret', amount=6})
-        ]]
 
         for k, v in pairs(items['space-age']['technology_1']) do
             if data.raw.technology[k] then
@@ -621,6 +559,34 @@ if settings.startup['PHI-SA'].value then
         end
 
         data.raw.recipe['promethium-science-pack'].ingredients = {{type='item', name='quantum-processor', amount=1}, {type='item', name='biter-egg', amount=10}}
+
+        table.insert(data.raw['character']['character']['mining_categories'], 'hard-solid')
+
+        data.raw['simple-entity']['huge-rock'].autoplace = nil
+        data.raw['simple-entity']['big-rock'].autoplace = nil
+        data.raw['simple-entity']['big-sand-rock'].autoplace = nil
+        data.raw['optimized-decorative']['medium-rock'].autoplace = nil
+        data.raw['optimized-decorative']['small-rock'] .autoplace= nil
+        data.raw['optimized-decorative']['tiny-rock'].autoplace = nil
+        data.raw['optimized-decorative']['medium-sand-rock'].autoplace = nil
+        data.raw['optimized-decorative']['small-sand-rock'].autoplace = nil
+        data.raw['optimized-decorative']['sand-decal'].autoplace = nil
+        data.raw['optimized-decorative']['sand-dune-decal'].autoplace = nil
+        data.raw['optimized-decorative']['light-mud-decal'].autoplace = nil
+        data.raw['optimized-decorative']['red-desert-decal'].autoplace = nil
+
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings['huge-rock'] = nil
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings['big-rock'] = nil
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings['big-sand-rock'] = nil
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['medium-rock'] = nil
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['small-rock'] = nil
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['tiny-rock'] = nil
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['medium-sand-rock'] = nil
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['small-sand-rock'] = nil
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['sand-decal'] = nil
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['sand-dune-decal'] = nil
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['light-mud-decal'] = nil
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['red-desert-decal'] = nil
 
         for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'sulfuric_acid_geyser', 'tungsten_ore'}) do
             data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v] = {}
@@ -663,75 +629,55 @@ if settings.startup['PHI-SA'].value then
 
         local resource_autoplace = require('resource-autoplace')
 
-        data.raw.tile['oil-ocean-shallow'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'oil-ocean-shallow',
-            order = 'a',
-            random_probability = 1,
-            base_density = 7,
-            base_spots_per_km2 = 0.02,
-            random_spot_size_minimum = 0.02,
-            random_spot_size_maximum = 0.03,
-            has_starting_area_placement = false,
-            autoplace_control_name = 'oil_ocean'
+        --[[
+        data.raw.tile['oil-ocean-shallow'].autoplace = {
+            ['probability_expression'] = 'water_base(-2, 200)',
+            ['control'] = 'oil_ocean'
         }
 
-        data.raw.tile['oil-ocean-deep'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'oil-ocean-deep',
-            order = 'a',
-            random_probability = 1,
-            base_density = 7,
-            base_spots_per_km2 = 0.02,
-            random_spot_size_minimum = 0.02,
-            random_spot_size_maximum = 0.03,
-            has_starting_area_placement = false,
-            autoplace_control_name = 'oil_ocean'
+        data.raw.tile['oil-ocean-deep'].autoplace = {
+            ['probability_expression'] = 'water_base(-2, 200)',
+            ['control'] = 'oil_ocean'
         }
 
-        data.raw.tile['lava'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'lava',
-            order = 'a',
-            base_density = 7,
-            base_spots_per_km2 = 0.04,
-            random_spot_size_minimum = 0.02,
-            random_spot_size_maximum = 0.03,
-            has_starting_area_placement = false,
-            autoplace_control_name = 'vulcanus_volcanism'
+        data.raw.tile['lava'].autoplace = {
+            ['probability_expression'] = 'water_base(-2, 200)',
+            ['control'] = 'vulcanus_volcanism'
         }
 
-        data.raw.tile['lava-hot'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'lava-hot',
-            order = 'a',
-            base_density = 7,
-            base_spots_per_km2 = 0.01,
-            random_spot_size_minimum = 0.2,
-            random_spot_size_maximum = 0.6,
-            has_starting_area_placement = false,
-            autoplace_control_name = 'vulcanus_volcanism'
+        data.raw.tile['lava-hot'].autoplace = {
+            ['probability_expression'] = 'water_base(-2, 200)',
+            ['control'] = 'vulcanus_volcanism'
         }
 
-        data.raw.tile['ammoniacal-ocean'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'ammoniacal-ocean',
-            order = 'a',
-            random_probability = 1,
-            base_density = 8.2,
-            base_spots_per_km2 = 0.15,
-            random_spot_size_minimum = 0.3,
-            random_spot_size_maximum = 1,
-            has_starting_area_placement = false,
-            autoplace_control_name = 'ammoniacal_ocean'
+        data.raw.tile['ammoniacal-ocean'].autoplace = {
+            ['probability_expression'] = 'water_base(-2, 200)',
+            ['control'] = 'ammoniacal_ocean'
         }
 
-        data.raw.tile['ammoniacal-ocean-2'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'ammoniacal-ocean-2',
-            order = 'a',
-            random_probability = 1,
-            base_density = 8.3,
-            base_spots_per_km2 = 0.15,
-            random_spot_size_minimum = 0.3,
-            random_spot_size_maximum = 1,
-            has_starting_area_placement = false,
-            autoplace_control_name = 'ammoniacal_ocean'
+        data.raw.tile['ammoniacal-ocean-2'].autoplace = {
+            ['probability_expression'] = 'water_base(-2, 200)',
+            ['control'] = 'ammoniacal_ocean'
         }
+
+        data.raw.resource['sulfuric-acid-geyser'].autoplace = {
+            order = 'a[resources]-c[sulfuric]',
+            probability_expression = 'vulcanus_sulfuric_acid_geyser_probability',
+            richness_expression = 'vulcanus_sulfuric_acid_geyser_richness'
+        }
+
+        data.raw.resource['fluorine-vent'].autoplace = {
+            order = 'a[resources]-a[fluorine]',
+            probability_expression = 'aquilo_flourine_vent_probability',
+            richness_expression = 'aquilo_flourine_vent_richness'
+        }
+
+        data.raw.resource['lithium-brine'].autoplace = {
+            order = 'a[resources]-b[lithium]',
+            probability_expression = 'aquilo_lithium_brine_probability',
+            richness_expression = 'aquilo_lithium_brine_richness'
+        }
+        ]]
 
         data.raw.resource['calcite'].autoplace = resource_autoplace.resource_autoplace_settings{
             name = 'calcite',
@@ -744,25 +690,117 @@ if settings.startup['PHI-SA'].value then
             regular_rq_factor_multiplier = 1
         }
 
-        --[[
-        data.raw.planet['nauvis'].map_gen_settings.territory_settings = {
-            units = {'small-demolisher', 'medium-demolisher', 'big-demolisher'},
-            territory_index_expression = 'demolisher_territory_expression',
-            territory_variation_expression = 'demolisher_variation_expression',
-            minimum_territory_size = 10
+        data.raw.resource['tungsten-ore'].autoplace = resource_autoplace.resource_autoplace_settings{
+            name = 'tungsten-ore',
+            order = 'c',
+            base_density = 0.9,
+            base_spots_per_km2 = 1.25,
+            has_starting_area_placement = false,
+            random_spot_size_minimum = 2,
+            random_spot_size_maximum = 4,
+            regular_rq_factor_multiplier = 1
         }
-        ]]
+
+        data.raw.resource['scrap'].autoplace = resource_autoplace.resource_autoplace_settings{
+            name = 'scrap',
+            order = 'c',
+            base_density = 0.9,
+            base_spots_per_km2 = 1.25,
+            has_starting_area_placement = false,
+            random_spot_size_minimum = 2,
+            random_spot_size_maximum = 4,
+            regular_rq_factor_multiplier = 1
+        }
+
+        data.raw.tile['oil-ocean-shallow'].autoplace = resource_autoplace.resource_autoplace_settings{
+            name = 'oil-ocean-shallow',
+            order = 'a',
+            base_density = 7,
+            base_spots_per_km2 = 0.02,
+            random_probability = 1,
+            random_spot_size_minimum = 0.02,
+            random_spot_size_maximum = 0.03,
+            has_starting_area_placement = false,
+            autoplace_control_name = 'oil_ocean'
+        }
+
+        data.raw.tile['oil-ocean-deep'].autoplace = resource_autoplace.resource_autoplace_settings{
+            name = 'oil-ocean-deep',
+            order = 'a',
+            base_density = 7,
+            base_spots_per_km2 = 0.02,
+            random_probability = 1,
+            random_spot_size_minimum = 0.02,
+            random_spot_size_maximum = 0.03,
+            has_starting_area_placement = false,
+            autoplace_control_name = 'oil_ocean'
+        }
+
+        data.raw.tile['lava'].autoplace = resource_autoplace.resource_autoplace_settings{
+            name = 'lava',
+            order = 'a',
+            base_density = 7,
+            base_spots_per_km2 = 0.04,
+            random_probability = 1,
+            random_spot_size_minimum = 0.2,
+            random_spot_size_maximum = 0.7,
+            has_starting_area_placement = false,
+            autoplace_control_name = 'vulcanus_volcanism'
+        }
+
+        data.raw.tile['lava-hot'].autoplace = resource_autoplace.resource_autoplace_settings{
+            name = 'lava-hot',
+            order = 'a',
+            base_density = 7,
+            base_spots_per_km2 = 0.01,
+            random_probability = 1,
+            random_spot_size_minimum = 0.2,
+            random_spot_size_maximum = 0.6,
+            has_starting_area_placement = false,
+            autoplace_control_name = 'vulcanus_volcanism'
+        }
+
+        data.raw.tile['ammoniacal-ocean'].autoplace = resource_autoplace.resource_autoplace_settings{
+            name = 'ammoniacal-ocean',
+            order = 'a',
+            base_density = 8.2,
+            base_spots_per_km2 = 0.15,
+            random_probability = 1,
+            random_spot_size_minimum = 0.3,
+            random_spot_size_maximum = 1,
+            has_starting_area_placement = false,
+            autoplace_control_name = 'ammoniacal_ocean'
+        }
+
+        data.raw.tile['ammoniacal-ocean-2'].autoplace = resource_autoplace.resource_autoplace_settings{
+            name = 'ammoniacal-ocean-2',
+            order = 'a',
+            base_density = 8.3,
+            base_spots_per_km2 = 0.15,
+            random_probability = 1,
+            random_spot_size_minimum = 0.3,
+            random_spot_size_maximum = 1,
+            has_starting_area_placement = false,
+            autoplace_control_name = 'ammoniacal_ocean'
+        }
+
+        data.raw['noise-expression']['demolisher_starting_area']['demolisher_starting_area'] = '0 < starting_spot_at_angle{angle = vulcanus_mountains_angle - 5 * vulcanus_starting_direction, distance = 128 * vulcanus_starting_area_radius + 32, radius = 24 * 32, x_distortion = 0, y_distortion = 0}'
+        data.raw.planet['nauvis'].map_gen_settings.territory_settings = data.raw.planet['vulcanus'].map_gen_settings.territory_settings
 
         for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
             data.raw['utility-constants']['default'].main_menu_simulations[v] = nil
         end
 
-        local gleba_tile = {}
+        local gleba_tile = {
+            'natural-yumako-soil',
+            'natural-jellynut-soil',
+            'wetland-yumako',
+            'wetland-jellynut'
+        }
 
-        for k, _ in pairs(items['space-age']['gleba_tile']) do
-            if data.raw.tile[k] then
-                data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings[k] = {}
-                table.insert(gleba_tile, k)
+        for _, v in pairs(gleba_tile) do
+            if data.raw.tile[v] then
+                data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = {}
             end
         end
 
@@ -777,6 +815,66 @@ if settings.startup['PHI-SA'].value then
             data.raw.item[v].place_as_tile.condition = {layers={water_tile=true}}
             data.raw.item[v].place_as_tile.tile_condition = nil
         end
+
+        for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
+            data.raw.planet[v].map_gen_settings = nil
+            data.raw.planet[v].hidden = true
+            data.raw.planet[v].hidden_in_factoriopedia = true
+        end
+
+        for _, v in pairs(data.raw['space-location']) do
+            v.hidden = true
+            v.hidden_in_factoriopedia = true
+        end
+
+        for _, v in pairs(data.raw['space-connection']) do
+            v.hidden = true
+            v.hidden_in_factoriopedia = true
+        end
+
+        for _, v in pairs(data.raw['asteroid']) do
+            v.mass = 1
+
+            for _, v2 in pairs(v.resistances) do
+                if v2.percent > 98 then
+                    v2.percent = 98
+                end
+            end
+        end
+
+        local asteroid_util = require('__space-age__.prototypes.planet.asteroid-spawn-definitions')
+        data.raw.planet['nauvis'].asteroid_spawn_influence = 1
+
+        local pb = {
+            has_promethium_asteroids = true,
+            probability_on_range_chunk = {
+                {position=0.001, probability=0.0625, angle_when_stopped=asteroid_util.chunk_angle},
+                {position=0.999, probability=0.0312, angle_when_stopped=asteroid_util.chunk_angle}
+            },
+            probability_on_range_small = {
+                {position=0.001, probability=0.0547, angle_when_stopped=asteroid_util.small_angle},
+                {position=0.999, probability=0.0390, angle_when_stopped=asteroid_util.small_angle}
+            },
+            probability_on_range_medium = {
+                {position=0.001, probability=0.0469, angle_when_stopped=asteroid_util.medium_angle},
+                {position=0.999, probability=0.0469, angle_when_stopped=asteroid_util.medium_angle}
+            },
+            probability_on_range_big = {
+                {position=0.001, probability=0.0390, angle_when_stopped=asteroid_util.big_angle},
+                {position=0.999, probability=0.0547, angle_when_stopped=asteroid_util.big_angle}
+            },
+            probability_on_range_huge = {
+                {position=0.001, probability=0.0312, angle_when_stopped=asteroid_util.huge_angle},
+                {position=0.999, probability=0.0625, angle_when_stopped=asteroid_util.huge_angle}
+            },
+            type_ratios = {
+                {position=0.001, ratios={1, 1, 1, 1}},
+                {position=0.999, ratios={1, 1, 1, 1}}
+            }
+        }
+
+        data.raw.planet['nauvis'].asteroid_spawn_definitions = asteroid_util.spawn_definitions(pb, 0.001)
+        data.raw.tile['space-platform-foundation'].max_health = data.raw.tile['space-platform-foundation'].max_health * 2
 
         data.raw['tips-and-tricks-item']['fulgora-briefing'] = nil
         data.raw['tips-and-tricks-item']['lightning-mechanics'] = nil
@@ -805,6 +903,11 @@ if settings.startup['PHI-SA'].value then
 
     if settings.startup['PHI-SA-GENERIC'].value or settings.startup['PHI-SA-VANILLA'].value then
         if mods['space-age'] then
+            data.raw.resource['lithium-brine'].infinite = true
+            data.raw.resource['lithium-brine'].minimum = 60000
+            data.raw.resource['lithium-brine'].normal = 300000
+            data.raw.resource['lithium-brine'].infinite_depletion_amount = 10
+
             data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
             data.raw.technology['cliff-explosives'].unit.count = 200
             data.raw.technology['cliff-explosives'].unit.ingredients = {
@@ -927,6 +1030,9 @@ if settings.startup['PHI-SA'].value then
             end
 
             data.raw.recipe['atomic-bomb'].ingredients[3] = {type='item', name='uranium-235', amount=30}
+
+            table.insert(data.raw['thruster']['thruster'].fuel_fluid_box.pipe_connections, {flow_direction='input-output', direction=defines.direction.west, position={-1.5, 2}})
+            table.insert(data.raw['thruster']['thruster'].oxidizer_fluid_box.pipe_connections, {flow_direction='input-output', direction=defines.direction.west, position={1.5, 2}})
 
             data.raw.roboport.roboport.charging_station_count_affected_by_quality = true
             data.raw['roboport-equipment']['personal-roboport-equipment'].charging_station_count_affected_by_quality = true
@@ -1317,10 +1423,10 @@ if settings.startup['PHI-SA'].value then
             data.raw['kill-achievement']['we-need-bigger-guns'] = nil
             data.raw['kill-achievement']['size-doesnt-matter'] = nil
 
-            for k, v in pairs(items['space-age']['resource']) do
-                if data.raw.resource[k] then
-                    data.raw.resource[k].hidden = v
-                    data.raw.resource[k].hidden_in_factoriopedia = v
+            for _, v in pairs({'tungsten-ore', 'calcite'}) do
+                if data.raw.resource[v] then
+                    data.raw.resource[v].hidden = true
+                    data.raw.resource[v].hidden_in_factoriopedia = true
                 end
             end
 

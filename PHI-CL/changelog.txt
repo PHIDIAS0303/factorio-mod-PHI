@@ -1,4 +1,13 @@
 ---------------------------------------------------------------------------------------------------
+Version: 3.0.44
+Date: 2024-12-01
+
+  Changes:
+    - [SA] Changed the fluid box from 2 to 3 on each side for thruster.
+    - [SA] Changed the asteroid generation settings.
+    - [SA] Changed the logic of map generation.
+
+---------------------------------------------------------------------------------------------------
 Version: 3.0.43
 Date: 2024-11-30
 
