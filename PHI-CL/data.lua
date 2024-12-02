@@ -595,10 +595,6 @@ if settings.startup['PHI-SA'].value then
 
         data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = {}
         -- data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_plants'] = {}
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['vulcanus_volcanism'] = {}
-
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings['lava'] = {}
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings['lava-hot'] = {}
 
         data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:tungsten-ore:probability'] = 'vulcanus_tungsten_ore_probability'
         data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:tungsten-ore:richness'] = 'vulcanus_tungsten_ore_richness'
@@ -608,23 +604,6 @@ if settings.startup['PHI-SA'].value then
         data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:sulfuric-acid-geyser:richness'] = 'vulcanus_sulfuric_acid_geyser_richness'
 
         local resource_autoplace = require('resource-autoplace')
-
-        --[[
-        data.raw.tile['lava'].autoplace = {
-            ['probability_expression'] = 'water_base(-2, 200)',
-            ['control'] = 'vulcanus_volcanism'
-        }
-
-        data.raw.tile['lava-hot'].autoplace = {
-            ['probability_expression'] = 'water_base(-2, 200)',
-            ['control'] = 'vulcanus_volcanism'
-        }
-
-        data.raw.resource['sulfuric-acid-geyser'].autoplace = {
-            order = 'a[resources]-c[sulfuric]',
-            probability_expression = 'vulcanus_sulfuric_acid_geyser_probability',
-            richness_expression = 'vulcanus_sulfuric_acid_geyser_richness'
-        }
 
         data.raw.resource['fluorine-vent'].autoplace = {
             order = 'a[resources]-a[fluorine]',
@@ -637,7 +616,12 @@ if settings.startup['PHI-SA'].value then
             probability_expression = 'aquilo_lithium_brine_probability',
             richness_expression = 'aquilo_lithium_brine_richness'
         }
-        ]]
+
+        data.raw.resource['sulfuric-acid-geyser'].autoplace = {
+            order = 'a[resources]-c[sulfuric]',
+            probability_expression = 'vulcanus_sulfuric_acid_geyser_probability',
+            richness_expression = 'vulcanus_sulfuric_acid_geyser_richness'
+        }
 
         data.raw.resource['calcite'].autoplace = resource_autoplace.resource_autoplace_settings{
             name = 'calcite',
@@ -672,53 +656,16 @@ if settings.startup['PHI-SA'].value then
             regular_rq_factor_multiplier = 1
         }
 
-        data.raw.tile['lava'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'lava',
-            order = 'a',
-            base_density = 7,
-            base_spots_per_km2 = 0.04,
-            random_probability = 1,
-            random_spot_size_minimum = 0.2,
-            random_spot_size_maximum = 0.7,
-            has_starting_area_placement = false,
-            autoplace_control_name = 'vulcanus_volcanism'
-        }
-
-        data.raw.tile['lava-hot'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'lava-hot',
-            order = 'a',
-            base_density = 7,
-            base_spots_per_km2 = 0.01,
-            random_probability = 1,
-            random_spot_size_minimum = 0.2,
-            random_spot_size_maximum = 0.6,
-            has_starting_area_placement = false,
-            autoplace_control_name = 'vulcanus_volcanism'
-        }
-
-        data.raw['noise-expression']['demolisher_starting_area']['demolisher_starting_area'] = '0 < starting_spot_at_angle{angle = vulcanus_mountains_angle - 5 * vulcanus_starting_direction, distance = 128 * vulcanus_starting_area_radius + 32, radius = 24 * 32, x_distortion = 0, y_distortion = 0}'
+        data.raw['noise-expression']['demolisher_starting_area']['demolisher_starting_area'] = '0 < starting_spot_at_angle{angle = vulcanus_mountains_angle - 5 * vulcanus_starting_direction, distance = 256 * vulcanus_starting_area_radius + 32, radius = 24 * 32, x_distortion = 0, y_distortion = 0}'
         data.raw.planet['nauvis'].map_gen_settings.territory_settings = data.raw.planet['vulcanus'].map_gen_settings.territory_settings
 
         for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
             data.raw['utility-constants']['default'].main_menu_simulations[v] = nil
         end
 
-        local gleba_tile = {
-            'natural-yumako-soil',
-            'natural-jellynut-soil',
-            'wetland-yumako',
-            'wetland-jellynut'
-        }
-
-        for _, v in pairs(gleba_tile) do
-            if data.raw.tile[v] then
-                data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = {}
-            end
-        end
-
         for k, _ in pairs(items['space-age']['gleba_tree']) do
             if data.raw.tree[k] then
-                data.raw.tree[k].autoplace['tile_restriction'] = gleba_tile
+                data.raw.tree[k].autoplace['tile_restriction'] = {'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut'}
             end
         end
 
