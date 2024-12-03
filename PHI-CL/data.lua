@@ -542,7 +542,7 @@ if settings.startup['PHI-SA'].value then
 
         data.raw.technology['railgun'].prerequisites = {'military-3', 'utility-science-pack'}
         data.raw.technology['railgun'].unit = {count = 1000, time = 60, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}}
-        table.insert(data.raw['space-platform-starter-pack']['space-platform-starter-pack'].initial_items, {type='item',name='railgun-turret', amount=6})
+        table.insert(data.raw.technology['railgun'].effects, {type='give-item',item='railgun-turret', count=10})
 
         for k, v in pairs(items['space-age']['technology_1']) do
             if data.raw.technology[k] then
@@ -656,17 +656,13 @@ if settings.startup['PHI-SA'].value then
             regular_rq_factor_multiplier = 1
         }
 
+        --[[
         data.raw['noise-expression']['demolisher_starting_area']['demolisher_starting_area'] = '0 < starting_spot_at_angle{angle = vulcanus_mountains_angle - 5 * vulcanus_starting_direction, distance = 256 * vulcanus_starting_area_radius + 32, radius = 24 * 32, x_distortion = 0, y_distortion = 0}'
         data.raw.planet['nauvis'].map_gen_settings.territory_settings = data.raw.planet['vulcanus'].map_gen_settings.territory_settings
+        ]]
 
         for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
             data.raw['utility-constants']['default'].main_menu_simulations[v] = nil
-        end
-
-        for k, _ in pairs(items['space-age']['gleba_tree']) do
-            if data.raw.tree[k] then
-                data.raw.tree[k].autoplace['tile_restriction'] = {'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut'}
-            end
         end
 
         for _, v in pairs({'artificial-yumako-soil', 'overgrowth-yumako-soil', 'artificial-jellynut-soil', 'overgrowth-jellynut-soil'}) do
@@ -675,8 +671,25 @@ if settings.startup['PHI-SA'].value then
             data.raw.item[v].place_as_tile.tile_condition = nil
         end
 
-        for _, v in pairs({'yumako-tree', 'jellystem', 'tree-plant'}) do
-            table.insert(data.raw['plant'][v].autoplace.tile_restriction, 'space-platform-foundation')
+        table.insert(data.raw['plant']['tree-plant'].autoplace.tile_restriction, 'space-platform-foundation')
+        table.insert(data.raw['plant']['tree-plant'].autoplace.tile_restriction, 'ice-platform')
+        table.insert(data.raw['plant']['tree-plant'].autoplace.tile_restriction, 'foundation')
+        table.insert(data.raw['plant']['tree-plant'].autoplace.tile_restriction, 'landfill')
+
+        for _, v in pairs({'yumako-tree', 'jellystem'}) do
+            local trs = table.deepcopy(data.raw['plant']['tree-plant'].autoplace.tile_restriction)
+
+            for _, v2 in pairs(data.raw['plant'][v].autoplace.tile_restriction) do
+                table.insert(trs, v2)
+            end
+
+            data.raw['plant'][v].autoplace.tile_restriction = trs
+        end
+
+        for k, _ in pairs(items['space-age']['gleba_tree']) do
+            if data.raw.tree[k] then
+                data.raw.tree[k].autoplace['tile_restriction'] = data.raw['plant']['tree-plant'].autoplace.tile_restriction
+            end
         end
 
         for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
