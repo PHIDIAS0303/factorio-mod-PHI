@@ -594,7 +594,6 @@ if settings.startup['PHI-SA'].value then
         end
 
         data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = {}
-        -- data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_plants'] = {}
 
         data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:tungsten-ore:probability'] = 'vulcanus_tungsten_ore_probability'
         data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:tungsten-ore:richness'] = 'vulcanus_tungsten_ore_richness'
