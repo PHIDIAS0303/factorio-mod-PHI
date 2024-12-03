@@ -672,7 +672,6 @@ if settings.startup['PHI-SA'].value then
         end
 
         table.insert(data.raw['plant']['tree-plant'].autoplace.tile_restriction, 'space-platform-foundation')
-        table.insert(data.raw['plant']['tree-plant'].autoplace.tile_restriction, 'ice-platform')
         table.insert(data.raw['plant']['tree-plant'].autoplace.tile_restriction, 'foundation')
         table.insert(data.raw['plant']['tree-plant'].autoplace.tile_restriction, 'landfill')
 
