@@ -299,9 +299,17 @@ if settings.startup['PHI-MI'].value then
 
         for _, t in pairs({data.raw['locomotive'], data.raw['cargo-wagon'], data.raw['fluid-wagon'], data.raw['artillery-wagon']}) do
             for _, v in pairs(t) do
-                v.max_health = v.max_health * s
-                v.max_speed = v.max_speed * s
-                v.braking_force = v.braking_force * s
+                if v.max_health then
+                    v.max_health = v.max_health * s
+                end
+
+                if v.max_speed then
+                    v.max_speed = v.max_speed * s
+                end
+
+                if v.braking_force then
+                    v.braking_force = v.braking_force * s
+                end
 
                 if v.max_power then
                     v.max_power = tostring(tonumber(string.match(v.max_power, '[%d%.]+')) * s) .. string.match(v.max_power, '%a+')
@@ -602,29 +610,56 @@ if settings.startup['PHI-SA'].value then
         data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:sulfuric-acid-geyser:probability'] = 'vulcanus_sulfuric_acid_geyser_probability'
         data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:sulfuric-acid-geyser:richness'] = 'vulcanus_sulfuric_acid_geyser_richness'
 
+        data.raw['unit-spawner']['gleba-spawner'].autoplace = data.raw['unit-spawner']['biter-spawner'].autoplace
+        data.raw['unit-spawner']['gleba-spawner-small'].autoplace = data.raw['unit-spawner']['spitter-spawner'].autoplace
+
         local resource_autoplace = require('resource-autoplace')
 
-        data.raw.resource['fluorine-vent'].autoplace = {
-            order = 'a[resources]-a[fluorine]',
-            probability_expression = 'aquilo_flourine_vent_probability',
-            richness_expression = 'aquilo_flourine_vent_richness'
+        data.raw.resource['fluorine-vent'].autoplace = resource_autoplace.resource_autoplace_settings{
+            name = 'fluorine-vent',
+            order = 'b',
+            control = 'fluorine_vent',
+            base_density = 8.2,
+            base_spots_per_km2 = 1.8,
+            random_probability = 1/48,
+            random_spot_size_minimum = 1,
+            random_spot_size_maximum = 1,
+            additional_richness = 220000,
+            has_starting_area_placement = false,
+            regular_rq_factor_multiplier = 1
         }
 
-        data.raw.resource['lithium-brine'].autoplace = {
-            order = 'a[resources]-b[lithium]',
-            probability_expression = 'aquilo_lithium_brine_probability',
-            richness_expression = 'aquilo_lithium_brine_richness'
+        data.raw.resource['lithium-brine'].autoplace = resource_autoplace.resource_autoplace_settings{
+            name = 'lithium-brine',
+            order = 'a-b-a',
+            control = 'lithium_brine',
+            base_density = 8.2,
+            base_spots_per_km2 = 1.8,
+            random_probability = 1/48,
+            random_spot_size_minimum = 1,
+            random_spot_size_maximum = 1,
+            additional_richness = 220000,
+            has_starting_area_placement = false,
+            regular_rq_factor_multiplier = 1
         }
 
-        data.raw.resource['sulfuric-acid-geyser'].autoplace = {
-            order = 'a[resources]-c[sulfuric]',
-            probability_expression = 'vulcanus_sulfuric_acid_geyser_probability',
-            richness_expression = 'vulcanus_sulfuric_acid_geyser_richness'
+        data.raw.resource['sulfuric-acid-geyser'].autoplace = resource_autoplace.resource_autoplace_settings{
+          name = 'sulfuric-acid-geyser',
+          order = 'a-b-b',
+          control = 'sulfuric_acid_geyser',
+          base_density = 8.2,
+          base_spots_per_km2 = 1.8,
+          random_probability = 1/48,
+          random_spot_size_minimum = 1,
+          random_spot_size_maximum = 1,
+          additional_richness = 220000,
+          has_starting_area_placement = false,
+          regular_rq_factor_multiplier = 1
         }
 
         data.raw.resource['calcite'].autoplace = resource_autoplace.resource_autoplace_settings{
             name = 'calcite',
-            order = 'c',
+            order = 'b',
             base_density = 0.9,
             base_spots_per_km2 = 1.25,
             has_starting_area_placement = false,
@@ -635,7 +670,7 @@ if settings.startup['PHI-SA'].value then
 
         data.raw.resource['tungsten-ore'].autoplace = resource_autoplace.resource_autoplace_settings{
             name = 'tungsten-ore',
-            order = 'c',
+            order = 'b',
             base_density = 0.9,
             base_spots_per_km2 = 1.25,
             has_starting_area_placement = false,
@@ -654,11 +689,6 @@ if settings.startup['PHI-SA'].value then
             random_spot_size_maximum = 4,
             regular_rq_factor_multiplier = 1
         }
-
-        --[[
-        data.raw['noise-expression']['demolisher_starting_area']['demolisher_starting_area'] = '0 < starting_spot_at_angle{angle = vulcanus_mountains_angle - 5 * vulcanus_starting_direction, distance = 256 * vulcanus_starting_area_radius + 32, radius = 24 * 32, x_distortion = 0, y_distortion = 0}'
-        data.raw.planet['nauvis'].map_gen_settings.territory_settings = data.raw.planet['vulcanus'].map_gen_settings.territory_settings
-        ]]
 
         for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
             data.raw['utility-constants']['default'].main_menu_simulations[v] = nil
@@ -805,6 +835,9 @@ if settings.startup['PHI-SA'].value then
             data.raw.resource['lithium-brine'].minimum = 60000
             data.raw.resource['lithium-brine'].normal = 300000
             data.raw.resource['lithium-brine'].infinite_depletion_amount = 10
+
+            data.raw.resource['fluorine-vent'].minimum = 60000
+            data.raw.resource['fluorine-vent'].normal = 300000
 
             data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
             data.raw.technology['cliff-explosives'].unit.count = 200
