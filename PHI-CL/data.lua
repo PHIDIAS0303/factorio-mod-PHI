@@ -1067,6 +1067,16 @@ if settings.startup['PHI-SA'].value then
     if mods['space-age'] then
         data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-SA-ROCKET-CAPACITY'].value * 1000000
         data.raw['utility-constants'].default.default_item_weight = settings.startup['PHI-SA-CARGO-WEIGHT'].value
+
+        if settings.startup['PHI-SA-HEAT-RADIUS'].value then
+            for _, v in pairs(data.raw['reactor']) do
+                v.heating_radius = settings.startup['PHI-SA-HEAT-RADIUS'].value
+            end
+
+            for _, v in pairs(data.raw['heat-pipe']) do
+                v.heating_radius = settings.startup['PHI-SA-HEAT-RADIUS'].value
+            end
+        end
     end
 
     if settings.startup['PHI-SA-VANILLA'].value then
@@ -1527,6 +1537,7 @@ if settings.startup['PHI-CT'].value then
         entity.quality_affects_inventory_size = false
         entity.logistic_mode = nil
         entity.next_upgrade = nil
+        entity.surface_conditions = nil
         entity.picture.layers[1].tint = items['tint'][8]
         entity.localised_name = item.localised_name
         data:extend({entity})
@@ -1665,7 +1676,7 @@ if settings.startup['PHI-CT'].value then
             item.name = 'basic-' .. c
             item.place_result = item.name
             item.order = 'b[storage]-h[basic-' .. c .. ']'
-            item.localised_name = {'name.basic-'.. c}
+            item.localised_name = {'name.basic-' .. c}
             data:extend({item})
 
             entity.name = item.name
@@ -1720,6 +1731,7 @@ if settings.startup['PHI-CT'].value then
         entity.inventory_type = 'with_filters_and_bar'
         entity.inventory_size = 48
         entity.gui_mode = 'all'
+        entity.surface_conditions = nil
         data:extend({entity})
 
         data:extend({{
