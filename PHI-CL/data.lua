@@ -963,9 +963,9 @@ if settings.startup['PHI-SA'].value then
             data.raw.recipe['atomic-bomb'].ingredients[3] = {type='item', name='uranium-235', amount=30}
 
             table.insert(data.raw['thruster']['thruster'].fuel_fluid_box.pipe_connections, {flow_direction='input-output', direction=defines.direction.west, position={-1.5, 2}})
-            table.insert(data.raw['thruster']['thruster'].oxidizer_fluid_box.pipe_connections, {flow_direction='input-output', direction=defines.direction.west, position={1.5, 2}})
+            table.insert(data.raw['thruster']['thruster'].oxidizer_fluid_box.pipe_connections, {flow_direction='input-output', direction=defines.direction.east, position={1.5, 2}})
 
-            data.raw.roboport.roboport.charging_station_count_affected_by_quality = true
+            data.raw['roboport']['roboport'].charging_station_count_affected_by_quality = true
             data.raw['roboport-equipment']['personal-roboport-equipment'].charging_station_count_affected_by_quality = true
 
             data.raw.item['space-platform-foundation'].stack_size = 100
