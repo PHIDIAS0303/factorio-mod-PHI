@@ -189,16 +189,30 @@ data:extend({
   order = 'F04'
 }, {
   type = 'bool-setting',
-  name = 'PHI-SA-RESTRICTION',
+  name = 'PHI-SA-SPOIL-FREEZE',
   setting_type = 'startup',
   default_value = false,
   order = 'F05'
+}, {
+  type = 'int-setting',
+  name = 'PHI-SA-SPOIL-FREEZE-RATIO',
+  setting_type = 'startup',
+  default_value = 50,
+  minimum_value = 1,
+  maximum_value = 1000,
+  order = 'F06'
+}, {
+  type = 'bool-setting',
+  name = 'PHI-SA-RESTRICTION',
+  setting_type = 'startup',
+  default_value = false,
+  order = 'F07'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-GENERIC',
   setting_type = 'startup',
   default_value = true,
-  order = 'F06'
+  order = 'F08'
 }, {
   type = 'int-setting',
   name = 'PHI-SA-QUALITY',
@@ -206,19 +220,19 @@ data:extend({
   default_value = 10,
   minimum_value = 1,
   maximum_value = 100,
-  order = 'F07'
+  order = 'F09'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-NO-QUALITY',
   setting_type = 'startup',
   default_value = false,
-  order = 'F08'
+  order = 'F10'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-VANILLA',
   setting_type = 'startup',
   default_value = false,
-  order = 'F09'
+  order = 'F11'
 }, {
   type = 'bool-setting',
   name = 'PHI-CT',

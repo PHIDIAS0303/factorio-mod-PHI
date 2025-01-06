@@ -456,6 +456,77 @@ if settings.startup['PHI-SA'].value then
         data.raw['tips-and-tricks-item']['spoilables-research'] = nil
     end
 
+    if settings.startup['PHI-SA-SPOIL-FREEZE'].value and mods['space-age'] then
+        local function spoil_handle(i)
+            item = table.deepcopy(i)
+            item.name = 'frozen-' .. i.name
+            item.order = item.order .. '-f'
+
+            item.icons = {
+                {
+                    icon = item.icon,
+                    icon_size = 64,
+                    icon_mipmaps = 4
+                }, {
+                    icon = data.raw['item']['ice'].icon,
+                    tint = {r=1, g=1, b=1, a=0.5},
+                    icon_size = 64,
+                    icon_mipmaps = 4
+                }
+            }
+
+            item.icon = nil
+            item.icon_size = nil
+            item.icon_mipmaps = nil
+            item.spoil_ticks = math.floor(i.spoil_ticks * settings.startup['PHI-SA-SPOIL-FREEZE-RATIO'].value / 10)
+            item.spoil_result = i.name
+            item.spoil_to_trigger_result = nil
+            item.localised_name = i.localised_name
+            data:extend({item})
+
+            data:extend({{
+                type = 'recipe',
+                name = item.name,
+                energy_required = 2,
+                enabled = false,
+                category = 'cryogenics',
+                ingredients = {{type='item', name=i.name, amount=1}, {type='fluid', name='fluoroketone-cold', amount=2, ignored_by_stats=2}},
+                results = {{type='item', name=item.name, amount=1}, {type='fluid', name='fluoroketone-hot', amount=2, ignored_by_stats=2, ignored_by_productivity=2}},
+                allow_productivity = false,
+                main_product = item.name,
+                localised_name = i.localised_name
+            }})
+
+            data:extend({{
+                type = 'recipe',
+                name = 'unfreeze-' .. i.name,
+                energy_required = 2,
+                enabled = false,
+                category = 'cryogenics',
+                ingredients = {{type='item', name=item.name, amount=1}},
+                results = {{type='item', name=i.name, amount=1}},
+                allow_productivity = false,
+                main_product = i.name,
+                localised_name = i.localised_name
+            }})
+
+            table.insert(data.raw.technology['cryogenic-plant'].effects, {type='unlock-recipe', recipe=item.name})
+            table.insert(data.raw.technology['cryogenic-plant'].effects, {type='unlock-recipe', recipe='unfreeze-' .. i.name})
+        end
+
+        spoil_handle(data.raw['item']['nutrients'])
+        spoil_handle(data.raw['item']['captive-biter-spawner'])
+        spoil_handle(data.raw['item']['biter-egg'])
+        spoil_handle(data.raw['item']['pentapod-egg'])
+        spoil_handle(data.raw['capsule']['raw-fish'])
+        spoil_handle(data.raw['capsule']['yumako-mash'])
+        spoil_handle(data.raw['capsule']['yumako'])
+        spoil_handle(data.raw['capsule']['jelly'])
+        spoil_handle(data.raw['capsule']['jellynut'])
+        spoil_handle(data.raw['capsule']['bioflux'])
+        spoil_handle(data.raw.tool['agricultural-science-pack'])
+    end
+
     if (settings.startup['PHI-SA-RESTRICTION'].value or settings.startup['PHI-SA-VANILLA'].value) and mods['space-age'] then
         data.raw['assembling-machine']['captive-biter-spawner'].surface_conditions = nil
         data.raw['agricultural-tower']['agricultural-tower'].surface_conditions = nil
@@ -1059,14 +1130,6 @@ if settings.startup['PHI-SA'].value then
             for _, v in pairs(data.raw['inserter']) do
                 v.extension_speed = v.extension_speed * new_scale
                 v.rotation_speed = v.rotation_speed * new_scale
-            end
-
-            for _, v in pairs(data.raw['cargo-wagon']) do
-                v.inventory_size = math.ceil(v.inventory_size * new_scale)
-            end
-
-            for _, v in pairs(data.raw['fluid-wagon']) do
-                v.capacity = math.ceil(v.capacity * new_scale)
             end
         end
     end
