@@ -1044,6 +1044,14 @@ if settings.startup['PHI-SA'].value then
             data.raw['roboport']['roboport'].charging_station_count_affected_by_quality = true
             data.raw['roboport-equipment']['personal-roboport-equipment'].charging_station_count_affected_by_quality = true
 
+            for _, v in pairs(data.raw['cargo-wagon']) do
+                v.quality_affects_inventory_size = true
+            end
+
+            for _, v in pairs(data.raw['fluid-wagon']) do
+                v.quality_affects_inventory_size = true
+            end
+
             data.raw.item['space-platform-foundation'].stack_size = 100
 
             data.raw['ammo-turret']['railgun-turret'].starting_attack_speed = 1
