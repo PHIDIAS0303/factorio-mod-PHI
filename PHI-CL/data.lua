@@ -403,7 +403,7 @@ if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) 
     if data.raw.fluid['water'] then
         data:extend({{
             type = 'recipe',
-            name = 'water',
+            name = 'pump-water',
             category = 'fluid',
             energy_required = 1,
             enabled = true,
@@ -519,7 +519,7 @@ if settings.startup['PHI-SA'].value then
             if data.raw.fluid[v] then
                 data:extend({{
                     type = 'recipe',
-                    name = v,
+                    name = 'pump-' .. v,
                     category = 'fluid',
                     energy_required = 1,
                     enabled = true,
@@ -534,20 +534,26 @@ if settings.startup['PHI-SA'].value then
             end
         end
 
-        data.raw.technology['tungsten-carbide'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        data.raw.technology['tungsten-carbide'].research_trigger = nil
-        -- data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        -- data.raw.technology['argiculture'].research_trigger = nil
+        data.raw.technology['agriculture'].research_trigger = nil
+        data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+        data.raw.technology['yumako'].research_trigger = nil
+        data.raw.technology['yumako'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+        table.insert(data.raw.technology['yumako'].effects, {type='give-item',item='yumako-seed', count=10})
+        data.raw.technology['jellynut'].research_trigger = nil
+        data.raw.technology['jellynut'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+        table.insert(data.raw.technology['jellynut'].effects, {type='give-item',item='jellynut-seed', count=10})
+        table.insert(data.raw.technology['biochamber'].effects, {type='give-item',item='pentapod-egg', count=10})
         data.raw.technology['bacteria-cultivation'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
         data.raw.technology['bacteria-cultivation'].research_trigger = nil
         data.raw.technology['heating-tower'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
         data.raw.technology['heating-tower'].research_trigger = nil
+        data.raw.technology['tungsten-carbide'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+        data.raw.technology['tungsten-carbide'].research_trigger = nil
         data.raw.technology['recycling'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
         data.raw.technology['recycling'].research_trigger = nil
         data.raw.technology['lithium-processing'].unit = {count = 400, time = 30, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
         data.raw.technology['lithium-processing'].research_trigger = nil
         data.raw.technology['promethium-science-pack'].effects = {{type='unlock-recipe', recipe='promethium-science-pack'}}
-
         data.raw.technology['railgun'].prerequisites = {'military-3', 'utility-science-pack'}
         data.raw.technology['railgun'].unit = {count = 1000, time = 60, ingredients={{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}}
         table.insert(data.raw.technology['railgun'].effects, {type='give-item',item='railgun-turret', count=10})
@@ -566,8 +572,7 @@ if settings.startup['PHI-SA'].value then
             end
         end
 
-        data.raw.recipe['promethium-science-pack'].ingredients = {{type='item', name='quantum-processor', amount=1}, {type='item', name='biter-egg', amount=10}}
-
+        -- data.raw.recipe['promethium-science-pack'].ingredients = {{type='item', name='quantum-processor', amount=1}, {type='item', name='biter-egg', amount=10}}
         table.insert(data.raw['character']['character']['mining_categories'], 'hard-solid')
 
         data.raw['simple-entity']['huge-rock'].autoplace = nil
@@ -980,9 +985,11 @@ if settings.startup['PHI-SA'].value then
                 end
             end
 
-            for _, v in pairs({'water', 'water-green', 'deepwater', 'deepwater-green'}) do
-                data.raw.tile[v].destroys_dropped_items = true
-                data.raw.tile[v].default_destroyed_dropped_item_trigger = nil
+            for _, v in pairs(data.raw.tile) do
+                if v.fluid then
+                    v.destroys_dropped_items = true
+                    v.default_destroyed_dropped_item_trigger = nil
+                end
             end
         end
 
@@ -1485,7 +1492,7 @@ if settings.startup['PHI-CT'].value then
 
                 data:extend({{
                     type = 'recipe',
-                    name = v.name,
+                    name = 'pump-' .. v.name,
                     category = 'fluid',
                     energy_required = 1,
                     enabled = true,
