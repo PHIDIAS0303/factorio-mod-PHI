@@ -828,44 +828,44 @@ if settings.startup['PHI-SA'].value then
         local pb = {
             has_promethium_asteroids = true,
             probability_on_range_chunk = {
-                {position=0.001, probability=0.0625, angle_when_stopped=asteroid_util.chunk_angle},
-                {position=0.199, probability=0.0563, angle_when_stopped=asteroid_util.chunk_angle},
-                {position=0.399, probability=0.0501, angle_when_stopped=asteroid_util.chunk_angle},
-                {position=0.599, probability=0.0439, angle_when_stopped=asteroid_util.chunk_angle},
-                {position=0.799, probability=0.0377, angle_when_stopped=asteroid_util.chunk_angle},
-                {position=0.999, probability=0.0312, angle_when_stopped=asteroid_util.chunk_angle}
+                {position=0.001, probability=0.0312, angle_when_stopped=asteroid_util.chunk_angle},
+                {position=0.199, probability=0.0281, angle_when_stopped=asteroid_util.chunk_angle},
+                {position=0.399, probability=0.0250, angle_when_stopped=asteroid_util.chunk_angle},
+                {position=0.599, probability=0.0219, angle_when_stopped=asteroid_util.chunk_angle},
+                {position=0.799, probability=0.0188, angle_when_stopped=asteroid_util.chunk_angle},
+                {position=0.999, probability=0.0156, angle_when_stopped=asteroid_util.chunk_angle}
             },
             probability_on_range_small = {
-                {position=0.001, probability=0.0547, angle_when_stopped=asteroid_util.small_angle},
-                {position=0.199, probability=0.0516, angle_when_stopped=asteroid_util.small_angle},
-                {position=0.399, probability=0.0485, angle_when_stopped=asteroid_util.small_angle},
-                {position=0.599, probability=0.0454, angle_when_stopped=asteroid_util.small_angle},
-                {position=0.799, probability=0.0423, angle_when_stopped=asteroid_util.small_angle},
-                {position=0.999, probability=0.0390, angle_when_stopped=asteroid_util.small_angle}
+                {position=0.001, probability=0.0273, angle_when_stopped=asteroid_util.small_angle},
+                {position=0.199, probability=0.0258, angle_when_stopped=asteroid_util.small_angle},
+                {position=0.399, probability=0.0242, angle_when_stopped=asteroid_util.small_angle},
+                {position=0.599, probability=0.0227, angle_when_stopped=asteroid_util.small_angle},
+                {position=0.799, probability=0.0211, angle_when_stopped=asteroid_util.small_angle},
+                {position=0.999, probability=0.0195, angle_when_stopped=asteroid_util.small_angle}
             },
             probability_on_range_medium = {
-                {position=0.001, probability=0.0469, angle_when_stopped=asteroid_util.medium_angle},
-                {position=0.199, probability=0.0469, angle_when_stopped=asteroid_util.medium_angle},
-                {position=0.399, probability=0.0469, angle_when_stopped=asteroid_util.medium_angle},
-                {position=0.599, probability=0.0469, angle_when_stopped=asteroid_util.medium_angle},
-                {position=0.799, probability=0.0469, angle_when_stopped=asteroid_util.medium_angle},
-                {position=0.999, probability=0.0469, angle_when_stopped=asteroid_util.medium_angle}
+                {position=0.001, probability=0.0234, angle_when_stopped=asteroid_util.medium_angle},
+                {position=0.199, probability=0.0234, angle_when_stopped=asteroid_util.medium_angle},
+                {position=0.399, probability=0.0234, angle_when_stopped=asteroid_util.medium_angle},
+                {position=0.599, probability=0.0234, angle_when_stopped=asteroid_util.medium_angle},
+                {position=0.799, probability=0.0234, angle_when_stopped=asteroid_util.medium_angle},
+                {position=0.999, probability=0.0234, angle_when_stopped=asteroid_util.medium_angle}
             },
             probability_on_range_big = {
-                {position=0.001, probability=0.0390, angle_when_stopped=asteroid_util.big_angle},
-                {position=0.199, probability=0.0423, angle_when_stopped=asteroid_util.big_angle},
-                {position=0.399, probability=0.0454, angle_when_stopped=asteroid_util.big_angle},
-                {position=0.599, probability=0.0485, angle_when_stopped=asteroid_util.big_angle},
-                {position=0.799, probability=0.0516, angle_when_stopped=asteroid_util.big_angle},
-                {position=0.999, probability=0.0547, angle_when_stopped=asteroid_util.big_angle}
+                {position=0.001, probability=0.0195, angle_when_stopped=asteroid_util.big_angle},
+                {position=0.199, probability=0.0211, angle_when_stopped=asteroid_util.big_angle},
+                {position=0.399, probability=0.0227, angle_when_stopped=asteroid_util.big_angle},
+                {position=0.599, probability=0.0242, angle_when_stopped=asteroid_util.big_angle},
+                {position=0.799, probability=0.0258, angle_when_stopped=asteroid_util.big_angle},
+                {position=0.999, probability=0.0273, angle_when_stopped=asteroid_util.big_angle}
             },
             probability_on_range_huge = {
-                {position=0.001, probability=0.0312, angle_when_stopped=asteroid_util.huge_angle},
-                {position=0.199, probability=0.0377, angle_when_stopped=asteroid_util.huge_angle},
-                {position=0.399, probability=0.0439, angle_when_stopped=asteroid_util.huge_angle},
-                {position=0.599, probability=0.0501, angle_when_stopped=asteroid_util.huge_angle},
-                {position=0.799, probability=0.0563, angle_when_stopped=asteroid_util.huge_angle},
-                {position=0.999, probability=0.0625, angle_when_stopped=asteroid_util.huge_angle}
+                {position=0.001, probability=0.0156, angle_when_stopped=asteroid_util.huge_angle},
+                {position=0.199, probability=0.0188, angle_when_stopped=asteroid_util.huge_angle},
+                {position=0.399, probability=0.0219, angle_when_stopped=asteroid_util.huge_angle},
+                {position=0.599, probability=0.0250, angle_when_stopped=asteroid_util.huge_angle},
+                {position=0.799, probability=0.0281, angle_when_stopped=asteroid_util.huge_angle},
+                {position=0.999, probability=0.0312, angle_when_stopped=asteroid_util.huge_angle}
             },
             type_ratios = {
                 {position=0.001, ratios={1, 1, 1, 1}},

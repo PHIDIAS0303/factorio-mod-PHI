@@ -4,6 +4,7 @@ Date: 2025-01-07
 
   Features:
     - [SA] Quality train wagon size.
+    - [SA] Decreased asteroid rate for single planet run.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.52
