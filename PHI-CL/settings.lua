@@ -14,11 +14,19 @@ data:extend({
   order = 'A01'
 }, {
   type = 'int-setting',
+  name = 'PHI-EN-SOLAR-RATIO',
+  setting_type = 'startup',
+  default_value = 4,
+  minimum_value = 2,
+  maximum_value = 16,
+  order = 'A02'
+}, {
+  type = 'int-setting',
   name = 'PHI-EN-POWER-TIER',
   setting_type = 'startup',
   default_value = 1,
   allowed_values = {1, 2, 3, 4, 5},
-  order = 'A02'
+  order = 'A03'
 }, {
   type = 'bool-setting',
   name = 'PHI-MB',
