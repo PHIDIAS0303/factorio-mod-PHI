@@ -419,44 +419,7 @@ if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) 
 end
 
 if settings.startup['PHI-SA'].value then
-    if (not settings.startup['PHI-SA-SPOIL'].value) and mods['space-age'] then
-        local function spoil_handle(i)
-            i.spoil_ticks = nil
-            i.spoil_result = nil
-            i.spoil_to_trigger_result = nil
-        end
-
-        spoil_handle(data.raw['item']['nutrients'])
-        spoil_handle(data.raw['item']['captive-biter-spawner'])
-        spoil_handle(data.raw['item']['biter-egg'])
-        spoil_handle(data.raw['item']['pentapod-egg'])
-        spoil_handle(data.raw['capsule']['raw-fish'])
-        spoil_handle(data.raw['capsule']['yumako-mash'])
-        spoil_handle(data.raw['capsule']['yumako'])
-        spoil_handle(data.raw['capsule']['jelly'])
-        spoil_handle(data.raw['capsule']['jellynut'])
-        spoil_handle(data.raw['capsule']['bioflux'])
-        spoil_handle(data.raw.tool['agricultural-science-pack'])
-
-        data:extend({{
-            type = 'recipe',
-            name = 'spoilage-from-nutrients',
-            energy_required = 1,
-            enabled = false,
-            ingredients = {{type='item', name='nutrients', amount=1}},
-            results = {{type='item', name='spoilage', amount=10}},
-            main_product = 'spoilage',
-            localised_name = {'phi-cl.combine', '', ''}
-        }})
-
-        table.insert(data.raw.technology['agriculture'].effects, {type='unlock-recipe', recipe='spoilage-from-nutrients'})
-
-        data.raw['tips-and-tricks-item']['spoilables'] = nil
-        data.raw['tips-and-tricks-item']['spoilables-result'] = nil
-        data.raw['tips-and-tricks-item']['spoilables-research'] = nil
-    end
-
-    if settings.startup['PHI-SA-SPOIL-FREEZE'].value and mods['space-age'] then
+    if settings.startup['PHI-SA-SPOIL-FREEZE'].value and settings.startup['PHI-SA-SPOIL'].value and mods['space-age'] then
         local function spoil_handle(i)
             item = table.deepcopy(i)
             item.name = 'frozen-' .. i.name
@@ -525,6 +488,43 @@ if settings.startup['PHI-SA'].value then
         spoil_handle(data.raw['capsule']['jellynut'])
         spoil_handle(data.raw['capsule']['bioflux'])
         spoil_handle(data.raw.tool['agricultural-science-pack'])
+    end
+
+    if (not settings.startup['PHI-SA-SPOIL'].value) and mods['space-age'] then
+        local function spoil_handle(i)
+            i.spoil_ticks = nil
+            i.spoil_result = nil
+            i.spoil_to_trigger_result = nil
+        end
+
+        spoil_handle(data.raw['item']['nutrients'])
+        spoil_handle(data.raw['item']['captive-biter-spawner'])
+        spoil_handle(data.raw['item']['biter-egg'])
+        spoil_handle(data.raw['item']['pentapod-egg'])
+        spoil_handle(data.raw['capsule']['raw-fish'])
+        spoil_handle(data.raw['capsule']['yumako-mash'])
+        spoil_handle(data.raw['capsule']['yumako'])
+        spoil_handle(data.raw['capsule']['jelly'])
+        spoil_handle(data.raw['capsule']['jellynut'])
+        spoil_handle(data.raw['capsule']['bioflux'])
+        spoil_handle(data.raw.tool['agricultural-science-pack'])
+
+        data:extend({{
+            type = 'recipe',
+            name = 'spoilage-from-nutrients',
+            energy_required = 1,
+            enabled = false,
+            ingredients = {{type='item', name='nutrients', amount=1}},
+            results = {{type='item', name='spoilage', amount=10}},
+            main_product = 'spoilage',
+            localised_name = {'phi-cl.combine', '', ''}
+        }})
+
+        table.insert(data.raw.technology['agriculture'].effects, {type='unlock-recipe', recipe='spoilage-from-nutrients'})
+
+        data.raw['tips-and-tricks-item']['spoilables'] = nil
+        data.raw['tips-and-tricks-item']['spoilables-result'] = nil
+        data.raw['tips-and-tricks-item']['spoilables-research'] = nil
     end
 
     if (settings.startup['PHI-SA-RESTRICTION'].value or settings.startup['PHI-SA-VANILLA'].value) and mods['space-age'] then

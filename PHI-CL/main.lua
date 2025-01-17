@@ -36,19 +36,24 @@ function main.EEE(source, tier)
         item.next_upgrade = source.name .. '-' .. (tier + 1)
     end
 
-    --[[
-    TODO some better handle of EEE code
-    ]]
+    if item.production then
+        if source.tech == 'compound-energy' and source.type == 'solar-panel' then
+            item.production = tonumber(string.match(item.production, '[%d%.]+')) * (settings.startup['PHI-EN-SOLAR-RATIO'].value ^ (tier - source.min + 1)) .. (string.match(item.production, '%a+') or '')
 
-    for _, v in pairs({'production', 'energy_usage', 'heating_energy', 'crane_energy_usage', 'energy_per_shot'}) do
-        if not (source.tech == 'compound-energy' and (source.type == 'solar-panel' or source.type == 'accumulator')) and item[v] then
-            item[v] = tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. (string.match(item[v], '%a+') or '')
+        else
+            item.production = tonumber(string.match(item.production, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. (string.match(item.production, '%a+') or '')
         end
     end
 
-    for _, v in pairs({'researching_speed', 'mining_speed', 'crafting_speed'}) do
-        if item[v] then
-            item[v] = tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))
+    for _, v in pairs({'energy_usage', 'heating_energy', 'crane_energy_usage', 'energy_per_shot', 'researching_speed', 'mining_speed', 'crafting_speed'}) do
+        if not (source.tech == 'compound-energy' and (source.type == 'solar-panel' or source.type == 'accumulator')) and item[v] then
+            local n = tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))
+            local a = string.match(item[v], '%a+')
+            item[v] = n
+
+            if a then
+                item[v] = item[v] .. a
+            end
         end
     end
 
@@ -135,9 +140,6 @@ function main.EEE(source, tier)
                     item.energy_source[v] = tonumber(string.match(item.energy_source[v], '[%d%.]+')) * (settings.startup['PHI-EN-SOLAR-RATIO'].value ^ (tier - source.min + 1)) .. string.match(item.energy_source[v], '%a+')
                 end
             end
-
-        elseif (source.type == 'solar-panel') then
-            item.production = tostring(tonumber(string.match(item.production, '[%d%.]+')) * (settings.startup['PHI-EN-SOLAR-RATIO'].value ^ (tier - source.min + 1))) .. string.match(item.production, '%a+')
 
         elseif (source.type == 'boiler') then
             item.energy_consumption = tostring(tonumber(string.match(item.energy_consumption, '[%d%.]+')) * tier) .. string.match(item.energy_consumption, '%a+')
