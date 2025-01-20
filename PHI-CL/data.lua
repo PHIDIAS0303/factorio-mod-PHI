@@ -1057,6 +1057,11 @@ if settings.startup['PHI-SA'].value then
             data.raw['ammo-turret']['railgun-turret'].starting_attack_speed = 1
             data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_secondary = 1
             data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_when_killed = 1
+            data.raw['ammo-turret']['railgun-turret'].preparing_speed = 1
+            data.raw['ammo-turret']['railgun-turret'].attacking_speed = 1
+            data.raw['ammo-turret']['railgun-turret'].ending_attack_speed = 1
+            data.raw['ammo-turret']['railgun-turret'].folding_speed = 1
+            data.raw['ammo-turret']['railgun-turret'].energy_source.input_flow_limit = tonumber(string.match(data.raw['ammo-turret']['railgun-turret'].energy_source.input_flow_limit, '[%d%.]+')) * 32 .. string.match(data.raw['ammo-turret']['railgun-turret'].energy_source.input_flow_limit, '%a+')
 
             for _, v in pairs({'carbonic-asteroid-chunk', 'metallic-asteroid-chunk', 'promethium-asteroid-chunk', 'oxide-asteroid-chunk', 'artillery-shell'}) do
                 if data.raw.item[v] then
