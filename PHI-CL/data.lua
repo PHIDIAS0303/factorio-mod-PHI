@@ -1141,11 +1141,12 @@ if settings.startup['PHI-SA'].value then
             end
         end
     end
+    
+    data.raw['utility-constants'].default.default_pipeline_extent = settings.startup['PHI-SA-PIPE-EXTENT'].value
 
     if mods['space-age'] then
         data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-SA-ROCKET-CAPACITY'].value * 1000000
         data.raw['utility-constants'].default.default_item_weight = settings.startup['PHI-SA-CARGO-WEIGHT'].value
-        data.raw['utility-constants'].default.default_pipeline_extent = settings.startup['PHI-SA-PIPE-EXTENT'].value
 
         if settings.startup['PHI-SA-HEAT-RADIUS'].value then
             for _, v in pairs(data.raw['reactor']) do
