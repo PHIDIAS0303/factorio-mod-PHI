@@ -38,7 +38,7 @@ function main.EEE(source, tier)
 
     if item.production then
         if source.tech == 'compound-energy' and source.type == 'solar-panel' then
-            item.production = tonumber(string.match(item.production, '[%d%.]+')) * (settings.startup['PHI-EN-SOLAR-RATIO'].value ^ (tier - source.min + 1)) .. (string.match(item.production, '%a+') or '')
+            item.production = tonumber(string.match(item.production, '[%d%.]+')) * (settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value ^ (tier - source.min + 1)) .. (string.match(item.production, '%a+') or '')
 
         else
             item.production = tonumber(string.match(item.production, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. (string.match(item.production, '%a+') or '')
@@ -137,7 +137,7 @@ function main.EEE(source, tier)
 
             for _, v in pairs({'buffer_capacity', 'input_flow_limit', 'output_flow_limit'}) do
                 if item.energy_source[v] then
-                    item.energy_source[v] = tonumber(string.match(item.energy_source[v], '[%d%.]+')) * (settings.startup['PHI-EN-SOLAR-RATIO'].value ^ (tier - source.min + 1)) .. string.match(item.energy_source[v], '%a+')
+                    item.energy_source[v] = tonumber(string.match(item.energy_source[v], '[%d%.]+')) * (settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value ^ (tier - source.min + 1)) .. string.match(item.energy_source[v], '%a+')
                 end
             end
 
@@ -430,7 +430,7 @@ function main.ER(source, tier)
                 icons = icons,
                 energy_required = 2,
                 enabled = false,
-                ingredients = {{type='item', name=ingredient_name, amount=settings.startup['PHI-EN-SOLAR-RATIO'].value}},
+                ingredients = {{type='item', name=ingredient_name, amount=settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value}},
                 results = {{type='item', name=result_name, amount=1}},
                 main_product = result_name,
                 localised_name = {'phi-cl.combine', data.raw[source.type][new_name].localised_name, ''}

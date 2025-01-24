@@ -720,6 +720,19 @@ if script.active_mods['space-exploration'] then
 end
             
 ** SETTING
+localised_description = {'phi-cl.combine', {'phi-cl.default'}, {'mod-setting-description.PHI-MB-ENERGY-SOLAR-TIER'}},
+PHI-MB-ENERGY-SOLAR-TIER=8
+PHI-MB-ENERGY-POWER-TIER=5
+
+PHI-MB-MACHINE-TIER=3
+PHI-WE-TURRET-TIER=3
+PHI-WE-RADAR-TIER=3
+
+PHI-EQ-POWER-TIER=8
+PHI-EQ-DEFENSE-TIER=8
+PHI-EQ-TOOL-TIER=8
+PHI-EQ-UTILITY-TIER=2
+
 {type = 'laser', decrease = 20, percent = 50},
 {type = 'electric', decrease = 20, percent = 50},
 {type = 'impact', decrease = 20, percent = 50},

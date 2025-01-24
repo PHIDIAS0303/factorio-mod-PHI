@@ -3,17 +3,6 @@ local items = {
         ['graphics_location'] = '__PHI-CL__/graphics/'
     },
     ['research_modifier'] = {
-        --[[
-        ['electric-turret'] = {
-            'energy-weapons-damage-1',
-            'energy-weapons-damage-2',
-            'energy-weapons-damage-3',
-            'energy-weapons-damage-4',
-            'energy-weapons-damage-5',
-            'energy-weapons-damage-6',
-            'energy-weapons-damage-7'
-        },
-        ]]
         ['ammo-turret'] = {
             'physical-projectile-damage-1',
             'physical-projectile-damage-2',
@@ -44,7 +33,7 @@ local items = {
     },
     ['item'] = {
         ['solar-panel'] = {
-            enabled = settings.startup['PHI-EN'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
             stage = 1,
             mod = 'base',
             type = 'solar-panel',
@@ -52,10 +41,10 @@ local items = {
             ref_name = 'solar-panel',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-SOLAR-TIER'].value
+            max = settings.startup['PHI-MB-ENERGY-SOLAR-TIER'].value
         },
         ['accumulator'] = {
-            enabled = settings.startup['PHI-EN'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
             stage = 1,
             mod = 'base',
             type = 'accumulator',
@@ -63,10 +52,10 @@ local items = {
             ref_name = 'accumulator',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-SOLAR-TIER'].value
+            max = settings.startup['PHI-MB-ENERGY-SOLAR-TIER'].value
         },
         ['boiler'] = {
-            enabled = settings.startup['PHI-EN'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
             stage = 1,
             mod = 'base',
             type = 'boiler',
@@ -74,10 +63,10 @@ local items = {
             ref_name = 'boiler',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-POWER-TIER'].value
+            max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
         },
         ['steam-engine'] = {
-            enabled = settings.startup['PHI-EN'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
             stage = 1,
             mod = 'base',
             type = 'generator',
@@ -85,10 +74,10 @@ local items = {
             ref_name = 'steam-engine',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-POWER-TIER'].value
+            max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
         },
         ['nuclear-reactor'] = {
-            enabled = settings.startup['PHI-EN'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
             stage = 1,
             mod = 'base',
             type = 'reactor',
@@ -96,10 +85,10 @@ local items = {
             ref_name = 'nuclear-reactor',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-POWER-TIER'].value
+            max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
         },
         ['heat-pipe'] = {
-            enabled = settings.startup['PHI-EN'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
             stage = 1,
             mod = 'base',
             type = 'heat-pipe',
@@ -107,10 +96,10 @@ local items = {
             ref_name = 'heat-pipe',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-POWER-TIER'].value
+            max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
         },
         ['heat-exchanger'] = {
-            enabled = settings.startup['PHI-EN'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
             stage = 1,
             mod = 'base',
             type = 'boiler',
@@ -118,10 +107,10 @@ local items = {
             ref_name = 'heat-exchanger',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-POWER-TIER'].value
+            max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
         },
         ['steam-turbine'] = {
-            enabled = settings.startup['PHI-EN'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
             stage = 1,
             mod = 'base',
             type = 'generator',
@@ -129,10 +118,10 @@ local items = {
             ref_name = 'steam-turbine',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-EN-POWER-TIER'].value
+            max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
         },
         ['assembling-machine'] = {
-            enabled = settings.startup['PHI-MB'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
             stage = 1,
             mod = 'base',
             type = 'assembling-machine',
@@ -143,7 +132,7 @@ local items = {
             max = settings.startup['PHI-MB-MACHINE-TIER'].value + 2
         },
         ['electric-furnace'] = {
-            enabled = settings.startup['PHI-MB'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
             stage = 1,
             mod = 'base',
             type = 'furnace',
@@ -154,7 +143,7 @@ local items = {
             max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['oil-refinery'] = {
-            enabled = settings.startup['PHI-MB'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
             stage = 1,
             mod = 'base',
             type = 'assembling-machine',
@@ -165,7 +154,7 @@ local items = {
             max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['chemical-plant'] = {
-            enabled = settings.startup['PHI-MB'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
             stage = 1,
             mod = 'base',
             type = 'assembling-machine',
@@ -176,7 +165,7 @@ local items = {
             max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['centrifuge'] = {
-            enabled = settings.startup['PHI-MB'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
             stage = 1,
             mod = 'base',
             type = 'assembling-machine',
@@ -187,7 +176,7 @@ local items = {
             max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['lab'] = {
-            enabled = settings.startup['PHI-MB'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
             stage = 1,
             mod = 'base',
             type = 'lab',
@@ -198,7 +187,7 @@ local items = {
             max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['electric-mining-drill'] = {
-            enabled = settings.startup['PHI-MB'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
             stage = 1,
             mod = 'base',
             type = 'mining-drill',
@@ -209,7 +198,7 @@ local items = {
             max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['pumpjack'] = {
-            enabled = settings.startup['PHI-MB'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
             stage = 1,
             mod = 'base',
             type = 'mining-drill',
@@ -220,7 +209,7 @@ local items = {
             max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['laser-turret'] = {
-            enabled = settings.startup['PHI-WE'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-WEAPON'].value,
             stage = 1,
             mod = 'base',
             type = 'electric-turret',
@@ -228,10 +217,10 @@ local items = {
             ref_name = 'laser-turret',
             tech = 'laser-turret',
             min = 2,
-            max = settings.startup['PHI-WE-TURRET-TIER'].value
+            max = settings.startup['PHI-MB-WEAPON-TURRET-TIER'].value
         },
         ['flamethrower-turret'] = {
-            enabled = settings.startup['PHI-WE'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-WEAPON'].value,
             stage = 1,
             mod = 'base',
             type = 'fluid-turret',
@@ -239,10 +228,10 @@ local items = {
             ref_name = 'flamethrower-turret',
             tech = 'flamethrower',
             min = 2,
-            max = settings.startup['PHI-WE-TURRET-TIER'].value
+            max = settings.startup['PHI-MB-WEAPON-TURRET-TIER'].value
         },
         ['gun-turret'] = {
-            enabled = settings.startup['PHI-WE'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-WEAPON'].value,
             stage = 1,
             mod = 'base',
             type = 'ammo-turret',
@@ -250,10 +239,10 @@ local items = {
             ref_name = 'gun-turret',
             tech = 'gun-turret',
             min = 2,
-            max = settings.startup['PHI-WE-TURRET-TIER'].value
+            max = settings.startup['PHI-MB-WEAPON-TURRET-TIER'].value
         },
         ['radar'] = {
-            enabled = settings.startup['PHI-WE'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-WEAPON'].value,
             stage = 1,
             mod = 'base',
             type = 'radar',
@@ -261,7 +250,7 @@ local items = {
             ref_name = 'radar',
             tech = 'automation',
             min = 2,
-            max = settings.startup['PHI-WE-RADAR-TIER'].value
+            max = settings.startup['PHI-MB-WEAPON-RADAR-TIER'].value
         }
     },
     ['equipment'] = {
@@ -547,7 +536,7 @@ local items = {
 
 if mods and mods['space-age'] then
     items['item']['fusion-reactor'] = {
-        enabled = settings.startup['PHI-EN'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
         stage = 1,
         mod = 'space-age',
         type = 'fusion-reactor',
@@ -555,11 +544,11 @@ if mods and mods['space-age'] then
         ref_name = 'fusion-reactor',
         tech = 'compound-energy',
         min = 2,
-        max = settings.startup['PHI-EN-POWER-TIER'].value
+        max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
     }
 
     items['item']['fusion-generator'] = {
-        enabled = settings.startup['PHI-EN'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
         stage = 1,
         mod = 'space-age',
         type = 'fusion-generator',
@@ -567,11 +556,11 @@ if mods and mods['space-age'] then
         ref_name = 'fusion-generator',
         tech = 'compound-energy',
         min = 2,
-        max = settings.startup['PHI-EN-POWER-TIER'].value
+        max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
     }
 
     items['item']['heating-tower'] = {
-        enabled = settings.startup['PHI-EN'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
         stage = 1,
         mod = 'space-age',
         type = 'reactor',
@@ -579,11 +568,11 @@ if mods and mods['space-age'] then
         ref_name = 'heating-tower',
         tech = 'heating-tower',
         min = 2,
-        max = settings.startup['PHI-EN-POWER-TIER'].value
+        max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
     }
 
     items['item']['railgun-turret'] = {
-        enabled = settings.startup['PHI-WE'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-WEAPON'].value,
         stage = 1,
         mod = 'space-age',
         type = 'ammo-turret',
@@ -591,11 +580,11 @@ if mods and mods['space-age'] then
         ref_name = 'railgun-turret',
         tech = 'railgun',
         min = 2,
-        max = settings.startup['PHI-WE-TURRET-TIER'].value
+        max = settings.startup['PHI-MB-WEAPON-TURRET-TIER'].value
     }
 
     items['item']['rocket-turret'] = {
-        enabled = settings.startup['PHI-WE'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-WEAPON'].value,
         stage = 1,
         mod = 'space-age',
         type = 'ammo-turret',
@@ -603,11 +592,11 @@ if mods and mods['space-age'] then
         ref_name = 'rocket-turret',
         tech = 'rocket-turret',
         min = 2,
-        max = settings.startup['PHI-WE-TURRET-TIER'].value
+        max = settings.startup['PHI-MB-WEAPON-TURRET-TIER'].value
     }
 
     items['item']['tesla-turret'] = {
-        enabled = settings.startup['PHI-WE'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-WEAPON'].value,
         stage = 1,
         mod = 'space-age',
         type = 'electric-turret',
@@ -615,11 +604,11 @@ if mods and mods['space-age'] then
         ref_name = 'tesla-turret',
         tech = 'tesla-weapons',
         min = 2,
-        max = settings.startup['PHI-WE-TURRET-TIER'].value
+        max = settings.startup['PHI-MB-WEAPON-TURRET-TIER'].value
     }
 
     items['item']['foundry'] = {
-        enabled = settings.startup['PHI-MB'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
         type = 'assembling-machine',
@@ -631,7 +620,7 @@ if mods and mods['space-age'] then
     }
 
     items['item']['big-mining-drill'] = {
-        enabled = settings.startup['PHI-MB'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
         type = 'mining-drill',
@@ -643,7 +632,7 @@ if mods and mods['space-age'] then
     }
 
     items['item']['biochamber'] = {
-        enabled = settings.startup['PHI-MB'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
         type = 'assembling-machine',
@@ -655,7 +644,7 @@ if mods and mods['space-age'] then
     }
 
     items['item']['crusher'] = {
-        enabled = settings.startup['PHI-MB'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
         type = 'assembling-machine',
@@ -667,7 +656,7 @@ if mods and mods['space-age'] then
     }
 
     items['item']['biolab'] = {
-        enabled = settings.startup['PHI-MB'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
         type = 'lab',
@@ -679,7 +668,7 @@ if mods and mods['space-age'] then
     }
 
     items['item']['cryogenic-plant'] = {
-        enabled = settings.startup['PHI-MB'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
         type = 'assembling-machine',
@@ -691,7 +680,7 @@ if mods and mods['space-age'] then
     }
 
     items['item']['electromagnetic-plant'] = {
-        enabled = settings.startup['PHI-MB'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
         type = 'assembling-machine',
@@ -703,7 +692,7 @@ if mods and mods['space-age'] then
     }
 
     items['item']['thruster'] = {
-        enabled = settings.startup['PHI-MB'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
         type = 'thruster',
@@ -715,7 +704,7 @@ if mods and mods['space-age'] then
     }
 
     items['item']['agricultural-tower'] = {
-        enabled = settings.startup['PHI-MB'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
         type = 'agricultural-tower',
@@ -757,7 +746,7 @@ end
 
 if mods and mods['quality'] then
     items['item']['recycler'] = {
-        enabled = settings.startup['PHI-MB'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'quality',
         type = 'furnace',

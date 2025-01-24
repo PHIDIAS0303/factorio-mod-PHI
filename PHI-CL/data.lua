@@ -2,12 +2,12 @@ local items = require 'config'
 local main = require 'main'
 local file_stage = 1
 
-if settings.startup['PHI-EN'].value then
-    if settings.startup['PHI-EN-POWER-TIER'].value > 1 then
+if settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value then
+    if settings.startup['PHI-MB-ENERGY-POWER-TIER'].value > 1 then
         data.raw['fluid']['steam'].max_temperature = 5000
     end
 
-    local ml = math.max(settings.startup['PHI-EN-SOLAR-TIER'].value, settings.startup['PHI-EN-POWER-TIER'].value)
+    local ml = math.max(settings.startup['PHI-MB-ENERGY-SOLAR-TIER'].value, settings.startup['PHI-MB-ENERGY-POWER-TIER'].value)
 
     for i=1, 7 do
         local tn = 'compound-energy-' .. i
@@ -330,6 +330,8 @@ if settings.startup['PHI-MI'].value then
             end
         end
     end
+
+    data.raw['utility-constants'].default.default_pipeline_extent = settings.startup['PHI-MI-PIPE-EXTENT'].value
 end
 
 if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) or (settings.startup['PHI-MI'].value) or (settings.startup['PHI-SA'].value and (settings.startup['PHI-SA-RESTRICTION'].value or settings.startup['PHI-SA-VANILLA'].value)) then
@@ -1146,8 +1148,6 @@ if settings.startup['PHI-SA'].value then
             end
         end
     end
-    
-    data.raw['utility-constants'].default.default_pipeline_extent = settings.startup['PHI-SA-PIPE-EXTENT'].value
 
     if mods['space-age'] then
         data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-SA-ROCKET-CAPACITY'].value * 1000000
