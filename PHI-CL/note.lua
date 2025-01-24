@@ -718,33 +718,6 @@ if script.active_mods['space-exploration'] then
         end
     end
 end
-
-            has_promethium_asteroids = true,
-            probability_on_range_chunk = {
-                {position=0.001, probability=asteroid_util.system_edge_huge * 5, angle_when_stopped=asteroid_util.chunk_angle},
-                {position=0.999, probability=asteroid_util.system_edge_huge, angle_when_stopped=asteroid_util.chunk_angle}
-            },
-            probability_on_range_small = {
-                {position=0.001, probability=asteroid_util.system_edge_huge * 4, angle_when_stopped=asteroid_util.small_angle},
-                {position=0.999, probability=asteroid_util.system_edge_huge * 2, angle_when_stopped=asteroid_util.small_angle}
-            },
-            probability_on_range_medium = {
-                {position=0.001, probability=asteroid_util.system_edge_huge * 3, angle_when_stopped=asteroid_util.medium_angle},
-                {position=0.999, probability=asteroid_util.system_edge_huge * 3, angle_when_stopped=asteroid_util.medium_angle}
-            },
-            probability_on_range_big = {
-                {position=0.001, probability=asteroid_util.system_edge_huge * 2, angle_when_stopped=asteroid_util.big_angle},
-                {position=0.999, probability=asteroid_util.system_edge_huge * 4, angle_when_stopped=asteroid_util.big_angle}
-            },
-            probability_on_range_huge = {
-                {position=0.001, probability=asteroid_util.system_edge_huge, angle_when_stopped=asteroid_util.huge_angle},
-                {position=0.999, probability=asteroid_util.system_edge_huge * 5, angle_when_stopped=asteroid_util.huge_angle}
-            },
-            type_ratios = {
-                {position=0.001, ratios={1, 1, 1, 1}},
-                {position=0.999, ratios={1, 1, 1, 1}}
-            }
-            
             
 ** SETTING
 {type = 'laser', decrease = 20, percent = 50},
