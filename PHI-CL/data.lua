@@ -332,6 +332,8 @@ if settings.startup['PHI-MI'].value then
     end
 
     data.raw['utility-constants'].default.default_pipeline_extent = settings.startup['PHI-MI-PIPE-EXTENT'].value
+    data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-MI-ROCKET-CAPACITY'].value * 1000000
+    data.raw['utility-constants'].default.default_item_weight = settings.startup['PHI-MI-CARGO-WEIGHT'].value
 end
 
 if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) or (settings.startup['PHI-MI'].value) or (settings.startup['PHI-SA'].value and (settings.startup['PHI-SA-RESTRICTION'].value or settings.startup['PHI-SA-VANILLA'].value)) then
@@ -1089,76 +1091,65 @@ if settings.startup['PHI-SA'].value then
         end
     end
 
-    if settings.startup['PHI-SA-QUALITY'].value then
-        if mods['quality'] then
-            for _, v in pairs(data.raw.module) do
-                if v.category and v.category == 'quality' then
-                    v.effect.quality = v.effect.quality * settings.startup['PHI-SA-QUALITY'].value / 10
+    if settings.startup['PHI-SA-QUALITY'].value and mods['quality'] then
+        for _, v in pairs(data.raw.module) do
+            if v.category and v.category == 'quality' then
+                v.effect.quality = v.effect.quality * settings.startup['PHI-SA-QUALITY'].value / 10
 
-                elseif v.category and v.category == 'speed' then
-                    v.effect.quality = nil
-                end
+            elseif v.category and v.category == 'speed' then
+                v.effect.quality = nil
             end
         end
     end
 
-    if settings.startup['PHI-SA-NO-QUALITY'].value or settings.startup['PHI-SA-VANILLA'].value then
-        if mods['quality'] then
-            for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
-                data.raw.technology[v] = nil
-                data.raw.module[v] = nil
-                data.raw.recipe[v] = nil
-                data.raw.recipe[v .. '-recycling'] = nil
-            end
+    if (settings.startup['PHI-SA-NO-QUALITY'].value or settings.startup['PHI-SA-VANILLA'].value) and mods['quality'] then
+        for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
+            data.raw.technology[v] = nil
+            data.raw.module[v] = nil
+            data.raw.recipe[v] = nil
+            data.raw.recipe[v .. '-recycling'] = nil
+        end
 
-            data.raw.technology['epic-quality'] = nil
-            data.raw.technology['legendary-quality'] = nil
+        data.raw.technology['epic-quality'] = nil
+        data.raw.technology['legendary-quality'] = nil
 
-            for _, v in pairs({'uncommon', 'rare', 'epic', 'legendary'}) do
-                data.raw.quality[v].hidden = true
-                data.raw.quality[v].hidden_in_factoriopedia = true
-            end
+        for _, v in pairs({'uncommon', 'rare', 'epic', 'legendary'}) do
+            data.raw.quality[v].hidden = true
+            data.raw.quality[v].hidden_in_factoriopedia = true
+        end
 
-            data.raw['tips-and-tricks-item']['quality'] = nil
-            data.raw['tips-and-tricks-item']['quality-modules'] = nil
-            data.raw['tips-and-tricks-item']['quality-factoriopedia'] = nil
-            data.raw['tips-and-tricks-item']['quality-probabilities'] = nil
+        data.raw['tips-and-tricks-item']['quality'] = nil
+        data.raw['tips-and-tricks-item']['quality-modules'] = nil
+        data.raw['tips-and-tricks-item']['quality-factoriopedia'] = nil
+        data.raw['tips-and-tricks-item']['quality-probabilities'] = nil
 
-            data.raw['produce-achievement']['crafting-with-quality'] = nil
-            data.raw['module-transfer-achievement']['make-it-better'] = nil
-            data.raw['produce-achievement']['my-modules-are-legendary'] = nil
-            data.raw['equip-armor-achievement']['look-at-my-shiny-rare-armor'] = nil
-            data.raw['use-item-achievement']['todays-fish-is-trout-a-la-creme'] = nil
-            data.raw['place-equipment-achievement']['no-room-for-more'] = nil
+        data.raw['produce-achievement']['crafting-with-quality'] = nil
+        data.raw['module-transfer-achievement']['make-it-better'] = nil
+        data.raw['produce-achievement']['my-modules-are-legendary'] = nil
+        data.raw['equip-armor-achievement']['look-at-my-shiny-rare-armor'] = nil
+        data.raw['use-item-achievement']['todays-fish-is-trout-a-la-creme'] = nil
+        data.raw['place-equipment-achievement']['no-room-for-more'] = nil
 
-            data.raw.quality.normal.level = 5
-            data.raw.quality.normal.next = nil
-            data.raw.quality.normal.next_probability = nil
-            data.raw.quality.normal.hidden = true
-            data.raw.quality.normal.hidden_in_factoriopedia = true
-            data.raw.quality.normal.beacon_power_usage_multiplier = 1 / 6
-            data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1 / 6
-            data.raw.quality.normal.science_pack_drain_multiplier = 19 / 20
+        data.raw.quality.normal.level = 5
+        data.raw.quality.normal.next = nil
+        data.raw.quality.normal.next_probability = nil
+        data.raw.quality.normal.hidden = true
+        data.raw.quality.normal.hidden_in_factoriopedia = true
+        data.raw.quality.normal.beacon_power_usage_multiplier = 1 / 6
+        data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1 / 6
+        data.raw.quality.normal.science_pack_drain_multiplier = 19 / 20
 
-            local new_scale = 1 + (0.3 * data.raw.quality.normal.level)
+        local new_scale = 1 + (0.3 * data.raw.quality.normal.level)
 
-            for _, v in pairs(data.raw['inserter']) do
-                v.extension_speed = v.extension_speed * new_scale
-                v.rotation_speed = v.rotation_speed * new_scale
-            end
+        for _, v in pairs(data.raw['inserter']) do
+            v.extension_speed = v.extension_speed * new_scale
+            v.rotation_speed = v.rotation_speed * new_scale
         end
     end
 
-    if mods['space-age'] then
-        data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-SA-ROCKET-CAPACITY'].value * 1000000
-        data.raw['utility-constants'].default.default_item_weight = settings.startup['PHI-SA-CARGO-WEIGHT'].value
-
-        if settings.startup['PHI-SA-HEAT-RADIUS'].value then
-            for _, v in pairs(data.raw['reactor']) do
-                v.heating_radius = settings.startup['PHI-SA-HEAT-RADIUS'].value
-            end
-
-            for _, v in pairs(data.raw['heat-pipe']) do
+    if settings.startup['PHI-SA-HEAT-RADIUS'].value and mods['space-age'] then
+        for k, _ in pairs({'heat-pipe', 'reactor'}) do
+            for _, v in pairs(data.raw[k]) do
                 v.heating_radius = settings.startup['PHI-SA-HEAT-RADIUS'].value
             end
         end

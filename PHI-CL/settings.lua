@@ -201,6 +201,24 @@ data:extend({
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-PIPE-EXTENT'}, {'mod-setting-name.PHI-MI-PIPE-EXTENT'}},
   order = 'C08'
 }, {
+  type = 'int-setting',
+  name = 'PHI-MI-ROCKET-CAPACITY',
+  setting_type = 'startup',
+  default_value = 10,
+  minimum_value = 1,
+  maximum_value = 10000,
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-ROCKET-CAPACITY'}, {'mod-setting-name.PHI-SA-ROCKET-CAPACITY'}},
+  order = 'C09'
+}, {
+  type = 'int-setting',
+  name = 'PHI-MI-CARGO-WEIGHT',
+  setting_type = 'startup',
+  default_value = 100,
+  minimum_value = 1,
+  maximum_value = 1000,
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-CARGO-WEIGHT'}, {'mod-setting-name.PHI-SA-CARGO-WEIGHT'}},
+  order = 'C10'
+}, {
   type = 'bool-setting',
   name = 'PHI-SA',
   setting_type = 'startup',
@@ -209,44 +227,26 @@ data:extend({
   order = 'D00'
 }, {
   type = 'int-setting',
-  name = 'PHI-SA-ROCKET-CAPACITY',
-  setting_type = 'startup',
-  default_value = 10,
-  minimum_value = 1,
-  maximum_value = 10000,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-ROCKET-CAPACITY'}, {'mod-setting-name.PHI-SA-ROCKET-CAPACITY'}},
-  order = 'D01'
-}, {
-  type = 'int-setting',
-  name = 'PHI-SA-CARGO-WEIGHT',
-  setting_type = 'startup',
-  default_value = 100,
-  minimum_value = 1,
-  maximum_value = 1000,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-CARGO-WEIGHT'}, {'mod-setting-name.PHI-SA-CARGO-WEIGHT'}},
-  order = 'D02'
-}, {
-  type = 'int-setting',
   name = 'PHI-SA-HEAT-RADIUS',
   setting_type = 'startup',
   default_value = 1,
   allowed_values = {1, 2, 3, 4, 5, 6, 7},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-HEAT-RADIUS'}, {'mod-setting-name.PHI-SA-HEAT-RADIUS'}},
-  order = 'D03'
+  order = 'D01'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-SPOIL',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL'}, {'mod-setting-name.PHI-SA-SPOIL'}},
-  order = 'D04'
+  order = 'D02'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-SPOIL-FREEZE',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE'}},
-  order = 'D05'
+  order = 'D03'
 }, {
   type = 'int-setting',
   name = 'PHI-SA-SPOIL-FREEZE-RATIO',
@@ -255,21 +255,21 @@ data:extend({
   minimum_value = 1,
   maximum_value = 1000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE-RATIO'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE-RATIO'}},
-  order = 'D06'
+  order = 'D04'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-RESTRICTION',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-RESTRICTION'}, {'mod-setting-name.PHI-SA-RESTRICTION'}},
-  order = 'D07'
+  order = 'D05'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-GENERIC',
   setting_type = 'startup',
   default_value = true,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-GENERIC'}, {'mod-setting-name.PHI-SA-GENERIC'}},
-  order = 'D08'
+  order = 'D06'
 }, {
   type = 'int-setting',
   name = 'PHI-SA-QUALITY',
@@ -278,21 +278,21 @@ data:extend({
   minimum_value = 1,
   maximum_value = 100,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-QUALITY'}, {'mod-setting-name.PHI-SA-QUALITY'}},
-  order = 'D09'
+  order = 'D07'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-NO-QUALITY',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-NO-QUALITY'}, {'mod-setting-name.PHI-SA-NO-QUALITY'}},
-  order = 'D10'
+  order = 'D08'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-VANILLA',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-VANILLA'}, {'mod-setting-name.PHI-SA-VANILLA'}},
-  order = 'D11'
+  order = 'D09'
 }, {
   type = 'bool-setting',
   name = 'PHI-CT',
