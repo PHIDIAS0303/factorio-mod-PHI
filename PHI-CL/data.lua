@@ -200,13 +200,15 @@ if settings.startup['PHI-MI'].value then
     end
 
     if settings.startup['PHI-MI-PIPE'].value then
-        local s = settings.startup['PHI-MI-PIPE'].value
+        local s = (1 + settings.startup['PHI-MI-ROBOT'].value) / 2
 
         for _, t in pairs({data.raw['offshore-pump'], data.raw['pump']}) do
             for _, v in pairs(t) do
                 v.pumping_speed = v.pumping_speed * s
             end
         end
+
+        data.raw['utility-constants'].default.max_fluid_flow = 100 * s
     end
 
     if settings.startup['PHI-MI-ROBOT'].value then
@@ -1148,9 +1150,9 @@ if settings.startup['PHI-SA'].value then
     end
 
     if settings.startup['PHI-SA-HEAT-RADIUS'].value and mods['space-age'] then
-        for k, _ in pairs({'heat-pipe', 'reactor'}) do
-            for _, v in pairs(data.raw[k]) do
-                v.heating_radius = settings.startup['PHI-SA-HEAT-RADIUS'].value
+        for _, v in pairs({data.raw['heat-pipe'], data.raw['heat-pipe']}) do
+            for _, v2 in pairs(v) do
+                v2.heating_radius = settings.startup['PHI-SA-HEAT-RADIUS'].value
             end
         end
     end

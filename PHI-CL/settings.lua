@@ -207,7 +207,7 @@ data:extend({
   default_value = 10,
   minimum_value = 1,
   maximum_value = 10000,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-ROCKET-CAPACITY'}, {'mod-setting-name.PHI-SA-ROCKET-CAPACITY'}},
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-ROCKET-CAPACITY'}, {'mod-setting-name.PHI-MI-ROCKET-CAPACITY'}},
   order = 'C09'
 }, {
   type = 'int-setting',
@@ -216,7 +216,7 @@ data:extend({
   default_value = 100,
   minimum_value = 1,
   maximum_value = 1000,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-CARGO-WEIGHT'}, {'mod-setting-name.PHI-SA-CARGO-WEIGHT'}},
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-CARGO-WEIGHT'}, {'mod-setting-name.PHI-MI-CARGO-WEIGHT'}},
   order = 'C10'
 }, {
   type = 'bool-setting',
@@ -257,20 +257,6 @@ data:extend({
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE-RATIO'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE-RATIO'}},
   order = 'D04'
 }, {
-  type = 'bool-setting',
-  name = 'PHI-SA-RESTRICTION',
-  setting_type = 'startup',
-  default_value = false,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-RESTRICTION'}, {'mod-setting-name.PHI-SA-RESTRICTION'}},
-  order = 'D05'
-}, {
-  type = 'bool-setting',
-  name = 'PHI-SA-GENERIC',
-  setting_type = 'startup',
-  default_value = true,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-GENERIC'}, {'mod-setting-name.PHI-SA-GENERIC'}},
-  order = 'D06'
-}, {
   type = 'int-setting',
   name = 'PHI-SA-QUALITY',
   setting_type = 'startup',
@@ -278,13 +264,27 @@ data:extend({
   minimum_value = 1,
   maximum_value = 100,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-QUALITY'}, {'mod-setting-name.PHI-SA-QUALITY'}},
-  order = 'D07'
+  order = 'D05'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-NO-QUALITY',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-NO-QUALITY'}, {'mod-setting-name.PHI-SA-NO-QUALITY'}},
+  order = 'D06'
+}, {
+  type = 'bool-setting',
+  name = 'PHI-SA-RESTRICTION',
+  setting_type = 'startup',
+  default_value = false,
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-RESTRICTION'}, {'mod-setting-name.PHI-SA-RESTRICTION'}},
+  order = 'D07'
+}, {
+  type = 'bool-setting',
+  name = 'PHI-SA-GENERIC',
+  setting_type = 'startup',
+  default_value = true,
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-GENERIC'}, {'mod-setting-name.PHI-SA-GENERIC'}},
   order = 'D08'
 }, {
   type = 'bool-setting',
