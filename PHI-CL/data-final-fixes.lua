@@ -2,7 +2,7 @@ local items = require 'config'
 local main = require 'main'
 
 if mods['space-age'] then
-    for i=2, settings.startup['PHI-EN-SOLAR-TIER'].value do
+    for i=2, settings.startup['PHI-MB-ENERGY-SOLAR-TIER'].value do
         if data.raw.recipe['accumulator-' .. i] then
             data.raw.recipe['accumulator-' .. i].category = 'electronics'
         end

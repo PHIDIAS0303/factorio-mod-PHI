@@ -12,7 +12,7 @@ data:extend({
   setting_type = 'startup',
   default_value = true,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-ENERGY'}, {'mod-setting-name.PHI-MB-ENERGY'}},
-  order = 'A01'
+  order = 'AA00'
 }, {
   type = 'int-setting',
   name = 'PHI-MB-ENERGY-SOLAR-TIER',
@@ -20,16 +20,15 @@ data:extend({
   default_value = 8,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-ENERGY-SOLAR-TIER'}, {'mod-setting-name.PHI-MB-ENERGY-SOLAR-TIER'}},
-  order = 'A02'
+  order = 'AA01'
 }, {
   type = 'int-setting',
   name = 'PHI-MB-ENERGY-SOLAR-RATIO',
   setting_type = 'startup',
   default_value = 4,
-  minimum_value = 2,
-  maximum_value = 16,
+  allowed_values = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-ENERGY-SOLAR-RATIO'}, {'mod-setting-name.PHI-MB-ENERGY-SOLAR-RATIO'}},
-  order = 'A03'
+  order = 'AA02'
 }, {
   type = 'int-setting',
   name = 'PHI-MB-ENERGY-POWER-TIER',
@@ -37,14 +36,14 @@ data:extend({
   default_value = 1,
   allowed_values = {1, 2, 3, 4, 5},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-ENERGY-POWER-TIER'}, {'mod-setting-name.PHI-MB-ENERGY-POWER-TIER'}},
-  order = 'A04'
+  order = 'AA03'
 }, {
   type = 'bool-setting',
   name = 'PHI-MB-MACHINE',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-MACHINE-TIER'}, {'mod-setting-name.PHI-MB-MACHINE-TIER'}},
-  order = 'A05'
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-MACHINE'}, {'mod-setting-name.PHI-MB-MACHINE'}},
+  order = 'AB00'
 }, {
   type = 'int-setting',
   name = 'PHI-MB-MACHINE-TIER',
@@ -52,14 +51,14 @@ data:extend({
   default_value = 3,
   allowed_values = {1, 2, 3},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-MACHINE-TIER'}, {'mod-setting-name.PHI-MB-MACHINE-TIER'}},
-  order = 'A06'
+  order = 'AB01'
 }, {
   type = 'bool-setting',
   name = 'PHI-MB-WEAPON',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-WEAPON'}, {'mod-setting-name.PHI-MB-WEAPON'}},
-  order = 'A07'
+  order = 'AC00'
 }, {
   type = 'int-setting',
   name = 'PHI-MB-WEAPON-TURRET-TIER',
@@ -67,7 +66,7 @@ data:extend({
   default_value = 3,
   allowed_values = {1, 2, 3},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-WEAPON-TURRET-TIER'}, {'mod-setting-name.PHI-MB-WEAPON-TURRET-TIER'}},
-  order = 'A08'
+  order = 'AC01'
 }, {
   type = 'int-setting',
   name = 'PHI-MB-WEAPON-RADAR-TIER',
@@ -75,7 +74,7 @@ data:extend({
   default_value = 3,
   allowed_values = {1, 2, 3},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-WEAPON-RADAR-TIER'}, {'mod-setting-name.PHI-MB-WEAPON-RADAR-TIER'}},
-  order = 'A09'
+  order = 'AC02'
 }, {
   type = 'bool-setting',
   name = 'PHI-EQ',
@@ -133,7 +132,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-MI',
   setting_type = 'startup',
-  default_value = true,
+  default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI'}, {'mod-setting-name.PHI-MI'}},
   order = 'C00'
 }, {
@@ -205,7 +204,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-SA',
   setting_type = 'startup',
-  default_value = true,
+  default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA'}, {'mod-setting-name.PHI-SA'}},
   order = 'D00'
 }, {
@@ -231,8 +230,7 @@ data:extend({
   name = 'PHI-SA-HEAT-RADIUS',
   setting_type = 'startup',
   default_value = 1,
-  minimum_value = 1,
-  maximum_value = 7,
+  allowed_values = {1, 2, 3, 4, 5, 6, 7},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-HEAT-RADIUS'}, {'mod-setting-name.PHI-SA-HEAT-RADIUS'}},
   order = 'D03'
 }, {
@@ -299,14 +297,14 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-CT',
   setting_type = 'startup',
-  default_value = true,
+  default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-CT'}, {'mod-setting-name.PHI-CT'}},
   order = 'E00'
 },  {
   type = 'bool-setting',
   name = 'PHI-CT-TOOL',
   setting_type = 'startup',
-  default_value = false,
+  default_value = true,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-CT-TOOL'}, {'mod-setting-name.PHI-CT-TOOL'}},
   order = 'E01'
 }, {
