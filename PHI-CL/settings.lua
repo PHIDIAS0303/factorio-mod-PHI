@@ -139,10 +139,12 @@ data:extend({
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-LANDFILL'}, {'mod-setting-name.PHI-MI-LANDFILL'}},
   order = 'E01'
 }, {
-  type = 'bool-setting',
+  type = 'int-setting',
   name = 'PHI-MI-EFFCY',
   setting_type = 'startup',
-  default_value = true,
+  default_value = 100,
+  minimum_value = 10,
+  maximum_value = 1000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-EFFCY'}, {'mod-setting-name.PHI-MI-EFFCY'}},
   order = 'E02'
 }, {
@@ -164,7 +166,7 @@ data:extend({
   type = 'int-setting',
   name = 'PHI-MI-ROBOT',
   setting_type = 'startup',
-  default_value = 2,
+  default_value = 1,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-ROBOT'}, {'mod-setting-name.PHI-MI-ROBOT'}},
   order = 'E05'
@@ -183,6 +185,15 @@ data:extend({
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-TRAIN'}, {'mod-setting-name.PHI-MI-TRAIN'}},
   order = 'E07'
+}, {
+  type = 'int-setting',
+  name = 'PHI-MI-PIPE-EXTENT',
+  setting_type = 'startup',
+  default_value = 320,
+  minimum_value = 80,
+  maximum_value = 2560,
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-PIPE-EXTENT'}, {'mod-setting-name.PHI-MI-PIPE-EXTENT'}},
+  order = 'E08'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA',
@@ -210,36 +221,27 @@ data:extend({
   order = 'F02'
 }, {
   type = 'int-setting',
-  name = 'PHI-SA-PIPE-EXTENT',
-  setting_type = 'startup',
-  default_value = 320,
-  minimum_value = 80,
-  maximum_value = 2560,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-PIPE-EXTENT'}, {'mod-setting-name.PHI-SA-PIPE-EXTENT'}},
-  order = 'F03'
-}, {
-  type = 'int-setting',
   name = 'PHI-SA-HEAT-RADIUS',
   setting_type = 'startup',
   default_value = 1,
   minimum_value = 1,
   maximum_value = 7,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-HEAT-RADIUS'}, {'mod-setting-name.PHI-SA-HEAT-RADIUS'}},
-  order = 'F04'
+  order = 'F03'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-SPOIL',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL'}, {'mod-setting-name.PHI-SA-SPOIL'}},
-  order = 'F05'
+  order = 'F04'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-SPOIL-FREEZE',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE'}},
-  order = 'F06'
+  order = 'F05'
 }, {
   type = 'int-setting',
   name = 'PHI-SA-SPOIL-FREEZE-RATIO',
@@ -248,21 +250,21 @@ data:extend({
   minimum_value = 1,
   maximum_value = 1000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE-RATIO'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE-RATIO'}},
-  order = 'F07'
+  order = 'F06'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-RESTRICTION',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-RESTRICTION'}, {'mod-setting-name.PHI-SA-RESTRICTION'}},
-  order = 'F08'
+  order = 'F07'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-GENERIC',
   setting_type = 'startup',
   default_value = true,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-GENERIC'}, {'mod-setting-name.PHI-SA-GENERIC'}},
-  order = 'F09'
+  order = 'F08'
 }, {
   type = 'int-setting',
   name = 'PHI-SA-QUALITY',
@@ -271,21 +273,21 @@ data:extend({
   minimum_value = 1,
   maximum_value = 100,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-QUALITY'}, {'mod-setting-name.PHI-SA-QUALITY'}},
-  order = 'F10'
+  order = 'F09'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-NO-QUALITY',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-NO-QUALITY'}, {'mod-setting-name.PHI-SA-NO-QUALITY'}},
-  order = 'F11'
+  order = 'F10'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-VANILLA',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-VANILLA'}, {'mod-setting-name.PHI-SA-VANILLA'}},
-  order = 'F12'
+  order = 'F11'
 }, {
   type = 'bool-setting',
   name = 'PHI-CT',

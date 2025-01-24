@@ -183,10 +183,10 @@ if settings.startup['PHI-MI'].value then
         v.automatic = true
     end
 
-    if settings.startup['PHI-MI-EFFCY'].value then
-        data.raw['module']['efficiency-module'].effect = {consumption=-0.4, pollution=-0.4}
-        data.raw['module']['efficiency-module-2'].effect = {consumption=-0.8, pollution=-0.8}
-        data.raw['module']['efficiency-module-3'].effect = {consumption=-1.2, pollution=-1.2}
+    for _, v in pairs({data.raw['module']['efficiency-module'], data.raw['module']['efficiency-module-2'], data.raw['module']['efficiency-module-3']}) do
+        for _, v2 in pairs(v.effect) do
+            v2 = v2 * settings.startup['PHI-MI-EFFCY'].value / 100
+        end
     end
 
     if settings.startup['PHI-MI-LANDFILL'].value ~= 50 then
