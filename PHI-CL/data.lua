@@ -333,35 +333,6 @@ if settings.startup['PHI-MI'].value then
         end
     end
 
-    if settings.startup['PHI-MI-PRODUCTIVITY'].value then
-        for k, v in pairs(items.item_productivity) do
-            if data.raw.recipe[k] and data.raw.technology[v] then
-                data:extend({{
-                    type = 'technology',
-                    name = k .. '-productivity',
-                    enabled = true,
-                    prerequisites = v,
-                    effects = {
-                        {
-                            type = 'change-recipe-productivity',
-                            recipe = k,
-                            change = 0.1
-                        }
-                    },
-                    unit = {
-                        count_formula = '(1.5^L)*1000',
-                        ingredients = table.deepcopy(data.raw.technology[v].unit.ingredients),
-                        time = data.raw.technology[v].unit.time
-                    },
-                    icon = data.raw.technology[v].icon,
-                    icon_size = 64,
-                    max_level = 'infinite',
-                    upgrade = true
-                }})
-            end
-        end
-    end
-
     data.raw['utility-constants'].default.default_pipeline_extent = settings.startup['PHI-MI-PIPE-EXTENT'].value
     data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-MI-ROCKET-CAPACITY'].value * 1000000
     data.raw['utility-constants'].default.default_item_weight = settings.startup['PHI-MI-CARGO-WEIGHT'].value
