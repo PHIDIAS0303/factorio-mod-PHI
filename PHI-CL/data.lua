@@ -334,32 +334,28 @@ if settings.startup['PHI-MI'].value then
     end
 
     if settings.startup['PHI-MI-PRODUCTIVITY'].value then
-        local function add_prod_tech(name, tech)
-            data:extend({{
-                type = 'technology',
-                name = name .. '-productivity',
-                prerequisites = tech,
-                effects = {
-                    {
-                        type = 'change-recipe-productivity',
-                        recipe = name,
-                        change = 0.1
-                    }
-                },
-                unit = {
-                    count_formula = '(1.5^L)*1000',
-                    ingredients = table.deepcopy(data.raw.technology[tech].unit.ingredients),
-                    time = data.raw.technology[tech].unit.time
-                },
-                icon = data.raw.technology[tech].icon,
-                max_level = 'infinite',
-                upgrade = true
-            }})
-        end
-
         for k, v in pairs(items.item_productivity) do
             if data.raw.technology[v] then
-                add_prod_tech(k, v)
+                data:extend({{
+                    type = 'technology',
+                    name = k .. '-productivity',
+                    prerequisites = tech,
+                    effects = {
+                        {
+                            type = 'change-recipe-productivity',
+                            recipe = k,
+                            change = 0.1
+                        }
+                    },
+                    unit = {
+                        count_formula = '(1.5^L)*1000',
+                        ingredients = table.deepcopy(data.raw.technology[v].unit.ingredients),
+                        time = data.raw.technology[v].unit.time
+                    },
+                    icon = data.raw.technology[v].icon,
+                    max_level = 'infinite',
+                    upgrade = true
+                }})
             end
         end
     end

@@ -356,7 +356,7 @@ local items = {
             graphics_name = 'solar-panel-equipment'
         }
     },
-    ['item-productivity'] = {
+    ['item_productivity'] = {
         ['solar-panel'] = 'solar-energy',
         ['accumulator'] = 'electric-energy-accumulators',
         ['landfill'] = 'landfill',
