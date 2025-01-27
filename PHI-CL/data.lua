@@ -335,11 +335,11 @@ if settings.startup['PHI-MI'].value then
 
     if settings.startup['PHI-MI-PRODUCTIVITY'].value then
         for k, v in pairs(items.item_productivity) do
-            if data.raw.technology[v] then
+            if data.raw.recipe[k] and data.raw.technology[v] then
                 data:extend({{
                     type = 'technology',
                     name = k .. '-productivity',
-                    prerequisites = tech,
+                    prerequisites = v,
                     effects = {
                         {
                             type = 'change-recipe-productivity',
