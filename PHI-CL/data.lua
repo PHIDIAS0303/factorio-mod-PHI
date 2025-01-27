@@ -339,6 +339,7 @@ if settings.startup['PHI-MI'].value then
                 data:extend({{
                     type = 'technology',
                     name = k .. '-productivity',
+                    enabled = true,
                     prerequisites = v,
                     effects = {
                         {
