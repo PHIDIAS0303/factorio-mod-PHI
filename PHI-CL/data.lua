@@ -353,6 +353,7 @@ if settings.startup['PHI-MI'].value then
                         time = data.raw.technology[v].unit.time
                     },
                     icon = data.raw.technology[v].icon,
+                    icon_size = 64,
                     max_level = 'infinite',
                     upgrade = true
                 }})

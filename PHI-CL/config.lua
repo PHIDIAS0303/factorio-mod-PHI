@@ -370,8 +370,8 @@ local items = {
         ['overgrowth-yumako-soil'] = 'overgrowth-soil',
         ['overgrowth-jellynut-soil'] = 'overgrowth-soil',
         ]]
-        ['copper-cable'] = 'electronics',
-        ['electronic-circuit'] = 'electronics',
+        ['copper-cable'] = 'automation',
+        ['electronic-circuit'] = 'automation',
         ['advanced-circuit'] = 'advanced-circuit',
         ['sulfur'] = 'sulfur-processing',
         ['explosives'] = 'explosives',
