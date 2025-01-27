@@ -220,6 +220,13 @@ data:extend({
   order = 'C10'
 }, {
   type = 'bool-setting',
+  name = 'PHI-MI-PRODUCTIVITY',
+  setting_type = 'startup',
+  default_value = false,
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-PRODUCTIVITY'}, {'mod-setting-name.PHI-MI-PRODUCTIVITY'}},
+  order = 'C11'
+}, {
+  type = 'bool-setting',
   name = 'PHI-SA',
   setting_type = 'startup',
   default_value = false,

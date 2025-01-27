@@ -356,6 +356,33 @@ local items = {
             graphics_name = 'solar-panel-equipment'
         }
     },
+    ['item-productivity'] = {
+        ['solar-panel'] = 'solar-energy',
+        ['accumulator'] = 'electric-energy-accumulators',
+        ['landfill'] = 'landfill',
+        ['cliff-explosives'] = 'cliff-explosives',
+        ['concrete'] = 'concrete',
+        ['refined-concrete'] = 'concrete',
+        ['foundation'] = 'foundation',
+        --[[
+        ['artificial-yumako-soil'] = 'artificial-soil',
+        ['artificial-jellynut-soil'] = 'artificial-soil',
+        ['overgrowth-yumako-soil'] = 'overgrowth-soil',
+        ['overgrowth-jellynut-soil'] = 'overgrowth-soil',
+        ]]
+        ['copper-cable'] = 'electronics',
+        ['electronic-circuit'] = 'electronics',
+        ['advanced-circuit'] = 'advanced-circuit',
+        ['sulfur'] = 'sulfur-processing',
+        ['explosives'] = 'explosives',
+        ['battery'] = 'battery',
+        ['engine'] = 'engine',
+        ['electric-engine'] = 'electric-engine',
+        ['flying-robot-frame'] = 'robotics',
+        ['iron-gear-wheel'] = 'automation',
+        ['iron-stick'] = 'concrete',
+        ['ice-melting'] = 'ice-melting',
+    },
     ['space-age'] = {
         ['science'] = {
             ['agricultural-science-pack'] = true,
