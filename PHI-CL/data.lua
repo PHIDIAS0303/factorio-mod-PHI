@@ -1824,33 +1824,27 @@ if settings.startup['PHI-CT'].value then
 
         table.insert(data.raw.technology['steel-processing'].effects, {type='unlock-recipe', recipe=item.name})
 
-        data.raw.recipe['loader'].hidden = false
-        data.raw.recipe['fast-loader'].hidden = false
-        data.raw.recipe['express-loader'].hidden = false
+        local s = data.raw['inserter']['stack-inserter'].max_belt_stack_size
 
-        data.raw['loader']['loader'].filter_count = 2
-        data.raw['loader']['fast-loader'].filter_count = 2
-        data.raw['loader']['express-loader'].filter_count = 2
+        for _, l in pairs({'loader', 'fast-loader', 'express-loader', 'turbo-loader'}) do
+            if data.raw.recipe[l] then
+                data.raw.recipe[l].hidden = false
+            end
 
-        data.raw['loader']['loader'].per_lane_filters = true
-        data.raw['loader']['fast-loader'].per_lane_filters = true
-        data.raw['loader']['express-loader'].per_lane_filters = true
+            if data.raw['loader'][l] then
+                data.raw['loader'][l].filter_count = 2
+                data.raw['loader'][l].per_lane_filters = true
+                data.raw['loader'][l].adjustable_belt_stack_size = true
+                data.raw['loader'][l].max_belt_stack_size = s
+            end
+        end
 
         table.insert(data.raw.technology['logistics'].effects, {type='unlock-recipe', recipe='loader'})
         table.insert(data.raw.technology['logistics-2'].effects, {type='unlock-recipe', recipe='fast-loader'})
         table.insert(data.raw.technology['logistics-3'].effects, {type='unlock-recipe', recipe='express-loader'})
 
         if mods['space-age'] then
-            data.raw.recipe['turbo-loader'].hidden = false
-            data.raw['loader']['turbo-loader'].filter_count = 2
-            data.raw['loader']['turbo-loader'].per_lane_filters = true
             table.insert(data.raw.technology['turbo-transport-belt'].effects, {type='unlock-recipe', recipe='turbo-loader'})
-
-            local s = data.raw['inserter']['stack-inserter'].max_belt_stack_size
-            data.raw['loader']['loader'].max_belt_stack_size = s
-            data.raw['loader']['fast-loader'].max_belt_stack_size = s
-            data.raw['loader']['express-loader'].max_belt_stack_size = s
-            data.raw['loader']['turbo-loader'].max_belt_stack_size = s
         end
     end
 
