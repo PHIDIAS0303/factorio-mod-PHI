@@ -3,7 +3,7 @@ Version: 3.0.59
 Date: 2025-02-22
 
   Changes:
-    - [CL] Apply the new api on loader.
+    - [CL] Allow loader stack size to be adjusted.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.58
