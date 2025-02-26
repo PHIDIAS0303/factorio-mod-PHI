@@ -1,4 +1,3 @@
-local alpha_order = {'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'}
 local items = require 'config'
 local main = {}
 
