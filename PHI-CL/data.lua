@@ -704,6 +704,7 @@ if settings.startup['PHI-SA'].value then
             data.raw.planet[v].map_gen_settings = nil
             data.raw.planet[v].hidden = true
             data.raw.planet[v].hidden_in_factoriopedia = true
+            data.raw['change-surface-achievement']['visit-' .. v] = nil
         end
 
         for _, v in pairs(data.raw['space-location']) do
@@ -790,10 +791,6 @@ if settings.startup['PHI-SA'].value then
         data.raw['create-platform-achievement']['reach-for-the-stars'] = nil
         data.raw['complete-objective-achievement']['second-star-to-the-right-and-straight-on-till-morning'] = nil
         data.raw['dont-research-before-researching-achievement']['rush-to-space'] = nil
-
-        for _, v in pairs({'visit-fulgora', 'visit-gleba', 'visit-vulcanus', 'visit-aquilo'}) do
-            data.raw['change-surface-achievement'][v] = nil
-        end
 
         for _, v in pairs({'shattered-planet-1', 'shattered-planet-2', 'shattered-planet-3'}) do
             data.raw['space-connection-distance-traveled-achievement'][v] = nil
