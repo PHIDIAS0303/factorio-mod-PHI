@@ -100,9 +100,7 @@ function main.EEE(source, tier)
             end
 
             for _, v in pairs({'buffer_capacity', 'input_flow_limit', 'output_flow_limit'}) do
-                if item.energy_source[v] then
-                    item.energy_source[v] = tonumber(string.match(item.energy_source[v], '[%d%.]+')) * (settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value ^ (tier - source.min + 1)) .. string.match(item.energy_source[v], '%a+')
-                end
+                item.energy_source[v] = (item.energy_source[v] and (tonumber(string.match(item.energy_source[v], '[%d%.]+')) * (settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value ^ (tier - source.min + 1)) .. string.match(item.energy_source[v], '%a+'))) or nil
             end
 
         elseif (source.type == 'boiler') then
@@ -116,19 +114,13 @@ function main.EEE(source, tier)
             end
 
         elseif (source.type == 'generator') then
-            if item.max_power_output then
-                item.max_power_output = (tonumber(string.match(item.max_power_output, '[%d%.]+')) * (tier - source.min + 2)) .. string.match(item.max_power_output, '%a+')
-            end
-
-            if item.maximum_temperature then
-                item.maximum_temperature = 15 + ((item.maximum_temperature - 15) * tier)
-            end
+            item.max_power_output = (item.max_power_output and (tonumber(string.match(item.max_power_output, '[%d%.]+')) * (tier - source.min + 2)) .. string.match(item.max_power_output, '%a+')) or nil
+            item.maximum_temperature = (item.maximum_temperature and 15 + ((item.maximum_temperature - 15) * tier)) or nil
 
         elseif (source.type == 'reactor') then
             item.consumption = tostring(tonumber(string.match(item.consumption, '[%d%.]+')) * tier) .. string.match(item.consumption, '%a+')
             item.heat_buffer.max_temperature = item.heat_buffer.max_temperature * tier
             item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * tier)  .. string.match(item.heat_buffer.max_transfer, '%a+')
-
             tint_handle(item, tier, {'connection_patches_connected', 'connection_patches_disconnected', 'heat_connection_patches_connected', 'heat_connection_patches_disconnected', 'lower_layer_picture'})
 
         elseif (source.type == 'fusion-reactor') then
@@ -142,7 +134,6 @@ function main.EEE(source, tier)
         elseif (source.type == 'heat-pipe') then
             item.heat_buffer.max_temperature = item.heat_buffer.max_temperature * tier
             item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * tier)  .. string.match(item.heat_buffer.max_transfer, '%a+')
-
             tint_handle(item, tier, {'connection_sprites', 'heat_glow_sprites'})
         end
     end
@@ -176,9 +167,7 @@ function main.EEE(source, tier)
 
     elseif source.type == 'thruster' then
         for _, v in pairs({'min_performance', 'max_performance'}) do
-            if item[v] and item[v].fluid_usage then
-                item[v].fluid_usage = item[v].fluid_usage * (2 ^ (tier - source.min + 1))
-            end
+            item[v].fluid_usage = (item[v].fluid_usage and item[v].fluid_usage * (2 ^ (tier - source.min + 1))) or nil
         end
 
     elseif source.type == 'reactor' and source.name == 'heating-tower' then
@@ -238,23 +227,17 @@ function main.EEQ(source, tier)
     item.take_result = source.name .. '-mk' .. tier .. '-equipment'
 
     for _, v in pairs({'power', 'energy_consumption', 'energy_input', 'charging_energy'}) do
-        if item[v] then
-            item[v] = tostring(tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item[v], '%a+')
-        end
+        item[v] = (item[v] and tostring(tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item[v], '%a+')) or nil
     end
 
     if item.energy_source then
         for _, v in pairs({'buffer_capacity', 'input_flow_limit', 'output_flow_limit'}) do
-            if item.energy_source[v] then
-                item.energy_source[v] = tostring(tonumber(string.match(item.energy_source[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source[v], '%a+')
-            end
+            item.energy_source[v] = (item.energy_source[v] and tostring(tonumber(string.match(item.energy_source[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source[v], '%a+')) or nil
         end
     end
 
     for _, v in pairs({'max_shield_value', 'movement_bonus', 'inventory_size_bonus'}) do
-        if item[v] then
-            item[v] = item[v] * (2 ^ (tier - source.min + 1))
-        end
+        item[v] = (item[v] and item[v] * (2 ^ (tier - source.min + 1))) or nil
     end
 
     if item.darkness_to_turn_on and item.color_lookup then
@@ -263,26 +246,13 @@ function main.EEQ(source, tier)
     end
 
     if item.attack_parameters then
-        if item.attack_parameters.cooldown then
-            item.attack_parameters.cooldown = item.attack_parameters.cooldown * ((24 - tier + source.min) / 25)
-        end
-
-        if item.attack_parameters.damage_modifier then
-            item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * (2 ^ (tier - source.min + 1))
-        end
+        item.attack_parameters.cooldown = (item.attack_parameters.cooldown and item.attack_parameters.cooldown * ((24 - tier + source.min) / 25)) or nil
+        item.attack_parameters.damage_modifier = (item.attack_parameters.damage_modifier and item.attack_parameters.damage_modifier * (2 ^ (tier - source.min + 1))) or nil
+        item.attack_parameters.range = (item.attack_parameters.range and item.attack_parameters.range + (tier - source.min + 1)) or nil
 
         if item.attack_parameters.ammo_type then
-            if item.attack_parameters.ammo_type.energy_consumption then
-                item.attack_parameters.ammo_type.energy_consumption = tostring(tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+')
-            end
-
-            if item.attack_parameters.ammo_type.action_delivery then
-                item.attack_parameters.ammo_type.action_delivery.max_length = item.attack_parameters.ammo_type.action_delivery.max_length + (tier - source.min + 1)
-            end
-        end
-
-        if item.attack_parameters.range then
-            item.attack_parameters.range = item.attack_parameters.range + (tier - source.min + 1)
+            item.attack_parameters.ammo_type.energy_consumption = (item.attack_parameters.ammo_type.energy_consumption and tostring(tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+')) or nil
+            item.attack_parameters.ammo_type.action_delivery.max_length = (item.attack_parameters.ammo_type.action_delivery and item.attack_parameters.ammo_type.action_delivery.max_length and item.attack_parameters.ammo_type.action_delivery.max_length + (tier - source.min + 1)) or nil
         end
     end
 
@@ -313,14 +283,8 @@ function main.EI(source, tier)
         item.place_as_equipment_result = source.name .. '-mk' .. tier .. '-equipment'
 
     else
-        if tier > 1 then
-            item.name = source.name .. '-' .. tier
-            item.place_result = source.name .. '-' .. tier
-
-        else
-            item.name = source.name
-            item.place_result = source.name
-        end
+        item.name = source.name .. ((tier > 1 and '-' .. tier) or '')
+        item.place_result = source.name .. ((tier > 1 and '-' .. tier) or '')
     end
 
     if item.icons and item.icons[1] then
@@ -343,13 +307,7 @@ function main.EI(source, tier)
     end
 
     item.order = item.order .. tier
-
-    if tier > 1 then
-        item.localised_name = {'phi-cl.combine', {'name.' .. source.ref_name}, tostring(tier)}
-
-    else
-        item.localised_name = {'name.' .. source.ref_name}
-    end
+    item.localised_name = (tier > 1 and {'phi-cl.combine', {'name.' .. source.ref_name}, tostring(tier)}) or {'name.' .. source.ref_name}
 
     data:extend({item})
 end
@@ -367,67 +325,28 @@ function main.ER(source, tier)
     }
 
     if source.category == 'equipment' then
-        if (tier == 2) then
-            ingredient_name = ingredient_name .. '-equipment'
-
-        else
-            ingredient_name = ingredient_name .. '-mk' .. (tier - 1) .. '-equipment'
-        end
-
+        ingredient_name = ((tier == 2) and ingredient_name .. '-equipment') or (ingredient_name .. '-mk' .. (tier - 1) .. '-equipment')
         new_name = new_name .. '-mk' .. tier .. '-equipment'
         result_name = result_name .. '-mk' .. tier .. '-equipment'
 
     else
-        if tier > 2 then
-            ingredient_name = ingredient_name .. '-' .. (tier - 1)
-        end
-
+        ingredient_name = ingredient_name .. ((tier > 2) and '-' .. (tier - 1))
         new_name = new_name .. '-' .. tier
         result_name = result_name .. '-' .. tier
     end
 
     if (source.tech == 'compound-energy') then
-        if (source.type == 'solar-panel') or (source.type == 'accumulator') then
-            data:extend({{
-                type = 'recipe',
-                name = new_name,
-                icons = icons,
-                energy_required = 2,
-                enabled = false,
-                ingredients = {{type='item', name=ingredient_name, amount=settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value}},
-                results = {{type='item', name=result_name, amount=1}},
-                main_product = result_name,
-                localised_name = {'phi-cl.combine', data.raw[source.type][new_name].localised_name, ''}
-            }})
-
-        else
-            if tier > 2 then
-                data:extend({{
-                    type = 'recipe',
-                    name = new_name,
-                    icons = icons,
-                    energy_required = 2,
-                    enabled = false,
-                    ingredients = {{type='item', name=ingredient_name, amount=1}, {type='item', name=source.name, amount=1}},
-                    results = {{type='item', name=result_name, amount=1}},
-                    main_product = result_name,
-                    localised_name = {'phi-cl.combine', data.raw[source.type][new_name].localised_name, ''}
-                }})
-
-            else
-                data:extend({{
-                    type = 'recipe',
-                    name = new_name,
-                    icons = icons,
-                    energy_required = 2,
-                    enabled = false,
-                    ingredients = {{type='item', name=ingredient_name, amount=2}},
-                    results = {{type='item', name=result_name, amount=1}},
-                    main_product = result_name,
-                    localised_name = {'phi-cl.combine', data.raw[source.type][new_name].localised_name, ''}
-                }})
-            end
-        end
+        data:extend({{
+            type = 'recipe',
+            name = new_name,
+            icons = icons,
+            energy_required = 2,
+            enabled = false,
+            ingredients = (((source.type == 'solar-panel') or (source.type == 'accumulator')) and ({type = 'item', name = ingredient_name, amount = tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value) or 4})) or ((tier > 2 and {{type = 'item', name = ingredient_name, amount = 1}, {type = 'item', name = source.name, amount = 1}}) or {{type = 'item', name = ingredient_name, amount = 2}}),
+            results = {{type = 'item', name = result_name, amount = 1}},
+            main_product = result_name,
+            localised_name = {'phi-cl.combine', data.raw[source.type][new_name].localised_name, ''}
+        }})
 
     else
         data:extend({{
@@ -436,8 +355,8 @@ function main.ER(source, tier)
             icons = icons,
             energy_required = 2,
             enabled = false,
-            ingredients = {{type='item', name=ingredient_name, amount=2}},
-            results = {{type='item', name=result_name, amount=1}},
+            ingredients = {{type = 'item', name = ingredient_name, amount = 2}},
+            results = {{type = 'item', name = result_name, amount = 1}},
             main_product = result_name,
             localised_name = {'phi-cl.combine', data.raw[source.type][new_name].localised_name, ''}
         }})
@@ -451,14 +370,7 @@ function main.ET(source, tier)
 
     elseif data.raw.technology[source.tech] then
         local recipe_name = source.name
-
-        if source.category == 'equipment' then
-            recipe_name = recipe_name .. '-mk' .. tier .. '-equipment'
-
-        else
-            recipe_name = recipe_name .. '-' .. tier
-        end
-
+        recipe_name = (source.category == 'equipment' and (recipe_name .. '-mk' .. tier .. '-equipment')) or (recipe_name .. '-' .. tier)
         table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=recipe_name})
 
         if source.type == 'ammo-turret' or source.type == 'fluid-turret' then
@@ -477,13 +389,8 @@ end
 
 -- fast replace group
 function main.EL(source)
-    if not data.raw[source.type][source.ref_name].fast_replaceable_group then
-        data.raw[source.type][source.ref_name].fast_replaceable_group = source.ref_name
-    end
-
-    if source.max > 2 then
-        data.raw[source.type][source.name .. '-' .. 2].fast_replaceable_group = data.raw[source.type][source.ref_name].fast_replaceable_group
-    end
+    data.raw[source.type][source.ref_name].fast_replaceable_group = ((not data.raw[source.type][source.ref_name].fast_replaceable_group) and source.ref_name) or nil
+    data.raw[source.type][source.name .. '-' .. 2].fast_replaceable_group = (source.max > 2 and data.raw[source.type][source.ref_name].fast_replaceable_group) or nil
 
     if source.max > source.min then
         for j=source.min + 1, source.max do
@@ -516,13 +423,8 @@ function main.EEEC(source, tier)
         end
     end
 
-    if data.raw[source.type][source.ref_name].fuel_categories then
-        data.raw[source.type][item_name].fuel_categories = table.deepcopy(data.raw[source.type][source.ref_name].fuel_categories)
-    end
-
-    if data.raw[source.type][source.ref_name].allowed_effects then
-        data.raw[source.type][item_name].allowed_effects = table.deepcopy(data.raw[source.type][source.ref_name].allowed_effects)
-    end
+    data.raw[source.type][item_name].fuel_categories = (data.raw[source.type][source.ref_name].fuel_categories and table.deepcopy(data.raw[source.type][source.ref_name].fuel_categories)) or nil
+    data.raw[source.type][item_name].allowed_effects = (data.raw[source.type][source.ref_name].allowed_effects and table.deepcopy(data.raw[source.type][source.ref_name].allowed_effects)) or nil
 end
 
 return main
