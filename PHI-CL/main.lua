@@ -31,29 +31,12 @@ function main.EEE(source, tier)
     item.name = source.name .. '-' .. tier
     item.minable.result = item.name
     item.max_health = item.max_health * (tier - source.min + 2)
-
-    if (tier < source.max) then
-        item.next_upgrade = source.name .. '-' .. (tier + 1)
-    end
-
-    if item.production then
-        if source.tech == 'compound-energy' and source.type == 'solar-panel' then
-            item.production = tonumber(string.match(item.production, '[%d%.]+')) * (settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value ^ (tier - source.min + 1)) .. (string.match(item.production, '%a+') or '')
-
-        else
-            item.production = tonumber(string.match(item.production, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. (string.match(item.production, '%a+') or '')
-        end
-    end
+    item.next_upgrade = ((tier < source.max) and source.name .. '-' .. (tier + 1)) or nil
+    item.production = (item.production and ((source.tech == 'compound-energy' and source.type == 'solar-panel') and (tonumber(string.match(item.production, '[%d%.]+')) * (settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value ^ (tier - source.min + 1)) .. (string.match(item.production, '%a+') or ''))) or (tonumber(string.match(item.production, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. (string.match(item.production, '%a+') or ''))) or nil
 
     for _, v in pairs({'energy_usage', 'heating_energy', 'crane_energy_usage', 'energy_per_shot', 'researching_speed', 'mining_speed', 'crafting_speed'}) do
         if not (source.tech == 'compound-energy' and (source.type == 'solar-panel' or source.type == 'accumulator')) and item[v] then
-            local n = tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))
-            local a = string.match(item[v], '%a+')
-            item[v] = n
-
-            if a then
-                item[v] = item[v] .. a
-            end
+            item[v] = (tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. (string.match(item[v], '%a+') or '')
         end
     end
 
@@ -65,16 +48,9 @@ function main.EEE(source, tier)
         end
 
         if item.energy_source.emissions_per_minute then
-            if source.tech == 'compound-energy' then
-                if (source.type == 'boiler') or (source.name == 'kr-gas-power-station') then
-                    for k, _ in pairs(item.energy_source.emissions_per_minute) do
-                        item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (tier - source.min + 2)
-                    end
-
-                else
-                    for k, _ in pairs(item.energy_source.emissions_per_minute) do
-                        item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (2 ^ (tier - source.min + 1))
-                    end
+            if source.tech == 'compound-energy' and ((source.type == 'boiler') or (source.name == 'kr-gas-power-station')) then
+                for k, _ in pairs(item.energy_source.emissions_per_minute) do
+                    item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (tier - source.min + 2)
                 end
 
             else
@@ -89,32 +65,20 @@ function main.EEE(source, tier)
         if item.attack_parameters then
             item.attack_parameters.damage_modifier = 2 ^ (tier - source.min + 1)
             item.attack_parameters.range = item.attack_parameters.range + (2 * (tier - source.min + 1))
-
-            if item.attack_parameters.cooldown then
-                item.attack_parameters.cooldown = item.attack_parameters.cooldown * ((24 - tier + source.min) / 25)
-            end
+            item.attack_parameters.cooldown = (item.attack_parameters.cooldown and (item.attack_parameters.cooldown * ((24 - tier + source.min) / 25))) or nil
         end
 
-        if item.call_for_help_radius then
-            item.call_for_help_radius = item.call_for_help_radius + (2 * (tier - source.min + 1))
-        end
+        item.call_for_help_radius = (item.call_for_help_radius and (item.call_for_help_radius + (2 * (tier - source.min + 1)))) or nil
 
         if source.type == 'electric-turret' then
             item.glow_light_intensity = 1
 
             if item.attack_parameters then
-                if item.attack_parameters.damage_modifier and source.name == 'laser-turret' then
-                    item.attack_parameters.damage_modifier = item.attack_parameters.damage_modifier * 2
-                end
+                item.attack_parameters.damage_modifier = ((item.attack_parameters.damage_modifier and source.name == 'laser-turret') and (item.attack_parameters.damage_modifier * 2)) or nil
 
                 if item.attack_parameters.ammo_type then
-                    if item.attack_parameters.ammo_type.action and item.attack_parameters.ammo_type.action.action_delivery and item.attack_parameters.ammo_type.action.action_delivery.max_length then
-                        item.attack_parameters.ammo_type.action.action_delivery.max_length = item.attack_parameters.ammo_type.action.action_delivery.max_length + (2 * (tier - source.min + 1))
-                    end
-
-                    if item.attack_parameters.ammo_type.energy_consumption then
-                        item.attack_parameters.ammo_type.energy_consumption = tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+')
-                    end
+                    item.attack_parameters.ammo_type.action.action_delivery.max_length = ((item.attack_parameters.ammo_type.action and item.attack_parameters.ammo_type.action.action_delivery and item.attack_parameters.ammo_type.action.action_delivery.max_length) and (item.attack_parameters.ammo_type.action.action_delivery.max_length + (2 * (tier - source.min + 1)))) or nil
+                    item.attack_parameters.ammo_type.energy_consumption = (item.attack_parameters.ammo_type.energy_consumption and (tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+'))) or nil
                 end
             end
 

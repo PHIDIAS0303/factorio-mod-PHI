@@ -274,17 +274,11 @@ if settings.startup['PHI-MI'].value then
 
         for _, t in pairs({data.raw['locomotive'], data.raw['cargo-wagon'], data.raw['fluid-wagon'], data.raw['artillery-wagon']}) do
             for _, v in pairs(t) do
-                if v.max_health then
-                    v.max_health = v.max_health * s
-                end
-
-                if v.max_speed then
-                    v.max_speed = v.max_speed * s
-                end
-
-                if v.braking_force then
-                    v.braking_force = v.braking_force * s
-                end
+                v.max_health = (v.max_health and (v.max_health * s)) or nil
+                v.max_speed = (v.max_speed and (v.max_speed * s)) or nil
+                v.braking_force = (v.braking_force and (v.braking_force * s)) or nil
+                v.inventory_size = (v.inventory_size and math.ceil(v.inventory_size * s)) or nil
+                v.capacity = (v.capacity and math.ceil(v.capacity * s)) or nil
 
                 if v.max_power then
                     v.max_power = tostring(tonumber(string.match(v.max_power, '[%d%.]+')) * s) .. string.match(v.max_power, '%a+')
@@ -293,14 +287,6 @@ if settings.startup['PHI-MI'].value then
                     if v.energy_source then
                         v.energy_source.burnt_inventory_size = 1
                     end
-                end
-
-                if v.inventory_size then
-                    v.inventory_size = math.ceil(v.inventory_size * s)
-                end
-
-                if v.capacity then
-                    v.capacity = math.ceil(v.capacity * s)
                 end
             end
         end
@@ -451,16 +437,14 @@ if settings.startup['PHI-SA'].value then
             table.insert(data.raw.technology['cryogenic-plant'].effects, {type = 'unlock-recipe', recipe = 'unfreeze-' .. i.name})
         end
 
-        spoil_handle(data.raw['item']['nutrients'])
-        spoil_handle(data.raw['item']['captive-biter-spawner'])
-        spoil_handle(data.raw['item']['biter-egg'])
-        spoil_handle(data.raw['item']['pentapod-egg'])
-        spoil_handle(data.raw['capsule']['raw-fish'])
-        spoil_handle(data.raw['capsule']['yumako-mash'])
-        spoil_handle(data.raw['capsule']['yumako'])
-        spoil_handle(data.raw['capsule']['jelly'])
-        spoil_handle(data.raw['capsule']['jellynut'])
-        spoil_handle(data.raw['capsule']['bioflux'])
+        for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg'}) do
+            spoil_handle(data.raw['item'][v])
+        end
+
+        for _, v in pairs({'raw-fish', 'yumako-mash', 'yumako', 'jelly', 'jellynut', 'bioflux'}) do
+            spoil_handle(data.raw['capsule'][v])
+        end
+
         spoil_handle(data.raw.tool['agricultural-science-pack'])
     end
 
@@ -471,16 +455,14 @@ if settings.startup['PHI-SA'].value then
             i.spoil_to_trigger_result = nil
         end
 
-        spoil_handle(data.raw['item']['nutrients'])
-        spoil_handle(data.raw['item']['captive-biter-spawner'])
-        spoil_handle(data.raw['item']['biter-egg'])
-        spoil_handle(data.raw['item']['pentapod-egg'])
-        spoil_handle(data.raw['capsule']['raw-fish'])
-        spoil_handle(data.raw['capsule']['yumako-mash'])
-        spoil_handle(data.raw['capsule']['yumako'])
-        spoil_handle(data.raw['capsule']['jelly'])
-        spoil_handle(data.raw['capsule']['jellynut'])
-        spoil_handle(data.raw['capsule']['bioflux'])
+        for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg'}) do
+            spoil_handle(data.raw['item'][v])
+        end
+
+        for _, v in pairs({'raw-fish', 'yumako-mash', 'yumako', 'jelly', 'jellynut', 'bioflux'}) do
+            spoil_handle(data.raw['capsule'][v])
+        end
+
         spoil_handle(data.raw.tool['agricultural-science-pack'])
 
         data:extend({{
