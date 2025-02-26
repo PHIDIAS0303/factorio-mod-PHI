@@ -496,65 +496,15 @@ if settings.startup['PHI-SA'].value then
 
         table.insert(data.raw.technology['agriculture'].effects, {type = 'unlock-recipe', recipe = 'spoilage-from-nutrients'})
 
-        data.raw['tips-and-tricks-item']['spoilables'] = nil
-        data.raw['tips-and-tricks-item']['spoilables-result'] = nil
-        data.raw['tips-and-tricks-item']['spoilables-research'] = nil
+        for _, v in pairs({'spoilables', 'spoilables-result', 'spoilables-research'}) do
+            data.raw['tips-and-tricks-item'][v] = nil
+        end
     end
 
     if (settings.startup['PHI-SA-RESTRICTION'].value or settings.startup['PHI-SA-VANILLA'].value) and mods['space-age'] then
-        data.raw['assembling-machine']['captive-biter-spawner'].surface_conditions = nil
-        data.raw['agricultural-tower']['agricultural-tower'].surface_conditions = nil
-        data.raw['asteroid-collector']['asteroid-collector'].surface_conditions = nil
-        data.raw['rocket-silo']['rocket-silo'].surface_conditions = nil
-        data.raw['cargo-landing-pad']['cargo-landing-pad'].surface_conditions = nil
-        data.raw['reactor']['heating-tower'].surface_conditions = nil
-        data.raw['furnace']['recycler'].surface_conditions = nil
-        data.raw['fusion-reactor']['fusion-reactor'].surface_conditions = nil
-        data.raw['fusion-generator']['fusion-generator'].surface_conditions = nil
-        data.raw['thruster']['thruster'].surface_conditions = nil
-        data.raw['assembling-machine']['biochamber'].surface_conditions = nil
-        data.raw['assembling-machine']['crusher'].surface_conditions = nil
-        data.raw['assembling-machine']['cryogenic-plant'].surface_conditions = nil
-        data.raw['assembling-machine']['electromagnetic-plant'].surface_conditions = nil
-        data.raw['assembling-machine']['foundry'].surface_conditions = nil
-        data.raw['lab']['biolab'].surface_conditions = nil
-        data.raw['fluid-turret']['flamethrower-turret'].surface_conditions = nil
-        data.raw['furnace']['stone-furnace'].surface_conditions = nil
-        data.raw['mining-drill']['burner-mining-drill'].surface_conditions = nil
-        data.raw['furnace']['steel-furnace'].surface_conditions = nil
-        data.raw['boiler']['boiler'].surface_conditions = nil
-        data.raw['roboport']['roboport'].surface_conditions = nil
-        data.raw['inserter']['burner-inserter'].surface_conditions = nil
-        data.raw['car']['car'].surface_conditions = nil
-        data.raw['car']['tank'].surface_conditions = nil
-        data.raw['spider-vehicle']['spidertron'].surface_conditions = nil
-        data.raw['legacy-curved-rail']['legacy-curved-rail'].surface_conditions = nil
-        data.raw['legacy-straight-rail']['legacy-straight-rail'].surface_conditions = nil
-        data.raw['locomotive']['locomotive'].surface_conditions = nil
-        data.raw['cargo-wagon']['cargo-wagon'].surface_conditions = nil
-        data.raw['fluid-wagon']['fluid-wagon'].surface_conditions = nil
-        data.raw['artillery-wagon']['artillery-wagon'].surface_conditions = nil
-        data.raw['train-stop']['train-stop'].surface_conditions = nil
-        data.raw['rail-signal']['rail-signal'].surface_conditions = nil
-        data.raw['rail-chain-signal']['rail-chain-signal'].surface_conditions = nil
-        data.raw['curved-rail-b']['curved-rail-b'].surface_conditions = nil
-        data.raw['curved-rail-a']['curved-rail-a'].surface_conditions = nil
-        data.raw['half-diagonal-rail']['half-diagonal-rail'].surface_conditions = nil
-        data.raw['straight-rail']['straight-rail'].surface_conditions = nil
-        data.raw['rail-ramp']['rail-ramp'].surface_conditions = nil
-        data.raw['elevated-straight-rail']['elevated-straight-rail'].surface_conditions = nil
-        data.raw['elevated-half-diagonal-rail']['elevated-half-diagonal-rail'].surface_conditions = nil
-        data.raw['elevated-curved-rail-a']['elevated-curved-rail-a'].surface_conditions = nil
-        data.raw['elevated-curved-rail-b']['elevated-curved-rail-b'].surface_conditions = nil
-        data.raw['rail-support']['rail-support'].surface_conditions = nil
-        data.raw['container']['wooden-chest'].surface_conditions = nil
-        data.raw['container']['iron-chest'].surface_conditions = nil
-        data.raw['container']['steel-chest'].surface_conditions = nil
-        data.raw['logistic-container']['passive-provider-chest'].surface_conditions = nil
-        data.raw['logistic-container']['active-provider-chest'].surface_conditions = nil
-        data.raw['logistic-container']['storage-chest'].surface_conditions = nil
-        data.raw['logistic-container']['buffer-chest'].surface_conditions = nil
-        data.raw['logistic-container']['requester-chest'].surface_conditions = nil
+        for k, v in pairs(items['space-age']['PHI-SA-RESTRICTION']['surface_conditions']) do
+            data.raw[v][k].surface_conditions = nil
+        end
 
         for _, v in pairs(data.raw.recipe) do
             v.surface_conditions = nil
@@ -579,25 +529,21 @@ if settings.startup['PHI-SA'].value then
             end
         end
 
-        data.raw.technology['agriculture'].research_trigger = nil
+        for _, v in pairs({'agriculture', 'yumako', 'jellynut', 'bacteria-cultivation', 'heating-tower', 'tungsten-carbide', 'recycling', 'lithium-processing'}) do
+            data.raw.technology[v].research_trigger = nil
+        end
+
         data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        data.raw.technology['yumako'].research_trigger = nil
         data.raw.technology['yumako'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
         table.insert(data.raw.technology['yumako'].effects, {type = 'give-item', item = 'yumako-seed', count = 10})
-        data.raw.technology['jellynut'].research_trigger = nil
         data.raw.technology['jellynut'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
         table.insert(data.raw.technology['jellynut'].effects, {type = 'give-item', item = 'jellynut-seed', count = 10})
         table.insert(data.raw.technology['biochamber'].effects, {type = 'give-item', item = 'pentapod-egg', count = 10})
         data.raw.technology['bacteria-cultivation'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        data.raw.technology['bacteria-cultivation'].research_trigger = nil
         data.raw.technology['heating-tower'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        data.raw.technology['heating-tower'].research_trigger = nil
         data.raw.technology['tungsten-carbide'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        data.raw.technology['tungsten-carbide'].research_trigger = nil
         data.raw.technology['recycling'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        data.raw.technology['recycling'].research_trigger = nil
         data.raw.technology['lithium-processing'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        data.raw.technology['lithium-processing'].research_trigger = nil
         data.raw.technology['promethium-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'promethium-science-pack'}}
         data.raw.technology['railgun'].prerequisites = {'military-3', 'utility-science-pack'}
         data.raw.technology['railgun'].unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}}
@@ -836,29 +782,22 @@ if settings.startup['PHI-SA'].value then
         data.raw.planet['nauvis'].asteroid_spawn_definitions = asteroid_util.spawn_definitions(pb, 0.001)
         data.raw.tile['space-platform-foundation'].max_health = data.raw.tile['space-platform-foundation'].max_health * 2
 
-        data.raw['tips-and-tricks-item']['fulgora-briefing'] = nil
-        data.raw['tips-and-tricks-item']['lightning-mechanics'] = nil
-        data.raw['tips-and-tricks-item']['gleba-briefing'] = nil
-        data.raw['tips-and-tricks-item']['vulcanus-briefing'] = nil
-        data.raw['tips-and-tricks-item']['aquilo-briefing'] = nil
-        data.raw['tips-and-tricks-item']['heating-mechanics'] = nil
-        data.raw['tips-and-tricks-item']['space-platform'] = nil
-        data.raw['tips-and-tricks-item']['orbital-logistics'] = nil
-        data.raw['tips-and-tricks-item']['removing-trash-in-space'] = nil
-        data.raw['tips-and-tricks-item']['space-science'] = nil
-        data.raw['tips-and-tricks-item']['asteroid-defense'] = nil
+        for _, v in pairs({'fulgora-briefing', 'lightning-mechanics', 'gleba-briefing', 'vulcanus-briefing', 'aquilo-briefing', 'heating-mechanics', 'space-platform', 'orbital-logistics', 'removing-trash-in-space', 'space-science', 'asteroid-defense'}) do
+            data.raw['tips-and-tricks-item'][v] = nil
+        end
 
         data.raw['dont-build-entity-achievement']['logistic-network-embargo'].research_with = nil
         data.raw['create-platform-achievement']['reach-for-the-stars'] = nil
-        data.raw['change-surface-achievement']['visit-fulgora'] = nil
-        data.raw['change-surface-achievement']['visit-gleba'] = nil
-        data.raw['change-surface-achievement']['visit-vulcanus'] = nil
-        data.raw['change-surface-achievement']['visit-aquilo'] = nil
         data.raw['complete-objective-achievement']['second-star-to-the-right-and-straight-on-till-morning'] = nil
-        data.raw['space-connection-distance-traveled-achievement']['shattered-planet-1'] = nil
-        data.raw['space-connection-distance-traveled-achievement']['shattered-planet-2'] = nil
-        data.raw['space-connection-distance-traveled-achievement']['shattered-planet-3'] = nil
         data.raw['dont-research-before-researching-achievement']['rush-to-space'] = nil
+
+        for _, v in pairs({'visit-fulgora', 'visit-gleba', 'visit-vulcanus', 'visit-aquilo'}) do
+            data.raw['change-surface-achievement'][v] = nil
+        end
+
+        for _, v in pairs({'shattered-planet-1', 'shattered-planet-2', 'shattered-planet-3'}) do
+            data.raw['space-connection-distance-traveled-achievement'][v] = nil
+        end        
     end
 
     if settings.startup['PHI-SA-GENERIC'].value or settings.startup['PHI-SA-VANILLA'].value then
