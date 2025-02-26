@@ -3,11 +3,8 @@ local main = require 'main'
 local file_stage = 1
 
 if settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value then
-    if settings.startup['PHI-MB-ENERGY-POWER-TIER'].value > 1 then
-        data.raw['fluid']['steam'].max_temperature = 5000
-    end
-
-    local ml = math.max(settings.startup['PHI-MB-ENERGY-SOLAR-TIER'].value, settings.startup['PHI-MB-ENERGY-POWER-TIER'].value)
+    data.raw['fluid']['steam'].max_temperature = ((settings.startup['PHI-MB-ENERGY-POWER-TIER'].value > 1) and 5000) or data.raw['fluid']['steam'].max_temperature
+    local ml = math.max(tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-TIER'].value) or 1, tonumber(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value) or 1)
 
     for i=1, 7 do
         data:extend({{
@@ -167,7 +164,7 @@ if settings.startup['PHI-MI'].value then
         end
     end
 
-    data.raw.recipe['landfill'].ingredients = {{type = 'item', name = 'stone', amount = settings.startup['PHI-MI-LANDFILL'].value}}
+    data.raw.recipe['landfill'].ingredients = {{type = 'item', name = 'stone', amount = tonumber(settings.startup['PHI-MI-LANDFILL'].value) or 50}}
 
     if settings.startup['PHI-MI-NUCLEAR'].value then
         for _, v in pairs(data.raw['reactor']) do
@@ -623,31 +620,15 @@ if settings.startup['PHI-SA'].value then
         -- data.raw.recipe['promethium-science-pack'].ingredients = {{type = 'item', name = 'quantum-processor', amount = 1}, {type = 'item', name = 'biter-egg', amount = 10}}
         table.insert(data.raw['character']['character']['mining_categories'], 'hard-solid')
 
-        data.raw['simple-entity']['huge-rock'].autoplace = nil
-        data.raw['simple-entity']['big-rock'].autoplace = nil
-        data.raw['simple-entity']['big-sand-rock'].autoplace = nil
-        data.raw['optimized-decorative']['medium-rock'].autoplace = nil
-        data.raw['optimized-decorative']['small-rock'] .autoplace= nil
-        data.raw['optimized-decorative']['tiny-rock'].autoplace = nil
-        data.raw['optimized-decorative']['medium-sand-rock'].autoplace = nil
-        data.raw['optimized-decorative']['small-sand-rock'].autoplace = nil
-        data.raw['optimized-decorative']['sand-decal'].autoplace = nil
-        data.raw['optimized-decorative']['sand-dune-decal'].autoplace = nil
-        data.raw['optimized-decorative']['light-mud-decal'].autoplace = nil
-        data.raw['optimized-decorative']['red-desert-decal'].autoplace = nil
+        for _, v in pairs({'huge-rock', 'big-rock', 'big-sand-rock'}) do
+            data.raw['simple-entity'][v].autoplace = nil
+            data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v] = nil
+        end
 
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings['huge-rock'] = nil
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings['big-rock'] = nil
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings['big-sand-rock'] = nil
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['medium-rock'] = nil
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['small-rock'] = nil
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['tiny-rock'] = nil
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['medium-sand-rock'] = nil
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['small-sand-rock'] = nil
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['sand-decal'] = nil
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['sand-dune-decal'] = nil
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['light-mud-decal'] = nil
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings['red-desert-decal'] = nil
+        for _, v in pairs({'medium-rock', 'small-rock', 'tiny-rock', 'medium-sand-rock', 'small-sand-rock', 'sand-decal', 'sand-dune-decal', 'light-mud-decal', 'red-desert-decal'}) do
+            data.raw['optimized-decorative'][v].autoplace = nil
+            data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings[v] = nil
+        end
 
         for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'sulfuric_acid_geyser', 'tungsten_ore'}) do
             data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v] = {}
