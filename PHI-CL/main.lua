@@ -31,7 +31,7 @@ function main.EEE(source, tier)
     item.minable.result = item.name
     item.max_health = item.max_health * (tier - source.min + 2)
     item.next_upgrade = ((tier < source.max) and source.name .. '-' .. (tier + 1)) or nil
-    item.production = (item.production and ((source.tech == 'compound-energy' and source.type == 'solar-panel') and (tonumber(string.match(item.production, '[%d%.]+')) * (settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value ^ (tier - source.min + 1)) .. (string.match(item.production, '%a+') or ''))) or (tonumber(string.match(item.production, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. (string.match(item.production, '%a+') or ''))) or nil
+    item.production = item.production and (((source.tech == 'compound-energy' and source.type == 'solar-panel') and (tonumber(string.match(item.production, '[%d%.]+')) * (settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value ^ (tier - source.min + 1)) .. (string.match(item.production, '%a+') or ''))) or (tonumber(string.match(item.production, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. (string.match(item.production, '%a+') or ''))) or nil
 
     for _, v in pairs({'energy_usage', 'heating_energy', 'crane_energy_usage', 'energy_per_shot', 'researching_speed', 'mining_speed', 'crafting_speed'}) do
         if not (source.tech == 'compound-energy' and (source.type == 'solar-panel' or source.type == 'accumulator')) and item[v] then
@@ -329,7 +329,7 @@ function main.ER(source, tier)
         result_name = result_name .. '-mk' .. tier .. '-equipment'
 
     else
-        ingredient_name = ingredient_name .. ((tier > 2) and '-' .. (tier - 1))
+        ingredient_name = ingredient_name .. ((tier > 2) and ('-' .. (tier - 1)) or '')
         new_name = new_name .. '-' .. tier
         result_name = result_name .. '-' .. tier
     end
