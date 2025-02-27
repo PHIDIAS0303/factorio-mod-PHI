@@ -33,14 +33,15 @@ function main.EEE(source, tier)
     item.next_upgrade = ((tier < source.max) and source.name .. '-' .. (tier + 1)) or nil
     item.production = item.production and (((source.tech == 'compound-energy' and source.type == 'solar-panel') and (tonumber(string.match(item.production, '[%d%.]+')) * (settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value ^ (tier - source.min + 1)) .. (string.match(item.production, '%a+') or ''))) or (tonumber(string.match(item.production, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. (string.match(item.production, '%a+') or ''))) or nil
 
-    for _, v in pairs({'energy_usage', 'heating_energy', 'crane_energy_usage', 'energy_per_shot', 'researching_speed', 'mining_speed', 'crafting_speed'}) do
-        if not (source.tech == 'compound-energy' and (source.type == 'solar-panel' or source.type == 'accumulator')) and item[v] then
+    for _, v in pairs({'researching_speed', 'mining_speed', 'crafting_speed'}) do
+        if item[v] then
             item[v] = tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))
-            local a = string.match(item[v], '%a+')
+        end
+    end
 
-            if a then
-                item[v] = item[v] .. a
-            end
+    for _, v in pairs({'energy_usage', 'heating_energy', 'crane_energy_usage', 'energy_per_shot'}) do
+        if not (source.tech == 'compound-energy' and (source.type == 'solar-panel' or source.type == 'accumulator')) and item[v] then
+            item[v] = (tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. (string.match(item[v], '%a+') or '')
         end
     end
 
