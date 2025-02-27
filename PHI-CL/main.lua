@@ -397,8 +397,13 @@ end
 
 -- fast replace group
 function main.EL(source)
-    data.raw[source.type][source.ref_name].fast_replaceable_group = ((not data.raw[source.type][source.ref_name].fast_replaceable_group) and source.ref_name) or nil
-    data.raw[source.type][source.name .. '-' .. 2].fast_replaceable_group = (source.max > 2 and data.raw[source.type][source.ref_name].fast_replaceable_group) or nil
+    if not data.raw[source.type][source.ref_name].fast_replaceable_group then
+        data.raw[source.type][source.ref_name].fast_replaceable_group = source.ref_name
+    end
+
+    if source.max > 2 then
+        data.raw[source.type][source.name .. '-' .. 2].fast_replaceable_group = data.raw[source.type][source.ref_name].fast_replaceable_group
+    end
 
     if source.max > source.min then
         for j=source.min + 1, source.max do
