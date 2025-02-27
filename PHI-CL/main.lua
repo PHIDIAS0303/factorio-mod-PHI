@@ -324,7 +324,7 @@ function main.ER(source, tier)
     }
 
     if source.category == 'equipment' then
-        ingredient_name = ((tier == 2) and ingredient_name .. '-equipment') or (ingredient_name .. '-mk' .. (tier - 1) .. '-equipment')
+        ingredient_name = ((tier == 2) and (ingredient_name .. '-equipment')) or (ingredient_name .. '-mk' .. (tier - 1) .. '-equipment')
         new_name = new_name .. '-mk' .. tier .. '-equipment'
         result_name = result_name .. '-mk' .. tier .. '-equipment'
 
@@ -335,13 +335,22 @@ function main.ER(source, tier)
     end
 
     if (source.tech == 'compound-energy') then
+        local ingredients
+
+        if (source.type == 'solar-panel') or (source.type == 'accumulator') then
+            ingredients = {{type = 'item', name = ingredient_name, amount = tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value) or 4}}
+
+        else
+            ingredients = {{type = 'item', name = ingredient_name, amount = 1}, {type='item', name = source.name, amount = 1}}
+        end
+
         data:extend({{
             type = 'recipe',
             name = new_name,
             icons = icons,
             energy_required = 2,
             enabled = false,
-            ingredients = (((source.type == 'solar-panel') or (source.type == 'accumulator')) and ({type = 'item', name = ingredient_name, amount = tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value) or 4})) or ((tier > 2 and {{type = 'item', name = ingredient_name, amount = 1}, {type = 'item', name = source.name, amount = 1}}) or {{type = 'item', name = ingredient_name, amount = 2}}),
+            ingredients = ingredients,
             results = {{type = 'item', name = result_name, amount = 1}},
             main_product = result_name,
             localised_name = {'phi-cl.combine', data.raw[source.type][new_name].localised_name, ''}
