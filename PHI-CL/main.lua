@@ -35,7 +35,12 @@ function main.EEE(source, tier)
 
     for _, v in pairs({'energy_usage', 'heating_energy', 'crane_energy_usage', 'energy_per_shot', 'researching_speed', 'mining_speed', 'crafting_speed'}) do
         if not (source.tech == 'compound-energy' and (source.type == 'solar-panel' or source.type == 'accumulator')) and item[v] then
-            item[v] = (tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. (string.match(item[v], '%a+') or '')
+            item[v] = tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))
+            local a = string.match(item[v], '%a+')
+
+            if a then
+                item[v] = item[v] .. a
+            end
         end
     end
 
