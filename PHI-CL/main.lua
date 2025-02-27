@@ -79,7 +79,7 @@ function main.EEE(source, tier)
             item.glow_light_intensity = 1
 
             if item.attack_parameters then
-                item.attack_parameters.damage_modifier = ((item.attack_parameters.damage_modifier and source.name == 'laser-turret') and (item.attack_parameters.damage_modifier * 2)) or nil
+                item.attack_parameters.damage_modifier = (item.attack_parameters.damage_modifier and (item.attack_parameters.damage_modifier * 2)) or nil
 
                 if item.attack_parameters.ammo_type then
                     item.attack_parameters.ammo_type.action.action_delivery.max_length = ((item.attack_parameters.ammo_type.action and item.attack_parameters.ammo_type.action.action_delivery and item.attack_parameters.ammo_type.action.action_delivery.max_length) and (item.attack_parameters.ammo_type.action.action_delivery.max_length + (2 * (tier - source.min + 1)))) or nil
