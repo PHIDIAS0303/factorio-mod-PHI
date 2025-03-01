@@ -535,6 +535,10 @@ if settings.startup['PHI-SA'].value then
             if data.raw.technology[k] then
                 data.raw.technology[k].hidden = v
                 data.raw.technology[k].hidden_in_factoriopedia = v
+
+                if settings.startup['PHI-SA-VANILLA'].value and data.raw.technology[k].unit and data.raw.technology[k].unit.ingredients then
+                    data.raw.technology[k].unit.ingredients = {{'space-science-pack', 1}}
+                end
             end
         end
 
@@ -1098,27 +1102,6 @@ if settings.startup['PHI-SA'].value then
                     data.raw.technology[k].unit.ingredients = {{'space-science-pack', 1}}
                 end
             end
-
-            --[[
-            for _, v in pairs(data.raw.technology) do
-                if v.unit and v.unit.ingredients then
-                    for i=#v.unit.ingredients, 1, -1 do
-                        if items['space-age']['science'][v.unit.ingredients[i][1] ] then
-                            table.remove(v.unit.ingredients, i)
-                        end
-                    end
-
-                    if v.max_level and v.max_level == 'infinite' and (not (string.find(v.name, 'productivity') or v.name == 'health')) then
-                        table.insert(v.unit.ingredients, {'space-science-pack', 1})
-                    end
-                end
-
-                if items['space-age']['technology_2'][v.name] then
-                    data.raw.technology[v.name].hidden = true
-                    data.raw.technology[v.name].hidden_in_factoriopedia = true
-                end
-            end
-            ]]
 
             data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
             data.raw.recipe['big-mining-drill'].category = nil

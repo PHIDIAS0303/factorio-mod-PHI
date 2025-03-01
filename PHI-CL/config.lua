@@ -357,14 +357,6 @@ local items = {
         }
     },
     ['space-age'] = {
-        ['science'] = {
-            ['agricultural-science-pack'] = true,
-            ['cryogenic-science-pack'] = true,
-            ['electromagnetic-science-pack'] = true,
-            ['metallurgic-science-pack'] = true,
-            ['promethium-science-pack'] = true,
-            ['space-science-pack'] = true
-        },
         ['gleba_tree'] = {
             ['cuttlepop'] = true,
             ['sunnycomb'] = true,
