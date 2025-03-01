@@ -1033,6 +1033,7 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['fusion-reactor-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
             data.raw.technology['artillery'].prerequisites = {'military-4', 'radar'}
             data.raw.technology['battery-mk3-equipment'].prerequisites = {'battery-mk2-equipment'}
+            data.raw.technology['battery-mk3-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
             data.raw.technology['rocket-turret'].effects = {{type = 'unlock-recipe', recipe = 'rocket-turret'}}
             data.raw.technology['rocket-turret'].prerequisites = {'rocketry', 'stronger-explosives-2'}
             data.raw.technology['toolbelt-equipment'].prerequisites = {'power-armor', 'toolbelt'}
