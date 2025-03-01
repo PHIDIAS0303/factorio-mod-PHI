@@ -1089,6 +1089,10 @@ if settings.startup['PHI-SA'].value then
             for k, v in pairs(items['space-age']['technology_2']) do
                 data.raw.technology[k].hidden = v
                 data.raw.technology[k].hidden_in_factoriopedia = v
+
+                if data.raw.technology[k].unit and data.raw.technology[k].unit.ingredients then
+                    data.raw.technology[k].unit.ingredients = {{'space-science-pack', 1}}
+                end
             end
 
             --[[
