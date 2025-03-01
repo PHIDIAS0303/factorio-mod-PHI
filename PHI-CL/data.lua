@@ -1121,6 +1121,7 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['cryogenic-plant'].effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}}
             data.raw.technology['cryogenic-plant'].unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
             data.raw.technology['biolab'].prerequisites = {'production-science-pack', 'utility-science-pack'}
+            data.raw.technology['biolab'].unit = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
 
             for k, v in pairs(items['space-age']['technology_2']) do
                 data.raw.technology[k].hidden = v
