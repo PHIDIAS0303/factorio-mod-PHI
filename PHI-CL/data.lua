@@ -1186,8 +1186,8 @@ if settings.startup['PHI-SA'].value then
             data.raw.recipe['cryogenic-plant'].ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'refined-concrete', amount = 40}}
             data.raw.recipe['biolab'].ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 25}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'uranium-235', amount = 3}}
 
-            data.raw.['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
-            data.raw.['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
+            data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
+            data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
             data.raw.recipe['biolab'].science_pack_drain_rate_percent = 100
 
             data.raw['plant']['yumako-tree'].hidden = true
