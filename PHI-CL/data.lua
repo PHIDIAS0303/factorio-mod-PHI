@@ -1091,6 +1091,7 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['rocket-part-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
             data.raw.technology['rocket-part-productivity'].max_level = 10
             data.raw.technology['research-productivity'].prerequisites = {'space-science-pack'}
+            data.raw.technology['research-productivity'].unit.count_formula = '1.5^L*2000'
             data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
             data.raw.technology['research-productivity'].max_level = 10
             data.raw.technology['transport-belt-capacity-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
