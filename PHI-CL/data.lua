@@ -1134,13 +1134,13 @@ if settings.startup['PHI-SA'].value then
 
             data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
             data.raw.recipe['big-mining-drill'].category = nil
-            data.raw.recipe['big-mining-drill'].ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount =20}, {type = 'item', name = 'electric-engine-unit', amount =10}, {type = 'item', name = 'advanced-circuit', amount =10}}
+            data.raw.recipe['big-mining-drill'].ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'electric-engine-unit', amount = 10}, {type = 'item', name = 'advanced-circuit', amount = 10}}
             data.raw.recipe['turbo-transport-belt'].category = 'crafting-with-fluid'
-            data.raw.recipe['turbo-transport-belt'].ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'item', name = 'express-transport-belt', amount =1}, {type = 'fluid', name = 'lubricant', amount =20}}
+            data.raw.recipe['turbo-transport-belt'].ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'item', name = 'express-transport-belt', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 20}}
             data.raw.recipe['turbo-underground-belt'].category = 'crafting-with-fluid'
-            data.raw.recipe['turbo-underground-belt'].ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'express-underground-belt', amount =2}, {type = 'fluid', name = 'lubricant', amount =40}}
+            data.raw.recipe['turbo-underground-belt'].ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'express-underground-belt', amount = 2}, {type = 'fluid', name = 'lubricant', amount = 40}}
             data.raw.recipe['turbo-splitter'].category = 'crafting-with-fluid'
-            data.raw.recipe['turbo-splitter'].ingredients = {{type = 'item', name = 'steel-plate', amount = 15}, {type = 'item', name = 'processing-unit', amount =2}, {type = 'item', name = 'express-splitter', amount =1}, {type = 'fluid', name = 'lubricant', amount =80}}
+            data.raw.recipe['turbo-splitter'].ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'express-splitter', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 80}}
             data.raw.recipe['express-transport-belt'].category = 'crafting-with-fluid'
             data.raw.recipe['express-underground-belt'].category = 'crafting-with-fluid'
             data.raw.recipe['express-splitter'].category = 'crafting-with-fluid'
