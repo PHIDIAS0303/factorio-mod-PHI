@@ -1103,6 +1103,24 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['electric-weapons-damage-4'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
             data.raw.technology['spidertron'].prerequisites = {'exoskeleton-equipment', 'fission-reactor-equipment', 'military-4', 'production-science-pack', 'radar'}
             data.raw.technology['spidertron'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+            data.raw.technology['heating-tower'].prerequisites = {'automation-2'}
+            data.raw.technology['heating-tower'].research_trigger = nil
+            data.raw.technology['heating-tower'].effects = {{type = 'unlock-recipe', recipe = 'heating-tower'}}
+            data.raw.technology['heating-tower'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+            data.raw.technology['agriculture'].prerequisites = {'chemical-science-pack'}
+            data.raw.technology['agriculture'].research_trigger = nil
+            data.raw.technology['agriculture'].effects = {{type = 'unlock-recipe', recipe = 'agricultural-tower'}}
+            data.raw.technology['agriculture'].unit = {count = 400, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+            data.raw.technology['tree-seeding'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
+            data.raw.technology['electromagnetic-plant'].prerequisites = {'automation-3'}
+            data.raw.technology['electromagnetic-plant'].research_trigger = nil
+            data.raw.technology['electromagnetic-plant'].effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-plant'}}
+            data.raw.technology['electromagnetic-plant'].unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+            data.raw.technology['cryogenic-plant'].prerequisites = {'automation-3'}
+            data.raw.technology['cryogenic-plant'].research_trigger = nil
+            data.raw.technology['cryogenic-plant'].effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}}
+            data.raw.technology['cryogenic-plant'].unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+            data.raw.technology['biolab'].prerequisites = {'production-science-pack', 'utility-science-pack'}
 
             for k, v in pairs(items['space-age']['technology_2']) do
                 data.raw.technology[k].hidden = v
@@ -1163,6 +1181,10 @@ if settings.startup['PHI-SA'].value then
             data.raw.recipe['fluoroketone-cooling'].category = 'chemistry'
             data.raw.recipe['fusion-power-cell'].category = 'crafting-with-fluid'
             data.raw.recipe['fusion-power-cell'].ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'fluid', name = 'petroleum-gas', amount = 100}}
+            data.raw.recipe['agricultural-tower'].ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electronic-circuit', amount = 3}, {type = 'item', name = 'landfill', amount = 1}}
+            data.raw.recipe['electromagnetic-plant'].ingredients = {{type = 'item', name = 'steel-plate', amount = 50}, {type = 'item', name = 'processing-unit', amount = 50}, {type = 'item', name = 'refined-concrete', amount = 50}}
+            data.raw.recipe['cryogenic-plant'].ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'refined-concrete', amount = 40}}
+            data.raw.recipe['biolab'].ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 25}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'uranium-235', amount = 3}}
 
             data.raw['plant']['yumako-tree'].hidden = true
             data.raw['plant']['yumako-tree'].hidden_in_factoriopedia = true

@@ -1,10 +1,18 @@
 ---------------------------------------------------------------------------------------------------
+Version: 3.0.63
+Date: 2025-03-03
+
+  Changes:
+    - [SA] Some more recipe or technology is allowed in SA vanilla.
+
+---------------------------------------------------------------------------------------------------
 Version: 3.0.62
 Date: 2025-03-02
 
   Changes:
-    - [SA] A limit of max level 10 for SA Vanilla.
+    - [SA] A limit of max level 10 for SA vanilla.
     - [SA] Changed logic of sa vanilla and generic.
+
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.61
 Date: 2025-02-28
