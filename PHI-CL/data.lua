@@ -1188,7 +1188,7 @@ if settings.startup['PHI-SA'].value then
 
             data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
             data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
-            data.raw.recipe['biolab'].science_pack_drain_rate_percent = 100
+            data.raw['lab']['biolab'].science_pack_drain_rate_percent = 100
 
             data.raw['plant']['yumako-tree'].hidden = true
             data.raw['plant']['yumako-tree'].hidden_in_factoriopedia = true
