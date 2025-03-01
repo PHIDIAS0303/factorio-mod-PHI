@@ -4,7 +4,7 @@ Date: 2025-03-02
 
   Changes:
     - [SA] A limit of max level 10 for SA Vanilla.
-
+    - [SA] Changed logic of sa vanilla and generic.
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.61
 Date: 2025-02-28
