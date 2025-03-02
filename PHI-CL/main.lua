@@ -430,19 +430,11 @@ function main.EEEC(source, tier)
     end
 
     if data.raw[source.type][source.ref_name].crafting_categories and data.raw[source.type][item_name].crafting_categories then
-        data.raw[source.type][item_name].crafting_categories = {}
-
-        for i=1, #data.raw[source.type][source.ref_name].crafting_categories do
-            table.insert(data.raw[source.type][item_name].crafting_categories, data.raw[source.type][source.ref_name].crafting_categories[i])
-        end
+        data.raw[source.type][item_name].crafting_categories = {table.unpack(data.raw[source.type][source.ref_name].crafting_categories)}
     end
 
     if data.raw[source.type][source.ref_name].resource_categories and data.raw[source.type][item_name].resource_categories then
-        data.raw[source.type][item_name].resource_categories = {}
-
-        for i=1, #data.raw[source.type][source.ref_name].resource_categories do
-            table.insert(data.raw[source.type][item_name].resource_categories, data.raw[source.type][source.ref_name].resource_categories[i])
-        end
+        data.raw[source.type][item_name].resource_categories = {table.unpack(data.raw[source.type][source.ref_name].resource_categories)}
     end
 
     data.raw[source.type][item_name].fuel_categories = (data.raw[source.type][source.ref_name].fuel_categories and table.deepcopy(data.raw[source.type][source.ref_name].fuel_categories)) or nil
