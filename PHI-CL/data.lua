@@ -483,7 +483,9 @@ if settings.startup['PHI-SA'].value then
         end
     end
 
-    if (settings.startup['PHI-SA-RESTRICTION'].value or settings.startup['PHI-SA-VANILLA'].value) and mods['space-age'] then
+    if settings.startup['PHI-SA-RESTRICTION'].value and mods['space-age'] then
+        data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
+
         for k, v in pairs(items['space-age']['PHI-SA-RESTRICTION']['surface_conditions']) do
             data.raw[v][k].surface_conditions = nil
         end
@@ -511,47 +513,6 @@ if settings.startup['PHI-SA'].value then
             end
         end
 
-        for _, v in pairs({'agriculture', 'yumako', 'jellynut', 'bacteria-cultivation', 'heating-tower', 'tungsten-carbide', 'recycling', 'lithium-processing'}) do
-            data.raw.technology[v].research_trigger = nil
-        end
-
-        data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        data.raw.technology['yumako'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        table.insert(data.raw.technology['yumako'].effects, {type = 'give-item', item = 'yumako-seed', count = 10})
-        data.raw.technology['jellynut'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        table.insert(data.raw.technology['jellynut'].effects, {type = 'give-item', item = 'jellynut-seed', count = 10})
-        table.insert(data.raw.technology['biochamber'].effects, {type = 'give-item', item = 'pentapod-egg', count = 10})
-        data.raw.technology['bacteria-cultivation'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        data.raw.technology['heating-tower'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        data.raw.technology['tungsten-carbide'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        data.raw.technology['recycling'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        data.raw.technology['lithium-processing'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
-        data.raw.technology['promethium-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'promethium-science-pack'}}
-        data.raw.technology['railgun'].prerequisites = {'military-3', 'utility-science-pack'}
-        data.raw.technology['railgun'].unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}}
-        table.insert(data.raw.technology['railgun'].effects, {type = 'give-item', item = 'railgun-turret', count = 10})
-
-        for k, v in pairs(items['space-age']['technology_1']) do
-            if data.raw.technology[k] then
-                data.raw.technology[k].hidden = v
-                data.raw.technology[k].hidden_in_factoriopedia = v
-
-                if settings.startup['PHI-SA-VANILLA'].value and data.raw.technology[k].unit and data.raw.technology[k].unit.ingredients then
-                    data.raw.technology[k].unit.ingredients = {{'space-science-pack', 1}}
-                end
-            end
-        end
-
-        for k, v in pairs(items['space-age']['recipe_1']) do
-            if data.raw.recipe[k] then
-                data.raw.recipe[k].hidden = v
-                data.raw.recipe[k].hidden_in_factoriopedia = v
-            end
-        end
-
-        -- data.raw.recipe['promethium-science-pack'].ingredients = {{type = 'item', name = 'quantum-processor', amount = 1}, {type = 'item', name = 'biter-egg', amount = 10}}
-        table.insert(data.raw['character']['character']['mining_categories'], 'hard-solid')
-
         for _, v in pairs({'huge-rock', 'big-rock', 'big-sand-rock'}) do
             data.raw['simple-entity'][v].autoplace = nil
             data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v] = nil
@@ -562,153 +523,14 @@ if settings.startup['PHI-SA'].value then
             data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings[v] = nil
         end
 
-        for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'sulfuric_acid_geyser', 'tungsten_ore'}) do
-            data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v] = {}
-            data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v:gsub('_', '-')] = {}
-        end
-
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = {}
-
-        data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:tungsten-ore:probability'] = 'vulcanus_tungsten_ore_probability'
-        data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:tungsten-ore:richness'] = 'vulcanus_tungsten_ore_richness'
-        data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:calcite:probability'] = 'vulcanus_calcite_probability'
-        data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:calcite:richness'] = 'vulcanus_calcite_richness'
-        data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:sulfuric-acid-geyser:probability'] = 'vulcanus_sulfuric_acid_geyser_probability'
-        data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:sulfuric-acid-geyser:richness'] = 'vulcanus_sulfuric_acid_geyser_richness'
-
-        data.raw['unit-spawner']['gleba-spawner'].autoplace = data.raw['unit-spawner']['biter-spawner'].autoplace
-        data.raw['unit-spawner']['gleba-spawner-small'].autoplace = data.raw['unit-spawner']['spitter-spawner'].autoplace
-
-        local resource_autoplace = require('resource-autoplace')
-
-        data.raw.resource['fluorine-vent'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'fluorine-vent',
-            order = 'b',
-            control = 'fluorine_vent',
-            base_density = 8.2,
-            base_spots_per_km2 = 1.8,
-            random_probability = 1/48,
-            random_spot_size_minimum = 1,
-            random_spot_size_maximum = 1,
-            additional_richness = 220000,
-            has_starting_area_placement = false,
-            regular_rq_factor_multiplier = 1
-        }
-
-        data.raw.resource['lithium-brine'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'lithium-brine',
-            order = 'a-b-a',
-            control = 'lithium_brine',
-            base_density = 8.2,
-            base_spots_per_km2 = 1.8,
-            random_probability = 1/48,
-            random_spot_size_minimum = 1,
-            random_spot_size_maximum = 1,
-            additional_richness = 220000,
-            has_starting_area_placement = false,
-            regular_rq_factor_multiplier = 1
-        }
-
-        data.raw.resource['sulfuric-acid-geyser'].autoplace = resource_autoplace.resource_autoplace_settings{
-          name = 'sulfuric-acid-geyser',
-          order = 'a-b-b',
-          control = 'sulfuric_acid_geyser',
-          base_density = 8.2,
-          base_spots_per_km2 = 1.8,
-          random_probability = 1/48,
-          random_spot_size_minimum = 1,
-          random_spot_size_maximum = 1,
-          additional_richness = 220000,
-          has_starting_area_placement = false,
-          regular_rq_factor_multiplier = 1
-        }
-
-        data.raw.resource['calcite'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'calcite',
-            order = 'b',
-            base_density = 0.9,
-            base_spots_per_km2 = 1.25,
-            has_starting_area_placement = false,
-            random_spot_size_minimum = 2,
-            random_spot_size_maximum = 4,
-            regular_rq_factor_multiplier = 1
-        }
-
-        data.raw.resource['tungsten-ore'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'tungsten-ore',
-            order = 'b',
-            base_density = 0.9,
-            base_spots_per_km2 = 1.25,
-            has_starting_area_placement = false,
-            random_spot_size_minimum = 2,
-            random_spot_size_maximum = 4,
-            regular_rq_factor_multiplier = 1
-        }
-
-        data.raw.resource['scrap'].autoplace = resource_autoplace.resource_autoplace_settings{
-            name = 'scrap',
-            order = 'c',
-            base_density = 0.9,
-            base_spots_per_km2 = 1.25,
-            has_starting_area_placement = false,
-            random_spot_size_minimum = 2,
-            random_spot_size_maximum = 4,
-            regular_rq_factor_multiplier = 1
-        }
-
-        for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
-            data.raw['utility-constants']['default'].main_menu_simulations[v] = nil
-        end
-
         for _, v in pairs({'artificial-yumako-soil', 'overgrowth-yumako-soil', 'artificial-jellynut-soil', 'overgrowth-jellynut-soil'}) do
             data.raw.tile[v].sprite_usage_surface = 'any'
             data.raw.item[v].place_as_tile.condition = {layers = {water_tile = true}}
             data.raw.item[v].place_as_tile.tile_condition = nil
         end
 
-        table.insert(data.raw['plant']['tree-plant'].autoplace.tile_restriction, 'space-platform-foundation')
-        table.insert(data.raw['plant']['tree-plant'].autoplace.tile_restriction, 'foundation')
-        table.insert(data.raw['plant']['tree-plant'].autoplace.tile_restriction, 'landfill')
-
-        for _, v in pairs({'yumako-tree', 'jellystem'}) do
-            local trs = table.deepcopy(data.raw['plant']['tree-plant'].autoplace.tile_restriction)
-
-            for _, v2 in pairs(data.raw['plant'][v].autoplace.tile_restriction) do
-                table.insert(trs, v2)
-            end
-
-            data.raw['plant'][v].autoplace.tile_restriction = trs
-        end
-
-        for k, _ in pairs(items['space-age']['gleba_tree']) do
-            if data.raw.tree[k] then
-                data.raw.tree[k].autoplace['tile_restriction'] = data.raw['plant']['tree-plant'].autoplace.tile_restriction
-            end
-        end
-
-        for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
-            data.raw.planet[v].map_gen_settings = nil
-            data.raw.planet[v].hidden = true
-            data.raw.planet[v].hidden_in_factoriopedia = true
-            data.raw['change-surface-achievement']['visit-' .. v] = nil
-        end
-
-        for _, v in pairs(data.raw['space-location']) do
-            v.hidden = true
-            v.hidden_in_factoriopedia = true
-        end
-
-        for _, v in pairs(data.raw['space-connection']) do
-            v.hidden = true
-            v.hidden_in_factoriopedia = true
-        end
-
-        for _, v in pairs(data.raw['asteroid']) do
-            v.mass = 1
-
-            for _, v2 in pairs(v.resistances) do
-                v2.percent = (v2.percent > 98 and 98) or v2.percent
-            end
+        for _, v in pairs({'tree-plant', 'yumako-tree', 'jellystem'}) do
+            data.raw['plant'][v].autoplace.tile_restriction = nil
         end
 
         local asteroid_util = require('__space-age__.prototypes.planet.asteroid-spawn-definitions')
@@ -716,70 +538,33 @@ if settings.startup['PHI-SA'].value then
 
         local pb = {
             has_promethium_asteroids = true,
-            probability_on_range_chunk = {
-                {position = 0.001, probability = 0.0312, angle_when_stopped = asteroid_util.chunk_angle},
-                {position = 0.199, probability = 0.0281, angle_when_stopped = asteroid_util.chunk_angle},
-                {position = 0.399, probability = 0.0250, angle_when_stopped = asteroid_util.chunk_angle},
-                {position = 0.599, probability = 0.0219, angle_when_stopped = asteroid_util.chunk_angle},
-                {position = 0.799, probability = 0.0188, angle_when_stopped = asteroid_util.chunk_angle},
-                {position = 0.999, probability = 0.0156, angle_when_stopped = asteroid_util.chunk_angle}
-            },
-            probability_on_range_small = {
-                {position = 0.001, probability = 0.0273, angle_when_stopped = asteroid_util.small_angle},
-                {position = 0.199, probability = 0.0258, angle_when_stopped = asteroid_util.small_angle},
-                {position = 0.399, probability = 0.0242, angle_when_stopped = asteroid_util.small_angle},
-                {position = 0.599, probability = 0.0227, angle_when_stopped = asteroid_util.small_angle},
-                {position = 0.799, probability = 0.0211, angle_when_stopped = asteroid_util.small_angle},
-                {position = 0.999, probability = 0.0195, angle_when_stopped = asteroid_util.small_angle}
-            },
-            probability_on_range_medium = {
-                {position = 0.001, probability = 0.0234, angle_when_stopped = asteroid_util.medium_angle},
-                {position = 0.199, probability = 0.0234, angle_when_stopped = asteroid_util.medium_angle},
-                {position = 0.399, probability = 0.0234, angle_when_stopped = asteroid_util.medium_angle},
-                {position = 0.599, probability = 0.0234, angle_when_stopped = asteroid_util.medium_angle},
-                {position = 0.799, probability = 0.0234, angle_when_stopped = asteroid_util.medium_angle},
-                {position = 0.999, probability = 0.0234, angle_when_stopped = asteroid_util.medium_angle}
-            },
-            probability_on_range_big = {
-                {position = 0.001, probability = 0.0195, angle_when_stopped = asteroid_util.big_angle},
-                {position = 0.199, probability = 0.0211, angle_when_stopped = asteroid_util.big_angle},
-                {position = 0.399, probability = 0.0227, angle_when_stopped = asteroid_util.big_angle},
-                {position = 0.599, probability = 0.0242, angle_when_stopped = asteroid_util.big_angle},
-                {position = 0.799, probability = 0.0258, angle_when_stopped = asteroid_util.big_angle},
-                {position = 0.999, probability = 0.0273, angle_when_stopped = asteroid_util.big_angle}
-            },
-            probability_on_range_huge = {
-                {position = 0.001, probability = 0.0156, angle_when_stopped = asteroid_util.huge_angle},
-                {position = 0.199, probability = 0.0188, angle_when_stopped = asteroid_util.huge_angle},
-                {position = 0.399, probability = 0.0219, angle_when_stopped = asteroid_util.huge_angle},
-                {position = 0.599, probability = 0.0250, angle_when_stopped = asteroid_util.huge_angle},
-                {position = 0.799, probability = 0.0281, angle_when_stopped = asteroid_util.huge_angle},
-                {position = 0.999, probability = 0.0312, angle_when_stopped = asteroid_util.huge_angle}
-            },
-            type_ratios = {
-                {position = 0.001, ratios = {1, 1, 1, 1}},
-                {position = 0.199, ratios = {1, 1, 1, 1}},
-                {position = 0.399, ratios = {1, 1, 1, 1}},
-                {position = 0.599, ratios = {1, 1, 1, 1}},
-                {position = 0.799, ratios = {1, 1, 1, 1}},
-                {position = 0.999, ratios = {1, 1, 1, 1}}
-            }
+            type_ratios = {},
+            probability_on_range_chunk = {},
+            probability_on_range_small = {},
+            probability_on_range_medium = {},
+            probability_on_range_big = {},
+            probability_on_range_huge = {},
         }
 
-        data.raw.planet['nauvis'].asteroid_spawn_definitions = asteroid_util.spawn_definitions(pb, 0.001)
-        data.raw.tile['space-platform-foundation'].max_health = data.raw.tile['space-platform-foundation'].max_health * 2
+        local distance = {0.001, 0.199, 0.399, 0.599, 0.799, 0.999}
 
-        for _, v in pairs({'fulgora-briefing', 'lightning-mechanics', 'gleba-briefing', 'vulcanus-briefing', 'aquilo-briefing', 'heating-mechanics', 'space-platform', 'orbital-logistics', 'removing-trash-in-space', 'space-science', 'asteroid-defense'}) do
-            data.raw['tips-and-tricks-item'][v] = nil
+        for i = 1, 6 do
+            table.insert(pb.type_ratios, {position = distance[i], ratios = {1, 1, 1, 1}})
+            table.insert(pb.probability_on_range_chunk, {position = distance[i], probability = 0.0312 - (0.0031 * i), angle_when_stopped = asteroid_util.chunk_angle})
+            table.insert(pb.probability_on_range_small, {position = distance[i], probability = 0.0273 - (0.0027 * i), angle_when_stopped = asteroid_util.small_angle})
+            table.insert(pb.probability_on_range_medium, {position = distance[i], probability = 0.0234, angle_when_stopped = asteroid_util.medium_angle})
+            table.insert(pb.probability_on_range_big, {position = distance[i], probability = 0.0195 + (0.0027 * i), angle_when_stopped = asteroid_util.big_angle})
+            table.insert(pb.probability_on_range_huge, {position = distance[i], probability = 0.0156 + (0.0031 * i), angle_when_stopped = asteroid_util.huge_angle})
         end
 
-        data.raw['dont-build-entity-achievement']['logistic-network-embargo'].research_with = nil
-        data.raw['create-platform-achievement']['reach-for-the-stars'] = nil
-        data.raw['complete-objective-achievement']['second-star-to-the-right-and-straight-on-till-morning'] = nil
-        data.raw['dont-research-before-researching-achievement']['rush-to-space'] = nil
+        data.raw.planet['nauvis'].asteroid_spawn_definitions = asteroid_util.spawn_definitions(pb, 0.001)
 
-        for _, v in pairs({'shattered-planet-1', 'shattered-planet-2', 'shattered-planet-3'}) do
-            data.raw['space-connection-distance-traveled-achievement'][v] = nil
+        for _, v in pairs(data.raw['asteroid']) do
+            v.mass = 1
+
+            for _, v2 in pairs(v.resistances) do
+                v2.percent = (v2.percent > 98 and 98) or v2.percent
+            end
         end
     end
 
@@ -840,7 +625,7 @@ if settings.startup['PHI-SA'].value then
     end
 
     if settings.startup['PHI-SA-HEAT-RADIUS'].value and mods['space-age'] then
-        for _, v in pairs({data.raw['heat-pipe'], data.raw['heat-pipe']}) do
+        for _, v in pairs({data.raw['heat-pipe'], data.raw['reactor']}) do
             for _, v2 in pairs(v) do
                 v2.heating_radius = settings.startup['PHI-SA-HEAT-RADIUS'].value
             end
@@ -891,6 +676,7 @@ if settings.startup['PHI-SA'].value then
             v.quality_affects_inventory_size = true
         end
 
+        data.raw.tile['space-platform-foundation'].max_health = data.raw.tile['space-platform-foundation'].max_health * 2
         data.raw.item['space-platform-foundation'].stack_size = 100
 
         data.raw['ammo-turret']['railgun-turret'].starting_attack_speed = 1
@@ -924,8 +710,37 @@ if settings.startup['PHI-SA'].value then
 
     if settings.startup['PHI-SA-VANILLA'].value then
         if mods['space-age'] then
-            data.raw.technology['rocket-silo'].effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}}
+            for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
+                data.raw.planet[v].map_gen_settings = nil
+                data.raw.planet[v].hidden = true
+                data.raw.planet[v].hidden_in_factoriopedia = true
+                data.raw['change-surface-achievement']['visit-' .. v] = nil
+            end
 
+            for _, v in pairs(data.raw['space-location']) do
+                v.hidden = true
+                v.hidden_in_factoriopedia = true
+            end
+
+            for _, v in pairs(data.raw['space-connection']) do
+                v.hidden = true
+                v.hidden_in_factoriopedia = true
+            end
+
+            for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
+                data.raw['utility-constants']['default'].main_menu_simulations[v] = nil
+            end
+
+            data.raw['dont-build-entity-achievement']['logistic-network-embargo'].research_with = nil
+            data.raw['create-platform-achievement']['reach-for-the-stars'] = nil
+            data.raw['complete-objective-achievement']['second-star-to-the-right-and-straight-on-till-morning'] = nil
+            data.raw['dont-research-before-researching-achievement']['rush-to-space'] = nil
+
+            for _, v in pairs({'shattered-planet-1', 'shattered-planet-2', 'shattered-planet-3'}) do
+                data.raw['space-connection-distance-traveled-achievement'][v] = nil
+            end
+
+            data.raw.technology['rocket-silo'].effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}}
             data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = false
             data.raw['rocket-silo']['rocket-silo'].rocket_parts_required = 100
             data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 1
@@ -971,6 +786,13 @@ if settings.startup['PHI-SA'].value then
             for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'tungsten_ore'}) do
                 data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v] = nil
                 data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v:gsub('_', '-')] = nil
+            end
+
+            for _, v in pairs({'tungsten-ore', 'calcite'}) do
+                if data.raw.resource[v] then
+                    data.raw.resource[v].hidden = true
+                    data.raw.resource[v].hidden_in_factoriopedia = true
+                end
             end
 
             data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = nil
@@ -1123,12 +945,19 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['biolab'].prerequisites = {'production-science-pack', 'utility-science-pack'}
             data.raw.technology['biolab'].unit = {count = 800, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
 
-            for k, v in pairs(items['space-age']['technology_2']) do
+            for k, v in pairs(items['space-age']['PHI-SA-VANILLA']['technology']) do
                 data.raw.technology[k].hidden = v
                 data.raw.technology[k].hidden_in_factoriopedia = v
 
                 if data.raw.technology[k].unit and data.raw.technology[k].unit.ingredients then
                     data.raw.technology[k].unit.ingredients = {{'space-science-pack', 1}}
+                end
+            end
+
+            for k, v in pairs(items['space-age']['PHI-SA-VANILLA']['recipe']) do
+                if data.raw.recipe[k] then
+                    data.raw.recipe[k].hidden = v
+                    data.raw.recipe[k].hidden_in_factoriopedia = v
                 end
             end
 
@@ -1258,20 +1087,6 @@ if settings.startup['PHI-SA'].value then
             data.raw['kill-achievement']['we-need-bigger-guns'] = nil
             data.raw['kill-achievement']['size-doesnt-matter'] = nil
 
-            for _, v in pairs({'tungsten-ore', 'calcite'}) do
-                if data.raw.resource[v] then
-                    data.raw.resource[v].hidden = true
-                    data.raw.resource[v].hidden_in_factoriopedia = true
-                end
-            end
-
-            for k, v in pairs(items['space-age']['recipe_2']) do
-                if data.raw.recipe[k] then
-                    data.raw.recipe[k].hidden = v
-                    data.raw.recipe[k].hidden_in_factoriopedia = v
-                end
-            end
-
             for _, v in pairs(data.raw.lab) do
                 v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
             end
@@ -1291,6 +1106,7 @@ if settings.startup['PHI-SA'].value then
         end
     end
 end
+
 if settings.startup['PHI-CT'].value then
     if settings.startup['PHI-CT-TOOL'].value then
         local item = table.deepcopy(data.raw['item']['radar'])

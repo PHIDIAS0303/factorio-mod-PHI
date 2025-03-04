@@ -615,6 +615,85 @@
         item.energy_per_shield = tostring(math.floor(tonumber(string.match(item.energy_per_shield, '[%d%.]+')) * ((32 - (tier - source.min + 1)) / 32))) .. string.match(item.energy_per_shield, '%a+')
     end
 
+** DATA
+    data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+    data.raw.technology['yumako'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+    data.raw.technology['jellynut'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+    data.raw.technology['bacteria-cultivation'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+    data.raw.technology['heating-tower'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+    data.raw.technology['tungsten-carbide'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+    data.raw.technology['recycling'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+    data.raw.technology['lithium-processing'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'space-science-pack', 1}}}
+    data.raw.technology['promethium-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'promethium-science-pack'}}
+    data.raw.technology['railgun'].prerequisites = {'military-3', 'utility-science-pack'}
+    data.raw.technology['railgun'].unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}}
+
+    local resource_autoplace = require('resource-autoplace')
+
+    data.raw.resource['fluorine-vent'].autoplace = resource_autoplace.resource_autoplace_settings{
+        name = 'fluorine-vent',
+        order = 'b',
+        control = 'fluorine_vent',
+        base_density = 8.2,
+        base_spots_per_km2 = 1.8,
+        random_probability = 1 / 48,
+        random_spot_size_minimum = 1,
+        random_spot_size_maximum = 1,
+        additional_richness = 220000,
+        has_starting_area_placement = false,
+        regular_rq_factor_multiplier = 1
+    }
+
+    data.raw.resource['lithium-brine'].autoplace = resource_autoplace.resource_autoplace_settings{
+        name = 'lithium-brine',
+        order = 'a-b-a',
+        control = 'lithium_brine'
+    }
+
+    data.raw.resource['sulfuric-acid-geyser'].autoplace = resource_autoplace.resource_autoplace_settings{
+        name = 'sulfuric-acid-geyser',
+        order = 'a-b-b',
+        control = 'sulfuric_acid_geyser'
+    }
+
+    data.raw.resource['calcite'].autoplace = resource_autoplace.resource_autoplace_settings{
+        name = 'calcite',
+        order = 'b',
+        base_density = 0.9,
+        base_spots_per_km2 = 1.25,
+        has_starting_area_placement = false,
+        random_spot_size_minimum = 2,
+        random_spot_size_maximum = 4,
+        regular_rq_factor_multiplier = 1
+    }
+
+    data.raw.resource['tungsten-ore'].autoplace = resource_autoplace.resource_autoplace_settings{
+        name = 'tungsten-ore',
+        order = 'b',
+    }
+
+    data.raw.resource['scrap'].autoplace = resource_autoplace.resource_autoplace_settings{
+        name = 'scrap',
+        order = 'c',
+    }
+
+    for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'sulfuric_acid_geyser', 'tungsten_ore'}) do
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v] = {}
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v:gsub('_', '-')] = {}
+    end
+
+    data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = {}
+    
+    data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:tungsten-ore:probability'] = 'vulcanus_tungsten_ore_probability'
+    data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:tungsten-ore:richness'] = 'vulcanus_tungsten_ore_richness'
+    data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:calcite:probability'] = 'vulcanus_calcite_probability'
+    data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:calcite:richness'] = 'vulcanus_calcite_richness'
+    data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:sulfuric-acid-geyser:probability'] = 'vulcanus_sulfuric_acid_geyser_probability'
+    data.raw.planet['nauvis'].map_gen_settings.property_expression_names['entity:sulfuric-acid-geyser:richness'] = 'vulcanus_sulfuric_acid_geyser_richness'
+
+    data.raw['unit-spawner']['gleba-spawner'].autoplace = data.raw['unit-spawner']['biter-spawner'].autoplace
+    data.raw['unit-spawner']['gleba-spawner-small'].autoplace = data.raw['unit-spawner']['spitter-spawner'].autoplace
+
 ** DATA UPDATE
 if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.startup['PHI-MB-MINING-TIER'].value > 1 then
     data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'se-core-miner-drill'
