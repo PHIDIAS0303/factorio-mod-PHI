@@ -346,7 +346,7 @@ if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) 
     entity.allowed_effects = {'consumption'}
     entity.tile_buildability_rules = nil
     entity.fluid_source_offset = nil
-    entity.localised_name = item.localised_name
+    entity.localised_name = {'phi-cl.combine', item.localised_name, ''}
     data:extend({entity})
 
     data:extend({{
@@ -357,7 +357,7 @@ if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) 
         ingredients = {{type = 'item', name = 'electronic-circuit', amount = 2}, {type = 'item', name = 'pipe', amount = 1}, {type = 'item', name = 'iron-gear-wheel', amount = 1}},
         results = {{type = 'item', name = item.name, amount = 1}},
         main_product = item.name,
-        localised_name = item.localised_name
+        localised_name = {'phi-cl.combine', item.localised_name, ''}
     }})
 
     if data.raw.fluid['water'] then
@@ -373,7 +373,7 @@ if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) 
             hide_from_player_crafting = true,
             allow_productivity = false,
             crafting_machine_tint = {primary=data.raw.fluid['water'].flow_color},
-            localised_name = data.raw.fluid['water'].localised_name
+            localised_name = {'phi-cl.combine', data.raw.fluid['water'].localised_name, ''}
         }})
     end
 end
@@ -404,7 +404,7 @@ if settings.startup['PHI-SA'].value then
             item.spoil_ticks = math.floor(i.spoil_ticks * settings.startup['PHI-SA-SPOIL-FREEZE-RATIO'].value / 10)
             item.spoil_result = i.name
             item.spoil_to_trigger_result = nil
-            item.localised_name = i.localised_name
+            item.localised_name = {'phi-cl.combine', 'item-name.' .. i.name, ''}
             data:extend({item})
 
             data:extend({{
@@ -413,11 +413,11 @@ if settings.startup['PHI-SA'].value then
                 energy_required = 2,
                 enabled = false,
                 category = 'cryogenics',
-                ingredients = {{type = 'item', name =i.name, amount =1}, {type = 'fluid', name = 'fluoroketone-cold', amount = 2, ignored_by_stats = 2}},
-                results = {{type = 'item', name =item.name, amount =1}, {type = 'fluid', name = 'fluoroketone-hot', amount = 2, ignored_by_stats=2, ignored_by_productivity = 2}},
+                ingredients = {{type = 'item', name = i.name, amount = 1}, {type = 'fluid', name = 'fluoroketone-cold', amount = 2, ignored_by_stats = 2}},
+                results = {{type = 'item', name = item.name, amount = 1}, {type = 'fluid', name = 'fluoroketone-hot', amount = 2, ignored_by_stats=2, ignored_by_productivity = 2}},
                 allow_productivity = false,
                 main_product = item.name,
-                localised_name = i.localised_name
+                localised_name = {'phi-cl.combine', 'item-name.' .. i.name, ''}
             }})
 
             data:extend({{
@@ -430,7 +430,7 @@ if settings.startup['PHI-SA'].value then
                 results = {{type = 'item', name = i.name, amount = 1}},
                 allow_productivity = false,
                 main_product = i.name,
-                localised_name = i.localised_name
+                localised_name = {'phi-cl.combine', 'item-name.' .. i.name, ''}
             }})
 
             table.insert(data.raw.technology['cryogenic-plant'].effects, {type = 'unlock-recipe', recipe = item.name})
@@ -473,7 +473,7 @@ if settings.startup['PHI-SA'].value then
             ingredients = {{type = 'item', name = 'nutrients', amount = 1}},
             results = {{type = 'item', name = 'spoilage', amount = 10}},
             main_product = 'spoilage',
-            localised_name = {'phi-cl.combine', '', ''}
+            localised_name = {'phi-cl.combine', 'item-name.spoilage', ''}
         }})
 
         table.insert(data.raw.technology['agriculture'].effects, {type = 'unlock-recipe', recipe = 'spoilage-from-nutrients'})
@@ -776,6 +776,75 @@ if settings.startup['PHI-SA'].value then
                 }
             })
 
+            data:extend({{
+                type = 'technology',
+                name = 'cargo-landing-pad-count',
+                prerequisites = {'rocket-silo', 'space-science-pack'},
+                effects = {{type = 'cargo-landing-pad-count', modifier = 1}},
+                unit = {
+                    count_formula = '1000 * L',
+                    ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}},
+                    time = 60
+                },
+                icons = {
+                    {
+                        icon = '__base__/graphics/icons/cargo-landing-pad.png',
+                        icon_size = 256,
+                        tint = items['tint'][8]
+                    }
+                },
+                order = 'a-i-a',
+                max_level = 'infinite',
+                upgrade = true,
+                localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ''}
+            }})
+
+            data:extend({{
+                type = 'technology',
+                name = 'concrete-productivity',
+                prerequisites = {'concrete', 'production-science-pack'},
+                effects = {{type = 'change-recipe-productivity', recipe = 'concrete', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'refined-concrete', change = 0.1}},
+                unit = {
+                    count_formula = '500 * (1.2 ^ L)',
+                    ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}},
+                    time = 30
+                },
+                icons = {
+                    {
+                        icon = '__base__/graphics/icons/concrete.png',
+                        icon_size = 256,
+                        tint = items['tint'][8]
+                    }
+                },
+                order = 'a-i-b',
+                max_level = 10,
+                upgrade = true,
+                localised_name = {'phi-cl.combine', {'item-name.concrete'}, ''}
+            }})
+
+            data:extend({{
+                type = 'technology',
+                name = 'landfill-productivity',
+                prerequisites = {'landfill', 'production-science-pack'},
+                effects = {{type = 'change-recipe-productivity', recipe = 'landfill', change = 0.1}},
+                unit = {
+                    count_formula = '500 * (1.2 ^ L)',
+                    ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}},
+                    time = 30
+                },
+                icons = {
+                    {
+                        icon = '__base__/graphics/icons/concrete.png',
+                        icon_size = 256,
+                        tint = items['tint'][8]
+                    }
+                },
+                order = 'a-i-c',
+                max_level = 10,
+                upgrade = true,
+                localised_name = {'phi-cl.combine', {'item-name.landfill'}, ''}
+            }})
+
             for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'tungsten_ore'}) do
                 data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v] = nil
                 data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v:gsub('_', '-')] = nil
@@ -935,6 +1004,10 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['cryogenic-plant'].research_trigger = nil
             data.raw.technology['cryogenic-plant'].effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}}
             data.raw.technology['cryogenic-plant'].unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+            data.raw.technology['foundry'].prerequisites = {'automation-3'}
+            data.raw.technology['foundry'].research_trigger = nil
+            data.raw.technology['foundry'].effects = {{type = 'unlock-recipe', recipe = 'foundry'}}
+            data.raw.technology['foundry'].unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
             data.raw.technology['biolab'].prerequisites = {'production-science-pack', 'utility-science-pack'}
             data.raw.technology['biolab'].unit = {count = 800, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
 
@@ -1014,6 +1087,8 @@ if settings.startup['PHI-SA'].value then
             data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
             data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
             data.raw['lab']['biolab'].science_pack_drain_rate_percent = 100
+            data.raw['assembling-machine']['foundry'].effect_receiver = nil
+            data.raw['assembling-machine']['foundry'].crafting_categories = {table.unpack(data.raw['assembling-machine']['electric-furnace'].crafting_categories)}
 
             data.raw['plant']['yumako-tree'].hidden = true
             data.raw['plant']['yumako-tree'].hidden_in_factoriopedia = true

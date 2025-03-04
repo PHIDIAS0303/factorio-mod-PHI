@@ -396,7 +396,6 @@ local items = {
                 ['promethium-science-pack'] = true,
                 ['foundation'] = true,
                 ['scrap-recycling-productivity'] = true,
-                ['foundry'] = true,
                 ['biochamber'] = true
             },
             ['recipe'] = {
@@ -454,7 +453,6 @@ local items = {
                 ['biter-egg'] = true,
                 ['spoilage-from-nutrients'] = true,
                 ['crusher'] = true,
-                ['foundry'] = true,
                 ['tungsten-carbide'] = true,
                 ['tungsten-plate'] = true,
                 ['carbon'] = true,
