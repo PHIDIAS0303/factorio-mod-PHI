@@ -694,6 +694,13 @@
     data.raw['unit-spawner']['gleba-spawner'].autoplace = data.raw['unit-spawner']['biter-spawner'].autoplace
     data.raw['unit-spawner']['gleba-spawner-small'].autoplace = data.raw['unit-spawner']['spitter-spawner'].autoplace
 
+    for _, v in pairs({'artificial-yumako-soil', 'overgrowth-yumako-soil', 'artificial-jellynut-soil', 'overgrowth-jellynut-soil', 'ice-platform', 'foundation', 'turbo-transport-belt', turbo-underground-belt', 'turbo-splitter', 'big-mining-drill', 'railgun-turret', 'tesla-turret', 'stack-inserter', 'fusion-reactor', 'fusion-generator'}) do
+        data.raw.item[v].default_import_location = nil
+    end
+    
+    data.raw.gun['teslagun'].default_import_location = nil
+    data.raw.ammo['tesla-ammo'].default_import_location = nil
+
 ** DATA UPDATE
 if settings.startup['PHI-MB'].value and mods['space-exploration'] and settings.startup['PHI-MB-MINING-TIER'].value > 1 then
     data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'se-core-miner-drill'

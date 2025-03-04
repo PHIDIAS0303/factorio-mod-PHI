@@ -483,9 +483,7 @@ if settings.startup['PHI-SA'].value then
         end
     end
 
-    if settings.startup['PHI-SA-RESTRICTION'].value and mods['space-age'] then
-        data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
-
+    if (settings.startup['PHI-SA-RESTRICTION'].value or settings.startup['PHI-SA-VANILLA'].value) and mods['space-age'] then
         for k, v in pairs(items['space-age']['PHI-SA-RESTRICTION']['surface_conditions']) do
             data.raw[v][k].surface_conditions = nil
         end
@@ -493,6 +491,10 @@ if settings.startup['PHI-SA'].value then
         for _, v in pairs(data.raw.recipe) do
             v.surface_conditions = nil
         end
+    end
+
+    if settings.startup['PHI-SA-RESTRICTION'].value and mods['space-age'] then
+        data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
 
         for _, v in pairs({'heavy-oil', 'lava', 'ammoniacal-solution'}) do
             if data.raw.fluid[v] then
@@ -579,7 +581,7 @@ if settings.startup['PHI-SA'].value then
         end
     end
 
-    if (settings.startup['PHI-SA-NO-QUALITY'].value or settings.startup['PHI-SA-VANILLA'].value) and mods['quality'] then
+    if (settings.startup['PHI-SA-MAX-QUALITY'].value or settings.startup['PHI-SA-VANILLA'].value) and mods['space-age'] then
         for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
             data.raw.technology[v] = nil
             data.raw.module[v] = nil
@@ -595,6 +597,11 @@ if settings.startup['PHI-SA'].value then
             data.raw.quality[v].hidden_in_factoriopedia = true
         end
 
+        data.raw.quality.normal.next = nil
+        data.raw.quality.normal.next_probability = nil
+        data.raw.quality.normal.hidden = true
+        data.raw.quality.normal.hidden_in_factoriopedia = true
+
         data.raw['tips-and-tricks-item']['quality'] = nil
         data.raw['tips-and-tricks-item']['quality-modules'] = nil
         data.raw['tips-and-tricks-item']['quality-factoriopedia'] = nil
@@ -606,21 +613,17 @@ if settings.startup['PHI-SA'].value then
         data.raw['equip-armor-achievement']['look-at-my-shiny-rare-armor'] = nil
         data.raw['use-item-achievement']['todays-fish-is-trout-a-la-creme'] = nil
         data.raw['place-equipment-achievement']['no-room-for-more'] = nil
+    end
 
+    if settings.startup['PHI-SA-MAX-QUALITY'].value and mods['quality'] then
         data.raw.quality.normal.level = 5
-        data.raw.quality.normal.next = nil
-        data.raw.quality.normal.next_probability = nil
-        data.raw.quality.normal.hidden = true
-        data.raw.quality.normal.hidden_in_factoriopedia = true
         data.raw.quality.normal.beacon_power_usage_multiplier = 1 / 6
         data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1 / 6
         data.raw.quality.normal.science_pack_drain_multiplier = 19 / 20
 
-        local new_scale = 1 + (0.3 * data.raw.quality.normal.level)
-
         for _, v in pairs(data.raw['inserter']) do
-            v.extension_speed = v.extension_speed * new_scale
-            v.rotation_speed = v.rotation_speed * new_scale
+            v.extension_speed = v.extension_speed * 2.5
+            v.rotation_speed = v.rotation_speed * 2.5
         end
     end
 
@@ -632,7 +635,7 @@ if settings.startup['PHI-SA'].value then
         end
     end
 
-    if mods['space-age'] and (settings.startup['PHI-SA-GENERIC'].value or settings.startup['PHI-SA-VANILLA'].value) then
+    if (settings.startup['PHI-SA-GENERIC'].value or settings.startup['PHI-SA-VANILLA'].value) and mods['space-age'] then
         data.raw.resource['lithium-brine'].infinite = true
         data.raw.resource['lithium-brine'].minimum = 60000
         data.raw.resource['lithium-brine'].normal = 300000
@@ -1033,24 +1036,6 @@ if settings.startup['PHI-SA'].value then
             data.raw.fluid['fluoroketone-cold'].auto_barrel = false
             data.raw.fluid['fluoroketone-hot'].auto_barrel = false
 
-            data.raw.item['artificial-yumako-soil'].default_import_location = nil
-            data.raw.item['overgrowth-yumako-soil'].default_import_location = nil
-            data.raw.item['artificial-jellynut-soil'].default_import_location = nil
-            data.raw.item['overgrowth-jellynut-soil'].default_import_location = nil
-            data.raw.item['ice-platform'].default_import_location = nil
-            data.raw.item['foundation'].default_import_location = nil
-            data.raw.item['turbo-transport-belt'].default_import_location = nil
-            data.raw.item['turbo-underground-belt'].default_import_location = nil
-            data.raw.item['turbo-splitter'].default_import_location = nil
-            data.raw.item['big-mining-drill'].default_import_location = nil
-            data.raw.item['railgun-turret'].default_import_location = nil
-            data.raw.item['tesla-turret'].default_import_location = nil
-            data.raw.item['stack-inserter'].default_import_location = nil
-            data.raw.item['fusion-reactor'].default_import_location = nil
-            data.raw.item['fusion-generator'].default_import_location = nil
-            data.raw.gun['teslagun'].default_import_location = nil
-            data.raw.ammo['tesla-ammo'].default_import_location = nil
-
             data.raw.tool['agricultural-science-pack'].hidden = true
             data.raw.tool['agricultural-science-pack'].hidden_in_factoriopedia = true
             data.raw.tool['cryogenic-science-pack'].hidden = true
@@ -1061,6 +1046,10 @@ if settings.startup['PHI-SA'].value then
             data.raw.tool['metallurgic-science-pack'].hidden_in_factoriopedia = true
             data.raw.tool['promethium-science-pack'].hidden = true
             data.raw.tool['promethium-science-pack'].hidden_in_factoriopedia = true
+
+            for _, v in pairs(data.raw.lab) do
+                v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
+            end
 
             data.raw.capsule['bioflux'].hidden = true
             data.raw.capsule['bioflux'].hidden_in_factoriopedia = true
@@ -1087,10 +1076,6 @@ if settings.startup['PHI-SA'].value then
             data.raw['kill-achievement']['we-need-bigger-guns'] = nil
             data.raw['kill-achievement']['size-doesnt-matter'] = nil
 
-            for _, v in pairs(data.raw.lab) do
-                v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
-            end
-
             for _, v in pairs(data.raw.tree) do
                 if v.minable and v.minable.results then
                     v.minable.results = {{type = 'item', name = 'wood', amount = 4}}
@@ -1098,7 +1083,7 @@ if settings.startup['PHI-SA'].value then
             end
         end
 
-        if mods['quality'] and (not settings.startup['PHI-SA-NO-QUALITY'].value) then
+        if mods['quality'] and (not settings.startup['PHI-SA-MAX-QUALITY'].value) then
             data.raw.quality.normal.level = 0
             data.raw.quality.normal.beacon_power_usage_multiplier = 1
             data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1

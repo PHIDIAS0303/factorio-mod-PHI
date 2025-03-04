@@ -267,10 +267,10 @@ data:extend({
   order = 'D05'
 }, {
   type = 'bool-setting',
-  name = 'PHI-SA-NO-QUALITY',
+  name = 'PHI-SA-MAX-QUALITY',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-NO-QUALITY'}, {'mod-setting-name.PHI-SA-NO-QUALITY'}},
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-MAX-QUALITY'}, {'mod-setting-name.PHI-SA-MAX-QUALITY'}},
   order = 'D06'
 }, {
   type = 'bool-setting',

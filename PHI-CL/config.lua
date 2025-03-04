@@ -364,6 +364,7 @@ local items = {
                 ['planet-discovery-fulgora'] = true,
                 ['planet-discovery-aquilo'] = true,
                 ['space-platform-thruster'] = true,
+                ['recycling'] = true,
                 ['lightning-collector'] = true,
                 ['space-platform'] = true,
                 ['asteroid-reprocessing'] = true,
