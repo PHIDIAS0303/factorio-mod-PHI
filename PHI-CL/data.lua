@@ -896,7 +896,7 @@ if settings.startup['PHI-SA'].value then
                 order = 'a-i-b',
                 max_level = 10,
                 upgrade = true,
-                localised_name = {'phi-cl.combine', {'technology-name.automation-2'}, ''}
+                localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
             }})
 
             data:extend({{
