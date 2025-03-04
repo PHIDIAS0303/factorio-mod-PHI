@@ -804,7 +804,7 @@ if settings.startup['PHI-SA'].value then
                 localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ''}
             }})
 
-            for _, v in pairs({'concrete', 'landfill', 'electronics', 'advanced-circuit', 'explosives', 'battery', 'engine', 'electric-engine', 'robotics', 'sulfur-processing', 'solar-energy', 'electric-energy-accumulators', 'railway'}) do
+            for _, v in pairs({'concrete', 'landfill', 'automation', 'electronics', 'advanced-circuit', 'explosives', 'battery', 'engine', 'electric-engine', 'robotics', 'sulfur-processing', 'solar-energy', 'electric-energy-accumulators', 'railway'}) do
                 data:extend({{
                     type = 'technology',
                     name = v .. '-productivity',
@@ -830,7 +830,7 @@ if settings.startup['PHI-SA'].value then
                     order = 'a-i-b',
                     max_level = 10,
                     upgrade = true,
-                    localised_name = {'phi-cl.combine', {'item-name.' .. v}, ''}
+                    localised_name = {'phi-cl.combine', {'technology-name.' .. v}, ''}
                 }})
             end
 
@@ -845,34 +845,10 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['electric-energy-accumulators-productivity'].effects[1].recipe = 'accumulator'
             data.raw.technology['electric-energy-accumulators-productivity'].icons[1].icon = '__base__/graphics/technology/electric-energy-acumulators.png'
             data.raw.technology['railway-productivity'].effects[1].recipe = 'rail'
-
-            data:extend({{
-                type = 'technology',
-                name = 'automation-productivity',
-                prerequisites = {'automation-3', 'production-science-pack'},
-                effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'pipe', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.1}},
-                unit = {
-                    count_formula = '500 * (1.2 ^ L)',
-                    ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}},
-                    time = 30
-                },
-                icons = {
-                    {
-                        icon = '__base__/graphics/technology/automation-2.png',
-                        icon_size = 256
-                    },
-                    {
-                      icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png',
-                      icon_size = 128,
-                      scale = 0.5,
-                      shift = {50, 50}
-                    }
-                },
-                order = 'a-i-b',
-                max_level = 10,
-                upgrade = true,
-                localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
-            }})
+            data.raw.technology['automation-productivity'].prerequisites[1] = 'automation-3'
+            data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'pipe', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.1}}
+            data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
+            data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
 
             for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'tungsten_ore'}) do
                 data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v] = nil
