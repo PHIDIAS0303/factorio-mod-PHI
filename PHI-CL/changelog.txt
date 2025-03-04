@@ -411,7 +411,6 @@ Date: 2024-10-31
 
   Changes:
     - [CL] Changed some main library handle methods.
-    - [EQ] Added one more tier for the armor.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.5
