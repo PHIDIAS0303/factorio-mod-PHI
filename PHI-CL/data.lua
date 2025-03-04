@@ -804,14 +804,14 @@ if settings.startup['PHI-SA'].value then
                 localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ''}
             }})
 
-            for _, v in pairs({'concrete', 'landfill', 'advanced-circuit', 'explosives', 'battery', 'engine', 'electric-engine', 'robotics', sulfur-processing}) do
+            for _, v in pairs({'concrete', 'landfill', 'electronics', 'advanced-circuit', 'explosives', 'battery', 'engine', 'electric-engine', 'robotics', 'sulfur-processing'}) do
                 data:extend({{
                     type = 'technology',
                     name = v .. '-productivity',
                     prerequisites = {v, 'automation-3', 'production-science-pack'},
                     effects = {{type = 'change-recipe-productivity', recipe = v, change = 0.1}},
                     unit = {
-                        count_formula = '500 * (1.2 ^ L)',
+                        count_formula = '500 * (1.5 ^ (L - 1))',
                         ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}},
                         time = 30
                     },
@@ -839,35 +839,8 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['engine-productivity'].effects[1].recipe = 'engine-unit'
             data.raw.technology['electric-engine-productivity'].effects[1].recipe = 'electric-engine-unit'
             data.raw.technology['robotics-productivity'].effects[1].recipe = 'flying-robot-frame'
-            data.raw.technology['explosives-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'sulfuric-acid', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'sulfur', change = 0.1}
-
-            data:extend({{
-                type = 'technology',
-                name = 'electronics-productivity',
-                prerequisites = {'automation-3', 'production-science-pack'},
-                effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'copper-cable', change = 0.1}},
-                unit = {
-                    count_formula = '500 * (1.2 ^ L)',
-                    ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}},
-                    time = 30
-                },
-                icons = {
-                    {
-                        icon = '__base__/graphics/technology/electronics.png',
-                        icon_size = 256
-                    },
-                    {
-                      icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png',
-                      icon_size = 128,
-                      scale = 0.5,
-                      shift = {50, 50}
-                    }
-                },
-                order = 'a-i-b',
-                max_level = 10,
-                upgrade = true,
-                localised_name = {'phi-cl.combine', {'technology-name.electronics'}, ''}
-            }})
+            data.raw.technology['sulfur-processing-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'sulfuric-acid', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'sulfur', change = 0.1}}
+            data.raw.technology['electronics-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'copper-cable', change = 0.1}}
 
             data:extend({{
                 type = 'technology',
