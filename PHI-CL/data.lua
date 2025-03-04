@@ -791,6 +791,12 @@ if settings.startup['PHI-SA'].value then
                         icon = '__base__/graphics/icons/cargo-landing-pad.png',
                         icon_size = 256,
                         tint = items['tint'][8]
+                    },
+                    {
+                      icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png',
+                      icon_size = 128,
+                      scale = 0.5,
+                      shift = {50, 50}
                     }
                 },
                 order = 'a-i-a',
@@ -814,6 +820,12 @@ if settings.startup['PHI-SA'].value then
                         icon = '__base__/graphics/icons/concrete.png',
                         icon_size = 256,
                         tint = items['tint'][8]
+                    },
+                    {
+                      icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png',
+                      icon_size = 128,
+                      scale = 0.5,
+                      shift = {50, 50}
                     }
                 },
                 order = 'a-i-b',
@@ -837,6 +849,12 @@ if settings.startup['PHI-SA'].value then
                         icon = '__base__/graphics/icons/concrete.png',
                         icon_size = 256,
                         tint = items['tint'][8]
+                    },
+                    {
+                      icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png',
+                      icon_size = 128,
+                      scale = 0.5,
+                      shift = {50, 50}
                     }
                 },
                 order = 'a-i-c',
