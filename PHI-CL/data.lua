@@ -515,16 +515,6 @@ if settings.startup['PHI-SA'].value then
             end
         end
 
-        for _, v in pairs({'huge-rock', 'big-rock', 'big-sand-rock'}) do
-            data.raw['simple-entity'][v].autoplace = nil
-            data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v] = nil
-        end
-
-        for _, v in pairs({'medium-rock', 'small-rock', 'tiny-rock', 'medium-sand-rock', 'small-sand-rock', 'sand-decal', 'sand-dune-decal', 'light-mud-decal', 'red-desert-decal'}) do
-            data.raw['optimized-decorative'][v].autoplace = nil
-            data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.decorative.settings[v] = nil
-        end
-
         for _, v in pairs({'artificial-yumako-soil', 'overgrowth-yumako-soil', 'artificial-jellynut-soil', 'overgrowth-jellynut-soil'}) do
             data.raw.tile[v].sprite_usage_surface = 'any'
             data.raw.item[v].place_as_tile.condition = {layers = {water_tile = true}}
