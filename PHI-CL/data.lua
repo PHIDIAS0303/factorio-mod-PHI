@@ -836,10 +836,12 @@ if settings.startup['PHI-SA'].value then
 
             table.insert(data.raw.technology['concrete-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'refined-concrete', change = 0.1})
             table.insert(data.raw.technology['explosives-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'cliff-explosives', change = 0.1})
-            data.raw.technology['flying-robot-frame-productivity'].icons[1].icon = '__base__/graphics/technology/robotics.png'
             data.raw.technology['engine-unit-productivity'].prerequisites[1] = 'engine'
+            data.raw.technology['engine-unit-productivity'].icons[1].icon = '__base__/graphics/technology/engine.png'
             data.raw.technology['electric-engine-unit-productivity'].prerequisites[1] = 'electric-engine'
+            data.raw.technology['electric-engine-unit-productivity'].icons[1].icon = '__base__/graphics/technology/electric-engine.png'
             data.raw.technology['flying-robot-frame-productivity'].prerequisites[1] = 'robotics'
+            data.raw.technology['flying-robot-frame-productivity'].icons[1].icon = '__base__/graphics/technology/robotics.png'
 
             data:extend({{
                 type = 'technology',
