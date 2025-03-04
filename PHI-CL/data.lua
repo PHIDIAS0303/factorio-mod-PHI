@@ -788,7 +788,7 @@ if settings.startup['PHI-SA'].value then
                 },
                 icons = {
                     {
-                        icon = '__base__/graphics/icons/cargo-landing-pad.png',
+                        icon = '__base__/graphics/technology/rocket-silo.png',
                         icon_size = 256,
                         tint = items['tint'][8]
                     },
