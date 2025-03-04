@@ -817,7 +817,7 @@ if settings.startup['PHI-SA'].value then
                 },
                 icons = {
                     {
-                        icon = '__base__/graphics/icons/concrete.png',
+                        icon = '__base__/graphics/technology/concrete.png',
                         icon_size = 256,
                         tint = items['tint'][8]
                     },
@@ -846,7 +846,7 @@ if settings.startup['PHI-SA'].value then
                 },
                 icons = {
                     {
-                        icon = '__base__/graphics/icons/concrete.png',
+                        icon = '__base__/graphics/technology/concrete.png',
                         icon_size = 256,
                         tint = items['tint'][8]
                     },
