@@ -1484,11 +1484,7 @@ if settings.startup['PHI-CT'].value then
         local autoplace_controls = {}
 
         for k, _ in pairs (data.raw['autoplace-control']) do
-            autoplace_controls[k] = {
-                frequency = 0.0,
-                size = 0.0,
-                richness = 0.0
-            }
+            autoplace_controls[k] = { frequency = 0.0, size = 0.0, richness = 0.0}
         end
 
         data.raw['map-gen-presets']['default']['empty-world'] = {
@@ -1503,15 +1499,9 @@ if settings.startup['PHI-CT'].value then
                 }
             },
             advanced_settings = {
-                pollution = {
-                    enabled = false
-                },
-                enemy_evolution = {
-                    enabled = false
-                },
-                enemy_expansion = {
-                    enabled = false
-                }
+                pollution = {enabled = false},
+                enemy_evolution = {enabled = false},
+                enemy_expansion = {enabled = false}
             }
         }
     end
