@@ -1106,7 +1106,7 @@ if settings.startup['PHI-SA'].value then
             data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
             data.raw['lab']['biolab'].science_pack_drain_rate_percent = 100
             data.raw['assembling-machine']['foundry'].effect_receiver = nil
-            data.raw['assembling-machine']['foundry'].crafting_categories = {table.unpack(data.raw['assembling-machine']['electric-furnace'].crafting_categories)}
+            data.raw['assembling-machine']['foundry'].crafting_categories = {table.unpack(data.raw['furnace']['electric-furnace'].crafting_categories)}
 
             data.raw['plant']['yumako-tree'].hidden = true
             data.raw['plant']['yumako-tree'].hidden_in_factoriopedia = true
