@@ -789,8 +789,7 @@ if settings.startup['PHI-SA'].value then
                 icons = {
                     {
                         icon = '__base__/graphics/technology/rocket-silo.png',
-                        icon_size = 256,
-                        tint = items['tint'][8]
+                        icon_size = 256
                     },
                     {
                       icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png',
@@ -818,8 +817,7 @@ if settings.startup['PHI-SA'].value then
                 icons = {
                     {
                         icon = '__base__/graphics/technology/concrete.png',
-                        icon_size = 256,
-                        tint = items['tint'][8]
+                        icon_size = 256
                     },
                     {
                       icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png',
@@ -846,9 +844,8 @@ if settings.startup['PHI-SA'].value then
                 },
                 icons = {
                     {
-                        icon = '__base__/graphics/technology/concrete.png',
-                        icon_size = 256,
-                        tint = items['tint'][8]
+                        icon = '__base__/graphics/technology/landfill.png',
+                        icon_size = 256
                     },
                     {
                       icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png',
