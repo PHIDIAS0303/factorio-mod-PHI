@@ -804,7 +804,7 @@ if settings.startup['PHI-SA'].value then
                 localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ''}
             }})
 
-            for _, v in pairs({'concrete', 'landfill', 'advanced-circuit', 'explosives', 'battery', 'engine-unit', 'electric-engine-unit', 'flying-robot-frame'}) do
+            for _, v in pairs({'concrete', 'landfill', 'advanced-circuit', 'explosives', 'battery', 'engine', 'electric-engine', 'robotics', sulfur-processing}) do
                 data:extend({{
                     type = 'technology',
                     name = v .. '-productivity',
@@ -836,12 +836,10 @@ if settings.startup['PHI-SA'].value then
 
             table.insert(data.raw.technology['concrete-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'refined-concrete', change = 0.1})
             table.insert(data.raw.technology['explosives-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'cliff-explosives', change = 0.1})
-            data.raw.technology['engine-unit-productivity'].prerequisites[1] = 'engine'
-            data.raw.technology['engine-unit-productivity'].icons[1].icon = '__base__/graphics/technology/engine.png'
-            data.raw.technology['electric-engine-unit-productivity'].prerequisites[1] = 'electric-engine'
-            data.raw.technology['electric-engine-unit-productivity'].icons[1].icon = '__base__/graphics/technology/electric-engine.png'
-            data.raw.technology['flying-robot-frame-productivity'].prerequisites[1] = 'robotics'
-            data.raw.technology['flying-robot-frame-productivity'].icons[1].icon = '__base__/graphics/technology/robotics.png'
+            data.raw.technology['engine-productivity'].effects[1].recipe = 'engine-unit'
+            data.raw.technology['electric-engine-productivity'].effects[1].recipe = 'electric-engine-unit'
+            data.raw.technology['robotics-productivity'].effects[1].recipe = 'flying-robot-frame'
+            data.raw.technology['explosives-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'sulfuric-acid', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'sulfur', change = 0.1}
 
             data:extend({{
                 type = 'technology',
@@ -897,34 +895,6 @@ if settings.startup['PHI-SA'].value then
                 max_level = 10,
                 upgrade = true,
                 localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
-            }})
-
-            data:extend({{
-                type = 'technology',
-                name = 'sulfur-processing-productivity',
-                prerequisites = {'sulfur-processing', 'production-science-pack'},
-                effects = {{type = 'change-recipe-productivity', recipe = 'sulfuric-acid', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'sulfur', change = 0.1}},
-                unit = {
-                    count_formula = '500 * (1.2 ^ L)',
-                    ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}},
-                    time = 30
-                },
-                icons = {
-                    {
-                        icon = '__base__/graphics/technology/sulfur-processing.png',
-                        icon_size = 256
-                    },
-                    {
-                      icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png',
-                      icon_size = 128,
-                      scale = 0.5,
-                      shift = {50, 50}
-                    }
-                },
-                order = 'a-i-b',
-                max_level = 10,
-                upgrade = true,
-                localised_name = {'phi-cl.combine', {'technology-name.sulfur-processing'}, ''}
             }})
 
             for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'tungsten_ore'}) do
