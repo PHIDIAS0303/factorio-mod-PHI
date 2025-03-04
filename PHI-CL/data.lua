@@ -804,7 +804,7 @@ if settings.startup['PHI-SA'].value then
                 localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ''}
             }})
 
-            for _, v in pairs({'concrete', 'landfill', 'electronics', 'advanced-circuit', 'explosives', 'battery', 'engine', 'electric-engine', 'robotics', 'sulfur-processing'}) do
+            for _, v in pairs({'concrete', 'landfill', 'electronics', 'advanced-circuit', 'explosives', 'battery', 'engine', 'electric-engine', 'robotics', 'sulfur-processing', 'solar-energy', 'electric-energy-accumulator', 'railway'}) do
                 data:extend({{
                     type = 'technology',
                     name = v .. '-productivity',
@@ -841,6 +841,9 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['robotics-productivity'].effects[1].recipe = 'flying-robot-frame'
             data.raw.technology['sulfur-processing-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'sulfuric-acid', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'sulfur', change = 0.1}}
             data.raw.technology['electronics-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'copper-cable', change = 0.1}}
+            data.raw.technology['solar-energy-productivity'].effects[1].recipe = 'solar-panel'
+            data.raw.technology['electric-energy-accumulator-productivity'].effects[1].recipe = 'accumulator'
+            data.raw.technology['railway-productivity'].effects[1].recipe = 'rail'
 
             data:extend({{
                 type = 'technology',
