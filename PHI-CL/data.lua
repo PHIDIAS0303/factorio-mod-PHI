@@ -494,28 +494,6 @@ if settings.startup['PHI-SA'].value then
     end
 
     if settings.startup['PHI-SA-RESTRICTION'].value and mods['space-age'] then
-        local location = items['general']['graphics_location'] .. ((tonumber(mods['space-age']:match('(%d+)$') or 0) < 34 and 'signal-2') or 'signal-1') .. '/'
-        local nsg = {
-            ['virtual-signal-number'] = true,
-            ['virtual-signal-letter'] = true
-        }
-        local s = {}
-
-        for _, v in pairs(data.raw['virtual-signal']) do
-            if nsg[v.subgroup] then
-                table.insert(s, {
-                    type = 'virtual-signal',
-                    name = v.name .. 'A',
-                    icon = location .. v.name:gsub('-', '_') .. '.png',
-                    subgroup = v.subgroup,
-                    order = (v.subgroup == 'virtual-signal-number' and 'b[numbers]2-[' or 'c[letters]2-[') .. v.name:gsub('signal-', '') .. ']',
-                    localised_name = {'phi-cl.combine', 'virtual-signal-name.' .. v.name, '(II)'}
-                })
-            end
-        end
-
-        data:extend(s)
-
         data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
 
         for _, v in pairs({'heavy-oil', 'lava', 'ammoniacal-solution'}) do
@@ -1280,6 +1258,28 @@ if settings.startup['PHI-CT'].value then
     end
 
     if settings.startup['PHI-CT-UTILITY'].value then
+        local location = items['general']['graphics_location'] .. ((tonumber(mods['space-age']:match('(%d+)$') or 0) < 34 and 'signal-2') or 'signal-1') .. '/'
+        local nsg = {
+            ['virtual-signal-number'] = true,
+            ['virtual-signal-letter'] = true
+        }
+        local s = {}
+
+        for _, v in pairs(data.raw['virtual-signal']) do
+            if nsg[v.subgroup] then
+                table.insert(s, {
+                    type = 'virtual-signal',
+                    name = v.name .. 'A',
+                    icon = location .. v.name:gsub('-', '_') .. '.png',
+                    subgroup = v.subgroup,
+                    order = (v.subgroup == 'virtual-signal-number' and 'b[numbers]2-[' or 'c[letters]2-[') .. v.name:gsub('signal-', '') .. ']',
+                    localised_name = {'phi-cl.combine', 'virtual-signal-name.' .. v.name, '(II)'}
+                })
+            end
+        end
+
+        data:extend(s)
+
         for _, t in pairs({'arithmetic-combinator', 'decider-combinator', 'programmable-speaker', 'selector-combinator'}) do
             data.raw[t][t].energy_source.usage_priority = 'primary-input'
         end

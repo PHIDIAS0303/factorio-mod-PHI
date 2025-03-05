@@ -1,16 +1,23 @@
 ---------------------------------------------------------------------------------------------------
+Version: 3.0.68
+Date: 2025-03-06
+
+  Features:
+    - [CT] Additional signal of numbers and letter, by using the two set of signal icon before and after update.
+
+---------------------------------------------------------------------------------------------------
 Version: 3.0.67
 Date: 2025-03-05
 
   Changes:
-    - [SA] allow foundry in sa vanilla, with different set of recipe instead.
+    - [SA] Allow foundry in sa vanilla, with different set of recipe instead.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.66
 Date: 2025-03-05
 
   Changes:
-    - [SA] some code clean up.
+    - [SA] Some code clean up.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.65
