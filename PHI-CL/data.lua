@@ -495,9 +495,13 @@ if settings.startup['PHI-SA'].value then
 
     if settings.startup['PHI-SA-RESTRICTION'].value and mods['space-age'] then
         local location = '__PHI-CL__/graphics/' .. ((tonumber(mods['space-age']:match('(%d+)$') or 0) < 34 and 'signal-2') or 'signal-1') .. '/'
+        local nsg = {
+            ['virtual-signal-number'] = true,
+            ['virtual-signal-letter'] = true
+        }
 
         for _, v in pairs(data.raw['virtual-signal']) do
-            if v.subgroup ~= 'virtual-signal-special' then
+            if nsg[v.subgroup] then
                 data:extend({
                     type = 'virtual-signal',
                     name = v.name .. '-2',
