@@ -357,7 +357,7 @@ local items = {
         }
     },
     ['space-age'] = {
-        ['PHI-SA-VANILLA'] = {
+        ['PHI-VP-MAIN'] = {
             ['technology'] = {
                 ['planet-discovery-vulcanus'] = true,
                 ['planet-discovery-gleba'] = true,
