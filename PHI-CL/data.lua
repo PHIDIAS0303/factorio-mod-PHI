@@ -494,28 +494,17 @@ if settings.startup['PHI-SA'].value then
     end
 
     if settings.startup['PHI-SA-RESTRICTION'].value and mods['space-age'] then
-        if tonumber(mods['space-age']:match('(%d+)$') or 0) < 34 then
-            for _, v in pairs(data.raw['virtual-signal']) do
-                local s = {table.unpack(v)}
+        local location = '__PHI-CL__/graphics/' .. ((tonumber(mods['space-age']:match('(%d+)$') or 0) < 34 and 'signal-2') or 'signal-1') .. '/'
 
-                if s.subgroup ~= 'virtual-signal-special' then
-                    s.name = s.name .. '-2'
-                    s.order = s.order .. '-2'
-                    s.icon = '__PHI-CL__/graphics/signal-2/' .. v.name .. '.png'
-                    data:extend({s})
-                end
-            end
-
-        else
-            for _, v in pairs(data.raw['virtual-signal']) do
-                local s = {table.unpack(v)}
-
-                if s.subgroup ~= 'virtual-signal-special' then
-                    s.name = s.name .. '-2'
-                    s.order = s.order .. '-2'
-                    s.icon = '__PHI-CL__/graphics/signal-1/' .. v.name .. '.png'
-                    data:extend({s})
-                end
+        for _, v in pairs(data.raw['virtual-signal']) do
+            if v.subgroup ~= 'virtual-signal-special' then
+                data:extend({
+                    type = 'virtual-signal',
+                    name = v.name .. '-2',
+                    icon = location .. v.name .. '.png',
+                    subgroup = v.subgroup,
+                    order = v.order .. '-2'
+                })
             end
         end
 
