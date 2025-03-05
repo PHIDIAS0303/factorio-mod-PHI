@@ -494,6 +494,31 @@ if settings.startup['PHI-SA'].value then
     end
 
     if settings.startup['PHI-SA-RESTRICTION'].value and mods['space-age'] then
+        if tonumber(mods['space-age']:match('(%d+)$') or 0) < 34 then
+            for _, v in pairs(data.raw['virtual-signal']) do
+                local s = {table.unpack(v)}
+
+                if s.subgroup ~= 'virtual-signal-special' then
+                    s.name = s.name .. '-2'
+                    s.order = s.order .. '-2'
+                    s.icon = '__PHI-CL__/graphics/signal-2/' .. v.name .. '.png'
+                    data:extend({s})
+                end
+            end
+
+        else
+            for _, v in pairs(data.raw['virtual-signal']) do
+                local s = {table.unpack(v)}
+
+                if s.subgroup ~= 'virtual-signal-special' then
+                    s.name = s.name .. '-2'
+                    s.order = s.order .. '-2'
+                    s.icon = '__PHI-CL__/graphics/signal-1/' .. v.name .. '.png'
+                    data:extend({s})
+                end
+            end
+        end
+
         data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
 
         for _, v in pairs({'heavy-oil', 'lava', 'ammoniacal-solution'}) do
@@ -1463,6 +1488,16 @@ if settings.startup['PHI-CT'].value then
             table.insert(data.raw.technology['logistic-system'].effects, {type = 'unlock-recipe', recipe = 'basic-' .. r .. '-chest'})
         end
     end
+
+    --[[
+    data:extend({{
+        type = 'virtual-signal',
+        name = 'signal-A',
+        icon = '__PHI-CL__/graphics/signal-1/signal_A.png',
+        subgroup = 'virtual-signal-letter',
+        order = 'a[special]-[1everything]
+    }})
+    ]]
 
     if settings.startup['PHI-CT-HIDDEN'].value then
         local item = table.deepcopy(data.raw['item']['linked-chest'])
