@@ -510,7 +510,7 @@ if settings.startup['PHI-SA'].value then
                     hide_from_player_crafting = true,
                     allow_productivity = false,
                     crafting_machine_tint = {primary=data.raw.fluid[v].flow_color},
-                    localised_name = data.raw.fluid[v].localised_name
+                    localised_name = localised_name = {'phi-cl.combine', {'fluid-name.' .. v}, ''}
                 }})
             end
         end
