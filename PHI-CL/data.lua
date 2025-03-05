@@ -494,7 +494,7 @@ if settings.startup['PHI-SA'].value then
     end
 
     if settings.startup['PHI-SA-RESTRICTION'].value and mods['space-age'] then
-        local location = '__PHI-CL__/graphics/' .. ((tonumber(mods['space-age']:match('(%d+)$') or 0) < 34 and 'signal-2') or 'signal-1') .. '/'
+        local location = items['general']['graphics_location'] .. ((tonumber(mods['space-age']:match('(%d+)$') or 0) < 34 and 'signal-2') or 'signal-1') .. '/'
         local nsg = {
             ['virtual-signal-number'] = true,
             ['virtual-signal-letter'] = true
@@ -504,10 +504,10 @@ if settings.startup['PHI-SA'].value then
             if nsg[v.subgroup] then
                 data:extend({
                     type = 'virtual-signal',
-                    name = v.name .. '-2',
+                    name = v.name .. 'A',
                     icon = location .. v.name .. '.png',
                     subgroup = v.subgroup,
-                    order = v.order .. '-2'
+                    order = v.order .. 'A'
                 })
             end
         end
@@ -1481,16 +1481,6 @@ if settings.startup['PHI-CT'].value then
             table.insert(data.raw.technology['logistic-system'].effects, {type = 'unlock-recipe', recipe = 'basic-' .. r .. '-chest'})
         end
     end
-
-    --[[
-    data:extend({{
-        type = 'virtual-signal',
-        name = 'signal-A',
-        icon = '__PHI-CL__/graphics/signal-1/signal_A.png',
-        subgroup = 'virtual-signal-letter',
-        order = 'a[special]-[1everything]
-    }})
-    ]]
 
     if settings.startup['PHI-CT-HIDDEN'].value then
         local item = table.deepcopy(data.raw['item']['linked-chest'])
