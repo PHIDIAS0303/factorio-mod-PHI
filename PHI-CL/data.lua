@@ -508,7 +508,8 @@ if settings.startup['PHI-SA'].value then
                     name = v.name .. 'A',
                     icon = location .. v.name:gsub('-', '_') .. '.png',
                     subgroup = v.subgroup,
-                    order = (v.subgroup == 'virtual-signal-number' and ('b[numbers]-[A' .. v.name:gsub('signal-', '') .. ']')) or ('c[letters]-[A' .. v.name:gsub('signal-', '') .. ']')
+                    order = (v.subgroup == 'virtual-signal-number' and ('b[numbers]-[ZZ' .. v.name:gsub('signal-', '') .. ']')) or ('c[letters]-[ZZ' .. v.name:gsub('signal-', '') .. ']')
+                    localised_name = {'phi-cl.combine', v.localised_name, ' (II)'}
                 })
             end
         end
