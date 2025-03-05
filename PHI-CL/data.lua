@@ -846,6 +846,7 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['solar-energy-productivity'].effects[1].recipe = 'solar-panel'
             data.raw.technology['electric-energy-accumulators-productivity'].effects[1].recipe = 'accumulator'
             data.raw.technology['electric-energy-accumulators-productivity'].icons[1].icon = '__base__/graphics/technology/electric-energy-acumulators.png'
+            data.raw.technology['electric-energy-accumulators-productivity'].localised_name = {'phi-cl.combine', {'technology-name.electric-energy-accumulators-1'}, ''}
             data.raw.technology['railway-productivity'].effects[1].recipe = 'rail'
             data.raw.technology['automation-productivity'].prerequisites[1] = 'logistics-2'
             data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'pipe', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.1}}
@@ -1253,7 +1254,7 @@ if settings.startup['PHI-CT'].value then
                     hide_from_player_crafting = true,
                     allow_productivity = false,
                     crafting_machine_tint = {primary=v.flow_color},
-                    localised_name = v.localised_name
+                    localised_name = {'phi-cl.combine', {'fluid-name.' .. v.name}, ''}
                 }})
             end
         end
