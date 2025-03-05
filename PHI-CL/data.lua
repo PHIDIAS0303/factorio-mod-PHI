@@ -499,18 +499,21 @@ if settings.startup['PHI-SA'].value then
             ['virtual-signal-number'] = true,
             ['virtual-signal-letter'] = true
         }
+        local s = {}
 
         for _, v in pairs(data.raw['virtual-signal']) do
             if nsg[v.subgroup] then
-                data:extend({{
+                table.insert(s, {
                     type = 'virtual-signal',
                     name = v.name .. 'A',
                     icon = location .. v.name:gsub('-', '_') .. '.png',
                     subgroup = v.subgroup,
                     order = (v.subgroup == 'virtual-signal-number' and ('b[numbers]-[A' .. v.name:gsub('signal-', '') .. ']')) or ('c[letters]-[A' .. v.name:gsub('signal-', '') .. ']')
-                }})
+                })
             end
         end
+
+        data:extend(s)
 
         data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
 
