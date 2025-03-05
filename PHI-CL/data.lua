@@ -703,6 +703,8 @@ if settings.startup['PHI-SA'].value then
 
     if settings.startup['PHI-SA-VANILLA'].value then
         if mods['space-age'] then
+            table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
+
             for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
                 data.raw.planet[v].map_gen_settings = nil
                 data.raw.planet[v].hidden = true
