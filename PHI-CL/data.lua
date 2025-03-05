@@ -868,7 +868,7 @@ if settings.startup['PHI-SA'].value then
             data.raw.technology['electric-energy-accumulators-productivity'].icons[1].icon = '__base__/graphics/technology/electric-energy-acumulators.png'
             data.raw.technology['railway-productivity'].effects[1].recipe = 'rail'
             data.raw.technology['automation-productivity'].prerequisites[1] = 'logistics-2'
-            data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'pipe', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.1}}
+            data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'pipe', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.1}}
             data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
             data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
 
