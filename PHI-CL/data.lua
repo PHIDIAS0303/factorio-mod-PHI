@@ -501,9 +501,14 @@ if settings.startup['PHI-SA'].value then
         }
 
         for _, v in pairs(data.raw['virtual-signal']) do
-            
             if nsg[v.subgroup] then
-                v.icon = location .. v.name .. '.png'
+                data:extend({{
+                    type = 'virtual-signal',
+                    name = v.name .. 'A',
+                    icon = location .. v.name:gsub('-', '_') .. '.png',
+                    subgroup = v.subgroup,
+                    order = (v.subgroup == 'virtual-signal-number' and ('b[numbers]-[A' .. v.name:gsub('signal-', '') .. ']')) or ('c[letters]-[A' .. v.name:gsub('signal-', '') .. ']')
+                }})
             end
         end
 
