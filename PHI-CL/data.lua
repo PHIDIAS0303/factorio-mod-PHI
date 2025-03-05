@@ -145,7 +145,7 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
     end
 end
 
-if settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-VANILLA'].value) then
+if settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value) then
     data.raw['mining-drill']['electric-mining-drill'].filter_count = 5
 
     if mods['space-age'] then
@@ -297,7 +297,7 @@ if settings.startup['PHI-MI'].value then
     data.raw['utility-constants'].default.default_item_weight = settings.startup['PHI-MI-CARGO-WEIGHT'].value
 end
 
-if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) or (settings.startup['PHI-MI'].value) or (settings.startup['PHI-SA'].value and (settings.startup['PHI-SA-RESTRICTION'].value or settings.startup['PHI-SA-VANILLA'].value)) then
+if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) or (settings.startup['PHI-MI'].value) or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value) then
     data:extend({{type = 'recipe-category', name = 'fluid'}})
 
     item = table.deepcopy(data.raw['item']['offshore-pump'])
@@ -375,6 +375,126 @@ if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) 
             crafting_machine_tint = {primary=data.raw.fluid['water'].flow_color},
             localised_name = {'phi-cl.combine', data.raw.fluid['water'].localised_name, ''}
         }})
+    end
+end
+
+if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value)) then
+    for k, v in pairs(items['space-age']['PHI-SA-RESTRICTION']['surface_conditions']) do
+        data.raw[v][k].surface_conditions = nil
+    end
+
+    for _, v in pairs(data.raw.recipe) do
+        v.surface_conditions = nil
+    end
+end
+
+if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-MAX-QUALITY'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value)) then
+    for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
+        data.raw.technology[v] = nil
+        data.raw.module[v] = nil
+        data.raw.recipe[v] = nil
+        data.raw.recipe[v .. '-recycling'] = nil
+    end
+
+    data.raw.technology['epic-quality'] = nil
+    data.raw.technology['legendary-quality'] = nil
+
+    for _, v in pairs({'uncommon', 'rare', 'epic', 'legendary'}) do
+        data.raw.quality[v].hidden = true
+        data.raw.quality[v].hidden_in_factoriopedia = true
+    end
+
+    data.raw.quality.normal.next = nil
+    data.raw.quality.normal.next_probability = nil
+    data.raw.quality.normal.hidden = true
+    data.raw.quality.normal.hidden_in_factoriopedia = true
+
+    data.raw['tips-and-tricks-item']['quality'] = nil
+    data.raw['tips-and-tricks-item']['quality-modules'] = nil
+    data.raw['tips-and-tricks-item']['quality-factoriopedia'] = nil
+    data.raw['tips-and-tricks-item']['quality-probabilities'] = nil
+
+    data.raw['produce-achievement']['crafting-with-quality'] = nil
+    data.raw['module-transfer-achievement']['make-it-better'] = nil
+    data.raw['produce-achievement']['my-modules-are-legendary'] = nil
+    data.raw['equip-armor-achievement']['look-at-my-shiny-rare-armor'] = nil
+    data.raw['use-item-achievement']['todays-fish-is-trout-a-la-creme'] = nil
+    data.raw['place-equipment-achievement']['no-room-for-more'] = nil
+end
+
+if mods['space-age'] and ((settings.startup['PHI-SA'].value or settings.startup['PHI-SA-GENERIC'].value) or (settings.startup['PHI-VP'].value or settings.startup['PHI-VP-MAIN'].value)) then
+    data.raw.resource['lithium-brine'].infinite = true
+    data.raw.resource['lithium-brine'].minimum = 60000
+    data.raw.resource['lithium-brine'].normal = 300000
+    data.raw.resource['lithium-brine'].infinite_depletion_amount = 10
+    data.raw.resource['fluorine-vent'].minimum = 60000
+    data.raw.resource['fluorine-vent'].normal = 300000
+
+    data.raw['roboport']['roboport'].charging_station_count_affected_by_quality = true
+    data.raw['roboport-equipment']['personal-roboport-equipment'].charging_station_count_affected_by_quality = true
+    data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier = 2
+    data.raw['space-platform-hub']['space-platform-hub'].inventory_size = 119
+    data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus = 40
+    data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 60
+    data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 60
+
+    data.raw.technology['foundation'].prerequisites = {'elevated-rail', 'rail-support-foundations'}
+    data.raw.technology['foundation'].unit.count_formula = '1000'
+    data.raw.technology['foundation'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+    data.raw.technology['rail-support-foundations'].prerequisites = {'elevated-rail'}
+    data.raw.technology['rail-support-foundations'].unit.count = 600
+    data.raw.technology['rail-support-foundations'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+    data.raw.technology['elevated-rail'].prerequisites = {'concrete'}
+    data.raw.technology['elevated-rail'].unit.count = 200
+    data.raw.technology['elevated-rail'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}
+
+    data.raw.recipe['foundation'].ingredients = {{type = 'item', name = 'stone', amount = 40}, {type = 'item', name = 'refined-concrete', amount = 20}, {type = 'item', name = 'steel-plate', amount = 20}}
+    data.raw.recipe['foundation'].results = {{type = 'item', name = 'foundation', amount = 10}}
+    data.raw.recipe['atomic-bomb'].ingredients[3] = {type = 'item', name = 'uranium-235', amount = 30}
+    data.raw.recipe['artillery-turret'].ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'concrete', amount = 60}, {type = 'item', name = 'iron-gear-wheel', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}}
+    data.raw.recipe['artillery-shell'].ingredients = {{type = 'item', name = 'explosive-cannon-shell', amount = 4}, {type = 'item', name = 'radar', amount = 1}, {type = 'item', name = 'explosives', amount = 8}}
+    data.raw.recipe['artillery-wagon'].ingredients = {{type = 'item', name = 'engine-unit', amount = 64}, {type = 'item', name = 'iron-gear-wheel', amount = 10}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'pipe', amount = 16}, {type = 'item', name = 'advanced-circuit', amount = 20}}
+
+    table.insert(data.raw['thruster']['thruster'].fuel_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.west, position = {-1.5, 2}})
+    table.insert(data.raw['thruster']['thruster'].oxidizer_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.east, position = {1.5, 2}})
+
+    for _, v in pairs(data.raw['cargo-wagon']) do
+        v.quality_affects_inventory_size = true
+    end
+
+    for _, v in pairs(data.raw['fluid-wagon']) do
+        v.quality_affects_inventory_size = true
+    end
+
+    data.raw.tile['space-platform-foundation'].max_health = data.raw.tile['space-platform-foundation'].max_health * 2
+    data.raw.item['space-platform-foundation'].stack_size = 100
+
+    data.raw['ammo-turret']['railgun-turret'].starting_attack_speed = 1
+    data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_secondary = 1
+    data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_when_killed = 1
+    data.raw['ammo-turret']['railgun-turret'].preparing_speed = 1
+    data.raw['ammo-turret']['railgun-turret'].attacking_speed = 1
+    data.raw['ammo-turret']['railgun-turret'].ending_attack_speed = 1
+    data.raw['ammo-turret']['railgun-turret'].folding_speed = 1
+    data.raw['ammo-turret']['railgun-turret'].energy_source.input_flow_limit = tonumber(string.match(data.raw['ammo-turret']['railgun-turret'].energy_source.input_flow_limit, '[%d%.]+')) * 32 .. string.match(data.raw['ammo-turret']['railgun-turret'].energy_source.input_flow_limit, '%a+')
+
+    for _, v in pairs({'carbonic-asteroid-chunk', 'metallic-asteroid-chunk', 'promethium-asteroid-chunk', 'oxide-asteroid-chunk', 'artillery-shell'}) do
+        if data.raw.item[v] then
+            data.raw.item[v].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
+        end
+    end
+
+    for _, v in pairs(data.raw.tile) do
+        if v.fluid then
+            v.destroys_dropped_items = true
+            v.default_destroyed_dropped_item_trigger = nil
+        end
+    end
+
+    for _, v in pairs(data.raw.recipe) do
+        if v.maximum_productivity then
+            v.maximum_productivity = nil
+        end
     end
 end
 
@@ -483,16 +603,6 @@ if settings.startup['PHI-SA'].value then
         end
     end
 
-    if (settings.startup['PHI-SA-RESTRICTION'].value or settings.startup['PHI-SA-VANILLA'].value) and mods['space-age'] then
-        for k, v in pairs(items['space-age']['PHI-SA-RESTRICTION']['surface_conditions']) do
-            data.raw[v][k].surface_conditions = nil
-        end
-
-        for _, v in pairs(data.raw.recipe) do
-            v.surface_conditions = nil
-        end
-    end
-
     if settings.startup['PHI-SA-RESTRICTION'].value and mods['space-age'] then
         data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
 
@@ -571,40 +681,6 @@ if settings.startup['PHI-SA'].value then
         end
     end
 
-    if (settings.startup['PHI-SA-MAX-QUALITY'].value or settings.startup['PHI-SA-VANILLA'].value) and mods['space-age'] then
-        for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
-            data.raw.technology[v] = nil
-            data.raw.module[v] = nil
-            data.raw.recipe[v] = nil
-            data.raw.recipe[v .. '-recycling'] = nil
-        end
-
-        data.raw.technology['epic-quality'] = nil
-        data.raw.technology['legendary-quality'] = nil
-
-        for _, v in pairs({'uncommon', 'rare', 'epic', 'legendary'}) do
-            data.raw.quality[v].hidden = true
-            data.raw.quality[v].hidden_in_factoriopedia = true
-        end
-
-        data.raw.quality.normal.next = nil
-        data.raw.quality.normal.next_probability = nil
-        data.raw.quality.normal.hidden = true
-        data.raw.quality.normal.hidden_in_factoriopedia = true
-
-        data.raw['tips-and-tricks-item']['quality'] = nil
-        data.raw['tips-and-tricks-item']['quality-modules'] = nil
-        data.raw['tips-and-tricks-item']['quality-factoriopedia'] = nil
-        data.raw['tips-and-tricks-item']['quality-probabilities'] = nil
-
-        data.raw['produce-achievement']['crafting-with-quality'] = nil
-        data.raw['module-transfer-achievement']['make-it-better'] = nil
-        data.raw['produce-achievement']['my-modules-are-legendary'] = nil
-        data.raw['equip-armor-achievement']['look-at-my-shiny-rare-armor'] = nil
-        data.raw['use-item-achievement']['todays-fish-is-trout-a-la-creme'] = nil
-        data.raw['place-equipment-achievement']['no-room-for-more'] = nil
-    end
-
     if settings.startup['PHI-SA-MAX-QUALITY'].value and mods['quality'] then
         data.raw.quality.normal.level = 5
         data.raw.quality.normal.beacon_power_usage_multiplier = 1 / 6
@@ -624,173 +700,125 @@ if settings.startup['PHI-SA'].value then
             end
         end
     end
+end
 
-    if (settings.startup['PHI-SA-GENERIC'].value or settings.startup['PHI-SA-VANILLA'].value) and mods['space-age'] then
-        data.raw.resource['lithium-brine'].infinite = true
-        data.raw.resource['lithium-brine'].minimum = 60000
-        data.raw.resource['lithium-brine'].normal = 300000
-        data.raw.resource['lithium-brine'].infinite_depletion_amount = 10
-        data.raw.resource['fluorine-vent'].minimum = 60000
-        data.raw.resource['fluorine-vent'].normal = 300000
-
-        data.raw['roboport']['roboport'].charging_station_count_affected_by_quality = true
-        data.raw['roboport-equipment']['personal-roboport-equipment'].charging_station_count_affected_by_quality = true
-        data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier = 2
-        data.raw['space-platform-hub']['space-platform-hub'].inventory_size = 119
-        data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus = 40
-        data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 60
-        data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 60
-
-        data.raw.technology['foundation'].prerequisites = {'elevated-rail', 'rail-support-foundations'}
-        data.raw.technology['foundation'].unit.count_formula = '1000'
-        data.raw.technology['foundation'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-        data.raw.technology['rail-support-foundations'].prerequisites = {'elevated-rail'}
-        data.raw.technology['rail-support-foundations'].unit.count = 600
-        data.raw.technology['rail-support-foundations'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-        data.raw.technology['elevated-rail'].prerequisites = {'concrete'}
-        data.raw.technology['elevated-rail'].unit.count = 200
-        data.raw.technology['elevated-rail'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}
-
-        data.raw.recipe['foundation'].ingredients = {{type = 'item', name = 'stone', amount = 40}, {type = 'item', name = 'refined-concrete', amount = 20}, {type = 'item', name = 'steel-plate', amount = 20}}
-        data.raw.recipe['foundation'].results = {{type = 'item', name = 'foundation', amount = 10}}
-        data.raw.recipe['atomic-bomb'].ingredients[3] = {type = 'item', name = 'uranium-235', amount = 30}
-        data.raw.recipe['artillery-turret'].ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'concrete', amount = 60}, {type = 'item', name = 'iron-gear-wheel', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}}
-        data.raw.recipe['artillery-shell'].ingredients = {{type = 'item', name = 'explosive-cannon-shell', amount = 4}, {type = 'item', name = 'radar', amount = 1}, {type = 'item', name = 'explosives', amount = 8}}
-        data.raw.recipe['artillery-wagon'].ingredients = {{type = 'item', name = 'engine-unit', amount = 64}, {type = 'item', name = 'iron-gear-wheel', amount = 10}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'pipe', amount = 16}, {type = 'item', name = 'advanced-circuit', amount = 20}}
-
-        table.insert(data.raw['thruster']['thruster'].fuel_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.west, position = {-1.5, 2}})
-        table.insert(data.raw['thruster']['thruster'].oxidizer_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.east, position = {1.5, 2}})
-
-        for _, v in pairs(data.raw['cargo-wagon']) do
-            v.quality_affects_inventory_size = true
+if settings.startup['PHI-VP'].value then
+    if mods['space-age'] and settings.startup['PHI-VP-MAIN'].value then
+        for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
+            data.raw.planet[v].map_gen_settings = nil
+            data.raw.planet[v].hidden = true
+            data.raw.planet[v].hidden_in_factoriopedia = true
+            data.raw['change-surface-achievement']['visit-' .. v] = nil
         end
 
-        for _, v in pairs(data.raw['fluid-wagon']) do
-            v.quality_affects_inventory_size = true
+        for _, v in pairs(data.raw['space-location']) do
+            v.hidden = true
+            v.hidden_in_factoriopedia = true
         end
 
-        data.raw.tile['space-platform-foundation'].max_health = data.raw.tile['space-platform-foundation'].max_health * 2
-        data.raw.item['space-platform-foundation'].stack_size = 100
-
-        data.raw['ammo-turret']['railgun-turret'].starting_attack_speed = 1
-        data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_secondary = 1
-        data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_when_killed = 1
-        data.raw['ammo-turret']['railgun-turret'].preparing_speed = 1
-        data.raw['ammo-turret']['railgun-turret'].attacking_speed = 1
-        data.raw['ammo-turret']['railgun-turret'].ending_attack_speed = 1
-        data.raw['ammo-turret']['railgun-turret'].folding_speed = 1
-        data.raw['ammo-turret']['railgun-turret'].energy_source.input_flow_limit = tonumber(string.match(data.raw['ammo-turret']['railgun-turret'].energy_source.input_flow_limit, '[%d%.]+')) * 32 .. string.match(data.raw['ammo-turret']['railgun-turret'].energy_source.input_flow_limit, '%a+')
-
-        for _, v in pairs({'carbonic-asteroid-chunk', 'metallic-asteroid-chunk', 'promethium-asteroid-chunk', 'oxide-asteroid-chunk', 'artillery-shell'}) do
-            if data.raw.item[v] then
-                data.raw.item[v].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
-            end
+        for _, v in pairs(data.raw['space-connection']) do
+            v.hidden = true
+            v.hidden_in_factoriopedia = true
         end
 
-        for _, v in pairs(data.raw.tile) do
-            if v.fluid then
-                v.destroys_dropped_items = true
-                v.default_destroyed_dropped_item_trigger = nil
-            end
+        for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
+            data.raw['utility-constants']['default'].main_menu_simulations[v] = nil
         end
 
-        for _, v in pairs(data.raw.recipe) do
-            if v.maximum_productivity then
-                v.maximum_productivity = nil
-            end
+        data.raw['dont-build-entity-achievement']['logistic-network-embargo'].research_with = nil
+        data.raw['create-platform-achievement']['reach-for-the-stars'] = nil
+        data.raw['complete-objective-achievement']['second-star-to-the-right-and-straight-on-till-morning'] = nil
+        data.raw['dont-research-before-researching-achievement']['rush-to-space'] = nil
+
+        for _, v in pairs({'shattered-planet-1', 'shattered-planet-2', 'shattered-planet-3'}) do
+            data.raw['space-connection-distance-traveled-achievement'][v] = nil
         end
-    end
 
-    if settings.startup['PHI-SA-VANILLA'].value then
-        if mods['space-age'] then
-            table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
+        data.raw.technology['rocket-silo'].effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}}
+        data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = false
+        data.raw['rocket-silo']['rocket-silo'].rocket_parts_required = 100
+        data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 1
+        data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 0
+        data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 0
 
-            for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
-                data.raw.planet[v].map_gen_settings = nil
-                data.raw.planet[v].hidden = true
-                data.raw.planet[v].hidden_in_factoriopedia = true
-                data.raw['change-surface-achievement']['visit-' .. v] = nil
-            end
+        local item_sounds = require('__base__/prototypes/item_sounds')
 
-            for _, v in pairs(data.raw['space-location']) do
-                v.hidden = true
-                v.hidden_in_factoriopedia = true
-            end
+        data:extend({
+            {
+                type = 'item',
+                name = 'satellite',
+                icon = '__base__/graphics/icons/satellite.png',
+                subgroup = 'space-related',
+                order = 'd[rocket-parts]-e[satellite]',
+                inventory_move_sound = item_sounds.mechanical_inventory_move,
+                pick_sound = item_sounds.mechanical_inventory_pickup,
+                drop_sound = item_sounds.mechanical_inventory_move,
+                stack_size = 1,
+                weight = 1 * tons,
+                rocket_launch_products = {{type = 'item', name = 'space-science-pack', amount = 1000}},
+                send_to_orbit_mode = 'automated'
+            },
+            {
+                type = 'recipe',
+                name = 'satellite',
+                energy_required = 5,
+                enabled = false,
+                category = 'crafting',
+                ingredients = {
+                    {type = 'item', name = 'low-density-structure', amount = 100},
+                    {type = 'item', name = 'solar-panel', amount = 100},
+                    {type = 'item', name = 'accumulator', amount = 100},
+                    {type = 'item', name = 'radar', amount = 5},
+                    {type = 'item', name = 'processing-unit', amount = 100},
+                    {type = 'item', name = 'rocket-fuel', amount = 50}
+                },
+                results = {{type = 'item', name = 'satellite', amount = 1}},
+                requester_paste_multiplier = 1
+            }
+        })
 
-            for _, v in pairs(data.raw['space-connection']) do
-                v.hidden = true
-                v.hidden_in_factoriopedia = true
-            end
-
-            for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
-                data.raw['utility-constants']['default'].main_menu_simulations[v] = nil
-            end
-
-            data.raw['dont-build-entity-achievement']['logistic-network-embargo'].research_with = nil
-            data.raw['create-platform-achievement']['reach-for-the-stars'] = nil
-            data.raw['complete-objective-achievement']['second-star-to-the-right-and-straight-on-till-morning'] = nil
-            data.raw['dont-research-before-researching-achievement']['rush-to-space'] = nil
-
-            for _, v in pairs({'shattered-planet-1', 'shattered-planet-2', 'shattered-planet-3'}) do
-                data.raw['space-connection-distance-traveled-achievement'][v] = nil
-            end
-
-            data.raw.technology['rocket-silo'].effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}}
-            data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = false
-            data.raw['rocket-silo']['rocket-silo'].rocket_parts_required = 100
-            data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 1
-            data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 0
-            data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 0
-
-            local item_sounds = require('__base__/prototypes/item_sounds')
-
-            data:extend({
+        data:extend({{
+            type = 'technology',
+            name = 'cargo-landing-pad-count',
+            prerequisites = {'rocket-silo', 'space-science-pack'},
+            effects = {{type = 'cargo-landing-pad-count', modifier = 1}},
+            unit = {
+                count_formula = '1000 * L',
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}},
+                time = 60
+            },
+            icons = {
                 {
-                    type = 'item',
-                    name = 'satellite',
-                    icon = '__base__/graphics/icons/satellite.png',
-                    subgroup = 'space-related',
-                    order = 'd[rocket-parts]-e[satellite]',
-                    inventory_move_sound = item_sounds.mechanical_inventory_move,
-                    pick_sound = item_sounds.mechanical_inventory_pickup,
-                    drop_sound = item_sounds.mechanical_inventory_move,
-                    stack_size = 1,
-                    weight = 1 * tons,
-                    rocket_launch_products = {{type = 'item', name = 'space-science-pack', amount = 1000}},
-                    send_to_orbit_mode = 'automated'
+                    icon = '__base__/graphics/technology/rocket-silo.png',
+                    icon_size = 256
                 },
                 {
-                    type = 'recipe',
-                    name = 'satellite',
-                    energy_required = 5,
-                    enabled = false,
-                    category = 'crafting',
-                    ingredients = {
-                        {type = 'item', name = 'low-density-structure', amount = 100},
-                        {type = 'item', name = 'solar-panel', amount = 100},
-                        {type = 'item', name = 'accumulator', amount = 100},
-                        {type = 'item', name = 'radar', amount = 5},
-                        {type = 'item', name = 'processing-unit', amount = 100},
-                        {type = 'item', name = 'rocket-fuel', amount = 50}
-                    },
-                    results = {{type = 'item', name = 'satellite', amount = 1}},
-                    requester_paste_multiplier = 1
+                  icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png',
+                  icon_size = 128,
+                  scale = 0.5,
+                  shift = {50, 50}
                 }
-            })
+            },
+            order = 'a-i-a',
+            max_level = 'infinite',
+            upgrade = true,
+            localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ''}
+        }})
 
+        for _, v in pairs({'concrete', 'landfill', 'automation', 'electronics', 'advanced-circuit', 'explosives', 'battery', 'engine', 'electric-engine', 'robotics', 'sulfur-processing', 'solar-energy', 'electric-energy-accumulators', 'railway'}) do
             data:extend({{
                 type = 'technology',
-                name = 'cargo-landing-pad-count',
-                prerequisites = {'rocket-silo', 'space-science-pack'},
-                effects = {{type = 'cargo-landing-pad-count', modifier = 1}},
+                name = v .. '-productivity',
+                prerequisites = {v, 'automation-3', 'production-science-pack'},
+                effects = {{type = 'change-recipe-productivity', recipe = v, change = 0.1}},
                 unit = {
-                    count_formula = '1000 * L',
-                    ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}},
-                    time = 60
+                    count_formula = '500 * (1.5 ^ (L - 1))',
+                    ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}},
+                    time = 30
                 },
                 icons = {
                     {
-                        icon = '__base__/graphics/technology/rocket-silo.png',
+                        icon = '__base__/graphics/technology/' .. v ..'.png',
                         icon_size = 256
                     },
                     {
@@ -800,368 +828,340 @@ if settings.startup['PHI-SA'].value then
                       shift = {50, 50}
                     }
                 },
-                order = 'a-i-a',
-                max_level = 'infinite',
+                order = 'a-i-b',
+                max_level = 10,
                 upgrade = true,
-                localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ''}
+                localised_name = {'phi-cl.combine', {'technology-name.' .. v}, ''}
             }})
+        end
 
-            for _, v in pairs({'concrete', 'landfill', 'automation', 'electronics', 'advanced-circuit', 'explosives', 'battery', 'engine', 'electric-engine', 'robotics', 'sulfur-processing', 'solar-energy', 'electric-energy-accumulators', 'railway'}) do
-                data:extend({{
-                    type = 'technology',
-                    name = v .. '-productivity',
-                    prerequisites = {v, 'automation-3', 'production-science-pack'},
-                    effects = {{type = 'change-recipe-productivity', recipe = v, change = 0.1}},
-                    unit = {
-                        count_formula = '500 * (1.5 ^ (L - 1))',
-                        ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}},
-                        time = 30
-                    },
-                    icons = {
-                        {
-                            icon = '__base__/graphics/technology/' .. v ..'.png',
-                            icon_size = 256
-                        },
-                        {
-                          icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png',
-                          icon_size = 128,
-                          scale = 0.5,
-                          shift = {50, 50}
-                        }
-                    },
-                    order = 'a-i-b',
-                    max_level = 10,
-                    upgrade = true,
-                    localised_name = {'phi-cl.combine', {'technology-name.' .. v}, ''}
-                }})
-            end
+        table.insert(data.raw.technology['concrete-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'refined-concrete', change = 0.1})
+        table.insert(data.raw.technology['explosives-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'cliff-explosives', change = 0.1})
+        data.raw.technology['engine-productivity'].effects[1].recipe = 'engine-unit'
+        data.raw.technology['electric-engine-productivity'].effects[1].recipe = 'electric-engine-unit'
+        data.raw.technology['robotics-productivity'].effects[1].recipe = 'flying-robot-frame'
+        data.raw.technology['sulfur-processing-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'sulfuric-acid', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'sulfur', change = 0.1}}
+        data.raw.technology['electronics-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'copper-cable', change = 0.1}}
+        data.raw.technology['solar-energy-productivity'].effects[1].recipe = 'solar-panel'
+        data.raw.technology['electric-energy-accumulators-productivity'].effects[1].recipe = 'accumulator'
+        data.raw.technology['electric-energy-accumulators-productivity'].icons[1].icon = '__base__/graphics/technology/electric-energy-acumulators.png'
+        data.raw.technology['electric-energy-accumulators-productivity'].localised_name = {'phi-cl.combine', {'technology-name.electric-energy-accumulators-1'}, ''}
+        data.raw.technology['railway-productivity'].effects[1].recipe = 'rail'
+        data.raw.technology['automation-productivity'].prerequisites[1] = 'logistics-2'
+        data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'pipe', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.1}}
+        data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
+        data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
 
-            table.insert(data.raw.technology['concrete-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'refined-concrete', change = 0.1})
-            table.insert(data.raw.technology['explosives-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'cliff-explosives', change = 0.1})
-            data.raw.technology['engine-productivity'].effects[1].recipe = 'engine-unit'
-            data.raw.technology['electric-engine-productivity'].effects[1].recipe = 'electric-engine-unit'
-            data.raw.technology['robotics-productivity'].effects[1].recipe = 'flying-robot-frame'
-            data.raw.technology['sulfur-processing-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'sulfuric-acid', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'sulfur', change = 0.1}}
-            data.raw.technology['electronics-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'copper-cable', change = 0.1}}
-            data.raw.technology['solar-energy-productivity'].effects[1].recipe = 'solar-panel'
-            data.raw.technology['electric-energy-accumulators-productivity'].effects[1].recipe = 'accumulator'
-            data.raw.technology['electric-energy-accumulators-productivity'].icons[1].icon = '__base__/graphics/technology/electric-energy-acumulators.png'
-            data.raw.technology['electric-energy-accumulators-productivity'].localised_name = {'phi-cl.combine', {'technology-name.electric-energy-accumulators-1'}, ''}
-            data.raw.technology['railway-productivity'].effects[1].recipe = 'rail'
-            data.raw.technology['automation-productivity'].prerequisites[1] = 'logistics-2'
-            data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'pipe', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.1}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.1}}
-            data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
-            data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
+        for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'tungsten_ore'}) do
+            data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v] = nil
+            data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v:gsub('_', '-')] = nil
+        end
 
-            for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'tungsten_ore'}) do
-                data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v] = nil
-                data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v:gsub('_', '-')] = nil
-            end
-
-            for _, v in pairs({'tungsten-ore', 'calcite'}) do
-                if data.raw.resource[v] then
-                    data.raw.resource[v].hidden = true
-                    data.raw.resource[v].hidden_in_factoriopedia = true
-                end
-            end
-
-            data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = nil
-            data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_plants'] = nil
-
-            for _, v in pairs({'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut', 'lowland-brown-blubber', 'lowland-olive-blubber', 'lowland-olive-blubber-2', 'lowland-olive-blubber-3', 'lowland-cream-red', 'lowland-red-vein', 'lowland-red-vein-2', 'lowland-red-vein-3', 'lowland-red-vein-4', 'lowland-red-vein-dead', 'lowland-red-infection', 'ammoniacal-ocean', 'ammoniacal-ocean-2'}) do
-                data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = nil
-            end
-
-            data.raw.recipe['landfill'].ingredients = {{type = 'item', name = 'stone', amount = math.min(20, tonumber(settings.startup['PHI-MI-LANDFILL'].value) or 20)}}
-
-            data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
-            data.raw.technology['cliff-explosives'].unit.count = 200
-            data.raw.technology['cliff-explosives'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}
-            data.raw.technology['space-science-pack'].research_trigger = nil
-            data.raw.technology['space-science-pack'].prerequisites = {'rocket-silo'}
-            data.raw.technology['space-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'satellite'}}
-            data.raw.technology['space-science-pack'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
-            data.raw.technology['space-science-pack'].unit = {count = 2000, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
-            data.raw.technology['cliff-explosives'].effects = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
-            data.raw.technology['logistic-system'].prerequisites = {'logistic-robotics'}
-            data.raw.technology['logistic-system'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['stronger-explosives-5'].prerequisites = {'stronger-explosives-4'}
-            data.raw.technology['stronger-explosives-5'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['stronger-explosives-6'].prerequisites = {'stronger-explosives-5'}
-            data.raw.technology['stronger-explosives-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['stronger-explosives-7'].prerequisites = {'stronger-explosives-6'}
-            data.raw.technology['stronger-explosives-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['refined-flammables-6'].prerequisites = {'refined-flammables-5'}
-            data.raw.technology['refined-flammables-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['refined-flammables-7'].prerequisites = {'refined-flammables-6'}
-            data.raw.technology['refined-flammables-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['worker-robots-speed-6'].prerequisites = {'worker-robots-speed-5'}
-            data.raw.technology['worker-robots-speed-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['worker-robots-speed-7'].prerequisites = {'worker-robots-speed-6', 'space-science-pack'}
-            data.raw.technology['worker-robots-speed-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['atomic-bomb'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['energy-shield-mk2-equipment'].prerequisites = {'energy-shield-equipment', 'military-4', 'power-armor'}
-            data.raw.technology['energy-shield-mk2-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['personal-roboport-mk2-equipment'].prerequisites = {'personal-roboport-equipment'}
-            data.raw.technology['personal-roboport-mk2-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['coal-liquefaction'].prerequisites = {'advanced-oil-processing'}
-            data.raw.technology['coal-liquefaction'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
-            data.raw.technology['speed-module-2'].prerequisites = {'speed-module'}
-            data.raw.technology['speed-module-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-            data.raw.technology['speed-module-3'].prerequisites = {'speed-module-2'}
-            data.raw.technology['speed-module-3'].unit.count = 400
-            data.raw.technology['speed-module-3'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-            data.raw.technology['productivity-module-2'].prerequisites = {'productivity-module'}
-            data.raw.technology['productivity-module-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-            data.raw.technology['productivity-module-3'].prerequisites = {'productivity-module-2'}
-            data.raw.technology['productivity-module-3'].unit.count = 400
-            data.raw.technology['productivity-module-3'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-            data.raw.technology['efficiency-module-2'].prerequisites = {'efficiency-module'}
-            data.raw.technology['efficiency-module-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-            data.raw.technology['efficiency-module-3'].prerequisites = {'efficiency-module-2'}
-            data.raw.technology['efficiency-module-3'].unit.count = 400
-            data.raw.technology['efficiency-module-3'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-            data.raw.technology['kovarex-enrichment-process'].prerequisites = {'uranium-processing'}
-            data.raw.technology['kovarex-enrichment-process'].unit = {count = 1500, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
-            data.raw.technology['fusion-reactor'].prerequisites = {'nuclear-power', 'space-science-pack'}
-            data.raw.technology['fusion-reactor'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone'})
-            table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'})
-            data.raw.technology['fusion-reactor-equipment'].prerequisites = {'fission-reactor-equipment', 'fusion-reactor'}
-            data.raw.technology['fusion-reactor-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['artillery'].prerequisites = {'military-4', 'radar'}
-            data.raw.technology['artillery'].prerequisites = {'military-4', 'tank', 'concrete', 'radar'}
-            data.raw.technology['artillery'].unit.count = 2000
-            data.raw.technology['artillery'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['artillery-shell-range-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['artillery-shell-speed-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['artillery-shell-damage-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['battery-mk3-equipment'].prerequisites = {'battery-mk2-equipment'}
-            data.raw.technology['battery-mk3-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['rocket-turret'].effects = {{type = 'unlock-recipe', recipe = 'rocket-turret'}}
-            data.raw.technology['rocket-turret'].prerequisites = {'rocketry', 'stronger-explosives-2'}
-            data.raw.technology['rocket-turret'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
-            data.raw.technology['toolbelt-equipment'].prerequisites = {'power-armor', 'toolbelt'}
-            data.raw.technology['toolbelt-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-            data.raw.technology['big-mining-drill'].prerequisites = {'electric-mining-drill', 'automation-3'}
-            data.raw.technology['big-mining-drill'].unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
-            data.raw.technology['big-mining-drill'].research_trigger = nil
-            data.raw.technology['turbo-transport-belt'].prerequisites = {'logistics-3'}
-            data.raw.technology['turbo-transport-belt'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['railgun'].prerequisites = {'military-4'}
-            data.raw.technology['railgun'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['railgun-damage-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['railgun-shooting-speed-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['tesla-weapons'].prerequisites = {'military-4'}
-            data.raw.technology['tesla-weapons'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['mech-armor'].prerequisites = {'power-armor-mk2'}
-            data.raw.technology['mech-armor'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['stack-inserter'].prerequisites = {'bulk-inserter'}
-            data.raw.technology['stack-inserter'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['power-armor-mk2'].prerequisites = {'power-armor', 'military-4', 'speed-module-2', 'efficiency-module-2'}
-            data.raw.technology['health'].prerequisites = {'utility-science-pack'}
-            data.raw.technology['health'].unit.ingredients = {{'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['processing-unit-productivity'].prerequisites = {'processing-unit'}
-            data.raw.technology['processing-unit-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
-            data.raw.technology['processing-unit-productivity'].max_level = 10
-            data.raw.technology['steel-plate-productivity'].prerequisites = {'steel-processing'}
-            data.raw.technology['steel-plate-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'steel-plate', change = 0.1}}
-            data.raw.technology['steel-plate-productivity'].max_level = 10
-            data.raw.technology['low-density-structure-productivity'].prerequisites = {'low-density-structure'}
-            data.raw.technology['low-density-structure-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'low-density-structure', change = 0.1}}
-            data.raw.technology['low-density-structure-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
-            data.raw.technology['low-density-structure-productivity'].max_level = 10
-            data.raw.technology['plastic-bar-productivity'].prerequisites = {'plastics'}
-            data.raw.technology['plastic-bar-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'plastic-bar', change = 0.1}}
-            data.raw.technology['plastic-bar-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
-            data.raw.technology['plastic-bar-productivity'].max_level = 10
-            data.raw.technology['rocket-fuel-productivity'].prerequisites = {'rocket-fuel'}
-            data.raw.technology['rocket-fuel-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'rocket-fuel', change = 0.1}}
-            data.raw.technology['rocket-fuel-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
-            data.raw.technology['rocket-fuel-productivity'].max_level = 10
-            data.raw.technology['rocket-part-productivity'].prerequisites = {'rocket-silo'}
-            data.raw.technology['rocket-part-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
-            data.raw.technology['rocket-part-productivity'].max_level = 10
-            data.raw.technology['research-productivity'].prerequisites = {'space-science-pack'}
-            data.raw.technology['research-productivity'].unit.count_formula = '1.5^L*2000'
-            data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['research-productivity'].max_level = 10
-            data.raw.technology['transport-belt-capacity-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['transport-belt-capacity-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['electric-weapons-damage-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
-            data.raw.technology['electric-weapons-damage-2'].prerequisites = {'electric-weapons-damage-1'}
-            data.raw.technology['electric-weapons-damage-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
-            data.raw.technology['electric-weapons-damage-3'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['electric-weapons-damage-4'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-            data.raw.technology['spidertron'].prerequisites = {'exoskeleton-equipment', 'fission-reactor-equipment', 'military-4', 'production-science-pack', 'radar'}
-            data.raw.technology['spidertron'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-            data.raw.technology['heating-tower'].prerequisites = {'automation-2'}
-            data.raw.technology['heating-tower'].research_trigger = nil
-            data.raw.technology['heating-tower'].effects = {{type = 'unlock-recipe', recipe = 'heating-tower'}}
-            data.raw.technology['heating-tower'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
-            data.raw.technology['agriculture'].prerequisites = {'chemical-science-pack'}
-            data.raw.technology['agriculture'].research_trigger = nil
-            data.raw.technology['agriculture'].effects = {{type = 'unlock-recipe', recipe = 'agricultural-tower'}}
-            data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
-            data.raw.technology['tree-seeding'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-            data.raw.technology['electromagnetic-plant'].prerequisites = {'automation-3'}
-            data.raw.technology['electromagnetic-plant'].research_trigger = nil
-            data.raw.technology['electromagnetic-plant'].effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-plant'}}
-            data.raw.technology['electromagnetic-plant'].unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
-            data.raw.technology['cryogenic-plant'].prerequisites = {'automation-3'}
-            data.raw.technology['cryogenic-plant'].research_trigger = nil
-            data.raw.technology['cryogenic-plant'].effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}}
-            data.raw.technology['cryogenic-plant'].unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
-            data.raw.technology['foundry'].prerequisites = {'automation-3'}
-            data.raw.technology['foundry'].research_trigger = nil
-            data.raw.technology['foundry'].effects = {{type = 'unlock-recipe', recipe = 'foundry'}}
-            data.raw.technology['foundry'].unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
-            data.raw.technology['biolab'].prerequisites = {'production-science-pack', 'utility-science-pack'}
-            data.raw.technology['biolab'].unit = {count = 800, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
-
-            for k, v in pairs(items['space-age']['PHI-SA-VANILLA']['technology']) do
-                data.raw.technology[k].hidden = v
-                data.raw.technology[k].hidden_in_factoriopedia = v
-
-                if data.raw.technology[k].unit and data.raw.technology[k].unit.ingredients then
-                    data.raw.technology[k].unit.ingredients = {{'space-science-pack', 1}}
-                end
-            end
-
-            for k, v in pairs(items['space-age']['PHI-SA-VANILLA']['recipe']) do
-                if data.raw.recipe[k] then
-                    data.raw.recipe[k].hidden = v
-                    data.raw.recipe[k].hidden_in_factoriopedia = v
-                end
-            end
-
-            data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
-            data.raw.recipe['big-mining-drill'].category = nil
-            data.raw.recipe['big-mining-drill'].ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'electric-engine-unit', amount = 10}, {type = 'item', name = 'advanced-circuit', amount = 10}}
-            data.raw.recipe['turbo-transport-belt'].category = 'crafting-with-fluid'
-            data.raw.recipe['turbo-transport-belt'].ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'item', name = 'express-transport-belt', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 20}}
-            data.raw.recipe['turbo-underground-belt'].category = 'crafting-with-fluid'
-            data.raw.recipe['turbo-underground-belt'].ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'express-underground-belt', amount = 2}, {type = 'fluid', name = 'lubricant', amount = 40}}
-            data.raw.recipe['turbo-splitter'].category = 'crafting-with-fluid'
-            data.raw.recipe['turbo-splitter'].ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'express-splitter', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 80}}
-            data.raw.recipe['express-transport-belt'].category = 'crafting-with-fluid'
-            data.raw.recipe['express-underground-belt'].category = 'crafting-with-fluid'
-            data.raw.recipe['express-splitter'].category = 'crafting-with-fluid'
-            data.raw.recipe['stack-inserter'].ingredients = {{type = 'item', name = 'processing-unit', amount = 2}, {type = 'item', name = 'steel-plate', amount = 5}, {type = 'item', name = 'bulk-inserter', amount = 1}}
-            data.raw.recipe['speed-module-3'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'speed-module-2', amount = 4}}
-            data.raw.recipe['productivity-module-3'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'productivity-module-2', amount = 4}}
-            data.raw.recipe['efficiency-module-3'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'efficiency-module-2', amount = 4}}
-            data.raw.recipe['toolbelt-equipment'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 3}, {type = 'item', name = 'steel-plate', amount = 4}}
-            data.raw.recipe['power-armor-mk2'].ingredients = {{type = 'item', name = 'efficiency-module-2', amount = 25}, {type = 'item', name = 'speed-module-2', amount = 25}, {type = 'item', name = 'processing-unit', amount = 60}, {type = 'item', name = 'electric-engine-unit', amount = 40}, {type = 'item', name = 'low-density-structure', amount = 30}}
-            data.raw.recipe['personal-roboport-mk2-equipment'].ingredients = {{type = 'item', name = 'personal-roboport-equipment', amount = 5}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'low-density-structure', amount = 20}}
-            data.raw.recipe['battery-mk3-equipment'].ingredients = {{type = 'item', name = 'battery-mk2-equipment', amount = 5}, {type = 'item', name = 'battery', amount = 20}}
-            data.raw.recipe['artillery-turret'].ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'concrete', amount = 60}, {type = 'item', name = 'iron-gear-wheel', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}}
-            data.raw.recipe['artillery-wagon'].ingredients = {{type = 'item', name = 'engine-unit', amount = 64}, {type = 'item', name = 'iron-gear-wheel', amount = 10}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'pipe', amount = 16}, {type = 'item', name = 'advanced-circuit', amount = 20}}
-            data.raw.recipe['artillery-shell'].ingredients = {{type = 'item', name = 'explosive-cannon-shell', amount = 4}, {type = 'item', name = 'radar', amount = 1}, {type = 'item', name = 'explosives', amount = 8}}
-            data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
-            data.raw.recipe['tesla-ammo'].category = 'crafting-with-fluid'
-            data.raw.recipe['tesla-ammo'].ingredients = {{type = 'item', name = 'battery', amount = 1}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 10}}
-            data.raw.recipe['teslagun'].category = 'crafting-with-fluid'
-            data.raw.recipe['teslagun'].ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
-            data.raw.recipe['tesla-turret'].category = 'crafting-with-fluid'
-            data.raw.recipe['tesla-turret'].ingredients = {{type = 'item', name = 'teslagun', amount = 1}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 500}}
-            data.raw.recipe['mech-armor'].ingredients = {{type = 'item', name = 'power-armor-mk2', amount = 1}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'battery', amount = 50}}
-            data.raw.recipe['railgun'].category = 'crafting-with-fluid'
-            data.raw.recipe['railgun'].ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'battery', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 10}}
-            data.raw.recipe['railgun-turret'].category = 'crafting-with-fluid'
-            data.raw.recipe['railgun-turret'].ingredients = {{type = 'item', name = 'steel-plate', amount = 30}, {type = 'item', name = 'processing-unit', amount = 50}, {type = 'item', name = 'battery', amount = 50}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
-            data.raw.recipe['rocket-turret'].category = 'crafting'
-            data.raw.recipe['rocket-turret'].ingredients = {{type = 'item', name = 'rocket-launcher', amount = 4}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 4}, {type = 'item', name = 'iron-gear-wheel', amount = 20}}
-            data.raw.recipe['fusion-reactor'].category = 'crafting'
-            data.raw.recipe['fusion-reactor'].ingredients = {{type = 'item', name = 'nuclear-reactor', amount = 1}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'processing-unit', amount = 450}}
-            data.raw.recipe['fusion-generator'].category = 'crafting'
-            data.raw.recipe['fusion-generator'].ingredients = {{type = 'item', name = 'steam-turbine', amount = 1}, {type = 'item', name = 'steel-plate', amount = 100}, {type = 'item', name = 'processing-unit', amount = 150}}
-            data.raw.recipe['fusion-power-cell'].category = 'crafting-with-fluid'
-            data.raw.recipe['fusion-power-cell'].ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'fluid', name = 'petroleum-gas', amount = 100}}
-            data.raw.recipe['fusion-reactor-equipment'].category = 'crafting'
-            data.raw.recipe['fusion-reactor-equipment'].ingredients = {{type = 'item', name = 'fission-reactor-equipment', amount = 1}, {type = 'item', name = 'fusion-power-cell', amount = 10}, {type = 'item', name = 'steel-plate', amount = 350}, {type = 'item', name = 'processing-unit', amount = 275}}
-            data.raw.recipe['fluoroketone'].category = 'chemistry'
-            data.raw.recipe['fluoroketone'].ingredients = {{type = 'fluid', name = 'light-oil', amount = 50}, {type = 'fluid', name = 'petroleum-gas', amount = 50}, {type = 'item', name = 'steel-plate', amount = 1}}
-            data.raw.recipe['fluoroketone-cooling'].category = 'chemistry'
-            data.raw.recipe['fusion-power-cell'].category = 'crafting-with-fluid'
-            data.raw.recipe['fusion-power-cell'].ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'fluid', name = 'petroleum-gas', amount = 100}}
-            data.raw.recipe['agricultural-tower'].ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electronic-circuit', amount = 3}, {type = 'item', name = 'landfill', amount = 1}}
-            data.raw.recipe['electromagnetic-plant'].category = 'crafting'
-            data.raw.recipe['electromagnetic-plant'].ingredients = {{type = 'item', name = 'steel-plate', amount = 50}, {type = 'item', name = 'processing-unit', amount = 50}, {type = 'item', name = 'refined-concrete', amount = 50}}
-            data.raw.recipe['cryogenic-plant'].category = 'crafting'
-            data.raw.recipe['cryogenic-plant'].ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'refined-concrete', amount = 40}}
-            data.raw.recipe['biolab'].ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 25}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'uranium-235', amount = 3}}
-
-            data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
-            data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
-            data.raw['lab']['biolab'].science_pack_drain_rate_percent = 100
-            data.raw['assembling-machine']['foundry'].effect_receiver = nil
-            data.raw['assembling-machine']['foundry'].crafting_categories = {table.unpack(data.raw['furnace']['electric-furnace'].crafting_categories)}
-
-            data.raw['plant']['yumako-tree'].hidden = true
-            data.raw['plant']['yumako-tree'].hidden_in_factoriopedia = true
-            data.raw['plant']['jellystem'].hidden = true
-            data.raw['plant']['jellystem'].hidden_in_factoriopedia = true
-
-            data.raw['unit-spawner']['biter-spawner'].captured_spawner_entity = nil
-            data.raw['unit-spawner']['spitter-spawner'].captured_spawner_entity = nil
-
-            data.raw.fluid['fluoroketone-cold'].auto_barrel = false
-            data.raw.fluid['fluoroketone-hot'].auto_barrel = false
-
-            data.raw.tool['agricultural-science-pack'].hidden = true
-            data.raw.tool['agricultural-science-pack'].hidden_in_factoriopedia = true
-            data.raw.tool['cryogenic-science-pack'].hidden = true
-            data.raw.tool['cryogenic-science-pack'].hidden_in_factoriopedia = true
-            data.raw.tool['electromagnetic-science-pack'].hidden = true
-            data.raw.tool['electromagnetic-science-pack'].hidden_in_factoriopedia = true
-            data.raw.tool['metallurgic-science-pack'].hidden = true
-            data.raw.tool['metallurgic-science-pack'].hidden_in_factoriopedia = true
-            data.raw.tool['promethium-science-pack'].hidden = true
-            data.raw.tool['promethium-science-pack'].hidden_in_factoriopedia = true
-
-            for _, v in pairs(data.raw.lab) do
-                v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
-            end
-
-            data.raw.capsule['bioflux'].hidden = true
-            data.raw.capsule['bioflux'].hidden_in_factoriopedia = true
-            data.raw.capsule['jelly'].hidden = true
-            data.raw.capsule['jelly'].hidden_in_factoriopedia = true
-            data.raw.capsule['jellynut'].hidden = true
-            data.raw.capsule['jellynut'].hidden_in_factoriopedia = true
-            data.raw.capsule['yumako'].hidden = true
-            data.raw.capsule['yumako'].hidden_in_factoriopedia = true
-            data.raw.capsule['yumako-mash'].hidden = true
-            data.raw.capsule['yumako-mash'].hidden_in_factoriopedia = true
-
-            data.raw['tips-and-tricks-item']['agriculture'] = nil
-            data.raw['tips-and-tricks-item']['lava-processing'] = nil
-
-            data.raw['group-attack-achievement']['it-stinks-and-they-do-like-it'] = nil
-            data.raw['group-attack-achievement']['get-off-my-lawn'] = nil
-            data.raw['research-with-science-pack-achievement']['research-with-metallurgics'] = nil
-            data.raw['research-with-science-pack-achievement']['research-with-agriculture'] = nil
-            data.raw['research-with-science-pack-achievement']['research-with-electromagnetics'] = nil
-            data.raw['research-with-science-pack-achievement']['research-with-cryogenics'] = nil
-            data.raw['research-with-science-pack-achievement']['research-with-promethium'] = nil
-            data.raw['kill-achievement']['if-it-bleeds'] = nil
-            data.raw['kill-achievement']['we-need-bigger-guns'] = nil
-            data.raw['kill-achievement']['size-doesnt-matter'] = nil
-
-            for _, v in pairs(data.raw.tree) do
-                if v.minable and v.minable.results then
-                    v.minable.results = {{type = 'item', name = 'wood', amount = 4}}
-                end
+        for _, v in pairs({'tungsten-ore', 'calcite'}) do
+            if data.raw.resource[v] then
+                data.raw.resource[v].hidden = true
+                data.raw.resource[v].hidden_in_factoriopedia = true
             end
         end
 
-        if mods['quality'] and (not settings.startup['PHI-SA-MAX-QUALITY'].value) then
-            data.raw.quality.normal.level = 0
-            data.raw.quality.normal.beacon_power_usage_multiplier = 1
-            data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1
-            data.raw.quality.normal.science_pack_drain_multiplier = 1
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = nil
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_plants'] = nil
+
+        for _, v in pairs({'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut', 'lowland-brown-blubber', 'lowland-olive-blubber', 'lowland-olive-blubber-2', 'lowland-olive-blubber-3', 'lowland-cream-red', 'lowland-red-vein', 'lowland-red-vein-2', 'lowland-red-vein-3', 'lowland-red-vein-4', 'lowland-red-vein-dead', 'lowland-red-infection', 'ammoniacal-ocean', 'ammoniacal-ocean-2'}) do
+            data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = nil
         end
+
+        data.raw.recipe['landfill'].ingredients = {{type = 'item', name = 'stone', amount = math.min(20, tonumber(settings.startup['PHI-MI-LANDFILL'].value) or 20)}}
+
+        data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
+        data.raw.technology['cliff-explosives'].unit.count = 200
+        data.raw.technology['cliff-explosives'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}
+        data.raw.technology['space-science-pack'].research_trigger = nil
+        data.raw.technology['space-science-pack'].prerequisites = {'rocket-silo'}
+        data.raw.technology['space-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'satellite'}}
+        data.raw.technology['space-science-pack'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+        data.raw.technology['space-science-pack'].unit = {count = 2000, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
+        data.raw.technology['cliff-explosives'].effects = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
+        data.raw.technology['logistic-system'].prerequisites = {'logistic-robotics'}
+        data.raw.technology['logistic-system'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology['stronger-explosives-5'].prerequisites = {'stronger-explosives-4'}
+        data.raw.technology['stronger-explosives-5'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology['stronger-explosives-6'].prerequisites = {'stronger-explosives-5'}
+        data.raw.technology['stronger-explosives-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology['stronger-explosives-7'].prerequisites = {'stronger-explosives-6'}
+        data.raw.technology['stronger-explosives-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['refined-flammables-6'].prerequisites = {'refined-flammables-5'}
+        data.raw.technology['refined-flammables-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology['refined-flammables-7'].prerequisites = {'refined-flammables-6'}
+        data.raw.technology['refined-flammables-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['worker-robots-speed-6'].prerequisites = {'worker-robots-speed-5'}
+        data.raw.technology['worker-robots-speed-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology['worker-robots-speed-7'].prerequisites = {'worker-robots-speed-6', 'space-science-pack'}
+        data.raw.technology['worker-robots-speed-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['atomic-bomb'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology['energy-shield-mk2-equipment'].prerequisites = {'energy-shield-equipment', 'military-4', 'power-armor'}
+        data.raw.technology['energy-shield-mk2-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology['personal-roboport-mk2-equipment'].prerequisites = {'personal-roboport-equipment'}
+        data.raw.technology['personal-roboport-mk2-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology['coal-liquefaction'].prerequisites = {'advanced-oil-processing'}
+        data.raw.technology['coal-liquefaction'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
+        data.raw.technology['speed-module-2'].prerequisites = {'speed-module'}
+        data.raw.technology['speed-module-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
+        data.raw.technology['speed-module-3'].prerequisites = {'speed-module-2'}
+        data.raw.technology['speed-module-3'].unit.count = 400
+        data.raw.technology['speed-module-3'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
+        data.raw.technology['productivity-module-2'].prerequisites = {'productivity-module'}
+        data.raw.technology['productivity-module-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
+        data.raw.technology['productivity-module-3'].prerequisites = {'productivity-module-2'}
+        data.raw.technology['productivity-module-3'].unit.count = 400
+        data.raw.technology['productivity-module-3'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
+        data.raw.technology['efficiency-module-2'].prerequisites = {'efficiency-module'}
+        data.raw.technology['efficiency-module-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
+        data.raw.technology['efficiency-module-3'].prerequisites = {'efficiency-module-2'}
+        data.raw.technology['efficiency-module-3'].unit.count = 400
+        data.raw.technology['efficiency-module-3'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
+        data.raw.technology['kovarex-enrichment-process'].prerequisites = {'uranium-processing'}
+        data.raw.technology['kovarex-enrichment-process'].unit = {count = 1500, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+        data.raw.technology['fusion-reactor'].prerequisites = {'nuclear-power', 'space-science-pack'}
+        data.raw.technology['fusion-reactor'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone'})
+        table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'})
+        data.raw.technology['fusion-reactor-equipment'].prerequisites = {'fission-reactor-equipment', 'fusion-reactor'}
+        data.raw.technology['fusion-reactor-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['artillery'].prerequisites = {'military-4', 'radar'}
+        data.raw.technology['artillery'].prerequisites = {'military-4', 'tank', 'concrete', 'radar'}
+        data.raw.technology['artillery'].unit.count = 2000
+        data.raw.technology['artillery'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology['artillery-shell-range-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['artillery-shell-speed-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['artillery-shell-damage-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['battery-mk3-equipment'].prerequisites = {'battery-mk2-equipment'}
+        data.raw.technology['battery-mk3-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['rocket-turret'].effects = {{type = 'unlock-recipe', recipe = 'rocket-turret'}}
+        data.raw.technology['rocket-turret'].prerequisites = {'rocketry', 'stronger-explosives-2'}
+        data.raw.technology['rocket-turret'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
+        data.raw.technology['toolbelt-equipment'].prerequisites = {'power-armor', 'toolbelt'}
+        data.raw.technology['toolbelt-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
+        data.raw.technology['big-mining-drill'].prerequisites = {'electric-mining-drill', 'automation-3'}
+        data.raw.technology['big-mining-drill'].unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+        data.raw.technology['big-mining-drill'].research_trigger = nil
+        data.raw.technology['turbo-transport-belt'].prerequisites = {'logistics-3'}
+        data.raw.technology['turbo-transport-belt'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology['railgun'].prerequisites = {'military-4'}
+        data.raw.technology['railgun'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['railgun-damage-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['railgun-shooting-speed-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['tesla-weapons'].prerequisites = {'military-4'}
+        data.raw.technology['tesla-weapons'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology['mech-armor'].prerequisites = {'power-armor-mk2'}
+        data.raw.technology['mech-armor'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['stack-inserter'].prerequisites = {'bulk-inserter'}
+        data.raw.technology['stack-inserter'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology['power-armor-mk2'].prerequisites = {'power-armor', 'military-4', 'speed-module-2', 'efficiency-module-2'}
+        data.raw.technology['health'].prerequisites = {'utility-science-pack'}
+        data.raw.technology['health'].unit.ingredients = {{'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology['processing-unit-productivity'].prerequisites = {'processing-unit'}
+        data.raw.technology['processing-unit-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
+        data.raw.technology['processing-unit-productivity'].max_level = 10
+        data.raw.technology['steel-plate-productivity'].prerequisites = {'steel-processing'}
+        data.raw.technology['steel-plate-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'steel-plate', change = 0.1}}
+        data.raw.technology['steel-plate-productivity'].max_level = 10
+        data.raw.technology['low-density-structure-productivity'].prerequisites = {'low-density-structure'}
+        data.raw.technology['low-density-structure-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'low-density-structure', change = 0.1}}
+        data.raw.technology['low-density-structure-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
+        data.raw.technology['low-density-structure-productivity'].max_level = 10
+        data.raw.technology['plastic-bar-productivity'].prerequisites = {'plastics'}
+        data.raw.technology['plastic-bar-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'plastic-bar', change = 0.1}}
+        data.raw.technology['plastic-bar-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
+        data.raw.technology['plastic-bar-productivity'].max_level = 10
+        data.raw.technology['rocket-fuel-productivity'].prerequisites = {'rocket-fuel'}
+        data.raw.technology['rocket-fuel-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'rocket-fuel', change = 0.1}}
+        data.raw.technology['rocket-fuel-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
+        data.raw.technology['rocket-fuel-productivity'].max_level = 10
+        data.raw.technology['rocket-part-productivity'].prerequisites = {'rocket-silo'}
+        data.raw.technology['rocket-part-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
+        data.raw.technology['rocket-part-productivity'].max_level = 10
+        data.raw.technology['research-productivity'].prerequisites = {'space-science-pack'}
+        data.raw.technology['research-productivity'].unit.count_formula = '1.5^L*2000'
+        data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['research-productivity'].max_level = 10
+        data.raw.technology['transport-belt-capacity-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['transport-belt-capacity-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['electric-weapons-damage-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
+        data.raw.technology['electric-weapons-damage-2'].prerequisites = {'electric-weapons-damage-1'}
+        data.raw.technology['electric-weapons-damage-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
+        data.raw.technology['electric-weapons-damage-3'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology['electric-weapons-damage-4'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['spidertron'].prerequisites = {'exoskeleton-equipment', 'fission-reactor-equipment', 'military-4', 'production-science-pack', 'radar'}
+        data.raw.technology['spidertron'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology['heating-tower'].prerequisites = {'automation-2'}
+        data.raw.technology['heating-tower'].research_trigger = nil
+        data.raw.technology['heating-tower'].effects = {{type = 'unlock-recipe', recipe = 'heating-tower'}}
+        data.raw.technology['heating-tower'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+        data.raw.technology['agriculture'].prerequisites = {'chemical-science-pack'}
+        data.raw.technology['agriculture'].research_trigger = nil
+        data.raw.technology['agriculture'].effects = {{type = 'unlock-recipe', recipe = 'agricultural-tower'}}
+        data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+        data.raw.technology['tree-seeding'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
+        data.raw.technology['electromagnetic-plant'].prerequisites = {'automation-3'}
+        data.raw.technology['electromagnetic-plant'].research_trigger = nil
+        data.raw.technology['electromagnetic-plant'].effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-plant'}}
+        data.raw.technology['electromagnetic-plant'].unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+        data.raw.technology['cryogenic-plant'].prerequisites = {'automation-3'}
+        data.raw.technology['cryogenic-plant'].research_trigger = nil
+        data.raw.technology['cryogenic-plant'].effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}}
+        data.raw.technology['cryogenic-plant'].unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+        data.raw.technology['foundry'].prerequisites = {'automation-3'}
+        data.raw.technology['foundry'].research_trigger = nil
+        data.raw.technology['foundry'].effects = {{type = 'unlock-recipe', recipe = 'foundry'}}
+        data.raw.technology['foundry'].unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+        data.raw.technology['biolab'].prerequisites = {'production-science-pack', 'utility-science-pack'}
+        data.raw.technology['biolab'].unit = {count = 800, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
+
+        for k, v in pairs(items['space-age']['PHI-VP-MAIN']['technology']) do
+            data.raw.technology[k].hidden = v
+            data.raw.technology[k].hidden_in_factoriopedia = v
+
+            if data.raw.technology[k].unit and data.raw.technology[k].unit.ingredients then
+                data.raw.technology[k].unit.ingredients = {{'space-science-pack', 1}}
+            end
+        end
+
+        for k, v in pairs(items['space-age']['PHI-VP-MAIN']['recipe']) do
+            if data.raw.recipe[k] then
+                data.raw.recipe[k].hidden = v
+                data.raw.recipe[k].hidden_in_factoriopedia = v
+            end
+        end
+
+        data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
+        data.raw.recipe['big-mining-drill'].category = nil
+        data.raw.recipe['big-mining-drill'].ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'electric-engine-unit', amount = 10}, {type = 'item', name = 'advanced-circuit', amount = 10}}
+        data.raw.recipe['turbo-transport-belt'].category = 'crafting-with-fluid'
+        data.raw.recipe['turbo-transport-belt'].ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'item', name = 'express-transport-belt', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 20}}
+        data.raw.recipe['turbo-underground-belt'].category = 'crafting-with-fluid'
+        data.raw.recipe['turbo-underground-belt'].ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'express-underground-belt', amount = 2}, {type = 'fluid', name = 'lubricant', amount = 40}}
+        data.raw.recipe['turbo-splitter'].category = 'crafting-with-fluid'
+        data.raw.recipe['turbo-splitter'].ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'express-splitter', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 80}}
+        data.raw.recipe['express-transport-belt'].category = 'crafting-with-fluid'
+        data.raw.recipe['express-underground-belt'].category = 'crafting-with-fluid'
+        data.raw.recipe['express-splitter'].category = 'crafting-with-fluid'
+        data.raw.recipe['stack-inserter'].ingredients = {{type = 'item', name = 'processing-unit', amount = 2}, {type = 'item', name = 'steel-plate', amount = 5}, {type = 'item', name = 'bulk-inserter', amount = 1}}
+        data.raw.recipe['speed-module-3'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'speed-module-2', amount = 4}}
+        data.raw.recipe['productivity-module-3'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'productivity-module-2', amount = 4}}
+        data.raw.recipe['efficiency-module-3'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'efficiency-module-2', amount = 4}}
+        data.raw.recipe['toolbelt-equipment'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 3}, {type = 'item', name = 'steel-plate', amount = 4}}
+        data.raw.recipe['power-armor-mk2'].ingredients = {{type = 'item', name = 'efficiency-module-2', amount = 25}, {type = 'item', name = 'speed-module-2', amount = 25}, {type = 'item', name = 'processing-unit', amount = 60}, {type = 'item', name = 'electric-engine-unit', amount = 40}, {type = 'item', name = 'low-density-structure', amount = 30}}
+        data.raw.recipe['personal-roboport-mk2-equipment'].ingredients = {{type = 'item', name = 'personal-roboport-equipment', amount = 5}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'low-density-structure', amount = 20}}
+        data.raw.recipe['battery-mk3-equipment'].ingredients = {{type = 'item', name = 'battery-mk2-equipment', amount = 5}, {type = 'item', name = 'battery', amount = 20}}
+        data.raw.recipe['artillery-turret'].ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'concrete', amount = 60}, {type = 'item', name = 'iron-gear-wheel', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}}
+        data.raw.recipe['artillery-wagon'].ingredients = {{type = 'item', name = 'engine-unit', amount = 64}, {type = 'item', name = 'iron-gear-wheel', amount = 10}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'pipe', amount = 16}, {type = 'item', name = 'advanced-circuit', amount = 20}}
+        data.raw.recipe['artillery-shell'].ingredients = {{type = 'item', name = 'explosive-cannon-shell', amount = 4}, {type = 'item', name = 'radar', amount = 1}, {type = 'item', name = 'explosives', amount = 8}}
+        data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
+        data.raw.recipe['tesla-ammo'].category = 'crafting-with-fluid'
+        data.raw.recipe['tesla-ammo'].ingredients = {{type = 'item', name = 'battery', amount = 1}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 10}}
+        data.raw.recipe['teslagun'].category = 'crafting-with-fluid'
+        data.raw.recipe['teslagun'].ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
+        data.raw.recipe['tesla-turret'].category = 'crafting-with-fluid'
+        data.raw.recipe['tesla-turret'].ingredients = {{type = 'item', name = 'teslagun', amount = 1}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 500}}
+        data.raw.recipe['mech-armor'].ingredients = {{type = 'item', name = 'power-armor-mk2', amount = 1}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'battery', amount = 50}}
+        data.raw.recipe['railgun'].category = 'crafting-with-fluid'
+        data.raw.recipe['railgun'].ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'battery', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 10}}
+        data.raw.recipe['railgun-turret'].category = 'crafting-with-fluid'
+        data.raw.recipe['railgun-turret'].ingredients = {{type = 'item', name = 'steel-plate', amount = 30}, {type = 'item', name = 'processing-unit', amount = 50}, {type = 'item', name = 'battery', amount = 50}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
+        data.raw.recipe['rocket-turret'].category = 'crafting'
+        data.raw.recipe['rocket-turret'].ingredients = {{type = 'item', name = 'rocket-launcher', amount = 4}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 4}, {type = 'item', name = 'iron-gear-wheel', amount = 20}}
+        data.raw.recipe['fusion-reactor'].category = 'crafting'
+        data.raw.recipe['fusion-reactor'].ingredients = {{type = 'item', name = 'nuclear-reactor', amount = 1}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'processing-unit', amount = 450}}
+        data.raw.recipe['fusion-generator'].category = 'crafting'
+        data.raw.recipe['fusion-generator'].ingredients = {{type = 'item', name = 'steam-turbine', amount = 1}, {type = 'item', name = 'steel-plate', amount = 100}, {type = 'item', name = 'processing-unit', amount = 150}}
+        data.raw.recipe['fusion-power-cell'].category = 'crafting-with-fluid'
+        data.raw.recipe['fusion-power-cell'].ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'fluid', name = 'petroleum-gas', amount = 100}}
+        data.raw.recipe['fusion-reactor-equipment'].category = 'crafting'
+        data.raw.recipe['fusion-reactor-equipment'].ingredients = {{type = 'item', name = 'fission-reactor-equipment', amount = 1}, {type = 'item', name = 'fusion-power-cell', amount = 10}, {type = 'item', name = 'steel-plate', amount = 350}, {type = 'item', name = 'processing-unit', amount = 275}}
+        data.raw.recipe['fluoroketone'].category = 'chemistry'
+        data.raw.recipe['fluoroketone'].ingredients = {{type = 'fluid', name = 'light-oil', amount = 50}, {type = 'fluid', name = 'petroleum-gas', amount = 50}, {type = 'item', name = 'steel-plate', amount = 1}}
+        data.raw.recipe['fluoroketone-cooling'].category = 'chemistry'
+        data.raw.recipe['fusion-power-cell'].category = 'crafting-with-fluid'
+        data.raw.recipe['fusion-power-cell'].ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'fluid', name = 'petroleum-gas', amount = 100}}
+        data.raw.recipe['agricultural-tower'].ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electronic-circuit', amount = 3}, {type = 'item', name = 'landfill', amount = 1}}
+        data.raw.recipe['electromagnetic-plant'].category = 'crafting'
+        data.raw.recipe['electromagnetic-plant'].ingredients = {{type = 'item', name = 'steel-plate', amount = 50}, {type = 'item', name = 'processing-unit', amount = 50}, {type = 'item', name = 'refined-concrete', amount = 50}}
+        data.raw.recipe['cryogenic-plant'].category = 'crafting'
+        data.raw.recipe['cryogenic-plant'].ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'refined-concrete', amount = 40}}
+        data.raw.recipe['biolab'].ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 25}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'uranium-235', amount = 3}}
+
+        data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
+        data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
+        data.raw['lab']['biolab'].science_pack_drain_rate_percent = 100
+        data.raw['assembling-machine']['foundry'].effect_receiver = nil
+        data.raw['assembling-machine']['foundry'].crafting_categories = {table.unpack(data.raw['furnace']['electric-furnace'].crafting_categories)}
+
+        table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
+
+        data.raw['plant']['yumako-tree'].hidden = true
+        data.raw['plant']['yumako-tree'].hidden_in_factoriopedia = true
+        data.raw['plant']['jellystem'].hidden = true
+        data.raw['plant']['jellystem'].hidden_in_factoriopedia = true
+
+        data.raw['unit-spawner']['biter-spawner'].captured_spawner_entity = nil
+        data.raw['unit-spawner']['spitter-spawner'].captured_spawner_entity = nil
+
+        data.raw.fluid['fluoroketone-cold'].auto_barrel = false
+        data.raw.fluid['fluoroketone-hot'].auto_barrel = false
+
+        data.raw.tool['agricultural-science-pack'].hidden = true
+        data.raw.tool['agricultural-science-pack'].hidden_in_factoriopedia = true
+        data.raw.tool['cryogenic-science-pack'].hidden = true
+        data.raw.tool['cryogenic-science-pack'].hidden_in_factoriopedia = true
+        data.raw.tool['electromagnetic-science-pack'].hidden = true
+        data.raw.tool['electromagnetic-science-pack'].hidden_in_factoriopedia = true
+        data.raw.tool['metallurgic-science-pack'].hidden = true
+        data.raw.tool['metallurgic-science-pack'].hidden_in_factoriopedia = true
+        data.raw.tool['promethium-science-pack'].hidden = true
+        data.raw.tool['promethium-science-pack'].hidden_in_factoriopedia = true
+
+        for _, v in pairs(data.raw.lab) do
+            v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
+        end
+
+        data.raw.capsule['bioflux'].hidden = true
+        data.raw.capsule['bioflux'].hidden_in_factoriopedia = true
+        data.raw.capsule['jelly'].hidden = true
+        data.raw.capsule['jelly'].hidden_in_factoriopedia = true
+        data.raw.capsule['jellynut'].hidden = true
+        data.raw.capsule['jellynut'].hidden_in_factoriopedia = true
+        data.raw.capsule['yumako'].hidden = true
+        data.raw.capsule['yumako'].hidden_in_factoriopedia = true
+        data.raw.capsule['yumako-mash'].hidden = true
+        data.raw.capsule['yumako-mash'].hidden_in_factoriopedia = true
+
+        data.raw['tips-and-tricks-item']['agriculture'] = nil
+        data.raw['tips-and-tricks-item']['lava-processing'] = nil
+
+        data.raw['group-attack-achievement']['it-stinks-and-they-do-like-it'] = nil
+        data.raw['group-attack-achievement']['get-off-my-lawn'] = nil
+        data.raw['research-with-science-pack-achievement']['research-with-metallurgics'] = nil
+        data.raw['research-with-science-pack-achievement']['research-with-agriculture'] = nil
+        data.raw['research-with-science-pack-achievement']['research-with-electromagnetics'] = nil
+        data.raw['research-with-science-pack-achievement']['research-with-cryogenics'] = nil
+        data.raw['research-with-science-pack-achievement']['research-with-promethium'] = nil
+        data.raw['kill-achievement']['if-it-bleeds'] = nil
+        data.raw['kill-achievement']['we-need-bigger-guns'] = nil
+        data.raw['kill-achievement']['size-doesnt-matter'] = nil
+
+        for _, v in pairs(data.raw.tree) do
+            if v.minable and v.minable.results then
+                v.minable.results = {{type = 'item', name = 'wood', amount = 4}}
+            end
+        end
+    end
+
+    if mods['quality'] and settings.startup['PHI-VP-MAIN'].value and (not settings.startup['PHI-SA-MAX-QUALITY'].value) then
+        data.raw.quality.normal.level = 0
+        data.raw.quality.normal.beacon_power_usage_multiplier = 1
+        data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1
+        data.raw.quality.normal.science_pack_drain_multiplier = 1
     end
 end
 
