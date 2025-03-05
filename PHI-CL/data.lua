@@ -507,7 +507,7 @@ if settings.startup['PHI-SA'].value then
                     name = v.name .. 'A',
                     icon = location .. v.name .. '.png',
                     subgroup = v.subgroup,
-                    order = v.order .. 'A'
+                    order = (v.subgroup == 'virtual-signal-number' and ('b[numbers]-[' .. v.name .. 'A]')) or ('c[letters]-[' .. v.name .. 'A]')
                 })
             end
         end
