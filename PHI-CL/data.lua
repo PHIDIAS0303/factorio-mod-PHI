@@ -504,7 +504,7 @@ if settings.startup['PHI-SA'].value then
             if nsg[v.subgroup] then
                 data:extend({
                     type = 'virtual-signal',
-                    name = v.name .. 'A',
+                    name = (v.subgroup == 'virtual-signal-number' and ('signal-' .. v.name .. '1]')) or ('signal-' .. v.name .. 'A'),
                     icon = location .. v.name .. '.png',
                     subgroup = v.subgroup,
                     order = (v.subgroup == 'virtual-signal-number' and ('b[numbers]-[' .. v.name .. 'A]')) or ('c[letters]-[' .. v.name .. 'A]')
