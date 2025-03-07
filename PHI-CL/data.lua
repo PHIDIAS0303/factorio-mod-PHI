@@ -1091,6 +1091,8 @@ if settings.startup['PHI-VP'].value then
         data.raw.recipe['cryogenic-plant'].category = 'crafting'
         data.raw.recipe['cryogenic-plant'].ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'refined-concrete', amount = 40}}
         data.raw.recipe['biolab'].ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 25}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'uranium-235', amount = 3}}
+        data.raw.recipe['foundry'].category = 'crafting'
+        data.raw.recipe['foundry'].ingredients = {{type = 'item', name = 'steel-plate', amount = 50}, {type = 'item', name = 'electronic-circuit', amount = 30}, {type = 'item', name = 'coal', amount = 20}, {type = 'item', name = 'refined-concrete', amount = 20}, {type = 'fluid', name = 'lubricant', amount = 20}}
 
         data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
         data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
