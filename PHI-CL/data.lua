@@ -346,7 +346,7 @@ if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) 
     entity.allowed_effects = {'consumption'}
     entity.tile_buildability_rules = nil
     entity.fluid_source_offset = nil
-    entity.localised_name = {'phi-cl.combine', item.localised_name, ''}
+    entity.localised_name = {'name.super-pump'}
     data:extend({entity})
 
     data:extend({{
@@ -357,7 +357,7 @@ if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) 
         ingredients = {{type = 'item', name = 'electronic-circuit', amount = 2}, {type = 'item', name = 'pipe', amount = 1}, {type = 'item', name = 'iron-gear-wheel', amount = 1}},
         results = {{type = 'item', name = item.name, amount = 1}},
         main_product = item.name,
-        localised_name = {'phi-cl.combine', item.localised_name, ''}
+        localised_name = {'name.super-pump'}
     }})
 
     if data.raw.fluid['water'] then
@@ -373,7 +373,7 @@ if (settings.startup['PHI-CT'].value and settings.startup['PHI-CT-TOOL'].value) 
             hide_from_player_crafting = true,
             allow_productivity = false,
             crafting_machine_tint = {primary=data.raw.fluid['water'].flow_color},
-            localised_name = {'phi-cl.combine', data.raw.fluid['water'].localised_name, ''}
+            localised_name = {'fluid-name.water'}
         }})
     end
 end
@@ -524,7 +524,7 @@ if settings.startup['PHI-SA'].value then
             item.spoil_ticks = math.floor(i.spoil_ticks * settings.startup['PHI-SA-SPOIL-FREEZE-RATIO'].value / 10)
             item.spoil_result = i.name
             item.spoil_to_trigger_result = nil
-            item.localised_name = {'phi-cl.combine', 'item-name.' .. i.name, ''}
+            item.localised_name = {'item-name.' .. i.name}
             data:extend({item})
 
             data:extend({{
@@ -537,7 +537,7 @@ if settings.startup['PHI-SA'].value then
                 results = {{type = 'item', name = item.name, amount = 1}, {type = 'fluid', name = 'fluoroketone-hot', amount = 2, ignored_by_stats=2, ignored_by_productivity = 2}},
                 allow_productivity = false,
                 main_product = item.name,
-                localised_name = {'phi-cl.combine', 'item-name.' .. i.name, ''}
+                localised_name = {'item-name.' .. i.name}
             }})
 
             data:extend({{
@@ -550,7 +550,7 @@ if settings.startup['PHI-SA'].value then
                 results = {{type = 'item', name = i.name, amount = 1}},
                 allow_productivity = false,
                 main_product = i.name,
-                localised_name = {'phi-cl.combine', 'item-name.' .. i.name, ''}
+                localised_name = {'item-name.' .. i.name}
             }})
 
             table.insert(data.raw.technology['cryogenic-plant'].effects, {type = 'unlock-recipe', recipe = item.name})
@@ -593,7 +593,7 @@ if settings.startup['PHI-SA'].value then
             ingredients = {{type = 'item', name = 'nutrients', amount = 1}},
             results = {{type = 'item', name = 'spoilage', amount = 10}},
             main_product = 'spoilage',
-            localised_name = {'phi-cl.combine', 'item-name.spoilage', ''}
+            localised_name = {'item-name.spoilage'}
         }})
 
         table.insert(data.raw.technology['agriculture'].effects, {type = 'unlock-recipe', recipe = 'spoilage-from-nutrients'})
@@ -620,7 +620,7 @@ if settings.startup['PHI-SA'].value then
                     hide_from_player_crafting = true,
                     allow_productivity = false,
                     crafting_machine_tint = {primary=data.raw.fluid[v].flow_color},
-                    localised_name = {'phi-cl.combine', {'fluid-name.' .. v}, ''}
+                    localised_name = {'fluid-name.' .. v}
                 }})
             end
         end
@@ -802,7 +802,7 @@ if settings.startup['PHI-VP'].value then
             order = 'a-i-a',
             max_level = 'infinite',
             upgrade = true,
-            localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ''}
+            localised_name = {'entity-name.cargo-landing-pad'}
         }})
 
         for _, v in pairs({'concrete', 'landfill', 'automation', 'electronics', 'advanced-circuit', 'explosives', 'battery', 'engine', 'electric-engine', 'robotics', 'sulfur-processing', 'solar-energy', 'electric-energy-accumulators', 'railway'}) do
@@ -831,7 +831,7 @@ if settings.startup['PHI-VP'].value then
                 order = 'a-i-b',
                 max_level = 10,
                 upgrade = true,
-                localised_name = {'phi-cl.combine', {'technology-name.' .. v}, ''}
+                localised_name = {'technology-name.' .. v}
             }})
         end
 
@@ -1195,7 +1195,7 @@ if settings.startup['PHI-CT'].value then
         entity.max_distance_of_sector_revealed = 35
         entity.max_distance_of_nearby_sector_revealed = 35
         entity.pictures.layers[1].tint = items['tint'][8]
-        entity.localised_name = item.localised_name
+        entity.localised_name = {'name.super-radar'}
         data:extend({entity})
 
         data:extend({{
@@ -1206,7 +1206,7 @@ if settings.startup['PHI-CT'].value then
             ingredients = {{type = 'item', name = 'electronic-circuit', amount = 5}, {type = 'item', name = 'iron-gear-wheel', amount = 5}, {type = 'item', name = 'iron-plate', amount = 10}},
             results = {{type = 'item', name = item.name, amount = 1}},
             main_product = item.name,
-            localised_name = {'name.' .. item.name}
+            localised_name = {'name.super-radar'}
         }})
 
         item = table.deepcopy(data.raw['item']['electric-energy-interface'])
@@ -1226,7 +1226,7 @@ if settings.startup['PHI-CT'].value then
         entity.energy_production = '0W'
         entity.energy_usage = '1PW'
         entity.gui_mode = 'none'
-        entity.localised_name = item.localised_name
+        entity.localised_name = {'name.passive-energy-void'}
         data:extend({entity})
 
         data:extend({{
@@ -1237,7 +1237,7 @@ if settings.startup['PHI-CT'].value then
             ingredients = {{type = 'item', name = 'accumulator', amount = 1}},
             results = {{type = 'item', name = item.name, amount = 1}},
             main_product = item.name,
-            localised_name = item.localised_name
+            localised_name = {'name.passive-energy-void'}
         }})
 
         table.insert(data.raw.technology['electric-energy-accumulators'].effects, {type = 'unlock-recipe', recipe = item.name})
@@ -1256,7 +1256,7 @@ if settings.startup['PHI-CT'].value then
                     hide_from_player_crafting = true,
                     allow_productivity = false,
                     crafting_machine_tint = {primary=v.flow_color},
-                    localised_name = {'phi-cl.combine', {'fluid-name.' .. v.name}, ''}
+                    localised_name = {'fluid-name.' .. v.name}
                 }})
             end
         end
@@ -1322,7 +1322,7 @@ if settings.startup['PHI-CT'].value then
         entity.next_upgrade = nil
         entity.surface_conditions = nil
         entity.picture.layers[1].tint = items['tint'][8]
-        entity.localised_name = item.localised_name
+        entity.localised_name = {'name.trash-chest'}
         data:extend({entity})
 
         data:extend({{
@@ -1333,7 +1333,7 @@ if settings.startup['PHI-CT'].value then
             ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
             results = {{type = 'item', name = item.name, amount = 1}},
             main_product = item.name,
-            localised_name = item.localised_name
+            localised_name = {'name.trash-chest'}
         }})
 
         table.insert(data.raw.technology['steel-processing'].effects, {type = 'unlock-recipe', recipe = item.name})
@@ -1375,7 +1375,7 @@ if settings.startup['PHI-CT'].value then
             end
         end
 
-        entity.localised_name = item.localised_name
+        entity.localised_name = {'name.trash-pipe'}
         data:extend({entity})
 
         data:extend({{
@@ -1386,7 +1386,7 @@ if settings.startup['PHI-CT'].value then
             ingredients = {{type = 'item', name = 'iron-plate', amount = 1}},
             results = {{type = 'item', name = item.name, amount = 1}},
             main_product = item.name,
-            localised_name = item.localised_name
+            localised_name = {'name.trash-pipe'}
         }})
 
         table.insert(data.raw.technology['automation'].effects, {type = 'unlock-recipe', recipe = item.name})
@@ -1419,7 +1419,7 @@ if settings.startup['PHI-CT'].value then
         entity.fire_flicker_enabled = false
         entity.fire_glow_flicker_enabled = false
         entity.fire = {}
-        entity.localised_name = item.localised_name
+        entity.localised_name = {'name.electric-boiler'}
         data:extend({entity})
 
         data:extend({{
@@ -1430,7 +1430,7 @@ if settings.startup['PHI-CT'].value then
             ingredients = {{type = 'item', name = 'boiler', amount = 1}, {type = 'item', name = 'electronic-circuit', amount = 1}},
             results = {{type = 'item', name = item.name, amount = 1}},
             main_product = item.name,
-            localised_name = item.localised_name
+            localised_name = {'name.electric-boiler'}
         }})
 
         -- electric boiler
@@ -1463,7 +1463,7 @@ if settings.startup['PHI-CT'].value then
             entity.max_logistic_slots = (c == 'steel-chest' and nil) or 1
             entity.trash_inventory_size = (c == 'steel-chest' and nil) or 1
 
-            entity.localised_name = item.localised_name
+            entity.localised_name = {'name.basic-' .. c}
             data:extend({entity})
 
             data:extend({{
@@ -1474,7 +1474,7 @@ if settings.startup['PHI-CT'].value then
                 ingredients = {{type = 'item', name =c, amount = 1}},
                 results = {{type = 'item', name = item.name, amount = 1}},
                 main_product = item.name,
-                localised_name = item.localised_name
+                localised_name = {'name.basic-' .. c}
             }})
         end
 
