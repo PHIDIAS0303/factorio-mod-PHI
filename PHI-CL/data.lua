@@ -6,7 +6,7 @@ if settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value 
     data.raw['fluid']['steam'].max_temperature = ((settings.startup['PHI-MB-ENERGY-POWER-TIER'].value > 1) and 5000) or data.raw['fluid']['steam'].max_temperature
     local ml = math.max(tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-TIER'].value) or 1, tonumber(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value) or 1)
 
-    for i=1, 7 do
+    for i = 1, 7 do
         data:extend({{
             type = 'technology',
             name = 'compound-energy-' .. i,
@@ -14,7 +14,7 @@ if settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value 
             prerequisites = ((i > 1) and {'compound-energy-' .. (i - 1)}) or {'solar-energy', 'advanced-circuit', 'electric-energy-accumulators'},
             effects = {},
             unit = {
-                count = math.floor(75 * (i ^ 2)),
+                count = math.floor(125 * (i ^ 2)),
                 ingredients = {
                     {'automation-science-pack', 1},
                     {'logistic-science-pack', 1}
@@ -1001,7 +1001,8 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['agriculture'].prerequisites = {'chemical-science-pack'}
         data.raw.technology['agriculture'].research_trigger = nil
         data.raw.technology['agriculture'].effects = {{type = 'unlock-recipe', recipe = 'agricultural-tower'}}
-        data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+        data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+        data.raw.technology['tree-seeding'].prerequisites = {'agriculture'}
         data.raw.technology['tree-seeding'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
         data.raw.technology['electromagnetic-plant'].prerequisites = {'automation-3'}
         data.raw.technology['electromagnetic-plant'].research_trigger = nil
