@@ -512,7 +512,7 @@ if settings.startup['PHI-SA'].value then
                     icon_mipmaps = 4
                 }, {
                     icon = data.raw['item']['ice'].icon,
-                    tint = {r=1, g=1, b=1, a=0.5},
+                    tint = {r = 1, g = 1, b = 1, a = 0.5},
                     icon_size = 64,
                     icon_mipmaps = 4
                 }
