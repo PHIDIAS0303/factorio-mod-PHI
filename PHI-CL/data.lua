@@ -219,57 +219,6 @@ if settings.startup['PHI-MI'].value then
     end
 
     if settings.startup['PHI-MI-TRAIN'].value then
-        local item = table.deepcopy(data.raw['item']['depleted-uranium-fuel-cell'])
-        item.name = 'empty-train-battery'
-        item.icon = items['general']['graphics_location'] .. 'battery.png'
-        item.order = 'qa'
-        item.stack_size = 100
-        item.localised_name = {'name.empty-train-battery'}
-        item.localised_description = {'description.empty-train-battery'}
-        data:extend({item})
-
-        data:extend({{
-            type = 'recipe',
-            name = 'empty-train-battery',
-            energy_required = 30,
-            enabled = true,
-            icon = items['general']['graphics_location'] .. 'battery.png',
-            icon_size = 64,
-            subgroup = 'intermediate-product',
-            order = 'zc',
-            allow_productivity = true,
-            ingredients = {{type = 'item', name = 'battery', amount = 50}},
-            results = {{type = 'item', name = 'empty-train-battery', amount = 1}},
-            main_product = 'empty-train-battery',
-            localised_name = {'name.empty-train-battery'},
-            localised_description = {'description.empty-train-battery'}
-        }})
-
-        item = table.deepcopy(data.raw['item']['nuclear-fuel'])
-        item.name = 'charged-train-battery'
-        item.burnt_result = 'empty-train-battery'
-        item.fuel_value = '1GJ'
-        item.icon = items['general']['graphics_location'] .. 'battery.png'
-        item.stack_size = 10
-        item.localised_name = {'name.charged-train-battery'}
-        item.localised_description = {'description.charged-train-battery'}
-        data:extend({item})
-
-        data:extend({{
-            type = 'recipe',
-            name = 'charged-train-battery',
-            energy_required = 60,
-            enabled = true,
-            icon = items['general']['graphics_location'] .. 'battery.png',
-            icon_size = 64,
-            subgroup = 'intermediate-product',
-            ingredients = {{type = 'item', name = 'empty-train-battery', amount = 1}},
-            results = {{type = 'item', name = 'charged-train-battery', probability = 0.995, amount = 1}, {type = 'item', name = 'battery', probability = 0.005, amount = 5}},
-            main_product = 'charged-train-battery',
-            localised_name = {'name.charged-train-battery'},
-            localised_description = {'description.charged-train-battery'}
-        }})
-
         local s = (7 + settings.startup['PHI-MI-TRAIN'].value) / 8
 
         for _, t in pairs({data.raw['locomotive'], data.raw['cargo-wagon'], data.raw['fluid-wagon'], data.raw['artillery-wagon']}) do
@@ -740,6 +689,59 @@ if settings.startup['PHI-VP'].value then
         data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 1
         data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 0
         data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 0
+
+        local item = table.deepcopy(data.raw['item']['depleted-uranium-fuel-cell'])
+        item.name = 'empty-train-battery'
+        item.icon = items['general']['graphics_location'] .. 'battery.png'
+        item.order = 'qa'
+        item.stack_size = 100
+        item.localised_name = {'name.empty-train-battery'}
+        item.localised_description = {'description.empty-train-battery'}
+        data:extend({item})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'empty-train-battery',
+            energy_required = 30,
+            enabled = true,
+            icon = items['general']['graphics_location'] .. 'battery.png',
+            icon_size = 64,
+            subgroup = 'intermediate-product',
+            order = 'zc',
+            allow_productivity = false,
+            ingredients = {{type = 'item', name = 'battery', amount = 100}},
+            results = {{type = 'item', name = 'empty-train-battery', amount = 1}},
+            main_product = 'empty-train-battery',
+            localised_name = {'name.empty-train-battery'},
+            localised_description = {'description.empty-train-battery'}
+        }})
+
+        item = table.deepcopy(data.raw['item']['nuclear-fuel'])
+        item.name = 'charged-train-battery'
+        item.burnt_result = 'empty-train-battery'
+        item.fuel_value = '1GJ'
+        item.icon = items['general']['graphics_location'] .. 'battery.png'
+        item.stack_size = 10
+        item.localised_name = {'name.charged-train-battery'}
+        item.localised_description = {'description.charged-train-battery'}
+        data:extend({item})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'charged-train-battery',
+            energy_required = 60,
+            enabled = true,
+            icon = items['general']['graphics_location'] .. 'battery.png',
+            icon_size = 64,
+            subgroup = 'intermediate-product',
+            order = 'zd',
+            allow_productivity = false,
+            ingredients = {{type = 'item', name = 'empty-train-battery', amount = 1}},
+            results = {{type = 'item', name = 'charged-train-battery', probability = 0.995, amount = 1}, {type = 'item', name = 'battery', probability = 0.005, amount = 5}},
+            main_product = 'charged-train-battery',
+            localised_name = {'name.charged-train-battery'},
+            localised_description = {'description.charged-train-battery'}
+        }})
 
         local item_sounds = require('__base__/prototypes/item_sounds')
 
