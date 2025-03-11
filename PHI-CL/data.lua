@@ -1152,65 +1152,38 @@ if settings.startup['PHI-VP'].value then
             end
         end
 
-        data.raw['unit']['small-wriggler-pentapod'].hidden = true
-        data.raw['unit']['small-wriggler-pentapod'].hidden_in_factoriopedia = true
-        data.raw['unit']['small-wriggler-pentapod-premature'].hidden = true
-        data.raw['unit']['small-wriggler-pentapod-premature'].hidden_in_factoriopedia = true
-        data.raw['unit']['medium-wriggler-pentapod'].hidden = true
-        data.raw['unit']['medium-wriggler-pentapod'].hidden_in_factoriopedia = true
-        data.raw['unit']['medium-wriggler-pentapod-premature'].hidden = true
-        data.raw['unit']['medium-wriggler-pentapod-premature'].hidden_in_factoriopedia = true
-        data.raw['unit']['big-wriggler-pentapod'].hidden = true
-        data.raw['unit']['big-wriggler-pentapod'].hidden_in_factoriopedia = true
-        data.raw['unit']['big-wriggler-pentapod-premature'].hidden = true
-        data.raw['unit']['big-wriggler-pentapod-premature'].hidden_in_factoriopedia = true
-        data.raw['spider-unit']['small-strafer-pentapod'].hidden = true
-        data.raw['spider-unit']['small-strafer-pentapod'].hidden_in_factoriopedia = true
-        data.raw['spider-unit']['medium-strafer-pentapod'].hidden = true
-        data.raw['spider-unit']['medium-strafer-pentapod'].hidden_in_factoriopedia = true
-        data.raw['spider-unit']['big-strafer-pentapod'].hidden = true
-        data.raw['spider-unit']['big-strafer-pentapod'].hidden_in_factoriopedia = true
-        data.raw['spider-unit']['small-stomper-pentapod'].hidden = true
-        data.raw['spider-unit']['small-stomper-pentapod'].hidden_in_factoriopedia = true
-        data.raw['spider-unit']['medium-stomper-pentapod'].hidden = true
-        data.raw['spider-unit']['medium-stomper-pentapod'].hidden_in_factoriopedia = true
-        data.raw['spider-unit']['big-stomper-pentapod'].hidden = true
-        data.raw['spider-unit']['big-stomper-pentapod'].hidden_in_factoriopedia = true
+        for _, v in pairs({'small-wriggler-pentapod', 'small-wriggler-pentapod-premature', 'medium-wriggler-pentapod', 'medium-wriggler-pentapod-premature', 'big-wriggler-pentapod', 'big-wriggler-pentapod-premature'}) do
+            data.raw['unit'][v].hidden = true
+            data.raw['unit'][v].hidden_in_factoriopedia = true
+        end
+
+        for _, v in pairs({'small-strafer-pentapod', 'medium-strafer-pentapod', 'big-strafer-pentapod', 'small-stomper-pentapod', 'medium-stomper-pentapod', 'big-stomper-pentapod'}) do
+            data.raw['spider-unit'][v].hidden = true
+            data.raw['spider-unit'][v].hidden_in_factoriopedia = true
+        end
+
+        for _, v in pairs({'small-demolisher', 'medium-demolisher', 'big-demolisher'}) do
+            data.raw['segmented-unit'][v].hidden = true
+            data.raw['segmented-unit'][v].hidden_in_factoriopedia = true
+        end
+
         data.raw['unit-spawner']['gleba-spawner'].hidden = true
         data.raw['unit-spawner']['gleba-spawner'].hidden_in_factoriopedia = true
         data.raw['unit-spawner']['gleba-spawner-small'].hidden = true
         data.raw['unit-spawner']['gleba-spawner-small'].hidden_in_factoriopedia = true
-        data.raw['segmented-unit']['small-demolisher'].hidden = true
-        data.raw['segmented-unit']['small-demolisher'].hidden_in_factoriopedia = true
-        data.raw['segmented-unit']['medium-demolisher'].hidden = true
-        data.raw['segmented-unit']['medium-demolisher'].hidden_in_factoriopedia = true
-        data.raw['segmented-unit']['big-demolisher'].hidden = true
-        data.raw['segmented-unit']['big-demolisher'].hidden_in_factoriopedia = true
 
-        data.raw.capsule['bioflux'].hidden = true
-        data.raw.capsule['bioflux'].hidden_in_factoriopedia = true
-        data.raw.capsule['jelly'].hidden = true
-        data.raw.capsule['jelly'].hidden_in_factoriopedia = true
-        data.raw.capsule['jellynut'].hidden = true
-        data.raw.capsule['jellynut'].hidden_in_factoriopedia = true
-        data.raw.capsule['yumako'].hidden = true
-        data.raw.capsule['yumako'].hidden_in_factoriopedia = true
-        data.raw.capsule['yumako-mash'].hidden = true
-        data.raw.capsule['yumako-mash'].hidden_in_factoriopedia = true
+        for _, v in pairs({'bioflux', 'jelly', 'jellynut', 'yumako', 'yumako-mash'}) do
+            data.raw['capsule'][v].hidden = true
+            data.raw['capsule'][v].hidden_in_factoriopedia = true
+        end
+
+        for _, v in pairs({'small-stomper-shell', 'medium-stomper-shell', 'big-stomper-shell', 'big-volcanic-rock', 'huge-volcanic-rock'}) do
+            data.raw['simple-entity'][v].hidden = true
+            data.raw['simple-entity'][v].hidden_in_factoriopedia = true
+        end
 
         data.raw.ammo['capture-robot-rocket'].hidden = true
         data.raw.ammo['capture-robot-rocket'].hidden_in_factoriopedia = true
-
-        data.raw['simple-entity']['small-stomper-shell'].hidden = true
-        data.raw['simple-entity']['small-stomper-shell'].hidden_in_factoriopedia = true
-        data.raw['simple-entity']['medium-stomper-shell'].hidden = true
-        data.raw['simple-entity']['medium-stomper-shell'].hidden_in_factoriopedia = true
-        data.raw['simple-entity']['big-stomper-shell'].hidden = true
-        data.raw['simple-entity']['big-stomper-shell'].hidden_in_factoriopedia = true
-        data.raw['simple-entity']['big-volcanic-rock'].hidden = true
-        data.raw['simple-entity']['big-volcanic-rock'].hidden_in_factoriopedia = true
-        data.raw['simple-entity']['huge-volcanic-rock'].hidden = true
-        data.raw['simple-entity']['huge-volcanic-rock'].hidden_in_factoriopedia = true
 
         data.raw['tips-and-tricks-item']['agriculture'] = nil
         data.raw['tips-and-tricks-item']['lava-processing'] = nil
