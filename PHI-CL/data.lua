@@ -1150,26 +1150,33 @@ if settings.startup['PHI-VP'].value then
         data.raw['tile']['foundation'].hidden_in_factoriopedia = true
 
         for _, v in pairs({'small-wriggler-pentapod', 'small-wriggler-pentapod-premature', 'medium-wriggler-pentapod', 'medium-wriggler-pentapod-premature', 'big-wriggler-pentapod', 'big-wriggler-pentapod-premature'}) do
-            data.raw['unit'][v] = nil
+            data.raw['unit'][v].hidden = true
+            data.raw['unit'][v].hidden_in_factoriopedia = true
         end
 
         for _, v in pairs({'small-strafer-pentapod', 'medium-strafer-pentapod', 'big-strafer-pentapod', 'small-stomper-pentapod', 'medium-stomper-pentapod', 'big-stomper-pentapod'}) do
-            data.raw['spider-unit'][v] = nil
+            data.raw['spider-unit'][v].hidden = true
+            data.raw['spider-unit'][v].hidden_in_factoriopedia = true
         end
 
         for _, v in pairs({'small-demolisher', 'medium-demolisher', 'big-demolisher'}) do
-            data.raw['segmented-unit'][v] = nil
+            data.raw['segmented-unit'][v].hidden = true
+            data.raw['segmented-unit'][v].hidden_in_factoriopedia = true
         end
 
-        data.raw['unit-spawner']['gleba-spawner'] = nil
-        data.raw['unit-spawner']['gleba-spawner-small'] = nil
+        data.raw['unit-spawner']['gleba-spawner'].hidden = true
+        data.raw['unit-spawner']['gleba-spawner'].hidden_in_factoriopedia = true
+        data.raw['unit-spawner']['gleba-spawner-small'].hidden = true
+        data.raw['unit-spawner']['gleba-spawner-small'].hidden_in_factoriopedia = true
 
         for _, v in pairs({'bioflux', 'jelly', 'jellynut', 'yumako', 'yumako-mash'}) do
-            data.raw['capsule'][v] = nil
+            data.raw['capsule'][v].hidden = true
+            data.raw['capsule'][v].hidden_in_factoriopedia = true
         end
 
         for _, v in pairs({'small-stomper-shell', 'medium-stomper-shell', 'big-stomper-shell', 'big-volcanic-rock', 'huge-volcanic-rock', 'copper-stromatolite', 'iron-stromatolite', 'vulcanus-chimney-short', 'vulcanus-chimney-truncated', 'vulcanus-chimney', 'vulcanus-chimney-cold', 'vulcanus-chimney-faded', 'fulgurite', 'fulgurite-small'}) do
-            data.raw['simple-entity'][v] = nil
+            data.raw['simple-entity'][v].hidden = true
+            data.raw['simple-entity'][v].hidden_in_factoriopedia = true
         end
 
         data.raw.ammo['capture-robot-rocket'] = nil
