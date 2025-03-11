@@ -854,16 +854,11 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
         data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
 
-        for _, v in pairs({'calcite', 'fluorine_vent', 'lithium_brine', 'scrap', 'tungsten_ore'}) do
-            data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v] = nil
-            data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v:gsub('_', '-')] = nil
-        end
-
-        for _, v in pairs({'tungsten-ore', 'calcite'}) do
-            if data.raw.resource[v] then
-                data.raw.resource[v].hidden = true
-                data.raw.resource[v].hidden_in_factoriopedia = true
-            end
+        for _, v in pairs({'calcite', 'fluorine-vent', 'lithium-brine', 'scrap', 'tungsten-ore'}) do
+            data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v:gsub('-', '_')] = nil
+            data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v] = nil
+            data.raw.resource[v].hidden = true
+            data.raw.resource[v].hidden_in_factoriopedia = true
         end
 
         data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = nil
