@@ -1329,7 +1329,6 @@ if settings.startup['PHI-CT'].value then
     end
 
     if settings.startup['PHI-CT-UTILITY'].value then
-        local location = items['general']['graphics_location'] .. ((tonumber(mods['space-age']:match('(%d+)$') or 0) < 34 and 'signal-2') or 'signal-1') .. '/'
         local nsg = {
             ['virtual-signal-number'] = true,
             ['virtual-signal-letter'] = true
@@ -1341,7 +1340,7 @@ if settings.startup['PHI-CT'].value then
                 table.insert(s, {
                     type = 'virtual-signal',
                     name = v.name .. 'A',
-                    icon = location .. v.name:gsub('-', '_') .. '.png',
+                    icon = items['general']['graphics_location'] .. 'signal/' .. v.name:gsub('-', '_') .. '.png',
                     subgroup = v.subgroup,
                     order = (v.subgroup == 'virtual-signal-number' and 'b[numbers]2-[' or 'c[letters]2-[') .. v.name:gsub('signal-', '') .. ']',
                     localised_name = {'phi-cl.combine', 'virtual-signal-name.' .. v.name, '(II)'}
