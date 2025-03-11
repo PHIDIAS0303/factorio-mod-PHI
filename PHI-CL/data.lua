@@ -1103,8 +1103,10 @@ if settings.startup['PHI-VP'].value then
 
         table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
 
-        data.raw['plant']['yumako-tree'] = nil
-        data.raw['plant']['jellystem'] = nil
+        data.raw['plant']['yumako-tree'].hidden = true
+        data.raw['plant']['yumako-tree'].hidden_in_factoriopedia = true
+        data.raw['plant']['jellystem'].hidden = true
+        data.raw['plant']['jellystem'].hidden_in_factoriopedia = true
         data.raw['unit-spawner']['biter-spawner'].captured_spawner_entity = nil
         data.raw['unit-spawner']['spitter-spawner'].captured_spawner_entity = nil
 
