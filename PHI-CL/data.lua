@@ -1175,10 +1175,10 @@ if settings.startup['PHI-VP'].value then
             data.raw['segmented-unit'][v].hidden_in_factoriopedia = true
         end
 
-        data.raw['unit-spawner']['gleba-spawner'].hidden = true
-        data.raw['unit-spawner']['gleba-spawner'].hidden_in_factoriopedia = true
-        data.raw['unit-spawner']['gleba-spawner-small'].hidden = true
-        data.raw['unit-spawner']['gleba-spawner-small'].hidden_in_factoriopedia = true
+        for _, v in pairs({'gleba-spawner', 'gleba-spawner-small'}) do
+            data.raw['unit-spawner'][v].hidden = true
+            data.raw['unit-spawner'][v].hidden_in_factoriopedia = true
+        end
 
         for _, v in pairs({'bioflux', 'jelly', 'jellynut', 'yumako', 'yumako-mash'}) do
             data.raw['capsule'][v].hidden = true
