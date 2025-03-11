@@ -1131,16 +1131,21 @@ if settings.startup['PHI-VP'].value then
             ['aquilo_tile'] = true,
         }
 
-        for k, v in pairs(data.raw['tile']) do
+        for _, v in pairs(data.raw['tile']) do
             if v.subgroup and tile_subgroup[v.subgroup] then
-                data.raw['tile'][k] = nil
+                v.hidden = true
+                v.hidden_in_factoriopedia = true
             end
         end
 
-        data.raw['tile']['empty-space'] = nil
-        data.raw['tile']['space'] = nil
-        data.raw['tile']['space-platform-foundation'] = nil
-        data.raw['tile']['foundation'] = nil
+        data.raw['tile']['empty-space'].hidden = true
+        data.raw['tile']['empty-space'].hidden_in_factoriopedia = true
+        data.raw['tile']['space'].hidden = true
+        data.raw['tile']['space'].hidden_in_factoriopedia = true
+        data.raw['tile']['space-platform-foundation'].hidden = true
+        data.raw['tile']['space-platform-foundation'].hidden_in_factoriopedia = true
+        data.raw['tile']['foundation'].hidden = true
+        data.raw['tile']['foundation'].hidden_in_factoriopedia = true
 
         for _, v in pairs({'small-wriggler-pentapod', 'small-wriggler-pentapod-premature', 'medium-wriggler-pentapod', 'medium-wriggler-pentapod-premature', 'big-wriggler-pentapod', 'big-wriggler-pentapod-premature'}) do
             data.raw['unit'][v] = nil
