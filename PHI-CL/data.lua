@@ -1124,16 +1124,10 @@ if settings.startup['PHI-VP'].value then
         data.raw.fluid['fluoroketone-cold'].auto_barrel = false
         data.raw.fluid['fluoroketone-hot'].auto_barrel = false
 
-        data.raw.tool['agricultural-science-pack'].hidden = true
-        data.raw.tool['agricultural-science-pack'].hidden_in_factoriopedia = true
-        data.raw.tool['cryogenic-science-pack'].hidden = true
-        data.raw.tool['cryogenic-science-pack'].hidden_in_factoriopedia = true
-        data.raw.tool['electromagnetic-science-pack'].hidden = true
-        data.raw.tool['electromagnetic-science-pack'].hidden_in_factoriopedia = true
-        data.raw.tool['metallurgic-science-pack'].hidden = true
-        data.raw.tool['metallurgic-science-pack'].hidden_in_factoriopedia = true
-        data.raw.tool['promethium-science-pack'].hidden = true
-        data.raw.tool['promethium-science-pack'].hidden_in_factoriopedia = true
+        for _, v in pairs({'agricultural', 'cryogenic', 'electromagnetic', 'metallurgic', 'promethium'}) do
+            data.raw.tool[v .. '-science-pack'].hidden = true
+            data.raw.tool[v .. '-science-pack'].hidden_in_factoriopedia = true
+        end
 
         for _, v in pairs(data.raw.lab) do
             v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
