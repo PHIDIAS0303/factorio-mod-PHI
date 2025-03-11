@@ -4,6 +4,7 @@ Date: 2025-03-13
 
   Changes:
     - [VP] Some changes to item or recipe display logic.
+    - [CT] Some changes to clean up the graphics.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.70
