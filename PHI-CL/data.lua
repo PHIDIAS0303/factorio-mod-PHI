@@ -1149,10 +1149,6 @@ if settings.startup['PHI-VP'].value then
             end
         end
 
-        data.raw['tile']['lava'].hidden = true
-        data.raw['tile']['lava'].hidden_in_factoriopedia = true
-        data.raw['tile']['lava-2'].hidden = true
-        data.raw['tile']['lava-2'].hidden_in_factoriopedia = true
         data.raw['tile']['empty-space'].hidden = true
         data.raw['tile']['empty-space'].hidden_in_factoriopedia = true
         data.raw['tile']['space-platform-foundation'].hidden = true
