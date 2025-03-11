@@ -1029,8 +1029,9 @@ if settings.startup['PHI-VP'].value then
             data.raw.recipe[k] = nil
         end
 
-        for k, _ in pairs(items['space-age']['PHI-VP-MAIN']['item']) do
-            data.raw.item[k] = nil
+        for k, v in pairs(items['space-age']['PHI-VP-MAIN']['item']) do
+            data.raw.item[k].hidden = v
+            data.raw.item[k].hidden_in_factoriopedia = v
         end
 
         data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
