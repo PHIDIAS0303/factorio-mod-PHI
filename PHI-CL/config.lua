@@ -396,7 +396,7 @@ local items = {
                 ['promethium-science-pack'] = true,
                 ['foundation'] = true,
                 ['scrap-recycling-productivity'] = true,
-                ['biochamber'] = true
+                ['biochamber'] = true,
             },
             ['recipe'] = {
                 ['thruster'] = true,
@@ -491,7 +491,7 @@ local items = {
                 ['foundation'] = true,
                 ['foundation-o'] = true,
                 ['steam-condensation'] = true,
-                ['ice-melting'] = true
+                ['ice-melting'] = true,
             },
             ['item'] = {
                 ['artificial-yumako-soil'] = true,

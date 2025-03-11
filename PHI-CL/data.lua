@@ -1029,9 +1029,8 @@ if settings.startup['PHI-VP'].value then
             data.raw.recipe[k] = nil
         end
 
-        for k, v in pairs(items['space-age']['PHI-VP-MAIN']['item']) do
-            data.raw.item[k].hidden = v
-            data.raw.item[k].hidden_in_factoriopedia = v
+        for k, _ in pairs(items['space-age']['PHI-VP-MAIN']['item']) do
+            data.raw.item[k] = nil
         end
 
         data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
@@ -1103,11 +1102,8 @@ if settings.startup['PHI-VP'].value then
 
         table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
 
-        data.raw['plant']['yumako-tree'].hidden = true
-        data.raw['plant']['yumako-tree'].hidden_in_factoriopedia = true
-        data.raw['plant']['jellystem'].hidden = true
-        data.raw['plant']['jellystem'].hidden_in_factoriopedia = true
-
+        data.raw['plant']['yumako-tree'] = nil
+        data.raw['plant']['jellystem'] = nil
         data.raw['unit-spawner']['biter-spawner'].captured_spawner_entity = nil
         data.raw['unit-spawner']['spitter-spawner'].captured_spawner_entity = nil
 
@@ -1143,37 +1139,29 @@ if settings.startup['PHI-VP'].value then
         end
 
         for _, v in pairs({'small-wriggler-pentapod', 'small-wriggler-pentapod-premature', 'medium-wriggler-pentapod', 'medium-wriggler-pentapod-premature', 'big-wriggler-pentapod', 'big-wriggler-pentapod-premature'}) do
-            data.raw['unit'][v].hidden = true
-            data.raw['unit'][v].hidden_in_factoriopedia = true
+            data.raw['unit'][v] = nil
         end
 
         for _, v in pairs({'small-strafer-pentapod', 'medium-strafer-pentapod', 'big-strafer-pentapod', 'small-stomper-pentapod', 'medium-stomper-pentapod', 'big-stomper-pentapod'}) do
-            data.raw['spider-unit'][v].hidden = true
-            data.raw['spider-unit'][v].hidden_in_factoriopedia = true
+            data.raw['spider-unit'][v] = nil
         end
 
         for _, v in pairs({'small-demolisher', 'medium-demolisher', 'big-demolisher'}) do
-            data.raw['segmented-unit'][v].hidden = true
-            data.raw['segmented-unit'][v].hidden_in_factoriopedia = true
+            data.raw['segmented-unit'][v] = nil
         end
 
-        data.raw['unit-spawner']['gleba-spawner'].hidden = true
-        data.raw['unit-spawner']['gleba-spawner'].hidden_in_factoriopedia = true
-        data.raw['unit-spawner']['gleba-spawner-small'].hidden = true
-        data.raw['unit-spawner']['gleba-spawner-small'].hidden_in_factoriopedia = true
+        data.raw['unit-spawner']['gleba-spawner'] = nil
+        data.raw['unit-spawner']['gleba-spawner-small'] = nil
 
         for _, v in pairs({'bioflux', 'jelly', 'jellynut', 'yumako', 'yumako-mash'}) do
-            data.raw['capsule'][v].hidden = true
-            data.raw['capsule'][v].hidden_in_factoriopedia = true
+            data.raw['capsule'][v] = nil
         end
 
         for _, v in pairs({'small-stomper-shell', 'medium-stomper-shell', 'big-stomper-shell', 'big-volcanic-rock', 'huge-volcanic-rock', 'copper-stromatolite', 'iron-stromatolite', 'vulcanus-chimney-short', 'vulcanus-chimney-truncated', 'vulcanus-chimney', 'vulcanus-chimney-cold', 'vulcanus-chimney-faded', 'fulgurite', 'fulgurite-small'}) do
-            data.raw['simple-entity'][v].hidden = true
-            data.raw['simple-entity'][v].hidden_in_factoriopedia = true
+            data.raw['simple-entity'][v] = nil
         end
 
-        data.raw.ammo['capture-robot-rocket'].hidden = true
-        data.raw.ammo['capture-robot-rocket'].hidden_in_factoriopedia = true
+        data.raw.ammo['capture-robot-rocket'] = nil
 
         data.raw['tips-and-tricks-item']['agriculture'] = nil
         data.raw['tips-and-tricks-item']['lava-processing'] = nil
