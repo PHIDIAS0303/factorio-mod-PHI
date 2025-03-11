@@ -1347,7 +1347,7 @@ if settings.startup['PHI-CT'].value then
                 icon = items['general']['graphics_location'] .. 'signal/signal_' .. char .. '.png',
                 subgroup = string.match(char, '%d') and 'virtual-signal-number' or 'virtual-signal-letter',
                 order = (string.match(char, '%d') and 'b[numbers]2-[' or 'c[letters]2-[') .. char .. ']',
-                localised_name = {'phi-cl.combine', 'virtual-signal-name.signal-' .. char, '(II)'}
+                localised_name = {'phi-cl.combine', {'virtual-signal-name.signal-' .. char}, '(II)'}
             })
         end
 
