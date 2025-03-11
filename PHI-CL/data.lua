@@ -1135,10 +1135,11 @@ if settings.startup['PHI-VP'].value then
         end
 
         local tile_subgroup = {
-            ['vulcanus_tile'] = true,
-            ['gleba_tile'] = true,
-            ['fulgora_tile'] = true,
-            ['aquilo_tile'] = true,
+            ['vulcanus-tiles'] = true,
+            ['gleba-tiles'] = true,
+            ['gleba-water-tiles'] = true,
+            ['fulgora-tiles'] = true,
+            ['aquilo-tiles'] = true,
         }
 
         for _, v in pairs(data.raw['tile']) do
@@ -1148,6 +1149,10 @@ if settings.startup['PHI-VP'].value then
             end
         end
 
+        data.raw['tile']['lava'].hidden = true
+        data.raw['tile']['lava'].hidden_in_factoriopedia = true
+        data.raw['tile']['lava-2'].hidden = true
+        data.raw['tile']['lava-2'].hidden_in_factoriopedia = true
         data.raw['tile']['empty-space'].hidden = true
         data.raw['tile']['empty-space'].hidden_in_factoriopedia = true
         data.raw['tile']['space-platform-foundation'].hidden = true
