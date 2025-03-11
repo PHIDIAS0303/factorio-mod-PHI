@@ -1123,14 +1123,16 @@ if settings.startup['PHI-VP'].value then
         data.raw['lightning-attractor']['lightning-collector'].hidden_in_factoriopedia = true
         data.raw['lightning-attractor']['fulgoran-ruin-attractor'].hidden = true
         data.raw['lightning-attractor']['fulgoran-ruin-attractor'].hidden_in_factoriopedia = true
-        data.raw['lightning']['lightning'].hidden = true
-        data.raw['lightning']['lightning'].hidden_in_factoriopedia = true
+
         data.raw['plant']['yumako-tree'].hidden = true
         data.raw['plant']['yumako-tree'].hidden_in_factoriopedia = true
         data.raw['plant']['jellystem'].hidden = true
         data.raw['plant']['jellystem'].hidden_in_factoriopedia = true
         data.raw['unit-spawner']['biter-spawner'].captured_spawner_entity = nil
         data.raw['unit-spawner']['spitter-spawner'].captured_spawner_entity = nil
+
+        data.raw['lightning']['lightning'].hidden = true
+        data.raw['lightning']['lightning'].hidden_in_factoriopedia = true
 
         data.raw.fluid['fluoroketone-cold'].auto_barrel = false
         data.raw.fluid['fluoroketone-hot'].auto_barrel = false
