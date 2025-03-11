@@ -1201,12 +1201,12 @@ if settings.startup['PHI-VP'].value then
         data.raw.ammo['capture-robot-rocket'].hidden = true
         data.raw.ammo['capture-robot-rocket'].hidden_in_factoriopedia = true
 
-        data.raw['simple-entity']['big-stomper-shell'].hidden = true
-        data.raw['simple-entity']['big-stomper-shell'].hidden_in_factoriopedia = true
-        data.raw['simple-entity']['medium-stomper-shell'].hidden = true
-        data.raw['simple-entity']['medium-stomper-shell'].hidden_in_factoriopedia = true
         data.raw['simple-entity']['small-stomper-shell'].hidden = true
         data.raw['simple-entity']['small-stomper-shell'].hidden_in_factoriopedia = true
+        data.raw['simple-entity']['medium-stomper-shell'].hidden = true
+        data.raw['simple-entity']['medium-stomper-shell'].hidden_in_factoriopedia = true
+        data.raw['simple-entity']['big-stomper-shell'].hidden = true
+        data.raw['simple-entity']['big-stomper-shell'].hidden_in_factoriopedia = true
         data.raw['simple-entity']['big-volcanic-rock'].hidden = true
         data.raw['simple-entity']['big-volcanic-rock'].hidden_in_factoriopedia = true
         data.raw['simple-entity']['huge-volcanic-rock'].hidden = true
