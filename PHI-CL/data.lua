@@ -1329,23 +1329,19 @@ if settings.startup['PHI-CT'].value then
     end
 
     if settings.startup['PHI-CT-UTILITY'].value then
-        local nsg = {
-            ['virtual-signal-number'] = true,
-            ['virtual-signal-letter'] = true
-        }
+        local vir_sig = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         local s = {}
 
-        for _, v in pairs(data.raw['virtual-signal']) do
-            if nsg[v.subgroup] then
-                table.insert(s, {
-                    type = 'virtual-signal',
-                    name = v.name .. 'A',
-                    icon = items['general']['graphics_location'] .. 'signal/' .. v.name:gsub('-', '_') .. '.png',
-                    subgroup = v.subgroup,
-                    order = (v.subgroup == 'virtual-signal-number' and 'b[numbers]2-[' or 'c[letters]2-[') .. v.name:gsub('signal-', '') .. ']',
-                    localised_name = {'phi-cl.combine', 'virtual-signal-name.' .. v.name, '(II)'}
-                })
-            end
+        for i = 1, #vir_sig do
+            local char = vir_sig:sub(i, i)
+            table.insert(s, {
+                type = 'virtual-signal',
+                name = char .. 'A',
+                icon = items['general']['graphics_location'] .. 'signal/signal_' .. char .. '.png',
+                subgroup = string.match(char, '%d') and 'virtual-signal-number' or 'virtual-signal-letter',
+                order = (string.match(char, '%d') and 'b[numbers]2-[' or 'c[letters]2-[') .. char .. ']',
+                localised_name = {'phi-cl.combine', 'virtual-signal-name.signal-' .. char, '(II)'}
+            })
         end
 
         data:extend(s)
