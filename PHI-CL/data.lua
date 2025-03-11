@@ -1139,6 +1139,46 @@ if settings.startup['PHI-VP'].value then
             v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
         end
 
+        for _, v in pairs(data.raw['asteroid']) do
+            v.hidden = true
+            v.hidden_in_factoriopedia = true
+        end
+
+        data.raw['unit']['small-wriggler-pentapod'].hidden = true
+        data.raw['unit']['small-wriggler-pentapod'].hidden_in_factoriopedia = true
+        data.raw['unit']['small-wriggler-pentapod-premature'].hidden = true
+        data.raw['unit']['small-wriggler-pentapod-premature'].hidden_in_factoriopedia = true
+        data.raw['unit']['medium-wriggler-pentapod'].hidden = true
+        data.raw['unit']['medium-wriggler-pentapod'].hidden_in_factoriopedia = true
+        data.raw['unit']['medium-wriggler-pentapod-premature'].hidden = true
+        data.raw['unit']['medium-wriggler-pentapod-premature'].hidden_in_factoriopedia = true
+        data.raw['unit']['big-wriggler-pentapod'].hidden = true
+        data.raw['unit']['big-wriggler-pentapod'].hidden_in_factoriopedia = true
+        data.raw['unit']['big-wriggler-pentapod-premature'].hidden = true
+        data.raw['unit']['big-wriggler-pentapod-premature'].hidden_in_factoriopedia = true
+        data.raw['spider-unit']['small-strafer-pentapod'].hidden = true
+        data.raw['spider-unit']['small-strafer-pentapod'].hidden_in_factoriopedia = true
+        data.raw['spider-unit']['medium-strafer-pentapod'].hidden = true
+        data.raw['spider-unit']['medium-strafer-pentapod'].hidden_in_factoriopedia = true
+        data.raw['spider-unit']['big-strafer-pentapod'].hidden = true
+        data.raw['spider-unit']['big-strafer-pentapod'].hidden_in_factoriopedia = true
+        data.raw['spider-unit']['small-stomper-pentapod'].hidden = true
+        data.raw['spider-unit']['small-stomper-pentapod'].hidden_in_factoriopedia = true
+        data.raw['spider-unit']['medium-stomper-pentapod'].hidden = true
+        data.raw['spider-unit']['medium-stomper-pentapod'].hidden_in_factoriopedia = true
+        data.raw['spider-unit']['big-stomper-pentapod'].hidden = true
+        data.raw['spider-unit']['big-stomper-pentapod'].hidden_in_factoriopedia = true
+        data.raw['unit-spawner']['gleba-spawner'].hidden = true
+        data.raw['unit-spawner']['gleba-spawner'].hidden_in_factoriopedia = true
+        data.raw['unit-spawner']['gleba-spawner-small'].hidden = true
+        data.raw['unit-spawner']['gleba-spawner-small'].hidden_in_factoriopedia = true
+        data.raw['segmented-unit']['small-demolisher'].hidden = true
+        data.raw['segmented-unit']['small-demolisher'].hidden_in_factoriopedia = true
+        data.raw['segmented-unit']['medium-demolisher'].hidden = true
+        data.raw['segmented-unit']['medium-demolisher'].hidden_in_factoriopedia = true
+        data.raw['segmented-unit']['big-demolisher'].hidden = true
+        data.raw['segmented-unit']['big-demolisher'].hidden_in_factoriopedia = true
+
         data.raw.capsule['bioflux'].hidden = true
         data.raw.capsule['bioflux'].hidden_in_factoriopedia = true
         data.raw.capsule['jelly'].hidden = true
@@ -1152,6 +1192,17 @@ if settings.startup['PHI-VP'].value then
 
         data.raw.ammo['capture-robot-rocket'].hidden = true
         data.raw.ammo['capture-robot-rocket'].hidden_in_factoriopedia = true
+
+        data.raw['simple-entity']['big-stomper-shell'].hidden = true
+        data.raw['simple-entity']['big-stomper-shell'].hidden_in_factoriopedia = true
+        data.raw['simple-entity']['medium-stomper-shell'].hidden = true
+        data.raw['simple-entity']['medium-stomper-shell'].hidden_in_factoriopedia = true
+        data.raw['simple-entity']['small-stomper-shell'].hidden = true
+        data.raw['simple-entity']['small-stomper-shell'].hidden_in_factoriopedia = true
+        data.raw['simple-entity']['big-volcanic-rock'].hidden = true
+        data.raw['simple-entity']['big-volcanic-rock'].hidden_in_factoriopedia = true
+        data.raw['simple-entity']['huge-volcanic-rock'].hidden = true
+        data.raw['simple-entity']['huge-volcanic-rock'].hidden_in_factoriopedia = true
 
         data.raw['tips-and-tricks-item']['agriculture'] = nil
         data.raw['tips-and-tricks-item']['lava-processing'] = nil
