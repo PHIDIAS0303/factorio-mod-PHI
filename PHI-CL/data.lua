@@ -1026,7 +1026,8 @@ if settings.startup['PHI-VP'].value then
         end
 
         for k, _ in pairs(items['space-age']['PHI-VP-MAIN']['recipe']) do
-            data.raw.recipe[k] = nil
+            data.raw.recipe[k].hidden = v
+            data.raw.recipe[k].hidden_in_factoriopedia = v
         end
 
         for k, v in pairs(items['space-age']['PHI-VP-MAIN']['item']) do
@@ -1169,10 +1170,6 @@ if settings.startup['PHI-VP'].value then
 
         for _, v in pairs({'small-stomper-shell', 'medium-stomper-shell', 'big-stomper-shell', 'big-volcanic-rock', 'huge-volcanic-rock', 'copper-stromatolite', 'iron-stromatolite', 'vulcanus-chimney-short', 'vulcanus-chimney-truncated', 'vulcanus-chimney', 'vulcanus-chimney-cold', 'vulcanus-chimney-faded', 'fulgurite', 'fulgurite-small'}) do
             data.raw['simple-entity'][v] = nil
-        end
-
-        for _, v in pairs({'biter-egg', 'pentapod-egg'}) do
-            data.raw.item[v] = nil
         end
 
         data.raw.ammo['capture-robot-rocket'] = nil
