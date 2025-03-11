@@ -1144,6 +1144,20 @@ if settings.startup['PHI-VP'].value then
             v.hidden_in_factoriopedia = true
         end
 
+        local tile_subgroup = {
+            ['vulcanus_tile'] = true,
+            ['gleba_tile'] = true,
+            ['fulgora_tile'] = true,
+            ['aquilo_tile'] = true,
+        }
+
+        for _, v in pairs(data.raw['tile']) do
+            if v.subgroup and tile_subgroup[v.subgroup] then
+                v.hidden = true
+                v.hidden_in_factoriopedia = true
+            end
+        end
+
         data.raw['unit']['small-wriggler-pentapod'].hidden = true
         data.raw['unit']['small-wriggler-pentapod'].hidden_in_factoriopedia = true
         data.raw['unit']['small-wriggler-pentapod-premature'].hidden = true
