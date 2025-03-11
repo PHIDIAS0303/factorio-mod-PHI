@@ -1129,6 +1129,7 @@ if settings.startup['PHI-VP'].value then
             ['gleba_tile'] = true,
             ['fulgora_tile'] = true,
             ['aquilo_tile'] = true,
+            ['artificial-tiles'] = true,
         }
 
         for k, v in pairs(data.raw['tile']) do
@@ -1136,6 +1137,8 @@ if settings.startup['PHI-VP'].value then
                 data.raw['tile'][k] = nil
             end
         end
+
+        data.raw['tile']['space'] = nil
 
         for _, v in pairs({'small-wriggler-pentapod', 'small-wriggler-pentapod-premature', 'medium-wriggler-pentapod', 'medium-wriggler-pentapod-premature', 'big-wriggler-pentapod', 'big-wriggler-pentapod-premature'}) do
             data.raw['unit'][v] = nil
