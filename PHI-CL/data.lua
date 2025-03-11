@@ -1017,22 +1017,28 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['biolab'].unit = {count = 800, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
 
         for k, v in pairs(items['space-age']['PHI-VP-MAIN']['technology']) do
-            data.raw.technology[k].hidden = v
-            data.raw.technology[k].hidden_in_factoriopedia = v
+            if data.raw.technology[k] then
+                data.raw.technology[k].hidden = v
+                data.raw.technology[k].hidden_in_factoriopedia = v
 
-            if data.raw.technology[k].unit and data.raw.technology[k].unit.ingredients then
-                data.raw.technology[k].unit.ingredients = {{'space-science-pack', 1}}
+                if data.raw.technology[k].unit and data.raw.technology[k].unit.ingredients then
+                    data.raw.technology[k].unit.ingredients = {{'space-science-pack', 1}}
+                end
             end
         end
 
         for k, v in pairs(items['space-age']['PHI-VP-MAIN']['recipe']) do
-            data.raw.recipe[k].hidden = v
-            data.raw.recipe[k].hidden_in_factoriopedia = v
+            if data.raw.recipe[k] then
+                data.raw.recipe[k].hidden = v
+                data.raw.recipe[k].hidden_in_factoriopedia = v
+            end
         end
 
         for k, v in pairs(items['space-age']['PHI-VP-MAIN']['item']) do
-            data.raw.item[k].hidden = v
-            data.raw.item[k].hidden_in_factoriopedia = v
+            if data.raw.item[k] then
+                data.raw.item[k].hidden = v
+                data.raw.item[k].hidden_in_factoriopedia = v
+            end
         end
 
         data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
