@@ -1179,7 +1179,8 @@ if settings.startup['PHI-VP'].value then
             data.raw['simple-entity'][v].hidden_in_factoriopedia = true
         end
 
-        data.raw.ammo['capture-robot-rocket'] = nil
+        data.raw.ammo['capture-robot-rocket'].hidden = true
+        data.raw.ammo['capture-robot-rocket'].hidden_in_factoriopedia = true
 
         data.raw['tips-and-tricks-item']['agriculture'] = nil
         data.raw['tips-and-tricks-item']['lava-processing'] = nil
