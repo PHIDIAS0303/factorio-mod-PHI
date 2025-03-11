@@ -1137,6 +1137,7 @@ if settings.startup['PHI-VP'].value then
             end
         end
 
+        data.raw['tile']['empty-space'] = nil
         data.raw['tile']['space'] = nil
         data.raw['tile']['space-platform-foundation'] = nil
         data.raw['tile']['foundation'] = nil
