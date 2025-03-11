@@ -854,12 +854,17 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
         data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
 
-        for _, v in pairs({'calcite', 'fluorine-vent', 'lithium-brine', 'scrap', 'tungsten-ore'}) do
+        for _, v in pairs({'calcite', 'lithium-brine', 'scrap', 'tungsten-ore'}) do
             data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v:gsub('-', '_')] = nil
             data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v] = nil
             data.raw.resource[v].hidden = true
             data.raw.resource[v].hidden_in_factoriopedia = true
         end
+
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['fluorine_vent'] = nil
+        data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings['fluorine-vent'] = nil
+        data.raw.resource['sulfuric-acid-geyser'].hidden = true
+        data.raw.resource['sulfuric-acid-geyser'].hidden_in_factoriopedia = true
 
         data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = nil
         data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_plants'] = nil
@@ -1118,6 +1123,8 @@ if settings.startup['PHI-VP'].value then
         data.raw['lightning-attractor']['lightning-rod'].hidden_in_factoriopedia = true
         data.raw['lightning-attractor']['lightning-collector'].hidden = true
         data.raw['lightning-attractor']['lightning-collector'].hidden_in_factoriopedia = true
+        data.raw['lightning-attractor']['fulgoran-ruin-attractor'].hidden = true
+        data.raw['lightning-attractor']['fulgoran-ruin-attractor'].hidden_in_factoriopedia = true
         data.raw['plant']['yumako-tree'].hidden = true
         data.raw['plant']['yumako-tree'].hidden_in_factoriopedia = true
         data.raw['plant']['jellystem'].hidden = true
@@ -1194,7 +1201,7 @@ if settings.startup['PHI-VP'].value then
             data.raw['capsule'][v].hidden_in_factoriopedia = true
         end
 
-        for _, v in pairs({'small-stomper-shell', 'medium-stomper-shell', 'big-stomper-shell', 'big-volcanic-rock', 'huge-volcanic-rock', 'copper-stromatolite', 'iron-stromatolite', 'vulcanus-chimney-short', 'vulcanus-chimney-truncated', 'vulcanus-chimney', 'vulcanus-chimney-cold', 'vulcanus-chimney-faded', 'fulgurite', 'fulgurite-small'}) do
+        for _, v in pairs({'small-stomper-shell', 'medium-stomper-shell', 'big-stomper-shell', 'big-volcanic-rock', 'huge-volcanic-rock', 'copper-stromatolite', 'iron-stromatolite', 'vulcanus-chimney-short', 'vulcanus-chimney-truncated', 'vulcanus-chimney', 'vulcanus-chimney-cold', 'vulcanus-chimney-faded', 'fulgurite', 'fulgurite-small', 'fulgoran-ruin-small', 'fulgoran-ruin-medium', 'fulgoran-ruin-stonehenge', 'fulgoran-ruin-big', 'fulgoran-ruin-colossal', 'fulgoran-ruin-huge', 'fulgoran-ruin-vault', 'lithium-iceberg-big', 'lithium-iceberg-huge', 'small-demolisher-corpse', 'medium-demolisher-corpse', 'big-demolisher-corpse'}) do
             data.raw['simple-entity'][v].hidden = true
             data.raw['simple-entity'][v].hidden_in_factoriopedia = true
         end
