@@ -1110,6 +1110,14 @@ if settings.startup['PHI-VP'].value then
 
         table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
 
+        data.raw['assembling-machine']['biochamber'].hidden = true
+        data.raw['assembling-machine']['biochamber'].hidden_in_factoriopedia = true
+        data.raw['assembling-machine']['captive-biter-spawner'].hidden = true
+        data.raw['assembling-machine']['captive-biter-spawner'].hidden_in_factoriopedia = true
+        data.raw['lightning-attractor']['lightning-rod'].hidden = true
+        data.raw['lightning-attractor']['lightning-rod'].hidden_in_factoriopedia = true
+        data.raw['lightning-attractor']['lightning-collector'].hidden = true
+        data.raw['lightning-attractor']['lightning-collector'].hidden_in_factoriopedia = true
         data.raw['plant']['yumako-tree'].hidden = true
         data.raw['plant']['yumako-tree'].hidden_in_factoriopedia = true
         data.raw['plant']['jellystem'].hidden = true
@@ -1155,6 +1163,11 @@ if settings.startup['PHI-VP'].value then
         data.raw['tile']['space-platform-foundation'].hidden_in_factoriopedia = true
         data.raw['tile']['foundation'].hidden = true
         data.raw['tile']['foundation'].hidden_in_factoriopedia = true
+
+        for _, v in pairs({'cliff-fulgora', 'cliff-gleba', 'cliff-vulcanus', 'crater-cliff'}) do
+            data.raw['cliff'][v].hidden = true
+            data.raw['cliff'][v].hidden_in_factoriopedia = true
+        end
 
         for _, v in pairs({'small-wriggler-pentapod', 'small-wriggler-pentapod-premature', 'medium-wriggler-pentapod', 'medium-wriggler-pentapod-premature', 'big-wriggler-pentapod', 'big-wriggler-pentapod-premature'}) do
             data.raw['unit'][v].hidden = true
