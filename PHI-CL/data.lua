@@ -1171,6 +1171,10 @@ if settings.startup['PHI-VP'].value then
             data.raw['simple-entity'][v] = nil
         end
 
+        for _, v in pairs({'biter-egg', 'pentapod-egg'}) do
+            data.raw.item[v] = nil
+        end
+
         data.raw.ammo['capture-robot-rocket'] = nil
 
         data.raw['tips-and-tricks-item']['agriculture'] = nil
