@@ -494,9 +494,9 @@ local items = {
                 ['ice-melting'] = true
             },
             ['item'] = {
-                ['artifical-yumako-soil'] = true,
+                ['artificial-yumako-soil'] = true,
                 ['overgrowth-yumako-soil'] = true,
-                ['artifical-jellynut-soil'] = true,
+                ['artificial-jellynut-soil'] = true,
                 ['overgrowth-jellynut-soil'] = true,
                 ['ice-platform'] = true,
                 ['foundation'] = true,
