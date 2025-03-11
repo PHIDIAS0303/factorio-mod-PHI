@@ -1025,7 +1025,7 @@ if settings.startup['PHI-VP'].value then
             end
         end
 
-        for k, _ in pairs(items['space-age']['PHI-VP-MAIN']['recipe']) do
+        for k, v in pairs(items['space-age']['PHI-VP-MAIN']['recipe']) do
             data.raw.recipe[k].hidden = v
             data.raw.recipe[k].hidden_in_factoriopedia = v
         end
