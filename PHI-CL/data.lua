@@ -1037,6 +1037,13 @@ if settings.startup['PHI-VP'].value then
             end
         end
 
+        for k, v in pairs(items['space-age']['PHI-VP-MAIN']['item']) do
+            if data.raw.item[k] then
+                data.raw.item[k].hidden = v
+                data.raw.item[k].hidden_in_factoriopedia = v
+            end
+        end
+
         data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
         data.raw.recipe['big-mining-drill'].category = nil
         data.raw.recipe['big-mining-drill'].ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'electric-engine-unit', amount = 10}, {type = 'item', name = 'advanced-circuit', amount = 10}}
@@ -1142,6 +1149,9 @@ if settings.startup['PHI-VP'].value then
         data.raw.capsule['yumako'].hidden_in_factoriopedia = true
         data.raw.capsule['yumako-mash'].hidden = true
         data.raw.capsule['yumako-mash'].hidden_in_factoriopedia = true
+
+        data.raw.ammo['capture-robot-rocket'].hidden = true
+        data.raw.ammo['capture-robot-rocket'].hidden_in_factoriopedia = true
 
         data.raw['tips-and-tricks-item']['agriculture'] = nil
         data.raw['tips-and-tricks-item']['lava-processing'] = nil
