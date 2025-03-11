@@ -1131,10 +1131,9 @@ if settings.startup['PHI-VP'].value then
             ['aquilo_tile'] = true,
         }
 
-        for _, v in pairs(data.raw['tile']) do
+        for k, v in pairs(data.raw['tile']) do
             if v.subgroup and tile_subgroup[v.subgroup] then
-                v.hidden = true
-                v.hidden_in_factoriopedia = true
+                data.raw['tile'][k] = nil
             end
         end
 
