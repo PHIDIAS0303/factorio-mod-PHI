@@ -832,7 +832,6 @@ if settings.startup['PHI-VP'].value then
                 },
                 order = 'a-i-d',
                 max_level = 10,
-                upgrade = true,
                 localised_name = {'technology-name.' .. v}
             }})
         end
