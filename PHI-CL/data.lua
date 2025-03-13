@@ -683,7 +683,6 @@ if settings.startup['PHI-VP'].value then
             data.raw['space-connection-distance-traveled-achievement'][v] = nil
         end
 
-        
         for _, v in pairs({'carbonic', 'metallic', 'promethium', 'oxide'}) do
             data.raw.item[v .. '-asteroid-chunk'].hidden = true
             data.raw.item[v .. '-asteroid-chunk'].hidden_in_factoriopedia = true
