@@ -1150,7 +1150,7 @@ if settings.startup['PHI-VP'].value then
             v.hidden_in_factoriopedia = true
         end
 
-        for _, v in pairs({'carbonic-asteroid-chunk', 'metallic-asteroid-chunk', 'promethium-asteroid-chunk', 'oxide-asteroid-chunk', 'artillery-shell'}) do
+        for _, v in pairs({'carbonic-asteroid-chunk', 'metallic-asteroid-chunk', 'promethium-asteroid-chunk', 'oxide-asteroid-chunk'}) do
             data.raw.item[v].hidden = true
             data.raw.item[v].hidden_in_factoriopedia = true
         end
