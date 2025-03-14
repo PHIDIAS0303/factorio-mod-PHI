@@ -29,6 +29,7 @@ if settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value 
                 }
             },
             order = 'a-h-' .. i,
+            upgrade = true,
             localised_name = {'phi-cl.combine', {'technology-name.compound-energy'}, tostring(i)},
             localised_description = {'technology-description.compound-energy'}
         }})
