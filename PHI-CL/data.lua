@@ -837,6 +837,7 @@ if settings.startup['PHI-VP'].value then
                 },
                 order = 'a-i-d',
                 max_level = 10,
+                upgrade = false,
                 localised_name = {'technology-name.' .. v}
             }})
         end
@@ -967,28 +968,35 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['processing-unit-productivity'].prerequisites = {'processing-unit'}
         data.raw.technology['processing-unit-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
         data.raw.technology['processing-unit-productivity'].max_level = 10
+        data.raw.technology['processing-unit-productivity'].upgrade = false
         data.raw.technology['steel-plate-productivity'].prerequisites = {'steel-processing'}
         data.raw.technology['steel-plate-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'steel-plate', change = 0.1}}
         data.raw.technology['steel-plate-productivity'].max_level = 10
+        data.raw.technology['steel-plate-productivity'].upgrade = false
         data.raw.technology['low-density-structure-productivity'].prerequisites = {'low-density-structure'}
         data.raw.technology['low-density-structure-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'low-density-structure', change = 0.1}}
         data.raw.technology['low-density-structure-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
         data.raw.technology['low-density-structure-productivity'].max_level = 10
+        data.raw.technology['low-density-structure-productivity'].upgrade = false
         data.raw.technology['plastic-bar-productivity'].prerequisites = {'plastics'}
         data.raw.technology['plastic-bar-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'plastic-bar', change = 0.1}}
         data.raw.technology['plastic-bar-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
         data.raw.technology['plastic-bar-productivity'].max_level = 10
+        data.raw.technology['plastic-bar-productivity'].upgrade = false
         data.raw.technology['rocket-fuel-productivity'].prerequisites = {'rocket-fuel'}
         data.raw.technology['rocket-fuel-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'rocket-fuel', change = 0.1}}
         data.raw.technology['rocket-fuel-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
         data.raw.technology['rocket-fuel-productivity'].max_level = 10
+        data.raw.technology['rocket-fuel-productivity'].upgrade = false
         data.raw.technology['rocket-part-productivity'].prerequisites = {'rocket-silo'}
         data.raw.technology['rocket-part-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
         data.raw.technology['rocket-part-productivity'].max_level = 10
+        data.raw.technology['rocket-part-productivity'].upgrade = false
         data.raw.technology['research-productivity'].prerequisites = {'space-science-pack'}
         data.raw.technology['research-productivity'].unit.count_formula = '1.5^L*2000'
         data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         data.raw.technology['research-productivity'].max_level = 10
+        data.raw.technology['research-productivity'].upgrade = false
         data.raw.technology['transport-belt-capacity-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         data.raw.technology['transport-belt-capacity-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         data.raw.technology['electric-weapons-damage-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
