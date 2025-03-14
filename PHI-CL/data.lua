@@ -1050,7 +1050,7 @@ if settings.startup['PHI-VP'].value then
 
         data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
         data.raw.recipe['big-mining-drill'].category = nil
-        data.raw.recipe['big-mining-drill'].ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electric-engine-unit', amount = 5}, {type = 'item', name = 'advanced-circuit', amount = 10}, {type = 'item', name = 'electric-mining-drill', amount = 1}}
+        data.raw.recipe['big-mining-drill'].ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electric-engine-unit', amount = 5}, {type = 'item', name = 'advanced-circuit', amount = 10}}
         data.raw.recipe['turbo-transport-belt'].category = 'crafting-with-fluid'
         data.raw.recipe['turbo-transport-belt'].ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'item', name = 'express-transport-belt', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 20}}
         data.raw.recipe['turbo-underground-belt'].category = 'crafting-with-fluid'
@@ -1099,9 +1099,9 @@ if settings.startup['PHI-VP'].value then
         data.raw.recipe['fusion-power-cell'].category = 'crafting-with-fluid'
         data.raw.recipe['fusion-power-cell'].ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'fluid', name = 'petroleum-gas', amount = 100}}
         data.raw.recipe['agricultural-tower'].ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electronic-circuit', amount = 3}, {type = 'item', name = 'landfill', amount = 1}}
-        data.raw.recipe['electromagnetic-plant'].category = 'crafting'
+        data.raw.recipe['electromagnetic-plant'].category = 'crafting-with-fluid'
         data.raw.recipe['electromagnetic-plant'].ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'assembling-machine-3', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'fluid', name = 'sulfuric-acid', amount = 20}}
-        data.raw.recipe['cryogenic-plant'].category = 'crafting'
+        data.raw.recipe['cryogenic-plant'].category = 'crafting-with-fluid'
         data.raw.recipe['cryogenic-plant'].ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'chemical-plant', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'fluid', name = 'water', amount = 20}}
         data.raw.recipe['biolab'].ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'item', name = 'processing-unit', amount = 40}, {type = 'item', name = 'uranium-235', amount = 3}}
         data.raw.recipe['foundry'].category = 'crafting-with-fluid'
