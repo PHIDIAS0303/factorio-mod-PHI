@@ -393,8 +393,8 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value or settings.startup[
     data.raw.technology['rail-support-foundations'].prerequisites = {'elevated-rail'}
     data.raw.technology['rail-support-foundations'].unit.count = 600
     data.raw.technology['rail-support-foundations'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-    data.raw.technology['elevated-rail'].prerequisites = {'concrete'}
-    data.raw.technology['elevated-rail'].unit.count = 200
+    data.raw.technology['elevated-rail'].prerequisites = {'concrete', 'railway'}
+    data.raw.technology['elevated-rail'].unit.count = 400
     data.raw.technology['elevated-rail'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}
 
     data.raw.recipe['foundation'].ingredients = {{type = 'item', name = 'stone', amount = 40}, {type = 'item', name = 'refined-concrete', amount = 20}, {type = 'item', name = 'steel-plate', amount = 20}}
