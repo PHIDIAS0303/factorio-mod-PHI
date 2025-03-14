@@ -371,7 +371,7 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw['place-equipment-achievement']['no-room-for-more'] = nil
 end
 
-if mods['space-age'] and ((settings.startup['PHI-SA'].value or settings.startup['PHI-SA-GENERIC'].value) or (settings.startup['PHI-VP'].value or settings.startup['PHI-VP-MAIN'].value)) then
+if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value)) then
     data.raw.resource['lithium-brine'].infinite = true
     data.raw.resource['lithium-brine'].minimum = 60000
     data.raw.resource['lithium-brine'].normal = 300000
@@ -1487,7 +1487,7 @@ if settings.startup['PHI-CT'].value then
             usage_priority = 'secondary-input',
             buffer_capacity = entity.buffer_capacity,
             light_flicker = {
-                color = {r=0.5, g=1, b=1, a=0.5},
+                color = {r = 0.5, g = 1, b = 1, a = 0.5},
                 minimum_light_size = 0.1,
                 light_intensity_to_size_coefficient = 1
             }
