@@ -342,6 +342,7 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
         data.raw.technology[v].hidden = true
         data.raw.technology[v].hidden_in_factoriopedia = true
+        data.raw.technology[v].unit.ingredients = {{'space-science-pack', 1}}
         data.raw.module[v].hidden = true
         data.raw.module[v].hidden_in_factoriopedia = true
         data.raw.recipe[v].hidden = true
