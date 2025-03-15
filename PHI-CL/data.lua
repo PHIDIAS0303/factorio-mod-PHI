@@ -826,7 +826,7 @@ if settings.startup['PHI-VP'].value then
                 type = 'technology',
                 name = v .. '-productivity',
                 prerequisites = {v, 'automation-3', 'production-science-pack'},
-                effects = {{type = 'change-recipe-productivity', recipe = v, change = 0.1}},
+                effects = {{type = 'change-recipe-productivity', recipe = v, change = 0.05}},
                 unit = {
                     count_formula = '750 * (1.5 ^ (L - 1))',
                     ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}},
