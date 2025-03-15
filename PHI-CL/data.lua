@@ -340,14 +340,20 @@ end
 
 if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-MAX-QUALITY'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value)) then
     for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
-        data.raw.technology[v] = nil
-        data.raw.module[v] = nil
-        data.raw.recipe[v] = nil
-        data.raw.recipe[v .. '-recycling'] = nil
+        data.raw.technology[v].hidden = true
+        data.raw.technology[v].hidden_in_factoriopedia = true
+        data.raw.module[v].hidden = true
+        data.raw.module[v].hidden_in_factoriopedia = true
+        data.raw.recipe[v].hidden = true
+        data.raw.recipe[v].hidden_in_factoriopedia = true
+        data.raw.recipe[v .. '-recycling'].hidden = true
+        data.raw.recipe[v .. '-recycling'].hidden_in_factoriopedia = true
     end
 
-    data.raw.technology['epic-quality'] = nil
-    data.raw.technology['legendary-quality'] = nil
+    data.raw.technology['epic-quality'].hidden = true
+    data.raw.technology['epic-quality'].hidden_in_factoriopedia = true
+    data.raw.technology['legendary-quality'].hidden = true
+    data.raw.technology['legendary-quality'].hidden_in_factoriopedia = true
 
     for _, v in pairs({'uncommon', 'rare', 'epic', 'legendary'}) do
         data.raw.quality[v].hidden = true
@@ -407,6 +413,8 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
 
     table.insert(data.raw['thruster']['thruster'].fuel_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.west, position = {-1.5, 2}})
     table.insert(data.raw['thruster']['thruster'].oxidizer_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.east, position = {1.5, 2}})
+
+    data.raw['cargo-wagon']['cargo-wagon'].inventory_size = 96
 
     for _, v in pairs(data.raw['cargo-wagon']) do
         v.quality_affects_inventory_size = true
