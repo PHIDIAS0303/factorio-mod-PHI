@@ -346,14 +346,14 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
         data.raw.module[v].hidden_in_factoriopedia = true
         data.raw.recipe[v].hidden = true
         data.raw.recipe[v].hidden_in_factoriopedia = true
-        data.raw.recipe[v .. '-recycling'].hidden = true
-        data.raw.recipe[v .. '-recycling'].hidden_in_factoriopedia = true
     end
 
     data.raw.technology['epic-quality'].hidden = true
     data.raw.technology['epic-quality'].hidden_in_factoriopedia = true
+    data.raw.technology['epic-quality'].unit.ingredients = {{'space-science-pack', 1}}
     data.raw.technology['legendary-quality'].hidden = true
     data.raw.technology['legendary-quality'].hidden_in_factoriopedia = true
+    data.raw.technology['legendary-quality'].unit.ingredients = {{'space-science-pack', 1}}
 
     for _, v in pairs({'uncommon', 'rare', 'epic', 'legendary'}) do
         data.raw.quality[v].hidden = true
