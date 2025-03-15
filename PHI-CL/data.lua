@@ -414,7 +414,7 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     table.insert(data.raw['thruster']['thruster'].fuel_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.west, position = {-1.5, 2}})
     table.insert(data.raw['thruster']['thruster'].oxidizer_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.east, position = {1.5, 2}})
 
-    data.raw['cargo-wagon']['cargo-wagon'].inventory_size = 96
+    data.raw['cargo-wagon']['cargo-wagon'].inventory_size = 80
 
     for _, v in pairs(data.raw['cargo-wagon']) do
         v.quality_affects_inventory_size = true
