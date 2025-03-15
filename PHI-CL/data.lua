@@ -828,7 +828,7 @@ if settings.startup['PHI-VP'].value then
                 prerequisites = {v, 'automation-3', 'production-science-pack'},
                 effects = {{type = 'change-recipe-productivity', recipe = v, change = 0.1}},
                 unit = {
-                    count_formula = '500 * (1.5 ^ (L - 1))',
+                    count_formula = '750 * (1.5 ^ (L - 1))',
                     ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}},
                     time = 30
                 },
