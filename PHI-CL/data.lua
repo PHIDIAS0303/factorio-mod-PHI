@@ -892,12 +892,10 @@ if settings.startup['PHI-VP'].value then
         data.raw.recipe['landfill'].ingredients = {{type = 'item', name = 'stone', amount = math.min(20, tonumber(settings.startup['PHI-MI-LANDFILL'].value) or 20)}}
 
         data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
-        data.raw.technology['cliff-explosives'].unit.count = 200
-        data.raw.technology['cliff-explosives'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}
+        data.raw.technology['cliff-explosives'].unit = {count = 200, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
         data.raw.technology['space-science-pack'].research_trigger = nil
         data.raw.technology['space-science-pack'].prerequisites = {'rocket-silo'}
         data.raw.technology['space-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'satellite'}}
-        data.raw.technology['space-science-pack'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
         data.raw.technology['space-science-pack'].unit = {count = 2000, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
         data.raw.technology['cliff-explosives'].effects = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
         data.raw.technology['logistic-system'].prerequisites = {'logistic-robotics'}
@@ -979,34 +977,36 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['health'].prerequisites = {'utility-science-pack'}
         data.raw.technology['health'].unit.ingredients = {{'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['processing-unit-productivity'].prerequisites = {'processing-unit'}
+        data.raw.technology['processing-unit-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'processing-unit', change = 0.05}}
         data.raw.technology['processing-unit-productivity'].unit.count_formula = '1000 * (1.5 ^ (L - 1))'
         data.raw.technology['processing-unit-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
         data.raw.technology['processing-unit-productivity'].max_level = 10
         data.raw.technology['processing-unit-productivity'].upgrade = false
         data.raw.technology['steel-plate-productivity'].prerequisites = {'steel-processing'}
+        data.raw.technology['steel-plate-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'steel-plate', change = 0.05}}
         data.raw.technology['steel-plate-productivity'].unit.count_formula = '1000 * (1.5 ^ (L - 1))'
-        data.raw.technology['steel-plate-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'steel-plate', change = 0.1}}
         data.raw.technology['steel-plate-productivity'].max_level = 10
         data.raw.technology['steel-plate-productivity'].upgrade = false
         data.raw.technology['low-density-structure-productivity'].prerequisites = {'low-density-structure'}
-        data.raw.technology['low-density-structure-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'low-density-structure', change = 0.1}}
+        data.raw.technology['low-density-structure-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'low-density-structure', change = 0.05}}
         data.raw.technology['low-density-structure-productivity'].unit.count_formula = '1000 * (1.5 ^ (L - 1))'
         data.raw.technology['low-density-structure-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
         data.raw.technology['low-density-structure-productivity'].max_level = 10
         data.raw.technology['low-density-structure-productivity'].upgrade = false
         data.raw.technology['plastic-bar-productivity'].prerequisites = {'plastics'}
-        data.raw.technology['plastic-bar-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'plastic-bar', change = 0.1}}
+        data.raw.technology['plastic-bar-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'plastic-bar', change = 0.05}}
         data.raw.technology['plastic-bar-productivity'].unit.count_formula = '1000 * (1.5 ^ (L - 1))'
         data.raw.technology['plastic-bar-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
         data.raw.technology['plastic-bar-productivity'].max_level = 10
         data.raw.technology['plastic-bar-productivity'].upgrade = false
         data.raw.technology['rocket-fuel-productivity'].prerequisites = {'rocket-fuel'}
-        data.raw.technology['rocket-fuel-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'rocket-fuel', change = 0.1}}
+        data.raw.technology['rocket-fuel-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'rocket-fuel', change = 0.05}}
         data.raw.technology['rocket-fuel-productivity'].unit.count_formula = '1000 * (1.5 ^ (L - 1))'
         data.raw.technology['rocket-fuel-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
         data.raw.technology['rocket-fuel-productivity'].max_level = 10
         data.raw.technology['rocket-fuel-productivity'].upgrade = false
         data.raw.technology['rocket-part-productivity'].prerequisites = {'rocket-silo'}
+        data.raw.technology['rocket-part-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'rocket-part', change = 0.05}}
         data.raw.technology['rocket-part-productivity'].unit.count_formula = '1000 * (1.5 ^ (L - 1))'
         data.raw.technology['rocket-part-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
         data.raw.technology['rocket-part-productivity'].max_level = 10
