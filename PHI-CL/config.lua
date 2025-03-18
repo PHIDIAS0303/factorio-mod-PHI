@@ -490,9 +490,9 @@ local items = {
                 ['simple-coal-liquefaction'] = true,
                 ['scrap-recycling'] = true,
                 ['foundation'] = true,
-                ['foundation-o'] = true,
                 ['steam-condensation'] = true,
                 ['ice-melting'] = true,
+                ['space-platform-starter-pack'] = true,
             },
             ['item'] = {
                 ['artificial-yumako-soil'] = true,
