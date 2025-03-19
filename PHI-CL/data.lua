@@ -1389,6 +1389,27 @@ if settings.startup['PHI-CT'].value then
 
         data:extend(s)
 
+        for _, v in pairs({'underground-belt', 'fast-underground-belt', 'express-underground-belt'}) do
+            local item = table.deepcopy(data.raw.item[v])
+            item.name = v .. '-A'
+            item.place_result = item.name
+            item.localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
+            item.localised_description = {'entity-description.' .. v}
+            data:extend({item})
+
+            local entity = table.deepcopy(data.raw['underground-belt'][v])
+            entity.name = item.name
+            entity.minable.result = item.name
+            entity.next_upgrade = nil
+            entity.surface_conditions = nil
+            entity.localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
+            entity.localised_description = {'entity-description.' .. v}
+            data:extend({entity})
+
+            data.raw['underground-belt']['underground-belt-A'].next_upgrade = 'fast-underground-belt'
+            data.raw['underground-belt']['fast-underground-belt-A'].next_upgrade = 'express-underground-belt'
+        end
+
         for _, t in pairs({'arithmetic-combinator', 'decider-combinator', 'programmable-speaker', 'selector-combinator'}) do
             data.raw[t][t].energy_source.usage_priority = 'primary-input'
         end
