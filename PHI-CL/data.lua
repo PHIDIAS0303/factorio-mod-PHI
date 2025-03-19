@@ -1405,11 +1405,15 @@ if settings.startup['PHI-CT'].value then
             entity.localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
             entity.localised_description = {'entity-description.' .. v}
 
-            for _, st in pairs(entity.structure) do
-                st.sheet.filename = items['general']['graphics_location'] .. v .. '.png'
+            for _, st in pairs({'direction_in', 'direction_out', 'direction_in_side_loading', 'direction_out_side_loading'}) do
+                entity[st].sheet.filename = items['general']['graphics_location'] .. v .. '.png'
+                entity[st].sheet.width = 106
+                entity[st].sheet.height = 85
             end
 
-            entity.structure.direction_in_side_loading.sheet.y = 192
+            entity.structure.direction_in.sheet.y = 85
+            entity.structure.direction_out.sheet.y = nil
+            entity.structure.direction_in_side_loading.sheet.y = 85
             entity.structure.direction_out_side_loading.sheet.y = nil
 
             data:extend({entity})
