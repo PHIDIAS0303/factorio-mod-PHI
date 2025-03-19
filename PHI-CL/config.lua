@@ -492,7 +492,6 @@ local items = {
                 ['foundation'] = true,
                 ['steam-condensation'] = true,
                 ['ice-melting'] = true,
-                ['space-platform-starter-pack'] = true,
             },
             ['item'] = {
                 ['artificial-yumako-soil'] = true,
