@@ -173,7 +173,7 @@ if settings.startup['PHI-MI'].value then
     end
 
     if settings.startup['PHI-MI-PIPE'].value then
-        local s = (1 + settings.startup['PHI-MI-ROBOT'].value) / 2
+        local s = (1 + settings.startup['PHI-MI-PIPE'].value) / 2
 
         for _, t in pairs({data.raw['offshore-pump'], data.raw['pump']}) do
             for _, v in pairs(t) do
@@ -1143,6 +1143,12 @@ if settings.startup['PHI-VP'].value then
         data.raw['assembling-machine']['cryogenic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['oil-refinery'].crafting_categories), table.unpack(data.raw['assembling-machine']['chemical-plant'].crafting_categories)}
 
         table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
+
+        data.raw['pump']['pump'].pumping_speed = 50
+
+        if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
+            data.raw['pump']['pump'].pumping_speed = data.raw['pump']['pump'].pumping_speed  * ((1 + settings.startup['PHI-MI-PIPE'].value) / 2)
+        end
 
         data.raw['assembling-machine']['biochamber'].hidden = true
         data.raw['assembling-machine']['biochamber'].hidden_in_factoriopedia = true
