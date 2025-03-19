@@ -1404,6 +1404,14 @@ if settings.startup['PHI-CT'].value then
             entity.surface_conditions = nil
             entity.localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
             entity.localised_description = {'entity-description.' .. v}
+
+            for _, st in pairs(entity.structure) do
+                st.sheet.filename = items['general']['graphics_location'] .. v .. '.png'
+            end
+
+            entity.structure.direction_in_side_loading.sheet.y = 192
+            entity.structure.direction_out_side_loading.sheet.y = nil
+
             data:extend({entity})
 
             data.raw['underground-belt']['underground-belt-A'].next_upgrade = 'fast-underground-belt'
