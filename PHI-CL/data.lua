@@ -1390,14 +1390,14 @@ if settings.startup['PHI-CT'].value then
         data:extend(s)
 
         for _, v in pairs({'underground-belt', 'fast-underground-belt', 'express-underground-belt'}) do
-            local item = {table.unpack(data.raw.item[v])}
+            local item = table.deepcopy(data.raw.item[v])
             item.name = v .. '-A'
             item.place_result = item.name
             item.localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
             item.localised_description = {'entity-description.' .. v}
             data:extend({item})
 
-            local entity = {table.unpack(data.raw['underground-belt'][v])}
+            local entity = table.deepcopy(data.raw['underground-belt'][v])
             entity.name = item.name
             entity.minable.result = item.name
             entity.next_upgrade = nil
