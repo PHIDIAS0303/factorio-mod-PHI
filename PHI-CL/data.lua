@@ -1409,7 +1409,7 @@ if settings.startup['PHI-CT'].value then
                 entity.structure[st].sheet.filename = items['general']['graphics_location'] .. v .. '.png'
                 entity.structure[st].sheet.width = 106
                 entity.structure[st].sheet.height = 85
-                entity.structure[st].sheetshift = {0.15625, 0.0703125}
+                -- entity.structure[st].sheetshift = {0.15625, 0.0703125}
             end
 
             entity.structure.direction_in.sheet.y = 85
