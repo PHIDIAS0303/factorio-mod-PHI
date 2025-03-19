@@ -51,6 +51,9 @@ for _, force in pairs(game.forces) do
 
     if settings.startup['PHI-CT'].value then
         if settings.startup['PHI-CT-UTILITY'].value then
+            recipes['electric-boiler'].enabled = true
+            recipes['electric-boiler'].reload()
+
             if (not technologies['steel-processing']) or technologies['steel-processing'].researched then
                 recipes['basic-steel-chest'].enabled = true
                 recipes['basic-steel-chest'].reload()
@@ -118,6 +121,11 @@ for _, force in pairs(game.forces) do
         end
 
         if settings.startup['PHI-CT-HIDDEN'].value then
+            if (not technologies['steel-processing']) or technologies['steel-processing'].researched then
+                recipes['linked-chest'].enabled = true
+                recipes['linked-chest'].reload()
+            end
+
             if (not technologies['logistics']) or technologies['logistics'].researched then
                 recipes['loader'].enabled = true
                 recipes['loader'].reload()
