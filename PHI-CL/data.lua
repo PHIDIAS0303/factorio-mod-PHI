@@ -1130,8 +1130,8 @@ if settings.startup['PHI-VP'].value then
         data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
         data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
         data.raw['assembling-machine']['electromagnetic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['assembling-machine-3'].crafting_categories)}
-        data.raw['assembling-machine']['electromagnetic-plant'].crafting_speed = 2.25
-        data.raw['assembling-machine']['electromagnetic-plant'].energy_usage = '1242kW'
+        data.raw['assembling-machine']['electromagnetic-plant'].crafting_speed = 2.5
+        data.raw['assembling-machine']['electromagnetic-plant'].energy_usage = '1379kW'
         data.raw['assembling-machine']['foundry'].effect_receiver = nil
         data.raw['assembling-machine']['foundry'].crafting_categories = {table.unpack(data.raw['furnace']['electric-furnace'].crafting_categories)}
         data.raw['assembling-machine']['foundry'].crafting_speed = 6
