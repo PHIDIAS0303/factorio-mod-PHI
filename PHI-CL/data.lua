@@ -898,17 +898,27 @@ if settings.startup['PHI-VP'].value then
         data.raw.recipe['landfill'].ingredients = {{type = 'item', name = 'stone', amount = math.min(20, tonumber(settings.startup['PHI-MI-LANDFILL'].value) or 20)}}
 
         for k, v in pairs(items['space-age']['PHI-VP-MAIN']['technology_reform']) do
-            data.raw.technology[k].prerequisites = v.prerequisites
-            data.raw.technology[k].unit = v.unit
+            if v.prerequisites then
+                data.raw.technology[k].prerequisites = v.prerequisites
+            end
+
+            if v.unit then
+                data.raw.technology[k].unit = v.unit
+            end
+
+            if v.effects then
+                data.raw.technology[k].effects = v.effects
+            end
         end
 
         data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
         data.raw.technology['cliff-explosives'].unit = {count = 200, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
+        data.raw.technology['cliff-explosives'].effects = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
+
         data.raw.technology['space-science-pack'].research_trigger = nil
         data.raw.technology['space-science-pack'].prerequisites = {'rocket-silo'}
         data.raw.technology['space-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'satellite'}}
         data.raw.technology['space-science-pack'].unit = {count = 2000, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
-        data.raw.technology['cliff-explosives'].effects = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
         data.raw.technology['logistic-system'].prerequisites = {'logistic-robotics'}
         data.raw.technology['logistic-system'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['stronger-explosives-5'].prerequisites = {'stronger-explosives-4'}
