@@ -1385,7 +1385,7 @@ if settings.startup['PHI-CT'].value then
 
         data:extend(s)
 
-        for _, v in pairs({'underground-belt', 'fast-underground-belt', 'express-underground-belt'}) do
+        for _, v in pairs({'underground-belt', 'fast-underground-belt', 'express-underground-belt', 'turbo-underground-belt'}) do
             local item = table.deepcopy(data.raw.item[v])
             item.name = v .. '-A'
             item.place_result = item.name
