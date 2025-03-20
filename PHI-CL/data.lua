@@ -1420,8 +1420,8 @@ if settings.startup['PHI-CT'].value then
                 name = item.name,
                 energy_required = 2,
                 enabled = false,
-                ingredients = {{type = 'item', name = v, amount = 1}},
-                results = {{type = 'item', name = item.name, amount = 1}},
+                ingredients = {{type = 'item', name = v, amount = 2}},
+                results = {{type = 'item', name = item.name, amount = 2}},
                 main_product = item.name,
                 localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
             }})
