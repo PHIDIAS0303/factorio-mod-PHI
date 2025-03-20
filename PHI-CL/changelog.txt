@@ -4,6 +4,7 @@ Date: 2025-03-21
 
   Changes:
     - [MI] Fixed a mismatch of settings.
+    - [VP] Some changes to code logic, technology price and prerequisites.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.77
