@@ -1028,18 +1028,12 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
         data.raw.technology['tree-seeding'].prerequisites = {'agriculture'}
         data.raw.technology['tree-seeding'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-        data.raw.technology['electromagnetic-plant'].prerequisites = {'automation-3', 'processing-unit'}
         data.raw.technology['electromagnetic-plant'].research_trigger = nil
-        data.raw.technology['electromagnetic-plant'].effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-plant'}}
-        data.raw.technology['electromagnetic-plant'].unit = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
-        data.raw.technology['cryogenic-plant'].prerequisites = {'automation-3', 'processing-unit'}
+        data.raw.technology['foundry'].research_trigger = nil
         data.raw.technology['cryogenic-plant'].research_trigger = nil
+        data.raw.technology['cryogenic-plant'].prerequisites = {'automation-3', 'processing-unit'}
         data.raw.technology['cryogenic-plant'].effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}}
         data.raw.technology['cryogenic-plant'].unit = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
-        data.raw.technology['foundry'].prerequisites = {'automation-3', 'advanced-material-processing-2', 'processing-unit'}
-        data.raw.technology['foundry'].research_trigger = nil
-        data.raw.technology['foundry'].effects = {{type = 'unlock-recipe', recipe = 'foundry'}}
-        data.raw.technology['foundry'].unit = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
         data.raw.technology['biolab'].prerequisites = {'production-science-pack', 'utility-science-pack'}
         data.raw.technology['biolab'].unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
 

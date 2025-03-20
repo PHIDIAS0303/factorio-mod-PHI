@@ -375,6 +375,16 @@ local items = {
                     ['prerequisites'] = {'logistics-3', 'production-science-pack', 'utility-science-pack'},
                     ['unit'] = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
                 },
+                ['electromagnetic-plant'] = {
+                    ['prerequisites'] = {'automation-3', 'processing-unit', 'utility-science-pack'},
+                    ['unit'] = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+                    ['effects'] = {{type = 'unlock-recipe', recipe = 'electromagnetic-plant'}}
+                },
+                ['foundry'] = {
+                    ['prerequisites'] = {'automation-3', 'advanced-material-processing-2', 'processing-unit', 'utility-science-pack'},
+                    ['unit'] = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+                    ['effects'] = {{type = 'unlock-recipe', recipe = 'foundry'}}
+                },
                 ['speed-module-2'] = {
                     ['prerequisites'] = {'speed-module', 'processing-unit'},
                     ['unit'] = {count = 75, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
