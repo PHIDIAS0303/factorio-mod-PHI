@@ -5,6 +5,7 @@ Date: 2025-03-21
   Changes:
     - [MI] Fixed a mismatch of settings.
     - [VP] Some changes to code logic, recipe price, technology price and prerequisites.
+    - [CT] Changed the recipe of underground belt designed for belt weaving, to each pair instead.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.77
