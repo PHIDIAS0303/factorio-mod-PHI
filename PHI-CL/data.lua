@@ -1427,11 +1427,13 @@ if settings.startup['PHI-CT'].value then
             }})
         end
 
-        data.raw['underground-belt']['underground-belt-A'].next_upgrade = 'fast-underground-belt'
-        data.raw['underground-belt']['fast-underground-belt-A'].next_upgrade = 'express-underground-belt'
+        data.raw['underground-belt']['underground-belt-A'].next_upgrade = 'fast-underground-belt-A'
+        data.raw['underground-belt']['fast-underground-belt-A'].next_upgrade = 'express-underground-belt-A'
+        data.raw['underground-belt']['express-underground-belt-A'].next_upgrade = 'turbo-underground-belt-A'
         table.insert(data.raw.technology['logistics'].effects, {type = 'unlock-recipe', recipe = 'underground-belt-A'})
         table.insert(data.raw.technology['logistics-2'].effects, {type = 'unlock-recipe', recipe = 'fast-underground-belt-A'})
         table.insert(data.raw.technology['logistics-3'].effects, {type = 'unlock-recipe', recipe = 'express-underground-belt-A'})
+        table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-underground-belt-A'})
 
         for _, t in pairs({'arithmetic-combinator', 'decider-combinator', 'programmable-speaker', 'selector-combinator'}) do
             data.raw[t][t].energy_source.usage_priority = 'primary-input'
