@@ -327,7 +327,7 @@ if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (se
             main_product = 'water',
             hide_from_player_crafting = true,
             allow_productivity = false,
-            crafting_machine_tint = {primary=data.raw.fluid['water'].flow_color},
+            crafting_machine_tint = {primary = data.raw.fluid['water'].flow_color},
             localised_name = {'fluid-name.water'}
         }})
     end
@@ -583,7 +583,7 @@ if settings.startup['PHI-SA'].value then
                     main_product = v,
                     hide_from_player_crafting = true,
                     allow_productivity = false,
-                    crafting_machine_tint = {primary=data.raw.fluid[v].flow_color},
+                    crafting_machine_tint = {primary = data.raw.fluid[v].flow_color},
                     localised_name = {'fluid-name.' .. v}
                 }})
             end
