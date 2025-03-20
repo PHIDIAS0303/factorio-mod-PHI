@@ -1654,11 +1654,11 @@ if settings.startup['PHI-CT'].value then
                 hidden = true,
                 enabled = true,
                 ingredients = {},
-                results = {{type = 'fluid', name = v.name, amount = 16000, temperature=v.max_temperature or v.default_temperature}},
+                results = {{type = 'fluid', name = v.name, amount = 16000, temperature = v.max_temperature or v.default_temperature}},
                 main_product = v.name,
                 hide_from_player_crafting = true,
                 allow_productivity = false,
-                crafting_machine_tint = {primary=v.flow_color},
+                crafting_machine_tint = {primary = v.flow_color},
                 localised_name = {'fluid-name.' .. v.name}
             }})
         end
