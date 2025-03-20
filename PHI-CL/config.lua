@@ -391,7 +391,7 @@ local items = {
                     ['effects'] = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}}
                 },
                 ['biolab'] = {
-                    ['prerequisites'] = {'automation-3', 'coal-liquefaction', 'processing-unit', 'utility-science-pack'},
+                    ['prerequisites'] = {'automation-3', 'processing-unit', 'utility-science-pack'},
                     ['unit'] = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
                 },
                 ['speed-module-2'] = {
