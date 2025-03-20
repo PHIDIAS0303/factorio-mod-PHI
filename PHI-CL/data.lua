@@ -1331,7 +1331,7 @@ if settings.startup['PHI-CT'].value then
     item.name = 'passive-energy-void'
     item.place_result = item.name
     item.hidden = true
-    item.subgroup = 'other'
+    item.subgroup = 'energy'
     item.localised_name = {'name.passive-energy-void'}
     data:extend({item})
 
@@ -1392,7 +1392,7 @@ if settings.startup['PHI-CT'].value then
     item = table.deepcopy(data.raw['item']['steel-chest'])
     item.name = 'trash-chest'
     item.place_result = item.name
-    item.subgroup = 'other'
+    item.subgroup = 'storage'
     item.order = 'b[storage]-h[trash-chest]'
     item.icons = {{icon = item.icon or '__base__/graphics/icons/steel-chest.png', tint = items['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
     item.icon = nil
@@ -1433,7 +1433,7 @@ if settings.startup['PHI-CT'].value then
     item = table.deepcopy(data.raw['item']['pipe'])
     item.name = 'trash-pipe'
     item.place_result = item.name
-    item.subgroup = 'other'
+    item.subgroup = 'energy-pipe-distribution'
     item.order = 'a[pipe]-c[trash-pipe]'
     item.icons = {{icon = item.icon or '__base__/graphics/icons/pipe.png', tint = items['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
     item.icon = nil
@@ -1478,7 +1478,7 @@ if settings.startup['PHI-CT'].value then
     item = table.deepcopy(data.raw['item']['boiler'])
     item.name = 'electric-boiler'
     item.place_result = item.name
-    item.subgroup = 'other'
+    item.subgroup = 'energy'
     item.order = 'b[steam-power]-a[electric-boiler]'
     item.localised_name = {'name.electric-boiler'}
     data:extend({item})
@@ -1525,7 +1525,7 @@ if settings.startup['PHI-CT'].value then
         item = table.deepcopy(data.raw['item'][c])
         item.name = 'basic-' .. c
         item.place_result = item.name
-        item.subgroup = 'other'
+        item.subgroup = 'storage'
         item.order = 'b[storage]-h[basic-' .. c .. ']'
         item.localised_name = {'name.basic-' .. c}
         data:extend({item})
