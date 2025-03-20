@@ -399,6 +399,10 @@ local items = {
                     ['prerequisites'] = {'efficiency-module-2', 'production-science-pack'},
                     ['unit'] = {count = 300, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
                 },
+                ['logistic-system'] = {
+                    ['prerequisites'] = {'logistic-robotics', 'utility-science-pack'},
+                    ['unit'] = {count = 500, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}}
+                },
             },
             ['technology'] = {
                 ['planet-discovery-vulcanus'] = true,
