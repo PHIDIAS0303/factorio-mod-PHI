@@ -358,6 +358,24 @@ local items = {
     },
     ['space-age'] = {
         ['PHI-VP-MAIN'] = {
+            ['technology_reform'] = {
+                ['stack-inserter'] = {
+                    ['prerequisites'] = {
+                        'bulk-inserter',
+                        'chemical-science-pack',
+                        'processing-unit'
+                    },
+                    ['units'] = {
+                        count = 800,
+                        time = 45,
+                        ingredients = {
+                            {'automation-science-pack', 1},
+                            {'logistic-science-pack', 1},
+                            {'chemical-science-pack', 1}
+                        }
+                    }
+                },
+            },
             ['technology'] = {
                 ['planet-discovery-vulcanus'] = true,
                 ['planet-discovery-gleba'] = true,

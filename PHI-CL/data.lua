@@ -897,6 +897,12 @@ if settings.startup['PHI-VP'].value then
 
         data.raw.recipe['landfill'].ingredients = {{type = 'item', name = 'stone', amount = math.min(20, tonumber(settings.startup['PHI-MI-LANDFILL'].value) or 20)}}
 
+        for k, v in pairs(items['space-age']['PHI-VP-MAIN']['technology_reform']) do
+            if data.raw.item[k] then
+                data.raw.item[k].hidden = v
+                data.raw.item[k].hidden_in_factoriopedia = v
+            end
+        end
         data.raw.technology['stack-inserter'].prerequisites = {'bulk-inserter', 'chemical-science-pack', 'processing-unit'}
         data.raw.technology['stack-inserter'].unit = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
         data.raw.technology['turbo-transport-belt'].prerequisites = {'logistics-3', 'stack-inserter', 'processing-unit'}
