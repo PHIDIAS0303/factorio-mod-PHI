@@ -360,20 +360,20 @@ local items = {
         ['PHI-VP-MAIN'] = {
             ['technology_reform'] = {
                 ['stack-inserter'] = {
-                    ['prerequisites'] = {
-                        'bulk-inserter',
-                        'chemical-science-pack',
-                        'processing-unit'
-                    },
-                    ['units'] = {
-                        count = 800,
-                        time = 45,
-                        ingredients = {
-                            {'automation-science-pack', 1},
-                            {'logistic-science-pack', 1},
-                            {'chemical-science-pack', 1}
-                        }
-                    }
+                    ['prerequisites'] = {'bulk-inserter', 'chemical-science-pack', 'processing-unit'},
+                    ['unit'] = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+                },
+                ['transport-belt-capacity-1'] = {
+                    ['prerequisites'] = {'stack-inserter', 'logistics-3', 'production-science-pack', 'utility-science-pack'},
+                    ['unit'] = {count = 1600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
+                },
+                ['transport-belt-capacity-2'] = {
+                    ['prerequisites'] = {'transport-belt-capacity-1', 'space-science-pack'},
+                    ['unit'] = {count = 2400, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}}
+                },
+                ['turbo-transport-belt'] = {
+                    ['prerequisites'] = {'logistics-3', 'production-science-pack', 'utility-science-pack'},
+                    ['unit'] = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
                 },
             },
             ['technology'] = {

@@ -898,19 +898,9 @@ if settings.startup['PHI-VP'].value then
         data.raw.recipe['landfill'].ingredients = {{type = 'item', name = 'stone', amount = math.min(20, tonumber(settings.startup['PHI-MI-LANDFILL'].value) or 20)}}
 
         for k, v in pairs(items['space-age']['PHI-VP-MAIN']['technology_reform']) do
-            if data.raw.item[k] then
-                data.raw.item[k].hidden = v
-                data.raw.item[k].hidden_in_factoriopedia = v
-            end
+            data.raw.technology[k].prerequisites = v.prerequisites
+            data.raw.technology[k].unit = v.unit
         end
-        data.raw.technology['stack-inserter'].prerequisites = {'bulk-inserter', 'chemical-science-pack', 'processing-unit'}
-        data.raw.technology['stack-inserter'].unit = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
-        data.raw.technology['turbo-transport-belt'].prerequisites = {'logistics-3', 'stack-inserter', 'processing-unit'}
-        data.raw.technology['turbo-transport-belt'].unit = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
-        data.raw.technology['transport-belt-capacity-1'].prerequisites = {'stack-inserter', 'production-science-pack', 'utility-science-pack'}
-        data.raw.technology['transport-belt-capacity-1'].unit = {count = 1600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
-        data.raw.technology['transport-belt-capacity-2'].prerequisites = {'transport-belt-capacity-1', 'space-science-pack'}
-        data.raw.technology['transport-belt-capacity-2'].unit = {count = 2400, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}}
 
         data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
         data.raw.technology['cliff-explosives'].unit = {count = 200, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
