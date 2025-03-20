@@ -385,6 +385,15 @@ local items = {
                     ['unit'] = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
                     ['effects'] = {{type = 'unlock-recipe', recipe = 'foundry'}}
                 },
+                ['cryogenic-plant'] = {
+                    ['prerequisites'] = {'automation-3', 'coal-liquefaction', 'processing-unit', 'utility-science-pack'},
+                    ['unit'] = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+                    ['effects'] = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}}
+                },
+                ['biolab'] = {
+                    ['prerequisites'] = {'automation-3', 'coal-liquefaction', 'processing-unit', 'utility-science-pack'},
+                    ['unit'] = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
+                },
                 ['speed-module-2'] = {
                     ['prerequisites'] = {'speed-module', 'processing-unit'},
                     ['unit'] = {count = 75, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}

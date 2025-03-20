@@ -1031,11 +1031,6 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['electromagnetic-plant'].research_trigger = nil
         data.raw.technology['foundry'].research_trigger = nil
         data.raw.technology['cryogenic-plant'].research_trigger = nil
-        data.raw.technology['cryogenic-plant'].prerequisites = {'automation-3', 'processing-unit'}
-        data.raw.technology['cryogenic-plant'].effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}}
-        data.raw.technology['cryogenic-plant'].unit = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
-        data.raw.technology['biolab'].prerequisites = {'production-science-pack', 'utility-science-pack'}
-        data.raw.technology['biolab'].unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
 
         for k, v in pairs(items['space-age']['PHI-VP-MAIN']['technology']) do
             if data.raw.technology[k] then
