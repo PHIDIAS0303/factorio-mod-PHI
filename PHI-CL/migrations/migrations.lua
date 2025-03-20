@@ -112,12 +112,10 @@ for _, force in pairs(game.forces) do
                 recipes['express-underground-belt-A'].reload()
             end
 
-            --[[
             if (not technologies['turbo-transport-belt']) or technologies['turbo-transport-belt'].researched then
                 recipes['turbo-underground-belt-A'].enabled = true
                 recipes['turbo-underground-belt-A'].reload()
             end
-            ]]
         end
 
         if settings.startup['PHI-CT-HIDDEN'].value then
