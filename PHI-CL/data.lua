@@ -942,21 +942,6 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['personal-roboport-mk2-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['coal-liquefaction'].prerequisites = {'advanced-oil-processing'}
         data.raw.technology['coal-liquefaction'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}
-        data.raw.technology['speed-module-2'].prerequisites = {'speed-module'}
-        data.raw.technology['speed-module-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-        data.raw.technology['speed-module-3'].prerequisites = {'speed-module-2'}
-        data.raw.technology['speed-module-3'].unit.count = 400
-        data.raw.technology['speed-module-3'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-        data.raw.technology['productivity-module-2'].prerequisites = {'productivity-module'}
-        data.raw.technology['productivity-module-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-        data.raw.technology['productivity-module-3'].prerequisites = {'productivity-module-2'}
-        data.raw.technology['productivity-module-3'].unit.count = 400
-        data.raw.technology['productivity-module-3'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-        data.raw.technology['efficiency-module-2'].prerequisites = {'efficiency-module'}
-        data.raw.technology['efficiency-module-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-        data.raw.technology['efficiency-module-3'].prerequisites = {'efficiency-module-2'}
-        data.raw.technology['efficiency-module-3'].unit.count = 400
-        data.raw.technology['efficiency-module-3'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
         data.raw.technology['kovarex-enrichment-process'].prerequisites = {'uranium-processing'}
         data.raw.technology['kovarex-enrichment-process'].unit = {count = 1500, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
         data.raw.technology['fusion-reactor'].prerequisites = {'nuclear-power', 'space-science-pack'}
