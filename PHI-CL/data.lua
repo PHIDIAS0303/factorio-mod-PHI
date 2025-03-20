@@ -911,10 +911,6 @@ if settings.startup['PHI-VP'].value then
             end
         end
 
-        data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
-        data.raw.technology['cliff-explosives'].unit = {count = 200, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
-        data.raw.technology['cliff-explosives'].effects = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
-
         data.raw.technology['space-science-pack'].research_trigger = nil
         data.raw.technology['space-science-pack'].prerequisites = {'rocket-silo'}
         data.raw.technology['space-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'satellite'}}
