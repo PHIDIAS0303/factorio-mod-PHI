@@ -1139,6 +1139,11 @@ if settings.startup['PHI-VP'].value then
         table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
 
         data.raw['pump']['pump'].pumping_speed = 50
+        data.raw['inserter']['burner-inserter'].allow_burner_leech = true
+
+        for _, v in pairs({'burner-inserter', 'inserter', 'fast-inserter', 'long-handed-inserter', 'bulk-inserter'}) do
+            data.raw['inserter'][v].max_belt_stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
+        end
 
         if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
             data.raw['pump']['pump'].pumping_speed = data.raw['pump']['pump'].pumping_speed  * ((1 + settings.startup['PHI-MI-PIPE'].value) / 2)
