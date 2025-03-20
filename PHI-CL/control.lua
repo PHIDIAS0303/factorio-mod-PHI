@@ -1,6 +1,6 @@
 local items = require 'config'
 
-if settings.startup['PHI-CT'].value and settings.startup['PHI-CT-UTILITY'].value then
+if settings.startup['PHI-CT'].value then
     local function trash_creation(event)
         local entity = event.created_entity or event.entity
 
