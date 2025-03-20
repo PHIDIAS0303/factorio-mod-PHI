@@ -59,6 +59,9 @@ for _, force in pairs(game.forces) do
         recipes['super-radar'].enabled = true
         recipes['super-radar'].reload()
 
+        recipes['passive-energy-void'].enabled = true
+        recipes['passive-energy-void'].reload()
+
         if (not technologies['steel-processing']) or technologies['steel-processing'].researched then
             recipes['basic-steel-chest'].enabled = true
             recipes['basic-steel-chest'].reload()
@@ -78,11 +81,6 @@ for _, force in pairs(game.forces) do
             recipes['basic-buffer-chest'].reload()
             recipes['basic-requester-chest'].enabled = true
             recipes['basic-requester-chest'].reload()
-        end
-
-        if (not technologies['electric-energy-accumulators']) or technologies['electric-energy-accumulators'].researched then
-            recipes['passive-energy-void'].enabled = true
-            recipes['passive-energy-void'].reload()
         end
 
         if (not technologies['automation']) or technologies['automation'].researched then

@@ -1297,21 +1297,12 @@ if settings.startup['PHI-CT'].value then
     local item = table.deepcopy(data.raw['item']['radar'])
     item.name = 'super-radar'
     item.place_result = item.name
+    item.hidden = true
     item.order = 'd[radar]-b[radar]'
-
-    item.icons = {
-        {
-            icon = item.icon or '__base__/graphics/icons/radar.png',
-            tint = items['tint'][8],
-            icon_size = item.icon_size or 64,
-            icon_mipmaps = item.icon_mipmaps or 4
-        }
-    }
-
+    item.icons = {{icon = item.icon or '__base__/graphics/icons/radar.png', tint = items['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
     item.icon = nil
     item.icon_size = nil
     item.icon_mipmaps = nil
-    item.hidden = true
     item.localised_name = {'name.super-radar'}
     data:extend({item})
 
@@ -1329,6 +1320,7 @@ if settings.startup['PHI-CT'].value then
         name = item.name,
         energy_required = 2,
         enabled = true,
+        hidden = true,
         ingredients = {{type = 'item', name = 'electronic-circuit', amount = 5}, {type = 'item', name = 'iron-gear-wheel', amount = 5}, {type = 'item', name = 'iron-plate', amount = 10}},
         results = {{type = 'item', name = item.name, amount = 1}},
         main_product = item.name,
@@ -1339,6 +1331,7 @@ if settings.startup['PHI-CT'].value then
     item.name = 'passive-energy-void'
     item.place_result = item.name
     item.hidden = true
+    item.subgroup = 'other'
     item.localised_name = {'name.passive-energy-void'}
     data:extend({item})
 
@@ -1360,29 +1353,48 @@ if settings.startup['PHI-CT'].value then
         type = 'recipe',
         name = item.name,
         energy_required = 2,
-        enabled = false,
+        enabled = true,
+        hidden = true,
         ingredients = {{type = 'item', name = 'accumulator', amount = 1}},
         results = {{type = 'item', name = item.name, amount = 1}},
         main_product = item.name,
         localised_name = {'name.passive-energy-void'}
     }})
 
-    table.insert(data.raw.technology['electric-energy-accumulators'].effects, {type = 'unlock-recipe', recipe = item.name})
+    item = table.deepcopy(data.raw['item']['linked-chest'])
+    item.subgroup = 'storage'
+    item.order = 'a[items]-d[linked-chest]'
+    item.stack_size = 50
+    data:extend({item})
+
+    entity = table.deepcopy(data.raw['linked-container']['linked-chest'])
+    entity.circuit_connector = table.deepcopy(data.raw['container']['steel-chest'].circuit_connector)
+    entity.circuit_wire_max_distance = data.raw['container']['steel-chest'].circuit_wire_max_distance
+    entity.quality_affects_inventory_size = false
+    entity.inventory_type = 'with_filters_and_bar'
+    entity.inventory_size = 48
+    entity.gui_mode = 'all'
+    entity.surface_conditions = nil
+    data:extend({entity})
+
+    data:extend({{
+        type = 'recipe',
+        name = item.name,
+        energy_required = 2,
+        enabled = false,
+        ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
+        results = {{type = 'item', name = item.name, amount = 1}},
+        main_product = item.name
+    }})
+
+    table.insert(data.raw.technology['steel-processing'].effects, {type = 'unlock-recipe', recipe = item.name})
 
     item = table.deepcopy(data.raw['item']['steel-chest'])
     item.name = 'trash-chest'
     item.place_result = item.name
+    item.subgroup = 'other'
     item.order = 'b[storage]-h[trash-chest]'
-
-    item.icons = {
-        {
-            icon = item.icon or '__base__/graphics/icons/steel-chest.png',
-            tint = items['tint'][8],
-            icon_size = item.icon_size or 64,
-            icon_mipmaps = item.icon_mipmaps or 4
-        }
-    }
-
+    item.icons = {{icon = item.icon or '__base__/graphics/icons/steel-chest.png', tint = items['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
     item.icon = nil
     item.icon_size = nil
     item.icon_mipmaps = nil
@@ -1421,17 +1433,9 @@ if settings.startup['PHI-CT'].value then
     item = table.deepcopy(data.raw['item']['pipe'])
     item.name = 'trash-pipe'
     item.place_result = item.name
+    item.subgroup = 'other'
     item.order = 'a[pipe]-c[trash-pipe]'
-
-    item.icons = {
-        {
-            icon = item.icon or '__base__/graphics/icons/pipe.png',
-            tint = items['tint'][8],
-            icon_size = item.icon_size or 64,
-            icon_mipmaps = item.icon_mipmaps or 4
-        }
-    }
-
+    item.icons = {{icon = item.icon or '__base__/graphics/icons/pipe.png', tint = items['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
     item.icon = nil
     item.icon_size = nil
     item.icon_mipmaps = nil
@@ -1474,6 +1478,7 @@ if settings.startup['PHI-CT'].value then
     item = table.deepcopy(data.raw['item']['boiler'])
     item.name = 'electric-boiler'
     item.place_result = item.name
+    item.subgroup = 'other'
     item.order = 'b[steam-power]-a[electric-boiler]'
     item.localised_name = {'name.electric-boiler'}
     data:extend({item})
@@ -1513,23 +1518,14 @@ if settings.startup['PHI-CT'].value then
         localised_name = {'name.electric-boiler'}
     }})
 
-    -- electric boiler
     data.raw['boiler']['boiler'].fast_replaceable_group = 'boiler'
     data.raw['boiler']['electric-boiler'].fast_replaceable_group = data.raw['boiler']['electric-boiler'].fast_replaceable_group
 
-    local chests = {
-        'steel-chest',
-        'passive-provider-chest',
-        'active-provider-chest',
-        'storage-chest',
-        'buffer-chest',
-        'requester-chest'
-    }
-
-    for _, c in pairs(chests) do
+    for _, c in pairs({'steel-chest', 'passive-provider-chest', 'active-provider-chest', 'storage-chest', 'buffer-chest', 'requester-chest'}) do
         item = table.deepcopy(data.raw['item'][c])
         item.name = 'basic-' .. c
         item.place_result = item.name
+        item.subgroup = 'other'
         item.order = 'b[storage]-h[basic-' .. c .. ']'
         item.localised_name = {'name.basic-' .. c}
         data:extend({item})
@@ -1569,35 +1565,6 @@ if settings.startup['PHI-CT'].value then
         table.insert(data.raw.technology['logistic-system'].effects, {type = 'unlock-recipe', recipe = 'basic-' .. r .. '-chest'})
     end
 
-    item = table.deepcopy(data.raw['item']['linked-chest'])
-    item.supgroup = 'storage'
-    item.order = 'a[items]-d[linked-chest]'
-    data:extend({item})
-
-    entity = table.deepcopy(data.raw['linked-container']['linked-chest'])
-    entity.circuit_connector = table.deepcopy(data.raw['container']['steel-chest'].circuit_connector)
-    entity.circuit_wire_max_distance = data.raw['container']['steel-chest'].circuit_wire_max_distance
-    entity.quality_affects_inventory_size = false
-    entity.inventory_type = 'with_filters_and_bar'
-    entity.inventory_size = 48
-    entity.gui_mode = 'all'
-    entity.surface_conditions = nil
-    data:extend({entity})
-
-    data:extend({{
-        type = 'recipe',
-        name = item.name,
-        energy_required = 2,
-        enabled = false,
-        ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
-        results = {{type = 'item', name = item.name, amount = 1}},
-        main_product = item.name
-    }})
-
-    table.insert(data.raw.technology['steel-processing'].effects, {type = 'unlock-recipe', recipe = item.name})
-
-    local ss = data.raw['inserter']['stack-inserter'].max_belt_stack_size
-
     for _, l in pairs({'loader', 'fast-loader', 'express-loader', 'turbo-loader'}) do
         if data.raw.recipe[l] then
             data.raw.recipe[l].hidden = false
@@ -1607,7 +1574,7 @@ if settings.startup['PHI-CT'].value then
             data.raw['loader'][l].filter_count = 2
             data.raw['loader'][l].per_lane_filters = true
             data.raw['loader'][l].adjustable_belt_stack_size = true
-            data.raw['loader'][l].max_belt_stack_size = ss
+            data.raw['loader'][l].max_belt_stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
         end
     end
 
@@ -1620,61 +1587,65 @@ if settings.startup['PHI-CT'].value then
     end
 
     for _, v in pairs({'underground-belt', 'fast-underground-belt', 'express-underground-belt', 'turbo-underground-belt'}) do
-        item = table.deepcopy(data.raw.item[v])
-        item.name = v .. '-A'
-        item.place_result = item.name
-        item.localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
-        item.localised_description = {'entity-description.' .. v}
-        data:extend({item})
+        if data.raw.item[v] then
+            item = table.deepcopy(data.raw.item[v])
+            item.name = v .. '-a'
+            item.place_result = item.name
+            item.localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
+            item.localised_description = {'entity-description.' .. v}
+            data:extend({item})
 
-        entity = table.deepcopy(data.raw['underground-belt'][v])
-        entity.name = item.name
-        entity.minable.result = item.name
-        entity.next_upgrade = nil
-        entity.surface_conditions = nil
-        entity.localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
-        entity.localised_description = {'entity-description.' .. v}
+            entity = table.deepcopy(data.raw['underground-belt'][v])
+            entity.name = item.name
+            entity.minable.result = item.name
+            entity.next_upgrade = nil
+            entity.surface_conditions = nil
+            entity.localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
+            entity.localised_description = {'entity-description.' .. v}
 
-        for _, st in pairs({'direction_in', 'direction_out', 'direction_in_side_loading', 'direction_out_side_loading'}) do
-            entity.structure[st].sheet.filename = items['general']['graphics_location'] .. v .. '.png'
-            entity.structure[st].sheet.width = 106
-            entity.structure[st].sheet.height = 85
-            entity.structure[st].sheetshift = {0.15625, 0.0703125}
+            for _, st in pairs({'direction_in', 'direction_out', 'direction_in_side_loading', 'direction_out_side_loading'}) do
+                entity.structure[st].sheet.filename = items['general']['graphics_location'] .. v .. '.png'
+                entity.structure[st].sheet.width = 106
+                entity.structure[st].sheet.height = 85
+                entity.structure[st].sheetshift = {0.15625, 0.0703125}
+            end
+
+            entity.structure.direction_in.sheet.y = 85
+            entity.structure.direction_out.sheet.y = nil
+            entity.structure.direction_in_side_loading.sheet.y = 85
+            entity.structure.direction_out_side_loading.sheet.y = nil
+            data:extend({entity})
+
+            data:extend({{
+                type = 'recipe',
+                name = item.name,
+                energy_required = 2,
+                enabled = false,
+                ingredients = {{type = 'item', name = v, amount = 2}},
+                results = {{type = 'item', name = item.name, amount = 2}},
+                main_product = item.name,
+                localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
+            }})
         end
-
-        entity.structure.direction_in.sheet.y = 85
-        entity.structure.direction_out.sheet.y = nil
-        entity.structure.direction_in_side_loading.sheet.y = 85
-        entity.structure.direction_out_side_loading.sheet.y = nil
-
-        data:extend({entity})
-
-        data:extend({{
-            type = 'recipe',
-            name = item.name,
-            energy_required = 2,
-            enabled = false,
-            ingredients = {{type = 'item', name = v, amount = 2}},
-            results = {{type = 'item', name = item.name, amount = 2}},
-            main_product = item.name,
-            localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
-        }})
     end
 
-    data.raw['underground-belt']['underground-belt-A'].next_upgrade = 'fast-underground-belt-A'
-    data.raw['underground-belt']['fast-underground-belt-A'].next_upgrade = 'express-underground-belt-A'
-    data.raw['underground-belt']['express-underground-belt-A'].next_upgrade = 'turbo-underground-belt-A'
-    table.insert(data.raw.technology['logistics'].effects, {type = 'unlock-recipe', recipe = 'underground-belt-A'})
-    table.insert(data.raw.technology['logistics-2'].effects, {type = 'unlock-recipe', recipe = 'fast-underground-belt-A'})
-    table.insert(data.raw.technology['logistics-3'].effects, {type = 'unlock-recipe', recipe = 'express-underground-belt-A'})
-    table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-underground-belt-A'})
+    data.raw['underground-belt']['underground-belt-a'].next_upgrade = 'fast-underground-belt-a'
+    data.raw['underground-belt']['fast-underground-belt-a'].next_upgrade = 'express-underground-belt-a'
+    table.insert(data.raw.technology['logistics'].effects, {type = 'unlock-recipe', recipe = 'underground-belt-a'})
+    table.insert(data.raw.technology['logistics-2'].effects, {type = 'unlock-recipe', recipe = 'fast-underground-belt-a'})
+    table.insert(data.raw.technology['logistics-3'].effects, {type = 'unlock-recipe', recipe = 'express-underground-belt-a'})
+
+    if mods['space-age'] then
+        data.raw['underground-belt']['express-underground-belt-a'].next_upgrade = 'turbo-underground-belt-a'
+        table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-underground-belt-a'})
+    end
 
     for _, t in pairs({'arithmetic-combinator', 'decider-combinator', 'programmable-speaker', 'selector-combinator'}) do
         data.raw[t][t].energy_source.usage_priority = 'primary-input'
     end
 
     for _, v in pairs(data.raw.fluid) do
-        if v.subgroup == 'fluid' and (not data.raw[v.name]) then
+        if v.subgroup == 'fluid' and (not data.raw[v.name]) and (not data.raw.recipe['pump-' .. v.name]) then
             data:extend({{
                 type = 'recipe',
                 name = 'pump-' .. v.name,
