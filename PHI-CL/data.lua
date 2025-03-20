@@ -950,7 +950,6 @@ if settings.startup['PHI-VP'].value then
         table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'})
         data.raw.technology['fusion-reactor-equipment'].prerequisites = {'fission-reactor-equipment', 'fusion-reactor'}
         data.raw.technology['fusion-reactor-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-        data.raw.technology['artillery'].prerequisites = {'military-4', 'radar'}
         data.raw.technology['artillery'].prerequisites = {'military-4', 'tank', 'concrete', 'radar'}
         data.raw.technology['artillery'].unit.count = 2000
         data.raw.technology['artillery'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
