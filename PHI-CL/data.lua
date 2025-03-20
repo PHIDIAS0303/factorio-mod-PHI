@@ -831,12 +831,12 @@ if settings.startup['PHI-VP'].value then
             data:extend({{
                 type = 'technology',
                 name = v .. '-productivity',
-                prerequisites = {v, 'automation-3', 'production-science-pack'},
+                prerequisites = {v, 'automation-3', 'production-science-pack', 'utility-science-pack'},
                 effects = {{type = 'change-recipe-productivity', recipe = v, change = 0.05}},
                 unit = {
-                    count_formula = '1000 * (1.5 ^ (L - 1))',
-                    ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}},
-                    time = 30
+                    count_formula = '800 * (1.5 ^ (L - 1))',
+                    ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}},
+                    time = 60
                 },
                 icons = {
                     {
@@ -852,7 +852,7 @@ if settings.startup['PHI-VP'].value then
                 },
                 order = 'a-i-d',
                 max_level = 10,
-                upgrade = false,
+                upgrade = true,
                 localised_name = {'technology-name.' .. v}
             }})
         end
