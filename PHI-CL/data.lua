@@ -897,6 +897,15 @@ if settings.startup['PHI-VP'].value then
 
         data.raw.recipe['landfill'].ingredients = {{type = 'item', name = 'stone', amount = math.min(20, tonumber(settings.startup['PHI-MI-LANDFILL'].value) or 20)}}
 
+        data.raw.technology['stack-inserter'].prerequisites = {'bulk-inserter', 'chemical-science-pack', 'processing-unit'}
+        data.raw.technology['stack-inserter'].unit = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+        data.raw.technology['turbo-transport-belt'].prerequisites = {'logistics-3', 'stack-inserter', 'processing-unit'}
+        data.raw.technology['turbo-transport-belt'].unit = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
+        data.raw.technology['transport-belt-capacity-1'].prerequisites = {'stack-inserter', 'production-science-pack', 'utility-science-pack'}
+        data.raw.technology['transport-belt-capacity-1'].unit = {count = 1600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
+        data.raw.technology['transport-belt-capacity-2'].prerequisites = {'transport-belt-capacity-1', 'space-science-pack'}
+        data.raw.technology['transport-belt-capacity-2'].unit = {count = 2400, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}}
+
         data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
         data.raw.technology['cliff-explosives'].unit = {count = 200, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
         data.raw.technology['space-science-pack'].research_trigger = nil
@@ -967,8 +976,6 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['big-mining-drill'].prerequisites = {'electric-mining-drill', 'automation-3'}
         data.raw.technology['big-mining-drill'].unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
         data.raw.technology['big-mining-drill'].research_trigger = nil
-        data.raw.technology['turbo-transport-belt'].prerequisites = {'logistics-3'}
-        data.raw.technology['turbo-transport-belt'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['railgun'].prerequisites = {'military-4', 'space-science-pack'}
         data.raw.technology['railgun'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         data.raw.technology['railgun-damage-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
@@ -977,8 +984,6 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['tesla-weapons'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['mech-armor'].prerequisites = {'power-armor-mk2', 'space-science-pack'}
         data.raw.technology['mech-armor'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-        data.raw.technology['stack-inserter'].prerequisites = {'bulk-inserter', 'utility-science-pack'}
-        data.raw.technology['stack-inserter'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['power-armor-mk2'].prerequisites = {'power-armor', 'military-4', 'speed-module-2', 'efficiency-module-2'}
         data.raw.technology['health'].prerequisites = {'utility-science-pack'}
         data.raw.technology['health'].unit.ingredients = {{'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
@@ -1022,8 +1027,6 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         data.raw.technology['research-productivity'].max_level = 10
         data.raw.technology['research-productivity'].upgrade = false
-        data.raw.technology['transport-belt-capacity-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-        data.raw.technology['transport-belt-capacity-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         data.raw.technology['electric-weapons-damage-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
         data.raw.technology['electric-weapons-damage-2'].prerequisites = {'electric-weapons-damage-1'}
         data.raw.technology['electric-weapons-damage-2'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
