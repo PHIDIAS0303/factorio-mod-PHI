@@ -467,6 +467,10 @@ local items = {
                 ['foundation'] = true,
                 ['scrap-recycling-productivity'] = true,
                 ['biochamber'] = true,
+                ['electric-weapons-damage-1'] = true,
+                ['electric-weapons-damage-2'] = true,
+                ['electric-weapons-damage-3'] = true,
+                ['electric-weapons-damage-4'] = true,
             },
             ['recipe'] = {
                 ['thruster'] = true,
