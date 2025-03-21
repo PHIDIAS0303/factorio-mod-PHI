@@ -974,6 +974,8 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['power-armor-mk2'].prerequisites = {'power-armor', 'military-4', 'speed-module-2', 'efficiency-module-2'}
         data.raw.technology['health'].prerequisites = {'utility-science-pack'}
         data.raw.technology['health'].unit.ingredients = {{'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology['mining-productivity-3'].prerequisites = {'mining-productivity-2', 'production-science-pack', 'utility-science-pack'}
+        data.raw.technology['mining-productivity-3'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['processing-unit-productivity'].prerequisites = {'processing-unit', 'electromagnetic-plant'}
         data.raw.technology['processing-unit-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'processing-unit', change = 0.05}}
         data.raw.technology['processing-unit-productivity'].unit.count_formula = '1000 * (1.5 ^ (L - 1))'
