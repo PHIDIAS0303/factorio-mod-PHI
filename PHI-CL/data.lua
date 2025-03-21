@@ -1168,9 +1168,6 @@ if settings.startup['PHI-VP'].value then
         data.raw['lightning']['lightning'].hidden = true
         data.raw['lightning']['lightning'].hidden_in_factoriopedia = true
 
-        data.raw.fluid['fluoroketone-cold'].auto_barrel = false
-        data.raw.fluid['fluoroketone-hot'].auto_barrel = false
-
         for _, v in pairs({'agricultural', 'cryogenic', 'electromagnetic', 'metallurgic', 'promethium'}) do
             data.raw.tool[v .. '-science-pack'].hidden = true
             data.raw.tool[v .. '-science-pack'].hidden_in_factoriopedia = true
