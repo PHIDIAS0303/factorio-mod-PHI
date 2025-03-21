@@ -827,7 +827,7 @@ if settings.startup['PHI-VP'].value then
             localised_name = {'entity-name.cargo-landing-pad'}
         }})
 
-        for _, v in pairs({'concrete', 'landfill', 'automation', 'electronics', 'advanced-circuit', 'explosives', 'battery', 'engine', 'robotics', 'sulfur-processing', 'solar-energy', 'railway'}) do
+        for _, v in pairs({'concrete', 'landfill', 'automation', 'electronics', 'advanced-circuit', 'explosives', 'battery', 'engine', 'sulfur-processing', 'solar-energy', 'railway'}) do
             data:extend({{
                 type = 'technology',
                 name = v .. '-productivity',
