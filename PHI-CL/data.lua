@@ -13,6 +13,7 @@ if settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value 
             enabled = (i <= ml),
             prerequisites = ((i > 1) and {'compound-energy-' .. (i - 1)}) or {'solar-energy', 'advanced-circuit', 'electric-energy-accumulators'},
             effects = {},
+            upgrade = true,
             unit = {
                 count = math.floor(125 * (i ^ 2)),
                 ingredients = {
@@ -827,7 +828,7 @@ if settings.startup['PHI-VP'].value then
             localised_name = {'entity-name.cargo-landing-pad'}
         }})
 
-        for _, v in pairs({'concrete', 'landfill', 'automation', 'electronics', 'advanced-circuit', 'explosives', 'battery', 'engine', 'sulfur-processing', 'solar-energy', 'railway'}) do
+        for _, v in pairs({'concrete', 'automation', 'electronics', 'advanced-circuit', 'explosives', 'battery', 'engine', 'sulfur-processing', 'solar-energy', 'railway'}) do
             data:extend({{
                 type = 'technology',
                 name = v .. '-productivity',
@@ -858,6 +859,7 @@ if settings.startup['PHI-VP'].value then
         end
 
         table.insert(data.raw.technology['concrete-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'refined-concrete', change = 0.05})
+        table.insert(data.raw.technology['concrete-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'landfill', change = 0.05})
         table.insert(data.raw.technology['explosives-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'cliff-explosives', change = 0.05})
         table.insert(data.raw.technology['solar-energy-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'accumulator', change = 0.05})
         table.insert(data.raw.technology['engine-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'electric-engine-unit', change = 0.05})
