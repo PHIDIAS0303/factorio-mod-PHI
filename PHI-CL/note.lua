@@ -804,7 +804,5 @@ localised_description = {'phi-cl.combine', {'phi-cl.default'}, {'mod-setting-des
 "? aai-industry >= 0.5.0",
 "? Krastorio2 >= 1.3.0",
 "? space-exploration >= 0.6.0",
-"(?) big-mining-drill >= 0.1.0",
 "(?) angelsrefining >= 0.12.0",
-"(?) exotic-industries >= 0.6.0"
 ]]
