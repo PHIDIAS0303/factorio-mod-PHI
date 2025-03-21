@@ -1145,7 +1145,10 @@ if settings.startup['PHI-VP'].value then
             data.raw['inserter'][v].max_belt_stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
             data.raw['inserter'][v].grab_less_to_match_belt_stack = true
             data.raw['inserter'][v].enter_drop_mode_if_held_stack_spoiled = true
+            data.raw['inserter'][v].allow_custom_vectors = true
         end
+
+        data.raw['inserter']['stack-inserter'].allow_custom_vectors = true
 
         if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
             data.raw['pump']['pump'].pumping_speed = data.raw['pump']['pump'].pumping_speed  * ((1 + settings.startup['PHI-MI-PIPE'].value) / 2)
