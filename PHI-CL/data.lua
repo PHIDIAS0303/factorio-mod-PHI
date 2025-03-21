@@ -1035,6 +1035,7 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['electromagnetic-plant'].research_trigger = nil
         data.raw.technology['foundry'].research_trigger = nil
         data.raw.technology['cryogenic-plant'].research_trigger = nil
+        data.raw.technology['asteroid-productivity'].effects = nil
 
         for k, v in pairs(items['space-age']['PHI-VP-MAIN']['technology']) do
             if data.raw.technology[k] then
