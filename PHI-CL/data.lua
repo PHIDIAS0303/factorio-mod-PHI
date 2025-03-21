@@ -862,6 +862,7 @@ if settings.startup['PHI-VP'].value then
         table.insert(data.raw.technology['solar-energy-productivity'].prerequisites, 'electric-energy-accumulators')
         table.insert(data.raw.technology['concrete-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'refined-concrete', change = 0.05})
         table.insert(data.raw.technology['concrete-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'landfill', change = 0.05})
+        table.insert(data.raw.technology['sulfur-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'sulfuric-acid', change = 0.05})
         table.insert(data.raw.technology['sulfur-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'explosives', change = 0.05})
         table.insert(data.raw.technology['sulfur-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'cliff-explosives', change = 0.05})
         table.insert(data.raw.technology['solar-energy-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'accumulator', change = 0.05})
@@ -870,7 +871,7 @@ if settings.startup['PHI-VP'].value then
         table.insert(data.raw.technology['engine-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'flying-robot-frame', change = 0.05})
         data.raw.technology['engine-productivity'].effects[1].recipe = 'engine-unit'
         data.raw.technology['sulfur-processing-productivity'].prerequisites[3] = 'cryogenic-plant'
-        data.raw.technology['sulfur-processing-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'sulfuric-acid', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'sulfur', change = 0.05}}
+        data.raw.technology['sulfur-processing-productivity'].effects[1].recipe = 'sulfur'
         data.raw.technology['electronics-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'copper-cable', change = 0.05}}
         data.raw.technology['solar-energy-productivity'].effects[1].recipe = 'solar-panel'
         data.raw.technology['railway-productivity'].effects[1].recipe = 'rail'
