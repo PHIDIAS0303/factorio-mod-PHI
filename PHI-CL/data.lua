@@ -831,7 +831,7 @@ if settings.startup['PHI-VP'].value then
             data:extend({{
                 type = 'technology',
                 name = v .. '-productivity',
-                prerequisites = {v, 'automation-3', 'production-science-pack', 'utility-science-pack'},
+                prerequisites = {v, 'automation-3', 'electromagnetic-plant', 'production-science-pack', 'utility-science-pack'},
                 effects = {{type = 'change-recipe-productivity', recipe = v, change = 0.05}},
                 unit = {
                     count_formula = '800 * (1.5 ^ (L - 1))',
@@ -862,6 +862,7 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['engine-productivity'].effects[1].recipe = 'engine-unit'
         data.raw.technology['electric-engine-productivity'].effects[1].recipe = 'electric-engine-unit'
         data.raw.technology['robotics-productivity'].effects[1].recipe = 'flying-robot-frame'
+        data.raw.technology['sulfur-processing-productivity'].prerequisites[3] = 'cryogenic-plant'
         data.raw.technology['sulfur-processing-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'sulfuric-acid', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'sulfur', change = 0.05}}
         data.raw.technology['electronics-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'copper-cable', change = 0.05}}
         data.raw.technology['solar-energy-productivity'].effects[1].recipe = 'solar-panel'
