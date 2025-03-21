@@ -943,6 +943,8 @@ if settings.startup['PHI-VP'].value then
             table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'electric', modifier = 0.7})
             table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.6})
         end
+        table.insert(data.raw.technology['physical-projectile-damage-6'].effects, {type = 'ammo-damage', ammo_category = 'railgun', modifier = 0.2})
+        table.insert(data.raw.technology['physical-projectile-damage-7'].effects, {type = 'ammo-damage', ammo_category = 'railgun', modifier = 0.4})
         data.raw.technology['artillery'].prerequisites = {'tank', 'concrete', 'radar'}
         data.raw.technology['artillery'].unit.count = 1500
         data.raw.technology['artillery'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
