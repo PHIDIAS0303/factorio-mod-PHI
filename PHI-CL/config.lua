@@ -471,6 +471,7 @@ local items = {
                 ['electric-weapons-damage-2'] = true,
                 ['electric-weapons-damage-3'] = true,
                 ['electric-weapons-damage-4'] = true,
+                ['artillery-shell-damage-1'] = true,
             },
             ['recipe'] = {
                 ['thruster'] = true,
