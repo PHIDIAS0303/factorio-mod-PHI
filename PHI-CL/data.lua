@@ -858,6 +858,8 @@ if settings.startup['PHI-VP'].value then
             }})
         end
 
+        table.insert(data.raw.technology['concrete-productivity'].prerequisites, 'landfill')
+        table.insert(data.raw.technology['solar-energy-productivity'].prerequisites, 'electric-energy-accumulators')
         table.insert(data.raw.technology['concrete-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'refined-concrete', change = 0.05})
         table.insert(data.raw.technology['concrete-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'landfill', change = 0.05})
         table.insert(data.raw.technology['sulfur-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'explosives', change = 0.05})
