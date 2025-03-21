@@ -867,7 +867,6 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['sulfur-processing-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'sulfuric-acid', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'sulfur', change = 0.05}}
         data.raw.technology['electronics-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'copper-cable', change = 0.05}}
         data.raw.technology['solar-energy-productivity'].effects[1].recipe = 'solar-panel'
-        data.raw.technology['electric-energy-accumulators-productivity'].effects[1].recipe = 'accumulator'
         data.raw.technology['railway-productivity'].effects[1].recipe = 'rail'
         data.raw.technology['automation-productivity'].prerequisites[1] = 'logistics-2'
         data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'pipe', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.05}}
