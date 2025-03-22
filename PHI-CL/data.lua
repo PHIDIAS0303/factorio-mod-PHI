@@ -1320,7 +1320,6 @@ if settings.startup['PHI-CT'].value then
     local item = table.deepcopy(data.raw['item']['radar'])
     item.name = 'super-radar'
     item.place_result = item.name
-    item.hidden = true
     item.order = 'd[radar]-b[radar]'
     item.icons = {{icon = item.icon or '__base__/graphics/icons/radar.png', tint = items['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
     item.icon = nil
@@ -1342,8 +1341,7 @@ if settings.startup['PHI-CT'].value then
         type = 'recipe',
         name = item.name,
         energy_required = 2,
-        enabled = true,
-        hidden = true,
+        enabled = false,
         ingredients = {{type = 'item', name = 'electronic-circuit', amount = 5}, {type = 'item', name = 'iron-gear-wheel', amount = 5}, {type = 'item', name = 'iron-plate', amount = 10}},
         results = {{type = 'item', name = item.name, amount = 1}},
         main_product = item.name,
@@ -1353,7 +1351,6 @@ if settings.startup['PHI-CT'].value then
     item = table.deepcopy(data.raw['item']['electric-energy-interface'])
     item.name = 'passive-energy-void'
     item.place_result = item.name
-    item.hidden = true
     item.subgroup = 'energy'
     item.localised_name = {'name.passive-energy-void'}
     data:extend({item})
@@ -1376,8 +1373,7 @@ if settings.startup['PHI-CT'].value then
         type = 'recipe',
         name = item.name,
         energy_required = 2,
-        enabled = true,
-        hidden = true,
+        enabled = false,
         ingredients = {{type = 'item', name = 'accumulator', amount = 1}},
         results = {{type = 'item', name = item.name, amount = 1}},
         main_product = item.name,
@@ -1387,7 +1383,6 @@ if settings.startup['PHI-CT'].value then
     item = table.deepcopy(data.raw['item']['linked-chest'])
     item.subgroup = 'storage'
     item.order = 'a[items]-d[linked-chest]'
-    item.hidden = true
     item.stack_size = 50
     data:extend({item})
 
@@ -1406,13 +1401,10 @@ if settings.startup['PHI-CT'].value then
         name = item.name,
         energy_required = 2,
         enabled = false,
-        hidden = true,
         ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
         results = {{type = 'item', name = item.name, amount = 1}},
         main_product = item.name
     }})
-
-    table.insert(data.raw.technology['steel-processing'].effects, {type = 'unlock-recipe', recipe = item.name})
 
     item = table.deepcopy(data.raw['item']['steel-chest'])
     item.name = 'trash-chest'

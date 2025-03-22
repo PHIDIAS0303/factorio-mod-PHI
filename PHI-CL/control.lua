@@ -40,21 +40,23 @@ if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.script_raised_built, trash_creation)
     script.on_event(defines.events.script_raised_revive, trash_creation)
 
-    local function hidden_recipe_enable(enable)
+    local function hidden_recipe_enable(e, enable)
+        local force = game.players[e.player_index].force
+
         for _, v in pairs(prototypes.fluid) do
-            prototypes.recipe['pump-' .. v.name].hidden = enable
+            force.recipes['pump-' .. v.name].enabled = enable
         end
 
-        prototypes.recipe['super-radar'].hidden = enable
-        prototypes.recipe['passive-energy-void'].hidden = enable
-        prototypes.recipe['linked-chest'].hidden = enable
+        force.recipes['super-radar'].enabled = enable
+        force.recipes['passive-energy-void'].enabled = enable
+        force.recipes['linked-chest'].enabled = enable
     end
 
-    script.on_event(defines.events.on_player_cheat_mode_enabled, function(_)
-        hidden_recipe_enable(true)
+    script.on_event(defines.events.on_player_cheat_mode_enabled, function(e)
+        hidden_recipe_enable(e, true)
     end)
 
-    script.on_event(defines.events.on_player_cheat_mode_disabled, function(_)
-        hidden_recipe_enable(false)
+    script.on_event(defines.events.on_player_cheat_mode_disabled, function(e)
+        hidden_recipe_enable(e, false)
     end)
 end
