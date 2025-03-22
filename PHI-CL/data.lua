@@ -1387,6 +1387,7 @@ if settings.startup['PHI-CT'].value then
     item = table.deepcopy(data.raw['item']['linked-chest'])
     item.subgroup = 'storage'
     item.order = 'a[items]-d[linked-chest]'
+    item.hidden = true
     item.stack_size = 50
     data:extend({item})
 
@@ -1405,6 +1406,7 @@ if settings.startup['PHI-CT'].value then
         name = item.name,
         energy_required = 2,
         enabled = false,
+        hidden = true,
         ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
         results = {{type = 'item', name = item.name, amount = 1}},
         main_product = item.name
