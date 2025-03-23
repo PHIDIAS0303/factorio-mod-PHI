@@ -50,6 +50,9 @@ if settings.startup['PHI-CT'].value then
         force.recipes['super-radar'].enabled = enable
         force.recipes['passive-energy-void'].enabled = enable
         force.recipes['linked-chest'].enabled = enable
+        force.recipes['infinity-chest'].enabled = enable
+        force.recipes['infinity-cargo-wagon'].enabled = enable
+        force.recipes['infinity-pipe'].enabled = enable
     end
 
     script.on_event(defines.events.on_player_cheat_mode_enabled, function(e)

@@ -1317,6 +1317,21 @@ if settings.startup['PHI-CT'].value then
 
     data:extend(s)
 
+    for _, v in pairs({'infinity-chest', 'infinity-cargo-wagon', 'infinity-pipe'}) do
+        data.raw['item'][v].hidden = false
+
+        data:extend({{
+            type = 'recipe',
+            name = data.raw['item'][v].name,
+            energy_required = 2,
+            enabled = false,
+            ingredients = {},
+            results = {{type = 'item', name = data.raw['item'][v].name, amount = 1}},
+            main_product = data.raw['item'][v].name,
+            localised_name = {'name.' .. data.raw['item'][v].name}
+        }})
+    end
+
     local item = table.deepcopy(data.raw['item']['radar'])
     item.name = 'super-radar'
     item.place_result = item.name
