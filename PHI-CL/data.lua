@@ -1164,6 +1164,14 @@ if settings.startup['PHI-VP'].value then
             data.raw['inserter'][v].allow_custom_vectors = true
         end
 
+        for _, v in pairs({'wooden-chest', 'iron-chest', 'steel-chest'}) do
+            data.raw['container'][v].inventory_type = 'with_filters_and_bar'
+        end
+
+        for _, v in pairs({'passive-provider-chest', 'active-provider-chest', 'storage-chest', 'buffer-chest', 'requester-chest'}) do
+            data.raw['logistic-container'][v].inventory_type = 'with_filters_and_bar'
+        end
+
         data.raw['inserter']['stack-inserter'].allow_custom_vectors = true
 
         if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
