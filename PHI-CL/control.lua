@@ -350,7 +350,7 @@ if settings.startup['PHI-CT'].value then
             if math.max(math.abs(arm_positions.drop.x), math.abs(arm_positions.drop.y)) > max_range then
                 arm_positions.drop = math2d.position.multiply_scalar(math2d.direction.vectors[(math2d.direction.from_vector(arm_positions.drop) % 8) + 1], max_range)
             end
-            
+
             if math.max(math.abs(arm_positions.pickup.x), math.abs(arm_positions.pickup.y)) > max_range then
                 arm_positions.pickup = math2d.position.multiply_scalar(math2d.direction.vectors[(math2d.direction.from_vector(arm_positions.pickup) % 8) + 1], max_range)
             end
