@@ -135,7 +135,7 @@ if settings.startup['PHI-CT'].value then
         local frame_content = frame_main.add({type = 'frame', name = 'frame_content', style = 'entity_frame'})
         local flow_content = frame_content.add({type = 'flow', name = 'flow_content', direction = 'vertical'})
         flow_content.add({type = 'label', name = 'label_position', caption = {'gui-inserter-config.position'}, style = 'heading_2_label'})
-        local table_range = 1
+        local table_range = 2
         local inserter_prototyes = prototypes.get_entity_filtered({{filter = 'type', type = 'inserter'}})
 
         for _, prototype in pairs(inserter_prototyes) do
