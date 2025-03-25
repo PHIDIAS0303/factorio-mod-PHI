@@ -1162,6 +1162,7 @@ if settings.startup['PHI-VP'].value then
             data.raw['inserter'][v].grab_less_to_match_belt_stack = true
             data.raw['inserter'][v].enter_drop_mode_if_held_stack_spoiled = true
             data.raw['inserter'][v].allow_custom_vectors = true
+            -- data.raw['inserter'][v].extension_speed = data.raw['inserter'][v].extension_speed * 2
         end
 
         for _, v in pairs({'wooden-chest', 'iron-chest', 'steel-chest'}) do
