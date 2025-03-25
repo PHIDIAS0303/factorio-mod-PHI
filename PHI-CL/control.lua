@@ -212,9 +212,9 @@ if settings.startup['PHI-CT'].value then
 
                 if gui_instance.table_position.children[idx].type == 'sprite-button' then
                     if math2d.position.equal(arm_positions.drop, {x, y}) then
-                        gui_instance.table_position.children[idx].sprite = '[virtual-signal=down-arrow]'
+                        gui_instance.table_position.children[idx].sprite = 'virtual-signal/down-arrow'
                     elseif math2d.position.equal(arm_positions.pickup, {x, y}) then
-                        gui_instance.table_position.children[idx].sprite = '[virtual-signal=up-arrow]'
+                        gui_instance.table_position.children[idx].sprite = 'virtual-signal/up-arrow'
                     elseif x ~= 0 or y ~= 0 then
                         gui_instance.table_position.children[idx].sprite = nil
                     end
@@ -237,7 +237,7 @@ if settings.startup['PHI-CT'].value then
         for y = -1, 1, 1 do
             for x = -1, 1, 1 do
                 idx = idx + 1
-                gui_instance.table_offset.children[idx].sprite = (math2d.position.equal(arm_positions.drop_offset, {x, y}) and '[virtual-signal=down-arrow]') or nil
+                gui_instance.table_offset.children[idx].sprite = (math2d.position.equal(arm_positions.drop_offset, {x, y}) and 'virtual-signal/down-arrow') or nil
             end
         end
     end
@@ -256,11 +256,11 @@ if settings.startup['PHI-CT'].value then
         if event.button == defines.mouse_button_type.left and (not event.control) and (not event.shift) then
             local new_positions = {drop = new_pos}
 
-            if event.element.sprite == '[virtual-signal=down-arrow]' then
+            if event.element.sprite == 'virtual-signal/down-arrow' then
                 return
             end
 
-            if event.element.sprite == '[virtual-signal=up-arrow]' then
+            if event.element.sprite == 'virtual-signal/up-arrow' then
                 new_positions.pickup = inserter_utils.get_arm_positions(inserter).drop
             end
 
@@ -270,11 +270,11 @@ if settings.startup['PHI-CT'].value then
         elseif event.button == defines.mouse_button_type.right or (event.button == defines.mouse_button_type.left and (event.control or event.shift)) then
             local new_positions = {pickup = new_pos}
 
-            if event.element.sprite == '[virtual-signal=up-arrow]' then
+            if event.element.sprite == 'virtual-signal/up-arrow' then
                 return
             end
 
-            if event.element.sprite == '[virtual-signal=down-arrow]' then
+            if event.element.sprite == 'virtual-signal/down-arrow' then
                 new_positions.drop = inserter_utils.get_arm_positions(inserter).pickup
             end
 
