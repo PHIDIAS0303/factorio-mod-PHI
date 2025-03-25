@@ -58,11 +58,6 @@ if settings.startup['PHI-CT'].value then
         return p1.x == p2.x and p1.y == p2.y
     end
 
-    function math2d.position.dot_product(p1, p2)
-        p1, p2 = math2d.position.ensure_xy(p1), math2d.position.ensure_xy(p2)
-        return p1.x * p2.x + p1.y * p2.y
-    end
-
     function math2d.position.split(pos)
         local function split_coord(v)
             local int, frac = math.modf(v)
@@ -143,25 +138,6 @@ if settings.startup['PHI-CT'].value then
         return math.max(math.abs(pickup_pos.x), math.abs(pickup_pos.y), math.abs(drop_pos.x), math.abs(drop_pos.y))
     end
 
-    function inserter_utils.enforce_max_range(inserter)
-        local arm_positions = inserter_utils.get_arm_positions(inserter)
-        local max_range = inserter_utils.get_max_range(inserter)
-
-        if math.max(math.abs(arm_positions.drop.x), math.abs(arm_positions.drop.y)) > max_range then
-            arm_positions.drop = math2d.position.multiply_scalar(math2d.direction.to_vector(math2d.direction.from_vector(arm_positions.drop)), max_range)
-        end
-
-        if math.max(math.abs(arm_positions.pickup.x), math.abs(arm_positions.pickup.y)) > max_range then
-            arm_positions.pickup = math2d.position.multiply_scalar(math2d.direction.to_vector(math2d.direction.from_vector(arm_positions.pickup)), max_range)
-        end
-
-        if math2d.position.equal(arm_positions.pickup, arm_positions.drop) then
-            arm_positions.pickup = {x = -arm_positions.drop.x , y = -arm_positions.drop.y}
-        end
-
-        inserter_utils.set_arm_positions(inserter, arm_positions)
-    end
-
     function inserter_utils.calc_rotated_drop_offset(inserter, positions)
         local old_positions = inserter_utils.get_arm_positions(inserter)
         local old_drop_dir  = math2d.direction.from_vector(old_positions.drop)
@@ -195,7 +171,6 @@ if settings.startup['PHI-CT'].value then
 
         for y = -table_range, table_range, 1 do
             for x = -table_range, table_range, 1 do
-
                 local pos_suffix = '_' .. tostring(x + table_range + 1) .. '_' .. tostring(y + table_range + 1)
 
                 if (x == 0 and y == 0) then
@@ -218,33 +193,16 @@ if settings.startup['PHI-CT'].value then
 
         for y = 1, 3, 1 do
             for x = 1, 3, 1 do
-                local button_name = 'button_offset_' .. tostring(x + table_range + 1) .. '_' .. tostring(y + table_range + 1)
-                local button = table_position.add({type = 'sprite-button', name = button_name, style = 'slot_sized_button'})
-                button.style.size = {32,32}
+                local button = table_position.add({type = 'sprite-button', name = 'button_offset_' .. tostring(x + table_range + 1) .. '_' .. tostring(y + table_range + 1), style = 'slot_sized_button'})
+                button.style.size = {32, 32}
             end
         end
     end
 
-    function gui.delete(player)
-        if player.gui.relative.inserter_config then
-            player.gui.relative.inserter_config.destroy()
-        end
-    end
-
-    function gui.create_all()
-        for _, player in pairs(game.players) do
-            gui.delete(player)
-            gui.create(player)
-        end
-    end
-
     function gui.update(player, inserter)
-
         local gui_instance = player.gui.relative.inserter_config.frame_content.flow_content
-
-        local table_range = (gui_instance.table_position.column_count - 1)/2
+        local table_range = (gui_instance.table_position.column_count - 1) / 2
         local inserter_range = inserter_utils.get_max_range(inserter)
-
         local arm_positions = inserter_utils.get_arm_positions(inserter)
 
         local idx = 0
@@ -254,16 +212,14 @@ if settings.startup['PHI-CT'].value then
 
                 if gui_instance.table_position.children[idx].type == 'sprite-button' then
                     if math2d.position.equal(arm_positions.drop, {x, y}) then
-                        gui_instance.table_position.children[idx].sprite = 'drop'
+                        gui_instance.table_position.children[idx].sprite = '__base__/graphics/icons/arrows/down-arrow.png'
                     elseif math2d.position.equal(arm_positions.pickup, {x, y}) then
-                        gui_instance.table_position.children[idx].sprite = 'pickup'
+                        gui_instance.table_position.children[idx].sprite = '__base__/graphics/icons/arrows/up-arrow.png'
                     elseif x ~= 0 or y ~= 0 then
                         gui_instance.table_position.children[idx].sprite = nil
                     end
 
                     gui_instance.table_position.children[idx].enabled = math.min(math.abs(x), math.abs(y)) == 0 and math.max(math.abs(x), math.abs(y)) <= inserter_range
-                    --gui_instance.table_position.children[idx].enabled = ((math.min(math.abs(x), math.abs(y))  == 0 or math.abs(x) == math.abs(y) ) and math.max(math.abs(x), math.abs(y)) <= inserter_range)
-                    --gui_instance.table_position.children[idx].enabled = math.max(math.abs(x), math.abs(y)) <= inserter_range
                 end
             end
         end
@@ -281,72 +237,59 @@ if settings.startup['PHI-CT'].value then
         for y = -1, 1, 1 do
             for x = -1, 1, 1 do
                 idx = idx + 1
-
-                if math2d.position.equal(arm_positions.drop_offset, {x, y}) then
-                    gui_instance.table_offset.children[idx].sprite = 'drop'
-                else
-                    gui_instance.table_offset.children[idx].sprite = nil
-                end
-            end
-        end
-    end
-
-    function gui.update_all(inserter)
-        for idx, player in pairs(game.players) do
-            if (inserter and player.opened == inserter) or (not inserter and inserter_utils.is_inserter(player.opened)) then
-                gui.update(player, player.opened)
+                gui_instance.table_offset.children[idx].sprite = (math2d.position.equal(arm_positions.drop_offset, {x, y}) and '__base__/graphics/icons/arrows/down-arrow.png') or nil
             end
         end
     end
 
     function gui.get_button_pos(button)
-        local idx = button.get_index_in_parent()-1
+        local idx = button.get_index_in_parent() - 1
         local len = button.parent.column_count
-        local center = (len-1)*-0.5
-        return math2d.position.add({idx%len, math.floor(idx/len)}, {center, center})
+        local center = (len - 1) * -0.5
+        return math2d.position.add({idx % len, math.floor(idx / len)}, {center, center})
     end
 
     function gui.on_button_position(player, event)
-
         local inserter = player.opened
         local new_pos = gui.get_button_pos(event.element)
 
-        if event.button == defines.mouse_button_type.left and not event.control and not event.shift then
-            local new_positions = { drop=new_pos }
+        if event.button == defines.mouse_button_type.left and (not event.control) and (not event.shift) then
+            local new_positions = {drop = new_pos}
 
-            if event.element.sprite == 'drop' then
+            if event.element.sprite == '__base__/graphics/icons/arrows/down-arrow.png' then
                 return
             end
 
-            if event.element.sprite == 'pickup' then
+            if event.element.sprite == '__base__/graphics/icons/arrows/up-arrow.png' then
                 new_positions.pickup = inserter_utils.get_arm_positions(inserter).drop
             end
 
             new_positions.drop_offset = inserter_utils.calc_rotated_drop_offset(inserter, new_positions)
-
             inserter_utils.set_arm_positions(inserter, new_positions)
 
         elseif event.button == defines.mouse_button_type.right or (event.button == defines.mouse_button_type.left and (event.control or event.shift)) then
-            local new_positions = { pickup=new_pos }
+            local new_positions = {pickup = new_pos}
 
-            if event.element.sprite == 'pickup' then
+            if event.element.sprite == '__base__/graphics/icons/arrows/up-arrow.png' then
                 return
             end
 
-            if event.element.sprite == 'drop' then
+            if event.element.sprite == '__base__/graphics/icons/arrows/down-arrow.png' then
                 new_positions.drop = inserter_utils.get_arm_positions(inserter).pickup
             end
 
             inserter_utils.set_arm_positions(inserter, new_positions)
         end
 
-        gui.update_all(inserter)
+        for _, p in pairs(game.players) do
+            if (inserter and p.opened == inserter) or (not inserter and inserter_utils.is_inserter(p.opened)) then
+                gui.update(p, p.opened)
+            end
+        end
     end
 
     function gui.on_button_offset(player, event)
-        local new_drop_offset = gui.get_button_pos(event.element)
-        inserter_utils.set_arm_positions(player.opened, {drop_offset=new_drop_offset})
-
+        inserter_utils.set_arm_positions(player.opened, {drop_offset = gui.get_button_pos(event.element)})
         gui.update(player, player.opened)
     end
 
@@ -365,12 +308,30 @@ if settings.startup['PHI-CT'].value then
 
     script.on_init(function(_)
         trash_check()
-        gui.create_all()
+
+        for _, player in pairs(game.players) do
+            if player.gui.relative.inserter_config then
+                player.gui.relative.inserter_config.destroy()
+            end
+
+            gui.create(player)
+        end
     end)
 
     script.on_configuration_changed(function(_)
-        gui.create_all()
-        gui.update_all()
+        for _, player in pairs(game.players) do
+            if player.gui.relative.inserter_config then
+                player.gui.relative.inserter_config.destroy()
+            end
+
+            gui.create(player)
+        end
+
+        for _, player in pairs(game.players) do
+            if inserter_utils.is_inserter(player.opened) then
+                gui.update(player, player.opened)
+            end
+        end
     end)
 
     script.on_event(defines.events.on_player_created, function(e)
@@ -398,15 +359,39 @@ if settings.startup['PHI-CT'].value then
 
     script.on_event(defines.events.on_player_rotated_entity, function(e)
         if inserter_utils.is_inserter(e.entity) then
-            gui.update_all(e.entity)
+            for _, player in pairs(game.players) do
+                if (e.entity and player.opened == e.entity) or (not e.entity and inserter_utils.is_inserter(player.opened)) then
+                    gui.update(player, player.opened)
+                end
+            end
         end
     end)
 
     script.on_event(defines.events.on_entity_settings_pasted, function(e)
         if inserter_utils.is_inserter(e.destination) then
             e.destination.direction = e.source.direction
-            inserter_utils.enforce_max_range(e.destination)
-            gui.update_all(e.destination)
+            local arm_positions = inserter_utils.get_arm_positions(e.destination)
+            local max_range = inserter_utils.get_max_range(e.destination)
+
+            if math.max(math.abs(arm_positions.drop.x), math.abs(arm_positions.drop.y)) > max_range then
+                arm_positions.drop = math2d.position.multiply_scalar(math2d.direction.to_vector(math2d.direction.from_vector(arm_positions.drop)), max_range)
+            end
+
+            if math.max(math.abs(arm_positions.pickup.x), math.abs(arm_positions.pickup.y)) > max_range then
+                arm_positions.pickup = math2d.position.multiply_scalar(math2d.direction.to_vector(math2d.direction.from_vector(arm_positions.pickup)), max_range)
+            end
+
+            if math2d.position.equal(arm_positions.pickup, arm_positions.drop) then
+                arm_positions.pickup = {x = -arm_positions.drop.x , y = -arm_positions.drop.y}
+            end
+
+            inserter_utils.set_arm_positions(e.destination, arm_positions)
+
+            for _, player in pairs(game.players) do
+                if (e.destination and player.opened == e.destination) or (not e.destination and inserter_utils.is_inserter(player.opened)) then
+                    gui.update(player, player.opened)
+                end
+            end
         end
     end)
 end
