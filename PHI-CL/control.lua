@@ -138,20 +138,6 @@ if settings.startup['PHI-CT'].value then
         return math.max(math.abs(pickup_pos.x), math.abs(pickup_pos.y), math.abs(drop_pos.x), math.abs(drop_pos.y))
     end
 
-    function inserter_utils.calc_rotated_drop_offset(inserter, positions)
-        local old_positions = inserter_utils.get_arm_positions(inserter)
-        local old_drop_dir  = math2d.direction.from_vector(old_positions.drop)
-
-        if not positions.drop then
-            return old_positions.drop_offset
-        end
-
-        local new_drop_dir = math2d.direction.from_vector(positions.drop)
-        local delta = (new_drop_dir - old_drop_dir) % 8
-
-        return ((delta % 2 == 0) and {x = ((delta == 0 or delta == 6) and old_positions.drop_offset.y) or -old_positions.drop_offset.y, y = ((delta == 0 or delta == 2) and old_positions.drop_offset.x) or -old_positions.drop_offset.x}) or math2d.direction.to_vector(new_drop_dir + (new_drop_dir % 2) * 4 )
-    end
-
     function gui.create(player)
         local frame_main_anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}
         local frame_main = player.gui.relative.add({type = 'frame', name = 'inserter_config', caption = {'gui-inserter-config.configuration'}, anchor = frame_main_anchor})
@@ -187,7 +173,7 @@ if settings.startup['PHI-CT'].value then
         local line = flow_content.add({type = 'line', name = 'line', style = 'inside_shallow_frame_with_padding_line'})
         line.style.top_margin = 8
         flow_content.add({type = 'label', name = 'label_offset', caption = {'gui-inserter-config.drop-offset'},  style = 'heading_2_label'})
-        table_position = flow_content.add({type = 'table', name = 'table_offset', column_count=3 })
+        table_position = flow_content.add({type = 'table', name = 'table_offset', column_count = 3})
         table_position.style.horizontal_spacing = 1
         table_position.style.vertical_spacing = 1
 
@@ -204,21 +190,14 @@ if settings.startup['PHI-CT'].value then
         local table_range = (gui_instance.table_position.column_count - 1) / 2
         local inserter_range = inserter_utils.get_max_range(inserter)
         local arm_positions = inserter_utils.get_arm_positions(inserter)
-
         local idx = 0
+
         for y = -table_range, table_range, 1 do
             for x = -table_range, table_range, 1 do
                 idx = idx + 1
 
                 if gui_instance.table_position.children[idx].type == 'sprite-button' then
-                    if math2d.position.equal(arm_positions.drop, {x, y}) then
-                        gui_instance.table_position.children[idx].sprite = 'virtual-signal/down-arrow'
-                    elseif math2d.position.equal(arm_positions.pickup, {x, y}) then
-                        gui_instance.table_position.children[idx].sprite = 'virtual-signal/up-arrow'
-                    elseif x ~= 0 or y ~= 0 then
-                        gui_instance.table_position.children[idx].sprite = nil
-                    end
-
+                    gui_instance.table_position.children[idx].sprite = ((math2d.position.equal(arm_positions.drop, {x, y}) and 'virtual-signal/down-arrow') or (math2d.position.equal(arm_positions.pickup, {x, y}) and 'virtual-signal/up-arrow')) or ((x ~= 0 or y ~= 0) and nil)
                     gui_instance.table_position.children[idx].enabled = math.min(math.abs(x), math.abs(y)) == 0 and math.max(math.abs(x), math.abs(y)) <= inserter_range
                 end
             end
@@ -264,7 +243,10 @@ if settings.startup['PHI-CT'].value then
                 new_positions.pickup = inserter_utils.get_arm_positions(inserter).drop
             end
 
-            new_positions.drop_offset = inserter_utils.calc_rotated_drop_offset(inserter, new_positions)
+            local old_positions = inserter_utils.get_arm_positions(inserter)
+            local new_drop_dir = math2d.direction.from_vector(new_positions.drop)
+            local delta = (new_drop_dir - math2d.direction.from_vector(old_positions.drop)) % 8
+            new_positions.drop_offset = (not new_positions.drop and old_positions.drop_offset) or (((delta % 2 == 0) and {x = ((delta == 0 or delta == 6) and old_positions.drop_offset.y) or -old_positions.drop_offset.y, y = ((delta == 0 or delta == 2) and old_positions.drop_offset.x) or -old_positions.drop_offset.x}) or math2d.direction.to_vector(new_drop_dir + (new_drop_dir % 2) * 4 ))
             inserter_utils.set_arm_positions(inserter, new_positions)
 
         elseif event.button == defines.mouse_button_type.right or (event.button == defines.mouse_button_type.left and (event.control or event.shift)) then
