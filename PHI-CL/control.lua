@@ -80,8 +80,7 @@ if settings.startup['PHI-CT'].value then
         return {x = math.floor(pos.x), y = math.floor(pos.y)}
     end
 
-    math2d.direction = math2d.direction or {}
-    math2d.direction.vectors = {{x = 0, y = -1}, {x = 1, y = -1}, {x = 1, y = 0}, {x = 1, y = 1}, {x = 0, y = 1}, {x = -1, y = 1}, {x = -1, y = 0}, {x = -1, y = -1}}
+    math2d.direction = {vectors = {{x = 0, y = -1}, {x = 1, y = -1}, {x = 1, y = 0}, {x = 1, y = 1}, {x = 0, y = 1}, {x = -1, y = 1}, {x = -1, y = 0}, {x = -1, y = -1}}}
 
     function math2d.direction.from_vector(vec)
         vec = math2d.position.ensure_xy(vec)
@@ -143,7 +142,7 @@ if settings.startup['PHI-CT'].value then
             table_range = math.max(table_range, inserter_utils.get_max_range(prototype))
         end
 
-        local table_position = flow_content.add({type = 'table', name = 'table_position', column_count= 1 + table_range * 2})
+        local table_position = flow_content.add({type = 'table', name = 'table_position', column_count = 1 + table_range * 2})
         table_position.style.horizontal_spacing = 1
         table_position.style.vertical_spacing = 1
 
