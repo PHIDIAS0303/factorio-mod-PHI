@@ -333,10 +333,7 @@ if settings.startup['PHI-CT'].value then
             end
         end
 
-        if math2d.position.equal(arm_positions.pickup, arm_positions.drop) then
-            arm_positions.pickup = {x = -arm_positions.drop.x , y = -arm_positions.drop.y}
-        end
-
+        arm_positions.pickup = (math2d.position.equal(arm_positions.pickup, arm_positions.drop) and {x = -arm_positions.drop.x , y = -arm_positions.drop.y}) or arm_positions.pickup
         inserter_utils.set_arm_positions(e.destination, arm_positions)
 
         for _, player in pairs(game.players) do
