@@ -8,14 +8,9 @@ if settings.startup['PHI-CT'].value then
     local function trash_creation(event)
         local entity = event.created_entity or event.entity
 
-        if not entity then
+        if not (entity and entity.valid) then
             return
         end
-
-        if not entity.valid then
-            return
-        end
-
         if entity.name == 'trash-chest' then
             entity.infinity_container_filters = {}
             entity.remove_unfiltered_items = true
@@ -43,7 +38,8 @@ if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.script_raised_built, trash_creation)
     script.on_event(defines.events.script_raised_revive, trash_creation)
 
-    local function hidden_recipe_enable(e, enable)
+    local function hidden_recipe_enable(e)
+        local enable = (e.name == defines.events.on_player_cheat_mode_enabled and true) or false
         local force = game.players[e.player_index].force
 
         for _, v in pairs(prototypes.fluid) do
@@ -58,13 +54,8 @@ if settings.startup['PHI-CT'].value then
         force.recipes['infinity-pipe'].enabled = enable
     end
 
-    script.on_event(defines.events.on_player_cheat_mode_enabled, function(e)
-        hidden_recipe_enable(e, true)
-    end)
-
-    script.on_event(defines.events.on_player_cheat_mode_disabled, function(e)
-        hidden_recipe_enable(e, false)
-    end)
+    script.on_event(defines.events.on_player_cheat_mode_enabled, hidden_recipe_enable)
+    script.on_event(defines.events.on_player_cheat_mode_disabled, hidden_recipe_enable)
 
     function math2d.position.equal(p1, p2)
         p1, p2 = math2d.position.ensure_xy(p1), math2d.position.ensure_xy(p2)
@@ -224,9 +215,7 @@ if settings.startup['PHI-CT'].value then
     script.on_configuration_changed(function(_)
         for _, player in pairs(game.players) do
             gui.create(player)
-        end
 
-        for _, player in pairs(game.players) do
             if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
                 gui.update(player, player.opened)
             end
