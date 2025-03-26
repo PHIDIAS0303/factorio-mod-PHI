@@ -318,31 +318,30 @@ if settings.startup['PHI-CT'].value then
     end)
 
     script.on_event(defines.events.on_entity_settings_pasted, function(e)
-        if e.destination.type == 'inserter' or (e.destination.type == 'entity-ghost' and e.destination.ghost_type == 'inserter') then
-            e.destination.direction = e.source.direction
-            local arm_positions = inserter_utils.get_arm_positions(e.destination)
-            local max_range = inserter_utils.get_max_range(e.destination)
+        if not (e.destination.type == 'inserter' and (e.destination.type == 'entity-ghost' and e.destination.ghost_type == 'inserter')) then
+            return
+        end
 
-            if math.max(math.abs(arm_positions.drop.x), math.abs(arm_positions.drop.y)) > max_range then
-                local vec = math2d.position.ensure_xy(arm_positions.drop)
-                arm_positions.drop = math2d.position.multiply_scalar(math2d.direction.vectors[(math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8) + 1], max_range)
+        e.destination.direction = e.source.direction
+        local arm_positions = inserter_utils.get_arm_positions(e.destination)
+        local max_range = inserter_utils.get_max_range(e.destination)
+
+        for _, v in pairs({'drop', 'pickup'}) do
+            if math.max(math.abs(arm_positions[v].x), math.abs(arm_positions[v].y)) > max_range then
+                local vec = math2d.position.ensure_xy(arm_positions[v])
+                arm_positions[v] = math2d.position.multiply_scalar(math2d.direction.vectors[(math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8) + 1], max_range)
             end
+        end
 
-            if math.max(math.abs(arm_positions.pickup.x), math.abs(arm_positions.pickup.y)) > max_range then
-                local vec = math2d.position.ensure_xy(arm_positions.drop)
-                arm_positions.pickup = math2d.position.multiply_scalar(math2d.direction.vectors[(math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8) + 1], max_range)
-            end
+        if math2d.position.equal(arm_positions.pickup, arm_positions.drop) then
+            arm_positions.pickup = {x = -arm_positions.drop.x , y = -arm_positions.drop.y}
+        end
 
-            if math2d.position.equal(arm_positions.pickup, arm_positions.drop) then
-                arm_positions.pickup = {x = -arm_positions.drop.x , y = -arm_positions.drop.y}
-            end
+        inserter_utils.set_arm_positions(e.destination, arm_positions)
 
-            inserter_utils.set_arm_positions(e.destination, arm_positions)
-
-            for _, player in pairs(game.players) do
-                if (e.destination and player.opened == e.destination) or (not e.destination and (player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')))) then
-                    gui.update(player, player.opened)
-                end
+        for _, player in pairs(game.players) do
+            if (e.destination and player.opened == e.destination) or (not e.destination and (player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')))) then
+                gui.update(player, player.opened)
             end
         end
     end)
