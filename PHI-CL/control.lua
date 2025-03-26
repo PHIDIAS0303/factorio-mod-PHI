@@ -291,10 +291,8 @@ if settings.startup['PHI-CT'].value then
     end)
 
     script.on_event(defines.events.on_gui_opened, function(e)
-        local player = game.players[e.player_index]
-
-        if e.entity.opened and e.entity.opened.object_name == 'LuaEntity' and (e.entity.opened.type == 'inserter' or (e.entity.opened.type == 'entity-ghost' and e.entity.opened.ghost_type == 'inserter')) then
-            gui.update(player, e.entity)
+        if e.entity and e.entity.opened and (e.entity.opened.type == 'inserter' or (e.entity.opened.type == 'entity-ghost' and e.entity.opened.ghost_type == 'inserter')) then
+            gui.update(game.players[e.player_index], e.entity)
         end
     end)
 
@@ -320,7 +318,7 @@ if settings.startup['PHI-CT'].value then
     end)
 
     script.on_event(defines.events.on_entity_settings_pasted, function(e)
-        if e.destination and e.destination.object_name == 'LuaEntity' and (e.destination.type == 'inserter' or (e.destination.type == 'entity-ghost' and e.destination.ghost_type == 'inserter')) then
+        if e.destination.type == 'inserter' or (e.destination.type == 'entity-ghost' and e.destination.ghost_type == 'inserter') then
             e.destination.direction = e.source.direction
             local arm_positions = inserter_utils.get_arm_positions(e.destination)
             local max_range = inserter_utils.get_max_range(e.destination)
