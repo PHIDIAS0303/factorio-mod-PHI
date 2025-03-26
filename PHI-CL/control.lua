@@ -291,7 +291,7 @@ if settings.startup['PHI-CT'].value then
     end)
 
     script.on_event(defines.events.on_gui_opened, function(e)
-        if e.entity and e.entity.opened and (e.entity.opened.type == 'inserter' or (e.entity.opened.type == 'entity-ghost' and e.entity.opened.ghost_type == 'inserter')) then
+        if e.entity and e.entity.opened and e.entity.opened.object_name and e.entity.opened.object_name == 'LuaEntity' and (e.entity.opened.type == 'inserter' or (e.entity.opened.type == 'entity-ghost' and e.entity.opened.ghost_type == 'inserter')) then
             gui.update(game.players[e.player_index], e.entity)
         end
     end)
