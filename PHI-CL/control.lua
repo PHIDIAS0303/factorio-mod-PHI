@@ -102,6 +102,7 @@ if settings.startup['PHI-CT'].value then
         end
     end
 
+
     function gui.create(player)
         if player.gui.relative.inserter_config then
             player.gui.relative.inserter_config.destroy()
