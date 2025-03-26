@@ -58,17 +58,19 @@ if settings.startup['PHI-CT'].value then
     local inserter_utils = {}
     math2d.direction = {vectors = {{x = 0, y = -1}, {x = 1, y = -1}, {x = 1, y = 0}, {x = 1, y = 1}, {x = 0, y = 1}, {x = -1, y = 1}, {x = -1, y = 0}, {x = -1, y = -1}}}
 
-    function math2d.position.split(pos)
-        pos = math2d.position.ensure_xy(pos)
+    function inserter_utils.get_arm_positions(inserter)
+        local pos = math2d.position.ensure_xy(inserter.position)
         local x_int, x_frac = math.modf(pos.x)
         local y_int, y_frac = math.modf(pos.y)
-        return {x = x_frac < 0 and (x_int - 1) or x_int, y = y_frac < 0 and (y_int - 1) or y_int}, {x = x_frac < 0 and (x_frac + 1) or x_frac, y = y_frac < 0 and (y_frac + 1) or y_frac}
-    end
-
-    function inserter_utils.get_arm_positions(inserter)
-        local base_tile, base_offset = math2d.position.split(inserter.position)
-        local drop_tile, drop_offset = math2d.position.split(inserter.drop_position)
-        local pickup_tile, _ = math2d.position.split(inserter.pickup_position)
+        local base_tile, base_offset = {x = x_frac < 0 and (x_int - 1) or x_int, y = y_frac < 0 and (y_int - 1) or y_int}, {x = x_frac < 0 and (x_frac + 1) or x_frac, y = y_frac < 0 and (y_frac + 1) or y_frac}
+        pos = math2d.position.ensure_xy(inserter.drop_position)
+        x_int, x_frac = math.modf(pos.x)
+        y_int, y_frac = math.modf(pos.y)
+        local drop_tile, drop_offset = {x = x_frac < 0 and (x_int - 1) or x_int, y = y_frac < 0 and (y_int - 1) or y_int}, {x = x_frac < 0 and (x_frac + 1) or x_frac, y = y_frac < 0 and (y_frac + 1) or y_frac}
+        pos = math2d.position.ensure_xy(inserter.pickup_position)
+        x_int, x_frac = math.modf(pos.x)
+        y_int, y_frac = math.modf(pos.y)
+        local pickup_tile = {x = x_frac < 0 and (x_int - 1) or x_int, y = y_frac < 0 and (y_int - 1) or y_int}
 
         return {
             base = base_tile,
@@ -86,8 +88,14 @@ if settings.startup['PHI-CT'].value then
         inserter.pickup_position = (positions.pickup and math2d.position.add(inserter.position, positions.pickup)) or nil
 
         if positions.drop or positions.drop_offset then
-            local base_tile, _ = math2d.position.split(inserter.position)
-            local old_drop_tile, old_drop_offset = math2d.position.split(inserter.drop_position)
+            local pos = math2d.position.ensure_xy(inserter.position)
+            local x_int, x_frac = math.modf(pos.x)
+            local y_int, y_frac = math.modf(pos.y)
+            local base_tile = {x = x_frac < 0 and (x_int - 1) or x_int, y = y_frac < 0 and (y_int - 1) or y_int}
+            pos = math2d.position.ensure_xy(inserter.drop_position)
+            x_int, x_frac = math.modf(pos.x)
+            y_int, y_frac = math.modf(pos.y)
+            local old_drop_tile, old_drop_offset = {x = x_frac < 0 and (x_int - 1) or x_int, y = y_frac < 0 and (y_int - 1) or y_int}, {x = x_frac < 0 and (x_frac + 1) or x_frac, y = y_frac < 0 and (y_frac + 1) or y_frac}
             inserter.drop_position = math2d.position.add((positions.drop and math2d.position.add(base_tile, positions.drop)) or old_drop_tile, (positions.drop_offset and math2d.position.add(math2d.position.multiply_scalar(positions.drop_offset, 0.2), {0.5, 0.5})) or old_drop_offset)
         end
     end
