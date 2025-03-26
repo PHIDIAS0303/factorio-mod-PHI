@@ -310,7 +310,7 @@ if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.on_player_rotated_entity, function(e)
         if e.entity and (e.entity.type == 'inserter' or (e.entity.type == 'entity-ghost' and e.entity.ghost_type == 'inserter')) then
             for _, player in pairs(game.players) do
-                if (e.entity and player.opened == e.entity) or (not e.entity and (player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')))) then
+                if player.opened == e.entity then
                     gui.update(player, player.opened)
                 end
             end
