@@ -168,8 +168,8 @@ if settings.startup['PHI-CT'].value then
 
         for y = 1, 3, 1 do
             for x = 1, 3, 1 do
-                local button = table_position.add({type = 'sprite-button', name = 'button_offset_' .. tostring(x + table_range + 1) .. '_' .. tostring(y + table_range + 1), style = 'slot_sized_button'})
-                button.style.size = {32, 32}
+                sprite = table_position.add({type = 'sprite-button', name = 'button_offset_' .. tostring(x + table_range + 1) .. '_' .. tostring(y + table_range + 1), style = 'slot_sized_button'})
+                sprite.style.size = {32, 32}
             end
         end
     end
@@ -192,14 +192,8 @@ if settings.startup['PHI-CT'].value then
             end
         end
 
-        local icon = 'item/inserter'
         local prototype = inserter_utils.get_prototype(inserter)
-
-        if prototype and prototype.items_to_place_this then
-            icon = 'item/' .. prototype.items_to_place_this[1].name
-        end
-
-        gui_instance.table_position.sprite_inserter.sprite = icon
+        gui_instance.table_position.sprite_inserter.sprite = ((prototype and prototype.items_to_place_this) and 'item/' .. prototype.items_to_place_this[1].name) or 'item/bulk-inserter'
         idx = 0
 
         for y = -1, 1, 1 do
