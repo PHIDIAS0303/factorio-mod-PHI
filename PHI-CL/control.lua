@@ -130,6 +130,10 @@ if settings.startup['PHI-CT'].value then
     end
 
     function gui.create(player)
+        if player.gui.relative.inserter_config then
+            player.gui.relative.inserter_config.destroy()
+        end
+
         local frame_main = player.gui.relative.add({type = 'frame', name = 'inserter_config', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}})
         local frame_content = frame_main.add({type = 'frame', name = 'frame_content', style = 'entity_frame'})
         local flow_content = frame_content.add({type = 'flow', name = 'flow_content', direction = 'vertical'})
@@ -213,20 +217,12 @@ if settings.startup['PHI-CT'].value then
         trash_check()
 
         for _, player in pairs(game.players) do
-            if player.gui.relative.inserter_config then
-                player.gui.relative.inserter_config.destroy()
-            end
-
             gui.create(player)
         end
     end)
 
     script.on_configuration_changed(function(_)
         for _, player in pairs(game.players) do
-            if player.gui.relative.inserter_config then
-                player.gui.relative.inserter_config.destroy()
-            end
-
             gui.create(player)
         end
 
@@ -238,13 +234,7 @@ if settings.startup['PHI-CT'].value then
     end)
 
     script.on_event(defines.events.on_player_created, function(e)
-        local player = game.players[e.player_index]
-
-        if player.gui.relative.inserter_config then
-            player.gui.relative.inserter_config.destroy()
-        end
-
-        gui.create(player)
+        gui.create(game.players[e.player_index])
     end)
 
     script.on_event(defines.events.on_gui_opened, function(e)
