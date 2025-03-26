@@ -108,9 +108,9 @@ if settings.startup['PHI-CT'].value then
     end
 
     function inserter_utils.get_max_range(inserter)
-        local prototype = (inserter.object_name == 'LuaEntity' and ((inserter.type == 'entity-ghost' and inserter.ghost_prototype) or inserter.prototype)) or ((inserter.object_name == 'LuaEntityPrototype' and inserter) or nil)
-        local pickup_pos = math2d.position.ensure_xy(math2d.position.add(prototype.inserter_pickup_position, {0.5, 0.5}))
-        local drop_pos = math2d.position.ensure_xy(math2d.position.add(prototype.inserter_drop_position, {0.5, 0.5}))
+        -- local p = (inserter.object_name == 'LuaEntity' and ((inserter.type == 'entity-ghost' and inserter.ghost_prototype) or inserter.prototype)) or ((inserter.object_name == 'LuaEntityPrototype' and inserter) or nil)
+        local pickup_pos = math2d.position.ensure_xy(math2d.position.add(inserter.inserter_pickup_position, {0.5, 0.5}))
+        local drop_pos = math2d.position.ensure_xy(math2d.position.add(inserter.inserter_drop_position, {0.5, 0.5}))
         return math.max(math.abs(math.floor(pickup_pos.x)), math.abs(math.floor(pickup_pos.y)), math.abs(math.floor(drop_pos.x)), math.abs(math.floor(drop_pos.y)))
     end
 
