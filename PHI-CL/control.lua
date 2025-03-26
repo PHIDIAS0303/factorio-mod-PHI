@@ -209,55 +209,6 @@ if settings.startup['PHI-CT'].value then
         return math2d.position.add({idx % len, math.floor(idx / len)}, {center, center})
     end
 
-    function gui.on_button_position(player, event)
-        local inserter = player.opened
-        local new_pos = gui.get_button_pos(event.element)
-
-        if event.button == defines.mouse_button_type.left and (not event.control) and (not event.shift) then
-            local new_positions = {drop = new_pos}
-
-            if event.element.sprite == 'virtual-signal/down-arrow' then
-                return
-            end
-
-            if event.element.sprite == 'virtual-signal/up-arrow' then
-                new_positions.pickup = inserter_utils.get_arm_positions(inserter).drop
-            end
-
-            local old_positions = inserter_utils.get_arm_positions(inserter)
-            local vec = math2d.position.ensure_xy(new_positions.drop)
-            local new_drop_dir = math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8
-            vec = math2d.position.ensure_xy(old_positions.drop)
-            local delta = (new_drop_dir - math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8) % 8
-            new_positions.drop_offset = (not new_positions.drop and old_positions.drop_offset) or (((delta % 2 == 0) and {x = ((delta == 0 or delta == 6) and old_positions.drop_offset.y) or -old_positions.drop_offset.y, y = ((delta == 0 or delta == 2) and old_positions.drop_offset.x) or -old_positions.drop_offset.x}) or math2d.direction.vectors[(new_drop_dir + (new_drop_dir % 2) * 4 % 8) + 1])
-            inserter_utils.set_arm_positions(inserter, new_positions)
-
-        elseif event.button == defines.mouse_button_type.right or (event.button == defines.mouse_button_type.left and (event.control or event.shift)) then
-            local new_positions = {pickup = new_pos}
-
-            if event.element.sprite == 'virtual-signal/up-arrow' then
-                return
-            end
-
-            if event.element.sprite == 'virtual-signal/down-arrow' then
-                new_positions.drop = inserter_utils.get_arm_positions(inserter).pickup
-            end
-
-            inserter_utils.set_arm_positions(inserter, new_positions)
-        end
-
-        for _, p in pairs(game.players) do
-            if (inserter and p.opened == inserter) or (not inserter and (p.opened and p.opened.object_name == 'LuaEntity' and (p.opened.type == 'inserter' or (p.opened.type == 'entity-ghost' and p.opened.ghost_type == 'inserter')))) then
-                gui.update(p, p.opened)
-            end
-        end
-    end
-
-    function gui.on_button_offset(player, event)
-        inserter_utils.set_arm_positions(player.opened, {drop_offset = gui.get_button_pos(event.element)})
-        gui.update(player, player.opened)
-    end
-
     script.on_init(function(_)
         trash_check()
 
@@ -307,9 +258,50 @@ if settings.startup['PHI-CT'].value then
         local gui_instance = player.gui.relative.inserter_config.frame_content.flow_content
 
         if e.element.parent == gui_instance.table_position and e.element ~= gui_instance.table_position.sprite_inserter then
-            gui.on_button_position(player, e)
+            local new_pos = gui.get_button_pos(e.element)
+
+            if e.button == defines.mouse_button_type.left and (not e.control) and (not e.shift) then
+                local new_positions = {drop = new_pos}
+
+                if e.element.sprite == 'virtual-signal/down-arrow' then
+                    return
+                end
+
+                if e.element.sprite == 'virtual-signal/up-arrow' then
+                    new_positions.pickup = inserter_utils.get_arm_positions(player.opened).drop
+                end
+
+                local old_positions = inserter_utils.get_arm_positions(player.opened)
+                local vec = math2d.position.ensure_xy(new_positions.drop)
+                local new_drop_dir = math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8
+                vec = math2d.position.ensure_xy(old_positions.drop)
+                local delta = (new_drop_dir - math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8) % 8
+                new_positions.drop_offset = (not new_positions.drop and old_positions.drop_offset) or (((delta % 2 == 0) and {x = ((delta == 0 or delta == 6) and old_positions.drop_offset.y) or -old_positions.drop_offset.y, y = ((delta == 0 or delta == 2) and old_positions.drop_offset.x) or -old_positions.drop_offset.x}) or math2d.direction.vectors[(new_drop_dir + (new_drop_dir % 2) * 4 % 8) + 1])
+                inserter_utils.set_arm_positions(player.opened, new_positions)
+
+            elseif e.button == defines.mouse_button_type.right or (e.button == defines.mouse_button_type.left and (e.control or e.shift)) then
+                local new_positions = {pickup = new_pos}
+
+                if e.element.sprite == 'virtual-signal/up-arrow' then
+                    return
+                end
+
+                if e.element.sprite == 'virtual-signal/down-arrow' then
+                    new_positions.drop = inserter_utils.get_arm_positions(player.opened).pickup
+                end
+
+                inserter_utils.set_arm_positions(player.opened, new_positions)
+            end
+
+            for _, p in pairs(game.players) do
+                if (player.opened and p.opened == player.opened) or (not player.opened and (p.opened and p.opened.object_name == 'LuaEntity' and (p.opened.type == 'inserter' or (p.opened.type == 'entity-ghost' and p.opened.ghost_type == 'inserter')))) then
+                    gui.update(p, p.opened)
+                end
+            end
+
         elseif e.element.parent == gui_instance.table_offset then
-            gui.on_button_offset(player, e)
+            inserter_utils.set_arm_positions(player.opened, {drop_offset = gui.get_button_pos(e.element)})
+            gui.update(player, player.opened)
         end
     end)
 
@@ -324,27 +316,25 @@ if settings.startup['PHI-CT'].value then
     end)
 
     script.on_event(defines.events.on_entity_settings_pasted, function(e)
-        if not (e.destination.type == 'inserter' and (e.destination.type == 'entity-ghost' and e.destination.ghost_type == 'inserter')) then
-            return
-        end
+        if e.destination.type == 'inserter' or (e.destination.type == 'entity-ghost' and e.destination.ghost_type == 'inserter') then
+            e.destination.direction = e.source.direction
+            local arm_positions = inserter_utils.get_arm_positions(e.destination)
+            local max_range = inserter_utils.get_max_range(e.destination)
 
-        e.destination.direction = e.source.direction
-        local arm_positions = inserter_utils.get_arm_positions(e.destination)
-        local max_range = inserter_utils.get_max_range(e.destination)
-
-        for _, v in pairs({'drop', 'pickup'}) do
-            if math.max(math.abs(arm_positions[v].x), math.abs(arm_positions[v].y)) > max_range then
-                local vec = math2d.position.ensure_xy(arm_positions[v])
-                arm_positions[v] = math2d.position.multiply_scalar(math2d.direction.vectors[(math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8) + 1], max_range)
+            for _, v in pairs({'drop', 'pickup'}) do
+                if math.max(math.abs(arm_positions[v].x), math.abs(arm_positions[v].y)) > max_range then
+                    local vec = math2d.position.ensure_xy(arm_positions[v])
+                    arm_positions[v] = math2d.position.multiply_scalar(math2d.direction.vectors[(math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8) + 1], max_range)
+                end
             end
-        end
 
-        arm_positions.pickup = (math2d.position.equal(arm_positions.pickup, arm_positions.drop) and {x = -arm_positions.drop.x , y = -arm_positions.drop.y}) or arm_positions.pickup
-        inserter_utils.set_arm_positions(e.destination, arm_positions)
+            arm_positions.pickup = (math2d.position.equal(arm_positions.pickup, arm_positions.drop) and {x = -arm_positions.drop.x , y = -arm_positions.drop.y}) or arm_positions.pickup
+            inserter_utils.set_arm_positions(e.destination, arm_positions)
 
-        for _, player in pairs(game.players) do
-            if (e.destination and player.opened == e.destination) or (not e.destination and (player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')))) then
-                gui.update(player, player.opened)
+            for _, player in pairs(game.players) do
+                if player.opened == e.destination then
+                    gui.update(player, player.opened)
+                end
             end
         end
     end)
