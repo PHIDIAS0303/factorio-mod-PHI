@@ -64,7 +64,6 @@ if settings.startup['PHI-CT'].value then
         local base_tile = {x = x_frac < 0 and (x_int - 1) or x_int, y = y_frac < 0 and (y_int - 1) or y_int}
         local pos2 = math2d.position.ensure_xy(inserter.drop_position)
         local x_int2, x_frac2, y_int2, y_frac2 = math.modf(pos2.x), math.modf(pos2.y)
-        local drop_offset = {x = x_frac2 < 0 and (x_frac2 + 1) or x_frac2, y = y_frac2 < 0 and (y_frac2 + 1) or y_frac2}
         local pos3 = math2d.position.ensure_xy(inserter.pickup_position)
         local x_int3, x_frac3, y_int3, y_frac3 = math.modf(pos3.x), math.modf(pos3.y)
 
@@ -72,7 +71,7 @@ if settings.startup['PHI-CT'].value then
             base = base_tile,
             base_offset = {x = x_frac < 0 and (x_frac + 1) or x_frac, y = y_frac < 0 and (y_frac + 1) or y_frac},
             drop = math2d.position.subtract({x = x_frac2 < 0 and (x_int2 - 1) or x_int2, y = y_frac2 < 0 and (y_int2 - 1) or y_int2}, base_tile),
-            drop_offset = {x = ((drop_offset.x > 0.5 and 1) or (drop_offset.x < 0.5 and -1)) or 0, y = ((drop_offset.y > 0.5 and 1) or (drop_offset.y < 0.5 and -1)) or 0},
+            drop_offset = {x = (((x_frac2 < 0 and (x_frac2 + 1) or x_frac2) > 0.5 and 1) or ((x_frac2 < 0 and (x_frac2 + 1) or x_frac2) < 0.5 and -1)) or 0, y = (((y_frac2 < 0 and (y_frac2 + 1) or y_frac2) > 0.5 and 1) or ((y_frac2 < 0 and (y_frac2 + 1) or y_frac2) < 0.5 and -1)) or 0},
             pickup = math2d.position.subtract({x = x_frac3 < 0 and (x_int3 - 1) or x_int3, y = y_frac3 < 0 and (y_int3 - 1) or y_int3}, base_tile)
         }
     end
