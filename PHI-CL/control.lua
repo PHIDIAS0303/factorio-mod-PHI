@@ -108,9 +108,8 @@ if settings.startup['PHI-CT'].value then
     end
 
     function inserter_utils.get_max_range(inserter)
-        local p = inserter.ghost_prototype or inserter.prototype
-        local pickup_pos = math2d.position.ensure_xy(math2d.position.add(p.inserter_pickup_position, {0.5, 0.5}))
-        local drop_pos = math2d.position.ensure_xy(math2d.position.add(p.inserter_drop_position, {0.5, 0.5}))
+        local pickup_pos = math2d.position.ensure_xy(math2d.position.add(inserter.prototype.inserter_pickup_position, {0.5, 0.5}))
+        local drop_pos = math2d.position.ensure_xy(math2d.position.add(inserter.prototype.inserter_drop_position, {0.5, 0.5}))
         return math.max(math.abs(math.floor(pickup_pos.x)), math.abs(math.floor(pickup_pos.y)), math.abs(math.floor(drop_pos.x)), math.abs(math.floor(drop_pos.y)))
     end
 
