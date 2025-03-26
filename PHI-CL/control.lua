@@ -132,17 +132,11 @@ if settings.startup['PHI-CT'].value then
         local table_position = flow_content.add({type = 'table', name = 'table_position', column_count = 1 + table_range * 2})
         table_position.style.horizontal_spacing = 1
         table_position.style.vertical_spacing = 1
-        local sprite
 
         for y = -table_range, table_range, 1 do
             for x = -table_range, table_range, 1 do
-                if (x == 0 and y == 0) then
-                    sprite = table_position.add({type = 'sprite', name = 'sprite_inserter', sprite = 'item/bulk-inserter'})
-                    sprite.style.stretch_image_to_widget_size = true
-                else
-                    sprite = table_position.add({type = 'sprite-button', name = 'button_position_' .. tostring(x + table_range + 1) .. '_' .. tostring(y + table_range + 1), style = 'slot_sized_button'})
-                end
-
+                local sprite = ((x == 0 and y == 0) and table_position.add({type = 'sprite', name = 'sprite_inserter', sprite = 'item/bulk-inserter'})) or table_position.add({type = 'sprite-button', name = 'button_position_' .. tostring(x + table_range + 1) .. '_' .. tostring(y + table_range + 1), style = 'slot_sized_button'})
+                sprite.style.stretch_image_to_widget_size = ((x == 0 and y == 0) and true) or false
                 sprite.style.size = {32, 32}
             end
         end
@@ -155,7 +149,7 @@ if settings.startup['PHI-CT'].value then
 
         for y = 1, 3, 1 do
             for x = 1, 3, 1 do
-                sprite = table_position.add({type = 'sprite-button', name = 'button_offset_' .. tostring(x + table_range + 1) .. '_' .. tostring(y + table_range + 1), style = 'slot_sized_button'})
+                local sprite = table_position.add({type = 'sprite-button', name = 'button_offset_' .. tostring(x + table_range + 1) .. '_' .. tostring(y + table_range + 1), style = 'slot_sized_button'})
                 sprite.style.size = {32, 32}
             end
         end
