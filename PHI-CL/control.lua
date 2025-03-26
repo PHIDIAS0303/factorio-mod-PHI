@@ -68,8 +68,7 @@ if settings.startup['PHI-CT'].value then
         local y_int2, y_frac2 = math.modf(pos2.y)
         local drop_offset = {x = x_frac2 < 0 and (x_frac2 + 1) or x_frac2, y = y_frac2 < 0 and (y_frac2 + 1) or y_frac2}
         local pos3 = math2d.position.ensure_xy(inserter.pickup_position)
-        local x_int3, x_frac3 = math.modf(pos3.x)
-        local y_int3, y_frac3 = math.modf(pos3.y)
+        local x_int3, x_frac3, y_int3, y_frac3 = math.modf(pos3.x), math.modf(pos3.y)
 
         return {
             base = base_tile,
