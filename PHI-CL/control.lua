@@ -185,13 +185,6 @@ if settings.startup['PHI-CT'].value then
         end
     end
 
-    function gui.get_button_pos(button)
-        local idx = button.get_index_in_parent() - 1
-        local len = button.parent.column_count
-        local center = (len - 1) * -0.5
-        return math2d.position.add({idx % len, math.floor(idx / len)}, {center, center})
-    end
-
     script.on_init(function(_)
         trash_check()
 
@@ -225,7 +218,7 @@ if settings.startup['PHI-CT'].value then
         local gui_instance = player.gui.relative.inserter_config.frame_content.flow_content
 
         if e.element.parent == gui_instance.table_position and e.element ~= gui_instance.table_position.sprite_inserter then
-            local new_pos = gui.get_button_pos(e.element)
+            local new_pos = math2d.position.add({(e.element.get_index_in_parent() - 1) % e.element.parent.column_count, math.floor((e.element.get_index_in_parent() - 1) / e.element.parent.column_count)}, {(e.element.parent.column_count - 1) * -0.5, (e.element.parent.column_count - 1) * -0.5})
 
             if (e.button == defines.mouse_button_type.left and (not e.control or e.shift)) and e.element.sprite == 'virtual-signal/up-arrow' then
                 local new_positions = {drop = new_pos, pickup = (e.element.sprite == 'virtual-signal/up-arrow' and inserter_utils.get_arm_positions(player.opened).drop) or nil}
@@ -248,7 +241,7 @@ if settings.startup['PHI-CT'].value then
             end
 
         elseif e.element.parent == gui_instance.table_offset then
-            inserter_utils.set_arm_positions(player.opened, {drop_offset = gui.get_button_pos(e.element)})
+            inserter_utils.set_arm_positions(player.opened, {drop_offset = math2d.position.add({(e.element.get_index_in_parent() - 1) % e.element.parent.column_count, math.floor((e.element.get_index_in_parent() - 1) / e.element.parent.column_count)}, {(e.element.parent.column_count - 1) * -0.5, (e.element.parent.column_count - 1) * -0.5})})
             gui.update(player, player.opened)
         end
     end)
