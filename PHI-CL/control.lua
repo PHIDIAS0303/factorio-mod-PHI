@@ -59,12 +59,11 @@ if settings.startup['PHI-CT'].value then
     math2d.direction = {vectors = {{x = 0, y = -1}, {x = 1, y = -1}, {x = 1, y = 0}, {x = 1, y = 1}, {x = 0, y = 1}, {x = -1, y = 1}, {x = -1, y = 0}, {x = -1, y = -1}}}
 
     function inserter_utils.get_arm_positions(inserter)
-        local pos = math2d.position.ensure_xy(inserter.position)
-        local x_int, x_frac, y_int, y_frac = math.modf(pos.x), math.modf(pos.y)
+        local x_int, x_frac, y_int, y_frac = math.modf((inserter.position.x and inserter.position.x) or inserter.position[1]), math.modf((inserter.position.y and inserter.position.y) or inserter.position[2])
         local base_tile = {x = x_frac < 0 and (x_int - 1) or x_int, y = y_frac < 0 and (y_int - 1) or y_int}
-        local pos2 = math2d.position.ensure_xy(inserter.drop_position)
+        local pos2 = (inserter.drop_position.x and {x = inserter.drop_position.x, y = inserter.drop_position.y}) or {x = inserter.drop_position[1], y = inserter.drop_position[2]}
         local x_int2, x_frac2, y_int2, y_frac2 = math.modf(pos2.x), math.modf(pos2.y)
-        local pos3 = math2d.position.ensure_xy(inserter.pickup_position)
+        local pos3 =(inserter.pickup_position.x and {x = inserter.pickup_position.x, y = inserter.pickup_position.y}) or {x = inserter.pickup_position[1], y = inserter.pickup_position[2]}
         local x_int3, x_frac3, y_int3, y_frac3 = math.modf(pos3.x), math.modf(pos3.y)
 
         return {
@@ -80,10 +79,8 @@ if settings.startup['PHI-CT'].value then
         inserter.pickup_position = (positions.pickup and math2d.position.add(inserter.position, positions.pickup)) or nil
 
         if positions.drop or positions.drop_offset then
-            local pos = math2d.position.ensure_xy(inserter.position)
-            local x_int, x_frac, y_int, y_frac = math.modf(pos.x), math.modf(pos.y)
-            local pos2 = math2d.position.ensure_xy(inserter.drop_position)
-            local x_int2, x_frac2, y_int2, y_frac2 = math.modf(pos2.x), math.modf(pos2.y)
+            local x_int, x_frac, y_int, y_frac = math.modf((inserter.position.x and inserter.position.x) or inserter.position[1]), math.modf((inserter.position.y and inserter.position.y) or inserter.position[2])
+            local x_int2, x_frac2, y_int2, y_frac2 = math.modf((inserter.drop_position.x and inserter.drop_position.x) or inserter.drop_position[1]), math.modf((inserter.drop_position.y and inserter.drop_position.y) or inserter.drop_position[2])
             local old_drop_tile, old_drop_offset = {x = x_frac2 < 0 and (x_int2 - 1) or x_int2, y = y_frac2 < 0 and (y_int2 - 1) or y_int2}, {x = x_frac2 < 0 and (x_frac2 + 1) or x_frac2, y = y_frac2 < 0 and (y_frac2 + 1) or y_frac2}
             inserter.drop_position = math2d.position.add((positions.drop and math2d.position.add({x = x_frac < 0 and (x_int - 1) or x_int, y = y_frac < 0 and (y_int - 1) or y_int}, positions.drop)) or old_drop_tile, (positions.drop_offset and math2d.position.add(math2d.position.multiply_scalar(positions.drop_offset, 0.2), {0.5, 0.5})) or old_drop_offset)
         end
