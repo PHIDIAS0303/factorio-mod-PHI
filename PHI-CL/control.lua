@@ -38,6 +38,11 @@ if settings.startup['PHI-CT'].value then
         end
     end
 
+    script.on_event(defines.events.on_built_entity, trash_creation, {{filter='name', name='trash-chest', mode='or'}, {filter='name', name='trash-pipe', mode='or'}})
+    script.on_event(defines.events.on_robot_built_entity, trash_creation, {{filter='name', name='trash-chest', mode='or'}, {filter='name', name='trash-pipe', mode='or'}})
+    script.on_event(defines.events.script_raised_built, trash_creation)
+    script.on_event(defines.events.script_raised_revive, trash_creation)
+
     local function hidden_recipe_enable(e, enable)
         local force = game.players[e.player_index].force
 
@@ -52,6 +57,14 @@ if settings.startup['PHI-CT'].value then
         force.recipes['infinity-cargo-wagon'].enabled = enable
         force.recipes['infinity-pipe'].enabled = enable
     end
+
+    script.on_event(defines.events.on_player_cheat_mode_enabled, function(e)
+        hidden_recipe_enable(e, true)
+    end)
+
+    script.on_event(defines.events.on_player_cheat_mode_disabled, function(e)
+        hidden_recipe_enable(e, false)
+    end)
 
     function math2d.position.equal(p1, p2)
         p1, p2 = math2d.position.ensure_xy(p1), math2d.position.ensure_xy(p2)
@@ -244,19 +257,6 @@ if settings.startup['PHI-CT'].value then
         inserter_utils.set_arm_positions(player.opened, {drop_offset = gui.get_button_pos(event.element)})
         gui.update(player, player.opened)
     end
-
-    script.on_event(defines.events.on_built_entity, trash_creation, {{filter='name', name='trash-chest', mode='or'}, {filter='name', name='trash-pipe', mode='or'}})
-    script.on_event(defines.events.on_robot_built_entity, trash_creation, {{filter='name', name='trash-chest', mode='or'}, {filter='name', name='trash-pipe', mode='or'}})
-    script.on_event(defines.events.script_raised_built, trash_creation)
-    script.on_event(defines.events.script_raised_revive, trash_creation)
-
-    script.on_event(defines.events.on_player_cheat_mode_enabled, function(e)
-        hidden_recipe_enable(e, true)
-    end)
-
-    script.on_event(defines.events.on_player_cheat_mode_disabled, function(e)
-        hidden_recipe_enable(e, false)
-    end)
 
     script.on_init(function(_)
         trash_check()
