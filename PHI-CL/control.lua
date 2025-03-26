@@ -102,12 +102,6 @@ if settings.startup['PHI-CT'].value then
         end
     end
 
-    function inserter_utils.get_max_range(inserter)
-        local pickup_pos = math2d.position.ensure_xy(math2d.position.add(inserter.inserter_pickup_position, {0.5, 0.5}))
-        local drop_pos = math2d.position.ensure_xy(math2d.position.add(inserter.inserter_drop_position, {0.5, 0.5}))
-        return math.max(math.abs(math.floor(pickup_pos.x)), math.abs(math.floor(pickup_pos.y)), math.abs(math.floor(drop_pos.x)), math.abs(math.floor(drop_pos.y)))
-    end
-
     function gui.create(player)
         if player.gui.relative.inserter_config then
             player.gui.relative.inserter_config.destroy()
@@ -119,7 +113,9 @@ if settings.startup['PHI-CT'].value then
         local table_range = 1
 
         for _, inserter in pairs(prototypes.get_entity_filtered({{filter = 'type', type = 'inserter'}})) do
-            table_range = math.max(table_range, inserter_utils.get_max_range(inserter))
+            local pickup_pos = math2d.position.ensure_xy(math2d.position.add(inserter.inserter_pickup_position, {0.5, 0.5}))
+            local drop_pos = math2d.position.ensure_xy(math2d.position.add(inserter.inserter_drop_position, {0.5, 0.5}))
+            table_range =  math.max(table_range, math.abs(math.floor(pickup_pos.x)), math.abs(math.floor(pickup_pos.y)), math.abs(math.floor(drop_pos.x)), math.abs(math.floor(drop_pos.y)))
         end
 
         local table_position = flow_content.add({type = 'table', name = 'table_position', column_count = 1 + table_range * 2})
@@ -155,7 +151,9 @@ if settings.startup['PHI-CT'].value then
     function gui.update(player, inserter)
         local gui_instance = player.gui.relative.inserter_config.frame_content.flow_content
         local table_range = (gui_instance.table_position.column_count - 1) / 2
-        local inserter_range = inserter_utils.get_max_range(inserter.prototype or inserter.ghost_prototype)
+        local pickup_pos = math2d.position.ensure_xy(math2d.position.add((inserter.prototype or inserter.ghost_prototype).inserter_pickup_position, {0.5, 0.5}))
+        local drop_pos = math2d.position.ensure_xy(math2d.position.add((inserter.prototype or inserter.ghost_prototype).inserter_drop_position, {0.5, 0.5}))
+        local inserter_range = math.max(math.abs(math.floor(pickup_pos.x)), math.abs(math.floor(pickup_pos.y)), math.abs(math.floor(drop_pos.x)), math.abs(math.floor(drop_pos.y)))
         local arm_positions = inserter_utils.get_arm_positions(inserter)
         local idx = 0
 
@@ -260,7 +258,9 @@ if settings.startup['PHI-CT'].value then
         if e.destination.type == 'inserter' or (e.destination.type == 'entity-ghost' and e.destination.ghost_type == 'inserter') then
             e.destination.direction = e.source.direction
             local arm_positions = inserter_utils.get_arm_positions(e.destination)
-            local max_range = inserter_utils.get_max_range(e.destination.prototype or e.destination.ghost_prototype)
+            local pickup_pos = math2d.position.ensure_xy(math2d.position.add((e.destination.prototype or e.destination.ghost_prototype).inserter_pickup_position, {0.5, 0.5}))
+            local drop_pos = math2d.position.ensure_xy(math2d.position.add((e.destination.prototype or e.destination.ghost_prototype).inserter_drop_position, {0.5, 0.5}))
+            local max_range = math.max(math.abs(math.floor(pickup_pos.x)), math.abs(math.floor(pickup_pos.y)), math.abs(math.floor(drop_pos.x)), math.abs(math.floor(drop_pos.y)))
 
             for _, v in pairs({'drop', 'pickup'}) do
                 if math.max(math.abs(arm_positions[v].x), math.abs(arm_positions[v].y)) > max_range then
