@@ -47,7 +47,7 @@ if settings.startup['PHI-CT'].value then
         local force = game.players[e.player_index].force
 
         for _, v in pairs(prototypes.fluid) do
-            force.recipes['pump-' .. v.name].enabled = (enable and prototypes.fluid[v.name].hidden)
+            force.recipes['pump-' .. v.name].enabled = (enable and (not prototypes.fluid[v.name].hidden))
         end
 
         force.recipes['super-radar'].enabled = enable
