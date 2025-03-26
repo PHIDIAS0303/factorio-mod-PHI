@@ -146,8 +146,7 @@ if settings.startup['PHI-CT'].value then
                 idx = idx + 1
 
                 if gui_instance.table_position.children[idx].type == 'sprite-button' then
-                    p1, p2 = math2d.position.ensure_xy(arm_positions.drop), math2d.position.ensure_xy({x, y})
-                    p3, p4 = math2d.position.ensure_xy(arm_positions.pickup), math2d.position.ensure_xy({x, y})
+                    p1, p2, p3, p4 = (arm_positions.drop.x and {x = arm_positions.drop.x, y = arm_positions.drop.y}) or {x = arm_positions.drop[1], y = arm_positions.drop[2]}, {x = x, y = y}, (arm_positions.pickup.x and {x = arm_positions.pickup.x, y = arm_positions.pickup.y}) or {x = arm_positions.pickup[1], y = arm_positions.pickup[2]}, {x = x, y = y}
                     gui_instance.table_position.children[idx].sprite = (((p1.x == p2.x and p1.y == p2.y) and 'virtual-signal/down-arrow') or ((p3.x == p4.x and p3.y == p4.y) and 'virtual-signal/up-arrow')) or ((x ~= 0 or y ~= 0) and nil)
                     gui_instance.table_position.children[idx].enabled = math.abs(x) < inserter_range or math.abs(y) < inserter_range
                 end
@@ -161,7 +160,7 @@ if settings.startup['PHI-CT'].value then
         for y = -1, 1, 1 do
             for x = -1, 1, 1 do
                 idx = idx + 1
-                p1, p2 = math2d.position.ensure_xy(arm_positions.drop_offset), math2d.position.ensure_xy({x, y})
+                p1, p2 = (arm_positions.drop_offset.x and {x = arm_positions.drop_offset.x, y = arm_positions.drop_offset.y}) or {x = arm_positions.drop_offset[1], y = arm_positions.drop_offset[2]}, {x = x, y = y}
                 gui_instance.table_offset.children[idx].sprite = ((p1.x == p2.x and p1.y == p2.y) and 'virtual-signal/down-arrow') or nil
             end
         end
@@ -205,9 +204,9 @@ if settings.startup['PHI-CT'].value then
             if (e.button == defines.mouse_button_type.left and (not e.control or e.shift)) and e.element.sprite == 'virtual-signal/up-arrow' then
                 local new_positions = {drop = new_pos, pickup = (e.element.sprite == 'virtual-signal/up-arrow' and inserter_utils.get_arm_positions(player.opened).drop) or nil}
                 local old_positions = inserter_utils.get_arm_positions(player.opened)
-                local vec = math2d.position.ensure_xy(new_positions.drop)
+                local vec = (new_positions.drop.x and {x = new_positions.drop.x, y = new_positions.drop.y}) or {x = new_positions.drop[1], y = new_positions.drop[2]}
                 local new_drop_dir = math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8
-                vec = math2d.position.ensure_xy(old_positions.drop)
+                vec = (old_positions.drop.x and {x = old_positions.drop.x, y = old_positions.drop.y}) or {x = old_positions.drop[1], y = old_positions.drop[2]}
                 local delta = (new_drop_dir - math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8) % 8
                 new_positions.drop_offset = (not new_positions.drop and old_positions.drop_offset) or (((delta % 2 == 0) and {x = ((delta == 0 or delta == 6) and old_positions.drop_offset.y) or -old_positions.drop_offset.y, y = ((delta == 0 or delta == 2) and old_positions.drop_offset.x) or -old_positions.drop_offset.x}) or math2d.direction.vectors[(new_drop_dir + (new_drop_dir % 2) * 4 % 8) + 1])
                 inserter_utils.set_arm_positions(player.opened, new_positions)
@@ -248,12 +247,12 @@ if settings.startup['PHI-CT'].value then
 
             for _, v in pairs({'drop', 'pickup'}) do
                 if math.max(math.abs(arm_positions[v].x), math.abs(arm_positions[v].y)) > max_range then
-                    local vec = math2d.position.ensure_xy(arm_positions[v])
+                    local vec = (arm_positions[v].x and {x = arm_positions[v].x, y = arm_positions[v].y}) or {x = arm_positions[v][1], y = arm_positions[v][2]}
                     arm_positions[v] = math2d.position.multiply_scalar(math2d.direction.vectors[(math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8) + 1], max_range)
                 end
             end
 
-            p1, p2 = math2d.position.ensure_xy(arm_positions.pickup), math2d.position.ensure_xy(arm_positions.drop)
+            p1, p2 = (arm_positions.pickup.x and {x = arm_positions.pickup.x, y = arm_positions.pickup.y}) or {x = arm_positions.pickup[1], y = arm_positions.pickup[2]}, (arm_positions.drop.x and {x = arm_positions.drop.x, y = arm_positions.drop.y}) or {x = arm_positions.drop[1], y = arm_positions.drop[2]}
             arm_positions.pickup = ((p1.x == p2.x and p1.y == p2.y) and {x = -arm_positions.drop.x , y = -arm_positions.drop.y}) or arm_positions.pickup
             inserter_utils.set_arm_positions(e.destination, arm_positions)
 
