@@ -56,6 +56,7 @@ if settings.startup['PHI-CT'].value then
 
     local gui = {}
     local inserter_utils = {}
+    math2d.direction = {vectors = {{x = 0, y = -1}, {x = 1, y = -1}, {x = 1, y = 0}, {x = 1, y = 1}, {x = 0, y = 1}, {x = -1, y = 1}, {x = -1, y = 0}, {x = -1, y = -1}}}
 
     function math2d.position.equal(p1, p2)
         p1, p2 = math2d.position.ensure_xy(p1), math2d.position.ensure_xy(p2)
@@ -78,13 +79,6 @@ if settings.startup['PHI-CT'].value then
         local y_int, y_frac = split_coord(pos.y)
         return {x = x_int, y = y_int}, {x = x_frac, y = y_frac}
     end
-
-    function math2d.position.tilepos(pos)
-        pos = math2d.position.ensure_xy(pos)
-        return {x = math.floor(pos.x), y = math.floor(pos.y)}
-    end
-
-    math2d.direction = {vectors = {{x = 0, y = -1}, {x = 1, y = -1}, {x = 1, y = 0}, {x = 1, y = 1}, {x = 0, y = 1}, {x = -1, y = 1}, {x = -1, y = 0}, {x = -1, y = -1}}}
 
     function inserter_utils.get_arm_positions(inserter)
         local base_tile, base_offset = math2d.position.split(inserter.position)
@@ -115,9 +109,9 @@ if settings.startup['PHI-CT'].value then
 
     function inserter_utils.get_max_range(inserter)
         local prototype = (inserter.object_name == 'LuaEntity' and ((inserter.type == 'entity-ghost' and inserter.ghost_prototype) or inserter.prototype)) or ((inserter.object_name == 'LuaEntityPrototype' and inserter) or nil)
-        local pickup_pos = math2d.position.tilepos(math2d.position.add(prototype.inserter_pickup_position, {0.5, 0.5}))
-        local drop_pos = math2d.position.tilepos(math2d.position.add(prototype.inserter_drop_position, {0.5, 0.5}))
-        return math.max(math.abs(pickup_pos.x), math.abs(pickup_pos.y), math.abs(drop_pos.x), math.abs(drop_pos.y))
+        local pickup_pos = math2d.position.ensure_xy(math2d.position.add(prototype.inserter_pickup_position, {0.5, 0.5}))
+        local drop_pos = math2d.position.ensure_xy(math2d.position.add(prototype.inserter_drop_position, {0.5, 0.5}))
+        return math.max(math.abs(math.floor(pickup_pos.x)), math.abs(math.floor(pickup_pos.y)), math.abs(math.floor(drop_pos.x)), math.abs(math.floor(drop_pos.y)))
     end
 
     function gui.create(player)
