@@ -287,7 +287,13 @@ if settings.startup['PHI-CT'].value then
     end)
 
     script.on_event(defines.events.on_player_created, function(e)
-        gui.create(game.players[e.player_index])
+        local player = game.players[e.player_index]
+
+        if player.gui.relative.inserter_config then
+            player.gui.relative.inserter_config.destroy()
+        end
+
+        gui.create(player)
     end)
 
     script.on_event(defines.events.on_gui_opened, function(e)
