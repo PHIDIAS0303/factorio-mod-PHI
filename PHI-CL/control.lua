@@ -136,7 +136,11 @@ if settings.startup['PHI-CT'].value then
         for y = -table_range, table_range, 1 do
             for x = -table_range, table_range, 1 do
                 local sprite = ((x == 0 and y == 0) and table_position.add({type = 'sprite', name = 'sprite_inserter', sprite = 'item/bulk-inserter'})) or table_position.add({type = 'sprite-button', name = 'button_position_' .. tostring(x + table_range + 1) .. '_' .. tostring(y + table_range + 1), style = 'slot_sized_button'})
-                sprite.style.stretch_image_to_widget_size = ((x == 0 and y == 0) and true) or nil
+
+                if (x == 0 and y == 0) then
+                    sprite.style.stretch_image_to_widget_size = true
+                end
+
                 sprite.style.size = {32, 32}
             end
         end
