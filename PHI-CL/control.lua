@@ -275,21 +275,16 @@ if settings.startup['PHI-CT'].value then
                 inserter_utils.set_arm_positions(player.opened, new_positions)
 
             elseif e.button == defines.mouse_button_type.right or (e.button == defines.mouse_button_type.left and (e.control or e.shift)) then
-                local new_positions = {pickup = new_pos}
-
                 if e.element.sprite == 'virtual-signal/up-arrow' then
                     return
                 end
 
-                if e.element.sprite == 'virtual-signal/down-arrow' then
-                    new_positions.drop = inserter_utils.get_arm_positions(player.opened).pickup
-                end
-
+                local new_positions = {pickup = new_pos, drop = (e.element.sprite == 'virtual-signal/down-arrow' and inserter_utils.get_arm_positions(player.opened).pickup) or nil}
                 inserter_utils.set_arm_positions(player.opened, new_positions)
             end
 
             for _, p in pairs(game.players) do
-                if (player.opened and p.opened == player.opened) or (not player.opened and (p.opened and p.opened.object_name == 'LuaEntity' and (p.opened.type == 'inserter' or (p.opened.type == 'entity-ghost' and p.opened.ghost_type == 'inserter')))) then
+                if p.opened and ((p.opened == player.opened) or (p.opened.object_name == 'LuaEntity' and (p.opened.type == 'inserter' or (p.opened.type == 'entity-ghost' and p.opened.ghost_type == 'inserter')))) then
                     gui.update(p, p.opened)
                 end
             end
