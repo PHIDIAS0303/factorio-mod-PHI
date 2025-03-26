@@ -87,10 +87,6 @@ if settings.startup['PHI-CT'].value then
         return math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8
     end
 
-    function inserter_utils.get_prototype(obj)
-        return (obj.object_name == 'LuaEntity' and ((obj.type == 'entity-ghost' and obj.ghost_prototype) or obj.prototype)) or ((obj.object_name == 'LuaEntityPrototype' and obj) or nil)
-    end
-
     function inserter_utils.is_inserter(entity)
         return (entity and entity.object_name == 'LuaEntity') and (entity.type == 'inserter' or (entity.type == 'entity-ghost' and entity.ghost_type == 'inserter'))
     end
@@ -123,7 +119,7 @@ if settings.startup['PHI-CT'].value then
     end
 
     function inserter_utils.get_max_range(inserter)
-        local prototype = inserter_utils.get_prototype(inserter)
+        local prototype = (inserter.object_name == 'LuaEntity' and ((inserter.type == 'entity-ghost' and inserter.ghost_prototype) or inserter.prototype)) or ((inserter.object_name == 'LuaEntityPrototype' and inserter) or nil)
         local pickup_pos = math2d.position.tilepos(math2d.position.add(prototype.inserter_pickup_position, {0.5, 0.5}))
         local drop_pos = math2d.position.tilepos(math2d.position.add(prototype.inserter_drop_position, {0.5, 0.5}))
         return math.max(math.abs(pickup_pos.x), math.abs(pickup_pos.y), math.abs(drop_pos.x), math.abs(drop_pos.y))
@@ -185,12 +181,12 @@ if settings.startup['PHI-CT'].value then
 
                 if gui_instance.table_position.children[idx].type == 'sprite-button' then
                     gui_instance.table_position.children[idx].sprite = ((math2d.position.equal(arm_positions.drop, {x, y}) and 'virtual-signal/down-arrow') or (math2d.position.equal(arm_positions.pickup, {x, y}) and 'virtual-signal/up-arrow')) or ((x ~= 0 or y ~= 0) and nil)
-                    gui_instance.table_position.children[idx].enabled = math.abs(x) <= inserter_range or math.abs(y) <= inserter_range
+                    gui_instance.table_position.children[idx].enabled = math.abs(x) < inserter_range or math.abs(y) < inserter_range
                 end
             end
         end
 
-        local prototype = inserter_utils.get_prototype(inserter)
+        local prototype = (inserter.object_name == 'LuaEntity' and ((inserter.type == 'entity-ghost' and inserter.ghost_prototype) or inserter.prototype)) or ((inserter.object_name == 'LuaEntityPrototype' and inserter) or nil)
         gui_instance.table_position.sprite_inserter.sprite = ((prototype and prototype.items_to_place_this) and 'item/' .. prototype.items_to_place_this[1].name) or 'item/inserter'
         idx = 0
 
