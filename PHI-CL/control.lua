@@ -82,11 +82,6 @@ if settings.startup['PHI-CT'].value then
 
     math2d.direction = {vectors = {{x = 0, y = -1}, {x = 1, y = -1}, {x = 1, y = 0}, {x = 1, y = 1}, {x = 0, y = 1}, {x = -1, y = 1}, {x = -1, y = 0}, {x = -1, y = -1}}}
 
-    function math2d.direction.from_vector(vec)
-        vec = math2d.position.ensure_xy(vec)
-        return math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8
-    end
-
     function inserter_utils.is_inserter(entity)
         return (entity and entity.object_name == 'LuaEntity') and (entity.type == 'inserter' or (entity.type == 'entity-ghost' and entity.ghost_type == 'inserter'))
     end
@@ -221,8 +216,10 @@ if settings.startup['PHI-CT'].value then
             end
 
             local old_positions = inserter_utils.get_arm_positions(inserter)
-            local new_drop_dir = math2d.direction.from_vector(new_positions.drop)
-            local delta = (new_drop_dir - math2d.direction.from_vector(old_positions.drop)) % 8
+            local vec = math2d.position.ensure_xy(new_positions.drop)
+            local new_drop_dir = math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8
+            vec = math2d.position.ensure_xy(old_positions.drop)
+            local delta = (new_drop_dir - math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8) % 8
             new_positions.drop_offset = (not new_positions.drop and old_positions.drop_offset) or (((delta % 2 == 0) and {x = ((delta == 0 or delta == 6) and old_positions.drop_offset.y) or -old_positions.drop_offset.y, y = ((delta == 0 or delta == 2) and old_positions.drop_offset.x) or -old_positions.drop_offset.x}) or math2d.direction.vectors[(new_drop_dir + (new_drop_dir % 2) * 4 % 8) + 1])
             inserter_utils.set_arm_positions(inserter, new_positions)
 
@@ -333,11 +330,13 @@ if settings.startup['PHI-CT'].value then
             local max_range = inserter_utils.get_max_range(e.destination)
 
             if math.max(math.abs(arm_positions.drop.x), math.abs(arm_positions.drop.y)) > max_range then
-                arm_positions.drop = math2d.position.multiply_scalar(math2d.direction.vectors[(math2d.direction.from_vector(arm_positions.drop) % 8) + 1], max_range)
+                local vec = math2d.position.ensure_xy(arm_positions.drop)
+                arm_positions.drop = math2d.position.multiply_scalar(math2d.direction.vectors[(math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8) + 1], max_range)
             end
 
             if math.max(math.abs(arm_positions.pickup.x), math.abs(arm_positions.pickup.y)) > max_range then
-                arm_positions.pickup = math2d.position.multiply_scalar(math2d.direction.vectors[(math2d.direction.from_vector(arm_positions.pickup) % 8) + 1], max_range)
+                local vec = math2d.position.ensure_xy(arm_positions.drop)
+                arm_positions.pickup = math2d.position.multiply_scalar(math2d.direction.vectors[(math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8) + 1], max_range)
             end
 
             if math2d.position.equal(arm_positions.pickup, arm_positions.drop) then
