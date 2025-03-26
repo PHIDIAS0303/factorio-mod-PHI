@@ -130,10 +130,9 @@ if settings.startup['PHI-CT'].value then
     end
 
     function gui.create(player)
-        local frame_main = player.gui.relative.add({type = 'frame', name = 'inserter_config', caption = {'gui-inserter-config.configuration'}, anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}})
+        local frame_main = player.gui.relative.add({type = 'frame', name = 'inserter_config', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}})
         local frame_content = frame_main.add({type = 'frame', name = 'frame_content', style = 'entity_frame'})
         local flow_content = frame_content.add({type = 'flow', name = 'flow_content', direction = 'vertical'})
-        flow_content.add({type = 'label', name = 'label_position', caption = {'gui-inserter-config.position'}, style = 'heading_2_label'})
         local table_range = 1
         local inserter_prototyes = prototypes.get_entity_filtered({{filter = 'type', type = 'inserter'}})
 
@@ -161,7 +160,6 @@ if settings.startup['PHI-CT'].value then
 
         local line = flow_content.add({type = 'line', name = 'line', style = 'inside_shallow_frame_with_padding_line'})
         line.style.top_margin = 8
-        flow_content.add({type = 'label', name = 'label_offset', caption = {'gui-inserter-config.drop-offset'},  style = 'heading_2_label'})
         table_position = flow_content.add({type = 'table', name = 'table_offset', column_count = 3})
         table_position.style.horizontal_spacing = 1
         table_position.style.vertical_spacing = 1
@@ -193,7 +191,7 @@ if settings.startup['PHI-CT'].value then
         end
 
         local prototype = inserter_utils.get_prototype(inserter)
-        gui_instance.table_position.sprite_inserter.sprite = ((prototype and prototype.items_to_place_this) and 'item/' .. prototype.items_to_place_this[1].name) or 'item/bulk-inserter'
+        gui_instance.table_position.sprite_inserter.sprite = ((prototype and prototype.items_to_place_this) and 'item/' .. prototype.items_to_place_this[1].name) or 'item/inserter'
         idx = 0
 
         for y = -1, 1, 1 do
