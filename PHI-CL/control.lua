@@ -130,8 +130,7 @@ if settings.startup['PHI-CT'].value then
     end
 
     function gui.create(player)
-        local frame_main_anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}
-        local frame_main = player.gui.relative.add({type = 'frame', name = 'inserter_config', caption = {'gui-inserter-config.configuration'}, anchor = frame_main_anchor})
+        local frame_main = player.gui.relative.add({type = 'frame', name = 'inserter_config', caption = {'gui-inserter-config.configuration'}, anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}})
         local frame_content = frame_main.add({type = 'frame', name = 'frame_content', style = 'entity_frame'})
         local flow_content = frame_content.add({type = 'flow', name = 'flow_content', direction = 'vertical'})
         flow_content.add({type = 'label', name = 'label_position', caption = {'gui-inserter-config.position'}, style = 'heading_2_label'})
@@ -145,19 +144,18 @@ if settings.startup['PHI-CT'].value then
         local table_position = flow_content.add({type = 'table', name = 'table_position', column_count = 1 + table_range * 2})
         table_position.style.horizontal_spacing = 1
         table_position.style.vertical_spacing = 1
+        local sprite
 
         for y = -table_range, table_range, 1 do
             for x = -table_range, table_range, 1 do
-                local pos_suffix = '_' .. tostring(x + table_range + 1) .. '_' .. tostring(y + table_range + 1)
-
                 if (x == 0 and y == 0) then
-                    local sprite = table_position.add({type = 'sprite', name = 'sprite_inserter', sprite = 'item/bulk-inserter'})
+                    sprite = table_position.add({type = 'sprite', name = 'sprite_inserter', sprite = 'item/bulk-inserter'})
                     sprite.style.stretch_image_to_widget_size = true
-                    sprite.style.size = {32, 32}
                 else
-                    local button = table_position.add({type = 'sprite-button', name = 'button_position' .. pos_suffix, style = 'slot_sized_button'})
-                    button.style.size = {32, 32}
+                    sprite = table_position.add({type = 'sprite-button', name = 'button_position_' .. tostring(x + table_range + 1) .. '_' .. tostring(y + table_range + 1), style = 'slot_sized_button'})
                 end
+
+                sprite.style.size = {32, 32}
             end
         end
 
@@ -179,7 +177,7 @@ if settings.startup['PHI-CT'].value then
     function gui.update(player, inserter)
         local gui_instance = player.gui.relative.inserter_config.frame_content.flow_content
         local table_range = (gui_instance.table_position.column_count - 1) / 2
-        -- local inserter_range = inserter_utils.get_max_range(inserter)
+        local inserter_range = inserter_utils.get_max_range(inserter)
         local arm_positions = inserter_utils.get_arm_positions(inserter)
         local idx = 0
 
@@ -189,7 +187,7 @@ if settings.startup['PHI-CT'].value then
 
                 if gui_instance.table_position.children[idx].type == 'sprite-button' then
                     gui_instance.table_position.children[idx].sprite = ((math2d.position.equal(arm_positions.drop, {x, y}) and 'virtual-signal/down-arrow') or (math2d.position.equal(arm_positions.pickup, {x, y}) and 'virtual-signal/up-arrow')) or ((x ~= 0 or y ~= 0) and nil)
-                    -- gui_instance.table_position.children[idx].enabled = math.min(math.abs(x), math.abs(y)) == 0 and math.max(math.abs(x), math.abs(y)) <= inserter_range
+                    gui_instance.table_position.children[idx].enabled = math.abs(x) <= inserter_range or math.abs(y) <= inserter_range
                 end
             end
         end
