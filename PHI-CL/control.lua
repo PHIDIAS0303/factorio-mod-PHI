@@ -67,11 +67,8 @@ if settings.startup['PHI-CT'].value then
     end)
 
     function math2d.position.equal(p1, p2)
-        -- Add nil check and explicit conversion
-        p1 = math2d.position.ensure_xy(p1 or {x = 0, y = 0})
-        p2 = math2d.position.ensure_xy(p2 or {x = 0, y = 0})
-        -- Add floating point tolerance (1e-6) for coordinate comparison
-        return math.abs(p1.x - p2.x) < 1e-6 and math.abs(p1.y - p2.y) < 1e-6
+        p1, p2 = math2d.position.ensure_xy(p1), math2d.position.ensure_xy(p2)
+        return p1.x == p2.x and p1.y == p2.y
     end
 
     function math2d.position.split(pos)
