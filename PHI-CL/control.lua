@@ -60,12 +60,10 @@ if settings.startup['PHI-CT'].value then
 
     function inserter_utils.get_arm_positions(inserter)
         local pos = math2d.position.ensure_xy(inserter.position)
-        local x_int, x_frac = math.modf(pos.x)
-        local y_int, y_frac = math.modf(pos.y)
+        local x_int, x_frac, y_int, y_frac = math.modf(pos.x), math.modf(pos.y)
         local base_tile = {x = x_frac < 0 and (x_int - 1) or x_int, y = y_frac < 0 and (y_int - 1) or y_int}
         local pos2 = math2d.position.ensure_xy(inserter.drop_position)
-        local x_int2, x_frac2 = math.modf(pos2.x)
-        local y_int2, y_frac2 = math.modf(pos2.y)
+        local x_int2, x_frac2, y_int2, y_frac2 = math.modf(pos2.x), math.modf(pos2.y)
         local drop_offset = {x = x_frac2 < 0 and (x_frac2 + 1) or x_frac2, y = y_frac2 < 0 and (y_frac2 + 1) or y_frac2}
         local pos3 = math2d.position.ensure_xy(inserter.pickup_position)
         local x_int3, x_frac3, y_int3, y_frac3 = math.modf(pos3.x), math.modf(pos3.y)
@@ -84,17 +82,14 @@ if settings.startup['PHI-CT'].value then
 
         if positions.drop or positions.drop_offset then
             local pos = math2d.position.ensure_xy(inserter.position)
-            local x_int, x_frac = math.modf(pos.x)
-            local y_int, y_frac = math.modf(pos.y)
+            local x_int, x_frac, y_int, y_frac = math.modf(pos.x), math.modf(pos.y)
             local base_tile = {x = x_frac < 0 and (x_int - 1) or x_int, y = y_frac < 0 and (y_int - 1) or y_int}
-            pos = math2d.position.ensure_xy(inserter.drop_position)
-            x_int, x_frac = math.modf(pos.x)
-            y_int, y_frac = math.modf(pos.y)
-            local old_drop_tile, old_drop_offset = {x = x_frac < 0 and (x_int - 1) or x_int, y = y_frac < 0 and (y_int - 1) or y_int}, {x = x_frac < 0 and (x_frac + 1) or x_frac, y = y_frac < 0 and (y_frac + 1) or y_frac}
+            local pos2 = math2d.position.ensure_xy(inserter.drop_position)
+            local x_int2, x_frac2, y_int2, y_frac2 = math.modf(pos2.x), math.modf(pos2.y)
+            local old_drop_tile, old_drop_offset = {x = x_frac2 < 0 and (x_int2 - 1) or x_int2, y = y_frac2 < 0 and (y_int2 - 1) or y_int2}, {x = x_frac2 < 0 and (x_frac2 + 1) or x_frac2, y = y_frac2 < 0 and (y_frac2 + 1) or y_frac2}
             inserter.drop_position = math2d.position.add((positions.drop and math2d.position.add(base_tile, positions.drop)) or old_drop_tile, (positions.drop_offset and math2d.position.add(math2d.position.multiply_scalar(positions.drop_offset, 0.2), {0.5, 0.5})) or old_drop_offset)
         end
     end
-
 
     function gui.create(player)
         if player.gui.relative.inserter_config then
