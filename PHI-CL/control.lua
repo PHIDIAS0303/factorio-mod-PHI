@@ -261,16 +261,11 @@ if settings.startup['PHI-CT'].value then
             local new_pos = gui.get_button_pos(e.element)
 
             if e.button == defines.mouse_button_type.left and (not e.control or e.shift) then
-                local new_positions = {drop = new_pos}
-
                 if e.element.sprite == 'virtual-signal/down-arrow' then
                     return
                 end
 
-                if e.element.sprite == 'virtual-signal/up-arrow' then
-                    new_positions.pickup = inserter_utils.get_arm_positions(player.opened).drop
-                end
-
+                local new_positions = {drop = new_pos, pickup = (e.element.sprite == 'virtual-signal/up-arrow' and inserter_utils.get_arm_positions(player.opened).drop) or nil}
                 local old_positions = inserter_utils.get_arm_positions(player.opened)
                 local vec = math2d.position.ensure_xy(new_positions.drop)
                 local new_drop_dir = math.floor(math.atan2(vec.x, -vec.y) * (4 / math.pi) + 0.5) % 8
