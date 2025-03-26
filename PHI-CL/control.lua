@@ -2,9 +2,6 @@ local items = require 'config'
 local math2d = require('math2d')
 
 if settings.startup['PHI-CT'].value then
-    local gui = {}
-    local inserter_utils = {}
-
     local function trash_creation(event)
         local entity = event.created_entity or event.entity
 
@@ -56,6 +53,9 @@ if settings.startup['PHI-CT'].value then
 
     script.on_event(defines.events.on_player_cheat_mode_enabled, hidden_recipe_enable)
     script.on_event(defines.events.on_player_cheat_mode_disabled, hidden_recipe_enable)
+
+    local gui = {}
+    local inserter_utils = {}
 
     function math2d.position.equal(p1, p2)
         p1, p2 = math2d.position.ensure_xy(p1), math2d.position.ensure_xy(p2)
