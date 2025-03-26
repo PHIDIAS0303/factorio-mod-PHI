@@ -59,20 +59,10 @@ if settings.startup['PHI-CT'].value then
     math2d.direction = {vectors = {{x = 0, y = -1}, {x = 1, y = -1}, {x = 1, y = 0}, {x = 1, y = 1}, {x = 0, y = 1}, {x = -1, y = 1}, {x = -1, y = 0}, {x = -1, y = -1}}}
 
     function math2d.position.split(pos)
-        local function split_coord(v)
-            local int, frac = math.modf(v)
-
-            if frac < 0 then
-                return int - 1, frac + 1
-            end
-
-            return int, frac
-        end
-
         pos = math2d.position.ensure_xy(pos)
-        local x_int, x_frac = split_coord(pos.x)
-        local y_int, y_frac = split_coord(pos.y)
-        return {x = x_int, y = y_int}, {x = x_frac, y = y_frac}
+        local x_int, x_frac = math.modf(pos.x)
+        local y_int, y_frac = math.modf(pos.y)
+        return {x = x_frac < 0 and (x_int - 1) or x_int, y = y_frac < 0 and (y_int - 1) or y_int}, {x = x_frac < 0 and (x_frac + 1) or x_frac, y = y_frac < 0 and (y_frac + 1) or y_frac}
     end
 
     function inserter_utils.get_arm_positions(inserter)
