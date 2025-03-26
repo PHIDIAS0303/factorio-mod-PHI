@@ -260,11 +260,7 @@ if settings.startup['PHI-CT'].value then
         if e.element.parent == gui_instance.table_position and e.element ~= gui_instance.table_position.sprite_inserter then
             local new_pos = gui.get_button_pos(e.element)
 
-            if e.button == defines.mouse_button_type.left and (not e.control or e.shift) then
-                if e.element.sprite == 'virtual-signal/down-arrow' then
-                    return
-                end
-
+            if (e.button == defines.mouse_button_type.left and (not e.control or e.shift)) and e.element.sprite == 'virtual-signal/up-arrow' then
                 local new_positions = {drop = new_pos, pickup = (e.element.sprite == 'virtual-signal/up-arrow' and inserter_utils.get_arm_positions(player.opened).drop) or nil}
                 local old_positions = inserter_utils.get_arm_positions(player.opened)
                 local vec = math2d.position.ensure_xy(new_positions.drop)
@@ -274,13 +270,8 @@ if settings.startup['PHI-CT'].value then
                 new_positions.drop_offset = (not new_positions.drop and old_positions.drop_offset) or (((delta % 2 == 0) and {x = ((delta == 0 or delta == 6) and old_positions.drop_offset.y) or -old_positions.drop_offset.y, y = ((delta == 0 or delta == 2) and old_positions.drop_offset.x) or -old_positions.drop_offset.x}) or math2d.direction.vectors[(new_drop_dir + (new_drop_dir % 2) * 4 % 8) + 1])
                 inserter_utils.set_arm_positions(player.opened, new_positions)
 
-            elseif e.button == defines.mouse_button_type.right or (e.button == defines.mouse_button_type.left and (e.control or e.shift)) then
-                if e.element.sprite == 'virtual-signal/up-arrow' then
-                    return
-                end
-
-                local new_positions = {pickup = new_pos, drop = (e.element.sprite == 'virtual-signal/down-arrow' and inserter_utils.get_arm_positions(player.opened).pickup) or nil}
-                inserter_utils.set_arm_positions(player.opened, new_positions)
+            elseif (e.button == defines.mouse_button_type.right or (e.button == defines.mouse_button_type.left and (e.control or e.shift))) and e.element.sprite == 'virtual-signal/down-arrow' then
+                inserter_utils.set_arm_positions(player.opened, {pickup = new_pos, drop = (e.element.sprite == 'virtual-signal/down-arrow' and inserter_utils.get_arm_positions(player.opened).pickup) or nil})
             end
 
             for _, p in pairs(game.players) do
