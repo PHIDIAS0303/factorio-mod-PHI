@@ -260,7 +260,7 @@ if settings.startup['PHI-CT'].value then
         if e.element.parent == gui_instance.table_position and e.element ~= gui_instance.table_position.sprite_inserter then
             local new_pos = gui.get_button_pos(e.element)
 
-            if e.button == defines.mouse_button_type.left and (not e.control) and (not e.shift) then
+            if e.button == defines.mouse_button_type.left and (not e.control or e.shift) then
                 local new_positions = {drop = new_pos}
 
                 if e.element.sprite == 'virtual-signal/down-arrow' then
