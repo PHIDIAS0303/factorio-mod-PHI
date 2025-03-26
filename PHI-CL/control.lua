@@ -252,8 +252,7 @@ if settings.startup['PHI-CT'].value then
                 end
             end
 
-            p1, p2 = (arm_positions.pickup.x and {x = arm_positions.pickup.x, y = arm_positions.pickup.y}) or {x = arm_positions.pickup[1], y = arm_positions.pickup[2]}, (arm_positions.drop.x and {x = arm_positions.drop.x, y = arm_positions.drop.y}) or {x = arm_positions.drop[1], y = arm_positions.drop[2]}
-            arm_positions.pickup = ((p1.x == p2.x and p1.y == p2.y) and {x = -arm_positions.drop.x , y = -arm_positions.drop.y}) or arm_positions.pickup
+            arm_positions.pickup = ((arm_positions.pickup.x == arm_positions.drop.x and arm_positions.pickup.y == arm_positions.drop.y) and {x = -arm_positions.drop.x , y = -arm_positions.drop.y}) or arm_positions.pickup
             inserter_utils.set_arm_positions(e.destination, arm_positions)
 
             for _, player in pairs(game.players) do
