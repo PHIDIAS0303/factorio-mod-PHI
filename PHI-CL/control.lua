@@ -82,10 +82,6 @@ if settings.startup['PHI-CT'].value then
 
     math2d.direction = {vectors = {{x = 0, y = -1}, {x = 1, y = -1}, {x = 1, y = 0}, {x = 1, y = 1}, {x = 0, y = 1}, {x = -1, y = 1}, {x = -1, y = 0}, {x = -1, y = -1}}}
 
-    function inserter_utils.is_inserter(entity)
-        return (entity and entity.object_name == 'LuaEntity') and (entity.type == 'inserter' or (entity.type == 'entity-ghost' and entity.ghost_type == 'inserter'))
-    end
-
     function inserter_utils.get_arm_positions(inserter)
         local base_tile, base_offset = math2d.position.split(inserter.position)
         local drop_tile, drop_offset = math2d.position.split(inserter.drop_position)
@@ -238,7 +234,7 @@ if settings.startup['PHI-CT'].value then
         end
 
         for _, p in pairs(game.players) do
-            if (inserter and p.opened == inserter) or (not inserter and inserter_utils.is_inserter(p.opened)) then
+            if (inserter and p.opened == inserter) or (not inserter and (p.opened and p.opened.object_name == 'LuaEntity' and (p.opened.type == 'inserter' or (p.opened.type == 'entity-ghost' and p.opened.ghost_type == 'inserter')))) then
                 gui.update(p, p.opened)
             end
         end
@@ -284,7 +280,7 @@ if settings.startup['PHI-CT'].value then
         end
 
         for _, player in pairs(game.players) do
-            if inserter_utils.is_inserter(player.opened) then
+            if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
                 gui.update(player, player.opened)
             end
         end
@@ -297,7 +293,7 @@ if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.on_gui_opened, function(e)
         local player = game.players[e.player_index]
 
-        if inserter_utils.is_inserter(e.entity) then
+        if e.entity.opened and e.entity.opened.object_name == 'LuaEntity' and (e.entity.opened.type == 'inserter' or (e.entity.opened.type == 'entity-ghost' and e.entity.opened.ghost_type == 'inserter')) then
             gui.update(player, e.entity)
         end
     end)
@@ -314,9 +310,9 @@ if settings.startup['PHI-CT'].value then
     end)
 
     script.on_event(defines.events.on_player_rotated_entity, function(e)
-        if inserter_utils.is_inserter(e.entity) then
+        if e.entity and e.entity.object_name == 'LuaEntity' and (e.entity.type == 'inserter' or (e.entity.type == 'entity-ghost' and e.entity.ghost_type == 'inserter')) then
             for _, player in pairs(game.players) do
-                if (e.entity and player.opened == e.entity) or (not e.entity and inserter_utils.is_inserter(player.opened)) then
+                if (e.entity and player.opened == e.entity) or (not e.entity and (player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')))) then
                     gui.update(player, player.opened)
                 end
             end
@@ -324,7 +320,7 @@ if settings.startup['PHI-CT'].value then
     end)
 
     script.on_event(defines.events.on_entity_settings_pasted, function(e)
-        if inserter_utils.is_inserter(e.destination) then
+        if e.destination and e.destination.object_name == 'LuaEntity' and (e.destination.type == 'inserter' or (e.destination.type == 'entity-ghost' and e.destination.ghost_type == 'inserter')) then
             e.destination.direction = e.source.direction
             local arm_positions = inserter_utils.get_arm_positions(e.destination)
             local max_range = inserter_utils.get_max_range(e.destination)
@@ -346,7 +342,7 @@ if settings.startup['PHI-CT'].value then
             inserter_utils.set_arm_positions(e.destination, arm_positions)
 
             for _, player in pairs(game.players) do
-                if (e.destination and player.opened == e.destination) or (not e.destination and inserter_utils.is_inserter(player.opened)) then
+                if (e.destination and player.opened == e.destination) or (not e.destination and (player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')))) then
                     gui.update(player, player.opened)
                 end
             end
