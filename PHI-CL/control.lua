@@ -58,11 +58,6 @@ if settings.startup['PHI-CT'].value then
     local inserter_utils = {}
     math2d.direction = {vectors = {{x = 0, y = -1}, {x = 1, y = -1}, {x = 1, y = 0}, {x = 1, y = 1}, {x = 0, y = 1}, {x = -1, y = 1}, {x = -1, y = 0}, {x = -1, y = -1}}}
 
-    function math2d.position.equal(p1, p2)
-        p1, p2 = math2d.position.ensure_xy(p1), math2d.position.ensure_xy(p2)
-        return p1.x == p2.x and p1.y == p2.y
-    end
-
     function math2d.position.split(pos)
         local function split_coord(v)
             local int, frac = math.modf(v)
@@ -169,7 +164,9 @@ if settings.startup['PHI-CT'].value then
                 idx = idx + 1
 
                 if gui_instance.table_position.children[idx].type == 'sprite-button' then
-                    gui_instance.table_position.children[idx].sprite = ((math2d.position.equal(arm_positions.drop, {x, y}) and 'virtual-signal/down-arrow') or (math2d.position.equal(arm_positions.pickup, {x, y}) and 'virtual-signal/up-arrow')) or ((x ~= 0 or y ~= 0) and nil)
+                    p1, p2 = math2d.position.ensure_xy(arm_positions.drop), math2d.position.ensure_xy({x, y})
+                    p3, p4 = math2d.position.ensure_xy(arm_positions.pickup), math2d.position.ensure_xy({x, y})
+                    gui_instance.table_position.children[idx].sprite = (((p1.x == p2.x and p1.y == p2.y) and 'virtual-signal/down-arrow') or ((p3.x == p4.x and p3.y == p4.y) and 'virtual-signal/up-arrow')) or ((x ~= 0 or y ~= 0) and nil)
                     gui_instance.table_position.children[idx].enabled = math.abs(x) < inserter_range or math.abs(y) < inserter_range
                 end
             end
@@ -182,7 +179,8 @@ if settings.startup['PHI-CT'].value then
         for y = -1, 1, 1 do
             for x = -1, 1, 1 do
                 idx = idx + 1
-                gui_instance.table_offset.children[idx].sprite = (math2d.position.equal(arm_positions.drop_offset, {x, y}) and 'virtual-signal/down-arrow') or nil
+                p1, p2 = math2d.position.ensure_xy(arm_positions.drop_offset), math2d.position.ensure_xy({x, y})
+                gui_instance.table_offset.children[idx].sprite = ((p1.x == p2.x and p1.y == p2.y) and 'virtual-signal/down-arrow') or nil
             end
         end
     end
@@ -278,7 +276,8 @@ if settings.startup['PHI-CT'].value then
                 end
             end
 
-            arm_positions.pickup = (math2d.position.equal(arm_positions.pickup, arm_positions.drop) and {x = -arm_positions.drop.x , y = -arm_positions.drop.y}) or arm_positions.pickup
+            p1, p2 = math2d.position.ensure_xy(arm_positions.pickup), math2d.position.ensure_xy(arm_positions.drop)
+            arm_positions.pickup = ((p1.x == p2.x and p1.y == p2.y) and {x = -arm_positions.drop.x , y = -arm_positions.drop.y}) or arm_positions.pickup
             inserter_utils.set_arm_positions(e.destination, arm_positions)
 
             for _, player in pairs(game.players) do
