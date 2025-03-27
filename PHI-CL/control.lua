@@ -8,25 +8,13 @@ if settings.startup['PHI-CT'].value then
         if not (entity and entity.valid) then
             return
         end
+
         if entity.name == 'trash-chest' then
             entity.infinity_container_filters = {}
             entity.remove_unfiltered_items = true
 
         elseif entity.name == 'trash-pipe' then
             entity.set_infinity_pipe_filter(nil)
-        end
-    end
-
-    local function trash_check()
-        for _, surface in pairs(game.surfaces) do
-            for _, e in pairs(surface.find_entities_filtered{name='trash-chest'}) do
-                e.infinity_container_filters = {}
-                e.remove_unfiltered_items = true
-            end
-
-            for _, e in pairs(surface.find_entities_filtered{name='trash-pipe'}) do
-                e.set_infinity_pipe_filter(nil)
-            end
         end
     end
 
@@ -53,7 +41,18 @@ if settings.startup['PHI-CT'].value then
 
     script.on_event(defines.events.on_player_cheat_mode_enabled, hidden_recipe_enable)
     script.on_event(defines.events.on_player_cheat_mode_disabled, hidden_recipe_enable)
-    script.on_init(trash_check)
+    script.on_init(function(_)
+        for _, surface in pairs(game.surfaces) do
+            for _, e in pairs(surface.find_entities_filtered{name='trash-chest'}) do
+                e.infinity_container_filters = {}
+                e.remove_unfiltered_items = true
+            end
+
+            for _, e in pairs(surface.find_entities_filtered{name='trash-pipe'}) do
+                e.set_infinity_pipe_filter(nil)
+            end
+        end
+    end)
 
     --[[
     local gui = {}
