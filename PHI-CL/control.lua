@@ -39,8 +39,14 @@ if settings.startup['PHI-CT'].value then
         force.recipes['infinity-pipe'].enabled = enable
     end
 
-    script.on_event(defines.events.on_player_cheat_mode_enabled, hidden_recipe_enable)
-    script.on_event(defines.events.on_player_cheat_mode_disabled, hidden_recipe_enable)
+    script.on_event(defines.events.on_player_cheat_mode_enabled, function(e)
+        hidden_recipe_enable(e)
+    end)
+
+    script.on_event(defines.events.on_player_cheat_mode_disabled, function(e)
+        hidden_recipe_enable(e)
+    end)
+
     script.on_init(function(_)
         for _, surface in pairs(game.surfaces) do
             for _, e in pairs(surface.find_entities_filtered{name='trash-chest'}) do
