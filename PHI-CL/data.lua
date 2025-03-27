@@ -1607,25 +1607,17 @@ if settings.startup['PHI-CT'].value then
     end
 
     for _, l in pairs({'loader', 'fast-loader', 'express-loader', 'turbo-loader'}) do
-        if data.raw.recipe[l] then
+        if data.raw.recipe[l] and data.raw['loader'][l] then
             data.raw.recipe[l].hidden = false
-        end
-
-        if data.raw['loader'][l] then
             data.raw['loader'][l].filter_count = 2
             data.raw['loader'][l].per_lane_filters = true
             data.raw['loader'][l].adjustable_belt_stack_size = true
             data.raw['loader'][l].max_belt_stack_size = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or data.raw['inserter']['bulk-inserter'].max_belt_stack_size
-        end
     end
 
     table.insert(data.raw.technology['logistics'].effects, {type = 'unlock-recipe', recipe = 'loader'})
     table.insert(data.raw.technology['logistics-2'].effects, {type = 'unlock-recipe', recipe = 'fast-loader'})
     table.insert(data.raw.technology['logistics-3'].effects, {type = 'unlock-recipe', recipe = 'express-loader'})
-
-    if mods['space-age'] then
-        table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-loader'})
-    end
 
     for _, v in pairs({'underground-belt', 'fast-underground-belt', 'express-underground-belt', 'turbo-underground-belt'}) do
         if data.raw.item[v] then
@@ -1677,6 +1669,7 @@ if settings.startup['PHI-CT'].value then
     table.insert(data.raw.technology['logistics-3'].effects, {type = 'unlock-recipe', recipe = 'express-underground-belt-a'})
 
     if mods['space-age'] then
+        table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-loader'})
         data.raw['underground-belt']['express-underground-belt-a'].next_upgrade = 'turbo-underground-belt-a'
         table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-underground-belt-a'})
     end
