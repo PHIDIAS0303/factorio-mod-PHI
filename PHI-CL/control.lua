@@ -53,7 +53,9 @@ if settings.startup['PHI-CT'].value then
 
     script.on_event(defines.events.on_player_cheat_mode_enabled, hidden_recipe_enable)
     script.on_event(defines.events.on_player_cheat_mode_disabled, hidden_recipe_enable)
+    script.on_init(trash_check)
 
+    --[[
     local gui = {}
     local inserter_utils = {}
     math2d.direction = {vectors = {{x = 0, y = -1}, {x = 1, y = -1}, {x = 1, y = 0}, {x = 1, y = 1}, {x = 0, y = 1}, {x = -1, y = 1}, {x = -1, y = 0}, {x = -1, y = -1}}}
@@ -262,4 +264,5 @@ if settings.startup['PHI-CT'].value then
             end
         end
     end)
+    ]]
 end
