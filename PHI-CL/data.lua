@@ -1615,7 +1615,7 @@ if settings.startup['PHI-CT'].value then
             data.raw['loader'][l].filter_count = 2
             data.raw['loader'][l].per_lane_filters = true
             data.raw['loader'][l].adjustable_belt_stack_size = true
-            data.raw['loader'][l].max_belt_stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
+            data.raw['loader'][l].max_belt_stack_size = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or data.raw['inserter']['bulk-inserter'].max_belt_stack_size
         end
     end
 
