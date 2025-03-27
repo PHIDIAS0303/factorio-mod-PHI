@@ -28,7 +28,7 @@ if settings.startup['PHI-CT'].value then
         local force = game.players[e.player_index].force
 
         for _, v in pairs(prototypes.fluid) do
-            if data.raw.recipe['pump-' .. v.name] then
+            if force.recipes['pump-' .. v.name] then
                 force.recipes['pump-' .. v.name].enabled = enable
             end
         end
