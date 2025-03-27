@@ -1680,7 +1680,7 @@ if settings.startup['PHI-CT'].value then
     end
 
     for _, v in pairs(data.raw.fluid) do
-        if not data.raw.recipe['pump-' .. v.name] then
+        if (not data.raw.recipe['pump-' .. v.name]) and v.subgroup == 'fluid' then
             data:extend({{
                 type = 'recipe',
                 name = 'pump-' .. v.name,
