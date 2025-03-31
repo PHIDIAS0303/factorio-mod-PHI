@@ -881,11 +881,6 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
         data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
 
-        for k, v in pairs(items['space-age']['PHI-VP-MAIN']['autoplace_control']) do
-            data.raw['autoplace-control'][k].hidden = v
-            data.raw['autoplace-control'][k].hidden_in_factoriopedia = v
-        end
-
         for _, v in pairs({'coal', 'stone', 'iron-ore', 'copper-ore', 'uranium-ore'}) do
             data.raw.item[v].stack_size = math.max(data.raw.item[v].stack_size, 100)
         end

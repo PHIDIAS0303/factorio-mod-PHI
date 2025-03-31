@@ -358,17 +358,6 @@ local items = {
     },
     ['space-age'] = {
         ['PHI-VP-MAIN'] = {
-            ['autoplace_control'] = {
-                ['vulcanus_coal'] = true,
-                ['tungsten_ore'] = true,
-                ['calcite'] = true,
-                ['sulfuric_acid_geyser'] = true,
-                ['gleba_stone'] = true,
-                ['scrap'] = true,
-                ['aquilo_crude_oil'] = true,
-                ['fluorine_vent'] = true,
-                ['lithium_brine'] = true,
-            },
             ['technology_reform'] = {
                 ['stack-inserter'] = {
                     ['prerequisites'] = {'bulk-inserter', 'chemical-science-pack', 'processing-unit'},
