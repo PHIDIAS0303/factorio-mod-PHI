@@ -1699,50 +1699,10 @@ if settings.startup['PHI-CT'].value then
     end
 
     if settings.startup['PHI-CT-TILE'].value then
-        for _, v in pairs(data.raw.planet) do
-            if v.map_gen_settings and v.map_gen_settings.autoplace_settings then
-                if v.map_gen_settings.autoplace_settings.tile and v.map_gen_settings.autoplace_settings.tile.settings then
-                    for _, e in pairs (v.map_gen_settings.autoplace_settings.tile.settings) do
-                        e.frequency = 0.0
-                        e.size = 0.0
-                        e.richness = 0.0
-                    end
-
-                    v.map_gen_settings.autoplace_settings.tile.settings[settings.startup['PHI-CT-TILE-CHOICE'].value] = {
-                        frequency = 1.0,
-                        size = 1.0,
-                        richness = 1.0
-                    }
-                end
-
-                if v.map_gen_settings.autoplace_settings.decorative and v.map_gen_settings.autoplace_settings.decorative.settings then
-                    for _, e in pairs(v.map_gen_settings.autoplace_settings.decorative.settings) do
-                        e.frequency = 0.0
-                        e.size = 0.0
-                        e.richness = 0.0
-                    end
-                end
-
-                if v.map_gen_settings.autoplace_settings.entity and v.map_gen_settings.autoplace_settings.entity.settings then
-                    for _, e in pairs(v.map_gen_settings.autoplace_settings.entity.settings) do
-                        e.frequency = 0.0
-                        e.size = 0.0
-                        e.richness = 0.0
-                    end
-                end
-            end
-        end
-
-        local autoplace_controls = {}
-
-        for k, _ in pairs (data.raw['autoplace-control']) do
-            autoplace_controls[k] = { frequency = 0.0, size = 0.0, richness = 0.0}
-        end
-
         data.raw['map-gen-presets']['default']['empty-world'] = {
             order = 'zz',
             basic_settings = {
-                autoplace_controls = autoplace_controls,
+                autoplace_controls = {},
                 cliff_settings = {
                     name = 'none',
                     cliff_elevation_interval = 100,
@@ -1756,6 +1716,10 @@ if settings.startup['PHI-CT'].value then
                 enemy_expansion = {enabled = false}
             }
         }
+
+        for k, _ in pairs (data.raw['autoplace-control']) do
+            data.raw['map-gen-presets']['default']['empty-world'].basic_settings.autoplace_controls[k] = {frequency = 0.0, size = 0.0, richness = 0.0}
+        end
     end
 end
 
