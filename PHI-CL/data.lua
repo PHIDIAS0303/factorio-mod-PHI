@@ -894,7 +894,6 @@ if settings.startup['PHI-VP'].value then
 
         data.raw.resource['sulfuric-acid-geyser'].hidden = true
         data.raw.resource['sulfuric-acid-geyser'].hidden_in_factoriopedia = true
-
         data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = nil
         data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_plants'] = nil
 
