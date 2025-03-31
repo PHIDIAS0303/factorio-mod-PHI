@@ -1717,7 +1717,8 @@ if settings.startup['PHI-CT'].value then
             }
         }
 
-        for k, _ in pairs (data.raw['autoplace-control']) do
+        for k, v in pairs (data.raw['autoplace-control']) do
+            v.can_be_disabled = true
             data.raw['map-gen-presets']['default']['empty-world'].basic_settings.autoplace_controls[k] = {frequency = 0.0, size = 0.0, richness = 0.0}
         end
     end
