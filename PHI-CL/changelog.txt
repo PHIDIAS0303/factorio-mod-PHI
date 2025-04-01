@@ -1,9 +1,10 @@
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.83
-Date: 2025-04-01
+Date: 2025-04-03
 
   Changes:
-    - [CT] Changes map preset generation logic.
+    - [SA] Fusion generator changed to input and output fluid.
+    - [CT] Cleanup map preset generation code.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.82

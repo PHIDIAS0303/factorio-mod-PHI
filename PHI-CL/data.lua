@@ -423,6 +423,14 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
 
     data.raw['cargo-wagon']['cargo-wagon'].inventory_size = 80
 
+    for _, v in pairs(data.raw['fusion-generator']['fusion-generator'].input_fluid_box.pipe_connections) do
+        v.flow_direction = 'input-output'
+    end
+
+    for _, v in pairs(data.raw['fusion-generator']['fusion-generator'].output_fluid_box.pipe_connections) do
+        v.flow_direction = 'input-output'
+    end
+
     for _, v in pairs(data.raw['cargo-wagon']) do
         v.quality_affects_inventory_size = true
     end
@@ -961,6 +969,7 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['worker-robots-speed-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['worker-robots-speed-7'].prerequisites = {'worker-robots-speed-6', 'space-science-pack'}
         data.raw.technology['worker-robots-speed-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['scrap-recycling-productivity'].effects = nil
         data.raw.technology['atomic-bomb'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['energy-shield-mk2-equipment'].prerequisites = {'energy-shield-equipment', 'military-4', 'power-armor'}
         data.raw.technology['energy-shield-mk2-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
@@ -1697,6 +1706,40 @@ if settings.startup['PHI-CT'].value then
     end
 
     if settings.startup['PHI-CT-TILE'].value then
+        for _, v in pairs(data.raw.planet) do
+            if v.map_gen_settings and v.map_gen_settings.autoplace_settings then
+                if v.map_gen_settings.autoplace_settings.tile and v.map_gen_settings.autoplace_settings.tile.settings then
+                    for _, e in pairs (v.map_gen_settings.autoplace_settings.tile.settings) do
+                        e.frequency = 0.0
+                        e.size = 0.0
+                        e.richness = 0.0
+                    end
+
+                    v.map_gen_settings.autoplace_settings.tile.settings[settings.startup['PHI-CT-TILE-CHOICE'].value] = {
+                        frequency = 1.0,
+                        size = 1.0,
+                        richness = 1.0
+                    }
+                end
+
+                if v.map_gen_settings.autoplace_settings.decorative and v.map_gen_settings.autoplace_settings.decorative.settings then
+                    for _, e in pairs(v.map_gen_settings.autoplace_settings.decorative.settings) do
+                        e.frequency = 0.0
+                        e.size = 0.0
+                        e.richness = 0.0
+                    end
+                end
+
+                if v.map_gen_settings.autoplace_settings.entity and v.map_gen_settings.autoplace_settings.entity.settings then
+                    for _, e in pairs(v.map_gen_settings.autoplace_settings.entity.settings) do
+                        e.frequency = 0.0
+                        e.size = 0.0
+                        e.richness = 0.0
+                    end
+                end
+            end
+        end
+
         data.raw['map-gen-presets']['default']['empty-world'] = {
             order = 'zz',
             basic_settings = {
