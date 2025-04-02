@@ -11,7 +11,7 @@ if mods['space-age'] then
         end
 
         if (vp or sa) and v.maximum_productivity then
-            v.maximum_productivity = nil
+            v.maximum_productivity = 99
         end
     end
 end
