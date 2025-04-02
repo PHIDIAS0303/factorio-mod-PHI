@@ -772,6 +772,12 @@ if settings.startup['PHI-VP'].value then
             localised_description = {'description.charged-train-battery'}
         }})
 
+        for k, v in pairs(data.raw.recipe) do
+            if v.category == 'recycling' then
+                data.raw.recipe[k] = nil
+            end
+        end
+
         local item_sounds = require('__base__/prototypes/item_sounds')
 
         data:extend({
