@@ -1343,8 +1343,7 @@ if settings.startup['PHI-CT'].value then
             enabled = false,
             ingredients = {},
             results = {{type = 'item', name = data.raw['item'][v].name, amount = 1}},
-            main_product = data.raw['item'][v].name,
-            localised_name = {'name.' .. data.raw['item'][v].name}
+            main_product = data.raw['item'][v].name
         }})
     end
 
