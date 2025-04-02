@@ -11,7 +11,7 @@ do
         end
 
         if (vp or sa) and v.maximum_productivity then
-            v.maximum_productivity = nil
+            v.maximum_productivity = 999
         end
     end
 end
