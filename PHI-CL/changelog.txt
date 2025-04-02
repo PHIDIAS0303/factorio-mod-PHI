@@ -5,6 +5,7 @@ Date: 2025-04-03
   Changes:
     - [SA] Fusion generator changed to input and output fluid.
     - [CT] Cleanup map preset generation code.
+    - [VP] Hide some unused item, such as recycling recipe.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.82
