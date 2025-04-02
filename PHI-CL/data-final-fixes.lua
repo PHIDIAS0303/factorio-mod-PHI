@@ -1,7 +1,7 @@
 local items = require 'config'
 local main = require 'main'
 
-if mods['space-age'] then
+do
     local vp = settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value
     local sa = settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value
 
@@ -11,7 +11,7 @@ if mods['space-age'] then
         end
 
         if (vp or sa) and v.maximum_productivity then
-            v.maximum_productivity = 99
+            v.maximum_productivity = nil
         end
     end
 end
