@@ -1324,6 +1324,21 @@ if settings.startup['PHI-VP'].value then
                 v.minable.results = {{type = 'item', name = 'wood', amount = 4}}
             end
         end
+
+        for _, v in pairs(data.raw.recipe) do
+            v.auto_recycle = false
+            v.allow_quality = false
+            v.allow_quality_message = nil
+
+            if v.category and v.category == 'recycling' then
+                v.hidden = true
+                v.hidden_in_factoriopedia = true
+            end
+        end
+
+        for _, v in pairs(data.raw.item) do
+            v.auto_recycle = false
+        end
     end
 
     if mods['quality'] and settings.startup['PHI-VP-MAIN'].value and (not settings.startup['PHI-SA-MAX-QUALITY'].value) then
