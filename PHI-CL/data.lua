@@ -773,9 +773,7 @@ if settings.startup['PHI-VP'].value then
         }})
 
         for k, v in pairs(data.raw.recipe) do
-            if v.category == 'recycling' then
-                data.raw.recipe[k] = nil
-            end
+            v.auto_recycle = false
         end
 
         local item_sounds = require('__base__/prototypes/item_sounds')
