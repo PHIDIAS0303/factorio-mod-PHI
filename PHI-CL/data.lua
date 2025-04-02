@@ -1327,8 +1327,6 @@ if settings.startup['PHI-VP'].value then
 
         for _, v in pairs(data.raw.recipe) do
             v.auto_recycle = false
-            v.allow_quality = false
-            v.allow_quality_message = nil
 
             if v.category and v.category == 'recycling' then
                 v.hidden = true
