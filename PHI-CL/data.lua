@@ -772,8 +772,10 @@ if settings.startup['PHI-VP'].value then
             localised_description = {'description.charged-train-battery'}
         }})
 
-        for k, v in pairs(data.raw.recipe) do
+        for _, v in pairs(data.raw.recipe) do
             v.auto_recycle = false
+            v.allow_quality = false
+            v.allow_quality_message = nil
         end
 
         local item_sounds = require('__base__/prototypes/item_sounds')
