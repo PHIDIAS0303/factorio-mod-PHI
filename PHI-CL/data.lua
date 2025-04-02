@@ -1196,6 +1196,20 @@ if settings.startup['PHI-VP'].value then
         data.raw['lightning-attractor']['lightning-collector'].hidden_in_factoriopedia = true
         data.raw['lightning-attractor']['fulgoran-ruin-attractor'].hidden = true
         data.raw['lightning-attractor']['fulgoran-ruin-attractor'].hidden_in_factoriopedia = true
+        data.raw['furnace']['recycler'].hidden = true
+        data.raw['furnace']['recycler'].hidden_in_factoriopedia = true
+        data.raw['thruster']['thruster'].hidden = true
+        data.raw['thruster']['thruster'].hidden_in_factoriopedia = true
+        data.raw['assembling-machine']['crusher'].hidden = true
+        data.raw['assembling-machine']['crusher'].hidden_in_factoriopedia = true
+        data.raw['asteroid-collector']['asteroid-collector'].hidden = true
+        data.raw['asteroid-collector']['asteroid-collector'].hidden_in_factoriopedia = true
+        data.raw['space-platform-hub']['space-platform-hub'].hidden = true
+        data.raw['space-platform-hub']['space-platform-hub'].hidden_in_factoriopedia = true
+        data.raw['space-platform-starter-pack']['space-platform-starter-pack'].hidden = true
+        data.raw['space-platform-starter-pack']['space-platform-starter-pack'].hidden_in_factoriopedia = true
+        data.raw['surface']['space-platform'].hidden = true
+        data.raw['surface']['space-platform'].hidden_in_factoriopedia = true
 
         data.raw['plant']['yumako-tree'].hidden = true
         data.raw['plant']['yumako-tree'].hidden_in_factoriopedia = true
@@ -1217,6 +1231,11 @@ if settings.startup['PHI-VP'].value then
         end
 
         for _, v in pairs(data.raw['asteroid']) do
+            v.hidden = true
+            v.hidden_in_factoriopedia = true
+        end
+
+        for _, v in pairs(data.raw['asteroid-chunk']) do
             v.hidden = true
             v.hidden_in_factoriopedia = true
         end
@@ -1304,16 +1323,6 @@ if settings.startup['PHI-VP'].value then
             if v.minable and v.minable.results then
                 v.minable.results = {{type = 'item', name = 'wood', amount = 4}}
             end
-        end
-
-        for _, v in pairs(data.raw.recipe) do
-            v.auto_recycle = false
-            v.allow_quality = false
-            v.allow_quality_message = nil
-        end
-
-        for _, v in pairs(data.raw.item) do
-            v.auto_recycle = false
         end
     end
 
