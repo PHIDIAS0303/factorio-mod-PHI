@@ -463,12 +463,6 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
             v.default_destroyed_dropped_item_trigger = nil
         end
     end
-
-    for _, v in pairs(data.raw.recipe) do
-        if v.maximum_productivity then
-            v.maximum_productivity = nil
-        end
-    end
 end
 
 if settings.startup['PHI-SA'].value then

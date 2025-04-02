@@ -1,7 +1,7 @@
 local items = require 'config'
 local main = require 'main'
 
-if mods['space-age'] and settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value then
+if mods['space-age'] then
     local vp = settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value
     local sa = settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value
 
