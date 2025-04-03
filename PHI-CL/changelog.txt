@@ -4,6 +4,7 @@ Date: 2025-04-07
 
   Changes:
     - [VP] Moved coal liquefaction earlier.
+    - [VP] Reduced power usage of sa machine.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.83
