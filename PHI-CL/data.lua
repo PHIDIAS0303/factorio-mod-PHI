@@ -1140,20 +1140,20 @@ if settings.startup['PHI-VP'].value then
         data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
         data.raw['assembling-machine']['electromagnetic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['assembling-machine-3'].crafting_categories)}
         data.raw['assembling-machine']['electromagnetic-plant'].crafting_speed = 2.5
-        data.raw['assembling-machine']['electromagnetic-plant'].energy_usage = '960kW'
+        data.raw['assembling-machine']['electromagnetic-plant'].energy_usage = '872kW'
         data.raw['assembling-machine']['electromagnetic-plant'].energy_source.emissions_per_minute.pollution = 4
         data.raw['assembling-machine']['foundry'].effect_receiver = nil
         data.raw['assembling-machine']['foundry'].crafting_categories = {table.unpack(data.raw['furnace']['electric-furnace'].crafting_categories)}
         data.raw['assembling-machine']['foundry'].crafting_speed = 6
-        data.raw['assembling-machine']['foundry'].energy_usage = '1023kW'
+        data.raw['assembling-machine']['foundry'].energy_usage = '930kW'
         data.raw['assembling-machine']['foundry'].energy_source.emissions_per_minute.pollution = 3
         data.raw['assembling-machine']['cryogenic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['oil-refinery'].crafting_categories), table.unpack(data.raw['assembling-machine']['chemical-plant'].crafting_categories)}
         data.raw['assembling-machine']['cryogenic-plant'].crafting_speed = 3
-        data.raw['assembling-machine']['cryogenic-plant'].energy_usage = '1432kW'
+        data.raw['assembling-machine']['cryogenic-plant'].energy_usage = '1302kW'
         data.raw['assembling-machine']['cryogenic-plant'].energy_source.emissions_per_minute.pollution = 12
         data.raw['lab']['biolab'].science_pack_drain_rate_percent = 100
         data.raw['lab']['biolab'].researching_speed = 3
-        data.raw['lab']['biolab'].energy_usage = '198kW'
+        data.raw['lab']['biolab'].energy_usage = '180kW'
         data.raw['lab']['biolab'].energy_source.emissions_per_minute = nil
 
         table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
