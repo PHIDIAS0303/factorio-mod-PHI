@@ -473,206 +473,204 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     end
 end
 
-if settings.startup['PHI-SA'].value then
-    if settings.startup['PHI-SA-SPOIL-FREEZE'].value and settings.startup['PHI-SA-SPOIL'].value and mods['space-age'] then
-        local function spoil_handle(i)
-            item = table.deepcopy(i)
-            item.name = 'frozen-' .. i.name
-            item.order = item.order .. '-f'
+if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-SPOIL-FREEZE'].value and settings.startup['PHI-SA-SPOIL'].value and mods['space-age'] then
+    local function spoil_handle(i)
+        item = table.deepcopy(i)
+        item.name = 'frozen-' .. i.name
+        item.order = item.order .. '-f'
 
-            item.icons = {
-                {
-                    icon = item.icon,
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }, {
-                    icon = data.raw['item']['ice'].icon,
-                    tint = {r = 1, g = 1, b = 1, a = 0.5},
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }
+        item.icons = {
+            {
+                icon = item.icon,
+                icon_size = 64,
+                icon_mipmaps = 4
+            }, {
+                icon = data.raw['item']['ice'].icon,
+                tint = {r = 1, g = 1, b = 1, a = 0.5},
+                icon_size = 64,
+                icon_mipmaps = 4
             }
+        }
 
-            item.icon = nil
-            item.icon_size = nil
-            item.icon_mipmaps = nil
-            item.spoil_ticks = math.floor(i.spoil_ticks * settings.startup['PHI-SA-SPOIL-FREEZE-RATIO'].value / 10)
-            item.spoil_result = i.name
-            item.spoil_to_trigger_result = nil
-            item.localised_name = {'item-name.' .. i.name}
-            data:extend({item})
-
-            data:extend({{
-                type = 'recipe',
-                name = item.name,
-                energy_required = 2,
-                enabled = false,
-                category = 'cryogenics',
-                ingredients = {{type = 'item', name = i.name, amount = 1}, {type = 'fluid', name = 'fluoroketone-cold', amount = 2, ignored_by_stats = 2}},
-                results = {{type = 'item', name = item.name, amount = 1}, {type = 'fluid', name = 'fluoroketone-hot', amount = 2, ignored_by_stats=2, ignored_by_productivity = 2}},
-                allow_productivity = false,
-                main_product = item.name,
-                localised_name = {'item-name.' .. i.name}
-            }})
-
-            data:extend({{
-                type = 'recipe',
-                name = 'unfreeze-' .. i.name,
-                energy_required = 2,
-                enabled = false,
-                category = 'cryogenics',
-                ingredients = {{type = 'item', name = item.name, amount = 1}},
-                results = {{type = 'item', name = i.name, amount = 1}},
-                allow_productivity = false,
-                main_product = i.name,
-                localised_name = {'item-name.' .. i.name}
-            }})
-
-            table.insert(data.raw.technology['cryogenic-plant'].effects, {type = 'unlock-recipe', recipe = item.name})
-            table.insert(data.raw.technology['cryogenic-plant'].effects, {type = 'unlock-recipe', recipe = 'unfreeze-' .. i.name})
-        end
-
-        for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg'}) do
-            spoil_handle(data.raw['item'][v])
-        end
-
-        for _, v in pairs({'raw-fish', 'yumako-mash', 'yumako', 'jelly', 'jellynut', 'bioflux'}) do
-            spoil_handle(data.raw['capsule'][v])
-        end
-
-        spoil_handle(data.raw.tool['agricultural-science-pack'])
-    end
-
-    if (not settings.startup['PHI-SA-SPOIL'].value) and mods['space-age'] then
-        local function spoil_handle(i)
-            i.spoil_ticks = nil
-            i.spoil_result = nil
-            i.spoil_to_trigger_result = nil
-        end
-
-        for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg'}) do
-            spoil_handle(data.raw['item'][v])
-        end
-
-        for _, v in pairs({'raw-fish', 'yumako-mash', 'yumako', 'jelly', 'jellynut', 'bioflux'}) do
-            spoil_handle(data.raw['capsule'][v])
-        end
-
-        spoil_handle(data.raw.tool['agricultural-science-pack'])
+        item.icon = nil
+        item.icon_size = nil
+        item.icon_mipmaps = nil
+        item.spoil_ticks = math.floor(i.spoil_ticks * settings.startup['PHI-SA-SPOIL-FREEZE-RATIO'].value / 10)
+        item.spoil_result = i.name
+        item.spoil_to_trigger_result = nil
+        item.localised_name = {'item-name.' .. i.name}
+        data:extend({item})
 
         data:extend({{
             type = 'recipe',
-            name = 'spoilage-from-nutrients',
-            energy_required = 1,
+            name = item.name,
+            energy_required = 2,
             enabled = false,
-            ingredients = {{type = 'item', name = 'nutrients', amount = 1}},
-            results = {{type = 'item', name = 'spoilage', amount = 10}},
-            main_product = 'spoilage',
-            localised_name = {'item-name.spoilage'}
+            category = 'cryogenics',
+            ingredients = {{type = 'item', name = i.name, amount = 1}, {type = 'fluid', name = 'fluoroketone-cold', amount = 2, ignored_by_stats = 2}},
+            results = {{type = 'item', name = item.name, amount = 1}, {type = 'fluid', name = 'fluoroketone-hot', amount = 2, ignored_by_stats=2, ignored_by_productivity = 2}},
+            allow_productivity = false,
+            main_product = item.name,
+            localised_name = {'item-name.' .. i.name}
         }})
 
-        table.insert(data.raw.technology['agriculture'].effects, {type = 'unlock-recipe', recipe = 'spoilage-from-nutrients'})
+        data:extend({{
+            type = 'recipe',
+            name = 'unfreeze-' .. i.name,
+            energy_required = 2,
+            enabled = false,
+            category = 'cryogenics',
+            ingredients = {{type = 'item', name = item.name, amount = 1}},
+            results = {{type = 'item', name = i.name, amount = 1}},
+            allow_productivity = false,
+            main_product = i.name,
+            localised_name = {'item-name.' .. i.name}
+        }})
 
-        for _, v in pairs({'spoilables', 'spoilables-result', 'spoilables-research'}) do
-            data.raw['tips-and-tricks-item'][v] = nil
+        table.insert(data.raw.technology['cryogenic-plant'].effects, {type = 'unlock-recipe', recipe = item.name})
+        table.insert(data.raw.technology['cryogenic-plant'].effects, {type = 'unlock-recipe', recipe = 'unfreeze-' .. i.name})
+    end
+
+    for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg'}) do
+        spoil_handle(data.raw['item'][v])
+    end
+
+    for _, v in pairs({'raw-fish', 'yumako-mash', 'yumako', 'jelly', 'jellynut', 'bioflux'}) do
+        spoil_handle(data.raw['capsule'][v])
+    end
+
+    spoil_handle(data.raw.tool['agricultural-science-pack'])
+end
+
+if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value)) and mods['space-age'] then
+    local function spoil_handle(i)
+        i.spoil_ticks = nil
+        i.spoil_result = nil
+        i.spoil_to_trigger_result = nil
+    end
+
+    for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg'}) do
+        spoil_handle(data.raw['item'][v])
+    end
+
+    for _, v in pairs({'raw-fish', 'yumako-mash', 'yumako', 'jelly', 'jellynut', 'bioflux'}) do
+        spoil_handle(data.raw['capsule'][v])
+    end
+
+    spoil_handle(data.raw.tool['agricultural-science-pack'])
+
+    data:extend({{
+        type = 'recipe',
+        name = 'spoilage-from-nutrients',
+        energy_required = 1,
+        enabled = false,
+        ingredients = {{type = 'item', name = 'nutrients', amount = 1}},
+        results = {{type = 'item', name = 'spoilage', amount = 10}},
+        main_product = 'spoilage',
+        localised_name = {'item-name.spoilage'}
+    }})
+
+    table.insert(data.raw.technology['agriculture'].effects, {type = 'unlock-recipe', recipe = 'spoilage-from-nutrients'})
+
+    for _, v in pairs({'spoilables', 'spoilables-result', 'spoilables-research'}) do
+        data.raw['tips-and-tricks-item'][v] = nil
+    end
+end
+
+if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value and mods['space-age'] then
+    data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
+
+    for _, v in pairs({'heavy-oil', 'lava', 'ammoniacal-solution'}) do
+        if data.raw.fluid[v] then
+            data:extend({{
+                type = 'recipe',
+                name = 'pump-' .. v,
+                category = 'fluid',
+                energy_required = 1,
+                enabled = true,
+                ingredients = {},
+                results = {{type = 'fluid', name = v, amount = 16000, temperature = data.raw.fluid[v].default_temperature}},
+                main_product = v,
+                hide_from_player_crafting = true,
+                allow_productivity = false,
+                crafting_machine_tint = {primary = data.raw.fluid[v].flow_color},
+                localised_name = {'fluid-name.' .. v}
+            }})
         end
     end
 
-    if settings.startup['PHI-SA-RESTRICTION'].value and mods['space-age'] then
-        data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
-
-        for _, v in pairs({'heavy-oil', 'lava', 'ammoniacal-solution'}) do
-            if data.raw.fluid[v] then
-                data:extend({{
-                    type = 'recipe',
-                    name = 'pump-' .. v,
-                    category = 'fluid',
-                    energy_required = 1,
-                    enabled = true,
-                    ingredients = {},
-                    results = {{type = 'fluid', name = v, amount = 16000, temperature = data.raw.fluid[v].default_temperature}},
-                    main_product = v,
-                    hide_from_player_crafting = true,
-                    allow_productivity = false,
-                    crafting_machine_tint = {primary = data.raw.fluid[v].flow_color},
-                    localised_name = {'fluid-name.' .. v}
-                }})
-            end
-        end
-
-        for _, v in pairs({'artificial-yumako-soil', 'overgrowth-yumako-soil', 'artificial-jellynut-soil', 'overgrowth-jellynut-soil'}) do
-            data.raw.tile[v].sprite_usage_surface = 'any'
-            data.raw.item[v].place_as_tile.condition = {layers = {water_tile = true}}
-            data.raw.item[v].place_as_tile.tile_condition = nil
-        end
-
-        for _, v in pairs({'tree-plant', 'yumako-tree', 'jellystem'}) do
-            data.raw['plant'][v].autoplace.tile_restriction = nil
-        end
-
-        local asteroid_util = require('__space-age__.prototypes.planet.asteroid-spawn-definitions')
-        data.raw.planet['nauvis'].asteroid_spawn_influence = 1
-
-        local pb = {
-            has_promethium_asteroids = true,
-            type_ratios = {},
-            probability_on_range_chunk = {},
-            probability_on_range_small = {},
-            probability_on_range_medium = {},
-            probability_on_range_big = {},
-            probability_on_range_huge = {},
-        }
-
-        local distance = {0.001, 0.199, 0.399, 0.599, 0.799, 0.999}
-
-        for i = 1, 6 do
-            table.insert(pb.type_ratios, {position = distance[i], ratios = {1, 1, 1, 1}})
-            table.insert(pb.probability_on_range_chunk, {position = distance[i], probability = 0.0312 - (0.0031 * i), angle_when_stopped = asteroid_util.chunk_angle})
-            table.insert(pb.probability_on_range_small, {position = distance[i], probability = 0.0273 - (0.0027 * i), angle_when_stopped = asteroid_util.small_angle})
-            table.insert(pb.probability_on_range_medium, {position = distance[i], probability = 0.0234, angle_when_stopped = asteroid_util.medium_angle})
-            table.insert(pb.probability_on_range_big, {position = distance[i], probability = 0.0195 + (0.0027 * i), angle_when_stopped = asteroid_util.big_angle})
-            table.insert(pb.probability_on_range_huge, {position = distance[i], probability = 0.0156 + (0.0031 * i), angle_when_stopped = asteroid_util.huge_angle})
-        end
-
-        data.raw.planet['nauvis'].asteroid_spawn_definitions = asteroid_util.spawn_definitions(pb, 0.001)
-
-        for _, v in pairs(data.raw['asteroid']) do
-            v.mass = 1
-
-            for _, v2 in pairs(v.resistances) do
-                v2.percent = (v2.percent > 98 and 98) or v2.percent
-            end
-        end
+    for _, v in pairs({'artificial-yumako-soil', 'overgrowth-yumako-soil', 'artificial-jellynut-soil', 'overgrowth-jellynut-soil'}) do
+        data.raw.tile[v].sprite_usage_surface = 'any'
+        data.raw.item[v].place_as_tile.condition = {layers = {water_tile = true}}
+        data.raw.item[v].place_as_tile.tile_condition = nil
     end
 
-    if settings.startup['PHI-SA-QUALITY'].value and mods['quality'] then
-        for _, v in pairs(data.raw.module) do
-            if v.category and v.category == 'quality' then
-                v.effect.quality = v.effect.quality * settings.startup['PHI-SA-QUALITY'].value / 10
-
-            elseif v.category and v.category == 'speed' then
-                v.effect.quality = nil
-            end
-        end
+    for _, v in pairs({'tree-plant', 'yumako-tree', 'jellystem'}) do
+        data.raw['plant'][v].autoplace.tile_restriction = nil
     end
 
-    if settings.startup['PHI-SA-MAX-QUALITY'].value and mods['quality'] then
-        data.raw.quality.normal.level = 5
-        data.raw.quality.normal.beacon_power_usage_multiplier = 1 / 6
-        data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1 / 6
-        data.raw.quality.normal.science_pack_drain_multiplier = 19 / 20
+    local asteroid_util = require('__space-age__.prototypes.planet.asteroid-spawn-definitions')
+    data.raw.planet['nauvis'].asteroid_spawn_influence = 1
 
-        for _, v in pairs(data.raw['inserter']) do
-            v.extension_speed = v.extension_speed * 2.5
-            v.rotation_speed = v.rotation_speed * 2.5
-        end
+    local pb = {
+        has_promethium_asteroids = true,
+        type_ratios = {},
+        probability_on_range_chunk = {},
+        probability_on_range_small = {},
+        probability_on_range_medium = {},
+        probability_on_range_big = {},
+        probability_on_range_huge = {},
+    }
+
+    local distance = {0.001, 0.199, 0.399, 0.599, 0.799, 0.999}
+
+    for i = 1, 6 do
+        table.insert(pb.type_ratios, {position = distance[i], ratios = {1, 1, 1, 1}})
+        table.insert(pb.probability_on_range_chunk, {position = distance[i], probability = 0.0312 - (0.0031 * i), angle_when_stopped = asteroid_util.chunk_angle})
+        table.insert(pb.probability_on_range_small, {position = distance[i], probability = 0.0273 - (0.0027 * i), angle_when_stopped = asteroid_util.small_angle})
+        table.insert(pb.probability_on_range_medium, {position = distance[i], probability = 0.0234, angle_when_stopped = asteroid_util.medium_angle})
+        table.insert(pb.probability_on_range_big, {position = distance[i], probability = 0.0195 + (0.0027 * i), angle_when_stopped = asteroid_util.big_angle})
+        table.insert(pb.probability_on_range_huge, {position = distance[i], probability = 0.0156 + (0.0031 * i), angle_when_stopped = asteroid_util.huge_angle})
     end
 
-    if settings.startup['PHI-SA-HEAT-RADIUS'].value and mods['space-age'] then
-        for _, v in pairs({data.raw['heat-pipe'], data.raw['reactor']}) do
-            for _, v2 in pairs(v) do
-                v2.heating_radius = settings.startup['PHI-SA-HEAT-RADIUS'].value
-            end
+    data.raw.planet['nauvis'].asteroid_spawn_definitions = asteroid_util.spawn_definitions(pb, 0.001)
+
+    for _, v in pairs(data.raw['asteroid']) do
+        v.mass = 1
+
+        for _, v2 in pairs(v.resistances) do
+            v2.percent = (v2.percent > 98 and 98) or v2.percent
+        end
+    end
+end
+
+if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value and mods['quality'] then
+    for _, v in pairs(data.raw.module) do
+        if v.category and v.category == 'quality' then
+            v.effect.quality = v.effect.quality * settings.startup['PHI-SA-QUALITY'].value / 10
+
+        elseif v.category and v.category == 'speed' then
+            v.effect.quality = nil
+        end
+    end
+end
+
+if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-MAX-QUALITY'].value and mods['quality'] then
+    data.raw.quality.normal.level = 5
+    data.raw.quality.normal.beacon_power_usage_multiplier = 1 / 6
+    data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1 / 6
+    data.raw.quality.normal.science_pack_drain_multiplier = 19 / 20
+
+    for _, v in pairs(data.raw['inserter']) do
+        v.extension_speed = v.extension_speed * 2.5
+        v.rotation_speed = v.rotation_speed * 2.5
+    end
+end
+
+if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-HEAT-RADIUS'].value and mods['space-age'] then
+    for _, v in pairs({data.raw['heat-pipe'], data.raw['reactor']}) do
+        for _, v2 in pairs(v) do
+            v2.heating_radius = settings.startup['PHI-SA-HEAT-RADIUS'].value
         end
     end
 end
