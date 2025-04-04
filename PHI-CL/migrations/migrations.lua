@@ -37,7 +37,7 @@ for _, force in pairs(game.forces) do
         end
     end
 
-    if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value then
+    if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-aRMOR'].value then
         if (not technologies['power-armor-mk2']) or technologies['power-armor-mk2'].researched then
             recipes['power-armor-mk3'].enabled = true
             recipes['power-armor-mk3'].reload()
@@ -91,23 +91,23 @@ for _, force in pairs(game.forces) do
         end
 
         if (not technologies['logistics']) or technologies['logistics'].researched then
-            recipes['underground-belt-A'].enabled = true
-            recipes['underground-belt-A'].reload()
+            recipes['underground-belt-a'].enabled = true
+            recipes['underground-belt-a'].reload()
         end
 
         if (not technologies['logistics-2']) or technologies['logistics-2'].researched then
-            recipes['fast-underground-belt-A'].enabled = true
-            recipes['fast-underground-belt-A'].reload()
+            recipes['fast-underground-belt-a'].enabled = true
+            recipes['fast-underground-belt-a'].reload()
         end
 
         if (not technologies['logistics-3']) or technologies['logistics-3'].researched then
-            recipes['express-underground-belt-A'].enabled = true
-            recipes['express-underground-belt-A'].reload()
+            recipes['express-underground-belt-a'].enabled = true
+            recipes['express-underground-belt-a'].reload()
         end
 
         if (not technologies['turbo-transport-belt']) or technologies['turbo-transport-belt'].researched then
-            recipes['turbo-underground-belt-A'].enabled = true
-            recipes['turbo-underground-belt-A'].reload()
+            recipes['turbo-underground-belt-a'].enabled = true
+            recipes['turbo-underground-belt-a'].reload()
         end
 
         if (not technologies['steel-processing']) or technologies['steel-processing'].researched then
