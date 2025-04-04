@@ -945,6 +945,7 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['refined-flammables-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         table.insert(data.raw.technology['laser-weapons-damage-3'].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.3})
         table.insert(data.raw.technology['laser-weapons-damage-4'].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.4})
+
         for i=5, 7 do
             table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'tesla', modifier = 0.7})
             table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'electric', modifier = 0.7})
