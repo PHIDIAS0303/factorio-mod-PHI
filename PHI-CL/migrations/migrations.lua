@@ -37,7 +37,7 @@ for _, force in pairs(game.forces) do
         end
     end
 
-    if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-aRMOR'].value then
+    if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value then
         if (not technologies['power-armor-mk2']) or technologies['power-armor-mk2'].researched then
             recipes['power-armor-mk3'].enabled = true
             recipes['power-armor-mk3'].reload()
