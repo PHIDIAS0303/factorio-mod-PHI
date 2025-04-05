@@ -349,6 +349,7 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
         data.raw.technology[v].hidden = true
         data.raw.technology[v].hidden_in_factoriopedia = true
         data.raw.technology[v].unit.ingredients = {{'space-science-pack', 1}}
+        data.raw.technology[v].effects = nil
         data.raw.module[v].hidden = true
         data.raw.module[v].hidden_in_factoriopedia = true
         data.raw.recipe[v].hidden = true
@@ -358,9 +359,11 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw.technology['epic-quality'].hidden = true
     data.raw.technology['epic-quality'].hidden_in_factoriopedia = true
     data.raw.technology['epic-quality'].unit.ingredients = {{'space-science-pack', 1}}
+    data.raw.technology['epic-quality'].effects = nil
     data.raw.technology['legendary-quality'].hidden = true
     data.raw.technology['legendary-quality'].hidden_in_factoriopedia = true
     data.raw.technology['legendary-quality'].unit.ingredients = {{'space-science-pack', 1}}
+    data.raw.technology['legendary-quality'].effects = nil
 
     for _, v in pairs({'uncommon', 'rare', 'epic', 'legendary'}) do
         data.raw.quality[v].hidden = true
@@ -644,27 +647,37 @@ if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].v
     end
 end
 
-if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value and mods['quality'] then
-    for _, v in pairs(data.raw.module) do
-        if v.category and v.category == 'quality' then
-            v.effect.quality = v.effect.quality * settings.startup['PHI-SA-QUALITY'].value / 10
+if mods['quality'] then
+    if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value then
+        for _, v in pairs(data.raw.module) do
+            if v.category and v.category == 'quality' then
+                v.effect.quality = v.effect.quality * settings.startup['PHI-SA-QUALITY'].value / 10
 
-        elseif v.category and v.category == 'speed' then
-            v.effect.quality = nil
+            elseif v.category and v.category == 'speed' then
+                v.effect.quality = nil
+            end
         end
     end
-end
 
-if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-MAX-QUALITY'].value and mods['quality'] then
-    data.raw.quality.normal.level = 5
-    data.raw.quality.normal.beacon_power_usage_multiplier = 1 / 6
-    data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1 / 6
-    data.raw.quality.normal.science_pack_drain_multiplier = 19 / 20
+    if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-MAX-QUALITY'].value then
+        data.raw.quality.normal.level = 5
+        data.raw.quality.normal.beacon_power_usage_multiplier = 1 / 6
+        data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1 / 6
+        data.raw.quality.normal.science_pack_drain_multiplier = 19 / 20
 
-    for _, v in pairs(data.raw['inserter']) do
-        v.extension_speed = v.extension_speed * 2.5
-        v.rotation_speed = v.rotation_speed * 2.5
+        for _, v in pairs(data.raw['inserter']) do
+            v.extension_speed = v.extension_speed * 2.5
+            v.rotation_speed = v.rotation_speed * 2.5
+        end
     end
+
+    if ((settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value)) or (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-MAX-QUALITY'].value)) then
+        data.raw.quality.normal.level = 0
+        data.raw.quality.normal.beacon_power_usage_multiplier = 1
+        data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1
+        data.raw.quality.normal.science_pack_drain_multiplier = 1
+    end
+    
 end
 
 if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-HEAT-RADIUS'].value and mods['space-age'] then
@@ -1062,6 +1075,7 @@ if settings.startup['PHI-VP'].value then
             if data.raw.technology[k] then
                 data.raw.technology[k].hidden = v
                 data.raw.technology[k].hidden_in_factoriopedia = v
+                data.raw.technology[k].effects = nil
 
                 if data.raw.technology[k].unit and data.raw.technology[k].unit.ingredients then
                     data.raw.technology[k].unit.ingredients = {{'space-science-pack', 1}}
@@ -1327,13 +1341,6 @@ if settings.startup['PHI-VP'].value then
                 v.minable.results = {{type = 'item', name = 'wood', amount = 4}}
             end
         end
-    end
-
-    if mods['quality'] and settings.startup['PHI-VP-MAIN'].value and (not settings.startup['PHI-SA-MAX-QUALITY'].value) then
-        data.raw.quality.normal.level = 0
-        data.raw.quality.normal.beacon_power_usage_multiplier = 1
-        data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1
-        data.raw.quality.normal.science_pack_drain_multiplier = 1
     end
 end
 
