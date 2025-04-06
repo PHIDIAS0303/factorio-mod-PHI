@@ -62,17 +62,16 @@ if settings.startup['PHI-CT'].value then
         end
     end)
 
-    --[[
     local gui = {}
     local inserter_utils = {}
     math2d.direction = {vectors = {{x = 0, y = -1}, {x = 1, y = -1}, {x = 1, y = 0}, {x = 1, y = 1}, {x = 0, y = 1}, {x = -1, y = 1}, {x = -1, y = 0}, {x = -1, y = -1}}}
 
     function inserter_utils.get_arm_positions(inserter)
-        local x_int, x_frac, y_int, y_frac = math.modf((inserter.position.x and inserter.position.x) or inserter.position[1]), math.modf((inserter.position.y and inserter.position.y) or inserter.position[2])
+        local x_int, x_frac, y_int, y_frac = math.modf(inserter.position.x or inserter.position[1]), math.modf((inserter.position.y and inserter.position.y) or inserter.position[2])
         local base_tile = {x = x_frac < 0 and (x_int - 1) or x_int, y = y_frac < 0 and (y_int - 1) or y_int}
-        local pos2 = (inserter.drop_position.x and {x = inserter.drop_position.x, y = inserter.drop_position.y}) or {x = inserter.drop_position[1], y = inserter.drop_position[2]}
+        local pos2 = {x = inserter.drop_position.x, y = inserter.drop_position.y} or {x = inserter.drop_position[1], y = inserter.drop_position[2]}
         local x_int2, x_frac2, y_int2, y_frac2 = math.modf(pos2.x), math.modf(pos2.y)
-        local pos3 =(inserter.pickup_position.x and {x = inserter.pickup_position.x, y = inserter.pickup_position.y}) or {x = inserter.pickup_position[1], y = inserter.pickup_position[2]}
+        local pos3 = {x = inserter.pickup_position.x, y = inserter.pickup_position.y} or {x = inserter.pickup_position[1], y = inserter.pickup_position[2]}
         local x_int3, x_frac3, y_int3, y_frac3 = math.modf(pos3.x), math.modf(pos3.y)
 
         return {
@@ -94,6 +93,9 @@ if settings.startup['PHI-CT'].value then
             inserter.drop_position = math2d.position.add((positions.drop and math2d.position.add({x = x_frac < 0 and (x_int - 1) or x_int, y = y_frac < 0 and (y_int - 1) or y_int}, positions.drop)) or old_drop_tile, (positions.drop_offset and math2d.position.add(math2d.position.multiply_scalar(positions.drop_offset, 0.2), {0.5, 0.5})) or old_drop_offset)
         end
     end
+
+
+    --[[
 
     function gui.create(player)
         if player.gui.relative.inserter_config then
