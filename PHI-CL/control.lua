@@ -49,19 +49,6 @@ if settings.startup['PHI-CT'].value then
         hidden_recipe_enable(e)
     end)
 
-    script.on_init(function(_)
-        for _, surface in pairs(game.surfaces) do
-            for _, e in pairs(surface.find_entities_filtered{name='trash-chest'}) do
-                e.infinity_container_filters = {}
-                e.remove_unfiltered_items = true
-            end
-
-            for _, e in pairs(surface.find_entities_filtered{name='trash-pipe'}) do
-                e.set_infinity_pipe_filter(nil)
-            end
-        end
-    end)
-
     local gui = {}
     local inserter_utils = {}
     math2d.direction = {vectors = {{x = 0, y = -1}, {x = 1, y = -1}, {x = 1, y = 0}, {x = 1, y = 1}, {x = 0, y = 1}, {x = -1, y = 1}, {x = -1, y = 0}, {x = -1, y = -1}}}
@@ -84,18 +71,15 @@ if settings.startup['PHI-CT'].value then
     end
 
     function inserter_utils.set_arm_positions(inserter, positions)
-        inserter.pickup_position = (positions.pickup and math2d.position.add(inserter.position, positions.pickup)) or nil
+        inserter.pickup_position = math2d.position.add(inserter.position, positions.pickup)
 
         if positions.drop or positions.drop_offset then
-            local x_int, x_frac, y_int, y_frac = math.modf((inserter.position.x and inserter.position.x) or inserter.position[1]), math.modf((inserter.position.y and inserter.position.y) or inserter.position[2])
-            local x_int2, x_frac2, y_int2, y_frac2 = math.modf((inserter.drop_position.x and inserter.drop_position.x) or inserter.drop_position[1]), math.modf((inserter.drop_position.y and inserter.drop_position.y) or inserter.drop_position[2])
+            local x_int, x_frac, y_int, y_frac = math.modf(inserter.position.x or inserter.position[1]), math.modf(inserter.position.y or inserter.position[2])
+            local x_int2, x_frac2, y_int2, y_frac2 = math.modf(inserter.drop_position.x or inserter.drop_position[1]), math.modf(inserter.drop_position.y or inserter.drop_position[2])
             local old_drop_tile, old_drop_offset = {x = x_frac2 < 0 and (x_int2 - 1) or x_int2, y = y_frac2 < 0 and (y_int2 - 1) or y_int2}, {x = x_frac2 < 0 and (x_frac2 + 1) or x_frac2, y = y_frac2 < 0 and (y_frac2 + 1) or y_frac2}
             inserter.drop_position = math2d.position.add((positions.drop and math2d.position.add({x = x_frac < 0 and (x_int - 1) or x_int, y = y_frac < 0 and (y_int - 1) or y_int}, positions.drop)) or old_drop_tile, (positions.drop_offset and math2d.position.add(math2d.position.multiply_scalar(positions.drop_offset, 0.2), {0.5, 0.5})) or old_drop_offset)
         end
     end
-
-
-    --[[
 
     function gui.create(player)
         if player.gui.relative.inserter_config then
@@ -157,7 +141,7 @@ if settings.startup['PHI-CT'].value then
                 idx = idx + 1
 
                 if gui_instance.table_position.children[idx].type == 'sprite-button' then
-                    p1, p2, p3, p4 = (arm_positions.drop.x and {x = arm_positions.drop.x, y = arm_positions.drop.y}) or {x = arm_positions.drop[1], y = arm_positions.drop[2]}, {x = x, y = y}, (arm_positions.pickup.x and {x = arm_positions.pickup.x, y = arm_positions.pickup.y}) or {x = arm_positions.pickup[1], y = arm_positions.pickup[2]}, {x = x, y = y}
+                    p1, p2, p3, p4 = {x = arm_positions.drop.x, y = arm_positions.drop.y} or {x = arm_positions.drop[1], y = arm_positions.drop[2]}, {x = x, y = y}, {x = arm_positions.pickup.x, y = arm_positions.pickup.y} or {x = arm_positions.pickup[1], y = arm_positions.pickup[2]}, {x = x, y = y}
                     gui_instance.table_position.children[idx].sprite = (((p1.x == p2.x and p1.y == p2.y) and 'virtual-signal/down-arrow') or ((p3.x == p4.x and p3.y == p4.y) and 'virtual-signal/up-arrow')) or ((x ~= 0 or y ~= 0) and nil)
                     gui_instance.table_position.children[idx].enabled = math.abs(x) < inserter_range or math.abs(y) < inserter_range
                 end
@@ -178,7 +162,16 @@ if settings.startup['PHI-CT'].value then
     end
 
     script.on_init(function(_)
-        trash_check()
+        for _, surface in pairs(game.surfaces) do
+            for _, e in pairs(surface.find_entities_filtered{name='trash-chest'}) do
+                e.infinity_container_filters = {}
+                e.remove_unfiltered_items = true
+            end
+
+            for _, e in pairs(surface.find_entities_filtered{name='trash-pipe'}) do
+                e.set_infinity_pipe_filter(nil)
+            end
+        end
 
         for _, player in pairs(game.players) do
             gui.create(player)
@@ -273,5 +266,4 @@ if settings.startup['PHI-CT'].value then
             end
         end
     end)
-    ]]
 end
