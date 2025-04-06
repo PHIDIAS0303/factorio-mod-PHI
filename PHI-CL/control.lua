@@ -49,6 +49,20 @@ if settings.startup['PHI-CT'].value then
         hidden_recipe_enable(e)
     end)
 
+    script.on_init(function(_)
+        for _, surface in pairs(game.surfaces) do
+            for _, e in pairs(surface.find_entities_filtered{name='trash-chest'}) do
+                e.infinity_container_filters = {}
+                e.remove_unfiltered_items = true
+            end
+
+            for _, e in pairs(surface.find_entities_filtered{name='trash-pipe'}) do
+                e.set_infinity_pipe_filter(nil)
+            end
+        end
+    end)
+
+    --[[
     local gui = {}
     local inserter_utils = {}
     math2d.direction = {vectors = {{x = 0, y = -1}, {x = 1, y = -1}, {x = 1, y = 0}, {x = 1, y = 1}, {x = 0, y = 1}, {x = -1, y = 1}, {x = -1, y = 0}, {x = -1, y = -1}}}
@@ -266,4 +280,5 @@ if settings.startup['PHI-CT'].value then
             end
         end
     end)
+    ]]
 end
