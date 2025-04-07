@@ -74,8 +74,8 @@ if settings.startup['PHI-CT'].value then
 
     function gui_update(player, inserter)
         local gui = player.gui.relative.inserter_config
-        local pos_p = (inserter.prototype or inserter.ghost_prototype).inserter_pickup_position
-        local pos_d = (inserter.prototype or inserter.ghost_prototype).inserter_drop_position
+        local pos_p = inserter.inserter_pickup_position
+        local pos_d = inserter.inserter_drop_position
         local range = math.max(math.abs(math.floor(pos_p.x)), math.abs(math.floor(pos_p.y)), math.abs(math.floor(pos_d.x)), math.abs(math.floor(pos_d.y)))
         table['table_' .. (3 + (pos_p.x >= 0 and math.max(math.ceil(pos_p.x), 2)) or (pos_p.x < 0 and math.min(math.ceil(pos_p.x), -2))) .. '_' .. (pos_p.y >= 0 and math.max(math.ceil(pos_p.y), 2)) or (pos_p.y < 0 and math.min(math.ceil(pos_p.y), -2))].sprite = 'virtual-signal/up-arrow'
         table['table_' .. (3 + (pos_d.x >= 0 and math.max(math.ceil(pos_d.x), 2)) or (pos_d.x < 0 and math.min(math.ceil(pos_d.x), -2))) .. '_' .. (pos_d.y >= 0 and math.max(math.ceil(pos_d.y), 2)) or (pos_d.y < 0 and math.min(math.ceil(pos_d.y), -2))].sprite = 'virtual-signal/down-arrow'
