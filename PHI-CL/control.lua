@@ -1,6 +1,21 @@
 local items = require 'config'
 local math2d = require('math2d')
 
+local inserter_vectors = {
+    ['near'] = {
+        [defines.direction.north] = {0.01, -0.2},
+        [defines.direction.east] = {0.2, 0.01},
+        [defines.direction.south] = {-0.01, 0.2},
+        [defines.direction.west] = {-0.2, -0.01},
+    },
+    ['far'] = {
+        [defines.direction.north] = {0.0, 0.2},
+        [defines.direction.east] = {-0.2, 0.0},
+        [defines.direction.south] = {0.0, -0.2},
+        [defines.direction.west] = {0.2, 0.0},
+    }
+}
+
 if settings.startup['PHI-CT'].value then
     local function trash_creation(event)
         local entity = event.created_entity or event.entity
@@ -70,9 +85,22 @@ if settings.startup['PHI-CT'].value then
         end
 
         table['table_3_3'].sprite = 'item/bulk-inserter'
+
+        local table2 = frame.add({type = 'table', name = 'table2', column_count = 3})
+
+        for x = 1, 3 do
+            for y = 1, 3 do
+                local sprite = table2.add({type = 'sprite-button', name = 'table2' .. tostring(x) .. '_' .. tostring(y), style = 'slot_sized_button'})
+                sprite.style.size = {32, 32}
+            end
+        end
     end
 
     function gui_update(player, inserter)
+        if not inserter.allow_custom_vectors then
+            return
+        end
+
         local gui = player.gui.relative.inserter_config
         local pos_p = inserter.inserter_pickup_position
         local pos_d = inserter.inserter_drop_position
