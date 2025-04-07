@@ -74,8 +74,9 @@ if settings.startup['PHI-CT'].value then
 
     function gui_update(player, inserter)
         local gui = player.gui.relative.inserter_config
-        local pos_p = inserter.inserter_pickup_position or {x = 0, y = 0}
-        local pos_d = inserter.inserter_drop_position or {x = 0, y = 0}
+        local pos_p = inserter.inserter_pickup_position
+        local pos_d = inserter.inserter_drop_position
+        pos_p.x, pos_p.y, pos_d.x, pos_d.y = pos_p.x or 0, pos_p.y or 0, pos_d.x or 0, pos_d.y or 0
         local range = math.max(math.abs(math.floor(pos_p.x)), math.abs(math.floor(pos_p.y)), math.abs(math.floor(pos_d.x)), math.abs(math.floor(pos_d.y)))
         gui.table['table_' .. (3 + (pos_p.x >= 0 and math.max(math.ceil(pos_p.x), 2)) or (pos_p.x < 0 and math.min(math.ceil(pos_p.x), -2))) .. '_' .. (pos_p.y >= 0 and math.max(math.ceil(pos_p.y), 2)) or (pos_p.y < 0 and math.min(math.ceil(pos_p.y), -2))].sprite = 'virtual-signal/up-arrow'
         gui.table['table_' .. (3 + (pos_d.x >= 0 and math.max(math.ceil(pos_d.x), 2)) or (pos_d.x < 0 and math.min(math.ceil(pos_d.x), -2))) .. '_' .. (pos_d.y >= 0 and math.max(math.ceil(pos_d.y), 2)) or (pos_d.y < 0 and math.min(math.ceil(pos_d.y), -2))].sprite = 'virtual-signal/down-arrow'
