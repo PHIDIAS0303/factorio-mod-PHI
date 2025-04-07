@@ -69,12 +69,14 @@ if settings.startup['PHI-CT'].value then
             end
         end
 
-        table.children[13].sprite = 'item/bulk-inserter'
-        table.children[13].style.stretch_image_to_widget_size = true
+        table['table_3_3'].sprite = 'item/bulk-inserter'
     end
 
     function gui_update(player, inserter)
         local gui = player.gui.relative.inserter_config
+        local pos_p = (inserter.prototype or inserter.ghost_prototype).inserter_pickup_position
+        local pos_d = (inserter.prototype or inserter.ghost_prototype).inserter_drop_position
+        local range = math.max(math.abs(math.floor(pos_p.x)), math.abs(math.floor(pos_p.y)), math.abs(math.floor(pos_d.x)), math.abs(math.floor(pos_d.y)))
     end
 
     script.on_init(function(_)
