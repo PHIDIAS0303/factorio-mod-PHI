@@ -76,13 +76,11 @@ if settings.startup['PHI-CT'].value then
         local gui = player.gui.relative.inserter_config
         local pos_p = inserter.inserter_pickup_position
         local pos_d = inserter.inserter_drop_position
-        local pos_p_x_int, pos_p_x_frac = math.modf(pos_p.x or 0)
-        local pos_p_y_int, pos_p_y_frac = math.modf(pos_p.y or 0)
-        local pos_d_x_int, pos_d_x_frac = math.modf(pos_d.x or 0)
-        local pos_d_y_int, pos_d_y_frac = math.modf(pos_d.y or 0)
-        local range = math.max(math.abs(math.floor(pos_p.x)), math.abs(math.floor(pos_p.y)), math.abs(math.floor(pos_d.x)), math.abs(math.floor(pos_d.y)))
-        gui.table['table_' .. (3 + (pos_p.x >= 0 and math.max(math.floor(pos_p.x), 2)) or (pos_p.x < 0 and math.min(math.floor(pos_p.x), -2))) .. '_' .. (pos_p.y >= 0 and math.max(math.floor(pos_p.y), 2)) or (pos_p.y < 0 and math.min(math.floor(pos_p.y), -2))].sprite = 'virtual-signal/up-arrow'
-        gui.table['table_' .. (3 + (pos_d.x >= 0 and math.max(math.floor(pos_d.x), 2)) or (pos_d.x < 0 and math.min(math.floor(pos_d.x), -2))) .. '_' .. (pos_d.y >= 0 and math.max(math.floor(pos_d.y), 2)) or (pos_d.y < 0 and math.min(math.floor(pos_d.y), -2))].sprite = 'virtual-signal/down-arrow'
+        local pos_p_x_int, pos_p_x_frac, pos_p_y_int, pos_p_y_frac = math.modf(pos_p.x or 0), math.modf(pos_p.y or 0)
+        local pos_d_x_int, pos_d_x_frac, pos_d_y_int, pos_d_y_frac = math.modf(pos_d.x or 0), math.modf(pos_d.y or 0)
+        local range = math.max(math.abs(pos_p_x_int), math.abs(pos_p_y_int), math.abs(pos_d_x_int), math.abs(pos_d_y_int))
+        gui.table['table_' .. (3 + (pos_p.x >= 0 and math.max(pos_p_x_int, 2)) or (pos_p.x < 0 and math.min(pos_p_x_int, -2))) .. '_' .. (pos_p.y >= 0 and math.max(pos_p_y_int, 2)) or (pos_p.y < 0 and math.min(pos_p_y_int, -2))].sprite = 'virtual-signal/up-arrow'
+        gui.table['table_' .. (3 + (pos_d.x >= 0 and math.max(pos_d_x_int, 2)) or (pos_d.x < 0 and math.min(pos_d_x_int, -2))) .. '_' .. (pos_d.y >= 0 and math.max(pos_d_y_int, 2)) or (pos_d.y < 0 and math.min(pos_d_y_int, -2))].sprite = 'virtual-signal/down-arrow'
 
         for x = 1, 5 do
             for y = 1, 5 do
