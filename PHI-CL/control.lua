@@ -80,20 +80,12 @@ if settings.startup['PHI-CT'].value then
         table['table_' .. (3 + (pos_p.x >= 0 and math.max(math.ceil(pos_p.x), 2)) or (pos_p.x < 0 and math.min(math.ceil(pos_p.x), -2))) .. '_' .. (pos_p.y >= 0 and math.max(math.ceil(pos_p.y), 2)) or (pos_p.y < 0 and math.min(math.ceil(pos_p.y), -2))].sprite = 'virtual-signal/up-arrow'
         table['table_' .. (3 + (pos_d.x >= 0 and math.max(math.ceil(pos_d.x), 2)) or (pos_d.x < 0 and math.min(math.ceil(pos_d.x), -2))) .. '_' .. (pos_d.y >= 0 and math.max(math.ceil(pos_d.y), 2)) or (pos_d.y < 0 and math.min(math.ceil(pos_d.y), -2))].sprite = 'virtual-signal/down-arrow'
 
-        if range == 1 then
-            for x = 1, 5 do
-                table['table_' .. x .. '_1'].enabled = false
-                table['table_' .. x .. '_5'].enabled = false
-            end
+        for x = 1, 5 do
+            for y = 1, 5 do
+                if range == 1 and ((x == 1 or x == 5) or (y == 1 or y == 5)) then
+                    table['table_' .. x .. '_' .. y].enabled = false
 
-            for y = 2, 4 do
-                table['table_1_' .. y].enabled = false
-                table['table_5_' .. y].enabled = false
-            end
-
-        elseif range == 2 then
-            for x = 1, 5 do
-                for y = 1, 5 do
+                else
                     table['table_' .. x .. '_' .. y].enabled = true
                 end
             end
