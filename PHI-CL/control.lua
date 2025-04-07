@@ -104,7 +104,7 @@ if settings.startup['PHI-CT'].value then
         local gui = player.gui.relative.inserter_config
         local pos_p = inserter.inserter_pickup_position
         local pos_d = inserter.inserter_drop_position
-        pos_p.x, pos_p.y, pos_d.x, pos_d.y = pos_p.x or 0, pos_p.y or 0, pos_d.x or 0, pos_d.y or 0
+        pos_p.x, pos_p.y, pos_d.x, pos_d.y = pos_p.x or 0, pos_p.y or -1, pos_d.x or 0, pos_d.y or 1
         local range = math.max(math.abs(math.floor(pos_p.x)), math.abs(math.floor(pos_p.y)), math.abs(math.floor(pos_d.x)), math.abs(math.floor(pos_d.y)))
         gui.table['table_' .. (3 + math.floor(pos_p.x)) .. '_' .. (3 + math.floor(pos_p.y))].sprite = 'virtual-signal/up-arrow'
         gui.table['table_' .. (3 + math.floor(pos_d.x)) .. '_' .. (3 + math.floor(pos_d.y))].sprite = 'virtual-signal/down-arrow'
