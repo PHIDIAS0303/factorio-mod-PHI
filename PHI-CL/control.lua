@@ -77,16 +77,16 @@ if settings.startup['PHI-CT'].value then
         local pos_p = inserter.inserter_pickup_position or {x = 0, y = 0}
         local pos_d = inserter.inserter_drop_position or {x = 0, y = 0}
         local range = math.max(math.abs(math.floor(pos_p.x)), math.abs(math.floor(pos_p.y)), math.abs(math.floor(pos_d.x)), math.abs(math.floor(pos_d.y)))
-        table['table_' .. (3 + (pos_p.x >= 0 and math.max(math.ceil(pos_p.x), 2)) or (pos_p.x < 0 and math.min(math.ceil(pos_p.x), -2))) .. '_' .. (pos_p.y >= 0 and math.max(math.ceil(pos_p.y), 2)) or (pos_p.y < 0 and math.min(math.ceil(pos_p.y), -2))].sprite = 'virtual-signal/up-arrow'
-        table['table_' .. (3 + (pos_d.x >= 0 and math.max(math.ceil(pos_d.x), 2)) or (pos_d.x < 0 and math.min(math.ceil(pos_d.x), -2))) .. '_' .. (pos_d.y >= 0 and math.max(math.ceil(pos_d.y), 2)) or (pos_d.y < 0 and math.min(math.ceil(pos_d.y), -2))].sprite = 'virtual-signal/down-arrow'
+        gui.table['table_' .. (3 + (pos_p.x >= 0 and math.max(math.ceil(pos_p.x), 2)) or (pos_p.x < 0 and math.min(math.ceil(pos_p.x), -2))) .. '_' .. (pos_p.y >= 0 and math.max(math.ceil(pos_p.y), 2)) or (pos_p.y < 0 and math.min(math.ceil(pos_p.y), -2))].sprite = 'virtual-signal/up-arrow'
+        gui.table['table_' .. (3 + (pos_d.x >= 0 and math.max(math.ceil(pos_d.x), 2)) or (pos_d.x < 0 and math.min(math.ceil(pos_d.x), -2))) .. '_' .. (pos_d.y >= 0 and math.max(math.ceil(pos_d.y), 2)) or (pos_d.y < 0 and math.min(math.ceil(pos_d.y), -2))].sprite = 'virtual-signal/down-arrow'
 
         for x = 1, 5 do
             for y = 1, 5 do
                 if range == 1 and ((x == 1 or x == 5) or (y == 1 or y == 5)) then
-                    table['table_' .. x .. '_' .. y].enabled = false
+                    gui.table['table_' .. x .. '_' .. y].enabled = false
 
                 else
-                    table['table_' .. x .. '_' .. y].enabled = true
+                    gui.table['table_' .. x .. '_' .. y].enabled = true
                 end
             end
         end
