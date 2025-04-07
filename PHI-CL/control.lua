@@ -55,14 +55,12 @@ if settings.startup['PHI-CT'].value then
         end
 
         local frame = player.gui.relative.add({type = 'frame', name = 'inserter_config', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}})
-        frame.add({type = 'label', name = 'test', caption = '1', style = 'heading_2_label'})
+        -- frame.add({type = 'label', name = 'test', caption = '1', style = 'heading_2_label'})
 
         local table = frame.add({type = 'table', name = 'table', column_count = 5})
 
-        table:style{
-            horizontal_spacing = 1,
-            vertical_spacing = 1
-        }
+        table.style.horizontal_spacing = 1
+        table.style.vertical_spacing = 1
 
         for x = 1, 5 do
             for y = 1, 5 do
@@ -71,8 +69,8 @@ if settings.startup['PHI-CT'].value then
             end
         end
 
-        table['table_3_3'].sprite = 'item/bulk-inserter'
-        table['table_3_3'].style.stretch_image_to_widget_size = true
+        table.children[13].sprite = 'item/bulk-inserter'
+        table.children[13].style.stretch_image_to_widget_size = true
     end
 
     function gui_update(player, inserter)
