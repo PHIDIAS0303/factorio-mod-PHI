@@ -49,6 +49,36 @@ if settings.startup['PHI-CT'].value then
         hidden_recipe_enable(e)
     end)
 
+    function gui_create(player)
+        if player.gui.relative.inserter_config then
+            player.gui.relative.inserter_config.destroy()
+        end
+
+        local frame = player.gui.relative.add({type = 'frame', name = 'inserter_config', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}})
+        frame.add({type = 'label', name = 'test', caption = '1', style = 'heading_2_label'})
+
+        local table = frame.add({type = 'table', name = 'table', column_count = 5})
+
+        table:style{
+            horizontal_spacing = 1,
+            vertical_spacing = 1
+        }
+
+        for x = 1, 5 do
+            for y = 1, 5 do
+                local sprite = table.add({type = 'sprite-button', name = 'table_' .. tostring(x) .. '_' .. tostring(y), style = 'slot_sized_button'})
+                sprite.style.size = {32, 32}
+            end
+        end
+
+        table['table_3_3'].sprite = 'item/bulk-inserter'
+        table['table_3_3'].style.stretch_image_to_widget_size = true
+    end
+
+    function gui_update(player, inserter)
+        local gui = player.gui.relative.inserter_config
+    end
+
     script.on_init(function(_)
         for _, surface in pairs(game.surfaces) do
             for _, e in pairs(surface.find_entities_filtered{name='trash-chest'}) do
@@ -59,6 +89,30 @@ if settings.startup['PHI-CT'].value then
             for _, e in pairs(surface.find_entities_filtered{name='trash-pipe'}) do
                 e.set_infinity_pipe_filter(nil)
             end
+        end
+
+        for _, player in pairs(game.players) do
+            gui_create(player)
+        end
+    end)
+
+    script.on_configuration_changed(function(_)
+        for _, player in pairs(game.players) do
+            gui_create(player)
+
+            if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
+                gui_update(player, player.opened)
+            end
+        end
+    end)
+
+    script.on_event(defines.events.on_player_created, function(e)
+        gui_create(game.players[e.player_index])
+    end)
+
+    script.on_event(defines.events.on_gui_opened, function(e)
+        if e.entity and (e.entity.type == 'inserter' or (e.entity.type == 'entity-ghost' and e.entity.ghost_type == 'inserter')) then
+            gui_create(game.players[e.player_index])
         end
     end)
 
@@ -174,43 +228,6 @@ if settings.startup['PHI-CT'].value then
             end
         end
     end
-
-    script.on_init(function(_)
-        for _, surface in pairs(game.surfaces) do
-            for _, e in pairs(surface.find_entities_filtered{name='trash-chest'}) do
-                e.infinity_container_filters = {}
-                e.remove_unfiltered_items = true
-            end
-
-            for _, e in pairs(surface.find_entities_filtered{name='trash-pipe'}) do
-                e.set_infinity_pipe_filter(nil)
-            end
-        end
-
-        for _, player in pairs(game.players) do
-            gui.create(player)
-        end
-    end)
-
-    script.on_configuration_changed(function(_)
-        for _, player in pairs(game.players) do
-            gui.create(player)
-
-            if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
-                gui.update(player, player.opened)
-            end
-        end
-    end)
-
-    script.on_event(defines.events.on_player_created, function(e)
-        gui.create(game.players[e.player_index])
-    end)
-
-    script.on_event(defines.events.on_gui_opened, function(e)
-        if e.entity and (e.entity.type == 'inserter' or (e.entity.type == 'entity-ghost' and e.entity.ghost_type == 'inserter')) then
-            gui.update(game.players[e.player_index], e.entity)
-        end
-    end)
 
     script.on_event(defines.events.on_gui_click, function(e)
         local player = game.players[e.player_index]
