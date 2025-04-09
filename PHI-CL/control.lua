@@ -39,7 +39,7 @@ if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.script_raised_revive, trash_creation)
 
     local function hidden_recipe_enable(e)
-        local enable = (e.name == defines.events.on_player_cheat_mode_enabled and true) or false
+        local enable = (e.name == defines.events.on_player_cheat_mode_enabled)
         local force = game.players[e.player_index].force
 
         for _, v in pairs(prototypes.fluid) do
@@ -56,13 +56,8 @@ if settings.startup['PHI-CT'].value then
         force.recipes['infinity-pipe'].enabled = enable
     end
 
-    script.on_event(defines.events.on_player_cheat_mode_enabled, function(e)
-        hidden_recipe_enable(e)
-    end)
-
-    script.on_event(defines.events.on_player_cheat_mode_disabled, function(e)
-        hidden_recipe_enable(e)
-    end)
+    script.on_event(defines.events.on_player_cheat_mode_enabled, hidden_recipe_enable)
+    script.on_event(defines.events.on_player_cheat_mode_disabled, hidden_recipe_enable)
 
     script.on_init(function(_)
         for _, surface in pairs(game.surfaces) do
