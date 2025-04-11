@@ -161,8 +161,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     end)
 
     local entities = {
-        ['rail-support'] = true,
-        ['rail-ramp'] = true,
+        ['rail-support'] = true
     }
 
     local function build(event)
