@@ -100,7 +100,7 @@ if settings.startup['PHI-CT'].value then
         local gui = player.gui.relative.inserter_config
         local d, ds = math.fmod(inserter_direction_reversed[inserter.direction], 4)
         gui['i_direction'].selected_index = (d or 0) + 1
-        gui['i_sub_direction'].selected_index = (ds or 0) + 1
+        gui['i_sub_direction'].selected_index = (inserter.mirroring and (ds or 0) + 3 % 4) or (ds or 0) + 1
     end
 
     script.on_init(function(_)
@@ -150,6 +150,14 @@ if settings.startup['PHI-CT'].value then
     end)
 
     script.on_event(defines.events.on_player_rotated_entity, function(e)
+        local player = game.players[e.player_index]
+
+        if e.entity and player.opened == e.entity and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
+            gui_update(player, player.opened)
+        end
+    end)
+
+    script.on_event(defines.events.on_player_flipped_entity, function(e)
         local player = game.players[e.player_index]
 
         if e.entity and player.opened == e.entity and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
