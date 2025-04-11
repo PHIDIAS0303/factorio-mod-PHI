@@ -144,7 +144,7 @@ if settings.startup['PHI-CT'].value then
         local player = game.players[e.player_index]
         local gui = player.gui.relative.inserter_config
 
-        if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.entity.type == 'inserter' or (player.opened.entity.type == 'entity-ghost' and player.opened.entity.ghost_type == 'inserter')) and gui[e.element.name] then
+        if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) and gui[e.element.name] then
             player.opened.direction = inserter_direction[(e.element.parent['i_direction'].selected_index - 1) * 4 + (e.element.parent['i_sub_direction'].selected_index - 1) + 1]
         end
     end)
