@@ -118,13 +118,8 @@ if settings.startup['PHI-CT'].value then
         for _, player in pairs(game.players) do
             gui_create(player)
 
-            if player.opened and player.opened.object_name == 'LuaEntity' then
-                if player.opened.type == 'inserter' then
-                    gui_update(player, player.opened.prototype)
-
-                elseif player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter' then
-                    gui_update(player, player.opened.ghost_prototype)
-                end
+            if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.entity.type == 'inserter' or (player.opened.entity.type == 'entity-ghost' and player.opened.entity.ghost_type == 'inserter')) then
+                gui_update(player, player.opened.entity)
             end
         end
     end)
@@ -134,13 +129,8 @@ if settings.startup['PHI-CT'].value then
     end)
 
     script.on_event(defines.events.on_gui_opened, function(e)
-        if e.entity then
-            if e.entity.type == 'inserter' then
-                gui_update(game.players[e.player_index], e.entity.prototype)
-
-            elseif e.entity.type == 'entity-ghost' and e.entity.ghost_type == 'inserter' then
-                gui_update(game.players[e.player_index], e.entity.ghost_prototype)
-            end
+        if e.entity and (e.entity.type == 'inserter' or (e.entity.type == 'entity-ghost' and e.entity.ghost_type == 'inserter')) then
+            gui_update(game.players[e.player_index], e.entity)
         end
     end)
 
@@ -156,14 +146,8 @@ if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.on_player_rotated_entity, function(e)
         if e.entity then
             for _, player in pairs(game.players) do
-                if player.opened == e.entity then
-                    if player.opened.type == 'inserter' then
-                        gui_update(player, player.opened.prototype)
-
-                    elseif player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter' then
-                        gui_update(player, player.opened.ghost_prototype)
-                    end
-
+                if player.opened == e.entity and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
+                    gui_update(player, player.opened)
                     return
                 end
             end
@@ -173,14 +157,8 @@ if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.on_entity_settings_pasted, function(e)
         if e.destination and e.destination.type == 'inserter' or (e.destination.type == 'entity-ghost' and e.destination.ghost_type == 'inserter') then
             for _, player in pairs(game.players) do
-                if player.opened == e.destination then
-                    if player.opened.type == 'inserter' then
-                        gui_update(player, player.opened.prototype)
-
-                    elseif player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter' then
-                        gui_update(player, player.opened.ghost_prototype)
-                    end
-
+                if player.opened == e.destination and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
+                    gui_update(player, player.opened)
                     return
                 end
             end
