@@ -19,6 +19,12 @@ local inserter_direction = {
     [16] = defines.direction.northnorthwest,
 }
 
+local inserter_direction_reversed = {}
+
+for k, v in pairs(inserter_direction) do
+    inserter_direction_reversed[v] = k
+end
+
 if settings.startup['PHI-CT'].value then
     local function trash_creation(event)
         local entity = event.created_entity or event.entity
@@ -92,9 +98,9 @@ if settings.startup['PHI-CT'].value then
         end
 
         local gui = player.gui.relative.inserter_config
-        local d, ds = math.fmod(inserter.direction, 4)
-        gui['i_direction'].selected_index = d
-        gui['i_sub_direction'].selected_index = ds
+        local d, ds = math.fmod(inserter_direction_reversed[inserter.direction], 4)
+        gui['i_direction'].selected_index = (d or 0) + 1
+        gui['i_sub_direction'].selected_index = (ds or 0) + 1
     end
 
     script.on_init(function(_)
