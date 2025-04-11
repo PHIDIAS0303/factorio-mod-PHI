@@ -1,19 +1,22 @@
 local items = require 'config'
-local math2d = require('math2d')
 
-local inserter_vectors = {
-    ['near'] = {
-        [defines.direction.north] = {0.01, -0.2},
-        [defines.direction.east] = {0.2, 0.01},
-        [defines.direction.south] = {-0.01, 0.2},
-        [defines.direction.west] = {-0.2, -0.01},
-    },
-    ['far'] = {
-        [defines.direction.north] = {0.0, 0.2},
-        [defines.direction.east] = {-0.2, 0.0},
-        [defines.direction.south] = {0.0, -0.2},
-        [defines.direction.west] = {0.2, 0.0},
-    }
+local inserter_direction = {
+    [1] = defines.direction.north,
+    [2] = defines.direction.northnortheast,
+    [3] = defines.direction.northeast,
+    [4] = defines.direction.eastnortheast,
+    [5] = defines.direction.east,
+    [6] = defines.direction.eastsoutheast,
+    [7] = defines.direction.southeast,
+    [8] = defines.direction.southsoutheast,
+    [9] = defines.direction.south,
+    [10] = defines.direction.southsouthwest,
+    [11] = defines.direction.southwest,
+    [12] = defines.direction.westsouthwest,
+    [13] = defines.direction.west,
+    [14] = defines.direction.westnorthwest,
+    [15] = defines.direction.northwest,
+    [16] = defines.direction.northnorthwest,
 }
 
 if settings.startup['PHI-CT'].value then
@@ -79,8 +82,8 @@ if settings.startup['PHI-CT'].value then
 
         local frame = player.gui.relative.add({type = 'frame', name = 'inserter_config', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}})
         frame.add({type = 'label', name = 'label_info', caption = 'Inserter direction', style = 'heading_2_label'})
-        frame.add({type = 'drop-down', name = 'direction', items = {'virtual-signal/down-arrow', 'virtual-signal/left-arrow', 'virtual-signal/up-arrow', 'virtual-signal/right-arrow'}, selected_index = 1})
-        frame.add({type = 'drop-down', name = 'sub-direction', items = {'virtual-signal/signal-0', 'virtual-signal/signal-1', 'virtual-signal/signal-2', 'virtual-signal/signal-3'}, selected_index = 1})
+        frame.add({type = 'drop-down', name = 'i_direction', items = {'virtual-signal/down-arrow', 'virtual-signal/left-arrow', 'virtual-signal/up-arrow', 'virtual-signal/right-arrow'}, selected_index = 1})
+        frame.add({type = 'drop-down', name = 'i_sub_direction', items = {'virtual-signal/signal-0', 'virtual-signal/signal-1', 'virtual-signal/signal-2', 'virtual-signal/signal-3'}, selected_index = 1})
     end
 
     function gui_update(player, inserter)
@@ -90,8 +93,8 @@ if settings.startup['PHI-CT'].value then
 
         local gui = player.gui.relative.inserter_config
         local d, ds = math.fmod(inserter.direction, 4)
-        gui['direction'].selected_index = d
-        gui['sub-direction'].selected_index = ds
+        gui['i_direction'].selected_index = d
+        gui['i_sub_direction'].selected_index = ds
     end
 
     script.on_init(function(_)
@@ -146,7 +149,7 @@ if settings.startup['PHI-CT'].value then
         local gui = player.gui.relative.inserter_config
 
         if gui[e.element.name] and e.element.entity and (e.element.entity.type == 'inserter' or (e.element.entity.type == 'entity-ghost' and e.element.entity.ghost_type == 'inserter')) then
-            e.element.entity.direction = (e.element.parent.direction.selected_index - 1) * 4 + (e.element.parent.sub_direction.selected_index - 1)
+            e.element.entity.direction = inserter_direction[(e.element.parent['i_direction'].selected_index - 1) * 4 + (e.element.parent['i_sub_direction'].selected_index - 1) + 1]
         end
     end)
 

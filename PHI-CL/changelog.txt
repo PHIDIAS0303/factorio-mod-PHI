@@ -1,9 +1,9 @@
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.88
-Date: 2025-04-07
+Date: 2025-04-13
 
   Changes:
-    - [CT] Introduced a test gui of inserter position gui.
+    - [CT] Introduced a test gui, to allow setting inserter direction, in which you can done without mod in the base game.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.87
