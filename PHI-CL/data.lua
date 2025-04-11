@@ -154,6 +154,21 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and set
     end
 end
 
+if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value) then
+    for _, v in pairs({'burner-inserter', 'inserter', 'fast-inserter', 'long-handed-inserter', 'bulk-inserter'}) do
+        if data.raw['inserter'][v] then
+            data.raw['inserter'][v].max_belt_stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
+            data.raw['inserter'][v].grab_less_to_match_belt_stack = true
+            data.raw['inserter'][v].enter_drop_mode_if_held_stack_spoiled = true
+            data.raw['inserter'][v].allow_custom_vectors = true
+        end
+    end
+
+    if mods['space-age'] and data.raw['inserter']['stack-inserter'] then
+        data.raw['inserter']['stack-inserter'].allow_custom_vectors = true
+    end
+end
+
 if settings.startup['PHI-MI'].value then
     for _, v in pairs(data.raw['active-defense-equipment']) do
         v.automatic = true
@@ -1181,15 +1196,6 @@ if settings.startup['PHI-VP'].value then
 
         data.raw['pump']['pump'].pumping_speed = 50
         data.raw['inserter']['burner-inserter'].allow_burner_leech = true
-
-        for _, v in pairs({'burner-inserter', 'inserter', 'fast-inserter', 'long-handed-inserter', 'bulk-inserter'}) do
-            data.raw['inserter'][v].max_belt_stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
-            data.raw['inserter'][v].grab_less_to_match_belt_stack = true
-            data.raw['inserter'][v].enter_drop_mode_if_held_stack_spoiled = true
-            data.raw['inserter'][v].allow_custom_vectors = true
-        end
-
-        data.raw['inserter']['stack-inserter'].allow_custom_vectors = true
 
         for _, v in pairs({'wooden-chest', 'iron-chest', 'steel-chest'}) do
             data.raw['container'][v].inventory_type = 'with_filters_and_bar'
