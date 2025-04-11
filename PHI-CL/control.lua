@@ -72,62 +72,26 @@ if settings.startup['PHI-CT'].value then
         end
     end)
 
-    --[[
-        function gui_create(player)
+    function gui_create(player)
         if player.gui.relative.inserter_config then
             player.gui.relative.inserter_config.destroy()
         end
 
         local frame = player.gui.relative.add({type = 'frame', name = 'inserter_config', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}})
         -- frame.add({type = 'label', name = 'test', caption = '1', style = 'heading_2_label'})
-
-        local table = frame.add({type = 'table', name = 'table', column_count = 5})
-
-        table.style.horizontal_spacing = 1
-        table.style.vertical_spacing = 1
-
-        for x = 1, 5 do
-            for y = 1, 5 do
-                local sprite = table.add({type = 'sprite-button', name = 'table_' .. tostring(x) .. '_' .. tostring(y), style = 'slot_sized_button'})
-                sprite.style.size = {32, 32}
-            end
-        end
-
-        table['table_3_3'].sprite = 'item/bulk-inserter'
-
-        local table2 = frame.add({type = 'table', name = 'table2', column_count = 3})
-
-        for x = 1, 3 do
-            for y = 1, 3 do
-                local sprite = table2.add({type = 'sprite-button', name = 'table2' .. tostring(x) .. '_' .. tostring(y), style = 'slot_sized_button'})
-                sprite.style.size = {32, 32}
-            end
-        end
+        frame.add({type = 'drop-down', name = 'direction', items = {'virtual-signal/down-arrow', 'virtual-signal/left-arrow', 'virtual-signal/up-arrow', 'virtual-signal/right-arrow'}, selected_index = 1})
+        frame.add({type = 'drop-down', name = 'sub-direction', items = {'virtual-signal/signal-0', 'virtual-signal/signal-1', 'virtual-signal/signal-2', 'virtual-signal/signal-3'}, selected_index = 1})
     end
 
     function gui_update(player, inserter)
-        if not inserter.allow_custom_vectors then
+        if not (inserter.allow_custom_vectors or inserter.supports_direction) then
             return
         end
 
         local gui = player.gui.relative.inserter_config
-        local pos_p = inserter.inserter_pickup_position
-        local pos_d = inserter.inserter_drop_position
-        pos_p.x, pos_p.y, pos_d.x, pos_d.y = pos_p.x or 0, pos_p.y or -1, pos_d.x or 0, pos_d.y or 1
-        local range = math.max(math.abs(math.floor(pos_p.x)), math.abs(math.floor(pos_p.y)), math.abs(math.floor(pos_d.x)), math.abs(math.floor(pos_d.y)))
-        gui.table['table_' .. (3 + math.floor(pos_p.x)) .. '_' .. (3 + math.floor(pos_p.y))].sprite = 'virtual-signal/up-arrow'
-        gui.table['table_' .. (3 + math.floor(pos_d.x)) .. '_' .. (3 + math.floor(pos_d.y))].sprite = 'virtual-signal/down-arrow'
-
-        for x = 1, 5 do
-            for y = 1, 5 do
-                if range == 1 and ((x == 1 or x == 5) or (y == 1 or y == 5)) then
-                    gui.table['table_' .. x .. '_' .. y].enabled = false
-
-                else
-                    gui.table['table_' .. x .. '_' .. y].enabled = true
-                end
-            end
-        end
+        local d, ds = math.fmod(inserter.direction, 4)
+        gui['direction'].selected_index = d
+        gui['sub-direction'].selected_index = ds
     end
 
     script.on_init(function(_)
@@ -147,6 +111,7 @@ if settings.startup['PHI-CT'].value then
         end
     end)
 
+    --[[
     script.on_configuration_changed(function(_)
         for _, player in pairs(game.players) do
             gui_create(player)
