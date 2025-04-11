@@ -173,7 +173,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     entity.hidden = true
     entity.hidden_in_factoriopedia = true
     entity.minable.result = nil
-    entity.maximum_wire_distance = math.floor(data.raw['rail-support']['rail-support'].support_range * 1.5)
+    entity.maximum_wire_distance = math.floor(data.raw['rail-support']['rail-support'].support_range * 1.75)
     entity.supply_area_distance = 0
     entity.water_reflection = nil
     entity.pictures = nil
