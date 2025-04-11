@@ -84,7 +84,7 @@ if settings.startup['PHI-CT'].value then
     function gui_create(player)
         if player.gui.relative.inserter_config then
             player.gui.relative.inserter_config.destroy()
-        end
+        end 
 
         local frame = player.gui.relative.add({type = 'frame', name = 'inserter_config', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}})
         frame.add({type = 'label', name = 'label_info', caption = 'Inserter direction', style = 'heading_2_label'})
@@ -99,8 +99,8 @@ if settings.startup['PHI-CT'].value then
 
         local gui = player.gui.relative.inserter_config
         local d, ds = math.fmod(inserter_direction_reversed[inserter.direction], 4)
-        gui['i_direction'].selected_index = (d or 0) + 1
-        gui['i_sub_direction'].selected_index = (inserter.mirroring and (ds or 0) + 3 % 4) or (ds or 0) + 1
+        gui['i_direction'].selected_index = d or 1
+        gui['i_sub_direction'].selected_index = ((ds or 0) + ((inserter.mirroring and 2) or 0)) % 4 + 1
     end
 
     script.on_init(function(_)
