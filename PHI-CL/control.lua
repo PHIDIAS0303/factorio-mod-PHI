@@ -87,7 +87,7 @@ if settings.startup['PHI-CT'].value then
     end
 
     function gui_update(player, inserter)
-        if not (inserter.allow_custom_vectors or inserter.supports_direction) then
+        if not (inserter.supports_direction or ((inserter.prototype and inserter.prototype.allow_custom_vectors) or (inserter.ghost_prototype and inserter.ghost_prototype.allow_custom_vectors))) then
             return
         end
 
