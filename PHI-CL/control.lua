@@ -89,7 +89,6 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         end
 
         local frame = player.gui.relative.add({type = 'frame', name = 'inserter_config', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}})
-        frame.add({type = 'drop-down', name = 'i_direction', items = {'[virtual-signal=down-arrow]', '[virtual-signal=left-arrow]', '[virtual-signal=up-arrow]', '[virtual-signal=right-arrow]'}, selected_index = 1})
         frame.add({type = 'drop-down', name = 'i_sub_direction', items = {'[virtual-signal=signal-0]', '[virtual-signal=signal-1]', '[virtual-signal=signal-2]', '[virtual-signal=signal-3]'}, selected_index = 1})
     end
 
@@ -99,8 +98,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         end
 
         local gui = player.gui.relative.inserter_config
-        local d, ds = math.fmod(inserter_direction_reversed[inserter.direction], 4)
-        gui['i_direction'].selected_index = d or 1
+        local _, ds = math.fmod(inserter_direction_reversed[inserter.direction], 4)
         gui['i_sub_direction'].selected_index = ((ds or 0) + ((inserter.mirroring and 2) or 0)) % 4 + 1
     end
 
@@ -135,7 +133,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         local gui = player.gui.relative.inserter_config
 
         if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) and gui[e.element.name] then
-            player.opened.direction = inserter_direction[(e.element.parent['i_direction'].selected_index - 1) * 4 + (e.element.parent['i_sub_direction'].selected_index - 1) + 1]
+            player.opened.direction = (inserter_direction_reversed[player.opened.direction] + (e.element.parent['i_sub_direction'].selected_index - 1)) % 16 + 1
         end
     end)
 
