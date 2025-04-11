@@ -144,30 +144,24 @@ if settings.startup['PHI-CT'].value then
         local player = game.players[e.player_index]
         local gui = player.gui.relative.inserter_config
 
-        if gui[e.element.name] and e.element.entity and (e.element.entity.type == 'inserter' or (e.element.entity.type == 'entity-ghost' and e.element.entity.ghost_type == 'inserter')) then
-            e.element.entity.direction = inserter_direction[(e.element.parent['i_direction'].selected_index - 1) * 4 + (e.element.parent['i_sub_direction'].selected_index - 1) + 1]
+        if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.entity.type == 'inserter' or (player.opened.entity.type == 'entity-ghost' and player.opened.entity.ghost_type == 'inserter')) and gui[e.element.name] then
+            player.opened.direction = inserter_direction[(e.element.parent['i_direction'].selected_index - 1) * 4 + (e.element.parent['i_sub_direction'].selected_index - 1) + 1]
         end
     end)
 
     script.on_event(defines.events.on_player_rotated_entity, function(e)
-        if e.entity then
-            for _, player in pairs(game.players) do
-                if player.opened == e.entity and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
-                    gui_update(player, player.opened)
-                    return
-                end
-            end
+        local player = game.players[e.player_index]
+
+        if e.entity and player.opened == e.entity and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
+            gui_update(player, player.opened)
         end
     end)
 
     script.on_event(defines.events.on_entity_settings_pasted, function(e)
-        if e.destination and e.destination.type == 'inserter' or (e.destination.type == 'entity-ghost' and e.destination.ghost_type == 'inserter') then
-            for _, player in pairs(game.players) do
-                if player.opened == e.destination and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
-                    gui_update(player, player.opened)
-                    return
-                end
-            end
+        local player = game.players[e.player_index]
+
+        if e.destination and (e.destination.type == 'inserter' or (e.destination.type == 'entity-ghost' and e.destination.ghost_type == 'inserter')) and player.opened == e.destination and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
+            gui_update(player, player.opened)
         end
     end)
 end
