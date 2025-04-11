@@ -84,10 +84,9 @@ if settings.startup['PHI-CT'].value then
     function gui_create(player)
         if player.gui.relative.inserter_config then
             player.gui.relative.inserter_config.destroy()
-        end 
+        end
 
         local frame = player.gui.relative.add({type = 'frame', name = 'inserter_config', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}})
-        frame.add({type = 'label', name = 'label_info', caption = 'Inserter direction', style = 'heading_2_label'})
         frame.add({type = 'drop-down', name = 'i_direction', items = {'[virtual-signal=down-arrow]', '[virtual-signal=left-arrow]', '[virtual-signal=up-arrow]', '[virtual-signal=right-arrow]'}, selected_index = 1})
         frame.add({type = 'drop-down', name = 'i_sub_direction', items = {'[virtual-signal=signal-0]', '[virtual-signal=signal-1]', '[virtual-signal=signal-2]', '[virtual-signal=signal-3]'}, selected_index = 1})
     end
