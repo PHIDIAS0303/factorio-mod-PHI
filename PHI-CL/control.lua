@@ -159,4 +159,33 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
             gui_update(player, player.opened)
         end
     end)
+
+    local entities = {
+        ['rail-support'] = true,
+        ['rail-ramp'] = true,
+    }
+
+    local function build(event)
+        if entities[event.entity.name] then
+            local p = event.entity.surface.create_entity{name = 'rail-electric-pole', position = {event.entity.position.x, event.entity.position.y}, force = game.forces.neutral, quality = event.entity.quality}
+            p.destructible = false
+        end
+    end
+
+    local function destroy(event)
+        if entities[event.entity.name] then
+            local e = event.entity.surface.find_entity({name = 'rail-electric-pole', quality = event.entity.quality.name}, {event.entity.position.x, event.entity.position.y})
+
+            if e then
+                e.destroy()
+            end
+        end
+    end
+
+    script.on_event(defines.events.on_built_entity, build)
+    script.on_event(defines.events.on_robot_built_entity, build)
+    script.on_event(defines.events.on_entity_died, destroy)
+    script.on_event(defines.events.on_player_mined_entity, destroy)
+    script.on_event(defines.events.on_robot_pre_mined, destroy)
+    script.on_event(defines.events.script_raised_destroy, destroy)
 end

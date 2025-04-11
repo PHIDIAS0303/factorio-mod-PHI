@@ -167,6 +167,25 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     if mods['space-age'] and data.raw['inserter']['stack-inserter'] then
         data.raw['inserter']['stack-inserter'].allow_custom_vectors = true
     end
+
+    local entity = table.deepcopy(data.raw['electric-pole']['big-electric-pole'])
+    entity.name = 'rail-electric-pole'
+    entity.hidden = true
+    entity.hidden_in_factoriopedia = true
+    entity.minable.result = nil
+    entity.maximum_wire_distance = math.floor(data.raw['rail-support']['rail-support'].support_range * 1.5)
+    entity.supply_area_distance = 0
+    entity.water_reflection = nil
+    entity.pictures = nil
+    entity.active_picture = nil
+    entity.collision_box = {{0, 0}, {0, 0}}
+    entity.selection_box = nil
+    entity.collision_mask = {colliding_with_tiles_only = true, layers = {}, not_colliding_with_itself = true}
+    entity.flags = {'hide-alt-info', 'no-copy-paste', 'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'not-selectable-in-game', 'placeable-off-grid', 'placeable-player'}
+    entity.max_health = 2147483648
+    entity.next_upgrade = nil
+    entity.order = 'zz'
+    data:extend({entity})
 end
 
 if settings.startup['PHI-MI'].value then
