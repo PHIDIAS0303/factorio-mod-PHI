@@ -80,7 +80,9 @@ if settings.startup['PHI-CT'].value then
             end
         end
     end)
+end
 
+if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value) then
     function gui_create(player)
         if player.gui.relative.inserter_config then
             player.gui.relative.inserter_config.destroy()
@@ -103,17 +105,6 @@ if settings.startup['PHI-CT'].value then
     end
 
     script.on_init(function(_)
-        for _, surface in pairs(game.surfaces) do
-            for _, e in pairs(surface.find_entities_filtered{name='trash-chest'}) do
-                e.infinity_container_filters = {}
-                e.remove_unfiltered_items = true
-            end
-
-            for _, e in pairs(surface.find_entities_filtered{name='trash-pipe'}) do
-                e.set_infinity_pipe_filter(nil)
-            end
-        end
-
         for _, player in pairs(game.players) do
             gui_create(player)
         end
