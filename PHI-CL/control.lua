@@ -98,8 +98,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         end
 
         local gui = player.gui.relative.inserter_config
-        local _, ds = math.fmod(inserter_direction_reversed[inserter.direction], 4)
-        gui['i_sub_direction'].selected_index = ((ds or 0) + ((inserter.mirroring and 2) or 0)) % 4 + 1
+        gui['i_sub_direction'].selected_index = ((inserter_direction_reversed[inserter.direction] % 4 or 0) + ((inserter.mirroring and 2) or 0)) % 4 + 1
     end
 
     script.on_init(function(_)
