@@ -25,6 +25,12 @@ for k, v in pairs(inserter_direction) do
     inserter_direction_reversed[v] = k
 end
 
+local rail_support_pole = {
+    'rail-support-pole-electric',
+    'rail-support-pole-lightning'
+}
+
+
 if settings.startup['PHI-CT'].value then
     local function trash_creation(event)
         local entity = event.created_entity or event.entity
@@ -160,31 +166,36 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         end
     end)
 
-    local entities = {
-        ['rail-support'] = true
-    }
 
-    local function build(event)
-        if entities[event.entity.name] then
-            local p = event.entity.surface.create_entity{name = 'rail-electric-pole', position = {event.entity.position.x, event.entity.position.y}, force = 'neutral', quality = event.entity.quality.name}
-            p.destructible = false
-        end
-    end
-
-    local function destroy(event)
-        if entities[event.entity.name] then
-            local e = event.entity.surface.find_entity{entity = {name = 'rail-electric-pole', force = 'neutral', quality = event.entity.quality.name}, position = {event.entity.position.x, event.entity.position.y}}
-
-            if e then
-                e.destroy()
+    local function build_electric_pole(event)
+        if event.entity.name == 'rail-support' then
+            for _, v in pairs(rail_support_pole) do
+                if prototypes.entity[v] then
+                    local p = event.entity.surface.create_entity{name = v, position = {event.entity.position.x, event.entity.position.y}, force = 'neutral', quality = event.entity.quality.name}
+                    p.destructible = false
+                end
             end
         end
     end
 
-    script.on_event(defines.events.on_built_entity, build)
-    script.on_event(defines.events.on_robot_built_entity, build)
-    script.on_event(defines.events.on_entity_died, destroy)
-    script.on_event(defines.events.on_player_mined_entity, destroy)
-    script.on_event(defines.events.on_robot_pre_mined, destroy)
-    script.on_event(defines.events.script_raised_destroy, destroy)
+    local function destroy_electric_pole(event)
+        if event.entity.name == 'rail-support' then
+            for _, v in pairs(rail_support_pole) do
+                if prototypes.entity[v] then
+                    local e = event.entity.surface.find_entity{entity = {name = v, force = 'neutral', quality = event.entity.quality.name}, position = {event.entity.position.x, event.entity.position.y}}
+
+                    if e then
+                        e.destroy()
+                    end
+                end
+            end
+        end
+    end
+
+    script.on_event(defines.events.on_built_entity, build_electric_pole)
+    script.on_event(defines.events.on_robot_built_entity, build_electric_pole)
+    script.on_event(defines.events.on_entity_died, destroy_electric_pole)
+    script.on_event(defines.events.on_player_mined_entity, destroy_electric_pole)
+    script.on_event(defines.events.on_robot_pre_mined, destroy_electric_pole)
+    script.on_event(defines.events.script_raised_destroy, destroy_electric_pole)
 end

@@ -169,7 +169,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     end
 
     local entity = table.deepcopy(data.raw['electric-pole']['big-electric-pole'])
-    entity.name = 'rail-electric-pole'
+    entity.name = 'rail-support-pole-electric'
     entity.hidden = true
     entity.hidden_in_factoriopedia = true
     entity.minable.result = nil
@@ -182,10 +182,27 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     entity.selection_box = nil
     entity.collision_mask = {colliding_with_tiles_only = true, layers = {}, not_colliding_with_itself = true}
     entity.flags = {'hide-alt-info', 'no-copy-paste', 'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'not-selectable-in-game', 'placeable-off-grid', 'placeable-player'}
-    entity.max_health = 2147483648
     entity.next_upgrade = nil
     entity.order = 'zz'
     data:extend({entity})
+
+    if (not (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value)) and mods['space-age'] and data.raw['lightning-attractor']['lightning-rod'] then
+        entity = table.deepcopy(data.raw['lightning-attractor']['lightning-rod'])
+        entity.name = 'rail-support-pole-lightning'
+        entity.hidden = true
+        entity.hidden_in_factoriopedia = true
+        entity.minable.result = nil
+        entity.range_elongation = math.floor(data.raw['rail-support']['rail-support'].support_range * 1.75)
+        entity.water_reflection = nil
+        entity.chargable_graphics = nil
+        entity.collision_box = {{0, 0}, {0, 0}}
+        entity.selection_box = nil
+        entity.collision_mask = {colliding_with_tiles_only = true, layers = {}, not_colliding_with_itself = true}
+        entity.flags = {'hide-alt-info', 'no-copy-paste', 'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'not-selectable-in-game', 'placeable-off-grid', 'placeable-player'}
+        entity.next_upgrade = nil
+        entity.order = 'zz'
+        data:extend({entity})
+    end
 end
 
 if settings.startup['PHI-MI'].value then
