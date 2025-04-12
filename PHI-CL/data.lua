@@ -728,7 +728,6 @@ if mods['quality'] then
         data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1
         data.raw.quality.normal.science_pack_drain_multiplier = 1
     end
-    
 end
 
 if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-HEAT-RADIUS'].value and mods['space-age'] then
