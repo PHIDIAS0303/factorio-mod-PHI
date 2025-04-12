@@ -181,12 +181,10 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     local function destroy_electric_pole(event)
         if event.entity.name == 'rail-support' then
             for _, v in pairs(rail_support_pole) do
-                if prototypes.entity[v] then
-                    local e = event.entity.surface.find_entity{entity = {name = v, force = 'neutral', quality = event.entity.quality.name}, position = {event.entity.position.x, event.entity.position.y}}
+                local e = event.entity.surface.find_entity({name = v, force = 'neutral', quality = event.entity.quality.name}, {event.entity.position.x, event.entity.position.y})
 
-                    if e then
-                        e.destroy()
-                    end
+                if e then
+                    e.destroy()
                 end
             end
         end
