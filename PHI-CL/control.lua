@@ -166,14 +166,14 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
 
     local function build(event)
         if entities[event.entity.name] then
-            local p = event.entity.surface.create_entity{name = 'rail-electric-pole', position = {event.entity.position.x, event.entity.position.y}, force = game.forces.neutral, quality = event.entity.quality}
+            local p = event.entity.surface.create_entity{name = 'rail-electric-pole', position = {event.entity.position.x, event.entity.position.y}, force = 'neutral', quality = event.entity.quality.name}
             p.destructible = false
         end
     end
 
     local function destroy(event)
         if entities[event.entity.name] then
-            local e = event.entity.surface.find_entity({name = 'rail-electric-pole', quality = event.entity.quality.name}, {event.entity.position.x, event.entity.position.y})
+            local e = event.entity.surface.find_entity{entity = {name = 'rail-electric-pole', force = 'neutral', quality = event.entity.quality.name}, position = {event.entity.position.x, event.entity.position.y}}
 
             if e then
                 e.destroy()
