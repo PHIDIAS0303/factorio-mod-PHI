@@ -47,7 +47,7 @@ if mods['space-exploration'] and settings.startup['PHI-MB'].value and settings.s
                 name = miner_name,
                 energy_required = 2,
                 enabled = false,
-                ingredients = {{name = 'se-core-miner-' .. (i - 1), amount = 1}, {name = 'se-core-miner', amount = 1}},
+                ingredients = {{type = 'item', name = 'se-core-miner-' .. (i - 1), amount = 1}, {type = 'item', name = 'se-core-miner', amount = 1}},
                 result = miner_name,
                 localised_name = {'name.se-core-miner-drill'},
                 localised_description = {'description.se-core-miner-drill'}
@@ -59,7 +59,7 @@ if mods['space-exploration'] and settings.startup['PHI-MB'].value and settings.s
                 name = miner_name,
                 energy_required = 2,
                 enabled = false,
-                ingredients = {{name = 'se-core-miner', amount = 2}},
+                ingredients = {{type = 'item', name = 'se-core-miner', amount = 2}},
                 result = miner_name,
                 localised_name = {'name.se-core-miner-drill'},
                 localised_description = {'description.se-core-miner-drill'}
