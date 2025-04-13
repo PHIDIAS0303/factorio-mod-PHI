@@ -893,4 +893,44 @@ if mods and mods['quality'] then
     }
 end
 
+if mods['aai-industry'] then
+    items['item']['industrial-furnace'] = {
+        enabled = settings.startup['PHI-MB'].value,
+        stage = 2,
+        mod = 'aai-industry',
+        type = 'assembling-machine',
+        name = 'industrial-furnace',
+        ref_name = 'industrial-furnace',
+        tech = 'industrial-furnace',
+        min = 2,
+        max = settings.startup['PHI-MB-FURNACE-TIER'].value
+    }
+
+    items['item']['fuel-processor'] = {
+        enabled = settings.startup['PHI-MB'].value,
+        stage = 2,
+        mod = 'aai-industry',
+        type = 'assembling-machine',
+        name = 'fuel-processor',
+        ref_name = 'fuel-processor',
+        tech = 'fuel-processing',
+        min = 2,
+        max = settings.startup['PHI-MB-OIL-TIER'].value
+    }
+end
+
+if mods['aai-industry'] or mods['big-mining-drill'] then
+    items['item']['area-mining-drill'] = {
+        enabled = settings.startup['PHI-MB'].value,
+        stage = 2,
+        mod = (mods['big-mining-drill'] and 'big-mining-drill') or 'aai-industry',
+        type = 'mining-drill',
+        name = 'area-mining-drill',
+        ref_name = 'area-mining-drill',
+        tech = 'area-mining-drill',
+        min = 2,
+        max = settings.startup['PHI-MB-MINING-TIER'].value
+    }
+end
+
 return items

@@ -1,8 +1,7 @@
--- local items = require 'config'
--- local main = require 'main'
--- local file_stage = 2
+local items = require 'config'
+local main = require 'main'
+local file_stage = 2
 
---[[
 for _, v in pairs(items['item']) do
     if (v.stage == file_stage) and v.enabled and (v.max >= v.min) then
         v.category = 'item'
@@ -30,4 +29,3 @@ for _, v in pairs(items['equipment']) do
         end
     end
 end
-]]
