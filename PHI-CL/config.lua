@@ -893,7 +893,7 @@ if mods and mods['quality'] then
     }
 end
 
-if mods['aai-industry'] then
+if mods and mods['aai-industry'] then
     items['item']['industrial-furnace'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
@@ -919,7 +919,7 @@ if mods['aai-industry'] then
     }
 end
 
-if mods['aai-industry'] or mods['big-mining-drill'] then
+if mods and (mods['aai-industry'] or mods['big-mining-drill']) then
     items['item']['area-mining-drill'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
@@ -933,7 +933,7 @@ if mods['aai-industry'] or mods['big-mining-drill'] then
     }
 end
 
-if mods['space-exploration'] then
+if mods and mods['space-exploration'] then
     items['item']['se-space-solar-panel'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
         stage = 2,
