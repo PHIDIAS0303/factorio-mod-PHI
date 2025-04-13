@@ -1,5 +1,5 @@
-local items = require 'config'
-local main = require 'main'
+-- local items = require 'config'
+-- local main = require 'main'
 
 do
     local vp = settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value

@@ -155,17 +155,23 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and set
 end
 
 if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value) then
+    local bss
+
+    if mods['space-age'] and data.raw['inserter']['stack-inserter'] then
+        data.raw['inserter']['stack-inserter'].allow_custom_vectors = true
+        bss = data.raw['inserter']['stack-inserter'].max_belt_stack_size
+
+    else
+        bss = 1
+    end
+
     for _, v in pairs({'burner-inserter', 'inserter', 'fast-inserter', 'long-handed-inserter', 'bulk-inserter'}) do
         if data.raw['inserter'][v] then
-            data.raw['inserter'][v].max_belt_stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
+            data.raw['inserter'][v].max_belt_stack_size = bss
             data.raw['inserter'][v].grab_less_to_match_belt_stack = true
             data.raw['inserter'][v].enter_drop_mode_if_held_stack_spoiled = true
             data.raw['inserter'][v].allow_custom_vectors = true
         end
-    end
-
-    if mods['space-age'] and data.raw['inserter']['stack-inserter'] then
-        data.raw['inserter']['stack-inserter'].allow_custom_vectors = true
     end
 
     local entity = table.deepcopy(data.raw['electric-pole']['big-electric-pole'])

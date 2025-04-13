@@ -1,6 +1,6 @@
-local items = require 'config'
-local main = require 'main'
-local file_stage = 2
+-- local items = require 'config'
+-- local main = require 'main'
+-- local file_stage = 2
 
 --[[
 for _, v in pairs(items['item']) do
