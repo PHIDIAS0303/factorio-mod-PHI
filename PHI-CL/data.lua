@@ -155,14 +155,10 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and set
 end
 
 if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value) then
-    local bss
+    local bss = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
 
     if mods['space-age'] and data.raw['inserter']['stack-inserter'] then
         data.raw['inserter']['stack-inserter'].allow_custom_vectors = true
-        bss = data.raw['inserter']['stack-inserter'].max_belt_stack_size
-
-    else
-        bss = 1
     end
 
     for _, v in pairs({'burner-inserter', 'inserter', 'fast-inserter', 'long-handed-inserter', 'bulk-inserter'}) do
