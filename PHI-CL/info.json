@@ -12,7 +12,9 @@
         "base >= 2.0.0",
         "? space-age >= 2.0.0",
         "? quality >= 2.0.0",
-        "? elevated-rails >= 2.0.0"
+        "? elevated-rails >= 2.0.0",
+        "? aai-industry >= 0.6.0",
+        "? space-exploration >= 0.7.0"
     ],
     "quality_required": false,
     "space_travel_required": false,

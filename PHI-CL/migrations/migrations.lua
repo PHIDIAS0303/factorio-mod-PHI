@@ -135,4 +135,13 @@ for _, force in pairs(game.forces) do
             recipes['turbo-loader'].reload()
         end
     end
+
+    if script.active_mods['space-exploration'] then
+        if technologies['se-core-miner'].researched then
+            for i = 2, settings.startup['PHI-MB-MACHINE-TIER'].value do
+                recipes['se-core-miner-' .. i].enabled = true
+                recipes['se-core-miner-' .. i].reload()
+            end
+        end
+    end
 end
