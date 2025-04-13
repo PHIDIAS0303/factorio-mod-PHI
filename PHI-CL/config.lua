@@ -1282,8 +1282,8 @@ if mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['equipment']['fusion-reactor-equipment'].tech = 'se-rtg-equipment'
-    items['equipment']['fusion-reactor-equipment'].base_name = 'se-rtg'
+    items['equipment']['fission-reactor-equipment'].tech = 'se-rtg-equipment'
+    items['equipment']['fission-reactor-equipment'].base_name = 'se-rtg'
 
     items['equipment']['battery-equipment'].tech = 'battery-equipment'
     items['equipment']['battery-equipment'].min = 2

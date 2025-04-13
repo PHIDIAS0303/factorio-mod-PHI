@@ -14,7 +14,7 @@ if mods['space-exploration'] and settings.startup['PHI-MB'].value and settings.s
         max = 3
     }
 
-    for i=2, settings.startup['PHI-MB-MACHINE-TIER'].value do
+    for i = 2, settings.startup['PHI-MB-MACHINE-TIER'].value do
         local miner_name = 'se-core-miner-' .. i
         local drill_name = 'se-core-miner-drill-' .. i
 
@@ -22,10 +22,10 @@ if mods['space-exploration'] and settings.startup['PHI-MB'].value and settings.s
         data.raw['mining-drill'][drill_name].minable.result = miner_name
         data.raw['mining-drill'][drill_name].placeable_by.item = miner_name
 
-        local item = table.deepcopy(data.raw['item']['se-core-miner'])
-        item.name = 'se-core-miner-' .. i
+        local item = table.deepcopy(data.raw['item']['se-core-miner-drill'])
+        item.name = 'se-core-miner-drill-' .. i
         item.place_result = drill_name
-        item.order = 'zzzz-core-miner-' .. i
+        item.order = 'zzzz-core-miner-drill-' .. i
 
         item.icons = {
             {
@@ -47,7 +47,7 @@ if mods['space-exploration'] and settings.startup['PHI-MB'].value and settings.s
                 name = miner_name,
                 energy_required = 2,
                 enabled = false,
-                ingredients = {{type = 'item', name = 'se-core-miner-' .. (i - 1), amount = 1}, {type = 'item', name = 'se-core-miner', amount = 1}},
+                ingredients = {{type = 'item', name = 'se-core-miner-drill-' .. (i - 1), amount = 1}, {type = 'item', name = 'se-core-miner-drill', amount = 1}},
                 result = miner_name,
                 localised_name = {'name.se-core-miner-drill'},
                 localised_description = {'description.se-core-miner-drill'}
@@ -59,7 +59,7 @@ if mods['space-exploration'] and settings.startup['PHI-MB'].value and settings.s
                 name = miner_name,
                 energy_required = 2,
                 enabled = false,
-                ingredients = {{type = 'item', name = 'se-core-miner', amount = 2}},
+                ingredients = {{type = 'item', name = 'se-core-miner-drill', amount = 2}},
                 result = miner_name,
                 localised_name = {'name.se-core-miner-drill'},
                 localised_description = {'description.se-core-miner-drill'}
