@@ -215,10 +215,10 @@ function main.EEE(source, tier)
     end
 
     if tier > 1 then
-        item.localised_name = {'phi-cl.combine', {'name.' .. source.ref_name:gsub('se-', '')}, tostring(tier)}
+        item.localised_name = {'phi-cl.combine', {'name.' .. source.ref_name}, tostring(tier)}
 
     else
-        item.localised_name = {'name.' .. source.ref_name:gsub('se-', '')}
+        item.localised_name = {'name.' .. source.ref_name}
     end
 
     data:extend({item})
@@ -315,7 +315,7 @@ function main.EI(source, tier)
     end
 
     item.order = item.order .. tier
-    item.localised_name = (tier > 1 and {'phi-cl.combine', {'name.' .. source.ref_name:gsub('se-', '')}, tostring(tier)}) or {'name.' .. source.ref_name}
+    item.localised_name = (tier > 1 and {'phi-cl.combine', {'name.' .. source.ref_name}, tostring(tier)}) or {'name.' .. source.ref_name}
 
     data:extend({item})
 end
