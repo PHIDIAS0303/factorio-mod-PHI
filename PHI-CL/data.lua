@@ -1124,6 +1124,8 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['foundry'].research_trigger = nil
         data.raw.technology['cryogenic-plant'].research_trigger = nil
         data.raw.technology['asteroid-productivity'].effects = nil
+        data.raw.technology['cryogenic-science-pack'].research_trigger = nil
+        data.raw.technology['cryogenic-science-pack'].unit = {count = 1000, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
 
         for k, v in pairs(items['space-age']['PHI-VP-MAIN']['technology']) do
             if data.raw.technology[k] then
