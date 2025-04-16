@@ -107,7 +107,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         gui['i_sub_direction'].selected_index = ((inserter_direction_reversed[inserter.direction] % 4 or 0) + ((inserter.mirroring and 2) or 0)) % 4 + 1
     end
 
-    script.on_nth_tick(1200, function(_)
+    script.on_nth_tick(300, function(_)
         local ec = game.surfaces['nauvis'].find_entities_filtered{type='cargo-landing-pad', force='player'}
 
         if not ec then
@@ -148,7 +148,9 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         end
 
         for k, v in pairs(ic_n) do
-            ec[1].insert{name = k, count = v.e, quality = 'normal'}
+            if v.e > 0 then
+                ec[1].insert{name = k, count = v.e, quality = 'normal'}
+            end
         end
     end)
 
