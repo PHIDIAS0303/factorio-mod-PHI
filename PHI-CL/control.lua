@@ -109,10 +109,13 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
 
     function space_white_science()
         local surface = game.surfaces['space-platform']
-        local hub_init = surface.can_place_entity{name='space-platform-hub', position={0, 0}, force='neutral'}
 
-        if hub_init then
-            surface.create_entity{name='space-platform-hub', position={0, 0}, force='neutral'}
+        if surface then
+            local hub_init = surface.can_place_entity{name='space-platform-hub', position={0, 0}, force='neutral'}
+
+            if hub_init then
+                surface.create_entity{name='space-platform-hub', position={0, 0}, force='neutral'}
+            end
         end
     end
 
