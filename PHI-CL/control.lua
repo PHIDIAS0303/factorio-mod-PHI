@@ -107,6 +107,52 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         gui['i_sub_direction'].selected_index = ((inserter_direction_reversed[inserter.direction] % 4 or 0) + ((inserter.mirroring and 2) or 0)) % 4 + 1
     end
 
+    script.on_nth_tick(600, function(_)
+        local ec = game.surfaces['nauvis'].find_entities_filtered{name='cargo-landing-pad'}
+        local ic = {}
+
+        if not ec then
+            return
+        end
+
+        for _, e in pairs(ec) do
+            local inv = e.get_inventory(defines.inventory.cargo_landing_pad_main)
+
+            if inv then
+                local item = inv.get_contents()
+
+                for _, v in pairs(item) do
+                    if ic[v.name] then
+                        ic[v.name] = ic[v.name] + v.count
+
+                    else
+                        ic[v.name] = v.count
+                    end
+                end
+
+                inv.clear()
+            end
+        end
+
+        local ic_n = {}
+        local ic_e = {}
+
+        for k, v in pairs(ic) do
+            ic_n[k] = math.floor(v / #ec)
+            ic_e[k] = v - #ec * ic_n[k]
+        end
+
+        for _, e in pairs(ec) do
+            for k, v in pairs(ic_n) do
+                e.insert{name = k, count = v, quality = 'normal'}
+            end
+        end
+
+        for k, v in pairs(ic_e) do
+            ec[1].insert{name = k, count = v, quality = 'normal'}
+        end
+    end)
+
     script.on_init(function(_)
         for _, player in pairs(game.players) do
             gui_create(player)
