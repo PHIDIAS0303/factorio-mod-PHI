@@ -108,9 +108,8 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     end
 
     script.on_nth_tick(1200, function(_)
-        game.print('PHI-CL: 1200T')
         local ec = game.surfaces['nauvis'].find_entities_filtered{type='cargo-landing-pad', force='player'}
-        game.print(ec)
+
         if not ec then
             return
         end
