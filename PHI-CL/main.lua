@@ -350,7 +350,11 @@ function main.ER(source, tier)
             ingredients = {{type = 'item', name = ingredient_name, amount = tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value) or 4}}
 
         else
-            ingredients = {{type = 'item', name = ingredient_name, amount = 1}, {type='item', name = source.name, amount = 1}}
+            if tier > 2 then
+                ingredients = {{type = 'item', name = ingredient_name, amount = 1}, {type='item', name = source.name, amount = 1}}
+            else
+                ingredients = {{type = 'item', name = source.name, amount = 2}}
+            end
         end
 
         data:extend({{
