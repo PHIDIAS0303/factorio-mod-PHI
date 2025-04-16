@@ -107,13 +107,14 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         gui['i_sub_direction'].selected_index = ((inserter_direction_reversed[inserter.direction] % 4 or 0) + ((inserter.mirroring and 2) or 0)) % 4 + 1
     end
 
-    script.on_nth_tick(1800, function(_)
+    script.on_nth_tick(600, function(_)
         local ec = game.surfaces['nauvis'].find_entities_filtered{name='cargo-landing-pad'}
-        local ic = {}
 
         if not ec then
             return
         end
+
+        local ic = {}
 
         for _, e in pairs(ec) do
             local inv = e.get_inventory(defines.inventory.cargo_landing_pad_main)
@@ -122,12 +123,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
                 local item = inv.get_contents()
 
                 for _, v in pairs(item) do
-                    if ic[v.name] then
-                        ic[v.name] = ic[v.name] + v.count
-
-                    else
-                        ic[v.name] = v.count
-                    end
+                    ic[v.name] = (ic[v.name] and (ic[v.name] + v.count)) or v.count
                 end
 
                 inv.clear()
@@ -135,21 +131,24 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         end
 
         local ic_n = {}
-        local ic_e = {}
 
         for k, v in pairs(ic) do
-            ic_n[k] = math.floor(v / #ec)
-            ic_e[k] = v - #ec * ic_n[k]
+            local b = math.floor(v / #ec)
+
+            ic_n[k] = {
+                c = b,
+                e = v - (#ec * b)
+            }
         end
 
         for _, e in pairs(ec) do
             for k, v in pairs(ic_n) do
-                e.insert{name = k, count = v, quality = 'normal'}
+                e.insert{name = k, count = v.c, quality = 'normal'}
             end
         end
 
-        for k, v in pairs(ic_e) do
-            ec[1].insert{name = k, count = v, quality = 'normal'}
+        for k, v in pairs(ic_n) do
+            ec[1].insert{name = k, count = v.e, quality = 'normal'}
         end
     end)
 
