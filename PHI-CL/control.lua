@@ -107,18 +107,6 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         gui['i_sub_direction'].selected_index = ((inserter_direction_reversed[inserter.direction] % 4 or 0) + ((inserter.mirroring and 2) or 0)) % 4 + 1
     end
 
-    function space_white_science()
-        local surface = game.surfaces['space-platform']
-
-        if surface then
-            local hub_init = surface.can_place_entity{name='space-platform-hub', position={0, 0}, force='neutral'}
-
-            if hub_init then
-                surface.create_entity{name='space-platform-hub', position={0, 0}, force='neutral'}
-            end
-        end
-    end
-
     script.on_init(function(_)
         for _, player in pairs(game.players) do
             gui_create(player)
@@ -133,14 +121,10 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
                 gui_update(player, player.opened.entity)
             end
         end
-
-        space_white_science()
     end)
 
     script.on_event(defines.events.on_player_created, function(e)
         gui_create(game.players[e.player_index])
-
-        space_white_science()
     end)
 
     script.on_event(defines.events.on_gui_opened, function(e)
