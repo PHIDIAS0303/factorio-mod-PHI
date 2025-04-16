@@ -107,9 +107,10 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         gui['i_sub_direction'].selected_index = ((inserter_direction_reversed[inserter.direction] % 4 or 0) + ((inserter.mirroring and 2) or 0)) % 4 + 1
     end
 
-    script.on_nth_tick(600, function(_)
+    script.on_nth_tick(1200, function(_)
+        game.print('PHI-CL: 1200T')
         local ec = game.surfaces['nauvis'].find_entities_filtered{type='cargo-landing-pad', force='player'}
-
+        game.print(ec)
         if not ec then
             return
         end
