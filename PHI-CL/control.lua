@@ -123,8 +123,6 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         for _, player in pairs(game.players) do
             gui_create(player)
         end
-
-        space_white_science()
     end)
 
     script.on_configuration_changed(function(_)
