@@ -38,7 +38,7 @@ if settings.startup['PHI-CT'].value then
         end
 
         if event.entity.name == 'trash-chest' then
-            event.entity.infinity_container_filters = {}
+            event.entity.set_infinity_container_filter(1, nil)
             event.entity.remove_unfiltered_items = true
 
         elseif event.entity.name == 'trash-pipe' then
