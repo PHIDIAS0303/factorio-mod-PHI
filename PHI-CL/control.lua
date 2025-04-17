@@ -104,7 +104,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         end
 
         local gui = player.gui.relative.inserter_config
-        gui['i_sub_direction'].selected_index = ((inserter_direction_reversed[inserter.direction] + ((inserter.mirroring and 2) or 0) - 1) % 4) + 1
+        gui['i_sub_direction'].selected_index = ((inserter_direction_reversed[inserter.direction] - 1) % 4) + 1
     end
 
     script.on_nth_tick(3600, function(_)
