@@ -233,10 +233,12 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         end
     end
 
-    script.on_event(defines.events.on_built_entity, build_electric_pole)
-    script.on_event(defines.events.on_robot_built_entity, build_electric_pole)
-    script.on_event(defines.events.on_entity_died, destroy_electric_pole)
-    script.on_event(defines.events.on_player_mined_entity, destroy_electric_pole)
-    script.on_event(defines.events.on_robot_pre_mined, destroy_electric_pole)
-    script.on_event(defines.events.script_raised_destroy, destroy_electric_pole)
+    script.on_event(defines.events.on_built_entity, build_electric_pole, {{filter='name', name='rail-support'}})
+    script.on_event(defines.events.on_robot_built_entity, build_electric_pole, {{filter='name', name='rail-support'}})
+    script.on_event(defines.events.on_space_platform_built_entity, build_electric_pole, {{filter='name', name='rail-support'}})
+    script.on_event(defines.events.script_raised_built, build_electric_pole, {{filter='name', name='rail-support'}})
+    script.on_event(defines.events.on_entity_died, destroy_electric_pole, {{filter='name', name='rail-support'}})
+    script.on_event(defines.events.on_player_mined_entity, destroy_electric_pole, {{filter='name', name='rail-support'}})
+    script.on_event(defines.events.on_robot_pre_mined, destroy_electric_pole, {{filter='name', name='rail-support'}})
+    script.on_event(defines.events.script_raised_destroy, destroy_electric_pole, {{filter='name', name='rail-support'}})
 end
