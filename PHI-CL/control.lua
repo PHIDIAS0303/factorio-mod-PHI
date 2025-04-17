@@ -141,15 +141,13 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
             }
         end
 
-        for _, e in pairs(ec) do
-            for k, v in pairs(ic_n) do
-                if v.c > 0 then
+        for k, v in pairs(ic_n) do
+            if v.c > 0 then
+                for _, e in pairs(ec) do
                     e.insert{name = k, count = v.c, quality = 'normal'}
                 end
             end
-        end
 
-        for k, v in pairs(ic_n) do
             if v.e > 0 then
                 ec[1].insert{name = k, count = v.e, quality = 'normal'}
             end
