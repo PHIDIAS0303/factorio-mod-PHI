@@ -1411,6 +1411,7 @@ if settings.startup['PHI-CT'].value then
 
     for _, v in pairs({'infinity-chest', 'infinity-cargo-wagon', 'infinity-pipe'}) do
         data.raw['item'][v].hidden = false
+        data.raw['item'][v].hidden_in_factoriopedia = false
 
         data:extend({{
             type = 'recipe',
@@ -1690,7 +1691,10 @@ if settings.startup['PHI-CT'].value then
 
     for _, l in pairs({'loader', 'fast-loader', 'express-loader', 'turbo-loader'}) do
         if data.raw.recipe[l] and data.raw['loader'][l] then
+            data.raw.item[l].hidden = false
+            data.raw.item[l].hidden_in_factoriopedia = false
             data.raw.recipe[l].hidden = false
+            data.raw.recipe[l].hidden_in_factoriopedia = false
             data.raw['loader'][l].filter_count = 2
             data.raw['loader'][l].per_lane_filters = true
             data.raw['loader'][l].adjustable_belt_stack_size = (data.raw['inserter']['stack-inserter'] and true) or false
