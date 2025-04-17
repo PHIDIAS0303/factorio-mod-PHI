@@ -33,7 +33,7 @@ local rail_support_pole = {
 if settings.startup['PHI-CT'].value then
     local function trash_creation(event)
         if event.entity.name == 'trash-chest' then
-            event.entity.set_infinity_container_filter(1, nil)
+            event.entity.infinity_container_filters = {{name='automation-science-pack', count=0, mode='exactly', index=1}}
             event.entity.remove_unfiltered_items = true
 
         elseif event.entity.name == 'trash-pipe' then
@@ -46,19 +46,6 @@ if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.on_space_platform_built_entity, trash_creation, {{filter='name', name='trash-chest', mode='or'}, {filter='name', name='trash-pipe', mode='or'}})
     script.on_event(defines.events.script_raised_built, trash_creation, {{filter='name', name='trash-chest', mode='or'}, {filter='name', name='trash-pipe', mode='or'}})
     script.on_event(defines.events.script_raised_revive, trash_creation, {{filter='name', name='trash-chest', mode='or'}, {filter='name', name='trash-pipe', mode='or'}})
-
-    script.on_init(function(_)
-        for _, surface in pairs(game.surfaces) do
-            for _, e in pairs(surface.find_entities_filtered{name='trash-chest'}) do
-                e.set_infinity_container_filter(1, nil)
-                e.remove_unfiltered_items = true
-            end
-
-            for _, e in pairs(surface.find_entities_filtered{name='trash-pipe'}) do
-                e.set_infinity_pipe_filter(nil)
-            end
-        end
-    end)
 
     local function hidden_recipe_enable(e)
         local enable = (e.name == defines.events.on_player_cheat_mode_enabled)
