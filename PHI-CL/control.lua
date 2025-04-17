@@ -50,8 +50,9 @@ if settings.startup['PHI-CT'].value then
 
     script.on_event(defines.events.on_built_entity, trash_creation, {{filter='name', name='trash-chest', mode='or'}, {filter='name', name='trash-pipe', mode='or'}})
     script.on_event(defines.events.on_robot_built_entity, trash_creation, {{filter='name', name='trash-chest', mode='or'}, {filter='name', name='trash-pipe', mode='or'}})
-    script.on_event(defines.events.script_raised_built, trash_creation)
-    script.on_event(defines.events.script_raised_revive, trash_creation)
+    script.on_event(defines.events.on_space_platform_built_entity, trash_creation, {{filter='name', name='trash-chest', mode='or'}, {filter='name', name='trash-pipe', mode='or'}})
+    script.on_event(defines.events.script_raised_built, trash_creation, {{filter='name', name='trash-chest', mode='or'}, {filter='name', name='trash-pipe', mode='or'}})
+    script.on_event(defines.events.script_raised_revive, trash_creation, {{filter='name', name='trash-chest', mode='or'}, {filter='name', name='trash-pipe', mode='or'}})
 
     local function hidden_recipe_enable(e)
         local enable = (e.name == defines.events.on_player_cheat_mode_enabled)
