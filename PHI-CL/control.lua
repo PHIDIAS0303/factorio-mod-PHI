@@ -188,21 +188,16 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         end
     end)
 
-    script.on_event(defines.events.on_player_rotated_entity, function(e)
+    local function inserter_changed(e)
         local player = game.players[e.player_index]
 
         if e.entity and player.opened == e.entity and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
             gui_update(player, player.opened)
         end
-    end)
+    end
 
-    script.on_event(defines.events.on_player_flipped_entity, function(e)
-        local player = game.players[e.player_index]
-
-        if e.entity and player.opened == e.entity and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
-            gui_update(player, player.opened)
-        end
-    end)
+    script.on_event(defines.events.on_player_rotated_entity, inserter_changed)
+    script.on_event(defines.events.on_player_flipped_entity, inserter_changed)
 
     script.on_event(defines.events.on_entity_settings_pasted, function(e)
         local player = game.players[e.player_index]
