@@ -143,7 +143,9 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
 
         for _, e in pairs(ec) do
             for k, v in pairs(ic_n) do
-                e.insert{name = k, count = v.c, quality = 'normal'}
+                if v.c > 0 then
+                    e.insert{name = k, count = v.c, quality = 'normal'}
+                end
             end
         end
 
