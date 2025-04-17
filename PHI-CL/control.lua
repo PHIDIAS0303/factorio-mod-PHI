@@ -52,6 +52,19 @@ if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.script_raised_built, trash_creation, {{filter='name', name='trash-chest', mode='or'}, {filter='name', name='trash-pipe', mode='or'}})
     script.on_event(defines.events.script_raised_revive, trash_creation, {{filter='name', name='trash-chest', mode='or'}, {filter='name', name='trash-pipe', mode='or'}})
 
+    script.on_init(function(_)
+        for _, surface in pairs(game.surfaces) do
+            for _, e in pairs(surface.find_entities_filtered{name='trash-chest'}) do
+                e.infinity_container_filters = {}
+                e.remove_unfiltered_items = true
+            end
+
+            for _, e in pairs(surface.find_entities_filtered{name='trash-pipe'}) do
+                e.set_infinity_pipe_filter(nil)
+            end
+        end
+    end)
+
     local function hidden_recipe_enable(e)
         local enable = (e.name == defines.events.on_player_cheat_mode_enabled)
         local force = game.players[e.player_index].force
@@ -72,19 +85,6 @@ if settings.startup['PHI-CT'].value then
 
     script.on_event(defines.events.on_player_cheat_mode_enabled, hidden_recipe_enable)
     script.on_event(defines.events.on_player_cheat_mode_disabled, hidden_recipe_enable)
-
-    script.on_init(function(_)
-        for _, surface in pairs(game.surfaces) do
-            for _, e in pairs(surface.find_entities_filtered{name='trash-chest'}) do
-                e.infinity_container_filters = {}
-                e.remove_unfiltered_items = true
-            end
-
-            for _, e in pairs(surface.find_entities_filtered{name='trash-pipe'}) do
-                e.set_infinity_pipe_filter(nil)
-            end
-        end
-    end)
 end
 
 if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value) then
