@@ -30,13 +30,8 @@ local rail_support_pole = {
     'rail-support-pole-lightning'
 }
 
-
 if settings.startup['PHI-CT'].value then
     local function trash_creation(event)
-        if not (event.entity and event.entity.valid) then
-            return
-        end
-
         if event.entity.name == 'trash-chest' then
             event.entity.set_infinity_container_filter(1, nil)
             event.entity.remove_unfiltered_items = true
@@ -55,7 +50,7 @@ if settings.startup['PHI-CT'].value then
     script.on_init(function(_)
         for _, surface in pairs(game.surfaces) do
             for _, e in pairs(surface.find_entities_filtered{name='trash-chest'}) do
-                e.infinity_container_filters = {}
+                e.set_infinity_container_filter(1, nil)
                 e.remove_unfiltered_items = true
             end
 
