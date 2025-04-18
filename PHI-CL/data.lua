@@ -841,13 +841,13 @@ if settings.startup['PHI-VP'].value then
 
         item = table.deepcopy(data.raw['ammo']['artillery-shell'])
         item.name = 'nuclear-artillery-shell'
-        item.ammo_type.action.projectile = 'nulcear-artillery-projectile'
+        item.ammo_type.action.action_delivery.projectile = 'nuclear-artillery-projectile'
         item.localised_name = {'phi-cl.combine', {'item-name.atomic-bomb'}, {'item-name.artillery-shell'}}
         data:extend({item})
 
         item = table.deepcopy(data.raw['artillery-projectile']['artillery-projectile'])
         item.name = 'nuclear-artillery-projectile'
-        item.action.action_delivery.action_delivery = table.unpack(data.raw['projectile']['atomic-rocket'])
+        item.action.action_delivery = table.unpack(data.raw['projectile']['atomic-rocket'].action.action_delivery)
         data:extend({item})
 
         data:extend({{
