@@ -420,15 +420,12 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw.technology['legendary-quality'].unit.ingredients = {{'space-science-pack', 1}}
     data.raw.technology['legendary-quality'].effects = nil
 
-    for _, v in pairs({'uncommon', 'rare', 'epic', 'legendary'}) do
+    for _, v in pairs({'normal', 'uncommon', 'rare', 'epic', 'legendary'}) do
+        data.raw.quality[v].next = nil
+        data.raw.quality[v].next_probability = nil
         data.raw.quality[v].hidden = true
         data.raw.quality[v].hidden_in_factoriopedia = true
     end
-
-    data.raw.quality.normal.next = nil
-    data.raw.quality.normal.next_probability = nil
-    data.raw.quality.normal.hidden = true
-    data.raw.quality.normal.hidden_in_factoriopedia = true
 
     data.raw['tips-and-tricks-item']['quality'] = nil
     data.raw['tips-and-tricks-item']['quality-modules'] = nil
