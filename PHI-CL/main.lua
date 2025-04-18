@@ -309,7 +309,7 @@ function main.EI(source, tier)
     end
 
     item.order = item.order .. tier
-    item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'name.' .. source.ref_name}, {'item-name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'name.' .. source.ref_name}, {'item-name.' .. source.ref_name}}
+    item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'name.' .. source.ref_name}, {'entity-name.' .. source.ref_name}, {'item-name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'name.' .. source.ref_name}, {'entity-name.' .. source.ref_name}, {'item-name.' .. source.ref_name}}
     data:extend({item})
 end
 
