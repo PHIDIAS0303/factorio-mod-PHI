@@ -287,13 +287,6 @@ data:extend({
   order = 'E00'
 },  {
   type = 'bool-setting',
-  name = 'PHI-VP-MAIN',
-  setting_type = 'startup',
-  default_value = false,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-VP-MAIN'}, {'mod-setting-name.PHI-VP-MAIN'}},
-  order = 'E01'
-}, {
-  type = 'bool-setting',
   name = 'PHI-CT',
   setting_type = 'startup',
   default_value = false,

@@ -2,15 +2,15 @@
 -- local main = require 'main'
 
 do
-    local vp = settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value
     local sa = settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value
+    local p = settings.startup['PHI-VP'].value or sa
 
     for k, v in pairs(data.raw.recipe) do
-        if vp and v.category == 'recycling' then
+        if settings.startup['PHI-VP'].value and v.category == 'recycling' then
             data.raw.recipe[k] = nil
         end
 
-        if (vp or sa) and v.maximum_productivity then
+        if p and v.maximum_productivity then
             v.maximum_productivity = 999
         end
     end
