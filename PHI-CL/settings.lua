@@ -61,20 +61,12 @@ data:extend({
   order = 'AC00'
 }, {
   type = 'int-setting',
-  name = 'PHI-MB-WEAPON-TURRET-TIER',
+  name = 'PHI-MB-WEAPON-TIER',
   setting_type = 'startup',
   default_value = 3,
   allowed_values = {1, 2, 3},
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-WEAPON-TURRET-TIER'}, {'mod-setting-name.PHI-MB-WEAPON-TURRET-TIER'}},
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-WEAPON-TIER'}, {'mod-setting-name.PHI-MB-WEAPON-TIER'}},
   order = 'AC01'
-}, {
-  type = 'int-setting',
-  name = 'PHI-MB-WEAPON-RADAR-TIER',
-  setting_type = 'startup',
-  default_value = 3,
-  allowed_values = {1, 2, 3},
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-WEAPON-RADAR-TIER'}, {'mod-setting-name.PHI-MB-WEAPON-RADAR-TIER'}},
-  order = 'AC02'
 }, {
   type = 'bool-setting',
   name = 'PHI-EQ',

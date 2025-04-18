@@ -5,6 +5,7 @@ Date: 2025-04-20
   Changes:
     - [CT] Changed the hidden status of some creative items.
     - [CL] Changed the some locale logic.
+    - [MI] Fixed heating tower also applied the nuclear reactor scale energy usage flag.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.93
