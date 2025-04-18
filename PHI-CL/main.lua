@@ -214,7 +214,7 @@ function main.EEE(source, tier)
         item.base_picture.sheets[1].tint = items['tint'][tier]
     end
 
-    item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', 'name.' .. source.ref_name, 'entity-name.' .. source.ref_name}, tostring(tier)}) or {'?', 'name.' .. source.ref_name, 'entity-name.' .. source.ref_name}
+    item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'name.' .. source.ref_name}, {'entity-name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'name.' .. source.ref_name}, {'entity-name.' .. source.ref_name}}
     data:extend({item})
 end
 
@@ -262,7 +262,7 @@ function main.EEQ(source, tier)
         item.sprite.tint = items['tint'][tier]
     end
 
-    item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', 'name.' .. source.ref_name, 'item-name.' .. source.ref_name}, tostring(tier)}) or {'?', 'name.' .. source.ref_name, 'item-name.' .. source.ref_name}
+    item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'name.' .. source.ref_name}, {'item-name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'name.' .. source.ref_name}, {'item-name.' .. source.ref_name}}
 
     if settings.startup['PHI-EQ-SIZE'].value then
         item.shape = {
@@ -309,7 +309,7 @@ function main.EI(source, tier)
     end
 
     item.order = item.order .. tier
-    item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', 'name.' .. source.ref_name, 'item-name.' .. source.ref_name}, tostring(tier)}) or {'?', 'name.' .. source.ref_name, 'item-name.' .. source.ref_name}
+    item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'name.' .. source.ref_name}, {'item-name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'name.' .. source.ref_name}, {'item-name.' .. source.ref_name}}
     data:extend({item})
 end
 
