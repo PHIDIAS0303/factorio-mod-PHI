@@ -839,32 +839,6 @@ if settings.startup['PHI-VP'].value then
             localised_description = {'description.charged-train-battery'}
         }})
 
-        item = table.deepcopy(data.raw['ammo']['artillery-shell'])
-        item.name = 'nuclear-artillery-shell'
-        item.ammo_type.action.action_delivery.projectile = 'nuclear-artillery-projectile'
-        item.localised_name = {'phi-cl.combine', {'item-name.atomic-bomb'}, {'item-name.artillery-shell'}}
-        data:extend({item})
-
-        item = table.deepcopy(data.raw['artillery-projectile']['artillery-projectile'])
-        item.name = 'nuclear-artillery-projectile'
-        item.action.action_delivery = table.unpack(data.raw['projectile']['atomic-rocket'].action.action_delivery)
-        data:extend({item})
-
-        data:extend({{
-            type = 'recipe',
-            name = 'nuclear-artillery-shell',
-            energy_required = 10,
-            enabled = false,
-            icon = '__base__/graphics/icons/artillery-shell.png',
-            allow_productivity = false,
-            ingredients = {{type = 'item', name = 'artillery-shell', amount = 1}, {type = 'item', name = 'atomic-bomb', amount = 1}},
-            results = {{type = 'item', name = 'nuclear-artillery-shell', amount = 1}},
-            main_product = 'nuclear-artillery-shell',
-            localised_name = {'phi-cl.combine', {'item-name.atomic-bomb'}, {'item-name.artillery-shell'}}
-        }})
-
-        table.insert(data.raw.technology['artillery'].effects, {type = 'unlock-recipe', recipe = 'nuclear-artillery-shell'})
-
         local item_sounds = require('__base__/prototypes/item_sounds')
 
         data:extend({
