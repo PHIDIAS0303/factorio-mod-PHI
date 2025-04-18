@@ -357,7 +357,7 @@ local items = {
         }
     },
     ['space-age'] = {
-        ['PHI-VP-MAIN'] = {
+        ['PHI-VP'] = {
             ['technology_reform'] = {
                 ['stack-inserter'] = {
                     ['prerequisites'] = {'bulk-inserter', 'chemical-science-pack', 'processing-unit'},

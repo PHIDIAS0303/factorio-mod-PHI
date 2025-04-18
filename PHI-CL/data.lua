@@ -146,7 +146,7 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
     end
 end
 
-if settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value) then
+if settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value then
     data.raw['mining-drill']['electric-mining-drill'].filter_count = 5
 
     if mods['space-age'] then
@@ -154,7 +154,7 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and set
     end
 end
 
-if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value) then
+if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or settings.startup['PHI-VP'].value then
     local bss = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
 
     if mods['space-age'] and data.raw['inserter']['stack-inserter'] then
@@ -189,7 +189,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         entity.order = 'zz'
         data:extend({entity})
 
-        if (not (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value)) and mods['space-age'] and data.raw['lightning-attractor']['lightning-rod'] then
+        if (not settings.startup['PHI-VP'].value) and mods['space-age'] and data.raw['lightning-attractor']['lightning-rod'] then
             entity = table.deepcopy(data.raw['lightning-attractor']['lightning-rod'])
             entity.name = 'rail-support-pole-lightning'
             entity.hidden = true
@@ -308,7 +308,7 @@ if settings.startup['PHI-MI'].value then
     data.raw['utility-constants'].default.default_item_weight = settings.startup['PHI-MI-CARGO-WEIGHT'].value
 end
 
-if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value) then
+if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or settings.startup['PHI-VP'].value then
     data:extend({{type = 'recipe-category', name = 'fluid'}})
 
     item = table.deepcopy(data.raw['item']['offshore-pump'])
@@ -389,7 +389,7 @@ if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (se
     end
 end
 
-if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value)) then
+if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or settings.startup['PHI-VP'].value) then
     for k, v in pairs(items['space-age']['PHI-SA-RESTRICTION']['surface_conditions']) do
         data.raw[v][k].surface_conditions = nil
     end
@@ -399,7 +399,7 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     end
 end
 
-if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-MAX-QUALITY'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value)) then
+if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-MAX-QUALITY'].value) or settings.startup['PHI-VP'].value) then
     for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
         data.raw.technology[v].hidden = true
         data.raw.technology[v].hidden_in_factoriopedia = true
@@ -443,7 +443,7 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw['place-equipment-achievement']['no-room-for-more'] = nil
 end
 
-if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value)) then
+if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value) then
     data.raw.resource['lithium-brine'].infinite = true
     data.raw.resource['lithium-brine'].minimum = 60000
     data.raw.resource['lithium-brine'].normal = 300000
@@ -600,7 +600,7 @@ if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-SPOIL-FREEZE'].
     spoil_handle(data.raw.tool['agricultural-science-pack'])
 end
 
-if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].value) or (settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value)) and mods['space-age'] then
+if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].value) or settings.startup['PHI-VP'].value) and mods['space-age'] then
     local function spoil_handle(i)
         i.spoil_ticks = nil
         i.spoil_result = nil
@@ -726,7 +726,7 @@ if mods['quality'] then
         end
     end
 
-    if ((settings.startup['PHI-VP'].value and settings.startup['PHI-VP-MAIN'].value)) or (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-MAX-QUALITY'].value)) then
+    if settings.startup['PHI-VP'].value or (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-MAX-QUALITY'].value)) then
         data.raw.quality.normal.level = 0
         data.raw.quality.normal.beacon_power_usage_multiplier = 1
         data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1
@@ -743,7 +743,7 @@ if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-HEAT-RADIUS'].v
 end
 
 if settings.startup['PHI-VP'].value then
-    if mods['space-age'] and settings.startup['PHI-VP-MAIN'].value then
+    if mods['space-age'] then
         for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
             data.raw.planet[v].map_gen_settings = nil
             data.raw.planet[v].hidden = true
@@ -978,7 +978,7 @@ if settings.startup['PHI-VP'].value then
 
         data.raw.recipe['landfill'].ingredients = {{type = 'item', name = 'stone', amount = math.min(20, tonumber(settings.startup['PHI-MI-LANDFILL'].value) or 20)}}
 
-        for k, v in pairs(items['space-age']['PHI-VP-MAIN']['technology_reform']) do
+        for k, v in pairs(items['space-age']['PHI-VP']['technology_reform']) do
             if v.prerequisites then
                 data.raw.technology[k].prerequisites = v.prerequisites
             end
@@ -1127,7 +1127,7 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['cryogenic-science-pack'].research_trigger = nil
         data.raw.technology['cryogenic-science-pack'].unit = {count = 1000, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
 
-        for k, v in pairs(items['space-age']['PHI-VP-MAIN']['technology']) do
+        for k, v in pairs(items['space-age']['PHI-VP']['technology']) do
             if data.raw.technology[k] then
                 data.raw.technology[k].hidden = v
                 data.raw.technology[k].hidden_in_factoriopedia = v
@@ -1139,14 +1139,14 @@ if settings.startup['PHI-VP'].value then
             end
         end
 
-        for k, v in pairs(items['space-age']['PHI-VP-MAIN']['recipe']) do
+        for k, v in pairs(items['space-age']['PHI-VP']['recipe']) do
             if data.raw.recipe[k] then
                 data.raw.recipe[k].hidden = v
                 data.raw.recipe[k].hidden_in_factoriopedia = v
             end
         end
 
-        for k, v in pairs(items['space-age']['PHI-VP-MAIN']['item']) do
+        for k, v in pairs(items['space-age']['PHI-VP']['item']) do
             if data.raw.item[k] then
                 data.raw.item[k].hidden = v
                 data.raw.item[k].hidden_in_factoriopedia = v
