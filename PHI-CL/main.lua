@@ -215,6 +215,8 @@ function main.EEE(source, tier)
     end
 
     item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
+    item.localised_description = (tier > 1 and {'phi-cl.combine', {'?', {'entity-description.' .. source.ref_name}, {'description.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-description.' .. source.ref_name}, {'description.' .. source.ref_name}}
+
     data:extend({item})
 end
 
@@ -263,6 +265,7 @@ function main.EEQ(source, tier)
     end
 
     item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'item-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'item-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
+    item.localised_description = (tier > 1 and {'phi-cl.combine', {'?', {'item-description.' .. source.ref_name}, {'description.' .. source.ref_name}}, tostring(tier)}) or {'?', {'item-description.' .. source.ref_name}, {'description.' .. source.ref_name}}
 
     if settings.startup['PHI-EQ-SIZE'].value then
         item.shape = {
@@ -310,6 +313,8 @@ function main.EI(source, tier)
 
     item.order = item.order .. tier
     item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'entity-name.' .. source.ref_name}, {'item-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-name.' .. source.ref_name}, {'item-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
+    item.localised_description = (tier > 1 and {'phi-cl.combine', {'?', {'entity-description.' .. source.ref_name}, {'item-description.' .. source.ref_name}, {'description.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-description.' .. source.ref_name}, {'item-description.' .. source.ref_name}, {'description.' .. source.ref_name}}
+
     data:extend({item})
 end
 
@@ -355,7 +360,8 @@ function main.ER(source, tier)
             ingredients = ingredients,
             results = {{type = 'item', name = result_name, amount = 1}},
             main_product = result_name,
-            localised_name = {'phi-cl.combine', data.raw[source.type][new_name].localised_name, ''}
+            localised_name = {'?', data.raw[source.type][new_name].localised_name, ''},
+            localised_description = {'?', data.raw[source.type][new_name].localised_description, ''}
         }})
 
     else
@@ -368,7 +374,8 @@ function main.ER(source, tier)
             ingredients = {{type = 'item', name = ingredient_name, amount = 2}},
             results = {{type = 'item', name = result_name, amount = 1}},
             main_product = result_name,
-            localised_name = {'phi-cl.combine', data.raw[source.type][new_name].localised_name, ''}
+            localised_name = {'?', data.raw[source.type][new_name].localised_name, ''},
+            localised_description = {'?', data.raw[source.type][new_name].localised_description, ''}
         }})
     end
 end
