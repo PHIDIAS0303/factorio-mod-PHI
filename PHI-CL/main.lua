@@ -214,13 +214,7 @@ function main.EEE(source, tier)
         item.base_picture.sheets[1].tint = items['tint'][tier]
     end
 
-    if tier > 1 then
-        item.localised_name = {'phi-cl.combine', {'name.' .. source.ref_name}, tostring(tier)}
-
-    else
-        item.localised_name = {'name.' .. source.ref_name}
-    end
-
+    item.localised_name = (tier > 1 and {'phi-cl.combine', {((source.mod == 'space-exploration' and 'entity-name.') or 'name.') .. source.ref_name}, tostring(tier)}) or {((source.mod == 'space-exploration' and 'entity-name.') or 'name.') .. source.ref_name}
     data:extend({item})
 end
 
@@ -268,7 +262,7 @@ function main.EEQ(source, tier)
         item.sprite.tint = items['tint'][tier]
     end
 
-    item.localised_name = {'phi-cl.combine-gen', {'name.' .. source.ref_name}, tostring(tier)}
+    item.localised_name = {'phi-cl.combine-gen', {((source.mod == 'space-exploration' and 'item-name.') or 'name.') .. source.ref_name}, tostring(tier)}
 
     if settings.startup['PHI-EQ-SIZE'].value then
         item.shape = {
