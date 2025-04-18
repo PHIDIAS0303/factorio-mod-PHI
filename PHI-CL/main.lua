@@ -214,7 +214,7 @@ function main.EEE(source, tier)
         item.base_picture.sheets[1].tint = items['tint'][tier]
     end
 
-    item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'name.' .. source.ref_name}, {'entity-name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'name.' .. source.ref_name}, {'entity-name.' .. source.ref_name}}
+    item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
     data:extend({item})
 end
 
@@ -262,7 +262,7 @@ function main.EEQ(source, tier)
         item.sprite.tint = items['tint'][tier]
     end
 
-    item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'name.' .. source.ref_name}, {'item-name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'name.' .. source.ref_name}, {'item-name.' .. source.ref_name}}
+    item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'item-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'item-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
 
     if settings.startup['PHI-EQ-SIZE'].value then
         item.shape = {
@@ -309,7 +309,7 @@ function main.EI(source, tier)
     end
 
     item.order = item.order .. tier
-    item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'name.' .. source.ref_name}, {'entity-name.' .. source.ref_name}, {'item-name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'name.' .. source.ref_name}, {'entity-name.' .. source.ref_name}, {'item-name.' .. source.ref_name}}
+    item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'entity-name.' .. source.ref_name}, {'item-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-name.' .. source.ref_name}, {'item-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
     data:extend({item})
 end
 
@@ -339,15 +339,11 @@ function main.ER(source, tier)
     if (source.tech == 'compound-energy') then
         local ingredients
 
-        if (source.type == 'solar-panel') or (source.type == 'accumulator') then
+        if ((source.type == 'solar-panel') or (source.type == 'accumulator')) then
             ingredients = {{type = 'item', name = ingredient_name, amount = tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value) or 4}}
 
         else
-            if tier > 2 then
-                ingredients = {{type = 'item', name = ingredient_name, amount = 1}, {type='item', name = source.name, amount = 1}}
-            else
-                ingredients = {{type = 'item', name = source.name, amount = 2}}
-            end
+            ingredients = (tier > 2 and {{type = 'item', name = ingredient_name, amount = 1}, {type='item', name = source.name, amount = 1}}) or {{type = 'item', name = source.name, amount = 2}}
         end
 
         data:extend({{
