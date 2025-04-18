@@ -224,7 +224,7 @@ if settings.startup['PHI-MI'].value then
 
     if settings.startup['PHI-MI-NUCLEAR'].value then
         for _, v in pairs(data.raw['reactor']) do
-            v.scale_energy_usage = settings.startup['PHI-MI-NUCLEAR'].value
+            v.scale_energy_usage = ((v.fast_replaceable_group and v.fast_replaceable_group == 'reactor') and settings.startup['PHI-MI-NUCLEAR'].value) or v.scale_energy_usage
         end
     end
 
