@@ -220,7 +220,7 @@ if settings.startup['PHI-MI'].value then
         end
     end
 
-    data.raw.recipe['landfill'].ingredients = {{type = 'item', name = 'stone', amount = tonumber(settings.startup['PHI-MI-LANDFILL'].value) or 50}}
+    data.raw.recipe['landfill'].ingredients = {{type = 'item', name = 'stone', amount = tonumber(settings.startup['PHI-MI-LANDFILL'].value) or 20}}
 
     if settings.startup['PHI-MI-NUCLEAR'].value then
         for _, v in pairs(data.raw['reactor']) do
@@ -255,26 +255,13 @@ if settings.startup['PHI-MI'].value then
                 v.speed = v.speed * s
 
                 if settings.startup['PHI-MI-ROBOT-ENERGY'].value then
-                    if v.energy_per_tick then
-                        v.energy_per_tick = '0J'
-                    end
-
-                    if v.energy_per_move then
-                        v.energy_per_move = '0J'
-                    end
-
-                    if v.speed_multiplier_when_out_of_energy then
-                        v.speed_multiplier_when_out_of_energy = 1
-                    end
+                    v.energy_per_tick = (v.energy_per_tick and '0J') or nil
+                    v.energy_per_move = (v.energy_per_move and '0J') or nil
+                    v.speed_multiplier_when_out_of_energy = (v.speed_multiplier_when_out_of_energy and 1) or nil
 
                 else
-                    if v.energy_per_tick then
-                        v.energy_per_tick = tostring(tonumber(string.match(v.energy_per_tick, '[%d%.]+')) * sn) .. string.match(v.energy_per_tick, '%a+')
-                    end
-
-                    if v.energy_per_move then
-                        v.energy_per_move = tostring(tonumber(string.match(v.energy_per_move, '[%d%.]+')) * sn) .. string.match(v.energy_per_move, '%a+')
-                    end
+                    v.energy_per_tick = (v.energy_per_tick and tostring(tonumber(string.match(v.energy_per_tick, '[%d%.]+')) * sn) .. string.match(v.energy_per_tick, '%a+')) or nil
+                    v.energy_per_move = (v.energy_per_move and tostring(tonumber(string.match(v.energy_per_move, '[%d%.]+')) * sn) .. string.match(v.energy_per_move, '%a+')) or nil
                 end
             end
         end
@@ -311,7 +298,7 @@ end
 if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or settings.startup['PHI-VP'].value then
     data:extend({{type = 'recipe-category', name = 'fluid'}})
 
-    item = table.deepcopy(data.raw['item']['offshore-pump'])
+    local item = table.deepcopy(data.raw['item']['offshore-pump'])
     item.name = 'super-pump'
     item.place_result = item.name
     item.order = 'b[fluids]-a[super-pump]-o'
@@ -331,7 +318,7 @@ if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (se
     item.localised_name = {'name.super-pump'}
     data:extend({item})
 
-    entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
+    local entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
     entity.name = item.name
     entity.minable.result = item.name
     entity.type = 'assembling-machine'
@@ -530,7 +517,7 @@ end
 
 if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-SPOIL-FREEZE'].value and settings.startup['PHI-SA-SPOIL'].value and mods['space-age'] then
     local function spoil_handle(i)
-        item = table.deepcopy(i)
+        local item = table.deepcopy(i)
         item.name = 'frozen-' .. i.name
         item.order = item.order .. '-f'
 
