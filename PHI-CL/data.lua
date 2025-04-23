@@ -146,14 +146,6 @@ if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value t
     end
 end
 
-if settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value then
-    data.raw['mining-drill']['electric-mining-drill'].filter_count = 5
-
-    if mods['space-age'] then
-        data.raw['mining-drill']['big-mining-drill'].filter_count = 5
-    end
-end
-
 if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or settings.startup['PHI-VP'].value then
     local bss = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
 
@@ -168,6 +160,12 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
             data.raw['inserter'][v].enter_drop_mode_if_held_stack_spoiled = true
             data.raw['inserter'][v].allow_custom_vectors = true
         end
+    end
+
+    data.raw['mining-drill']['electric-mining-drill'].filter_count = 5
+
+    if mods['space-age'] then
+        data.raw['mining-drill']['big-mining-drill'].filter_count = 5
     end
 
     if mods['elevated-rails'] then
