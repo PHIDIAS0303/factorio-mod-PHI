@@ -148,9 +148,11 @@ end
 
 if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or settings.startup['PHI-VP'].value then
     local bss = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
+    data.raw['mining-drill']['electric-mining-drill'].filter_count = 5
 
-    if mods['space-age'] and data.raw['inserter']['stack-inserter'] then
+    if mods['space-age'] then
         data.raw['inserter']['stack-inserter'].allow_custom_vectors = true
+        data.raw['mining-drill']['big-mining-drill'].filter_count = 5
     end
 
     for _, v in pairs({'burner-inserter', 'inserter', 'fast-inserter', 'long-handed-inserter', 'bulk-inserter'}) do
@@ -160,12 +162,15 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
             data.raw['inserter'][v].enter_drop_mode_if_held_stack_spoiled = true
             data.raw['inserter'][v].allow_custom_vectors = true
         end
-    end
 
-    data.raw['mining-drill']['electric-mining-drill'].filter_count = 5
-
-    if mods['space-age'] then
-        data.raw['mining-drill']['big-mining-drill'].filter_count = 5
+        data.raw['pipe']['pipe'].heating_energy = nil
+        data.raw['pipe-to-ground']['pipe-to-ground'].heating_energy = nil
+        data.raw['pump']['pump'].heating_energy = nil
+        data.raw['storage-tank']['storage-tank'].heating_energy = nil
+        data.raw['generator']['steam-engine'].heating_energy = nil
+        data.raw['generator']['steam-turbine'].heating_energy = nil
+        data.raw['furnace']['electric-furnace'].heating_energy = nil
+        data.raw['assembling-machine']['cryogenic-plant'].heating_energy = nil
     end
 
     if mods['elevated-rails'] then
