@@ -218,7 +218,7 @@ if settings.startup['PHI-MI'].value then
     end
 
     for _, v in pairs(data.raw['reactor']) do
-        v.scale_energy_usage = ((v.fast_replaceable_group and v.fast_replaceable_group == 'reactor') and settings.startup['PHI-MI-NUCLEAR'].value) or v.scale_energy_usage
+        v.scale_energy_usage = (v.fast_replaceable_group and v.fast_replaceable_group == 'reactor')
     end
 
     for _, v in pairs({data.raw['module']['efficiency-module'], data.raw['module']['efficiency-module-2'], data.raw['module']['efficiency-module-3']}) do
