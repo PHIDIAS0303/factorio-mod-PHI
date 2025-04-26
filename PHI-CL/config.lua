@@ -263,7 +263,7 @@ local items = {
             ref_name = 'battery-mk2-equipment',
             tech = 'battery-mk2-equipment',
             min = 3,
-            max = settings.startup['PHI-EQ-EQUIPMENT-TIER'].value
+            max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
         },
         ['discharge-defense-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -274,7 +274,7 @@ local items = {
             ref_name = 'discharge-defense-equipment',
             tech = 'discharge-defense-equipment',
             min = 2,
-            max = settings.startup['PHI-EQ-EQUIPMENT-TIER'].value
+            max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
         },
         ['energy-shield-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -285,7 +285,7 @@ local items = {
             ref_name = 'energy-shield-mk2-equipment',
             tech = 'energy-shield-mk2-equipment',
             min = 3,
-            max = settings.startup['PHI-EQ-EQUIPMENT-TIER'].value
+            max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
         },
         ['exoskeleton-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -296,7 +296,7 @@ local items = {
             ref_name = 'exoskeleton-equipment',
             tech = 'exoskeleton-equipment',
             min = 2,
-            max = math.min(tonumber(settings.startup['PHI-EQ-EQUIPMENT-TIER'].value) or 1, 2)
+            max = math.min(tonumber(settings.startup['PHI-MB-EQUIPMENT-TIER'].value) or 1, 2)
         },
         ['fission-reactor-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -307,7 +307,7 @@ local items = {
             ref_name = 'fission-reactor-equipment',
             tech = 'fission-reactor-equipment',
             min = 2,
-            max = settings.startup['PHI-EQ-EQUIPMENT-TIER'].value
+            max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
         },
         ['night-vision-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -318,7 +318,7 @@ local items = {
             ref_name = 'night-vision-equipment',
             tech = 'night-vision-equipment',
             min = 2,
-            max = math.min(tonumber(settings.startup['PHI-EQ-EQUIPMENT-TIER'].value) or 1, 2)
+            max = math.min(tonumber(settings.startup['PHI-MB-EQUIPMENT-TIER'].value) or 1, 2)
         },
         ['personal-laser-defense-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -329,7 +329,7 @@ local items = {
             ref_name = 'personal-laser-defense-equipment',
             tech = 'personal-laser-defense-equipment',
             min = 2,
-            max = settings.startup['PHI-EQ-EQUIPMENT-TIER'].value
+            max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
         },
         ['personal-roboport-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -340,7 +340,7 @@ local items = {
             ref_name = 'personal-roboport-mk2-equipment',
             tech = 'personal-roboport-mk2-equipment',
             min = 3,
-            max = settings.startup['PHI-EQ-EQUIPMENT-TIER'].value
+            max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
         },
         ['solar-panel-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -351,7 +351,7 @@ local items = {
             ref_name = 'solar-panel-equipment',
             tech = 'solar-panel-equipment',
             min = 2,
-            max = settings.startup['PHI-EQ-EQUIPMENT-TIER'].value,
+            max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value,
             base = 30,
             graphics_name = 'solar-panel-equipment'
         }
@@ -859,7 +859,7 @@ if mods and mods['space-age'] then
         ref_name = 'fusion-reactor-equipment',
         tech = 'fusion-reactor-equipment',
         min = 2,
-        max = settings.startup['PHI-EQ-EQUIPMENT-TIER'].value
+        max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
     }
 
     items['equipment']['toolbelt-equipment'] = {
@@ -871,7 +871,7 @@ if mods and mods['space-age'] then
         ref_name = 'toolbelt-equipment',
         tech = 'toolbelt-equipment',
         min = 2,
-        max = math.min(tonumber(settings.startup['PHI-EQ-EQUIPMENT-TIER'].value) or 1, 2)
+        max = math.min(tonumber(settings.startup['PHI-MB-EQUIPMENT-TIER'].value) or 1, 2)
     }
 
     items['equipment']['battery-equipment'].ref_name = 'battery-mk3-equipment'

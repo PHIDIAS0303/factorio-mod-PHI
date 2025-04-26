@@ -69,41 +69,41 @@ data:extend({
   order = 'AC01'
 }, {
   type = 'bool-setting',
-  name = 'PHI-EQ',
+  name = 'PHI-MB-EQUIPMENT',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-EQ'}, {'mod-setting-name.PHI-EQ'}},
-  order = 'B00'
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT'}, {'mod-setting-name.PHI-MB-EQUIPMENT'}},
+  order = 'AD00'
 }, {
   type = 'int-setting',
-  name = 'PHI-EQ-EQUIPMENT-TIER',
+  name = 'PHI-MB-EQUIPMENT-TIER',
   setting_type = 'startup',
   default_value = 2,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-EQ-EQUIPMENT-TIER'}, {'mod-setting-name.PHI-EQ-EQUIPMENT-TIER'}},
-  order = 'B01'
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-TIER'}, {'mod-setting-name.PHI-MB-EQUIPMENT-TIER'}},
+  order = 'AD01'
 }, {
   type = 'int-setting',
-  name = 'PHI-EQ-UTILITY-TIER',
+  name = 'PHI-MB-EQUIPMENT-UTILITY-TIER',
   setting_type = 'startup',
   default_value = 2,
   allowed_values = {1, 2},
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-EQ-UTILITY-TIER'}, {'mod-setting-name.PHI-EQ-UTILITY-TIER'}},
-  order = 'B02'
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-UTILITY-TIER'}, {'mod-setting-name.PHI-MB-EQUIPMENT-UTILITY-TIER'}},
+  order = 'AD02'
 }, {
   type = 'bool-setting',
-  name = 'PHI-EQ-ARMOR',
+  name = 'PHI-MB-EQUIPMENT-ARMOR',
   setting_type = 'startup',
   default_value = true,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-EQ-ARMOR'}, {'mod-setting-name.PHI-EQ-ARMOR'}},
-  order = 'B03'
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-ARMOR'}, {'mod-setting-name.PHI-MB-EQUIPMENT-ARMOR'}},
+  order = 'AD03'
 }, {
   type = 'bool-setting',
-  name = 'PHI-EQ-SIZE',
+  name = 'PHI-MB-EQUIPMENT-SIZE',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-EQ-SIZE'}, {'mod-setting-name.PHI-EQ-SIZE'}},
-  order = 'B04'
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-SIZE'}, {'mod-setting-name.PHI-MB-EQUIPMENT-SIZE'}},
+  order = 'AD04'
 }, {
   type = 'bool-setting',
   name = 'PHI-MI',
