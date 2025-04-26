@@ -36,7 +36,7 @@ if settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value 
     end
 end
 
-if settings.startup['PHI-EQ'].value and settings.startup['PHI-MB-EQUIPMENT-ARMOR'].value then
+if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIPMENT-ARMOR'].value then
     local grid = table.deepcopy(data.raw['equipment-grid']['large-equipment-grid'])
     grid.name = 'equipment-grid-14x14'
     grid.width = 14
