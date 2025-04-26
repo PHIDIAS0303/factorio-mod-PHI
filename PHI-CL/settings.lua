@@ -83,34 +83,26 @@ data:extend({
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-TIER'}, {'mod-setting-name.PHI-MB-EQUIPMENT-TIER'}},
   order = 'AD01'
 }, {
-  type = 'int-setting',
-  name = 'PHI-MB-EQUIPMENT-UTILITY-TIER',
-  setting_type = 'startup',
-  default_value = 2,
-  allowed_values = {1, 2},
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-UTILITY-TIER'}, {'mod-setting-name.PHI-MB-EQUIPMENT-UTILITY-TIER'}},
-  order = 'AD02'
-}, {
   type = 'bool-setting',
   name = 'PHI-MB-EQUIPMENT-ARMOR',
   setting_type = 'startup',
   default_value = true,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-ARMOR'}, {'mod-setting-name.PHI-MB-EQUIPMENT-ARMOR'}},
-  order = 'AD03'
+  order = 'AD02'
 }, {
   type = 'bool-setting',
   name = 'PHI-MB-EQUIPMENT-SIZE',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-SIZE'}, {'mod-setting-name.PHI-MB-EQUIPMENT-SIZE'}},
-  order = 'AD04'
+  order = 'AD03'
 }, {
   type = 'bool-setting',
   name = 'PHI-MI',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI'}, {'mod-setting-name.PHI-MI'}},
-  order = 'C00'
+  order = 'B00'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-LANDFILL',
@@ -119,7 +111,7 @@ data:extend({
   minimum_value = 1,
   maximum_value = 100,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-LANDFILL'}, {'mod-setting-name.PHI-MI-LANDFILL'}},
-  order = 'C01'
+  order = 'B01'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-EFFCY',
@@ -128,7 +120,7 @@ data:extend({
   minimum_value = 10,
   maximum_value = 1000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-EFFCY'}, {'mod-setting-name.PHI-MI-EFFCY'}},
-  order = 'C02'
+  order = 'B02'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-PIPE',
@@ -136,7 +128,7 @@ data:extend({
   default_value = 1,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-PIPE'}, {'mod-setting-name.PHI-MI-PIPE'}},
-  order = 'C03'
+  order = 'B03'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-ROBOT',
@@ -144,14 +136,14 @@ data:extend({
   default_value = 1,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-ROBOT'}, {'mod-setting-name.PHI-MI-ROBOT'}},
-  order = 'C04'
+  order = 'B04'
 }, {
   type = 'bool-setting',
   name = 'PHI-MI-ROBOT-ENERGY',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-ROBOT-ENERGY'}, {'mod-setting-name.PHI-MI-ROBOT-ENERGY'}},
-  order = 'C05'
+  order = 'B05'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-TRAIN',
@@ -159,7 +151,7 @@ data:extend({
   default_value = 1,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-TRAIN'}, {'mod-setting-name.PHI-MI-TRAIN'}},
-  order = 'C06'
+  order = 'B06'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-PIPE-EXTENT',
@@ -168,7 +160,7 @@ data:extend({
   minimum_value = 80,
   maximum_value = 2560,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-PIPE-EXTENT'}, {'mod-setting-name.PHI-MI-PIPE-EXTENT'}},
-  order = 'C07'
+  order = 'B07'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-ROCKET-CAPACITY',
@@ -177,14 +169,14 @@ data:extend({
   minimum_value = 1,
   maximum_value = 10000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-ROCKET-CAPACITY'}, {'mod-setting-name.PHI-MI-ROCKET-CAPACITY'}},
-  order = 'C08'
+  order = 'B08'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA'}, {'mod-setting-name.PHI-SA'}},
-  order = 'D00'
+  order = 'C00'
 }, {
   type = 'int-setting',
   name = 'PHI-SA-HEAT-RADIUS',
@@ -192,21 +184,21 @@ data:extend({
   default_value = 1,
   allowed_values = {1, 2, 3, 4, 5, 6, 7},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-HEAT-RADIUS'}, {'mod-setting-name.PHI-SA-HEAT-RADIUS'}},
-  order = 'D01'
+  order = 'C01'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-SPOIL',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL'}, {'mod-setting-name.PHI-SA-SPOIL'}},
-  order = 'D02'
+  order = 'C02'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-SPOIL-FREEZE',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE'}},
-  order = 'D03'
+  order = 'C03'
 }, {
   type = 'int-setting',
   name = 'PHI-SA-SPOIL-FREEZE-RATIO',
@@ -215,7 +207,7 @@ data:extend({
   minimum_value = 1,
   maximum_value = 1000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE-RATIO'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE-RATIO'}},
-  order = 'D04'
+  order = 'C04'
 }, {
   type = 'int-setting',
   name = 'PHI-SA-QUALITY',
@@ -224,49 +216,49 @@ data:extend({
   minimum_value = 1,
   maximum_value = 100,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-QUALITY'}, {'mod-setting-name.PHI-SA-QUALITY'}},
-  order = 'D05'
+  order = 'C05'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-MAX-QUALITY',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-MAX-QUALITY'}, {'mod-setting-name.PHI-SA-MAX-QUALITY'}},
-  order = 'D06'
+  order = 'C06'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-RESTRICTION',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-RESTRICTION'}, {'mod-setting-name.PHI-SA-RESTRICTION'}},
-  order = 'D07'
+  order = 'C07'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-GENERIC',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-GENERIC'}, {'mod-setting-name.PHI-SA-GENERIC'}},
-  order = 'D08'
+  order = 'C08'
 }, {
   type = 'bool-setting',
   name = 'PHI-VP',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-VP'}, {'mod-setting-name.PHI-VP'}},
-  order = 'E00'
+  order = 'D00'
 },  {
   type = 'bool-setting',
   name = 'PHI-CT',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-CT'}, {'mod-setting-name.PHI-CT'}},
-  order = 'F00'
+  order = 'E00'
 },  {
   type = 'bool-setting',
   name = 'PHI-CT-TILE',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-CT-TILE'}, {'mod-setting-name.PHI-CT-TILE'}},
-  order = 'F01'
+  order = 'E01'
 }, {
   type = 'string-setting',
   name = 'PHI-CT-TILE-CHOICE',
@@ -274,6 +266,6 @@ data:extend({
   default_value = 'grass-1',
   allowed_values = {'landfill', 'stone-path', 'concrete', 'refined-concrete', 'lab-dark-1', 'lab-dark-2', 'lab-white', 'water', 'water-green', 'water-mud', 'water-shallow', 'deepwater', 'deepwater-green', 'dirt-1', 'dirt-2', 'dirt-3', 'dirt-4', 'dirt-5', 'dirt-6', 'dirt-7', 'dry-dirt', 'grass-1', 'grass-2', 'grass-3', 'grass-4'},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-CT-TILE-CHOICE'}, {'mod-setting-name.PHI-CT-TILE-CHOICE'}},
-  order = 'F02'
+  order = 'E02'
 }
 })
