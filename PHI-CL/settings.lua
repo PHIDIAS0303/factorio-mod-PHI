@@ -130,20 +130,13 @@ data:extend({
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-EFFCY'}, {'mod-setting-name.PHI-MI-EFFCY'}},
   order = 'C02'
 }, {
-  type = 'bool-setting',
-  name = 'PHI-MI-NUCLEAR',
-  setting_type = 'startup',
-  default_value = true,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-NUCLEAR'}, {'mod-setting-name.PHI-MI-NUCLEAR'}},
-  order = 'C03'
-}, {
   type = 'int-setting',
   name = 'PHI-MI-PIPE',
   setting_type = 'startup',
   default_value = 1,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-PIPE'}, {'mod-setting-name.PHI-MI-PIPE'}},
-  order = 'C04'
+  order = 'C03'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-ROBOT',
@@ -151,14 +144,14 @@ data:extend({
   default_value = 1,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-ROBOT'}, {'mod-setting-name.PHI-MI-ROBOT'}},
-  order = 'C05'
+  order = 'C04'
 }, {
   type = 'bool-setting',
   name = 'PHI-MI-ROBOT-ENERGY',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-ROBOT-ENERGY'}, {'mod-setting-name.PHI-MI-ROBOT-ENERGY'}},
-  order = 'C06'
+  order = 'C05'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-TRAIN',
@@ -166,7 +159,7 @@ data:extend({
   default_value = 1,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-TRAIN'}, {'mod-setting-name.PHI-MI-TRAIN'}},
-  order = 'C07'
+  order = 'C06'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-PIPE-EXTENT',
@@ -175,7 +168,7 @@ data:extend({
   minimum_value = 80,
   maximum_value = 2560,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-PIPE-EXTENT'}, {'mod-setting-name.PHI-MI-PIPE-EXTENT'}},
-  order = 'C08'
+  order = 'C07'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-ROCKET-CAPACITY',
@@ -184,7 +177,7 @@ data:extend({
   minimum_value = 1,
   maximum_value = 10000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-ROCKET-CAPACITY'}, {'mod-setting-name.PHI-MI-ROCKET-CAPACITY'}},
-  order = 'C09'
+  order = 'C08'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA',

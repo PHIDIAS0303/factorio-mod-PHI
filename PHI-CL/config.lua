@@ -296,7 +296,7 @@ local items = {
             ref_name = 'exoskeleton-equipment',
             tech = 'exoskeleton-equipment',
             min = 2,
-            max = settings.startup['PHI-EQ-EQUIPMENT-TIER'].value
+            max = math.min(tonumber(settings.startup['PHI-EQ-EQUIPMENT-TIER'].value) or 1, 2)
         },
         ['fission-reactor-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -318,7 +318,7 @@ local items = {
             ref_name = 'night-vision-equipment',
             tech = 'night-vision-equipment',
             min = 2,
-            max = settings.startup['PHI-EQ-EQUIPMENT-TIER'].value
+            max = math.min(tonumber(settings.startup['PHI-EQ-EQUIPMENT-TIER'].value) or 1, 2)
         },
         ['personal-laser-defense-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
@@ -871,7 +871,7 @@ if mods and mods['space-age'] then
         ref_name = 'toolbelt-equipment',
         tech = 'toolbelt-equipment',
         min = 2,
-        max = settings.startup['PHI-EQ-EQUIPMENT-TIER'].value
+        max = math.min(tonumber(settings.startup['PHI-EQ-EQUIPMENT-TIER'].value) or 1, 2)
     }
 
     items['equipment']['battery-equipment'].ref_name = 'battery-mk3-equipment'

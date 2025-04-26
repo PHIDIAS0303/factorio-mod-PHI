@@ -217,6 +217,10 @@ if settings.startup['PHI-MI'].value then
         v.automatic = true
     end
 
+    for _, v in pairs(data.raw['reactor']) do
+        v.scale_energy_usage = ((v.fast_replaceable_group and v.fast_replaceable_group == 'reactor') and settings.startup['PHI-MI-NUCLEAR'].value) or v.scale_energy_usage
+    end
+
     for _, v in pairs({data.raw['module']['efficiency-module'], data.raw['module']['efficiency-module-2'], data.raw['module']['efficiency-module-3']}) do
         for _, v2 in pairs(v.effect) do
             v2 = v2 * settings.startup['PHI-MI-EFFCY'].value / 100
@@ -224,12 +228,6 @@ if settings.startup['PHI-MI'].value then
     end
 
     data.raw.recipe['landfill'].ingredients = {{type = 'item', name = 'stone', amount = tonumber(settings.startup['PHI-MI-LANDFILL'].value) or 20}}
-
-    if settings.startup['PHI-MI-NUCLEAR'].value then
-        for _, v in pairs(data.raw['reactor']) do
-            v.scale_energy_usage = ((v.fast_replaceable_group and v.fast_replaceable_group == 'reactor') and settings.startup['PHI-MI-NUCLEAR'].value) or v.scale_energy_usage
-        end
-    end
 
     if settings.startup['PHI-MI-PIPE'].value then
         local s = (1 + settings.startup['PHI-MI-PIPE'].value) / 2

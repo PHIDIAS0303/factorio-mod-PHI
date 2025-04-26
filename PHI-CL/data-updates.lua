@@ -40,30 +40,17 @@ if mods['space-exploration'] and settings.startup['PHI-MB'].value and settings.s
         item.localised_description = {'description.se-core-miner-drill'}
         data:extend({item})
 
-        if i > 2 then
-            data:extend({{
-                type = 'recipe',
-                name = miner_name,
-                energy_required = 2,
-                enabled = false,
-                ingredients = {{type = 'item', name = 'se-core-miner-drill-' .. (i - 1), amount = 1}, {type = 'item', name = 'se-core-miner-drill', amount = 1}},
-                results = {{type = 'item', name = miner_name, amount = 1}},
-                localised_name = {'name.se-core-miner-drill'},
-                localised_description = {'description.se-core-miner-drill'}
-            }})
+        data:extend({{
+            type = 'recipe',
+            name = miner_name,
+            energy_required = 2,
+            enabled = false,
+            ingredients =  (i > 2 and {{type = 'item', name = 'se-core-miner-drill-' .. (i - 1), amount = 1}, {type = 'item', name = 'se-core-miner-drill', amount = 1}}) or {{type = 'item', name = 'se-core-miner-drill', amount = 2}},
+            results = {{type = 'item', name = miner_name, amount = 1}},
+            localised_name = {'name.se-core-miner-drill'},
+            localised_description = {'description.se-core-miner-drill'}
+        }})
 
-        else
-            data:extend({{
-                type = 'recipe',
-                name = miner_name,
-                energy_required = 2,
-                enabled = false,
-                ingredients = {{type = 'item', name = 'se-core-miner-drill', amount = 2}},
-                results = {{type = 'item', name = miner_name, amount = 1}},
-                localised_name = {'name.se-core-miner-drill'},
-                localised_description = {'description.se-core-miner-drill'}
-            }})
-        end
 
         data.raw['mining-drill'][miner_name].fast_replaceable_group = data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group
         table.insert(data.raw.technology['se-core-miner'].effects, {type='unlock-recipe', recipe=miner_name})
