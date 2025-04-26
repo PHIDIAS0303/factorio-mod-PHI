@@ -340,7 +340,7 @@ local items = {
             ref_name = 'personal-roboport-mk2-equipment',
             tech = 'personal-roboport-mk2-equipment',
             min = 3,
-            max = settings.startup['PHI-EQ-TOOL-TIER'].value
+            max = settings.startup['PHI-EQ-EQUIPMENT-TIER'].value
         },
         ['solar-panel-equipment'] = {
             enabled = settings.startup['PHI-EQ'].value,
