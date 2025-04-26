@@ -76,28 +76,12 @@ data:extend({
   order = 'B00'
 }, {
   type = 'int-setting',
-  name = 'PHI-EQ-POWER-TIER',
+  name = 'PHI-EQ-EQUIPMENT-TIER',
   setting_type = 'startup',
-  default_value = 8,
+  default_value = 2,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-EQ-POWER-TIER'}, {'mod-setting-name.PHI-EQ-POWER-TIER'}},
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-EQ-EQUIPMENT-TIER'}, {'mod-setting-name.PHI-EQ-EQUIPMENT-TIER'}},
   order = 'B01'
-}, {
-  type = 'int-setting',
-  name = 'PHI-EQ-DEFENSE-TIER',
-  setting_type = 'startup',
-  default_value = 8,
-  allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-EQ-DEFENSE-TIER'}, {'mod-setting-name.PHI-EQ-DEFENSE-TIER'}},
-  order = 'B02'
-}, {
-  type = 'int-setting',
-  name = 'PHI-EQ-TOOL-TIER',
-  setting_type = 'startup',
-  default_value = 8,
-  allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-EQ-TOOL-TIER'}, {'mod-setting-name.PHI-EQ-TOOL-TIER'}},
-  order = 'B03'
 }, {
   type = 'int-setting',
   name = 'PHI-EQ-UTILITY-TIER',
@@ -105,21 +89,21 @@ data:extend({
   default_value = 2,
   allowed_values = {1, 2},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-EQ-UTILITY-TIER'}, {'mod-setting-name.PHI-EQ-UTILITY-TIER'}},
-  order = 'B04'
+  order = 'B02'
 }, {
   type = 'bool-setting',
   name = 'PHI-EQ-ARMOR',
   setting_type = 'startup',
   default_value = true,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-EQ-ARMOR'}, {'mod-setting-name.PHI-EQ-ARMOR'}},
-  order = 'B05'
+  order = 'B03'
 }, {
   type = 'bool-setting',
   name = 'PHI-EQ-SIZE',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-EQ-SIZE'}, {'mod-setting-name.PHI-EQ-SIZE'}},
-  order = 'B06'
+  order = 'B04'
 }, {
   type = 'bool-setting',
   name = 'PHI-MI',
@@ -201,15 +185,6 @@ data:extend({
   maximum_value = 10000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-ROCKET-CAPACITY'}, {'mod-setting-name.PHI-MI-ROCKET-CAPACITY'}},
   order = 'C09'
-}, {
-  type = 'int-setting',
-  name = 'PHI-MI-CARGO-WEIGHT',
-  setting_type = 'startup',
-  default_value = 100,
-  minimum_value = 1,
-  maximum_value = 1000,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-CARGO-WEIGHT'}, {'mod-setting-name.PHI-MI-CARGO-WEIGHT'}},
-  order = 'C10'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA',

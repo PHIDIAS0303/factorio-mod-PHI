@@ -1,4 +1,13 @@
 ---------------------------------------------------------------------------------------------------
+Version: 3.0.96
+Date: 2025-04-27
+
+  Changes:
+    - [SA] Clean up the code of previous change that is not in the correct block.
+    - [SA] Removed the settings to change the item weight for space age silo, use the silo capacity instead.
+    - [EQ] Grouped the equipment settings together.
+
+---------------------------------------------------------------------------------------------------
 Version: 3.0.95
 Date: 2025-04-27
 
