@@ -53,15 +53,10 @@ function main.EEE(source, tier)
         end
 
         if item.energy_source.emissions_per_minute then
-            if source.tech == 'compound-energy' and ((source.type == 'boiler') or (source.name == 'kr-gas-power-station')) then
-                for k, _ in pairs(item.energy_source.emissions_per_minute) do
-                    item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (tier - source.min + 2)
-                end
+            local m = ((source.tech == 'compound-energy' and ((source.type == 'boiler') or (source.name == 'kr-gas-power-station'))) and (tier - source.min + 2)) or (2 ^ (tier - source.min + 1))
 
-            else
-                for k, _ in pairs(item.energy_source.emissions_per_minute) do
-                    item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (2 ^ (tier - source.min + 1))
-                end
+            for k, _ in pairs(item.energy_source.emissions_per_minute) do
+                item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (tier - source.min + 2)
             end
         end
     end
@@ -330,54 +325,22 @@ function main.ER(source, tier)
         }
     }
 
-    if source.category == 'equipment' then
-        ingredient_name = ((tier == 2) and (ingredient_name .. '-equipment')) or (ingredient_name .. '-mk' .. (tier - 1) .. '-equipment')
-        new_name = new_name .. '-mk' .. tier .. '-equipment'
-        result_name = result_name .. '-mk' .. tier .. '-equipment'
+    ingredient_name = ((source.category == 'equipment' and (((tier == 2) and (ingredient_name .. '-equipment')) or (ingredient_name .. '-mk' .. (tier - 1) .. '-equipment'))) or (ingredient_name .. ((tier > 2) and ('-' .. (tier - 1)) or '')))
+    new_name = new_name .. ((source.category == 'equipment' and ('-mk' .. tier .. '-equipment')) or ('-' .. tier))
+    result_name = result_name .. ((source.category == 'equipment' and ('-mk' .. tier .. '-equipment')) or ('-' .. tier))
 
-    else
-        ingredient_name = ingredient_name .. ((tier > 2) and ('-' .. (tier - 1)) or '')
-        new_name = new_name .. '-' .. tier
-        result_name = result_name .. '-' .. tier
-    end
-
-    if (source.tech == 'compound-energy') then
-        local ingredients
-
-        if ((source.type == 'solar-panel') or (source.type == 'accumulator')) then
-            ingredients = {{type = 'item', name = ingredient_name, amount = tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value) or 4}}
-
-        else
-            ingredients = (tier > 2 and {{type = 'item', name = ingredient_name, amount = 1}, {type='item', name = source.name, amount = 1}}) or {{type = 'item', name = source.name, amount = 2}}
-        end
-
-        data:extend({{
-            type = 'recipe',
-            name = new_name,
-            icons = icons,
-            energy_required = 2,
-            enabled = false,
-            ingredients = ingredients,
-            results = {{type = 'item', name = result_name, amount = 1}},
-            main_product = result_name,
-            localised_name = {'?', data.raw[source.type][new_name].localised_name, ''},
-            localised_description = {'?', data.raw[source.type][new_name].localised_description, ''}
-        }})
-
-    else
-        data:extend({{
-            type = 'recipe',
-            name = new_name,
-            icons = icons,
-            energy_required = 2,
-            enabled = false,
-            ingredients = {{type = 'item', name = ingredient_name, amount = 2}},
-            results = {{type = 'item', name = result_name, amount = 1}},
-            main_product = result_name,
-            localised_name = {'?', data.raw[source.type][new_name].localised_name, ''},
-            localised_description = {'?', data.raw[source.type][new_name].localised_description, ''}
-        }})
-    end
+    data:extend({{
+        type = 'recipe',
+        name = new_name,
+        icons = icons,
+        energy_required = 2,
+        enabled = false,
+        ingredients = (source.tech == 'compound-energy' and (((source.type == 'solar-panel') or (source.type == 'accumulator')) and {{type = 'item', name = ingredient_name, amount = tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value) or 4}}) or ((tier > 2 and {{type = 'item', name = ingredient_name, amount = 1}, {type='item', name = source.name, amount = 1}}) or {{type = 'item', name = source.name, amount = 2}})) or {{type = 'item', name = ingredient_name, amount = 2}},
+        results = {{type = 'item', name = result_name, amount = 1}},
+        main_product = result_name,
+        localised_name = {'?', data.raw[source.type][new_name].localised_name, ''},
+        localised_description = {'?', data.raw[source.type][new_name].localised_description, ''}
+    }})
 end
 
 -- technology
