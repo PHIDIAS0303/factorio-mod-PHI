@@ -255,7 +255,7 @@ local items = {
     },
     ['equipment'] = {
         ['battery-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
+            enabled = settings.startup['PHI-MB-EQUIPMENT'].value,
             stage = 1,
             mod = 'base',
             type = 'battery-equipment',
@@ -266,7 +266,7 @@ local items = {
             max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
         },
         ['discharge-defense-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
+            enabled = settings.startup['PHI-MB-EQUIPMENT'].value,
             stage = 1,
             mod = 'base',
             type = 'active-defense-equipment',
@@ -277,7 +277,7 @@ local items = {
             max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
         },
         ['energy-shield-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
+            enabled = settings.startup['PHI-MB-EQUIPMENT'].value,
             stage = 1,
             mod = 'base',
             type = 'energy-shield-equipment',
@@ -288,7 +288,7 @@ local items = {
             max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
         },
         ['exoskeleton-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
+            enabled = settings.startup['PHI-MB-EQUIPMENT'].value,
             stage = 1,
             mod = 'base',
             type = 'movement-bonus-equipment',
@@ -299,7 +299,7 @@ local items = {
             max = math.min(tonumber(settings.startup['PHI-MB-EQUIPMENT-TIER'].value) or 1, 2)
         },
         ['fission-reactor-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
+            enabled = settings.startup['PHI-MB-EQUIPMENT'].value,
             stage = 1,
             mod = 'base',
             type = 'generator-equipment',
@@ -310,7 +310,7 @@ local items = {
             max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
         },
         ['night-vision-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
+            enabled = settings.startup['PHI-MB-EQUIPMENT'].value,
             stage = 1,
             mod = 'base',
             type = 'night-vision-equipment',
@@ -321,7 +321,7 @@ local items = {
             max = math.min(tonumber(settings.startup['PHI-MB-EQUIPMENT-TIER'].value) or 1, 2)
         },
         ['personal-laser-defense-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
+            enabled = settings.startup['PHI-MB-EQUIPMENT'].value,
             stage = 1,
             mod = 'base',
             type = 'active-defense-equipment',
@@ -332,7 +332,7 @@ local items = {
             max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
         },
         ['personal-roboport-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
+            enabled = settings.startup['PHI-MB-EQUIPMENT'].value,
             stage = 1,
             mod = 'base',
             type = 'roboport-equipment',
@@ -343,7 +343,7 @@ local items = {
             max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
         },
         ['solar-panel-equipment'] = {
-            enabled = settings.startup['PHI-EQ'].value,
+            enabled = settings.startup['PHI-MB-EQUIPMENT'].value,
             stage = 1,
             mod = 'base',
             type = 'solar-panel-equipment',
@@ -851,7 +851,7 @@ if mods and mods['space-age'] then
     }
 
     items['equipment']['fusion-reactor-equipment'] = {
-        enabled = settings.startup['PHI-EQ'].value,
+        enabled = settings.startup['PHI-MB-EQUIPMENT'].value,
         stage = 1,
         mod = 'space-age',
         type = 'generator-equipment',
@@ -863,7 +863,7 @@ if mods and mods['space-age'] then
     }
 
     items['equipment']['toolbelt-equipment'] = {
-        enabled = settings.startup['PHI-EQ'].value,
+        enabled = settings.startup['PHI-MB-EQUIPMENT'].value,
         stage = 1,
         mod = 'space-age',
         type = 'inventory-bonus-equipment',
