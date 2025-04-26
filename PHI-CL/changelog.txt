@@ -1,9 +1,10 @@
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.95
-Date: 2025-04-25
+Date: 2025-04-27
 
   Changes:
     - [MI] Removed a few entity from the requirement of needing heating energy in aquilo.
+    - [VP] Moved coal liquefaction one science bottle earlier.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.94
