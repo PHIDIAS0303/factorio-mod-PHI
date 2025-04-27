@@ -26,7 +26,6 @@ end
 -- entity
 function main.EEE(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
-
     item.name = source.name .. '-' .. tier
     item.minable.result = item.name
     item.max_health = item.max_health * (tier - source.min + 2)
@@ -218,9 +217,8 @@ end
 -- equipment
 function main.EEQ(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
-
     item.name = source.name .. '-mk' .. tier .. '-equipment'
-    item.take_result = source.name .. '-mk' .. tier .. '-equipment'
+    item.take_result = item.name
 
     for _, v in pairs({'power', 'energy_consumption', 'energy_input', 'charging_energy'}) do
         item[v] = (item[v] and tostring(tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item[v], '%a+')) or nil
@@ -280,11 +278,11 @@ function main.EI(source, tier)
 
     if source.category == 'equipment' then
         item.name = source.name .. '-mk' .. tier .. '-equipment'
-        item.place_as_equipment_result = source.name .. '-mk' .. tier .. '-equipment'
+        item.place_as_equipment_result = item.name
 
     else
         item.name = source.name .. ((tier > 1 and '-' .. tier) or '')
-        item.place_result = source.name .. ((tier > 1 and '-' .. tier) or '')
+        item.place_result = item.name
     end
 
     if item.icons and item.icons[1] then
@@ -315,9 +313,6 @@ end
 
 -- recipe
 function main.ER(source, tier)
-    local new_name = source.name
-    local ingredient_name = source.name
-    local result_name = source.name
     local icons = {
         {
             icon = data.raw.item[source.ref_name].icon,
@@ -325,21 +320,20 @@ function main.ER(source, tier)
         }
     }
 
-    ingredient_name = ((source.category == 'equipment' and (((tier == 2) and (ingredient_name .. '-equipment')) or (ingredient_name .. '-mk' .. (tier - 1) .. '-equipment'))) or (ingredient_name .. ((tier > 2) and ('-' .. (tier - 1)) or '')))
-    new_name = new_name .. ((source.category == 'equipment' and ('-mk' .. tier .. '-equipment')) or ('-' .. tier))
-    result_name = result_name .. ((source.category == 'equipment' and ('-mk' .. tier .. '-equipment')) or ('-' .. tier))
+    local ingredient_name = ((source.category == 'equipment' and (((tier == 2) and (source.name .. '-equipment')) or (source.name .. '-mk' .. (tier - 1) .. '-equipment'))) or (source.name .. ((tier > 2) and ('-' .. (tier - 1)) or '')))
+    local result_name = source.name .. ((source.category == 'equipment' and ('-mk' .. tier .. '-equipment')) or ('-' .. tier))
 
     data:extend({{
         type = 'recipe',
-        name = new_name,
+        name = result_name,
         icons = icons,
         energy_required = 2,
         enabled = false,
         ingredients = (source.tech == 'compound-energy' and (((source.type == 'solar-panel') or (source.type == 'accumulator')) and {{type = 'item', name = ingredient_name, amount = tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value) or 4}}) or ((tier > 2 and {{type = 'item', name = ingredient_name, amount = 1}, {type='item', name = source.name, amount = 1}}) or {{type = 'item', name = source.name, amount = 2}})) or {{type = 'item', name = ingredient_name, amount = 2}},
         results = {{type = 'item', name = result_name, amount = 1}},
         main_product = result_name,
-        localised_name = {'?', data.raw[source.type][new_name].localised_name, ''},
-        localised_description = {'?', data.raw[source.type][new_name].localised_description, ''}
+        localised_name = {'?', data.raw[source.type][result_name].localised_name, ''},
+        localised_description = {'?', data.raw[source.type][result_name].localised_description, ''}
     }})
 end
 
@@ -349,8 +343,7 @@ function main.ET(source, tier)
         table.insert(data.raw.technology['compound-energy-' .. (tier - 1)].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
 
     elseif data.raw.technology[source.tech] then
-        local recipe_name = source.name
-        recipe_name = (source.category == 'equipment' and (recipe_name .. '-mk' .. tier .. '-equipment')) or (recipe_name .. '-' .. tier)
+        local recipe_name = (source.category == 'equipment' and (source.name .. '-mk' .. tier .. '-equipment')) or (source.name .. '-' .. tier)
         table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=recipe_name})
 
         if source.type == 'ammo-turret' or source.type == 'fluid-turret' then
