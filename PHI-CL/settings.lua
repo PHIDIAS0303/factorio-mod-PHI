@@ -158,7 +158,7 @@ data:extend({
   setting_type = 'startup',
   default_value = 320,
   minimum_value = 80,
-  maximum_value = 2560,
+  maximum_value = 5120,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-PIPE-EXTENT'}, {'mod-setting-name.PHI-MI-PIPE-EXTENT'}},
   order = 'B07'
 }, {
