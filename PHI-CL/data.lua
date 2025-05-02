@@ -151,9 +151,8 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     data.raw['mining-drill']['electric-mining-drill'].filter_count = 5
 
     if mods['space-age'] then
-        data.raw['inserter']['stack-inserter'].allow_custom_vectors = true
         data.raw['mining-drill']['big-mining-drill'].filter_count = 5
-
+        data.raw['inserter']['stack-inserter'].allow_custom_vectors = true
         data.raw['pipe']['pipe'].heating_energy = nil
         data.raw['pipe-to-ground']['pipe-to-ground'].heating_energy = nil
         data.raw['pump']['pump'].heating_energy = nil
