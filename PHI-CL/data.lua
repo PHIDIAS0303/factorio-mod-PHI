@@ -727,6 +727,8 @@ end
 
 if settings.startup['PHI-VP'].value then
     if mods['space-age'] then
+        data.raw['utility-constants'].default.default_pipeline_extent = math.max(settings.startup['PHI-MI-PIPE-EXTENT'].value, 960)
+
         for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
             data.raw.planet[v].map_gen_settings = nil
             data.raw.planet[v].hidden = true
