@@ -296,8 +296,33 @@ end
 -- recipe
 function main.ER(source, tier)
     local icons = {{icon = data.raw.item[source.ref_name].icon, tint = items['tint'][tier]}}
-    local ingredient_name = ((source.category == 'equipment' and (((tier == source.min) and (source.name .. '-equipment')) or (source.name .. '-mk' .. (tier - 1) .. '-equipment'))) or (source.name .. ((tier > source.min) and ('-' .. (tier - 1)) or '')))
     local result_name = source.name .. ((source.category == 'equipment' and ('-mk' .. tier .. '-equipment')) or ('-' .. tier))
+    local ingredients = {}
+    local ingredient_name
+
+    if source.category == 'equipment' then
+        ingredient_name = (tier == source.min and source.name .. '-equipment') or (source.name .. '-mk' .. (tier - 1) .. '-equipment')
+
+    else
+        ingredient_name = (tier > source.min and (source.name .. '-' .. (tier - 1))) or source.name
+    end
+
+    if source.tech == 'compound-energy' then
+        if source.type == 'solar-panel' or source.type == 'accumulator' then
+            table.insert({type = 'item', name = ingredient_name, amount = tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value) or 4})
+
+        else
+            if tier > source.min then
+                table.insert({type = 'item', name = ingredient_name, amount = 1}, {type='item', name = source.ref_name, amount = 1})
+
+            else
+                table.insert({type = 'item', name = source.ref_name, amount = 2})
+            end
+        end
+
+    else
+        table.insert({type = 'item', name = ingredient_name, amount = 2})
+    end
 
     data:extend({{
         type = 'recipe',
@@ -305,7 +330,7 @@ function main.ER(source, tier)
         icons = icons,
         energy_required = 2,
         enabled = false,
-        ingredients = (source.tech == 'compound-energy' and (((source.type == 'solar-panel') or (source.type == 'accumulator')) and {{type = 'item', name = ingredient_name, amount = tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value) or 4}}) or ((tier > source.min and {{type = 'item', name = ingredient_name, amount = 1}, {type='item', name = source.ref_name, amount = 1}}) or {{type = 'item', name = source.ref_name, amount = 2}})) or {{type = 'item', name = ingredient_name, amount = 2}},
+        ingredients = ingredients,
         results = {{type = 'item', name = result_name, amount = 1}},
         main_product = result_name,
         localised_name = {'?', data.raw[source.type][result_name].localised_name, ''},
