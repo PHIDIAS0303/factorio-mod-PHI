@@ -301,10 +301,10 @@ function main.ER(source, tier)
     local ingredient_name
 
     if source.category == 'equipment' then
-        ingredient_name = (tier == source.min and source.name .. '-equipment') or (source.name .. '-mk' .. (tier - 1) .. '-equipment')
+        ingredient_name = (tier == source.min and source.ref_name) or (source.name .. '-mk' .. (tier - 1) .. '-equipment')
 
     else
-        ingredient_name = (tier > source.min and (source.name .. '-' .. (tier - 1))) or source.name
+        ingredient_name = (tier > source.min and (source.name .. '-' .. (tier - 1))) or source.ref_name
     end
 
     if source.tech == 'compound-energy' then
