@@ -313,7 +313,9 @@ function main.ER(source, tier)
 
         else
             if tier > source.min then
-                table.insert(ingredients, {type = 'item', name = ingredient_name, amount = 1}, {type='item', name = source.ref_name, amount = 1})
+                table.insert(ingredients, {type = 'item', name = ingredient_name, amount = 1})
+                table.insert(ingredients, {type = 'item', name = source.ref_name, amount = 1})
+
 
             else
                 table.insert(ingredients, {type = 'item', name = source.ref_name, amount = 2})
