@@ -275,27 +275,14 @@ end
 -- item
 function main.EI(source, tier)
     local item = table.deepcopy(data.raw.item[source.ref_name])
-
-    if source.category == 'equipment' then
-        item.name = source.name .. '-mk' .. tier .. '-equipment'
-        item.place_as_equipment_result = item.name
-
-    else
-        item.name = source.name .. ((tier > 1 and '-' .. tier) or '')
-        item.place_result = item.name
-    end
+    item.name = (source.category == 'equipment' and (source.name .. '-mk' .. tier .. '-equipment')) or (source.name .. ((tier > 1 and '-' .. tier) or ''))
+    item[(source.category == 'equipment' and 'place_as_equipment_result') or 'place_result'] = item.name
 
     if item.icons and item.icons[1] then
         item.icons[1].tint = items['tint'][tier]
 
     elseif item.icon then
-        item.icons = {
-            {
-                icon = item.icon,
-                tint = items['tint'][tier]
-            }
-        }
-
+        item.icons = {{icon = item.icon, tint = items['tint'][tier]}}
         item.icon = nil
 
         if item.icon_size then
