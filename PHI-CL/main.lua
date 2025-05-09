@@ -309,19 +309,19 @@ function main.ER(source, tier)
 
     if source.tech == 'compound-energy' then
         if source.type == 'solar-panel' or source.type == 'accumulator' then
-            table.insert({type = 'item', name = ingredient_name, amount = tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value) or 4})
+            table.insert(ingredients, {type = 'item', name = ingredient_name, amount = tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value) or 4})
 
         else
             if tier > source.min then
-                table.insert({type = 'item', name = ingredient_name, amount = 1}, {type='item', name = source.ref_name, amount = 1})
+                table.insert(ingredients, {type = 'item', name = ingredient_name, amount = 1}, {type='item', name = source.ref_name, amount = 1})
 
             else
-                table.insert({type = 'item', name = source.ref_name, amount = 2})
+                table.insert(ingredients, {type = 'item', name = source.ref_name, amount = 2})
             end
         end
 
     else
-        table.insert({type = 'item', name = ingredient_name, amount = 2})
+        table.insert(ingredients, {type = 'item', name = ingredient_name, amount = 2})
     end
 
     data:extend({{
