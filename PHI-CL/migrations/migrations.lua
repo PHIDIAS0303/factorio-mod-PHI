@@ -37,7 +37,7 @@ for _, force in pairs(game.forces) do
         end
     end
 
-    if settings.startup['PHI-EQ'].value and settings.startup['PHI-EQ-ARMOR'].value then
+    if settings.startup['PHI-MB'].value and settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIPMENT-ARMOR'].value then
         if (not technologies['power-armor-mk2']) or technologies['power-armor-mk2'].researched then
             recipes['power-armor-mk3'].enabled = true
             recipes['power-armor-mk3'].reload()
@@ -136,7 +136,7 @@ for _, force in pairs(game.forces) do
         end
     end
 
-    if script.active_mods['space-exploration'] then
+    if settings.startup['PHI-MB'].value and script.active_mods['space-exploration'] then
         if technologies['se-core-miner'].researched then
             for i = 2, settings.startup['PHI-MB-MACHINE-TIER'].value do
                 recipes['se-core-miner-drill-' .. i].enabled = true
