@@ -1138,6 +1138,18 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
+    items['item']['se-space-thermodynamics-laboratory'] = {
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
+        stage = 2,
+        mod = 'space-exploration',
+        type = 'assembling-machine',
+        name = 'se-space-thermodynamics-laboratory',
+        ref_name = 'se-space-thermodynamics-laboratory',
+        tech = 'se-space-thermodynamics-laboratory',
+        min = 2,
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
+    }
+
     items['item']['se-space-material-fabricator'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
