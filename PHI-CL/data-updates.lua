@@ -21,7 +21,7 @@ if mods['space-exploration'] and settings.startup['PHI-MB'].value and settings.s
         data.raw['mining-drill'][miner_name].minable.result = miner_name
         data.raw['mining-drill'][miner_name].placeable_by.item = miner_name
         data.raw['mining-drill'][miner_name].localised_name = {'phi-cl.combine', {'entity-name.se-core-miner-drill'}, tostring(i)}
-        data.raw['mining-drill'][miner_name].localised_description = {'phi-cl.combine', {'entity-description.se-core-miner-drill'}, tostring(i)}
+        data.raw['mining-drill'][miner_name].localised_description = {'entity-description.se-core-miner-drill'}
 
         local item = table.deepcopy(data.raw['item']['se-core-miner-drill'])
         item.name = 'se-core-miner-drill-' .. i
@@ -39,7 +39,7 @@ if mods['space-exploration'] and settings.startup['PHI-MB'].value and settings.s
         item.icon = nil
         item.icon_size = nil
         item.localised_name = {'phi-cl.combine', {'entity-name.se-core-miner-drill'}, tostring(i)}
-        item.localised_description = {'phi-cl.combine', {'entity-description.se-core-miner-drill'}, tostring(i)}
+        item.localised_description = {'entity-description.se-core-miner-drill'}
         data:extend({item})
 
         data:extend({{
@@ -50,7 +50,7 @@ if mods['space-exploration'] and settings.startup['PHI-MB'].value and settings.s
             ingredients =  (i > 2 and {{type = 'item', name = 'se-core-miner-drill-' .. (i - 1), amount = 1}, {type = 'item', name = 'se-core-miner-drill', amount = 1}}) or {{type = 'item', name = 'se-core-miner-drill', amount = 2}},
             results = {{type = 'item', name = miner_name, amount = 1}},
             localised_name = {'phi-cl.combine', {'entity-name.se-core-miner-drill'}, tostring(i)},
-            localised_description = {'phi-cl.combine', {'entity-description.se-core-miner-drill'}, tostring(i)}
+            localised_description = {'entity-description.se-core-miner-drill'}
         }})
 
 
