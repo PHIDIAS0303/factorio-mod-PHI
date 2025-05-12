@@ -2,6 +2,12 @@ local items = require 'config'
 local main = require 'main'
 local file_stage = 2
 
+if settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE-TIER'].value > 1 then
+    for i = 4, settings.startup['PHI-MB-MACHINE-TIER'].value + 2 do
+        data.raw['assembling-machine']['assembling-machine-' .. i].localised_name = {'phi-cl.combine', {'?', {'entity-name.assembling-machine'}, {'name.assembling-machine'}}, tostring(i)}
+    end
+end
+
 if mods['space-exploration'] and settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE-TIER'].value > 1 then
     data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'se-core-miner-drill'
 
@@ -56,6 +62,10 @@ if mods['space-exploration'] and settings.startup['PHI-MB'].value and settings.s
 
         data.raw['mining-drill'][miner_name].fast_replaceable_group = data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group
         table.insert(data.raw.technology['se-core-miner'].effects, {type='unlock-recipe', recipe=miner_name})
+    end
+
+    for i = 3, settings.startup['PHI-MB-MACHINE-TIER'].value + 1 do
+        data.raw['assembling-machine']['se-space-radiator-' .. i].localised_name = {'phi-cl.combine', {'entity-name.se-space-radiator'}, tostring(i)}
     end
 end
 
