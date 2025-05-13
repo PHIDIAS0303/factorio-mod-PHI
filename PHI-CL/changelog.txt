@@ -4,6 +4,7 @@ Date: 2025-05-14
 
   Changes:
     - [MB] Further changes on the locale for entities name.
+    - [VP] Infinite research requires space science pack.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.100
