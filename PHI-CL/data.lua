@@ -1523,6 +1523,7 @@ if settings.startup['PHI-CT'].value then
     entity.type = 'infinity-container'
     entity.gui_mode = 'none'
     entity.erase_contents_when_mined = true
+    entity.preserve_contents_when_created = true
     entity.quality_affects_inventory_size = false
     entity.logistic_mode = nil
     entity.next_upgrade = nil
