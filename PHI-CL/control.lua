@@ -32,9 +32,8 @@ local rail_support_pole = {
 
 if settings.startup['PHI-CT'].value then
     local function trash_chest_creation(event)
-        local entity = event.created_entity or event.entity
-        entity.infinity_container_filters = {}
-        entity.remove_unfiltered_items = true
+        event.entity.infinity_container_filters = {}
+        event.entity.remove_unfiltered_items = true
     end
 
     local filter = {{filter='name', name='trash-chest', mode='and'}, {filter='type', type='infinity-container', mode='and'}}
