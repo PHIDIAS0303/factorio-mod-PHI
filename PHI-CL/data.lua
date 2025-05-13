@@ -1520,6 +1520,8 @@ if settings.startup['PHI-CT'].value then
     entity.minable.result = item.name
     entity.inventory_type = 'with_filters_and_bar'
     entity.inventory_size = 1
+    entity.max_logistic_slots = 0
+    entity.trash_inventory_size = 0
     entity.type = 'infinity-container'
     entity.gui_mode = 'none'
     entity.erase_contents_when_mined = true
