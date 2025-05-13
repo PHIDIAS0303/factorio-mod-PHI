@@ -55,9 +55,9 @@ if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.script_raised_built, trash_pipe_creation, filter)
     script.on_event(defines.events.script_raised_revive, trash_pipe_creation, filter)
 
-    local function hidden_recipe_enable(e)
-        local enable = (e.name == defines.events.on_player_cheat_mode_enabled)
-        local force = game.players[e.player_index].force
+    local function hidden_recipe_enable(event)
+        local enable = (event.name == defines.events.on_player_cheat_mode_enabled)
+        local force = game.players[event.player_index].force
 
         for _, v in pairs(prototypes.fluid) do
             if force.recipes['pump-' .. v.name] then
