@@ -36,21 +36,21 @@ if settings.startup['PHI-CT'].value then
         event.entity.remove_unfiltered_items = true
     end
 
-    script.on_event(defines.events.on_built_entity, trash_chest_creation, {{filter='name', name='trash-chest', 'and'}, {filter='type', name='infinity-container', 'and'}})
-    script.on_event(defines.events.on_robot_built_entity, trash_chest_creation, {{filter='name', name='trash-chest', 'and'}, {filter='type', name='infinity-container', 'and'}})
-    script.on_event(defines.events.on_space_platform_built_entity, trash_chest_creation, {{filter='name', name='trash-chest', 'and'}, {filter='type', name='infinity-container', 'and'}})
-    script.on_event(defines.events.script_raised_built, trash_chest_creation, {{filter='name', name='trash-chest', 'and'}, {filter='type', name='infinity-container', 'and'}})
-    script.on_event(defines.events.script_raised_revive, trash_chest_creation, {{filter='name', name='trash-chest', 'and'}, {filter='type', name='infinity-container', 'and'}})
+    script.on_event(defines.events.on_built_entity, trash_chest_creation, {{filter='name', name='trash-chest', mode='and'}, {filter='type', name='infinity-container', mode='and'}})
+    script.on_event(defines.events.on_robot_built_entity, trash_chest_creation, {{filter='name', name='trash-chest', mode='and'}, {filter='type', name='infinity-container', mode='and'}})
+    script.on_event(defines.events.on_space_platform_built_entity, trash_chest_creation, {{filter='name', name='trash-chest', mode='and'}, {filter='type', name='infinity-container', mode='and'}})
+    script.on_event(defines.events.script_raised_built, trash_chest_creation, {{filter='name', name='trash-chest', mode='and'}, {filter='type', name='infinity-container', mode='and'}})
+    script.on_event(defines.events.script_raised_revive, trash_chest_creation, {{filter='name', name='trash-chest', mode='and'}, {filter='type', name='infinity-container', mode='and'}})
 
     local function trash_pipe_creation(event)
         event.entity.set_infinity_pipe_filter(nil)
     end
 
-    script.on_event(defines.events.on_built_entity, trash_pipe_creation, {{filter='name', name='trash-pipe', 'and'}, {filter='type', name='infinity-pipe', 'and'}})
-    script.on_event(defines.events.on_robot_built_entity, trash_pipe_creation, {{filter='name', name='trash-pipe', 'and'}, {filter='type', name='infinity-pipe', 'and'}})
-    script.on_event(defines.events.on_space_platform_built_entity, trash_pipe_creation, {{filter='name', name='trash-pipe', 'and'}, {filter='type', name='infinity-pipe', 'and'}})
-    script.on_event(defines.events.script_raised_built, trash_pipe_creation, {{filter='name', name='trash-pipe', 'and'}, {filter='type', name='infinity-pipe', 'and'}})
-    script.on_event(defines.events.script_raised_revive, trash_pipe_creation, {{filter='name', name='trash-pipe', 'and'}, {filter='type', name='infinity-pipe', 'and'}})
+    script.on_event(defines.events.on_built_entity, trash_pipe_creation, {{filter='name', name='trash-pipe', mode='and'}, {filter='type', name='infinity-pipe', mode='and'}})
+    script.on_event(defines.events.on_robot_built_entity, trash_pipe_creation, {{filter='name', name='trash-pipe', mode='and'}, {filter='type', name='infinity-pipe', mode='and'}})
+    script.on_event(defines.events.on_space_platform_built_entity, trash_pipe_creation, {{filter='name', name='trash-pipe', mode='and'}, {filter='type', name='infinity-pipe', mode='and'}})
+    script.on_event(defines.events.script_raised_built, trash_pipe_creation, {{filter='name', name='trash-pipe', mode='and'}, {filter='type', name='infinity-pipe', mode='and'}})
+    script.on_event(defines.events.script_raised_revive, trash_pipe_creation, {{filter='name', name='trash-pipe', mode='and'}, {filter='type', name='infinity-pipe', mode='and'}})
 
     local function hidden_recipe_enable(e)
         local enable = (e.name == defines.events.on_player_cheat_mode_enabled)
