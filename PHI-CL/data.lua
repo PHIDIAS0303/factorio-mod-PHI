@@ -237,7 +237,7 @@ if settings.startup['PHI-MI'].value then
             end
         end
 
-        for _, t in pairs({data.raw['pipe'], data.raw['pipe-to-ground']}) do
+        for _, t in pairs({data.raw['pipe'], data.raw['pipe-to-ground'], data.raw['infinity-pipe']}) do
             for _, v in pairs(t) do
                 v.fluid_box.volume = v.fluid_box.volume * s
             end
@@ -328,7 +328,7 @@ if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (se
     entity.fluid_boxes = {{
         production_type = 'output',
         pipe_covers = table.deepcopy(entity.fluid_box.pipe_covers),
-        volume = 6000,
+        volume = 100 * ((1 + settings.startup['PHI-MI-PIPE'].value) / 2),
         pipe_connections = {{
             flow_direction = 'output',
             connection_category = (mods['space-age'] and {'default', 'fusion-plasma'}) or {'default'},
@@ -1562,7 +1562,6 @@ if settings.startup['PHI-CT'].value then
     entity = table.deepcopy(data.raw['pipe']['pipe'])
     entity.name = item.name
     entity.minable.result = item.name
-    entity.inventory_size = 1
     entity.type = 'infinity-pipe'
     entity.gui_mode = 'none'
     entity.erase_contents_when_mined = true
