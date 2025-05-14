@@ -405,6 +405,9 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw.technology['legendary-quality'].hidden_in_factoriopedia = true
     data.raw.technology['legendary-quality'].unit.ingredients = {{'space-science-pack', 1}}
     data.raw.technology['legendary-quality'].effects = nil
+    data.raw.quality['normal'].beacon_power_usage_multiplier = 1 / 6
+    data.raw.quality['normal'].mining_drill_resource_drain_multiplier = 1 / 6
+    -- data.raw.quality['normal'].science_pack_drain_multiplier = 0.95
 
     for _, v in pairs({'normal', 'uncommon', 'rare', 'epic', 'legendary'}) do
         data.raw.quality[v].next = nil
