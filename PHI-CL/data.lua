@@ -424,6 +424,12 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
         v.rotation_speed = v.rotation_speed * q_s
     end
 
+    for _, v in pairs(data.raw['asteroid']) do
+        if v.max_health then
+            v.max_health = v.max_health / q_s
+        end
+    end
+
     for _, e in pairs({data.raw['unit-spawner'], data.raw['unit'], data.raw['turret']}) do
         for _, v in pairs(e) do
             if v.max_health then
