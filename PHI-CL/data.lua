@@ -430,15 +430,19 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
                 v.max_health = v.max_health / q_s
             end
 
+            --[[
             if v.attack_parameters then
                 if v.attack_parameters.damage_modifier then
                     v.attack_parameters.damage_modifier = v.attack_parameters.damage_modifier / q_s
+                elseif v.attack_parameters.ammo_type and v.attack_parameters.ammo_type.action and v.attack_parameters.ammo_type.action.action_delivery and v.attack_parameters.ammo_type.action.action_delivery.target_effects and v.attack_parameters.ammo_type.action.action_delivery.target_effects.damage and v.attack_parameters.ammo_type.action.action_delivery.target_effects.damage.amount then
+                    v.attack_parameters.ammo_type.action.action_delivery.target_effects.damage.amount = v.attack_parameters.ammo_type.action.action_delivery.target_effects.damage.amount / q_s
                 end
 
                 if v.attack_parameters.range then
                     v.attack_parameters.range = v.attack_parameters.range * 2 / 3
                 end
             end
+            ]]
         end
     end
 
