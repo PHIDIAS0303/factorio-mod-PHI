@@ -405,15 +405,27 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw.technology['legendary-quality'].hidden_in_factoriopedia = true
     data.raw.technology['legendary-quality'].unit.ingredients = {{'space-science-pack', 1}}
     data.raw.technology['legendary-quality'].effects = nil
-    data.raw.quality['normal'].beacon_power_usage_multiplier = 1 / 6
-    data.raw.quality['normal'].mining_drill_resource_drain_multiplier = 1 / 6
-    -- data.raw.quality['normal'].science_pack_drain_multiplier = 0.95
+    data.raw.quality['normal'].level = data.raw.quality['legendary'].level
+    data.raw.quality['normal'].beacon_power_usage_multiplier = data.raw.quality['legendary'].beacon_power_usage_multiplier
+    data.raw.quality['normal'].mining_drill_resource_drain_multiplier = data.raw.quality['legendary'].mining_drill_resource_drain_multiplier
+    -- data.raw.quality['normal'].science_pack_drain_multiplier = data.raw.quality['legendary'].science_pack_drain_multiplier
 
     for _, v in pairs({'normal', 'uncommon', 'rare', 'epic', 'legendary'}) do
         data.raw.quality[v].next = nil
         data.raw.quality[v].next_probability = nil
         data.raw.quality[v].hidden = true
         data.raw.quality[v].hidden_in_factoriopedia = true
+    end
+
+    local q_s = 1 + 0.3 * data.raw.quality['normal'].level
+
+    for _, v in pairs(data.raw['inserter']) do
+        v.extension_speed = v.extension_speed * q_s
+        v.rotation_speed = v.rotation_speed * q_s
+    end
+
+    for _, v in pairs({data.raw['unit-spawner'], data.raw['unit']}) do
+        v.max_health = v.max_health / q_s
     end
 
     data.raw['tips-and-tricks-item']['quality'] = nil
@@ -621,6 +633,17 @@ if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].v
     end
 end
 
+if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value and mods['quality'] then
+    for _, v in pairs(data.raw.module) do
+        if v.category and v.category == 'quality' then
+            v.effect.quality = v.effect.quality * settings.startup['PHI-SA-QUALITY'].value / 10
+
+        elseif v.category and v.category == 'speed' then
+            v.effect.quality = nil
+        end
+    end
+end
+
 if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value and mods['space-age'] then
     data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
 
@@ -688,38 +711,6 @@ if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].v
     end
 end
 
-if mods['quality'] then
-    if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value then
-        for _, v in pairs(data.raw.module) do
-            if v.category and v.category == 'quality' then
-                v.effect.quality = v.effect.quality * settings.startup['PHI-SA-QUALITY'].value / 10
-
-            elseif v.category and v.category == 'speed' then
-                v.effect.quality = nil
-            end
-        end
-    end
-
-    if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-MAX-QUALITY'].value then
-        data.raw.quality.normal.level = 5
-        data.raw.quality.normal.beacon_power_usage_multiplier = 1 / 6
-        data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1 / 6
-        data.raw.quality.normal.science_pack_drain_multiplier = 19 / 20
-
-        for _, v in pairs(data.raw['inserter']) do
-            v.extension_speed = v.extension_speed * 2.5
-            v.rotation_speed = v.rotation_speed * 2.5
-        end
-    end
-
-    if settings.startup['PHI-VP'].value or (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-MAX-QUALITY'].value)) then
-        data.raw.quality.normal.level = 0
-        data.raw.quality.normal.beacon_power_usage_multiplier = 1
-        data.raw.quality.normal.mining_drill_resource_drain_multiplier = 1
-        data.raw.quality.normal.science_pack_drain_multiplier = 1
-    end
-end
-
 if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-HEAT-RADIUS'].value and mods['space-age'] then
     for _, v in pairs({data.raw['heat-pipe'], data.raw['reactor']}) do
         for _, v2 in pairs(v) do
@@ -730,6 +721,11 @@ end
 
 if settings.startup['PHI-VP'].value then
     if mods['space-age'] then
+        data.raw.quality['normal'].level = 0
+        data.raw.quality['normal'].beacon_power_usage_multiplier = 1
+        data.raw.quality['normal'].mining_drill_resource_drain_multiplier = 1
+        data.raw.quality['normal'].science_pack_drain_multiplier = 1
+
         data.raw['utility-constants'].default.default_pipeline_extent = math.max(settings.startup['PHI-MI-PIPE-EXTENT'].value, 960)
 
         for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
