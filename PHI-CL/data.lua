@@ -425,7 +425,9 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     end
 
     for _, v in pairs({data.raw['unit-spawner'], data.raw['unit']}) do
-        v.max_health = v.max_health / q_s
+        if v.max_health then
+            v.max_health = v.max_health / q_s
+        end
     end
 
     data.raw['tips-and-tricks-item']['quality'] = nil
