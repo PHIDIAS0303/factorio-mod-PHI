@@ -408,7 +408,7 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw.quality['normal'].level = data.raw.quality['legendary'].level
     data.raw.quality['normal'].beacon_power_usage_multiplier = data.raw.quality['legendary'].beacon_power_usage_multiplier
     data.raw.quality['normal'].mining_drill_resource_drain_multiplier = data.raw.quality['legendary'].mining_drill_resource_drain_multiplier
-    -- data.raw.quality['normal'].science_pack_drain_multiplier = data.raw.quality['legendary'].science_pack_drain_multiplier
+    data.raw.quality['normal'].science_pack_drain_multiplier = data.raw.quality['legendary'].science_pack_drain_multiplier
 
     for _, v in pairs({'normal', 'uncommon', 'rare', 'epic', 'legendary'}) do
         data.raw.quality[v].next = nil
@@ -424,9 +424,15 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
         v.rotation_speed = v.rotation_speed * q_s
     end
 
-    for _, v in pairs({data.raw['unit-spawner'], data.raw['unit']}) do
-        if v.max_health then
-            v.max_health = v.max_health / q_s
+    for _, e in pairs({data.raw['unit-spawner'], data.raw['unit'], data.raw['turret']}) do
+        for _, v in pairs(e) do
+            if v.max_health then
+                v.max_health = v.max_health / q_s
+            end
+
+            if v.attack_parameters and v.attack_parameters.range then
+                v.attack_parameters.range = v.attack_parameters.range * 2 / 3
+            end
         end
     end
 
