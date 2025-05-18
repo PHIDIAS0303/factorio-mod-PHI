@@ -4,6 +4,7 @@ Date: 2025-05-22
 
   Changes:
     - [MI] Add an information of the setting is in percentage.
+    - [CL] Changed some of the settings into number type instead of drop down list.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.102
