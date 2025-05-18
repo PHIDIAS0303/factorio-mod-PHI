@@ -33,7 +33,7 @@ data:extend({
   type = 'int-setting',
   name = 'PHI-MB-ENERGY-POWER-TIER',
   setting_type = 'startup',
-  default_value = 1,
+  default_value = 5,
   allowed_values = {1, 2, 3, 4, 5},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-ENERGY-POWER-TIER'}, {'mod-setting-name.PHI-MB-ENERGY-POWER-TIER'}},
   order = 'AA03'
@@ -109,15 +109,15 @@ data:extend({
   setting_type = 'startup',
   default_value = 20,
   minimum_value = 1,
-  maximum_value = 100,
+  maximum_value = 1000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-LANDFILL'}, {'mod-setting-name.PHI-MI-LANDFILL'}},
   order = 'B01'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-EFFCY',
   setting_type = 'startup',
-  default_value = 100,
-  minimum_value = 10,
+  default_value = 10,
+  minimum_value = 1,
   maximum_value = 1000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-EFFCY'}, {'mod-setting-name.PHI-MI-EFFCY'}},
   order = 'B02'
@@ -125,16 +125,18 @@ data:extend({
   type = 'int-setting',
   name = 'PHI-MI-PIPE',
   setting_type = 'startup',
-  default_value = 1,
-  allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
+  default_value = 10,
+  minimum_value = 1,
+  maximum_value = 1000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-PIPE'}, {'mod-setting-name.PHI-MI-PIPE'}},
   order = 'B03'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-ROBOT',
   setting_type = 'startup',
-  default_value = 1,
-  allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
+  default_value = 10,
+  minimum_value = 1,
+  maximum_value = 1000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-ROBOT'}, {'mod-setting-name.PHI-MI-ROBOT'}},
   order = 'B04'
 }, {
@@ -148,8 +150,9 @@ data:extend({
   type = 'int-setting',
   name = 'PHI-MI-TRAIN',
   setting_type = 'startup',
-  default_value = 1,
-  allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
+  default_value = 10,
+  minimum_value = 1,
+  maximum_value = 1000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-TRAIN'}, {'mod-setting-name.PHI-MI-TRAIN'}},
   order = 'B06'
 }, {

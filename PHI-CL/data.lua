@@ -222,14 +222,14 @@ if settings.startup['PHI-MI'].value then
 
     for _, v in pairs({data.raw['module']['efficiency-module'], data.raw['module']['efficiency-module-2'], data.raw['module']['efficiency-module-3']}) do
         for _, v2 in pairs(v.effect) do
-            v2 = v2 * settings.startup['PHI-MI-EFFCY'].value / 100
+            v2 = v2 * settings.startup['PHI-MI-EFFCY'].value / 10
         end
     end
 
     data.raw.recipe['landfill'].ingredients = {{type = 'item', name = 'stone', amount = tonumber(settings.startup['PHI-MI-LANDFILL'].value) or 20}}
 
     if settings.startup['PHI-MI-PIPE'].value then
-        local s = (1 + settings.startup['PHI-MI-PIPE'].value) / 2
+        local s = settings.startup['PHI-MI-PIPE'].value / 10
 
         for _, t in pairs({data.raw['offshore-pump'], data.raw['pump']}) do
             for _, v in pairs(t) do
@@ -247,8 +247,7 @@ if settings.startup['PHI-MI'].value then
     end
 
     if settings.startup['PHI-MI-ROBOT'].value then
-        local s = (1 + settings.startup['PHI-MI-ROBOT'].value) / 2
-        local sn = (17 - settings.startup['PHI-MI-ROBOT'].value) / 16
+        local s = settings.startup['PHI-MI-ROBOT'].value / 10
 
         for _, t in pairs({data.raw['construction-robot'], data.raw['logistic-robot']}) do
             for _, v in pairs(t) do
@@ -258,17 +257,13 @@ if settings.startup['PHI-MI'].value then
                     v.energy_per_tick = (v.energy_per_tick and '0J') or nil
                     v.energy_per_move = (v.energy_per_move and '0J') or nil
                     v.speed_multiplier_when_out_of_energy = (v.speed_multiplier_when_out_of_energy and 1) or nil
-
-                else
-                    v.energy_per_tick = (v.energy_per_tick and tostring(tonumber(string.match(v.energy_per_tick, '[%d%.]+')) * sn) .. string.match(v.energy_per_tick, '%a+')) or nil
-                    v.energy_per_move = (v.energy_per_move and tostring(tonumber(string.match(v.energy_per_move, '[%d%.]+')) * sn) .. string.match(v.energy_per_move, '%a+')) or nil
                 end
             end
         end
     end
 
     if settings.startup['PHI-MI-TRAIN'].value then
-        local s = (7 + settings.startup['PHI-MI-TRAIN'].value) / 8
+        local s = settings.startup['PHI-MI-TRAIN'].value / 10
 
         for _, t in pairs({data.raw['locomotive'], data.raw['cargo-wagon'], data.raw['fluid-wagon'], data.raw['artillery-wagon']}) do
             for _, v in pairs(t) do
@@ -328,7 +323,7 @@ if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (se
     entity.fluid_boxes = {{
         production_type = 'output',
         pipe_covers = table.deepcopy(entity.fluid_box.pipe_covers),
-        volume = 100 * ((1 + settings.startup['PHI-MI-PIPE'].value) / 2),
+        volume = 100 * settings.startup['PHI-MI-PIPE'].value / 10,
         pipe_connections = {{
             flow_direction = 'output',
             connection_category = (mods['space-age'] and {'default', 'fusion-plasma'}) or {'default'},
@@ -365,7 +360,7 @@ if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (se
             energy_required = 1,
             enabled = true,
             ingredients = {},
-            results = {{type = 'fluid', name = 'water', amount = 12000 * ((1 + settings.startup['PHI-MI-PIPE'].value) / 2), temperature = data.raw.fluid['water'].default_temperature}},
+            results = {{type = 'fluid', name = 'water', amount = 12000 * settings.startup['PHI-MI-PIPE'].value / 10, temperature = data.raw.fluid['water'].default_temperature}},
             main_product = 'water',
             hide_from_player_crafting = true,
             allow_productivity = false,
@@ -524,7 +519,7 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw['module']['efficiency-module-3'].effect.consumption = -0.9
 
     for _, v in pairs({data.raw['module']['efficiency-module'], data.raw['module']['efficiency-module-2'], data.raw['module']['efficiency-module-3']}) do
-        v.effect.consumption = v.effect.consumption * settings.startup['PHI-MI-EFFCY'].value / 100
+        v.effect.consumption = v.effect.consumption * settings.startup['PHI-MI-EFFCY'].value / 10
     end
 
     data.raw.tile['space-platform-foundation'].max_health = data.raw.tile['space-platform-foundation'].max_health * 2
@@ -680,7 +675,7 @@ if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].v
                 energy_required = 1,
                 enabled = true,
                 ingredients = {},
-                results = {{type = 'fluid', name = v, amount = 12000 * ((1 + settings.startup['PHI-MI-PIPE'].value) / 2), temperature = data.raw.fluid[v].default_temperature}},
+                results = {{type = 'fluid', name = v, amount = 12000 * settings.startup['PHI-MI-PIPE'].value / 10, temperature = data.raw.fluid[v].default_temperature}},
                 main_product = v,
                 hide_from_player_crafting = true,
                 allow_productivity = false,
@@ -1260,7 +1255,7 @@ if settings.startup['PHI-VP'].value then
         end
 
         if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
-            data.raw['pump']['pump'].pumping_speed = data.raw['pump']['pump'].pumping_speed  * ((1 + settings.startup['PHI-MI-PIPE'].value) / 2)
+            data.raw['pump']['pump'].pumping_speed = data.raw['pump']['pump'].pumping_speed * settings.startup['PHI-MI-PIPE'].value / 10
         end
 
         data.raw['assembling-machine']['biochamber'].hidden = true
@@ -1789,7 +1784,7 @@ if settings.startup['PHI-CT'].value then
                 energy_required = 1,
                 enabled = false,
                 ingredients = {},
-                results = {{type = 'fluid', name = v.name, amount = 12000 * ((1 + settings.startup['PHI-MI-PIPE'].value) / 2), temperature = v.max_temperature or v.default_temperature}},
+                results = {{type = 'fluid', name = v.name, amount = 12000 * settings.startup['PHI-MI-PIPE'].value / 10, temperature = v.max_temperature or v.default_temperature}},
                 main_product = v.name,
                 hide_from_player_crafting = true,
                 allow_productivity = false,
