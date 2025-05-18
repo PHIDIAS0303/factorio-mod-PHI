@@ -400,10 +400,6 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw.technology['legendary-quality'].hidden_in_factoriopedia = true
     data.raw.technology['legendary-quality'].unit.ingredients = {{'space-science-pack', 1}}
     data.raw.technology['legendary-quality'].effects = nil
-    data.raw.quality['normal'].level = data.raw.quality['legendary'].level
-    data.raw.quality['normal'].beacon_power_usage_multiplier = data.raw.quality['legendary'].beacon_power_usage_multiplier
-    data.raw.quality['normal'].mining_drill_resource_drain_multiplier = data.raw.quality['legendary'].mining_drill_resource_drain_multiplier
-    data.raw.quality['normal'].science_pack_drain_multiplier = data.raw.quality['legendary'].science_pack_drain_multiplier
 
     for _, v in pairs({'normal', 'uncommon', 'rare', 'epic', 'legendary'}) do
         data.raw.quality[v].next = nil
@@ -411,6 +407,25 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
         data.raw.quality[v].hidden = true
         data.raw.quality[v].hidden_in_factoriopedia = true
     end
+
+    data.raw['tips-and-tricks-item']['quality'] = nil
+    data.raw['tips-and-tricks-item']['quality-modules'] = nil
+    data.raw['tips-and-tricks-item']['quality-factoriopedia'] = nil
+    data.raw['tips-and-tricks-item']['quality-probabilities'] = nil
+
+    data.raw['produce-achievement']['crafting-with-quality'] = nil
+    data.raw['module-transfer-achievement']['make-it-better'] = nil
+    data.raw['produce-achievement']['my-modules-are-legendary'] = nil
+    data.raw['equip-armor-achievement']['look-at-my-shiny-rare-armor'] = nil
+    data.raw['use-item-achievement']['todays-fish-is-trout-a-la-creme'] = nil
+    data.raw['place-equipment-achievement']['no-room-for-more'] = nil
+end
+
+if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-MAX-QUALITY'].value)) then
+    data.raw.quality['normal'].level = data.raw.quality['legendary'].level
+    data.raw.quality['normal'].beacon_power_usage_multiplier = data.raw.quality['legendary'].beacon_power_usage_multiplier
+    data.raw.quality['normal'].mining_drill_resource_drain_multiplier = data.raw.quality['legendary'].mining_drill_resource_drain_multiplier
+    data.raw.quality['normal'].science_pack_drain_multiplier = data.raw.quality['legendary'].science_pack_drain_multiplier
 
     local q_s = 1 + 0.3 * data.raw.quality['normal'].level
 
@@ -446,18 +461,6 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
             ]]
         end
     end
-
-    data.raw['tips-and-tricks-item']['quality'] = nil
-    data.raw['tips-and-tricks-item']['quality-modules'] = nil
-    data.raw['tips-and-tricks-item']['quality-factoriopedia'] = nil
-    data.raw['tips-and-tricks-item']['quality-probabilities'] = nil
-
-    data.raw['produce-achievement']['crafting-with-quality'] = nil
-    data.raw['module-transfer-achievement']['make-it-better'] = nil
-    data.raw['produce-achievement']['my-modules-are-legendary'] = nil
-    data.raw['equip-armor-achievement']['look-at-my-shiny-rare-armor'] = nil
-    data.raw['use-item-achievement']['todays-fish-is-trout-a-la-creme'] = nil
-    data.raw['place-equipment-achievement']['no-room-for-more'] = nil
 end
 
 if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value) then
