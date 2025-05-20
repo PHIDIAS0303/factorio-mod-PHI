@@ -216,7 +216,7 @@ data:extend({
   name = 'PHI-SA-ENABLE-QUALITY',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-NO-QUALITY'}, {'mod-setting-name.PHI-SA-NO-QUALITY'}},
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-ENABLE-QUALITY'}, {'mod-setting-name.PHI-SA-ENABLE-QUALITY'}},
   order = 'C05'
 }, {
   type = 'int-setting',
