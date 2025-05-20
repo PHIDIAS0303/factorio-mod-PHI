@@ -231,7 +231,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-SA-GENERIC',
   setting_type = 'startup',
-  default_value = false,
+  default_value = true,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-GENERIC'}, {'mod-setting-name.PHI-SA-GENERIC'}},
   order = 'C07'
 }, {
