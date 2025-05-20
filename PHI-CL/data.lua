@@ -518,9 +518,12 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
         end
     end
 
+    data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
+
     data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
     data.raw.technology['cliff-explosives'].unit = {count = 200, time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
     data.raw.technology['cliff-explosives'].effects = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
+
     table.insert(data.raw.technology['stronger-explosives-4'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.1})
     table.insert(data.raw.technology['stronger-explosives-5'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.1})
     table.insert(data.raw.technology['stronger-explosives-6'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.2})
@@ -1084,7 +1087,6 @@ if settings.startup['PHI-VP'].value then
             end
         end
 
-        data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
         data.raw.recipe['big-mining-drill'].category = nil
         data.raw.recipe['big-mining-drill'].ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electric-engine-unit', amount = 5}, {type = 'item', name = 'advanced-circuit', amount = 10}}
         data.raw.recipe['turbo-transport-belt'].category = 'crafting-with-fluid'
@@ -1107,7 +1109,6 @@ if settings.startup['PHI-VP'].value then
         data.raw.recipe['artillery-turret'].ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'concrete', amount = 60}, {type = 'item', name = 'iron-gear-wheel', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}}
         data.raw.recipe['artillery-wagon'].ingredients = {{type = 'item', name = 'engine-unit', amount = 64}, {type = 'item', name = 'iron-gear-wheel', amount = 10}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'pipe', amount = 16}, {type = 'item', name = 'advanced-circuit', amount = 20}}
         data.raw.recipe['artillery-shell'].ingredients = {{type = 'item', name = 'explosive-cannon-shell', amount = 4}, {type = 'item', name = 'radar', amount = 1}, {type = 'item', name = 'explosives', amount = 8}}
-        data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
         data.raw.recipe['tesla-ammo'].category = 'crafting-with-fluid'
         data.raw.recipe['tesla-ammo'].ingredients = {{type = 'item', name = 'battery', amount = 1}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 10}}
         data.raw.recipe['teslagun'].category = 'crafting-with-fluid'
