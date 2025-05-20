@@ -534,11 +534,11 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     table.insert(data.raw.technology['physical-projectile-damage-6'].effects, {type = 'ammo-damage', ammo_category = 'railgun', modifier = 0.2})
     table.insert(data.raw.technology['physical-projectile-damage-7'].effects, {type = 'ammo-damage', ammo_category = 'railgun', modifier = 0.4})
 
-    for k, v in pairs({'artillery-shell-damage-1', 'railgun-damage-1', 'electric-weapons-damage-1', 'electric-weapons-damage-2', 'electric-weapons-damage-3', 'electric-weapons-damage-4'}) do
-        if data.raw.technology[k] then
-            data.raw.technology[k].hidden = v
-            data.raw.technology[k].hidden_in_factoriopedia = v
-            data.raw.technology[k].effects = nil
+    for _, v in pairs({'artillery-shell-damage-1', 'railgun-damage-1', 'electric-weapons-damage-1', 'electric-weapons-damage-2', 'electric-weapons-damage-3', 'electric-weapons-damage-4'}) do
+        if data.raw.technology[v] then
+            data.raw.technology[v].hidden = true
+            data.raw.technology[v].hidden_in_factoriopedia = true
+            data.raw.technology[v].effects = nil
         end
     end
 end
