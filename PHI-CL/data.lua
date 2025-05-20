@@ -369,6 +369,17 @@ if mods['space-age'] and settings.startup['PHI-VP'].value then
     end
 end
 
+if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value and mods['quality'] then
+    for _, v in pairs(data.raw.module) do
+        if v.category and v.category == 'quality' then
+            v.effect.quality = v.effect.quality * settings.startup['PHI-SA-QUALITY'].value / 10
+
+        elseif v.category and v.category == 'speed' then
+            v.effect.quality = nil
+        end
+    end
+end
+
 if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-ENABLE-QUALITY'].value) or settings.startup['PHI-VP'].value) then
     for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
         data.raw.technology[v].hidden = true
@@ -506,6 +517,25 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
             v2.percent = (v2.percent > 98 and 98) or v2.percent
         end
     end
+
+    table.insert(data.raw.technology['stronger-explosives-4'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.1})
+    table.insert(data.raw.technology['stronger-explosives-5'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.1})
+    table.insert(data.raw.technology['stronger-explosives-6'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.2})
+    table.insert(data.raw.technology['stronger-explosives-7'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.2})
+    table.insert(data.raw.technology['laser-weapons-damage-3'].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.3})
+    table.insert(data.raw.technology['laser-weapons-damage-4'].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.4})
+
+    for i=5, 7 do
+        table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'tesla', modifier = 0.7})
+        table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'electric', modifier = 0.7})
+        table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.6})
+    end
+
+    table.insert(data.raw.technology['physical-projectile-damage-6'].effects, {type = 'ammo-damage', ammo_category = 'railgun', modifier = 0.2})
+    table.insert(data.raw.technology['physical-projectile-damage-7'].effects, {type = 'ammo-damage', ammo_category = 'railgun', modifier = 0.4})
+
+    data.raw.technology['artillery-shell-damage-1'].effects = nil
+    data.raw.technology['railgun-damage-1'].effects = nil
 end
 
 if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-SPOIL-FREEZE'].value and settings.startup['PHI-SA-SPOIL'].value and mods['space-age'] then
@@ -609,17 +639,6 @@ if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].v
 
     for _, v in pairs({'spoilables', 'spoilables-result', 'spoilables-research'}) do
         data.raw['tips-and-tricks-item'][v] = nil
-    end
-end
-
-if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value and mods['quality'] then
-    for _, v in pairs(data.raw.module) do
-        if v.category and v.category == 'quality' then
-            v.effect.quality = v.effect.quality * settings.startup['PHI-SA-QUALITY'].value / 10
-
-        elseif v.category and v.category == 'speed' then
-            v.effect.quality = nil
-        end
     end
 end
 
@@ -908,31 +927,16 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['space-science-pack'].prerequisites = {'rocket-silo'}
         data.raw.technology['space-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'satellite'}}
         data.raw.technology['space-science-pack'].unit = {count = 2000, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
-        table.insert(data.raw.technology['stronger-explosives-4'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.1})
         data.raw.technology['stronger-explosives-5'].prerequisites = {'stronger-explosives-4'}
         data.raw.technology['stronger-explosives-5'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-        table.insert(data.raw.technology['stronger-explosives-5'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.1})
         data.raw.technology['stronger-explosives-6'].prerequisites = {'stronger-explosives-5'}
         data.raw.technology['stronger-explosives-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-        table.insert(data.raw.technology['stronger-explosives-6'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.2})
         data.raw.technology['stronger-explosives-7'].prerequisites = {'stronger-explosives-6'}
         data.raw.technology['stronger-explosives-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-        table.insert(data.raw.technology['stronger-explosives-7'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.2})
         data.raw.technology['refined-flammables-6'].prerequisites = {'refined-flammables-5'}
         data.raw.technology['refined-flammables-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['refined-flammables-7'].prerequisites = {'refined-flammables-6'}
-        data.raw.technology['refined-flammables-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-        table.insert(data.raw.technology['laser-weapons-damage-3'].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.3})
-        table.insert(data.raw.technology['laser-weapons-damage-4'].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.4})
-
-        for i=5, 7 do
-            table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'tesla', modifier = 0.7})
-            table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'electric', modifier = 0.7})
-            table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.6})
-        end
-
-        table.insert(data.raw.technology['physical-projectile-damage-6'].effects, {type = 'ammo-damage', ammo_category = 'railgun', modifier = 0.2})
-        table.insert(data.raw.technology['physical-projectile-damage-7'].effects, {type = 'ammo-damage', ammo_category = 'railgun', modifier = 0.4})
+        data.raw.technology['refined-flammables-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}    
         data.raw.technology['artillery'].prerequisites = {'tank', 'concrete', 'radar'}
         data.raw.technology['artillery'].unit.count = 1500
         data.raw.technology['artillery'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
@@ -940,13 +944,11 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['artillery-shell-range-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         data.raw.technology['artillery-shell-speed-1'].prerequisites = {'artillery', 'space-science-pack'}
         data.raw.technology['artillery-shell-speed-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-        data.raw.technology['artillery-shell-damage-1'].effects = nil
         data.raw.technology['artillery-shell-damage-1'].prerequisites = {'artillery', 'space-science-pack'}
-        data.raw.technology['artillery-shell-damage-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        data.raw.technology['artillery-shell-damage-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}    
         data.raw.technology['railgun'].prerequisites = {'military-4', 'artillery', 'production-science-pack'}
         data.raw.technology['railgun'].unit.count = 2500
         data.raw.technology['railgun'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-        data.raw.technology['railgun-damage-1'].effects = nil
         data.raw.technology['railgun-damage-1'].prerequisites = {'railgun', 'space-science-pack'}
         data.raw.technology['railgun-damage-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         data.raw.technology['railgun-shooting-speed-1'].prerequisites = {'railgun', 'space-science-pack'}
