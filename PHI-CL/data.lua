@@ -380,7 +380,7 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     end
 end
 
-if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-MAX-QUALITY'].value) or settings.startup['PHI-VP'].value) then
+if mods['space-age'] and settings.startup['PHI-VP'].value then
     for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
         data.raw.technology[v].hidden = true
         data.raw.technology[v].hidden_in_factoriopedia = true
@@ -408,20 +408,7 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
         data.raw.quality[v].hidden_in_factoriopedia = true
     end
 
-    data.raw['tips-and-tricks-item']['quality'] = nil
-    data.raw['tips-and-tricks-item']['quality-modules'] = nil
-    data.raw['tips-and-tricks-item']['quality-factoriopedia'] = nil
-    data.raw['tips-and-tricks-item']['quality-probabilities'] = nil
-
-    data.raw['produce-achievement']['crafting-with-quality'] = nil
-    data.raw['module-transfer-achievement']['make-it-better'] = nil
-    data.raw['produce-achievement']['my-modules-are-legendary'] = nil
-    data.raw['equip-armor-achievement']['look-at-my-shiny-rare-armor'] = nil
-    data.raw['use-item-achievement']['todays-fish-is-trout-a-la-creme'] = nil
-    data.raw['place-equipment-achievement']['no-room-for-more'] = nil
-end
-
-if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-MAX-QUALITY'].value)) then
+    --[[
     data.raw.quality['normal'].level = data.raw.quality['legendary'].level
     data.raw.quality['normal'].beacon_power_usage_multiplier = data.raw.quality['legendary'].beacon_power_usage_multiplier
     data.raw.quality['normal'].mining_drill_resource_drain_multiplier = data.raw.quality['legendary'].mining_drill_resource_drain_multiplier
@@ -433,34 +420,19 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
         v.extension_speed = v.extension_speed * q_s
         v.rotation_speed = v.rotation_speed * q_s
     end
+    ]]
 
-    for _, v in pairs(data.raw['asteroid']) do
-        if v.max_health then
-            v.max_health = v.max_health / q_s
-        end
-    end
+    data.raw['tips-and-tricks-item']['quality'] = nil
+    data.raw['tips-and-tricks-item']['quality-modules'] = nil
+    data.raw['tips-and-tricks-item']['quality-factoriopedia'] = nil
+    data.raw['tips-and-tricks-item']['quality-probabilities'] = nil
 
-    for _, e in pairs({data.raw['unit-spawner'], data.raw['unit'], data.raw['turret']}) do
-        for _, v in pairs(e) do
-            if v.max_health then
-                v.max_health = v.max_health / q_s
-            end
-
-            --[[
-            if v.attack_parameters then
-                if v.attack_parameters.damage_modifier then
-                    v.attack_parameters.damage_modifier = v.attack_parameters.damage_modifier / q_s
-                elseif v.attack_parameters.ammo_type and v.attack_parameters.ammo_type.action and v.attack_parameters.ammo_type.action.action_delivery and v.attack_parameters.ammo_type.action.action_delivery.target_effects and v.attack_parameters.ammo_type.action.action_delivery.target_effects.damage and v.attack_parameters.ammo_type.action.action_delivery.target_effects.damage.amount then
-                    v.attack_parameters.ammo_type.action.action_delivery.target_effects.damage.amount = v.attack_parameters.ammo_type.action.action_delivery.target_effects.damage.amount / q_s
-                end
-
-                if v.attack_parameters.range then
-                    v.attack_parameters.range = v.attack_parameters.range * 2 / 3
-                end
-            end
-            ]]
-        end
-    end
+    data.raw['produce-achievement']['crafting-with-quality'] = nil
+    data.raw['module-transfer-achievement']['make-it-better'] = nil
+    data.raw['produce-achievement']['my-modules-are-legendary'] = nil
+    data.raw['equip-armor-achievement']['look-at-my-shiny-rare-armor'] = nil
+    data.raw['use-item-achievement']['todays-fish-is-trout-a-la-creme'] = nil
+    data.raw['place-equipment-achievement']['no-room-for-more'] = nil
 end
 
 if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value) then
@@ -1243,6 +1215,7 @@ if settings.startup['PHI-VP'].value then
         data.raw['lab']['biolab'].researching_speed = 3
         data.raw['lab']['biolab'].energy_usage = '180kW'
         data.raw['lab']['biolab'].energy_source.emissions_per_minute = nil
+        data.raw['chain-active-trigger']['chain-tesla-turret-chain'].fork_chance = 0.3
 
         table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
 

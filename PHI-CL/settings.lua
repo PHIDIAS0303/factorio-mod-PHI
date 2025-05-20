@@ -222,25 +222,18 @@ data:extend({
   order = 'C05'
 }, {
   type = 'bool-setting',
-  name = 'PHI-SA-MAX-QUALITY',
-  setting_type = 'startup',
-  default_value = false,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-MAX-QUALITY'}, {'mod-setting-name.PHI-SA-MAX-QUALITY'}},
-  order = 'C06'
-}, {
-  type = 'bool-setting',
   name = 'PHI-SA-RESTRICTION',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-RESTRICTION'}, {'mod-setting-name.PHI-SA-RESTRICTION'}},
-  order = 'C07'
+  order = 'C06'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-GENERIC',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-GENERIC'}, {'mod-setting-name.PHI-SA-GENERIC'}},
-  order = 'C08'
+  order = 'C07'
 }, {
   type = 'bool-setting',
   name = 'PHI-VP',
