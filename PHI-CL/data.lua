@@ -458,12 +458,10 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
         v.flow_direction = 'input-output'
     end
 
-    for _, v in pairs(data.raw['cargo-wagon']) do
-        v.quality_affects_inventory_size = true
-    end
-
-    for _, v in pairs(data.raw['fluid-wagon']) do
-        v.quality_affects_inventory_size = true
+    for _, w in pairs({data.raw['cargo-wagon'], data.raw['fluid-wagon']}) do
+        for _, v in pairs(w) do
+            v.quality_affects_inventory_size = true
+        end
     end
 
     for _, v in pairs(data.raw['lab']) do
