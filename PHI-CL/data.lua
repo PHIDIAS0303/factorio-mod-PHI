@@ -380,7 +380,7 @@ if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value
     end
 end
 
-if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-ENABLE-QUALITY'].value) or settings.startup['PHI-VP'].value) then
+if mods['space-age'] and ((settings.startup['PHI-SA'].value and not settings.startup['PHI-SA-ENABLE-QUALITY'].value) or settings.startup['PHI-VP'].value) then
     for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
         data.raw.technology[v].hidden = true
         data.raw.technology[v].hidden_in_factoriopedia = true
