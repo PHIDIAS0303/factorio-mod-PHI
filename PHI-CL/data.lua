@@ -489,6 +489,10 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
         v.quality_affects_inventory_size = true
     end
 
+    for _, v in pairs(data.raw['lab']) do
+        v.uses_quality_drain_modifier = true
+    end
+
     data.raw['module']['efficiency-module'].effect.consumption = -0.3
     data.raw['module']['efficiency-module-2'].effect.consumption = -0.6
     data.raw['module']['efficiency-module-3'].effect.consumption = -0.9
