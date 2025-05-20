@@ -3,7 +3,7 @@ Version: 3.0.104
 Date: 2025-05-22
 
   Changes:
-    - [SA] Support for default max quality setting is dropped.
+    - [SA] Support for default max quality setting is dropped, instead, having no quality in space age.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.103
