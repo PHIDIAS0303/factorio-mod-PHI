@@ -466,13 +466,7 @@ local items = {
                 ['promethium-science-pack'] = true,
                 ['foundation'] = true,
                 ['scrap-recycling-productivity'] = true,
-                ['biochamber'] = true,
-                ['electric-weapons-damage-1'] = true,
-                ['electric-weapons-damage-2'] = true,
-                ['electric-weapons-damage-3'] = true,
-                ['electric-weapons-damage-4'] = true,
-                ['artillery-shell-damage-1'] = true,
-                ['railgun-damage-1'] = true,
+                ['biochamber'] = true
             },
             ['recipe'] = {
                 ['thruster'] = true,
