@@ -408,20 +408,6 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
         data.raw.quality[v].hidden_in_factoriopedia = true
     end
 
-    --[[
-    data.raw.quality['normal'].level = data.raw.quality['legendary'].level
-    data.raw.quality['normal'].beacon_power_usage_multiplier = data.raw.quality['legendary'].beacon_power_usage_multiplier
-    data.raw.quality['normal'].mining_drill_resource_drain_multiplier = data.raw.quality['legendary'].mining_drill_resource_drain_multiplier
-    data.raw.quality['normal'].science_pack_drain_multiplier = data.raw.quality['legendary'].science_pack_drain_multiplier
-
-    local q_s = 1 + 0.3 * data.raw.quality['normal'].level
-
-    for _, v in pairs(data.raw['inserter']) do
-        v.extension_speed = v.extension_speed * q_s
-        v.rotation_speed = v.rotation_speed * q_s
-    end
-    ]]
-
     data.raw['tips-and-tricks-item']['quality'] = nil
     data.raw['tips-and-tricks-item']['quality-modules'] = nil
     data.raw['tips-and-tricks-item']['quality-factoriopedia'] = nil
