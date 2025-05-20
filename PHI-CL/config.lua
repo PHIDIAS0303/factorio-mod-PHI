@@ -421,12 +421,7 @@ local items = {
                 ['logistic-system'] = {
                     ['prerequisites'] = {'logistic-robotics', 'utility-science-pack'},
                     ['unit'] = {count = 500, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}}
-                },
-                ['cliff-explosives'] = {
-                    ['prerequisites'] = {'explosives', 'military-2'},
-                    ['unit'] = {count = 200, time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}},
-                    ['effects'] = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
-                },
+                }
             },
             ['technology'] = {
                 ['planet-discovery-vulcanus'] = true,
