@@ -212,6 +212,13 @@ data:extend({
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE-RATIO'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE-RATIO'}},
   order = 'C04'
 }, {
+  type = 'bool-setting',
+  name = 'PHI-SA-ENABLE-QUALITY',
+  setting_type = 'startup',
+  default_value = false,
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-NO-QUALITY'}, {'mod-setting-name.PHI-SA-NO-QUALITY'}},
+  order = 'C05'
+}, {
   type = 'int-setting',
   name = 'PHI-SA-QUALITY',
   setting_type = 'startup',
@@ -219,13 +226,6 @@ data:extend({
   minimum_value = 1,
   maximum_value = 100,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-QUALITY'}, {'mod-setting-name.PHI-SA-QUALITY'}},
-  order = 'C05'
-}, {
-  type = 'bool-setting',
-  name = 'PHI-SA-NO-QUALITY',
-  setting_type = 'startup',
-  default_value = false,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-NO-QUALITY'}, {'mod-setting-name.PHI-SA-NO-QUALITY'}},
   order = 'C06'
 }, {
   type = 'bool-setting',
