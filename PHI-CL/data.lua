@@ -146,13 +146,11 @@ if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIP
     end
 end
 
-if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or settings.startup['PHI-VP'].value then
-    local bss = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
+if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value then
     data.raw['mining-drill']['electric-mining-drill'].filter_count = 5
 
     if mods['space-age'] then
         data.raw['mining-drill']['big-mining-drill'].filter_count = 5
-        data.raw['inserter']['stack-inserter'].allow_custom_vectors = true
         data.raw['pipe']['pipe'].heating_energy = nil
         data.raw['pipe-to-ground']['pipe-to-ground'].heating_energy = nil
         data.raw['pump']['pump'].heating_energy = nil
@@ -161,15 +159,6 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         data.raw['generator']['steam-turbine'].heating_energy = nil
         data.raw['furnace']['electric-furnace'].heating_energy = nil
         data.raw['assembling-machine']['cryogenic-plant'].heating_energy = nil
-    end
-
-    for _, v in pairs({'burner-inserter', 'inserter', 'fast-inserter', 'long-handed-inserter', 'bulk-inserter'}) do
-        if data.raw['inserter'][v] then
-            data.raw['inserter'][v].max_belt_stack_size = bss
-            data.raw['inserter'][v].grab_less_to_match_belt_stack = true
-            data.raw['inserter'][v].enter_drop_mode_if_held_stack_spoiled = true
-            data.raw['inserter'][v].allow_custom_vectors = true
-        end
     end
 
     if mods['elevated-rails'] then
@@ -289,7 +278,7 @@ if settings.startup['PHI-MI'].value then
     data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-MI-ROCKET-CAPACITY'].value * 1000000
 end
 
-if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or settings.startup['PHI-VP'].value then
+if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value then
     data:extend({{type = 'recipe-category', name = 'fluid'}})
 
     local item = table.deepcopy(data.raw['item']['offshore-pump'])
@@ -370,8 +359,8 @@ if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (se
     end
 end
 
-if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or settings.startup['PHI-VP'].value) then
-    for k, v in pairs(items['space-age']['PHI-SA-RESTRICTION']['surface_conditions']) do
+if mods['space-age'] and settings.startup['PHI-VP'].value then
+    for k, v in pairs(items['space-age']['PHI-VP']['surface_conditions']) do
         data.raw[v][k].surface_conditions = nil
     end
 
@@ -422,6 +411,8 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
 end
 
 if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value) then
+    data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
+
     data.raw.resource['lithium-brine'].infinite = true
     data.raw.resource['lithium-brine'].minimum = 60000
     data.raw.resource['lithium-brine'].normal = 300000
@@ -509,6 +500,12 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
         if v.fluid then
             v.destroys_dropped_items = true
             v.default_destroyed_dropped_item_trigger = nil
+        end
+    end
+
+    for _, v in pairs(data.raw['asteroid']) do
+        for _, v2 in pairs(v.resistances) do
+            v2.percent = (v2.percent > 98 and 98) or v2.percent
         end
     end
 end
@@ -628,73 +625,6 @@ if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value
     end
 end
 
-if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value and mods['space-age'] then
-    data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
-
-    for _, v in pairs({'heavy-oil', 'lava', 'ammoniacal-solution'}) do
-        if data.raw.fluid[v] then
-            data:extend({{
-                type = 'recipe',
-                name = 'pump-' .. v,
-                category = 'fluid',
-                energy_required = 1,
-                enabled = true,
-                ingredients = {},
-                results = {{type = 'fluid', name = v, amount = 12000 * settings.startup['PHI-MI-PIPE'].value / 10, temperature = data.raw.fluid[v].default_temperature}},
-                main_product = v,
-                hide_from_player_crafting = true,
-                allow_productivity = false,
-                crafting_machine_tint = {primary = data.raw.fluid[v].flow_color},
-                localised_name = {'fluid-name.' .. v}
-            }})
-        end
-    end
-
-    for _, v in pairs({'artificial-yumako-soil', 'overgrowth-yumako-soil', 'artificial-jellynut-soil', 'overgrowth-jellynut-soil'}) do
-        data.raw.tile[v].sprite_usage_surface = 'any'
-        data.raw.item[v].place_as_tile.condition = {layers = {water_tile = true}}
-        data.raw.item[v].place_as_tile.tile_condition = nil
-    end
-
-    for _, v in pairs({'tree-plant', 'yumako-tree', 'jellystem'}) do
-        data.raw['plant'][v].autoplace.tile_restriction = nil
-    end
-
-    local asteroid_util = require('__space-age__.prototypes.planet.asteroid-spawn-definitions')
-    data.raw.planet['nauvis'].asteroid_spawn_influence = 1
-
-    local pb = {
-        has_promethium_asteroids = true,
-        type_ratios = {},
-        probability_on_range_chunk = {},
-        probability_on_range_small = {},
-        probability_on_range_medium = {},
-        probability_on_range_big = {},
-        probability_on_range_huge = {},
-    }
-
-    local distance = {0.001, 0.199, 0.399, 0.599, 0.799, 0.999}
-
-    for i = 1, 6 do
-        table.insert(pb.type_ratios, {position = distance[i], ratios = {1, 1, 1, 1}})
-        table.insert(pb.probability_on_range_chunk, {position = distance[i], probability = 0.0312 - (0.0031 * i), angle_when_stopped = asteroid_util.chunk_angle})
-        table.insert(pb.probability_on_range_small, {position = distance[i], probability = 0.0273 - (0.0027 * i), angle_when_stopped = asteroid_util.small_angle})
-        table.insert(pb.probability_on_range_medium, {position = distance[i], probability = 0.0234, angle_when_stopped = asteroid_util.medium_angle})
-        table.insert(pb.probability_on_range_big, {position = distance[i], probability = 0.0195 + (0.0027 * i), angle_when_stopped = asteroid_util.big_angle})
-        table.insert(pb.probability_on_range_huge, {position = distance[i], probability = 0.0156 + (0.0031 * i), angle_when_stopped = asteroid_util.huge_angle})
-    end
-
-    data.raw.planet['nauvis'].asteroid_spawn_definitions = asteroid_util.spawn_definitions(pb, 0.001)
-
-    for _, v in pairs(data.raw['asteroid']) do
-        v.mass = 1
-
-        for _, v2 in pairs(v.resistances) do
-            v2.percent = (v2.percent > 98 and 98) or v2.percent
-        end
-    end
-end
-
 if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-HEAT-RADIUS'].value and mods['space-age'] then
     for _, v in pairs({data.raw['heat-pipe'], data.raw['reactor']}) do
         for _, v2 in pairs(v) do
@@ -711,6 +641,22 @@ if settings.startup['PHI-VP'].value then
         data.raw.quality['normal'].science_pack_drain_multiplier = 1
 
         data.raw['utility-constants'].default.default_pipeline_extent = math.max(settings.startup['PHI-MI-PIPE-EXTENT'].value, 960)
+
+        local bss = 1
+
+        if data.raw['inserter']['stack-inserter'] then
+            data.raw['inserter']['stack-inserter'].allow_custom_vectors = true
+            bss = data.raw['inserter']['stack-inserter'].max_belt_stack_size
+        end
+
+        for _, v in pairs({'burner-inserter', 'inserter', 'fast-inserter', 'long-handed-inserter', 'bulk-inserter'}) do
+            if data.raw['inserter'][v] then
+                data.raw['inserter'][v].max_belt_stack_size = bss
+                data.raw['inserter'][v].grab_less_to_match_belt_stack = true
+                data.raw['inserter'][v].enter_drop_mode_if_held_stack_spoiled = true
+                data.raw['inserter'][v].allow_custom_vectors = true
+            end
+        end
 
         for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
             data.raw.planet[v].map_gen_settings = nil

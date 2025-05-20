@@ -76,7 +76,7 @@ if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.on_player_cheat_mode_disabled, hidden_recipe_enable)
 end
 
-if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-RESTRICTION'].value) or settings.startup['PHI-VP'].value then
+if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value then
     function gui_create(player)
         if player.gui.relative.inserter_config then
             player.gui.relative.inserter_config.destroy()

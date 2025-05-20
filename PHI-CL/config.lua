@@ -607,10 +607,8 @@ local items = {
                 ['crusher'] = true,
                 ['thruster'] = true,
                 ['space-platform-hub'] = true,
-            }
-        },
-        ['PHI-SA-RESTRICTION'] = {
-            ['surface_conditions'] = {
+            },
+                        ['surface_conditions'] = {
                 ['captive-biter-spawner'] = 'assembling-machine',
                 ['agricultural-tower'] = 'agricultural-tower',
                 ['asteroid-collector'] = 'asteroid-collector',
