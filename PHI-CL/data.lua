@@ -358,17 +358,6 @@ if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (se
         }})
     end
 end
-
-if mods['space-age'] and settings.startup['PHI-VP'].value then
-    for k, v in pairs(items['space-age']['PHI-VP']['surface_conditions']) do
-        data.raw[v][k].surface_conditions = nil
-    end
-
-    for _, v in pairs(data.raw.recipe) do
-        v.surface_conditions = nil
-    end
-end
-
 if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value and mods['quality'] then
     for _, v in pairs(data.raw.module) do
         if v.category and v.category == 'quality' then
@@ -686,6 +675,13 @@ if settings.startup['PHI-VP'].value then
             end
         end
 
+        for k, v in pairs(items['space-age']['PHI-VP']['surface_conditions']) do
+            data.raw[v][k].surface_conditions = nil
+        end
+
+        for _, v in pairs(data.raw.recipe) do
+            v.surface_conditions = nil
+        end
         for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
             data.raw.planet[v].map_gen_settings = nil
             data.raw.planet[v].hidden = true
