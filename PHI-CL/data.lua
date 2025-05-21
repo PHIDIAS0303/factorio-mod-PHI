@@ -410,6 +410,119 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and not settings.sta
     data.raw['place-equipment-achievement']['no-room-for-more'] = nil
 end
 
+
+if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-SPOIL-FREEZE'].value and settings.startup['PHI-SA-SPOIL'].value and mods['space-age'] then
+    local function spoil_handle(i)
+        local item = table.deepcopy(i)
+        item.name = 'frozen-' .. i.name
+        item.order = item.order .. '-f'
+
+        item.icons = {
+            {
+                icon = item.icon,
+                icon_size = 64,
+                icon_mipmaps = 4
+            }, {
+                icon = data.raw['item']['ice'].icon,
+                tint = {r = 1, g = 1, b = 1, a = 0.5},
+                icon_size = 64,
+                icon_mipmaps = 4
+            }
+        }
+
+        item.icon = nil
+        item.icon_size = nil
+        item.icon_mipmaps = nil
+        item.spoil_ticks = math.floor(i.spoil_ticks * settings.startup['PHI-SA-SPOIL-FREEZE-RATIO'].value / 10)
+        item.spoil_result = i.name
+        item.spoil_to_trigger_result = nil
+        item.localised_name = {'item-name.' .. i.name}
+        data:extend({item})
+
+        data:extend({{
+            type = 'recipe',
+            name = item.name,
+            energy_required = 2,
+            enabled = false,
+            category = 'cryogenics',
+            ingredients = {{type = 'item', name = i.name, amount = 1}, {type = 'fluid', name = 'fluoroketone-cold', amount = 2, ignored_by_stats = 2}},
+            results = {{type = 'item', name = item.name, amount = 1}, {type = 'fluid', name = 'fluoroketone-hot', amount = 2, ignored_by_stats=2, ignored_by_productivity = 2}},
+            allow_productivity = false,
+            main_product = item.name,
+            localised_name = {'item-name.' .. i.name}
+        }})
+
+        data:extend({{
+            type = 'recipe',
+            name = 'unfreeze-' .. i.name,
+            energy_required = 2,
+            enabled = false,
+            category = 'cryogenics',
+            ingredients = {{type = 'item', name = item.name, amount = 1}},
+            results = {{type = 'item', name = i.name, amount = 1}},
+            allow_productivity = false,
+            main_product = i.name,
+            localised_name = {'item-name.' .. i.name}
+        }})
+
+        table.insert(data.raw.technology['cryogenic-plant'].effects, {type = 'unlock-recipe', recipe = item.name})
+        table.insert(data.raw.technology['cryogenic-plant'].effects, {type = 'unlock-recipe', recipe = 'unfreeze-' .. i.name})
+    end
+
+    for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg'}) do
+        spoil_handle(data.raw['item'][v])
+    end
+
+    for _, v in pairs({'raw-fish', 'yumako-mash', 'yumako', 'jelly', 'jellynut', 'bioflux'}) do
+        spoil_handle(data.raw['capsule'][v])
+    end
+
+    spoil_handle(data.raw.tool['agricultural-science-pack'])
+end
+
+if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].value) or settings.startup['PHI-VP'].value) and mods['space-age'] then
+    local function spoil_handle(i)
+        i.spoil_ticks = nil
+        i.spoil_result = nil
+        i.spoil_to_trigger_result = nil
+    end
+
+    for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg'}) do
+        spoil_handle(data.raw['item'][v])
+    end
+
+    for _, v in pairs({'raw-fish', 'yumako-mash', 'yumako', 'jelly', 'jellynut', 'bioflux'}) do
+        spoil_handle(data.raw['capsule'][v])
+    end
+
+    spoil_handle(data.raw.tool['agricultural-science-pack'])
+
+    data:extend({{
+        type = 'recipe',
+        name = 'spoilage-from-nutrients',
+        energy_required = 1,
+        enabled = false,
+        ingredients = {{type = 'item', name = 'nutrients', amount = 1}},
+        results = {{type = 'item', name = 'spoilage', amount = 10}},
+        main_product = 'spoilage',
+        localised_name = {'item-name.spoilage'}
+    }})
+
+    table.insert(data.raw.technology['agriculture'].effects, {type = 'unlock-recipe', recipe = 'spoilage-from-nutrients'})
+
+    for _, v in pairs({'spoilables', 'spoilables-result', 'spoilables-research'}) do
+        data.raw['tips-and-tricks-item'][v] = nil
+    end
+end
+
+if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-HEAT-RADIUS'].value and mods['space-age'] then
+    for _, v in pairs({data.raw['heat-pipe'], data.raw['reactor']}) do
+        for _, v2 in pairs(v) do
+            v2.heating_radius = settings.startup['PHI-SA-HEAT-RADIUS'].value
+        end
+    end
+end
+
 if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value) then
     data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
 
@@ -536,118 +649,36 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
             data.raw.technology[v].effects = nil
         end
     end
-end
 
-if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-SPOIL-FREEZE'].value and settings.startup['PHI-SA-SPOIL'].value and mods['space-age'] then
-    local function spoil_handle(i)
-        local item = table.deepcopy(i)
-        item.name = 'frozen-' .. i.name
-        item.order = item.order .. '-f'
+    data.raw.tool['promethium-science-pack'].hidden = true
+    data.raw.tool['promethium-science-pack'].hidden_in_factoriopedia = true
 
-        item.icons = {
-            {
-                icon = item.icon,
-                icon_size = 64,
-                icon_mipmaps = 4
-            }, {
-                icon = data.raw['item']['ice'].icon,
-                tint = {r = 1, g = 1, b = 1, a = 0.5},
-                icon_size = 64,
-                icon_mipmaps = 4
-            }
-        }
-
-        item.icon = nil
-        item.icon_size = nil
-        item.icon_mipmaps = nil
-        item.spoil_ticks = math.floor(i.spoil_ticks * settings.startup['PHI-SA-SPOIL-FREEZE-RATIO'].value / 10)
-        item.spoil_result = i.name
-        item.spoil_to_trigger_result = nil
-        item.localised_name = {'item-name.' .. i.name}
-        data:extend({item})
-
-        data:extend({{
-            type = 'recipe',
-            name = item.name,
-            energy_required = 2,
-            enabled = false,
-            category = 'cryogenics',
-            ingredients = {{type = 'item', name = i.name, amount = 1}, {type = 'fluid', name = 'fluoroketone-cold', amount = 2, ignored_by_stats = 2}},
-            results = {{type = 'item', name = item.name, amount = 1}, {type = 'fluid', name = 'fluoroketone-hot', amount = 2, ignored_by_stats=2, ignored_by_productivity = 2}},
-            allow_productivity = false,
-            main_product = item.name,
-            localised_name = {'item-name.' .. i.name}
-        }})
-
-        data:extend({{
-            type = 'recipe',
-            name = 'unfreeze-' .. i.name,
-            energy_required = 2,
-            enabled = false,
-            category = 'cryogenics',
-            ingredients = {{type = 'item', name = item.name, amount = 1}},
-            results = {{type = 'item', name = i.name, amount = 1}},
-            allow_productivity = false,
-            main_product = i.name,
-            localised_name = {'item-name.' .. i.name}
-        }})
-
-        table.insert(data.raw.technology['cryogenic-plant'].effects, {type = 'unlock-recipe', recipe = item.name})
-        table.insert(data.raw.technology['cryogenic-plant'].effects, {type = 'unlock-recipe', recipe = 'unfreeze-' .. i.name})
+    for _, v in pairs(data.raw.lab) do
+        v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack', 'agricultural-science-pack', 'cryogenic-science-pack', 'electromagnetic-science-pack', 'metallurgic-science-pack'}
     end
 
-    for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg'}) do
-        spoil_handle(data.raw['item'][v])
-    end
+    table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
 
-    for _, v in pairs({'raw-fish', 'yumako-mash', 'yumako', 'jelly', 'jellynut', 'bioflux'}) do
-        spoil_handle(data.raw['capsule'][v])
-    end
+    data.raw['pump']['pump'].pumping_speed = 50
+    data.raw['inserter']['burner-inserter'].allow_burner_leech = true
 
-    spoil_handle(data.raw.tool['agricultural-science-pack'])
-end
-
-if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].value) or settings.startup['PHI-VP'].value) and mods['space-age'] then
-    local function spoil_handle(i)
-        i.spoil_ticks = nil
-        i.spoil_result = nil
-        i.spoil_to_trigger_result = nil
-    end
-
-    for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg'}) do
-        spoil_handle(data.raw['item'][v])
-    end
-
-    for _, v in pairs({'raw-fish', 'yumako-mash', 'yumako', 'jelly', 'jellynut', 'bioflux'}) do
-        spoil_handle(data.raw['capsule'][v])
-    end
-
-    spoil_handle(data.raw.tool['agricultural-science-pack'])
-
-    data:extend({{
-        type = 'recipe',
-        name = 'spoilage-from-nutrients',
-        energy_required = 1,
-        enabled = false,
-        ingredients = {{type = 'item', name = 'nutrients', amount = 1}},
-        results = {{type = 'item', name = 'spoilage', amount = 10}},
-        main_product = 'spoilage',
-        localised_name = {'item-name.spoilage'}
-    }})
-
-    table.insert(data.raw.technology['agriculture'].effects, {type = 'unlock-recipe', recipe = 'spoilage-from-nutrients'})
-
-    for _, v in pairs({'spoilables', 'spoilables-result', 'spoilables-research'}) do
-        data.raw['tips-and-tricks-item'][v] = nil
-    end
-end
-
-if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-HEAT-RADIUS'].value and mods['space-age'] then
-    for _, v in pairs({data.raw['heat-pipe'], data.raw['reactor']}) do
-        for _, v2 in pairs(v) do
-            v2.heating_radius = settings.startup['PHI-SA-HEAT-RADIUS'].value
+    for _, v in pairs({'wooden-chest', 'iron-chest', 'steel-chest'}) do
+        if data.raw['container'][v] then
+            data.raw['container'][v].inventory_type = 'with_filters_and_bar'
         end
     end
+
+    for _, v in pairs({'passive-provider-chest', 'active-provider-chest', 'storage-chest', 'buffer-chest', 'requester-chest'}) do
+        if data.raw['logistic-container'][v] then
+            data.raw['logistic-container'][v].inventory_type = 'with_filters_and_bar'
+        end
+    end
+
+    if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
+        data.raw['pump']['pump'].pumping_speed = data.raw['pump']['pump'].pumping_speed * settings.startup['PHI-MI-PIPE'].value / 10
+    end
+
+    data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
 end
 
 if settings.startup['PHI-VP'].value then
@@ -1139,7 +1170,6 @@ if settings.startup['PHI-VP'].value then
         data.raw.recipe['biolab'].ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 60}, {type = 'item', name = 'processing-unit', amount = 60}, {type = 'item', name = 'uranium-235', amount = 3}}
         data.raw.recipe['foundry'].category = 'crafting-with-fluid'
         data.raw.recipe['foundry'].ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'processing-unit', amount = 40}, {type = 'item', name = 'coal', amount = 60}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'item', name = 'electric-furnace', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 60}}
-        data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
 
         data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
         data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
@@ -1161,23 +1191,6 @@ if settings.startup['PHI-VP'].value then
         data.raw['lab']['biolab'].energy_usage = '180kW'
         data.raw['lab']['biolab'].energy_source.emissions_per_minute = nil
         data.raw['chain-active-trigger']['chain-tesla-turret-chain'].fork_chance = 0.3
-
-        table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
-
-        data.raw['pump']['pump'].pumping_speed = 50
-        data.raw['inserter']['burner-inserter'].allow_burner_leech = true
-
-        for _, v in pairs({'wooden-chest', 'iron-chest', 'steel-chest'}) do
-            data.raw['container'][v].inventory_type = 'with_filters_and_bar'
-        end
-
-        for _, v in pairs({'passive-provider-chest', 'active-provider-chest', 'storage-chest', 'buffer-chest', 'requester-chest'}) do
-            data.raw['logistic-container'][v].inventory_type = 'with_filters_and_bar'
-        end
-
-        if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
-            data.raw['pump']['pump'].pumping_speed = data.raw['pump']['pump'].pumping_speed * settings.startup['PHI-MI-PIPE'].value / 10
-        end
 
         data.raw['assembling-machine']['biochamber'].hidden = true
         data.raw['assembling-machine']['biochamber'].hidden_in_factoriopedia = true
@@ -1214,7 +1227,7 @@ if settings.startup['PHI-VP'].value then
         data.raw['lightning']['lightning'].hidden = true
         data.raw['lightning']['lightning'].hidden_in_factoriopedia = true
 
-        for _, v in pairs({'agricultural', 'cryogenic', 'electromagnetic', 'metallurgic', 'promethium'}) do
+        for _, v in pairs({'agricultural', 'cryogenic', 'electromagnetic', 'metallurgic'}) do
             data.raw.tool[v .. '-science-pack'].hidden = true
             data.raw.tool[v .. '-science-pack'].hidden_in_factoriopedia = true
         end
