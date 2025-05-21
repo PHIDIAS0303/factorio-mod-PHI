@@ -160,6 +160,10 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         data.raw['assembling-machine']['cryogenic-plant'].heating_energy = nil
         data.raw['roboport']['roboport'].charging_station_count_affected_by_quality = true
         data.raw['roboport-equipment']['personal-roboport-equipment'].charging_station_count_affected_by_quality = true
+
+        for _, v in pairs(data.raw['lab']) do
+            v.uses_quality_drain_modifier = true
+        end
     end
 
     if mods['elevated-rails'] then
@@ -563,10 +567,6 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
         for _, v in pairs(w) do
             v.quality_affects_inventory_size = true
         end
-    end
-
-    for _, v in pairs(data.raw['lab']) do
-        v.uses_quality_drain_modifier = true
     end
 
     data.raw['module']['efficiency-module'].effect.consumption = -0.3
