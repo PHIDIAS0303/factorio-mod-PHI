@@ -215,7 +215,7 @@ if settings.startup['PHI-MI'].value then
         end
     end
 
-    data.raw.recipe['landfill'].ingredients = {{type = 'item', name = 'stone', amount = tonumber(settings.startup['PHI-MI-LANDFILL'].value) or 20}}
+    data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
 
     if settings.startup['PHI-MI-PIPE'].value then
         local s = settings.startup['PHI-MI-PIPE'].value / 10
@@ -914,7 +914,7 @@ if settings.startup['PHI-VP'].value then
             data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = nil
         end
 
-        data.raw.recipe['landfill'].ingredients = {{type = 'item', name = 'stone', amount = math.min(20, tonumber(settings.startup['PHI-MI-LANDFILL'].value) or 20)}}
+        data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
 
         for k, v in pairs(items['space-age']['PHI-VP']['technology_reform']) do
             if v.prerequisites then

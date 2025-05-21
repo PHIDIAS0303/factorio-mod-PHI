@@ -4,6 +4,7 @@ Date: 2025-05-24
 
   Changes:
     - [SA] Some code clean up.
+    - [MI] Dropped support for the setting of the landfill, instead use min comparsion, comparing to 20.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.104
