@@ -3,6 +3,7 @@ Version: 3.0.106
 Date: 2025-05-24
 
   Changes:
+    - [MB] Combined a tier setting for power.
     - [SA] Further changes for the space age generic settings.
     - [SA] Support for heat pipe heat radius is dropped.
 
