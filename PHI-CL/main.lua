@@ -88,7 +88,11 @@ function main.EEE(source, tier)
 
     if source.tech == 'compound-energy' then
         if mods['space-age'] and (not settings.startup['PHI-VP'].value) then
-            item.surface_conditions = {{property = 'gravity', min = 0.01}}
+            if not item.surface_conditions then
+                item.surface_conditions = {}
+            end
+
+            table.insert(item.surface_conditions, {property = 'gravity', min = 0.01})
         end
 
         if (source.type == 'accumulator') and item['chargable_graphics'] then
