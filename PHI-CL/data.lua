@@ -625,6 +625,8 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
     data.raw.technology['cliff-explosives'].unit = {count = 200, time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
     data.raw.technology['cliff-explosives'].effects = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
+    data.raw.technology['research-productivity'].prerequisites = {'cryogenic-science-pack'}
+    data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}, {'agricultural-science-pack', 1}, {'cryogenic-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'metallurgic-science-pack', 1}}
 
     table.insert(data.raw.technology['stronger-explosives-4'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.1})
     table.insert(data.raw.technology['stronger-explosives-5'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.1})
@@ -679,6 +681,93 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     end
 
     data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
+
+    local item = table.deepcopy(data.raw['item']['depleted-uranium-fuel-cell'])
+    item.name = 'empty-train-battery'
+    item.icon = items['general']['graphics_location'] .. 'battery.png'
+    item.order = 'qa'
+    item.stack_size = 100
+    item.localised_name = {'name.empty-train-battery'}
+    item.localised_description = {'description.empty-train-battery'}
+    data:extend({item})
+
+    data:extend({{
+        type = 'recipe',
+        name = 'empty-train-battery',
+        energy_required = 30,
+        enabled = true,
+        icon = items['general']['graphics_location'] .. 'battery.png',
+        icon_size = 64,
+        subgroup = 'intermediate-product',
+        order = 'zc',
+        allow_productivity = false,
+        ingredients = {{type = 'item', name = 'battery', amount = 100}},
+        results = {{type = 'item', name = 'empty-train-battery', amount = 1}},
+        main_product = 'empty-train-battery',
+        localised_name = {'name.empty-train-battery'},
+        localised_description = {'description.empty-train-battery'}
+    }})
+
+    item = table.deepcopy(data.raw['item']['nuclear-fuel'])
+    item.name = 'charged-train-battery'
+    item.burnt_result = 'empty-train-battery'
+    item.fuel_value = '1GJ'
+    item.icon = items['general']['graphics_location'] .. 'battery.png'
+    item.stack_size = 10
+    item.localised_name = {'name.charged-train-battery'}
+    item.localised_description = {'description.charged-train-battery'}
+    data:extend({item})
+
+    data:extend({{
+        type = 'recipe',
+        name = 'charged-train-battery',
+        energy_required = 60,
+        enabled = true,
+        icon = items['general']['graphics_location'] .. 'battery.png',
+        icon_size = 64,
+        subgroup = 'intermediate-product',
+        order = 'zd',
+        allow_productivity = false,
+        ingredients = {{type = 'item', name = 'empty-train-battery', amount = 1}},
+        results = {{type = 'item', name = 'charged-train-battery', probability = 0.995, amount = 1}, {type = 'item', name = 'battery', probability = 0.005, amount = 5}},
+        main_product = 'charged-train-battery',
+        localised_name = {'name.charged-train-battery'},
+        localised_description = {'description.charged-train-battery'}
+    }})
+
+    data:extend({{
+        type = 'technology',
+        name = 'cargo-landing-pad-count',
+        prerequisites = {'rocket-silo', 'space-science-pack'},
+        effects = {{type = 'cargo-landing-pad-count', modifier = 1}},
+        unit = {
+            count_formula = '1000 * L',
+            ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}},
+            time = 60
+        },
+        icons = {
+            {
+                icon = '__base__/graphics/technology/rocket-silo.png',
+                icon_size = 256
+            },
+            {
+                icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png',
+                icon_size = 128,
+                scale = 0.5,
+                shift = {50, 50}
+            }
+        },
+        order = 'a-i-a',
+        max_level = 'infinite',
+        upgrade = true,
+        localised_name = {'entity-name.cargo-landing-pad'}
+    }})
+
+    for _, v in pairs({'coal', 'stone', 'iron-ore', 'copper-ore', 'uranium-ore'}) do
+        if data.raw.item[v] then
+            data.raw.item[v].stack_size = math.max(data.raw.item[v].stack_size, 100)
+        end
+    end
 end
 
 if settings.startup['PHI-VP'].value then
@@ -755,59 +844,6 @@ if settings.startup['PHI-VP'].value then
         data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 0
         data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 0
 
-        local item = table.deepcopy(data.raw['item']['depleted-uranium-fuel-cell'])
-        item.name = 'empty-train-battery'
-        item.icon = items['general']['graphics_location'] .. 'battery.png'
-        item.order = 'qa'
-        item.stack_size = 100
-        item.localised_name = {'name.empty-train-battery'}
-        item.localised_description = {'description.empty-train-battery'}
-        data:extend({item})
-
-        data:extend({{
-            type = 'recipe',
-            name = 'empty-train-battery',
-            energy_required = 30,
-            enabled = true,
-            icon = items['general']['graphics_location'] .. 'battery.png',
-            icon_size = 64,
-            subgroup = 'intermediate-product',
-            order = 'zc',
-            allow_productivity = false,
-            ingredients = {{type = 'item', name = 'battery', amount = 100}},
-            results = {{type = 'item', name = 'empty-train-battery', amount = 1}},
-            main_product = 'empty-train-battery',
-            localised_name = {'name.empty-train-battery'},
-            localised_description = {'description.empty-train-battery'}
-        }})
-
-        item = table.deepcopy(data.raw['item']['nuclear-fuel'])
-        item.name = 'charged-train-battery'
-        item.burnt_result = 'empty-train-battery'
-        item.fuel_value = '1GJ'
-        item.icon = items['general']['graphics_location'] .. 'battery.png'
-        item.stack_size = 10
-        item.localised_name = {'name.charged-train-battery'}
-        item.localised_description = {'description.charged-train-battery'}
-        data:extend({item})
-
-        data:extend({{
-            type = 'recipe',
-            name = 'charged-train-battery',
-            energy_required = 60,
-            enabled = true,
-            icon = items['general']['graphics_location'] .. 'battery.png',
-            icon_size = 64,
-            subgroup = 'intermediate-product',
-            order = 'zd',
-            allow_productivity = false,
-            ingredients = {{type = 'item', name = 'empty-train-battery', amount = 1}},
-            results = {{type = 'item', name = 'charged-train-battery', probability = 0.995, amount = 1}, {type = 'item', name = 'battery', probability = 0.005, amount = 5}},
-            main_product = 'charged-train-battery',
-            localised_name = {'name.charged-train-battery'},
-            localised_description = {'description.charged-train-battery'}
-        }})
-
         local item_sounds = require('__base__/prototypes/item_sounds')
 
         data:extend({
@@ -843,34 +879,6 @@ if settings.startup['PHI-VP'].value then
                 requester_paste_multiplier = 1
             }
         })
-
-        data:extend({{
-            type = 'technology',
-            name = 'cargo-landing-pad-count',
-            prerequisites = {'rocket-silo', 'space-science-pack'},
-            effects = {{type = 'cargo-landing-pad-count', modifier = 1}},
-            unit = {
-                count_formula = '1000 * L',
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}},
-                time = 60
-            },
-            icons = {
-                {
-                    icon = '__base__/graphics/technology/rocket-silo.png',
-                    icon_size = 256
-                },
-                {
-                  icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png',
-                  icon_size = 128,
-                  scale = 0.5,
-                  shift = {50, 50}
-                }
-            },
-            order = 'a-i-a',
-            max_level = 'infinite',
-            upgrade = true,
-            localised_name = {'entity-name.cargo-landing-pad'}
-        }})
 
         for _, v in pairs({'concrete', 'automation', 'electronics', 'advanced-circuit', 'engine', 'sulfur-processing', 'solar-energy', 'railway'}) do
             data:extend({{
@@ -924,10 +932,6 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'pipe', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.05}}
         data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
         data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
-
-        for _, v in pairs({'coal', 'stone', 'iron-ore', 'copper-ore', 'uranium-ore'}) do
-            data.raw.item[v].stack_size = math.max(data.raw.item[v].stack_size, 100)
-        end
 
         for _, v in pairs({'calcite', 'fluorine-vent', 'lithium-brine', 'scrap', 'tungsten-ore'}) do
             data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v:gsub('-', '_')] = nil
