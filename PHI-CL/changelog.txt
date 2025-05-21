@@ -8,6 +8,9 @@ Date: 2025-05-24
     - [SA] Further changes for the space age generic settings.
     - [SA] Support for heat pipe heat radius is dropped.
 
+  Balancing:
+    - [MB] Compound power is not allowed on space platform.
+
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.105
 Date: 2025-05-24
