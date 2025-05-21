@@ -6,9 +6,6 @@ Date: 2025-05-24
     - [SA] Some code clean up.
     - [MI] Dropped support for the setting of the landfill, instead use min comparsion, comparing to 20.
 
-  Balancing:
-    - [MB] Compound power is not allowed on space platform. 
-
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.104
 Date: 2025-05-22
