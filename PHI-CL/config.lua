@@ -209,7 +209,7 @@ local items = {
             max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['laser-turret'] = {
-            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-WEAPON'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
             stage = 1,
             mod = 'base',
             type = 'electric-turret',
@@ -217,10 +217,10 @@ local items = {
             ref_name = 'laser-turret',
             tech = 'laser-turret',
             min = 2,
-            max = settings.startup['PHI-MB-WEAPON-TIER'].value
+            max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['flamethrower-turret'] = {
-            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-WEAPON'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
             stage = 1,
             mod = 'base',
             type = 'fluid-turret',
@@ -228,10 +228,10 @@ local items = {
             ref_name = 'flamethrower-turret',
             tech = 'flamethrower',
             min = 2,
-            max = settings.startup['PHI-MB-WEAPON-TIER'].value
+            max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['gun-turret'] = {
-            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-WEAPON'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
             stage = 1,
             mod = 'base',
             type = 'ammo-turret',
@@ -239,10 +239,10 @@ local items = {
             ref_name = 'gun-turret',
             tech = 'gun-turret',
             min = 2,
-            max = settings.startup['PHI-MB-WEAPON-TIER'].value
+            max = settings.startup['PHI-MB-MACHINE-TIER'].value
         },
         ['radar'] = {
-            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-WEAPON'].value,
+            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
             stage = 1,
             mod = 'base',
             type = 'radar',
@@ -250,7 +250,7 @@ local items = {
             ref_name = 'radar',
             tech = 'automation',
             min = 2,
-            max = settings.startup['PHI-MB-WEAPON-TIER'].value
+            max = settings.startup['PHI-MB-MACHINE-TIER'].value
         }
     },
     ['equipment'] = {
@@ -694,7 +694,7 @@ if mods and mods['space-age'] then
     }
 
     items['item']['railgun-turret'] = {
-        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-WEAPON'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
         type = 'ammo-turret',
@@ -702,11 +702,11 @@ if mods and mods['space-age'] then
         ref_name = 'railgun-turret',
         tech = 'railgun',
         min = 2,
-        max = settings.startup['PHI-MB-WEAPON-TIER'].value
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
     items['item']['rocket-turret'] = {
-        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-WEAPON'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
         type = 'ammo-turret',
@@ -714,11 +714,11 @@ if mods and mods['space-age'] then
         ref_name = 'rocket-turret',
         tech = 'rocket-turret',
         min = 2,
-        max = settings.startup['PHI-MB-WEAPON-TIER'].value
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
     items['item']['tesla-turret'] = {
-        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-WEAPON'].value,
+        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
         type = 'electric-turret',
@@ -726,7 +726,7 @@ if mods and mods['space-age'] then
         ref_name = 'tesla-turret',
         tech = 'tesla-weapons',
         min = 2,
-        max = settings.startup['PHI-MB-WEAPON-TIER'].value
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
     items['item']['foundry'] = {
