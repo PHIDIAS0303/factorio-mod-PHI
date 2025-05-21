@@ -541,7 +541,7 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw.technology['elevated-rail'].unit.count = 400
     data.raw.technology['elevated-rail'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}
 
-    data.raw.recipe['foundation'].ingredients = {{type = 'item', name = 'stone', amount = 20}, {type = 'item', name = 'refined-concrete', amount = 10}, {type = 'item', name = 'steel-plate', amount = 10}}
+    data.raw.recipe['foundation'].ingredients = {{type = 'item', name = 'landfill', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 10}, {type = 'item', name = 'steel-plate', amount = 10}}
     data.raw.recipe['foundation'].results = {{type = 'item', name = 'foundation', amount = 1}}
     data.raw.recipe['atomic-bomb'].ingredients[3] = {type = 'item', name = 'uranium-235', amount = 30}
     data.raw.recipe['artillery-turret'].ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'concrete', amount = 60}, {type = 'item', name = 'iron-gear-wheel', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}}
