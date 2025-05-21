@@ -248,12 +248,6 @@
     ** DATA FINAL FIXES
 data.raw['utility-constants'].default.train_inactivity_wait_condition_default = 60
 
-data.raw['gui-style'].default.machine_slots_scroll_pane.maximal_height = nil
-data.raw['gui-style'].default.machine_ingredients_scroll_pane.maximal_height = nil
-data.raw['gui-style'].default.machine_outputs_scroll_pane.maximal_height = nil
-data.raw['gui-style'].default.module_inventory_scroll_pane.maximal_height = nil
-data.raw['utility-constants'].select_group_row_count
-
 for _,name in pairs({'furnace', 'lab', 'beacon'}) do
 	local entities = {}
 
