@@ -4,6 +4,7 @@ Date: 2025-05-24
 
   Changes:
     - [SA] Some code clean up.
+    - [SA] Moved some of the code from VP, sharing the logic.
     - [MI] Dropped support for the setting of the landfill, instead use min comparsion, comparing to 20.
 
 ---------------------------------------------------------------------------------------------------
