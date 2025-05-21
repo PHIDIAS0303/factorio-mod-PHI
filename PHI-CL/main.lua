@@ -87,7 +87,7 @@ function main.EEE(source, tier)
     end
 
     if source.tech == 'compound-energy' then
-        if mods['space-age'] then
+        if mods['space-age'] and (not settings.startup['PHI-VP'].value) then
             item.surface_conditions = {{property = 'gravity', min = 0.01}}
         end
 
