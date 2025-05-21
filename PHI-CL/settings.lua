@@ -172,27 +172,19 @@ data:extend({
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA'}, {'mod-setting-name.PHI-SA'}},
   order = 'C00'
 }, {
-  type = 'int-setting',
-  name = 'PHI-SA-HEAT-RADIUS',
-  setting_type = 'startup',
-  default_value = 1,
-  allowed_values = {1, 2, 3, 4, 5, 6, 7},
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-HEAT-RADIUS'}, {'mod-setting-name.PHI-SA-HEAT-RADIUS'}},
-  order = 'C01'
-}, {
   type = 'bool-setting',
   name = 'PHI-SA-SPOIL',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL'}, {'mod-setting-name.PHI-SA-SPOIL'}},
-  order = 'C02'
+  order = 'C01'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-SPOIL-FREEZE',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE'}},
-  order = 'C03'
+  order = 'C02'
 }, {
   type = 'int-setting',
   name = 'PHI-SA-SPOIL-FREEZE-RATIO',
@@ -201,14 +193,14 @@ data:extend({
   minimum_value = 1,
   maximum_value = 1000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE-RATIO'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE-RATIO'}},
-  order = 'C04'
+  order = 'C03'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-ENABLE-QUALITY',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-ENABLE-QUALITY'}, {'mod-setting-name.PHI-SA-ENABLE-QUALITY'}},
-  order = 'C05'
+  order = 'C04'
 }, {
   type = 'int-setting',
   name = 'PHI-SA-QUALITY',
@@ -217,14 +209,14 @@ data:extend({
   minimum_value = 1,
   maximum_value = 100,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-QUALITY'}, {'mod-setting-name.PHI-SA-QUALITY'}},
-  order = 'C06'
+  order = 'C05'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-GENERIC',
   setting_type = 'startup',
   default_value = true,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-GENERIC'}, {'mod-setting-name.PHI-SA-GENERIC'}},
-  order = 'C07'
+  order = 'C06'
 }, {
   type = 'bool-setting',
   name = 'PHI-VP',

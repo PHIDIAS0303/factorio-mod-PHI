@@ -516,14 +516,6 @@ if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].v
     end
 end
 
-if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-HEAT-RADIUS'].value and mods['space-age'] then
-    for _, v in pairs({data.raw['heat-pipe'], data.raw['reactor']}) do
-        for _, v2 in pairs(v) do
-            v2.heating_radius = settings.startup['PHI-SA-HEAT-RADIUS'].value
-        end
-    end
-end
-
 if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value) then
     data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
 
