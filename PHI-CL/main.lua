@@ -87,6 +87,10 @@ function main.EEE(source, tier)
     end
 
     if source.tech == 'compound-energy' then
+        if mods['space-age'] then
+            item.surface_conditions = {{property = 'pressure', min = 0, max = 0}}
+        end
+
         if (source.type == 'accumulator') and item['chargable_graphics'] then
             if item['chargable_graphics']['picture'].layers and item['chargable_graphics']['picture'].layers[1] then
                 item['chargable_graphics']['picture'].layers[1].tint = items['tint'][tier]
