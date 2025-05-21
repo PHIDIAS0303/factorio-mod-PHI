@@ -63,7 +63,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-MB-EQUIPMENT-ARMOR',
   setting_type = 'startup',
-  default_value = true,
+  default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-ARMOR'}, {'mod-setting-name.PHI-MB-EQUIPMENT-ARMOR'}},
   order = 'AC02'
 }, {
