@@ -46,26 +46,11 @@ data:extend({
   order = 'AB01'
 }, {
   type = 'bool-setting',
-  name = 'PHI-MB-WEAPON',
-  setting_type = 'startup',
-  default_value = false,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-WEAPON'}, {'mod-setting-name.PHI-MB-WEAPON'}},
-  order = 'AC00'
-}, {
-  type = 'int-setting',
-  name = 'PHI-MB-WEAPON-TIER',
-  setting_type = 'startup',
-  default_value = 3,
-  allowed_values = {1, 2, 3},
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-WEAPON-TIER'}, {'mod-setting-name.PHI-MB-WEAPON-TIER'}},
-  order = 'AC01'
-}, {
-  type = 'bool-setting',
   name = 'PHI-MB-EQUIPMENT',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT'}, {'mod-setting-name.PHI-MB-EQUIPMENT'}},
-  order = 'AD00'
+  order = 'AC00'
 }, {
   type = 'int-setting',
   name = 'PHI-MB-EQUIPMENT-TIER',
@@ -73,21 +58,21 @@ data:extend({
   default_value = 2,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-TIER'}, {'mod-setting-name.PHI-MB-EQUIPMENT-TIER'}},
-  order = 'AD01'
+  order = 'AC01'
 }, {
   type = 'bool-setting',
   name = 'PHI-MB-EQUIPMENT-ARMOR',
   setting_type = 'startup',
   default_value = true,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-ARMOR'}, {'mod-setting-name.PHI-MB-EQUIPMENT-ARMOR'}},
-  order = 'AD02'
+  order = 'AC02'
 }, {
   type = 'bool-setting',
   name = 'PHI-MB-EQUIPMENT-SIZE',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-SIZE'}, {'mod-setting-name.PHI-MB-EQUIPMENT-SIZE'}},
-  order = 'AD03'
+  order = 'AC03'
 }, {
   type = 'bool-setting',
   name = 'PHI-MI',
