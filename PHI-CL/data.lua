@@ -159,6 +159,8 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         data.raw['generator']['steam-turbine'].heating_energy = nil
         data.raw['furnace']['electric-furnace'].heating_energy = nil
         data.raw['assembling-machine']['cryogenic-plant'].heating_energy = nil
+        data.raw['roboport']['roboport'].charging_station_count_affected_by_quality = true
+        data.raw['roboport-equipment']['personal-roboport-equipment'].charging_station_count_affected_by_quality = true
     end
 
     if mods['elevated-rails'] then
@@ -369,7 +371,7 @@ if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value
     end
 end
 
-if mods['space-age'] and ((settings.startup['PHI-SA'].value and not settings.startup['PHI-SA-ENABLE-QUALITY'].value) or settings.startup['PHI-VP'].value) then
+if mods['space-age'] and ((settings.startup['PHI-SA'].value and ((not settings.startup['PHI-SA-ENABLE-QUALITY'].value) or settings.startup['PHI-SA-GENERIC'].value)) or settings.startup['PHI-VP'].value) then
     for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
         data.raw.technology[v].hidden = true
         data.raw.technology[v].hidden_in_factoriopedia = true
@@ -409,7 +411,6 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and not settings.sta
     data.raw['use-item-achievement']['todays-fish-is-trout-a-la-creme'] = nil
     data.raw['place-equipment-achievement']['no-room-for-more'] = nil
 end
-
 
 if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-SPOIL-FREEZE'].value and settings.startup['PHI-SA-SPOIL'].value and mods['space-age'] then
     local function spoil_handle(i)
@@ -533,8 +534,6 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw.resource['fluorine-vent'].minimum = 60000
     data.raw.resource['fluorine-vent'].normal = 300000
 
-    data.raw['roboport']['roboport'].charging_station_count_affected_by_quality = true
-    data.raw['roboport-equipment']['personal-roboport-equipment'].charging_station_count_affected_by_quality = true
     data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier = 2
     data.raw['space-platform-hub']['space-platform-hub'].inventory_size = 119
     data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus = 40
@@ -628,6 +627,8 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw.technology['research-productivity'].prerequisites = {'cryogenic-science-pack'}
     data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}, {'agricultural-science-pack', 1}, {'cryogenic-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'metallurgic-science-pack', 1}}
 
+    table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'solar-system-edge'})
+    table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'shattered-planet'})
     table.insert(data.raw.technology['stronger-explosives-4'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.1})
     table.insert(data.raw.technology['stronger-explosives-5'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.1})
     table.insert(data.raw.technology['stronger-explosives-6'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.2})
@@ -644,7 +645,7 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     table.insert(data.raw.technology['physical-projectile-damage-6'].effects, {type = 'ammo-damage', ammo_category = 'railgun', modifier = 0.2})
     table.insert(data.raw.technology['physical-projectile-damage-7'].effects, {type = 'ammo-damage', ammo_category = 'railgun', modifier = 0.4})
 
-    for _, v in pairs({'artillery-shell-damage-1', 'railgun-damage-1', 'electric-weapons-damage-1', 'electric-weapons-damage-2', 'electric-weapons-damage-3', 'electric-weapons-damage-4'}) do
+    for _, v in pairs({'artillery-shell-damage-1', 'railgun-damage-1', 'electric-weapons-damage-1', 'electric-weapons-damage-2', 'electric-weapons-damage-3', 'electric-weapons-damage-4', 'promethium-science-pack'}) do
         if data.raw.technology[v] then
             data.raw.technology[v].hidden = true
             data.raw.technology[v].hidden_in_factoriopedia = true
