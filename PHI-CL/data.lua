@@ -431,7 +431,7 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw.technology['foundation'].prerequisites = {'elevated-rail', 'rail-support-foundations'}
     data.raw.technology['foundation'].unit.count_formula = '1000'
     data.raw.technology['foundation'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-    data.raw.technology['rail-support-foundations'].prerequisites = {'elevated-rail'}
+    data.raw.technology['rail-support-foundations'].prerequisites = {'elevated-rail', 'planet-discovery-fulgora'}
     data.raw.technology['rail-support-foundations'].unit.count = 600
     data.raw.technology['rail-support-foundations'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
     data.raw.technology['elevated-rail'].prerequisites = {'concrete', 'railway'}
