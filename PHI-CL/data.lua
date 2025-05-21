@@ -4,13 +4,12 @@ local file_stage = 1
 
 if settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value then
     data.raw['fluid']['steam'].max_temperature = ((settings.startup['PHI-MB-ENERGY-POWER-TIER'].value > 1) and 5000) or data.raw['fluid']['steam'].max_temperature
-    local ml = math.max(tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-TIER'].value) or 1, tonumber(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value) or 1)
 
     for i = 1, 7 do
         data:extend({{
             type = 'technology',
             name = 'compound-energy-' .. i,
-            enabled = (i <= ml),
+            enabled = (i <= tonumber(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value)),
             prerequisites = ((i > 1) and {'compound-energy-' .. (i - 1)}) or {'solar-energy', 'advanced-circuit', 'electric-energy-accumulators'},
             effects = {},
             upgrade = true,
