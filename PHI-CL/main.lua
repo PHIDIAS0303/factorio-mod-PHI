@@ -260,10 +260,6 @@ function main.EEQ(source, tier)
     item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'item-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'item-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
     item.localised_description = {'?', {'item-description.' .. source.ref_name}, {'description.' .. source.ref_name}}
 
-    if settings.startup['PHI-MB-EQUIPMENT-SIZE'].value then
-        item.shape = {width = 1, height = 1, type = 'full', points = {{0, 0}}}
-    end
-
     data:extend({item})
 end
 

@@ -69,6 +69,16 @@ if mods['space-exploration'] and settings.startup['PHI-MB'].value and settings.s
     end
 end
 
+if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIPMENT-SIZE'].value then
+    for _, e in pairs({'night-vision-equipment','energy-shield-equipment', 'battery-equipment', 'solar-panel-equipment', 'generator-equipment','active-defense-equipment', 'movement-bonus-equipment', 'roboport-equipment', 'belt-immunity-equipment'}) do
+        if data.raw[e] then
+            for _, v in pairs(data.raw[e]) do
+                v.shape = {width = 1, height = 1, type = 'full', points = {{0, 0}}}
+            end
+        end
+    end
+end
+
 for _, v in pairs(items['item']) do
     if (v.stage == file_stage) and v.enabled and (v.max >= v.min) then
         v.category = 'item'
