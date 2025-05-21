@@ -553,12 +553,10 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
 
     data.raw['cargo-wagon']['cargo-wagon'].inventory_size = 80
 
-    for _, v in pairs(data.raw['fusion-generator']['fusion-generator'].input_fluid_box.pipe_connections) do
-        v.flow_direction = 'input-output'
-    end
-
-    for _, v in pairs(data.raw['fusion-generator']['fusion-generator'].output_fluid_box.pipe_connections) do
-        v.flow_direction = 'input-output'
+    for _, fb in pairs({'input_fluid_box', 'output_fluid_box'}) do
+        for _, v in pairs(data.raw['fusion-generator']['fusion-generator'][fb].pipe_connections) do
+            v.flow_direction = 'input-output'
+        end
     end
 
     for _, w in pairs({data.raw['cargo-wagon'], data.raw['fluid-wagon']}) do
