@@ -15,11 +15,11 @@ data:extend({
   order = 'AA00'
 }, {
   type = 'int-setting',
-  name = 'PHI-MB-ENERGY-SOLAR-TIER',
+  name = 'PHI-MB-ENERGY-POWER-TIER',
   setting_type = 'startup',
   default_value = 8,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-ENERGY-SOLAR-TIER'}, {'mod-setting-name.PHI-MB-ENERGY-SOLAR-TIER'}},
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-ENERGY-POWER-TIER'}, {'mod-setting-name.PHI-MB-ENERGY-POWER-TIER'}},
   order = 'AA01'
 }, {
   type = 'int-setting',
@@ -29,14 +29,6 @@ data:extend({
   allowed_values = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-ENERGY-SOLAR-RATIO'}, {'mod-setting-name.PHI-MB-ENERGY-SOLAR-RATIO'}},
   order = 'AA02'
-}, {
-  type = 'int-setting',
-  name = 'PHI-MB-ENERGY-POWER-TIER',
-  setting_type = 'startup',
-  default_value = 5,
-  allowed_values = {1, 2, 3, 4, 5},
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-ENERGY-POWER-TIER'}, {'mod-setting-name.PHI-MB-ENERGY-POWER-TIER'}},
-  order = 'AA03'
 }, {
   type = 'bool-setting',
   name = 'PHI-MB-MACHINE',

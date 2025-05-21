@@ -41,7 +41,7 @@ local items = {
             ref_name = 'solar-panel',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-MB-ENERGY-SOLAR-TIER'].value
+            max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
         },
         ['accumulator'] = {
             enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
@@ -52,7 +52,7 @@ local items = {
             ref_name = 'accumulator',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-MB-ENERGY-SOLAR-TIER'].value
+            max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
         },
         ['boiler'] = {
             enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
@@ -63,7 +63,7 @@ local items = {
             ref_name = 'boiler',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
+            max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
         },
         ['steam-engine'] = {
             enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
@@ -74,7 +74,7 @@ local items = {
             ref_name = 'steam-engine',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
+            max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
         },
         ['nuclear-reactor'] = {
             enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
@@ -85,7 +85,7 @@ local items = {
             ref_name = 'nuclear-reactor',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
+            max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
         },
         ['heat-pipe'] = {
             enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
@@ -96,7 +96,7 @@ local items = {
             ref_name = 'heat-pipe',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
+            max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
         },
         ['heat-exchanger'] = {
             enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
@@ -107,7 +107,7 @@ local items = {
             ref_name = 'heat-exchanger',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
+            max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
         },
         ['steam-turbine'] = {
             enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
@@ -118,7 +118,7 @@ local items = {
             ref_name = 'steam-turbine',
             tech = 'compound-energy',
             min = 2,
-            max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
+            max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
         },
         ['assembling-machine'] = {
             enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
@@ -666,7 +666,7 @@ if mods and mods['space-age'] then
         ref_name = 'fusion-reactor',
         tech = 'compound-energy',
         min = 2,
-        max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
+        max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
     }
 
     items['item']['fusion-generator'] = {
@@ -678,7 +678,7 @@ if mods and mods['space-age'] then
         ref_name = 'fusion-generator',
         tech = 'compound-energy',
         min = 2,
-        max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
+        max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
     }
 
     items['item']['heating-tower'] = {
@@ -690,7 +690,7 @@ if mods and mods['space-age'] then
         ref_name = 'heating-tower',
         tech = 'heating-tower',
         min = 2,
-        max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
+        max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
     }
 
     items['item']['railgun-turret'] = {
