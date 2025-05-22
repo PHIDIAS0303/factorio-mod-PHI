@@ -517,17 +517,18 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
 
     data.raw.resource['lithium-brine'].infinite = true
-    data.raw.resource['lithium-brine'].minimum = 60000
-    data.raw.resource['lithium-brine'].normal = 300000
-    data.raw.resource['lithium-brine'].infinite_depletion_amount = 10
-    data.raw.resource['fluorine-vent'].minimum = 60000
-    data.raw.resource['fluorine-vent'].normal = 300000
+    data.raw.resource['lithium-brine'].minimum = math.max(60000, data.raw.resource['lithium-brine'].minimum)
+    data.raw.resource['lithium-brine'].normal = math.max(300000, data.raw.resource['lithium-brine'].normal)
+    data.raw.resource['lithium-brine'].infinite_depletion_amount = math.min(10, data.raw.resource['lithium-brine'].infinite_depletion_amount)
+    data.raw.resource['fluorine-vent'].minimum = math.max(60000, data.raw.resource['fluorine-vent'].minimum)
+    data.raw.resource['fluorine-vent'].normal = math.max(300000, data.raw.resource['fluorine-vent'].normal)
 
-    data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier = 2
-    data.raw['space-platform-hub']['space-platform-hub'].inventory_size = 119
-    data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus = 40
-    data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 60
-    data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 60
+    data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier = math.max(2, data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier)
+    data.raw['space-platform-hub']['space-platform-hub'].inventory_size = math.max(119, data.raw['space-platform-hub']['space-platform-hub'].inventory_size)
+    data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus = math.max(40, data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus)
+    data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = math.max(60, data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size)
+    data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = math.max(60, data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size)
+    data.raw['cargo-wagon']['cargo-wagon'].inventory_size = math.max(80, data.raw['cargo-wagon']['cargo-wagon'].inventory_size)
 
     data.raw.technology['foundation'].prerequisites = {'elevated-rail', 'rail-support-foundations'}
     data.raw.technology['foundation'].unit.count_formula = '1000'
@@ -549,8 +550,6 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     table.insert(data.raw['thruster']['thruster'].fuel_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.west, position = {-1.5, 2}})
     table.insert(data.raw['thruster']['thruster'].oxidizer_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.east, position = {1.5, 2}})
 
-    data.raw['cargo-wagon']['cargo-wagon'].inventory_size = 80
-
     for _, fb in pairs({'input_fluid_box', 'output_fluid_box'}) do
         for _, v in pairs(data.raw['fusion-generator']['fusion-generator'][fb].pipe_connections) do
             v.flow_direction = 'input-output'
@@ -563,12 +562,12 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
         end
     end
 
-    data.raw['module']['efficiency-module'].effect.consumption = -0.3
-    data.raw['module']['efficiency-module-2'].effect.consumption = -0.6
-    data.raw['module']['efficiency-module-3'].effect.consumption = -0.9
+    data.raw['module']['efficiency-module'].effect.consumption = math.min(-0.3, data.raw['module']['efficiency-module'].effect.consumption)
+    data.raw['module']['efficiency-module-2'].effect.consumption = math.min(-0.6, data.raw['module']['efficiency-module'].effect.consumption)
+    data.raw['module']['efficiency-module-3'].effect.consumption = math.min(-0.9, data.raw['module']['efficiency-module'].effect.consumption)
 
     data.raw.tile['space-platform-foundation'].max_health = data.raw.tile['space-platform-foundation'].max_health * 2
-    data.raw.item['space-platform-foundation'].stack_size = 100
+    data.raw.item['space-platform-foundation'].stack_size = math.max(100, data.raw.item['space-platform-foundation'].stack_size)
 
     data.raw['ammo-turret']['railgun-turret'].starting_attack_speed = 1
     data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_secondary = 1
@@ -641,7 +640,10 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
 
     table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
 
-    data.raw['pump']['pump'].pumping_speed = 50
+    for _, v in pairs(data.raw['pump']) do
+        data.raw['pump']['pump'].pumping_speed = math.max(50, data.raw['pump']['pump'].pumping_speed) * settings.startup['PHI-MI-PIPE'].value / 10
+    end
+
     data.raw['inserter']['burner-inserter'].allow_burner_leech = true
 
     for _, v in pairs({'wooden-chest', 'iron-chest', 'steel-chest'}) do
@@ -654,10 +656,6 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
         if data.raw['logistic-container'][v] then
             data.raw['logistic-container'][v].inventory_type = 'with_filters_and_bar'
         end
-    end
-
-    if settings.startup['PHI-MI'].value and settings.startup['PHI-MI-PIPE'].value then
-        data.raw['pump']['pump'].pumping_speed = data.raw['pump']['pump'].pumping_speed * settings.startup['PHI-MI-PIPE'].value / 10
     end
 
     data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
@@ -725,18 +723,7 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
             ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}},
             time = 60
         },
-        icons = {
-            {
-                icon = '__base__/graphics/technology/rocket-silo.png',
-                icon_size = 256
-            },
-            {
-                icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png',
-                icon_size = 128,
-                scale = 0.5,
-                shift = {50, 50}
-            }
-        },
+        icons = {{icon = '__base__/graphics/technology/rocket-silo.png', icon_size = 256}, {icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png', icon_size = 128, scale = 0.5, shift = {50, 50}}},
         order = 'a-i-a',
         max_level = 'infinite',
         upgrade = true,
@@ -871,18 +858,7 @@ if settings.startup['PHI-VP'].value then
                     ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}},
                     time = 60
                 },
-                icons = {
-                    {
-                        icon = '__base__/graphics/technology/' .. v ..'.png',
-                        icon_size = 256
-                    },
-                    {
-                      icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png',
-                      icon_size = 128,
-                      scale = 0.5,
-                      shift = {50, 50}
-                    }
-                },
+                icons = {{icon = '__base__/graphics/technology/' .. v ..'.png', icon_size = 256}, {icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png', icon_size = 128, scale = 0.5, shift = {50, 50}}},
                 order = 'a-i-d',
                 max_level = 10,
                 upgrade = true,
