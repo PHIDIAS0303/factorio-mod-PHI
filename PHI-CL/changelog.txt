@@ -4,6 +4,7 @@ Date: 2025-05-24
 
   Changes:
     - [SA] Simplify some of the code logic in calculation.
+    - [SA] Support for adjusting efficiency module is dropped.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.106

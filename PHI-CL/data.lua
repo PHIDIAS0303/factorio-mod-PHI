@@ -214,12 +214,6 @@ if settings.startup['PHI-MI'].value then
         v.scale_energy_usage = (v.fast_replaceable_group and v.fast_replaceable_group == 'reactor')
     end
 
-    for _, v in pairs({data.raw['module']['efficiency-module'], data.raw['module']['efficiency-module-2'], data.raw['module']['efficiency-module-3']}) do
-        for _, v2 in pairs(v.effect) do
-            v2 = v2 * settings.startup['PHI-MI-EFFCY'].value / 10
-        end
-    end
-
     data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
 
     if settings.startup['PHI-MI-PIPE'].value then
@@ -572,10 +566,6 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw['module']['efficiency-module'].effect.consumption = -0.3
     data.raw['module']['efficiency-module-2'].effect.consumption = -0.6
     data.raw['module']['efficiency-module-3'].effect.consumption = -0.9
-
-    for _, v in pairs({data.raw['module']['efficiency-module'], data.raw['module']['efficiency-module-2'], data.raw['module']['efficiency-module-3']}) do
-        v.effect.consumption = v.effect.consumption * settings.startup['PHI-MI-EFFCY'].value / 10
-    end
 
     data.raw.tile['space-platform-foundation'].max_health = data.raw.tile['space-platform-foundation'].max_health * 2
     data.raw.item['space-platform-foundation'].stack_size = 100

@@ -82,22 +82,13 @@ data:extend({
   order = 'B00'
 }, {
   type = 'int-setting',
-  name = 'PHI-MI-EFFCY',
-  setting_type = 'startup',
-  default_value = 10,
-  minimum_value = 1,
-  maximum_value = 1000,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-EFFCY'}, {'mod-setting-name.PHI-MI-EFFCY'}},
-  order = 'B01'
-}, {
-  type = 'int-setting',
   name = 'PHI-MI-PIPE',
   setting_type = 'startup',
   default_value = 10,
   minimum_value = 1,
   maximum_value = 1000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-PIPE'}, {'mod-setting-name.PHI-MI-PIPE'}},
-  order = 'B02'
+  order = 'B01'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-ROBOT',
@@ -106,14 +97,14 @@ data:extend({
   minimum_value = 1,
   maximum_value = 1000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-ROBOT'}, {'mod-setting-name.PHI-MI-ROBOT'}},
-  order = 'B03'
+  order = 'B02'
 }, {
   type = 'bool-setting',
   name = 'PHI-MI-ROBOT-ENERGY',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-ROBOT-ENERGY'}, {'mod-setting-name.PHI-MI-ROBOT-ENERGY'}},
-  order = 'B04'
+  order = 'B03'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-TRAIN',
@@ -122,7 +113,7 @@ data:extend({
   minimum_value = 1,
   maximum_value = 1000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-TRAIN'}, {'mod-setting-name.PHI-MI-TRAIN'}},
-  order = 'B05'
+  order = 'B04'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-PIPE-EXTENT',
@@ -131,7 +122,7 @@ data:extend({
   minimum_value = 80,
   maximum_value = 10240,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-PIPE-EXTENT'}, {'mod-setting-name.PHI-MI-PIPE-EXTENT'}},
-  order = 'B06'
+  order = 'B05'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-ROCKET-CAPACITY',
@@ -140,7 +131,7 @@ data:extend({
   minimum_value = 1,
   maximum_value = 10000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-ROCKET-CAPACITY'}, {'mod-setting-name.PHI-MI-ROCKET-CAPACITY'}},
-  order = 'B07'
+  order = 'B06'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA',
