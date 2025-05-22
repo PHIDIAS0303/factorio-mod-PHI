@@ -517,11 +517,11 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
 
     data.raw.resource['lithium-brine'].infinite = true
-    data.raw.resource['lithium-brine'].minimum = math.max(60000, data.raw.resource['lithium-brine'].minimum)
-    data.raw.resource['lithium-brine'].normal = math.max(300000, data.raw.resource['lithium-brine'].normal)
-    data.raw.resource['lithium-brine'].infinite_depletion_amount = math.min(10, data.raw.resource['lithium-brine'].infinite_depletion_amount)
-    data.raw.resource['fluorine-vent'].minimum = math.max(60000, data.raw.resource['fluorine-vent'].minimum)
-    data.raw.resource['fluorine-vent'].normal = math.max(300000, data.raw.resource['fluorine-vent'].normal)
+    data.raw.resource['lithium-brine'].minimum = math.max(60000, data.raw.resource['lithium-brine'].minimum or 0)
+    data.raw.resource['lithium-brine'].normal = math.max(300000, data.raw.resource['lithium-brine'].normal or 0)
+    data.raw.resource['lithium-brine'].infinite_depletion_amount = math.min(10, data.raw.resource['lithium-brine'].infinite_depletion_amount or 999)
+    data.raw.resource['fluorine-vent'].minimum = math.max(60000, data.raw.resource['fluorine-vent'].minimum or 0)
+    data.raw.resource['fluorine-vent'].normal = math.max(300000, data.raw.resource['fluorine-vent'].normal or 0)
 
     data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier = math.max(2, data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier)
     data.raw['space-platform-hub']['space-platform-hub'].inventory_size = math.max(119, data.raw['space-platform-hub']['space-platform-hub'].inventory_size)
