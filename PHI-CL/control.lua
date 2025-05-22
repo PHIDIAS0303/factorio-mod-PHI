@@ -76,6 +76,57 @@ if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.on_player_cheat_mode_disabled, hidden_recipe_enable)
 end
 
+if (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value then
+script.on_nth_tick(3600, function(_)
+        for _, s in pairs(game.surfaces) do
+            local ec = s.find_entities_filtered{type='cargo-landing-pad', force='player'}
+
+            if (not ec) or #ec == 1 then
+                return
+            end
+
+            local ic = {}
+
+            for _, e in pairs(ec) do
+                local inv = e.get_inventory(defines.inventory.cargo_landing_pad_main)
+
+                if inv then
+                    local item = inv.get_contents()
+
+                    for _, v in pairs(item) do
+                        ic[v.name] = (ic[v.name] and (ic[v.name] + v.count)) or v.count
+                    end
+
+                    inv.clear()
+                end
+            end
+
+            local ic_n = {}
+
+            for k, v in pairs(ic) do
+                local b = math.floor(v / #ec)
+
+                ic_n[k] = {
+                    c = b,
+                    e = v - (#ec * b)
+                }
+            end
+
+            for k, v in pairs(ic_n) do
+                if v.c > 0 then
+                    for _, e in pairs(ec) do
+                        e.insert{name = k, count = v.c, quality = 'normal'}
+                    end
+                end
+
+                if v.e > 0 then
+                    ec[1].insert{name = k, count = v.e, quality = 'normal'}
+                end
+            end
+        end
+    end)
+end
+
 if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value then
     function gui_create(player)
         if player.gui.relative.inserter_config then
@@ -94,53 +145,6 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         local gui = player.gui.relative.inserter_config
         gui['i_sub_direction'].selected_index = ((inserter_direction_reversed[inserter.direction] - 1) % 4) + 1
     end
-
-    script.on_nth_tick(3600, function(_)
-        local ec = game.surfaces['nauvis'].find_entities_filtered{type='cargo-landing-pad', force='player'}
-
-        if (not ec) or #ec == 1 then
-            return
-        end
-
-        local ic = {}
-
-        for _, e in pairs(ec) do
-            local inv = e.get_inventory(defines.inventory.cargo_landing_pad_main)
-
-            if inv then
-                local item = inv.get_contents()
-
-                for _, v in pairs(item) do
-                    ic[v.name] = (ic[v.name] and (ic[v.name] + v.count)) or v.count
-                end
-
-                inv.clear()
-            end
-        end
-
-        local ic_n = {}
-
-        for k, v in pairs(ic) do
-            local b = math.floor(v / #ec)
-
-            ic_n[k] = {
-                c = b,
-                e = v - (#ec * b)
-            }
-        end
-
-        for k, v in pairs(ic_n) do
-            if v.c > 0 then
-                for _, e in pairs(ec) do
-                    e.insert{name = k, count = v.c, quality = 'normal'}
-                end
-            end
-
-            if v.e > 0 then
-                ec[1].insert{name = k, count = v.e, quality = 'normal'}
-            end
-        end
-    end)
 
     script.on_init(function(_)
         for _, player in pairs(game.players) do
