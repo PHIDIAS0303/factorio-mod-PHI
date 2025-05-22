@@ -81,7 +81,13 @@ script.on_nth_tick(3600, function(_)
         for _, s in pairs(game.surfaces) do
             local ec = s.find_entities_filtered{type='cargo-landing-pad', force='player'}
 
-            if (not ec) or #ec == 1 then
+            if (not ec) then
+                return
+            end
+
+            local ec_count = #ec
+
+            if ec_count == 1 then
                 return
             end
 
@@ -101,26 +107,18 @@ script.on_nth_tick(3600, function(_)
                 end
             end
 
-            local ic_n = {}
-
             for k, v in pairs(ic) do
-                local b = math.floor(v / #ec)
+                local c = math.floor(v / ec_count)
+                local remainder = v % ec_count
 
-                ic_n[k] = {
-                    c = b,
-                    e = v - (#ec * b)
-                }
-            end
-
-            for k, v in pairs(ic_n) do
-                if v.c > 0 then
-                    for _, e in pairs(ec) do
-                        e.insert{name = k, count = v.c, quality = 'normal'}
+                if c > 0 then
+                    for _, e in ipairs(ec) do
+                        e.insert{name = k, count = c, quality = 'normal'}
                     end
                 end
 
-                if v.e > 0 then
-                    ec[1].insert{name = k, count = v.e, quality = 'normal'}
+                if remainder > 0 then
+                    ec[1].insert{name = k, count = remainder, quality = 'normal'}
                 end
             end
         end
