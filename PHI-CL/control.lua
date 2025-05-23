@@ -100,13 +100,11 @@ script.on_nth_tick(3600, function(_)
                     local item = inv.get_contents()
 
                     for _, v in pairs(item) do
-                        if ic[v.name] and ic[v.name].quality and ic[v.name].quality == v.quality then
+                        if ic[v.name] and (ic[v.name].quality == v.quality) then
                             ic[v.name].count = ic[v.name].count + v.count
+
                         else
-                            ic[v.name] = {
-                                count = v.count,
-                                quality = v.quality
-                            }
+                            ic[v.name] = {count = v.count, quality = v.quality}
                         end
                     end
 
