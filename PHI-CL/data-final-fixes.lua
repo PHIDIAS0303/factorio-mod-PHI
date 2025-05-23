@@ -14,6 +14,9 @@ do
             v.maximum_productivity = 999
         end
     end
+
+    data.raw['lamp']['small-lamp'].light.color = {1, 1, 1}
+    data.raw['lamp']['small-lamp'].light_when_colored.color = {1, 1, 1}
 end
 
 if mods['space-age'] then
