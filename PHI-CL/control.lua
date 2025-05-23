@@ -97,14 +97,12 @@ script.on_nth_tick(3600, function(_)
                 local inv = e.get_inventory(defines.inventory.cargo_landing_pad_main)
 
                 if inv then
-                    local item = inv.get_contents()
-
-                    for _, v in pairs(item) do
-                        if ic[v.name] and (ic[v.name].quality == v.quality) then
+                    for _, v in pairs(inv) do
+                        if ic[v.name] and (ic[v.name].quality == v.quality) and (ic[v.name].health == v.health) and (ic[v.name].spoil_tick == v.spoil_tick) and (ic[v.name].durability == v.durability) then
                             ic[v.name].count = ic[v.name].count + v.count
 
                         else
-                            ic[v.name] = {count = v.count, quality = v.quality}
+                            ic[v.name] = {count = v.count, quality = v.quality, health = v.health, spoil_tick = v.spoil_tick, durability = v.durability}
                         end
                     end
 
@@ -118,12 +116,12 @@ script.on_nth_tick(3600, function(_)
 
                 if c > 0 then
                     for _, e in ipairs(ec) do
-                        e.insert{name = k, count = c, quality = v.quality}
+                        e.insert{name = k, count = c, quality = v.quality, health = v.health, spoil_tick = v.spoil_tick, durability = v.durability}
                     end
                 end
 
                 if remainder > 0 then
-                    ec[1].insert{name = k, count = remainder, quality = v.quality}
+                    ec[1].insert{name = k, count = remainder, quality = v.quality, health = v.health, spoil_tick = v.spoil_tick, durability = v.durability}
                 end
             end
         end
