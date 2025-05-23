@@ -100,7 +100,14 @@ script.on_nth_tick(3600, function(_)
                     local item = inv.get_contents()
 
                     for _, v in pairs(item) do
-                        ic[v.name] = (ic[v.name] and (ic[v.name] + v.count)) or v.count
+                        if ic[v.name] and ic[v.name].quality and ic[v.name].quality == v.quality then
+                            ic[v.name].count = ic[v.name].count + v.count
+                        else
+                            ic[v.name] = {
+                                count = v.count,
+                                quality = v.quality
+                            }
+                        end
                     end
 
                     inv.clear()
@@ -108,17 +115,17 @@ script.on_nth_tick(3600, function(_)
             end
 
             for k, v in pairs(ic) do
-                local c = math.floor(v / ec_count)
-                local remainder = v % ec_count
+                local c = math.floor(v.count / ec_count)
+                local remainder = v.count % ec_count
 
                 if c > 0 then
                     for _, e in ipairs(ec) do
-                        e.insert{name = k, count = c, quality = 'normal'}
+                        e.insert{name = k, count = c, quality = v.quality}
                     end
                 end
 
                 if remainder > 0 then
-                    ec[1].insert{name = k, count = remainder, quality = 'normal'}
+                    ec[1].insert{name = k, count = remainder, quality = v.quality}
                 end
             end
         end
