@@ -11,12 +11,27 @@ do
         end
 
         if p and v.maximum_productivity then
-            v.maximum_productivity = 999
+            v.maximum_productivity = nil
         end
     end
 
-    data.raw['lamp']['small-lamp'].light.color = {1, 1, 1}
-    data.raw['lamp']['small-lamp'].light_when_colored.color = {1, 1, 1}
+    for _, v in pairs(data.raw['lamp']) do
+        if v.light then
+            v['lamp']['small-lamp'].light.color = {1, 1, 1}
+            v['lamp']['small-lamp'].light_when_colored.color = {1, 1, 1}
+        end
+    end
+
+    for _, v in pairs(data.raw['land-mine']) do
+        if v.flags then
+            for fk, fv in ipairs(v.flags) do
+                if fv == 'placeable-off-grid' then
+                    table.remove(v.flags, fk)
+                    break
+                end
+            end
+        end
+    end
 end
 
 if mods['space-age'] then
