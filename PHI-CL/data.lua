@@ -370,14 +370,22 @@ end
 
 if mods['space-age'] and ((settings.startup['PHI-SA'].value and ((not settings.startup['PHI-SA-ENABLE-QUALITY'].value) or settings.startup['PHI-SA-GENERIC'].value)) or settings.startup['PHI-VP'].value) then
     for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
-        data.raw.technology[v].hidden = true
-        data.raw.technology[v].hidden_in_factoriopedia = true
-        data.raw.technology[v].unit.ingredients = {{'space-science-pack', 1}}
-        data.raw.technology[v].effects = nil
-        data.raw.module[v].hidden = true
-        data.raw.module[v].hidden_in_factoriopedia = true
-        data.raw.recipe[v].hidden = true
-        data.raw.recipe[v].hidden_in_factoriopedia = true
+        if data.raw.technology[v] then
+            data.raw.technology[v].hidden = true
+            data.raw.technology[v].hidden_in_factoriopedia = true
+            data.raw.technology[v].unit.ingredients = {{'space-science-pack', 1}}
+            data.raw.technology[v].effects = nil
+        end
+
+        if data.raw.module[v] then
+            data.raw.module[v].hidden = true
+            data.raw.module[v].hidden_in_factoriopedia = true
+        end
+
+        if data.raw.recipe[v] then
+            data.raw.recipe[v].hidden = true
+            data.raw.recipe[v].hidden_in_factoriopedia = true
+        end
     end
 
     data.raw.technology['epic-quality'].hidden = true
