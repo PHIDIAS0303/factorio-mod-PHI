@@ -1255,11 +1255,11 @@ if settings.startup['PHI-VP'].value then
             data.raw['cliff'][v].hidden_in_factoriopedia = true
         end
 
-        data.raw['unit-spawner']['gleba-spawner'].absorptions_per_second = table.deepcopy(data.raw['unit-spawner']['biter-spawner'].absorptions_per_second)
-        data.raw['unit-spawner']['gleba-spawner'].collision_mask = table.deepcopy(data.raw['unit-spawner']['biter-spawner'].collision_mask)
-        data.raw['unit-spawner']['gleba-spawner'].autoplace = table.deepcopy(data.raw['unit-spawner']['biter-spawner'].autoplace)
-        data.raw['unit-spawner']['gleba-spawner-small'].collision_mask = table.deepcopy(data.raw['unit-spawner']['biter-spawner'].collision_mask)
-        data.raw['unit-spawner']['gleba-spawner-small'].autoplace = table.deepcopy(data.raw['unit-spawner']['biter-spawner'].autoplace)
+        data.raw['unit-spawner']['gleba-spawner'].absorptions_per_second = table.unpack(data.raw['unit-spawner']['biter-spawner'].absorptions_per_second)
+        data.raw['unit-spawner']['gleba-spawner'].collision_mask = table.unpack(data.raw['unit-spawner']['biter-spawner'].collision_mask)
+        data.raw['unit-spawner']['gleba-spawner'].autoplace = table.unpack(data.raw['unit-spawner']['biter-spawner'].autoplace)
+        data.raw['unit-spawner']['gleba-spawner-small'].collision_mask = table.unpack(data.raw['unit-spawner']['biter-spawner'].collision_mask)
+        data.raw['unit-spawner']['gleba-spawner-small'].autoplace = table.unpack(data.raw['unit-spawner']['biter-spawner'].autoplace)
 
         for _, v in pairs({'small-wriggler-pentapod-premature', 'medium-wriggler-pentapod-premature', 'big-wriggler-pentapod-premature'}) do
             data.raw['unit'][v].absorptions_to_join_attack = {pollution = 0}
