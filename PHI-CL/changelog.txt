@@ -3,7 +3,7 @@ Version: 3.0.109
 Date: 2025-05-31
 
   Changes:
-    - [VP] Changed the biter spawning settings to have both planet type.
+    - [CL] Further clean up of code.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.108
