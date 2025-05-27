@@ -910,7 +910,7 @@ if settings.startup['PHI-VP'].value then
         data.raw.resource['sulfuric-acid-geyser'].hidden = true
         data.raw.resource['sulfuric-acid-geyser'].hidden_in_factoriopedia = true
 
-        for _, v in pairs({'vulcanus_coal', 'tungsten_ore', 'calcite', 'sulfuric_acid_geyser', 'scrap', 'fluorine_vent', 'lithium_brine', 'gleba_stone', 'aquilo_crude_oil', 'gleba_cliff', 'fulgora_cliff', 'vulcanus_volcanism', 'gleba_water', 'gleba_plants', 'fulgora_islands'}) do
+        for _, v in pairs({'vulcanus_coal', 'tungsten_ore', 'calcite', 'sulfuric_acid_geyser', 'scrap', 'fluorine_vent', 'lithium_brine', 'gleba_stone', 'aquilo_crude_oil', 'gleba_cliff', 'fulgora_cliff', 'vulcanus_volcanism', 'gleba_water', 'gleba_plants', 'gleba_enemy_base', 'fulgora_islands'}) do
             data.raw['autoplace-control'][v] = nil
 
             local r = v:gsub('_', '-')
@@ -927,8 +927,6 @@ if settings.startup['PHI-VP'].value then
         for _, v in pairs({'yumako-tree', 'jellystem'}) do
             data.raw['plant'][v].autoplace = nil
         end
-
-        -- 'gleba_enemy_base'
 
         for _, v in pairs({'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut', 'lowland-brown-blubber', 'lowland-olive-blubber', 'lowland-olive-blubber-2', 'lowland-olive-blubber-3', 'lowland-cream-red', 'lowland-red-vein', 'lowland-red-vein-2', 'lowland-red-vein-3', 'lowland-red-vein-4', 'lowland-red-vein-dead', 'lowland-red-infection', 'ammoniacal-ocean', 'ammoniacal-ocean-2'}) do
             data.raw['planet']['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = nil
