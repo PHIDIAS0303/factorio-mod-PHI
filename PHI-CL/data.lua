@@ -1281,24 +1281,24 @@ if settings.startup['PHI-VP'].value then
         end
 
         data.raw['unit-spawner']['biter-spawner'].result_units = {
-            {'small-biter', {{0.0, 10}, {0.6, 0}}},
-            {'medium-biter', {{0.2, 0}, {0.6, 3}, {0.7, 1}}},
-            {'big-biter', {{0.5, 0}, {1.0, 4}}},
+            {'small-biter', {{0.0, 15}, {0.6, 0}}},
+            {'medium-biter', {{0.2, 0}, {0.6, 15}, {0.7, 5}}},
+            {'big-biter', {{0.5, 0}, {1.0, 20}}},
             {'small-strafer-pentapod', {{0.6, 6}, {1.0, 4}}},
             {'medium-strafer-pentapod', {{0.7, 5}, {1.0, 3}}},
             {'big-strafer-pentapod', {{0.75, 3}, {1.0, 1}}},
-            {'behemoth-biter', {{0.9, 0}, {1.0, 3}}},
+            {'behemoth-biter', {{0.9, 0}, {1.0, 15}}},
         }
 
         data.raw['unit-spawner']['spitter-spawner'].result_units = {
-            {'small-biter', {{0.0, 3}, {0.35, 0}}},
-            {'small-spitter', {{0.25, 0}, {0.5, 3}, {0.7, 0}}},
-            {'medium-spitter', {{0.4, 0}, {0.7, 3}, {0.9, 1}}},
-            {'big-spitter', {{0.5, 0}, {1.0, 4}}},
+            {'small-biter', {{0.0, 15}, {0.35, 0}}},
+            {'small-spitter', {{0.25, 0}, {0.5, 15}, {0.7, 0}}},
+            {'medium-spitter', {{0.4, 0}, {0.7, 15}, {0.9, 5}}},
+            {'big-spitter', {{0.5, 0}, {1.0, 20}}},
             {'small-stomper-pentapod', {{0.7, 4}, {1.0, 2}}},
             {'medium-stomper-pentapod', {{0.8, 0}, {1.0, 1}}},
             {'big-stomper-pentapod', {{0.9, 0}, {1.0, 0.5}}},
-            {'behemoth-spitter', {{0.9, 0}, {1.0, 3}}},
+            {'behemoth-spitter', {{0.9, 0}, {1.0, 15}}},
         }
 
         for _, v in pairs({'gleba-spawner', 'gleba-spawner-small'}) do
