@@ -780,6 +780,7 @@ if settings.startup['PHI-VP'].value then
         for _, v in pairs(data.raw.recipe) do
             v.surface_conditions = nil
         end
+
         for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
             data.raw.planet[v].map_gen_settings = nil
             data.raw.planet[v].hidden = true
@@ -798,7 +799,7 @@ if settings.startup['PHI-VP'].value then
         end
 
         for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
-            data.raw['utility-constants']['default'].main_menu_simulations[v] = nil
+            data.raw['utility-constants']['default']['main_menu_simulations'][v] = nil
         end
 
         data.raw['dont-build-entity-achievement']['logistic-network-embargo'].research_with = nil
@@ -813,6 +814,40 @@ if settings.startup['PHI-VP'].value then
         for _, v in pairs({'carbonic', 'metallic', 'promethium', 'oxide'}) do
             data.raw.item[v .. '-asteroid-chunk'].hidden = true
             data.raw.item[v .. '-asteroid-chunk'].hidden_in_factoriopedia = true
+        end
+
+        for _, v in pairs({'calcite', 'fluorine-vent', 'lithium-brine', 'scrap', 'tungsten-ore'}) do
+            data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v:gsub('-', '_')] = nil
+            data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v] = nil
+            data.raw.resource[v].hidden = true
+            data.raw.resource[v].hidden_in_factoriopedia = true
+        end
+
+        data.raw.resource['sulfuric-acid-geyser'].hidden = true
+        data.raw.resource['sulfuric-acid-geyser'].hidden_in_factoriopedia = true
+
+        for _, v in pairs({'vulcanus_coal', 'tungsten_ore', 'calcite', 'sulfuric_acid_geyser', 'scrap', 'fluorine_vent', 'lithium_brine', 'gleba_stone', 'aquilo_crude_oil', 'gleba_cliff', 'fulgora_cliff', 'vulcanus_volcanism', 'gleba_plants', 'gleba_enemy_base', 'fulgora_islands'}) do
+            data.raw['autoplace-control'][v] = nil
+
+            local r = v:gsub('_', '-')
+
+            if data.raw['resource'][r] then
+                data.raw['resource'][r].autoplace = nil
+            end
+        end
+
+        -- 'gleba_water', 
+
+        for _, v in pairs({'ashland-lichen-tree', 'ashland-lichen-tree-flaming', 'cuttlepop', 'slipstack', 'funneltrunk', 'hairyclubnub', 'teflilly', 'lickmaw', 'stingfrond', 'boompuff', 'sunnycomb', 'water-cane'}) do
+            data.raw['tree'][v].autoplace = nil
+        end
+
+        for _, v in pairs({'yumako-tree', 'jellystem'}) do
+            data.raw['plant'][v].autoplace = nil
+        end
+
+        for _, v in pairs({'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut', 'lowland-brown-blubber', 'lowland-olive-blubber', 'lowland-olive-blubber-2', 'lowland-olive-blubber-3', 'lowland-cream-red', 'lowland-red-vein', 'lowland-red-vein-2', 'lowland-red-vein-3', 'lowland-red-vein-4', 'lowland-red-vein-dead', 'lowland-red-infection', 'ammoniacal-ocean', 'ammoniacal-ocean-2'}) do
+            data.raw['planet']['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = nil
         end
 
         data.raw.technology['rocket-silo'].effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}, {type = 'unlock-recipe', recipe = 'cargo-bay'}}
@@ -899,38 +934,6 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'pipe', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.05}}
         data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
         data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
-
-        for _, v in pairs({'calcite', 'fluorine-vent', 'lithium-brine', 'scrap', 'tungsten-ore'}) do
-            data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v:gsub('-', '_')] = nil
-            data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v] = nil
-            data.raw.resource[v].hidden = true
-            data.raw.resource[v].hidden_in_factoriopedia = true
-        end
-
-        data.raw.resource['sulfuric-acid-geyser'].hidden = true
-        data.raw.resource['sulfuric-acid-geyser'].hidden_in_factoriopedia = true
-
-        for _, v in pairs({'vulcanus_coal', 'tungsten_ore', 'calcite', 'sulfuric_acid_geyser', 'scrap', 'fluorine_vent', 'lithium_brine', 'gleba_stone', 'aquilo_crude_oil', 'gleba_cliff', 'fulgora_cliff', 'vulcanus_volcanism', 'gleba_water', 'gleba_plants', 'gleba_enemy_base', 'fulgora_islands'}) do
-            data.raw['autoplace-control'][v] = nil
-
-            local r = v:gsub('_', '-')
-
-            if data.raw['resource'][r] then
-                data.raw['resource'][r].autoplace = nil
-            end
-        end
-
-        for _, v in pairs({'ashland-lichen-tree', 'ashland-lichen-tree-flaming', 'cuttlepop', 'slipstack', 'funneltrunk', 'hairyclubnub', 'teflilly', 'lickmaw', 'stingfrond', 'boompuff', 'sunnycomb', 'water-cane'}) do
-            data.raw['tree'][v].autoplace = nil
-        end
-
-        for _, v in pairs({'yumako-tree', 'jellystem'}) do
-            data.raw['plant'][v].autoplace = nil
-        end
-
-        for _, v in pairs({'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut', 'lowland-brown-blubber', 'lowland-olive-blubber', 'lowland-olive-blubber-2', 'lowland-olive-blubber-3', 'lowland-cream-red', 'lowland-red-vein', 'lowland-red-vein-2', 'lowland-red-vein-3', 'lowland-red-vein-4', 'lowland-red-vein-dead', 'lowland-red-infection', 'ammoniacal-ocean', 'ammoniacal-ocean-2'}) do
-            data.raw['planet']['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = nil
-        end
 
         for k, v in pairs(items['space-age']['PHI-VP']['technology_reform']) do
             if v.prerequisites then
