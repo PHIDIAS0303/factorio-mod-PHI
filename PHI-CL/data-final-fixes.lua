@@ -17,8 +17,8 @@ do
 
     for _, v in pairs(data.raw['lamp']) do
         if v.light then
-            v['lamp']['small-lamp'].light.color = {1, 1, 1}
-            v['lamp']['small-lamp'].light_when_colored.color = {1, 1, 1}
+            v.light.color = {1, 1, 1}
+            v.light_when_colored.color = {1, 1, 1}
         end
     end
 
