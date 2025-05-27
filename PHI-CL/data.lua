@@ -908,7 +908,7 @@ if settings.startup['PHI-VP'].value then
 
         data.raw.resource['sulfuric-acid-geyser'].hidden = true
         data.raw.resource['sulfuric-acid-geyser'].hidden_in_factoriopedia = true
-        data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = nil
+        -- data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = nil
         data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_plants'] = nil
 
         for _, v in pairs({'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut', 'lowland-brown-blubber', 'lowland-olive-blubber', 'lowland-olive-blubber-2', 'lowland-olive-blubber-3', 'lowland-cream-red', 'lowland-red-vein', 'lowland-red-vein-2', 'lowland-red-vein-3', 'lowland-red-vein-4', 'lowland-red-vein-dead', 'lowland-red-infection', 'ammoniacal-ocean', 'ammoniacal-ocean-2'}) do
