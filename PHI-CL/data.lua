@@ -351,6 +351,7 @@ if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (se
             results = {{type = 'fluid', name = 'water', amount = 12000 * settings.startup['PHI-MI-PIPE'].value / 10, temperature = data.raw.fluid['water'].default_temperature}},
             main_product = 'water',
             hide_from_player_crafting = true,
+            hidden_in_factoriopedia = true,
             allow_productivity = false,
             crafting_machine_tint = {primary = data.raw.fluid['water'].flow_color},
             localised_name = {'fluid-name.water'}
@@ -1741,6 +1742,7 @@ if settings.startup['PHI-CT'].value then
                 results = {{type = 'fluid', name = v.name, amount = 12000 * settings.startup['PHI-MI-PIPE'].value / 10, temperature = v.max_temperature or v.default_temperature}},
                 main_product = v.name,
                 hide_from_player_crafting = true,
+                hidden_in_factoriopedia = true,
                 allow_productivity = false,
                 crafting_machine_tint = {primary = v.flow_color},
                 localised_name = {'fluid-name.' .. v.name}
