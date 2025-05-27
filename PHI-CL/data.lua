@@ -1263,48 +1263,23 @@ if settings.startup['PHI-VP'].value then
 
         for _, v in pairs({'small-wriggler-pentapod-premature', 'medium-wriggler-pentapod-premature', 'big-wriggler-pentapod-premature'}) do
             data.raw['unit'][v].absorptions_to_join_attack = {pollution = 0}
-
-            --[[
-            data.raw['unit'][v].hidden = true
-            data.raw['unit'][v].hidden_in_factoriopedia = true
-            ]]
         end
 
         for _, v in pairs({'small-wriggler-pentapod', 'medium-wriggler-pentapod', 'big-wriggler-pentapod'}) do
             data.raw['unit'][v].absorptions_to_join_attack = {pollution = 2}
-
-            --[[
-            data.raw['unit'][v].hidden = true
-            data.raw['unit'][v].hidden_in_factoriopedia = true
-            ]]
         end
 
         for _, v in pairs({'small-strafer-pentapod', 'medium-strafer-pentapod', 'big-strafer-pentapod'}) do
             data.raw['spider-unit'][v].absorptions_to_join_attack = {pollution = 20}
-
-            --[[
-            data.raw['spider-unit'][v].hidden = true
-            data.raw['spider-unit'][v].hidden_in_factoriopedia = true
-            ]]
         end
 
         for _, v in pairs({'small-stomper-pentapod', 'medium-stomper-pentapod', 'big-stomper-pentapod'}) do
             data.raw['spider-unit'][v].absorptions_to_join_attack = {pollution = 25}
             table.remove(data.raw['spider-unit'][v].dying_trigger_effect, 1)
-
-            --[[
-            data.raw['spider-unit'][v].hidden = true
-            data.raw['spider-unit'][v].hidden_in_factoriopedia = true
-            ]]
         end
 
         for _, v in pairs({'gleba-spawner', 'gleba-spawner-small'}) do
             data.raw['unit-spawner'][v].loot = nil
-
-            --[[
-            data.raw['unit-spawner'][v].hidden = true
-            data.raw['unit-spawner'][v].hidden_in_factoriopedia = true
-            ]]
         end
 
         for _, v in pairs({'small-demolisher', 'medium-demolisher', 'big-demolisher'}) do
