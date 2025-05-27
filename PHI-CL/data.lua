@@ -1204,14 +1204,11 @@ if settings.startup['PHI-VP'].value then
             v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
         end
 
-        for _, v in pairs(data.raw['asteroid']) do
-            v.hidden = true
-            v.hidden_in_factoriopedia = true
-        end
-
-        for _, v in pairs(data.raw['asteroid-chunk']) do
-            v.hidden = true
-            v.hidden_in_factoriopedia = true
+        for _, a in pairs({'asteroid', 'asteroid-chunk'}) do
+            for _, v in pairs(data.raw[a]) do
+                v.hidden = true
+                v.hidden_in_factoriopedia = true
+            end
         end
 
         local tile_subgroup = {
