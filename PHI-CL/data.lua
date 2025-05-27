@@ -1263,13 +1263,13 @@ if settings.startup['PHI-VP'].value then
             data.raw['cliff'][v].hidden_in_factoriopedia = true
         end
 
-        local enemy_autoplace = require('__base__/prototypes/entity/enemy-autoplace-utils')
-
         data.raw['unit-spawner']['gleba-spawner'].absorptions_per_second = {pollution = {absolute = 20, proportional = 0.01}}
         data.raw['unit-spawner']['gleba-spawner'].collision_mask = nil
-        data.raw['unit-spawner']['gleba-spawner'].autoplace = enemy_autoplace.enemy_spawner_autoplace('enemy_autoplace_base(0, 6)')
+        data.raw['unit-spawner']['gleba-spawner'].map_generator_bounding_box = {{-3.7, -3.2}, {3.7, 3.2}}
+        data.raw['unit-spawner']['gleba-spawner'].autoplace = {control = 'enemy-base', order = 'b[enemy]-a[spawner]', force = 'enemy', probability_expression = 'enemy_autoplace_base(0, 6)', richness_expression = 1}
         data.raw['unit-spawner']['gleba-spawner-small'].collision_mask = nil
-        data.raw['unit-spawner']['gleba-spawner-small'].autoplace = enemy_autoplace.enemy_spawner_autoplace('enemy_autoplace_base(0, 6)')
+        data.raw['unit-spawner']['gleba-spawner-small'].map_generator_bounding_box = {{-3.7, -3.2}, {3.7, 3.2}}
+        data.raw['unit-spawner']['gleba-spawner-small'].autoplace = {control = 'enemy-base', order = 'b[enemy]-a[spawner]', force = 'enemy', probability_expression = 'enemy_autoplace_base(0, 6)', richness_expression = 1}
 
         for _, v in pairs({'small-wriggler-pentapod-premature', 'medium-wriggler-pentapod-premature', 'big-wriggler-pentapod-premature'}) do
             data.raw['unit'][v].absorptions_to_join_attack = {pollution = 0}
