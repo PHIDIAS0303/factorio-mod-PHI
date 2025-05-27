@@ -827,7 +827,11 @@ if settings.startup['PHI-VP'].value then
         data.raw.resource['sulfuric-acid-geyser'].hidden_in_factoriopedia = true
 
         for _, v in pairs({'vulcanus_coal', 'tungsten_ore', 'calcite', 'sulfuric_acid_geyser', 'scrap', 'fluorine_vent', 'lithium_brine', 'gleba_stone', 'aquilo_crude_oil', 'gleba_cliff', 'fulgora_cliff', 'vulcanus_volcanism', 'gleba_water', 'gleba_plants', 'gleba_enemy_base', 'fulgora_islands'}) do
-            data.raw['autoplace-control'][v] = nil
+            data.raw['autoplace-control'][v].hidden = true
+            data.raw['autoplace-control'][v].hidden_in_factoriopedia = true
+
+            -- TODO it will show blackscreen if it is nil
+            -- data.raw['autoplace-control'][v] = nil
 
             local r = v:gsub('_', '-')
 
