@@ -1245,6 +1245,7 @@ if settings.startup['PHI-VP'].value then
 
         for _, v in pairs(data.raw['tile']) do
             if v.subgroup and tile_subgroup[v.subgroup] then
+                v.autoplace = nil
                 v.hidden = true
                 v.hidden_in_factoriopedia = true
             end
