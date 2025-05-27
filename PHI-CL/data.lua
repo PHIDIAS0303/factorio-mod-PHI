@@ -1226,7 +1226,7 @@ if settings.startup['PHI-VP'].value then
             end
         end
 
-        for _, v in pairs({'lithium-brine', 'fluorine', 'ammonia', 'ammonia-solution', 'electrolyte', 'holmium-solution', 'molten-copper', 'molten-iron', 'lava', 'thruster-oxidizer', 'thruster-fuel'}) do
+        for _, v in pairs({'lithium-brine', 'fluorine', 'ammonia', 'ammoniacal-solution', 'electrolyte', 'holmium-solution', 'molten-copper', 'molten-iron', 'lava', 'thruster-oxidizer', 'thruster-fuel'}) do
             data.raw.fluid[v].hidden = true
             data.raw.fluid[v].hidden_in_factoriopedia = true
         end
