@@ -840,7 +840,7 @@ if settings.startup['PHI-VP'].value then
             data.raw['optimized-decorative'][v].autoplace = nil
         end
 
-        data.raw['fulgoran-ruin-attractor']['lightning-attractor'].autoplace = nil
+        data.raw['lightning-attractor']['fulgoran-ruin-attractor'].autoplace = nil
 
         for _, v in pairs({'ashland-lichen-tree', 'ashland-lichen-tree-flaming', 'cuttlepop', 'slipstack', 'funneltrunk', 'hairyclubnub', 'teflilly', 'lickmaw', 'stingfrond', 'boompuff', 'sunnycomb', 'water-cane'}) do
             data.raw['tree'][v].autoplace = nil
