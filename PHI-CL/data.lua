@@ -1263,14 +1263,6 @@ if settings.startup['PHI-VP'].value then
             data.raw['cliff'][v].hidden_in_factoriopedia = true
         end
 
-        data.raw['unit-spawner']['gleba-spawner'].absorptions_per_second = {pollution = {absolute = 20, proportional = 0.01}}
-        data.raw['unit-spawner']['gleba-spawner'].collision_mask = nil
-        data.raw['unit-spawner']['gleba-spawner'].map_generator_bounding_box = {{-3.7, -3.2}, {3.7, 3.2}}
-        data.raw['unit-spawner']['gleba-spawner'].autoplace = {control = 'enemy-base', order = 'b[enemy]-a[spawner]', force = 'enemy', probability_expression = 'enemy_autoplace_base(0, 6)', richness_expression = 1}
-        data.raw['unit-spawner']['gleba-spawner-small'].collision_mask = nil
-        data.raw['unit-spawner']['gleba-spawner-small'].map_generator_bounding_box = {{-3.7, -3.2}, {3.7, 3.2}}
-        data.raw['unit-spawner']['gleba-spawner-small'].autoplace = {control = 'enemy-base', order = 'b[enemy]-a[spawner]', force = 'enemy', probability_expression = 'enemy_autoplace_base(0, 6)', richness_expression = 1}
-
         for _, v in pairs({'small-wriggler-pentapod-premature', 'medium-wriggler-pentapod-premature', 'big-wriggler-pentapod-premature'}) do
             data.raw['unit'][v].absorptions_to_join_attack = {pollution = 0}
         end
@@ -1288,8 +1280,33 @@ if settings.startup['PHI-VP'].value then
             table.remove(data.raw['spider-unit'][v].dying_trigger_effect, 1)
         end
 
+        data.raw['unit-spawner']['biter-spawner'].result_units = {
+            {'small-biter', {{0.0, 10}, {0.6, 0}}},
+            {'medium-biter', {{0.2, 0}, {0.6, 3}, {0.7, 1}}},
+            {'big-biter', {{0.5, 0}, {1.0, 4}}},
+            {'small-strafer-pentapod', {{0.6, 6}, {1.0, 4}}},
+            {'medium-strafer-pentapod', {{0.7, 5}, {1.0, 3}}},
+            {'big-strafer-pentapod', {{0.75, 3}, {1.0, 1}}},
+            {'behemoth-biter', {{0.9, 0}, {1.0, 3}}},
+        }
+
+        data.raw['unit-spawner']['spitter-spawner'].result_units = {
+            {'small-biter', {{0.0, 3}, {0.35, 0}}},
+            {'small-spitter', {{0.25, 0}, {0.5, 3}, {0.7, 0}}},
+            {'medium-spitter', {{0.4, 0}, {0.7, 3}, {0.9, 1}}},
+            {'big-spitter', {{0.5, 0}, {1.0, 4}}},
+            {'small-stomper-pentapod', {{0.7, 4}, {1.0, 2}}},
+            {'medium-stomper-pentapod', {{0.8, 0}, {1.0, 1}}},
+            {'big-stomper-pentapod', {{0.9, 0}, {1.0, 0.5}}},
+            {'behemoth-spitter', {{0.9, 0}, {1.0, 3}}},
+        }
+
         for _, v in pairs({'gleba-spawner', 'gleba-spawner-small'}) do
             data.raw['unit-spawner'][v].loot = nil
+            data.raw['unit-spawner'][v].collision_mask = nil
+            data.raw['unit-spawner'][v].autoplace = nil
+            data.raw['unit-spawner'][v].hidden = true
+            data.raw['unit-spawner'][v].hidden_in_factoriopedia = true
         end
 
         for _, v in pairs({'small-demolisher', 'medium-demolisher', 'big-demolisher'}) do
