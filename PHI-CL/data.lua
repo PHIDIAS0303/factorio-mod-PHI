@@ -1241,24 +1241,60 @@ if settings.startup['PHI-VP'].value then
             data.raw['cliff'][v].hidden_in_factoriopedia = true
         end
 
-        for _, v in pairs({'small-wriggler-pentapod', 'small-wriggler-pentapod-premature', 'medium-wriggler-pentapod', 'medium-wriggler-pentapod-premature', 'big-wriggler-pentapod', 'big-wriggler-pentapod-premature'}) do
+        data.raw['unit-spawner']['gleba-spawner'].absorptions_per_second = data.raw['unit-spawner']['biter-spawner'].absorptions_per_second
+        data.raw['unit-spawner']['gleba-spawner'].autoplace = data.raw['unit-spawner']['biter-spawner'].autoplace
+        data.raw['unit-spawner']['gleba-spawner-small'].hidden = true
+        data.raw['unit-spawner']['gleba-spawner-small'].hidden_in_factoriopedia = true
+
+        for _, v in pairs({'small-wriggler-pentapod-premature', 'medium-wriggler-pentapod-premature', 'big-wriggler-pentapod-premature'}) do
+            data.raw['unit'][v].absorptions_to_join_attack = {pollution = 0}
+
+            --[[
             data.raw['unit'][v].hidden = true
             data.raw['unit'][v].hidden_in_factoriopedia = true
+            ]]
         end
 
-        for _, v in pairs({'small-strafer-pentapod', 'medium-strafer-pentapod', 'big-strafer-pentapod', 'small-stomper-pentapod', 'medium-stomper-pentapod', 'big-stomper-pentapod'}) do
+        for _, v in pairs({'small-wriggler-pentapod', 'medium-wriggler-pentapod', 'big-wriggler-pentapod'}) do
+            data.raw['unit'][v].absorptions_to_join_attack = {pollution = 2}
+
+            --[[
+            data.raw['unit'][v].hidden = true
+            data.raw['unit'][v].hidden_in_factoriopedia = true
+            ]]
+        end
+
+        for _, v in pairs({'small-strafer-pentapod', 'medium-strafer-pentapod', 'big-strafer-pentapod'}) do
+            data.raw['spider-unit'][v].absorptions_to_join_attack = {pollution = 20}
+
+            --[[
             data.raw['spider-unit'][v].hidden = true
             data.raw['spider-unit'][v].hidden_in_factoriopedia = true
+            ]]
+        end
+
+        for _, v in pairs({'small-stomper-pentapod', 'medium-stomper-pentapod', 'big-stomper-pentapod'}) do
+            data.raw['spider-unit'][v].absorptions_to_join_attack = {pollution = 25}
+            data.raw['spider-unit'][v].dying_trigger_effect[1] = nil
+
+            --[[
+            data.raw['spider-unit'][v].hidden = true
+            data.raw['spider-unit'][v].hidden_in_factoriopedia = true
+            ]]
+        end
+
+        for _, v in pairs({'gleba-spawner', 'gleba-spawner-small'}) do
+            data.raw['unit-spawner'][v].loot = nil
+
+            --[[
+            data.raw['unit-spawner'][v].hidden = true
+            data.raw['unit-spawner'][v].hidden_in_factoriopedia = true
+            ]]
         end
 
         for _, v in pairs({'small-demolisher', 'medium-demolisher', 'big-demolisher'}) do
             data.raw['segmented-unit'][v].hidden = true
             data.raw['segmented-unit'][v].hidden_in_factoriopedia = true
-        end
-
-        for _, v in pairs({'gleba-spawner', 'gleba-spawner-small'}) do
-            data.raw['unit-spawner'][v].hidden = true
-            data.raw['unit-spawner'][v].hidden_in_factoriopedia = true
         end
 
         for _, v in pairs({'bioflux', 'jelly', 'jellynut', 'yumako', 'yumako-mash'}) do
