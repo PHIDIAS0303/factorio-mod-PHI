@@ -911,7 +911,12 @@ if settings.startup['PHI-VP'].value then
 
         for _, v in pairs({'vulcanus_coal', 'tungsten_ore', 'calcite', 'sulfuric_acid_geyser', 'scrap', 'fluorine_vent', 'lithium_brine', 'gleba_stone', 'aquilo_crude_oil', 'gleba_cliff', 'fulgora_cliff', 'vulcanus_volcanism', 'gleba_water', 'gleba_plants', 'fulgora_islands'}) do
             data.raw['autoplace-control'][v] = nil
-            data.raw['resource'][v:gsub('_', '-')].autoplace = nil
+
+            local r = v:gsub('_', '-')
+
+            if data.raw['resource'][r] then
+                data.raw['resource'][r].autoplace = nil
+            end
         end
 
         -- data.raw.planet['nauvis'].map_gen_settings.autoplace_controls['gleba_enemy_base'] = nil
