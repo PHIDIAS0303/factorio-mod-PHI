@@ -944,6 +944,7 @@ if settings.startup['PHI-VP'].value then
             end
         end
 
+        table.insert(data.raw.technology['automation'].effects, {type = 'create-ghost-on-entity-death', modifier = true})
         data.raw.technology['space-science-pack'].research_trigger = nil
         data.raw.technology['space-science-pack'].prerequisites = {'rocket-silo'}
         data.raw.technology['space-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'satellite'}}
