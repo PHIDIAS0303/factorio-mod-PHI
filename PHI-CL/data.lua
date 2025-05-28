@@ -539,6 +539,7 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw.recipe['foundation'].ingredients = {{type = 'item', name = 'landfill', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 10}, {type = 'item', name = 'steel-plate', amount = 10}}
     data.raw.recipe['foundation'].results = {{type = 'item', name = 'foundation', amount = 1}}
     data.raw.recipe['atomic-bomb'].ingredients[3] = {type = 'item', name = 'uranium-235', amount = 30}
+    data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
     data.raw.recipe['artillery-turret'].ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'concrete', amount = 60}, {type = 'item', name = 'iron-gear-wheel', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}}
     data.raw.recipe['artillery-shell'].ingredients = {{type = 'item', name = 'explosive-cannon-shell', amount = 4}, {type = 'item', name = 'radar', amount = 1}, {type = 'item', name = 'explosives', amount = 8}}
     data.raw.recipe['artillery-wagon'].ingredients = {{type = 'item', name = 'engine-unit', amount = 64}, {type = 'item', name = 'iron-gear-wheel', amount = 10}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'pipe', amount = 16}, {type = 'item', name = 'advanced-circuit', amount = 20}}
@@ -593,8 +594,6 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
         end
     end
 
-    data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
-
     data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
     data.raw.technology['cliff-explosives'].unit = {count = 200, time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
     data.raw.technology['cliff-explosives'].effects = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
@@ -609,6 +608,9 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     table.insert(data.raw.technology['stronger-explosives-7'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.2})
     table.insert(data.raw.technology['laser-weapons-damage-3'].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.3})
     table.insert(data.raw.technology['laser-weapons-damage-4'].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.4})
+    table.insert(data.raw.technology['laser-shooting-speed-5'].effects, {type = 'gun-speed', ammo_category = 'electric', modifier = 0.2})
+    table.insert(data.raw.technology['laser-shooting-speed-6'].effects, {type = 'gun-speed', ammo_category = 'electric', modifier = 0.3})
+    table.insert(data.raw.technology['laser-shooting-speed-7'].effects, {type = 'gun-speed', ammo_category = 'electric', modifier = 0.5})
 
     for i=5, 7 do
         table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'tesla', modifier = 0.7})
