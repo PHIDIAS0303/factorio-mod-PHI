@@ -1147,8 +1147,8 @@ if settings.startup['PHI-VP'].value then
         data.raw.recipe['fluoroketone'].ingredients = {{type = 'fluid', name = 'light-oil', amount = 50}, {type = 'fluid', name = 'petroleum-gas', amount = 50}, {type = 'item', name = 'steel-plate', amount = 1}}
         data.raw.recipe['fluoroketone-cooling'].category = 'chemistry'
         data.raw.recipe['fusion-power-cell'].category = 'crafting-with-fluid'
-        data.raw.recipe['fusion-power-cell'].ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'fluid', name = 'petroleum-gas', amount = 200}}
-        data.raw.recipe['fusion-power-cell'].results = {{type = 'item', name = 'fusion-power-cell', amount = 2}}
+        data.raw.recipe['fusion-power-cell'].ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'fluid', name = 'petroleum-gas', amount = 200}}
+        data.raw.recipe['fusion-power-cell'].results = {{type = 'item', name = 'fusion-power-cell', amount = 4}}
         data.raw.recipe['agricultural-tower'].ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electronic-circuit', amount = 3}, {type = 'item', name = 'landfill', amount = 1}}
         data.raw.recipe['electromagnetic-plant'].category = 'crafting-with-fluid'
         data.raw.recipe['electromagnetic-plant'].ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'processing-unit', amount = 40}, {type = 'item', name = 'assembling-machine-3', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 60}, {type = 'fluid', name = 'sulfuric-acid', amount = 60}}
