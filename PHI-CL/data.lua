@@ -985,7 +985,6 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['worker-robots-speed-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['worker-robots-speed-7'].prerequisites = {'worker-robots-speed-6', 'space-science-pack'}
         data.raw.technology['worker-robots-speed-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-        data.raw.technology['scrap-recycling-productivity'].effects = nil
         data.raw.technology['coal-liquefaction'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
         data.raw.technology['atomic-bomb'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['energy-shield-mk2-equipment'].prerequisites = {'energy-shield-equipment', 'military-4', 'power-armor'}
@@ -1057,7 +1056,7 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['research-productivity'].max_level = 10
         data.raw.technology['spidertron'].prerequisites = {'exoskeleton-equipment', 'fission-reactor-equipment', 'military-4', 'production-science-pack', 'radar'}
         data.raw.technology['spidertron'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-        data.raw.technology['heating-tower'].prerequisites = {'automation-2'}
+        data.raw.technology['heating-tower'].prerequisites = {'automation-2', 'chemical-science-pack'}
         data.raw.technology['heating-tower'].research_trigger = nil
         data.raw.technology['heating-tower'].effects = {{type = 'unlock-recipe', recipe = 'heating-tower'}}
         data.raw.technology['heating-tower'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
@@ -1070,8 +1069,6 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['electromagnetic-plant'].research_trigger = nil
         data.raw.technology['foundry'].research_trigger = nil
         data.raw.technology['cryogenic-plant'].research_trigger = nil
-        data.raw.technology['cryogenic-science-pack'].research_trigger = nil
-        data.raw.technology['cryogenic-science-pack'].unit = {count = 1000, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
 
         for k, v in pairs(items['space-age']['PHI-VP']['technology']) do
             if data.raw.technology[k] then
@@ -1081,6 +1078,7 @@ if settings.startup['PHI-VP'].value then
 
                 if data.raw.technology[k].research_trigger then
                     data.raw.technology[k].research_trigger = nil
+                    data.raw.technology[k].unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
                 end
 
                 if data.raw.technology[k].unit and data.raw.technology[k].unit.ingredients then
