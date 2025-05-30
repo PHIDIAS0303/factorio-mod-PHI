@@ -164,6 +164,12 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         for _, v in pairs(data.raw['lab']) do
             v.uses_quality_drain_modifier = true
         end
+
+        for _, w in pairs({data.raw['cargo-wagon'], data.raw['fluid-wagon']}) do
+            for _, v in pairs(w) do
+                v.quality_affects_inventory_size = true
+            end
+        end
     end
 
     if mods['elevated-rails'] then
@@ -550,12 +556,6 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     for _, fb in pairs({'input_fluid_box', 'output_fluid_box'}) do
         for _, v in pairs(data.raw['fusion-generator']['fusion-generator'][fb].pipe_connections) do
             v.flow_direction = 'input-output'
-        end
-    end
-
-    for _, w in pairs({data.raw['cargo-wagon'], data.raw['fluid-wagon']}) do
-        for _, v in pairs(w) do
-            v.quality_affects_inventory_size = true
         end
     end
 
