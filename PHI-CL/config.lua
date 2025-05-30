@@ -421,6 +421,10 @@ local items = {
                 ['logistic-system'] = {
                     ['prerequisites'] = {'logistic-robotics', 'utility-science-pack'},
                     ['unit'] = {count = 500, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}}
+                },
+                ['effect-transmission'] = {
+                    ['prerequisites'] = {'production-science-pack'},
+                    ['unit'] = {count = 75, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
                 }
             },
             ['technology'] = {
