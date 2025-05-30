@@ -86,7 +86,7 @@ data:extend({
   setting_type = 'startup',
   default_value = 10,
   minimum_value = 1,
-  maximum_value = 300,
+  maximum_value = 160,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-PIPE'}, {'mod-setting-name.PHI-MI-PIPE'}},
   order = 'B01'
 }, {
@@ -95,7 +95,7 @@ data:extend({
   setting_type = 'startup',
   default_value = 10,
   minimum_value = 1,
-  maximum_value = 300,
+  maximum_value = 160,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-ROBOT'}, {'mod-setting-name.PHI-MI-ROBOT'}},
   order = 'B02'
 }, {
@@ -111,7 +111,7 @@ data:extend({
   setting_type = 'startup',
   default_value = 10,
   minimum_value = 1,
-  maximum_value = 300,
+  maximum_value = 160,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-TRAIN'}, {'mod-setting-name.PHI-MI-TRAIN'}},
   order = 'B04'
 }, {

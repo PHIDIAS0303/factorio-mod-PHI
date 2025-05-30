@@ -4,6 +4,7 @@ Date: 2025-06-06
 
   Changes:
     - [CL] Some code clean up.
+    - [MI] Dropped support for train efficiency affecting wagon size.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.109

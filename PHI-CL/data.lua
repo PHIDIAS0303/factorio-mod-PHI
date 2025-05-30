@@ -264,8 +264,6 @@ if settings.startup['PHI-MI'].value then
                 v.max_health = (v.max_health and (v.max_health * s)) or nil
                 v.max_speed = (v.max_speed and (v.max_speed * s)) or nil
                 v.braking_force = (v.braking_force and (v.braking_force * s)) or nil
-                v.inventory_size = (v.inventory_size and math.ceil(v.inventory_size * s)) or nil
-                v.capacity = (v.capacity and math.ceil(v.capacity * s)) or nil
 
                 if v.max_power then
                     v.max_power = tostring(tonumber(string.match(v.max_power, '[%d%.]+')) * s) .. string.match(v.max_power, '%a+')
