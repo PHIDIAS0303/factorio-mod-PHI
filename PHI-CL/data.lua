@@ -1056,7 +1056,7 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['research-productivity'].max_level = 10
         data.raw.technology['spidertron'].prerequisites = {'exoskeleton-equipment', 'fission-reactor-equipment', 'military-4', 'production-science-pack', 'radar'}
         data.raw.technology['spidertron'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-        data.raw.technology['heating-tower'].prerequisites = {'automation-2', 'chemical-science-pack'}
+        data.raw.technology['heating-tower'].prerequisites = {'chemical-science-pack'}
         data.raw.technology['heating-tower'].research_trigger = nil
         data.raw.technology['heating-tower'].effects = {{type = 'unlock-recipe', recipe = 'heating-tower'}}
         data.raw.technology['heating-tower'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
