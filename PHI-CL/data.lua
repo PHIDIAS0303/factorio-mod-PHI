@@ -1070,7 +1070,6 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['electromagnetic-plant'].research_trigger = nil
         data.raw.technology['foundry'].research_trigger = nil
         data.raw.technology['cryogenic-plant'].research_trigger = nil
-        data.raw.technology['asteroid-productivity'].effects = nil
         data.raw.technology['cryogenic-science-pack'].research_trigger = nil
         data.raw.technology['cryogenic-science-pack'].unit = {count = 1000, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
 
@@ -1079,6 +1078,10 @@ if settings.startup['PHI-VP'].value then
                 data.raw.technology[k].hidden = v
                 data.raw.technology[k].hidden_in_factoriopedia = v
                 data.raw.technology[k].effects = nil
+
+                if data.raw.technology[k].research_trigger then
+                    data.raw.technology[k].research_trigger = nil
+                end
 
                 if data.raw.technology[k].unit and data.raw.technology[k].unit.ingredients then
                     data.raw.technology[k].unit.ingredients = {{'space-science-pack', 1}}
