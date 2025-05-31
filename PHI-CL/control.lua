@@ -198,7 +198,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     script.on_event(defines.events.on_entity_settings_pasted, function(e)
         local player = game.players[e.player_index]
 
-        if e.destination and (e.destination.type == 'inserter' or (e.destination.type == 'entity-ghost' and e.destination.ghost_type == 'inserter')) and player.opened == e.destination and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
+        if e.destination and e.source and player.opened and e.destination.type and (e.destination.type == 'inserter' or (e.destination.type == 'entity-ghost' and e.destination.ghost_type == 'inserter')) and e.source.type and (e.source.type == 'inserter' or (e.source.type == 'entity-ghost' and e.source.ghost_type == 'inserter')) and player.opened == e.source then
             gui_update(player, player.opened)
         end
     end)
