@@ -195,6 +195,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     script.on_event(defines.events.on_player_rotated_entity, inserter_changed)
     script.on_event(defines.events.on_player_flipped_entity, inserter_changed)
 
+    --[[
     script.on_event(defines.events.on_entity_settings_pasted, function(e)
         local player = game.players[e.player_index]
 
@@ -202,7 +203,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
             gui_update(player, player.opened)
         end
     end)
-
+    ]]
 
     local function build_electric_pole(e)
         for _, v in pairs(rail_support_pole) do
