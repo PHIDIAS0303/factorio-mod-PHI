@@ -655,13 +655,30 @@ local items = {
                 ['storage-chest'] = 'logistic-container',
                 ['buffer-chest'] = 'logistic-container',
                 ['requester-chest'] = 'logistic-container'
+            },
+            ['hidden_data'] = {
+                ['biochamber'] = 'assembling-machine',
+                ['captive-biter-spawner'] = 'assembling-machine',
+                ['lightning-rod']= 'lightning-attractor',
+                ['lightning-collector'] = 'lightning-attractor',
+                ['fulgoran-ruin-attractor'] = 'lightning-attractor',
+                ['recycler'] = 'furnace',
+                ['thruster'] = 'thruster',
+                ['crusher'] = 'assembling-machine',
+                ['asteroid-collector'] = 'asteroid-collector',
+                ['space-platform-hub'] = 'space-platform-hub',
+                ['space-platform-starter-pack'] = 'space-platform-starter-pack',
+                ['space-platform'] = 'surface',
+                ['yumako-tree'] = 'plant',
+                ['jellystem'] = 'plant',
+                ['lightning'] = 'lightning'
             }
         }
     }
 }
 
 if mods and mods['space-age'] then
-    items['item']['fusion-reactor'] = {
+    items['item' = 'fusion-reactor'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
         stage = 1,
         mod = 'space-age',
@@ -673,7 +690,7 @@ if mods and mods['space-age'] then
         max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
     }
 
-    items['item']['fusion-generator'] = {
+    items['item' = 'fusion-generator'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
         stage = 1,
         mod = 'space-age',
@@ -685,7 +702,7 @@ if mods and mods['space-age'] then
         max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
     }
 
-    items['item']['heating-tower'] = {
+    items['item' = 'heating-tower'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
         stage = 1,
         mod = 'space-age',
@@ -697,7 +714,7 @@ if mods and mods['space-age'] then
         max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
     }
 
-    items['item']['railgun-turret'] = {
+    items['item' = 'railgun-turret'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
@@ -709,7 +726,7 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['rocket-turret'] = {
+    items['item' = 'rocket-turret'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
@@ -721,7 +738,7 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['tesla-turret'] = {
+    items['item' = 'tesla-turret'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
@@ -733,7 +750,7 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['foundry'] = {
+    items['item' = 'foundry'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
@@ -745,7 +762,7 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['big-mining-drill'] = {
+    items['item' = 'big-mining-drill'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
@@ -757,7 +774,7 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['biochamber'] = {
+    items['item' = 'biochamber'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
@@ -769,7 +786,7 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['crusher'] = {
+    items['item' = 'crusher'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
@@ -781,7 +798,7 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['biolab'] = {
+    items['item' = 'biolab'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
@@ -793,7 +810,7 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['cryogenic-plant'] = {
+    items['item' = 'cryogenic-plant'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
@@ -805,7 +822,7 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['electromagnetic-plant'] = {
+    items['item' = 'electromagnetic-plant'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
@@ -817,7 +834,7 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['thruster'] = {
+    items['item' = 'thruster'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
@@ -829,7 +846,7 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['agricultural-tower'] = {
+    items['item' = 'agricultural-tower'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'space-age',
@@ -841,7 +858,7 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['equipment']['fusion-reactor-equipment'] = {
+    items['equipment' = 'fusion-reactor-equipment'] = {
         enabled = settings.startup['PHI-MB-EQUIPMENT'].value,
         stage = 1,
         mod = 'space-age',
@@ -853,7 +870,7 @@ if mods and mods['space-age'] then
         max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
     }
 
-    items['equipment']['toolbelt-equipment'] = {
+    items['equipment' = 'toolbelt-equipment'] = {
         enabled = settings.startup['PHI-MB-EQUIPMENT'].value,
         stage = 1,
         mod = 'space-age',
@@ -865,13 +882,13 @@ if mods and mods['space-age'] then
         max = math.min(tonumber(settings.startup['PHI-MB-EQUIPMENT-TIER'].value) or 1, 2)
     }
 
-    items['equipment']['battery-equipment'].ref_name = 'battery-mk3-equipment'
-    items['equipment']['battery-equipment'].tech = 'battery-mk3-equipment'
-    items['equipment']['battery-equipment'].min = 4
+    items['equipment' = 'battery-equipment'].ref_name = 'battery-mk3-equipment'
+    items['equipment' = 'battery-equipment'].tech = 'battery-mk3-equipment'
+    items['equipment' = 'battery-equipment'].min = 4
 end
 
 if mods and mods['quality'] then
-    items['item']['recycler'] = {
+    items['item' = 'recycler'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
         mod = 'quality',
@@ -885,7 +902,7 @@ if mods and mods['quality'] then
 end
 
 if mods and mods['aai-industry'] then
-    items['item']['industrial-furnace'] = {
+    items['item' = 'industrial-furnace'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'aai-industry',
@@ -897,7 +914,7 @@ if mods and mods['aai-industry'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['fuel-processor'] = {
+    items['item' = 'fuel-processor'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'aai-industry',
@@ -911,7 +928,7 @@ if mods and mods['aai-industry'] then
 end
 
 if mods and (mods['aai-industry'] or mods['big-mining-drill']) then
-    items['item']['area-mining-drill'] = {
+    items['item' = 'area-mining-drill'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = (mods['big-mining-drill'] and 'big-mining-drill') or 'aai-industry',
@@ -925,7 +942,7 @@ if mods and (mods['aai-industry'] or mods['big-mining-drill']) then
 end
 
 if mods and mods['space-exploration'] then
-    items['item']['se-space-solar-panel'] = {
+    items['item' = 'se-space-solar-panel'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -937,7 +954,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
     }
 
-    items['item']['se-space-assembling-machine'] = {
+    items['item' = 'se-space-assembling-machine'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -949,7 +966,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-manufactory'] = {
+    items['item' = 'se-space-manufactory'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -961,7 +978,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-casting-machine'] = {
+    items['item' = 'se-casting-machine'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -973,7 +990,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-pulveriser'] = {
+    items['item' = 'se-pulveriser'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -985,7 +1002,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-lifesupport-facility'] = {
+    items['item' = 'se-lifesupport-facility'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -997,7 +1014,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-fuel-refinery'] = {
+    items['item' = 'se-fuel-refinery'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1009,7 +1026,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-decontamination-facility'] = {
+    items['item' = 'se-space-decontamination-facility'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1021,7 +1038,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-genetics-laboratory'] = {
+    items['item' = 'se-space-genetics-laboratory'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1033,7 +1050,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-growth-facility'] = {
+    items['item' = 'se-space-growth-facility'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1045,7 +1062,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-biochemical-laboratory'] = {
+    items['item' = 'se-space-biochemical-laboratory'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1057,7 +1074,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-radiation-laboratory'] = {
+    items['item' = 'se-space-radiation-laboratory'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1069,7 +1086,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-electromagnetics-laboratory'] = {
+    items['item' = 'se-space-electromagnetics-laboratory'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1081,7 +1098,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-laser-laboratory'] = {
+    items['item' = 'se-space-laser-laboratory'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1093,7 +1110,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-astrometrics-laboratory'] = {
+    items['item' = 'se-space-astrometrics-laboratory'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1105,7 +1122,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-gravimetrics-laboratory'] = {
+    items['item' = 'se-space-gravimetrics-laboratory'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1117,7 +1134,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-mechanical-laboratory'] = {
+    items['item' = 'se-space-mechanical-laboratory'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1129,7 +1146,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-thermodynamics-laboratory'] = {
+    items['item' = 'se-space-thermodynamics-laboratory'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1141,7 +1158,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-material-fabricator'] = {
+    items['item' = 'se-space-material-fabricator'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1153,7 +1170,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-particle-accelerator'] = {
+    items['item' = 'se-space-particle-accelerator'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1165,7 +1182,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-particle-collider'] = {
+    items['item' = 'se-space-particle-collider'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1177,7 +1194,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-plasma-generator'] = {
+    items['item' = 'se-space-plasma-generator'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1189,7 +1206,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-hypercooler'] = {
+    items['item' = 'se-space-hypercooler'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1201,7 +1218,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-radiator'] = {
+    items['item' = 'se-space-radiator'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1213,7 +1230,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value + 1
     }
 
-    items['item']['se-space-telescope'] = {
+    items['item' = 'se-space-telescope'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1225,7 +1242,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-telescope-gammaray'] = {
+    items['item' = 'se-space-telescope-gammaray'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1237,7 +1254,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-telescope-microwave'] = {
+    items['item' = 'se-space-telescope-microwave'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1249,7 +1266,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-telescope-radio'] = {
+    items['item' = 'se-space-telescope-radio'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1261,7 +1278,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-telescope-xray'] = {
+    items['item' = 'se-space-telescope-xray'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1273,7 +1290,7 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['item']['se-space-science-lab'] = {
+    items['item' = 'se-space-science-lab'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 2,
         mod = 'space-exploration',
@@ -1285,17 +1302,17 @@ if mods and mods['space-exploration'] then
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     }
 
-    items['equipment']['fission-reactor-equipment'].tech = 'se-rtg-equipment'
-    items['equipment']['fission-reactor-equipment'].base_name = 'se-rtg'
+    items['equipment' = 'fission-reactor-equipment'].tech = 'se-rtg-equipment'
+    items['equipment' = 'fission-reactor-equipment'].base_name = 'se-rtg'
 
-    items['equipment']['battery-equipment'].tech = 'battery-equipment'
-    items['equipment']['battery-equipment'].min = 2
+    items['equipment' = 'battery-equipment'].tech = 'battery-equipment'
+    items['equipment' = 'battery-equipment'].min = 2
 
-    items['equipment']['energy-shield-equipment'].tech = 'energy-shield-equipment'
-    items['equipment']['energy-shield-equipment'].min = 2
+    items['equipment' = 'energy-shield-equipment'].tech = 'energy-shield-equipment'
+    items['equipment' = 'energy-shield-equipment'].min = 2
 
-    items['equipment']['personal-roboport-equipment'].tech = 'personal-roboport-equipment'
-    items['equipment']['personal-roboport-equipment'].min = 2
+    items['equipment' = 'personal-roboport-equipment'].tech = 'personal-roboport-equipment'
+    items['equipment' = 'personal-roboport-equipment'].min = 2
 end
 
 return items

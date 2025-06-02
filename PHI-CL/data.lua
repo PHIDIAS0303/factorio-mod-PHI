@@ -1059,6 +1059,15 @@ if settings.startup['PHI-VP'].value then
             end
         end
 
+        for k, v in pairs(items['space-age']['PHI-VP']['hidden_data']) do
+            if data.raw[v] and data.raw[v][k] then
+                data.raw[v][k].hidden = true
+                data.raw[v][k].hidden_in_factoriopedia = true
+            end
+        end
+
+
+
         data.raw.recipe['big-mining-drill'].category = nil
         data.raw.recipe['big-mining-drill'].ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electric-engine-unit', amount = 5}, {type = 'item', name = 'advanced-circuit', amount = 10}}
         data.raw.recipe['big-mining-drill'].energy_required = 20
@@ -1140,37 +1149,6 @@ if settings.startup['PHI-VP'].value then
         data.raw['lab']['biolab'].energy_source.emissions_per_minute = nil
         data.raw['electric-turret']['tesla-turret'].energy_source.drain = '250kW'
         data.raw['chain-active-trigger']['chain-tesla-turret-chain'].fork_chance = 0.3
-
-        data.raw['assembling-machine']['biochamber'].hidden = true
-        data.raw['assembling-machine']['biochamber'].hidden_in_factoriopedia = true
-        data.raw['assembling-machine']['captive-biter-spawner'].hidden = true
-        data.raw['assembling-machine']['captive-biter-spawner'].hidden_in_factoriopedia = true
-        data.raw['lightning-attractor']['lightning-rod'].hidden = true
-        data.raw['lightning-attractor']['lightning-rod'].hidden_in_factoriopedia = true
-        data.raw['lightning-attractor']['lightning-collector'].hidden = true
-        data.raw['lightning-attractor']['lightning-collector'].hidden_in_factoriopedia = true
-        data.raw['lightning-attractor']['fulgoran-ruin-attractor'].hidden = true
-        data.raw['lightning-attractor']['fulgoran-ruin-attractor'].hidden_in_factoriopedia = true
-        data.raw['furnace']['recycler'].hidden = true
-        data.raw['furnace']['recycler'].hidden_in_factoriopedia = true
-        data.raw['thruster']['thruster'].hidden = true
-        data.raw['thruster']['thruster'].hidden_in_factoriopedia = true
-        data.raw['assembling-machine']['crusher'].hidden = true
-        data.raw['assembling-machine']['crusher'].hidden_in_factoriopedia = true
-        data.raw['asteroid-collector']['asteroid-collector'].hidden = true
-        data.raw['asteroid-collector']['asteroid-collector'].hidden_in_factoriopedia = true
-        data.raw['space-platform-hub']['space-platform-hub'].hidden = true
-        data.raw['space-platform-hub']['space-platform-hub'].hidden_in_factoriopedia = true
-        data.raw['space-platform-starter-pack']['space-platform-starter-pack'].hidden = true
-        data.raw['space-platform-starter-pack']['space-platform-starter-pack'].hidden_in_factoriopedia = true
-        data.raw['surface']['space-platform'].hidden = true
-        data.raw['surface']['space-platform'].hidden_in_factoriopedia = true
-        data.raw['plant']['yumako-tree'].hidden = true
-        data.raw['plant']['yumako-tree'].hidden_in_factoriopedia = true
-        data.raw['plant']['jellystem'].hidden = true
-        data.raw['plant']['jellystem'].hidden_in_factoriopedia = true
-        data.raw['lightning']['lightning'].hidden = true
-        data.raw['lightning']['lightning'].hidden_in_factoriopedia = true
 
         data.raw['unit-spawner']['biter-spawner'].captured_spawner_entity = nil
         data.raw['unit-spawner']['spitter-spawner'].captured_spawner_entity = nil
