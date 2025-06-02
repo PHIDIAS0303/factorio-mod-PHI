@@ -671,7 +671,11 @@ local items = {
                 ['space-platform'] = 'surface',
                 ['yumako-tree'] = 'plant',
                 ['jellystem'] = 'plant',
-                ['lightning'] = 'lightning'
+                ['lightning'] = 'lightning',
+                ['agricultural-science-pack'] = 'tool',
+                ['cryogenic-science-pack'] = 'tool',
+                ['electromagnetic-science-pack'] = 'tool',
+                ['metallurgic-science-pack'] = 'tool'
             }
         }
     }

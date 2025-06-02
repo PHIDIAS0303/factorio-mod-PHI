@@ -1151,11 +1151,6 @@ if settings.startup['PHI-VP'].value then
         data.raw['unit-spawner']['biter-spawner'].captured_spawner_entity = nil
         data.raw['unit-spawner']['spitter-spawner'].captured_spawner_entity = nil
 
-        for _, v in pairs({'agricultural', 'cryogenic', 'electromagnetic', 'metallurgic'}) do
-            data.raw.tool[v .. '-science-pack'].hidden = true
-            data.raw.tool[v .. '-science-pack'].hidden_in_factoriopedia = true
-        end
-
         for _, v in pairs(data.raw.lab) do
             v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
         end
