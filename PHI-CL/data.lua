@@ -13,21 +13,8 @@ if settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value 
             prerequisites = ((i > 1) and {'compound-energy-' .. (i - 1)}) or {'solar-energy', 'advanced-circuit', 'electric-energy-accumulators'},
             effects = {},
             upgrade = true,
-            unit = {
-                count = math.floor(125 * (i ^ 2)),
-                ingredients = {
-                    {'automation-science-pack', 1},
-                    {'logistic-science-pack', 1}
-                },
-                time = 30
-            },
-            icons = {
-                {
-                    icon = '__base__/graphics/technology/solar-energy.png',
-                    icon_size = 256,
-                    tint = items['tint'][i]
-                }
-            },
+            unit = {count = math.floor(125 * (i ^ 2)), ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, time = 30},
+            icons = {{icon = '__base__/graphics/technology/solar-energy.png', icon_size = 256, tint = items['tint'][i]}},
             order = 'a-h-' .. i,
             localised_name = {'phi-cl.combine', {'technology-name.compound-energy'}, tostring(i)},
             localised_description = {'technology-description.compound-energy'}
@@ -36,21 +23,23 @@ if settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value 
 end
 
 if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIPMENT-ARMOR'].value then
+    local an_m = false
+
     local grid = table.deepcopy(data.raw['equipment-grid']['large-equipment-grid'])
     grid.name = 'equipment-grid-14x14'
     grid.width = 14
     grid.height = 14
     data:extend({grid})
 
+    grid = table.deepcopy(data.raw['equipment-grid']['large-equipment-grid'])
+    grid.name = 'equipment-grid-15x16'
+    grid.width = 15
+    grid.height = 16
+    data:extend({grid})
+
     local armor = table.deepcopy(data.raw['armor']['power-armor-mk2'])
     armor.name = 'power-armor-mk3'
-    armor.icons = {
-        {
-            icon = armor.icon,
-            tint = items['tint'][2],
-            icon_size = armor.icon_size
-        }
-    }
+    armor.icons = {{icon = armor.icon, tint = items['tint'][2], icon_size = armor.icon_size}}
     armor.icon = nil
     armor.icon_size = nil
 
@@ -59,8 +48,8 @@ if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIP
         v.percent = ((v.percent < 90) and v.percent + 10) or v.percent
     end
 
-    armor.order = armor.order .. '2'
-    armor.equipment_grid = grid.name
+    armor.order = armor.order .. '-2'
+    armor.equipment_grid = 'equipment-grid-14x14'
     armor.inventory_size_bonus = armor.inventory_size_bonus + 10
     armor.localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'}
     data:extend({armor})
@@ -75,36 +64,15 @@ if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIP
         main_product = armor.name,
         localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'}
     }})
-
-    for _, an in ipairs(data.raw['character']['character']['animations']) do
-        if an.armors then
-            for _, ar in ipairs(an.armors) do
-                if ar == 'power-armor-mk2' then
-                    an.armors[#an.armors + 1] = armor.name
-                    break
-                end
-            end
-        end
-    end
-
+    
     table.insert(data.raw.technology['power-armor-mk2'].effects, {type = 'unlock-recipe', recipe = armor.name})
 
     if mods['space-age'] then
-        grid = table.deepcopy(data.raw['equipment-grid']['large-equipment-grid'])
-        grid.name = 'equipment-grid-15x16'
-        grid.width = 15
-        grid.height = 16
-        data:extend({grid})
+        an_m = true
 
         armor = table.deepcopy(data.raw['armor']['mech-armor'])
         armor.name = 'mech-armor-mk2'
-        armor.icons = {
-            {
-                icon = armor.icon,
-                tint = items['tint'][2],
-                icon_size = armor.icon_size
-            }
-        }
+        armor.icons = {{icon = armor.icon, tint = items['tint'][2], icon_size = armor.icon_size}}
         armor.icon = nil
         armor.icon_size = nil
 
@@ -113,8 +81,8 @@ if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIP
             v.percent = ((v.percent < 90) and v.percent + 10) or v.percent
         end
 
-        armor.order = armor.order .. '2'
-        armor.equipment_grid = grid.name
+        armor.order = armor.order .. '-2'
+        armor.equipment_grid = 'equipment-grid-15x16'
         armor.inventory_size_bonus = armor.inventory_size_bonus + 10
         armor.localised_name = {'phi-cl.combine-gen', {'name.mech-armor'}, '2'}
         data:extend({armor})
@@ -130,18 +98,20 @@ if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIP
             localised_name = {'phi-cl.combine-gen', {'name.mech-armor'}, '2'}
         }})
 
-        for _, an in ipairs(data.raw['character']['character']['animations']) do
-            if an.armors then
-                for _, ar in ipairs(an.armors) do
-                    if ar == 'mech-armor' then
-                        an.armors[#an.armors + 1] = armor.name
-                        break
-                    end
+        table.insert(data.raw.technology['mech-armor'].effects, {type = 'unlock-recipe', recipe = armor.name})
+    end
+
+    for _, an in ipairs(data.raw['character']['character']['animations']) do
+        if an.armors then
+            for _, ar in ipairs(an.armors) do
+                if ar == 'power-armor-mk2' then
+                    table.insert(an.armors, 'power-armor-mk3')
+
+                elseif ar == 'mech-armor' then
+                    table.insert(an.armors, 'mech-armor-mk2')
                 end
             end
         end
-
-        table.insert(data.raw.technology['mech-armor'].effects, {type = 'unlock-recipe', recipe = armor.name})
     end
 end
 
