@@ -852,17 +852,16 @@ if settings.startup['PHI-VP'].value then
             }
         })
 
+        data.raw['tool']['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'fish', amount = 1}}
+        data.raw['tool']['space-science-pack'].send_to_orbit_mode = 'automated'
+
         for _, v in pairs({'concrete', 'automation', 'electronics', 'advanced-circuit', 'engine', 'sulfur-processing', 'solar-energy', 'railway'}) do
             data:extend({{
                 type = 'technology',
                 name = v .. '-productivity',
                 prerequisites = {v, 'automation-3', 'electromagnetic-plant', 'production-science-pack', 'utility-science-pack'},
                 effects = {{type = 'change-recipe-productivity', recipe = v, change = 0.05}},
-                unit = {
-                    count_formula = '1000 * (1.5 ^ (L - 1))',
-                    ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}},
-                    time = 60
-                },
+                unit = {count_formula = '1000 * (1.5 ^ (L - 1))', ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}, time = 60},
                 icons = {{icon = '__base__/graphics/technology/' .. v ..'.png', icon_size = 256}, {icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png', icon_size = 128, scale = 0.5, shift = {50, 50}}},
                 order = 'a-i-d',
                 max_level = 10,
@@ -909,7 +908,6 @@ if settings.startup['PHI-VP'].value then
         end
 
         table.insert(data.raw.technology['automation'].effects, {type = 'create-ghost-on-entity-death', modifier = true})
-        data.raw.technology['space-science-pack'].research_trigger = nil
         data.raw.technology['space-science-pack'].prerequisites = {'rocket-silo'}
         data.raw.technology['space-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'satellite'}}
         data.raw.technology['space-science-pack'].unit = {count = 2000, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
@@ -972,7 +970,6 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['toolbelt-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
         data.raw.technology['big-mining-drill'].prerequisites = {'electric-mining-drill', 'automation-3'}
         data.raw.technology['big-mining-drill'].unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
-        data.raw.technology['big-mining-drill'].research_trigger = nil
         data.raw.technology['tesla-weapons'].prerequisites = {'military-4', 'processing-unit'}
         data.raw.technology['tesla-weapons'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['mech-armor'].prerequisites = {'power-armor-mk2', 'space-science-pack'}
@@ -1019,18 +1016,17 @@ if settings.startup['PHI-VP'].value then
         data.raw.technology['spidertron'].prerequisites = {'exoskeleton-equipment', 'fission-reactor-equipment', 'military-4', 'production-science-pack', 'radar'}
         data.raw.technology['spidertron'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['heating-tower'].prerequisites = {'chemical-science-pack'}
-        data.raw.technology['heating-tower'].research_trigger = nil
         data.raw.technology['heating-tower'].effects = {{type = 'unlock-recipe', recipe = 'heating-tower'}}
         data.raw.technology['heating-tower'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
         data.raw.technology['agriculture'].prerequisites = {'chemical-science-pack'}
-        data.raw.technology['agriculture'].research_trigger = nil
         data.raw.technology['agriculture'].effects = {{type = 'unlock-recipe', recipe = 'agricultural-tower'}}
         data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
         data.raw.technology['tree-seeding'].prerequisites = {'agriculture'}
         data.raw.technology['tree-seeding'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-        data.raw.technology['electromagnetic-plant'].research_trigger = nil
-        data.raw.technology['foundry'].research_trigger = nil
-        data.raw.technology['cryogenic-plant'].research_trigger = nil
+
+        for _, v in pairs({'space-science-pack', 'electromagnetic-plant', 'foundry', 'cryogenic-plant', 'big-mining-drill', 'agriculture', 'heating-tower'}) do
+            data.raw.technology[v].research_trigger = nil
+        end
 
         for k, v in pairs(items['space-age']['PHI-VP']['technology']) do
             if data.raw.technology[k] then
@@ -1169,16 +1165,15 @@ if settings.startup['PHI-VP'].value then
         data.raw['space-platform-starter-pack']['space-platform-starter-pack'].hidden_in_factoriopedia = true
         data.raw['surface']['space-platform'].hidden = true
         data.raw['surface']['space-platform'].hidden_in_factoriopedia = true
-
         data.raw['plant']['yumako-tree'].hidden = true
         data.raw['plant']['yumako-tree'].hidden_in_factoriopedia = true
         data.raw['plant']['jellystem'].hidden = true
         data.raw['plant']['jellystem'].hidden_in_factoriopedia = true
-        data.raw['unit-spawner']['biter-spawner'].captured_spawner_entity = nil
-        data.raw['unit-spawner']['spitter-spawner'].captured_spawner_entity = nil
-
         data.raw['lightning']['lightning'].hidden = true
         data.raw['lightning']['lightning'].hidden_in_factoriopedia = true
+
+        data.raw['unit-spawner']['biter-spawner'].captured_spawner_entity = nil
+        data.raw['unit-spawner']['spitter-spawner'].captured_spawner_entity = nil
 
         for _, v in pairs({'agricultural', 'cryogenic', 'electromagnetic', 'metallurgic'}) do
             data.raw.tool[v .. '-science-pack'].hidden = true
