@@ -1179,6 +1179,7 @@ if settings.startup['PHI-VP'].value then
         data.raw['lab']['biolab'].researching_speed = 3
         data.raw['lab']['biolab'].energy_usage = '180kW'
         data.raw['lab']['biolab'].energy_source.emissions_per_minute = nil
+        data.raw['electric-turret']['tesla-turret'].energy_source.drain = '250kW'
         data.raw['chain-active-trigger']['chain-tesla-turret-chain'].fork_chance = 0.3
 
         data.raw['assembling-machine']['biochamber'].hidden = true
