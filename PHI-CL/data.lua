@@ -1066,8 +1066,6 @@ if settings.startup['PHI-VP'].value then
             end
         end
 
-
-
         data.raw.recipe['big-mining-drill'].category = nil
         data.raw.recipe['big-mining-drill'].ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electric-engine-unit', amount = 5}, {type = 'item', name = 'advanced-circuit', amount = 10}}
         data.raw.recipe['big-mining-drill'].energy_required = 20
