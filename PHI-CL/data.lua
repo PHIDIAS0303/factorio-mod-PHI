@@ -364,14 +364,12 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and ((not settings.s
         end
     end
 
-    data.raw.technology['epic-quality'].hidden = true
-    data.raw.technology['epic-quality'].hidden_in_factoriopedia = true
-    data.raw.technology['epic-quality'].unit.ingredients = {{'space-science-pack', 1}}
-    data.raw.technology['epic-quality'].effects = nil
-    data.raw.technology['legendary-quality'].hidden = true
-    data.raw.technology['legendary-quality'].hidden_in_factoriopedia = true
-    data.raw.technology['legendary-quality'].unit.ingredients = {{'space-science-pack', 1}}
-    data.raw.technology['legendary-quality'].effects = nil
+    for _, v in pairs({'epic-quality', 'legendary-quality'}) do
+        data.raw.technology[v].hidden = true
+        data.raw.technology[v].hidden_in_factoriopedia = true
+        data.raw.technology[v].unit.ingredients = {{'space-science-pack', 1}}
+        data.raw.technology[v].effects = nil
+    end
 
     for _, v in pairs({'normal', 'uncommon', 'rare', 'epic', 'legendary'}) do
         data.raw.quality[v].next = nil
@@ -380,10 +378,9 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and ((not settings.s
         data.raw.quality[v].hidden_in_factoriopedia = true
     end
 
-    data.raw['tips-and-tricks-item']['quality'] = nil
-    data.raw['tips-and-tricks-item']['quality-modules'] = nil
-    data.raw['tips-and-tricks-item']['quality-factoriopedia'] = nil
-    data.raw['tips-and-tricks-item']['quality-probabilities'] = nil
+    for _, v in pairs({'quality', 'quality-modules', 'quality-factoriopedia', 'quality-probabilities'}) do
+        data.raw['tips-and-tricks-item'][v] = nil
+    end
 
     data.raw['produce-achievement']['crafting-with-quality'] = nil
     data.raw['module-transfer-achievement']['make-it-better'] = nil
