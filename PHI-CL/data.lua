@@ -1126,6 +1126,7 @@ if settings.startup['PHI-VP'].value then
         data.raw.recipe['tesla-ammo'].category = 'crafting-with-fluid'
         data.raw.recipe['tesla-ammo'].ingredients = {{type = 'item', name = 'battery', amount = 1}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 10}}
         data.raw.recipe['teslagun'].category = 'crafting-with-fluid'
+        data.raw.recipe['teslagun'].energy_required = 10
         data.raw.recipe['teslagun'].ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
         data.raw.recipe['tesla-turret'].category = 'crafting-with-fluid'
         data.raw.recipe['tesla-turret'].ingredients = {{type = 'item', name = 'teslagun', amount = 1}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 500}}
