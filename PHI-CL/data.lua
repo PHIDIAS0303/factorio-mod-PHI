@@ -64,7 +64,7 @@ if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIP
         main_product = armor.name,
         localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'}
     }})
-    
+
     table.insert(data.raw.technology['power-armor-mk2'].effects, {type = 'unlock-recipe', recipe = armor.name})
 
     if mods['space-age'] then
@@ -1637,6 +1637,8 @@ if settings.startup['PHI-CT'].value then
                 ingredients = {{type = 'item', name = v, amount = 2}},
                 results = {{type = 'item', name = item.name, amount = 2}},
                 main_product = item.name,
+                hide_from_player_crafting = true,
+                allow_productivity = false,
                 localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
             }})
         end
