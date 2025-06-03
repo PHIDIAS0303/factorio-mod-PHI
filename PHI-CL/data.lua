@@ -541,6 +541,12 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw['ammo-turret']['railgun-turret'].folding_speed = 1
     data.raw['ammo-turret']['railgun-turret'].energy_source.input_flow_limit = tonumber(string.match(data.raw['ammo-turret']['railgun-turret'].energy_source.input_flow_limit, '[%d%.]+')) * 32 .. string.match(data.raw['ammo-turret']['railgun-turret'].energy_source.input_flow_limit, '%a+')
 
+    data.raw['roboport']['roboport'].energy_source.input_flow_limit = nil
+    data.raw['roboport']['roboport'].charging_energy = tostring(tonumber(string.match(data.raw['roboport']['roboport'].charging_energy, '[%d%.]+')) * 2) .. string.match(data.raw['roboport']['roboport'].charging_energy, '%a+')
+    data.raw['roboport']['roboport'].robot_slots_count = 10
+    data.raw['roboport']['roboport'].material_slots_count = 2
+    data.raw['roboport']['roboport'].charging_offsets = {{-1.5, -1}, {1.5, -1}, {1.5, 1}, {-1.5, 1}, {-1, -1.5}, {1, -1.5}, {1, 1.5}, {-1, 1.5}}
+
     for _, v in pairs({'carbonic-asteroid-chunk', 'metallic-asteroid-chunk', 'promethium-asteroid-chunk', 'oxide-asteroid-chunk', 'artillery-shell'}) do
         if data.raw.item[v] then
             data.raw.item[v].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
