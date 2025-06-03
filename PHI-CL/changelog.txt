@@ -4,6 +4,7 @@ Date: 2025-06-06
 
   Changes:
     - [CL] Some changes to the control behaviour.
+    - [VP] Bring back the space science pack to fish process in silo.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.110
