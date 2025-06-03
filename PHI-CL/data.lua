@@ -852,7 +852,7 @@ if settings.startup['PHI-VP'].value then
             }
         })
 
-        data.raw['tool']['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'fish', amount = 1}}
+        data.raw['tool']['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'raw-fish', amount = 1}}
         data.raw['tool']['space-science-pack'].send_to_orbit_mode = 'automated'
 
         for _, v in pairs({'concrete', 'automation', 'electronics', 'advanced-circuit', 'engine', 'sulfur-processing', 'solar-energy', 'railway'}) do
