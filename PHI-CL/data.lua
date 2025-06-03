@@ -1264,13 +1264,12 @@ if settings.startup['PHI-VP'].value then
         data.raw['tips-and-tricks-item']['agriculture'] = nil
         data.raw['tips-and-tricks-item']['lava-processing'] = nil
 
+        for _, v in pairs({'research-with-metallurgics', 'research-with-agriculture', 'research-with-electromagnetics', 'research-with-cryogenics', 'research-with-promethium'}) do
+            data.raw['research-with-science-pack-achievement'][v] = nil
+        end
+
         data.raw['group-attack-achievement']['it-stinks-and-they-do-like-it'] = nil
         data.raw['group-attack-achievement']['get-off-my-lawn'] = nil
-        data.raw['research-with-science-pack-achievement']['research-with-metallurgics'] = nil
-        data.raw['research-with-science-pack-achievement']['research-with-agriculture'] = nil
-        data.raw['research-with-science-pack-achievement']['research-with-electromagnetics'] = nil
-        data.raw['research-with-science-pack-achievement']['research-with-cryogenics'] = nil
-        data.raw['research-with-science-pack-achievement']['research-with-promethium'] = nil
         data.raw['kill-achievement']['if-it-bleeds'] = nil
         data.raw['kill-achievement']['we-need-bigger-guns'] = nil
         data.raw['kill-achievement']['size-doesnt-matter'] = nil
