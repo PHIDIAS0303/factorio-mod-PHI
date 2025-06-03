@@ -1160,16 +1160,8 @@ if settings.startup['PHI-VP'].value then
             data.raw.fluid[v].hidden_in_factoriopedia = true
         end
 
-        local tile_subgroup = {
-            ['vulcanus-tiles'] = true,
-            ['gleba-tiles'] = true,
-            ['gleba-water-tiles'] = true,
-            ['fulgora-tiles'] = true,
-            ['aquilo-tiles'] = true,
-        }
-
         for _, v in pairs(data.raw['tile']) do
-            if v.subgroup and tile_subgroup[v.subgroup] then
+            if v.subgroup and (v.subgroup == 'vulcanus-tiles' or v.subgroup == 'gleba-tiles' or v.subgroup == 'gleba-water-tiles' or v.subgroup == 'fulgora-tiles' or v.subgroup == 'aquilo-tiles') then
                 v.autoplace = nil
                 v.hidden = true
                 v.hidden_in_factoriopedia = true
