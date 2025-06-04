@@ -6,7 +6,7 @@ do
     local p = (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP') or sa
 
     for k, v in pairs(data.raw.recipe) do
-        if settings.startup['PHI-VP'].value and v.category == 'recycling' then
+        if (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP') and v.category == 'recycling' then
             data.raw.recipe[k] = nil
         end
 
