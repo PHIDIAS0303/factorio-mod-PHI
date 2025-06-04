@@ -1694,34 +1694,18 @@ if settings.startup['PHI-CT'].value then
     if settings.startup['PHI-CT-TILE'].value then
         for _, v in pairs(data.raw.planet) do
             if v.map_gen_settings and v.map_gen_settings.autoplace_settings then
+                for _, c in pairs({'tile', 'decorative', 'entity'}) do
+                    if v.map_gen_settings.autoplace_settings[c] and v.map_gen_settings.autoplace_settings[c].settings then
+                        for _, e in pairs(v.map_gen_settings.autoplace_settings[c].settings) do
+                            e.frequency = 0.0
+                            e.size = 0.0
+                            e.richness = 0.0
+                        end
+                    end
+                end
+
                 if v.map_gen_settings.autoplace_settings.tile and v.map_gen_settings.autoplace_settings.tile.settings then
-                    for _, e in pairs (v.map_gen_settings.autoplace_settings.tile.settings) do
-                        e.frequency = 0.0
-                        e.size = 0.0
-                        e.richness = 0.0
-                    end
-
-                    v.map_gen_settings.autoplace_settings.tile.settings[settings.startup['PHI-CT-TILE-CHOICE'].value] = {
-                        frequency = 1.0,
-                        size = 1.0,
-                        richness = 1.0
-                    }
-                end
-
-                if v.map_gen_settings.autoplace_settings.decorative and v.map_gen_settings.autoplace_settings.decorative.settings then
-                    for _, e in pairs(v.map_gen_settings.autoplace_settings.decorative.settings) do
-                        e.frequency = 0.0
-                        e.size = 0.0
-                        e.richness = 0.0
-                    end
-                end
-
-                if v.map_gen_settings.autoplace_settings.entity and v.map_gen_settings.autoplace_settings.entity.settings then
-                    for _, e in pairs(v.map_gen_settings.autoplace_settings.entity.settings) do
-                        e.frequency = 0.0
-                        e.size = 0.0
-                        e.richness = 0.0
-                    end
+                    v.map_gen_settings.autoplace_settings.tile.settings[settings.startup['PHI-CT-TILE-CHOICE'].value] = {frequency = 1.0, size = 1.0, richness = 1.0}
                 end
             end
         end
