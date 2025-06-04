@@ -260,16 +260,7 @@ if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (se
     item.name = 'super-pump'
     item.place_result = item.name
     item.order = 'b[fluids]-a[super-pump]-o'
-
-    item.icons = {
-        {
-            icon = '__base__/graphics/icons/offshore-pump.png',
-            tint = items['tint'][2],
-            icon_size = 64,
-            icon_mipmaps = 4
-        }
-    }
-
+    item.icons = {{icon = '__base__/graphics/icons/offshore-pump.png', tint = items['tint'][2], icon_size = 64, icon_mipmaps = 4}}
     item.icon = nil
     item.icon_size = nil
     item.icon_mipmaps = nil
