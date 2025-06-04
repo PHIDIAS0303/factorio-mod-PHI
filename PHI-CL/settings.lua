@@ -19,7 +19,7 @@ data:extend({
   setting_type = 'startup',
   default_value = 8,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MB-ENERGY-POWER-TIER'}, {'phi-cl.proportion', {'mod-setting-name.PHI-MB-ENERGY-POWER-TIER'}}},
+  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MB-ENERGY-POWER-TIER'}, {'phi-cl.tier', {'mod-setting-name.PHI-MB-ENERGY-POWER-TIER'}}},
   order = 'AA01'
 }, {
   type = 'int-setting',
@@ -42,7 +42,7 @@ data:extend({
   setting_type = 'startup',
   default_value = 3,
   allowed_values = {1, 2, 3},
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MB-MACHINE-TIER'}, {'phi-cl.proportion', {'mod-setting-name.PHI-MB-MACHINE-TIER'}}},
+  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MB-MACHINE-TIER'}, {'phi-cl.tier', {'mod-setting-name.PHI-MB-MACHINE-TIER'}}},
   order = 'AB01'
 }, {
   type = 'bool-setting',
@@ -57,7 +57,7 @@ data:extend({
   setting_type = 'startup',
   default_value = 2,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-TIER'}, {'phi-cl.proportion', {'mod-setting-name.PHI-MB-EQUIPMENT-TIER'}}},
+  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-TIER'}, {'phi-cl.tier', {'mod-setting-name.PHI-MB-EQUIPMENT-TIER'}}},
   order = 'AC01'
 }, {
   type = 'bool-setting',
