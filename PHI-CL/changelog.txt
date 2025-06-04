@@ -5,6 +5,7 @@ Date: 2025-06-06
   Changes:
     - [SA] Introduced asteroid density to reduce the ups usage for space platform.
     - [CL] Grouped SA Plus and Vanilla Plus together as game mode in the settings.
+    - [CL] Cleanup the localisation.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.111
