@@ -1712,21 +1712,8 @@ if settings.startup['PHI-CT'].value then
 
         data.raw['map-gen-presets']['default']['empty-world'] = {
             order = 'zz',
-            basic_settings = {
-                autoplace_controls = {},
-                autoplace_settings = {},
-                cliff_settings = {
-                    name = 'none',
-                    cliff_elevation_interval = 100,
-                    cliff_elevation_0 = 100,
-                    richness = 0
-                }
-            },
-            advanced_settings = {
-                pollution = {enabled = false},
-                enemy_evolution = {enabled = false},
-                enemy_expansion = {enabled = false}
-            }
+            basic_settings = {autoplace_controls = {}, autoplace_settings = {}, cliff_settings = {}},
+            advanced_settings = {pollution = {enabled = false}, enemy_evolution = {enabled = false}, enemy_expansion = {enabled = false}}
         }
 
         for k, v in pairs (data.raw['autoplace-control']) do
