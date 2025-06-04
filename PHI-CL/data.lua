@@ -273,7 +273,7 @@ if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (se
     item.icon = nil
     item.icon_size = nil
     item.icon_mipmaps = nil
-    item.localised_name = {'name.super-pump'}
+    item.localised_name = {'', {'name.super-entity'}, {'entity-name.pump'}}
     data:extend({item})
 
     local entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
@@ -302,7 +302,7 @@ if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (se
     entity.allowed_effects = {'consumption'}
     entity.tile_buildability_rules = nil
     entity.fluid_source_offset = nil
-    entity.localised_name = {'name.super-pump'}
+    entity.localised_name = {'', {'name.super-entity'}, {'entity-name.pump'}}
     data:extend({entity})
 
     data:extend({{
@@ -313,7 +313,7 @@ if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (se
         ingredients = {{type = 'item', name = 'electronic-circuit', amount = 2}, {type = 'item', name = 'pipe', amount = 1}, {type = 'item', name = 'iron-gear-wheel', amount = 1}},
         results = {{type = 'item', name = item.name, amount = 1}},
         main_product = item.name,
-        localised_name = {'name.super-pump'}
+        localised_name = {'', {'name.super-entity'}, {'entity-name.pump'}}
     }})
 
     if data.raw.fluid['water'] then
@@ -1334,7 +1334,7 @@ if settings.startup['PHI-CT'].value then
     item.icon = nil
     item.icon_size = nil
     item.icon_mipmaps = nil
-    item.localised_name = {'name.super-radar'}
+    item.localised_name = {'', {'name.super-entity'}, {'entity-name.radar'}}
     data:extend({item})
 
     local entity = table.deepcopy(data.raw['radar']['radar'])
@@ -1343,7 +1343,7 @@ if settings.startup['PHI-CT'].value then
     entity.max_distance_of_sector_revealed = 35
     entity.max_distance_of_nearby_sector_revealed = 35
     entity.pictures.layers[1].tint = items['tint'][8]
-    entity.localised_name = {'name.super-radar'}
+    entity.localised_name = {'', {'name.super-entity'}, {'entity-name.radar'}}
     data:extend({entity})
 
     data:extend({{
@@ -1354,7 +1354,7 @@ if settings.startup['PHI-CT'].value then
         ingredients = {{type = 'item', name = 'electronic-circuit', amount = 5}, {type = 'item', name = 'iron-gear-wheel', amount = 5}, {type = 'item', name = 'iron-plate', amount = 10}},
         results = {{type = 'item', name = item.name, amount = 1}},
         main_product = item.name,
-        localised_name = {'name.super-radar'}
+        localised_name = {'', {'name.super-entity'}, {'entity-name.radar'}}
     }})
 
     item = table.deepcopy(data.raw['item']['electric-energy-interface'])
@@ -1424,7 +1424,7 @@ if settings.startup['PHI-CT'].value then
     item.icon = nil
     item.icon_size = nil
     item.icon_mipmaps = nil
-    item.localised_name = {'name.trash-chest'}
+    item.localised_name = {'', {'name.trash-entity'}, {'entity-name.steel-chest'}}
     data:extend({item})
 
     entity = table.deepcopy(data.raw['container']['steel-chest'])
@@ -1443,7 +1443,7 @@ if settings.startup['PHI-CT'].value then
     entity.next_upgrade = nil
     entity.surface_conditions = nil
     entity.picture.layers[1].tint = items['tint'][8]
-    entity.localised_name = {'name.trash-chest'}
+    entity.localised_name = {'', {'name.trash-entity'}, {'entity-name.steel-chest'}}
     data:extend({entity})
 
     data:extend({{
@@ -1454,7 +1454,7 @@ if settings.startup['PHI-CT'].value then
         ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
         results = {{type = 'item', name = item.name, amount = 1}},
         main_product = item.name,
-        localised_name = {'name.trash-chest'}
+        localised_name = {'', {'name.trash-entity'}, {'entity-name.steel-chest'}}
     }})
 
     table.insert(data.raw.technology['steel-processing'].effects, {type = 'unlock-recipe', recipe = item.name})
