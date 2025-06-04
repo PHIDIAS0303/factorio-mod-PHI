@@ -44,6 +44,8 @@ if mods['space-age'] then
             data.raw.recipe['solar-panel-' .. i].category = 'electronics'
         end
     end
+
+    data.raw['bool-setting']['PHI-MB-EQUIPMENT-ARMOR'].localised_description = {'', '[item=power-armor-mk2] 3, [item=mech-armor] 2'}
 end
 
 --[[
