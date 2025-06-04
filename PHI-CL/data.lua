@@ -141,6 +141,8 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
                 v.quality_affects_inventory_size = true
             end
         end
+
+        data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-SA-ROCKET-CAPACITY'].value * 1000000
     end
 
     if mods['elevated-rails'] then
@@ -249,7 +251,6 @@ if settings.startup['PHI-MI'].value then
     end
 
     data.raw['utility-constants'].default.default_pipeline_extent = settings.startup['PHI-MI-PIPE-EXTENT'].value
-    data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-MI-ROCKET-CAPACITY'].value * 1000000
 end
 
 if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then

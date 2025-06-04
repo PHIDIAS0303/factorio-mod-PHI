@@ -124,15 +124,6 @@ data:extend({
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-PIPE-EXTENT'}, {'mod-setting-name.PHI-MI-PIPE-EXTENT'}},
   order = 'B05'
 }, {
-  type = 'int-setting',
-  name = 'PHI-MI-ROCKET-CAPACITY',
-  setting_type = 'startup',
-  default_value = 10,
-  minimum_value = 1,
-  maximum_value = 10000,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MI-ROCKET-CAPACITY'}, {'mod-setting-name.PHI-MI-ROCKET-CAPACITY'}},
-  order = 'B06'
-}, {
   type = 'bool-setting',
   name = 'PHI-SA',
   setting_type = 'startup',
@@ -178,6 +169,15 @@ data:extend({
   maximum_value = 100,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-QUALITY'}, {'mod-setting-name.PHI-SA-QUALITY'}},
   order = 'C05'
+}, {
+  type = 'int-setting',
+  name = 'PHI-SA-ROCKET-CAPACITY',
+  setting_type = 'startup',
+  default_value = 10,
+  minimum_value = 1,
+  maximum_value = 10000,
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-ROCKET-CAPACITY'}, {'mod-setting-name.PHI-SA-ROCKET-CAPACITY'}},
+  order = 'C06'
 }, {
   type = 'string-setting',
   name = 'PHI-GM',
