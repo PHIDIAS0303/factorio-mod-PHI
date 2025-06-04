@@ -49,7 +49,7 @@ if mods['space-age'] then
     data.raw['bool-setting']['PHI-SA-SPOIL'].localised_description = {'', '[item=spoilage]'}
     data.raw['bool-setting']['PHI-SA-SPOIL-FREEZE'].localised_description = {'', '[item=ice]'}
     data.raw['bool-setting']['PHI-SA-ENABLE-QUALITY'].localised_description = {'', '[virtual-signal=signal-any-quality]'}
-    data.raw['bool-setting']['PHI-SA-QUALITY'].localised_description = {'', '[item=quality-module-3] x 0.1'}
+    data.raw['int-setting']['PHI-SA-QUALITY'].localised_description = {'', '[item=quality-module-3] x 0.1'}
 end
 
 --[[
