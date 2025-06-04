@@ -182,6 +182,7 @@ data:extend({
   type = 'string-setting',
   name = 'PHI-GM',
   setting_type = 'startup',
+  allow_blank = true,
   default_value = '',
   allowed_values = {'', 'SAP', 'VP'},
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-GM'}, {'mod-setting-name.PHI-GM'}},
