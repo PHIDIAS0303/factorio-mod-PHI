@@ -289,7 +289,7 @@ if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (se
 
     entity.fluid_box = nil
     entity.fluid_boxes_off_when_no_fluid_recipe = false
-    entity.effect_receiver = {uses_module_effects=false, uses_beacon_effects=false}
+    entity.effect_receiver = {uses_module_effects = false, uses_beacon_effects = false}
     entity.allowed_effects = {'consumption'}
     entity.tile_buildability_rules = nil
     entity.fluid_source_offset = nil
