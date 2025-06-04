@@ -33,15 +33,7 @@ if mods['space-exploration'] and settings.startup['PHI-MB'].value and settings.s
         item.name = 'se-core-miner-drill-' .. i
         item.place_result = miner_name
         item.order = 'zzzz-core-miner-drill-' .. i
-
-        item.icons = {
-            {
-                icon = '__space-exploration-graphics__/graphics/icons/core-miner.png',
-                tint = items['tint'][i],
-                icon_size = 64,
-            }
-        }
-
+        item.icons = {{icon = '__space-exploration-graphics__/graphics/icons/core-miner.png', tint = items['tint'][i], icon_size = 64}}
         item.icon = nil
         item.icon_size = nil
         item.localised_name = {'phi-cl.combine', {'entity-name.se-core-miner-drill'}, tostring(i)}
