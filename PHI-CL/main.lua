@@ -87,7 +87,7 @@ function main.EEE(source, tier)
     end
 
     if source.tech == 'compound-energy' then
-        if mods['space-age'] and (not settings.startup['PHI-VP'].value) then
+        if mods['space-age'] and (not (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP')) then
             if not item.surface_conditions then
                 item.surface_conditions = {}
             end

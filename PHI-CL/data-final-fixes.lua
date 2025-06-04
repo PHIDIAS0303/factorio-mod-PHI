@@ -2,8 +2,8 @@
 -- local main = require 'main'
 
 do
-    local sa = settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value
-    local p = settings.startup['PHI-VP'].value or sa
+    local sa = settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SAP'
+    local p = (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP') or sa
 
     for k, v in pairs(data.raw.recipe) do
         if settings.startup['PHI-VP'].value and v.category == 'recycling' then
