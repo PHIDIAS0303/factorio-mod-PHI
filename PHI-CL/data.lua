@@ -548,13 +548,9 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw['roboport']['roboport'].charging_station_count = 8
     -- data.raw['roboport']['roboport'].charging_offsets = {{-1.5, -1}, {1.5, -1}, {1.5, 1}, {-1.5, 1}, {-1, -1.5}, {1, -1.5}, {1, 1.5}, {-1, 1.5}}
 
-    for _, chunk in pairs(data.raw['asteroid-chunk']) do
-        if chunk.minable then
-            chunk.minable.count = (chunk.minable.count or 1) * 4
-        end
-
-        chunk.stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
-
+    for _, chunk in pairs({'carbonic-asteroid-chunk', 'metallic-asteroid-chunk', 'promethium-asteroid-chunk', 'oxide-asteroid-chunk'}) do
+        data.raw['asteroid-chunk'][chunk].minable.count = (data.raw['asteroid-chunk'][chunk].minable.count or 1) * 4
+        data.raw.item[chunk].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
         -- can try dying_trigger_effect = nil, not much ups improvement
     end
 
