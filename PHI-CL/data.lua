@@ -115,7 +115,7 @@ if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIP
     end
 end
 
-if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value then
+if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
     data.raw['mining-drill']['electric-mining-drill'].filter_count = 5
 
     if mods['space-age'] then
@@ -252,7 +252,7 @@ if settings.startup['PHI-MI'].value then
     data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-MI-ROCKET-CAPACITY'].value * 1000000
 end
 
-if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value then
+if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
     data:extend({{type = 'recipe-category', name = 'fluid'}})
 
     local item = table.deepcopy(data.raw['item']['offshore-pump'])
@@ -344,7 +344,7 @@ if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value
     end
 end
 
-if mods['space-age'] and ((settings.startup['PHI-SA'].value and ((not settings.startup['PHI-SA-ENABLE-QUALITY'].value) or settings.startup['PHI-SA-GENERIC'].value)) or settings.startup['PHI-VP'].value) then
+if mods['space-age'] and ((settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-ENABLE-QUALITY'].value)) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-')) then
     for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
         if data.raw.technology[v] then
             data.raw.technology[v].hidden = true
@@ -481,7 +481,7 @@ if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].v
     end
 end
 
-if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value) then
+if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
     data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
 
     data.raw.resource['lithium-brine'].infinite = true
@@ -716,7 +716,7 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     end
 end
 
-if settings.startup['PHI-VP'].value then
+if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP' then
     if mods['space-age'] then
         data.raw.quality['normal'].level = 0
         data.raw.quality['normal'].beacon_power_usage_multiplier = 1

@@ -141,25 +141,18 @@ data:extend({
   order = 'C00'
 }, {
   type = 'bool-setting',
-  name = 'PHI-SA-GENERIC',
-  setting_type = 'startup',
-  default_value = true,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-GENERIC'}, {'mod-setting-name.PHI-SA-GENERIC'}},
-  order = 'C01'
-}, {
-  type = 'bool-setting',
   name = 'PHI-SA-SPOIL',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL'}, {'mod-setting-name.PHI-SA-SPOIL'}},
-  order = 'C02'
+  order = 'C01'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-SPOIL-FREEZE',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE'}},
-  order = 'C03'
+  order = 'C02'
 }, {
   type = 'int-setting',
   name = 'PHI-SA-SPOIL-FREEZE-RATIO',
@@ -168,14 +161,14 @@ data:extend({
   minimum_value = 1,
   maximum_value = 1000,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE-RATIO'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE-RATIO'}},
-  order = 'C04'
+  order = 'C03'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-ENABLE-QUALITY',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-ENABLE-QUALITY'}, {'mod-setting-name.PHI-SA-ENABLE-QUALITY'}},
-  order = 'C05'
+  order = 'C04'
 }, {
   type = 'int-setting',
   name = 'PHI-SA-QUALITY',
@@ -184,13 +177,14 @@ data:extend({
   minimum_value = 1,
   maximum_value = 100,
   localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-SA-QUALITY'}, {'mod-setting-name.PHI-SA-QUALITY'}},
-  order = 'C06'
+  order = 'C05'
 }, {
-  type = 'bool-setting',
-  name = 'PHI-VP',
+  type = 'string-setting',
+  name = 'PHI-GM',
   setting_type = 'startup',
-  default_value = false,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-VP'}, {'mod-setting-name.PHI-VP'}},
+  default_value = '',
+  allowed_values = {'', 'SAP', 'VP'},
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-GM'}, {'mod-setting-name.PHI-GM'}},
   order = 'D00'
 },  {
   type = 'bool-setting',
