@@ -4,7 +4,7 @@ data:extend({
   name = 'PHI-MB',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB'}, {'', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB'}}},
+  localised_name = {'phi-cl.color', '255,254,42', {'', {'mod-setting-name-prefix.PHI-MB'}, ' ', {'phi-cl.enable', {'mod-setting-name.PHI-MB'}}}},
   order = 'A00'
 }, {
   type = 'bool-setting',
