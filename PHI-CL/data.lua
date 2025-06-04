@@ -1555,7 +1555,7 @@ if settings.startup['PHI-CT'].value then
         item.place_result = item.name
         item.subgroup = 'storage'
         item.order = 'b[storage]-h[basic-' .. c .. ']'
-        item.localised_name = {'name.basic-' .. c}
+        item.localised_name = {'phi-cl.combine', {'name.basic-entity'}, {'name.' .. c}}
         data:extend({item})
 
         entity = (c == 'steel-chest' and table.deepcopy(data.raw['container'][c])) or table.deepcopy(data.raw['logistic-container'][c])
@@ -1566,7 +1566,7 @@ if settings.startup['PHI-CT'].value then
         entity.quality_affects_inventory_size = false
         entity.max_logistic_slots = (c == 'steel-chest' and nil) or 1
         entity.trash_inventory_size = (c == 'steel-chest' and nil) or 1
-        entity.localised_name = {'name.basic-' .. c}
+        entity.localised_name = {'phi-cl.combine', {'name.basic-entity'}, {'name.' .. c}}
         data:extend({entity})
 
         data:extend({{
@@ -1577,7 +1577,7 @@ if settings.startup['PHI-CT'].value then
             ingredients = {{type = 'item', name =c, amount = 1}},
             results = {{type = 'item', name = item.name, amount = 1}},
             main_product = item.name,
-            localised_name = {'name.basic-' .. c}
+            localised_name = {'phi-cl.combine', {'name.basic-entity'}, {'name.' .. c}}
         }})
     end
 
