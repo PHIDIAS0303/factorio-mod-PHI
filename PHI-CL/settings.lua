@@ -11,7 +11,7 @@ data:extend({
   name = 'PHI-MB-ENERGY',
   setting_type = 'startup',
   default_value = true,
-  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-ENERGY'}, {'mod-setting-name.PHI-MB-ENERGY'}},
+  localised_name = {'phi-cl.combine', {'mod-setting-name-prefix.PHI-MB-ENERGY'}, {'', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-ENERGY'}}},
   order = 'AA00'
 }, {
   type = 'int-setting',
