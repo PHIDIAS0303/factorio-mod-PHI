@@ -548,22 +548,36 @@ if mods['space-age'] and ((settings.startup['PHI-SA'].value and settings.startup
     data.raw['roboport']['roboport'].charging_station_count = 8
     -- data.raw['roboport']['roboport'].charging_offsets = {{-1.5, -1}, {1.5, -1}, {1.5, 1}, {-1.5, 1}, {-1, -1.5}, {1, -1.5}, {1, 1.5}, {-1, 1.5}}
 
-    for _, v in pairs({'carbonic-asteroid-chunk', 'metallic-asteroid-chunk', 'promethium-asteroid-chunk', 'oxide-asteroid-chunk', 'artillery-shell'}) do
-        if data.raw.item[v] then
-            data.raw.item[v].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
+    for _, chunk in pairs(data.raw['asteroid-chunk']) do
+        if chunk.minable then
+            chunk.minable.count = (chunk.minable.count or 1) * 4
+        end
+
+        chunk.stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
+
+        -- can try dying_trigger_effect = nil, not much ups improvement
+    end
+
+    for _, asteroid in pairs(data.raw['asteroid']) do
+        if asteroid.dying_trigger_effect then
+            for _, trigger in pairs(asteroid.dying_trigger_effect) do
+                if trigger.type == 'create-asteroid-chunk' then
+                    trigger.probability = (trigger.probability or 1) / 4
+                end
+            end
+        end
+
+        for _, r in pairs(asteroid.resistances) do
+            r.percent = (r.percent > 98 and 98) or r.percent
         end
     end
+
+    data.raw.item['artillery-shell'].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
 
     for _, v in pairs(data.raw.tile) do
         if v.fluid then
             v.destroys_dropped_items = true
             v.default_destroyed_dropped_item_trigger = nil
-        end
-    end
-
-    for _, v in pairs(data.raw['asteroid']) do
-        for _, v2 in pairs(v.resistances) do
-            v2.percent = (v2.percent > 98 and 98) or v2.percent
         end
     end
 
