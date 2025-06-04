@@ -76,7 +76,7 @@ if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.on_player_cheat_mode_disabled, hidden_recipe_enable)
 end
 
-if (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value then
+if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-' then
 script.on_nth_tick(3600, function(_)
         for _, s in pairs(game.surfaces) do
             local ec = s.find_entities_filtered{type='cargo-landing-pad', force='player'}
@@ -130,7 +130,7 @@ script.on_nth_tick(3600, function(_)
     end)
 end
 
-if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-SA'].value and settings.startup['PHI-SA-GENERIC'].value) or settings.startup['PHI-VP'].value then
+if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
     function gui_create(player)
         if player.gui.relative.inserter_config then
             player.gui.relative.inserter_config.destroy()
