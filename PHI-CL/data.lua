@@ -1468,7 +1468,7 @@ if settings.startup['PHI-CT'].value then
     item.icon = nil
     item.icon_size = nil
     item.icon_mipmaps = nil
-    item.localised_name = {'name.trash-pipe'}
+    item.localised_name = {'', {'name.trash-entity'}, {'entity-name.pipe'}}
     data:extend({item})
 
     entity = table.deepcopy(data.raw['pipe']['pipe'])
@@ -1487,7 +1487,7 @@ if settings.startup['PHI-CT'].value then
         end
     end
 
-    entity.localised_name = {'name.trash-pipe'}
+    entity.localised_name = {'', {'name.trash-entity'}, {'entity-name.pipe'}}
     data:extend({entity})
 
     data:extend({{
@@ -1498,7 +1498,7 @@ if settings.startup['PHI-CT'].value then
         ingredients = {{type = 'item', name = 'iron-plate', amount = 1}},
         results = {{type = 'item', name = item.name, amount = 1}},
         main_product = item.name,
-        localised_name = {'name.trash-pipe'}
+        localised_name = {'', {'name.trash-entity'}, {'entity-name.pipe'}}
     }})
 
     table.insert(data.raw.technology['automation'].effects, {type = 'unlock-recipe', recipe = item.name})
@@ -1508,7 +1508,7 @@ if settings.startup['PHI-CT'].value then
     item.place_result = item.name
     item.subgroup = 'energy'
     item.order = 'b[steam-power]-a[electric-boiler]'
-    item.localised_name = {'name.electric-boiler'}
+    item.localised_name = {'', {'name.electric-entity'}, {'entity-name.boiler'}}
     data:extend({item})
 
     entity = table.deepcopy(data.raw['boiler']['boiler'])
@@ -1532,7 +1532,7 @@ if settings.startup['PHI-CT'].value then
     entity.fire_flicker_enabled = false
     entity.fire_glow_flicker_enabled = false
     entity.fire = {}
-    entity.localised_name = {'name.electric-boiler'}
+    entity.localised_name = {'', {'name.electric-entity'}, {'entity-name.boiler'}}
     data:extend({entity})
 
     data:extend({{
@@ -1543,7 +1543,7 @@ if settings.startup['PHI-CT'].value then
         ingredients = {{type = 'item', name = 'boiler', amount = 1}, {type = 'item', name = 'electronic-circuit', amount = 1}},
         results = {{type = 'item', name = item.name, amount = 1}},
         main_product = item.name,
-        localised_name = {'name.electric-boiler'}
+        localised_name = {'', {'name.electric-entity'}, {'entity-name.boiler'}}
     }})
 
     data.raw['boiler']['boiler'].fast_replaceable_group = 'boiler'
@@ -1555,7 +1555,7 @@ if settings.startup['PHI-CT'].value then
         item.place_result = item.name
         item.subgroup = 'storage'
         item.order = 'b[storage]-h[basic-' .. c .. ']'
-        item.localised_name = {'phi-cl.combine', {'name.basic-entity'}, {'name.' .. c}}
+        item.localised_name = {'', {'name.basic-entity'}, {'entity-name.' .. c}}
         data:extend({item})
 
         entity = (c == 'steel-chest' and table.deepcopy(data.raw['container'][c])) or table.deepcopy(data.raw['logistic-container'][c])
@@ -1566,7 +1566,7 @@ if settings.startup['PHI-CT'].value then
         entity.quality_affects_inventory_size = false
         entity.max_logistic_slots = (c == 'steel-chest' and nil) or 1
         entity.trash_inventory_size = (c == 'steel-chest' and nil) or 1
-        entity.localised_name = {'phi-cl.combine', {'name.basic-entity'}, {'name.' .. c}}
+        entity.localised_name = {'', {'name.basic-entity'}, {'entity-name.' .. c}}
         data:extend({entity})
 
         data:extend({{
@@ -1577,7 +1577,7 @@ if settings.startup['PHI-CT'].value then
             ingredients = {{type = 'item', name =c, amount = 1}},
             results = {{type = 'item', name = item.name, amount = 1}},
             main_product = item.name,
-            localised_name = {'phi-cl.combine', {'name.basic-entity'}, {'name.' .. c}}
+            localised_name = {'', {'name.basic-entity'}, {'entity-name.' .. c}}
         }})
     end
 
