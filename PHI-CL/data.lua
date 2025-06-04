@@ -162,7 +162,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         entity.order = 'zz'
         data:extend({entity})
 
-        if (not settings.startup['PHI-VP'].value) and mods['space-age'] and data.raw['lightning-attractor']['lightning-rod'] then
+        if (not (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP')) and mods['space-age'] and data.raw['lightning-attractor']['lightning-rod'] then
             entity = table.deepcopy(data.raw['lightning-attractor']['lightning-rod'])
             entity.name = 'rail-support-pole-lightning'
             entity.hidden = true
@@ -446,7 +446,7 @@ if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-SPOIL-FREEZE'].
     spoil_handle(data.raw.tool['agricultural-science-pack'])
 end
 
-if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].value) or settings.startup['PHI-VP'].value) and mods['space-age'] then
+if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP')) and mods['space-age'] then
     local function spoil_handle(i)
         i.spoil_ticks = nil
         i.spoil_result = nil
