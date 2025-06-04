@@ -51,7 +51,7 @@ if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIP
     armor.order = armor.order .. '-2'
     armor.equipment_grid = 'equipment-grid-14x14'
     armor.inventory_size_bonus = armor.inventory_size_bonus + 10
-    armor.localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'}
+    armor.localised_name = {'phi-cl.combine-gen', {'item-name.power-armor-mk2'}, '3'}
     data:extend({armor})
 
     data:extend({{
@@ -62,7 +62,7 @@ if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIP
         ingredients = {{type = 'item', name = 'power-armor-mk2', amount = 2}},
         results = {{type = 'item', name = armor.name, amount = 1}},
         main_product = armor.name,
-        localised_name = {'phi-cl.combine-gen', {'name.power-armor-mk2'}, '3'}
+        localised_name = {'phi-cl.combine-gen', {'item-name.power-armor-mk2'}, '3'}
     }})
 
     table.insert(data.raw.technology['power-armor-mk2'].effects, {type = 'unlock-recipe', recipe = armor.name})
@@ -84,7 +84,7 @@ if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIP
         armor.order = armor.order .. '-2'
         armor.equipment_grid = 'equipment-grid-15x16'
         armor.inventory_size_bonus = armor.inventory_size_bonus + 10
-        armor.localised_name = {'phi-cl.combine-gen', {'name.mech-armor'}, '2'}
+        armor.localised_name = {'phi-cl.combine-gen', {'item-name.mech-armor'}, '2'}
         data:extend({armor})
 
         data:extend({{
@@ -95,7 +95,7 @@ if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIP
             ingredients = {{type = 'item', name = 'mech-armor', amount = 2}},
             results = {{type = 'item', name = armor.name, amount = 1}},
             main_product = armor.name,
-            localised_name = {'phi-cl.combine-gen', {'name.mech-armor'}, '2'}
+            localised_name = {'phi-cl.combine-gen', {'item-name.mech-armor'}, '2'}
         }})
 
         table.insert(data.raw.technology['mech-armor'].effects, {type = 'unlock-recipe', recipe = armor.name})
