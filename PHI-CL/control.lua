@@ -57,7 +57,7 @@ local function inserter_changed(event)
 end
 
 local function hidden_recipe_enable(event)
-    local enable = (event.name == defines.events.on_player_cheat_mode_enabled)
+    local enable = (settings.startup['PHI-CT'].value and (event.name == defines.events.on_player_cheat_mode_enabled))
     local force = game.players[event.player_index].force
 
     for _, v in pairs(prototypes.fluid) do
@@ -157,16 +157,6 @@ local function event_reg(event_name, event_handler_name, event_handler)
     end
 end
 
-if settings.startup['PHI-CT'].value then
-    for _, event_name in pairs({'on_built_entity', 'on_robot_built_entity', 'on_space_platform_built_entity', 'script_raised_built', 'script_raised_revive'}) do
-        event_reg(event_name, entity_build)
-    end
-
-    for _, event_name in pairs({'on_player_cheat_mode_enabled', 'on_player_cheat_mode_disabled'}) do
-        event_reg(event_name, hidden_recipe_enable)
-    end
-end
-
 if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-' then
     script.on_nth_tick(3600, function(_)
         for _, s in pairs(game.surfaces) do
@@ -263,10 +253,14 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         end)
     end
 
-    for _, event_name in pairs({'on_entity_died', 'on_player_mined_entity', 'on_robot_pre_mined', 'script_raised_destroy'}) do
+    for _, event_name in pairs({'on_entity_died', 'on_player_mined_entity', 'on_robot_pre_mined', 'script_ratroy'}) do
         event_reg(event_name, 'entity_destroy', function(event)
             entity_destroy(event)
         end)
+    end
+
+    for _, event_name in pairs({'on_player_cheat_mode_enabled', 'on_player_cheat_mode_disabled'}) do
+        event_reg(event_name, hidden_recipe_enable)
     end
 end
 
