@@ -243,14 +243,14 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     script.on_event(defines.events.script_raised_destroy, destroy_electric_pole, filter)
 
     local function build_proxy_container(e)
-        local p = e.entity.surface.create_entity{name = 'phi-cl-proxy-container', position = {e.entity.position.x, e.entity.position.y}, force = 'neutral', quality = e.entity.quality.name}
+        local p = e.entity.surface.create_entity{name = 'proxy-container', position = {e.entity.position.x, e.entity.position.y}, force = 'neutral', quality = e.entity.quality.name}
         p.destructible = false
         p.proxy_target_entity = e.entity
         p.proxy_target_inventory = defines.inventory.lab_input
     end
 
     local function destroy_proxy_container(e)
-        local p = e.entity.surface.find_entity({name = 'phi-cl-proxy-container', force = 'neutral', quality = e.entity.quality.name}, {e.entity.position.x, e.entity.position.y})
+        local p = e.entity.surface.find_entity({name = 'proxy-container', force = 'neutral', quality = e.entity.quality.name}, {e.entity.position.x, e.entity.position.y})
 
         if p then
             p.destroy()
