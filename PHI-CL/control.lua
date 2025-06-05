@@ -68,8 +68,7 @@ if settings.startup['PHI-CT'].value then
         force.recipes['infinity-pipe'].enabled = enable
     end
 
-    script.on_event(defines.events.on_player_cheat_mode_enabled, hidden_recipe_enable)
-    script.on_event(defines.events.on_player_cheat_mode_disabled, hidden_recipe_enable)
+    script.on_event({defines.events.on_player_cheat_mode_enabled, defines.events.on_player_cheat_mode_disabled}, hidden_recipe_enable)
 end
 
 if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-' then
@@ -188,8 +187,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         end
     end
 
-    script.on_event(defines.events.on_player_rotated_entity, inserter_changed)
-    script.on_event(defines.events.on_player_flipped_entity, inserter_changed)
+    script.on_event({defines.events.on_player_rotated_entity, defines.events.on_player_flipped_entity}, inserter_changed)
 
     --[[
     script.on_event(defines.events.on_entity_settings_pasted, function(e)
@@ -222,17 +220,8 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         end
     end
 
-    local filter = {{filter = 'type', type = 'rail-support'}}
-    script.on_event(defines.events.on_built_entity, build_electric_pole, filter)
-    script.on_event(defines.events.on_robot_built_entity, build_electric_pole, filter)
-    script.on_event(defines.events.on_space_platform_built_entity, build_electric_pole, filter)
-    script.on_event(defines.events.script_raised_built, build_electric_pole, filter)
-    script.on_event(defines.events.script_raised_revive, build_electric_pole, filter)
-
-    script.on_event(defines.events.on_entity_died, destroy_electric_pole, filter)
-    script.on_event(defines.events.on_player_mined_entity, destroy_electric_pole, filter)
-    script.on_event(defines.events.on_robot_pre_mined, destroy_electric_pole, filter)
-    script.on_event(defines.events.script_raised_destroy, destroy_electric_pole, filter)
+    script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_entity, defines.events.on_space_platform_built_entity, defines.events.script_raised_built, defines.events.script_raised_revive}, build_electric_pole, {{filter = 'type', type = 'rail-support'}})
+    script.on_event({defines.events.on_entity_died, defines.events.on_player_mined_entity, defines.events.on_robot_pre_mined, defines.events.script_raised_destroy}, destroy_electric_pole, {{filter = 'type', type = 'rail-support'}})
 
     local function build_proxy_container(e)
         local p = e.entity.surface.create_entity{name = 'proxy-container', position = {e.entity.position.x, e.entity.position.y}, force = 'neutral', quality = e.entity.quality.name}
