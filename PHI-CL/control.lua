@@ -32,13 +32,13 @@ local rail_support_pole = {
 
 script.on_init(function()
 	storage.phi_cl = storage.phi_cl or {
-        event = {}
+        event_handler = {}
     }
 end)
 
 script.on_configuration_changed(function()
 	storage.phi_cl = storage.phi_cl or {
-        event = {}
+        event_handler = {}
     }
 end)
 
