@@ -57,7 +57,11 @@ local function inserter_changed(event)
 end
 
 local function hidden_recipe_enable(event)
-    local enable = (settings.startup['PHI-CT'].value and (event.name == defines.events.on_player_cheat_mode_enabled))
+    if not settings.startup['PHI-CT'].value then
+        return
+    end
+
+    local enable = (event.name == defines.events.on_player_cheat_mode_enabled)
     local force = game.players[event.player_index].force
 
     for _, v in pairs(prototypes.fluid) do
