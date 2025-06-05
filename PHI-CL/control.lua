@@ -254,7 +254,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     end
 
     for _, event_name in pairs({'on_player_cheat_mode_enabled', 'on_player_cheat_mode_disabled'}) do
-        event_reg(event_name, 'hidden_recipe_enable',hidden_recipe_enable)
+        event_reg(event_name, 'hidden_recipe_enable', hidden_recipe_enable)
     end
 end
 
