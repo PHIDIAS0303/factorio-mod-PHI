@@ -51,6 +51,24 @@ local function trash_entity_creation(event)
     end
 end
 
+local function hidden_recipe_enable(event)
+    local enable = (event.name == defines.events.on_player_cheat_mode_enabled)
+    local force = game.players[event.player_index].force
+
+    for _, v in pairs(prototypes.fluid) do
+        if force.recipes['pump-' .. v.name] then
+            force.recipes['pump-' .. v.name].enabled = enable
+        end
+    end
+
+    force.recipes['super-radar'].enabled = enable
+    force.recipes['passive-energy-void'].enabled = enable
+    force.recipes['linked-chest'].enabled = enable
+    force.recipes['infinity-chest'].enabled = enable
+    force.recipes['infinity-cargo-wagon'].enabled = enable
+    force.recipes['infinity-pipe'].enabled = enable
+end
+
 if settings.startup['PHI-CT'].value then
     if storage.phi_cl.event_handler then
         filter = {{filter = 'type', type = 'infinity-container', mode = 'or'}, {filter = 'type', type = 'infinity-pipe', mode = 'or'}}
@@ -69,24 +87,6 @@ if settings.startup['PHI-CT'].value then
                 }}
             end
         end
-    end
-
-    local function hidden_recipe_enable(event)
-        local enable = (event.name == defines.events.on_player_cheat_mode_enabled)
-        local force = game.players[event.player_index].force
-
-        for _, v in pairs(prototypes.fluid) do
-            if force.recipes['pump-' .. v.name] then
-                force.recipes['pump-' .. v.name].enabled = enable
-            end
-        end
-
-        force.recipes['super-radar'].enabled = enable
-        force.recipes['passive-energy-void'].enabled = enable
-        force.recipes['linked-chest'].enabled = enable
-        force.recipes['infinity-chest'].enabled = enable
-        force.recipes['infinity-cargo-wagon'].enabled = enable
-        force.recipes['infinity-pipe'].enabled = enable
     end
 
     script.on_event({defines.events.on_player_cheat_mode_enabled, defines.events.on_player_cheat_mode_disabled}, hidden_recipe_enable)
