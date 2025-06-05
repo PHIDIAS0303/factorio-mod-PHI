@@ -30,16 +30,46 @@ local rail_support_pole = {
     'rail-support-pole-lightning'
 }
 
+local function inserter_gui_create(player)
+    if player.gui.relative.inserter_config then
+        player.gui.relative.inserter_config.destroy()
+    end
+
+    local frame = player.gui.relative.add({type = 'frame', name = 'inserter_config', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}})
+    frame.add({type = 'drop-down', name = 'i_sub_direction', items = {'[virtual-signal=signal-0]', '[virtual-signal=signal-1]', '[virtual-signal=signal-2]', '[virtual-signal=signal-3]'}, selected_index = 1})
+end
+
+local function inserter_gui_update(player, inserter)
+    if not (inserter.supports_direction or ((inserter.prototype and inserter.prototype.allow_custom_vectors) or (inserter.ghost_prototype and inserter.ghost_prototype.allow_custom_vectors))) then
+        return
+    end
+
+    local gui = player.gui.relative.inserter_config
+    gui['i_sub_direction'].selected_index = ((inserter_direction_reversed[inserter.direction] - 1) % 4) + 1
+end
+
 script.on_init(function()
 	storage.phi_cl = storage.phi_cl or {
         event_handler = {}
     }
+
+    for _, player in pairs(game.players) do
+        inserter_gui_create(player)
+    end
 end)
 
 script.on_configuration_changed(function()
 	storage.phi_cl = storage.phi_cl or {
         event_handler = {}
     }
+
+    for _, player in pairs(game.players) do
+        inserter_gui_create(player)
+
+        if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.entity.type == 'inserter' or (player.opened.entity.type == 'entity-ghost' and player.opened.entity.ghost_type == 'inserter')) then
+            inserter_gui_update(player, player.opened.entity)
+        end
+    end
 end)
 
 local function event_reg(event_name, event_handler, event_filter)
@@ -147,40 +177,6 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-' 
 end
 
 if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
-    function inserter_gui_create(player)
-        if player.gui.relative.inserter_config then
-            player.gui.relative.inserter_config.destroy()
-        end
-
-        local frame = player.gui.relative.add({type = 'frame', name = 'inserter_config', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}})
-        frame.add({type = 'drop-down', name = 'i_sub_direction', items = {'[virtual-signal=signal-0]', '[virtual-signal=signal-1]', '[virtual-signal=signal-2]', '[virtual-signal=signal-3]'}, selected_index = 1})
-    end
-
-    function inserter_gui_update(player, inserter)
-        if not (inserter.supports_direction or ((inserter.prototype and inserter.prototype.allow_custom_vectors) or (inserter.ghost_prototype and inserter.ghost_prototype.allow_custom_vectors))) then
-            return
-        end
-
-        local gui = player.gui.relative.inserter_config
-        gui['i_sub_direction'].selected_index = ((inserter_direction_reversed[inserter.direction] - 1) % 4) + 1
-    end
-
-    script.on_init(function(_)
-        for _, player in pairs(game.players) do
-            inserter_gui_create(player)
-        end
-    end)
-
-    script.on_configuration_changed(function(_)
-        for _, player in pairs(game.players) do
-            inserter_gui_create(player)
-
-            if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.entity.type == 'inserter' or (player.opened.entity.type == 'entity-ghost' and player.opened.entity.ghost_type == 'inserter')) then
-                inserter_gui_update(player, player.opened.entity)
-            end
-        end
-    end)
-
     script.on_event(defines.events.on_player_created, function(e)
         inserter_gui_create(game.players[e.player_index])
     end)
