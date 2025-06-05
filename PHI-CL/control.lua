@@ -146,12 +146,14 @@ script.on_configuration_changed(function()
     end
 end)
 
-local function event_reg(event_name, event_handler, event_filter)
+local function event_reg(event_name, event_handler_name, event_handler)
     if storage.phi_cl.event_handler[event_name] then
-        table.insert(storage.phi_cl.event_handler[event_name], {func = event_handler, filter = event_filter})
+        if not storage.phi_cl.event_handler[event_name][event_handler_name] then
+            storage.phi_cl.event_handler[event_name][event_handler_name] = event_handler
+        end
 
     else
-        storage.phi_cl.event_handler[event_name] = {{func = event_handler, filter = event_filter}}
+        storage.phi_cl.event_handler[event_name] = {event_handler_name = event_handler}
     end
 end
 
@@ -222,17 +224,17 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-' 
 end
 
 if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
-    event_reg('on_player_created', function(event)
+    event_reg('on_player_created', 'inserter_gui_create', function(event)
         inserter_gui_create(game.players[event.player_index])
     end)
 
-    event_reg('on_gui_opened', function(event)
+    event_reg('on_gui_opened', 'inserter_gui_update', function(event)
         if event.entity and (event.entity.type == 'inserter' or (event.entity.type == 'entity-ghost' and event.entity.ghost_type == 'inserter')) then
             inserter_gui_update(game.players[event.player_index], event.entity)
         end
     end)
 
-    event_reg('on_gui_selection_state_changed', function(event)
+    event_reg('on_gui_selection_state_changed', 'inserter_direction', function(event)
         local player = game.players[event.player_index]
         local gui = player.gui.relative.inserter_config
 
@@ -242,29 +244,29 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     end)
 
     for _, event_name in pairs({'on_player_rotated_entity', 'on_player_flipped_entity'}) do
-        event_reg(event_name, function(event)
+        event_reg(event_name, 'inserter_changed', function(event)
             inserter_changed(event)
         end)
     end
 
     --[[
-    event_reg('on_entity_settings_pasted', function(event)
+    event_reg('on_entity_settings_pasted', 'inserter_direction', function(event)
         local player = game.players[event.player_index]
 
         if event.destination and event.source and player.opened and event.destination.type and (event.destination.type == 'inserter' or (event.destination.type == 'entity-ghost' and event.destination.ghost_type == 'inserter')) and event.source.type and (event.source.type == 'inserter' or (event.source.type == 'entity-ghost' and event.source.ghost_type == 'rter')) and player.opened == event.source then
             inserter_gui_update(player, player.opened)
         end
-    end, nil)
+    end)
     ]]
 
     for _, event_name in pairs({'on_built_entity', 'on_robot_built_entity', 'on_space_platform_built_entity', 'script_raised_built', 'script_raised_revive'}) do
-        event_reg(event_name, function(event)
+        event_reg(event_name, 'entity_build', function(event)
             entity_build(event)
         end)
     end
 
     for _, event_name in pairs({'on_entity_died', 'on_player_mined_entity', 'on_robot_pre_mined', 'script_raised_destroy'}) do
-        event_reg(event_name, function(event)
+        event_reg(event_name, 'entity_destroy', function(event)
             entity_destroy(event)
         end)
     end
