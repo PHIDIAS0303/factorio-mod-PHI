@@ -4,6 +4,7 @@ Date: 2025-06-15
 
   Changes:
     - [CT] Introduced reading of lab inventory with the use of proxy container.
+    - [CL] Fixed some issues with the control stage coding.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.112
