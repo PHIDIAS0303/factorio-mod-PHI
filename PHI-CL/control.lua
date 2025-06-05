@@ -134,10 +134,6 @@ local function entity_destroy(event)
 end
 
 script.on_init(function()
-	storage.phi_cl = storage.phi_cl or {
-        event_handler = {}
-    }
-
     if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
         for _, player in pairs(game.players) do
             inserter_gui_create(player)
@@ -146,10 +142,6 @@ script.on_init(function()
 end)
 
 script.on_configuration_changed(function()
-	storage.phi_cl = storage.phi_cl or {
-        event_handler = {}
-    }
-
     if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
         for _, player in pairs(game.players) do
             inserter_gui_create(player)
@@ -160,17 +152,6 @@ script.on_configuration_changed(function()
         end
     end
 end)
-
-local function event_reg(event_name, event_handler_name, event_handler)
-    if storage.phi_cl.event_handler[event_name] then
-        if not storage.phi_cl.event_handler[event_name][event_handler_name] then
-            storage.phi_cl.event_handler[event_name][event_handler_name] = event_handler
-        end
-
-    else
-        storage.phi_cl.event_handler[event_name] = {event_handler_name = event_handler}
-    end
-end
 
 if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-' then
     script.on_nth_tick(3600, function(_)
@@ -227,17 +208,17 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-' 
 end
 
 if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
-    event_reg('on_player_created', 'inserter_gui_create', function(event)
+    script.on_event(defines.events.on_player_created, function(event)
         inserter_gui_create(game.players[event.player_index])
     end)
 
-    event_reg('on_gui_opened', 'inserter_gui_update', function(event)
+    script.on_event(defines.events.on_gui_opened, function(event)
         if event.entity and (event.entity.type == 'inserter' or (event.entity.type == 'entity-ghost' and event.entity.ghost_type == 'inserter')) then
             inserter_gui_update(game.players[event.player_index], event.entity)
         end
     end)
 
-    event_reg('on_gui_selection_state_changed', 'inserter_direction', function(event)
+    script.on_event(defines.events.on_gui_selection_state_changed, function(event)
         local player = game.players[event.player_index]
         local gui = player.gui.relative.inserter_config
 
@@ -246,12 +227,8 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         end
     end)
 
-    for _, event_name in pairs({'on_player_rotated_entity', 'on_player_flipped_entity'}) do
-        event_reg(event_name, 'inserter_changed', inserter_changed)
-    end
-
     --[[
-    event_reg('on_entity_settings_pasted', 'inserter_direction', function(event)
+    script.on_event(defines.events.on_entity_settings_pasted, function(event)
         local player = game.players[event.player_index]
 
         if event.destination and event.source and player.opened and event.destination.type and (event.destination.type == 'inserter' or (event.destination.type == 'entity-ghost' and event.destination.ghost_type == 'inserter')) and event.source.type and (event.source.type == 'inserter' or (event.source.type == 'entity-ghost' and event.source.ghost_type == 'rter')) and player.opened == event.source then
@@ -261,22 +238,20 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     ]]
 
     for _, event_name in pairs({'on_built_entity', 'on_robot_built_entity', 'on_space_platform_built_entity', 'script_raised_built', 'script_raised_revive'}) do
-        event_reg(event_name, 'entity_build', entity_build)
+        script.on_event(defines.events[event_name], function(event)
+            entity_build(event)
+        end)
     end
 
     for _, event_name in pairs({'on_entity_died', 'on_player_mined_entity', 'on_robot_pre_mined', 'script_ratroy'}) do
-        event_reg(event_name, 'entity_destroy', entity_destroy)
+        script.on_event(defines.events[event_name], function(event)
+            entity_destroy(event)
+        end)
     end
 
     for _, event_name in pairs({'on_player_cheat_mode_enabled', 'on_player_cheat_mode_disabled'}) do
-        event_reg(event_name, 'hidden_recipe_enable', hidden_recipe_enable)
+        script.on_event(defines.events[event_name], function(event)
+            hidden_recipe_enable(event)
+        end)
     end
-end
-
-for event_name, event_funcs in pairs(storage.phi_cl.event_handler) do
-    script.on_event(defines.events[event_name], function(event)
-        for _, event_func in pairs(event_funcs) do
-            event_func(event)
-        end
-    end)
 end
