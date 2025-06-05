@@ -56,7 +56,7 @@ local function trash_entity_creation(event)
         event.entity.remove_unfiltered_items = true
 
     elseif event.entity.name == 'trash-pipe' then
-        event.entset_infinity_pipe_filter(nil)
+        event.entity.set_infinity_pipe_filter(nil)
     end
 end
 
@@ -270,4 +270,9 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     script.on_event(defines.events.on_player_mined_entity, destroy_proxy_container, filter)
     script.on_event(defines.events.on_robot_pre_mined, destroy_proxy_container, filter)
     script.on_event(defines.events.script_raised_destroy, destroy_proxy_container, filter)
+end
+
+for event_name, event_detail in pairs(storage.phi_cl.event_handler) do
+    script.on_event(defines.events[event_name], function(event)
+    end, event_detail.filter)
 end
