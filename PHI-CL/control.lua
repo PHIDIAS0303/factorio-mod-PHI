@@ -113,16 +113,18 @@ local function hidden_recipe_enable(event)
 end
 
 if settings.startup['PHI-CT'].value then
-    if storage.phi_cl.event_handler then
-        filter = {{filter = 'type', type = 'infinity-container', mode = 'or'}, {filter = 'type', type = 'infinity-pipe', mode = 'or'}}
+    filter = {{filter = 'type', type = 'infinity-container', mode = 'or'}, {filter = 'type', type = 'infinity-pipe', mode = 'or'}}
 
-        for _, event_name in pairs({'on_built_entity', 'on_robot_built_entity', 'on_space_platform_built_entity', 'script_raised_built', 'script_raised_revive'}) do
-            event_reg(event_name, trash_entity_creation, filter)
-        end
+    for _, event_name in pairs({'on_built_entity', 'on_robot_built_entity', 'on_space_platform_built_entity', 'script_raised_built', 'script_raised_revive'}) do
+        event_reg(event_name, function(event)
+            trash_entity_creation(event)
+        end, filter)
+    end
 
-        for _, event_name in pairs({'on_player_cheat_mode_enabled', 'on_player_cheat_mode_disabled'}) do
-            event_reg(event_name, hidden_recipe_enable, nil)
-        end
+    for _, event_name in pairs({'on_player_cheat_mode_enabled', 'on_player_cheat_mode_disabled'}) do
+        event_reg(event_name, function(event)
+            hidden_recipe_enable(event)
+        end, nil)
     end
 end
 
@@ -181,9 +183,9 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-' 
 end
 
 if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
-    script.on_event(defines.events.on_player_created, function(e)
-        inserter_gui_create(game.players[e.player_index])
-    end)
+    event_reg('on_player_created', function(event)
+        inserter_gui_create(game.players[event.player_index])
+    end, nil)
 
     script.on_event(defines.events.on_gui_opened, function(e)
         if e.entity and (e.entity.type == 'inserter' or (e.entity.type == 'entity-ghost' and e.entity.ghost_type == 'inserter')) then
