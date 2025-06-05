@@ -227,6 +227,10 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         end
     end)
 
+    script.on_event({defines.events.on_player_rotated_entity, defines.events.on_player_flipped_entity}, function(event)
+        inserter_changed(event)
+    end)
+
     --[[
     script.on_event(defines.events.on_entity_settings_pasted, function(event)
         local player = game.players[event.player_index]
@@ -237,21 +241,15 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     end)
     ]]
 
-    for _, event_name in pairs({'on_built_entity', 'on_robot_built_entity', 'on_space_platform_built_entity', 'script_raised_built', 'script_raised_revive'}) do
-        script.on_event(defines.events[event_name], function(event)
-            entity_build(event)
-        end)
-    end
+    script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_entity, defines.events.on_space_platform_built_entity, defines.events.script_raised_built, defines.events.script_raised_revive}, function(event)
+        entity_build(event)
+    end)
 
-    for _, event_name in pairs({'on_entity_died', 'on_player_mined_entity', 'on_robot_pre_mined', 'script_ratroy'}) do
-        script.on_event(defines.events[event_name], function(event)
-            entity_destroy(event)
-        end)
-    end
+    script.on_event({defines.events.on_entity_died, defines.events.on_player_mined_entity, defines.events.on_robot_pre_mined, defines.events.script_raised_destroy}, function(event)
+        entity_destroy(event)
+    end)
 
-    for _, event_name in pairs({'on_player_cheat_mode_enabled', 'on_player_cheat_mode_disabled'}) do
-        script.on_event(defines.events[event_name], function(event)
-            hidden_recipe_enable(event)
-        end)
-    end
+    script.on_event({defines.events.on_player_cheat_mode_enabled, defines.events.on_player_cheat_mode_disabled}, function(event)
+        hidden_recipe_enable(event)
+    end)
 end
