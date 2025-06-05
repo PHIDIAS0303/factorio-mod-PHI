@@ -230,14 +230,42 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         end
     end
 
-    script.on_event(defines.events.on_built_entity, build_electric_pole, {{filter='name', name='rail-support'}})
-    script.on_event(defines.events.on_robot_built_entity, build_electric_pole, {{filter='name', name='rail-support'}})
-    script.on_event(defines.events.on_space_platform_built_entity, build_electric_pole, {{filter='name', name='rail-support'}})
-    script.on_event(defines.events.script_raised_built, build_electric_pole, {{filter='name', name='rail-support'}})
-    script.on_event(defines.events.script_raised_revive, build_electric_pole, {{filter='name', name='rail-support'}})
+    local filter = {{filter = 'type', type = 'rail-support'}}
+    script.on_event(defines.events.on_built_entity, build_electric_pole, filter)
+    script.on_event(defines.events.on_robot_built_entity, build_electric_pole, filter)
+    script.on_event(defines.events.on_space_platform_built_entity, build_electric_pole, filter)
+    script.on_event(defines.events.script_raised_built, build_electric_pole, filter)
+    script.on_event(defines.events.script_raised_revive, build_electric_pole, filter)
 
-    script.on_event(defines.events.on_entity_died, destroy_electric_pole, {{filter='name', name='rail-support'}})
-    script.on_event(defines.events.on_player_mined_entity, destroy_electric_pole, {{filter='name', name='rail-support'}})
-    script.on_event(defines.events.on_robot_pre_mined, destroy_electric_pole, {{filter='name', name='rail-support'}})
-    script.on_event(defines.events.script_raised_destroy, destroy_electric_pole, {{filter='name', name='rail-support'}})
+    script.on_event(defines.events.on_entity_died, destroy_electric_pole, filter)
+    script.on_event(defines.events.on_player_mined_entity, destroy_electric_pole, filter)
+    script.on_event(defines.events.on_robot_pre_mined, destroy_electric_pole, filter)
+    script.on_event(defines.events.script_raised_destroy, destroy_electric_pole, filter)
+
+    local function build_proxy_container(e)
+        local p = e.entity.surface.create_entity{name = 'phi-cl-proxy-container', position = {e.entity.position.x, e.entity.position.y}, force = 'neutral', quality = e.entity.quality.name}
+        p.destructible = false
+        p.proxy_target_entity = e.entity
+        p.proxy_target_inventory = defines.inventory.lab_input
+    end
+
+    local function destroy_proxy_container(e)
+        local p = e.entity.surface.find_entity({name = 'phi-cl-proxy-container', force = 'neutral', quality = e.entity.quality.name}, {e.entity.position.x, e.entity.position.y})
+
+        if p then
+            p.destroy()
+        end
+    end
+
+    filter = {{filter = 'type', type = 'lab'}}
+    script.on_event(defines.events.on_built_entity, build_proxy_container, filter)
+    script.on_event(defines.events.on_robot_built_entity, build_proxy_container, filter)
+    script.on_event(defines.events.on_space_platform_built_entity, build_proxy_container, filter)
+    script.on_event(defines.events.script_raised_built, build_proxy_container, filter)
+    script.on_event(defines.events.script_raised_revive, build_proxy_container, filter)
+
+    script.on_event(defines.events.on_entity_died, destroy_proxy_container, filter)
+    script.on_event(defines.events.on_player_mined_entity, destroy_proxy_container, filter)
+    script.on_event(defines.events.on_robot_pre_mined, destroy_proxy_container, filter)
+    script.on_event(defines.events.script_raised_destroy, destroy_proxy_container, filter)
 end

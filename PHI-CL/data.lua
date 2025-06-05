@@ -1675,9 +1675,9 @@ if settings.startup['PHI-CT'].value then
     entity.collision_mask = {colliding_with_tiles_only = true, layers = {}, not_colliding_with_itself = true}
     -- entity.flags = {'hide-alt-info', 'no-copy-paste', 'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'not-selectable-in-game', 'placeable-off-grid', 'placeable-player'}
     entity.flags = {'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'placeable-off-grid', 'placeable-player', 'no-automated-item-insertion', 'no-automated-item-removal'}
-    entity.draw_circuit_wires = false
     entity.draw_inventory_content = false
     entity.next_upgrade = nil
+    entity.selection_priority = 51
     entity.order = 'zz'
     data:extend{{entity}}
 
