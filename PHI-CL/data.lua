@@ -161,6 +161,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         entity.collision_mask = {colliding_with_tiles_only = true, layers = {}, not_colliding_with_itself = true}
         entity.flags = {'hide-alt-info', 'no-copy-paste', 'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'not-selectable-in-game', 'placeable-off-grid', 'placeable-player'}
         entity.next_upgrade = nil
+        entity.selection_priority = 49
         entity.order = 'zz'
         data:extend({entity})
 
@@ -178,6 +179,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
             entity.collision_mask = {colliding_with_tiles_only = true, layers = {}, not_colliding_with_itself = true}
             entity.flags = {'hide-alt-info', 'no-copy-paste', 'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'not-selectable-in-game', 'placeable-off-grid', 'placeable-player'}
             entity.next_upgrade = nil
+            entity.selection_priority = 49
             entity.order = 'zz'
             data:extend({entity})
         end
@@ -475,6 +477,10 @@ end
 
 if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
     data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
+
+    for _, t in pairs({'arithmetic-combinator', 'decider-combinator', 'programmable-speaker', 'selector-combinator'}) do
+        data.raw[t][t].energy_source.usage_priority = 'primary-input'
+    end
 
     data.raw.resource['lithium-brine'].infinite = true
     data.raw.resource['lithium-brine'].minimum = math.max(60000, data.raw.resource['lithium-brine'].minimum or 0)
@@ -1658,9 +1664,22 @@ if settings.startup['PHI-CT'].value then
         table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-underground-belt-a'})
     end
 
-    for _, t in pairs({'arithmetic-combinator', 'decider-combinator', 'programmable-speaker', 'selector-combinator'}) do
-        data.raw[t][t].energy_source.usage_priority = 'primary-input'
-    end
+    entity = table.deepcopy(data.raw['proxy-container']['proxy-container'])
+    entity.name = 'phi-cl-proxy-container'
+    entity.hidden = true
+    entity.hidden_in_factoriopedia = true
+    entity.minable.result = nil
+    entity.water_reflection = nil
+    entity.collision_box = {{-0.2, -0.2}, {0.2, 0.2}}
+    entity.selection_box = {{-0.5, -0.5}, {0.5, 0.5}}
+    entity.collision_mask = {colliding_with_tiles_only = true, layers = {}, not_colliding_with_itself = true}
+    -- entity.flags = {'hide-alt-info', 'no-copy-paste', 'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'not-selectable-in-game', 'placeable-off-grid', 'placeable-player'}
+    entity.flags = {'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'placeable-off-grid', 'placeable-player', 'no-automated-item-insertion', 'no-automated-item-removal'}
+    entity.draw_circuit_wires = false
+    entity.draw_inventory_content = false
+    entity.next_upgrade = nil
+    entity.order = 'zz'
+    data:extend{{entity}}
 
     for _, v in pairs(data.raw.fluid) do
         if (not data.raw.recipe['pump-' .. v.name]) and v.subgroup == 'fluid' then
