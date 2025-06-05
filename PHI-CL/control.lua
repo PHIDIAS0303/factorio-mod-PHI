@@ -232,9 +232,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     end)
 
     for _, event_name in pairs({'on_player_rotated_entity', 'on_player_flipped_entity'}) do
-        event_reg(event_name, 'inserter_changed', function(event)
-            inserter_changed(event)
-        end)
+        event_reg(event_name, 'inserter_changed', inserter_changed)
     end
 
     --[[
@@ -248,19 +246,15 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     ]]
 
     for _, event_name in pairs({'on_built_entity', 'on_robot_built_entity', 'on_space_platform_built_entity', 'script_raised_built', 'script_raised_revive'}) do
-        event_reg(event_name, 'entity_build', function(event)
-            entity_build(event)
-        end)
+        event_reg(event_name, 'entity_build', entity_build)
     end
 
     for _, event_name in pairs({'on_entity_died', 'on_player_mined_entity', 'on_robot_pre_mined', 'script_ratroy'}) do
-        event_reg(event_name, 'entity_destroy', function(event)
-            entity_destroy(event)
-        end)
+        event_reg(event_name, 'entity_destroy', entity_destroy)
     end
 
     for _, event_name in pairs({'on_player_cheat_mode_enabled', 'on_player_cheat_mode_disabled'}) do
-        event_reg(event_name, hidden_recipe_enable)
+        event_reg(event_name, 'hidden_recipe_enable',hidden_recipe_enable)
     end
 end
 
