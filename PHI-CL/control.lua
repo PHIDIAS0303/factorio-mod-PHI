@@ -48,6 +48,41 @@ local function inserter_gui_update(player, inserter)
     gui['i_sub_direction'].selected_index = ((inserter_direction_reversed[inserter.direction] - 1) % 4) + 1
 end
 
+local function inserter_changed(e)
+    local player = game.players[e.player_index]
+
+    if e.entity and player.opened == e.entity and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
+        inserter_gui_update(player, player.opened)
+    end
+end
+
+local function trash_entity_creation(event)
+    if event.entity.name == 'trash-chest' then
+        event.entity.remove_unfiltered_items = true
+
+    elseif event.entity.name == 'trash-pipe' then
+        event.entity.set_infinity_pipe_filter(nil)
+    end
+end
+
+local function hidden_recipe_enable(event)
+    local enable = (event.name == defines.events.on_player_cheat_mode_enabled)
+    local force = game.players[event.player_index].force
+
+    for _, v in pairs(prototypes.fluid) do
+        if force.recipes['pump-' .. v.name] then
+            force.recipes['pump-' .. v.name].enabled = enable
+        end
+    end
+
+    force.recipes['super-radar'].enabled = enable
+    force.recipes['passive-energy-void'].enabled = enable
+    force.recipes['linked-chest'].enabled = enable
+    force.recipes['infinity-chest'].enabled = enable
+    force.recipes['infinity-cargo-wagon'].enabled = enable
+    force.recipes['infinity-pipe'].enabled = enable
+end
+
 script.on_init(function()
 	storage.phi_cl = storage.phi_cl or {
         event_handler = {}
@@ -83,33 +118,6 @@ local function event_reg(event_name, event_handler, event_filter)
     else
         storage.phi_cl.event_handler[event_name] = {{func = event_handler, filter = event_filter}}
     end
-end
-
-local function trash_entity_creation(event)
-    if event.entity.name == 'trash-chest' then
-        event.entity.remove_unfiltered_items = true
-
-    elseif event.entity.name == 'trash-pipe' then
-        event.entity.set_infinity_pipe_filter(nil)
-    end
-end
-
-local function hidden_recipe_enable(event)
-    local enable = (event.name == defines.events.on_player_cheat_mode_enabled)
-    local force = game.players[event.player_index].force
-
-    for _, v in pairs(prototypes.fluid) do
-        if force.recipes['pump-' .. v.name] then
-            force.recipes['pump-' .. v.name].enabled = enable
-        end
-    end
-
-    force.recipes['super-radar'].enabled = enable
-    force.recipes['passive-energy-void'].enabled = enable
-    force.recipes['linked-chest'].enabled = enable
-    force.recipes['infinity-chest'].enabled = enable
-    force.recipes['infinity-cargo-wagon'].enabled = enable
-    force.recipes['infinity-pipe'].enabled = enable
 end
 
 if settings.startup['PHI-CT'].value then
@@ -187,28 +195,22 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         inserter_gui_create(game.players[event.player_index])
     end, nil)
 
-    script.on_event(defines.events.on_gui_opened, function(e)
-        if e.entity and (e.entity.type == 'inserter' or (e.entity.type == 'entity-ghost' and e.entity.ghost_type == 'inserter')) then
-            inserter_gui_update(game.players[e.player_index], e.entity)
+    event_reg('on_gui_opened', function(event)
+        if event.entity and (event.entity.type == 'inserter' or (event.entity.type == 'entity-ghost' and event.entity.ghost_type == 'inserter')) then
+            inserter_gui_update(game.players[event.player_index], event.entity)
         end
-    end)
+    end, nil)
 
-    script.on_event(defines.events.on_gui_selection_state_changed, function(e)
-        local player = game.players[e.player_index]
+    event_reg('on_gui_selection_state_changed', function(event)
+        local player = game.players[event.player_index]
         local gui = player.gui.relative.inserter_config
 
-        if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) and gui[e.element.name] then
-            player.opened.direction = inserter_direction[(math.floor(inserter_direction_reversed[player.opened.direction] / 4) * 4 + (e.element.parent['i_sub_direction'].selected_index - 1)) % 16 + 1]
+        if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) and gui[event.element.name] then
+            player.opened.direction = inserter_direction[(math.floor(inserter_direction_reversed[player.opened.direction] / 4) * 4 + (event.element.parent['i_sub_direction'].selected_index - 1)) % 16 + 1]
         end
-    end)
+    end, nil)
 
-    local function inserter_changed(e)
-        local player = game.players[e.player_index]
 
-        if e.entity and player.opened == e.entity and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
-            inserter_gui_update(player, player.opened)
-        end
-    end
 
     script.on_event({defines.events.on_player_rotated_entity, defines.events.on_player_flipped_entity}, inserter_changed)
 
