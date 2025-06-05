@@ -53,8 +53,10 @@ script.on_init(function()
         event_handler = {}
     }
 
-    for _, player in pairs(game.players) do
-        inserter_gui_create(player)
+    if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
+        for _, player in pairs(game.players) do
+            inserter_gui_create(player)
+        end
     end
 end)
 
@@ -63,11 +65,13 @@ script.on_configuration_changed(function()
         event_handler = {}
     }
 
-    for _, player in pairs(game.players) do
-        inserter_gui_create(player)
+    if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
+        for _, player in pairs(game.players) do
+            inserter_gui_create(player)
 
-        if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.entity.type == 'inserter' or (player.opened.entity.type == 'entity-ghost' and player.opened.entity.ghost_type == 'inserter')) then
-            inserter_gui_update(player, player.opened.entity)
+            if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.entity.type == 'inserter' or (player.opened.entity.type == 'entity-ghost' and player.opened.entity.ghost_type == 'inserter')) then
+                inserter_gui_update(player, player.opened.entity)
+            end
         end
     end
 end)
