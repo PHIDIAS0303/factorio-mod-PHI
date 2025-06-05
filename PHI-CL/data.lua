@@ -496,7 +496,7 @@ if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup[
     data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = math.max(60, data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size)
     data.raw['cargo-wagon']['cargo-wagon'].inventory_size = math.max(80, data.raw['cargo-wagon']['cargo-wagon'].inventory_size)
 
-    data.raw.technology['foundation'].prerequisites = {'elevated-rail', 'rail-support-foundations'}
+    data.raw.technology['foundation'].prerequisites = {'rail-support-foundations'}
     data.raw.technology['foundation'].unit.count_formula = '1000'
     data.raw.technology['foundation'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
     data.raw.technology['rail-support-foundations'].prerequisites = {'elevated-rail', 'planet-discovery-fulgora'}
@@ -697,7 +697,7 @@ if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup[
     data:extend({{
         type = 'technology',
         name = 'cargo-landing-pad-count',
-        prerequisites = {'rocket-silo', 'space-science-pack'},
+        prerequisites = {'space-science-pack'},
         effects = {{type = 'cargo-landing-pad-count', modifier = 1}},
         unit = {count_formula = '1000 * L', ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}, time = 60},
         icons = {{icon = '__base__/graphics/technology/rocket-silo.png', icon_size = 256}, {icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png', icon_size = 128, scale = 0.5, shift = {50, 50}}},
@@ -867,7 +867,7 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
             data:extend({{
                 type = 'technology',
                 name = v .. '-productivity',
-                prerequisites = {v, 'automation-3', 'electromagnetic-plant', 'production-science-pack', 'utility-science-pack'},
+                prerequisites = {'electromagnetic-plant'},
                 effects = {{type = 'change-recipe-productivity', recipe = v, change = 0.05}},
                 unit = {count_formula = '1000 * (1.5 ^ (L - 1))', ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}, time = 60},
                 icons = {{icon = '__base__/graphics/technology/' .. v ..'.png', icon_size = 256}, {icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png', icon_size = 128, scale = 0.5, shift = {50, 50}}},
@@ -891,7 +891,7 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
         table.insert(data.raw.technology['engine-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'electric-engine-unit', change = 0.05})
         table.insert(data.raw.technology['engine-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'flying-robot-frame', change = 0.05})
         data.raw.technology['engine-productivity'].effects[1].recipe = 'engine-unit'
-        data.raw.technology['sulfur-processing-productivity'].prerequisites[3] = 'cryogenic-plant'
+        data.raw.technology['sulfur-processing-productivity'].prerequisites = {'cryogenic-plant'}
         data.raw.technology['sulfur-processing-productivity'].effects[1].recipe = 'sulfur'
         data.raw.technology['electronics-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'copper-cable', change = 0.05}}
         data.raw.technology['solar-energy-productivity'].effects[1].recipe = 'solar-panel'
