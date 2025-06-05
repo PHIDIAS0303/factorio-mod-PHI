@@ -203,7 +203,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
 
     event_reg('on_gui_selection_state_changed', function(event)
         local player = game.players[event.player_index]
-        local gui = player.gui.reve.inserter_config
+        local gui = player.gui.relative.inserter_config
 
         if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) and gui[event.element.name] then
             player.opened.direction = inserter_direction[(math.floor(inserter_direction_reversed[player.opened.direction] / 4) * 4 + (event.element.parent['i_sub_direction'].selected_index - 1)) % 16 + 1]
