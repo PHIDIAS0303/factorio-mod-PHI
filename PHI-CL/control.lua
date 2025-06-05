@@ -83,6 +83,42 @@ local function hidden_recipe_enable(event)
     force.recipes['infinity-pipe'].enabled = enable
 end
 
+local function rail_support_electric_pole_build(event)
+    for _, v in pairs(rail_support_pole) do
+        if prototypes.entity[v] then
+            local p = event.entity.surface.create_entity{name = v, position = {event.entity.position.x, event.entity.position.y}, force = 'neutral', quality = event.entity.quality.name}
+            p.destructible = false
+        end
+    end
+end
+
+local function rail_support_electric_pole_destroy(event)
+    for _, v in pairs(rail_support_pole) do
+        if prototypes.entity[v] then
+            local p = event.entity.surface.find_entity({name = v, force = 'neutral', quality = event.entity.quality.name}, {event.entity.position.x, event.entity.position.y})
+
+            if p then
+                p.destroy()
+            end
+        end
+    end
+end
+
+local function lab_proxy_container_build(e)
+    local p = e.entity.surface.create_entity{name = 'proxy-container', position = {e.entity.position.x, e.entity.position.y}, force = 'neutral', quality = e.entity.quality.name}
+    p.destructible = false
+    p.proxy_target_entity = e.entity
+    p.proxy_target_inventory = defines.inventory.lab_input
+end
+
+local function lab_proxy_container_destroy(e)
+    local p = e.entity.surface.find_entity({name = 'proxy-container', force = 'neutral', quality = e.entity.quality.name}, {e.entity.position.x, e.entity.position.y})
+
+    if p then
+        p.destroy()
+    end
+end
+
 script.on_init(function()
 	storage.phi_cl = storage.phi_cl or {
         event_handler = {}
@@ -217,65 +253,38 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     end
 
     --[[
-    script.on_event(defines.events.on_entity_settings_pasted, function(e)
-        local player = game.players[e.player_index]
+    event_reg('on_entity_settings_pasted', function(event)
+        local player = game.players[event.player_index]
 
-        if e.destination and e.source and player.opened and e.destination.type and (e.destination.type == 'inserter' or (e.destination.type == 'entity-ghost' and e.destination.ghost_type == 'inserter')) and e.source.type and (e.source.type == 'inserter' or (e.source.type == 'entity-ghost' and e.source.ghost_type == 'inserter')) and player.opened == e.source then
+        if event.destination and event.source and player.opened and event.destination.type and (event.destination.type == 'inserter' or (event.destination.type == 'entity-ghost' and event.destination.ghost_type == 'inserter')) and event.source.type and (event.source.type == 'inserter' or (event.source.type == 'entity-ghost' and event.source.ghost_type == 'rter')) and player.opened == event.source then
             inserter_gui_update(player, player.opened)
         end
-    end)
+    end, nil)
     ]]
 
-    local function build_electric_pole(e)
-        for _, v in pairs(rail_support_pole) do
-            if prototypes.entity[v] then
-                local p = e.entity.surface.create_entity{name = v, position = {e.entity.position.x, e.entity.position.y}, force = 'neutral', quality = e.entity.quality.name}
-                p.destructible = false
-            end
-        end
+    for _, event_name in pairs({'on_built_entity', 'on_robot_built_entity', 'on_space_platform_built_entity', 'script_raised_built', 'script_raised_revive'}) do
+        event_reg(event_name, function(event)
+            rail_support_electric_pole_build(event)
+        end, {{filter = 'type', type = 'rail-support'}})
     end
 
-    local function destroy_electric_pole(e)
-        for _, v in pairs(rail_support_pole) do
-            if prototypes.entity[v] then
-                local p = e.entity.surface.find_entity({name = v, force = 'neutral', quality = e.entity.quality.name}, {e.entity.position.x, e.entity.position.y})
-
-                if p then
-                    p.destroy()
-                end
-            end
-        end
+    for _, event_name in pairs({'on_entity_died', 'on_player_mined_entity', 'on_robot_pre_mined', 'script_raised_destroy'}) do
+        event_reg(event_name, function(event)
+            rail_support_electric_pole_destroy(event)
+        end, {{filter = 'type', type = 'rail-support'}})
     end
 
-    script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_entity, defines.events.on_space_platform_built_entity, defines.events.script_raised_built, defines.events.script_raised_revive}, build_electric_pole, {{filter = 'type', type = 'rail-support'}})
-    script.on_event({defines.events.on_entity_died, defines.events.on_player_mined_entity, defines.events.on_robot_pre_mined, defines.events.script_raised_destroy}, destroy_electric_pole, {{filter = 'type', type = 'rail-support'}})
-
-    local function build_proxy_container(e)
-        local p = e.entity.surface.create_entity{name = 'proxy-container', position = {e.entity.position.x, e.entity.position.y}, force = 'neutral', quality = e.entity.quality.name}
-        p.destructible = false
-        p.proxy_target_entity = e.entity
-        p.proxy_target_inventory = defines.inventory.lab_input
+    for _, event_name in pairs({'on_built_entity', 'on_robot_built_entity', 'on_space_platform_built_entity', 'script_raised_built', 'script_raised_revive'}) do
+        event_reg(event_name, function(event)
+            lab_proxy_container_build(event)
+        end, {{filter = 'type', type = 'lab'}})
     end
 
-    local function destroy_proxy_container(e)
-        local p = e.entity.surface.find_entity({name = 'proxy-container', force = 'neutral', quality = e.entity.quality.name}, {e.entity.position.x, e.entity.position.y})
-
-        if p then
-            p.destroy()
-        end
+    for _, event_name in pairs({'on_entity_died', 'on_player_mined_entity', 'on_robot_pre_mined', 'script_raised_destroy'}) do
+        event_reg(event_name, function(event)
+            lab_proxy_container_destroy(event)
+        end, {{filter = 'type', type = 'lab'}})
     end
-
-    filter = {{filter = 'type', type = 'lab'}}
-    script.on_event(defines.events.on_built_entity, build_proxy_container, filter)
-    script.on_event(defines.events.on_robot_built_entity, build_proxy_container, filter)
-    script.on_event(defines.events.on_space_platform_built_entity, build_proxy_container, filter)
-    script.on_event(defines.events.script_raised_built, build_proxy_container, filter)
-    script.on_event(defines.events.script_raised_revive, build_proxy_container, filter)
-
-    script.on_event(defines.events.on_entity_died, destroy_proxy_container, filter)
-    script.on_event(defines.events.on_player_mined_entity, destroy_proxy_container, filter)
-    script.on_event(defines.events.on_robot_pre_mined, destroy_proxy_container, filter)
-    script.on_event(defines.events.script_raised_destroy, destroy_proxy_container, filter)
 end
 
 for event_name, event_detail in pairs(storage.phi_cl.event_handler) do
