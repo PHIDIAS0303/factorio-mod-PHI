@@ -40,12 +40,11 @@ end)
 
 if settings.startup['PHI-CT'].value then
     local function trash_entity_creation(event)
-        if not (event.entity and event.entity.valid and event.entity.name) then
+        if not (event.entity.valid and event.entity.name) then
             return
         end
 
         if event.entity.name == 'trash-chest' then
-            event.entity.infinity_container_filters = {}
             event.entity.remove_unfiltered_items = true
 
         elseif event.entity.name == 'trash-pipe' then
