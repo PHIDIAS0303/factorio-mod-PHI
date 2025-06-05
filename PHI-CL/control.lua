@@ -30,6 +30,14 @@ local rail_support_pole = {
     'rail-support-pole-lightning'
 }
 
+script.on_init(function()
+	storage.phi_cl = storage.phi_cl or {}
+end)
+
+script.on_configuration_changed(function()
+	storage.phi_cl = storage.phi_cl or {}
+end)
+
 if settings.startup['PHI-CT'].value then
     local function trash_entity_creation(event)
         if event.entity and event.entity.valid and event.entity.name then
