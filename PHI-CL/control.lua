@@ -83,17 +83,27 @@ local function entity_build(event)
             end
         end
 
-    elseif event.entity.type == 'lab' then
+        return
+    end
+
+    if event.entity.type == 'lab' then
         local p = event.entity.surface.create_entity{name = 'proxy-container', position = {event.entity.position.x, event.entity.position.y}, force = 'neutral', quality = event.entity.quality.name}
         p.destructible = false
         p.proxy_target_entity = event.entity
         p.proxy_target_inventory = defines.inventory.lab_input
 
-    elseif event.entity.type == 'infinity-container' and event.entity.name == 'trash-chest' then
-        event.entity.remove_unfiltered_items = true
+        return
+    end
 
-    elseif event.entity.type == 'infinity-pipe' and event.entity.name == 'trash-pipe' then
-        event.entity.set_infinity_pipe_filter(nil)
+    if settings.startup['PHI-CT'].value then
+        if event.entity.type == 'infinity-container' and event.entity.name == 'trash-chest' then
+            event.entity.remove_unfiltered_items = true
+
+        elseif event.entity.type == 'infinity-pipe' and event.entity.name == 'trash-pipe' then
+            event.entity.set_infinity_pipe_filter(nil)
+        end
+
+        return
     end
 end
 
