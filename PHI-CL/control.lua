@@ -56,15 +56,6 @@ local function inserter_changed(event)
     end
 end
 
-local function trash_entity_creation(event)
-    if event.entity.name == 'trash-chest' then
-        event.entity.remove_unfiltered_items = true
-
-    elseif event.entity.name == 'trash-pipe' then
-        event.entity.set_infinity_pipe_filter(nil)
-    end
-end
-
 local function hidden_recipe_enable(event)
     local enable = (event.name == defines.events.on_player_cheat_mode_enabled)
     local force = game.players[event.player_index].force
@@ -83,39 +74,47 @@ local function hidden_recipe_enable(event)
     force.recipes['infinity-pipe'].enabled = enable
 end
 
-local function rail_support_electric_pole_build(event)
-    for _, v in pairs(rail_support_pole) do
-        if prototypes.entity[v] then
-            local p = event.entity.surface.create_entity{name = v, position = {event.entity.position.x, event.entity.position.y}, force = 'neutral', quality = event.entity.quality.name}
-            p.destructible = false
-        end
-    end
-end
-
-local function rail_support_electric_pole_destroy(event)
-    for _, v in pairs(rail_support_pole) do
-        if prototypes.entity[v] then
-            local p = event.entity.surface.find_entity({name = v, force = 'neutral', quality = event.entity.quality.name}, {event.entity.position.x, event.entity.position.y})
-
-            if p then
-                p.destroy()
+local function entity_build(event)
+    if event.entity.type == 'rail-support' then
+        for _, v in pairs(rail_support_pole) do
+            if prototypes.entity[v] then
+                local p = event.entity.surface.create_entity{name = v, position = {event.entity.position.x, event.entity.position.y}, force = 'neutral', quality = event.entity.quality.name}
+                p.destructible = false
             end
         end
+
+    elseif event.entity.type == 'lab' then
+        local p = event.entity.surface.create_entity{name = 'proxy-container', position = {event.entity.position.x, event.entity.position.y}, force = 'neutral', quality = event.entity.quality.name}
+        p.destructible = false
+        p.proxy_target_entity = event.entity
+        p.proxy_target_inventory = defines.inventory.lab_input
+
+    elseif event.entity.name == 'trash-chest' then
+        event.entity.remove_unfiltered_items = true
+
+    elseif event.entity.name == 'trash-pipe' then
+        event.entity.set_infinity_pipe_filter(nil)
     end
 end
 
-local function lab_proxy_container_build(e)
-    local p = e.entity.surface.create_entity{name = 'proxy-container', position = {e.entity.position.x, e.entity.position.y}, force = 'neutral', quality = e.entity.quality.name}
-    p.destructible = false
-    p.proxy_target_entity = e.entity
-    p.proxy_target_inventory = defines.inventory.lab_input
-end
+local function entity_destroy(event)
+    if event.entity.type == 'rail-support' then
+        for _, v in pairs(rail_support_pole) do
+            if prototypes.entity[v] then
+                local p = event.entity.surface.find_entity({name = v, force = 'neutral', quality = event.entity.quality.name}, {event.entity.position.x, event.entity.position.y})
 
-local function lab_proxy_container_destroy(e)
-    local p = e.entity.surface.find_entity({name = 'proxy-container', force = 'neutral', quality = e.entity.quality.name}, {e.entity.position.x, e.entity.position.y})
+                if p then
+                    p.destroy()
+                end
+            end
+        end
 
-    if p then
-        p.destroy()
+    elseif event.entity.type == 'lab' then
+        local p = event.entity.surface.find_entity({name = 'proxy-container', force = 'neutral', quality = event.entity.quality.name}, {event.entity.position.x, event.entity.position.y})
+
+        if p then
+            p.destroy()
+        end
     end
 end
 
@@ -160,15 +159,11 @@ if settings.startup['PHI-CT'].value then
     filter = {{filter = 'type', type = 'infinity-container', mode = 'or'}, {filter = 'type', type = 'infinity-pipe', mode = 'or'}}
 
     for _, event_name in pairs({'on_built_entity', 'on_robot_built_entity', 'on_space_platform_built_entity', 'script_raised_built', 'script_raised_revive'}) do
-        event_reg(event_name, function(event)
-            trash_entity_creation(event)
-        end, filter)
+        event_reg(event_name, entity_build)
     end
 
     for _, event_name in pairs({'on_player_cheat_mode_enabled', 'on_player_cheat_mode_disabled'}) do
-        event_reg(event_name, function(event)
-            hidden_recipe_enable(event)
-        end, nil)
+        event_reg(event_name, hidden_recipe_enable)
     end
 end
 
@@ -229,13 +224,13 @@ end
 if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
     event_reg('on_player_created', function(event)
         inserter_gui_create(game.players[event.player_index])
-    end, nil)
+    end)
 
     event_reg('on_gui_opened', function(event)
         if event.entity and (event.entity.type == 'inserter' or (event.entity.type == 'entity-ghost' and event.entity.ghost_type == 'inserter')) then
             inserter_gui_update(game.players[event.player_index], event.entity)
         end
-    end, nil)
+    end)
 
     event_reg('on_gui_selection_state_changed', function(event)
         local player = game.players[event.player_index]
@@ -244,12 +239,12 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) and gui[event.element.name] then
             player.opened.direction = inserter_direction[(math.floor(inserter_direction_reversed[player.opened.direction] / 4) * 4 + (event.element.parent['i_sub_direction'].selected_index - 1)) % 16 + 1]
         end
-    end, nil)
+    end)
 
     for _, event_name in pairs({'on_player_rotated_entity', 'on_player_flipped_entity'}) do
         event_reg(event_name, function(event)
             inserter_changed(event)
-        end, nil)
+        end)
     end
 
     --[[
@@ -264,30 +259,21 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
 
     for _, event_name in pairs({'on_built_entity', 'on_robot_built_entity', 'on_space_platform_built_entity', 'script_raised_built', 'script_raised_revive'}) do
         event_reg(event_name, function(event)
-            rail_support_electric_pole_build(event)
-        end, {{filter = 'type', type = 'rail-support'}})
+            entity_build(event)
+        end)
     end
 
     for _, event_name in pairs({'on_entity_died', 'on_player_mined_entity', 'on_robot_pre_mined', 'script_raised_destroy'}) do
         event_reg(event_name, function(event)
-            rail_support_electric_pole_destroy(event)
-        end, {{filter = 'type', type = 'rail-support'}})
-    end
-
-    for _, event_name in pairs({'on_built_entity', 'on_robot_built_entity', 'on_space_platform_built_entity', 'script_raised_built', 'script_raised_revive'}) do
-        event_reg(event_name, function(event)
-            lab_proxy_container_build(event)
-        end, {{filter = 'type', type = 'lab'}})
-    end
-
-    for _, event_name in pairs({'on_entity_died', 'on_player_mined_entity', 'on_robot_pre_mined', 'script_raised_destroy'}) do
-        event_reg(event_name, function(event)
-            lab_proxy_container_destroy(event)
-        end, {{filter = 'type', type = 'lab'}})
+            entity_destroy(event)
+        end)
     end
 end
 
-for event_name, event_detail in pairs(storage.phi_cl.event_handler) do
+for event_name, event_funcs in pairs(storage.phi_cl.event_handler) do
     script.on_event(defines.events[event_name], function(event)
-    end, event_detail.filter)
+        for _, event_func in pairs(event_funcs) do
+            event_func(event)
+        end
+    end)
 end
