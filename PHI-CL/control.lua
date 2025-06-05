@@ -119,12 +119,17 @@ local function entity_destroy(event)
             end
         end
 
-    elseif event.entity.type == 'lab' then
+        return
+    end
+
+    if event.entity.type == 'lab' then
         local p = event.entity.surface.find_entity({name = 'proxy-container', force = 'neutral', quality = event.entity.quality.name}, {event.entity.position.x, event.entity.position.y})
 
         if p then
             p.destroy()
         end
+
+        return
     end
 end
 
