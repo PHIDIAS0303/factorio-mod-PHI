@@ -42,6 +42,15 @@ script.on_configuration_changed(function()
     }
 end)
 
+local function event_reg(event_name, event_handler, event_filter)
+    if storage.phi_cl.event_handler[event_name] then
+        table.insert(storage.phi_cl.event_handler[event_name], {func = event_handler, filter = event_filter})
+
+    else
+        storage.phi_cl.event_handler[event_name] = {{func = event_handler, filter = event_filter}}
+    end
+end
+
 local function trash_entity_creation(event)
     if event.entity.name == 'trash-chest' then
         event.entity.remove_unfiltered_items = true
@@ -73,27 +82,18 @@ if settings.startup['PHI-CT'].value then
     if storage.phi_cl.event_handler then
         filter = {{filter = 'type', type = 'infinity-container', mode = 'or'}, {filter = 'type', type = 'infinity-pipe', mode = 'or'}}
 
-        for _, e in pairs({'on_built_entity', 'on_robot_built_entity', 'on_space_platform_built_entity', 'script_raised_built', 'script_raised_revive'}) do
-            if storage.phi_cl.event_handler[e] then
-                table.insert(storage.phi_cl.event_handler[e], {
-                    func = trash_entity_creation,
-                    filter = filter
-                })
+        for _, event_name in pairs({'on_built_entity', 'on_robot_built_entity', 'on_space_platform_built_entity', 'script_raised_built', 'script_raised_revive'}) do
+            event_reg(event_name, trash_entity_creation, filter)
+        end
 
-            else
-                storage.phi_cl.event_handler[e] = {{
-                    func = trash_entity_creation,
-                    filter = filter
-                }}
-            end
+        for _, event_name in pairs({'on_player_cheat_mode_enabled', 'on_player_cheat_mode_disabled'}) do
+            event_reg(event_name, hidden_recipe_enable, nil)
         end
     end
-
-    script.on_event({defines.events.on_player_cheat_mode_enabled, defines.events.on_player_cheat_mode_disabled}, hidden_recipe_enable)
 end
 
 if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-' then
-script.on_nth_tick(3600, function(_)
+    script.on_nth_tick(3600, function(_)
         for _, s in pairs(game.surfaces) do
             local ec = s.find_entities_filtered{type='cargo-landing-pad', force='player'}
 
