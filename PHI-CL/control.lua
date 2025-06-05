@@ -89,10 +89,10 @@ local function entity_build(event)
         p.proxy_target_entity = event.entity
         p.proxy_target_inventory = defines.inventory.lab_input
 
-    elseif event.entity.name == 'trash-chest' then
+    elseif event.entity.type == 'infinity-container' and event.entity.name == 'trash-chest' then
         event.entity.remove_unfiltered_items = true
 
-    elseif event.entity.name == 'trash-pipe' then
+    elseif event.entity.type == 'infinity-pipe' and event.entity.name == 'trash-pipe' then
         event.entity.set_infinity_pipe_filter(nil)
     end
 end
@@ -158,8 +158,6 @@ local function event_reg(event_name, event_handler_name, event_handler)
 end
 
 if settings.startup['PHI-CT'].value then
-    filter = {{filter = 'type', type = 'infinity-container', mode = 'or'}, {filter = 'type', type = 'infinity-pipe', mode = 'or'}}
-
     for _, event_name in pairs({'on_built_entity', 'on_robot_built_entity', 'on_space_platform_built_entity', 'script_raised_built', 'script_raised_revive'}) do
         event_reg(event_name, entity_build)
     end
