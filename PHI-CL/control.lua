@@ -48,10 +48,10 @@ local function inserter_gui_update(player, inserter)
     gui['i_sub_direction'].selected_index = ((inserter_direction_reversed[inserter.direction] - 1) % 4) + 1
 end
 
-local function inserter_changed(e)
-    local player = game.players[e.player_index]
+local function inserter_changed(event)
+    local player = game.players[event.player_index]
 
-    if e.entity and player.opened == e.entity and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
+    if event.entity and player.opened == event.entity and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
         inserter_gui_update(player, player.opened)
     end
 end
@@ -203,16 +203,18 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
 
     event_reg('on_gui_selection_state_changed', function(event)
         local player = game.players[event.player_index]
-        local gui = player.gui.relative.inserter_config
+        local gui = player.gui.reve.inserter_config
 
         if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) and gui[event.element.name] then
             player.opened.direction = inserter_direction[(math.floor(inserter_direction_reversed[player.opened.direction] / 4) * 4 + (event.element.parent['i_sub_direction'].selected_index - 1)) % 16 + 1]
         end
     end, nil)
 
-
-
-    script.on_event({defines.events.on_player_rotated_entity, defines.events.on_player_flipped_entity}, inserter_changed)
+    for _, event_name in pairs({'on_player_rotated_entity', 'on_player_flipped_entity'}) do
+        event_reg(event_name, function(event)
+            inserter_changed(event)
+        end, nil)
+    end
 
     --[[
     script.on_event(defines.events.on_entity_settings_pasted, function(e)
