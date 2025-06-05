@@ -32,7 +32,7 @@ local rail_support_pole = {
 
 if settings.startup['PHI-CT'].value then
     local function trash_chest_creation(event)
-        event.entity.infinity_container_filters = {}
+        event.entity.infinity_container_filters = {name = 'iron-ore', count = 0, mode = 'exactly', index = 1}
         event.entity.remove_unfiltered_items = true
     end
 
