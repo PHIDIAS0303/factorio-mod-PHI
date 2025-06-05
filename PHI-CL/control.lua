@@ -45,7 +45,7 @@ if settings.startup['PHI-CT'].value then
 
         elseif event.entity.name == 'trash-pipe' then
             event.entity.set_infinity_pipe_filter(nil)
-         end
+        end
     end
 
     script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_entity, defines.events.on_space_platform_built_entity, defines.events.script_raised_built, defines.events.script_raised_revive}, trash_entity_creation, {{filter = 'type', type = 'infinity-container', mode = 'or'}, {filter = 'type', type = 'infinity-pipe', mode = 'or'}})
