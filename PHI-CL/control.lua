@@ -31,28 +31,24 @@ local rail_support_pole = {
 }
 
 if settings.startup['PHI-CT'].value then
-    local function trash_chest_creation(event)
-        event.entity.infinity_container_filters = {name = 'iron-ore', count = 0, mode = 'exactly', index = 1}
-        event.entity.remove_unfiltered_items = true
+    local function trash_entity_creation(event)
+        if event.entity and event.entity.valid and event.entity.name then
+            if event.entity.name == 'trash-chest' then
+                event.entity.infinity_container_filters = {name = 'iron-ore', count = 0, mode = 'exactly', index = 1}
+                event.entity.remove_unfiltered_items = true
+
+            elseif event.entity.name == 'trash-pipe' then
+                event.entity.set_infinity_pipe_filter(nil)
+            end
+        end
     end
 
-    local filter = {{filter='name', name='trash-chest', mode='and'}, {filter='type', type='infinity-container', mode='and'}}
-    script.on_event(defines.events.on_built_entity, trash_chest_creation, filter)
-    script.on_event(defines.events.on_robot_built_entity, trash_chest_creation, filter)
-    script.on_event(defines.events.on_space_platform_built_entity, trash_chest_creation, filter)
-    script.on_event(defines.events.script_raised_built, trash_chest_creation, filter)
-    script.on_event(defines.events.script_raised_revive, trash_chest_creation, filter)
-
-    local function trash_pipe_creation(event)
-        event.entity.set_infinity_pipe_filter(nil)
-    end
-
-    filter = {{filter='name', name='trash-pipe', mode='and'}, {filter='type', type='infinity-pipe', mode='and'}}
-    script.on_event(defines.events.on_built_entity, trash_pipe_creation, filter)
-    script.on_event(defines.events.on_robot_built_entity, trash_pipe_creation, filter)
-    script.on_event(defines.events.on_space_platform_built_entity, trash_pipe_creation, filter)
-    script.on_event(defines.events.script_raised_built, trash_pipe_creation, filter)
-    script.on_event(defines.events.script_raised_revive, trash_pipe_creation, filter)
+    local filter = {{filter = 'type', type = 'infinity-container', mode = 'or'}, {filter = 'type', type = 'infinity-pipe', mode = 'or'}}
+    script.on_event(defines.events.on_built_entity, trash_entity_creation, filter)
+    script.on_event(defines.events.on_robot_built_entity, trash_entity_creation, filter)
+    script.on_event(defines.events.on_space_platform_built_entity, trash_entity_creation, filter)
+    script.on_event(defines.events.script_raised_built, trash_entity_creation, filter)
+    script.on_event(defines.events.script_raised_revive, trash_entity_creation, filter)
 
     local function hidden_recipe_enable(event)
         local enable = (event.name == defines.events.on_player_cheat_mode_enabled)
