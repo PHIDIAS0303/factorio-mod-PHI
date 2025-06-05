@@ -1677,7 +1677,7 @@ if settings.startup['PHI-CT'].value then
                 energy_required = 1,
                 enabled = false,
                 ingredients = {},
-                results = {{type = 'fluid', name = v.name, amount = 12000 * settings.startup['PHI-MI-PIPE'].value / 10, temperature = v.max_temperature or v.default_temperature}},
+                results = {{type = 'fluid', name = v.name, amount = 12000 * settings.startup['PHI-MI-PIPE'].value / 10, temperature = v.default_temperature}},
                 main_product = v.name,
                 hide_from_player_crafting = true,
                 hidden_in_factoriopedia = true,
