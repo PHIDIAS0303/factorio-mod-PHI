@@ -40,10 +40,6 @@ end)
 
 if settings.startup['PHI-CT'].value then
     local function trash_entity_creation(event)
-        if not event.entity.valid then
-            return
-        end
-
         if event.entity.name == 'trash-chest' then
             event.entity.remove_unfiltered_items = true
 
@@ -52,12 +48,7 @@ if settings.startup['PHI-CT'].value then
          end
     end
 
-    local filter = {{filter = 'type', type = 'infinity-container', mode = 'or'}, {filter = 'type', type = 'infinity-pipe', mode = 'or'}}
-    script.on_event(defines.events.on_built_entity, trash_entity_creation, filter)
-    script.on_event(defines.events.on_robot_built_entity, trash_entity_creation, filter)
-    script.on_event(defines.events.on_space_platform_built_entity, trash_entity_creation, filter)
-    script.on_event(defines.events.script_raised_built, trash_entity_creation, filter)
-    script.on_event(defines.events.script_raised_revive, trash_entity_creation, filter)
+    script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_entity, defines.events.on_space_platform_built_entity, defines.events.script_raised_built, defines.events.script_raised_revive}, trash_entity_creation, {{filter = 'type', type = 'infinity-container', mode = 'or'}, {filter = 'type', type = 'infinity-pipe', mode = 'or'}})
 
     local function hidden_recipe_enable(event)
         local enable = (event.name == defines.events.on_player_cheat_mode_enabled)
