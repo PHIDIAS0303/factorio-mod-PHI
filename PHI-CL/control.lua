@@ -147,7 +147,7 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-' 
 end
 
 if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
-    function gui_create(player)
+    function inserter_gui_create(player)
         if player.gui.relative.inserter_config then
             player.gui.relative.inserter_config.destroy()
         end
@@ -156,7 +156,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         frame.add({type = 'drop-down', name = 'i_sub_direction', items = {'[virtual-signal=signal-0]', '[virtual-signal=signal-1]', '[virtual-signal=signal-2]', '[virtual-signal=signal-3]'}, selected_index = 1})
     end
 
-    function gui_update(player, inserter)
+    function inserter_gui_update(player, inserter)
         if not (inserter.supports_direction or ((inserter.prototype and inserter.prototype.allow_custom_vectors) or (inserter.ghost_prototype and inserter.ghost_prototype.allow_custom_vectors))) then
             return
         end
@@ -167,27 +167,27 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
 
     script.on_init(function(_)
         for _, player in pairs(game.players) do
-            gui_create(player)
+            inserter_gui_create(player)
         end
     end)
 
     script.on_configuration_changed(function(_)
         for _, player in pairs(game.players) do
-            gui_create(player)
+            inserter_gui_create(player)
 
             if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.entity.type == 'inserter' or (player.opened.entity.type == 'entity-ghost' and player.opened.entity.ghost_type == 'inserter')) then
-                gui_update(player, player.opened.entity)
+                inserter_gui_update(player, player.opened.entity)
             end
         end
     end)
 
     script.on_event(defines.events.on_player_created, function(e)
-        gui_create(game.players[e.player_index])
+        inserter_gui_create(game.players[e.player_index])
     end)
 
     script.on_event(defines.events.on_gui_opened, function(e)
         if e.entity and (e.entity.type == 'inserter' or (e.entity.type == 'entity-ghost' and e.entity.ghost_type == 'inserter')) then
-            gui_update(game.players[e.player_index], e.entity)
+            inserter_gui_update(game.players[e.player_index], e.entity)
         end
     end)
 
@@ -204,7 +204,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         local player = game.players[e.player_index]
 
         if e.entity and player.opened == e.entity and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) then
-            gui_update(player, player.opened)
+            inserter_gui_update(player, player.opened)
         end
     end
 
@@ -215,7 +215,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         local player = game.players[e.player_index]
 
         if e.destination and e.source and player.opened and e.destination.type and (e.destination.type == 'inserter' or (e.destination.type == 'entity-ghost' and e.destination.ghost_type == 'inserter')) and e.source.type and (e.source.type == 'inserter' or (e.source.type == 'entity-ghost' and e.source.ghost_type == 'inserter')) and player.opened == e.source then
-            gui_update(player, player.opened)
+            inserter_gui_update(player, player.opened)
         end
     end)
     ]]
