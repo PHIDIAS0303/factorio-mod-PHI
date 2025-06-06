@@ -47,7 +47,7 @@ local function gui_create(player)
 end
 
 local function gui_update(player, entity)
-    if entity.type == 'proxy-container' then
+    if entity.type == 'proxy-container' and entity.proxy_target_inventory and entity.proxy_target_inventory == defines.inventory.lab_input then
         player.opened = nil
 
         return
