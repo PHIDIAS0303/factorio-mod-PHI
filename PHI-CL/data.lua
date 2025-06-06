@@ -238,7 +238,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     end
 
     for _, v in pairs({'burner-inserter', 'inserter', 'fast-inserter', 'long-handed-inserter', 'bulk-inserter'}) do
-        data.raw['inserter'][v].flags = {'placeable-neutral', 'placeable-player', 'player-creation', 'building-direction-8-way'}
+        data.raw['inserter'][v].flags = {'placeable-neutral', 'placeable-player', 'player-creation', 'building-direction-16-way'}
     end
 
     if mods['elevated-rails'] then
@@ -255,7 +255,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         entity.collision_box = {{0, 0}, {0, 0}}
         entity.selection_box = nil
         entity.collision_mask = {colliding_with_tiles_only = true, layers = {}, not_colliding_with_itself = true}
-        entity.flags = {'hide-alt-info', 'no-copy-paste', 'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'not-selectable-in-game', 'placeable-off-grid', 'placeable-player'}
+        entity.flags = {'hide-alt-info', 'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'not-selectable-in-game', 'placeable-off-grid', 'placeable-player'}
         entity.next_upgrade = nil
         entity.selection_priority = 49
         entity.order = 'zz'
@@ -273,7 +273,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
             entity.collision_box = {{0, 0}, {0, 0}}
             entity.selection_box = nil
             entity.collision_mask = {colliding_with_tiles_only = true, layers = {}, not_colliding_with_itself = true}
-            entity.flags = {'hide-alt-info', 'no-copy-paste', 'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'not-selectable-in-game', 'placeable-off-grid', 'placeable-player'}
+            entity.flags = {'hide-alt-info', 'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'not-selectable-in-game', 'placeable-off-grid', 'placeable-player'}
             entity.next_upgrade = nil
             entity.selection_priority = 49
             entity.order = 'zz'
@@ -1687,7 +1687,7 @@ if settings.startup['PHI-CT'].value then
         table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-underground-belt-a'})
     end
 
-    data.raw['proxy-container']['proxy-container'].flags = {'not-blueprintable', 'not-selectable-in-game', 'hide-alt-info', 'no-copy-paste', 'not-deconstructable', 'not-flammable', 'not-on-map', 'placeable-off-grid', 'placeable-player', 'no-automated-item-insertion', 'no-automated-item-removal'}
+    data.raw['proxy-container']['proxy-container'].flags = {'not-blueprintable', 'hide-alt-info', 'not-deconstructable', 'not-flammable', 'not-on-map', 'placeable-off-grid', 'placeable-player', 'no-automated-item-insertion', 'no-automated-item-removal'}
     data.raw['proxy-container']['proxy-container'].draw_inventory_content = false
     data.raw['proxy-container']['proxy-container'].selection_priority = 49
 
