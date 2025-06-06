@@ -1687,7 +1687,7 @@ if settings.startup['PHI-CT'].value then
         table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-underground-belt-a'})
     end
 
-    -- entity.flags = {'hide-alt-info', 'no-copy-paste', 'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'not-selectable-in-game', 'placeable-off-grid', 'placeable-player'}
+    -- entity.flags = {'hide-alt-info', 'no-copy-paste', 'not-selectable-in-game'}
     data.raw['proxy-container']['proxy-container'].flags = {'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'placeable-off-grid', 'placeable-player', 'no-automated-item-insertion', 'no-automated-item-removal'}
     data.raw['proxy-container']['proxy-container'].draw_inventory_content = false
 
