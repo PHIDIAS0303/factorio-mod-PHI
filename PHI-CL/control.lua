@@ -47,6 +47,12 @@ local function gui_create(player)
 end
 
 local function gui_update(player, entity)
+    if entity.type == 'proxy-container' then
+        player.opened = nil
+
+        return
+    end
+
     if entity.type and (entity.type == 'inserter' or (entity.type == 'entity-ghost' and entity.ghost_type == 'inserter')) then
         player.gui.relative.phi_cl_inserter_config['i_sub_direction'].selected_index = ((inserter_direction_reversed[entity.direction] - 1) % 4) + 1
     end
@@ -223,13 +229,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     script.on_event(defines.events.on_gui_opened, function(event)
         local player = game.players[event.player_index]
 
-        if event.entity then
-            if player.opened and player.opened == event.entity and event.entity.type == 'proxy-container' then
-                player.opened = nil
-
-                return
-            end
-
+        if event.entity and player.opened and player.opened == event.entity then
             gui_update(player, event.entity)
         end
     end)
