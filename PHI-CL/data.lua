@@ -655,11 +655,11 @@ if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup[
     table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
 
     for _, v in pairs(data.raw['pump']) do
-        data.raw['pump'][v].pumping_speed = math.max(50, data.raw['pump'][v].pumping_speed) * settings.startup['PHI-MI-PIPE'].value / 10
+        v.pumping_speed = math.max(50, v.pumping_speed) * settings.startup['PHI-MI-PIPE'].value / 10
     end
 
     for _, v in pairs(data.raw['valve']) do
-        data.raw['valve'][v].flow_rate = math.max(50, data.raw['valve'][v].flow_rate) * settings.startup['PHI-MI-PIPE'].value / 10
+        v.flow_rate = math.max(50, v.flow_rate) * settings.startup['PHI-MI-PIPE'].value / 10
     end
 
     data.raw['inserter']['burner-inserter'].allow_burner_leech = true
