@@ -1742,10 +1742,7 @@ if settings.startup['PHI-CT'].value then
             end
         end
 
-        data.raw['map-gen-presets']['default']['empty-world'] = {
-            order = 'zz',
-            basic_settings = {autoplace_controls = {}}
-        }
+        data.raw['map-gen-presets']['default']['empty-world'] = {order = 'zz', basic_settings = {autoplace_controls = {}}}
 
         for k, v in pairs (data.raw['autoplace-control']) do
             v.can_be_disabled = true
