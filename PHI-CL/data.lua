@@ -238,6 +238,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     end
 
     for _, v in pairs({'burner-inserter', 'inserter', 'fast-inserter', 'long-handed-inserter', 'bulk-inserter'}) do
+        data.raw['inserter'][v].allow_custom_vectors = true
         data.raw['inserter'][v].flags = {'placeable-neutral', 'placeable-player', 'player-creation', 'building-direction-16-way'}
     end
 
