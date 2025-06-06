@@ -4,6 +4,7 @@ Date: 2025-06-15
 
   Changes:
     - [SA] Reduced the duplicated prerequisites in technology tree.
+    - [CT] Hide the proxy container GUI.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.113
