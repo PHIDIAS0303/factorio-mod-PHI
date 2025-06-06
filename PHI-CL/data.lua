@@ -148,6 +148,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     for _, v in pairs({'one-way-valve', 'overflow-valve', 'top-up-valve'}) do
         data.raw['valve'][v].hidden = false
         data.raw.item[v].hidden = false
+        data.raw.item[v].subgroup = 'energy-pipe-distribution'
 
         data:extend({{
             type = 'recipe',
