@@ -536,7 +536,7 @@ if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup[
             icon_size = 64,
             order = 'zc',
             allow_productivity = false,
-            ingredients = {{type = 'item', name = 'pipe', amount = 1}, {type = 'item', name = 'pump', amount = 1}, {type = 'item', name = 'electronic-circuit', amount = 5}},
+            ingredients = {{type = 'item', name = 'pipe', amount = 1}, {type = 'item', name = 'pump', amount = 1}, {type = 'item', name = 'electronic-circuit', amount = 3}},
             results = {{type = 'item', name = v, amount = 1}},
             main_product = v,
             localised_name = {'entity-name.' .. v},
