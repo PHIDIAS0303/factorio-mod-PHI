@@ -124,6 +124,9 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         data.raw['pipe']['pipe'].heating_energy = nil
         data.raw['pipe-to-ground']['pipe-to-ground'].heating_energy = nil
         data.raw['pump']['pump'].heating_energy = nil
+        data.raw['valve']['one-way-valve'].heating_energy = nil
+        data.raw['valve']['overflow-valve'].heating_energy = nil
+        data.raw['valve']['top-up-valve'].heating_energy = nil
         data.raw['storage-tank']['storage-tank'].heating_energy = nil
         data.raw['generator']['steam-engine'].heating_energy = nil
         data.raw['generator']['steam-turbine'].heating_energy = nil
