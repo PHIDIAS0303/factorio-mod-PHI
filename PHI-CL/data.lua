@@ -1689,7 +1689,6 @@ if settings.startup['PHI-CT'].value then
 
     data.raw['proxy-container']['proxy-container'].flags = {'not-blueprintable', 'hide-alt-info', 'not-deconstructable', 'not-flammable', 'not-on-map', 'placeable-off-grid', 'placeable-player', 'no-automated-item-insertion', 'no-automated-item-removal'}
     data.raw['proxy-container']['proxy-container'].draw_inventory_content = false
-    data.raw['proxy-container']['proxy-container'].selection_priority = 49
 
     for _, v in pairs(data.raw.fluid) do
         if (not data.raw.recipe['pump-' .. v.name]) and v.subgroup == 'fluid' then
