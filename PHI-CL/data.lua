@@ -237,6 +237,10 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         }})
     end
 
+    for _, v in pairs({'burner-inserter', 'inserter', 'fast-inserter', 'long-handed-inserter', 'bulk-inserter'}) do
+        data.raw['inserter'][v].flags = {'placeable-neutral', 'placeable-player', 'player-creation', 'building-direction-8-way'}
+    end
+
     if mods['elevated-rails'] then
         entity = table.deepcopy(data.raw['electric-pole']['big-electric-pole'])
         entity.name = 'rail-support-pole-electric'
@@ -755,7 +759,6 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
                 data.raw['inserter'][v].max_belt_stack_size = bss
                 data.raw['inserter'][v].grab_less_to_match_belt_stack = true
                 data.raw['inserter'][v].enter_drop_mode_if_held_stack_spoiled = true
-                data.raw['inserter'][v].allow_custom_vectors = true
             end
         end
 
