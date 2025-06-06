@@ -523,6 +523,27 @@ if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup[
         end
     end
 
+    for _, v in pairs({'one-way-valve', 'overflow-valve', 'top-up-valve'}) do
+        data.raw['valve'][v].hidden = false
+        data.raw.item[v].hidden = false
+
+        data:extend({{
+            type = 'recipe',
+            name = v,
+            energy_required = 1,
+            enabled = true,
+            icon = data.raw.item[v].icon,
+            icon_size = 64,
+            order = 'zc',
+            allow_productivity = false,
+            ingredients = {{type = 'item', name = 'pipe', amount = 1}, {type = 'item', name = 'pump', amount = 1}, {type = 'item', name = 'electronic-circuit', amount = 5}},
+            results = {{type = 'item', name = v, amount = 1}},
+            main_product = v,
+            localised_name = {'entity-name.' .. v},
+            localised_description = {'entity-description.' .. v}
+        }})
+    end
+
     data.raw['module']['efficiency-module'].effect.consumption = math.min(-0.3, data.raw['module']['efficiency-module'].effect.consumption)
     data.raw['module']['efficiency-module-2'].effect.consumption = math.min(-0.6, data.raw['module']['efficiency-module'].effect.consumption)
     data.raw['module']['efficiency-module-3'].effect.consumption = math.min(-0.9, data.raw['module']['efficiency-module'].effect.consumption)

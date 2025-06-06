@@ -30,6 +30,13 @@ local rail_support_pole = {
     'rail-support-pole-lightning'
 }
 
+--[[
+TODO
+Valve
+GUI set 0 ~ 1
+entity.valve_threshold_override
+]]
+
 local function inserter_gui_create(player)
     if player.gui.relative.inserter_config then
         player.gui.relative.inserter_config.destroy()
