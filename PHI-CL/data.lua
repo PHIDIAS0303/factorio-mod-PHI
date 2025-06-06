@@ -304,6 +304,10 @@ if settings.startup['PHI-MI'].value then
             end
         end
 
+        for _, v in pairs(data.raw['valve']) do
+            v.flow_rate = v.flow_rate * s
+        end
+
         for _, t in pairs({data.raw['pipe'], data.raw['pipe-to-ground'], data.raw['infinity-pipe']}) do
             for _, v in pairs(t) do
                 v.fluid_box.volume = v.fluid_box.volume * s
