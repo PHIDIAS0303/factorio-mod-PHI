@@ -162,7 +162,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
             icon_size = 64,
             order = 'zc',
             allow_productivity = false,
-            ingredients = {{type = 'item', name = 'pipe', amount = 1}, {type = 'item', name = 'pump', amount = 1}, {type = 'item', name = 'electronic-circuit', amount = 3}},
+            ingredients = {{type = 'item', name = 'pipe', amount = 2}, {type = 'item', name = 'electronic-circuit', amount = 3}},
             results = {{type = 'item', name = v, amount = 1}},
             main_product = v,
             localised_name = {'entity-name.' .. v},
