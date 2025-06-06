@@ -38,11 +38,11 @@ entity.valve_threshold_override
 ]]
 
 local function inserter_gui_create(player)
-    if player.gui.relative.inserter_config then
-        player.gui.relative.inserter_config.destroy()
+    if player.gui.relative.phi_cl_inserter_config then
+        player.gui.relative.phi_cl_inserter_config.destroy()
     end
 
-    local frame = player.gui.relative.add({type = 'frame', name = 'inserter_config', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}})
+    local frame = player.gui.relative.add({type = 'frame', name = 'phi_cl_inserter_config', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}})
     frame.add({type = 'drop-down', name = 'i_sub_direction', items = {'[virtual-signal=signal-0]', '[virtual-signal=signal-1]', '[virtual-signal=signal-2]', '[virtual-signal=signal-3]'}, selected_index = 1})
 end
 
@@ -51,8 +51,7 @@ local function inserter_gui_update(player, inserter)
         return
     end
 
-    local gui = player.gui.relative.inserter_config
-    gui['i_sub_direction'].selected_index = ((inserter_direction_reversed[inserter.direction] - 1) % 4) + 1
+    player.gui.relative.phi_cl_inserter_config['i_sub_direction'].selected_index = ((inserter_direction_reversed[inserter.direction] - 1) % 4) + 1
 end
 
 local function inserter_changed(event)
@@ -235,9 +234,8 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
 
     script.on_event(defines.events.on_gui_selection_state_changed, function(event)
         local player = game.players[event.player_index]
-        local gui = player.gui.relative.inserter_config
 
-        if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) and gui[event.element.name] then
+        if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) and player.gui.relative.phi_cl_inserter_config[event.element.name] then
             player.opened.direction = inserter_direction[(math.floor(inserter_direction_reversed[player.opened.direction] / 4) * 4 + (event.element.parent['i_sub_direction'].selected_index - 1)) % 16 + 1]
         end
     end)
@@ -250,7 +248,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     script.on_event(defines.events.on_entity_settings_pasted, function(event)
         local player = game.players[event.player_index]
 
-        if event.destination and event.source and player.opened and event.destination.type and (event.destination.type == 'inserter' or (event.destination.type == 'entity-ghost' and event.destination.ghost_type == 'inserter')) and event.source.type and (event.source.type == 'inserter' or (event.source.type == 'entity-ghost' and event.source.ghost_type == 'rter')) and player.opened == event.source then
+        if event.destination and event.source and player.opened and event.destination.type and (event.destination.type == 'inserter' or (event.destination.type == 'entity-ghost' and event.destination.ghost_type == 'inserter')) and event.source.type and (event.source.type == 'inserter' or (event.source.type == 'entity-ghost' and event.source.ghost_type == 'inserter')) and player.opened == event.source then
             inserter_gui_update(player, player.opened)
         end
     end)
