@@ -1744,8 +1744,7 @@ if settings.startup['PHI-CT'].value then
 
         data.raw['map-gen-presets']['default']['empty-world'] = {
             order = 'zz',
-            basic_settings = {autoplace_controls = {}, autoplace_settings = {}, cliff_settings = {}},
-            advanced_settings = {pollution = {enabled = false}, enemy_evolution = {enabled = false}, enemy_expansion = {enabled = false}}
+            basic_settings = {autoplace_controls = {}}
         }
 
         for k, v in pairs (data.raw['autoplace-control']) do
