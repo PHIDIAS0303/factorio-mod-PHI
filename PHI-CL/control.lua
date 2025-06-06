@@ -221,8 +221,16 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     end)
 
     script.on_event(defines.events.on_gui_opened, function(event)
+        local player = game.players[event.player_index]
+
         if event.entity then
-            gui_update(game.players[event.player_index], event.entity)
+            if player.opened and player.opened == event.entity and event.entity.type == 'proxy-container' then
+                player.opened = nil
+
+                return
+            end
+
+            gui_update(player, event.entity)
         end
     end)
 
