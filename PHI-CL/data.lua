@@ -145,8 +145,100 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-SA-ROCKET-CAPACITY'].value * 1000000
     end
 
+    for _, v in pairs({'one-way-valve', 'overflow-valve', 'top-up-valve'}) do
+        data.raw['valve'][v].hidden = false
+        data.raw.item[v].hidden = false
+
+        data:extend({{
+            type = 'recipe',
+            name = v,
+            energy_required = 1,
+            enabled = true,
+            icon = data.raw.item[v].icon,
+            icon_size = 64,
+            order = 'zc',
+            allow_productivity = false,
+            ingredients = {{type = 'item', name = 'pipe', amount = 1}, {type = 'item', name = 'pump', amount = 1}, {type = 'item', name = 'electronic-circuit', amount = 3}},
+            results = {{type = 'item', name = v, amount = 1}},
+            main_product = v,
+            localised_name = {'entity-name.' .. v},
+            localised_description = {'entity-description.' .. v}
+        }})
+    end
+
+    data:extend({{type = 'recipe-category', name = 'fluid'}})
+
+    local item = table.deepcopy(data.raw['item']['offshore-pump'])
+    item.name = 'super-pump'
+    item.place_result = item.name
+    item.order = 'b[fluids]-a[super-pump]-o'
+    item.icons = {{icon = '__base__/graphics/icons/offshore-pump.png', tint = items['tint'][2], icon_size = 64, icon_mipmaps = 4}}
+    item.icon = nil
+    item.icon_size = nil
+    item.icon_mipmaps = nil
+    item.localised_name = {'', {'name.super-entity'}, {'entity-name.pump'}}
+    data:extend({item})
+
+    local entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
+    entity.name = item.name
+    entity.minable.result = item.name
+    entity.type = 'assembling-machine'
+    entity.crafting_categories = {'fluid'}
+    entity.crafting_speed = 1
+    entity.energy_source = {type = 'void'}
+
+    entity.fluid_boxes = {{
+        production_type = 'output',
+        pipe_covers = table.deepcopy(entity.fluid_box.pipe_covers),
+        volume = 100 * settings.startup['PHI-MI-PIPE'].value / 10,
+        pipe_connections = {{
+            flow_direction = 'output',
+            connection_category = (mods['space-age'] and {'default', 'fusion-plasma'}) or {'default'},
+            direction = defines.direction.south,
+            position = {0, 0}
+        }}
+    }}
+
+    entity.fluid_box = nil
+    entity.fluid_boxes_off_when_no_fluid_recipe = false
+    entity.effect_receiver = {uses_module_effects = false, uses_beacon_effects = false}
+    entity.allowed_effects = {'consumption'}
+    entity.tile_buildability_rules = nil
+    entity.fluid_source_offset = nil
+    entity.localised_name = {'', {'name.super-entity'}, {'entity-name.pump'}}
+    data:extend({entity})
+
+    data:extend({{
+        type = 'recipe',
+        name = item.name,
+        energy_required = 2,
+        enabled = true,
+        ingredients = {{type = 'item', name = 'electronic-circuit', amount = 2}, {type = 'item', name = 'pipe', amount = 1}, {type = 'item', name = 'iron-gear-wheel', amount = 1}},
+        results = {{type = 'item', name = item.name, amount = 1}},
+        main_product = item.name,
+        localised_name = {'', {'name.super-entity'}, {'entity-name.pump'}}
+    }})
+
+    if data.raw.fluid['water'] then
+        data:extend({{
+            type = 'recipe',
+            name = 'pump-water',
+            category = 'fluid',
+            energy_required = 1,
+            enabled = true,
+            ingredients = {},
+            results = {{type = 'fluid', name = 'water', amount = 12000 * settings.startup['PHI-MI-PIPE'].value / 10, temperature = data.raw.fluid['water'].default_temperature}},
+            main_product = 'water',
+            hide_from_player_crafting = true,
+            hidden_in_factoriopedia = true,
+            allow_productivity = false,
+            crafting_machine_tint = {primary = data.raw.fluid['water'].flow_color},
+            localised_name = {'fluid-name.water'}
+        }})
+    end
+
     if mods['elevated-rails'] then
-        local entity = table.deepcopy(data.raw['electric-pole']['big-electric-pole'])
+        entity = table.deepcopy(data.raw['electric-pole']['big-electric-pole'])
         entity.name = 'rail-support-pole-electric'
         entity.hidden = true
         entity.hidden_in_factoriopedia = true
@@ -255,78 +347,6 @@ if settings.startup['PHI-MI'].value then
     data.raw['utility-constants'].default.default_pipeline_extent = settings.startup['PHI-MI-PIPE-EXTENT'].value
 end
 
-if settings.startup['PHI-CT'].value or (settings.startup['PHI-MI'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
-    data:extend({{type = 'recipe-category', name = 'fluid'}})
-
-    local item = table.deepcopy(data.raw['item']['offshore-pump'])
-    item.name = 'super-pump'
-    item.place_result = item.name
-    item.order = 'b[fluids]-a[super-pump]-o'
-    item.icons = {{icon = '__base__/graphics/icons/offshore-pump.png', tint = items['tint'][2], icon_size = 64, icon_mipmaps = 4}}
-    item.icon = nil
-    item.icon_size = nil
-    item.icon_mipmaps = nil
-    item.localised_name = {'', {'name.super-entity'}, {'entity-name.pump'}}
-    data:extend({item})
-
-    local entity = table.deepcopy(data.raw['offshore-pump']['offshore-pump'])
-    entity.name = item.name
-    entity.minable.result = item.name
-    entity.type = 'assembling-machine'
-    entity.crafting_categories = {'fluid'}
-    entity.crafting_speed = 1
-    entity.energy_source = {type = 'void'}
-
-    entity.fluid_boxes = {{
-        production_type = 'output',
-        pipe_covers = table.deepcopy(entity.fluid_box.pipe_covers),
-        volume = 100 * settings.startup['PHI-MI-PIPE'].value / 10,
-        pipe_connections = {{
-            flow_direction = 'output',
-            connection_category = (mods['space-age'] and {'default', 'fusion-plasma'}) or {'default'},
-            direction = defines.direction.south,
-            position = {0, 0}
-        }}
-    }}
-
-    entity.fluid_box = nil
-    entity.fluid_boxes_off_when_no_fluid_recipe = false
-    entity.effect_receiver = {uses_module_effects = false, uses_beacon_effects = false}
-    entity.allowed_effects = {'consumption'}
-    entity.tile_buildability_rules = nil
-    entity.fluid_source_offset = nil
-    entity.localised_name = {'', {'name.super-entity'}, {'entity-name.pump'}}
-    data:extend({entity})
-
-    data:extend({{
-        type = 'recipe',
-        name = item.name,
-        energy_required = 2,
-        enabled = true,
-        ingredients = {{type = 'item', name = 'electronic-circuit', amount = 2}, {type = 'item', name = 'pipe', amount = 1}, {type = 'item', name = 'iron-gear-wheel', amount = 1}},
-        results = {{type = 'item', name = item.name, amount = 1}},
-        main_product = item.name,
-        localised_name = {'', {'name.super-entity'}, {'entity-name.pump'}}
-    }})
-
-    if data.raw.fluid['water'] then
-        data:extend({{
-            type = 'recipe',
-            name = 'pump-water',
-            category = 'fluid',
-            energy_required = 1,
-            enabled = true,
-            ingredients = {},
-            results = {{type = 'fluid', name = 'water', amount = 12000 * settings.startup['PHI-MI-PIPE'].value / 10, temperature = data.raw.fluid['water'].default_temperature}},
-            main_product = 'water',
-            hide_from_player_crafting = true,
-            hidden_in_factoriopedia = true,
-            allow_productivity = false,
-            crafting_machine_tint = {primary = data.raw.fluid['water'].flow_color},
-            localised_name = {'fluid-name.water'}
-        }})
-    end
-end
 if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value and mods['quality'] then
     for _, v in pairs(data.raw.module) do
         if v.category and v.category == 'quality' then
@@ -521,27 +541,6 @@ if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup[
         for _, v in pairs(data.raw['fusion-generator']['fusion-generator'][fb].pipe_connections) do
             v.flow_direction = 'input-output'
         end
-    end
-
-    for _, v in pairs({'one-way-valve', 'overflow-valve', 'top-up-valve'}) do
-        data.raw['valve'][v].hidden = false
-        data.raw.item[v].hidden = false
-
-        data:extend({{
-            type = 'recipe',
-            name = v,
-            energy_required = 1,
-            enabled = true,
-            icon = data.raw.item[v].icon,
-            icon_size = 64,
-            order = 'zc',
-            allow_productivity = false,
-            ingredients = {{type = 'item', name = 'pipe', amount = 1}, {type = 'item', name = 'pump', amount = 1}, {type = 'item', name = 'electronic-circuit', amount = 3}},
-            results = {{type = 'item', name = v, amount = 1}},
-            main_product = v,
-            localised_name = {'entity-name.' .. v},
-            localised_description = {'entity-description.' .. v}
-        }})
     end
 
     data.raw['module']['efficiency-module'].effect.consumption = math.min(-0.3, data.raw['module']['efficiency-module'].effect.consumption)

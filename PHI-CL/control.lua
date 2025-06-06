@@ -37,7 +37,7 @@ GUI set 0 ~ 1
 entity.valve_threshold_override
 ]]
 
-local function inserter_gui_create(player)
+local function gui_create(player)
     if player.gui.relative.phi_cl_inserter_config then
         player.gui.relative.phi_cl_inserter_config.destroy()
     end
@@ -146,7 +146,7 @@ end
 script.on_init(function()
     if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
         for _, player in pairs(game.players) do
-            inserter_gui_create(player)
+            gui_create(player)
         end
     end
 end)
@@ -154,7 +154,7 @@ end)
 script.on_configuration_changed(function()
     if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
         for _, player in pairs(game.players) do
-            inserter_gui_create(player)
+            gui_create(player)
 
             if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.entity.type == 'inserter' or (player.opened.entity.type == 'entity-ghost' and player.opened.entity.ghost_type == 'inserter')) then
                 inserter_gui_update(player, player.opened.entity)
