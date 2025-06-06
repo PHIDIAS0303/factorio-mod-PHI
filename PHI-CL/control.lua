@@ -224,7 +224,11 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     end)
 
     script.on_event(defines.events.on_gui_opened, function(event)
-        if event.entity and (event.entity.type == 'inserter' or (event.entity.type == 'entity-ghost' and event.entity.ghost_type == 'inserter')) then
+        if not event.entity then
+            return
+        end
+
+        if event.entity.type == 'inserter' or (event.entity.type == 'entity-ghost' and event.entity.ghost_type == 'inserter') then
             inserter_gui_update(game.players[event.player_index], event.entity)
         end
     end)
