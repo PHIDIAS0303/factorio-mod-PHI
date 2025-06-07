@@ -4,6 +4,7 @@ Date: 2025-06-15
 
   Changes:
     - [SA] Some changes on the creative world map presets.
+    - [CL] Some clean up on the locale, but dont seem ideal.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.114
