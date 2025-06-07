@@ -7,7 +7,7 @@
     "author": "PHIDIAS0303",
     "contributers": "",
     "homepage": "",
-    "description": "[font=heading-1]UPS-friendly megabases[/font]\n[font=heading-2]Compound entities to save space and UPS\nAdjusted pipe limits for smoother logistics[/font]\n\n[font=heading-1]Space Age Enhanced[/font]\n[font=heading-2]Supports spoilage and quality mechanics\nTwo modes: Vanilla+ (refined classic) or Space Age+ (easier planetary challenges)[/font]\n\n[font=heading-1]Multiplayer Maps[/font]\n[font=heading-2]Regular PHI-CL VP or SAP games hosted on APERX[/font]",
+    "description": "UPS-friendly megabases\nCompound entities to save space and UPS\nAdjusted pipe limits for smoother logistics\n\nSpace Age Enhanced\nSupports spoilage and quality mechanics\nTwo modes: Vanilla+ (refined classic) or Space Age+ (easier planetary challenges)\n\nMultiplayer Maps\nRegular PHI-CL VP or SAP games hosted on APERX",
     "dependencies": [
         "base >= 2.0.0",
         "? space-age >= 2.0.0",
