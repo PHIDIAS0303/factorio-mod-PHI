@@ -1724,30 +1724,7 @@ if settings.startup['PHI-CT'].value then
     end
 
     if settings.startup['PHI-CT-TILE'].value then
-        for _, v in pairs(data.raw.planet) do
-            if v.map_gen_settings and v.map_gen_settings.autoplace_settings then
-                for _, c in pairs({'tile', 'decorative', 'entity'}) do
-                    if v.map_gen_settings.autoplace_settings[c] and v.map_gen_settings.autoplace_settings[c].settings then
-                        for _, e in pairs(v.map_gen_settings.autoplace_settings[c].settings) do
-                            e.frequency = 0.0
-                            e.size = 0.0
-                            e.richness = 0.0
-                        end
-                    end
-                end
-
-                if v.map_gen_settings.autoplace_settings.tile and v.map_gen_settings.autoplace_settings.tile.settings then
-                    v.map_gen_settings.autoplace_settings.tile.settings[settings.startup['PHI-CT-TILE-CHOICE'].value] = {frequency = 1.0, size = 1.0, richness = 1.0}
-                end
-            end
-        end
-
-        data.raw['map-gen-presets']['default']['empty-world'] = {order = 'zz', basic_settings = {autoplace_controls = {}}}
-
-        for k, v in pairs (data.raw['autoplace-control']) do
-            v.can_be_disabled = true
-            data.raw['map-gen-presets']['default']['empty-world'].basic_settings.autoplace_controls[k] = {frequency = 0.0, size = 0.0, richness = 0.0}
-        end
+        data.raw['map-gen-presets']['default']['empty-world'] = {order = 'zz', basic_settings = {default_enable_all_autoplace_controls = false, autoplace_settings = {treat_missing_as_default = false, settings = {[settings.startup['PHI-CT-TILE-CHOICE'].value] = {frequency = 1.0, size = 1.0, richness = 1.0}}}}}
     end
 end
 
