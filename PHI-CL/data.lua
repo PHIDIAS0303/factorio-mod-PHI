@@ -1728,6 +1728,7 @@ if settings.startup['PHI-CT'].value then
             order = 'zz',
             basic_settings = {
                 default_enable_all_autoplace_controls = false,
+                autoplace_controls = {},
                 autoplace_settings = {
                     tile = {
                         treat_missing_as_default = false,
@@ -1741,7 +1742,8 @@ if settings.startup['PHI-CT'].value then
                     decorative = {
                         treat_missing_as_default = false
                     }
-                }
+                },
+                no_enemies_mode = true
             }
         }
     end
