@@ -1731,7 +1731,9 @@ if settings.startup['PHI-CT'].value then
                 autoplace_settings = {
                     tile = {
                         treat_missing_as_default = false,
-                        [settings.startup['PHI-CT-TILE-CHOICE'].value] = {frequency = 1.0, size = 1.0, richness = 1.0}
+                        settings = {
+                            [settings.startup['PHI-CT-TILE-CHOICE'].value] = {frequency = 1.0, size = 1.0, richness = 1.0}
+                        }
                     },
                     entity = {
                         treat_missing_as_default = false
