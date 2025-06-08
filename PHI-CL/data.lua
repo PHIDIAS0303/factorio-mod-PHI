@@ -1724,7 +1724,24 @@ if settings.startup['PHI-CT'].value then
     end
 
     if settings.startup['PHI-CT-TILE'].value then
-        data.raw['map-gen-presets']['default']['empty-world'] = {order = 'zz', basic_settings = {default_enable_all_autoplace_controls = false, autoplace_settings = {treat_missing_as_default = false, settings = {tile = {[settings.startup['PHI-CT-TILE-CHOICE'].value] = {frequency = 1.0, size = 1.0, richness = 1.0}}}}}}
+        data.raw['map-gen-presets']['default']['empty-world'] = {
+            order = 'zz',
+            basic_settings = {
+                default_enable_all_autoplace_controls = false,
+                autoplace_settings = {
+                    tile = {
+                        treat_missing_as_default = false,
+                        [settings.startup['PHI-CT-TILE-CHOICE'].value] = {frequency = 1.0, size = 1.0, richness = 1.0}
+                    },
+                    entity = {
+                        treat_missing_as_default = false
+                    },
+                    decorative = {
+                        treat_missing_as_default = false
+                    }
+                }
+            }
+        }
     end
 end
 
