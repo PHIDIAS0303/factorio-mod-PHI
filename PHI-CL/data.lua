@@ -1744,6 +1744,17 @@ if settings.startup['PHI-CT'].value then
                     }
                 },
                 no_enemies_mode = true
+            },
+            advanced_settings = {
+                pollution = {
+                    enabled = false
+                },
+                enemy_evolution = {
+                    enabled = false
+                },
+                enemy_expansion = {
+                    enabled = false
+                }
             }
         }
     end
