@@ -371,7 +371,7 @@ if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value
     end
 end
 
-if mods['space-age'] and ((settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-ENABLE-QUALITY'].value)) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-')) then
+if mods['space-age'] and ((settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-ENABLE-QUALITY'].value)) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '')) then
     for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
         if data.raw.technology[v] then
             data.raw.technology[v].hidden = true
