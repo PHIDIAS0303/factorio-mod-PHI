@@ -18,6 +18,9 @@ do
     for _, v in pairs(data.raw['lamp']) do
         if v.light then
             v.light.color = {1, 1, 1}
+        end
+
+        if v.light_when_colored then
             v.light_when_colored.color = {1, 1, 1}
         end
     end
