@@ -1647,9 +1647,8 @@ if settings.startup['PHI-CT'].value then
         }})
     end
 
-
     for _, c in pairs({'steel-chest', 'passive-provider-chest', 'active-provider-chest', 'storage-chest', 'buffer-chest', 'requester-chest'}) do
-        item = table.deepcopy(data.raw['item'][c])
+        local item = table.deepcopy(data.raw['item'][c])
         item.name = 'basic-' .. c
         item.place_result = item.name
         item.subgroup = 'storage'
@@ -1657,7 +1656,7 @@ if settings.startup['PHI-CT'].value then
         item.localised_name = {'', {'name.basic-entity'}, {'entity-name.' .. c}}
         data:extend({item})
 
-        entity = (c == 'steel-chest' and table.deepcopy(data.raw['container'][c])) or table.deepcopy(data.raw['logistic-container'][c])
+        local entity = (c == 'steel-chest' and table.deepcopy(data.raw['container'][c])) or table.deepcopy(data.raw['logistic-container'][c])
         entity.name = item.name
         entity.minable.result = item.name
         entity.inventory_type = 'with_filters_and_bar'
@@ -1711,14 +1710,14 @@ if settings.startup['PHI-CT'].value then
 
     for _, v in pairs({'underground-belt', 'fast-underground-belt', 'express-underground-belt', 'turbo-underground-belt'}) do
         if data.raw.item[v] then
-            item = table.deepcopy(data.raw.item[v])
+            local item = table.deepcopy(data.raw.item[v])
             item.name = v .. '-a'
             item.place_result = item.name
             item.localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
             item.localised_description = {'entity-description.' .. v}
             data:extend({item})
 
-            entity = table.deepcopy(data.raw['underground-belt'][v])
+            local entity = table.deepcopy(data.raw['underground-belt'][v])
             entity.name = item.name
             entity.minable.result = item.name
             entity.next_upgrade = nil
