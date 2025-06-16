@@ -1759,14 +1759,15 @@ if settings.startup['PHI-CT'].value then
         end
     end
 
-    data.raw['underground-belt']['underground-belt-a'].next_upgrade = 'fast-underground-belt-a'
-    data.raw['underground-belt']['fast-underground-belt-a'].next_upgrade = 'express-underground-belt-a'
-    table.insert(data.raw.technology['logistics'].effects, {type = 'unlock-recipe', recipe = 'underground-belt-a'})
-    table.insert(data.raw.technology['logistics-2'].effects, {type = 'unlock-recipe', recipe = 'fast-underground-belt-a'})
-    table.insert(data.raw.technology['logistics-3'].effects, {type = 'unlock-recipe', recipe = 'express-underground-belt-a'})
+    if data.raw['underground-belt']['underground-belt'] and data.raw['underground-belt']['fast-underground-belt'] and data.raw['underground-belt']['express-underground-belt'] then
+        data.raw['underground-belt']['underground-belt-a'].next_upgrade = 'fast-underground-belt-a'
+        data.raw['underground-belt']['fast-underground-belt-a'].next_upgrade = 'express-underground-belt-a'
+        table.insert(data.raw.technology['logistics'].effects, {type = 'unlock-recipe', recipe = 'underground-belt-a'})
+        table.insert(data.raw.technology['logistics-2'].effects, {type = 'unlock-recipe', recipe = 'fast-underground-belt-a'})
+        table.insert(data.raw.technology['logistics-3'].effects, {type = 'unlock-recipe', recipe = 'express-underground-belt-a'})
+    end
 
-    if mods['space-age'] then
-        table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-loader'})
+    if data.raw['underground-belt']['underground-belt'] and data.raw['underground-belt']['turbo-underground-belt'] then
         data.raw['underground-belt']['express-underground-belt-a'].next_upgrade = 'turbo-underground-belt-a'
         table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-underground-belt-a'})
     end
