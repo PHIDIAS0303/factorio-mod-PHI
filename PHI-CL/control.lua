@@ -109,16 +109,14 @@ local function entity_build(event)
         return
     end
 
-    if settings.startup['PHI-CT'].value then
-        if event.entity.type == 'infinity-container' and event.entity.name == 'trash-chest' then
-            event.entity.remove_unfiltered_items = true
+    if event.entity.type == 'infinity-container' and event.entity.name == 'trash-chest' then
+        event.entity.remove_unfiltered_items = true
 
-        elseif event.entity.type == 'infinity-pipe' and event.entity.name == 'trash-pipe' then
-            event.entity.set_infinity_pipe_filter(nil)
-        end
-
-        return
+    elseif event.entity.type == 'infinity-pipe' and event.entity.name == 'trash-pipe' then
+        event.entity.set_infinity_pipe_filter(nil)
     end
+
+    return
 end
 
 local function entity_destroy(event)

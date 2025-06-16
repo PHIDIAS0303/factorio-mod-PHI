@@ -1331,7 +1331,7 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
     end
 end
 
-if settings.startup['PHI-CT'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
+if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
     local vir_sig = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     local s = {}
 
