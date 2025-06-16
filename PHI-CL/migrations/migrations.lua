@@ -90,6 +90,11 @@ for _, force in pairs(game.forces) do
             recipes['trash-pipe'].reload()
         end
 
+        if (not technologies['heating-tower']) or technologies['heating-tower'].researched then
+            recipes['electric-heating-tower'].enabled = true
+            recipes['electric-heating-tower'].reload()
+        end
+
         if (not technologies['logistics']) or technologies['logistics'].researched then
             recipes['underground-belt-a'].enabled = true
             recipes['underground-belt-a'].reload()
