@@ -63,79 +63,86 @@ for _, force in pairs(game.forces) do
         recipes['passive-energy-void'].reload()
 
         if (not technologies['steel-processing']) or technologies['steel-processing'].researched then
-            recipes['basic-steel-chest'].enabled = true
-            recipes['basic-steel-chest'].reload()
+            if recipes['basic-steel-chest'] then
+                recipes['basic-steel-chest'].enabled = true
+                recipes['basic-steel-chest'].reload()
+            end
+
+            if recipes['trash-chest'] then
+                recipes['trash-chest'].enabled = true
+                recipes['trash-chest'].reload()
+            end
         end
 
         if ((not technologies['construction-robotics']) or technologies['construction-robotics'].researched) or ((not technologies['logistic-robotics']) or technologies['logistic-robotics'].researched) then
-            recipes['basic-passive-provider-chest'].enabled = true
-            recipes['basic-passive-provider-chest'].reload()
-            recipes['basic-storage-chest'].enabled = true
-            recipes['basic-storage-chest'].reload()
+            for _, r in pairs({'passive-provider', 'storage'}) do
+                if recipes['basic-' .. r .. '-chest'] then
+                    recipes['basic-' .. r .. '-chest'].enabled = true
+                    recipes['basic-' .. r .. '-chest'].reload()
+                end
+            end
         end
 
         if (not technologies['logistic-system']) or technologies['logistic-system'].researched then
-            recipes['basic-active-provider-chest'].enabled = true
-            recipes['basic-active-provider-chest'].reload()
-            recipes['basic-buffer-chest'].enabled = true
-            recipes['basic-buffer-chest'].reload()
-            recipes['basic-requester-chest'].enabled = true
-            recipes['basic-requester-chest'].reload()
+            for _, r in pairs({'active-provider', 'buffer', 'requester'}) do
+                if recipes['basic-' .. r .. '-chest'] then
+                    recipes['basic-' .. r .. '-chest'].enabled = true
+                    recipes['basic-' .. r .. '-chest'].reload()
+                end
+            end
         end
 
-        if (not technologies['automation']) or technologies['automation'].researched then
-            recipes['trash-chest'].enabled = true
-            recipes['trash-chest'].reload()
+        if (not technologies['automation']) or technologies['automation'].researched and recipes['trash-pipe'] then
             recipes['trash-pipe'].enabled = true
             recipes['trash-pipe'].reload()
         end
 
-        if (not technologies['heating-tower']) or technologies['heating-tower'].researched then
+        if (not technologies['heating-tower']) or technologies['heating-tower'].researched and recipes['electric-heating-tower'] then
             recipes['electric-heating-tower'].enabled = true
             recipes['electric-heating-tower'].reload()
         end
 
-        if (not technologies['logistics']) or technologies['logistics'].researched then
+        if (not technologies['logistics']) or technologies['logistics'].researched and recipes['underground-belt-a'] then
             recipes['underground-belt-a'].enabled = true
             recipes['underground-belt-a'].reload()
         end
 
-        if (not technologies['logistics-2']) or technologies['logistics-2'].researched then
+        if (not technologies['logistics-2']) or technologies['logistics-2'].researched and recipes['fast-underground-belt-a'] then
             recipes['fast-underground-belt-a'].enabled = true
             recipes['fast-underground-belt-a'].reload()
         end
 
-        if (not technologies['logistics-3']) or technologies['logistics-3'].researched then
+        if (not technologies['logistics-3']) or technologies['logistics-3'].researched and recipes['express-underground-belt-a'] then
             recipes['express-underground-belt-a'].enabled = true
             recipes['express-underground-belt-a'].reload()
         end
 
-        if (not technologies['turbo-transport-belt']) or technologies['turbo-transport-belt'].researched then
+        if (not technologies['turbo-transport-belt']) or technologies['turbo-transport-belt'].researched and recipes['turbo-underground-belt-a'] then
             recipes['turbo-underground-belt-a'].enabled = true
             recipes['turbo-underground-belt-a'].reload()
         end
 
-        if (not technologies['steel-processing']) or technologies['steel-processing'].researched then
+        if (not technologies['steel-processing']) or technologies['steel-processing'].researched and recipes['linked-chest'] then
             recipes['linked-chest'].enabled = true
             recipes['linked-chest'].reload()
         end
 
-        if (not technologies['logistics']) or technologies['logistics'].researched then
+        if (not technologies['logistics']) or technologies['logistics'].researched and recipes['loader'] then
             recipes['loader'].enabled = true
             recipes['loader'].reload()
         end
 
-        if (not technologies['logistics-2']) or technologies['logistics-2'].researched then
+        if (not technologies['logistics-2']) or technologies['logistics-2'].researched and recipes['fast-loader'] then
             recipes['fast-loader'].enabled = true
             recipes['fast-loader'].reload()
         end
 
-        if (not technologies['logistics-3']) or technologies['logistics-3'].researched then
+        if (not technologies['logistics-3']) or technologies['logistics-3'].researched and recipes['express-loader'] then
             recipes['express-loader'].enabled = true
             recipes['express-loader'].reload()
         end
 
-        if (not technologies['turbo-transport-belt']) or technologies['turbo-transport-belt'].researched then
+        if (not technologies['turbo-transport-belt']) or technologies['turbo-transport-belt'].researched and recipes['turbo-loader'] then
             recipes['turbo-loader'].enabled = true
             recipes['turbo-loader'].reload()
         end
