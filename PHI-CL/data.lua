@@ -1596,6 +1596,7 @@ if settings.startup['PHI-CT'].value then
         entity.consumption = '160MW'
         entity.buffer_capacity = '320MJ'
         entity.heat_buffer.max_temperature = 500
+        entity.scale_energy_usage = true
         entity.minable.result = entity.name
         entity.energy_source = {
             type = 'electric',
