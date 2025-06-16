@@ -1494,7 +1494,7 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         item.name = 'electric-heating-tower'
         item.place_result = item.name
         item.subgroup = 'environmental-protection'
-        item.order = 'c[electric-heating-tower]'
+        item.order = 'c[heating-tower]-e'
         item.localised_name = {'', {'name.electric-entity'}, {'entity-name.heating-tower'}}
         data:extend({item})
 
