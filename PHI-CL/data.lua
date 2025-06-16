@@ -1623,7 +1623,7 @@ if settings.startup['PHI-CT'].value then
         }})
 
         data.raw['reactor']['heating-tower'].fast_replaceable_group = 'heating-tower'
-        data.raw['reactor']['heating-tower'].fast_replaceable_group = data.raw['boiler']['electric-heating-tower'].fast_replaceable_group
+        data.raw['reactor']['electric-heating-tower'].fast_replaceable_group = data.raw['boiler']['heating-tower'].fast_replaceable_group
 
         table.insert(data.raw.technology['heating-tower'].effects, {type = 'unlock-recipe', recipe = item.name})
     end
