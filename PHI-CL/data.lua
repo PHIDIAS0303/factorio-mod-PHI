@@ -1704,9 +1704,15 @@ if settings.startup['PHI-CT'].value then
         end
     end
 
-    table.insert(data.raw.technology['logistics'].effects, {type = 'unlock-recipe', recipe = 'loader'})
-    table.insert(data.raw.technology['logistics-2'].effects, {type = 'unlock-recipe', recipe = 'fast-loader'})
-    table.insert(data.raw.technology['logistics-3'].effects, {type = 'unlock-recipe', recipe = 'express-loader'})
+    if data.raw['loader']['loader'] and data.raw['loader']['fast-loader'] and data.raw['loader']['express-loader'] then
+        table.insert(data.raw.technology['logistics'].effects, {type = 'unlock-recipe', recipe = 'loader'})
+        table.insert(data.raw.technology['logistics-2'].effects, {type = 'unlock-recipe', recipe = 'fast-loader'})
+        table.insert(data.raw.technology['logistics-3'].effects, {type = 'unlock-recipe', recipe = 'express-loader'})
+    end
+
+    if data.raw['loader']['loader'] and data.raw['loader']['turbo-loader'] then
+        table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-loader'})
+    end
 
     for _, v in pairs({'underground-belt', 'fast-underground-belt', 'express-underground-belt', 'turbo-underground-belt'}) do
         if data.raw.item[v] then
