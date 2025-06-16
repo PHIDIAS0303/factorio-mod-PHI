@@ -1580,7 +1580,53 @@ if settings.startup['PHI-CT'].value then
     }})
 
     data.raw['boiler']['boiler'].fast_replaceable_group = 'boiler'
-    data.raw['boiler']['electric-boiler'].fast_replaceable_group = data.raw['boiler']['electric-boiler'].fast_replaceable_group
+    data.raw['boiler']['electric-boiler'].fast_replaceable_group = data.raw['boiler']['boiler'].fast_replaceable_group
+
+    if data.raw['reactor']['heating-tower'] then
+        item = table.deepcopy(data.raw['item']['heating-tower'])
+        item.name = 'electric-heating-tower'
+        item.place_result = item.name
+        item.subgroup = 'environmental-protection'
+        item.order = 'c[electric-heating-tower]'
+        item.localised_name = {'', {'name.electric-entity'}, {'entity-name.heating-tower'}}
+        data:extend({item})
+
+        entity = table.deepcopy(data.raw['reactor']['heating-tower'])
+        entity.name = item.name
+        entity.consumption = '160MW'
+        entity.buffer_capacity = '320MJ'
+        entity.heat_buffer.max_temperature = 500
+        entity.minable.result = entity.name
+        entity.energy_source = {
+            type = 'electric',
+            usage_priority = 'secondary-input',
+            buffer_capacity = entity.buffer_capacity,
+            light_flicker = {
+                color = {r = 0.5, g = 1, b = 1, a = 0.5},
+                minimum_light_size = 0.1,
+                light_intensity_to_size_coefficient = 1
+            }
+        }
+
+        entity.localised_name = {'', {'name.electric-entity'}, {'entity-name.heating-tower'}}
+        data:extend({entity})
+
+        data:extend({{
+            type = 'recipe',
+            name = item.name,
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{type = 'item', name = 'heating-tower', amount = 1}, {type = 'item', name = 'electronic-circuit', amount = 1}},
+            results = {{type = 'item', name = item.name, amount = 1}},
+            main_product = item.name,
+            localised_name = {'', {'name.electric-entity'}, {'entity-name.heating-tower'}}
+        }})
+
+        data.raw['reactor']['heating-tower'].fast_replaceable_group = 'heating-tower'
+        data.raw['reactor']['heating-tower'].fast_replaceable_group = data.raw['boiler']['electric-heating-tower'].fast_replaceable_group
+
+        table.insert(data.raw.technology['heating-tower'].effects, {type = 'unlock-recipe', recipe = item.name})
+    end
 
     for _, c in pairs({'steel-chest', 'passive-provider-chest', 'active-provider-chest', 'storage-chest', 'buffer-chest', 'requester-chest'}) do
         item = table.deepcopy(data.raw['item'][c])
