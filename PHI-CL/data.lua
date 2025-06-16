@@ -1613,7 +1613,6 @@ if settings.startup['PHI-CT'].value then
                 light_intensity_to_size_coefficient = 1
             }
         }
-
         entity.localised_name = {'', {'name.electric-entity'}, {'entity-name.heating-tower'}}
         data:extend({entity})
 
