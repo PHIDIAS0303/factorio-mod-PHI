@@ -241,9 +241,14 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
         }})
     end
 
-    for _, v in pairs({'burner-inserter', 'inserter', 'fast-inserter', 'long-handed-inserter', 'bulk-inserter'}) do
-        data.raw['inserter'][v].allow_custom_vectors = true
-        data.raw['inserter'][v].flags = {'placeable-neutral', 'placeable-player', 'player-creation', 'building-direction-16-way'}
+    data.raw['inserter']['long-handed-inserter'].allow_custom_vectors = true
+    data.raw['inserter']['long-handed-inserter'].flags = {'placeable-neutral', 'placeable-player', 'player-creation', 'building-direction-16-way'}
+
+    for _, v in pairs({'burner-inserter', 'inserter', 'fast-inserter', 'bulk-inserter', 'stack-inserter'}) do
+        if data.raw['inserter'][v] then
+            data.raw['inserter'][v].allow_custom_vectors = true
+            data.raw['inserter'][v].flags = {'placeable-neutral', 'placeable-player', 'player-creation', 'building-direction-8-way'}
+        end
     end
 
     if mods['elevated-rails'] then
