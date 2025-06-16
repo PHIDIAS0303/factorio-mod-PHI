@@ -1349,142 +1349,148 @@ if settings.startup['PHI-CT'].value or (settings.startup['PHI-GM'].value and set
 
     data:extend(s)
 
-    local item = table.deepcopy(data.raw['item']['steel-chest'])
-    item.name = 'trash-chest'
-    item.place_result = item.name
-    item.subgroup = 'storage'
-    item.order = 'b[storage]-h[trash-chest]'
-    item.icons = {{icon = item.icon or '__base__/graphics/icons/steel-chest.png', tint = items['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
-    item.icon = nil
-    item.icon_size = nil
-    item.icon_mipmaps = nil
-    item.localised_name = {'', {'name.trash-entity'}, {'entity-name.steel-chest'}}
-    data:extend({item})
+    if data.raw['container']['steel-chest'] then
+        local item = table.deepcopy(data.raw['item']['steel-chest'])
+        item.name = 'trash-chest'
+        item.place_result = item.name
+        item.subgroup = 'storage'
+        item.order = 'b[storage]-h[trash-chest]'
+        item.icons = {{icon = item.icon or '__base__/graphics/icons/steel-chest.png', tint = items['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
+        item.icon = nil
+        item.icon_size = nil
+        item.icon_mipmaps = nil
+        item.localised_name = {'', {'name.trash-entity'}, {'entity-name.steel-chest'}}
+        data:extend({item})
 
-    local entity = table.deepcopy(data.raw['container']['steel-chest'])
-    entity.name = item.name
-    entity.minable.result = item.name
-    entity.inventory_type = 'with_filters_and_bar'
-    entity.inventory_size = 1
-    entity.max_logistic_slots = 0
-    entity.trash_inventory_size = 0
-    entity.type = 'infinity-container'
-    entity.gui_mode = 'none'
-    entity.erase_contents_when_mined = true
-    entity.preserve_contents_when_created = true
-    entity.quality_affects_inventory_size = false
-    entity.logistic_mode = nil
-    entity.next_upgrade = nil
-    entity.surface_conditions = nil
-    entity.picture.layers[1].tint = items['tint'][8]
-    entity.localised_name = {'', {'name.trash-entity'}, {'entity-name.steel-chest'}}
-    data:extend({entity})
+        local entity = table.deepcopy(data.raw['container']['steel-chest'])
+        entity.name = item.name
+        entity.minable.result = item.name
+        entity.inventory_type = 'with_filters_and_bar'
+        entity.inventory_size = 1
+        entity.max_logistic_slots = 0
+        entity.trash_inventory_size = 0
+        entity.type = 'infinity-container'
+        entity.gui_mode = 'none'
+        entity.erase_contents_when_mined = true
+        entity.preserve_contents_when_created = true
+        entity.quality_affects_inventory_size = false
+        entity.logistic_mode = nil
+        entity.next_upgrade = nil
+        entity.surface_conditions = nil
+        entity.picture.layers[1].tint = items['tint'][8]
+        entity.localised_name = {'', {'name.trash-entity'}, {'entity-name.steel-chest'}}
+        data:extend({entity})
 
-    data:extend({{
-        type = 'recipe',
-        name = item.name,
-        energy_required = 2,
-        enabled = false,
-        ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
-        results = {{type = 'item', name = item.name, amount = 1}},
-        main_product = item.name,
-        localised_name = {'', {'name.trash-entity'}, {'entity-name.steel-chest'}}
-    }})
+        data:extend({{
+            type = 'recipe',
+            name = item.name,
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
+            results = {{type = 'item', name = item.name, amount = 1}},
+            main_product = item.name,
+            localised_name = {'', {'name.trash-entity'}, {'entity-name.steel-chest'}}
+        }})
 
-    table.insert(data.raw.technology['steel-processing'].effects, {type = 'unlock-recipe', recipe = item.name})
-
-    item = table.deepcopy(data.raw['item']['pipe'])
-    item.name = 'trash-pipe'
-    item.place_result = item.name
-    item.subgroup = 'energy-pipe-distribution'
-    item.order = 'a[pipe]-c[trash-pipe]'
-    item.icons = {{icon = item.icon or '__base__/graphics/icons/pipe.png', tint = items['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
-    item.icon = nil
-    item.icon_size = nil
-    item.icon_mipmaps = nil
-    item.localised_name = {'', {'name.trash-entity'}, {'entity-name.pipe'}}
-    data:extend({item})
-
-    entity = table.deepcopy(data.raw['pipe']['pipe'])
-    entity.name = item.name
-    entity.minable.result = item.name
-    entity.type = 'infinity-pipe'
-    entity.gui_mode = 'none'
-    entity.erase_contents_when_mined = true
-    entity.next_upgrade = nil
-
-    for _, v in pairs(entity.pictures) do
-        v.tint = items['tint'][8]
-
-        if v.hr_version then
-            v.hr_version.tint = items['tint'][8]
-        end
+        table.insert(data.raw.technology['steel-processing'].effects, {type = 'unlock-recipe', recipe = item.name})
     end
 
-    entity.localised_name = {'', {'name.trash-entity'}, {'entity-name.pipe'}}
-    data:extend({entity})
+    if data.raw['pipe']['pipe'] then
+        local item = table.deepcopy(data.raw['item']['pipe'])
+        item.name = 'trash-pipe'
+        item.place_result = item.name
+        item.subgroup = 'energy-pipe-distribution'
+        item.order = 'a[pipe]-c[trash-pipe]'
+        item.icons = {{icon = item.icon or '__base__/graphics/icons/pipe.png', tint = items['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
+        item.icon = nil
+        item.icon_size = nil
+        item.icon_mipmaps = nil
+        item.localised_name = {'', {'name.trash-entity'}, {'entity-name.pipe'}}
+        data:extend({item})
 
-    data:extend({{
-        type = 'recipe',
-        name = item.name,
-        energy_required = 2,
-        enabled = false,
-        ingredients = {{type = 'item', name = 'iron-plate', amount = 1}},
-        results = {{type = 'item', name = item.name, amount = 1}},
-        main_product = item.name,
-        localised_name = {'', {'name.trash-entity'}, {'entity-name.pipe'}}
-    }})
+        local entity = table.deepcopy(data.raw['pipe']['pipe'])
+        entity.name = item.name
+        entity.minable.result = item.name
+        entity.type = 'infinity-pipe'
+        entity.gui_mode = 'none'
+        entity.erase_contents_when_mined = true
+        entity.next_upgrade = nil
 
-    table.insert(data.raw.technology['automation'].effects, {type = 'unlock-recipe', recipe = item.name})
+        for _, v in pairs(entity.pictures) do
+            v.tint = items['tint'][8]
 
-    item = table.deepcopy(data.raw['item']['boiler'])
-    item.name = 'electric-boiler'
-    item.place_result = item.name
-    item.subgroup = 'energy'
-    item.order = 'b[steam-power]-a[electric-boiler]'
-    item.localised_name = {'', {'name.electric-entity'}, {'entity-name.boiler'}}
-    data:extend({item})
+            if v.hr_version then
+                v.hr_version.tint = items['tint'][8]
+            end
+        end
 
-    entity = table.deepcopy(data.raw['boiler']['boiler'])
-    entity.name = item.name
-    entity.energy_consumption = '7200kW'
-    entity.buffer_capacity = '14400kJ'
-    entity.target_temperature = 165
-    entity.emissions_per_minute = {pollution = 0}
-    entity.minable.result = entity.name
-    entity.energy_source = {
-        type = 'electric',
-        usage_priority = 'secondary-input',
-        buffer_capacity = entity.buffer_capacity,
-        light_flicker = {
-            color = {r = 0.5, g = 1, b = 1, a = 0.5},
-            minimum_light_size = 0.1,
-            light_intensity_to_size_coefficient = 1
+        entity.localised_name = {'', {'name.trash-entity'}, {'entity-name.pipe'}}
+        data:extend({entity})
+
+        data:extend({{
+            type = 'recipe',
+            name = item.name,
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{type = 'item', name = 'iron-plate', amount = 1}},
+            results = {{type = 'item', name = item.name, amount = 1}},
+            main_product = item.name,
+            localised_name = {'', {'name.trash-entity'}, {'entity-name.pipe'}}
+        }})
+
+        table.insert(data.raw.technology['automation'].effects, {type = 'unlock-recipe', recipe = item.name})
+    end
+
+    if data.raw['boiler']['boiler'] then
+        local item = table.deepcopy(data.raw['item']['boiler'])
+        item.name = 'electric-boiler'
+        item.place_result = item.name
+        item.subgroup = 'energy'
+        item.order = 'b[steam-power]-a[electric-boiler]'
+        item.localised_name = {'', {'name.electric-entity'}, {'entity-name.boiler'}}
+        data:extend({item})
+
+        local entity = table.deepcopy(data.raw['boiler']['boiler'])
+        entity.name = item.name
+        entity.energy_consumption = '7200kW'
+        entity.buffer_capacity = '14400kJ'
+        entity.target_temperature = 165
+        entity.emissions_per_minute = {pollution = 0}
+        entity.minable.result = entity.name
+        entity.energy_source = {
+            type = 'electric',
+            usage_priority = 'secondary-input',
+            buffer_capacity = entity.buffer_capacity,
+            light_flicker = {
+                color = {r = 0.5, g = 1, b = 1, a = 0.5},
+                minimum_light_size = 0.1,
+                light_intensity_to_size_coefficient = 1
+            }
         }
-    }
 
-    entity.fire_flicker_enabled = false
-    entity.fire_glow_flicker_enabled = false
-    entity.fire = {}
-    entity.localised_name = {'', {'name.electric-entity'}, {'entity-name.boiler'}}
-    data:extend({entity})
+        entity.fire_flicker_enabled = false
+        entity.fire_glow_flicker_enabled = false
+        entity.fire = {}
+        entity.localised_name = {'', {'name.electric-entity'}, {'entity-name.boiler'}}
+        data:extend({entity})
 
-    data:extend({{
-        type = 'recipe',
-        name = item.name,
-        energy_required = 2,
-        enabled = true,
-        ingredients = {{type = 'item', name = 'boiler', amount = 1}, {type = 'item', name = 'electronic-circuit', amount = 1}},
-        results = {{type = 'item', name = item.name, amount = 1}},
-        main_product = item.name,
-        localised_name = {'', {'name.electric-entity'}, {'entity-name.boiler'}}
-    }})
+        data:extend({{
+            type = 'recipe',
+            name = item.name,
+            energy_required = 2,
+            enabled = true,
+            ingredients = {{type = 'item', name = 'boiler', amount = 1}, {type = 'item', name = 'electronic-circuit', amount = 1}},
+            results = {{type = 'item', name = item.name, amount = 1}},
+            main_product = item.name,
+            localised_name = {'', {'name.electric-entity'}, {'entity-name.boiler'}}
+        }})
 
-    data.raw['boiler']['boiler'].fast_replaceable_group = 'boiler'
-    data.raw['boiler']['electric-boiler'].fast_replaceable_group = data.raw['boiler']['boiler'].fast_replaceable_group
+        data.raw['boiler']['boiler'].fast_replaceable_group = 'boiler'
+        data.raw['boiler']['electric-boiler'].fast_replaceable_group = data.raw['boiler']['boiler'].fast_replaceable_group
+    end
 
     if data.raw['reactor']['heating-tower'] then
-        item = table.deepcopy(data.raw['item']['heating-tower'])
+        local item = table.deepcopy(data.raw['item']['heating-tower'])
         item.name = 'electric-heating-tower'
         item.place_result = item.name
         item.subgroup = 'environmental-protection'
@@ -1492,7 +1498,7 @@ if settings.startup['PHI-CT'].value or (settings.startup['PHI-GM'].value and set
         item.localised_name = {'', {'name.electric-entity'}, {'entity-name.heating-tower'}}
         data:extend({item})
 
-        entity = table.deepcopy(data.raw['reactor']['heating-tower'])
+        local entity = table.deepcopy(data.raw['reactor']['heating-tower'])
         entity.name = item.name
         entity.consumption = '160MW'
         entity.buffer_capacity = '320MJ'
@@ -1546,94 +1552,100 @@ if settings.startup['PHI-CT'].value then
         }})
     end
 
-    local item = table.deepcopy(data.raw['item']['radar'])
-    item.name = 'super-radar'
-    item.place_result = item.name
-    item.order = 'd[radar]-b[radar]'
-    item.icons = {{icon = item.icon or '__base__/graphics/icons/radar.png', tint = items['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
-    item.icon = nil
-    item.icon_size = nil
-    item.icon_mipmaps = nil
-    item.localised_name = {'', {'name.super-entity'}, {'entity-name.radar'}}
-    data:extend({item})
+    if data.raw['radar']['radar'] then
+        local item = table.deepcopy(data.raw['item']['radar'])
+        item.name = 'super-radar'
+        item.place_result = item.name
+        item.order = 'd[radar]-b[radar]'
+        item.icons = {{icon = item.icon or '__base__/graphics/icons/radar.png', tint = items['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
+        item.icon = nil
+        item.icon_size = nil
+        item.icon_mipmaps = nil
+        item.localised_name = {'', {'name.super-entity'}, {'entity-name.radar'}}
+        data:extend({item})
 
-    local entity = table.deepcopy(data.raw['radar']['radar'])
-    entity.name = item.name
-    entity.minable.result = item.name
-    entity.max_distance_of_sector_revealed = 35
-    entity.max_distance_of_nearby_sector_revealed = 35
-    entity.pictures.layers[1].tint = items['tint'][8]
-    entity.localised_name = {'', {'name.super-entity'}, {'entity-name.radar'}}
-    data:extend({entity})
+        local entity = table.deepcopy(data.raw['radar']['radar'])
+        entity.name = item.name
+        entity.minable.result = item.name
+        entity.max_distance_of_sector_revealed = 35
+        entity.max_distance_of_nearby_sector_revealed = 35
+        entity.pictures.layers[1].tint = items['tint'][8]
+        entity.localised_name = {'', {'name.super-entity'}, {'entity-name.radar'}}
+        data:extend({entity})
 
-    data:extend({{
-        type = 'recipe',
-        name = item.name,
-        energy_required = 2,
-        enabled = false,
-        ingredients = {{type = 'item', name = 'electronic-circuit', amount = 5}, {type = 'item', name = 'iron-gear-wheel', amount = 5}, {type = 'item', name = 'iron-plate', amount = 10}},
-        results = {{type = 'item', name = item.name, amount = 1}},
-        main_product = item.name,
-        localised_name = {'', {'name.super-entity'}, {'entity-name.radar'}}
-    }})
+        data:extend({{
+            type = 'recipe',
+            name = item.name,
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{type = 'item', name = 'electronic-circuit', amount = 5}, {type = 'item', name = 'iron-gear-wheel', amount = 5}, {type = 'item', name = 'iron-plate', amount = 10}},
+            results = {{type = 'item', name = item.name, amount = 1}},
+            main_product = item.name,
+            localised_name = {'', {'name.super-entity'}, {'entity-name.radar'}}
+        }})
+    end
 
-    item = table.deepcopy(data.raw['item']['electric-energy-interface'])
-    item.name = 'passive-energy-void'
-    item.place_result = item.name
-    item.subgroup = 'energy'
-    item.localised_name = {'name.passive-energy-void'}
-    data:extend({item})
+    if data.raw['electric-energy-interface']['electric-energy-interface'] then
+        local item = table.deepcopy(data.raw['item']['electric-energy-interface'])
+        item.name = 'passive-energy-void'
+        item.place_result = item.name
+        item.subgroup = 'energy'
+        item.localised_name = {'name.passive-energy-void'}
+        data:extend({item})
 
-    entity = table.deepcopy(data.raw['electric-energy-interface']['electric-energy-interface'])
-    entity.name = item.name
-    entity.minable.result = item.name
-    entity.energy_source.usage_priority = 'tertiary'
-    entity.energy_source.emissions_per_minute = {pollution = 0}
-    entity.energy_source.input_flow_limit = '1PW'
-    entity.energy_source.output_flow_limit = '0W'
-    entity.energy_source.buffer_capacity = '1PJ'
-    entity.energy_production = '0W'
-    entity.energy_usage = '1PW'
-    entity.gui_mode = 'none'
-    entity.localised_name = {'name.passive-energy-void'}
-    data:extend({entity})
+        local entity = table.deepcopy(data.raw['electric-energy-interface']['electric-energy-interface'])
+        entity.name = item.name
+        entity.minable.result = item.name
+        entity.energy_source.usage_priority = 'tertiary'
+        entity.energy_source.emissions_per_minute = {pollution = 0}
+        entity.energy_source.input_flow_limit = '1PW'
+        entity.energy_source.output_flow_limit = '0W'
+        entity.energy_source.buffer_capacity = '1PJ'
+        entity.energy_production = '0W'
+        entity.energy_usage = '1PW'
+        entity.gui_mode = 'none'
+        entity.localised_name = {'name.passive-energy-void'}
+        data:extend({entity})
 
-    data:extend({{
-        type = 'recipe',
-        name = item.name,
-        energy_required = 2,
-        enabled = false,
-        ingredients = {{type = 'item', name = 'accumulator', amount = 1}},
-        results = {{type = 'item', name = item.name, amount = 1}},
-        main_product = item.name,
-        localised_name = {'name.passive-energy-void'}
-    }})
+        data:extend({{
+            type = 'recipe',
+            name = item.name,
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{type = 'item', name = 'accumulator', amount = 1}},
+            results = {{type = 'item', name = item.name, amount = 1}},
+            main_product = item.name,
+            localised_name = {'name.passive-energy-void'}
+        }})
+    end
 
-    item = table.deepcopy(data.raw['item']['linked-chest'])
-    item.subgroup = 'storage'
-    item.order = 'a[items]-d[linked-chest]'
-    item.stack_size = 50
-    data:extend({item})
+    if data.raw['linked-container']['linked-chest'] then
+        local item = table.deepcopy(data.raw['item']['linked-chest'])
+        item.subgroup = 'storage'
+        item.order = 'a[items]-d[linked-chest]'
+        item.stack_size = 50
+        data:extend({item})
 
-    entity = table.deepcopy(data.raw['linked-container']['linked-chest'])
-    entity.circuit_connector = table.deepcopy(data.raw['container']['steel-chest'].circuit_connector)
-    entity.circuit_wire_max_distance = data.raw['container']['steel-chest'].circuit_wire_max_distance
-    entity.quality_affects_inventory_size = false
-    entity.inventory_type = 'with_filters_and_bar'
-    entity.inventory_size = 48
-    entity.gui_mode = 'all'
-    entity.surface_conditions = nil
-    data:extend({entity})
+        local entity = table.deepcopy(data.raw['linked-container']['linked-chest'])
+        entity.circuit_connector = table.deepcopy(data.raw['container']['steel-chest'].circuit_connector)
+        entity.circuit_wire_max_distance = data.raw['container']['steel-chest'].circuit_wire_max_distance
+        entity.quality_affects_inventory_size = false
+        entity.inventory_type = 'with_filters_and_bar'
+        entity.inventory_size = 48
+        entity.gui_mode = 'all'
+        entity.surface_conditions = nil
+        data:extend({entity})
 
-    data:extend({{
-        type = 'recipe',
-        name = item.name,
-        energy_required = 2,
-        enabled = false,
-        ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
-        results = {{type = 'item', name = item.name, amount = 1}},
-        main_product = item.name
-    }})
+        data:extend({{
+            type = 'recipe',
+            name = item.name,
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
+            results = {{type = 'item', name = item.name, amount = 1}},
+            main_product = item.name
+        }})
+    end
 
 
     for _, c in pairs({'steel-chest', 'passive-provider-chest', 'active-provider-chest', 'storage-chest', 'buffer-chest', 'requester-chest'}) do
