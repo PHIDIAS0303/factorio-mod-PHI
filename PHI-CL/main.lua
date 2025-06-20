@@ -266,7 +266,7 @@ function main.EEQ(source, tier)
     end
 
     item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'equipment-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'equipment-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
-    item.localised_description = {'?', {'item-description.' .. source.ref_name}, {'description.' .. source.ref_name}}
+    item.localised_description = {'?', {'equipment-description.' .. source.ref_name}, {'description.' .. source.ref_name}}
 
     data:extend({item})
 end
