@@ -1752,30 +1752,26 @@ if settings.startup['PHI-CT'].value then
     end
 
     if data.raw['linked-container']['linked-chest'] then
-        local item = table.deepcopy(data.raw['item']['linked-chest'])
-        item.subgroup = 'storage'
-        item.order = 'a[items]-d[linked-chest]'
-        item.stack_size = 50
-        data:extend({item})
+        data.raw['item']['linked-chest'].subgroup = 'storage'
+        data.raw['item']['linked-chest'].order = 'a[items]-d[linked-chest]'
+        data.raw['item']['linked-chest'].stack_size = 50
 
-        local entity = table.deepcopy(data.raw['linked-container']['linked-chest'])
-        entity.circuit_connector = table.deepcopy(data.raw['container']['steel-chest'].circuit_connector)
-        entity.circuit_wire_max_distance = data.raw['container']['steel-chest'].circuit_wire_max_distance
-        entity.quality_affects_inventory_size = false
-        entity.inventory_type = 'with_filters_and_bar'
-        entity.inventory_size = 48
-        entity.gui_mode = 'all'
-        entity.surface_conditions = nil
-        data:extend({entity})
+        data.raw['linked-container']['linked-chest'].circuit_connector = table.deepcopy(data.raw['container']['steel-chest'].circuit_connector)
+        data.raw['linked-container']['linked-chest'].circuit_wire_max_distance = data.raw['container']['steel-chest'].circuit_wire_max_distance
+        data.raw['linked-container']['linked-chest'].quality_affects_inventory_size = false
+        data.raw['linked-container']['linked-chest'].inventory_type = 'with_filters_and_bar'
+        data.raw['linked-container']['linked-chest'].inventory_size = 48
+        data.raw['linked-container']['linked-chest'].gui_mode = 'all'
+        data.raw['linked-container']['linked-chest'].surface_conditions = nil
 
         data:extend({{
             type = 'recipe',
-            name = item.name,
+            name = 'linked-chest',
             energy_required = 2,
             enabled = false,
             ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
-            results = {{type = 'item', name = item.name, amount = 1}},
-            main_product = item.name
+            results = {{type = 'item', name = 'linked-chest', amount = 1}},
+            main_product = 'linked-chest'
         }})
     end
 
