@@ -111,7 +111,7 @@ if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIP
     end
 end
 
-if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
+if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
     data.raw['mining-drill']['electric-mining-drill'].filter_count = 5
 
     if mods['space-age'] then
@@ -702,7 +702,7 @@ if settings.startup['PHI-MI'].value then
     data.raw['utility-constants'].default.default_pipeline_extent = settings.startup['PHI-MI-PIPE-EXTENT'].value
 end
 
-if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value and mods['quality'] then
+if mods['space-age'] and settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value then
     for _, v in pairs(data.raw.module) do
         if v.category and v.category == 'quality' then
             v.effect.quality = v.effect.quality * settings.startup['PHI-SA-QUALITY'].value / 10
