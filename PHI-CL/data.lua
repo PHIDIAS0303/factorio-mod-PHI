@@ -140,8 +140,6 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
                 v.quality_affects_inventory_size = true
             end
         end
-
-        data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-SA-ROCKET-CAPACITY'].value * 1000000
     end
 
     for _, v in pairs({'one-way-valve', 'overflow-valve', 'top-up-valve'}) do
@@ -802,6 +800,10 @@ if mods['space-age'] and settings.startup['PHI-SA'].value and settings.startup['
             v.effect.quality = nil
         end
     end
+end
+
+if mods['space-age'] and settings.startup['PHI-SA'].value then
+    data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-SA-ROCKET-CAPACITY'].value * 1000000
 end
 
 if mods['space-age'] and ((settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-ENABLE-QUALITY'].value)) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '')) then
