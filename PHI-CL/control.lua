@@ -146,7 +146,7 @@ local function entity_destroy(event)
 end
 
 script.on_init(function()
-    if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
+    if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
         for _, player in pairs(game.players) do
             gui_create(player)
         end
@@ -154,7 +154,7 @@ script.on_init(function()
 end)
 
 script.on_configuration_changed(function()
-    if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
+    if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
         for _, player in pairs(game.players) do
             gui_create(player)
 
@@ -165,7 +165,7 @@ script.on_configuration_changed(function()
     end
 end)
 
-if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-' then
+if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '' then
     script.on_nth_tick(3600, function(_)
         for _, s in pairs(game.surfaces) do
             local ec = s.find_entities_filtered{type='cargo-landing-pad', force='player'}
@@ -219,7 +219,7 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-' 
     end)
 end
 
-if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '-') then
+if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
     script.on_event(defines.events.on_player_created, function(event)
         gui_create(game.players[event.player_index])
     end)
