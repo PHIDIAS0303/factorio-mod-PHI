@@ -702,6 +702,41 @@ if settings.startup['PHI-MI'].value then
     data.raw['utility-constants'].default.default_pipeline_extent = settings.startup['PHI-MI-PIPE-EXTENT'].value
 end
 
+if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP')) and mods['space-age'] then
+    local function spoil_handle(i)
+        i.spoil_ticks = nil
+        i.spoil_result = nil
+        i.spoil_to_trigger_result = nil
+    end
+
+    for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg'}) do
+        spoil_handle(data.raw['item'][v])
+    end
+
+    for _, v in pairs({'raw-fish', 'yumako-mash', 'yumako', 'jelly', 'jellynut', 'bioflux'}) do
+        spoil_handle(data.raw['capsule'][v])
+    end
+
+    spoil_handle(data.raw.tool['agricultural-science-pack'])
+
+    data:extend({{
+        type = 'recipe',
+        name = 'spoilage-from-nutrients',
+        energy_required = 1,
+        enabled = false,
+        ingredients = {{type = 'item', name = 'nutrients', amount = 1}},
+        results = {{type = 'item', name = 'spoilage', amount = 10}},
+        main_product = 'spoilage',
+        localised_name = {'item-name.spoilage'}
+    }})
+
+    table.insert(data.raw.technology['agriculture'].effects, {type = 'unlock-recipe', recipe = 'spoilage-from-nutrients'})
+
+    for _, v in pairs({'spoilables', 'spoilables-result', 'spoilables-research'}) do
+        data.raw['tips-and-tricks-item'][v] = nil
+    end
+end
+
 if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-SPOIL-FREEZE'].value and settings.startup['PHI-SA-SPOIL'].value and mods['space-age'] then
     local function spoil_handle(i)
         local item = table.deepcopy(i)
@@ -756,41 +791,6 @@ if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-SPOIL-FREEZE'].
     end
 
     spoil_handle(data.raw.tool['agricultural-science-pack'])
-end
-
-if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP')) and mods['space-age'] then
-    local function spoil_handle(i)
-        i.spoil_ticks = nil
-        i.spoil_result = nil
-        i.spoil_to_trigger_result = nil
-    end
-
-    for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg'}) do
-        spoil_handle(data.raw['item'][v])
-    end
-
-    for _, v in pairs({'raw-fish', 'yumako-mash', 'yumako', 'jelly', 'jellynut', 'bioflux'}) do
-        spoil_handle(data.raw['capsule'][v])
-    end
-
-    spoil_handle(data.raw.tool['agricultural-science-pack'])
-
-    data:extend({{
-        type = 'recipe',
-        name = 'spoilage-from-nutrients',
-        energy_required = 1,
-        enabled = false,
-        ingredients = {{type = 'item', name = 'nutrients', amount = 1}},
-        results = {{type = 'item', name = 'spoilage', amount = 10}},
-        main_product = 'spoilage',
-        localised_name = {'item-name.spoilage'}
-    }})
-
-    table.insert(data.raw.technology['agriculture'].effects, {type = 'unlock-recipe', recipe = 'spoilage-from-nutrients'})
-
-    for _, v in pairs({'spoilables', 'spoilables-result', 'spoilables-research'}) do
-        data.raw['tips-and-tricks-item'][v] = nil
-    end
 end
 
 if mods['space-age'] and settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value then
