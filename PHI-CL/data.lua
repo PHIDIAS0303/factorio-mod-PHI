@@ -707,7 +707,7 @@ if mods['space-age'] and settings.startup['PHI-SA'].value and settings.startup['
         if v.category and v.category == 'quality' then
             v.effect.quality = v.effect.quality * settings.startup['PHI-SA-QUALITY'].value / 10
 
-        elseif v.category and v.category == 'speed' then
+        elseif v.category and v.category == 'speed' and settings.startup['PHI-SA-QUALITY'].value ~= 10 then
             v.effect.quality = nil
         end
     end
