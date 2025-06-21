@@ -112,24 +112,26 @@ if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIP
 end
 
 if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
-    data.raw['mining-drill']['electric-mining-drill'].filter_count = 5
+    for _, v in pairs(data.raw['mining-drill']) do
+        v.filter_count = 5
+    end
 
     if mods['space-age'] then
-        data.raw['mining-drill']['electric-mining-drill'].drops_full_belt_stacks = true
-        data.raw['mining-drill']['big-mining-drill'].filter_count = 5
-        data.raw['pipe']['pipe'].heating_energy = nil
-        data.raw['pipe-to-ground']['pipe-to-ground'].heating_energy = nil
-        data.raw['pump']['pump'].heating_energy = nil
-        data.raw['valve']['one-way-valve'].heating_energy = nil
-        data.raw['valve']['overflow-valve'].heating_energy = nil
-        data.raw['valve']['top-up-valve'].heating_energy = nil
-        data.raw['storage-tank']['storage-tank'].heating_energy = nil
-        data.raw['generator']['steam-engine'].heating_energy = nil
-        data.raw['generator']['steam-turbine'].heating_energy = nil
-        data.raw['furnace']['electric-furnace'].heating_energy = nil
-        data.raw['assembling-machine']['cryogenic-plant'].heating_energy = nil
-        data.raw['roboport']['roboport'].charging_station_count_affected_by_quality = true
-        data.raw['roboport-equipment']['personal-roboport-equipment'].charging_station_count_affected_by_quality = true
+        for _, v in pairs(data.raw['mining-drill']) do
+            v.drops_full_belt_stacks = true
+        end
+
+        for _, w in pairs({data.raw['valve'], data.raw['pipe'], data.raw['pipe-to-ground'], data.raw['pump'], data.raw['storage-tank'], data.raw['generator'], data.raw['furnace'], data.raw['assembling-machine'], data.raw['roboport']}) do
+            for _, v in pairs(w) do
+                v.heating_energy = nil
+            end
+        end
+
+        for _, w in pairs({data.raw['roboport'], data.raw['roboport-equipment']}) do
+            for _, v in pairs(w) do
+                v.charging_station_count_affected_by_quality = true
+            end
+        end
 
         for _, v in pairs(data.raw['lab']) do
             v.uses_quality_drain_modifier = true
