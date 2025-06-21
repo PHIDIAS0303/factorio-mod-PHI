@@ -144,7 +144,7 @@ local function entity_destroy(event)
 end
 
 script.on_init(function()
-    if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
+    if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
         for _, player in pairs(game.players) do
             gui_create(player)
         end
@@ -152,7 +152,7 @@ script.on_init(function()
 end)
 
 script.on_configuration_changed(function()
-    if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
+    if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
         for _, player in pairs(game.players) do
             gui_create(player)
 
@@ -217,7 +217,7 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '' t
     end)
 end
 
-if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
+if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
     script.on_event(defines.events.on_player_created, function(event)
         gui_create(game.players[event.player_index])
     end)
@@ -259,7 +259,9 @@ if settings.startup['PHI-CT'].value or settings.startup['PHI-MI'].value or (sett
     script.on_event({defines.events.on_entity_died, defines.events.on_player_mined_entity, defines.events.on_robot_pre_mined, defines.events.script_raised_destroy}, function(event)
         entity_destroy(event)
     end)
+end
 
+if settings.startup['PHI-CT'].value then
     script.on_event({defines.events.on_player_cheat_mode_enabled, defines.events.on_player_cheat_mode_disabled}, function(event)
         hidden_recipe_enable(event)
     end)
