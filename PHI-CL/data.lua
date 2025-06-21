@@ -688,10 +688,6 @@ if settings.startup['PHI-MI'].value then
                 if v.max_power then
                     v.max_power = tostring(tonumber(string.match(v.max_power, '[%d%.]+')) * s) .. string.match(v.max_power, '%a+')
                     v.reversing_power_modifier = 1
-
-                    if v.energy_source then
-                        v.energy_source.burnt_inventory_size = 1
-                    end
                 end
             end
         end
@@ -1074,6 +1070,12 @@ if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup[
         localised_name = {'name.charged-train-battery'},
         localised_description = {'description.charged-train-battery'}
     }})
+
+    for _, v in pairs(data.raw['locomotive']) do
+        if v.energy_source then
+            v.energy_source.burnt_inventory_size = (v.energy_source.burnt_inventory_size and math.max(v.energy_source.burnt_inventory_size, 1)) or 1
+        end
+    end
 
     data:extend({{
         type = 'technology',
