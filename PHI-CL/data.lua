@@ -112,16 +112,16 @@ if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIP
 end
 
 if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
-    for _, v in pairs(data.raw['mining-drill']) do
-        v.filter_count = 5
-    end
-
     for _, v in pairs(data.raw['active-defense-equipment']) do
         v.automatic = true
     end
 
     for _, v in pairs(data.raw['reactor']) do
         v.scale_energy_usage = (v.fast_replaceable_group and v.fast_replaceable_group == 'reactor')
+    end
+
+    for _, v in pairs(data.raw['mining-drill']) do
+        v.filter_count = 5
     end
 
     if mods['space-age'] then
