@@ -37,16 +37,14 @@ for _, force in pairs(game.forces) do
         end
     end
 
-    if settings.startup['PHI-MB'].value and settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIPMENT-ARMOR'].value then
-        if (not technologies['power-armor-mk2']) or technologies['power-armor-mk2'].researched then
-            recipes['power-armor-mk3'].enabled = true
-            recipes['power-armor-mk3'].reload()
-        end
+    if ((not technologies['power-armor-mk2']) or technologies['power-armor-mk2'].researched) and recipes['power-armor-mk3'] then
+        recipes['power-armor-mk3'].enabled = true
+        recipes['power-armor-mk3'].reload()
+    end
 
-        if (not technologies['mech-armor']) or technologies['mech-armor'].researched then
-            recipes['mech-armor-mk2'].enabled = true
-            recipes['mech-armor-mk2'].reload()
-        end
+    if ((not technologies['mech-armor']) or technologies['mech-armor'].researched) and recipes['mech-armor'] then
+        recipes['mech-armor-mk2'].enabled = true
+        recipes['mech-armor-mk2'].reload()
     end
 
     if settings.startup['PHI-CT'].value then
