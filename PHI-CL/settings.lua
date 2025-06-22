@@ -81,6 +81,13 @@ data:extend({
   localised_name = {'phi-cl.setting-category-color', {'mod-setting-name-prefix.PHI-MI'}, {'phi-cl.enable', {'mod-setting-name.PHI-MI'}}},
   order = 'B00'
 }, {
+  type = 'bool-setting',
+  name = 'PHI-MI-GENERIC',
+  setting_type = 'startup',
+  default_value = false,
+  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MI-GENERIC'}, {'phi-cl.enable', {'mod-setting-name.PHI-MI-GENERIC'}}},
+  order = 'B01'
+}, {
   type = 'int-setting',
   name = 'PHI-MI-PIPE',
   setting_type = 'startup',
@@ -88,7 +95,7 @@ data:extend({
   minimum_value = 1,
   maximum_value = 160,
   localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MI-PIPE'}, {'phi-cl.proportion', {'mod-setting-name.PHI-MI-PIPE'}}},
-  order = 'B01'
+  order = 'B02'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-ROBOT',
@@ -97,14 +104,14 @@ data:extend({
   minimum_value = 1,
   maximum_value = 160,
   localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MI-ROBOT'}, {'phi-cl.proportion', {'mod-setting-name.PHI-MI-ROBOT'}}},
-  order = 'B02'
+  order = 'B03'
 }, {
   type = 'bool-setting',
   name = 'PHI-MI-ROBOT-ENERGY',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MI-ROBOT-ENERGY'}, {'phi-cl.enable', {'mod-setting-name.PHI-MI-ROBOT-ENERGY'}}},
-  order = 'B03'
+  order = 'B04'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-TRAIN',
@@ -113,7 +120,7 @@ data:extend({
   minimum_value = 1,
   maximum_value = 160,
   localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MI-TRAIN'}, {'phi-cl.proportion', {'mod-setting-name.PHI-MI-TRAIN'}}},
-  order = 'B04'
+  order = 'B05'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-PIPE-EXTENT',
@@ -122,7 +129,7 @@ data:extend({
   minimum_value = 80,
   maximum_value = 10240,
   localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MI-PIPE-EXTENT'}, {'mod-setting-name.PHI-MI-PIPE-EXTENT'}},
-  order = 'B05'
+  order = 'B06'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA',
