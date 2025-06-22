@@ -1100,19 +1100,12 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
 
         data.raw['utility-constants'].default.default_pipeline_extent = math.max(settings.startup['PHI-MI-PIPE-EXTENT'].value, 960)
 
-        local bss = 1
+        local bss = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
 
-        if data.raw['inserter']['stack-inserter'] then
-            data.raw['inserter']['stack-inserter'].allow_custom_vectors = true
-            bss = data.raw['inserter']['stack-inserter'].max_belt_stack_size
-        end
-
-        for _, v in pairs({'burner-inserter', 'inserter', 'fast-inserter', 'long-handed-inserter', 'bulk-inserter'}) do
-            if data.raw['inserter'][v] then
-                data.raw['inserter'][v].max_belt_stack_size = bss
-                data.raw['inserter'][v].grab_less_to_match_belt_stack = true
-                data.raw['inserter'][v].enter_drop_mode_if_held_stack_spoiled = true
-            end
+        for _, v in pairs(data.raw['inserter']) do
+            v.max_belt_stack_size = bss
+            v.grab_less_to_match_belt_stack = true
+            v.enter_drop_mode_if_held_stack_spoiled = true
         end
 
         for k, v in pairs(items['space-age']['PHI-VP']['surface_conditions']) do
