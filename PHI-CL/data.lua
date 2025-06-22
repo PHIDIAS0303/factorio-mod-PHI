@@ -112,6 +112,8 @@ if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIP
 end
 
 if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
+    data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
+
     for _, v in pairs(data.raw['active-defense-equipment']) do
         v.automatic = true
     end
@@ -635,8 +637,6 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 end
 
 if settings.startup['PHI-MI'].value then
-    data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
-
     if settings.startup['PHI-MI-PIPE'].value then
         local s = settings.startup['PHI-MI-PIPE'].value / 10
 
