@@ -113,9 +113,18 @@ end
 
 if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
     data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
+    data.raw['inserter']['burner-inserter'].allow_burner_leech = true
 
     for _, t in pairs({'arithmetic-combinator', 'decider-combinator', 'programmable-speaker', 'selector-combinator'}) do
         data.raw[t][t].energy_source.usage_priority = 'primary-input'
+    end
+
+    for _, v in pairs(data.raw['container']) do
+        v.inventory_type = 'with_filters_and_bar'
+    end
+
+    for _, v in pairs(data.raw['logistic-container']) do
+        v.inventory_type = 'with_filters_and_bar'
     end
 
     for _, v in pairs(data.raw['active-defense-equipment']) do
@@ -999,20 +1008,6 @@ if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup[
 
     for _, v in pairs(data.raw['valve']) do
         v.flow_rate = math.max(50, v.flow_rate) * settings.startup['PHI-MI-PIPE'].value / 10
-    end
-
-    data.raw['inserter']['burner-inserter'].allow_burner_leech = true
-
-    for _, v in pairs({'wooden-chest', 'iron-chest', 'steel-chest'}) do
-        if data.raw['container'][v] then
-            data.raw['container'][v].inventory_type = 'with_filters_and_bar'
-        end
-    end
-
-    for _, v in pairs({'passive-provider-chest', 'active-provider-chest', 'storage-chest', 'buffer-chest', 'requester-chest'}) do
-        if data.raw['logistic-container'][v] then
-            data.raw['logistic-container'][v].inventory_type = 'with_filters_and_bar'
-        end
     end
 
     data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
