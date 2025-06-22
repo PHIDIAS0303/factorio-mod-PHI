@@ -116,6 +116,14 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
         v.filter_count = 5
     end
 
+    for _, v in pairs(data.raw['active-defense-equipment']) do
+        v.automatic = true
+    end
+
+    for _, v in pairs(data.raw['reactor']) do
+        v.scale_energy_usage = (v.fast_replaceable_group and v.fast_replaceable_group == 'reactor')
+    end
+
     if mods['space-age'] then
         for _, v in pairs(data.raw['mining-drill']) do
             v.drops_full_belt_stacks = true
@@ -627,14 +635,6 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 end
 
 if settings.startup['PHI-MI'].value then
-    for _, v in pairs(data.raw['active-defense-equipment']) do
-        v.automatic = true
-    end
-
-    for _, v in pairs(data.raw['reactor']) do
-        v.scale_energy_usage = (v.fast_replaceable_group and v.fast_replaceable_group == 'reactor')
-    end
-
     data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
 
     if settings.startup['PHI-MI-PIPE'].value then
