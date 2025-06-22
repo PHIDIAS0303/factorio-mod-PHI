@@ -114,6 +114,10 @@ end
 if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
     data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
 
+    for _, t in pairs({'arithmetic-combinator', 'decider-combinator', 'programmable-speaker', 'selector-combinator'}) do
+        data.raw[t][t].energy_source.usage_priority = 'primary-input'
+    end
+
     for _, v in pairs(data.raw['active-defense-equipment']) do
         v.automatic = true
     end
@@ -849,10 +853,6 @@ end
 
 if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
     data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
-
-    for _, t in pairs({'arithmetic-combinator', 'decider-combinator', 'programmable-speaker', 'selector-combinator'}) do
-        data.raw[t][t].energy_source.usage_priority = 'primary-input'
-    end
 
     data.raw.resource['lithium-brine'].infinite = true
     data.raw.resource['lithium-brine'].minimum = math.max(60000, data.raw.resource['lithium-brine'].minimum or 0)
