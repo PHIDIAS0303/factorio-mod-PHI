@@ -276,11 +276,15 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
     end
 
     for _, v in pairs(data.raw['inserter']) do
-        v.allow_custom_vectors = true
-        v.flags = {'placeable-neutral', 'placeable-player', 'player-creation', 'building-direction-8-way'}
+        if v.energy_source and (v.energy_source == 'electric' or v.energy_source == 'void' or v.energy_source == 'burner') then
+            v.allow_custom_vectors = true
+            v.flags = {'placeable-neutral', 'placeable-player', 'player-creation', 'building-direction-8-way'}
+        end
     end
 
-    data.raw['inserter']['long-handed-inserter'].flags = {'placeable-neutral', 'placeable-player', 'player-creation', 'building-direction-16-way'}
+    if data.raw['inserter']['long-handed-inserter'] then
+        data.raw['inserter']['long-handed-inserter'].flags = {'placeable-neutral', 'placeable-player', 'player-creation', 'building-direction-16-way'}
+    end
 
     if mods['elevated-rails'] then
         local entity = table.deepcopy(data.raw['electric-pole']['big-electric-pole'])
