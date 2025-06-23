@@ -136,6 +136,18 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
         v.scale_energy_usage = (v.fast_replaceable_group and v.fast_replaceable_group == 'reactor')
     end
 
+    table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
+
+    for _, v in pairs(data.raw['pump']) do
+        v.pumping_speed = math.max(50, v.pumping_speed) * settings.startup['PHI-MI-PIPE'].value / 10
+    end
+
+    for _, v in pairs(data.raw['valve']) do
+        v.flow_rate = math.max(50, v.flow_rate) * settings.startup['PHI-MI-PIPE'].value / 10
+    end
+
+    data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
+
     for _, v in pairs(data.raw['mining-drill']) do
         v.filter_count = 5
     end
@@ -1002,18 +1014,6 @@ if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup[
     for _, v in pairs(data.raw.lab) do
         v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack', 'agricultural-science-pack', 'cryogenic-science-pack', 'electromagnetic-science-pack', 'metallurgic-science-pack'}
     end
-
-    table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
-
-    for _, v in pairs(data.raw['pump']) do
-        v.pumping_speed = math.max(50, v.pumping_speed) * settings.startup['PHI-MI-PIPE'].value / 10
-    end
-
-    for _, v in pairs(data.raw['valve']) do
-        v.flow_rate = math.max(50, v.flow_rate) * settings.startup['PHI-MI-PIPE'].value / 10
-    end
-
-    data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
 
     local item = table.deepcopy(data.raw['item']['depleted-uranium-fuel-cell'])
     item.name = 'empty-train-battery'
