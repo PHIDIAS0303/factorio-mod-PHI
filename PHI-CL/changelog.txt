@@ -4,6 +4,7 @@ Date: 2025-06-29
 
   Changes:
     - [CL] Some code clean up.
+    - [GM] SAP can choose if they want to play with quality.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.119
