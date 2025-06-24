@@ -1228,7 +1228,7 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
         data.raw['tool']['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'raw-fish', amount = 1}}
         data.raw['tool']['space-science-pack'].send_to_orbit_mode = 'automated'
 
-        for _, v in pairs({'concrete', 'automation', 'electronics', 'advanced-circuit', 'engine', 'sulfur-processing', 'solar-energy', 'railway'}) do
+        for _, v in pairs({'concrete', 'automation', 'electronics', 'advanced-circuit', 'engine', 'sulfur-processing', 'solar-energy', 'railway', 'oil-processing'}) do
             data:extend({{
                 type = 'technology',
                 name = v .. '-productivity',
@@ -1255,6 +1255,11 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
         table.insert(data.raw.technology['solar-energy-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'battery', change = 0.05})
         table.insert(data.raw.technology['engine-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'electric-engine-unit', change = 0.05})
         table.insert(data.raw.technology['engine-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'flying-robot-frame', change = 0.05})
+        data.raw.technology['oil-processing-productivity'].effects[1].recipe = 'basic-oil-processing'
+        table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'advanced-oil-processing', change = 0.05})
+        table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'solid-fuel-from-petroleum-gas', change = 0.05})
+        table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'solid-fuel-from-heavy-oil', change = 0.05})
+        table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'solid-fuel-from-light-oil', change = 0.05})
         data.raw.technology['engine-productivity'].effects[1].recipe = 'engine-unit'
         data.raw.technology['sulfur-processing-productivity'].prerequisites = {'cryogenic-plant'}
         data.raw.technology['sulfur-processing-productivity'].effects[1].recipe = 'sulfur'
