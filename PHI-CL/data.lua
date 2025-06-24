@@ -965,7 +965,7 @@ if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup[
     data.raw.ammo['artillery-shell'].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
 
     for _, v in pairs(data.raw.tile) do
-        if v.fluid then
+        if v.fluid and v.subgroup and v.subgroup ~= 'gleba-tiles' then
             v.destroys_dropped_items = true
             v.default_destroyed_dropped_item_trigger = nil
         end
