@@ -1266,8 +1266,9 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
         data.raw.technology['electronics-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'copper-cable', change = 0.05}}
         data.raw.technology['solar-energy-productivity'].effects[1].recipe = 'solar-panel'
         data.raw.technology['railway-productivity'].effects[1].recipe = 'rail'
+        table.insert(data.raw.technology['railway-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.05})
         data.raw.technology['automation-productivity'].prerequisites[1] = 'logistics-2'
-        data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'pipe', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.05}}
+        data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'pipe', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.05}}
         data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
         data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
 
