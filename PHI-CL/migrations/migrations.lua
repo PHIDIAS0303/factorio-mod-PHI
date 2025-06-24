@@ -42,7 +42,7 @@ for _, force in pairs(game.forces) do
         recipes['power-armor-mk3'].reload()
     end
 
-    if ((not technologies['mech-armor']) or technologies['mech-armor'].researched) and recipes['mech-armor'] then
+    if ((not technologies['mech-armor']) or technologies['mech-armor'].researched) and recipes['mech-armor-mk2'] then
         recipes['mech-armor-mk2'].enabled = true
         recipes['mech-armor-mk2'].reload()
     end
