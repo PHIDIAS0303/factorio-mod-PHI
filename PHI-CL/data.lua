@@ -477,7 +477,6 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
 
         entity.fire_flicker_enabled = false
         entity.fire_glow_flicker_enabled = false
-        entity.fire = {}
         entity.localised_name = {'', {'name.electric-entity'}, {'entity-name.boiler'}}
         data:extend({entity})
 
