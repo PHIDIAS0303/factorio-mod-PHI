@@ -1258,9 +1258,11 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
         data.raw.technology['oil-processing-productivity'].prerequisites = {'cryogenic-plant'}
         data.raw.technology['oil-processing-productivity'].effects[1].recipe = 'basic-oil-processing'
         table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'advanced-oil-processing', change = 0.05})
+        table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'coal-liquefaction', change = 0.05})
         table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'solid-fuel-from-petroleum-gas', change = 0.05})
         table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'solid-fuel-from-heavy-oil', change = 0.05})
         table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'solid-fuel-from-light-oil', change = 0.05})
+        table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'lubricant', change = 0.05})
         data.raw.technology['engine-productivity'].effects[1].recipe = 'engine-unit'
         data.raw.technology['sulfur-processing-productivity'].prerequisites = {'cryogenic-plant'}
         data.raw.technology['sulfur-processing-productivity'].effects[1].recipe = 'sulfur'
