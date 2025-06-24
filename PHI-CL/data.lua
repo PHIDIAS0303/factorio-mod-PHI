@@ -745,8 +745,7 @@ if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].v
         i.spoil_to_trigger_result = nil
     end
 
-    -- , 'biter-egg', 'pentapod-egg'
-    for _, v in pairs({'nutrients', 'captive-biter-spawner'}) do
+    for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg'}) do
         spoil_handle(data.raw['item'][v])
     end
 
