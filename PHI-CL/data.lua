@@ -1255,6 +1255,7 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
         table.insert(data.raw.technology['solar-energy-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'battery', change = 0.05})
         table.insert(data.raw.technology['engine-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'electric-engine-unit', change = 0.05})
         table.insert(data.raw.technology['engine-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'flying-robot-frame', change = 0.05})
+        data.raw.technology['oil-processing-productivity'].prerequisites = {'cryogenic-plant'}
         data.raw.technology['oil-processing-productivity'].effects[1].recipe = 'basic-oil-processing'
         table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'advanced-oil-processing', change = 0.05})
         table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'solid-fuel-from-petroleum-gas', change = 0.05})
