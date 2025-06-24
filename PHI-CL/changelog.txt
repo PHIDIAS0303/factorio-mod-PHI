@@ -4,6 +4,7 @@ Date: 2025-06-29
 
   Changes:
     - [MI] Loader will try to wait for a full stack.
+    - [GM] Fixed an issue that the ore of stromatolite sometimes cannot be picked up by robots.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.120
