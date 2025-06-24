@@ -603,6 +603,7 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
             data.raw['loader'][l].per_lane_filters = true
             data.raw['loader'][l].adjustable_belt_stack_size = (data.raw['inserter']['stack-inserter'] and true) or false
             data.raw['loader'][l].max_belt_stack_size = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
+            data.raw['loader'][l].wait_for_full_stack = (data.raw['inserter']['stack-inserter'] and true) or false
         end
     end
 
