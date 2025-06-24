@@ -4,6 +4,7 @@ Date: 2025-06-29
 
   Changes:
     - [GM] Added oil processing productivity in VP.
+    - [GM] Moved some technology productivity effects in VP.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.121
