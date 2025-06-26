@@ -738,7 +738,7 @@ if settings.startup['PHI-MI'].value then
     data.raw['utility-constants'].default.default_pipeline_extent = settings.startup['PHI-MI-PIPE-EXTENT'].value
 end
 
-if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP')) and mods['space-age'] then
+if mods['space-age'] and (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP')) then
     local function spoil_handle(i)
         i.spoil_ticks = nil
         i.spoil_result = nil
@@ -758,10 +758,14 @@ if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].v
     data:extend({{
         type = 'recipe',
         name = 'spoilage-from-nutrients',
-        energy_required = 1,
+        category = 'organic-or-assembling',
+        subgroup = 'agriculture-processes',
+        order = 'c[nutrients]-z',
+        energy_required = 2,
         enabled = false,
+        allow_productivity = true,
         ingredients = {{type = 'item', name = 'nutrients', amount = 1}},
-        results = {{type = 'item', name = 'spoilage', amount = 10}},
+        results = {{type = 'item', name = 'spoilage', amount = 8}},
         main_product = 'spoilage',
         localised_name = {'item-name.spoilage'}
     }})
