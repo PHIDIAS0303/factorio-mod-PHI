@@ -305,7 +305,7 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
         entity.hidden = true
         entity.hidden_in_factoriopedia = true
         entity.minable.result = nil
-        entity.maximum_wire_distance = math.floor(data.raw['rail-support']['rail-support'].support_range * 1.75)
+        entity.maximum_wire_distance = math.floor(data.raw['rail-support']['rail-support'].support_range * 2)
         entity.supply_area_distance = 0
         entity.water_reflection = nil
         entity.pictures = nil
@@ -325,7 +325,7 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
             entity.hidden = true
             entity.hidden_in_factoriopedia = true
             entity.minable.result = nil
-            entity.range_elongation = math.floor(data.raw['rail-support']['rail-support'].support_range * 1.75)
+            entity.range_elongation = math.floor(data.raw['rail-support']['rail-support'].support_range * 2)
             entity.water_reflection = nil
             entity.chargable_graphics = nil
             entity.collision_box = {{0, 0}, {0, 0}}
