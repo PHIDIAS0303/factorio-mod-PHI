@@ -258,6 +258,11 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
         entity_build(event)
     end)
 
+    script.on_event(defines.events.on_entity_cloned, function(event)
+        entity_build({entity=event.destination})
+    end)
+
+
     script.on_event({defines.events.on_entity_died, defines.events.on_player_mined_entity, defines.events.on_robot_pre_mined, defines.events.script_raised_destroy}, function(event)
         entity_destroy(event)
     end)
