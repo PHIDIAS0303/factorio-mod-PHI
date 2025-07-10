@@ -346,7 +346,7 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
         local char = vir_sig:sub(i, i)
         table.insert(s, {
             type = 'virtual-signal',
-            name = char .. 'A',
+            name = 'signal-' .. char .. 'A',
             icon = items['general']['graphics_location'] .. 'signal/signal_' .. char .. '.png',
             subgroup = string.match(char, '%d') and 'virtual-signal-number' or 'virtual-signal-letter',
             order = (string.match(char, '%d') and 'b[numbers]2-[' or 'c[letters]2-[') .. char .. ']',

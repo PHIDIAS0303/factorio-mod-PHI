@@ -252,24 +252,42 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
     script.on_event(defines.events.on_gui_selection_state_changed, function(event)
         local player = game.players[event.player_index]
 
-        if player.opened and player.opened.object_name == 'LuaEntity' and (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) and player.gui.relative.phi_cl_inserter_config[event.element.name] then
+        if not (player.opened and player.opened.object_name == 'LuaEntity') then
+            return
+        end
+
+        if (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) and player.gui.relative.phi_cl_inserter_config then
             player.opened.direction = inserter_direction[(math.floor(inserter_direction_reversed[player.opened.direction] / 4) * 4 + (event.element.parent['i_sub_direction'].selected_index - 1)) % 16 + 1]
+        end
+
+        if player.opened.type == 'constant-combinator' and player.opened.name == 'super-combinator' and player.gui.relative.phi_cl_inserter_config then
+            local circuit_oc = player.opened.get_or_create_control_behavior()
+
+            if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
+                circuit_oc.add_section()
+            end
+
+            circuit_oc = circuit_oc.sections[1]
+            local signal_index = 1
+            local circuit = vlayer.get_circuits()
+
+            circuit_oc.set_slot(signal_index, {value = {type = 'virtual', name = '', quality = 'normal'}, min = math.floor(stats[stat_name])})
+
+            for clear_index = signal_index, #circuit do
+                if not circuit_oc.get_slot(clear_index).signal then
+                    break -- There are no more signals to clear
+                end
+
+                circuit_oc.clear_slot(clear_index)
+            end
+
+            interface.combinator_description = vlayer_circuits_string
         end
     end)
 
     script.on_event({defines.events.on_player_rotated_entity, defines.events.on_player_flipped_entity}, function(event)
         inserter_changed(event)
     end)
-
-    --[[
-    script.on_event(defines.events.on_entity_settings_pasted, function(event)
-        local player = game.players[event.player_index]
-
-        if event.destination and event.source and player.opened and event.destination.type and (event.destination.type == 'inserter' or (event.destination.type == 'entity-ghost' and event.destination.ghost_type == 'inserter')) and event.source.type and (event.source.type == 'inserter' or (event.source.type == 'entity-ghost' and event.source.ghost_type == 'inserter')) and player.opened == event.source then
-            inserter_gui_update(player, player.opened)
-        end
-    end)
-    ]]
 
     script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_entity, defines.events.on_space_platform_built_entity, defines.events.script_raised_built, defines.events.script_raised_revive}, function(event)
         entity_build(event)
