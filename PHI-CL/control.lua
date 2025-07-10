@@ -274,7 +274,7 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
             end
 
             circuit_oc = circuit_oc.sections[1]
-            circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-RA', quality = 'normal'}, min = 0})
+            circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-RA', quality = 'normal'}, min = ((event.element.parent.parent['read_type_table']['read_type_technology_dropdown'].selected_index == 2) and 1 or 0) + ((event.element.parent.parent['set_type_table']['set_type_technology_dropdown'].selected_index == 2) and 2 or 0)})
         end
     end)
 
