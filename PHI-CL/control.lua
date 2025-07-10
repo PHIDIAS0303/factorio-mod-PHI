@@ -305,19 +305,22 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
     script.on_nth_tick(1800, function(_)
         storage.phi_cl.combinator.research_progress = math.floor(game.forces['player'].research_progress * 100)
-        local n = 1
 
-        for _, r in pairs(game.forces['player'].research_queue) do
-            if r.name and r.level and r.research_unit_count_formula then
-                if storage.phi_cl.combinator.research_queue_n[n] then
-                    storage.phi_cl.combinator.research_queue_n[n].value = storage.phi_cl.combinator.research_queue_n[n].value + math.pow(2, n + 8)
+        do
+            local n = 1
 
-                else
-                    storage.phi_cl.combinator.research_queue_n[n] = {name = r.name, value = math.pow(2, n + 8)}
+            for _, r in pairs(game.forces['player'].research_queue) do
+                if r.name and r.level and r.research_unit_count_formula then
+                    if storage.phi_cl.combinator.research_queue[n] then
+                        storage.phi_cl.combinator.research_queue[n].value = storage.phi_cl.combinator.research_queue[n].value + math.pow(2, n + 8)
+
+                    else
+                        storage.phi_cl.combinator.research_queue[n] = {name = r.name, value = math.pow(2, n + 8)}
+                    end
                 end
-            end
 
-            n = n + 1
+                n = n + 1
+            end
         end
 
         for _, s in pairs(game.surfaces) do
@@ -340,6 +343,10 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
                     if (val % 2) >= 1 then
                         -- read_type_technology_dropdown
+                        for n, r in pairs(storage.phi_cl.combinator.research_queue) do
+                            circuit_oc.set_slot(10 + n, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
+                        end
+
                         circuit_oc.set_slot(18, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
                     end
 
