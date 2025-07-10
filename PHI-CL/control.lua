@@ -51,12 +51,13 @@ local function gui_create(player)
         frame.add({type = 'drop-down', name = 'i_sub_direction', items = {'[virtual-signal=signal-0]', '[virtual-signal=signal-1]', '[virtual-signal=signal-2]', '[virtual-signal=signal-3]'}, selected_index = 1})
     end
 
-    --[[
     do
         local frame = player.gui.relative.add({type = 'frame', name = 'phi_cl_combinator_config', anchor = {gui = defines.relative_gui_type.constant_combinator_gui, position = defines.relative_gui_position.right}})
-        -- frame.add({type = 'drop-down', name = 'i_sub_direction', items = {'[virtual-signal=signal-0]', '[virtual-signal=signal-1]', '[virtual-signal=signal-2]', '[virtual-signal=signal-3]'}, selected_index = 1})
+        frame.add({type = 'label', name = 'read_type', caption = {}, style = 'heading_2_label'})
+        frame.add({type = 'label', name = 'read_type_technology', caption = {'gui-technology-queue.title'}, style = 'heading_2_label'})
+        frame.add({type = 'drop-down', name = 'read_type_technology_dropdown', items = {'[virtual-signal=signal-no-entry]', '[virtual-signal=signal-green]', '[virtual-signal=signal-red]'}, selected_index = 1})
+        frame.add({type = 'label', name = 'set_type', caption = {}, style = 'heading_2_label'})
     end
-    ]]
 end
 
 local function gui_update(player, entity)
