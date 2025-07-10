@@ -295,7 +295,7 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
         end
     end
 
-    if data.raw['inserter']['long-handed-inserter'] then
+    if data.raw['inserter']['long-handed-inserter'] and (data.raw['inserter']['long-handed-inserter'].energy_source and (data.raw['inserter']['long-handed-inserter'].energy_source == 'electric' or data.raw['inserter']['long-handed-inserter'].energy_source == 'void' or data.raw['inserter']['long-handed-inserter'].energy_source == 'burner')) then
         data.raw['inserter']['long-handed-inserter'].flags = {'placeable-neutral', 'placeable-player', 'player-creation', 'building-direction-16-way'}
     end
 

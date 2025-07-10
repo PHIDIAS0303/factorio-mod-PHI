@@ -57,11 +57,11 @@ local function gui_create(player)
         table.add({type = 'label', name = 'read_type', caption = {'gui-control-behavior-modes.read-contents'}, style = 'heading_2_label'})
         local read_type_table = table.add({type = 'table', name = 'read_type_table', column_count = 2, style = 'table'})
         read_type_table.add({type = 'label', name = 'read_type_technology', caption = {'gui-technology-queue.title'}, style = 'heading_2_label'})
-        read_type_table.add({type = 'drop-down', name = 'read_type_technology_dropdown', items = {'[virtual-signal=signal-no-entry]', '[virtual-signal=signal-green]', '[virtual-signal=signal-red]'}, selected_index = 1})
+        read_type_table.add({type = 'drop-down', name = 'read_type_technology_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-check]'}, selected_index = 1})
         table.add({type = 'label', name = 'set_type', caption = {'gui-control-behavior-modes.set-filter'}, style = 'heading_2_label'})
         local set_type_table = table.add({type = 'table', name = 'set_type_table', column_count = 2, style = 'table'})
         set_type_table.add({type = 'label', name = 'set_type_technology', caption = {'gui-technology-queue.title'}, style = 'heading_2_label'})
-        set_type_table.add({type = 'drop-down', name = 'set_type_technology_dropdown', items = {'[virtual-signal=signal-no-entry]', '[virtual-signal=signal-green]', '[virtual-signal=signal-red]'}, selected_index = 1})
+        set_type_table.add({type = 'drop-down', name = 'set_type_technology_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-check]'}, selected_index = 1})
     end
 end
 
@@ -261,6 +261,12 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
         end
 
         if player.opened.type == 'constant-combinator' and player.opened.name == 'super-combinator' and player.gui.relative.phi_cl_inserter_config then
+            --[[
+            any signal = research_queue in bit form (inf only)
+            research_progress = 0 ~ 100% (100x)
+            ]]
+
+
             local circuit_oc = player.opened.get_or_create_control_behavior()
 
             if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
@@ -268,20 +274,7 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
             end
 
             circuit_oc = circuit_oc.sections[1]
-            local signal_index = 1
-            local circuit = vlayer.get_circuits()
-
-            circuit_oc.set_slot(signal_index, {value = {type = 'virtual', name = '', quality = 'normal'}, min = math.floor(stats[stat_name])})
-
-            for clear_index = signal_index, #circuit do
-                if not circuit_oc.get_slot(clear_index).signal then
-                    break -- There are no more signals to clear
-                end
-
-                circuit_oc.clear_slot(clear_index)
-            end
-
-            interface.combinator_description = vlayer_circuits_string
+            circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-RA', quality = 'normal'}, min = 0})
         end
     end)
 
