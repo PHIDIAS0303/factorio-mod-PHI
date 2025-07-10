@@ -309,7 +309,12 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
         for _, r in pairs(game.forces['player'].research_queue) do
             if r.name and r.level and r.research_unit_count_formula then
-                storage.phi_cl.combinator.research_queue_n[n] = ((storage.phi_cl.combinator.research_queue_n[n] and storage.phi_cl.combinator.research_queue_n[n]) or 0) + math.pow(2, n + 8)
+                if storage.phi_cl.combinator.research_queue_n[n] then
+                    storage.phi_cl.combinator.research_queue_n[n].value = storage.phi_cl.combinator.research_queue_n[n].value + math.pow(2, n + 8)
+
+                else
+                    storage.phi_cl.combinator.research_queue_n[n] = {name = r.name, value = math.pow(2, n + 8)}
+                end
             end
 
             n = n + 1
