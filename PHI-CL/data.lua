@@ -320,7 +320,7 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
         local s = {}
 
         for _, v in pairs(data.raw['technology']) do
-            if v.max_level and v.max_level == 'infinite' then
+            if (v.max_level and v.max_level == 'infinite') and (v.hidden and v.hidden == false) then
                 table.insert(s, {
                     type = 'virtual-signal',
                     name = 'signal-' .. v.name,
