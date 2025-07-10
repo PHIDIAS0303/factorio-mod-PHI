@@ -76,7 +76,7 @@ local function gui_update(player, entity)
         player.gui.relative.phi_cl_inserter_config['i_sub_direction'].selected_index = ((inserter_direction_reversed[entity.direction] - 1) % 4) + 1
     end
 
-    if entity.type and entity.type == 'constant-combinator' and entity.type == 'super-combinator' then
+    if entity.type and entity.type == 'constant-combinator' and entity.name == 'super-combinator' then
         local circuit_oc = player.opened.get_or_create_control_behavior()
 
         if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
