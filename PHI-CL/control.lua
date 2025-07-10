@@ -57,6 +57,8 @@ local function gui_create(player)
         frame.add({type = 'label', name = 'read_type_technology', caption = {'gui-technology-queue.title'}, style = 'heading_2_label'})
         frame.add({type = 'drop-down', name = 'read_type_technology_dropdown', items = {'[virtual-signal=signal-no-entry]', '[virtual-signal=signal-green]', '[virtual-signal=signal-red]'}, selected_index = 1})
         frame.add({type = 'label', name = 'set_type', caption = {}, style = 'heading_2_label'})
+        frame.add({type = 'label', name = 'set_type_technology', caption = {'gui-technology-queue.title'}, style = 'heading_2_label'})
+        frame.add({type = 'drop-down', name = 'set_type_technology_dropdown', items = {'[virtual-signal=signal-no-entry]', '[virtual-signal=signal-green]', '[virtual-signal=signal-red]'}, selected_index = 1})
     end
 end
 
