@@ -337,10 +337,6 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
                     circuit_oc = circuit_oc.sections[1]
                     local val = circuit_oc.get_slot(1).min or 0
 
-                    --[[
-                    any signal = research_queue in bit form (inf only)
-                    ]]
-
                     if (val % 2) >= 1 then
                         -- read_type_technology_dropdown
                         for n, r in pairs(storage.phi_cl.combinator.research_queue) do
