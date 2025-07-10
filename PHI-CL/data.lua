@@ -328,7 +328,7 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
                     icon_size = (v.icons and v.icons[1].icon_size and v.icons[1].icon_size) or 64,
                     subgroup = 'pictographs',
                     order = 'z[tech]-[' .. v.name .. ']',
-                    localised_name = {'technology-name.' .. v.name}
+                    localised_name = {'technology-name.' .. v.name:gsub('-%d+$', '')}
                 })
             end
         end
