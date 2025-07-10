@@ -178,6 +178,7 @@ script.on_init(function()
 
     storage.phi_cl = {
         combinator = {
+            research_queue = {},
             research_progress = 0
         }
     }
@@ -304,6 +305,15 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
     script.on_nth_tick(1800, function(_)
         storage.phi_cl.combinator.research_progress = math.floor(game.forces['player'].research_progress * 100)
+        local n = 1
+
+        for _, r in pairs(game.forces['player'].research_queue) do
+            if r.name and r.level and r.research_unit_count_formula then
+                storage.phi_cl.combinator.research_queue_n[n] = ((storage.phi_cl.combinator.research_queue_n[n] and storage.phi_cl.combinator.research_queue_n[n]) or 0) + math.pow(2, n - 1)
+            end
+
+            n = n + 1
+        end
 
         for _, s in pairs(game.surfaces) do
             local c = s.find_entities_filtered{type = 'constant-combinator', name = 'super-combinator'}
