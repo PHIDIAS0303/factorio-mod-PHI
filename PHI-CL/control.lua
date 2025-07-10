@@ -344,7 +344,7 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
                     if (val % 2) >= 1 then
                         -- read_type_technology_dropdown
                         for n, r in pairs(storage.phi_cl.combinator.research_queue) do
-                            circuit_oc.set_slot(10 + n, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
+                            circuit_oc.set_slot(10 + n, {value = {type = 'virtual', name = 'signal-' .. r.name, quality = 'normal'}, min = r.value})
                         end
 
                         circuit_oc.set_slot(18, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
