@@ -324,7 +324,7 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
                 table.insert(s, {
                     type = 'virtual-signal',
                     name = 'signal-' .. v.name,
-                    icon = (v.icon and v.icon) or (v.icons and v.icons[1]),
+                    icon = (v.icon and v.icon) or (v.icons and v.icons[1].icon),
                     subgroup = 'pictographs',
                     order = 'z[tech]-[' .. v.name .. ']',
                     localised_name = {'technology-name.' .. v.name}
