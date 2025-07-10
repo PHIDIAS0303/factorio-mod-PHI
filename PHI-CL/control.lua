@@ -75,6 +75,20 @@ local function gui_update(player, entity)
     if entity.type and (entity.type == 'inserter' or (entity.type == 'entity-ghost' and entity.ghost_type == 'inserter')) then
         player.gui.relative.phi_cl_inserter_config['i_sub_direction'].selected_index = ((inserter_direction_reversed[entity.direction] - 1) % 4) + 1
     end
+
+    if entity.type and entity.type == 'constant-combinator' and entity.type == 'super-combinator' then
+        local circuit_oc = player.opened.get_or_create_control_behavior()
+
+        if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
+            circuit_oc.add_section()
+        end
+
+        circuit_oc = circuit_oc.sections[1]
+        local val = circuit_oc.get_slot(1).value
+
+        player.gui.relative.phi_cl_combinator_config['default']['read_type_table']['read_type_technology_dropdown'].selected_index = (val % 2) >= 1
+        player.gui.relative.phi_cl_combinator_config['default']['set_type_table']['set_type_technology_dropdown'].selected_index = (val % 4) >= 2
+    end
 end
 
 local function inserter_changed(event)
