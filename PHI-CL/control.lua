@@ -84,7 +84,7 @@ local function gui_update(player, entity)
         end
 
         circuit_oc = circuit_oc.sections[1]
-        local val = circuit_oc.get_slot(1).value
+        local val = circuit_oc.get_slot(1).value or 0
 
         player.gui.relative.phi_cl_combinator_config['default']['read_type_table']['read_type_technology_dropdown'].selected_index = ((val % 2) >= 1 and 2) or 1
         player.gui.relative.phi_cl_combinator_config['default']['set_type_table']['set_type_technology_dropdown'].selected_index = ((val % 4) >= 2 and 2) or 1
