@@ -311,11 +311,28 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
             name = item.name,
             energy_required = 2,
             enabled = true,
-            ingredients = {{type = 'item', name = 'electronic-circuit', amount = 5}, {type = 'item', name = 'copper-wire', amount = 5}},
+            ingredients = {{type = 'item', name = 'electronic-circuit', amount = 5}, {type = 'item', name = 'copper-cable', amount = 5}},
             results = {{type = 'item', name = item.name, amount = 1}},
             main_product = item.name,
             localised_name = {'', {'name.super-entity'}, {'entity-name.constant-combinator'}}
         }})
+
+        local s = {}
+
+        for _, v in pairs(data.raw['technology']) do
+            if v.max_level and v.max_level == 'infinite' then
+                table.insert(s, {
+                    type = 'virtual-signal',
+                    name = 'signal-' .. v.name,
+                    icon = (v.icon and v.icon) or (v.icons and v.icons[1]),
+                    subgroup = 'pictographs',
+                    order = 'z[tech]-[' .. v.name .. ']',
+                    localised_name = {'technology-name.' .. v.name}
+                })
+            end
+        end
+
+        data:extend(s)
     end
 
     for _, v in pairs(data.raw['inserter']) do
