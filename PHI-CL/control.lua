@@ -30,13 +30,6 @@ local rail_support_pole = {
     'rail-support-pole-lightning'
 }
 
---[[
-TODO
-Valve
-GUI set 0 ~ 1
-entity.valve_threshold_override
-]]
-
 local function gui_create(player)
     if player.gui.relative.phi_cl_inserter_config then
         player.gui.relative.phi_cl_inserter_config.destroy()
@@ -182,6 +175,12 @@ script.on_init(function()
             gui_create(player)
         end
     end
+
+    storage.phi_cl = {
+        combinator = {
+            research_progress = 0
+        }
+    }
 end)
 
 script.on_configuration_changed(function()
@@ -275,12 +274,6 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
         end
 
         if player.opened.type == 'constant-combinator' and player.opened.name == 'super-combinator' and player.gui.relative.phi_cl_inserter_config then
-            --[[
-            any signal = research_queue in bit form (inf only)
-            research_progress = 0 ~ 100% (100x)
-            ]]
-
-
             local circuit_oc = player.opened.get_or_create_control_behavior()
 
             if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
@@ -307,6 +300,40 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
     script.on_event({defines.events.on_entity_died, defines.events.on_player_mined_entity, defines.events.on_robot_pre_mined, defines.events.script_raised_destroy}, function(event)
         entity_destroy(event)
+    end)
+
+    script.on_nth_tick(1800, function(_)
+        storage.phi_cl.combinator.research_progress = math.floor(game.forces['player'].research_progress * 100)
+
+        for _, s in pairs(game.surfaces) do
+            local c = s.find_entities_filtered{type = 'constant-combinator', name = 'super-combinator'}
+
+            if c and #c > 0 then
+                for _, sc in pairs(c) do
+                    local circuit_oc = sc.get_or_create_control_behavior()
+
+                    if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
+                        circuit_oc.add_section()
+                    end
+
+                    circuit_oc = circuit_oc.sections[1]
+                    local val = circuit_oc.get_slot(1).min or 0
+
+                    --[[
+                    any signal = research_queue in bit form (inf only)
+                    ]]
+
+                    if (val % 2) >= 1 then
+                        -- read_type_technology_dropdown
+                        circuit_oc.set_slot(18, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
+                    end
+
+                    if (val % 4) >= 2 then
+                        -- set_type_technology_dropdown
+                    end
+                end
+            end
+        end
     end)
 end
 
