@@ -47,12 +47,12 @@ local function gui_create(player)
     end
 
     do
-        local frame = player.gui.relative.add({type = 'frame', name = 'phi_cl_inserter_config', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right}})
+        local frame = player.gui.relative.add({type = 'frame', name = 'phi_cl_inserter_config', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right, type = 'inserter', ghost_mode = 'both'}})
         frame.add({type = 'drop-down', name = 'i_sub_direction', items = {'[virtual-signal=signal-0]', '[virtual-signal=signal-1]', '[virtual-signal=signal-2]', '[virtual-signal=signal-3]'}, selected_index = 1})
     end
 
     do
-        local frame = player.gui.relative.add({type = 'frame', name = 'phi_cl_combinator_config', anchor = {gui = defines.relative_gui_type.constant_combinator_gui, position = defines.relative_gui_position.right}})
+        local frame = player.gui.relative.add({type = 'frame', name = 'phi_cl_combinator_config', anchor = {gui = defines.relative_gui_type.constant_combinator_gui, position = defines.relative_gui_position.right, type = 'constant-combinator', name = 'super-combinator', ghost_mode = 'only_real'}})
         local table = frame.add({type = 'table', name = 'default', column_count = 1, style = 'table'})
         table.add({type = 'label', name = 'read_type', caption = {'gui-control-behavior-modes.read-contents'}, style = 'heading_2_label'})
         local read_type_table = table.add({type = 'table', name = 'read_type_table', column_count = 2, style = 'table'})
