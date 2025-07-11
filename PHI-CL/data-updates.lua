@@ -41,6 +41,8 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
         local s = {}
 
         for _, v in pairs(data.raw['technology']) do
+            local raw_name = v.name:gsub('-%d+$', '')
+
             if (v.max_level and v.max_level == 'infinite') and v.hidden ~= true then
                 table.insert(s, {
                     type = 'virtual-signal',
@@ -49,7 +51,7 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
                     icon_size = ((v.icons and v.icons[1].icon_size and v.icons[1].icon_size) or (v.icon_size and v.icon_size)) or 64,
                     subgroup = 'pictographs',
                     order = 'z[tech]-[' .. v.name .. ']',
-                    localised_name = {'technology-name.' .. v.name:gsub('-%d+$', '')}
+                    localised_name = {'?', {'technology-name.' .. raw_name}, {'entity-name.' .. raw_name}}
                 })
             end
         end
