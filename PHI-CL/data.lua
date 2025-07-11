@@ -1073,7 +1073,7 @@ if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup[
 
     data:extend({{
         type = 'technology',
-        name = 'cargo-landing-pad-count',
+        name = 'cargo-landing-pad',
         prerequisites = {'space-science-pack'},
         effects = {{type = 'cargo-landing-pad-count', modifier = 1}},
         unit = {count_formula = '1000 * L', ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}, time = 60},
