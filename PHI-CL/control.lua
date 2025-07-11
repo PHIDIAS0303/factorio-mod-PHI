@@ -341,6 +341,8 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
                         for rn, rv in pairs(storage.phi_cl.combinator.research_queue) do
                             circuit_oc.set_slot(n, {value = {type = 'virtual', name = 'signal-' .. rn, quality = 'normal'}, min = rv})
+
+                            n = n + 1
                         end
 
                         for i = n, 17 do
