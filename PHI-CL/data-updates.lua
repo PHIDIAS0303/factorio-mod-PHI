@@ -46,11 +46,11 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
             if (v.max_level and v.max_level == 'infinite') and v.hidden ~= true then
                 table.insert(s, {
                     type = 'virtual-signal',
-                    name = 'signal-' .. v.name,
+                    name = 'signal-' .. raw_name,
                     icon = (v.icon and v.icon) or (v.icons and v.icons[1].icon),
                     icon_size = ((v.icons and v.icons[1].icon_size and v.icons[1].icon_size) or (v.icon_size and v.icon_size)) or 64,
                     subgroup = 'pictographs',
-                    order = 'z[tech]-[' .. v.name .. ']',
+                    order = 'z[tech]-[' .. raw_name .. ']',
                     localised_name = {'?', {'technology-name.' .. raw_name}, {'entity-name.' .. raw_name}}
                 })
             end
