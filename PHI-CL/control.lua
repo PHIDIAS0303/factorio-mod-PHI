@@ -30,6 +30,16 @@ local rail_support_pole = {
     'rail-support-pole-lightning'
 }
 
+local technology_signal = {}
+
+for _, v in pairs(prototypes.technology) do
+    local raw_name = v.name:gsub('-%d+$', '')
+
+    if (v.research_unit_count_formula) and v.hidden ~= true then
+        technology_signal[raw_name] = v.name
+    end
+end
+
 local function gui_create(player)
     if player.gui.relative.phi_cl_inserter_config then
         player.gui.relative.phi_cl_inserter_config.destroy()
@@ -365,7 +375,14 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
                             circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-RA', quality = 'normal'}, min = (((val % 2) >= 1) and 1 or 0)})
 
                         else
-                            local signal_sum = circuit_oc.get_signal({type = 'virtual', name = 'signal-mining-productivity', quality = 'normal'}, defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
+                            for _, s in pairs(circuit_oc.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)) do
+                                local raw_name = s.name:gsub('^signal%-', '')
+
+                                if technology_signal[raw_name] then
+                                    storage.phi_cl.combinator.research_queue_set[technology_signal[raw_name]] = s.count
+                                end
+                            end
+                            table.insert(storage.phi_cl.combinator.research_queue_set, technology_signal[raw_name])
                         end
                     end
                 end
