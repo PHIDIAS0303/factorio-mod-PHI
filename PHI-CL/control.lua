@@ -307,6 +307,10 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
         storage.phi_cl.combinator.research_progress = math.floor(game.forces['player'].research_progress * 100)
 
         do
+            for i = 1, 7 do
+                storage.phi_cl.combinator.research_queue[i] = nil
+            end
+
             local n = 1
 
             for _, r in pairs(game.forces['player'].research_queue) do
@@ -320,10 +324,6 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
                 end
 
                 n = n + 1
-            end
-
-            for i = n, 7 do
-                storage.phi_cl.combinator.research_queue[i] = nil
             end
         end
 
