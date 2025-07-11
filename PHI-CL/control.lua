@@ -36,7 +36,7 @@ for _, v in pairs(prototypes.technology) do
     local raw_name = v.name:gsub('-%d+$', '')
 
     if (v.research_unit_count_formula) and v.hidden ~= true then
-        technology_signal[raw_name] = v.name
+        technology_signal['signal-' .. raw_name] = v.name
     end
 end
 
