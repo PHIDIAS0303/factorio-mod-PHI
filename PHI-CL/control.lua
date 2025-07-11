@@ -321,6 +321,10 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
                 n = n + 1
             end
+
+            for i = n, 7 do
+                storage.phi_cl.combinator.research_queue[i] = nil
+            end
         end
 
         for _, s in pairs(game.surfaces) do
@@ -340,7 +344,12 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
                     if (val % 2) >= 1 then
                         -- read_type_technology_dropdown
                         for n, r in pairs(storage.phi_cl.combinator.research_queue) do
-                            circuit_oc.set_slot(10 + n, {value = {type = 'virtual', name = 'signal-' .. r.name, quality = 'normal'}, min = r.value})
+                            if r.name then
+                                circuit_oc.set_slot(10 + n, {value = {type = 'virtual', name = 'signal-' .. r.name, quality = 'normal'}, min = r.value})
+
+                            else
+                                circuit_oc.clear_slot(10 + n)
+                            end
                         end
 
                         circuit_oc.set_slot(18, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
