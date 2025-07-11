@@ -375,10 +375,16 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
                             circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-RA', quality = 'normal'}, min = (((val % 2) >= 1) and 1 or 0)})
 
                         else
+                            local nrq = {}
+
                             for _, cs in pairs(circuit_oc.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)) do
                                 if cs.signal and cs.signal.type == 'virtual' and technology_signal[cs.signal.name] then
                                     storage.phi_cl.combinator.research_queue_set[cs.signal.name] = ((storage.phi_cl.combinator.research_queue[cs.signal.name] and storage.phi_cl.combinator.research_queue[cs.signal.name]) or 0) + cs.signal.count
                                 end
+                            end
+
+                            for rqn, rqv in pairs(storage.phi_cl.combinator.research_queue_set) do
+                                
                             end
                         end
                     end
