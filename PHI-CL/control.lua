@@ -320,7 +320,15 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
         do
             storage.phi_cl.combinator.research_queue = {}
-            storage.phi_cl.combinator.research_queue_set = {}
+            storage.phi_cl.combinator.research_queue_set = {
+                [1] = nil,
+                [2] = nil,
+                [3] = nil,
+                [4] = nil,
+                [5] = nil,
+                [6] = nil,
+                [7] = nil
+            }
             storage.phi_cl.combinator.research_set_combinator_count = 0
             local n = 1
 
@@ -375,20 +383,20 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
                             circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-RA', quality = 'normal'}, min = (((val % 2) >= 1) and 1 or 0)})
 
                         else
-                            local nrq = {}
-
                             for _, cs in pairs(circuit_oc.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)) do
                                 if cs.signal and cs.signal.type == 'virtual' and technology_signal[cs.signal.name] then
-                                    storage.phi_cl.combinator.research_queue_set[cs.signal.name] = ((storage.phi_cl.combinator.research_queue[cs.signal.name] and storage.phi_cl.combinator.research_queue[cs.signal.name]) or 0) + cs.signal.count
+                                    for i = 1, 7 do
+                                        if cs.signal.count % (2 ^ i) == 1 then
+                                            storage.phi_cl.combinator.research_queue_set[inserter_direction_reversed] = cs.signal.name
+                                        end
+                                    end
                                 end
-                            end
-
-                            for rqn, rqv in pairs(storage.phi_cl.combinator.research_queue_set) do
-                                
                             end
                         end
                     end
                 end
+
+                game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
             end
         end
     end)
