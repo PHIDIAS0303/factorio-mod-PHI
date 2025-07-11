@@ -389,7 +389,7 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
                                 for _, cs in pairs(ls) do
                                     if cs.signal and cs.signal.type == 'virtual' and technology_signal[cs.signal.name] then
                                         for i = 1, 7 do
-                                            if cs.count % (2 ^ i) == 1 then
+                                            if cs.count % (2 ^ (8 + i)) == 1 then
                                                 storage.phi_cl.combinator.research_queue_set[inserter_direction_reversed] = cs.signal.name
                                             end
                                         end
