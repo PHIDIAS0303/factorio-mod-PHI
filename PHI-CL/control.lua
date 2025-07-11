@@ -307,20 +307,14 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
         storage.phi_cl.combinator.research_progress = math.floor(game.forces['player'].research_progress * 100)
 
         do
-            for i = 1, 7 do
-                storage.phi_cl.combinator.research_queue[i] = nil
-            end
-
+            storage.phi_cl.combinator.research_queue = {}
             local n = 1
 
             for _, r in pairs(game.forces['player'].research_queue) do
-                if r.name and r.level and r.research_unit_count_formula then
-                    if storage.phi_cl.combinator.research_queue[n] then
-                        storage.phi_cl.combinator.research_queue[n].value = storage.phi_cl.combinator.research_queue[n].value + math.pow(2, n - 1)
+                local raw_name = r.name:gsub('-%d+$', '')
 
-                    else
-                        storage.phi_cl.combinator.research_queue[n] = {name = r.name, value = math.pow(2, n - 1)}
-                    end
+                if r.name and r.level and r.research_unit_count_formula then
+                    storage.phi_cl.combinator.research_queue[raw_name] = ((storage.phi_cl.combinator.research_queue[raw_name] and storage.phi_cl.combinator.research_queue[raw_name]) or 0) + math.pow(2, n - 1)
                 end
 
                 n = n + 1
@@ -343,13 +337,14 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
                     if (val % 2) >= 1 then
                         -- read_type_technology_dropdown
-                        for n, r in pairs(storage.phi_cl.combinator.research_queue) do
-                            if r.name then
-                                circuit_oc.set_slot(10 + n, {value = {type = 'virtual', name = 'signal-' .. r.name, quality = 'normal'}, min = r.value})
+                        local n = 11
 
-                            else
-                                circuit_oc.clear_slot(10 + n)
-                            end
+                        for rn, rv in pairs(storage.phi_cl.combinator.research_queue) do
+                            circuit_oc.set_slot(n, {value = {type = 'virtual', name = 'signal-' .. rn, quality = 'normal'}, min = rv})
+                        end
+
+                        for i = n, 17 do
+                            circuit_oc.clear_slot(i)
                         end
 
                         circuit_oc.set_slot(18, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
