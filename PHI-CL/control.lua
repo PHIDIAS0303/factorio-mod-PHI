@@ -178,7 +178,9 @@ script.on_init(function()
 
     storage.phi_cl = {
         combinator = {
+            research_set_combinator_count = 0,
             research_queue = {},
+            research_queue_set = {},
             research_progress = 0
         }
     }
@@ -308,6 +310,8 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
         do
             storage.phi_cl.combinator.research_queue = {}
+            storage.phi_cl.combinator.research_queue_set = {}
+            storage.phi_cl.combinator.research_set_combinator_count = 0
             local n = 1
 
             for _, r in pairs(game.forces['player'].research_queue) do
@@ -354,6 +358,15 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
                     if (val % 4) >= 2 then
                         -- set_type_technology_dropdown
+
+                        storage.phi_cl.combinator.research_set_combinator_count = storage.phi_cl.combinator.research_set_combinator_count + 1
+
+                        if storage.phi_cl.combinator.research_set_combinator_count > 1 then
+                            circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-RA', quality = 'normal'}, min = (((val % 2) >= 1) and 1 or 0)})
+
+                        else
+                            local signal_sum = circuit_oc.get_signal({type = 'virtual', name = 'signal-mining-productivity', quality = 'normal'}, defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
+                        end
                     end
                 end
             end
