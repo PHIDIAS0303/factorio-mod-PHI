@@ -187,6 +187,7 @@ script.on_init(function()
     end
 
     storage.phi_cl = {
+        cargo_landing_pad_storage = {},
         combinator = {
             research_set_combinator_count = 0,
             research_queue = {},
@@ -208,54 +209,49 @@ script.on_configuration_changed(function()
     end
 end)
 
-if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '' then
+if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP' then
     script.on_nth_tick(3600, function(_)
-        for _, s in pairs(game.surfaces) do
-            local ec = s.find_entities_filtered{type='cargo-landing-pad', force='player'}
+        -- 
+        local ec = game.surfaces[1].find_entities_filtered{type='cargo-landing-pad'}
+        local ec_count = #ec
 
-            if (not ec) then
-                return
+        if ec_count <= 1 then
+            return
+        end
+
+        local inv = ec[1].get_inventory(defines.inventory.cargo_landing_pad_main)
+
+        if inv then
+            local item = inv.get_contents()
+
+            for _, v in pairs(item) do
+                if storage.phi_cl.cargo_landing_pad_storage[v.name] and (storage.phi_cl.cargo_landing_pad_storage[v.name].quality == v.quality) then
+                    storage.phi_cl.cargo_landing_pad_storage[v.name][v.quality] = storage.phi_cl.cargo_landing_pad_storage[v.name] + v.count
+
+                else
+                    storage.phi_cl.cargo_landing_pad_storage[v.name] = {[v.quality] = v.count}
+                end
             end
 
-            local ec_count = #ec
+            inv.clear()
+        end
 
-            if ec_count == 1 then
-                return
-            end
+        for _, e in pairs(ec) do
+            local inventory = e.get_inventory(defines.inventory.chest)
+            local inventory_request_sections = e.get_logistic_sections().sections
 
-            local ic = {}
+            if inventory then
+                for i = 1, #inventory_request_sections do
+                    for _, v in pairs(inventory_request_sections[i].filters) do
+                        if v.value and v.value.quality then
+                            local request_amount = math.min(v.min - inventory.get_item_count(v.value.name), storage.phi_cl.cargo_landing_pad_storage[v.value.name][v.value.quality])
 
-            for _, e in pairs(ec) do
-                local inv = e.get_inventory(defines.inventory.cargo_landing_pad_main)
-
-                if inv then
-                    local item = inv.get_contents()
-
-                    for _, v in pairs(item) do
-                        if ic[v.name] and (ic[v.name].quality == v.quality) then
-                            ic[v.name].count = ic[v.name].count + v.count
-
-                        else
-                            ic[v.name] = {count = v.count, quality = v.quality}
+                            if request_amount > 0 and inventory.can_insert{name = v.value.name, count = request_amount, quality = v.value.quality} then
+                                storage.phi_cl.cargo_landing_pad_storage[v.value.name][v.value.quality] = storage.phi_cl.cargo_landing_pad_storage[v.value.name][v.value.quality] - request_amount
+                                inventory.insert{name = v.value.name, count = request_amount, quality = v.value.quality}
+                            end
                         end
                     end
-
-                    inv.clear()
-                end
-            end
-
-            for k, v in pairs(ic) do
-                local c = math.floor(v.count / ec_count)
-                local remainder = v.count % ec_count
-
-                if c > 0 then
-                    for _, e in ipairs(ec) do
-                        e.insert{name = k, count = c, quality = v.quality}
-                    end
-                end
-
-                if remainder > 0 then
-                    ec[1].insert{name = k, count = remainder, quality = v.quality}
                 end
             end
         end
