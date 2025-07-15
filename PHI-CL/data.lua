@@ -289,13 +289,13 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
     end
 
     for _, v in pairs(data.raw['inserter']) do
-        if v.energy_source and (v.energy_source == 'electric' or v.energy_source == 'void' or v.energy_source == 'burner') then
+        if v.energy_source and v.energy_source.type and (v.energy_source.type == 'electric' or v.energy_source.type == 'void' or v.energy_source.type == 'burner') then
             v.allow_custom_vectors = true
             v.flags = {'placeable-neutral', 'placeable-player', 'player-creation', 'building-direction-8-way'}
         end
     end
 
-    if data.raw['inserter']['long-handed-inserter'] and (data.raw['inserter']['long-handed-inserter'].energy_source and (data.raw['inserter']['long-handed-inserter'].energy_source == 'electric' or data.raw['inserter']['long-handed-inserter'].energy_source == 'void' or data.raw['inserter']['long-handed-inserter'].energy_source == 'burner')) then
+    if data.raw['inserter']['long-handed-inserter'] and data.raw['inserter']['long-handed-inserter'].allow_custom_vectors then
         data.raw['inserter']['long-handed-inserter'].flags = {'placeable-neutral', 'placeable-player', 'player-creation', 'building-direction-16-way'}
     end
 
