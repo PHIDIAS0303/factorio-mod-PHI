@@ -45,7 +45,7 @@ local function gui_create(player)
     end
 
     do
-        local frame = player.gui.relative.add({type = 'frame', name = 'phi_cl_combinator_config', anchor = {gui = defines.relative_gui_type.constant_combinator_gui, position = defines.relative_gui_position.right, type = 'constant-combinator', name = 'super-combinator', ghost_mode = 'only_real'}})
+        local frame = player.gui.relative.add({type = 'frame', name = 'phi_cl_combinator_config', anchor = {gui = defines.relative_gui_type.constant_combinator_gui, position = defines.relative_gui_position.right, name = 'super-combinator', ghost_mode = 'only_real'}})
         local table = frame.add({type = 'table', name = 'default', column_count = 1, style = 'table'})
         table.add({type = 'label', name = 'read_type', caption = {'gui-control-behavior-modes.read-contents'}, style = 'heading_2_label'})
         local read_type_table = table.add({type = 'table', name = 'read_type_table', column_count = 2, style = 'table'})
