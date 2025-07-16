@@ -30,16 +30,6 @@ local rail_support_pole = {
     'rail-support-pole-lightning'
 }
 
-local technology_signal = {}
-
-for _, v in pairs(prototypes.technology) do
-    local raw_name = v.name:gsub('-%d+$', '')
-
-    if (v.research_unit_count_formula) and v.hidden ~= true then
-        technology_signal['signal-' .. raw_name] = v.name
-    end
-end
-
 local function gui_create(player)
     if player.gui.relative.phi_cl_inserter_config then
         player.gui.relative.phi_cl_inserter_config.destroy()
