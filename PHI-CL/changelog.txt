@@ -3,7 +3,7 @@ Version: 3.0.124
 Date: 2025-07-27
 
   Changes:
-    - [GM] A beta version of multi combinator.
+    - [GM] A beta version of multi combinator, it allows to read the current research queue on circuit.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.123
