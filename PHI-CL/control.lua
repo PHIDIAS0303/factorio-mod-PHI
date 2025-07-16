@@ -370,7 +370,8 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
                         circuit_oc.set_slot(18, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
                     end
 
-                    if (val % 4) >= 2 and false then
+                    --[[
+                    if (val % 4) >= 2 then
                         -- incomplete
                         -- set_type_technology_dropdown
 
@@ -395,9 +396,10 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
                             end
                         end
                     end
+                    ]]
                 end
 
-                game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
+                -- game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
             end
         end
     end)
