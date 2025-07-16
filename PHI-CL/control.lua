@@ -370,7 +370,8 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
                         circuit_oc.set_slot(18, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
                     end
 
-                    if (val % 4) >= 2 then
+                    if (val % 4) >= 2 and false then
+                        -- incomplete
                         -- set_type_technology_dropdown
 
                         storage.phi_cl.combinator.research_set_combinator_count = storage.phi_cl.combinator.research_set_combinator_count + 1
