@@ -201,12 +201,6 @@ local function storage_init()
 end
 
 script.on_load(function()
-    if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
-        for _, player in pairs(game.players) do
-            gui_create(player)
-        end
-    end
-
     storage_init()
 end)
 
