@@ -171,49 +171,7 @@ local function entity_destroy(event)
     end
 end
 
-script.on_init(function()
-    if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
-        for _, player in pairs(game.players) do
-            gui_create(player)
-        end
-    end
-
-    if not storage.phi_cl then
-        storage.phi_cl = {}
-    end
-
-    if not storage.phi_cl.loop then
-        storage.phi_cl.loop = {
-            cargo_landing_pad_storage = false,
-            combinator = false
-        }
-    end
-
-    if not storage.phi_cl.cargo_landing_pad_storage then
-        storage.phi_cl.cargo_landing_pad_storage = {}
-    end
-
-    if not storage.phi_cl.combinator then
-        storage.phi_cl.combinator = {
-            research_set_combinator_count = 0,
-            research_queue = {},
-            research_queue_set = {},
-            research_progress = 0
-        }
-    end
-end)
-
-script.on_configuration_changed(function()
-    if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
-        for _, player in pairs(game.players) do
-            gui_create(player)
-
-            if player.opened and player.opened.object_name == 'LuaEntity' then
-                gui_update(player, player.opened.entity)
-            end
-        end
-    end
-
+local function storage_init()
     if not storage.phi_cl then
         storage.phi_cl = {}
     end
@@ -240,6 +198,41 @@ script.on_configuration_changed(function()
 
     storage.phi_cl.loop.cargo_landing_pad_storage = (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP')
     storage.phi_cl.loop.combinator = (settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= ''))
+end
+
+script.on_load(function()
+    if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
+        for _, player in pairs(game.players) do
+            gui_create(player)
+        end
+    end
+
+    storage_init()
+end)
+
+
+script.on_init(function()
+    if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
+        for _, player in pairs(game.players) do
+            gui_create(player)
+        end
+    end
+
+    storage_init()
+end)
+
+script.on_configuration_changed(function()
+    if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
+        for _, player in pairs(game.players) do
+            gui_create(player)
+
+            if player.opened and player.opened.object_name == 'LuaEntity' then
+                gui_update(player, player.opened.entity)
+            end
+        end
+    end
+
+    storage_init()
 end)
 
 if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
