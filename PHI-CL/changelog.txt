@@ -3,7 +3,7 @@ Version: 3.0.125
 Date: 2025-08-17
 
   Changes:
-    - [GM] Fixed an issue that it will crash on existing game, as of no init of code.
+    - [GM] Changes on the init and the calculation period.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.124

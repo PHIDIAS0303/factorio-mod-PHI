@@ -200,19 +200,24 @@ script.on_configuration_changed(function()
         end
     end
 
-    storage.phi_cl = {
-        cargo_landing_pad_storage = {},
-        combinator = {
-            research_set_combinator_count = 0,
-            research_queue = {},
-            research_queue_set = {},
-            research_progress = 0
-        }
-    }
+    if storage.phi_cl then
+        if not storage.phi_cl.cargo_landing_pad_storage then
+            storage.phi_cl.cargo_landing_pad_storage = {}
+        end
+
+        if not storage.phi_cl.combinator then
+            storage.phi_cl.combinator = {
+                research_set_combinator_count = 0,
+                research_queue = {},
+                research_queue_set = {},
+                research_progress = 0
+            }
+        end
+    end
 end)
 
 if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP' then
-    script.on_nth_tick(3600, function(_)
+    script.on_nth_tick(1800, function(_)
         -- 
         local ec = game.surfaces[1].find_entities_filtered{type='cargo-landing-pad'}
         local ec_count = #ec
