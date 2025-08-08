@@ -199,6 +199,16 @@ script.on_configuration_changed(function()
             end
         end
     end
+
+    storage.phi_cl = {
+        cargo_landing_pad_storage = {},
+        combinator = {
+            research_set_combinator_count = 0,
+            research_queue = {},
+            research_queue_set = {},
+            research_progress = 0
+        }
+    }
 end)
 
 if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP' then
