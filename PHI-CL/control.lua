@@ -200,11 +200,6 @@ local function storage_init()
     storage.phi_cl.loop.combinator = (settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= ''))
 end
 
-script.on_load(function()
-    storage_init()
-end)
-
-
 script.on_init(function()
     if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
         for _, player in pairs(game.players) do
