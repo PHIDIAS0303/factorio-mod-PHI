@@ -137,6 +137,24 @@ local function entity_build(event)
         return
     end
 
+    if event.entity.type == 'cargo-landing-pad' and prototypes.entity['proxy-cargo-landing-pad'] then
+        local ec = game.surfaces[1].find_entities_filtered{type='cargo-landing-pad'}
+        local ec_count = #ec
+
+        if ec_count <= 1 then
+            return
+        end
+
+        local e = event.entity
+        event.entity.destroy()
+
+        local p = event.entity.surface.create_entity{name = 'proxy-cargo-landing-pad', position = {e.position.x, e.position.y}, force = 'neutral', quality = e.quality.name}
+        p.proxy_target_entity = e
+        p.proxy_target_inventory = defines.inventory.cargo_landing_pad_main
+
+        return
+    end
+
     if event.entity.type == 'infinity-container' and event.entity.name == 'trash-chest' then
         event.entity.remove_unfiltered_items = true
 
@@ -178,13 +196,8 @@ local function storage_init()
 
     if not storage.phi_cl.loop then
         storage.phi_cl.loop = {
-            cargo_landing_pad_storage = false,
             combinator = false
         }
-    end
-
-    if not storage.phi_cl.cargo_landing_pad_storage then
-        storage.phi_cl.cargo_landing_pad_storage = {}
     end
 
     if not storage.phi_cl.combinator then
@@ -196,7 +209,6 @@ local function storage_init()
         }
     end
 
-    storage.phi_cl.loop.cargo_landing_pad_storage = (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP')
     storage.phi_cl.loop.combinator = (settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= ''))
 end
 
@@ -287,52 +299,6 @@ if settings.startup['PHI-CT'].value then
 end
 
 script.on_nth_tick(1800, function(_)
-    if storage.phi_cl.loop.cargo_landing_pad_storage then
-        local ec = game.surfaces[1].find_entities_filtered{type='cargo-landing-pad'}
-        local ec_count = #ec
-
-        if ec_count <= 1 then
-            return
-        end
-
-        local inv = ec[1].get_inventory(defines.inventory.cargo_landing_pad_main)
-
-        if inv then
-            local item = inv.get_contents()
-
-            for _, v in pairs(item) do
-                if storage.phi_cl.cargo_landing_pad_storage[v.name] and (storage.phi_cl.cargo_landing_pad_storage[v.name].quality == v.quality) then
-                    storage.phi_cl.cargo_landing_pad_storage[v.name][v.quality] = storage.phi_cl.cargo_landing_pad_storage[v.name][v.quality] + v.count
-
-                else
-                    storage.phi_cl.cargo_landing_pad_storage[v.name] = {[v.quality] = v.count}
-                end
-            end
-
-            inv.clear()
-        end
-
-        for _, e in pairs(ec) do
-            local inventory = e.get_inventory(defines.inventory.chest)
-            local inventory_request_sections = e.get_logistic_sections().sections
-
-            if inventory then
-                for i = 1, #inventory_request_sections do
-                    for _, v in pairs(inventory_request_sections[i].filters) do
-                        if v.value and v.value.quality then
-                            local request_amount = math.min(v.min - inventory.get_item_count(v.value.name), storage.phi_cl.cargo_landing_pad_storage[v.value.name][v.value.quality])
-
-                            if request_amount > 0 and inventory.can_insert{name = v.value.name, count = request_amount, quality = v.value.quality} then
-                                storage.phi_cl.cargo_landing_pad_storage[v.value.name][v.value.quality] = storage.phi_cl.cargo_landing_pad_storage[v.value.name][v.value.quality] - request_amount
-                                inventory.insert{name = v.value.name, count = request_amount, quality = v.value.quality}
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
-
     if storage.phi_cl.loop.combinator then
         storage.phi_cl.combinator.research_progress = math.floor(game.forces['player'].research_progress * 100)
 
