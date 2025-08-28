@@ -1232,6 +1232,16 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
         data.raw['tool']['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'raw-fish', amount = 1}}
         data.raw['tool']['space-science-pack'].send_to_orbit_mode = 'automated'
 
+        local entity = table.deepcopy(data.raw['cargo-landing-pad']['cargo-landing-pad'])
+        entity.name = 'proxy-cargo-landing-pad'
+        entity.minable.result = 'proxy-cargo-landing-pad'
+        entity.type = 'proxy-container'
+        entity.trash_inventory_size = 0
+        entity.flags = {'placeable-player', 'player-creation', 'no-automated-item-insertion', 'hide-alt-info'}
+        entity.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
+        entity.localised_description = {'entity-description.cargo-landing-pad'}
+        data:extend({entity})
+
         for _, v in pairs({'concrete', 'automation', 'electronics', 'advanced-circuit', 'engine', 'sulfur-processing', 'solar-energy', 'railway', 'oil-processing'}) do
             data:extend({{
                 type = 'technology',
