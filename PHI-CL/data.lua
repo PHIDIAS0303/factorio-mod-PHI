@@ -1242,7 +1242,8 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
         item.icon_mipmaps = nil
         item.hidden = true
         item.hidden_in_factoriopedia = true
-        item.localised_name = {'', {'name.super-entity'}, {'entity-name.radar'}}
+        item.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
+        item.localised_description = {'entity-description.cargo-landing-pad'}
         data:extend({item})
 
         local entity = table.deepcopy(data.raw['cargo-landing-pad']['cargo-landing-pad'])
