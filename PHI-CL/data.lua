@@ -1251,6 +1251,7 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
         entity.minable.result = 'cargo-landing-pad'
         entity.type = 'proxy-container'
         entity.trash_inventory_size = 0
+        entity.picture = table.deepcopy(entity.graphics_set.picture)
         entity.flags = {'placeable-player', 'player-creation', 'no-automated-item-insertion', 'hide-alt-info'}
         entity.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
         entity.localised_description = {'entity-description.cargo-landing-pad'}
