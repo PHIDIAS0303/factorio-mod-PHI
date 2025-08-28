@@ -139,9 +139,8 @@ local function entity_build(event)
 
     if event.entity.type == 'cargo-landing-pad' and prototypes.entity['proxy-cargo-landing-pad'] then
         local ec = game.surfaces[1].find_entities_filtered{type='cargo-landing-pad'}
-        local ec_count = #ec
 
-        if ec_count <= 1 then
+        if #ec <= 1 then
             return
         end
 
