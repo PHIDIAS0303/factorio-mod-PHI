@@ -1248,7 +1248,7 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
 
         local entity = table.deepcopy(data.raw['cargo-landing-pad']['cargo-landing-pad'])
         entity.name = item.name
-        entity.minable.result = item.name
+        entity.minable.result = 'cargo-landing-pad'
         entity.type = 'proxy-container'
         entity.trash_inventory_size = 0
         entity.flags = {'placeable-player', 'player-creation', 'no-automated-item-insertion', 'hide-alt-info'}
