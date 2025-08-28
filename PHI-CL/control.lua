@@ -148,7 +148,7 @@ local function entity_build(event)
         local e = event.entity
         event.entity.destroy()
 
-        local p = event.entity.surface.create_entity{name = 'proxy-cargo-landing-pad', position = {e.position.x, e.position.y}, force = 'neutral', quality = e.quality.name}
+        local p = e.surface.create_entity{name = 'proxy-cargo-landing-pad', position = {e.position.x, e.position.y}, force = 'neutral', quality = e.quality.name}
         p.proxy_target_entity = e
         p.proxy_target_inventory = defines.inventory.cargo_landing_pad_main
 
