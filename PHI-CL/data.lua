@@ -1232,8 +1232,8 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
         data.raw['tool']['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'raw-fish', amount = 1}}
         data.raw['tool']['space-science-pack'].send_to_orbit_mode = 'automated'
 
-        local item = table.deepcopy(data.raw['item']['cargo-landing-pad'])
-        item.name = 'proxy-cargo-landing-pad'
+        local item = table.deepcopy(data.raw['item']['steel-chest'])
+        item.name = 'proxy-cargo-landing-chest'
         item.place_result = item.name
         item.order = 'c[cargo-landing-pad]-2'
         item.icons = {{icon = item.icon or '__base__/graphics/icons/cargo-landing-pad.png', tint = items['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
@@ -1246,12 +1246,10 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
         item.localised_description = {'entity-description.cargo-landing-pad'}
         data:extend({item})
 
-        local entity = table.deepcopy(data.raw['cargo-landing-pad']['cargo-landing-pad'])
+        local entity = table.deepcopy(data.raw['container']['steel-chest'])
         entity.name = item.name
-        entity.minable.result = 'cargo-landing-pad'
+        entity.minable.result = item.name
         entity.type = 'proxy-container'
-        entity.trash_inventory_size = 0
-        entity.picture = {layers = table.deepcopy(entity.graphics_set.picture)}
         entity.flags = {'placeable-player', 'player-creation', 'no-automated-item-insertion', 'hide-alt-info'}
         entity.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
         entity.localised_description = {'entity-description.cargo-landing-pad'}
