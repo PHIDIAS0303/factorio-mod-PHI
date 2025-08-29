@@ -137,7 +137,7 @@ local function entity_build(event)
         return
     end
 
-    if event.entity.type == 'proxy-cargo-landing-chest' then
+    if event.entity.type == 'proxy-container' and event.entity.name == 'proxy-cargo-landing-chest' then
         local ec = game.surfaces[1].find_entities_filtered{type='cargo-landing-pad'}
 
         if not ec then
