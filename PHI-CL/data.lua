@@ -1071,6 +1071,14 @@ if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup[
         end
     end
 
+    for _, v in pairs({'coal', 'stone', 'iron-ore', 'copper-ore', 'uranium-ore'}) do
+        if data.raw.item[v] then
+            data.raw.item[v].stack_size = math.max(data.raw.item[v].stack_size, 100)
+        end
+    end
+end
+
+if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SAP' then
     data:extend({{
         type = 'technology',
         name = 'cargo-landing-pad',
@@ -1083,12 +1091,6 @@ if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup[
         upgrade = true,
         localised_name = {'entity-name.cargo-landing-pad'}
     }})
-
-    for _, v in pairs({'coal', 'stone', 'iron-ore', 'copper-ore', 'uranium-ore'}) do
-        if data.raw.item[v] then
-            data.raw.item[v].stack_size = math.max(data.raw.item[v].stack_size, 100)
-        end
-    end
 end
 
 if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP' then
