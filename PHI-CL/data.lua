@@ -1236,12 +1236,10 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
         item.name = 'proxy-cargo-landing-chest'
         item.place_result = item.name
         item.order = 'c[cargo-landing-pad]-2'
-        item.icons = {{icon = item.icon or '__base__/graphics/icons/cargo-landing-pad.png', tint = items['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
+        item.icons = {{icon = item.icon or '__base__/graphics/icons/cargo-landing-pad.png', tint = items['tint'][5], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
         item.icon = nil
         item.icon_size = nil
         item.icon_mipmaps = nil
-        item.hidden = true
-        item.hidden_in_factoriopedia = true
         item.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
         item.localised_description = {'entity-description.cargo-landing-pad'}
         data:extend({item})
@@ -1250,7 +1248,7 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
         entity.name = item.name
         entity.minable.result = item.name
         entity.type = 'proxy-container'
-        entity.flags = {'placeable-player', 'player-creation', 'no-automated-item-insertion', 'hide-alt-info'}
+        entity.picture.layers[1].tint = items['tint'][5]
         entity.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
         entity.localised_description = {'entity-description.cargo-landing-pad'}
         data:extend({entity})
