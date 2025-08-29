@@ -146,6 +146,24 @@ local function entity_build(event)
 
         event.entity.proxy_target_entity = ec[1]
         event.entity.proxy_target_inventory = defines.inventory.cargo_landing_pad_main
+
+        return
+    end
+
+    if event.entity.type == 'cargo-landing-pad' and event.entity.name == 'cargo-landing-pad' then
+        local ec = game.surfaces[1].find_entities_filtered{type='cargo-landing-pad'}
+
+        if #ec > 1 then
+            return
+        end
+
+        local ep = game.surfaces[1].find_entities_filtered{type='proxy-container', name='proxy-cargo-landing-chest'}
+
+        for _, v in pairs(ep) do
+            v.proxy_target_entity = ec[1]
+            v.proxy_target_inventory = defines.inventory.cargo_landing_pad_main
+        end
+
         return
     end
 
