@@ -1255,6 +1255,18 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
         entity.localised_description = {'entity-description.cargo-landing-pad'}
         data:extend({entity})
 
+        data:extend({{
+            type = 'recipe',
+            name = item.name,
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
+            results = {{type = 'item', name = item.name, amount = 1}},
+            main_product = item.name
+        }})
+
+        table.insert(data.raw.technology['rocket-silo'].effects, {type = 'unlock-recipe', recipe = item.name})
+
         for _, v in pairs({'concrete', 'automation', 'electronics', 'advanced-circuit', 'engine', 'sulfur-processing', 'solar-energy', 'railway', 'oil-processing'}) do
             data:extend({{
                 type = 'technology',
