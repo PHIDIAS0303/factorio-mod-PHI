@@ -910,7 +910,7 @@ if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup[
     data.raw['cargo-wagon']['cargo-wagon'].inventory_size = math.max(80, data.raw['cargo-wagon']['cargo-wagon'].inventory_size)
 
     data.raw.technology['foundation'].prerequisites = {'rail-support-foundations'}
-    data.raw.technology['foundation'].unit.count = '1000'
+    data.raw.technology['foundation'].unit.count = 1000
     data.raw.technology['foundation'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
     data.raw.technology['rail-support-foundations'].prerequisites = {'elevated-rail', 'planet-discovery-fulgora'}
     data.raw.technology['rail-support-foundations'].unit.count = 600
