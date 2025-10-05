@@ -137,7 +137,7 @@ local function entity_build(event)
         return
     end
 
-    if event.entity.type == 'proxy-container' and event.entity.name == 'proxy-cargo-landing-chest' then
+    if event.entity.type == 'proxy-container' and event.entity.name == 'proxy-cargo-landing-chest' and prototypes.entity['cargo-landing-pad'] then
         local ec = game.surfaces[1].find_entities_filtered{type='cargo-landing-pad'}
 
         if not ec then
@@ -150,7 +150,7 @@ local function entity_build(event)
         return
     end
 
-    if event.entity.type == 'cargo-landing-pad' and event.entity.name == 'cargo-landing-pad' then
+    if event.entity.type == 'cargo-landing-pad' and event.entity.name == 'cargo-landing-pad' and prototypes.entity['proxy-cargo-landing-chest'] then
         local ec = game.surfaces[1].find_entities_filtered{type='cargo-landing-pad'}
 
         if #ec > 1 then
@@ -340,7 +340,7 @@ script.on_nth_tick(1800, function(_)
         end
 
         for _, s in pairs(game.surfaces) do
-            local c = s.find_entities_filtered{type = 'constant-combinator', name = 'super-combinator'}
+            local c = s.find_entities_filtered{type='constant-combinator', name='super-combinator'}
 
             if c and #c > 0 then
                 for _, sc in pairs(c) do
