@@ -191,7 +191,7 @@ data:extend({
   setting_type = 'startup',
   allow_blank = true,
   default_value = '',
-  allowed_values = {'', 'SAP', 'VP'},
+  allowed_values = {'', 'SAP', 'SS', 'VP'},
   localised_name = {'phi-cl.setting-category-color', {'mod-setting-name-prefix.PHI-GM'}, {'phi-cl.enable', {'mod-setting-name.PHI-GM'}}},
   order = 'D00'
 },  {
