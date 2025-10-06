@@ -1093,7 +1093,7 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SAP
     }})
 end
 
-if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP' then
+if settings.startup['PHI-GM'].value and (settings.startup['PHI-GM'].value == 'SS' or settings.startup['PHI-GM'].value == 'VP') then
     if mods['space-age'] then
         data.raw.quality['normal'].level = 0
         data.raw.quality['normal'].beacon_power_usage_multiplier = 1
@@ -1233,40 +1233,6 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
 
         data.raw['tool']['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'raw-fish', amount = 1}}
         data.raw['tool']['space-science-pack'].send_to_orbit_mode = 'automated'
-
-        local item = table.deepcopy(data.raw['item']['steel-chest'])
-        item.name = 'proxy-cargo-landing-chest'
-        item.place_result = item.name
-        item.order = 'c[cargo-landing-pad]-2'
-        item.icons = {{icon = item.icon or '__base__/graphics/icons/cargo-landing-pad.png', tint = items['tint'][5], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
-        item.icon = nil
-        item.icon_size = nil
-        item.icon_mipmaps = nil
-        item.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
-        item.localised_description = {'entity-description.cargo-landing-pad'}
-        data:extend({item})
-
-        local entity = table.deepcopy(data.raw['container']['steel-chest'])
-        entity.name = item.name
-        entity.minable.result = item.name
-        entity.type = 'proxy-container'
-        entity.picture.layers[1].tint = items['tint'][5]
-        entity.flags = {'placeable-player', 'player-creation', 'no-automated-item-insertion', 'hide-alt-info'}
-        entity.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
-        entity.localised_description = {'entity-description.cargo-landing-pad'}
-        data:extend({entity})
-
-        data:extend({{
-            type = 'recipe',
-            name = item.name,
-            energy_required = 2,
-            enabled = false,
-            ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
-            results = {{type = 'item', name = item.name, amount = 1}},
-            main_product = item.name
-        }})
-
-        table.insert(data.raw.technology['rocket-silo'].effects, {type = 'unlock-recipe', recipe = item.name})
 
         for _, v in pairs({'concrete', 'automation', 'electronics', 'advanced-circuit', 'engine', 'sulfur-processing', 'solar-energy', 'railway', 'oil-processing'}) do
             data:extend({{
@@ -1582,13 +1548,6 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
             end
         end
 
-        data.raw['tile']['empty-space'].hidden = true
-        data.raw['tile']['empty-space'].hidden_in_factoriopedia = true
-        data.raw['tile']['space-platform-foundation'].hidden = true
-        data.raw['tile']['space-platform-foundation'].hidden_in_factoriopedia = true
-        data.raw['tile']['foundation'].hidden = true
-        data.raw['tile']['foundation'].hidden_in_factoriopedia = true
-
         for _, v in pairs({'cliff-fulgora', 'cliff-gleba', 'cliff-vulcanus', 'crater-cliff'}) do
             data.raw['cliff'][v].hidden = true
             data.raw['cliff'][v].hidden_in_factoriopedia = true
@@ -1618,30 +1577,6 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
             data.raw['spider-unit'][v].hidden = true
             data.raw['spider-unit'][v].hidden_in_factoriopedia = true
         end
-
-        -- Normal biters and spitters is 30 times
-        --[[
-        data.raw['unit-spawner']['biter-spawner'].result_units = {
-            {'small-biter', {{0.0, 90}, {0.6, 0}}},
-            {'medium-biter', {{0.2, 0}, {0.6, 90}, {0.7, 30}}},
-            {'big-biter', {{0.5, 0}, {1.0, 120}}},
-            {'small-strafer-pentapod', {{0.6, 8}, {1.0, 4}}},
-            {'medium-strafer-pentapod', {{0.7, 0}, {1.0, 2}}},
-            {'big-strafer-pentapod', {{0.75, 0}, {1.0, 1}}},
-            {'behemoth-biter', {{0.9, 0}, {1.0, 90}}},
-        }
-
-        data.raw['unit-spawner']['spitter-spawner'].result_units = {
-            {'small-biter', {{0.0, 90}, {0.35, 0}}},
-            {'small-spitter', {{0.25, 0}, {0.5, 90}, {0.7, 0}}},
-            {'medium-spitter', {{0.4, 0}, {0.7, 90}, {0.9, 30}}},
-            {'big-spitter', {{0.5, 0}, {1.0, 120}}},
-            {'small-stomper-pentapod', {{0.7, 8}, {1.0, 4}}},
-            {'medium-stomper-pentapod', {{0.8, 0}, {1.0, 2}}},
-            {'big-stomper-pentapod', {{0.9, 0}, {1.0, 1}}},
-            {'behemoth-spitter', {{0.9, 0}, {1.0, 90}}},
-        }
-        ]]
 
         for _, v in pairs({'gleba-spawner', 'gleba-spawner-small'}) do
             data.raw['unit-spawner'][v].loot = nil
@@ -1693,6 +1628,67 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
                 v.minable.results = {{type = 'item', name = 'wood', amount = 4}}
             end
         end
+    end
+end
+
+if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SS' then
+    if mods['space-age'] then
+        for _, v in pairs(data.raw['mining-drill']) do
+            data.raw.item[v.name].hidden = true
+            data.raw.item[v.name].hidden_in_factoriopedia = true
+            v.hidden = true
+            v.hidden_in_factoriopedia = true
+        end
+
+        data.raw['tile']['landfill'].hidden = true
+        data.raw['tile']['landfill'].hidden_in_factoriopedia = true
+        data.raw.item['landfill'].hidden = true
+        data.raw.item['landfill'].hidden_in_factoriopedia = true
+    end
+end
+
+if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP' then
+    if mods['space-age'] then
+        data.raw['tile']['empty-space'].hidden = true
+        data.raw['tile']['empty-space'].hidden_in_factoriopedia = true
+        data.raw['tile']['space-platform-foundation'].hidden = true
+        data.raw['tile']['space-platform-foundation'].hidden_in_factoriopedia = true
+        data.raw['tile']['foundation'].hidden = true
+        data.raw['tile']['foundation'].hidden_in_factoriopedia = true
+
+        local item = table.deepcopy(data.raw['item']['steel-chest'])
+        item.name = 'proxy-cargo-landing-chest'
+        item.place_result = item.name
+        item.order = 'c[cargo-landing-pad]-2'
+        item.icons = {{icon = item.icon or '__base__/graphics/icons/cargo-landing-pad.png', tint = items['tint'][5], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
+        item.icon = nil
+        item.icon_size = nil
+        item.icon_mipmaps = nil
+        item.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
+        item.localised_description = {'entity-description.cargo-landing-pad'}
+        data:extend({item})
+
+        local entity = table.deepcopy(data.raw['container']['steel-chest'])
+        entity.name = item.name
+        entity.minable.result = item.name
+        entity.type = 'proxy-container'
+        entity.picture.layers[1].tint = items['tint'][5]
+        entity.flags = {'placeable-player', 'player-creation', 'no-automated-item-insertion', 'hide-alt-info'}
+        entity.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
+        entity.localised_description = {'entity-description.cargo-landing-pad'}
+        data:extend({entity})
+
+        data:extend({{
+            type = 'recipe',
+            name = item.name,
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
+            results = {{type = 'item', name = item.name, amount = 1}},
+            main_product = item.name
+        }})
+
+        table.insert(data.raw.technology['rocket-silo'].effects, {type = 'unlock-recipe', recipe = item.name})
     end
 end
 
