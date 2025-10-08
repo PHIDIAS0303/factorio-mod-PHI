@@ -1252,7 +1252,7 @@ if settings.startup['PHI-GM'].value and (settings.startup['PHI-GM'].value == 'SS
 
         table.insert(data.raw.technology['automation'].effects, {type = 'create-ghost-on-entity-death', modifier = true})
         data.raw.technology['space-science-pack'].prerequisites = {'rocket-silo'}
-        data.raw.technology['space-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'satellite'}}
+        data.raw.technology['space-science-pack'].effects = nil
         data.raw.technology['space-science-pack'].unit = {count = 2000, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
         data.raw.technology['stronger-explosives-5'].prerequisites = {'stronger-explosives-4'}
         data.raw.technology['stronger-explosives-5'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
@@ -1263,7 +1263,7 @@ if settings.startup['PHI-GM'].value and (settings.startup['PHI-GM'].value == 'SS
         data.raw.technology['refined-flammables-6'].prerequisites = {'refined-flammables-5'}
         data.raw.technology['refined-flammables-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['refined-flammables-7'].prerequisites = {'refined-flammables-6'}
-        data.raw.technology['refined-flammables-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}    
+        data.raw.technology['refined-flammables-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         data.raw.technology['artillery'].prerequisites = {'tank', 'concrete', 'radar'}
         data.raw.technology['artillery'].unit.count = 1500
         data.raw.technology['artillery'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
@@ -1654,6 +1654,7 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
             data.raw.item[v .. '-asteroid-chunk'].hidden_in_factoriopedia = true
         end
 
+        data.raw.technology['space-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'satellite'}}
         data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = false
         data.raw['rocket-silo']['rocket-silo'].rocket_parts_required = 100
         data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 1
