@@ -1148,11 +1148,6 @@ if settings.startup['PHI-GM'].value and (settings.startup['PHI-GM'].value == 'SS
             data.raw['space-connection-distance-traveled-achievement'][v] = nil
         end
 
-        for _, v in pairs({'carbonic', 'metallic', 'promethium', 'oxide'}) do
-            data.raw.item[v .. '-asteroid-chunk'].hidden = true
-            data.raw.item[v .. '-asteroid-chunk'].hidden_in_factoriopedia = true
-        end
-
         for _, v in pairs({'calcite', 'fluorine-vent', 'lithium-brine', 'scrap', 'tungsten-ore'}) do
             data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v:gsub('-', '_')] = nil
             data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v] = nil
@@ -1196,43 +1191,6 @@ if settings.startup['PHI-GM'].value and (settings.startup['PHI-GM'].value == 'SS
         end
 
         data.raw.technology['rocket-silo'].effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}, {type = 'unlock-recipe', recipe = 'cargo-bay'}}
-        data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = false
-        data.raw['rocket-silo']['rocket-silo'].rocket_parts_required = 100
-        data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 1
-        data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 0
-        data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 0
-
-        local item_sounds = require('__base__/prototypes/item_sounds')
-
-        data:extend({
-            {
-                type = 'item',
-                name = 'satellite',
-                icon = '__base__/graphics/icons/satellite.png',
-                subgroup = 'space-related',
-                order = 'd[rocket-parts]-e[satellite]',
-                inventory_move_sound = item_sounds.mechanical_inventory_move,
-                pick_sound = item_sounds.mechanical_inventory_pickup,
-                drop_sound = item_sounds.mechanical_inventory_move,
-                stack_size = 1,
-                weight = 1 * tons,
-                rocket_launch_products = {{type = 'item', name = 'space-science-pack', amount = 1000}},
-                send_to_orbit_mode = 'automated'
-            },
-            {
-                type = 'recipe',
-                name = 'satellite',
-                energy_required = 5,
-                enabled = false,
-                category = 'crafting',
-                ingredients = {{type = 'item', name = 'low-density-structure', amount = 100}, {type = 'item', name = 'solar-panel', amount = 100}, {type = 'item', name = 'accumulator', amount = 100}, {type = 'item', name = 'radar', amount = 5}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'rocket-fuel', amount = 50}},
-                results = {{type = 'item', name = 'satellite', amount = 1}},
-                requester_paste_multiplier = 1
-            }
-        })
-
-        data.raw['tool']['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'raw-fish', amount = 1}}
-        data.raw['tool']['space-science-pack'].send_to_orbit_mode = 'automated'
 
         for _, v in pairs({'concrete', 'automation', 'electronics', 'advanced-circuit', 'engine', 'sulfur-processing', 'solar-energy', 'railway', 'oil-processing'}) do
             data:extend({{
@@ -1330,7 +1288,6 @@ if settings.startup['PHI-GM'].value and (settings.startup['PHI-GM'].value == 'SS
         data.raw.technology['worker-robots-speed-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['worker-robots-speed-7'].prerequisites = {'worker-robots-speed-6', 'space-science-pack'}
         data.raw.technology['worker-robots-speed-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-        data.raw.technology['coal-liquefaction'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
         data.raw.technology['atomic-bomb'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
         data.raw.technology['energy-shield-mk2-equipment'].prerequisites = {'energy-shield-equipment', 'military-4', 'power-armor'}
         data.raw.technology['energy-shield-mk2-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
@@ -1689,6 +1646,56 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
         }})
 
         table.insert(data.raw.technology['rocket-silo'].effects, {type = 'unlock-recipe', recipe = item.name})
+
+        for _, v in pairs({'carbonic', 'metallic', 'promethium', 'oxide'}) do
+            data.raw.item[v .. '-asteroid-chunk'].hidden = true
+            data.raw.item[v .. '-asteroid-chunk'].hidden_in_factoriopedia = true
+        end
+
+        data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = false
+        data.raw['rocket-silo']['rocket-silo'].rocket_parts_required = 100
+        data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 1
+        data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 0
+        data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 0
+
+        local item_sounds = require('__base__/prototypes/item_sounds')
+
+        data:extend({
+            {
+                type = 'item',
+                name = 'satellite',
+                icon = '__base__/graphics/icons/satellite.png',
+                subgroup = 'space-related',
+                order = 'd[rocket-parts]-e[satellite]',
+                inventory_move_sound = item_sounds.mechanical_inventory_move,
+                pick_sound = item_sounds.mechanical_inventory_pickup,
+                drop_sound = item_sounds.mechanical_inventory_move,
+                stack_size = 1,
+                weight = 1 * tons,
+                rocket_launch_products = {{type = 'item', name = 'space-science-pack', amount = 1000}},
+                send_to_orbit_mode = 'automated'
+            },
+            {
+                type = 'recipe',
+                name = 'satellite',
+                energy_required = 5,
+                enabled = false,
+                category = 'crafting',
+                ingredients = {{type = 'item', name = 'low-density-structure', amount = 100}, {type = 'item', name = 'solar-panel', amount = 100}, {type = 'item', name = 'accumulator', amount = 100}, {type = 'item', name = 'radar', amount = 5}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'rocket-fuel', amount = 50}},
+                results = {{type = 'item', name = 'satellite', amount = 1}},
+                requester_paste_multiplier = 1
+            }
+        })
+
+        data.raw['tool']['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'raw-fish', amount = 1}}
+        data.raw['tool']['space-science-pack'].send_to_orbit_mode = 'automated'
+
+        for k, v in pairs(items['space-age']['PHI-VP']['hidden_data_vp']) do
+            if data.raw[v] and data.raw[v][k] then
+                data.raw[v][k].hidden = true
+                data.raw[v][k].hidden_in_factoriopedia = true
+            end
+        end
     end
 end
 

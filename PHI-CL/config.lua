@@ -663,12 +663,6 @@ local items = {
                 ['lightning-collector'] = 'lightning-attractor',
                 ['fulgoran-ruin-attractor'] = 'lightning-attractor',
                 ['recycler'] = 'furnace',
-                ['thruster'] = 'thruster',
-                ['crusher'] = 'assembling-machine',
-                ['asteroid-collector'] = 'asteroid-collector',
-                ['space-platform-hub'] = 'space-platform-hub',
-                ['space-platform-starter-pack'] = 'space-platform-starter-pack',
-                ['space-platform'] = 'surface',
                 ['yumako-tree'] = 'plant',
                 ['jellystem'] = 'plant',
                 ['lightning'] = 'lightning',
@@ -676,6 +670,14 @@ local items = {
                 ['cryogenic-science-pack'] = 'tool',
                 ['electromagnetic-science-pack'] = 'tool',
                 ['metallurgic-science-pack'] = 'tool'
+            },
+            ['hidden_data_vp'] = {
+                ['thruster'] = 'thruster',
+                ['crusher'] = 'assembling-machine',
+                ['asteroid-collector'] = 'asteroid-collector',
+                ['space-platform-hub'] = 'space-platform-hub',
+                ['space-platform-starter-pack'] = 'space-platform-starter-pack',
+                ['space-platform'] = 'surface',
             }
         }
     }
