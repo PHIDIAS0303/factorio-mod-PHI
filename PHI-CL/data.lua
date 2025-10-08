@@ -1251,6 +1251,18 @@ if settings.startup['PHI-GM'].value and (settings.startup['PHI-GM'].value == 'SS
         end
 
         table.insert(data.raw.technology['automation'].effects, {type = 'create-ghost-on-entity-death', modifier = true})
+        data.raw.technology['space-platform'].prerequisites = nil
+        data.raw.technology['space-platform'].unit = {count = 100, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
+        data.raw.technology['space-platform-thruster'].prerequisites = {'space-platform'}
+        data.raw.technology['space-platform-thruster'].unit = {count = 100, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
+        data.raw.technology['asteroid-reprocessing'].prerequisites = {'space-platform'}
+        data.raw.technology['asteroid-reprocessing'].unit = {count = 100, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
+        data.raw.technology['advanced-asteroid-processing'].prerequisites = {'space-platform'}
+        data.raw.technology['advanced-asteroid-processing'].unit = {count = 100, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
+        data.raw.technology['asteroid-productivity'].prerequisites = {'space-platform'}
+        data.raw.technology['asteroid-productivity'].unit = {count = 100, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
+        data.raw.technology['calcite-processing'].prerequisites = {'space-platform'}
+        data.raw.technology['calcite-processing'].unit = {count = 100, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
         data.raw.technology['space-science-pack'].prerequisites = {'rocket-silo'}
         data.raw.technology['space-science-pack'].effects = nil
         data.raw.technology['space-science-pack'].unit = {count = 2000, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
