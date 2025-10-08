@@ -1601,6 +1601,8 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SS'
         data.raw.recipe['landfill'].hidden_in_factoriopedia = true
         data.raw.technology['landfill'].hidden = true
         data.raw.technology['landfill'].hidden_in_factoriopedia = true
+        data.raw.technology['oil-gathering'].hidden = true
+        data.raw.technology['oil-gathering'].hidden_in_factoriopedia = true
     end
 end
 
