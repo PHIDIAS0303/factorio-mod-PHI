@@ -265,9 +265,7 @@ script.on_init(function()
         end
 
         if not storage.phi_cl.spaceship then
-            storage.phi_cl.spaceship = {
-                hub = pf
-            }
+            storage.phi_cl.spaceship = pf
         end
     end
 end)
