@@ -232,6 +232,44 @@ script.on_init(function()
     end
 
     storage_init()
+
+    if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SS' then
+        if remote.interfaces.freeplay and remote.interfaces.freeplay.set_disable_crashsite then
+            remote.call('freeplay', 'set_disable_crashsite', true)
+        end
+
+        local pf = game.forces['player'].create_space_platform({name = 'spaceship', planet = 'nauvis', starter_pack = 'space-platform-starter-pack'})
+
+        if not pf then
+            return
+        end
+
+        pf.apply_starter_pack()
+        pf.hub.insert({name='asteroid-collector', count=1})
+        pf.hub.insert({name='crusher', count=1})
+        pf.hub.insert({name='assembling-machine-1', count=2})
+        pf.hub.insert({name='inserter', count=10})
+        pf.hub.insert({name='solar-panel', count=20})
+        pf.hub.insert({name='space-platform-foundation', count=200})
+        pf.hub.insert({name='electric-furnace', count=4})
+
+        game.surfaces[1].map_gen_settings.width = 1
+        game.surfaces[1].map_gen_settings.height = 1
+
+        for _, g in pairs(game.permissions.groups) do
+            g.set_allows_action(defines.input_action.land_at_planet, false)
+        end
+
+        for c in game.surfaces[1].get_chunks() do
+            game.surfaces[1].delete_chunk({c.x, c.y})
+        end
+
+        if not storage.phi_cl.spaceship then
+            storage.phi_cl.spaceship = {
+                hub = pf
+            }
+        end
+    end
 end)
 
 script.on_configuration_changed(function()
