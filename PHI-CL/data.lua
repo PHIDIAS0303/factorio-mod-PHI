@@ -1483,7 +1483,7 @@ if settings.startup['PHI-GM'].value and (settings.startup['PHI-GM'].value == 'SS
             v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
         end
 
-        for _, v in pairs({'lithium-brine', 'fluorine', 'ammonia', 'ammoniacal-solution', 'electrolyte', 'holmium-solution', 'molten-copper', 'molten-iron', 'lava', 'thruster-oxidizer', 'thruster-fuel'}) do
+        for _, v in pairs({'lithium-brine', 'fluorine', 'ammonia', 'ammoniacal-solution', 'electrolyte', 'holmium-solution', 'molten-copper', 'molten-iron', 'lava'}) do
             data.raw.fluid[v].hidden = true
             data.raw.fluid[v].hidden_in_factoriopedia = true
         end
@@ -1724,6 +1724,11 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
                 v.hidden = true
                 v.hidden_in_factoriopedia = true
             end
+        end
+
+        for _, v in pairs({'thruster-oxidizer', 'thruster-fuel'}) do
+            data.raw.fluid[v].hidden = true
+            data.raw.fluid[v].hidden_in_factoriopedia = true
         end
     end
 end
