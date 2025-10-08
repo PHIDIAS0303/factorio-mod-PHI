@@ -1584,14 +1584,23 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SS'
         for _, v in pairs(data.raw['mining-drill']) do
             data.raw.item[v.name].hidden = true
             data.raw.item[v.name].hidden_in_factoriopedia = true
+            data.raw.recipe[v.name].hidden = true
+            data.raw.recipe[v.name].hidden_in_factoriopedia = true
             v.hidden = true
             v.hidden_in_factoriopedia = true
         end
+
+        data.raw.technology['big-mining-drill'].hidden = true
+        data.raw.technology['big-mining-drill'].hidden_in_factoriopedia = true
 
         data.raw['tile']['landfill'].hidden = true
         data.raw['tile']['landfill'].hidden_in_factoriopedia = true
         data.raw.item['landfill'].hidden = true
         data.raw.item['landfill'].hidden_in_factoriopedia = true
+        data.raw.recipe['landfill'].hidden = true
+        data.raw.recipe['landfill'].hidden_in_factoriopedia = true
+        data.raw.technology['landfill'].hidden = true
+        data.raw.technology['landfill'].hidden_in_factoriopedia = true
     end
 end
 
