@@ -848,7 +848,7 @@ if mods['space-age'] and settings.startup['PHI-SA'].value then
     data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-SA-ROCKET-CAPACITY'].value * 1000000
 end
 
-if mods['space-age'] and ((settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-ENABLE-QUALITY'].value)) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP')) then
+if mods['space-age'] and ((settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-ENABLE-QUALITY'].value)) or (settings.startup['PHI-GM'].value and (settings.startup['PHI-GM'].value == 'SS' or settings.startup['PHI-GM'].value == 'VP'))) then
     for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
         if data.raw.technology[v] then
             data.raw.technology[v].hidden = true
