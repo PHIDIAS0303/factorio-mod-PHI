@@ -1483,13 +1483,6 @@ if settings.startup['PHI-GM'].value and (settings.startup['PHI-GM'].value == 'SS
             v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
         end
 
-        for _, a in pairs({'asteroid', 'asteroid-chunk'}) do
-            for _, v in pairs(data.raw[a]) do
-                v.hidden = true
-                v.hidden_in_factoriopedia = true
-            end
-        end
-
         for _, v in pairs({'lithium-brine', 'fluorine', 'ammonia', 'ammoniacal-solution', 'electrolyte', 'holmium-solution', 'molten-copper', 'molten-iron', 'lava', 'thruster-oxidizer', 'thruster-fuel'}) do
             data.raw.fluid[v].hidden = true
             data.raw.fluid[v].hidden_in_factoriopedia = true
@@ -1688,10 +1681,48 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP'
         data.raw['tool']['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'raw-fish', amount = 1}}
         data.raw['tool']['space-science-pack'].send_to_orbit_mode = 'automated'
 
+        for k, v in pairs(items['space-age']['PHI-VP']['technology_vp']) do
+            if data.raw.technology[k] then
+                data.raw.technology[k].hidden = v
+                data.raw.technology[k].hidden_in_factoriopedia = v
+                data.raw.technology[k].effects = nil
+
+                if data.raw.technology[k].research_trigger then
+                    data.raw.technology[k].research_trigger = nil
+                    data.raw.technology[k].unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
+                end
+
+                if data.raw.technology[k].unit and data.raw.technology[k].unit.ingredients then
+                    data.raw.technology[k].unit.ingredients = {{'space-science-pack', 1}}
+                end
+            end
+        end
+
+        for k, v in pairs(items['space-age']['PHI-VP']['recipe_vp']) do
+            if data.raw.recipe[k] then
+                data.raw.recipe[k].hidden = v
+                data.raw.recipe[k].hidden_in_factoriopedia = v
+            end
+        end
+
+        for k, v in pairs(items['space-age']['PHI-VP']['item_vp']) do
+            if data.raw.item[k] then
+                data.raw.item[k].hidden = v
+                data.raw.item[k].hidden_in_factoriopedia = v
+            end
+        end
+
         for k, v in pairs(items['space-age']['PHI-VP']['hidden_data_vp']) do
             if data.raw[v] and data.raw[v][k] then
                 data.raw[v][k].hidden = true
                 data.raw[v][k].hidden_in_factoriopedia = true
+            end
+        end
+
+        for _, a in pairs({'asteroid', 'asteroid-chunk'}) do
+            for _, v in pairs(data.raw[a]) do
+                v.hidden = true
+                v.hidden_in_factoriopedia = true
             end
         end
     end
