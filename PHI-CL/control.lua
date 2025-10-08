@@ -289,7 +289,17 @@ end)
 if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
     script.on_event(defines.events.on_player_created, function(event)
         gui_create(game.players[event.player_index])
+
+        if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SS' then
+            game.players[event.player_index].teleport({x=0, y=0}, storage.platform.surface.name)
+        end
     end)
+
+    if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SS' then
+        script.on_event(defines.events.on_cargo_pod_finished_ascending, function(event)
+            event.cargo_pod.destroy()
+        end)
+    end
 
     script.on_event(defines.events.on_gui_opened, function(event)
         local player = game.players[event.player_index]
