@@ -242,7 +242,7 @@ script.on_init(function()
             default_enable_all_autoplace_controls = false,
             width = 1,
             height = 1,
-            property_expression_names = 'tile:void:1',
+            property_expression_names = {['tile:void:probability']=1},
             no_enemies_mode = true
         }
 
