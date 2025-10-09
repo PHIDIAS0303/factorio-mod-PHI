@@ -238,7 +238,17 @@ script.on_init(function()
             remote.call('freeplay', 'set_disable_crashsite', true)
         end
 
+        local mgs = {
+            default_enable_all_autoplace_controls = false,
+            width = 1,
+            height = 1,
+            property_expression_names = 'tile:void:1',
+            no_enemies_mode = true
+        }
+
         local pf = game.forces['player'].create_space_platform({name = 'spaceship', planet = 'nauvis', starter_pack = 'space-platform-starter-pack'})
+        local sp = game.create_surface('spaceship_power', mgs)
+        local sm = game.create_surface('spaceship_manufacture', mgs)
 
         if not pf then
             return
@@ -274,22 +284,39 @@ script.on_init(function()
 
         pf.surface.set_tiles(tiles)
 
+        tiles = {}
+
+        for x = -7, 7 do
+            for y = -3, 10 do
+                table.insert(tiles, {name='grass-1', position={x, y}})
+            end
+        end
+
+        sp.set_tiles(tiles)
+        sm.set_tiles(tiles)
+
         local entities = {
             {name='substation', position={0, 6}},
             {name='substation', position={3, 5}},
             {name='substation', position={-3, 5}}
         }
 
-        for _, en in pairs(entities) do
-            local e = pf.surface.create_entity{name=en.name, position=en.position, force='player'}
-            e.destructible = false
-            e.minable = false
-            e.rotatable = false
-            e.operable = false
+        for _, s in pairs({pf.surface, sp, sm}) do
+            for _, en in pairs(entities) do
+                local e = s.create_entity{name=en.name, position=en.position, force='player'}
+                e.destructible = false
+                e.minable = false
+                e.rotatable = false
+                e.operable = false
+            end
         end
 
         if not storage.phi_cl.spaceship then
-            storage.phi_cl.spaceship = pf
+            storage.phi_cl.spaceship = {
+                deck = pf,
+                power = sp,
+                manufacture = sm
+            }
         end
     end
 end)
@@ -313,7 +340,7 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
         gui_create(game.players[event.player_index])
 
         if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SS' then
-            game.players[event.player_index].teleport(storage.phi_cl.spaceship.surface.find_non_colliding_position('character', {x=0, y=0}, 32, 1) or {x=0, y=0}, storage.phi_cl.spaceship.surface.name)
+            game.players[event.player_index].teleport(storage.phi_cl.spaceship.deck.surface.find_non_colliding_position('character', {x=0, y=0}, 32, 1) or {x=0, y=0}, storage.phi_cl.spaceship.deck.surface.name)
         end
     end)
 
