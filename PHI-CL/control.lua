@@ -240,8 +240,6 @@ script.on_init(function()
 
         local mgs = {
             default_enable_all_autoplace_controls = false,
-            width = 1,
-            height = 1,
             property_expression_names = {['tile:void:probability']=1},
             no_enemies_mode = true
         }
@@ -276,7 +274,7 @@ script.on_init(function()
 
         local tiles = {}
 
-        for x = -7, 7 do
+        for x = -7, 6 do
             for y = -7, 10 do
                 table.insert(tiles, {name='space-platform-foundation', position={x, y}})
             end
@@ -287,7 +285,7 @@ script.on_init(function()
         tiles = {}
 
         for x = -7, 6 do
-            for y = -3, 10 do
+            for y = 0, 10 do
                 table.insert(tiles, {name='grass-1', position={x, y}})
             end
         end
@@ -307,7 +305,6 @@ script.on_init(function()
                 e.destructible = false
                 e.minable = false
                 e.rotatable = false
-                -- e.operable = false
             end
         end
 
