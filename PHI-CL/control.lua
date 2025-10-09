@@ -272,7 +272,7 @@ script.on_init(function()
             end
         end
 
-        pf.surface.set_tiles{tiles=tiles, remove_colliding_entities=false}
+        pf.surface.set_tiles(tiles)
         pf.surface.create_entity{name='substation', position={-1, 6}}
 
         if not storage.phi_cl.spaceship then
