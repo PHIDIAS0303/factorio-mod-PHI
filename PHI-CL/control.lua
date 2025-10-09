@@ -268,11 +268,11 @@ script.on_init(function()
 
         for x = -10, 10 do
             for y = -10, 20 do
-                table.insert(tiles, {name = 'space-platform-foundation', position = {x, y}})
+                table.insert(tiles, {name='space-platform-foundation', position={x, y}})
             end
         end
 
-        pf.surface.set_tiles{tiles, remove_colliding_entities=false}
+        pf.surface.set_tiles{tiles=tiles, remove_colliding_entities=false}
         pf.surface.create_entity{name='substation', position={-1, 6}}
 
         if not storage.phi_cl.spaceship then
