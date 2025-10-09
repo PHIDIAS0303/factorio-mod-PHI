@@ -297,18 +297,31 @@ script.on_init(function()
 
         local entities = {
             {name='substation', position={0, 6}},
-            {name='substation', position={3, 5}},
-            {name='substation', position={-3, 5}}
+            {name='pipe-to-ground', position={3, 5}, direction=defines.direction.south},
+            {name='pipe-to-ground', position={-3, 5}, direction=defines.direction.south}
         }
 
         for _, s in pairs({pf.surface, sp, sm}) do
             for _, en in pairs(entities) do
-                local e = s.create_entity{name=en.name, position=en.position, force='player'}
+                local e = s.create_entity{name=en.name, position=en.position, direction=en.direction or nil, force='player'}
                 e.destructible = false
                 e.minable = false
                 e.rotatable = false
                 e.operable = false
             end
+        end
+
+        local sub_d = pf.surface.find_entity('substation', {0, 6})
+        local sub_p = sp.find_entity('substation', {0, 6})
+        local sub_m = sm.find_entity('substation', {0, 6})
+
+        if sub_d and sub_p and sub_m then
+            local p_d = sub_d.get_wire_connector(defines.wire_connector_id.pole_copper, true)
+            local p_p = sub_p.get_wire_connector(defines.wire_connector_id.pole_copper, true)
+            local p_m = sub_m.get_wire_connector(defines.wire_connector_id.pole_copper, true)
+
+            p_d.connect_to(p_p, false, defines.wire_origin.script)
+            p_m.connect_to(p_d, false, defines.wire_origin.script)
         end
 
         if not storage.phi_cl.spaceship then
