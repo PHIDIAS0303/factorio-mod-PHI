@@ -240,8 +240,23 @@ script.on_init(function()
 
         local mgs = {
             default_enable_all_autoplace_controls = true,
-            property_expression_names = {['tile:out-of-map:probability']=1},
-            no_enemies_mode = true
+            seed = 1,
+            no_enemies_mode = true,
+            autoplace_controls = {},
+            autoplace_settings = {
+                tile = {
+                    treat_missing_as_default = false,
+                    settings = {
+                        ['out-of-map'] = {frequency = 1.0, size = 1.0, richness = 1.0}
+                    }
+                },
+                entity = {
+                    treat_missing_as_default = false
+                },
+                decorative = {
+                    treat_missing_as_default = false
+                }
+            }
         }
 
         local pf = game.forces['player'].create_space_platform({name = 'spaceship', planet = 'nauvis', starter_pack = 'space-platform-starter-pack'})
