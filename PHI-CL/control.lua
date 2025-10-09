@@ -266,8 +266,8 @@ script.on_init(function()
 
         local tiles = {}
 
-        for x = -10, 10 do
-            for y = -10, 20 do
+        for x = -7, 7 do
+            for y = -7, 10 do
                 table.insert(tiles, {name='space-platform-foundation', position={x, y}})
             end
         end
