@@ -286,7 +286,7 @@ script.on_init(function()
 
         tiles = {}
 
-        for x = -7, 7 do
+        for x = -7, 6 do
             for y = -3, 10 do
                 table.insert(tiles, {name='grass-1', position={x, y}})
             end
@@ -296,7 +296,7 @@ script.on_init(function()
         sm.set_tiles(tiles)
 
         local entities = {
-            {name='substation', position={0, 6}, direction=defines.direction.south},
+            {name='substation', position={0, 6}},
             {name='pipe-to-ground', position={3, 5}, direction=defines.direction.south},
             {name='pipe-to-ground', position={-4, 5}, direction=defines.direction.south}
         }
