@@ -296,18 +296,18 @@ script.on_init(function()
         sm.set_tiles(tiles)
 
         local entities = {
-            {name='substation', position={0, 6}},
+            {name='substation', position={0, 6}, direction=defines.direction.south},
             {name='pipe-to-ground', position={3, 5}, direction=defines.direction.south},
-            {name='pipe-to-ground', position={-3, 5}, direction=defines.direction.south}
+            {name='pipe-to-ground', position={-4, 5}, direction=defines.direction.south}
         }
 
         for _, s in pairs({pf.surface, sp, sm}) do
             for _, en in pairs(entities) do
-                local e = s.create_entity{name=en.name, position=en.position, direction=en.direction or nil, force='player'}
+                local e = s.create_entity{name=en.name, position=en.position, force='player', direction=en.direction}
                 e.destructible = false
                 e.minable = false
                 e.rotatable = false
-                e.operable = false
+                -- e.operable = false
             end
         end
 
