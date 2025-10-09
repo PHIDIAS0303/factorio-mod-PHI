@@ -289,7 +289,7 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
         gui_create(game.players[event.player_index])
 
         if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SS' then
-            game.players[event.player_index].teleport({x=0, y=0}, storage.phi_cl.spaceship.surface.name)
+            game.players[event.player_index].teleport(storage.phi_cl.spaceship.surface.find_non_colliding_position('character', {x=0, y=0}, 32, 1) or {x=0, y=0}, storage.phi_cl.spaceship.surface.name)
         end
     end)
 
