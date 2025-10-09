@@ -240,7 +240,7 @@ script.on_init(function()
 
         local mgs = {
             default_enable_all_autoplace_controls = false,
-            property_expression_names = {['tile:void:probability']=1},
+            property_expression_names = {['tile:out-of-map:probability']=1},
             no_enemies_mode = true
         }
 
