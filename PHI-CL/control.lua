@@ -245,8 +245,8 @@ script.on_init(function()
         }
 
         local pf = game.forces['player'].create_space_platform({name = 'spaceship', planet = 'nauvis', starter_pack = 'space-platform-starter-pack'})
-        local sp = game.create_surface('spaceship_power', mgs)
-        local sm = game.create_surface('spaceship_manufacture', mgs)
+        local sp = game.create_surface('spaceship_fl_1', mgs)
+        local sm = game.create_surface('spaceship_fl_2', mgs)
 
         if not pf then
             return
@@ -324,8 +324,8 @@ script.on_init(function()
         if not storage.phi_cl.spaceship then
             storage.phi_cl.spaceship = {
                 deck = pf,
-                power = sp,
-                manufacture = sm
+                fl_1 = sp,
+                fl_2 = sm
             }
         end
     end
