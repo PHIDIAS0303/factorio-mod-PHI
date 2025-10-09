@@ -273,7 +273,20 @@ script.on_init(function()
         end
 
         pf.surface.set_tiles(tiles)
-        pf.surface.create_entity{name='substation', position={-1, 6}}
+
+        local entities = {
+            {name='substation', position={0, 6}},
+            {name='substation', position={3, 5}},
+            {name='substation', position={-3, 5}}
+        }
+
+        for _, en in pairs(entities) do
+            local e = pf.surface.create_entity{name=en.name, position=en.position, force='player'}
+            e.destructible = false
+            e.minable = false
+            e.rotatable = false
+            e.operable = false
+        end
 
         if not storage.phi_cl.spaceship then
             storage.phi_cl.spaceship = pf
