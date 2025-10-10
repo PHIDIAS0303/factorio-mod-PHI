@@ -247,7 +247,7 @@ script.on_init(function()
                 tile = {
                     treat_missing_as_default = false,
                     settings = {
-                        ['out-of-map'] = {}
+                        ['empty-space'] = {}
                     }
                 },
                 entity = {
@@ -258,13 +258,12 @@ script.on_init(function()
                     treat_missing_as_default = false,
                     settings = {}
                 }
-            },
-            property_expression_names = {
-                ['tile:out-of-map:probability'] = '1'
             }
         }
 
-        local pf = game.forces['player'].create_space_platform({name = 'spaceship', planet = 'nauvis', starter_pack = 'space-platform-starter-pack'})
+        game.planets.nauvis.surface.map_gen_settings = mgs
+
+        local pf = game.forces['player'].create_space_platform({name='spaceship', planet='nauvis', starter_pack='space-platform-starter-pack'})
         local sp = game.create_surface('spaceship_fl_1', mgs)
         local sm = game.create_surface('spaceship_fl_2', mgs)
 
@@ -281,15 +280,12 @@ script.on_init(function()
         pf.hub.insert({name='space-platform-foundation', count=200})
         pf.hub.insert({name='electric-furnace', count=4})
 
+        game.surfaces[1].set_tiles({name='space-platform-foundation', position={0, 0}})
         game.surfaces[1].map_gen_settings.width = 1
         game.surfaces[1].map_gen_settings.height = 1
 
         for _, g in pairs(game.permissions.groups) do
             g.set_allows_action(defines.input_action.land_at_planet, false)
-        end
-
-        for c in game.surfaces[1].get_chunks() do
-            game.surfaces[1].delete_chunk({c.x, c.y})
         end
 
         local tiles = {}
@@ -301,15 +297,6 @@ script.on_init(function()
         end
 
         pf.surface.set_tiles(tiles)
-
-        tiles = {}
-
-        for x = -7, 6 do
-            for y = 0, 10 do
-                table.insert(tiles, {name='grass-1', position={x, y}})
-            end
-        end
-
         sp.set_tiles(tiles)
         sm.set_tiles(tiles)
 
