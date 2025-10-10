@@ -297,8 +297,17 @@ script.on_init(function()
         end
 
         pf.surface.set_tiles(tiles)
-        sp.set_tiles(tiles)
-        sm.set_tiles(tiles)
+
+        tiles = {}
+
+        for x = -7, 6 do
+            for y = -3, 10 do
+                table.insert(tiles, {name='grass-1', position={x, y}})
+            end
+        end
+
+        sp.set_tiles(tiles, false)
+        sm.set_tiles(tiles, false)
 
         local entities = {
             {name='substation', position={0, 6}},
