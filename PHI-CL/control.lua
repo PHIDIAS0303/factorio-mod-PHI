@@ -244,9 +244,17 @@ script.on_init(function()
             no_enemies_mode = true,
             autoplace_controls = {},
             autoplace_settings = {
-                tile = {treat_missing_as_default = false},
+                tile = {
+                    treat_missing_as_default = false,
+                    settings = {
+                        ['out-of-map'] = {frequency=1, size=1, richness=1},
+                    }
+                },
                 entity = {treat_missing_as_default = false},
                 decorative = {treat_missing_as_default = false}
+            },
+            property_expression_names = {
+                ['tile:out-of-map:probability'] = '1'
             }
         }
 
