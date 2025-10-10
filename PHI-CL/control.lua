@@ -239,23 +239,14 @@ script.on_init(function()
         end
 
         local mgs = {
-            default_enable_all_autoplace_controls = true,
+            default_enable_all_autoplace_controls = false,
             seed = 1,
             no_enemies_mode = true,
             autoplace_controls = {},
             autoplace_settings = {
-                tile = {
-                    treat_missing_as_default = false,
-                    settings = {
-                        ['out-of-map'] = {frequency = 1.0, size = 1.0, richness = 1.0}
-                    }
-                },
-                entity = {
-                    treat_missing_as_default = false
-                },
-                decorative = {
-                    treat_missing_as_default = false
-                }
+                tile = {treat_missing_as_default = false},
+                entity = {treat_missing_as_default = false},
+                decorative = {treat_missing_as_default = false}
             }
         }
 
