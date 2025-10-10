@@ -280,7 +280,7 @@ script.on_init(function()
         pf.hub.insert({name='space-platform-foundation', count=200})
         pf.hub.insert({name='electric-furnace', count=4})
 
-        game.surfaces[1].set_tiles({name='space-platform-foundation', position={0, 0}})
+        game.surfaces[1].set_tiles({{name='space-platform-foundation', position={0, 0}}})
         game.surfaces[1].map_gen_settings.width = 1
         game.surfaces[1].map_gen_settings.height = 1
 
