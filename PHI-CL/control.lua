@@ -325,8 +325,8 @@ script.on_init(function()
         end
 
         local sub_d = pf.surface.find_entity('substation', {0, 6})
-        local sub_p = sp.find_entity('substation', {0, 6})
-        local sub_m = sm.find_entity('substation', {0, 6})
+        local sub_p = game.surfaces['spaceship_fl_1'].find_entity('substation', {0, 6})
+        local sub_m = game.surfaces['spaceship_fl_2'].find_entity('substation', {0, 6})
 
         if sub_d and sub_p and sub_m then
             local p_d = sub_d.get_wire_connector(defines.wire_connector_id.pole_copper, true)
