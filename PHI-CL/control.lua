@@ -238,51 +238,24 @@ script.on_init(function()
             remote.call('freeplay', 'set_disable_crashsite', true)
         end
 
-        local mgs = {
-            default_enable_all_autoplace_controls = false,
-            seed = 1,
-            no_enemies_mode = true,
-            autoplace_controls = {},
-            autoplace_settings = {
-                tile = {
-                    treat_missing_as_default = false,
-                    settings = {
-                        ['empty-space'] = {}
-                    }
-                },
-                entity = {
-                    treat_missing_as_default = false,
-                    settings = {}
-                },
-                decorative = {
-                    treat_missing_as_default = false,
-                    settings = {}
-                }
-            }
-        }
+        local s_fl_0 = game.forces['player'].create_space_platform({name='spaceship', planet='nauvis', starter_pack='space-platform-starter-pack'})
+        local s_fl_1 = game.forces['player'].create_space_platform({name='spaceship_fl_1', planet='nauvis', starter_pack='space-platform-starter-pack'})
+        local s_fl_2 = game.forces['player'].create_space_platform({name='spaceship_fl_2', planet='nauvis', starter_pack='space-platform-starter-pack'})
 
-        game.planets.nauvis.surface.map_gen_settings = mgs
-
-        local pf = game.forces['player'].create_space_platform({name='spaceship', planet='nauvis', starter_pack='space-platform-starter-pack'})
-        game.create_surface('spaceship_fl_1', mgs)
-        game.create_surface('spaceship_fl_2', mgs)
-
-        if not pf then
+        if not (s_fl_0 and s_fl_1 and s_fl_2) then
             return
         end
 
-        pf.apply_starter_pack()
-        pf.hub.insert({name='asteroid-collector', count=1})
-        pf.hub.insert({name='crusher', count=1})
-        pf.hub.insert({name='assembling-machine-1', count=2})
-        pf.hub.insert({name='inserter', count=10})
-        pf.hub.insert({name='solar-panel', count=20})
-        pf.hub.insert({name='space-platform-foundation', count=200})
-        pf.hub.insert({name='electric-furnace', count=4})
-
-        game.surfaces[1].set_tiles({{name='space-platform-foundation', position={0, 0}}})
-        game.surfaces[1].map_gen_settings.width = 1
-        game.surfaces[1].map_gen_settings.height = 1
+        s_fl_0.apply_starter_pack()
+        s_fl_1.apply_starter_pack()
+        s_fl_2.apply_starter_pack()
+        s_fl_0.hub.insert({name='asteroid-collector', count=1})
+        s_fl_0.hub.insert({name='crusher', count=1})
+        s_fl_0.hub.insert({name='assembling-machine-1', count=2})
+        s_fl_0.hub.insert({name='inserter', count=10})
+        s_fl_0.hub.insert({name='solar-panel', count=20})
+        s_fl_0.hub.insert({name='space-platform-foundation', count=200})
+        s_fl_0.hub.insert({name='electric-furnace', count=4})
 
         for _, g in pairs(game.permissions.groups) do
             g.set_allows_action(defines.input_action.land_at_planet, false)
@@ -296,18 +269,9 @@ script.on_init(function()
             end
         end
 
-        pf.surface.set_tiles(tiles)
-
-        tiles = {}
-
-        for x = -7, 6 do
-            for y = -3, 10 do
-                table.insert(tiles, {name='foundation', position={x, y}})
-            end
-        end
-
-        game.surfaces['spaceship_fl_1'].set_tiles(tiles)
-        game.surfaces['spaceship_fl_2'].set_tiles(tiles)
+        s_fl_0.surface.set_tiles(tiles)
+        s_fl_1.surface.set_tiles(tiles)
+        s_fl_2.surface.set_tiles(tiles)
 
         local entities = {
             {name='substation', position={0, 6}},
@@ -315,7 +279,7 @@ script.on_init(function()
             {name='pipe-to-ground', position={-4, 5}, direction=defines.direction.south}
         }
 
-        for _, s in pairs({pf.surface, game.surfaces['spaceship_fl_1'], game.surfaces['spaceship_fl_2']}) do
+        for _, s in pairs({s_fl_0.surface, s_fl_1.surface, s_fl_2.surface}) do
             for _, en in pairs(entities) do
                 local e = s.create_entity{name=en.name, position=en.position, force='player', direction=en.direction}
                 e.destructible = false
@@ -324,9 +288,9 @@ script.on_init(function()
             end
         end
 
-        local sub_d = pf.surface.find_entity('substation', {0, 6})
-        local sub_p = game.surfaces['spaceship_fl_1'].find_entity('substation', {0, 6})
-        local sub_m = game.surfaces['spaceship_fl_2'].find_entity('substation', {0, 6})
+        local sub_d = s_fl_0.surface.find_entity('substation', {0, 6})
+        local sub_p = s_fl_1.surface.find_entity('substation', {0, 6})
+        local sub_m = s_fl_2.surface.find_entity('substation', {0, 6})
 
         if sub_d and sub_p and sub_m then
             local p_d = sub_d.get_wire_connector(defines.wire_connector_id.pole_copper, true)
@@ -338,7 +302,11 @@ script.on_init(function()
         end
 
         if not storage.phi_cl.spaceship then
-            storage.phi_cl.spaceship = pf
+            storage.phi_cl.spaceship = {
+                s_fl_0 = s_fl_0,
+                s_fl_1 = s_fl_1,
+                s_fl_2 = s_fl_2,
+            }
         end
     end
 end)
@@ -363,10 +331,8 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
         if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SS' then
             game.forces['player'].technologies['space-platform'].researched = true
-            game.players[event.player_index].teleport(storage.phi_cl.spaceship.surface.find_non_colliding_position('character', {x=0, y=0}, 32, 1) or {x=0, y=0}, storage.phi_cl.spaceship.surface.name)
-            local r = 16 * 32
-            game.forces['player'].chart(game.surfaces['spaceship_fl_1'], {{-r, -r}, {r, r}})
-            game.forces['player'].chart(game.surfaces['spaceship_fl_2'], {{-r, -r}, {r, r}})
+            game.players[event.player_index].teleport(storage.phi_cl.spaceship.s_fl_0.surface.find_non_colliding_position('character', {x=0, y=0}, 32, 1) or {x=0, y=0}, storage.phi_cl.spaceship.s_fl_0.surface.name)
+            game.forces['player'].set_surface_hidden('nauvis', true)
         end
     end)
 
