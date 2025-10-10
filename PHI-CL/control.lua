@@ -302,7 +302,7 @@ script.on_init(function()
 
         for x = -7, 6 do
             for y = -3, 10 do
-                table.insert(tiles, {name='grass-1', position={x, y}})
+                table.insert(tiles, {name='foundation', position={x, y}})
             end
         end
 
@@ -315,7 +315,7 @@ script.on_init(function()
             {name='pipe-to-ground', position={-4, 5}, direction=defines.direction.south}
         }
 
-        for _, s in pairs({pf.surface, sp, sm}) do
+        for _, s in pairs({pf.surface, game.surfaces['spaceship_fl_1'], game.surfaces['spaceship_fl_2']}) do
             for _, en in pairs(entities) do
                 local e = s.create_entity{name=en.name, position=en.position, force='player', direction=en.direction}
                 e.destructible = false
