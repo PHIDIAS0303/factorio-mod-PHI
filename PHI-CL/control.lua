@@ -247,11 +247,17 @@ script.on_init(function()
                 tile = {
                     treat_missing_as_default = false,
                     settings = {
-                        ['out-of-map'] = {frequency=1, size=1, richness=1},
+                        ['out-of-map'] = {}
                     }
                 },
-                entity = {treat_missing_as_default = false},
-                decorative = {treat_missing_as_default = false}
+                entity = {
+                    treat_missing_as_default = false,
+                    settings = {}
+                },
+                decorative = {
+                    treat_missing_as_default = false,
+                    settings = {}
+                }
             },
             property_expression_names = {
                 ['tile:out-of-map:probability'] = '1'
