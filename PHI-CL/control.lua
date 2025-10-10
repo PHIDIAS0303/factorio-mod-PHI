@@ -264,8 +264,8 @@ script.on_init(function()
         game.planets.nauvis.surface.map_gen_settings = mgs
 
         local pf = game.forces['player'].create_space_platform({name='spaceship', planet='nauvis', starter_pack='space-platform-starter-pack'})
-        local sp = game.create_surface('spaceship_fl_1', mgs)
-        local sm = game.create_surface('spaceship_fl_2', mgs)
+        game.create_surface('spaceship_fl_1', mgs)
+        game.create_surface('spaceship_fl_2', mgs)
 
         if not pf then
             return
@@ -306,8 +306,8 @@ script.on_init(function()
             end
         end
 
-        sp.set_tiles(tiles, false)
-        sm.set_tiles(tiles, false)
+        game.surfaces['spaceship_fl_1'].set_tiles(tiles)
+        game.surfaces['spaceship_fl_2'].set_tiles(tiles)
 
         local entities = {
             {name='substation', position={0, 6}},
@@ -339,9 +339,7 @@ script.on_init(function()
 
         if not storage.phi_cl.spaceship then
             storage.phi_cl.spaceship = {
-                deck = pf,
-                fl_1 = sp,
-                fl_2 = sm
+                deck = pf
             }
         end
     end
@@ -369,8 +367,8 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
             game.forces['player'].technologies['space-platform'].researched = true
             game.players[event.player_index].teleport(storage.phi_cl.spaceship.deck.surface.find_non_colliding_position('character', {x=0, y=0}, 32, 1) or {x=0, y=0}, storage.phi_cl.spaceship.deck.surface.name)
             local r = 16 * 32
-            game.forces['player'].chart(storage.phi_cl.spaceship.fl_1, {{-r, -r}, {r, r}})
-            game.forces['player'].chart(storage.phi_cl.spaceship.fl_2, {{-r, -r}, {r, r}})
+            game.forces['player'].chart(game.surfaces['spaceship_fl_1'], {{-r, -r}, {r, r}})
+            game.forces['player'].chart(game.surfaces['spaceship_fl_2'], {{-r, -r}, {r, r}})
         end
     end)
 
