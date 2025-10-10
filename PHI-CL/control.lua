@@ -338,9 +338,7 @@ script.on_init(function()
         end
 
         if not storage.phi_cl.spaceship then
-            storage.phi_cl.spaceship = {
-                deck = pf
-            }
+            storage.phi_cl.spaceship = pf
         end
     end
 end)
@@ -365,7 +363,7 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
         if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SS' then
             game.forces['player'].technologies['space-platform'].researched = true
-            game.players[event.player_index].teleport(storage.phi_cl.spaceship.deck.surface.find_non_colliding_position('character', {x=0, y=0}, 32, 1) or {x=0, y=0}, storage.phi_cl.spaceship.deck.surface.name)
+            game.players[event.player_index].teleport(storage.phi_cl.spaceship.surface.find_non_colliding_position('character', {x=0, y=0}, 32, 1) or {x=0, y=0}, storage.phi_cl.spaceship.surface.name)
             local r = 16 * 32
             game.forces['player'].chart(game.surfaces['spaceship_fl_1'], {{-r, -r}, {r, r}})
             game.forces['player'].chart(game.surfaces['spaceship_fl_2'], {{-r, -r}, {r, r}})
