@@ -77,6 +77,12 @@ local function gui_update(player, entity)
         end
 
         circuit_oc = circuit_oc.sections[1]
+        local cs1 = circuit_oc.get_slot(1)
+
+        if not (cs1 or (cs1.value and cs1.value.name and cs1.value.name == 'signal-SA')) then
+            return
+        end
+
         local val = circuit_oc.get_slot(1).min or 0
 
         player.gui.relative.phi_cl_combinator_config['default']['read_type_table']['read_type_technology_dropdown'].selected_index = ((val == 1 or val == 3) and 2) or 1
