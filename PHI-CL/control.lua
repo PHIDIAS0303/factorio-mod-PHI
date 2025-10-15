@@ -266,12 +266,7 @@ script.on_init(function()
         end
 
         s_fl_0.surface.set_tiles(tiles)
-
-        if not storage.phi_cl.spaceship then
-            storage.phi_cl.spaceship = {
-                s_fl_0 = s_fl_0
-            }
-        end
+        storage.phi_cl.spaceship = s_fl_0
     end
 end)
 
@@ -295,7 +290,7 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
         if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SS' then
             game.forces['player'].technologies['space-platform'].researched = true
-            game.players[event.player_index].teleport(storage.phi_cl.spaceship.s_fl_0.surface.find_non_colliding_position('character', {x=0, y=0}, 32, 1) or {x=0, y=0}, storage.phi_cl.spaceship.s_fl_0.surface.name)
+            game.players[event.player_index].teleport(storage.phi_cl.spaceship.surface.find_non_colliding_position('character', {x=0, y=0}, 32, 1) or {x=0, y=0}, storage.phi_cl.spaceship.surface.name)
             game.forces['player'].set_surface_hidden('nauvis', true)
         end
     end)
