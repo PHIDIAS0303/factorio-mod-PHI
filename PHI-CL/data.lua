@@ -215,7 +215,7 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
         }})
     end
 
-    data:extend({{type = 'recipe-category', name = 'fluid'}})
+    data:extend({{type='recipe-category', name='fluid'}})
 
     if data.raw['offshore-pump']['offshore-pump'] then
         local item = table.deepcopy(data.raw['item']['offshore-pump'])
