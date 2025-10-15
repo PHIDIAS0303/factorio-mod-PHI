@@ -220,7 +220,6 @@ local function storage_init()
         storage.phi_cl.combinator = {
             research_set_combinator_count = 0,
             combinator_list = {},
-            combinator_list_len = 0,
             research_queue = {},
             research_queue_set = {},
             research_progress = 0
@@ -325,7 +324,6 @@ script.on_nth_tick(1800, function(_)
     if storage.phi_cl.loop.combinator then
         storage.phi_cl.combinator.research_progress = math.floor(game.forces['player'].research_progress * 100)
         storage.phi_cl.combinator.combinator_list = {}
-        storage.phi_cl.combinator.combinator_list_len = 0
         storage.phi_cl.combinator.research_queue = {}
         storage.phi_cl.combinator.research_queue_set = {
             [1] = nil,
@@ -357,7 +355,6 @@ script.on_nth_tick(1800, function(_)
             end
 
             storage.phi_cl.combinator.combinator_list = c
-            storage.phi_cl.combinator.combinator_list_len = math.ceil(#c / 175)
         end
     end
 end)
