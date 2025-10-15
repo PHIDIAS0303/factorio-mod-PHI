@@ -286,8 +286,7 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
             end
 
             circuit_oc = circuit_oc.sections[1]
-            circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-RA', quality = 'normal'}, min = ((event.element.parent.parent['read_type_table']['read_type_technology_dropdown'].selected_index == 2) and 1 or 0)})
-            -- circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-RA', quality = 'normal'}, min = ((event.element.parent.parent['read_type_table']['read_type_technology_dropdown'].selected_index == 2) and 1 or 0) + ((event.element.parent.parent['set_type_table']['set_type_technology_dropdown'].selected_index == 2) and 2 or 0)})
+            circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = ((event.element.parent.parent['read_type_table']['read_type_technology_dropdown'].selected_index == 2) and 1 or 0) + ((event.element.parent.parent['set_type_table']['set_type_technology_dropdown'].selected_index == 2) and 2 or 0)})
         end
     end)
 
@@ -348,65 +347,73 @@ script.on_nth_tick(1800, function(_)
         for _, s in pairs(game.surfaces) do
             local c = s.find_entities_filtered{type='constant-combinator', name='super-combinator'}
 
-            if c and #c > 0 then
-                for _, sc in pairs(c) do
-                    local circuit_oc = sc.get_or_create_control_behavior()
+            if not (c or #c == 0) then
+                return
+            end
 
-                    if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
-                        circuit_oc.add_section()
+            for _, sc in pairs(c) do
+                local circuit_oc = sc.get_or_create_control_behavior()
+
+                if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
+                    circuit_oc.add_section()
+                end
+
+                circuit_oc = circuit_oc.sections[1]
+                local cs1 = circuit_oc.get_slot(1)
+
+                if not (cs1 or (cs1.value and cs1.value.name and cs1.value.name == 'signal-SA')) then
+                    return
+                end
+
+                local val = circuit_oc.get_slot(1).min or 0
+
+                if val == 1 or val == 3 then
+                    -- read_type_technology_dropdown
+                    local n = 11
+
+                    for rn, rv in pairs(storage.phi_cl.combinator.research_queue) do
+                        circuit_oc.set_slot(n, {value = {type = 'virtual', name = 'signal-' .. rn, quality = 'normal'}, min = rv})
+
+                        n = n + 1
                     end
 
-                    circuit_oc = circuit_oc.sections[1]
-                    local val = circuit_oc.get_slot(1).min or 0
-
-                    if (val % 2) >= 1 then
-                        -- read_type_technology_dropdown
-                        local n = 11
-
-                        for rn, rv in pairs(storage.phi_cl.combinator.research_queue) do
-                            circuit_oc.set_slot(n, {value = {type = 'virtual', name = 'signal-' .. rn, quality = 'normal'}, min = rv})
-
-                            n = n + 1
-                        end
-
-                        for i = n, 17 do
-                            circuit_oc.clear_slot(i)
-                        end
-
-                        circuit_oc.set_slot(18, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
+                    for i = n, 17 do
+                        circuit_oc.clear_slot(i)
                     end
 
-                    --[[
-                    if (val % 4) >= 2 then
-                        -- incomplete
-                        -- set_type_technology_dropdown
+                    circuit_oc.set_slot(18, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
+                end
 
-                        storage.phi_cl.combinator.research_set_combinator_count = storage.phi_cl.combinator.research_set_combinator_count + 1
+                --[[
+                if val == 2 or val == 3 then
+                    -- incomplete
+                    -- set_type_technology_dropdown
 
-                        if storage.phi_cl.combinator.research_set_combinator_count > 1 then
-                            circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-RA', quality = 'normal'}, min = (((val % 2) >= 1) and 1 or 0)})
+                    storage.phi_cl.combinator.research_set_combinator_count = storage.phi_cl.combinator.research_set_combinator_count + 1
 
-                        else
-                            local ls = sc.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
+                    if storage.phi_cl.combinator.research_set_combinator_count > 1 then
+                        circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-RA', quality = 'normal'}, min = (((val % 2) >= 1) and 1 or 0)})
 
-                            if ls and #ls > 0 then
-                                for _, cs in pairs(ls) do
-                                    if cs.signal and cs.signal.type == 'virtual' and technology_signal[cs.signal.name] then
-                                        for i = 1, 7 do
-                                            if cs.count % (2 ^ (8 + i)) == 1 then
-                                                storage.phi_cl.combinator.research_queue_set[i] = technology_signal[cs.signal.name]
-                                            end
+                    else
+                        local ls = sc.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
+
+                        if ls and #ls > 0 then
+                            for _, cs in pairs(ls) do
+                                if cs.signal and cs.signal.type == 'virtual' and technology_signal[cs.signal.name] then
+                                    for i = 1, 7 do
+                                        if cs.count % (2 ^ (8 + i)) == 1 then
+                                            storage.phi_cl.combinator.research_queue_set[i] = technology_signal[cs.signal.name]
                                         end
                                     end
                                 end
                             end
                         end
                     end
-                    ]]
                 end
-
-                -- game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
+                ]]
             end
+
+            -- game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
         end
     end
 end)
