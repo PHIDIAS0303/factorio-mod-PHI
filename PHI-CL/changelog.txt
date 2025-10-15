@@ -3,7 +3,7 @@ Version: 3.0.129
 Date: 2025-10-19
 
   Changes:
-    - [GM] Added some code for the spaceship game mode.
+    - [GM] Some changes in code layout.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.128
