@@ -232,42 +232,6 @@ script.on_init(function()
     end
 
     storage_init()
-
-    if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SS' then
-        if remote.interfaces.freeplay and remote.interfaces.freeplay.set_disable_crashsite then
-            remote.call('freeplay', 'set_disable_crashsite', true)
-        end
-
-        local s_fl_0 = game.forces['player'].create_space_platform({name='spaceship', planet='nauvis', starter_pack='space-platform-starter-pack'})
-
-        if not s_fl_0 then
-            return
-        end
-
-        s_fl_0.apply_starter_pack()
-        s_fl_0.hub.insert({name='asteroid-collector', count=1})
-        s_fl_0.hub.insert({name='crusher', count=1})
-        s_fl_0.hub.insert({name='assembling-machine-1', count=2})
-        s_fl_0.hub.insert({name='inserter', count=10})
-        s_fl_0.hub.insert({name='solar-panel', count=20})
-        s_fl_0.hub.insert({name='space-platform-foundation', count=200})
-        s_fl_0.hub.insert({name='electric-furnace', count=4})
-
-        for _, g in pairs(game.permissions.groups) do
-            g.set_allows_action(defines.input_action.land_at_planet, false)
-        end
-
-        local tiles = {}
-
-        for x = -7, 6 do
-            for y = -7, 10 do
-                table.insert(tiles, {name='space-platform-foundation', position={x, y}})
-            end
-        end
-
-        s_fl_0.surface.set_tiles(tiles)
-        storage.phi_cl.spaceship = s_fl_0
-    end
 end)
 
 script.on_configuration_changed(function()
@@ -287,12 +251,6 @@ end)
 if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
     script.on_event(defines.events.on_player_created, function(event)
         gui_create(game.players[event.player_index])
-
-        if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SS' then
-            game.forces['player'].technologies['space-platform'].researched = true
-            game.players[event.player_index].teleport(storage.phi_cl.spaceship.surface.find_non_colliding_position('character', {x=0, y=0}, 32, 1) or {x=0, y=0}, storage.phi_cl.spaceship.surface.name)
-            game.forces['player'].set_surface_hidden('nauvis', true)
-        end
     end)
 
     if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SS' then

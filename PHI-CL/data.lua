@@ -848,7 +848,7 @@ if mods['space-age'] and settings.startup['PHI-SA'].value then
     data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-SA-ROCKET-CAPACITY'].value * 1000000
 end
 
-if mods['space-age'] and ((settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-ENABLE-QUALITY'].value)) or (settings.startup['PHI-GM'].value and (settings.startup['PHI-GM'].value == 'SS' or settings.startup['PHI-GM'].value == 'VP'))) then
+if mods['space-age'] and ((settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-ENABLE-QUALITY'].value)) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP')) then
     for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
         if data.raw.technology[v] then
             data.raw.technology[v].hidden = true
@@ -1093,7 +1093,7 @@ if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SAP
     }})
 end
 
-if settings.startup['PHI-GM'].value and (settings.startup['PHI-GM'].value == 'SS' or settings.startup['PHI-GM'].value == 'VP') then
+if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP' then
     if mods['space-age'] then
         data.raw.quality['normal'].level = 0
         data.raw.quality['normal'].beacon_power_usage_multiplier = 1
@@ -1588,38 +1588,7 @@ if settings.startup['PHI-GM'].value and (settings.startup['PHI-GM'].value == 'SS
                 v.minable.results = {{type = 'item', name = 'wood', amount = 4}}
             end
         end
-    end
-end
 
-if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SS' then
-    if mods['space-age'] then
-        for _, v in pairs(data.raw['mining-drill']) do
-            data.raw.item[v.name].hidden = true
-            data.raw.item[v.name].hidden_in_factoriopedia = true
-            data.raw.recipe[v.name].hidden = true
-            data.raw.recipe[v.name].hidden_in_factoriopedia = true
-            v.hidden = true
-            v.hidden_in_factoriopedia = true
-        end
-
-        data.raw.technology['big-mining-drill'].hidden = true
-        data.raw.technology['big-mining-drill'].hidden_in_factoriopedia = true
-        data.raw.technology['oil-gathering'].hidden = true
-        data.raw.technology['oil-gathering'].hidden_in_factoriopedia = true
-
-        data.raw['tile']['landfill'].hidden = true
-        data.raw['tile']['landfill'].hidden_in_factoriopedia = true
-        data.raw.item['landfill'].hidden = true
-        data.raw.item['landfill'].hidden_in_factoriopedia = true
-        data.raw.recipe['landfill'].hidden = true
-        data.raw.recipe['landfill'].hidden_in_factoriopedia = true
-        data.raw.technology['landfill'].hidden = true
-        data.raw.technology['landfill'].hidden_in_factoriopedia = true
-    end
-end
-
-if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP' then
-    if mods['space-age'] then
         data.raw['tile']['empty-space'].hidden = true
         data.raw['tile']['empty-space'].hidden_in_factoriopedia = true
         data.raw['tile']['space-platform-foundation'].hidden = true

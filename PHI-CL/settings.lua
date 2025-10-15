@@ -226,3 +226,12 @@ if mods['space-age'] then
     data.raw['bool-setting']['PHI-SA-ENABLE-QUALITY'].localised_description = {'', '[virtual-signal=signal-any-quality]'}
     data.raw['int-setting']['PHI-SA-QUALITY'].localised_description = {'', '[item=quality-module-3] x 0.1'}
 end
+
+--[[
+if data.raw['string-setting']['PHI-GM'].value and data.raw['string-setting']['PHI-GM'].value == 'SS' then
+    data.raw['bool-setting']['PHI-MB'].value = true
+    data.raw['bool-setting']['PHI-MB-ENERGY'].value = true
+    data.raw['int-setting']['PHI-MB-ENERGY-POWER-TIER'].value = true
+    
+end
+]]
