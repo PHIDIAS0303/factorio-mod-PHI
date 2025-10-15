@@ -396,7 +396,7 @@ script.on_nth_tick(1800, function(_)
                     storage.phi_cl.combinator.research_set_combinator_count = storage.phi_cl.combinator.research_set_combinator_count + 1
 
                     if storage.phi_cl.combinator.research_set_combinator_count > 1 then
-                        circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-RA', quality = 'normal'}, min = (((val % 2) >= 1) and 1 or 0)})
+                        circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = 1})
 
                     else
                         local ls = sc.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
