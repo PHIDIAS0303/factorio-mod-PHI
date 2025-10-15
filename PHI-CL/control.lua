@@ -51,12 +51,10 @@ local function gui_create(player)
         local read_type_table = table.add({type = 'table', name = 'read_type_table', column_count = 2, style = 'table'})
         read_type_table.add({type = 'label', name = 'read_type_technology', caption = {'gui-technology-queue.title'}, style = 'heading_2_label'})
         read_type_table.add({type = 'drop-down', name = 'read_type_technology_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-check]'}, selected_index = 1})
-        --[[
         table.add({type = 'label', name = 'set_type', caption = {'gui-control-behavior-modes.set-filter'}, style = 'heading_2_label'})
         local set_type_table = table.add({type = 'table', name = 'set_type_table', column_count = 2, style = 'table'})
         set_type_table.add({type = 'label', name = 'set_type_technology', caption = {'gui-technology-queue.title'}, style = 'heading_2_label'})
         set_type_table.add({type = 'drop-down', name = 'set_type_technology_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-check]'}, selected_index = 1})
-        ]]
     end
 end
 
@@ -81,8 +79,8 @@ local function gui_update(player, entity)
         circuit_oc = circuit_oc.sections[1]
         local val = circuit_oc.get_slot(1).min or 0
 
-        player.gui.relative.phi_cl_combinator_config['default']['read_type_table']['read_type_technology_dropdown'].selected_index = ((val % 2) >= 1 and 2) or 1
-        -- player.gui.relative.phi_cl_combinator_config['default']['set_type_table']['set_type_technology_dropdown'].selected_index = ((val % 4) >= 2 and 2) or 1
+        player.gui.relative.phi_cl_combinator_config['default']['read_type_table']['read_type_technology_dropdown'].selected_index = ((val == 1 or val == 3) and 2) or 1
+        player.gui.relative.phi_cl_combinator_config['default']['set_type_table']['set_type_technology_dropdown'].selected_index = ((val == 2 or val == 3) and 2) or 1
     end
 end
 
