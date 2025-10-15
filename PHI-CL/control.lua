@@ -219,6 +219,8 @@ local function storage_init()
     if not storage.phi_cl.combinator then
         storage.phi_cl.combinator = {
             research_set_combinator_count = 0,
+            combinator_list = {},
+            combinator_list_len = 0,
             research_queue = {},
             research_queue_set = {},
             research_progress = 0
@@ -322,30 +324,29 @@ end
 script.on_nth_tick(1800, function(_)
     if storage.phi_cl.loop.combinator then
         storage.phi_cl.combinator.research_progress = math.floor(game.forces['player'].research_progress * 100)
+        storage.phi_cl.combinator.combinator_list = {}
+        storage.phi_cl.combinator.combinator_list_len = 0
+        storage.phi_cl.combinator.research_queue = {}
+        storage.phi_cl.combinator.research_queue_set = {
+            [1] = nil,
+            [2] = nil,
+            [3] = nil,
+            [4] = nil,
+            [5] = nil,
+            [6] = nil,
+            [7] = nil
+        }
+        storage.phi_cl.combinator.research_set_combinator_count = 0
+        local n = 1
 
-        do
-            storage.phi_cl.combinator.research_queue = {}
-            storage.phi_cl.combinator.research_queue_set = {
-                [1] = nil,
-                [2] = nil,
-                [3] = nil,
-                [4] = nil,
-                [5] = nil,
-                [6] = nil,
-                [7] = nil
-            }
-            storage.phi_cl.combinator.research_set_combinator_count = 0
-            local n = 1
+        for _, r in pairs(game.forces['player'].research_queue) do
+            local raw_name = r.name:gsub('-%d+$', '')
 
-            for _, r in pairs(game.forces['player'].research_queue) do
-                local raw_name = r.name:gsub('-%d+$', '')
-
-                if r.name and r.level and r.research_unit_count_formula then
-                    storage.phi_cl.combinator.research_queue[raw_name] = ((storage.phi_cl.combinator.research_queue[raw_name] and storage.phi_cl.combinator.research_queue[raw_name]) or 0) + math.pow(2, n - 1)
-                end
-
-                n = n + 1
+            if r.name and r.level and r.research_unit_count_formula then
+                storage.phi_cl.combinator.research_queue[raw_name] = ((storage.phi_cl.combinator.research_queue[raw_name] and storage.phi_cl.combinator.research_queue[raw_name]) or 0) + math.pow(2, n - 1)
             end
+
+            n = n + 1
         end
 
         for _, s in pairs(game.surfaces) do
@@ -355,40 +356,58 @@ script.on_nth_tick(1800, function(_)
                 return
             end
 
-            for _, sc in pairs(c) do
-                local circuit_oc = sc.get_or_create_control_behavior()
+            storage.phi_cl.combinator.combinator_list = c
+            storage.phi_cl.combinator.combinator_list_len = math.ceil(#c / 175)
+        end
+    end
+end)
 
-                if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
-                    circuit_oc.add_section()
+script.on_nth_tick(10, function(event)
+    local head = #storage.phi_cl.combinator.combinator_list
+    local max_remove = math.floor(head / 100) + 1
+    local remove_count = math.random(0, max_remove)
+
+    while remove_count > 0 and head > 0 do
+        local remove_index = math.random(1, head)
+        local entity = storage.phi_cl.combinator.combinator_list[remove_index]
+        storage.phi_cl.combinator.combinator_list[remove_index] = storage.phi_cl.combinator.combinator_list[head]
+        head = head - 1
+
+        if entity and entity.valid then
+            remove_count = remove_count - 1
+            local circuit_oc = entity.get_or_create_control_behavior()
+
+            if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
+                circuit_oc.add_section()
+            end
+
+            circuit_oc = circuit_oc.sections[1]
+            local cs1 = circuit_oc.get_slot(1)
+
+            if not (cs1 or (cs1.value and cs1.value.name and cs1.value.name == 'signal-SA')) then
+                return
+            end
+
+            local val = circuit_oc.get_slot(1).min or 0
+
+            if val == 1 or val == 3 then
+                -- read_type_technology_dropdown
+                local n = 11
+
+                for rn, rv in pairs(storage.phi_cl.combinator.research_queue) do
+                    circuit_oc.set_slot(n, {value = {type = 'virtual', name = 'signal-' .. rn, quality = 'normal'}, min = rv})
+
+                    n = n + 1
                 end
 
-                circuit_oc = circuit_oc.sections[1]
-                local cs1 = circuit_oc.get_slot(1)
-
-                if not (cs1 or (cs1.value and cs1.value.name and cs1.value.name == 'signal-SA')) then
-                    return
+                for i = n, 17 do
+                    circuit_oc.clear_slot(i)
                 end
 
-                local val = circuit_oc.get_slot(1).min or 0
+                circuit_oc.set_slot(18, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
+            end
 
-                if val == 1 or val == 3 then
-                    -- read_type_technology_dropdown
-                    local n = 11
-
-                    for rn, rv in pairs(storage.phi_cl.combinator.research_queue) do
-                        circuit_oc.set_slot(n, {value = {type = 'virtual', name = 'signal-' .. rn, quality = 'normal'}, min = rv})
-
-                        n = n + 1
-                    end
-
-                    for i = n, 17 do
-                        circuit_oc.clear_slot(i)
-                    end
-
-                    circuit_oc.set_slot(18, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
-                end
-
-                --[[
+            --[[
                 if val == 2 or val == 3 then
                     -- incomplete
                     -- set_type_technology_dropdown
@@ -414,8 +433,7 @@ script.on_nth_tick(1800, function(_)
                         end
                     end
                 end
-                ]]
-            end
+            ]]
 
             -- game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
         end
