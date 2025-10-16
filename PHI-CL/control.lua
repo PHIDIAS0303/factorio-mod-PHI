@@ -351,16 +351,16 @@ script.on_nth_tick(1800, function(_)
 end)
 
 local function handle_research_queue(combinator)
-    local combinator_slot_1 = combinator.get_slot(1)
+    local combinator_slot = combinator.get_slot(1)
 
-    if not (combinator_slot_1 or (combinator_slot_1.value and combinator_slot_1.value.name and combinator_slot_1.value.name == 'signal-SA')) then
+    if not (combinator_slot or (combinator_slot.value and combinator_slot.value.name and combinator_slot.value.name == 'signal-SA')) then
         combinator.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = 0})
         return
     end
 
-    local combinator_slot_1_value = combinator_slot_1.get_slot(1).min or 0
+    local combinator_slot_value = combinator_slot.get_slot(1).min or 0
 
-    if combinator_slot_1_value == 1 or combinator_slot_1_value == 3 then
+    if combinator_slot_value == 1 or combinator_slot_value == 3 then
         -- research_queue_read
         local n = 21
 
@@ -377,12 +377,12 @@ local function handle_research_queue(combinator)
         combinator.set_slot(28, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
     end
 
-    if combinator_slot_1_value == 2 or combinator_slot_1_value == 3 then
+    if combinator_slot_value == 2 or combinator_slot_value == 3 then
         -- research_queue_write
         storage.phi_cl.combinator.research_set_combinator_count = storage.phi_cl.combinator.research_set_combinator_count + 1
 
         if storage.phi_cl.combinator.research_set_combinator_count > 1 then
-            combinator.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = ((combinator_slot_1_value == 3) and 1) or 0})
+            combinator.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = ((combinator_slot_value == 3) and 1) or 0})
             return
         end
 
@@ -427,6 +427,18 @@ local function handle_research_queue(combinator)
 end
 
 local function handle_valve_value(combinator)
+    local combinator_slot = combinator.get_slot(1)
+
+    if not (combinator_slot or (combinator_slot.value and combinator_slot.value.name and combinator_slot.value.name == 'signal-SA')) then
+        combinator.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = 0})
+        return
+    end
+
+    local combinator_slot_value = combinator_slot.get_slot(1).min or 0
+
+    if (combinator_slot_value >= 0 and combinator_slot_value < 101) then
+        -- every item in front of it?
+    end
 end
 
 script.on_nth_tick(10, function(_)
