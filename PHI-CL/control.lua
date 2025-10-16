@@ -458,31 +458,21 @@ local function handle_valve_value(entity, combinator)
 end
 
 local function handle_spoil_value(entity, combinator)
-    local combinator_slot = combinator.get_slot(3)
+    -- combinator.set_slot(1, {value = {type = 'virtual', name = 'signal-OA', quality = 'normal'}, min = 0})
 
-    if not (combinator_slot or (combinator_slot.value and combinator_slot.value.name and combinator_slot.value.name == 'signal-SA')) then
-        combinator.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = 0})
+    local v = entity.surface.find_entities_filtered{type='valve', position=entity.position, radius=1}
+
+    if not (v or #v == 0) then
         return
     end
 
-    local combinator_slot_value = combinator_slot.get_slot(1).min or 0
+    for _, valve in pairs(v) do
+        if valve.valve_threshold_override then
+            if combinator_slot_value == 0 then
+                valve.valve_threshold_override = nil
 
-    if (combinator_slot_value >= 0 and combinator_slot_value < 101) then
-        -- every item in front of it?
-        local v = entity.surface.find_entities_filtered{type='valve', position=entity.position, radius=1}
-
-        if not (v or #v == 0) then
-            return
-        end
-
-        for _, valve in pairs(v) do
-            if valve.valve_threshold_override then
-                if combinator_slot_value == 0 then
-                    valve.valve_threshold_override = nil
-
-                else
-                    valve.valve_threshold_override = combinator_slot_value / 100
-                end
+            else
+                valve.valve_threshold_override = combinator_slot_value / 100
             end
         end
     end
