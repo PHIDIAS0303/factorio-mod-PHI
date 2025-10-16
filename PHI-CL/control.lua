@@ -81,8 +81,11 @@ local function gui_update(player, entity)
 
         local val = circuit_oc.get_slot(1).min or 0
 
-        player.gui.relative.phi_cl_combinator_config['default']['read_type_table']['read_type_technology_dropdown'].selected_index = ((val == 1 or val == 3) and 2) or 1
-        player.gui.relative.phi_cl_combinator_config['default']['set_type_table']['set_type_technology_dropdown'].selected_index = ((val == 2 or val == 3) and 2) or 1
+        if (val < 0 or val > 3) then
+            val = 0
+        end
+
+        player.gui.relative.phi_cl_combinator_config['default']['research_queue_table']['research_queue_dropdown'].selected_index = val + 1
     end
 end
 
@@ -287,7 +290,7 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
             end
 
             circuit_oc = circuit_oc.sections[1]
-            circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = ((event.element.parent.parent['read_type_table']['read_type_technology_dropdown'].selected_index == 2) and 1 or 0) + ((event.element.parent.parent['set_type_table']['set_type_technology_dropdown'].selected_index == 2) and 2 or 0)})
+            circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = event.element.parent.parent['research_queue_table']['research_queue_dropdown'].selected_index})
         end
     end)
 
