@@ -48,13 +48,9 @@ local function gui_create(player)
         local frame = player.gui.relative.add({type = 'frame', name = 'phi_cl_combinator_config', anchor = {gui = defines.relative_gui_type.constant_combinator_gui, position = defines.relative_gui_position.right, name = 'super-combinator', ghost_mode = 'only_real'}})
         local table = frame.add({type = 'table', name = 'default', column_count = 1, style = 'table'})
         table.add({type = 'label', name = 'read_type', caption = {'gui-control-behavior-modes.read-contents'}, style = 'heading_2_label'})
-        local read_type_table = table.add({type = 'table', name = 'read_type_table', column_count = 2, style = 'table'})
-        read_type_table.add({type = 'label', name = 'read_type_technology', caption = {'gui-technology-queue.title'}, style = 'heading_2_label'})
-        read_type_table.add({type = 'drop-down', name = 'read_type_technology_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-check]'}, selected_index = 1})
-        table.add({type = 'label', name = 'set_type', caption = {'gui-control-behavior-modes.set-filter'}, style = 'heading_2_label'})
-        local set_type_table = table.add({type = 'table', name = 'set_type_table', column_count = 2, style = 'table'})
-        set_type_table.add({type = 'label', name = 'set_type_technology', caption = {'gui-technology-queue.title'}, style = 'heading_2_label'})
-        set_type_table.add({type = 'drop-down', name = 'set_type_technology_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-check]'}, selected_index = 1})
+        local research_queue_table = table.add({type = 'table', name = 'research_queue_table', column_count = 2, style = 'table'})
+        research_queue_table.add({type = 'label', name = 'research_queue_label', caption = {'gui-technology-queue.title'}, style = 'heading_2_label'})
+        research_queue_table.add({type = 'drop-down', name = 'research_queue_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-RA]', '[virtual-signal=signal-WA]', '[virtual-signal=signal-check]'}, selected_index = 1})
     end
 end
 
