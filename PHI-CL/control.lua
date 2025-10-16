@@ -350,6 +350,93 @@ script.on_nth_tick(1800, function(_)
     end
 end)
 
+local function handle_research_queue(entity)
+    local combinator = entity.get_or_create_control_behavior()
+
+    if not combinator then
+        return
+    end
+
+    if combinator.sections_count and combinator.sections_count == 0 then
+        combinator.add_section()
+        return
+    end
+
+    local combinator_slot_1 = combinator.get_slot(1)
+
+    if not (combinator_slot_1 or (combinator_slot_1.value and combinator_slot_1.value.name and combinator_slot_1.value.name == 'signal-SA')) then
+        combinator.add_section()
+        return
+    end
+
+    local combinator_slot_1_value = combinator_slot_1.get_slot(1).min or 0
+
+    if combinator_slot_1_value == 1 or combinator_slot_1_value == 3 then
+        -- research_queue_read
+        local n = 21
+
+        for rn, rv in pairs(storage.phi_cl.combinator.research_queue) do
+            combinator.set_slot(n, {value = {type = 'virtual', name = 'signal-' .. rn, quality = 'normal'}, min = rv})
+
+            n = n + 1
+        end
+
+        for i = n, 27 do
+            combinator.clear_slot(i)
+        end
+
+        combinator.set_slot(28, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
+    end
+
+    if combinator_slot_1_value == 2 or combinator_slot_1_value == 3 then
+        -- research_queue_write
+        storage.phi_cl.combinator.research_set_combinator_count = storage.phi_cl.combinator.research_set_combinator_count + 1
+
+        if storage.phi_cl.combinator.research_set_combinator_count > 1 then
+            combinator.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = ((combinator_slot_1_value == 3) and 1) or 0})
+            return
+        end
+
+        local ls = combinator.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
+
+        if not (ls or #ls < 1) then
+            return
+        end
+
+        for _, cs in pairs(ls) do
+            local name = cs.signal.name:gsub('signal-', '')
+
+            if cs.signal and cs.signal.type == 'virtual' and game.forces.player.technologies[name] and game.forces.player.technologies[name].enabled and game.forces.player.technologies[name].research_unit_count_formula then
+                for i=1, 7 do
+                    if cs.count % (2 ^ (8 + i)) == 1 then
+                        storage.phi_cl.combinator.research_queue_set[i] = cs.signal.name
+                    end
+                end
+            end
+        end
+
+        local empty = true
+        local empty_gap = false
+        local det = true
+
+        for i=1, 7 do
+            if storage.phi_cl.combinator.research_queue_set[i] then
+                empty = false
+
+                if empty_gap then
+                    det = false
+                end
+            else
+                empty_gap = true
+            end
+        end
+
+        if det and (not empty) then
+            game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
+        end
+    end
+end
+
 script.on_nth_tick(10, function(_)
     local head = #storage.phi_cl.combinator.combinator_list
     local max_remove = math.floor(head / 100) + 1
@@ -363,84 +450,7 @@ script.on_nth_tick(10, function(_)
 
         if entity and entity.valid then
             remove_count = remove_count - 1
-            local circuit_oc = entity.get_or_create_control_behavior()
-
-            if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
-                circuit_oc.add_section()
-            end
-
-            circuit_oc = circuit_oc.sections[1]
-            local cs1 = circuit_oc.get_slot(1)
-
-            if not (cs1 or (cs1.value and cs1.value.name and cs1.value.name == 'signal-SA')) then
-                return
-            end
-
-            local val = circuit_oc.get_slot(1).min or 0
-
-            if val == 1 or val == 3 then
-                -- research_queue_read
-                local n = 11
-
-                for rn, rv in pairs(storage.phi_cl.combinator.research_queue) do
-                    circuit_oc.set_slot(n, {value = {type = 'virtual', name = 'signal-' .. rn, quality = 'normal'}, min = rv})
-
-                    n = n + 1
-                end
-
-                for i = n, 17 do
-                    circuit_oc.clear_slot(i)
-                end
-
-                circuit_oc.set_slot(18, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
-            end
-
-            if val == 2 or val == 3 then
-                -- research_queue_write
-
-                storage.phi_cl.combinator.research_set_combinator_count = storage.phi_cl.combinator.research_set_combinator_count + 1
-
-                if storage.phi_cl.combinator.research_set_combinator_count > 1 then
-                    circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = ((val == 3) and 1) or 0})
-
-                else
-                    local ls = cs1.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
-
-                    if ls and #ls > 0 then
-                        for _, cs in pairs(ls) do
-                            local name = cs.signal.name:gsub('signal-', '')
-
-                            if cs.signal and cs.signal.type == 'virtual' and game.forces.player.technologies[name] and game.forces.player.technologies[name].enabled and game.forces.player.technologies[name].research_unit_count_formula then
-                                for i=1, 7 do
-                                    if cs.count % (2 ^ (8 + i)) == 1 then
-                                        storage.phi_cl.combinator.research_queue_set[i] = cs.signal.name
-                                    end
-                                end
-                            end
-                        end
-
-                        local empty = true
-                        local empty_gap = false
-                        local det = true
-
-                        for i=1, 7 do
-                            if storage.phi_cl.combinator.research_queue_set[i] then
-                                empty = false
-
-                                if empty_gap then
-                                    det = false
-                                end
-                            else
-                                empty_gap = true
-                            end
-                        end
-
-                        if det and (not empty) then
-                            game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
-                        end
-                    end
-                end
-            end
+            handle_research_queue(entity)
         end
     end
 end)
