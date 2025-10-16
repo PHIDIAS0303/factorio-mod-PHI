@@ -350,22 +350,11 @@ script.on_nth_tick(1800, function(_)
     end
 end)
 
-local function handle_research_queue(entity)
-    local combinator = entity.get_or_create_control_behavior()
-
-    if not combinator then
-        return
-    end
-
-    if combinator.sections_count and combinator.sections_count == 0 then
-        combinator.add_section()
-        return
-    end
-
+local function handle_research_queue(combinator)
     local combinator_slot_1 = combinator.get_slot(1)
 
     if not (combinator_slot_1 or (combinator_slot_1.value and combinator_slot_1.value.name and combinator_slot_1.value.name == 'signal-SA')) then
-        combinator.add_section()
+        combinator.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = 0})
         return
     end
 
@@ -437,6 +426,9 @@ local function handle_research_queue(entity)
     end
 end
 
+local function handle_valve_value(combinator)
+end
+
 script.on_nth_tick(10, function(_)
     local head = #storage.phi_cl.combinator.combinator_list
     local max_remove = math.floor(head / 100) + 1
@@ -450,7 +442,17 @@ script.on_nth_tick(10, function(_)
 
         if entity and entity.valid then
             remove_count = remove_count - 1
-            handle_research_queue(entity)
+            local combinator = entity.get_or_create_control_behavior()
+
+            if combinator and combinator.sections_count then
+                if combinator.sections_count > 0 then
+                    handle_research_queue(combinator)
+                    handle_valve_value(combinator)
+
+                else
+                    combinator.add_section()
+                end
+            end
         end
     end
 end)
