@@ -427,7 +427,38 @@ local function handle_research_queue(combinator)
 end
 
 local function handle_valve_value(entity, combinator)
-    local combinator_slot = combinator.get_slot(1)
+    local combinator_slot = combinator.get_slot(2)
+
+    if not (combinator_slot or (combinator_slot.value and combinator_slot.value.name and combinator_slot.value.name == 'signal-VA')) then
+        combinator.set_slot(2, {value = {type = 'virtual', name = 'signal-VA', quality = 'normal'}, min = 0})
+        return
+    end
+
+    local combinator_slot_value = combinator_slot.get_slot(2).min or 0
+
+    if (combinator_slot_value >= 0 and combinator_slot_value < 101) then
+        -- every item in front of it?
+        local v = entity.surface.find_entities_filtered{type='valve', position=entity.position, radius=1}
+
+        if not (v or #v == 0) then
+            return
+        end
+
+        for _, valve in pairs(v) do
+            if valve.valve_threshold_override then
+                if combinator_slot_value == 0 then
+                    valve.valve_threshold_override = nil
+
+                else
+                    valve.valve_threshold_override = combinator_slot_value / 100
+                end
+            end
+        end
+    end
+end
+
+local function handle_spoil_value(entity, combinator)
+    local combinator_slot = combinator.get_slot(3)
 
     if not (combinator_slot or (combinator_slot.value and combinator_slot.value.name and combinator_slot.value.name == 'signal-SA')) then
         combinator.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = 0})
@@ -476,6 +507,7 @@ script.on_nth_tick(10, function(_)
                 if combinator.sections_count > 0 then
                     handle_research_queue(combinator)
                     handle_valve_value(entity, combinator)
+                    handle_spoil_value(entity, combinator)
 
                 else
                     combinator.add_section()
