@@ -436,7 +436,7 @@ local function handle_valve_value(entity, combinator)
 
     local combinator_slot_value = combinator_slot.get_slot(1).min or 0
 
-    if (combinator_slot_value >= -1 and combinator_slot_value < 101) then
+    if (combinator_slot_value >= 0 and combinator_slot_value < 101) then
         -- every item in front of it?
         local v = entity.surface.find_entities_filtered{type='valve', position=entity.position, radius=1}
 
@@ -446,7 +446,7 @@ local function handle_valve_value(entity, combinator)
 
         for _, valve in pairs(v) do
             if valve.valve_threshold_override then
-                if combinator_slot_value == -1 then
+                if combinator_slot_value == 0 then
                     valve.valve_threshold_override = nil
 
                 else
