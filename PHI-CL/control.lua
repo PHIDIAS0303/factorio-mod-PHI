@@ -435,7 +435,7 @@ script.on_nth_tick(10, function(_)
                             end
                         end
 
-                        if (not det) and (not empty) then
+                        if det and (not empty) then
                             game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
                         end
                     end
