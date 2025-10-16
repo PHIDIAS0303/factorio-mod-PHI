@@ -324,15 +324,7 @@ script.on_nth_tick(1800, function(_)
         storage.phi_cl.combinator.research_progress = math.floor(game.forces['player'].research_progress * 100)
         storage.phi_cl.combinator.combinator_list = {}
         storage.phi_cl.combinator.research_queue = {}
-        storage.phi_cl.combinator.research_queue_set = {
-            [1] = nil,
-            [2] = nil,
-            [3] = nil,
-            [4] = nil,
-            [5] = nil,
-            [6] = nil,
-            [7] = nil
-        }
+        storage.phi_cl.combinator.research_queue_set = {}
         storage.phi_cl.combinator.research_set_combinator_count = 0
         local n = 1
 
@@ -358,7 +350,7 @@ script.on_nth_tick(1800, function(_)
     end
 end)
 
-script.on_nth_tick(10, function(event)
+script.on_nth_tick(10, function(_)
     local head = #storage.phi_cl.combinator.combinator_list
     local max_remove = math.floor(head / 100) + 1
     local remove_count = math.random(0, max_remove)
@@ -409,26 +401,46 @@ script.on_nth_tick(10, function(event)
                 storage.phi_cl.combinator.research_set_combinator_count = storage.phi_cl.combinator.research_set_combinator_count + 1
 
                 if storage.phi_cl.combinator.research_set_combinator_count > 1 then
-                    circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = 1})
+                    circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = ((val == 3) and 1) or 0})
 
                 else
                     local ls = cs1.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
 
                     if ls and #ls > 0 then
                         for _, cs in pairs(ls) do
-                            if cs.signal and cs.signal.type == 'virtual' and cs.signal.name then
-                                for i = 1, 7 do
+                            local name = cs.signal.name:gsub('signal-', '')
+
+                            if cs.signal and cs.signal.type == 'virtual' and game.forces.player.technologies[name] and game.forces.player.technologies[name].enabled and game.forces.player.technologies[name].research_unit_count_formula then
+                                for i=1, 7 do
                                     if cs.count % (2 ^ (8 + i)) == 1 then
-                                        storage.phi_cl.combinator.research_queue_set[i] = cs.signal.name:gsub('signal-', '')
+                                        storage.phi_cl.combinator.research_queue_set[i] = cs.signal.name
                                     end
                                 end
                             end
                         end
+
+                        local empty = true
+                        local empty_gap = false
+                        local det = true
+
+                        for i=1, 7 do
+                            if storage.phi_cl.combinator.research_queue_set[i] then
+                                empty = false
+
+                                if empty_gap then
+                                    det = false
+                                end
+                            else
+                                empty_gap = true
+                            end
+                        end
+
+                        if (not det) and (not empty) then
+                            game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
+                        end
                     end
                 end
             end
-
-            game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
         end
     end
 end)
