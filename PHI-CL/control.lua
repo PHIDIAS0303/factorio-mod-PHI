@@ -290,7 +290,7 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
             end
 
             circuit_oc = circuit_oc.sections[1]
-            circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = event.element.parent.parent['research_queue_table']['research_queue_dropdown'].selected_index})
+            circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = event.element.parent.parent['research_queue_table']['research_queue_dropdown'].selected_index - 1})
         end
     end)
 
@@ -387,7 +387,7 @@ script.on_nth_tick(10, function(event)
             local val = circuit_oc.get_slot(1).min or 0
 
             if val == 1 or val == 3 then
-                -- read_type_technology_dropdown
+                -- research_queue_read
                 local n = 11
 
                 for rn, rv in pairs(storage.phi_cl.combinator.research_queue) do
@@ -403,35 +403,32 @@ script.on_nth_tick(10, function(event)
                 circuit_oc.set_slot(18, {value = {type = 'virtual', name = 'signal-PA', quality = 'normal'}, min = storage.phi_cl.combinator.research_progress})
             end
 
-            --[[
-                if val == 2 or val == 3 then
-                    -- incomplete
-                    -- set_type_technology_dropdown
+            if val == 2 or val == 3 then
+                -- research_queue_write
 
-                    storage.phi_cl.combinator.research_set_combinator_count = storage.phi_cl.combinator.research_set_combinator_count + 1
+                storage.phi_cl.combinator.research_set_combinator_count = storage.phi_cl.combinator.research_set_combinator_count + 1
 
-                    if storage.phi_cl.combinator.research_set_combinator_count > 1 then
-                        circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = 1})
+                if storage.phi_cl.combinator.research_set_combinator_count > 1 then
+                    circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = 1})
 
-                    else
-                        local ls = sc.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
+                else
+                    local ls = cs1.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
 
-                        if ls and #ls > 0 then
-                            for _, cs in pairs(ls) do
-                                if cs.signal and cs.signal.type == 'virtual' and technology_signal[cs.signal.name] then
-                                    for i = 1, 7 do
-                                        if cs.count % (2 ^ (8 + i)) == 1 then
-                                            storage.phi_cl.combinator.research_queue_set[i] = technology_signal[cs.signal.name]
-                                        end
+                    if ls and #ls > 0 then
+                        for _, cs in pairs(ls) do
+                            if cs.signal and cs.signal.type == 'virtual' and cs.signal.name then
+                                for i = 1, 7 do
+                                    if cs.count % (2 ^ (8 + i)) == 1 then
+                                        storage.phi_cl.combinator.research_queue_set[i] = cs.signal.name:gsub('signal-', '')
                                     end
                                 end
                             end
                         end
                     end
                 end
-            ]]
+            end
 
-            -- game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
+            game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
         end
     end
 end)
