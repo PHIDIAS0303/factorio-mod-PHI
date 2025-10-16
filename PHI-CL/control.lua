@@ -459,21 +459,27 @@ end
 
 local function handle_spoil_value(entity, combinator)
     -- combinator.set_slot(1, {value = {type = 'virtual', name = 'signal-OA', quality = 'normal'}, min = 0})
+    local c = entity.surface.find_entities_filtered{type='chest', position=entity.position, radius=1, limit=1}
 
-    local v = entity.surface.find_entities_filtered{type='valve', position=entity.position, radius=1}
-
-    if not (v or #v == 0) then
+    if not (c or #c == 0) then
         return
     end
 
-    for _, valve in pairs(v) do
-        if valve.valve_threshold_override then
-            if combinator_slot_value == 0 then
-                valve.valve_threshold_override = nil
+    local chest_storage = c[1].get_inventory(defines.inventory.chest)
 
-            else
-                valve.valve_threshold_override = combinator_slot_value / 100
+    if chest_storage then
+        local n = 31
+
+        for _, item in pairs(chest_storage) do
+            if item.spoil_percent and item.spoil_percent > 0 and n < 35 then
+                combinator.set_slot(n, {value = {type = 'virtual', name = item, quality = 'normal'}, min = math.floor(item.spoil_percent * 100)})
+
+                n = n + 1
             end
+        end
+
+        for i = n, 35 do
+            combinator.clear_slot(i)
         end
     end
 end
