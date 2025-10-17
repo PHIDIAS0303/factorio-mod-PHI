@@ -358,7 +358,7 @@ local function handle_research_queue(combinator)
         return
     end
 
-    local combinator_slot_value = combinator_slot.get_slot(1).min or 0
+    local combinator_slot_value = combinator_slot.min or 0
 
     if combinator_slot_value == 1 or combinator_slot_value == 3 then
         -- research_queue_read
@@ -434,7 +434,7 @@ local function handle_valve_value(entity, combinator)
         return
     end
 
-    local combinator_slot_value = combinator_slot.get_slot(2).min or 0
+    local combinator_slot_value = combinator_slot.min or 0
 
     if (combinator_slot_value >= 0 and combinator_slot_value < 101) then
         -- every item in front of it?
