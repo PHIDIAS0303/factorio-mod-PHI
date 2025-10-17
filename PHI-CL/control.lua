@@ -499,14 +499,13 @@ script.on_nth_tick(10, function(_)
             local combinator = entity.get_or_create_control_behavior()
 
             if combinator and combinator.sections_count then
-                if combinator.sections_count > 0 then
-                    handle_research_queue(combinator.sections[1])
-                    handle_valve_value(entity, combinator.sections[1])
-                    handle_spoil_value(entity, combinator.sections[1])
-
-                else
+                if combinator.sections_count == 0 then
                     combinator.add_section()
                 end
+
+                handle_research_queue(combinator.sections[1])
+                handle_valve_value(entity, combinator.sections[1])
+                handle_spoil_value(entity, combinator.sections[1])
             end
         end
     end
