@@ -321,7 +321,7 @@ end
 
 script.on_nth_tick(1800, function(_)
     if storage.phi_cl.loop.combinator then
-        storage.phi_cl.combinator.research_progress = math.floor(game.forces['player'].research_progress * 100)
+        storage.phi_cl.combinator.research_progress = math.floor(game.forces['player'].research_progress * 1000)
         storage.phi_cl.combinator.combinator_list = {}
         storage.phi_cl.combinator.research_queue = {}
         storage.phi_cl.combinator.research_queue_set = {}
@@ -458,7 +458,6 @@ local function handle_valve_value(entity, combinator)
 end
 
 local function handle_spoil_value(entity, combinator)
-    -- combinator.set_slot(1, {value = {type = 'virtual', name = 'signal-OA', quality = 'normal'}, min = 0})
     local c = entity.surface.find_entities_filtered{type='chest', position=entity.position, radius=1, limit=1}
 
     if not (c or #c == 0) then
@@ -472,7 +471,7 @@ local function handle_spoil_value(entity, combinator)
 
         for _, item in pairs(chest_storage) do
             if item.spoil_percent and item.spoil_percent > 0 and n < 35 then
-                combinator.set_slot(n, {value = {type = 'virtual', name = item, quality = 'normal'}, min = math.floor(item.spoil_percent * 100)})
+                combinator.set_slot(n, {value = {type = 'item', name = item.name, quality = 'normal'}, min = math.floor(item.spoil_percent * 1000)})
 
                 n = n + 1
             end
