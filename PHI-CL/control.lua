@@ -500,9 +500,9 @@ script.on_nth_tick(10, function(_)
 
             if combinator and combinator.sections_count then
                 if combinator.sections_count > 0 then
-                    handle_research_queue(combinator)
-                    handle_valve_value(entity, combinator)
-                    handle_spoil_value(entity, combinator)
+                    handle_research_queue(combinator.sections[1])
+                    handle_valve_value(entity, combinator.sections[1])
+                    handle_spoil_value(entity, combinator.sections[1])
 
                 else
                     combinator.add_section()
