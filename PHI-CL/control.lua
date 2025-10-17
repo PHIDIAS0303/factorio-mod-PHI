@@ -460,7 +460,7 @@ end
 local function handle_spoil_value(entity, combinator)
     local c = entity.surface.find_entities_filtered{type='chest', position=entity.position, radius=1, limit=1}
 
-    if not c then
+    if (not c) or (#c == 0) then
         return
     end
 
