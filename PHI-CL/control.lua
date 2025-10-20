@@ -453,32 +453,6 @@ local function handle_valve_value(entity, combinator)
     end
 end
 
-local function handle_spoil_value(entity, combinator)
-    local c = entity.surface.find_entities_filtered{type='chest', position=entity.position, radius=1, limit=1}
-
-    if #c == 0 then
-        return
-    end
-
-    local chest_storage = c[1].get_inventory(defines.inventory.chest)
-
-    if chest_storage then
-        local n = 31
-
-        for _, item in pairs(chest_storage) do
-            if item.spoil_percent and item.spoil_percent > 0 and n < 35 then
-                combinator.set_slot(n, {value = {type = 'item', name = item.name, quality = 'normal'}, min = math.floor(item.spoil_percent * 1000)})
-
-                n = n + 1
-            end
-        end
-
-        for i = n, 35 do
-            combinator.clear_slot(i)
-        end
-    end
-end
-
 script.on_nth_tick(10, function(_)
     local head = #storage.phi_cl.combinator.combinator_list
     local max_remove = math.floor(head / 100) + 1
@@ -500,7 +474,6 @@ script.on_nth_tick(10, function(_)
                 end
 
                 handle_research_queue(entity, combinator.sections[1])
-                handle_spoil_value(entity, combinator.sections[1])
             end
         end
     end
