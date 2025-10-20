@@ -388,7 +388,7 @@ local function handle_research_queue(entity, combinator)
 
         local ls = entity.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
 
-        if not (ls or #ls == 0) then
+        if (not ls) or #ls == 0 then
             return
         end
 
