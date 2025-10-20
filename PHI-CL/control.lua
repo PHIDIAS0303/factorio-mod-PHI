@@ -52,6 +52,31 @@ local function gui_create(player)
         table_research_queue.add({type = 'label', name = 'research_queue_label', caption = {'gui-technology-queue.title'}, style = 'heading_2_label'})
         table_research_queue.add({type = 'drop-down', name = 'research_queue_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-RA]', '[virtual-signal=signal-WA]', '[virtual-signal=signal-check]'}, selected_index = 1})
     end
+
+    do
+        local frame = player.gui.relative.add({type = 'frame', name = 'phi_cl_combinator_decider_config', anchor = {gui = defines.relative_gui_type.decider_combinator_gui, position = defines.relative_gui_position.right, ghost_mode = 'only_real'}})
+        local table = frame.add({type = 'table', name = 'default', column_count = 1, style = 'table'})
+
+        local table_decider_signal_start = table.add({type = 'table', name = 'table_decider_signal_start', column_count = 3, style = 'table'})
+        table_decider_signal_start.add({type = 'label', name = 'label_decider_signal_start_first', caption = '', style = 'heading_2_label'})
+        table_decider_signal_start.add({type = 'label', name = 'label_decider_signal_start_comparator', caption = '', style = 'heading_2_label'})
+        table_decider_signal_start.add({type = 'label', name = 'label_decider_signal_start_second', caption = '', style = 'heading_2_label'})
+
+        local table_decider_signal_end = table.add({type = 'table', name = 'table_decider_signal_end', column_count = 3, style = 'table'})
+        table_decider_signal_end.add({type = 'label', name = 'label_decider_signal_end_first', caption = '', style = 'heading_2_label'})
+        table_decider_signal_end.add({type = 'label', name = 'label_decider_signal_end_comparator', caption = '', style = 'heading_2_label'})
+        table_decider_signal_end.add({type = 'label', name = 'label_decider_signal_end_second', caption = '', style = 'heading_2_label'})
+
+        local table_decider_action = table.add({type = 'table', name = 'table_decider_action', column_count = 2, style = 'table'})
+        table_decider_action.add({type = 'sprite-button', name = 'label_decider_action_button_zoom_in', caption = 'utility/controller_joycon_start', style = 'frame_action_button'})
+        table_decider_action.add({type = 'sprite-button', name = 'label_decider_action_button_zoom_out', caption = 'utility/controller_joycon_back', style = 'frame_action_button'})
+        table_decider_action.add({type = 'sprite-button', name = 'label_decider_action_button_zoom_left', caption = 'utility/controller_joycon_dpleft', style = 'frame_action_button'})
+        table_decider_action.add({type = 'sprite-button', name = 'label_decider_action_button_zoom_right', caption = 'utility/controller_joycon_dpright', style = 'frame_action_button'})
+        table_decider_action.add({type = 'sprite-button', name = 'label_decider_action_button_previous', caption = 'utility/controller_ps_dpup', style = 'frame_action_button'})
+        table_decider_action.add({type = 'sprite-button', name = 'label_decider_action_button_next', caption = 'utility/controller_ps_dpdown', style = 'frame_action_button'})
+
+        -- table_decider.add({type = 'drop-down', name = 'research_queue_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-RA]', '[virtual-signal=signal-WA]', '[virtual-signal=signal-check]'}, selected_index = 1})
+    end
 end
 
 local function gui_update(player, entity)
