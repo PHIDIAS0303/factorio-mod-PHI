@@ -217,7 +217,7 @@ local function storage_init()
 
     if not storage.phi_cl.combinator then
         storage.phi_cl.combinator = {
-            research_set_combinator_count = 0,
+            research_set_combinator = false,
             combinator_list = {},
             research_queue = {},
             research_queue_set = {},
