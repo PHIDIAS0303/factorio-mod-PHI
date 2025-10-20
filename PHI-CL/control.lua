@@ -48,9 +48,12 @@ local function gui_create(player)
         local frame = player.gui.relative.add({type = 'frame', name = 'phi_cl_combinator_config', anchor = {gui = defines.relative_gui_type.constant_combinator_gui, position = defines.relative_gui_position.right, name = 'super-combinator', ghost_mode = 'only_real'}})
         local table = frame.add({type = 'table', name = 'default', column_count = 1, style = 'table'})
         table.add({type = 'label', name = 'read_type', caption = {'gui-control-behavior-modes.read-contents'}, style = 'heading_2_label'})
-        local research_queue_table = table.add({type = 'table', name = 'research_queue_table', column_count = 2, style = 'table'})
-        research_queue_table.add({type = 'label', name = 'research_queue_label', caption = {'gui-technology-queue.title'}, style = 'heading_2_label'})
-        research_queue_table.add({type = 'drop-down', name = 'research_queue_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-RA]', '[virtual-signal=signal-WA]', '[virtual-signal=signal-check]'}, selected_index = 1})
+        local table_research_queue = table.add({type = 'table', name = 'table_research_queue', column_count = 2, style = 'table'})
+        table_research_queue.add({type = 'label', name = 'research_queue_label', caption = {'gui-technology-queue.title'}, style = 'heading_2_label'})
+        table_research_queue.add({type = 'drop-down', name = 'research_queue_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-RA]', '[virtual-signal=signal-WA]', '[virtual-signal=signal-check]'}, selected_index = 1})
+        local table_valve = table.add({type = 'table', name = 'table_valve', column_count = 2, style = 'table'})
+        table_valve.add({type = 'label', name = 'valve_label', caption = {'description.threshold'}, style = 'heading_2_label'})
+        table_valve.add({type = 'drop-down', name = 'valve_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-check]'}, selected_index = 1})
     end
 end
 
@@ -80,12 +83,10 @@ local function gui_update(player, entity)
         end
 
         local val = circuit_oc.get_slot(1).min or 0
+        player.gui.relative.phi_cl_combinator_config['default']['table_research_queue']['research_queue_dropdown'].selected_index = ((val < 0 or val > 3) and 1) or (val + 1)
 
-        if (val < 0 or val > 3) then
-            val = 0
-        end
-
-        player.gui.relative.phi_cl_combinator_config['default']['research_queue_table']['research_queue_dropdown'].selected_index = val + 1
+        val = circuit_oc.get_slot(2).min or 0
+        player.gui.relative.phi_cl_combinator_config['default']['table_valve']['valve_dropdown'].selected_index = ((val < 0 or val > 1) and 1) or (val + 1)
     end
 end
 
@@ -290,7 +291,7 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
             end
 
             circuit_oc = circuit_oc.sections[1]
-            circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = event.element.parent.parent['research_queue_table']['research_queue_dropdown'].selected_index - 1})
+            circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = event.element.parent.parent['table_research_queue']['research_queue_dropdown'].selected_index - 1})
         end
     end)
 
