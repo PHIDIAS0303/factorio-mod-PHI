@@ -341,7 +341,7 @@ script.on_nth_tick(1800, function(_)
         for _, s in pairs(game.surfaces) do
             local c = s.find_entities_filtered{type='constant-combinator', name='super-combinator'}
 
-            if not (c or #c == 0) then
+            if #c == 0 then
                 return
             end
 
