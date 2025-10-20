@@ -440,7 +440,7 @@ local function handle_valve_value(entity, combinator)
         -- every item in front of it?
         local v = entity.surface.find_entities_filtered{type='valve', position=entity.position, radius=1}
 
-        if not (v or #v == 0) then
+        if #v == 0 then
             return
         end
 
@@ -460,7 +460,7 @@ end
 local function handle_spoil_value(entity, combinator)
     local c = entity.surface.find_entities_filtered{type='chest', position=entity.position, radius=1, limit=1}
 
-    if (not c) or (#c == 0) then
+    if #c == 0 then
         return
     end
 
