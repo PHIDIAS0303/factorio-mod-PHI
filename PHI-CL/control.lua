@@ -109,6 +109,20 @@ local function gui_update(player, entity)
     end
 end
 
+local function gui_press(event, player)
+    if event.element.anchor then
+        --[[
+            label_decider_action_button_zoom_in
+            label_decider_action_button_zoom_out
+            label_decider_action_button_zoom_left
+            label_decider_action_button_zoom_right
+            label_decider_action_button_previous
+            label_decider_action_button_next
+        ]]
+
+    end
+end
+
 local function inserter_changed(event)
     local player = game.players[event.player_index]
 
@@ -311,6 +325,14 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
             circuit_oc = circuit_oc.sections[1]
             circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = event.element.parent.parent['table_research_queue']['research_queue_dropdown'].selected_index - 1})
+        end
+    end)
+
+    script.on_event(defines.events.on_gui_click, function(event)
+        local player = game.players[event.player_index]
+
+        if event.element and event.element.type == 'sprite-button' then
+            gui_press(event, player)
         end
     end)
 
