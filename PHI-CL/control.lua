@@ -325,7 +325,7 @@ script.on_nth_tick(1800, function(_)
         storage.phi_cl.combinator.combinator_list = {}
         storage.phi_cl.combinator.research_queue = {}
         storage.phi_cl.combinator.research_queue_set = {}
-        storage.phi_cl.combinator.research_set_combinator_count = 0
+        storage.phi_cl.combinator.research_set_combinator = false
         local n = 1
 
         for _, r in pairs(game.forces['player'].research_queue) do
@@ -379,12 +379,12 @@ local function handle_research_queue(entity, combinator)
 
     if combinator_slot_value == 2 or combinator_slot_value == 3 then
         -- research_queue_write
-        storage.phi_cl.combinator.research_set_combinator_count = storage.phi_cl.combinator.research_set_combinator_count + 1
-
-        if storage.phi_cl.combinator.research_set_combinator_count > 1 then
+        if storage.phi_cl.combinator.research_set_combinator then
             combinator.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = ((combinator_slot_value == 3) and 1) or 0})
             return
         end
+
+        storage.phi_cl.combinator.research_set_combinator = true
 
         local ls = entity.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
 
@@ -415,6 +415,7 @@ local function handle_research_queue(entity, combinator)
                 if empty_gap then
                     det = false
                 end
+
             else
                 empty_gap = true
             end
