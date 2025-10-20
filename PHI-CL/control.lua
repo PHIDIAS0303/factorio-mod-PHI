@@ -51,9 +51,6 @@ local function gui_create(player)
         local table_research_queue = table.add({type = 'table', name = 'table_research_queue', column_count = 2, style = 'table'})
         table_research_queue.add({type = 'label', name = 'research_queue_label', caption = {'gui-technology-queue.title'}, style = 'heading_2_label'})
         table_research_queue.add({type = 'drop-down', name = 'research_queue_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-RA]', '[virtual-signal=signal-WA]', '[virtual-signal=signal-check]'}, selected_index = 1})
-        local table_valve = table.add({type = 'table', name = 'table_valve', column_count = 2, style = 'table'})
-        table_valve.add({type = 'label', name = 'valve_label', caption = {'description.threshold'}, style = 'heading_2_label'})
-        table_valve.add({type = 'drop-down', name = 'valve_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-check]'}, selected_index = 1})
     end
 end
 
@@ -84,9 +81,6 @@ local function gui_update(player, entity)
 
         local val = circuit_oc.get_slot(1).min or 0
         player.gui.relative.phi_cl_combinator_config['default']['table_research_queue']['research_queue_dropdown'].selected_index = ((val < 0 or val > 3) and 1) or (val + 1)
-
-        val = circuit_oc.get_slot(2).min or 0
-        player.gui.relative.phi_cl_combinator_config['default']['table_valve']['valve_dropdown'].selected_index = ((val < 0 or val > 1) and 1) or (val + 1)
     end
 end
 
@@ -292,7 +286,6 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
             circuit_oc = circuit_oc.sections[1]
             circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = event.element.parent.parent['table_research_queue']['research_queue_dropdown'].selected_index - 1})
-            circuit_oc.set_slot(2, {value = {type = 'virtual', name = 'signal-VA', quality = 'normal'}, min = event.element.parent.parent['table_valve']['valve_dropdown'].selected_index - 1})
         end
     end)
 
