@@ -350,7 +350,7 @@ script.on_nth_tick(1800, function(_)
     end
 end)
 
-local function handle_research_queue(combinator)
+local function handle_research_queue(entity, combinator)
     local combinator_slot = combinator.get_slot(1)
 
     if not (combinator_slot or (combinator_slot.value and combinator_slot.value.name and combinator_slot.value.name == 'signal-SA')) then
@@ -386,7 +386,7 @@ local function handle_research_queue(combinator)
             return
         end
 
-        local ls = combinator.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
+        local ls = entity.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
 
         if not (ls or #ls < 1) then
             return
@@ -503,7 +503,7 @@ script.on_nth_tick(10, function(_)
                     combinator.add_section()
                 end
 
-                handle_research_queue(combinator.sections[1])
+                handle_research_queue(entity, combinator.sections[1])
                 handle_valve_value(entity, combinator.sections[1])
                 handle_spoil_value(entity, combinator.sections[1])
             end
