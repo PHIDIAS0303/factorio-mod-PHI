@@ -292,6 +292,7 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
             circuit_oc = circuit_oc.sections[1]
             circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = event.element.parent.parent['table_research_queue']['research_queue_dropdown'].selected_index - 1})
+            circuit_oc.set_slot(2, {value = {type = 'virtual', name = 'signal-VA', quality = 'normal'}, min = event.element.parent.parent['table_valve']['valve_dropdown'].selected_index - 1})
         end
     end)
 
