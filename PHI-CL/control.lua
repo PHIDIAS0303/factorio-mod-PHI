@@ -500,7 +500,6 @@ script.on_nth_tick(10, function(_)
                 end
 
                 handle_research_queue(entity, combinator.sections[1])
-                handle_valve_value(entity, combinator.sections[1])
                 handle_spoil_value(entity, combinator.sections[1])
             end
         end
