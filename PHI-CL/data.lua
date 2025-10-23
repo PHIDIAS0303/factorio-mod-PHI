@@ -115,10 +115,7 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
     data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
     data.raw['inserter']['burner-inserter'].allow_burner_leech = true
     data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
-
-    for _, t in pairs({'arithmetic-combinator', 'decider-combinator', 'programmable-speaker', 'selector-combinator'}) do
-        data.raw[t][t].energy_source.usage_priority = 'primary-input'
-    end
+    data.raw['programmable-speaker']['programmable-speaker'].energy_source.usage_priority = 'primary-input'
 
     for _, v in pairs(data.raw['container']) do
         v.inventory_type = 'with_filters_and_bar'

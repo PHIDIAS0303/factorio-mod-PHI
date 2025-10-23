@@ -110,7 +110,27 @@ local function gui_update(player, entity)
 end
 
 local function gui_press(event, player)
-    if event.element.anchor then
+    if event.element.anchor and event.element.entity and event.element.entity.name == 'decider-combinator' then
+        if event.element.entity.parameters and event.element.entity.parameters.conditions then
+
+        end
+
+        if event.element.name == 'label_decider_action_button_zoom_in' then
+
+        end
+
+        if event.element.entity.parameters.conditions.first_signal then
+            event.element.parent.parent['table_decider_signal_start']['label_decider_signal_start_first'].caption = '[' .. event.element.entity.parameters.conditions.first_signal.type .. '=' .. event.element.entity.parameters.conditions.first_signal.name .. ']'
+        end
+
+        if event.element.entity.parameters.conditions.comparator then
+            event.element.parent.parent['table_decider_signal_start']['label_decider_signal_start_comparator'].caption = event.element.entity.parameters.conditions.comparator
+        end
+
+        if event.element.entity.parameters.conditions.second_signal then
+            event.element.parent.parent['table_decider_signal_start']['label_decider_signal_start_second'].caption = '[' .. event.element.entity.parameters.conditions.second_signal.type .. '=' .. event.element.entity.parameters.conditions.second_signal.name .. ']'
+        end
+
         --[[
             label_decider_action_button_zoom_in
             label_decider_action_button_zoom_out
