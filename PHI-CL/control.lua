@@ -53,6 +53,7 @@ local function gui_create(player)
         table_research_queue.add({type = 'drop-down', name = 'research_queue_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-RA]', '[virtual-signal=signal-WA]', '[virtual-signal=signal-check]'}, selected_index = 1})
     end
 
+    --[[
     do
         local frame = player.gui.relative.add({type = 'frame', name = 'phi_cl_combinator_decider_config', anchor = {gui = defines.relative_gui_type.decider_combinator_gui, position = defines.relative_gui_position.right, ghost_mode = 'only_real'}})
         local table = frame.add({type = 'table', name = 'default', column_count = 1, style = 'table'})
@@ -77,6 +78,7 @@ local function gui_create(player)
 
         -- table_decider.add({type = 'drop-down', name = 'research_queue_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-RA]', '[virtual-signal=signal-WA]', '[virtual-signal=signal-check]'}, selected_index = 1})
     end
+    ]]
 end
 
 local function gui_update(player, entity)
@@ -110,6 +112,7 @@ local function gui_update(player, entity)
 end
 
 local function gui_press(event, player)
+    --[[
     if event.element.anchor and event.element.entity and event.element.entity.name == 'decider-combinator' then
         if event.element.entity.parameters and event.element.entity.parameters.conditions then
 
@@ -131,16 +134,14 @@ local function gui_press(event, player)
             event.element.parent.parent['table_decider_signal_start']['label_decider_signal_start_second'].caption = '[' .. event.element.entity.parameters.conditions.second_signal.type .. '=' .. event.element.entity.parameters.conditions.second_signal.name .. ']'
         end
 
-        --[[
-            label_decider_action_button_zoom_in
-            label_decider_action_button_zoom_out
-            label_decider_action_button_zoom_left
-            label_decider_action_button_zoom_right
-            label_decider_action_button_previous
-            label_decider_action_button_next
-        ]]
-
+        label_decider_action_button_zoom_in
+        label_decider_action_button_zoom_out
+        label_decider_action_button_zoom_left
+        label_decider_action_button_zoom_right
+        label_decider_action_button_previous
+        label_decider_action_button_next
     end
+    ]]
 end
 
 local function inserter_changed(event)
