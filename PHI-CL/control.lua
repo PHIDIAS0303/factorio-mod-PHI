@@ -324,10 +324,8 @@ script.on_nth_tick(1800, function(_)
         local n = 1
 
         for _, r in pairs(game.forces['player'].research_queue) do
-            local raw_name = r.name:gsub('-%d+$', '')
-
             if r.name and r.level and r.research_unit_count_formula then
-                storage.phi_cl.combinator.research_queue[raw_name] = ((storage.phi_cl.combinator.research_queue[raw_name] and storage.phi_cl.combinator.research_queue[raw_name]) or 0) + math.pow(2, n - 1)
+                storage.phi_cl.combinator.research_queue[r.name] = ((storage.phi_cl.combinator.research_queue[r.name] and storage.phi_cl.combinator.research_queue[r.name]) or 0) + math.pow(2, n - 1)
             end
 
             n = n + 1
