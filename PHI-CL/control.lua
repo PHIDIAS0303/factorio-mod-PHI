@@ -52,33 +52,6 @@ local function gui_create(player)
         table_research_queue.add({type = 'label', name = 'research_queue_label', caption = {'gui-technology-queue.title'}, style = 'heading_2_label'})
         table_research_queue.add({type = 'drop-down', name = 'research_queue_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-RA]', '[virtual-signal=signal-WA]', '[virtual-signal=signal-check]'}, selected_index = 1})
     end
-
-    --[[
-    do
-        local frame = player.gui.relative.add({type = 'frame', name = 'phi_cl_combinator_decider_config', anchor = {gui = defines.relative_gui_type.decider_combinator_gui, position = defines.relative_gui_position.right, ghost_mode = 'only_real'}})
-        local table = frame.add({type = 'table', name = 'default', column_count = 1, style = 'table'})
-
-        local table_decider_signal_start = table.add({type = 'table', name = 'table_decider_signal_start', column_count = 3, style = 'table'})
-        table_decider_signal_start.add({type = 'label', name = 'label_decider_signal_start_first', caption = '', style = 'heading_2_label'})
-        table_decider_signal_start.add({type = 'label', name = 'label_decider_signal_start_comparator', caption = '', style = 'heading_2_label'})
-        table_decider_signal_start.add({type = 'label', name = 'label_decider_signal_start_second', caption = '', style = 'heading_2_label'})
-
-        local table_decider_signal_end = table.add({type = 'table', name = 'table_decider_signal_end', column_count = 3, style = 'table'})
-        table_decider_signal_end.add({type = 'label', name = 'label_decider_signal_end_first', caption = '', style = 'heading_2_label'})
-        table_decider_signal_end.add({type = 'label', name = 'label_decider_signal_end_comparator', caption = '', style = 'heading_2_label'})
-        table_decider_signal_end.add({type = 'label', name = 'label_decider_signal_end_second', caption = '', style = 'heading_2_label'})
-
-        local table_decider_action = table.add({type = 'table', name = 'table_decider_action', column_count = 2, style = 'table'})
-        table_decider_action.add({type = 'sprite-button', name = 'label_decider_action_button_zoom_in', caption = 'utility/controller_joycon_start', style = 'frame_action_button'})
-        table_decider_action.add({type = 'sprite-button', name = 'label_decider_action_button_zoom_out', caption = 'utility/controller_joycon_back', style = 'frame_action_button'})
-        table_decider_action.add({type = 'sprite-button', name = 'label_decider_action_button_zoom_left', caption = 'utility/controller_joycon_dpleft', style = 'frame_action_button'})
-        table_decider_action.add({type = 'sprite-button', name = 'label_decider_action_button_zoom_right', caption = 'utility/controller_joycon_dpright', style = 'frame_action_button'})
-        table_decider_action.add({type = 'sprite-button', name = 'label_decider_action_button_previous', caption = 'utility/controller_ps_dpup', style = 'frame_action_button'})
-        table_decider_action.add({type = 'sprite-button', name = 'label_decider_action_button_next', caption = 'utility/controller_ps_dpdown', style = 'frame_action_button'})
-
-        -- table_decider.add({type = 'drop-down', name = 'research_queue_dropdown', items = {'[virtual-signal=signal-deny]', '[virtual-signal=signal-RA]', '[virtual-signal=signal-WA]', '[virtual-signal=signal-check]'}, selected_index = 1})
-    end
-    ]]
 end
 
 local function gui_update(player, entity)
@@ -109,39 +82,6 @@ local function gui_update(player, entity)
         local val = circuit_oc.get_slot(1).min or 0
         player.gui.relative.phi_cl_combinator_config['default']['table_research_queue']['research_queue_dropdown'].selected_index = ((val < 0 or val > 3) and 1) or (val + 1)
     end
-end
-
-local function gui_press(event, player)
-    --[[
-    if event.element.anchor and event.element.entity and event.element.entity.name == 'decider-combinator' then
-        if event.element.entity.parameters and event.element.entity.parameters.conditions then
-
-        end
-
-        if event.element.name == 'label_decider_action_button_zoom_in' then
-
-        end
-
-        if event.element.entity.parameters.conditions.first_signal then
-            event.element.parent.parent['table_decider_signal_start']['label_decider_signal_start_first'].caption = '[' .. event.element.entity.parameters.conditions.first_signal.type .. '=' .. event.element.entity.parameters.conditions.first_signal.name .. ']'
-        end
-
-        if event.element.entity.parameters.conditions.comparator then
-            event.element.parent.parent['table_decider_signal_start']['label_decider_signal_start_comparator'].caption = event.element.entity.parameters.conditions.comparator
-        end
-
-        if event.element.entity.parameters.conditions.second_signal then
-            event.element.parent.parent['table_decider_signal_start']['label_decider_signal_start_second'].caption = '[' .. event.element.entity.parameters.conditions.second_signal.type .. '=' .. event.element.entity.parameters.conditions.second_signal.name .. ']'
-        end
-
-        label_decider_action_button_zoom_in
-        label_decider_action_button_zoom_out
-        label_decider_action_button_zoom_left
-        label_decider_action_button_zoom_right
-        label_decider_action_button_previous
-        label_decider_action_button_next
-    end
-    ]]
 end
 
 local function inserter_changed(event)
@@ -346,14 +286,6 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
             circuit_oc = circuit_oc.sections[1]
             circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = event.element.parent.parent['table_research_queue']['research_queue_dropdown'].selected_index - 1})
-        end
-    end)
-
-    script.on_event(defines.events.on_gui_click, function(event)
-        local player = game.players[event.player_index]
-
-        if event.element and event.element.type == 'sprite-button' then
-            gui_press(event, player)
         end
     end)
 
