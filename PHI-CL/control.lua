@@ -421,6 +421,10 @@ local function handle_research_queue(entity, combinator)
 end
 
 script.on_nth_tick(10, function(_)
+    if not storage.phi_cl.combinator.combinator_list then
+        return
+    end
+
     local head = #storage.phi_cl.combinator.combinator_list
     local max_remove = math.floor(head / 100) + 1
     local remove_count = math.random(0, max_remove)
