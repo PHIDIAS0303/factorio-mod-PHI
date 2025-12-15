@@ -1829,6 +1829,36 @@ if settings.startup['PHI-CT'].value then
             main_product = item.name,
             localised_name = {'name.passive-energy-void'}
         }})
+
+        item.name = 'active-energy-void'
+        item.place_result = item.name
+        item.subgroup = 'energy'
+        item.localised_name = {'name.active-energy-void'}
+        data:extend({item})
+
+        entity.name = item.name
+        entity.minable.result = item.name
+        entity.energy_source.usage_priority = 'primary-input'
+        entity.energy_source.emissions_per_minute = {pollution = 0}
+        entity.energy_source.input_flow_limit = '1PW'
+        entity.energy_source.output_flow_limit = '0W'
+        entity.energy_source.buffer_capacity = '1PJ'
+        entity.energy_production = '0W'
+        entity.energy_usage = '1PW'
+        entity.gui_mode = 'none'
+        entity.localised_name = {'name.active-energy-void'}
+        data:extend({entity})
+
+        data:extend({{
+            type = 'recipe',
+            name = item.name,
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{type = 'item', name = 'accumulator', amount = 1}},
+            results = {{type = 'item', name = item.name, amount = 1}},
+            main_product = item.name,
+            localised_name = {'name.active-energy-void'}
+        }})
     end
 
     for _, v in pairs(data.raw.fluid) do
