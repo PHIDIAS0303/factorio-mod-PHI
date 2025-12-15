@@ -81,10 +81,8 @@ local function gui_update(player, entity)
 
         local val = cs1.min or 0
 
-        local gui = player.gui.relative.phi_cl_combinator_config
-
-        if gui and gui['default'] and gui['default']['table_research_queue'] then
-            local dropdown = gui['default']['table_research_queue']['research_queue_dropdown']
+        if player.gui.relative.phi_cl_combinator_config and player.gui.relative.phi_cl_combinator_config['default'] and player.gui.relative.phi_cl_combinator_config['default']['table_research_queue'] then
+            local dropdown = player.gui.relative.phi_cl_combinator_config['default']['table_research_queue']['research_queue_dropdown']
 
             if dropdown then
                 dropdown.selected_index = ((val < 0 or val > 3) and 1) or (val + 1)
@@ -387,6 +385,8 @@ local function handle_research_queue(entity, combinator)
 
         storage.phi_cl.combinator.last_writer = entity.unit_number
         local tech_queue = {}
+
+        -- todo, r and g should be a sum
 
         for _, wire_type in pairs({defines.wire_type.red, defines.wire_type.green}) do
             local network = entity.get_circuit_network(wire_type)
