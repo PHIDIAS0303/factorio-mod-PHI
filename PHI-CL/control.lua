@@ -139,7 +139,7 @@ local function entity_build(event)
     end
 
     if event.entity.type == 'proxy-container' and event.entity.name == 'proxy-cargo-landing-chest' and prototypes.entity['cargo-landing-pad'] then
-        local ec = game.surfaces[1].find_entities_filtered{type='cargo-landing-pad'}
+        local ec = game.surfaces[event.entity.surface].find_entities_filtered{type='cargo-landing-pad'}
 
         if not ec then
             return
@@ -152,13 +152,13 @@ local function entity_build(event)
     end
 
     if event.entity.type == 'cargo-landing-pad' and event.entity.name == 'cargo-landing-pad' and prototypes.entity['proxy-cargo-landing-chest'] then
-        local ec = game.surfaces[1].find_entities_filtered{type='cargo-landing-pad'}
+        local ec = game.surfaces[event.entity.surface].find_entities_filtered{type='cargo-landing-pad'}
 
         if #ec > 1 then
             return
         end
 
-        local ep = game.surfaces[1].find_entities_filtered{type='proxy-container', name='proxy-cargo-landing-chest'}
+        local ep = game.surfaces[event.entity.surface].find_entities_filtered{type='proxy-container', name='proxy-cargo-landing-chest'}
 
         for _, v in pairs(ep) do
             v.proxy_target_entity = ec[1]
