@@ -383,7 +383,7 @@ local function handle_research_queue(entity, combinator)
 
         -- todo, r and g should be a sum
 
-        for _, wire_type in pairs({defines.wire_type.red, defines.wire_type.green}) do
+        for _, wire_type in pairs({defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green}) do
             local network = entity.get_circuit_network(wire_type)
 
             if network and network.signals then
