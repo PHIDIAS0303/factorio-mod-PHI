@@ -379,7 +379,7 @@ local function handle_research_queue(entity, combinator)
         end
 
         storage.phi_cl.combinator.last_writer = entity.unit_number
-        local tech_queue = {}
+        storage.phi_cl.combinator.research_queue_set = {}
 
         -- todo, r and g should be a sum
 
@@ -395,7 +395,7 @@ local function handle_research_queue(entity, combinator)
 
                             for i=1, 7 do
                                 if math.floor(signal.count / (2 ^ (7 + i))) % 2 == 1 then
-                                    tech_queue[i] = tech_name
+                                    storage.phi_cl.combinator.research_queue_set[i] = tech_name
                                 end
                             end
                         end
@@ -404,18 +404,13 @@ local function handle_research_queue(entity, combinator)
             end
         end
 
-        storage.phi_cl.combinator.research_queue_set = {}
-
         for i=1,7 do
-            if tech_queue[i] then
-                table.insert(storage.phi_cl.combinator.research_queue_set, tech_queue[i])
+            if storage.phi_cl.combinator.research_queue_set[i] then
+                game.forces['player'].add_research(storage.phi_cl.combinator.research_queue_set[i])
             end
         end
 
-        if #storage.phi_cl.combinator.research_queue_set > 0 then
-            game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
-            storage.phi_cl.combinator.last_writer = nil
-        end
+        storage.phi_cl.combinator.last_writer = nil
     end
 end
 
