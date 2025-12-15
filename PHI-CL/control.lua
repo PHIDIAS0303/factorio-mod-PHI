@@ -222,11 +222,11 @@ local function storage_init()
 
     if not storage.phi_cl.combinator then
         storage.phi_cl.combinator = {
-            research_set_combinator = false,
             combinator_list = {},
             research_queue = {},
             research_queue_set = {},
-            research_progress = 0
+            research_progress = 0,
+            last_writer = nil
         }
     end
 
@@ -328,7 +328,6 @@ script.on_nth_tick(1800, function(_)
         storage.phi_cl.combinator.combinator_list = {}
         storage.phi_cl.combinator.research_queue = {}
         storage.phi_cl.combinator.research_queue_set = {}
-        storage.phi_cl.combinator.research_set_combinator = false
         local n = 1
 
         for _, r in pairs(game.forces['player'].research_queue) do
@@ -380,12 +379,13 @@ local function handle_research_queue(entity, combinator)
 
     if combinator_slot_value == 2 or combinator_slot_value == 3 then
         -- research_queue_write
-        if storage.phi_cl.combinator.research_set_combinator then
+        if storage.phi_cl.combinator.last_writer and storage.phi_cl.combinator.last_writer ~= entity.unit_number then
+            -- Another combinator wrote recently
             combinator.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = ((combinator_slot_value == 3) and 1) or 0})
             return
         end
 
-        storage.phi_cl.combinator.research_set_combinator = true
+        storage.phi_cl.combinator.last_writer = entity.unit_number
 
         for _, wire_type in pairs({defines.wire_type.red, defines.wire_type.green}) do
             local network = entity.get_circuit_network(wire_type)
@@ -438,7 +438,7 @@ local function handle_research_queue(entity, combinator)
                 game.forces['player'].research_queue = tech_queue
             end
 
-            storage.phi_cl.combinator.research_set_combinator = false
+            storage.phi_cl.combinator.last_writer = nil
         end
     end
 end
