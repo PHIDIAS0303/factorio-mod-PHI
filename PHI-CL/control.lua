@@ -398,7 +398,7 @@ local function handle_research_queue(entity, combinator)
                         if game.forces.player.technologies[tech_name] and game.forces.player.technologies[tech_name].enabled and game.forces.player.technologies[tech_name].research_unit_count_formula then
 
                             for i=1, 7 do
-                                if signal.count % (2 ^ (8 + i)) == 1 then
+                                if math.floor(signal.count / (2 ^ (7 + i))) % 2 == 1 then
                                     storage.phi_cl.combinator.research_queue_set[i] = tech_name
                                 end
                             end
