@@ -75,7 +75,7 @@ local function gui_update(player, entity)
         circuit_oc = circuit_oc.sections[1]
         local cs1 = circuit_oc.get_slot(1)
 
-        if not (cs1 or (cs1.value and cs1.value.name and cs1.value.name == 'signal-SA')) then
+        if not cs1 or not cs1.value or not cs1.value.name or cs1.value.name ~= 'signal-SA' then
             return
         end
 
@@ -238,7 +238,7 @@ script.on_configuration_changed(function()
         for _, player in pairs(game.players) do
             gui_create(player)
 
-            if player.opened and player.opened.object_name == 'LuaEntity' then
+            if player.opened and player.opened.valid and player.opened.object_name == 'LuaEntity' then
                 gui_update(player, player.opened.entity)
             end
         end
@@ -251,12 +251,6 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
     script.on_event(defines.events.on_player_created, function(event)
         gui_create(game.players[event.player_index])
     end)
-
-    if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SS' then
-        script.on_event(defines.events.on_cargo_pod_finished_ascending, function(event)
-            event.cargo_pod.destroy()
-        end)
-    end
 
     script.on_event(defines.events.on_gui_opened, function(event)
         local player = game.players[event.player_index]
@@ -315,7 +309,7 @@ if settings.startup['PHI-CT'].value then
 end
 
 script.on_nth_tick(1800, function(_)
-    if storage.phi_cl.loop.combinator then
+    if storage.phi_cl.loop.combinator and game.forces['player'] then
         storage.phi_cl.combinator.research_progress = math.floor(game.forces['player'].research_progress * 1000)
         storage.phi_cl.combinator.combinator_list = {}
         storage.phi_cl.combinator.research_queue = {}
@@ -334,11 +328,11 @@ script.on_nth_tick(1800, function(_)
         for _, s in pairs(game.surfaces) do
             local c = s.find_entities_filtered{type='constant-combinator', name='super-combinator'}
 
-            if #c == 0 then
-                return
+            if #c > 0 then
+                for _, entity in pairs(c) do
+                    table.insert(storage.phi_cl.combinator.combinator_list, entity)
+                end
             end
-
-            storage.phi_cl.combinator.combinator_list = c
         end
     end
 end)
@@ -379,19 +373,22 @@ local function handle_research_queue(entity, combinator)
 
         storage.phi_cl.combinator.research_set_combinator = true
 
-        local ls = entity.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
+        for _, wire_type in pairs({defines.wire_type.red, defines.wire_type.green}) do
+            local network = entity.get_circuit_network(wire_type)
 
-        if (not ls) or #ls == 0 then
-            return
-        end
+            if network and network.signals then
+                for _, signal in pairs(network.signals) do
+                    if signal.signal and signal.signal.type == 'virtual' then
+                        local tech_name = signal.signal.name:gsub('signal-', '')
 
-        for _, cs in pairs(ls) do
-            local name = cs.signal.name:gsub('signal-', '')
+                        if game.forces.player.technologies[tech_name] and game.forces.player.technologies[tech_name].enabled and game.forces.player.technologies[tech_name].research_unit_count_formula then
 
-            if cs.signal and cs.signal.type == 'virtual' and game.forces.player.technologies[name] and game.forces.player.technologies[name].enabled and game.forces.player.technologies[name].research_unit_count_formula then
-                for i=1, 7 do
-                    if cs.count % (2 ^ (8 + i)) == 1 then
-                        storage.phi_cl.combinator.research_queue_set[i] = cs.signal.name
+                            for i=1, 7 do
+                                if signal.count % (2 ^ (8 + i)) == 1 then
+                                    storage.phi_cl.combinator.research_queue_set[i] = tech_name
+                                end
+                            end
+                        end
                     end
                 end
             end
@@ -416,6 +413,7 @@ local function handle_research_queue(entity, combinator)
 
         if det and (not empty) then
             game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
+            storage.phi_cl.combinator.research_set_combinator = false
         end
     end
 end
