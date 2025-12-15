@@ -408,38 +408,19 @@ local function handle_research_queue(entity, combinator)
             end
         end
 
-        local empty = true
-        local empty_gap = false
-        local det = true
+        local tech_queue = {}
 
-        for i=1, 7 do
+        for i=1,7 do
             if storage.phi_cl.combinator.research_queue_set[i] then
-                empty = false
-
-                if empty_gap then
-                    det = false
-                end
-
-            else
-                empty_gap = true
+                table.insert(tech_queue, storage.phi_cl.combinator.research_queue_set[i])
             end
         end
 
-        if det and (not empty) then
-            local tech_queue = {}
-
-            for i=1,7 do
-                if storage.phi_cl.combinator.research_queue_set[i] then
-                    table.insert(tech_queue, storage.phi_cl.combinator.research_queue_set[i])
-                end
-            end
-
-            if #tech_queue > 0 then
-                game.forces['player'].research_queue = tech_queue
-            end
-
-            storage.phi_cl.combinator.last_writer = nil
+        if #tech_queue > 0 then
+            game.forces['player'].research_queue = tech_queue
         end
+
+        storage.phi_cl.combinator.last_writer = nil
     end
 end
 
