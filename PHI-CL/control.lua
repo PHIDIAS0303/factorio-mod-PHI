@@ -117,6 +117,7 @@ local function hidden_recipe_enable(event)
 
     force.recipes['super-radar'].enabled = enable
     force.recipes['passive-energy-void'].enabled = enable
+    force.recipes['active-energy-void'].enabled = enable
     force.recipes['linked-chest'].enabled = enable
     force.recipes['infinity-chest'].enabled = enable
     force.recipes['infinity-cargo-wagon'].enabled = enable
