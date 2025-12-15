@@ -105,21 +105,16 @@ local function hidden_recipe_enable(event)
     end
 
     local enable = (event.name == defines.events.on_player_cheat_mode_enabled)
-    local force = game.players[event.player_index].force
 
     for _, v in pairs(prototypes.fluid) do
-        if force.recipes['pump-' .. v.name] then
-            force.recipes['pump-' .. v.name].enabled = enable
+        if game.players[event.player_index].force.recipes['pump-' .. v.name] then
+            game.players[event.player_index].force.recipes['pump-' .. v.name].enabled = enable
         end
     end
 
-    force.recipes['super-radar'].enabled = enable
-    force.recipes['passive-energy-void'].enabled = enable
-    force.recipes['active-energy-void'].enabled = enable
-    force.recipes['linked-chest'].enabled = enable
-    force.recipes['infinity-chest'].enabled = enable
-    force.recipes['infinity-cargo-wagon'].enabled = enable
-    force.recipes['infinity-pipe'].enabled = enable
+    for _, v in pairs({'super-radar', 'passive-energy-void', 'active-energy-void', 'linked-chest', 'infinity-chest', 'infinity-cargo-wagon', 'infinity-pipe'}) do
+        game.players[event.player_index].force.recipes[v].enabled = enable
+    end
 end
 
 local function entity_build(event)
