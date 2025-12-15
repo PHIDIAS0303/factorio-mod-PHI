@@ -386,6 +386,7 @@ local function handle_research_queue(entity, combinator)
         end
 
         storage.phi_cl.combinator.last_writer = entity.unit_number
+        local tech_queue = {}
 
         for _, wire_type in pairs({defines.wire_type.red, defines.wire_type.green}) do
             local network = entity.get_circuit_network(wire_type)
@@ -399,7 +400,7 @@ local function handle_research_queue(entity, combinator)
 
                             for i=1, 7 do
                                 if math.floor(signal.count / (2 ^ (7 + i))) % 2 == 1 then
-                                    storage.phi_cl.combinator.research_queue_set[i] = tech_name
+                                    tech_queue[i] = tech_name
                                 end
                             end
                         end
@@ -408,19 +409,18 @@ local function handle_research_queue(entity, combinator)
             end
         end
 
-        local tech_queue = {}
+        storage.phi_cl.combinator.research_queue_set = {}
 
         for i=1,7 do
-            if storage.phi_cl.combinator.research_queue_set[i] then
-                table.insert(tech_queue, storage.phi_cl.combinator.research_queue_set[i])
+            if tech_queue[i] then
+                table.insert(storage.phi_cl.combinator.research_queue_set, tech_queue[i])
             end
         end
 
-        if #tech_queue > 0 then
-            game.forces['player'].research_queue = tech_queue
+        if #storage.phi_cl.combinator.research_queue_set > 0 then
+            game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
+            storage.phi_cl.combinator.last_writer = nil
         end
-
-        storage.phi_cl.combinator.last_writer = nil
     end
 end
 
