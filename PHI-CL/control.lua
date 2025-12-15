@@ -55,17 +55,17 @@ local function gui_create(player)
 end
 
 local function gui_update(player, entity)
-    if entity.type == 'proxy-container' and entity.proxy_target_inventory and entity.proxy_target_inventory == defines.inventory.lab_input then
+    if entity.valid and entity.type == 'proxy-container' and entity.proxy_target_inventory and entity.proxy_target_inventory == defines.inventory.lab_input then
         player.opened = nil
 
         return
     end
 
-    if entity.type and (entity.type == 'inserter' or (entity.type == 'entity-ghost' and entity.ghost_type == 'inserter')) then
+    if entity.valid and entity.type and (entity.type == 'inserter' or (entity.type == 'entity-ghost' and entity.ghost_type == 'inserter')) then
         player.gui.relative.phi_cl_inserter_config['i_sub_direction'].selected_index = ((inserter_direction_reversed[entity.direction] - 1) % 4) + 1
     end
 
-    if entity.type and entity.type == 'constant-combinator' and entity.name == 'super-combinator' then
+    if entity.valid and entity.type and entity.type == 'constant-combinator' and entity.name == 'super-combinator' then
         local circuit_oc = player.opened.get_or_create_control_behavior()
 
         if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
@@ -79,8 +79,17 @@ local function gui_update(player, entity)
             return
         end
 
-        local val = circuit_oc.get_slot(1).min or 0
-        player.gui.relative.phi_cl_combinator_config['default']['table_research_queue']['research_queue_dropdown'].selected_index = ((val < 0 or val > 3) and 1) or (val + 1)
+        local val = cs1.min or 0
+
+        local gui = player.gui.relative.phi_cl_combinator_config
+
+        if gui and gui['default'] and gui['default']['table_research_queue'] then
+            local dropdown = gui['default']['table_research_queue']['research_queue_dropdown']
+
+            if dropdown then
+                dropdown.selected_index = ((val < 0 or val > 3) and 1) or (val + 1)
+            end
+        end
     end
 end
 
@@ -267,11 +276,15 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
             return
         end
 
+        if not player.opened.valid then
+            return
+        end
+
         if (player.opened.type == 'inserter' or (player.opened.type == 'entity-ghost' and player.opened.ghost_type == 'inserter')) and player.gui.relative.phi_cl_inserter_config then
             player.opened.direction = inserter_direction[(math.floor(inserter_direction_reversed[player.opened.direction] / 4) * 4 + (event.element.parent['i_sub_direction'].selected_index - 1)) % 16 + 1]
         end
 
-        if player.opened.type == 'constant-combinator' and player.opened.name == 'super-combinator' and player.gui.relative.phi_cl_inserter_config then
+        if player.opened.type == 'constant-combinator' and player.opened.name == 'super-combinator' and player.gui.relative.phi_cl_combinator_config then
             local circuit_oc = player.opened.get_or_create_control_behavior()
 
             if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
@@ -309,7 +322,7 @@ if settings.startup['PHI-CT'].value then
 end
 
 script.on_nth_tick(1800, function(_)
-    if storage.phi_cl.loop.combinator and game.forces['player'] then
+    if storage.phi_cl and storage.phi_cl.loop and storage.phi_cl.loop.combinator and game.forces['player'] then
         storage.phi_cl.combinator.research_progress = math.floor(game.forces['player'].research_progress * 1000)
         storage.phi_cl.combinator.combinator_list = {}
         storage.phi_cl.combinator.research_queue = {}
@@ -319,7 +332,7 @@ script.on_nth_tick(1800, function(_)
 
         for _, r in pairs(game.forces['player'].research_queue) do
             if r.name and r.level and r.research_unit_count_formula then
-                storage.phi_cl.combinator.research_queue[r.name] = ((storage.phi_cl.combinator.research_queue[r.name] and storage.phi_cl.combinator.research_queue[r.name]) or 0) + math.pow(2, n - 1)
+                storage.phi_cl.combinator.research_queue[r.name] = (storage.phi_cl.combinator.research_queue[r.name] or 0) + math.pow(2, n - 1)
             end
 
             n = n + 1
@@ -340,7 +353,7 @@ end)
 local function handle_research_queue(entity, combinator)
     local combinator_slot = combinator.get_slot(1)
 
-    if not (combinator_slot or (combinator_slot.value and combinator_slot.value.name and combinator_slot.value.name == 'signal-SA')) then
+    if not combinator_slot or not combinator_slot.value or not combinator_slot.value.name or combinator_slot.value.name ~= 'signal-SA' then
         combinator.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = 0})
         return
     end
@@ -412,18 +425,34 @@ local function handle_research_queue(entity, combinator)
         end
 
         if det and (not empty) then
-            game.forces['player'].research_queue = storage.phi_cl.combinator.research_queue_set
+            local tech_queue = {}
+
+            for i=1,7 do
+                if storage.phi_cl.combinator.research_queue_set[i] then
+                    table.insert(tech_queue, storage.phi_cl.combinator.research_queue_set[i])
+                end
+            end
+
+            if #tech_queue > 0 then
+                game.forces['player'].research_queue = tech_queue
+            end
+
             storage.phi_cl.combinator.research_set_combinator = false
         end
     end
 end
 
 script.on_nth_tick(10, function(_)
-    if not storage.phi_cl.combinator.combinator_list then
+    if not storage.phi_cl or not storage.phi_cl.combinator or not storage.phi_cl.combinator.combinator_list then
         return
     end
 
     local head = #storage.phi_cl.combinator.combinator_list
+
+    if head == 0 then
+        return
+    end
+
     local max_remove = math.floor(head / 100) + 1
     local remove_count = math.random(0, max_remove)
 
