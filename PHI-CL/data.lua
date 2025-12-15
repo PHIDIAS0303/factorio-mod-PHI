@@ -1830,12 +1830,14 @@ if settings.startup['PHI-CT'].value then
             localised_name = {'name.passive-energy-void'}
         }})
 
+        item = table.deepcopy(data.raw['item']['electric-energy-interface'])
         item.name = 'active-energy-void'
         item.place_result = item.name
         item.subgroup = 'energy'
         item.localised_name = {'name.active-energy-void'}
         data:extend({item})
 
+        entity = table.deepcopy(data.raw['electric-energy-interface']['electric-energy-interface'])
         entity.name = item.name
         entity.minable.result = item.name
         entity.energy_source.usage_priority = 'primary-input'
