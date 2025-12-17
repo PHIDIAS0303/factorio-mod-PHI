@@ -381,22 +381,20 @@ local function handle_research_queue(entity, combinator)
         storage.phi_cl.combinator.last_writer = entity.unit_number
         storage.phi_cl.combinator.research_queue_set = {}
 
-        -- todo, r and g should be a sum
+        local s = entity.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
 
-        for _, wire_type in pairs({defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green}) do
-            local network = entity.get_circuit_network(wire_type)
+        if not s then
+            return
+        end
 
-            if network and network.signals then
-                for _, signal in pairs(network.signals) do
-                    if signal.signal and signal.signal.type == 'virtual' then
-                        local tech_name = signal.signal.name:gsub('signal-', '')
+        for _, ss in pairs(s) do
+            if ss.signal and ss.signal.type == 'virtual' and ss.signal.count > 0 then
+                local tn = ss.signal.name:gsub('signal-', '')
 
-                        if game.forces.player.technologies[tech_name] and game.forces.player.technologies[tech_name].enabled and game.forces.player.technologies[tech_name].research_unit_count_formula then
-                            for i=1, 7 do
-                                if math.floor(signal.count / (2 ^ (7 + i))) % 2 == 1 then
-                                    storage.phi_cl.combinator.research_queue_set[i] = tech_name
-                                end
-                            end
+                if game.forces.player.technologies[tn] and game.forces.player.technologies[tn].enabled and game.forces.player.technologies[tn].research_unit_count_formula then
+                    for i=1, 7 do
+                        if math.floor(ss.signal.count / (2 ^ (7 + i))) % 2 == 1 then
+                            storage.phi_cl.combinator.research_queue_set[i] = tn
                         end
                     end
                 end
