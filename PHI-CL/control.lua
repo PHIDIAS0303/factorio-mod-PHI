@@ -388,12 +388,12 @@ local function handle_research_queue(entity, combinator)
         end
 
         for _, ss in pairs(s) do
-            if ss.signal and ss.signal.type == 'virtual' and ss.signal.count > 0 then
+            if ss.signal and ss.signal.type == 'virtual' and ss.count > 0 then
                 local tn = ss.signal.name:gsub('signal-', '')
 
                 if game.forces.player.technologies[tn] and game.forces.player.technologies[tn].enabled and game.forces.player.technologies[tn].research_unit_count_formula then
                     for i=1, 7 do
-                        if math.floor(ss.signal.count / (2 ^ (7 + i))) % 2 == 1 then
+                        if math.floor(ss.count / (2 ^ (7 + i))) % 2 == 1 then
                             storage.phi_cl.combinator.research_queue_set[i] = tn
                         end
                     end
