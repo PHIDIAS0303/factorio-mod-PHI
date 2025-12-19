@@ -353,6 +353,11 @@ local function handle_research_queue(entity, combinator)
 
     local combinator_slot_value = combinator_slot.min or 0
 
+    if combinator_slot_value < 0 or combinator_slot_value > 3 then
+        combinator.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = 0})
+        return
+    end
+
     if combinator_slot_value == 1 or combinator_slot_value == 3 then
         -- research_queue_read
         local n = 21
