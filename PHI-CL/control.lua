@@ -406,12 +406,15 @@ local function handle_research_queue(entity, combinator)
             end
         end
 
+        local research_queue = {}
+
         for i=1,7 do
             if storage.phi_cl.combinator.research_queue_set[i] then
-                game.forces['player'].add_research(storage.phi_cl.combinator.research_queue_set[i])
+                table.insert(research_queue, storage.phi_cl.combinator.research_queue_set[i])
             end
         end
 
+        game.forces['player'].research_queue = research_queue
         storage.phi_cl.combinator.last_writer = nil
     end
 end
