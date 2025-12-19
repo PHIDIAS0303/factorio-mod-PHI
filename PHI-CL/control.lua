@@ -391,7 +391,7 @@ local function handle_research_queue(entity, combinator)
             if ss.signal and ss.signal.type == 'virtual' and ss.signal.quality == 'normal' and ss.count > 0 then
                 local tn = ss.signal.name:gsub('signal-', '')
 
-                if game.forces.player.technologies[tn] and game.forces.player.technologies[tn].enabled and game.forces.player.technologies[tn].research_unit_count_formula then
+                if prototypes.technology[tn] and prototypes.technology[tn].enabled and prototypes.technology[tn].research_unit_count_formula then
                     for i=1, 7 do
                         if math.floor(ss.count / (2 ^ (7 + i))) % 2 == 1 then
                             storage.phi_cl.combinator.research_queue_set[i] = tn
