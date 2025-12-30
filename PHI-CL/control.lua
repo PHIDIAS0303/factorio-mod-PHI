@@ -223,7 +223,7 @@ local function storage_init()
         }
     end
 
-    storage.phi_cl.loop.combinator = (settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= ''))
+    storage.phi_cl.loop.combinator = ((settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= ''))
 end
 
 script.on_init(function()
