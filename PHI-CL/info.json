@@ -6,7 +6,7 @@
     "title": "Phidias Collection",
     "author": "PHIDIAS0303",
     "contributers": "",
-    "homepage": "https://wiki.aperx.org/aperx/phi-cl/home",
+    "homepage": "https://wiki.aperx.org/aperx/phi-cl",
     "description": "UPS-friendly megabases\nCompound entities to save space and UPS\nAdjusted pipe limits for smoother logistics\n\nSpace Age Enhanced\nSupports spoilage and quality mechanics\nTwo modes: Vanilla+ (refined classic) or Space Age+ (easier planetary challenges)\n\nMultiplayer Maps\nRegular PHI-CL VP or SAP games hosted on APERX\nhttps://wiki.aperx.org/en/home",
     "dependencies": [
         "base >= 2.0.0",
