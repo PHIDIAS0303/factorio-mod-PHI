@@ -3,7 +3,7 @@ Version: 3.0.133
 Date: 2026-01-18
 
   Changes:
-    - [GM] Some changes in code layout.
+    - [GM] Fixed an issue with setting the research in queue.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.132
