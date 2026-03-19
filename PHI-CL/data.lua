@@ -4,15 +4,17 @@ local file_stage = 1
 
 if settings.startup['PHI-MB'].value then
     if settings.startup['PHI-MB-ENERGY'].value then
-        require 'data/mbe'
+        require 'data.mbe'
     end
 
+    --[[
     if settings.startup['PHI-MB-MACHINE'].value then
-        require 'data/mbm'
+        require 'data.mbm'
     end
+    ]]
 
     if settings.startup['PHI-MB-EQUIPMENT'].value then
-        require 'data/mbq'
+        require 'data.mbq'
     end
 end
 
