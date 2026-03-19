@@ -69,5 +69,21 @@ return {
         max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value,
         base = 30,
         graphics_name = 'solar-panel-equipment'
+    },
+    -- MBQ A 7 SPACE_AGE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
+    ['fusion-reactor-equipment'] = {
+        mod = 'space-age',
+        type = 'generator-equipment',
+        name = 'fusion-reactor',
+        tech = 'fusion-reactor-equipment',
+        max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
+    },
+    -- MBQ A 1 SPACE_AGE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
+    ['toolbelt-equipment'] = {
+        mod = 'space-age',
+        type = 'inventory-bonus-equipment',
+        name = 'toolbelt',
+        tech = 'toolbelt-equipment',
+        max = math.min(tonumber(settings.startup['PHI-MB-EQUIPMENT-TIER'].value) or 1, 2)
     }
 }

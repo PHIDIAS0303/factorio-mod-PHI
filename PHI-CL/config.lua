@@ -370,30 +370,6 @@ local items = {
 }
 
 if mods and mods['space-age'] then
-    items['equipment']['fusion-reactor-equipment'] = {
-        enabled = settings.startup['PHI-MB-EQUIPMENT'].value,
-        stage = 1,
-        mod = 'space-age',
-        type = 'generator-equipment',
-        name = 'fusion-reactor',
-        ref_name = 'fusion-reactor-equipment',
-        tech = 'fusion-reactor-equipment',
-        min = 2,
-        max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
-    }
-
-    items['equipment']['toolbelt-equipment'] = {
-        enabled = settings.startup['PHI-MB-EQUIPMENT'].value,
-        stage = 1,
-        mod = 'space-age',
-        type = 'inventory-bonus-equipment',
-        name = 'toolbelt',
-        ref_name = 'toolbelt-equipment',
-        tech = 'toolbelt-equipment',
-        min = 2,
-        max = math.min(tonumber(settings.startup['PHI-MB-EQUIPMENT-TIER'].value) or 1, 2)
-    }
-
     items['equipment']['battery-equipment'].ref_name = 'battery-mk3-equipment'
     items['equipment']['battery-equipment'].tech = 'battery-mk3-equipment'
     items['equipment']['battery-equipment'].min = 4
