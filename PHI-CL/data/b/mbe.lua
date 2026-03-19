@@ -25,12 +25,13 @@ end
 -- MBE A 38 BASE ENTITY,RECIPE,RESEARCH_EFFECT
 -- MBE A 12 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT
 for _, v in pairs(items) do
-    if v.enabled and (v.max >= v.min) then
-        v.mod = v.mod or 'base'
+    v.mod = v.mod or 'base'
+    v.min = v.min or 2
+
+    if (v.mod and mods[v.mod]) and (v.max >= v.min) then
         v.category = v.category or 'item'
         v.ref_name = v.ref_name or v.name
         v.tech = v.tech or 'compound-energy'
-        v.min = v.min or 2
 
         for j=v.min, v.max, 1 do
             main.EEE(v, j)
