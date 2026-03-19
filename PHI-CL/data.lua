@@ -7,11 +7,9 @@ if settings.startup['PHI-MB'].value then
         require 'data.mbe'
     end
 
-    --[[
     if settings.startup['PHI-MB-MACHINE'].value then
         require 'data.mbm'
     end
-    ]]
 
     if settings.startup['PHI-MB-EQUIPMENT'].value then
         require 'data.mbq'

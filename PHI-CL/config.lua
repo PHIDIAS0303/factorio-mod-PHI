@@ -32,94 +32,6 @@ local items = {
         [8] = {r=233, g=63, b=233}
     },
     ['item'] = {
-        ['solar-panel'] = {
-            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
-            stage = 1,
-            mod = 'base',
-            type = 'solar-panel',
-            name = 'solar-panel',
-            ref_name = 'solar-panel',
-            tech = 'compound-energy',
-            min = 2,
-            max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
-        },
-        ['accumulator'] = {
-            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
-            stage = 1,
-            mod = 'base',
-            type = 'accumulator',
-            name = 'accumulator',
-            ref_name = 'accumulator',
-            tech = 'compound-energy',
-            min = 2,
-            max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
-        },
-        ['boiler'] = {
-            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
-            stage = 1,
-            mod = 'base',
-            type = 'boiler',
-            name = 'boiler',
-            ref_name = 'boiler',
-            tech = 'compound-energy',
-            min = 2,
-            max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
-        },
-        ['steam-engine'] = {
-            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
-            stage = 1,
-            mod = 'base',
-            type = 'generator',
-            name = 'steam-engine',
-            ref_name = 'steam-engine',
-            tech = 'compound-energy',
-            min = 2,
-            max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
-        },
-        ['nuclear-reactor'] = {
-            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
-            stage = 1,
-            mod = 'base',
-            type = 'reactor',
-            name = 'nuclear-reactor',
-            ref_name = 'nuclear-reactor',
-            tech = 'compound-energy',
-            min = 2,
-            max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
-        },
-        ['heat-pipe'] = {
-            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
-            stage = 1,
-            mod = 'base',
-            type = 'heat-pipe',
-            name = 'heat-pipe',
-            ref_name = 'heat-pipe',
-            tech = 'compound-energy',
-            min = 2,
-            max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
-        },
-        ['heat-exchanger'] = {
-            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
-            stage = 1,
-            mod = 'base',
-            type = 'boiler',
-            name = 'heat-exchanger',
-            ref_name = 'heat-exchanger',
-            tech = 'compound-energy',
-            min = 2,
-            max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
-        },
-        ['steam-turbine'] = {
-            enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
-            stage = 1,
-            mod = 'base',
-            type = 'generator',
-            name = 'steam-turbine',
-            ref_name = 'steam-turbine',
-            tech = 'compound-energy',
-            min = 2,
-            max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
-        },
         ['assembling-machine'] = {
             enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
             stage = 1,
@@ -691,42 +603,6 @@ local items = {
 }
 
 if mods and mods['space-age'] then
-    items['item']['fusion-reactor'] = {
-        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
-        stage = 1,
-        mod = 'space-age',
-        type = 'fusion-reactor',
-        name = 'fusion-reactor',
-        ref_name = 'fusion-reactor',
-        tech = 'compound-energy',
-        min = 2,
-        max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
-    }
-
-    items['item']['fusion-generator'] = {
-        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
-        stage = 1,
-        mod = 'space-age',
-        type = 'fusion-generator',
-        name = 'fusion-generator',
-        ref_name = 'fusion-generator',
-        tech = 'compound-energy',
-        min = 2,
-        max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
-    }
-
-    items['item']['heating-tower'] = {
-        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-ENERGY'].value,
-        stage = 1,
-        mod = 'space-age',
-        type = 'reactor',
-        name = 'heating-tower',
-        ref_name = 'heating-tower',
-        tech = 'heating-tower',
-        min = 2,
-        max = math.min(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value, 5)
-    }
-
     items['item']['railgun-turret'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
         stage = 1,
