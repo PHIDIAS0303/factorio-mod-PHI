@@ -369,12 +369,6 @@ local items = {
     }
 }
 
-if mods and mods['space-age'] then
-    items['equipment']['battery-equipment'].ref_name = 'battery-mk3-equipment'
-    items['equipment']['battery-equipment'].tech = 'battery-mk3-equipment'
-    items['equipment']['battery-equipment'].min = 4
-end
-
 if mods and mods['quality'] then
     items['item']['recycler'] = {
         enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
