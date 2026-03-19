@@ -1,6 +1,21 @@
-local items = require 'config'
+local param = require 'config'
+local items = require 'config-updates'
 local main = require 'main'
 local file_stage = 2
+
+if settings.startup['PHI-MB'].value then
+    if settings.startup['PHI-MB-ENERGY'].value then
+        require 'data.u.mbe'
+    end
+
+    if settings.startup['PHI-MB-MACHINE'].value then
+        require 'data.u.mbm'
+    end
+
+    if settings.startup['PHI-MB-EQUIPMENT'].value then
+        require 'data.u.mbq'
+    end
+end
 
 if settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE-TIER'].value > 1 then
     for i = 4, settings.startup['PHI-MB-MACHINE-TIER'].value + 2 do
@@ -14,7 +29,7 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
         item.name = 'super-combinator'
         item.place_result = item.name
         item.order = 'c[combinators]-e[super-combinator]'
-        item.icons = {{icon = '__base__/graphics/icons/constant-combinator.png', tint = items['tint'][2], icon_size = 64, icon_mipmaps = 4}}
+        item.icons = {{icon = '__base__/graphics/icons/constant-combinator.png', tint = param['tint'][2], icon_size = 64, icon_mipmaps = 4}}
         item.icon = nil
         item.icon_size = nil
         item.icon_mipmaps = nil
@@ -87,7 +102,7 @@ if mods['space-exploration'] and settings.startup['PHI-MB'].value and settings.s
         item.name = 'se-core-miner-drill-' .. i
         item.place_result = miner_name
         item.order = 'zzzz-core-miner-drill-' .. i
-        item.icons = {{icon = '__space-exploration-graphics__/graphics/icons/core-miner.png', tint = items['tint'][i], icon_size = 64}}
+        item.icons = {{icon = '__space-exploration-graphics__/graphics/icons/core-miner.png', tint = param['tint'][i], icon_size = 64}}
         item.icon = nil
         item.icon_size = nil
         item.localised_name = {'phi-cl.combine', {'entity-name.se-core-miner-drill'}, tostring(i)}

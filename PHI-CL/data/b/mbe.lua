@@ -1,6 +1,6 @@
 local param = require 'config'
 local main = require 'main'
-local items = require 'mbe-config'
+local items = require 'mbe-c'
 
 -- MBE C 1 BASE FLUID
 data.raw['fluid']['steam'].max_temperature = ((settings.startup['PHI-MB-ENERGY-POWER-TIER'].value > 1) and 5000) or data.raw['fluid']['steam'].max_temperature
@@ -22,6 +22,8 @@ for i = 1, 7 do
     }})
 end
 
+-- MBE A 38 BASE ENTITY,RECIPE,RESEARCH_EFFECT
+-- MBE A 12 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT
 for _, v in pairs(items) do
     if v.enabled and (v.max >= v.min) then
         v.mod = v.mod or 'base'
