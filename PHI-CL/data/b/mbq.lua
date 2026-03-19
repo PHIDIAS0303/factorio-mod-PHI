@@ -99,6 +99,7 @@ if settings.startup['PHI-MB-EQUIPMENT-ARMOR'].value then
     end
 end
 
+-- MBQ A 48 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
 for _, v in pairs(items) do
     v.mod = v.mod or 'base'
     v.min = v.min or 2

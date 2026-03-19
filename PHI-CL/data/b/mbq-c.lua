@@ -1,5 +1,5 @@
 return {
-    -- MBM A 2 BASE ENTITY,RECIPE,RESEARCH_EFFECT
+    -- MBQ A 6 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
     ['battery-equipment'] = {
         type = 'battery-equipment',
         name = 'battery',
@@ -8,12 +8,14 @@ return {
         min = 3,
         max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
     },
+    -- MBQ A 7 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
     ['discharge-defense-equipment'] = {
         type = 'active-defense-equipment',
         name = 'discharge-defense',
         tech = 'discharge-defense-equipment',
         max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
     },
+    -- MBQ A 6 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
     ['energy-shield-equipment'] = {
         type = 'energy-shield-equipment',
         name = 'energy-shield',
@@ -22,30 +24,35 @@ return {
         min = 3,
         max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
     },
+    -- MBQ A 1 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
     ['exoskeleton-equipment'] = {
         type = 'movement-bonus-equipment',
         name = 'exoskeleton',
         tech = 'exoskeleton-equipment',
         max = math.min(tonumber(settings.startup['PHI-MB-EQUIPMENT-TIER'].value) or 1, 2)
     },
+    -- MBQ A 7 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
     ['fission-reactor-equipment'] = {
         type = 'generator-equipment',
         name = 'fission-reactor',
         tech = 'fission-reactor-equipment',
         max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
     },
+    -- MBQ A 1 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
     ['night-vision-equipment'] = {
         type = 'night-vision-equipment',
         name = 'night-vision',
         tech = 'night-vision-equipment',
         max = math.min(tonumber(settings.startup['PHI-MB-EQUIPMENT-TIER'].value) or 1, 2)
     },
+    -- MBQ A 7 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
     ['personal-laser-defense-equipment'] = {
         type = 'active-defense-equipment',
         name = 'personal-laser-defense',
         tech = 'personal-laser-defense-equipment',
         max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
     },
+    -- MBQ A 6 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
     ['personal-roboport-equipment'] = {
         type = 'roboport-equipment',
         name = 'personal-roboport',
@@ -54,6 +61,7 @@ return {
         min = 3,
         max = settings.startup['PHI-MB-EQUIPMENT-TIER'].value
     },
+    -- MBQ A 7 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
     ['solar-panel-equipment'] = {
         type = 'solar-panel-equipment',
         name = 'solar-panel',
