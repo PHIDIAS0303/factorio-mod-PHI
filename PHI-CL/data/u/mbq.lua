@@ -1,5 +1,3 @@
--- local main = require 'main'
--- local items = require 'mbq-c'
 
 -- MBQ C 11 BASE ARMOR_EQUIPMENT
 if settings.startup['PHI-MB-EQUIPMENT-SIZE'].value then
