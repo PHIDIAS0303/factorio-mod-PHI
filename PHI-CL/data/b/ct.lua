@@ -28,7 +28,7 @@ if data.raw['linked-container']['linked-chest'] then
     data.raw['linked-container']['linked-chest'].circuit_wire_max_distance = data.raw['container']['steel-chest'].circuit_wire_max_distance
     -- data.raw['linked-container']['linked-chest'].quality_affects_inventory_size = false
     data.raw['linked-container']['linked-chest'].inventory_type = 'with_filters_and_bar'
-    data.raw['linked-container']['linked-chest'].inventory_size = 48
+    data.raw['linked-container']['linked-chest'].inventory_size = data.raw['container']['steel-chest'].inventory_size
     data.raw['linked-container']['linked-chest'].gui_mode = 'all'
     data.raw['linked-container']['linked-chest'].surface_conditions = nil
 
@@ -79,69 +79,39 @@ end
 
 -- CT A 2 BASE ENTITY,ITEM,RECIPE
 if data.raw['electric-energy-interface']['electric-energy-interface'] then
-    local item = table.deepcopy(data.raw['item']['electric-energy-interface'])
-    item.name = 'passive-energy-void'
-    item.place_result = item.name
-    item.subgroup = 'energy'
-    item.localised_name = {'name.passive-energy-void'}
-    data:extend({item})
+    for _, v in pairs({'active', 'passive'}) do
+        local item = table.deepcopy(data.raw['item']['electric-energy-interface'])
+        item.name = v .. '-energy-void'
+        item.place_result = item.name
+        item.subgroup = 'energy'
+        item.localised_name = {'name.' .. item.name .. '-energy-void'}
+        data:extend({item})
 
-    local entity = table.deepcopy(data.raw['electric-energy-interface']['electric-energy-interface'])
-    entity.name = item.name
-    entity.minable.result = item.name
-    entity.energy_source.usage_priority = 'tertiary'
-    entity.energy_source.emissions_per_minute = {pollution = 0}
-    entity.energy_source.input_flow_limit = '1PW'
-    entity.energy_source.output_flow_limit = '0W'
-    entity.energy_source.buffer_capacity = '1PJ'
-    entity.energy_production = '0W'
-    entity.energy_usage = '1PW'
-    entity.gui_mode = 'none'
-    entity.localised_name = {'name.passive-energy-void'}
-    data:extend({entity})
+        local entity = table.deepcopy(data.raw['electric-energy-interface']['electric-energy-interface'])
+        entity.name = item.name
+        entity.minable.result = item.name
+        entity.energy_source.usage_priority = (v == 'passive' and 'tertiary') or 'primary-input'
+        entity.energy_source.emissions_per_minute = {pollution = 0}
+        entity.energy_source.input_flow_limit = '1PW'
+        entity.energy_source.output_flow_limit = '0W'
+        entity.energy_source.buffer_capacity = '1PJ'
+        entity.energy_production = '0W'
+        entity.energy_usage = '1PW'
+        entity.gui_mode = 'none'
+        entity.localised_name = {'name.' .. item.name .. '-energy-void'}
+        data:extend({entity})
 
-    data:extend({{
-        type = 'recipe',
-        name = item.name,
-        energy_required = 2,
-        enabled = false,
-        ingredients = {{type = 'item', name = 'accumulator', amount = 1}},
-        results = {{type = 'item', name = item.name, amount = 1}},
-        main_product = item.name,
-        localised_name = {'name.passive-energy-void'}
-    }})
-
-    item = table.deepcopy(data.raw['item']['electric-energy-interface'])
-    item.name = 'active-energy-void'
-    item.place_result = item.name
-    item.subgroup = 'energy'
-    item.localised_name = {'name.active-energy-void'}
-    data:extend({item})
-
-    entity = table.deepcopy(data.raw['electric-energy-interface']['electric-energy-interface'])
-    entity.name = item.name
-    entity.minable.result = item.name
-    entity.energy_source.usage_priority = 'primary-input'
-    entity.energy_source.emissions_per_minute = {pollution = 0}
-    entity.energy_source.input_flow_limit = '1PW'
-    entity.energy_source.output_flow_limit = '0W'
-    entity.energy_source.buffer_capacity = '1PJ'
-    entity.energy_production = '0W'
-    entity.energy_usage = '1PW'
-    entity.gui_mode = 'none'
-    entity.localised_name = {'name.active-energy-void'}
-    data:extend({entity})
-
-    data:extend({{
-        type = 'recipe',
-        name = item.name,
-        energy_required = 2,
-        enabled = false,
-        ingredients = {{type = 'item', name = 'accumulator', amount = 1}},
-        results = {{type = 'item', name = item.name, amount = 1}},
-        main_product = item.name,
-        localised_name = {'name.active-energy-void'}
-    }})
+        data:extend({{
+            type = 'recipe',
+            name = item.name,
+            energy_required = 2,
+            enabled = false,
+            ingredients = {{type = 'item', name = 'accumulator', amount = 1}},
+            results = {{type = 'item', name = item.name, amount = 1}},
+            main_product = item.name,
+            localised_name = {'name.' .. item.name .. '-energy-void'}
+        }})
+    end
 end
 
 -- CT A 8 BASE RECIPE
