@@ -1,4 +1,6 @@
-local items = require 'config'
+local param = require 'config'
+local main = require 'main'
+local items = require 'mbq-c'
 
 if settings.startup['PHI-MB-EQUIPMENT-ARMOR'].value then
     -- MBQ A 1 ARMOR_GRID
@@ -11,7 +13,7 @@ if settings.startup['PHI-MB-EQUIPMENT-ARMOR'].value then
     -- MBQ A 1 ARMOR
     local armor = table.deepcopy(data.raw['armor']['power-armor-mk2'])
     armor.name = 'power-armor-mk3'
-    armor.icons = {{icon = armor.icon, tint = items['tint'][2], icon_size = armor.icon_size}}
+    armor.icons = {{icon = armor.icon, tint = param['tint'][2], icon_size = armor.icon_size}}
     armor.icon = nil
     armor.icon_size = nil
 
@@ -52,7 +54,7 @@ if settings.startup['PHI-MB-EQUIPMENT-ARMOR'].value then
         -- MBQ A 1 ARMOR
         armor = table.deepcopy(data.raw['armor']['mech-armor'])
         armor.name = 'mech-armor-mk2'
-        armor.icons = {{icon = armor.icon, tint = items['tint'][2], icon_size = armor.icon_size}}
+        armor.icons = {{icon = armor.icon, tint = param['tint'][2], icon_size = armor.icon_size}}
         armor.icon = nil
         armor.icon_size = nil
 
@@ -93,6 +95,22 @@ if settings.startup['PHI-MB-EQUIPMENT-ARMOR'].value then
                     table.insert(an.armors, 'mech-armor-mk2')
                 end
             end
+        end
+    end
+end
+
+for _, v in pairs(items) do
+    v.mod = v.mod or 'base'
+    v.min = v.min or 2
+
+    if v.enabled and (v.mod and mods[v.mod]) and (v.max >= v.min) then
+        v.category = 'equipment'
+
+        for j=v.min, v.max, 1 do
+            main.EEQ(v, j)
+            main.EI(v, j)
+            main.ER(v, j)
+            main.ET(v, j)
         end
     end
 end
