@@ -2,28 +2,33 @@
 if settings.startup['PHI-MI-PIPE'].value then
     local s = settings.startup['PHI-MI-PIPE'].value / 10
 
+    -- CT C 2 BASE ENTITY
     for _, t in pairs({data.raw['offshore-pump'], data.raw['pump']}) do
         for _, v in pairs(t) do
             v.pumping_speed = v.pumping_speed * s
         end
     end
 
+    -- CT C 3 BASE ENTITY
     for _, v in pairs(data.raw['valve']) do
         v.flow_rate = v.flow_rate * s
     end
 
+    -- CT C 3 BASE ENTITY
     for _, t in pairs({data.raw['pipe'], data.raw['pipe-to-ground'], data.raw['infinity-pipe']}) do
         for _, v in pairs(t) do
             v.fluid_box.volume = v.fluid_box.volume * s
         end
     end
 
+    -- CT C 1 BASE UTILITY_CONSTANTS
     data.raw['utility-constants'].default.max_fluid_flow = 100 * s
 end
 
 if settings.startup['PHI-MI-ROBOT'].value then
     local s = settings.startup['PHI-MI-ROBOT'].value / 10
 
+    -- CT C 2 BASE ENTITY
     for _, t in pairs({data.raw['construction-robot'], data.raw['logistic-robot']}) do
         for _, v in pairs(t) do
             v.speed = v.speed * s
@@ -40,6 +45,7 @@ end
 if settings.startup['PHI-MI-TRAIN'].value then
     local s = settings.startup['PHI-MI-TRAIN'].value / 10
 
+    -- CT C 4 BASE ENTITY
     for _, t in pairs({data.raw['locomotive'], data.raw['cargo-wagon'], data.raw['fluid-wagon'], data.raw['artillery-wagon']}) do
         for _, v in pairs(t) do
             v.max_health = (v.max_health and (v.max_health * s)) or nil
@@ -54,4 +60,5 @@ if settings.startup['PHI-MI-TRAIN'].value then
     end
 end
 
+-- CT C 1 BASE UTILITY_CONSTANTS
 data.raw['utility-constants'].default.default_pipeline_extent = settings.startup['PHI-MI-PIPE-EXTENT'].value
