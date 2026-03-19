@@ -1,5 +1,4 @@
 local items = require 'config'
-local main = require 'main'
 
 -- MBE C 1 FLUID
 data.raw['fluid']['steam'].max_temperature = ((settings.startup['PHI-MB-ENERGY-POWER-TIER'].value > 1) and 5000) or data.raw['fluid']['steam'].max_temperature
