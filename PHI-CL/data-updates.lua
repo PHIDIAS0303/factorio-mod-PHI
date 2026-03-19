@@ -1,5 +1,4 @@
 local param = require 'config'
-local main = require 'main'
 
 if settings.startup['PHI-MB'].value then
     if settings.startup['PHI-MB-ENERGY'].value then
@@ -66,59 +65,6 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
         if #s > 0 then
             data:extend(s)
         end
-    end
-end
-
-if mods['space-exploration'] and settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE-TIER'].value > 1 then
-    data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'se-core-miner-drill'
-
-    local se = {
-        mod = 'space-exploration',
-        type = 'mining-drill',
-        name = 'se-core-miner-drill',
-        ref_name = 'se-core-miner-drill',
-        min = 2,
-        max = 3
-    }
-
-    for i = 2, settings.startup['PHI-MB-MACHINE-TIER'].value do
-        local miner_name = 'se-core-miner-drill-' .. i
-
-        main.EEE(se, i)
-        data.raw['mining-drill'][miner_name].minable.result = miner_name
-        data.raw['mining-drill'][miner_name].placeable_by.item = miner_name
-        data.raw['mining-drill'][miner_name].localised_name = {'phi-cl.combine', {'entity-name.se-core-miner-drill'}, tostring(i)}
-        data.raw['mining-drill'][miner_name].localised_description = {'entity-description.se-core-miner-drill'}
-
-        local item = table.deepcopy(data.raw['item']['se-core-miner-drill'])
-        item.name = 'se-core-miner-drill-' .. i
-        item.place_result = miner_name
-        item.order = 'zzzz-core-miner-drill-' .. i
-        item.icons = {{icon = '__space-exploration-graphics__/graphics/icons/core-miner.png', tint = param['tint'][i], icon_size = 64}}
-        item.icon = nil
-        item.icon_size = nil
-        item.localised_name = {'phi-cl.combine', {'entity-name.se-core-miner-drill'}, tostring(i)}
-        item.localised_description = {'entity-description.se-core-miner-drill'}
-        data:extend({item})
-
-        data:extend({{
-            type = 'recipe',
-            name = miner_name,
-            energy_required = 2,
-            enabled = false,
-            ingredients =  (i > 2 and {{type = 'item', name = 'se-core-miner-drill-' .. (i - 1), amount = 1}, {type = 'item', name = 'se-core-miner-drill', amount = 1}}) or {{type = 'item', name = 'se-core-miner-drill', amount = 2}},
-            results = {{type = 'item', name = miner_name, amount = 1}},
-            localised_name = {'phi-cl.combine', {'entity-name.se-core-miner-drill'}, tostring(i)},
-            localised_description = {'entity-description.se-core-miner-drill'}
-        }})
-
-
-        data.raw['mining-drill'][miner_name].fast_replaceable_group = data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group
-        table.insert(data.raw.technology['se-core-miner'].effects, {type='unlock-recipe', recipe=miner_name})
-    end
-
-    for i = 3, settings.startup['PHI-MB-MACHINE-TIER'].value + 1 do
-        data.raw['assembling-machine']['se-space-radiator-' .. i].localised_name = {'phi-cl.combine', {'entity-name.se-space-radiator'}, tostring(i)}
     end
 end
 
