@@ -31,10 +31,6 @@ local items = {
         [7] = {r=0, g=209, b=102},
         [8] = {r=233, g=63, b=233}
     },
-    ['item'] = {},
-    ['equipment'] = {
-
-    },
     ['space-age'] = {
         ['PHI-VP'] = {
             ['technology_reform'] = {
@@ -368,19 +364,5 @@ local items = {
         }
     }
 }
-
-if mods and mods['quality'] then
-    items['item']['recycler'] = {
-        enabled = settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value,
-        stage = 1,
-        mod = 'quality',
-        type = 'furnace',
-        name = 'recycler',
-        ref_name = 'recycler',
-        tech = 'recycling',
-        min = 2,
-        max = settings.startup['PHI-MB-MACHINE-TIER'].value
-    }
-end
 
 return items

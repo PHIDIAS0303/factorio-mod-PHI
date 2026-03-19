@@ -3,6 +3,7 @@ local items = require 'mbm-c'
 
 -- MBE A 24 BASE ENTITY,RECIPE,RESEARCH_EFFECT
 -- MBE A 24 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT
+-- MBE A 2 QUALITY ENTITY,RECIPE,RESEARCH_EFFECT
 for _, v in pairs(items) do
     v.mod = v.mod or 'base'
     v.min = v.min or 2

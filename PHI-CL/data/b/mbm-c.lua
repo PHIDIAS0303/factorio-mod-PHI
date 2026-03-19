@@ -181,4 +181,12 @@ return {
         tech = 'agriculture',
         max = settings.startup['PHI-MB-MACHINE-TIER'].value
     },
+    -- MBE A 2 QUALITY ENTITY,RECIPE,RESEARCH_EFFECT
+    ['recycler'] = {
+        mod = 'quality',
+        type = 'furnace',
+        name = 'recycler',
+        tech = 'agriculture',
+        max = settings.startup['PHI-MB-MACHINE-TIER'].value
+    },
 }
