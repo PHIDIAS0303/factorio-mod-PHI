@@ -105,6 +105,7 @@ for _, v in pairs(items) do
 
     if v.enabled and (v.mod and mods[v.mod]) and (v.max >= v.min) then
         v.category = 'equipment'
+        v.ref_name = v.ref_name or v.name .. '-equipment'
 
         for j=v.min, v.max, 1 do
             main.EEQ(v, j)
