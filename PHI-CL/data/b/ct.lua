@@ -61,7 +61,7 @@ if data.raw['radar']['radar'] then
     entity.minable.result = item.name
     entity.max_distance_of_sector_revealed = 35
     entity.max_distance_of_nearby_sector_revealed = 35
-    entity.pictures.layers[1].tint = items['tint'][8]
+    entity.pictures.layers[1].tint = param['tint'][8]
     entity.localised_name = {'', {'name.super-entity'}, {'entity-name.radar'}}
     data:extend({entity})
 
