@@ -22,3 +22,7 @@ for _, v in pairs(items) do
         main.EL(v)
     end
 end
+
+for i = 4, settings.startup['PHI-MB-MACHINE-TIER'].value + 2 do
+    data.raw['assembling-machine']['assembling-machine-' .. i].localised_name = {'phi-cl.combine', {'?', {'entity-name.assembling-machine'}, {'name.assembling-machine'}}, tostring(i)}
+end

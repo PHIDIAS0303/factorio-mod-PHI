@@ -1,7 +1,5 @@
 local param = require 'config'
-local items = require 'config-updates'
 local main = require 'main'
-local file_stage = 2
 
 if settings.startup['PHI-MB'].value then
     if settings.startup['PHI-MB-ENERGY'].value then
@@ -14,12 +12,6 @@ if settings.startup['PHI-MB'].value then
 
     if settings.startup['PHI-MB-EQUIPMENT'].value then
         require 'data.u.mbq'
-    end
-end
-
-if settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE-TIER'].value > 1 then
-    for i = 4, settings.startup['PHI-MB-MACHINE-TIER'].value + 2 do
-        data.raw['assembling-machine']['assembling-machine-' .. i].localised_name = {'phi-cl.combine', {'?', {'entity-name.assembling-machine'}, {'name.assembling-machine'}}, tostring(i)}
     end
 end
 
