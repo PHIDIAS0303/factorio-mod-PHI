@@ -2,8 +2,13 @@ local items = require 'config'
 
 data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
 data.raw['inserter']['burner-inserter'].allow_burner_leech = true
-data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
 data.raw['programmable-speaker']['programmable-speaker'].energy_source.usage_priority = 'primary-input'
+data.raw['active-defense-equipment']['discharge-defense-equipment'].automatic = true
+table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
+data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
+data.raw['module']['efficiency-module'].effect.consumption = math.min(-0.3, data.raw['module']['efficiency-module'].effect.consumption)
+data.raw['module']['efficiency-module-2'].effect.consumption = math.min(-0.6, data.raw['module']['efficiency-module'].effect.consumption)
+data.raw['module']['efficiency-module-3'].effect.consumption = math.min(-0.9, data.raw['module']['efficiency-module'].effect.consumption)
 
 for _, v in pairs(data.raw['container']) do
     v.inventory_type = 'with_filters_and_bar'
@@ -13,57 +18,42 @@ for _, v in pairs(data.raw['logistic-container']) do
     v.inventory_type = 'with_filters_and_bar'
 end
 
-for _, v in pairs(data.raw['active-defense-equipment']) do
-    v.automatic = true
-end
-
 for _, v in pairs(data.raw['reactor']) do
     v.scale_energy_usage = (v.fast_replaceable_group and v.fast_replaceable_group == 'reactor')
 end
-
-table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
 
 for _, v in pairs(data.raw['pump']) do
     v.pumping_speed = math.max(50, v.pumping_speed) * settings.startup['PHI-MI-PIPE'].value / 10
 end
 
-for _, v in pairs(data.raw['valve']) do
-    v.flow_rate = math.max(50, v.flow_rate) * settings.startup['PHI-MI-PIPE'].value / 10
-end
-
-data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
-
 for _, v in pairs(data.raw['mining-drill']) do
     v.filter_count = 5
 end
 
-data.raw['module']['efficiency-module'].effect.consumption = math.min(-0.3, data.raw['module']['efficiency-module'].effect.consumption)
-data.raw['module']['efficiency-module-2'].effect.consumption = math.min(-0.6, data.raw['module']['efficiency-module'].effect.consumption)
-data.raw['module']['efficiency-module-3'].effect.consumption = math.min(-0.9, data.raw['module']['efficiency-module'].effect.consumption)
+data:extend({{type='recipe-category', name='fluid'}})
 
-for _, v in pairs({'one-way-valve', 'overflow-valve', 'top-up-valve'}) do
-    data.raw['valve'][v].hidden = false
-    data.raw.item[v].hidden = false
-    data.raw.item[v].subgroup = 'energy-pipe-distribution'
+for _, v in pairs(data.raw['valve']) do
+    v.flow_rate = math.max(50, v.flow_rate) * settings.startup['PHI-MI-PIPE'].value / 10
+    v.hidden = false
+    data.raw.item[v.name].hidden = false
+    data.raw.item[v.name].subgroup = 'energy-pipe-distribution'
 
     data:extend({{
         type = 'recipe',
-        name = v,
+        name = v.name,
         energy_required = 1,
         enabled = true,
-        icon = data.raw.item[v].icon,
+        icon = data.raw.item[v.name].icon,
         icon_size = 64,
         order = 'zc',
         allow_productivity = false,
         ingredients = {{type = 'item', name = 'pipe', amount = 2}, {type = 'item', name = 'electronic-circuit', amount = 3}},
-        results = {{type = 'item', name = v, amount = 1}},
-        main_product = v,
-        localised_name = {'entity-name.' .. v},
-        localised_description = {'entity-description.' .. v}
+        results = {{type = 'item', name = v.name, amount = 1}},
+        main_product = v.name,
+        localised_name = {'entity-name.' .. v.name},
+        localised_description = {'entity-description.' .. v.name}
     }})
 end
-
-data:extend({{type='recipe-category', name='fluid'}})
 
 if data.raw['offshore-pump']['offshore-pump'] then
     local item = table.deepcopy(data.raw['item']['offshore-pump'])
@@ -481,6 +471,8 @@ data.raw['proxy-container']['proxy-container'].flags = {'not-blueprintable', 'hi
 data.raw['proxy-container']['proxy-container'].draw_inventory_content = false
 
 if mods['space-age'] then
+    data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
+
     for _, v in pairs(data.raw['mining-drill']) do
         v.drops_full_belt_stacks = true
     end
