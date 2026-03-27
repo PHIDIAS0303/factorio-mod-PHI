@@ -8,7 +8,7 @@ for _, v in pairs(items) do
     v.mod = v.mod or 'base'
     v.min = v.min or 2
 
-    if v.enabled and (v.mod and mods[v.mod]) and (v.max >= v.min) then
+    if (v.mod and mods[v.mod]) and (v.max >= v.min) then
         v.category = v.category or 'item'
         v.ref_name = v.ref_name or v.name
 
