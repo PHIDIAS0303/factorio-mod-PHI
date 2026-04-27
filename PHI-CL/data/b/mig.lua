@@ -1,18 +1,22 @@
 local items = require 'config'
 
--- MIGS C 2 BASE RECIPE
-data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
-data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
+-- MIGS C 1 BASE ARMOR_EQUIPMENT
+data.raw['active-defense-equipment']['discharge-defense-equipment'].automatic = true
+
 -- MIGS C 3 BASE ENTITY
 data.raw['inserter']['burner-inserter'].allow_burner_leech = true
 data.raw['programmable-speaker']['programmable-speaker'].energy_source.usage_priority = 'primary-input'
 table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
--- MIGS C 1 BASE EQUIPMENT
-data.raw['active-defense-equipment']['discharge-defense-equipment'].automatic = true
+
 -- MIGS C 3 BASE MODULE
 data.raw['module']['efficiency-module'].effect.consumption = math.min(-0.3, data.raw['module']['efficiency-module'].effect.consumption)
 data.raw['module']['efficiency-module-2'].effect.consumption = math.min(-0.6, data.raw['module']['efficiency-module'].effect.consumption)
 data.raw['module']['efficiency-module-3'].effect.consumption = math.min(-0.9, data.raw['module']['efficiency-module'].effect.consumption)
+
+-- MIGS C 2 BASE RECIPE
+data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
+data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
+
 
 for _, v in pairs(data.raw['container']) do
     v.inventory_type = 'with_filters_and_bar'
