@@ -42,9 +42,10 @@ data.raw['module']['efficiency-module-3'].effect.consumption = math.min(-0.9, da
 data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
 data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
 
+-- MIG A 1 BASE RECIPE_CATEGORY
+data:extend({{type='recipe-category', name='super-pump-fluid'}})
 
-data:extend({{type='recipe-category', name='fluid'}})
-
+-- MIG C 2 BASE ENTITY
 for _, v in pairs(data.raw['valve']) do
     v.hidden = false
     data.raw.item[v.name].hidden = false
@@ -83,7 +84,7 @@ if data.raw['offshore-pump']['offshore-pump'] then
     entity.name = item.name
     entity.minable.result = item.name
     entity.type = 'assembling-machine'
-    entity.crafting_categories = {'fluid'}
+    entity.crafting_categories = {'super-pump-fluid'}
     entity.crafting_speed = 1
     entity.energy_source = {type = 'void'}
 
@@ -124,7 +125,7 @@ if data.raw.fluid['water'] then
     data:extend({{
         type = 'recipe',
         name = 'pump-water',
-        category = 'fluid',
+        category = 'super-pump-fluid',
         energy_required = 1,
         enabled = true,
         ingredients = {},

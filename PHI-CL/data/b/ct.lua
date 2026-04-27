@@ -121,7 +121,7 @@ for _, v in pairs(data.raw.fluid) do
         data:extend({{
             type = 'recipe',
             name = 'pump-' .. v.name,
-            category = 'fluid',
+            category = 'super-pump-fluid',
             energy_required = 1,
             enabled = false,
             ingredients = {},
