@@ -18,6 +18,21 @@ for _, v in pairs(data.raw['logistic-container']) do
     v.inventory_type = 'with_filters_and_bar'
 end
 
+-- MIGS C 1 BASE ENTITY
+for _, v in pairs(data.raw['reactor']) do
+    v.scale_energy_usage = (v.fast_replaceable_group and v.fast_replaceable_group == 'reactor')
+end
+
+-- MIGS C 1 BASE ENTITY
+for _, v in pairs(data.raw['pump']) do
+    v.pumping_speed = math.max(50, v.pumping_speed) * settings.startup['PHI-MI-PIPE'].value / 10
+end
+
+-- MIGS C 2 BASE ENTITY
+for _, v in pairs(data.raw['mining-drill']) do
+    v.filter_count = 5
+end
+
 -- MIGS C 3 BASE MODULE
 data.raw['module']['efficiency-module'].effect.consumption = math.min(-0.3, data.raw['module']['efficiency-module'].effect.consumption)
 data.raw['module']['efficiency-module-2'].effect.consumption = math.min(-0.6, data.raw['module']['efficiency-module'].effect.consumption)
@@ -27,14 +42,6 @@ data.raw['module']['efficiency-module-3'].effect.consumption = math.min(-0.9, da
 data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
 data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
 
-
-for _, v in pairs(data.raw['reactor']) do
-    v.scale_energy_usage = (v.fast_replaceable_group and v.fast_replaceable_group == 'reactor')
-end
-
-for _, v in pairs(data.raw['pump']) do
-    v.pumping_speed = math.max(50, v.pumping_speed) * settings.startup['PHI-MI-PIPE'].value / 10
-end
 
 for _, v in pairs(data.raw['mining-drill']) do
     v.filter_count = 5
