@@ -45,7 +45,8 @@ data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'ad
 -- MIG A 1 BASE RECIPE_CATEGORY
 data:extend({{type='recipe-category', name='super-pump-fluid'}})
 
--- MIG C 2 BASE ENTITY
+-- MIG C 3 BASE ENTITY,ITEM
+-- MIG A 1 BASE RECIPE
 for _, v in pairs(data.raw['valve']) do
     v.hidden = false
     data.raw.item[v.name].hidden = false
@@ -68,6 +69,7 @@ for _, v in pairs(data.raw['valve']) do
     }})
 end
 
+-- MIG A 1 BASE ENTITY,ITEM,RECIPE
 if data.raw['offshore-pump']['offshore-pump'] then
     local item = table.deepcopy(data.raw['item']['offshore-pump'])
     item.name = 'super-pump'
@@ -91,7 +93,7 @@ if data.raw['offshore-pump']['offshore-pump'] then
     entity.fluid_boxes = {{
         production_type = 'output',
         pipe_covers = table.deepcopy(entity.fluid_box.pipe_covers),
-        volume = 100 * settings.startup['PHI-MI-PIPE'].value / 10,
+        volume = 10 * settings.startup['PHI-MI-PIPE'].value,
         pipe_connections = {{
             flow_direction = 'output',
             connection_category = (mods['space-age'] and {'default', 'fusion-plasma'}) or {'default'},
@@ -121,6 +123,7 @@ if data.raw['offshore-pump']['offshore-pump'] then
     }})
 end
 
+-- MIG A 1 BASE RECIPE
 if data.raw.fluid['water'] then
     data:extend({{
         type = 'recipe',
@@ -129,7 +132,7 @@ if data.raw.fluid['water'] then
         energy_required = 1,
         enabled = true,
         ingredients = {},
-        results = {{type = 'fluid', name = 'water', amount = 12000 * settings.startup['PHI-MI-PIPE'].value / 10, temperature = data.raw.fluid['water'].default_temperature}},
+        results = {{type = 'fluid', name = 'water', amount = 1200 * settings.startup['PHI-MI-PIPE'].value, temperature = data.raw.fluid['water'].default_temperature}},
         main_product = 'water',
         hide_from_player_crafting = true,
         hidden_in_factoriopedia = true,
