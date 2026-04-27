@@ -1,8 +1,8 @@
 local param = require 'config'
 
--- MIG A 1 BASE ENTITY,ITEM,RECIPE
--- MIG A 9 BASE RESEARCH_EFFECT
--- MIG A 15 SPACE_AGE RESEARCH_EFFECT
+-- MIGS A 1 BASE ENTITY,ITEM,RECIPE
+-- MIGS A 9 BASE RESEARCH_EFFECT
+-- MIGS A 15 SPACE_AGE RESEARCH_EFFECT
 if data.raw['constant-combinator']['constant-combinator'] then
     local item = table.deepcopy(data.raw['item']['constant-combinator'])
     item.name = 'super-combinator'
