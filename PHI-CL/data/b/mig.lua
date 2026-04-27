@@ -43,10 +43,6 @@ data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe
 data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
 
 
-for _, v in pairs(data.raw['mining-drill']) do
-    v.filter_count = 5
-end
-
 data:extend({{type='recipe-category', name='fluid'}})
 
 for _, v in pairs(data.raw['valve']) do
