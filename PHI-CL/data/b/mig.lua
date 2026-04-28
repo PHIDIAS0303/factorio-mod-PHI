@@ -145,12 +145,8 @@ end
 for _, v in pairs(data.raw['inserter']) do
     if v.energy_source and v.energy_source.type and (v.energy_source.type == 'electric' or v.energy_source.type == 'void' or v.energy_source.type == 'burner') then
         v.allow_custom_vectors = true
-        v.flags = {'placeable-neutral', 'placeable-player', 'player-creation', 'building-direction-8-way'}
+        v.flags = {'placeable-neutral', 'placeable-player', 'player-creation', ((v.hand_size and v.hand_size < 1) and 'building-direction-8-way') or 'building-direction-16-way'}
     end
-end
-
-if data.raw['inserter']['long-handed-inserter'] and data.raw['inserter']['long-handed-inserter'].allow_custom_vectors then
-    data.raw['inserter']['long-handed-inserter'].flags = {'placeable-neutral', 'placeable-player', 'player-creation', 'building-direction-16-way'}
 end
 
 if mods['elevated-rails'] then

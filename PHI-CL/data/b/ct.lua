@@ -120,12 +120,12 @@ for _, v in pairs(data.raw.fluid) do
     if (not data.raw.recipe['pump-' .. v.name]) and v.subgroup == 'fluid' then
         data:extend({{
             type = 'recipe',
-            name = 'pump-' .. v.name,
+            name = 'super-pump-' .. v.name,
             category = 'super-pump-fluid',
             energy_required = 1,
             enabled = false,
             ingredients = {},
-            results = {{type = 'fluid', name = v.name, amount = 12000 * settings.startup['PHI-MI-PIPE'].value / 10, temperature = v.default_temperature}},
+            results = {{type = 'fluid', name = v.name, amount = 1200 * settings.startup['PHI-MI-PIPE'].value, temperature = v.default_temperature}},
             main_product = v.name,
             hide_from_player_crafting = true,
             hidden_in_factoriopedia = true,
