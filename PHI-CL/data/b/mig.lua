@@ -480,8 +480,6 @@ data.raw['proxy-container']['proxy-container'].flags = {'not-blueprintable', 'hi
 data.raw['proxy-container']['proxy-container'].draw_inventory_content = false
 
 if mods['space-age'] then
-    data.raw['character']['character']['mining_categories'] = {'basic-solid', 'hard-solid'}
-
     for _, v in pairs(data.raw['mining-drill']) do
         v.drops_full_belt_stacks = true
     end
