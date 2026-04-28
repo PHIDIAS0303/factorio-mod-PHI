@@ -1,12 +1,6 @@
 
 if mods['space-age'] then
-    data.raw.quality['normal'].level = 0
-    data.raw.quality['normal'].beacon_power_usage_multiplier = 1
-    data.raw.quality['normal'].mining_drill_resource_drain_multiplier = 1
-    data.raw.quality['normal'].science_pack_drain_multiplier = 1
-
     data.raw['utility-constants'].default.default_pipeline_extent = math.max(settings.startup['PHI-MI-PIPE-EXTENT'].value, 960)
-
     local bss = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
 
     for _, v in pairs(data.raw['inserter']) do
