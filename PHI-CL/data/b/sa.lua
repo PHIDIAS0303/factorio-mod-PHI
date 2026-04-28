@@ -125,6 +125,7 @@ if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value
     end
 end
 
+-- SA C 1 SPACE_AGE UTILITY_CONSTANTS
 if settings.startup['PHI-SA'].value then
     data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-SA-ROCKET-CAPACITY'].value * 1000000
 end
