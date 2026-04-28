@@ -133,6 +133,7 @@ for _, v in pairs(data.raw.fluid) do
             category = 'super-pump-fluid',
             energy_required = 1,
             enabled = false,
+            hidden = true,
             ingredients = {},
             results = {{type = 'fluid', name = v.name, amount = 1200 * settings.startup['PHI-MI-PIPE'].value, temperature = v.default_temperature}},
             main_product = v.name,
@@ -147,6 +148,7 @@ end
 
 if data.raw.fluid['water'] and data.raw.recipe['super-pump-water'] then
     data.raw.recipe['super-pump-water'].enabled = true
+    data.raw.recipe['super-pump-water'].hidden = false
 end
 
 for _, v in pairs(data.raw['inserter']) do
