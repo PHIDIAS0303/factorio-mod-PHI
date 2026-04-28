@@ -475,6 +475,7 @@ if data.raw.technology['turbo-transport-belt'] and data.raw['underground-belt'] 
     table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-underground-belt-a'})
 end
 
+-- MIG C 1 BASE ENTITY
 data.raw['proxy-container']['proxy-container'].flags = {'not-blueprintable', 'hide-alt-info', 'not-deconstructable', 'not-flammable', 'not-on-map', 'placeable-off-grid', 'placeable-player', 'no-automated-item-insertion', 'no-automated-item-removal'}
 data.raw['proxy-container']['proxy-container'].draw_inventory_content = false
 
