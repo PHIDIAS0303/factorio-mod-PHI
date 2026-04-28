@@ -221,6 +221,7 @@ if mods['space-age'] and data.raw['lightning-attractor']['lightning-rod'] then
     data:extend({entity})
 end
 
+-- MIG A 1 BASE ENTITY,ITEM,RECIPE,RESEARCH_EFFECT
 if data.raw['container']['steel-chest'] then
     local item = table.deepcopy(data.raw['item']['steel-chest'])
     item.name = 'trash-chest'
@@ -267,6 +268,7 @@ if data.raw['container']['steel-chest'] then
     table.insert(data.raw.technology['steel-processing'].effects, {type = 'unlock-recipe', recipe = item.name})
 end
 
+-- MIG A 1 BASE ENTITY,ITEM,RECIPE,RESEARCH_EFFECT
 if data.raw['pipe']['pipe'] then
     local item = table.deepcopy(data.raw['item']['pipe'])
     item.name = 'trash-pipe'
@@ -313,6 +315,7 @@ if data.raw['pipe']['pipe'] then
     table.insert(data.raw.technology['automation'].effects, {type = 'unlock-recipe', recipe = item.name})
 end
 
+-- MIG A 1 BASE ENTITY,ITEM,RECIPE
 if data.raw['boiler']['boiler'] then
     local item = table.deepcopy(data.raw['item']['boiler'])
     item.name = 'electric-boiler'
@@ -360,79 +363,45 @@ if data.raw['boiler']['boiler'] then
     data.raw['boiler']['electric-boiler'].fast_replaceable_group = data.raw['boiler']['boiler'].fast_replaceable_group
 end
 
-for _, c in pairs({'steel-chest', 'passive-provider-chest', 'active-provider-chest', 'storage-chest', 'buffer-chest', 'requester-chest'}) do
-    if (c == 'steel-chest' and data.raw['container'][c]) or data.raw['logistic-container'][c] then
-        local item = table.deepcopy(data.raw['item'][c])
-        item.name = 'basic-' .. c
-        item.place_result = item.name
-        item.subgroup = 'storage'
-        item.order = 'b[storage]-h[basic-' .. c .. ']'
-        item.localised_name = {'', {'name.basic-entity'}, {'entity-name.' .. c}}
-        data:extend({item})
+-- MIG C 3 BASE ENTITY,ITEM,RECIPE
+-- MIG C 1 SPACE_AGE ENTITY,ITEM,RECIPE
+for _, ln in pairs(data.raw['loader']) do
+    local l = ln.name
 
-        local entity = (c == 'steel-chest' and table.deepcopy(data.raw['container'][c])) or table.deepcopy(data.raw['logistic-container'][c])
-        entity.name = item.name
-        entity.minable.result = item.name
-        entity.inventory_type = 'with_filters_and_bar'
-        entity.inventory_size = 1
-        entity.quality_affects_inventory_size = false
-        entity.max_logistic_slots = (c == 'steel-chest' and nil) or 1
-        entity.trash_inventory_size = (c == 'steel-chest' and nil) or 1
-        entity.localised_name = {'', {'name.basic-entity'}, {'entity-name.' .. c}}
-        data:extend({entity})
+    ln.filter_count = 2
+    ln.per_lane_filters = true
+    ln.adjustable_belt_stack_size = (data.raw['inserter']['stack-inserter'] and true) or false
+    ln.max_belt_stack_size = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
+    ln.wait_for_full_stack = (data.raw['inserter']['stack-inserter'] and true) or false
 
-        data:extend({{
-            type = 'recipe',
-            name = item.name,
-            energy_required = 2,
-            enabled = false,
-            ingredients = {{type = 'item', name =c, amount = 1}},
-            results = {{type = 'item', name = item.name, amount = 1}},
-            main_product = item.name,
-            localised_name = {'', {'name.basic-entity'}, {'entity-name.' .. c}}
-        }})
-    end
-end
-
-if data.raw.recipe['basic-steel-chest'] then
-    table.insert(data.raw.technology['steel-processing'].effects, {type = 'unlock-recipe', recipe = 'basic-steel-chest'})
-end
-
-for _, r in pairs({'passive-provider', 'storage'}) do
-    if data.raw.recipe['basic-' .. r .. '-chest'] then
-        for _, t in pairs({'construction', 'logistic'}) do
-            table.insert(data.raw.technology[t .. '-robotics'].effects, {type = 'unlock-recipe', recipe = 'basic-' .. r .. '-chest'})
-        end
-    end
-end
-
-for _, r in pairs({'active-provider', 'buffer', 'requester'}) do
-    if data.raw.recipe['basic-' .. r .. '-chest'] then
-        table.insert(data.raw.technology['logistic-system'].effects, {type = 'unlock-recipe', recipe = 'basic-' .. r .. '-chest'})
-    end
-end
-
-for _, l in pairs({'loader', 'fast-loader', 'express-loader', 'turbo-loader'}) do
-    if data.raw.recipe[l] and data.raw['loader'][l] then
+    if data.raw.item[l] then
         data.raw.item[l].hidden = false
         data.raw.item[l].hidden_in_factoriopedia = false
+    end
+
+    if data.raw.recipe[l] then
         data.raw.recipe[l].hidden = false
         data.raw.recipe[l].hidden_in_factoriopedia = false
-        data.raw['loader'][l].filter_count = 2
-        data.raw['loader'][l].per_lane_filters = true
-        data.raw['loader'][l].adjustable_belt_stack_size = (data.raw['inserter']['stack-inserter'] and true) or false
-        data.raw['loader'][l].max_belt_stack_size = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
-        data.raw['loader'][l].wait_for_full_stack = (data.raw['inserter']['stack-inserter'] and true) or false
     end
 end
 
-if data.raw['loader']['loader'] and data.raw['loader']['fast-loader'] and data.raw['loader']['express-loader'] then
+-- MIG A 1 BASE RESEARCH_EFFECT
+if data.raw.technology['logistics'] and data.raw['loader'] and data.raw['loader']['loader'] then
     table.insert(data.raw.technology['logistics'].effects, {type = 'unlock-recipe', recipe = 'loader'})
+end
+
+-- MIG A 1 BASE RESEARCH_EFFECT
+if data.raw.technology['logistics-2'] and data.raw['loader'] and data.raw['loader']['fast-loader'] then
     table.insert(data.raw.technology['logistics-2'].effects, {type = 'unlock-recipe', recipe = 'fast-loader'})
+end
+
+-- MIG A 1 BASE RESEARCH_EFFECT
+if data.raw.technology['logistics-3'] and data.raw['loader'] and data.raw['loader']['express-loader'] then
     table.insert(data.raw.technology['logistics-3'].effects, {type = 'unlock-recipe', recipe = 'express-loader'})
 end
 
-if data.raw['loader']['loader'] and data.raw['loader']['turbo-loader'] then
+-- MIG A 1 SPACE_AGE RESEARCH_EFFECT
+if data.raw.technology['turbo-transport-belt'] and data.raw['loader'] and data.raw['loader']['turbo-loader'] then
     table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-loader'})
 end
 
