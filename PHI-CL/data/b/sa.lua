@@ -89,8 +89,8 @@ end
 
 -- SA A 1 SPACE_AGE RECIPE
 -- SA A 1 SPACE_AGE RESEARCH_EFFECT
--- SA C 3 SPACE_AGE TIPS_AND_TRICKS
-if settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP') then
+-- SA H 3 SPACE_AGE TIPS_AND_TRICKS
+if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].value)) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP') then
     data:extend({{
         type = 'recipe',
         name = 'spoilage-from-nutrients',
@@ -114,6 +114,7 @@ if settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].va
     end
 end
 
+-- SA C 3 SPACE_AGE MODULE
 if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value then
     for _, v in pairs(data.raw.module) do
         if v.category and v.category == 'quality' then
@@ -125,6 +126,11 @@ if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value
     end
 end
 
+-- SA C 3 SPACE_AGE MODULE,RECIPE,RESEARCH_EFFECT
+-- SA C 5 SPACE_AGE QUALITY,RESEARCH
+-- SA C 6 SPACE_AGE ACHIEVEMENT
+-- SA H 5 SPACE_AGE QUALITY
+-- SA H 4 SPACE_AGE TIPS_AND_TRICKS
 if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-ENABLE-QUALITY'].value)) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP') then
     for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
         if data.raw.technology[v] then
@@ -159,16 +165,15 @@ if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-ENABLE-QU
         data.raw.quality[v].hidden_in_factoriopedia = true
     end
 
-    for _, v in pairs({'quality', 'quality-modules', 'quality-factoriopedia', 'quality-probabilities'}) do
-        data.raw['tips-and-tricks-item'][v] = nil
+    for _, v in pairs({{'produce-achievement', 'crafting-with-quality'}, {'module-transfer-achievement', 'make-it-better'}, {'produce-achievement', 'my-modules-are-legendary'}, {'equip-armor-achievement', 'look-at-my-shiny-rare-armor'}, {'use-item-achievement', 'todays-fish-is-trout-a-la-creme'}, {'place-equipment-achievement', 'no-room-for-more'}}) do
+        data.raw[v[1]][v[2]].hidden = true
+        data.raw[v[1]][v[2]].hidden_in_factoriopedia = true
     end
 
-    data.raw['produce-achievement']['crafting-with-quality'] = nil
-    data.raw['module-transfer-achievement']['make-it-better'] = nil
-    data.raw['produce-achievement']['my-modules-are-legendary'] = nil
-    data.raw['equip-armor-achievement']['look-at-my-shiny-rare-armor'] = nil
-    data.raw['use-item-achievement']['todays-fish-is-trout-a-la-creme'] = nil
-    data.raw['place-equipment-achievement']['no-room-for-more'] = nil
+    for _, v in pairs({'quality', 'quality-modules', 'quality-factoriopedia', 'quality-probabilities'}) do
+        data.raw['tips-and-tricks-item'][v].hidden = true
+        data.raw['tips-and-tricks-item'][v].hidden_in_factoriopedia = true
+    end
 end
 
 -- SA C 1 SPACE_AGE CONSTANT
