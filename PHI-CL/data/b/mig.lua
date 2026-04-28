@@ -178,7 +178,8 @@ end
 
 data:extend(s)
 
-if mods['elevated-rails'] then
+-- MIG A 1 ELEVATED_RAILS ENTITY
+if mods['elevated-rails'] and data.raw['electric-pole']['big-electric-pole'] then
     local entity = table.deepcopy(data.raw['electric-pole']['big-electric-pole'])
     entity.name = 'rail-support-pole-electric'
     entity.hidden = true
@@ -197,25 +198,27 @@ if mods['elevated-rails'] then
     entity.selection_priority = 49
     entity.order = 'zz'
     data:extend({entity})
+end
 
-    if (not (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP')) and mods['space-age'] and data.raw['lightning-attractor']['lightning-rod'] then
-        entity = table.deepcopy(data.raw['lightning-attractor']['lightning-rod'])
-        entity.name = 'rail-support-pole-lightning'
-        entity.hidden = true
-        entity.hidden_in_factoriopedia = true
-        entity.minable.result = nil
-        entity.range_elongation = math.floor(data.raw['rail-support']['rail-support'].support_range * 2)
-        entity.water_reflection = nil
-        entity.chargable_graphics = nil
-        entity.collision_box = {{0, 0}, {0, 0}}
-        entity.selection_box = nil
-        entity.collision_mask = {colliding_with_tiles_only = true, layers = {}, not_colliding_with_itself = true}
-        entity.flags = {'hide-alt-info', 'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'not-selectable-in-game', 'placeable-off-grid', 'placeable-player'}
-        entity.next_upgrade = nil
-        entity.selection_priority = 49
-        entity.order = 'zz'
-        data:extend({entity})
-    end
+-- MIG A 1 SPACE_AGE ENTITY
+if mods['space-age'] and data.raw['lightning-attractor']['lightning-rod'] then
+    local entity = table.deepcopy(data.raw['lightning-attractor']['lightning-rod'])
+    entity.name = 'rail-support-pole-lightning'
+    entity.enabled = false
+    entity.hidden = true
+    entity.hidden_in_factoriopedia = true
+    entity.minable.result = nil
+    entity.range_elongation = math.floor(data.raw['rail-support']['rail-support'].support_range * 2)
+    entity.water_reflection = nil
+    entity.chargable_graphics = nil
+    entity.collision_box = {{0, 0}, {0, 0}}
+    entity.selection_box = nil
+    entity.collision_mask = {colliding_with_tiles_only = true, layers = {}, not_colliding_with_itself = true}
+    entity.flags = {'hide-alt-info', 'not-blueprintable', 'not-deconstructable', 'not-flammable', 'not-on-map', 'not-selectable-in-game', 'placeable-off-grid', 'placeable-player'}
+    entity.next_upgrade = nil
+    entity.selection_priority = 49
+    entity.order = 'zz'
+    data:extend({entity})
 end
 
 if data.raw['container']['steel-chest'] then

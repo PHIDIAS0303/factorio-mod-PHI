@@ -117,6 +117,7 @@ local function hidden_recipe_enable(event)
     end
 end
 
+-- settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SAP'
 local function entity_build(event)
     if event.entity.type == 'rail-support' then
         for _, v in pairs(rail_support_pole) do
