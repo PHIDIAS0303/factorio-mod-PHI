@@ -26,6 +26,7 @@ end
 -- MIG C 1 BASE ENTITY
 for _, v in pairs(data.raw['pump']) do
     v.pumping_speed = math.max(50, v.pumping_speed) * settings.startup['PHI-MI-PIPE'].value / 10
+    v.heating_energy = nil
 end
 
 -- MIG C 2 BASE ENTITY
@@ -479,9 +480,9 @@ end
 data.raw['proxy-container']['proxy-container'].flags = {'not-blueprintable', 'hide-alt-info', 'not-deconstructable', 'not-flammable', 'not-on-map', 'placeable-off-grid', 'placeable-player', 'no-automated-item-insertion', 'no-automated-item-removal'}
 data.raw['proxy-container']['proxy-container'].draw_inventory_content = false
 
--- MIG C 19 BASE ENTITY
+-- MIG C 13 BASE ENTITY
 -- MIG C 5 SPACE_AGE ENTITY
-for _, w in pairs({data.raw['valve'], data.raw['pipe'], data.raw['pipe-to-ground'], data.raw['pump'], data.raw['storage-tank'], data.raw['generator'], data.raw['furnace'], data.raw['assembling-machine'], data.raw['roboport']}) do
+for _, w in pairs({data.raw['storage-tank'], data.raw['generator'], data.raw['furnace'], data.raw['assembling-machine'], data.raw['roboport']}) do
     for _, v in pairs(w) do
         v.heating_energy = nil
     end
