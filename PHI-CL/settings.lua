@@ -89,12 +89,12 @@ data:extend({
   order = 'B01'
 }, {
   type = 'int-setting',
-  name = 'PHI-MI-PIPE',
+  name = 'PHI-MI-FLUID',
   setting_type = 'startup',
   default_value = 10,
   minimum_value = 1,
   maximum_value = 160,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MI-PIPE'}, {'phi-cl.proportion', {'mod-setting-name.PHI-MI-PIPE'}}},
+  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MI-FLUID'}, {'phi-cl.proportion', {'mod-setting-name.PHI-MI-FLUID'}}},
   order = 'B02'
 }, {
   type = 'bool-setting',
@@ -127,28 +127,21 @@ data:extend({
   localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-SA-SPOIL'}, {'phi-cl.enable', {'mod-setting-name.PHI-SA-SPOIL'}}},
   order = 'C01'
 }, {
-  type = 'bool-setting',
+  type = 'int-setting',
   name = 'PHI-SA-SPOIL-FREEZE',
   setting_type = 'startup',
-  default_value = false,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE'}, {'phi-cl.enable', {'mod-setting-name.PHI-SA-SPOIL-FREEZE'}}},
-  order = 'C02'
-}, {
-  type = 'int-setting',
-  name = 'PHI-SA-SPOIL-FREEZE-RATIO',
-  setting_type = 'startup',
   default_value = 50,
-  minimum_value = 1,
+  minimum_value = 0,
   maximum_value = 1000,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE-RATIO'}, {'phi-cl.proportion', {'mod-setting-name.PHI-SA-SPOIL-FREEZE-RATIO'}}},
-  order = 'C03'
+  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE'}, {'phi-cl.proportion', {'mod-setting-name.PHI-SA-SPOIL-FREEZE'}}},
+  order = 'C02'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-ENABLE-QUALITY',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-SA-ENABLE-QUALITY'}, {'phi-cl.enable', {'mod-setting-name.PHI-SA-ENABLE-QUALITY'}}},
-  order = 'C04'
+  order = 'C03'
 }, {
   type = 'int-setting',
   name = 'PHI-SA-QUALITY',
@@ -157,7 +150,7 @@ data:extend({
   minimum_value = 1,
   maximum_value = 100,
   localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-SA-QUALITY'}, {'phi-cl.proportion', {'mod-setting-name.PHI-SA-QUALITY'}}},
-  order = 'C05'
+  order = 'C04'
 }, {
   type = 'int-setting',
   name = 'PHI-SA-ROCKET-CAPACITY',
@@ -166,7 +159,7 @@ data:extend({
   minimum_value = 1,
   maximum_value = 10000,
   localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-SA-ROCKET-CAPACITY'}, {'phi-cl.proportion', {'mod-setting-name.PHI-SA-ROCKET-CAPACITY'}}},
-  order = 'C06'
+  order = 'C05'
 }, {
   type = 'string-setting',
   name = 'PHI-GM',

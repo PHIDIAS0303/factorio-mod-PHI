@@ -8,6 +8,7 @@ Date: 2026-04-12
     - [MI] Removed train speed setting.
     - [MI] Removed robot speed setting.
     - [MI] Removed lab quality affect drain setting.
+    - [SA] Now spoil freeze ratio equal to zero means it will be disabled.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.135
