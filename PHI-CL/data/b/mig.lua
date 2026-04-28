@@ -499,8 +499,10 @@ if data.raw.technology['turbo-transport-belt'] and data.raw['underground-belt'] 
 end
 
 -- MIG C 1 BASE ENTITY
-data.raw['proxy-container']['proxy-container'].flags = {'not-blueprintable', 'hide-alt-info', 'not-deconstructable', 'not-flammable', 'not-on-map', 'placeable-off-grid', 'placeable-player', 'no-automated-item-insertion', 'no-automated-item-removal'}
-data.raw['proxy-container']['proxy-container'].draw_inventory_content = false
+if data.raw['proxy-container'] and data.raw['proxy-container']['proxy-container'] then
+    data.raw['proxy-container']['proxy-container'].flags = {'not-blueprintable', 'hide-alt-info', 'not-deconstructable', 'not-flammable', 'not-on-map', 'placeable-off-grid', 'placeable-player', 'no-automated-item-insertion', 'no-automated-item-removal'}
+    data.raw['proxy-container']['proxy-container'].draw_inventory_content = false
+end
 
 -- MIG C 12 BASE ENTITY
 -- MIG C 5 SPACE_AGE ENTITY
@@ -521,16 +523,22 @@ for _, v in pairs(data.raw['roboport-equipment']) do
     v.charging_station_count_affected_by_quality = true
 end
 
-if mods['space-age'] then
+-- MIG C 1 SPAGE_AGE ENTITY
+if data.raw['thruster'] and data.raw['thruster']['thruster'] then
     table.insert(data.raw['thruster']['thruster'].fuel_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.west, position = {-1.5, 2}})
     table.insert(data.raw['thruster']['thruster'].oxidizer_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.east, position = {1.5, 2}})
+end
 
+-- MIG C 1 SPAGE_AGE ENTITY
+if data.raw['fusion-generator'] and data.raw['fusion-generator']['fusion-generator'] then
     for _, fb in pairs({'input_fluid_box', 'output_fluid_box'}) do
         for _, v in pairs(data.raw['fusion-generator']['fusion-generator'][fb].pipe_connections) do
             v.flow_direction = 'input-output'
         end
     end
+end
 
+if mods['space-age'] then
     if data.raw['reactor']['heating-tower'] then
         local item = table.deepcopy(data.raw['item']['heating-tower'])
         item.name = 'electric-heating-tower'
