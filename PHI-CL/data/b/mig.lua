@@ -123,23 +123,30 @@ if data.raw['offshore-pump']['offshore-pump'] then
     }})
 end
 
--- MIG A 1 BASE RECIPE
-if data.raw.fluid['water'] then
-    data:extend({{
-        type = 'recipe',
-        name = 'super-pump-water',
-        category = 'super-pump-fluid',
-        energy_required = 1,
-        enabled = true,
-        ingredients = {},
-        results = {{type = 'fluid', name = 'water', amount = 1200 * settings.startup['PHI-MI-PIPE'].value, temperature = data.raw.fluid['water'].default_temperature}},
-        main_product = 'water',
-        hide_from_player_crafting = true,
-        hidden_in_factoriopedia = true,
-        allow_productivity = false,
-        crafting_machine_tint = {primary = data.raw.fluid['water'].flow_color},
-        localised_name = {'fluid-name.water'}
-    }})
+-- MIG A 8 BASE RECIPE
+-- MIG A 14 SPACE_AGE RECIPE
+for _, v in pairs(data.raw.fluid) do
+    if v.subgroup == 'fluid' then
+        data:extend({{
+            type = 'recipe',
+            name = 'super-pump-' .. v.name,
+            category = 'super-pump-fluid',
+            energy_required = 1,
+            enabled = false,
+            ingredients = {},
+            results = {{type = 'fluid', name = v.name, amount = 1200 * settings.startup['PHI-MI-PIPE'].value, temperature = v.default_temperature}},
+            main_product = v.name,
+            hide_from_player_crafting = true,
+            hidden_in_factoriopedia = true,
+            allow_productivity = false,
+            crafting_machine_tint = {primary = v.flow_color},
+            localised_name = {'fluid-name.' .. v.name}
+        }})
+    end
+end
+
+if data.raw.fluid['water'] and data.raw.recipe['super-pump-water'] then
+    data.raw.recipe['super-pump-water'].enabled = true
 end
 
 for _, v in pairs(data.raw['inserter']) do

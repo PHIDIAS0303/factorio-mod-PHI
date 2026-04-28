@@ -114,28 +114,6 @@ if data.raw['electric-energy-interface']['electric-energy-interface'] then
     end
 end
 
--- CT A 8 BASE RECIPE
--- CT A 14 SPACE_AGE RECIPE
-for _, v in pairs(data.raw.fluid) do
-    if (not data.raw.recipe['pump-' .. v.name]) and v.subgroup == 'fluid' then
-        data:extend({{
-            type = 'recipe',
-            name = 'super-pump-' .. v.name,
-            category = 'super-pump-fluid',
-            energy_required = 1,
-            enabled = false,
-            ingredients = {},
-            results = {{type = 'fluid', name = v.name, amount = 1200 * settings.startup['PHI-MI-PIPE'].value, temperature = v.default_temperature}},
-            main_product = v.name,
-            hide_from_player_crafting = true,
-            hidden_in_factoriopedia = true,
-            allow_productivity = false,
-            crafting_machine_tint = {primary = v.flow_color},
-            localised_name = {'fluid-name.' .. v.name}
-        }})
-    end
-end
-
 -- CT A 1 BASE MAP_GEN_PRESET
 if settings.startup['PHI-CT-TILE'].value then
     data.raw['map-gen-presets']['default']['empty-world'] = {
