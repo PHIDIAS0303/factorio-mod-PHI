@@ -18,10 +18,15 @@ for _, v in pairs(data.raw['logistic-container']) do
 end
 
 -- MI C 4 BASE ENTITY
-for _, t in pairs({data.raw['locomotive'], data.raw['cargo-wagon'], data.raw['fluid-wagon'], data.raw['artillery-wagon']}) do
+for _, t in pairs({data.raw['cargo-wagon'], data.raw['fluid-wagon']}) do
     for _, v in pairs(t) do
-        v.reversing_power_modifier = 1
+        v.quality_affects_inventory_size = true
     end
+end
+
+-- MI C 1 BASE ENTITY
+for _, v in pairs(data.raw['locomotive']) do
+    v.reversing_power_modifier = 1
 end
 
 -- MIG C 1 BASE ENTITY
@@ -29,39 +34,18 @@ for _, v in pairs(data.raw['reactor']) do
     v.scale_energy_usage = (v.fast_replaceable_group and v.fast_replaceable_group == 'reactor')
 end
 
--- MIG C 8 BASE ENTITY
-for _, t in pairs({data.raw['offshore-pump'], data.raw['pump'], data.raw['valve'], data.raw['pipe'], data.raw['pipe-to-ground'], data.raw['infinity-pipe']}) do
+-- MIG C 5 BASE ENTITY
+for _, t in pairs({data.raw['offshore-pump'], data.raw['pump'], data.raw['pipe'], data.raw['pipe-to-ground'], data.raw['infinity-pipe']}) do
     for _, v in pairs(t) do
         v.heating_energy = nil
     end
 end
 
--- MIG C 1 BASE ENTITY
--- MIG C 1 SPACE_AGE ENTITY
-for _, v in pairs(data.raw['mining-drill']) do
-    v.filter_count = 5
-
-    if mods['space-age'] then
-        v.drops_full_belt_stacks = true
-    end
-end
-
--- MIG C 3 BASE MODULE
-data.raw['module']['efficiency-module'].effect.consumption = math.min(-0.3, data.raw['module']['efficiency-module'].effect.consumption)
-data.raw['module']['efficiency-module-2'].effect.consumption = math.min(-0.6, data.raw['module']['efficiency-module'].effect.consumption)
-data.raw['module']['efficiency-module-3'].effect.consumption = math.min(-0.9, data.raw['module']['efficiency-module'].effect.consumption)
-
--- MIG C 2 BASE RECIPE
-data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
-data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
-
--- MIG A 1 BASE RECIPE_CATEGORY
-data:extend({{type='recipe-category', name='super-pump-fluid'}})
-
 -- MIG C 3 BASE ENTITY,ITEM
 -- MIG A 1 BASE RECIPE
 for _, v in pairs(data.raw['valve']) do
     v.hidden = false
+    v.heating_energy = nil
     data.raw.item[v.name].hidden = false
     data.raw.item[v.name].subgroup = 'energy-pipe-distribution'
 
@@ -135,6 +119,28 @@ if data.raw['offshore-pump']['offshore-pump'] then
         localised_name = {'', {'name.super-entity'}, {'entity-name.pump'}}
     }})
 end
+
+-- MIG C 1 BASE ENTITY
+-- MIG C 1 SPACE_AGE ENTITY
+for _, v in pairs(data.raw['mining-drill']) do
+    v.filter_count = 5
+
+    if mods['space-age'] then
+        v.drops_full_belt_stacks = true
+    end
+end
+
+-- MIG C 3 BASE MODULE
+data.raw['module']['efficiency-module'].effect.consumption = math.min(-0.3, data.raw['module']['efficiency-module'].effect.consumption)
+data.raw['module']['efficiency-module-2'].effect.consumption = math.min(-0.6, data.raw['module']['efficiency-module'].effect.consumption)
+data.raw['module']['efficiency-module-3'].effect.consumption = math.min(-0.9, data.raw['module']['efficiency-module'].effect.consumption)
+
+-- MIG C 2 BASE RECIPE
+data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
+data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
+
+-- MIG A 1 BASE RECIPE_CATEGORY
+data:extend({{type='recipe-category', name='super-pump-fluid'}})
 
 -- MIG A 8 BASE RECIPE
 -- MIG A 14 SPACE_AGE RECIPE
@@ -496,35 +502,26 @@ end
 data.raw['proxy-container']['proxy-container'].flags = {'not-blueprintable', 'hide-alt-info', 'not-deconstructable', 'not-flammable', 'not-on-map', 'placeable-off-grid', 'placeable-player', 'no-automated-item-insertion', 'no-automated-item-removal'}
 data.raw['proxy-container']['proxy-container'].draw_inventory_content = false
 
--- MIG C 13 BASE ENTITY
+-- MIG C 12 BASE ENTITY
 -- MIG C 5 SPACE_AGE ENTITY
-for _, w in pairs({data.raw['storage-tank'], data.raw['generator'], data.raw['furnace'], data.raw['assembling-machine'], data.raw['roboport']}) do
+for _, w in pairs({data.raw['storage-tank'], data.raw['generator'], data.raw['furnace'], data.raw['assembling-machine']}) do
     for _, v in pairs(w) do
         v.heating_energy = nil
     end
 end
 
+-- MIG C 1 BASE ENTITY
+for _, v in pairs(data.raw['roboport']) do
+    v.heating_energy = nil
+    v.charging_station_count_affected_by_quality = true
+end
+
+-- MIG C 1 BASE ARMOR_EQUIPMENT
+for _, v in pairs(data.raw['roboport-equipment']) do
+    v.charging_station_count_affected_by_quality = true
+end
+
 if mods['space-age'] then
-    for _, v in pairs(data.raw['mining-drill']) do
-        v.drops_full_belt_stacks = true
-    end
-
-    for _, w in pairs({data.raw['roboport'], data.raw['roboport-equipment']}) do
-        for _, v in pairs(w) do
-            v.charging_station_count_affected_by_quality = true
-        end
-    end
-
-    for _, v in pairs(data.raw['lab']) do
-        v.uses_quality_drain_modifier = true
-    end
-
-    for _, w in pairs({data.raw['cargo-wagon'], data.raw['fluid-wagon']}) do
-        for _, v in pairs(w) do
-            v.quality_affects_inventory_size = true
-        end
-    end
-
     table.insert(data.raw['thruster']['thruster'].fuel_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.west, position = {-1.5, 2}})
     table.insert(data.raw['thruster']['thruster'].oxidizer_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.east, position = {1.5, 2}})
 
