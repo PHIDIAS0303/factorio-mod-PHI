@@ -107,8 +107,8 @@ local function hidden_recipe_enable(event)
     local enable = (event.name == defines.events.on_player_cheat_mode_enabled)
 
     for _, v in pairs(prototypes.fluid) do
-        if game.players[event.player_index].force.recipes['pump-' .. v.name] then
-            game.players[event.player_index].force.recipes['pump-' .. v.name].enabled = enable
+        if game.players[event.player_index].force.recipes['super-pump-' .. v.name] then
+            game.players[event.player_index].force.recipes['super-pump-' .. v.name].enabled = enable
         end
     end
 

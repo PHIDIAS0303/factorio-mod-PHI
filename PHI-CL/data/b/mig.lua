@@ -127,7 +127,7 @@ end
 if data.raw.fluid['water'] then
     data:extend({{
         type = 'recipe',
-        name = 'pump-water',
+        name = 'super-pump-water',
         category = 'super-pump-fluid',
         energy_required = 1,
         enabled = true,
