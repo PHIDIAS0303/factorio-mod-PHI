@@ -405,61 +405,73 @@ if data.raw.technology['turbo-transport-belt'] and data.raw['loader'] and data.r
     table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-loader'})
 end
 
-for _, v in pairs({'underground-belt', 'fast-underground-belt', 'express-underground-belt', 'turbo-underground-belt'}) do
+-- MIG A 3 BASE ENTITY,ITEM,RECIPE
+-- MIG A 1 SPACE_AGE ENTITY,ITEM,RECIPE
+for _, vn in pairs(data.raw['underground-belt']) do
+    local v = vn.name
+    local va = v .. '-a'
+
     if data.raw.item[v] then
         local item = table.deepcopy(data.raw.item[v])
-        item.name = v .. '-a'
-        item.place_result = item.name
+        item.name = va
+        item.place_result = va
         item.localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
         item.localised_description = {'entity-description.' .. v}
         data:extend({item})
-
-        local entity = table.deepcopy(data.raw['underground-belt'][v])
-        entity.name = item.name
-        entity.minable.result = item.name
-        entity.next_upgrade = nil
-        entity.surface_conditions = nil
-        entity.localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
-        entity.localised_description = {'entity-description.' .. v}
-
-        for _, st in pairs({'direction_in', 'direction_out', 'direction_in_side_loading', 'direction_out_side_loading'}) do
-            entity.structure[st].sheet.filename = items['general']['graphics_location'] .. v .. '.png'
-            entity.structure[st].sheet.width = 106
-            entity.structure[st].sheet.height = 85
-            entity.structure[st].sheetshift = {0.15625, 0.0703125}
-        end
-
-        entity.structure.direction_in.sheet.y = 85
-        entity.structure.direction_out.sheet.y = nil
-        entity.structure.direction_in_side_loading.sheet.y = 85
-        entity.structure.direction_out_side_loading.sheet.y = nil
-        data:extend({entity})
-
-        data:extend({{
-            type = 'recipe',
-            name = item.name,
-            energy_required = 2,
-            enabled = false,
-            ingredients = {{type = 'item', name = v, amount = 2}},
-            results = {{type = 'item', name = item.name, amount = 2}},
-            main_product = item.name,
-            hide_from_player_crafting = true,
-            allow_productivity = false,
-            localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
-        }})
     end
+
+    local entity = table.deepcopy(vn)
+    entity.name = va
+    entity.minable.result = va
+    entity.next_upgrade = (entity.next_upgrade and entity.next_upgrade .. '-a') or nil
+    entity.surface_conditions = nil
+    entity.localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
+    entity.localised_description = {'entity-description.' .. v}
+
+    for _, st in pairs({'direction_in', 'direction_out', 'direction_in_side_loading', 'direction_out_side_loading'}) do
+        entity.structure[st].sheet.filename = items['general']['graphics_location'] .. v .. '.png'
+        entity.structure[st].sheet.width = 106
+        entity.structure[st].sheet.height = 85
+        entity.structure[st].sheetshift = {0.15625, 0.0703125}
+    end
+
+    entity.structure.direction_in.sheet.y = 85
+    entity.structure.direction_out.sheet.y = nil
+    entity.structure.direction_in_side_loading.sheet.y = 85
+    entity.structure.direction_out_side_loading.sheet.y = nil
+    data:extend({entity})
+
+    data:extend({{
+        type = 'recipe',
+        name = va,
+        energy_required = 2,
+        enabled = false,
+        ingredients = {{type = 'item', name = v, amount = 2}},
+        results = {{type = 'item', name = va, amount = 2}},
+        main_product = va,
+        hide_from_player_crafting = true,
+        allow_productivity = false,
+        localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
+    }})
 end
 
-if data.raw['underground-belt']['underground-belt'] and data.raw['underground-belt']['fast-underground-belt'] and data.raw['underground-belt']['express-underground-belt'] then
-    data.raw['underground-belt']['underground-belt-a'].next_upgrade = 'fast-underground-belt-a'
-    data.raw['underground-belt']['fast-underground-belt-a'].next_upgrade = 'express-underground-belt-a'
+-- MIG A 1 BASE RESEARCH_EFFECT
+if data.raw.technology['logistics'] and data.raw['underground-belt'] and data.raw['underground-belt']['underground-belt'] then
     table.insert(data.raw.technology['logistics'].effects, {type = 'unlock-recipe', recipe = 'underground-belt-a'})
+end
+
+-- MIG A 1 BASE RESEARCH_EFFECT
+if data.raw.technology['logistics-2'] and data.raw['underground-belt'] and data.raw['underground-belt']['fast-underground-belt'] then
     table.insert(data.raw.technology['logistics-2'].effects, {type = 'unlock-recipe', recipe = 'fast-underground-belt-a'})
+end
+
+-- MIG A 1 BASE RESEARCH_EFFECT
+if data.raw.technology['logistics-3'] and data.raw['underground-belt'] and data.raw['underground-belt']['express-underground-belt'] then
     table.insert(data.raw.technology['logistics-3'].effects, {type = 'unlock-recipe', recipe = 'express-underground-belt-a'})
 end
 
-if data.raw['underground-belt']['underground-belt'] and data.raw['underground-belt']['turbo-underground-belt'] then
-    data.raw['underground-belt']['express-underground-belt-a'].next_upgrade = 'turbo-underground-belt-a'
+-- MIG A 1 SPACE_AGE RESEARCH_EFFECT
+if data.raw.technology['turbo-transport-belt'] and data.raw['underground-belt'] and data.raw['underground-belt']['turbo-underground-belt'] then
     table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-underground-belt-a'})
 end
 
