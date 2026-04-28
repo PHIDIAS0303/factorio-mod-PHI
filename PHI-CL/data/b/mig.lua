@@ -36,9 +36,14 @@ for _, t in pairs({data.raw['offshore-pump'], data.raw['pump'], data.raw['valve'
     end
 end
 
--- MIG C 2 BASE ENTITY
+-- MIG C 1 BASE ENTITY
+-- MIG C 1 SPACE_AGE ENTITY
 for _, v in pairs(data.raw['mining-drill']) do
     v.filter_count = 5
+
+    if mods['space-age'] then
+        v.drops_full_belt_stacks = true
+    end
 end
 
 -- MIG C 3 BASE MODULE
