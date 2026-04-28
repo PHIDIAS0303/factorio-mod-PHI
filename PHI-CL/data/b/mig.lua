@@ -3,8 +3,7 @@ local items = require 'config'
 -- MIG C 1 BASE ARMOR_EQUIPMENT
 data.raw['active-defense-equipment']['discharge-defense-equipment'].automatic = true
 
--- MIG C 3 BASE ENTITY
-data.raw['inserter']['burner-inserter'].allow_burner_leech = true
+-- MIG C 2 BASE ENTITY
 data.raw['programmable-speaker']['programmable-speaker'].energy_source.usage_priority = 'primary-input'
 table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
 
@@ -18,15 +17,23 @@ for _, v in pairs(data.raw['logistic-container']) do
     v.inventory_type = 'with_filters_and_bar'
 end
 
+-- MI C 4 BASE ENTITY
+for _, t in pairs({data.raw['locomotive'], data.raw['cargo-wagon'], data.raw['fluid-wagon'], data.raw['artillery-wagon']}) do
+    for _, v in pairs(t) do
+        v.reversing_power_modifier = 1
+    end
+end
+
 -- MIG C 1 BASE ENTITY
 for _, v in pairs(data.raw['reactor']) do
     v.scale_energy_usage = (v.fast_replaceable_group and v.fast_replaceable_group == 'reactor')
 end
 
--- MIG C 1 BASE ENTITY
-for _, v in pairs(data.raw['pump']) do
-    v.pumping_speed = math.max(50, v.pumping_speed) * settings.startup['PHI-MI-PIPE'].value / 10
-    v.heating_energy = nil
+-- MIG C 8 BASE ENTITY
+for _, t in pairs({data.raw['offshore-pump'], data.raw['pump'], data.raw['valve'], data.raw['pipe'], data.raw['pipe-to-ground'], data.raw['infinity-pipe']}) do
+    for _, v in pairs(t) do
+        v.heating_energy = nil
+    end
 end
 
 -- MIG C 2 BASE ENTITY
@@ -158,6 +165,10 @@ for _, v in pairs(data.raw['inserter']) do
     if v.energy_source and v.energy_source.type and (v.energy_source.type == 'electric' or v.energy_source.type == 'void' or v.energy_source.type == 'burner') then
         v.allow_custom_vectors = true
         v.flags = {'placeable-neutral', 'placeable-player', 'player-creation', ((v.hand_size and v.hand_size < 1) and 'building-direction-8-way') or 'building-direction-16-way'}
+
+        if v.energy_source.type == 'burner' then
+            v.allow_burner_leech = true
+        end
     end
 end
 
