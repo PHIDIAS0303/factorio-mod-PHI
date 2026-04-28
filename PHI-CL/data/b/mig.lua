@@ -151,12 +151,32 @@ if data.raw.fluid['water'] and data.raw.recipe['super-pump-water'] then
     data.raw.recipe['super-pump-water'].hidden = false
 end
 
+-- MIG C 5 BASE ENTITY
+-- MIG C 1 SPACE_AGE ENTITY
 for _, v in pairs(data.raw['inserter']) do
     if v.energy_source and v.energy_source.type and (v.energy_source.type == 'electric' or v.energy_source.type == 'void' or v.energy_source.type == 'burner') then
         v.allow_custom_vectors = true
         v.flags = {'placeable-neutral', 'placeable-player', 'player-creation', ((v.hand_size and v.hand_size < 1) and 'building-direction-8-way') or 'building-direction-16-way'}
     end
 end
+
+-- MIG A 36 BASE VIRTUAL_SIGNAL
+local vir_sig = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+local s = {}
+
+for i = 1, #vir_sig do
+    local char = vir_sig:sub(i, i)
+    table.insert(s, {
+        type = 'virtual-signal',
+        name = 'signal-' .. char .. 'A',
+        icon = items['general']['graphics_location'] .. 'signal/signal_' .. char .. '.png',
+        subgroup = (i < 11 and 'virtual-signal-number') or 'virtual-signal-letter',
+        order = ((i < 11 and 'b[numbers]2-[') or 'c[letters]2-[') .. char .. ']',
+        localised_name = {'phi-cl.combine', {'virtual-signal-name.signal-' .. char}, '(II)'}
+    })
+end
+
+data:extend(s)
 
 if mods['elevated-rails'] then
     local entity = table.deepcopy(data.raw['electric-pole']['big-electric-pole'])
@@ -197,23 +217,6 @@ if mods['elevated-rails'] then
         data:extend({entity})
     end
 end
-
-local vir_sig = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-local s = {}
-
-for i = 1, #vir_sig do
-    local char = vir_sig:sub(i, i)
-    table.insert(s, {
-        type = 'virtual-signal',
-        name = 'signal-' .. char .. 'A',
-        icon = items['general']['graphics_location'] .. 'signal/signal_' .. char .. '.png',
-        subgroup = string.match(char, '%d') and 'virtual-signal-number' or 'virtual-signal-letter',
-        order = (string.match(char, '%d') and 'b[numbers]2-[' or 'c[letters]2-[') .. char .. ']',
-        localised_name = {'phi-cl.combine', {'virtual-signal-name.signal-' .. char}, '(II)'}
-    })
-end
-
-data:extend(s)
 
 if data.raw['container']['steel-chest'] then
     local item = table.deepcopy(data.raw['item']['steel-chest'])
