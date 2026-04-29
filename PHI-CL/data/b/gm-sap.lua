@@ -1,11 +1,17 @@
 
--- GM-SAP C 2 SPACE_AGE RESOURCE
-data.raw.resource['lithium-brine'].infinite = true
-data.raw.resource['lithium-brine'].minimum = math.max(60000, data.raw.resource['lithium-brine'].minimum or 0)
-data.raw.resource['lithium-brine'].normal = math.max(300000, data.raw.resource['lithium-brine'].normal or 0)
-data.raw.resource['lithium-brine'].infinite_depletion_amount = math.min(10, data.raw.resource['lithium-brine'].infinite_depletion_amount or 999)
-data.raw.resource['fluorine-vent'].minimum = math.max(60000, data.raw.resource['fluorine-vent'].minimum or 0)
-data.raw.resource['fluorine-vent'].normal = math.max(300000, data.raw.resource['fluorine-vent'].normal or 0)
+-- GM-SAP C 1 SPACE_AGE RESOURCE
+if data.raw.resource['lithium-brine'] then
+    data.raw.resource['lithium-brine'].infinite = true
+    data.raw.resource['lithium-brine'].minimum = math.max(60000, data.raw.resource['lithium-brine'].minimum or 0)
+    data.raw.resource['lithium-brine'].normal = math.max(300000, data.raw.resource['lithium-brine'].normal or 0)
+    data.raw.resource['lithium-brine'].infinite_depletion_amount = math.min(10, data.raw.resource['lithium-brine'].infinite_depletion_amount or 999)
+end
+
+-- GM-SAP C 1 SPACE_AGE RESOURCE
+if data.raw.resource['fluorine-vent'] then
+    data.raw.resource['fluorine-vent'].minimum = math.max(60000, data.raw.resource['fluorine-vent'].minimum or 0)
+    data.raw.resource['fluorine-vent'].normal = math.max(300000, data.raw.resource['fluorine-vent'].normal or 0)
+end
 
 -- GM-SAP C 16 SPACE_AGE ENTITY
 for _, asteroid in pairs(data.raw['asteroid']) do
@@ -29,16 +35,26 @@ for _, chunk in pairs({'carbonic-asteroid-chunk', 'metallic-asteroid-chunk', 'pr
 end
 
 -- GM-SAP A 2 SPACE_AGE RESEARCH_EFFECT
-table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'solar-system-edge'})
-table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'shattered-planet'})
+if data.raw.technology['cryogenic-science-pack'] then
+    table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'solar-system-edge'})
+    table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'shattered-planet'})
+end
 
 -- GM-SAP C 1 SPACE_AGE ENTITY
-data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier = math.max(2, data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier)
-data.raw['space-platform-hub']['space-platform-hub'].inventory_size = math.max(119, data.raw['space-platform-hub']['space-platform-hub'].inventory_size)
+if data.raw['space-platform-hub'] and data.raw['space-platform-hub']['space-platform-hub'] then
+    data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier = math.max(2, data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier)
+    data.raw['space-platform-hub']['space-platform-hub'].inventory_size = math.max(119, data.raw['space-platform-hub']['space-platform-hub'].inventory_size)
+end
 
--- GM-SAP C 1 SPACE_AGE ITEM,TILE
-data.raw.tile['space-platform-foundation'].max_health = data.raw.tile['space-platform-foundation'].max_health * 2
-data.raw.item['space-platform-foundation'].stack_size = math.max(100, data.raw.item['space-platform-foundation'].stack_size)
+-- GM-SAP C 1 SPACE_AGE TILE
+if data.raw.tile['space-platform-foundation'] then
+    data.raw.tile['space-platform-foundation'].max_health = data.raw.tile['space-platform-foundation'].max_health * 2
+end
+
+-- GM-SAP C 1 SPACE_AGE ITEM
+if data.raw.item['space-platform-foundation'] then
+    data.raw.item['space-platform-foundation'].stack_size = math.max(100, data.raw.item['space-platform-foundation'].stack_size)
+end
 
 -- GM-SAP C 1 BASE ENTITY
 -- GM-SAP C 1 SPACE_AGE ENTITY
