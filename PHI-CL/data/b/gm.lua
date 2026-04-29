@@ -23,9 +23,6 @@ data.raw.recipe['artillery-turret'].ingredients = {{type = 'item', name = 'steel
 data.raw.recipe['artillery-shell'].ingredients = {{type = 'item', name = 'explosive-cannon-shell', amount = 4}, {type = 'item', name = 'radar', amount = 1}, {type = 'item', name = 'explosives', amount = 8}}
 data.raw.recipe['artillery-wagon'].ingredients = {{type = 'item', name = 'engine-unit', amount = 64}, {type = 'item', name = 'iron-gear-wheel', amount = 10}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'pipe', amount = 16}, {type = 'item', name = 'advanced-circuit', amount = 20}}
 
-data.raw.tile['space-platform-foundation'].max_health = data.raw.tile['space-platform-foundation'].max_health * 2
-data.raw.item['space-platform-foundation'].stack_size = math.max(100, data.raw.item['space-platform-foundation'].stack_size)
-
 data.raw['ammo-turret']['railgun-turret'].starting_attack_speed = 1
 data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_secondary = 1
 data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_when_killed = 1
@@ -40,7 +37,6 @@ data.raw['roboport']['roboport'].charging_energy = tostring(tonumber(string.matc
 data.raw['roboport']['roboport'].robot_slots_count = 10
 data.raw['roboport']['roboport'].material_slots_count = 2
 data.raw['roboport']['roboport'].charging_station_count = 8
--- data.raw['roboport']['roboport'].charging_offsets = {{-1.5, -1}, {1.5, -1}, {1.5, 1}, {-1.5, 1}, {-1, -1.5}, {1, -1.5}, {1, 1.5}, {-1, 1.5}}
 
 data.raw.ammo['artillery-shell'].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
 

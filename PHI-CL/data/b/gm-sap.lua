@@ -36,6 +36,10 @@ table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unl
 data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier = math.max(2, data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier)
 data.raw['space-platform-hub']['space-platform-hub'].inventory_size = math.max(119, data.raw['space-platform-hub']['space-platform-hub'].inventory_size)
 
+-- GM-SAP C 1 SPACE_AGE ITEM,TILE
+data.raw.tile['space-platform-foundation'].max_health = data.raw.tile['space-platform-foundation'].max_health * 2
+data.raw.item['space-platform-foundation'].stack_size = math.max(100, data.raw.item['space-platform-foundation'].stack_size)
+
 -- GM-SAP C 1 BASE ENTITY
 -- GM-SAP C 1 SPACE_AGE ENTITY
 for _, v in pairs(data.raw.lab) do
