@@ -281,14 +281,16 @@ if data.raw['container']['steel-chest'] then
         type = 'recipe',
         name = item.name,
         energy_required = 2,
-        enabled = false,
+        enabled = (data.raw.technology['steel-processing'] and false) or true,
         ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
         results = {{type = 'item', name = item.name, amount = 1}},
         main_product = item.name,
         localised_name = {'', {'name.trash-entity'}, {'entity-name.steel-chest'}}
     }})
 
-    table.insert(data.raw.technology['steel-processing'].effects, {type = 'unlock-recipe', recipe = item.name})
+    if data.raw.technology['steel-processing'] then
+        table.insert(data.raw.technology['steel-processing'].effects, {type = 'unlock-recipe', recipe = item.name})
+    end
 end
 
 -- MIG A 1 BASE ENTITY,ITEM,RECIPE,RESEARCH_EFFECT
@@ -328,14 +330,16 @@ if data.raw['pipe']['pipe'] then
         type = 'recipe',
         name = item.name,
         energy_required = 2,
-        enabled = false,
+        enabled = (data.raw.technology['automation'] and false) or true,
         ingredients = {{type = 'item', name = 'iron-plate', amount = 1}},
         results = {{type = 'item', name = item.name, amount = 1}},
         main_product = item.name,
         localised_name = {'', {'name.trash-entity'}, {'entity-name.pipe'}}
     }})
 
-    table.insert(data.raw.technology['automation'].effects, {type = 'unlock-recipe', recipe = item.name})
+    if data.raw.technology['automation'] then
+        table.insert(data.raw.technology['automation'].effects, {type = 'unlock-recipe', recipe = item.name})
+    end
 end
 
 -- MIG A 1 BASE ENTITY,ITEM,RECIPE
@@ -408,24 +412,16 @@ for _, ln in pairs(data.raw['loader']) do
     end
 end
 
--- MIG A 1 BASE RESEARCH_EFFECT
-if data.raw.technology['logistics'] and data.raw['loader'] and data.raw['loader']['loader'] then
-    table.insert(data.raw.technology['logistics'].effects, {type = 'unlock-recipe', recipe = 'loader'})
-end
-
--- MIG A 1 BASE RESEARCH_EFFECT
-if data.raw.technology['logistics-2'] and data.raw['loader'] and data.raw['loader']['fast-loader'] then
-    table.insert(data.raw.technology['logistics-2'].effects, {type = 'unlock-recipe', recipe = 'fast-loader'})
-end
-
--- MIG A 1 BASE RESEARCH_EFFECT
-if data.raw.technology['logistics-3'] and data.raw['loader'] and data.raw['loader']['express-loader'] then
-    table.insert(data.raw.technology['logistics-3'].effects, {type = 'unlock-recipe', recipe = 'express-loader'})
-end
-
+-- MIG A 3 BASE RESEARCH_EFFECT
 -- MIG A 1 SPACE_AGE RESEARCH_EFFECT
-if data.raw.technology['turbo-transport-belt'] and data.raw['loader'] and data.raw['loader']['turbo-loader'] then
-    table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-loader'})
+for _, v in pairs({{'logistics', 'loader'}, {'logistics-2', 'fast-loader'}, {'logistics-3', 'express-loader'}, {'turbo-transport-belt', 'turbo-loader'}}) do
+    if data.raw['loader'] and data.raw['loader'][v[2]] then
+        if data.raw.technology[v[1]] then
+            table.insert(data.raw.technology[v[1]].effects, {type = 'unlock-recipe', recipe = v[2]})
+        else
+            data.raw.recipe[v[2]].enabled = true
+        end
+    end
 end
 
 -- MIG A 3 BASE ENTITY,ITEM,RECIPE
@@ -478,24 +474,16 @@ for _, vn in pairs(data.raw['underground-belt']) do
     }})
 end
 
--- MIG A 1 BASE RESEARCH_EFFECT
-if data.raw.technology['logistics'] and data.raw['underground-belt'] and data.raw['underground-belt']['underground-belt'] then
-    table.insert(data.raw.technology['logistics'].effects, {type = 'unlock-recipe', recipe = 'underground-belt-a'})
-end
-
--- MIG A 1 BASE RESEARCH_EFFECT
-if data.raw.technology['logistics-2'] and data.raw['underground-belt'] and data.raw['underground-belt']['fast-underground-belt'] then
-    table.insert(data.raw.technology['logistics-2'].effects, {type = 'unlock-recipe', recipe = 'fast-underground-belt-a'})
-end
-
--- MIG A 1 BASE RESEARCH_EFFECT
-if data.raw.technology['logistics-3'] and data.raw['underground-belt'] and data.raw['underground-belt']['express-underground-belt'] then
-    table.insert(data.raw.technology['logistics-3'].effects, {type = 'unlock-recipe', recipe = 'express-underground-belt-a'})
-end
-
+-- MIG A 3 BASE RESEARCH_EFFECT
 -- MIG A 1 SPACE_AGE RESEARCH_EFFECT
-if data.raw.technology['turbo-transport-belt'] and data.raw['underground-belt'] and data.raw['underground-belt']['turbo-underground-belt'] then
-    table.insert(data.raw.technology['turbo-transport-belt'].effects, {type = 'unlock-recipe', recipe = 'turbo-underground-belt-a'})
+for _, v in pairs({{'logistics', 'underground-belt'}, {'logistics-2', 'fast-underground-belt'}, {'logistics-3', 'express-underground-belt'}, {'turbo-transport-belt', 'turbo-underground-belt'}}) do
+    if data.raw['underground-belt'] and data.raw['underground-belt'][v[2]] then
+        if data.raw.technology[v[1]] then
+            table.insert(data.raw.technology[v[1]].effects, {type = 'unlock-recipe', recipe = v[2] .. '-a'})
+        else
+            data.raw.recipe[v[2] .. '-a'].enabled = true
+        end
+    end
 end
 
 -- MIG C 1 BASE ENTITY

@@ -78,6 +78,12 @@ end
 data.raw.tool['promethium-science-pack'].hidden = true
 data.raw.tool['promethium-science-pack'].hidden_in_factoriopedia = true
 
+for _, v in pairs({'coal', 'stone', 'iron-ore', 'copper-ore', 'uranium-ore'}) do
+    if data.raw.item[v] then
+        data.raw.item[v].stack_size = math.max(data.raw.item[v].stack_size, 100)
+    end
+end
+
 local item = table.deepcopy(data.raw['item']['depleted-uranium-fuel-cell'])
 item.name = 'empty-train-battery'
 item.icon = items['general']['graphics_location'] .. 'battery.png'
@@ -134,11 +140,5 @@ data:extend({{
 for _, v in pairs(data.raw['locomotive']) do
     if v.energy_source then
         v.energy_source.burnt_inventory_size = (v.energy_source.burnt_inventory_size and math.max(v.energy_source.burnt_inventory_size, 1)) or 1
-    end
-end
-
-for _, v in pairs({'coal', 'stone', 'iron-ore', 'copper-ore', 'uranium-ore'}) do
-    if data.raw.item[v] then
-        data.raw.item[v].stack_size = math.max(data.raw.item[v].stack_size, 100)
     end
 end
