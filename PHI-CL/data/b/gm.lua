@@ -54,9 +54,13 @@ data.raw.technology['research-productivity'].unit.ingredients = {{'automation-sc
 
 -- GM A 9 BASE RESEARCH_EFFECT
 for i=5, 7 do
-    table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'tesla', modifier = 0.7})
-    table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'electric', modifier = 0.7})
-    table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.6})
+    local tn = 'laser-weapons-damage-' .. i
+
+    if data.raw.technology[tn] then
+        table.insert(data.raw.technology[tn].effects, {type = 'ammo-damage', ammo_category = 'tesla', modifier = 0.7})
+        table.insert(data.raw.technology[tn].effects, {type = 'ammo-damage', ammo_category = 'electric', modifier = 0.7})
+        table.insert(data.raw.technology[tn].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.6})
+    end
 end
 
 -- GM A 13 BASE RESEARCH_EFFECT
