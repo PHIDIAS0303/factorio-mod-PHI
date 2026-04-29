@@ -93,9 +93,13 @@ end
 data.raw.tool['promethium-science-pack'].hidden = true
 data.raw.tool['promethium-science-pack'].hidden_in_factoriopedia = true
 
-for _, v in pairs({'coal', 'stone', 'iron-ore', 'copper-ore', 'uranium-ore'}) do
-    if data.raw.item[v] then
-        data.raw.item[v].stack_size = math.max(data.raw.item[v].stack_size, 100)
+-- GM C 5 BASE RESOURCE
+-- GM C 3 SPACE_AGE RESOURCE
+for _, v in pairs(data.raw['resource']) do
+    local vn = v.name
+
+    if data.raw.item[vn] and data.raw.item[vn].stack_size then
+        data.raw.item[vn].stack_size = math.max(data.raw.item[vn].stack_size, 100)
     end
 end
 
