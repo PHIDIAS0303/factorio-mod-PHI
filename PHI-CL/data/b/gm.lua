@@ -61,26 +61,19 @@ data.raw.technology['cliff-explosives'].effects = {{type = 'unlock-recipe', reci
 data.raw.technology['research-productivity'].prerequisites = {'cryogenic-science-pack'}
 data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}, {'agricultural-science-pack', 1}, {'cryogenic-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'metallurgic-science-pack', 1}}
 
-table.insert(data.raw.technology['stronger-explosives-4'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.1})
-table.insert(data.raw.technology['stronger-explosives-5'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.1})
-table.insert(data.raw.technology['stronger-explosives-6'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.2})
-table.insert(data.raw.technology['stronger-explosives-7'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.2})
-table.insert(data.raw.technology['laser-weapons-damage-3'].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.3})
-table.insert(data.raw.technology['laser-weapons-damage-4'].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.4})
-table.insert(data.raw.technology['laser-shooting-speed-5'].effects, {type = 'gun-speed', ammo_category = 'electric', modifier = 0.2})
-table.insert(data.raw.technology['laser-shooting-speed-6'].effects, {type = 'gun-speed', ammo_category = 'electric', modifier = 0.3})
-table.insert(data.raw.technology['laser-shooting-speed-7'].effects, {type = 'gun-speed', ammo_category = 'electric', modifier = 0.5})
-
+-- GM A 9 BASE RESEARCH_EFFECT
 for i=5, 7 do
     table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'tesla', modifier = 0.7})
     table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'electric', modifier = 0.7})
     table.insert(data.raw.technology['laser-weapons-damage-' .. i].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.6})
 end
 
-table.insert(data.raw.technology['physical-projectile-damage-6'].effects, {type = 'ammo-damage', ammo_category = 'railgun', modifier = 0.2})
-table.insert(data.raw.technology['physical-projectile-damage-7'].effects, {type = 'ammo-damage', ammo_category = 'railgun', modifier = 0.4})
-table.insert(data.raw.technology['weapon-shooting-speed-6'].effects, {type = 'gun-speed', ammo_category = 'railgun', modifier = 0.2})
-table.insert(data.raw.technology['artillery-shell-speed-1'].effects, {type = 'gun-speed', ammo_category = 'railgun', modifier = 0.2})
+-- GM A 13 BASE RESEARCH_EFFECT
+for _, v in pairs({{'stronger-explosives-4', 'ammo-damage', 'artillery-shell', 0.1}, {'stronger-explosives-5', 'ammo-damage', 'artillery-shell', 0.1}, {'stronger-explosives-6', 'ammo-damage', 'artillery-shell', 0.2}, {'stronger-explosives-7', 'ammo-damage', 'artillery-shell', 0.2}, {'laser-weapons-damage-3', 'ammo-damage', 'beam', 0.3}, {'laser-weapons-damage-4', 'ammo-damage', 'beam', 0.4}, {'laser-shooting-speed-5', 'gun-speed', 'electric', 0.2}, {'laser-shooting-speed-6', 'gun-speed', 'electric', 0.3}, {'laser-shooting-speed-7', 'gun-speed', 'electric', 0.5}, {'physical-projectile-damage-6', 'ammo-damage', 'railgun', 0.2}, {'physical-projectile-damage-7', 'ammo-damage', 'railgun', 0.4}, {'weapon-shooting-speed-6', 'gun-speed', 'railgun', 0.2}, {'artillery-shell-speed-1', 'gun-speed', 'railgun', 0.2}}) do
+    if data.raw.technology[v[1]] then
+        table.insert(data.raw.technology[v[1]].effects, {type = v[2], ammo_category = v[3], modifier = v[4]})
+    end
+end
 
 -- GM H 8 SPACE_AGE RESEARCH
 for _, v in pairs({'artillery-shell-damage-1', 'railgun-damage-1', 'railgun-shooting-speed-1', 'electric-weapons-damage-1', 'electric-weapons-damage-2', 'electric-weapons-damage-3', 'electric-weapons-damage-4', 'promethium-science-pack'}) do
