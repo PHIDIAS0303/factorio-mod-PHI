@@ -99,61 +99,65 @@ for _, v in pairs({'coal', 'stone', 'iron-ore', 'copper-ore', 'uranium-ore'}) do
     end
 end
 
-local item = table.deepcopy(data.raw['item']['depleted-uranium-fuel-cell'])
-item.name = 'empty-train-battery'
-item.icon = items['general']['graphics_location'] .. 'battery.png'
-item.order = 'qa'
-item.stack_size = 100
-item.localised_name = {'name.empty-train-battery'}
-item.localised_description = {'description.empty-train-battery'}
-data:extend({item})
+-- GM A 2 BASE ITEM,RECIPE
+-- GM C 1 BASE ENTITY
+if data.raw.item['depleted-uranium-fuel-cell'] and data.raw.item['nuclear-fuel'] then
+    local item = table.deepcopy(data.raw.item['depleted-uranium-fuel-cell'])
+    item.name = 'empty-train-battery'
+    item.icon = items['general']['graphics_location'] .. 'battery.png'
+    item.order = 'qa'
+    item.stack_size = 100
+    item.localised_name = {'name.empty-train-battery'}
+    item.localised_description = {'description.empty-train-battery'}
+    data:extend({item})
 
-data:extend({{
-    type = 'recipe',
-    name = 'empty-train-battery',
-    energy_required = 30,
-    enabled = true,
-    icon = items['general']['graphics_location'] .. 'battery.png',
-    icon_size = 64,
-    subgroup = 'intermediate-product',
-    order = 'zc',
-    allow_productivity = false,
-    ingredients = {{type = 'item', name = 'battery', amount = 100}},
-    results = {{type = 'item', name = 'empty-train-battery', amount = 1}},
-    main_product = 'empty-train-battery',
-    localised_name = {'name.empty-train-battery'},
-    localised_description = {'description.empty-train-battery'}
-}})
+    data:extend({{
+        type = 'recipe',
+        name = 'empty-train-battery',
+        energy_required = 30,
+        enabled = true,
+        icon = items['general']['graphics_location'] .. 'battery.png',
+        icon_size = 64,
+        subgroup = 'intermediate-product',
+        order = 'zc',
+        allow_productivity = false,
+        ingredients = {{type = 'item', name = 'battery', amount = 100}},
+        results = {{type = 'item', name = 'empty-train-battery', amount = 1}},
+        main_product = 'empty-train-battery',
+        localised_name = {'name.empty-train-battery'},
+        localised_description = {'description.empty-train-battery'}
+    }})
 
-item = table.deepcopy(data.raw['item']['nuclear-fuel'])
-item.name = 'charged-train-battery'
-item.burnt_result = 'empty-train-battery'
-item.fuel_value = '1GJ'
-item.icon = items['general']['graphics_location'] .. 'battery.png'
-item.stack_size = 10
-item.localised_name = {'name.charged-train-battery'}
-item.localised_description = {'description.charged-train-battery'}
-data:extend({item})
+    item = table.deepcopy(data.raw.item['nuclear-fuel'])
+    item.name = 'charged-train-battery'
+    item.burnt_result = 'empty-train-battery'
+    item.fuel_value = '1GJ'
+    item.icon = items['general']['graphics_location'] .. 'battery.png'
+    item.stack_size = 10
+    item.localised_name = {'name.charged-train-battery'}
+    item.localised_description = {'description.charged-train-battery'}
+    data:extend({item})
 
-data:extend({{
-    type = 'recipe',
-    name = 'charged-train-battery',
-    energy_required = 60,
-    enabled = true,
-    icon = items['general']['graphics_location'] .. 'battery.png',
-    icon_size = 64,
-    subgroup = 'intermediate-product',
-    order = 'zd',
-    allow_productivity = false,
-    ingredients = {{type = 'item', name = 'empty-train-battery', amount = 1}},
-    results = {{type = 'item', name = 'charged-train-battery', probability = 0.995, amount = 1}, {type = 'item', name = 'battery', probability = 0.005, amount = 5}},
-    main_product = 'charged-train-battery',
-    localised_name = {'name.charged-train-battery'},
-    localised_description = {'description.charged-train-battery'}
-}})
+    data:extend({{
+        type = 'recipe',
+        name = 'charged-train-battery',
+        energy_required = 60,
+        enabled = true,
+        icon = items['general']['graphics_location'] .. 'battery.png',
+        icon_size = 64,
+        subgroup = 'intermediate-product',
+        order = 'zd',
+        allow_productivity = false,
+        ingredients = {{type = 'item', name = 'empty-train-battery', amount = 1}},
+        results = {{type = 'item', name = 'charged-train-battery', probability = 0.995, amount = 1}, {type = 'item', name = 'battery', probability = 0.005, amount = 5}},
+        main_product = 'charged-train-battery',
+        localised_name = {'name.charged-train-battery'},
+        localised_description = {'description.charged-train-battery'}
+    }})
 
-for _, v in pairs(data.raw['locomotive']) do
-    if v.energy_source then
-        v.energy_source.burnt_inventory_size = (v.energy_source.burnt_inventory_size and math.max(v.energy_source.burnt_inventory_size, 1)) or 1
+    for _, v in pairs(data.raw['locomotive']) do
+        if v.energy_source then
+            v.energy_source.burnt_inventory_size = (v.energy_source.burnt_inventory_size and math.max(v.energy_source.burnt_inventory_size, 1)) or 1
+        end
     end
 end
