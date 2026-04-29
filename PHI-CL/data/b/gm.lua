@@ -38,15 +38,6 @@ data.raw.recipe['artillery-turret'].ingredients = {{type = 'item', name = 'steel
 data.raw.recipe['artillery-shell'].ingredients = {{type = 'item', name = 'explosive-cannon-shell', amount = 4}, {type = 'item', name = 'radar', amount = 1}, {type = 'item', name = 'explosives', amount = 8}}
 data.raw.recipe['artillery-wagon'].ingredients = {{type = 'item', name = 'engine-unit', amount = 64}, {type = 'item', name = 'iron-gear-wheel', amount = 10}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'pipe', amount = 16}, {type = 'item', name = 'advanced-circuit', amount = 20}}
 
-data.raw['ammo-turret']['railgun-turret'].starting_attack_speed = 1
-data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_secondary = 1
-data.raw['ammo-turret']['railgun-turret'].starting_attack_speed_when_killed = 1
-data.raw['ammo-turret']['railgun-turret'].preparing_speed = 1
-data.raw['ammo-turret']['railgun-turret'].attacking_speed = 1
-data.raw['ammo-turret']['railgun-turret'].ending_attack_speed = 1
-data.raw['ammo-turret']['railgun-turret'].folding_speed = 1
-data.raw['ammo-turret']['railgun-turret'].energy_source.input_flow_limit = tonumber(string.match(data.raw['ammo-turret']['railgun-turret'].energy_source.input_flow_limit, '[%d%.]+')) * 32 .. string.match(data.raw['ammo-turret']['railgun-turret'].energy_source.input_flow_limit, '%a+')
-
 data.raw['roboport']['roboport'].energy_source.input_flow_limit = nil
 data.raw['roboport']['roboport'].charging_energy = tostring(tonumber(string.match(data.raw['roboport']['roboport'].charging_energy, '[%d%.]+')) * 2) .. string.match(data.raw['roboport']['roboport'].charging_energy, '%a+')
 data.raw['roboport']['roboport'].robot_slots_count = 10
