@@ -82,6 +82,7 @@ table.insert(data.raw.technology['physical-projectile-damage-7'].effects, {type 
 table.insert(data.raw.technology['weapon-shooting-speed-6'].effects, {type = 'gun-speed', ammo_category = 'railgun', modifier = 0.2})
 table.insert(data.raw.technology['artillery-shell-speed-1'].effects, {type = 'gun-speed', ammo_category = 'railgun', modifier = 0.2})
 
+-- GM H 8 SPACE_AGE RESEARCH
 for _, v in pairs({'artillery-shell-damage-1', 'railgun-damage-1', 'railgun-shooting-speed-1', 'electric-weapons-damage-1', 'electric-weapons-damage-2', 'electric-weapons-damage-3', 'electric-weapons-damage-4', 'promethium-science-pack'}) do
     if data.raw.technology[v] then
         data.raw.technology[v].hidden = true
@@ -90,6 +91,7 @@ for _, v in pairs({'artillery-shell-damage-1', 'railgun-damage-1', 'railgun-shoo
     end
 end
 
+-- GM H 1 SPACE_AGE TOOL
 data.raw.tool['promethium-science-pack'].hidden = true
 data.raw.tool['promethium-science-pack'].hidden_in_factoriopedia = true
 
