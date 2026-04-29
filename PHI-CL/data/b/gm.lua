@@ -1,9 +1,24 @@
 local items = require 'config'
 
-data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus = math.max(40, data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus)
-data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = math.max(60, data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size)
-data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = math.max(60, data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size)
-data.raw['cargo-wagon']['cargo-wagon'].inventory_size = math.max(80, data.raw['cargo-wagon']['cargo-wagon'].inventory_size)
+-- GM C 1 SPACE_AGE ENTITY
+if data.raw['cargo-bay'] and data.raw['cargo-bay']['cargo-bay'] then
+    data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus = math.max(40, data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus)
+end
+
+-- GM C 1 BASE ENTITY
+if data.raw['rocket-silo'] and data.raw['rocket-silo']['rocket-silo'] then
+    data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = math.max(60, data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size)
+end
+
+-- GM C 1 BASE ENTITY
+if data.raw['rocket-silo-rocket'] and data.raw['rocket-silo-rocket']['rocket-silo-rocket'] then
+    data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = math.max(60, data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size)
+end
+
+-- GM C 1 BASE ENTITY
+if data.raw['cargo-wagon'] and data.raw['cargo-wagon']['cargo-wagon'] then
+    data.raw['cargo-wagon']['cargo-wagon'].inventory_size = math.max(80, data.raw['cargo-wagon']['cargo-wagon'].inventory_size)
+end
 
 data.raw.technology['foundation'].prerequisites = {'rail-support-foundations'}
 data.raw.technology['foundation'].unit.count = 1000
