@@ -1,3 +1,4 @@
+local items = require 'config'
 
 if mods['space-age'] then
     data.raw['utility-constants'].default.default_pipeline_extent = math.max(settings.startup['PHI-MI-PIPE-EXTENT'].value, 960)

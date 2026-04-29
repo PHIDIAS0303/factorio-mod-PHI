@@ -1,10 +1,4 @@
-
-data.raw.resource['lithium-brine'].infinite = true
-data.raw.resource['lithium-brine'].minimum = math.max(60000, data.raw.resource['lithium-brine'].minimum or 0)
-data.raw.resource['lithium-brine'].normal = math.max(300000, data.raw.resource['lithium-brine'].normal or 0)
-data.raw.resource['lithium-brine'].infinite_depletion_amount = math.min(10, data.raw.resource['lithium-brine'].infinite_depletion_amount or 999)
-data.raw.resource['fluorine-vent'].minimum = math.max(60000, data.raw.resource['fluorine-vent'].minimum or 0)
-data.raw.resource['fluorine-vent'].normal = math.max(300000, data.raw.resource['fluorine-vent'].normal or 0)
+local items = require 'config'
 
 data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier = math.max(2, data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier)
 data.raw['space-platform-hub']['space-platform-hub'].inventory_size = math.max(119, data.raw['space-platform-hub']['space-platform-hub'].inventory_size)
@@ -50,26 +44,6 @@ data.raw['roboport']['roboport'].material_slots_count = 2
 data.raw['roboport']['roboport'].charging_station_count = 8
 -- data.raw['roboport']['roboport'].charging_offsets = {{-1.5, -1}, {1.5, -1}, {1.5, 1}, {-1.5, 1}, {-1, -1.5}, {1, -1.5}, {1, 1.5}, {-1, 1.5}}
 
-for _, chunk in pairs({'carbonic-asteroid-chunk', 'metallic-asteroid-chunk', 'promethium-asteroid-chunk', 'oxide-asteroid-chunk'}) do
-    data.raw['asteroid-chunk'][chunk].minable.count = (data.raw['asteroid-chunk'][chunk].minable.count or 1) * 4
-    data.raw.item[chunk].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
-    -- can try dying_trigger_effect = nil, not much ups improvement
-end
-
-for _, asteroid in pairs(data.raw['asteroid']) do
-    if asteroid.dying_trigger_effect then
-        for _, trigger in pairs(asteroid.dying_trigger_effect) do
-            if trigger.type == 'create-asteroid-chunk' then
-                trigger.probability = (trigger.probability or 1) / 4
-            end
-        end
-    end
-
-    for _, r in pairs(asteroid.resistances) do
-        r.percent = (r.percent > 98 and 98) or r.percent
-    end
-end
-
 data.raw.ammo['artillery-shell'].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
 
 data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
@@ -78,8 +52,6 @@ data.raw.technology['cliff-explosives'].effects = {{type = 'unlock-recipe', reci
 data.raw.technology['research-productivity'].prerequisites = {'cryogenic-science-pack'}
 data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}, {'agricultural-science-pack', 1}, {'cryogenic-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'metallurgic-science-pack', 1}}
 
-table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'solar-system-edge'})
-table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'shattered-planet'})
 table.insert(data.raw.technology['stronger-explosives-4'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.1})
 table.insert(data.raw.technology['stronger-explosives-5'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.1})
 table.insert(data.raw.technology['stronger-explosives-6'].effects, {type = 'ammo-damage', ammo_category = 'artillery-shell', modifier = 0.2})
@@ -111,10 +83,6 @@ end
 
 data.raw.tool['promethium-science-pack'].hidden = true
 data.raw.tool['promethium-science-pack'].hidden_in_factoriopedia = true
-
-for _, v in pairs(data.raw.lab) do
-    v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack', 'agricultural-science-pack', 'cryogenic-science-pack', 'electromagnetic-science-pack', 'metallurgic-science-pack'}
-end
 
 local item = table.deepcopy(data.raw['item']['depleted-uranium-fuel-cell'])
 item.name = 'empty-train-battery'
