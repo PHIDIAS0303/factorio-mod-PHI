@@ -1,4 +1,3 @@
-local items = require 'config'
 
 -- GM-SAP C 2 SPACE_AGE RESOURCE
 data.raw.resource['lithium-brine'].infinite = true
@@ -32,6 +31,10 @@ end
 -- GM-SAP A 2 SPACE_AGE RESEARCH_EFFECT
 table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'solar-system-edge'})
 table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'shattered-planet'})
+
+-- GM-SAP C 1 SPACE_AGE ENTITY
+data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier = math.max(2, data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier)
+data.raw['space-platform-hub']['space-platform-hub'].inventory_size = math.max(119, data.raw['space-platform-hub']['space-platform-hub'].inventory_size)
 
 -- GM-SAP C 1 BASE ENTITY
 -- GM-SAP C 1 SPACE_AGE ENTITY
