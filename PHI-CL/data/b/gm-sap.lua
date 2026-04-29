@@ -40,6 +40,12 @@ if data.raw.technology['cryogenic-science-pack'] then
     table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'shattered-planet'})
 end
 
+-- GM-SAP C 1 SPACE_AGE RESEARCH
+if data.raw.technology['research-productivity'] then
+    data.raw.technology['research-productivity'].prerequisites = {'cryogenic-science-pack'}
+    data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}, {'agricultural-science-pack', 1}, {'cryogenic-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'metallurgic-science-pack', 1}}
+end
+
 -- GM-SAP C 1 SPACE_AGE ENTITY
 if data.raw['space-platform-hub'] and data.raw['space-platform-hub']['space-platform-hub'] then
     data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier = math.max(2, data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier)

@@ -49,8 +49,6 @@ data.raw.ammo['artillery-shell'].stack_size = data.raw['inserter']['stack-insert
 data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
 data.raw.technology['cliff-explosives'].unit = {count = 200, time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
 data.raw.technology['cliff-explosives'].effects = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
-data.raw.technology['research-productivity'].prerequisites = {'cryogenic-science-pack'}
-data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}, {'agricultural-science-pack', 1}, {'cryogenic-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'metallurgic-science-pack', 1}}
 
 -- GM A 9 BASE RESEARCH_EFFECT
 for i=5, 7 do
