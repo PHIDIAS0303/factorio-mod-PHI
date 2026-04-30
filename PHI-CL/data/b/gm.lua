@@ -1,14 +1,5 @@
 
 local mod_graphic_location = '__PHI-CL__/graphics/'
-local mod_tint = {
-    [2] = {r=140, g=142, b=200},
-    [3] = {r=242, g=161, b=26},
-    [4] = {r=255, g=254, b=42},
-    [5] = {r=54, g=228, b=255},
-    [6] = {r=253, g=0, b=97},
-    [7] = {r=0, g=209, b=102},
-    [8] = {r=233, g=63, b=233}
-}
 
 -- GM C 1 SPACE_AGE ENTITY
 if data.raw['cargo-bay'] and data.raw['cargo-bay']['cargo-bay'] then

@@ -22,7 +22,7 @@ for _, v in pairs(data.raw['inserter']) do
     v.enter_drop_mode_if_held_stack_spoiled = true
 end
 
-for k, v in pairs(items['space-age']['PHI-VP']['surface_conditions']) do
+for k, v in pairs(items['surface_conditions']) do
     data.raw[v][k].surface_conditions = nil
 end
 
@@ -148,7 +148,7 @@ data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe
 data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
 data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
 
-for k, v in pairs(items['space-age']['PHI-VP']['technology_reform']) do
+for k, v in pairs(items['technology_reform']) do
     if v.prerequisites then
         data.raw.technology[k].prerequisites = v.prerequisites
     end
@@ -282,7 +282,7 @@ for _, v in pairs({'space-science-pack', 'electromagnetic-plant', 'foundry', 'cr
     data.raw.technology[v].research_trigger = nil
 end
 
-for k, v in pairs(items['space-age']['PHI-VP']['technology']) do
+for k, v in pairs(items['technology']) do
     if data.raw.technology[k] then
         data.raw.technology[k].hidden = v
         data.raw.technology[k].hidden_in_factoriopedia = v
@@ -299,21 +299,21 @@ for k, v in pairs(items['space-age']['PHI-VP']['technology']) do
     end
 end
 
-for k, v in pairs(items['space-age']['PHI-VP']['recipe']) do
+for k, v in pairs(items['recipe']) do
     if data.raw.recipe[k] then
         data.raw.recipe[k].hidden = v
         data.raw.recipe[k].hidden_in_factoriopedia = v
     end
 end
 
-for k, v in pairs(items['space-age']['PHI-VP']['item']) do
+for k, v in pairs(items['item']) do
     if data.raw.item[k] then
         data.raw.item[k].hidden = v
         data.raw.item[k].hidden_in_factoriopedia = v
     end
 end
 
-for k, v in pairs(items['space-age']['PHI-VP']['hidden_data']) do
+for k, v in pairs(items['hidden_data']) do
     if data.raw[v] and data.raw[v][k] then
         data.raw[v][k].hidden = true
         data.raw[v][k].hidden_in_factoriopedia = true
@@ -586,7 +586,7 @@ data:extend({
 data.raw['tool']['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'raw-fish', amount = 1}}
 data.raw['tool']['space-science-pack'].send_to_orbit_mode = 'automated'
 
-for k, v in pairs(items['space-age']['PHI-VP']['technology_vp']) do
+for k, v in pairs(items['technology_vp']) do
     if data.raw.technology[k] then
         data.raw.technology[k].hidden = v
         data.raw.technology[k].hidden_in_factoriopedia = v
@@ -603,21 +603,21 @@ for k, v in pairs(items['space-age']['PHI-VP']['technology_vp']) do
     end
 end
 
-for k, v in pairs(items['space-age']['PHI-VP']['recipe_vp']) do
+for k, v in pairs(items['recipe_vp']) do
     if data.raw.recipe[k] then
         data.raw.recipe[k].hidden = v
         data.raw.recipe[k].hidden_in_factoriopedia = v
     end
 end
 
-for k, v in pairs(items['space-age']['PHI-VP']['item_vp']) do
+for k, v in pairs(items['item_vp']) do
     if data.raw.item[k] then
         data.raw.item[k].hidden = v
         data.raw.item[k].hidden_in_factoriopedia = v
     end
 end
 
-for k, v in pairs(items['space-age']['PHI-VP']['hidden_data_vp']) do
+for k, v in pairs(items['hidden_data_vp']) do
     if data.raw[v] and data.raw[v][k] then
         data.raw[v][k].hidden = true
         data.raw[v][k].hidden_in_factoriopedia = true
