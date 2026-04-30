@@ -32,7 +32,6 @@ for _, v in pairs(items) do
     end
 end
 
-
 if mods['space-exploration'] and settings.startup['PHI-MB-MACHINE-TIER'].value > 1 then
     data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'se-core-miner-drill'
 

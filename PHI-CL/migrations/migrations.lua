@@ -1,50 +1,85 @@
-local items = require '__PHI-CL__/config'
+local mbe = require 'mbe-c'
+local mbm = require 'mbm-c'
+local mbq = require 'mbq-c'
 
 for _, force in pairs(game.forces) do
     local technologies = force.technologies
     local recipes = force.recipes
 
-    for _, v in pairs(items['item']) do
-        if v.enabled then
+    for _, v in pairs(mbe) do
+        v.mod = v.mod or 'base'
+
+        if (v.mod and mods[v.mod]) and (v.max >= (v.min or 2)) then
+            v.tech = v.tech or 'compound-energy'
+
             if (v.tech == 'compound-energy') then
                 for j=v.min, v.max, 1 do
-                    if ((not technologies['compound-energy-' .. j]) or technologies['compound-energy-' .. j].researched) and recipes[v.name .. '-' .. j] then
-                        recipes[v.name .. '-' .. j].enabled = true
-                        recipes[v.name .. '-' .. j].reload()
+                    local vn = (v.ref_name or v.name) .. '-' .. j
+
+                    if ((not technologies['compound-energy-' .. j]) or technologies['compound-energy-' .. j].researched) and recipes[vn] then
+                        recipes[vn].enabled = true
+                        recipes[vn].reload()
                     end
                 end
+            elseif (not technologies[v.tech]) or technologies[v.tech].researched then
+                for j=v.min, v.max, 1 do
+                    local vn = (v.ref_name or v.name) .. '-' .. j
 
-            else
-                if (not technologies[v.tech]) or technologies[v.tech].researched then
-                    if string.find(v.type, '-equipment') then
-                        for j=v.min, v.max, 1 do
-                            if recipes[v.name .. '-mk' .. j .. '-equipment'] then
-                                recipes[v.name .. '-mk' .. j .. '-equipment'].enabled = true
-                                recipes[v.name .. '-mk' .. j .. '-equipment'].reload()
-                            end
-                        end
-
-                    else
-                        for j=v.min, v.max, 1 do
-                            if recipes[v.name .. '-' .. j] then
-                                recipes[v.name .. '-' .. j].enabled = true
-                                recipes[v.name .. '-' .. j].reload()
-                            end
-                        end
+                    if recipes[vn] then
+                        recipes[vn].enabled = true
+                        recipes[vn].reload()
                     end
                 end
             end
         end
     end
 
-    if ((not technologies['power-armor-mk2']) or technologies['power-armor-mk2'].researched) and recipes['power-armor-mk3'] then
-        recipes['power-armor-mk3'].enabled = true
-        recipes['power-armor-mk3'].reload()
+    for _, v in pairs(mbm) do
+        v.mod = v.mod or 'base'
+
+        if (v.mod and mods[v.mod]) and (v.max >= (v.min or 2)) then
+            if (not technologies[v.tech]) or technologies[v.tech].researched then
+                for j=v.min, v.max, 1 do
+                    local vn = (v.ref_name or v.name) .. '-' .. j
+
+                    if recipes[vn] then
+                        recipes[vn].enabled = true
+                        recipes[vn].reload()
+                    end
+                end
+            end
+        end
     end
 
-    if ((not technologies['mech-armor']) or technologies['mech-armor'].researched) and recipes['mech-armor-mk2'] then
-        recipes['mech-armor-mk2'].enabled = true
-        recipes['mech-armor-mk2'].reload()
+    for _, v in pairs(mbq) do
+        v.mod = v.mod or 'base'
+
+        if (v.mod and mods[v.mod]) and (v.max >= (v.min or 2)) then
+            v.category = 'equipment'
+
+            if (not technologies[v.tech]) or technologies[v.tech].researched then
+                for j=v.min, v.max, 1 do
+                    local vn = (v.ref_name or v.name) .. '-' .. j .. '-equipment'
+
+                    if recipes[vn] then
+                        recipes[vn].enabled = true
+                        recipes[vn].reload()
+                    end
+                end
+            end
+        end
+    end
+
+    if settings.startup['PHI-MB-EQUIPMENT-ARMOR'].value then
+        if technologies['power-armor-mk2'] and technologies['power-armor-mk2'].researched and recipes['power-armor-mk3'] then
+            recipes['power-armor-mk3'].enabled = true
+            recipes['power-armor-mk3'].reload()
+        end
+
+        if technologies['mech-armor'] and technologies['mech-armor'].researched and recipes['mech-armor-mk2'] then
+            recipes['mech-armor-mk2'].enabled = true
+            recipes['mech-armor-mk2'].reload()
+        end
     end
 
     if settings.startup['PHI-CT'].value then
@@ -61,32 +96,9 @@ for _, force in pairs(game.forces) do
         recipes['passive-energy-void'].reload()
 
         if (not technologies['steel-processing']) or technologies['steel-processing'].researched then
-            if recipes['basic-steel-chest'] then
-                recipes['basic-steel-chest'].enabled = true
-                recipes['basic-steel-chest'].reload()
-            end
-
             if recipes['trash-chest'] then
                 recipes['trash-chest'].enabled = true
                 recipes['trash-chest'].reload()
-            end
-        end
-
-        if ((not technologies['construction-robotics']) or technologies['construction-robotics'].researched) or ((not technologies['logistic-robotics']) or technologies['logistic-robotics'].researched) then
-            for _, r in pairs({'passive-provider', 'storage'}) do
-                if recipes['basic-' .. r .. '-chest'] then
-                    recipes['basic-' .. r .. '-chest'].enabled = true
-                    recipes['basic-' .. r .. '-chest'].reload()
-                end
-            end
-        end
-
-        if (not technologies['logistic-system']) or technologies['logistic-system'].researched then
-            for _, r in pairs({'active-provider', 'buffer', 'requester'}) do
-                if recipes['basic-' .. r .. '-chest'] then
-                    recipes['basic-' .. r .. '-chest'].enabled = true
-                    recipes['basic-' .. r .. '-chest'].reload()
-                end
             end
         end
 
