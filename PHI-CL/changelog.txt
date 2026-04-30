@@ -1,9 +1,10 @@
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.136
-Date: 2026-04-12
+Date: 2026-05-10
 
   Changes:
     - [MI] Generic code layout restructure.
+    - [GM] Generic code layout restructure.
     - [MI] Removed basic chests.
     - [MI] Removed train speed setting.
     - [MI] Removed robot speed setting.

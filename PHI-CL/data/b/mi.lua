@@ -1,7 +1,7 @@
 
-if settings.startup['PHI-MI-FLUID'].value then
+if settings.startup['PHI-MI-PIPE'].value then
     -- MI C 1 BASE UTILITY_CONSTANTS
-    data.raw['utility-constants'].default.max_fluid_flow = 10 * settings.startup['PHI-MI-FLUID'].value
+    data.raw['utility-constants'].default.max_fluid_flow = 10 * settings.startup['PHI-MI-PIPE'].value
 end
 
 -- MI C 2 BASE ENTITY

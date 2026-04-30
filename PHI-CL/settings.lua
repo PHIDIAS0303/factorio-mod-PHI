@@ -89,12 +89,12 @@ data:extend({
   order = 'B01'
 }, {
   type = 'int-setting',
-  name = 'PHI-MI-FLUID',
+  name = 'PHI-MI-PIPE',
   setting_type = 'startup',
   default_value = 10,
   minimum_value = 1,
   maximum_value = 160,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MI-FLUID'}, {'phi-cl.proportion', {'mod-setting-name.PHI-MI-FLUID'}}},
+  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MI-PIPE'}, {'phi-cl.proportion', {'mod-setting-name.PHI-MI-PIPE'}}},
   order = 'B02'
 }, {
   type = 'bool-setting',
