@@ -28,6 +28,8 @@ end
 
 if mods['space-age'] then
     require 'data.b.sa'
+else
+    error('[PHI-CL][SA] Space Age not detected.')
 end
 
 if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
