@@ -1,7 +1,10 @@
 local items = require 'config'
 
 if not mods['space-age'] then
-    error('[PHI-CL][SA] Space Age not detected.')
+    return
+end
+
+if mods['space-age'] then
     return
 end
 

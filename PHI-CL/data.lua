@@ -1,4 +1,3 @@
-local items = require 'config'
 
 if settings.startup['PHI-MB'].value then
     if settings.startup['PHI-MB-ENERGY'].value then
@@ -28,18 +27,18 @@ end
 
 if mods['space-age'] then
     require 'data.b.sa'
-else
-    error('[PHI-CL][SA] Space Age not detected.')
+
+    if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '' then
+        require 'data.b.gm'
+    end
 end
 
-if mods['space-age'] and (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
-    require 'data.b.gm'
+if settings.startup['PHI-GM'].value then
+    if settings.startup['PHI-GM'].value == 'SAP' then
+        require 'data.b.gm-sap'
+    elseif settings.startup['PHI-GM'].value == 'VP' then
+        require 'data.b.gm-vp'
+    end
 end
 
-if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SAP' then
-    require 'data.b.gm-sap'
-end
 
-if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP' then
-    require 'data.b.gm-vp'
-end
