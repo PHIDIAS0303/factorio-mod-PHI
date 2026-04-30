@@ -1,36 +1,4 @@
 local items = {
-    ['general'] = {
-        ['graphics_location'] = '__PHI-CL__/graphics/'
-    },
-    ['research_modifier'] = {
-        ['ammo-turret'] = {
-            'physical-projectile-damage-1',
-            'physical-projectile-damage-2',
-            'physical-projectile-damage-3',
-            'physical-projectile-damage-4',
-            'physical-projectile-damage-5',
-            'physical-projectile-damage-6',
-            'physical-projectile-damage-7'
-        },
-        ['fluid-turret'] = {
-            'refined-flammables-1',
-            'refined-flammables-2',
-            'refined-flammables-3',
-            'refined-flammables-4',
-            'refined-flammables-5',
-            'refined-flammables-6',
-            'refined-flammables-7'
-        }
-    },
-    ['tint'] = {
-        [2] = {r=140, g=142, b=200},
-        [3] = {r=242, g=161, b=26},
-        [4] = {r=255, g=254, b=42},
-        [5] = {r=54, g=228, b=255},
-        [6] = {r=253, g=0, b=97},
-        [7] = {r=0, g=209, b=102},
-        [8] = {r=233, g=63, b=233}
-    },
     ['space-age'] = {
         ['PHI-VP'] = {
             ['technology_reform'] = {

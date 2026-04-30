@@ -1,4 +1,33 @@
-local items = require 'config'
+local research_modifier = {
+    ['ammo-turret'] = {
+        'physical-projectile-damage-1',
+        'physical-projectile-damage-2',
+        'physical-projectile-damage-3',
+        'physical-projectile-damage-4',
+        'physical-projectile-damage-5',
+        'physical-projectile-damage-6',
+        'physical-projectile-damage-7'
+    },
+    ['fluid-turret'] = {
+        'refined-flammables-1',
+        'refined-flammables-2',
+        'refined-flammables-3',
+        'refined-flammables-4',
+        'refined-flammables-5',
+        'refined-flammables-6',
+        'refined-flammables-7'
+    }
+}
+
+local mod_tint = {
+    [2] = {r=140, g=142, b=200},
+    [3] = {r=242, g=161, b=26},
+    [4] = {r=255, g=254, b=42},
+    [5] = {r=54, g=228, b=255},
+    [6] = {r=253, g=0, b=97},
+    [7] = {r=0, g=209, b=102},
+    [8] = {r=233, g=63, b=233}
+}
 local main = {}
 
 local function tint_handle(item, tier, tl)
@@ -7,18 +36,18 @@ local function tint_handle(item, tier, tl)
             for _, tc in pairs({'layers', 'sheets', 'structure', 'frames'}) do
                 if item[ve][tc] and type(item[ve][tc]) == 'table' then
                     for _, v2 in pairs(item[ve][tc]) do
-                        v2.tint = items['tint'][tier]
+                        v2.tint = mod_tint[tier]
 
                         if v2.frames then
                             for _, v3 in pairs(v2.frames) do
-                                v3.tint = items['tint'][tier]
+                                v3.tint = mod_tint[tier]
                             end
                         end
                     end
                 end
             end
 
-            item[ve].tint = items['tint'][tier]
+            item[ve].tint = mod_tint[tier]
         end
     end
 end
@@ -97,12 +126,12 @@ function main.EEE(source, tier)
 
         if (source.type == 'accumulator') and item['chargable_graphics'] then
             if item['chargable_graphics']['picture'].layers and item['chargable_graphics']['picture'].layers[1] then
-                item['chargable_graphics']['picture'].layers[1].tint = items['tint'][tier]
+                item['chargable_graphics']['picture'].layers[1].tint = mod_tint[tier]
             end
 
             for _, v in pairs({item['chargable_graphics']['charge_animation'], item['chargable_graphics']['discharge_animation']}) do
                 if v.layers and v.layers[1] and v.layers[1].layers and v.layers[1].layers[1] then
-                    v.layers[1].layers[1].tint = items['tint'][tier]
+                    v.layers[1].layers[1].tint = mod_tint[tier]
                 end
             end
 
@@ -150,7 +179,7 @@ function main.EEE(source, tier)
             if item[v['a']] and item[v['a']].layers then
                 for i=1, v['n'], 1 do
                     if item[v['a']].layers[i] then
-                        item[v['a']].layers[i].tint = items['tint'][tier]
+                        item[v['a']].layers[i].tint = mod_tint[tier]
                     end
                 end
             end
@@ -161,8 +190,8 @@ function main.EEE(source, tier)
             if item[e] and item[e].animation then
                 for _, d in pairs(item[e].animation) do
                     if d.layers then
-                        d.layers[1].tint = items['tint'][tier]
-                        d.layers[2].tint = items['tint'][tier]
+                        d.layers[1].tint = mod_tint[tier]
+                        d.layers[2].tint = mod_tint[tier]
                     end
                 end
             end
@@ -201,7 +230,7 @@ function main.EEE(source, tier)
 
         while i < #item.idle_animation.layers do
             if item.idle_animation.layers[i] then
-                item.idle_animation.layers[i].tint = items['tint'][tier]
+                item.idle_animation.layers[i].tint = mod_tint[tier]
             end
 
             i = i + 2
@@ -213,7 +242,7 @@ function main.EEE(source, tier)
     end
 
     if item.base_picture and item.base_picture.sheets then
-        item.base_picture.sheets[1].tint = items['tint'][tier]
+        item.base_picture.sheets[1].tint = mod_tint[tier]
     end
 
     item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
@@ -262,7 +291,7 @@ function main.EEQ(source, tier)
     end
 
     if item.sprite then
-        item.sprite.tint = items['tint'][tier]
+        item.sprite.tint = mod_tint[tier]
     end
 
     item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'equipment-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'equipment-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
@@ -278,10 +307,10 @@ function main.EI(source, tier)
     item[(source.category == 'equipment' and 'place_as_equipment_result') or 'place_result'] = item.name
 
     if item.icons and item.icons[1] then
-        item.icons[1].tint = items['tint'][tier]
+        item.icons[1].tint = mod_tint[tier]
 
     elseif item.icon then
-        item.icons = {{icon = item.icon, tint = items['tint'][tier]}}
+        item.icons = {{icon = item.icon, tint = mod_tint[tier]}}
         item.icon = nil
 
         if item.icon_size then
@@ -299,7 +328,7 @@ end
 
 -- recipe
 function main.ER(source, tier)
-    local icons = {{icon = data.raw.item[source.ref_name].icon, tint = items['tint'][tier]}}
+    local icons = {{icon = data.raw.item[source.ref_name].icon, tint = mod_tint[tier]}}
     local result_name = source.name .. ((source.category == 'equipment' and ('-mk' .. tier .. '-equipment')) or ('-' .. tier))
     local ingredients = {}
     local ingredient_name
@@ -354,11 +383,11 @@ function main.ET(source, tier)
         table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=recipe_name})
 
         if source.type == 'ammo-turret' or source.type == 'fluid-turret' then
-            for i=1, #items['research_modifier'][source.type], 1 do
-                for j=1, #data.raw.technology[items['research_modifier'][source.type][i]].effects, 1 do
-                    if (data.raw.technology[items['research_modifier'][source.type][i]].effects[j].type == 'turret-attack') then
-                        if (data.raw.technology[items['research_modifier'][source.type][i]].effects[j].turret_id == source.ref_name) then
-                            table.insert(data.raw.technology[items['research_modifier'][source.type][i]].effects, {type='turret-attack', turret_id=source.name .. '-' .. tier, modifier=data.raw.technology[items['research_modifier'][source.type][i]].effects[j].modifier})
+            for i=1, #research_modifier[source.type], 1 do
+                for j=1, #data.raw.technology[research_modifier[source.type][i]].effects, 1 do
+                    if (data.raw.technology[research_modifier[source.type][i]].effects[j].type == 'turret-attack') then
+                        if (data.raw.technology[research_modifier[source.type][i]].effects[j].turret_id == source.ref_name) then
+                            table.insert(data.raw.technology[research_modifier[source.type][i]].effects, {type='turret-attack', turret_id=source.name .. '-' .. tier, modifier=data.raw.technology[research_modifier[source.type][i]].effects[j].modifier})
                         end
                     end
                 end

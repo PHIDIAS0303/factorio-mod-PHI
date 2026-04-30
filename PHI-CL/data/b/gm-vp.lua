@@ -1,4 +1,13 @@
-local items = require 'config'
+local items = require 'gm-vp-c'
+local mod_tint = {
+    [2] = {r=140, g=142, b=200},
+    [3] = {r=242, g=161, b=26},
+    [4] = {r=255, g=254, b=42},
+    [5] = {r=54, g=228, b=255},
+    [6] = {r=253, g=0, b=97},
+    [7] = {r=0, g=209, b=102},
+    [8] = {r=233, g=63, b=233}
+}
 
 if not mods['space-age'] then
     return
@@ -507,7 +516,7 @@ local item = table.deepcopy(data.raw['item']['steel-chest'])
 item.name = 'proxy-cargo-landing-chest'
 item.place_result = item.name
 item.order = 'c[cargo-landing-pad]-2'
-item.icons = {{icon = item.icon or '__base__/graphics/icons/cargo-landing-pad.png', tint = items['tint'][5], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
+item.icons = {{icon = item.icon or '__base__/graphics/icons/cargo-landing-pad.png', tint = mod_tint[5], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
 item.icon = nil
 item.icon_size = nil
 item.icon_mipmaps = nil
@@ -519,7 +528,7 @@ local entity = table.deepcopy(data.raw['container']['steel-chest'])
 entity.name = item.name
 entity.minable.result = item.name
 entity.type = 'proxy-container'
-entity.picture.layers[1].tint = items['tint'][5]
+entity.picture.layers[1].tint = mod_tint[5]
 entity.flags = {'placeable-player', 'player-creation', 'no-automated-item-insertion', 'hide-alt-info'}
 entity.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
 entity.localised_description = {'entity-description.cargo-landing-pad'}

@@ -1,6 +1,15 @@
-local param = require 'config'
 local main = require 'main'
 local items = require 'mbm-c'
+local mod_tint = {
+    [2] = {r=140, g=142, b=200},
+    [3] = {r=242, g=161, b=26},
+    [4] = {r=255, g=254, b=42},
+    [5] = {r=54, g=228, b=255},
+    [6] = {r=253, g=0, b=97},
+    [7] = {r=0, g=209, b=102},
+    [8] = {r=233, g=63, b=233}
+}
+
 
 -- MBE A 6 AAI_INDUSTRY ENTITY,RECIPE,RESEARCH_EFFECT
 -- MBE A 58 SPACE_EXPLORATION ENTITY,RECIPE,RESEARCH_EFFECT
@@ -49,7 +58,7 @@ if mods['space-exploration'] and settings.startup['PHI-MB-MACHINE-TIER'].value >
         item.name = 'se-core-miner-drill-' .. i
         item.place_result = miner_name
         item.order = 'zzzz-core-miner-drill-' .. i
-        item.icons = {{icon = '__space-exploration-graphics__/graphics/icons/core-miner.png', tint = param['tint'][i], icon_size = 64}}
+        item.icons = {{icon = '__space-exploration-graphics__/graphics/icons/core-miner.png', tint = mod_tint[i], icon_size = 64}}
         item.icon = nil
         item.icon_size = nil
         item.localised_name = {'phi-cl.combine', {'entity-name.se-core-miner-drill'}, tostring(i)}

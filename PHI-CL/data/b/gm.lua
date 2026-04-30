@@ -1,4 +1,14 @@
-local items = require 'config'
+
+local mod_graphic_location = '__PHI-CL__/graphics/'
+local mod_tint = {
+    [2] = {r=140, g=142, b=200},
+    [3] = {r=242, g=161, b=26},
+    [4] = {r=255, g=254, b=42},
+    [5] = {r=54, g=228, b=255},
+    [6] = {r=253, g=0, b=97},
+    [7] = {r=0, g=209, b=102},
+    [8] = {r=233, g=63, b=233}
+}
 
 -- GM C 1 SPACE_AGE ENTITY
 if data.raw['cargo-bay'] and data.raw['cargo-bay']['cargo-bay'] then
@@ -143,7 +153,7 @@ end
 if data.raw.item['depleted-uranium-fuel-cell'] and data.raw.item['nuclear-fuel'] then
     local item = table.deepcopy(data.raw.item['depleted-uranium-fuel-cell'])
     item.name = 'empty-train-battery'
-    item.icon = items['general']['graphics_location'] .. 'battery.png'
+    item.icon = mod_graphic_location .. 'battery.png'
     item.order = 'qa'
     item.stack_size = 100
     item.localised_name = {'name.empty-train-battery'}
@@ -155,7 +165,7 @@ if data.raw.item['depleted-uranium-fuel-cell'] and data.raw.item['nuclear-fuel']
         name = 'empty-train-battery',
         energy_required = 30,
         enabled = true,
-        icon = items['general']['graphics_location'] .. 'battery.png',
+        icon = mod_graphic_location .. 'battery.png',
         icon_size = 64,
         subgroup = 'intermediate-product',
         order = 'zc',
@@ -171,7 +181,7 @@ if data.raw.item['depleted-uranium-fuel-cell'] and data.raw.item['nuclear-fuel']
     item.name = 'charged-train-battery'
     item.burnt_result = 'empty-train-battery'
     item.fuel_value = '1GJ'
-    item.icon = items['general']['graphics_location'] .. 'battery.png'
+    item.icon = mod_graphic_location .. 'battery.png'
     item.stack_size = 10
     item.localised_name = {'name.charged-train-battery'}
     item.localised_description = {'description.charged-train-battery'}
@@ -182,7 +192,7 @@ if data.raw.item['depleted-uranium-fuel-cell'] and data.raw.item['nuclear-fuel']
         name = 'charged-train-battery',
         energy_required = 60,
         enabled = true,
-        icon = items['general']['graphics_location'] .. 'battery.png',
+        icon = mod_graphic_location .. 'battery.png',
         icon_size = 64,
         subgroup = 'intermediate-product',
         order = 'zd',

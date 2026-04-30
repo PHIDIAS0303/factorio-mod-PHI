@@ -1,6 +1,15 @@
-local param = require 'config'
 local main = require 'main'
 local items = require 'mbe-c'
+
+local mod_tint = {
+    [2] = {r=140, g=142, b=200},
+    [3] = {r=242, g=161, b=26},
+    [4] = {r=255, g=254, b=42},
+    [5] = {r=54, g=228, b=255},
+    [6] = {r=253, g=0, b=97},
+    [7] = {r=0, g=209, b=102},
+    [8] = {r=233, g=63, b=233}
+}
 
 -- MBE C 1 BASE FLUID
 data.raw['fluid']['steam'].max_temperature = ((settings.startup['PHI-MB-ENERGY-POWER-TIER'].value > 1) and 5000) or data.raw['fluid']['steam'].max_temperature
@@ -15,7 +24,7 @@ for i = 1, 7 do
         effects = {},
         upgrade = true,
         unit = {count = math.floor(125 * (i ^ 2)), ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, time = 30},
-        icons = {{icon = '__base__/graphics/technology/solar-energy.png', icon_size = 256, tint = param['tint'][i]}},
+        icons = {{icon = '__base__/graphics/technology/solar-energy.png', icon_size = 256, tint = mod_tint[i]}},
         order = 'a-h-' .. i,
         localised_name = {'phi-cl.combine', {'technology-name.compound-energy'}, tostring(i)},
         localised_description = {'technology-description.compound-energy'}

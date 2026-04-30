@@ -1,5 +1,3 @@
-local items = require 'config'
-
 local inserter_direction = {
     [1] = defines.direction.north,
     [2] = defines.direction.northnortheast,

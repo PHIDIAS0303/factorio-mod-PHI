@@ -1,4 +1,12 @@
-local param = require 'config'
+local mod_tint = {
+    [2] = {r=140, g=142, b=200},
+    [3] = {r=242, g=161, b=26},
+    [4] = {r=255, g=254, b=42},
+    [5] = {r=54, g=228, b=255},
+    [6] = {r=253, g=0, b=97},
+    [7] = {r=0, g=209, b=102},
+    [8] = {r=233, g=63, b=233}
+}
 
 -- CT U 3 BASE ITEM
 -- CT A 3 BASE RECIPE
@@ -49,7 +57,7 @@ if data.raw['radar']['radar'] then
     item.name = 'super-radar'
     item.place_result = item.name
     item.order = 'd[radar]-b[radar]'
-    item.icons = {{icon = item.icon or '__base__/graphics/icons/radar.png', tint = param['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
+    item.icons = {{icon = item.icon or '__base__/graphics/icons/radar.png', tint = mod_tint[8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
     item.icon = nil
     item.icon_size = nil
     item.icon_mipmaps = nil
@@ -61,7 +69,7 @@ if data.raw['radar']['radar'] then
     entity.minable.result = item.name
     entity.max_distance_of_sector_revealed = 35
     entity.max_distance_of_nearby_sector_revealed = 35
-    entity.pictures.layers[1].tint = param['tint'][8]
+    entity.pictures.layers[1].tint = mod_tint[8]
     entity.localised_name = {'', {'name.super-entity'}, {'entity-name.radar'}}
     data:extend({entity})
 

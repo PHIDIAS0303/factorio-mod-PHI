@@ -1,6 +1,14 @@
-local param = require 'config'
 local main = require 'main'
 local items = require 'mbq-c'
+local mod_tint = {
+    [2] = {r=140, g=142, b=200},
+    [3] = {r=242, g=161, b=26},
+    [4] = {r=255, g=254, b=42},
+    [5] = {r=54, g=228, b=255},
+    [6] = {r=253, g=0, b=97},
+    [7] = {r=0, g=209, b=102},
+    [8] = {r=233, g=63, b=233}
+}
 
 if settings.startup['PHI-MB-EQUIPMENT-ARMOR'].value then
     -- MBQ A 1 ARMOR_GRID
@@ -13,7 +21,7 @@ if settings.startup['PHI-MB-EQUIPMENT-ARMOR'].value then
     -- MBQ A 1 ARMOR
     local armor = table.deepcopy(data.raw['armor']['power-armor-mk2'])
     armor.name = 'power-armor-mk3'
-    armor.icons = {{icon = armor.icon, tint = param['tint'][2], icon_size = armor.icon_size}}
+    armor.icons = {{icon = armor.icon, tint = mod_tint[2], icon_size = armor.icon_size}}
     armor.icon = nil
     armor.icon_size = nil
 
@@ -54,7 +62,7 @@ if settings.startup['PHI-MB-EQUIPMENT-ARMOR'].value then
         -- MBQ A 1 ARMOR
         armor = table.deepcopy(data.raw['armor']['mech-armor'])
         armor.name = 'mech-armor-mk2'
-        armor.icons = {{icon = armor.icon, tint = param['tint'][2], icon_size = armor.icon_size}}
+        armor.icons = {{icon = armor.icon, tint = mod_tint[2], icon_size = armor.icon_size}}
         armor.icon = nil
         armor.icon_size = nil
 

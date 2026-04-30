@@ -1,4 +1,12 @@
-local param = require 'config'
+local mod_tint = {
+    [2] = {r=140, g=142, b=200},
+    [3] = {r=242, g=161, b=26},
+    [4] = {r=255, g=254, b=42},
+    [5] = {r=54, g=228, b=255},
+    [6] = {r=253, g=0, b=97},
+    [7] = {r=0, g=209, b=102},
+    [8] = {r=233, g=63, b=233}
+}
 
 -- MIGS A 1 BASE ENTITY,ITEM,RECIPE
 -- MIGS A 9 BASE VIRTUAL_SIGNAL
@@ -8,7 +16,7 @@ if data.raw['constant-combinator']['constant-combinator'] then
     item.name = 'super-combinator'
     item.place_result = item.name
     item.order = 'c[combinators]-e[super-combinator]'
-    item.icons = {{icon = '__base__/graphics/icons/constant-combinator.png', tint = param['tint'][2], icon_size = 64, icon_mipmaps = 4}}
+    item.icons = {{icon = '__base__/graphics/icons/constant-combinator.png', tint = mod_tint[2], icon_size = 64, icon_mipmaps = 4}}
     item.icon = nil
     item.icon_size = nil
     item.icon_mipmaps = nil

@@ -1,4 +1,13 @@
-local items = require 'config'
+local mod_graphic_location = '__PHI-CL__/graphics/'
+local mod_tint = {
+    [2] = {r=140, g=142, b=200},
+    [3] = {r=242, g=161, b=26},
+    [4] = {r=255, g=254, b=42},
+    [5] = {r=54, g=228, b=255},
+    [6] = {r=253, g=0, b=97},
+    [7] = {r=0, g=209, b=102},
+    [8] = {r=233, g=63, b=233}
+}
 
 -- MIG C 1 BASE ARMOR_EQUIPMENT
 data.raw['active-defense-equipment']['discharge-defense-equipment'].automatic = true
@@ -72,7 +81,7 @@ if data.raw['offshore-pump']['offshore-pump'] then
     item.name = 'super-pump'
     item.place_result = item.name
     item.order = 'b[fluids]-a[super-pump]-o'
-    item.icons = {{icon = '__base__/graphics/icons/offshore-pump.png', tint = items['tint'][2], icon_size = 64, icon_mipmaps = 4}}
+    item.icons = {{icon = '__base__/graphics/icons/offshore-pump.png', tint = mod_tint[2], icon_size = 64, icon_mipmaps = 4}}
     item.icon = nil
     item.icon_size = nil
     item.icon_mipmaps = nil
@@ -132,8 +141,8 @@ end
 
 -- MIG C 3 BASE MODULE
 data.raw['module']['efficiency-module'].effect.consumption = math.min(-0.3, data.raw['module']['efficiency-module'].effect.consumption)
-data.raw['module']['efficiency-module-2'].effect.consumption = math.min(-0.6, data.raw['module']['efficiency-module'].effect.consumption)
-data.raw['module']['efficiency-module-3'].effect.consumption = math.min(-0.9, data.raw['module']['efficiency-module'].effect.consumption)
+data.raw['module']['efficiency-module-2'].effect.consumption = math.min(-0.6, data.raw['module']['efficiency-module-2'].effect.consumption)
+data.raw['module']['efficiency-module-3'].effect.consumption = math.min(-0.9, data.raw['module']['efficiency-module-3'].effect.consumption)
 
 -- MIG C 2 BASE RECIPE
 data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
@@ -154,12 +163,12 @@ for _, v in pairs(data.raw.fluid) do
             enabled = false,
             hidden = true,
             ingredients = {},
-            results = {{type = 'fluid', name = v.name, amount = 12000, temperature = v.default_temperature}},
+            results = {{type = 'fluid', name = v.name, amount = 12000, temperature = v.default_temperature or 15}},
             main_product = v.name,
             hide_from_player_crafting = true,
             hidden_in_factoriopedia = true,
             allow_productivity = false,
-            crafting_machine_tint = {primary = v.flow_color},
+            crafting_machine_tint = {primary = v.flow_color or {r = 255,g = 255,b = 255}},
             localised_name = {'fluid-name.' .. v.name}
         }})
     end
@@ -192,7 +201,7 @@ for i = 1, #vir_sig do
     table.insert(s, {
         type = 'virtual-signal',
         name = 'signal-' .. char .. 'A',
-        icon = items['general']['graphics_location'] .. 'signal/signal_' .. char .. '.png',
+        icon = mod_graphic_location .. 'signal/signal_' .. char .. '.png',
         subgroup = (i < 11 and 'virtual-signal-number') or 'virtual-signal-letter',
         order = ((i < 11 and 'b[numbers]2-[') or 'c[letters]2-[') .. char .. ']',
         localised_name = {'phi-cl.combine', {'virtual-signal-name.signal-' .. char}, '(II)'}
@@ -251,7 +260,7 @@ if data.raw['container']['steel-chest'] then
     item.place_result = item.name
     item.subgroup = 'storage'
     item.order = 'b[storage]-h[trash-chest]'
-    item.icons = {{icon = item.icon or '__base__/graphics/icons/steel-chest.png', tint = items['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
+    item.icons = {{icon = item.icon or '__base__/graphics/icons/steel-chest.png', tint = mod_tint[8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
     item.icon = nil
     item.icon_size = nil
     item.icon_mipmaps = nil
@@ -273,7 +282,7 @@ if data.raw['container']['steel-chest'] then
     entity.logistic_mode = nil
     entity.next_upgrade = nil
     entity.surface_conditions = nil
-    entity.picture.layers[1].tint = items['tint'][8]
+    entity.picture.layers[1].tint = mod_tint[8]
     entity.localised_name = {'', {'name.trash-entity'}, {'entity-name.steel-chest'}}
     data:extend({entity})
 
@@ -300,7 +309,7 @@ if data.raw['pipe']['pipe'] then
     item.place_result = item.name
     item.subgroup = 'energy-pipe-distribution'
     item.order = 'a[pipe]-c[trash-pipe]'
-    item.icons = {{icon = item.icon or '__base__/graphics/icons/pipe.png', tint = items['tint'][8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
+    item.icons = {{icon = item.icon or '__base__/graphics/icons/pipe.png', tint = mod_tint[8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
     item.icon = nil
     item.icon_size = nil
     item.icon_mipmaps = nil
@@ -316,10 +325,10 @@ if data.raw['pipe']['pipe'] then
     entity.next_upgrade = nil
 
     for _, v in pairs(entity.pictures) do
-        v.tint = items['tint'][8]
+        v.tint = mod_tint[8]
 
         if v.hr_version then
-            v.hr_version.tint = items['tint'][8]
+            v.hr_version.tint = mod_tint[8]
         end
     end
 
@@ -448,7 +457,7 @@ for _, vn in pairs(data.raw['underground-belt']) do
     entity.localised_description = {'entity-description.' .. v}
 
     for _, st in pairs({'direction_in', 'direction_out', 'direction_in_side_loading', 'direction_out_side_loading'}) do
-        entity.structure[st].sheet.filename = items['general']['graphics_location'] .. v .. '.png'
+        entity.structure[st].sheet.filename = mod_graphic_location .. v .. '.png'
         entity.structure[st].sheet.width = 106
         entity.structure[st].sheet.height = 85
         entity.structure[st].sheetshift = {0.15625, 0.0703125}
