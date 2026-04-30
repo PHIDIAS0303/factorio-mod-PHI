@@ -128,12 +128,12 @@ data:extend({
   order = 'C01'
 }, {
   type = 'int-setting',
-  name = 'PHI-SA-SPOIL-FREEZE',
+  name = 'PHI-SA-SPOIL-FREEZE-MULTIPLIER',
   setting_type = 'startup',
   default_value = 50,
   minimum_value = 0,
   maximum_value = 1000,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE'}, {'phi-cl.proportion', {'mod-setting-name.PHI-SA-SPOIL-FREEZE'}}},
+  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE-MULTIPLIER'}, {'phi-cl.proportion', {'mod-setting-name.PHI-SA-SPOIL-FREEZE-MULTIPLIER'}}},
   order = 'C02'
 }, {
   type = 'bool-setting',
@@ -197,7 +197,7 @@ data:extend({
 if mods['space-age'] then
     data.raw['bool-setting']['PHI-MB-EQUIPMENT-ARMOR'].localised_description = {'', '[item=power-armor-mk2] 3, [item=mech-armor] 2'}
     data.raw['bool-setting']['PHI-SA-SPOIL'].localised_description = {'', '[item=spoilage]'}
-    data.raw['int-setting']['PHI-SA-SPOIL-FREEZE'].localised_description = {'', '[item=ice]'}
+    data.raw['int-setting']['PHI-SA-SPOIL-FREEZE-MULTIPLIER'].localised_description = {'', '[item=ice]'}
     data.raw['bool-setting']['PHI-SA-ENABLE-QUALITY'].localised_description = {'', '[virtual-signal=signal-any-quality]'}
     data.raw['int-setting']['PHI-SA-QUALITY'].localised_description = {'', '[item=quality-module-3] x 0.1'}
 end

@@ -56,7 +56,7 @@ end
 -- SA C 1 SPACE_AGE TOOL
 if settings.startup['PHI-SA'].value then
     local spoil_set = (not settings.startup['PHI-SA-SPOIL'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP')
-    local spoil_freeze_set = settings.startup['PHI-SA-SPOIL'].value and settings.startup['PHI-SA-SPOIL-FREEZE'].value and settings.startup['PHI-SA-SPOIL-FREEZE'].value > 0
+    local spoil_freeze_set = settings.startup['PHI-SA-SPOIL'].value and settings.startup['PHI-SA-SPOIL-FREEZE-MULTIPLIER'].value and settings.startup['PHI-SA-SPOIL-FREEZE-MULTIPLIER'].value > 0
 
     for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg'}) do
         if spoil_set then
