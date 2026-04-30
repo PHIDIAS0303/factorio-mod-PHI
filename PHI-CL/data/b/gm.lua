@@ -20,23 +20,40 @@ if data.raw['cargo-wagon'] and data.raw['cargo-wagon']['cargo-wagon'] then
     data.raw['cargo-wagon']['cargo-wagon'].inventory_size = math.max(80, data.raw['cargo-wagon']['cargo-wagon'].inventory_size)
 end
 
-data.raw.technology['foundation'].prerequisites = {'rail-support-foundations'}
-data.raw.technology['foundation'].unit.count = 1000
-data.raw.technology['foundation'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-data.raw.technology['rail-support-foundations'].prerequisites = {'elevated-rail', 'planet-discovery-fulgora'}
-data.raw.technology['rail-support-foundations'].unit.count = 600
-data.raw.technology['rail-support-foundations'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-data.raw.technology['elevated-rail'].prerequisites = {'concrete', 'railway'}
-data.raw.technology['elevated-rail'].unit.count = 400
-data.raw.technology['elevated-rail'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}
+-- GM C 1 SPACE_AGE RECIPE
+if data.raw.recipe['foundation'] then
+    data.raw.recipe['foundation'].ingredients = {{type = 'item', name = 'landfill', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 10}, {type = 'item', name = 'steel-plate', amount = 10}}
+    data.raw.recipe['foundation'].results = {{type = 'item', name = 'foundation', amount = 1}}
+end
 
-data.raw.recipe['foundation'].ingredients = {{type = 'item', name = 'landfill', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 10}, {type = 'item', name = 'steel-plate', amount = 10}}
-data.raw.recipe['foundation'].results = {{type = 'item', name = 'foundation', amount = 1}}
-data.raw.recipe['atomic-bomb'].ingredients[3] = {type = 'item', name = 'uranium-235', amount = 30}
-data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
-data.raw.recipe['artillery-turret'].ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'concrete', amount = 60}, {type = 'item', name = 'iron-gear-wheel', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}}
-data.raw.recipe['artillery-shell'].ingredients = {{type = 'item', name = 'explosive-cannon-shell', amount = 4}, {type = 'item', name = 'radar', amount = 1}, {type = 'item', name = 'explosives', amount = 8}}
-data.raw.recipe['artillery-wagon'].ingredients = {{type = 'item', name = 'engine-unit', amount = 64}, {type = 'item', name = 'iron-gear-wheel', amount = 10}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'pipe', amount = 16}, {type = 'item', name = 'advanced-circuit', amount = 20}}
+-- GM C 1 BASE RECIPE
+if data.raw.recipe['atomic-bomb'] then
+    for _, v in pairs(data.raw.recipe['atomic-bomb'].ingredients) do
+        if v.name == 'uranium-235' then
+            v.amount = math.min(v.amount, 30)
+        end
+    end
+end
+
+-- GM C 1 BASE RECIPE
+if data.raw.recipe['cliff-explosives'] then
+    data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
+end
+
+-- GM C 1 BASE RECIPE
+if data.raw.recipe['artillery-turret'] then
+    data.raw.recipe['artillery-turret'].ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'concrete', amount = 60}, {type = 'item', name = 'iron-gear-wheel', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}}
+end
+
+-- GM C 1 BASE RECIPE
+if data.raw.recipe['artillery-shell'] then
+    data.raw.recipe['artillery-shell'].ingredients = {{type = 'item', name = 'explosive-cannon-shell', amount = 4}, {type = 'item', name = 'radar', amount = 1}, {type = 'item', name = 'explosives', amount = 8}}
+end
+
+-- GM C 1 BASE RECIPE
+if data.raw.recipe['artillery-wagon'] then
+    data.raw.recipe['artillery-wagon'].ingredients = {{type = 'item', name = 'engine-unit', amount = 64}, {type = 'item', name = 'iron-gear-wheel', amount = 10}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'pipe', amount = 16}, {type = 'item', name = 'advanced-circuit', amount = 20}}
+end
 
 -- GM C 1 BASE ENTITY
 if data.raw['roboport'] and data.raw['roboport']['roboport'] then
@@ -52,12 +69,19 @@ if data.raw.ammo['artillery-shell'] then
     data.raw.ammo['artillery-shell'].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
 end
 
+data.raw.technology['foundation'].prerequisites = {'rail-support-foundations'}
+data.raw.technology['foundation'].unit.count = 1000
+data.raw.technology['foundation'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+data.raw.technology['rail-support-foundations'].prerequisites = {'elevated-rail', 'planet-discovery-fulgora'}
+data.raw.technology['rail-support-foundations'].unit.count = 600
+data.raw.technology['rail-support-foundations'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+data.raw.technology['elevated-rail'].prerequisites = {'concrete', 'railway'}
+data.raw.technology['elevated-rail'].unit.count = 400
+data.raw.technology['elevated-rail'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}
+
 -- GM C 1 BASE RESEARCH
 if data.raw.technology['cliff-explosives'] then
-    if data.raw.technology['explosives'] and data.raw.technology['military-2'] then
-        data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
-    end
-
+    data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
     data.raw.technology['cliff-explosives'].unit = {count = 200, time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
     data.raw.technology['cliff-explosives'].effects = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
 end
