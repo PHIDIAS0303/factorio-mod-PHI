@@ -13,10 +13,6 @@ if not mods['space-age'] then
     return
 end
 
-if mods['space-age'] then
-    return
-end
-
 data.raw['utility-constants'].default.default_pipeline_extent = math.max(settings.startup['PHI-MI-PIPE-EXTENT'].value, 960)
 local bss = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
 

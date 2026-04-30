@@ -1,5 +1,5 @@
-local main = require 'main'
-local items = require 'mbe-c'
+local main = require('main')
+local items = require('mbe-c')
 
 -- MBE A 5 SPACE_EXPLORATION ENTITY,RECIPE,RESEARCH_EFFECT
 for _, v in pairs(items) do

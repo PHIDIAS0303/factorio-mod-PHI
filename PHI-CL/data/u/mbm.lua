@@ -1,5 +1,6 @@
-local main = require 'main'
-local items = require 'mbm-c'
+local main = require('main')
+local items = require('mbm-c')
+
 local mod_tint = {
     [2] = {r=140, g=142, b=200},
     [3] = {r=242, g=161, b=26},

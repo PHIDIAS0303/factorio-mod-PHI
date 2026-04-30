@@ -1,5 +1,5 @@
-local main = require 'main'
-local items = require 'mbm-c'
+local main = require('main')
+local items = require('mbm-c')
 
 -- MBE A 24 BASE ENTITY,RECIPE,RESEARCH_EFFECT
 -- MBE A 24 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT

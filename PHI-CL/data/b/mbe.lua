@@ -1,5 +1,5 @@
-local main = require 'main'
-local items = require 'mbe-c'
+local main = require('main')
+local items = require('mbe-c')
 
 local mod_tint = {
     [2] = {r=140, g=142, b=200},
