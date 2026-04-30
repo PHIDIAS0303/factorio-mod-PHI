@@ -69,15 +69,26 @@ if data.raw.ammo['artillery-shell'] then
     data.raw.ammo['artillery-shell'].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
 end
 
-data.raw.technology['foundation'].prerequisites = {'rail-support-foundations'}
-data.raw.technology['foundation'].unit.count = 1000
-data.raw.technology['foundation'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-data.raw.technology['rail-support-foundations'].prerequisites = {'elevated-rail', 'planet-discovery-fulgora'}
-data.raw.technology['rail-support-foundations'].unit.count = 600
-data.raw.technology['rail-support-foundations'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-data.raw.technology['elevated-rail'].prerequisites = {'concrete', 'railway'}
-data.raw.technology['elevated-rail'].unit.count = 400
-data.raw.technology['elevated-rail'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}
+-- GM C 1 SPACE_AGE TECHNOLOGY
+if data.raw.technology['foundation'] then
+    data.raw.technology['foundation'].prerequisites = {'rail-support-foundations'}
+    data.raw.technology['foundation'].unit.count = 1000
+    data.raw.technology['foundation'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+end
+
+-- GM C 1 SPACE_AGE TECHNOLOGY
+if data.raw.technology['rail-support-foundations'] then
+    data.raw.technology['rail-support-foundations'].prerequisites = {'elevated-rail', 'planet-discovery-fulgora'}
+    data.raw.technology['rail-support-foundations'].unit.count = 600
+    data.raw.technology['rail-support-foundations'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+end
+
+-- GM C 1 ELEVATED_RAIL TECHNOLOGY
+if data.raw.technology['elevated-rail'] then
+    data.raw.technology['elevated-rail'].prerequisites = {'concrete', 'railway'}
+    data.raw.technology['elevated-rail'].unit.count = 400
+    data.raw.technology['elevated-rail'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}
+end
 
 -- GM C 1 BASE RESEARCH
 if data.raw.technology['cliff-explosives'] then
