@@ -38,17 +38,29 @@ data.raw.recipe['artillery-turret'].ingredients = {{type = 'item', name = 'steel
 data.raw.recipe['artillery-shell'].ingredients = {{type = 'item', name = 'explosive-cannon-shell', amount = 4}, {type = 'item', name = 'radar', amount = 1}, {type = 'item', name = 'explosives', amount = 8}}
 data.raw.recipe['artillery-wagon'].ingredients = {{type = 'item', name = 'engine-unit', amount = 64}, {type = 'item', name = 'iron-gear-wheel', amount = 10}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'pipe', amount = 16}, {type = 'item', name = 'advanced-circuit', amount = 20}}
 
-data.raw['roboport']['roboport'].energy_source.input_flow_limit = nil
-data.raw['roboport']['roboport'].charging_energy = tostring(tonumber(string.match(data.raw['roboport']['roboport'].charging_energy, '[%d%.]+')) * 2) .. string.match(data.raw['roboport']['roboport'].charging_energy, '%a+')
-data.raw['roboport']['roboport'].robot_slots_count = 10
-data.raw['roboport']['roboport'].material_slots_count = 2
-data.raw['roboport']['roboport'].charging_station_count = 8
+-- GM C 1 BASE ENTITY
+if data.raw['roboport'] and data.raw['roboport']['roboport'] then
+    data.raw['roboport']['roboport'].energy_source.input_flow_limit = nil
+    data.raw['roboport']['roboport'].charging_energy = tostring(tonumber(string.match(data.raw['roboport']['roboport'].charging_energy, '[%d%.]+')) * 2) .. string.match(data.raw['roboport']['roboport'].charging_energy, '%a+')
+    data.raw['roboport']['roboport'].robot_slots_count = 10
+    data.raw['roboport']['roboport'].material_slots_count = 2
+    data.raw['roboport']['roboport'].charging_station_count = 8
+end
 
-data.raw.ammo['artillery-shell'].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
+-- GM C 1 BASE ITEM
+if data.raw.ammo['artillery-shell'] then
+    data.raw.ammo['artillery-shell'].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
+end
 
-data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
-data.raw.technology['cliff-explosives'].unit = {count = 200, time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
-data.raw.technology['cliff-explosives'].effects = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
+-- GM C 1 BASE RESEARCH
+if data.raw.technology['cliff-explosives'] then
+    if data.raw.technology['explosives'] and data.raw.technology['military-2'] then
+        data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
+    end
+
+    data.raw.technology['cliff-explosives'].unit = {count = 200, time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
+    data.raw.technology['cliff-explosives'].effects = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
+end
 
 -- GM A 9 BASE RESEARCH_EFFECT
 for i=5, 7 do
