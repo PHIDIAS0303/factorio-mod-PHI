@@ -97,24 +97,6 @@ local function inserter_changed(event)
     end
 end
 
-local function hidden_recipe_enable(event)
-    if not settings.startup['PHI-CT'].value then
-        return
-    end
-
-    local enable = (event.name == defines.events.on_player_cheat_mode_enabled)
-
-    for _, v in pairs(prototypes.fluid) do
-        if game.players[event.player_index].force.recipes['super-pump-' .. v.name] then
-            game.players[event.player_index].force.recipes['super-pump-' .. v.name].enabled = enable
-        end
-    end
-
-    for _, v in pairs({'super-radar', 'passive-energy-void', 'active-energy-void', 'linked-chest', 'infinity-chest', 'infinity-cargo-wagon', 'infinity-pipe'}) do
-        game.players[event.player_index].force.recipes[v].enabled = enable
-    end
-end
-
 -- settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SAP'
 local function entity_build(event)
     if event.entity.type == 'rail-support' then
@@ -306,12 +288,6 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
         entity_destroy(event)
     end)
 
-end
-
-if settings.startup['PHI-CT'].value then
-    script.on_event({defines.events.on_player_cheat_mode_enabled, defines.events.on_player_cheat_mode_disabled}, function(event)
-        hidden_recipe_enable(event)
-    end)
 end
 
 script.on_nth_tick(1800, function(_)
