@@ -13,7 +13,7 @@ local function spoil_freeze_handle(i)
     item.icon = nil
     item.icon_size = nil
     item.icon_mipmaps = nil
-    item.spoil_ticks = math.floor(i.spoil_ticks * settings.startup['PHI-SA-SPOIL-FREEZE-RATIO'].value / 10)
+    item.spoil_ticks = math.floor(i.spoil_ticks * settings.startup['PHI-SA-SPOIL-FREEZE-MULTIPLIER'].value / 10)
     item.spoil_result = i.name
     item.spoil_to_trigger_result = nil
     item.localised_name = {'item-name.' .. i.name}
