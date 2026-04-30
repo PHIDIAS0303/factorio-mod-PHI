@@ -1,5 +1,3 @@
--- local items = require 'config'
--- local main = require 'main'
 
 do
     local sa = settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SAP'

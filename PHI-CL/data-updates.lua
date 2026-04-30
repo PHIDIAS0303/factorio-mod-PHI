@@ -1,4 +1,3 @@
-local param = require 'config'
 
 if settings.startup['PHI-MB'].value then
     if settings.startup['PHI-MB-ENERGY'].value then
