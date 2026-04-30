@@ -90,7 +90,7 @@ if data.raw['offshore-pump']['offshore-pump'] then
     entity.fluid_boxes = {{
         production_type = 'output',
         pipe_covers = table.deepcopy(entity.fluid_box.pipe_covers),
-        volume = 10 * settings.startup['PHI-MI-PIPE'].value,
+        volume = 100,
         pipe_connections = {{
             flow_direction = 'output',
             connection_category = (mods['space-age'] and {'default', 'fusion-plasma'}) or {'default'},
@@ -154,7 +154,7 @@ for _, v in pairs(data.raw.fluid) do
             enabled = false,
             hidden = true,
             ingredients = {},
-            results = {{type = 'fluid', name = v.name, amount = 1200 * settings.startup['PHI-MI-PIPE'].value, temperature = v.default_temperature}},
+            results = {{type = 'fluid', name = v.name, amount = 12000, temperature = v.default_temperature}},
             main_product = v.name,
             hide_from_player_crafting = true,
             hidden_in_factoriopedia = true,
