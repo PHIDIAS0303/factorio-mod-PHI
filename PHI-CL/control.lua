@@ -53,11 +53,7 @@ local function gui_create(player)
 end
 
 local function gui_update(player, entity)
-    if entity.valid and entity.type == 'proxy-container' and entity.proxy_target_inventory and entity.proxy_target_inventory == defines.inventory.lab_input then
-        player.opened = nil
-
-        return
-    end
+    lab.open(player)
 
     if entity.valid and entity.type and (entity.type == 'inserter' or (entity.type == 'entity-ghost' and entity.ghost_type == 'inserter')) then
         player.gui.relative.phi_cl_inserter_config['i_sub_direction'].selected_index = ((inserter_direction_reversed[entity.direction] - 1) % 4) + 1

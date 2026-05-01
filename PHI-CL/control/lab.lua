@@ -1,5 +1,33 @@
 local main = {}
 
+function main.open(player)
+    if not player then
+        return
+    end
+
+    if not player.opened then
+        return
+    end
+
+    if not player.opened.valid then
+        return
+    end
+
+    if player.opened.type ~= 'proxy-container' then
+        return
+    end
+
+    if not player.opened.proxy_target_inventory then
+        return
+    end
+
+    if player.opened.proxy_target_inventory ~= defines.inventory.lab_input then
+        return
+    end
+
+    player.opened = nil
+end
+
 function main.build(event)
     if event.entity.type ~= 'lab' then
         return
