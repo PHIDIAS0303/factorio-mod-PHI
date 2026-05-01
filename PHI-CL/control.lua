@@ -1,3 +1,5 @@
+local rail_support = require('control/rail-support')
+
 local inserter_direction = {
     [1] = defines.direction.north,
     [2] = defines.direction.northnortheast,
@@ -22,11 +24,6 @@ local inserter_direction_reversed = {}
 for k, v in pairs(inserter_direction) do
     inserter_direction_reversed[v] = k
 end
-
-local rail_support_pole = {
-    'rail-support-pole-electric',
-    'rail-support-pole-lightning'
-}
 
 local function gui_create(player)
     if player.gui.relative.phi_cl_inserter_config then
@@ -99,16 +96,7 @@ end
 
 -- settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SAP'
 local function entity_build(event)
-    if event.entity.type == 'rail-support' then
-        for _, v in pairs(rail_support_pole) do
-            if prototypes.entity[v] then
-                local p = event.entity.surface.create_entity{name = v, position = {event.entity.position.x, event.entity.position.y}, force = 'neutral', quality = event.entity.quality.name}
-                p.destructible = false
-            end
-        end
-
-        return
-    end
+    rail_support.build(event)
 
     if event.entity.type == 'lab' and prototypes.entity['proxy-container'] then
         local p = event.entity.surface.create_entity{name = 'proxy-container', position = {event.entity.position.x, event.entity.position.y}, force = 'neutral', quality = event.entity.quality.name}
@@ -158,19 +146,7 @@ local function entity_build(event)
 end
 
 local function entity_destroy(event)
-    if event.entity.type == 'rail-support' then
-        for _, v in pairs(rail_support_pole) do
-            if prototypes.entity[v] then
-                local p = event.entity.surface.find_entity({name = v, force = 'neutral', quality = event.entity.quality.name}, {event.entity.position.x, event.entity.position.y})
-
-                if p then
-                    p.destroy()
-                end
-            end
-        end
-
-        return
-    end
+    rail_support.destroy(event)
 
     if event.entity.type == 'lab' and prototypes.entity['proxy-container'] then
         local p = event.entity.surface.find_entity({name = 'proxy-container', force = 'neutral', quality = event.entity.quality.name}, {event.entity.position.x, event.entity.position.y})
@@ -306,12 +282,14 @@ script.on_nth_tick(1800, function(_)
             n = n + 1
         end
 
-        for _, s in pairs(game.surfaces) do
-            local c = s.find_entities_filtered{type='constant-combinator', name='super-combinator'}
+        if prototypes.entity['super-combinator'] then
+            for _, s in pairs(game.surfaces) do
+                local c = s.find_entities_filtered{type='constant-combinator', name='super-combinator'}
 
-            if #c > 0 then
-                for _, entity in pairs(c) do
-                    table.insert(storage.phi_cl.combinator.combinator_list, entity)
+                if #c > 0 then
+                    for _, entity in pairs(c) do
+                        table.insert(storage.phi_cl.combinator.combinator_list, entity)
+                    end
                 end
             end
         end
