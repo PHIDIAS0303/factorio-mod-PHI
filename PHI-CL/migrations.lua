@@ -1,6 +1,6 @@
-local mbe = require 'data.b.mbe-c'
-local mbm = require 'data.b.mbm-c'
-local mbq = require 'data.b.mbq-c'
+local mbe = require('data.b.mbe-c')
+local mbm = require('data.b.mbm-c')
+local mbq = require('data.b.mbq-c')
 
 for _, force in pairs(game.forces) do
     local technologies = force.technologies
