@@ -1,3 +1,6 @@
+local cargo_landing_pad = require('control/cargo-landing-pad')
+local cargo_landing_chest = require('control/cargo-landing-chest')
+local lab = require('control/lab')
 local rail_support = require('control/rail-support')
 
 local inserter_direction = {
@@ -96,66 +99,16 @@ end
 
 -- settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SAP'
 local function entity_build(event)
+    cargo_landing_pad.build(event)
+    cargo_landing_chest.build(event)
+    lab.build(event)
     rail_support.build(event)
-
-    if event.entity.type == 'lab' and prototypes.entity['proxy-container'] then
-        local p = event.entity.surface.create_entity{name = 'proxy-container', position = {event.entity.position.x, event.entity.position.y}, force = 'neutral', quality = event.entity.quality.name}
-        p.destructible = false
-        p.proxy_target_entity = event.entity
-        p.proxy_target_inventory = defines.inventory.lab_input
-
-        return
-    end
-
-    if event.entity.type == 'proxy-container' and event.entity.name == 'proxy-cargo-landing-chest' and prototypes.entity['cargo-landing-pad'] then
-        local ec = game.surfaces[event.entity.surface].find_entities_filtered{type='cargo-landing-pad'}
-
-        if not ec then
-            return
-        end
-
-        event.entity.proxy_target_entity = ec[1]
-        event.entity.proxy_target_inventory = defines.inventory.cargo_landing_pad_main
-
-        return
-    end
-
-    if event.entity.type == 'cargo-landing-pad' and event.entity.name == 'cargo-landing-pad' and prototypes.entity['proxy-cargo-landing-chest'] then
-        local ec = game.surfaces[event.entity.surface].find_entities_filtered{type='cargo-landing-pad'}
-
-        if #ec > 1 then
-            return
-        end
-
-        local ep = game.surfaces[event.entity.surface].find_entities_filtered{type='proxy-container', name='proxy-cargo-landing-chest'}
-
-        for _, v in pairs(ep) do
-            v.proxy_target_entity = ec[1]
-            v.proxy_target_inventory = defines.inventory.cargo_landing_pad_main
-        end
-
-        return
-    end
 
     if event.entity.type == 'infinity-container' and event.entity.name == 'trash-chest' then
         event.entity.remove_unfiltered_items = true
 
     elseif event.entity.type == 'infinity-pipe' and event.entity.name == 'trash-pipe' then
         event.entity.set_infinity_pipe_filter(nil)
-    end
-end
-
-local function entity_destroy(event)
-    rail_support.destroy(event)
-
-    if event.entity.type == 'lab' and prototypes.entity['proxy-container'] then
-        local p = event.entity.surface.find_entity({name = 'proxy-container', force = 'neutral', quality = event.entity.quality.name}, {event.entity.position.x, event.entity.position.y})
-
-        if p then
-            p.destroy()
-        end
-
-        return
     end
 end
 
@@ -261,7 +214,8 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
 
     script.on_event({defines.events.on_entity_died, defines.events.on_player_mined_entity, defines.events.on_robot_pre_mined, defines.events.script_raised_destroy}, function(event)
-        entity_destroy(event)
+        lab.destroy(event)
+        rail_support.destroy(event)
     end)
 
 end
