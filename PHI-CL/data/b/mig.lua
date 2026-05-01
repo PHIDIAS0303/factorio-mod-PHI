@@ -1,4 +1,3 @@
-local mod_graphic_location = '__PHI-CL__/graphics/'
 local mod_tint = {
     [2] = {r=140, g=142, b=200},
     [3] = {r=242, g=161, b=26},
@@ -163,11 +162,11 @@ for _, v in pairs(data.raw.fluid) do
             category = 'super-pump-fluid',
             energy_required = 1,
             enabled = false,
-            hidden = true,
             ingredients = {},
             results = {{type = 'fluid', name = v.name, amount = 12000, temperature = v.default_temperature or 15}},
             main_product = v.name,
             hide_from_player_crafting = true,
+            hidden = true,
             hidden_in_factoriopedia = true,
             allow_productivity = false,
             crafting_machine_tint = {primary = v.flow_color or {r = 255,g = 255,b = 255}},
@@ -203,7 +202,7 @@ for i = 1, #vir_sig do
     table.insert(s, {
         type = 'virtual-signal',
         name = 'signal-' .. char .. 'A',
-        icon = mod_graphic_location .. 'signal/signal_' .. char .. '.png',
+        icon = '__PHI-CL__/graphics/signal/signal_' .. char .. '.png',
         subgroup = (i < 11 and 'virtual-signal-number') or 'virtual-signal-letter',
         order = ((i < 11 and 'b[numbers]2-[') or 'c[letters]2-[') .. char .. ']',
         localised_name = {'phi-cl.combine', {'virtual-signal-name.signal-' .. char}, '(II)'}
@@ -433,68 +432,6 @@ for _, v in pairs({{'logistics', 'loader'}, {'logistics-2', 'fast-loader'}, {'lo
             table.insert(data.raw.technology[v[1]].effects, {type = 'unlock-recipe', recipe = v[2]})
         else
             data.raw.recipe[v[2]].enabled = true
-        end
-    end
-end
-
--- MIG A 3 BASE ENTITY,ITEM,RECIPE
--- MIG A 1 SPACE_AGE ENTITY,ITEM,RECIPE
-for _, vn in pairs(data.raw['underground-belt']) do
-    local v = vn.name
-    local va = v .. '-a'
-
-    if data.raw.item[v] then
-        local item = table.deepcopy(data.raw.item[v])
-        item.name = va
-        item.place_result = va
-        item.localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
-        item.localised_description = {'entity-description.' .. v}
-        data:extend({item})
-    end
-
-    local entity = table.deepcopy(vn)
-    entity.name = va
-    entity.minable.result = va
-    entity.next_upgrade = (entity.next_upgrade and entity.next_upgrade .. '-a') or nil
-    entity.surface_conditions = nil
-    entity.localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
-    entity.localised_description = {'entity-description.' .. v}
-
-    for _, st in pairs({'direction_in', 'direction_out', 'direction_in_side_loading', 'direction_out_side_loading'}) do
-        entity.structure[st].sheet.filename = mod_graphic_location .. v .. '.png'
-        entity.structure[st].sheet.width = 106
-        entity.structure[st].sheet.height = 85
-        entity.structure[st].sheet.shift = {0.15625, 0.0703125}
-    end
-
-    entity.structure.direction_in.sheet.y = 85
-    entity.structure.direction_out.sheet.y = nil
-    entity.structure.direction_in_side_loading.sheet.y = 85
-    entity.structure.direction_out_side_loading.sheet.y = nil
-    data:extend({entity})
-
-    data:extend({{
-        type = 'recipe',
-        name = va,
-        energy_required = 2,
-        enabled = false,
-        ingredients = {{type = 'item', name = v, amount = 2}},
-        results = {{type = 'item', name = va, amount = 2}},
-        main_product = va,
-        hide_from_player_crafting = true,
-        allow_productivity = false,
-        localised_name = {'phi-cl.combine', {'entity-name.' .. v}, '(II)'}
-    }})
-end
-
--- MIG A 3 BASE RESEARCH_EFFECT
--- MIG A 1 SPACE_AGE RESEARCH_EFFECT
-for _, v in pairs({{'logistics', 'underground-belt'}, {'logistics-2', 'fast-underground-belt'}, {'logistics-3', 'express-underground-belt'}, {'turbo-transport-belt', 'turbo-underground-belt'}}) do
-    if data.raw['underground-belt'] and data.raw['underground-belt'][v[2]] then
-        if data.raw.technology[v[1]] then
-            table.insert(data.raw.technology[v[1]].effects, {type = 'unlock-recipe', recipe = v[2] .. '-a'})
-        else
-            data.raw.recipe[v[2] .. '-a'].enabled = true
         end
     end
 end

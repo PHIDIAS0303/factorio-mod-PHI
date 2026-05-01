@@ -105,12 +105,10 @@ for _, force in pairs(game.forces) do
             recipes['electric-heating-tower'].reload()
         end
 
-        for _, v in pairs({{'logistics', 'underground-belt'}, {'logistics-2', 'fast-underground-belt'}, {'logistics-3', 'express-underground-belt'}, {'turbo-transport-belt', 'turbo-underground-belt'}, {'logistics', 'loader'}, {'logistics-2', 'fast-loader'}, {'logistics-3', 'express-loader'}, {'turbo-transport-belt', 'turbo-loader'}}) do
-            local vn = v[2] .. '-a'
-
-            if technologies[v[1]] and technologies[v[1]].researched and recipes[vn] then
-                recipes[vn].enabled = true
-                recipes[vn].reload()
+        for _, v in pairs({{'logistics', 'loader'}, {'logistics-2', 'fast-loader'}, {'logistics-3', 'express-loader'}, {'turbo-transport-belt', 'turbo-loader'}}) do
+            if technologies[v[1]] and technologies[v[1]].researched and recipes[v[2]] then
+                recipes[v[2]].enabled = true
+                recipes[v[2]].reload()
             end
         end
     end

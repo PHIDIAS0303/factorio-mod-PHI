@@ -1,4 +1,4 @@
---[[
+
 do
     local sa = settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'SAP'
     local p = (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP') or sa
@@ -46,4 +46,3 @@ if mods['space-age'] then
         end
     end
 end
-]]

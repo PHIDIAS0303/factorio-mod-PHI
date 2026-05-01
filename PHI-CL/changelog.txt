@@ -9,6 +9,7 @@ Date: 2026-05-10
     - [MI] Removed train speed setting.
     - [MI] Removed robot speed setting.
     - [MI] Removed lab quality affect drain setting.
+    - [MI] Removed second underground belt set.
     - [SA] Now spoil freeze ratio equal to zero means it will be disabled.
 
 ---------------------------------------------------------------------------------------------------
