@@ -13,6 +13,7 @@ if settings.startup['PHI-MB'].value then
     end
 end
 
+--[[
 if settings.startup['PHI-CT'].value then
     require('data.b.ct')
 end
@@ -40,5 +41,4 @@ if settings.startup['PHI-GM'].value then
         require('data.b.gm-vp')
     end
 end
-
-
+]]
