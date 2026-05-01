@@ -13,7 +13,6 @@ if settings.startup['PHI-MB'].value then
     end
 end
 
---[[
 if settings.startup['PHI-CT'].value then
     require('data.b.ct')
 end
@@ -26,6 +25,7 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
     require('data.b.mig')
 end
 
+--[[
 if mods['space-age'] then
     require('data.b.sa')
 
