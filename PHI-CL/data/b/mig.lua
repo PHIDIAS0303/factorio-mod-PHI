@@ -52,27 +52,29 @@ end
 
 -- MIG C 3 BASE ENTITY,ITEM
 -- MIG A 1 BASE RECIPE
-for _, v in pairs(data.raw['valve']) do
-    v.hidden = false
-    v.heating_energy = nil
-    data.raw.item[v.name].hidden = false
-    data.raw.item[v.name].subgroup = 'energy-pipe-distribution'
+if data.raw['valve'] then
+    for _, v in pairs(data.raw['valve']) do
+        v.hidden = false
+        v.heating_energy = nil
+        data.raw.item[v.name].hidden = false
+        data.raw.item[v.name].subgroup = 'energy-pipe-distribution'
 
-    data:extend({{
-        type = 'recipe',
-        name = v.name,
-        energy_required = 1,
-        enabled = true,
-        icon = data.raw.item[v.name].icon,
-        icon_size = 64,
-        order = 'zc',
-        allow_productivity = false,
-        ingredients = {{type = 'item', name = 'pipe', amount = 2}, {type = 'item', name = 'electronic-circuit', amount = 3}},
-        results = {{type = 'item', name = v.name, amount = 1}},
-        main_product = v.name,
-        localised_name = {'entity-name.' .. v.name},
-        localised_description = {'entity-description.' .. v.name}
-    }})
+        data:extend({{
+            type = 'recipe',
+            name = v.name,
+            energy_required = 1,
+            enabled = true,
+            icon = data.raw.item[v.name].icon,
+            icon_size = 64,
+            order = 'zc',
+            allow_productivity = false,
+            ingredients = {{type = 'item', name = 'pipe', amount = 2}, {type = 'item', name = 'electronic-circuit', amount = 3}},
+            results = {{type = 'item', name = v.name, amount = 1}},
+            main_product = v.name,
+            localised_name = {'entity-name.' .. v.name},
+            localised_description = {'entity-description.' .. v.name}
+        }})
+    end
 end
 
 -- MIG A 1 BASE ENTITY,ITEM,RECIPE
@@ -401,23 +403,25 @@ end
 
 -- MIG C 3 BASE ENTITY,ITEM,RECIPE
 -- MIG C 1 SPACE_AGE ENTITY,ITEM,RECIPE
-for _, ln in pairs(data.raw['loader']) do
-    local l = ln.name
+if data.raw['loader'] then
+    for _, ln in pairs(data.raw['loader']) do
+        local l = ln.name
 
-    ln.filter_count = 2
-    ln.per_lane_filters = true
-    ln.adjustable_belt_stack_size = (data.raw['inserter']['stack-inserter'] and true) or false
-    ln.max_belt_stack_size = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
-    ln.wait_for_full_stack = (data.raw['inserter']['stack-inserter'] and true) or false
+        ln.filter_count = 2
+        ln.per_lane_filters = true
+        ln.adjustable_belt_stack_size = (data.raw['inserter']['stack-inserter'] and true) or false
+        ln.max_belt_stack_size = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
+        ln.wait_for_full_stack = (data.raw['inserter']['stack-inserter'] and true) or false
 
-    if data.raw.item[l] then
-        data.raw.item[l].hidden = false
-        data.raw.item[l].hidden_in_factoriopedia = false
-    end
+        if data.raw.item[l] then
+            data.raw.item[l].hidden = false
+            data.raw.item[l].hidden_in_factoriopedia = false
+        end
 
-    if data.raw.recipe[l] then
-        data.raw.recipe[l].hidden = false
-        data.raw.recipe[l].hidden_in_factoriopedia = false
+        if data.raw.recipe[l] then
+            data.raw.recipe[l].hidden = false
+            data.raw.recipe[l].hidden_in_factoriopedia = false
+        end
     end
 end
 
@@ -460,7 +464,7 @@ for _, vn in pairs(data.raw['underground-belt']) do
         entity.structure[st].sheet.filename = mod_graphic_location .. v .. '.png'
         entity.structure[st].sheet.width = 106
         entity.structure[st].sheet.height = 85
-        entity.structure[st].sheetshift = {0.15625, 0.0703125}
+        entity.structure[st].sheet.shift = {0.15625, 0.0703125}
     end
 
     entity.structure.direction_in.sheet.y = 85
