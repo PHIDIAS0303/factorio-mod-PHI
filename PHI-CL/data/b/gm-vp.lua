@@ -91,6 +91,56 @@ data:extend({
     }
 })
 
+-- GM-VP A 9 BASE RESEARCH
+for _, v in pairs({'concrete', 'automation', 'electronics', 'advanced-circuit', 'engine', 'sulfur-processing', 'solar-energy', 'railway', 'oil-processing'}) do
+    data:extend({{
+        type = 'technology',
+        name = v .. '-productivity',
+        prerequisites = {'electromagnetic-plant'},
+        effects = {{type = 'change-recipe-productivity', recipe = v, change = 0.05}},
+        unit = {count_formula = '1000 * (1.5 ^ (L - 1))', ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}, time = 60},
+        icons = {{icon = '__base__/graphics/technology/' .. v ..'.png', icon_size = 256}, {icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png', icon_size = 128, scale = 0.5, shift = {50, 50}}},
+        order = 'a-i-d',
+        max_level = 10,
+        upgrade = true,
+        localised_name = {'technology-name.' .. v}
+    }})
+end
+
+table.insert(data.raw.technology['concrete-productivity'].prerequisites, 'landfill')
+table.insert(data.raw.technology['solar-energy-productivity'].prerequisites, 'electric-energy-accumulators')
+table.insert(data.raw.technology['sulfur-processing-productivity'].prerequisites, 'cliff-explosives')
+table.insert(data.raw.technology['concrete-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'refined-concrete', change = 0.05})
+table.insert(data.raw.technology['concrete-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'landfill', change = 0.05})
+table.insert(data.raw.technology['sulfur-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'sulfuric-acid', change = 0.05})
+table.insert(data.raw.technology['sulfur-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'explosives', change = 0.05})
+table.insert(data.raw.technology['sulfur-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'cliff-explosives', change = 0.05})
+table.insert(data.raw.technology['solar-energy-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'accumulator', change = 0.05})
+table.insert(data.raw.technology['solar-energy-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'battery', change = 0.05})
+table.insert(data.raw.technology['engine-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'electric-engine-unit', change = 0.05})
+table.insert(data.raw.technology['engine-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'flying-robot-frame', change = 0.05})
+data.raw.technology['oil-processing-productivity'].prerequisites = {'cryogenic-plant'}
+data.raw.technology['oil-processing-productivity'].effects[1].recipe = 'basic-oil-processing'
+table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'advanced-oil-processing', change = 0.05})
+table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'coal-liquefaction', change = 0.05})
+table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'lubricant', change = 0.05})
+data.raw.technology['engine-productivity'].effects[1].recipe = 'engine-unit'
+data.raw.technology['sulfur-processing-productivity'].prerequisites = {'cryogenic-plant'}
+data.raw.technology['sulfur-processing-productivity'].effects[1].recipe = 'sulfur'
+data.raw.technology['electronics-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'copper-cable', change = 0.05}}
+data.raw.technology['solar-energy-productivity'].effects[1].recipe = 'solar-panel'
+data.raw.technology['railway-productivity'].effects[1].recipe = 'rail'
+table.insert(data.raw.technology['railway-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.05})
+data.raw.technology['automation-productivity'].prerequisites[1] = 'logistics-2'
+data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'pipe', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.05}}
+data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
+data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
+
+
+
+
+
+
 for _, v in pairs(data.raw.recipe) do
     v.surface_conditions = nil
 end
@@ -166,51 +216,6 @@ end
 for _, v in pairs({'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut', 'lowland-brown-blubber', 'lowland-olive-blubber', 'lowland-olive-blubber-2', 'lowland-olive-blubber-3', 'lowland-cream-red', 'lowland-red-vein', 'lowland-red-vein-2', 'lowland-red-vein-3', 'lowland-red-vein-4', 'lowland-red-vein-dead', 'lowland-red-infection', 'ammoniacal-ocean', 'ammoniacal-ocean-2'}) do
     data.raw['planet']['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = nil
 end
-
-
-for _, v in pairs({'concrete', 'automation', 'electronics', 'advanced-circuit', 'engine', 'sulfur-processing', 'solar-energy', 'railway', 'oil-processing'}) do
-    data:extend({{
-        type = 'technology',
-        name = v .. '-productivity',
-        prerequisites = {'electromagnetic-plant'},
-        effects = {{type = 'change-recipe-productivity', recipe = v, change = 0.05}},
-        unit = {count_formula = '1000 * (1.5 ^ (L - 1))', ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}, time = 60},
-        icons = {{icon = '__base__/graphics/technology/' .. v ..'.png', icon_size = 256}, {icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png', icon_size = 128, scale = 0.5, shift = {50, 50}}},
-        order = 'a-i-d',
-        max_level = 10,
-        upgrade = true,
-        localised_name = {'technology-name.' .. v}
-    }})
-end
-
-table.insert(data.raw.technology['concrete-productivity'].prerequisites, 'landfill')
-table.insert(data.raw.technology['solar-energy-productivity'].prerequisites, 'electric-energy-accumulators')
-table.insert(data.raw.technology['sulfur-processing-productivity'].prerequisites, 'cliff-explosives')
-table.insert(data.raw.technology['concrete-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'refined-concrete', change = 0.05})
-table.insert(data.raw.technology['concrete-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'landfill', change = 0.05})
-table.insert(data.raw.technology['sulfur-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'sulfuric-acid', change = 0.05})
-table.insert(data.raw.technology['sulfur-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'explosives', change = 0.05})
-table.insert(data.raw.technology['sulfur-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'cliff-explosives', change = 0.05})
-table.insert(data.raw.technology['solar-energy-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'accumulator', change = 0.05})
-table.insert(data.raw.technology['solar-energy-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'battery', change = 0.05})
-table.insert(data.raw.technology['engine-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'electric-engine-unit', change = 0.05})
-table.insert(data.raw.technology['engine-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'flying-robot-frame', change = 0.05})
-data.raw.technology['oil-processing-productivity'].prerequisites = {'cryogenic-plant'}
-data.raw.technology['oil-processing-productivity'].effects[1].recipe = 'basic-oil-processing'
-table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'advanced-oil-processing', change = 0.05})
-table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'coal-liquefaction', change = 0.05})
-table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'lubricant', change = 0.05})
-data.raw.technology['engine-productivity'].effects[1].recipe = 'engine-unit'
-data.raw.technology['sulfur-processing-productivity'].prerequisites = {'cryogenic-plant'}
-data.raw.technology['sulfur-processing-productivity'].effects[1].recipe = 'sulfur'
-data.raw.technology['electronics-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'copper-cable', change = 0.05}}
-data.raw.technology['solar-energy-productivity'].effects[1].recipe = 'solar-panel'
-data.raw.technology['railway-productivity'].effects[1].recipe = 'rail'
-table.insert(data.raw.technology['railway-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.05})
-data.raw.technology['automation-productivity'].prerequisites[1] = 'logistics-2'
-data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'pipe', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.05}}
-data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
-data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
 
 for k, v in pairs(items['technology_reform']) do
     if v.prerequisites then
