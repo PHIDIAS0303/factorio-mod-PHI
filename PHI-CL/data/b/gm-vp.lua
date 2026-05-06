@@ -44,6 +44,45 @@ if data.raw.technology['rocket-silo'] then
     data.raw.technology['rocket-silo'].effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}, {type = 'unlock-recipe', recipe = 'cargo-bay'}}
 end
 
+-- GM-VP A 1 BASE ITEM,ENTITY,RECIPE,RESEARCH_EFFECT
+do
+    local item = table.deepcopy(data.raw['item']['steel-chest'])
+    item.name = 'proxy-cargo-landing-chest'
+    item.place_result = item.name
+    item.order = 'c[cargo-landing-pad]-2'
+    item.icons = {{icon = item.icon or '__base__/graphics/icons/cargo-landing-pad.png', tint = mod_tint[5], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
+    item.icon = nil
+    item.icon_size = nil
+    item.icon_mipmaps = nil
+    item.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
+    item.localised_description = {'entity-description.cargo-landing-pad'}
+    data:extend({item})
+
+    local entity = table.deepcopy(data.raw['container']['steel-chest'])
+    entity.name = item.name
+    entity.minable.result = item.name
+    entity.type = 'proxy-container'
+    entity.picture.layers[1].tint = mod_tint[5]
+    entity.flags = {'placeable-player', 'player-creation', 'no-automated-item-insertion', 'hide-alt-info'}
+    entity.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
+    entity.localised_description = {'entity-description.cargo-landing-pad'}
+    data:extend({entity})
+
+    data:extend({{
+        type = 'recipe',
+        name = item.name,
+        energy_required = 2,
+        enabled = (data.raw.technology['rocket-silo'] and false) or true,
+        ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
+        results = {{type = 'item', name = item.name, amount = 1}},
+        main_product = item.name
+    }})
+
+    if data.raw.technology['rocket-silo'] then
+        table.insert(data.raw.technology['rocket-silo'].effects, {type = 'unlock-recipe', recipe = 'proxy-cargo-landing-chest'})
+    end
+end
+
 -- GM-VP C 1 BASE TOOL
 if data.raw.tool['space-science-pack'] then
     data.raw.tool['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'raw-fish', amount = 1}}
@@ -136,7 +175,20 @@ data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe
 data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
 data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
 
+-- GM-VP C 7 SPACE_AGE RESEARCH
+for _, v in pairs({'processing-unit-productivity', 'steel-plate-productivity', 'low-density-structure-productivity', 'plastic-bar-productivity', 'rocket-fuel-productivity', 'rocket-part-productivity', 'research-productivity'}) do
+    if data.raw.technology[v] then
+        data.raw.technology[v].unit.count_formula = '1000 * (1.5 ^ (L - 1))'
+        data.raw.technology[v].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+        data.raw.technology[v].max_level = 10
+    end
+end
 
+-- GM-VP C 1 SPACE_AGE RESEARCH
+if data.raw.technology['research-productivity'] then
+    data.raw.technology['research-productivity'].unit.count_formula = '1500 * (1.5 ^ L)'
+    data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+end
 
 
 
@@ -337,15 +389,6 @@ data.raw.technology['agriculture'].effects = {{type = 'unlock-recipe', recipe = 
 data.raw.technology['agriculture'].unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
 data.raw.technology['tree-seeding'].prerequisites = {'agriculture'}
 data.raw.technology['tree-seeding'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-
-for _, v in pairs({'processing-unit-productivity', 'steel-plate-productivity', 'low-density-structure-productivity', 'plastic-bar-productivity', 'rocket-fuel-productivity', 'rocket-part-productivity', 'research-productivity'}) do
-    data.raw.technology[v].unit.count_formula = '1000 * (1.5 ^ (L - 1))'
-    data.raw.technology[v].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-    data.raw.technology[v].max_level = 10
-end
-
-data.raw.technology['research-productivity'].unit.count_formula = '1500 * (1.5 ^ L)'
-data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
 
 for _, v in pairs({'space-science-pack', 'electromagnetic-plant', 'foundry', 'cryogenic-plant', 'big-mining-drill', 'agriculture', 'heating-tower'}) do
     data.raw.technology[v].research_trigger = nil
@@ -576,40 +619,6 @@ data.raw['tile']['space-platform-foundation'].hidden = true
 data.raw['tile']['space-platform-foundation'].hidden_in_factoriopedia = true
 data.raw['tile']['foundation'].hidden = true
 data.raw['tile']['foundation'].hidden_in_factoriopedia = true
-
-local item = table.deepcopy(data.raw['item']['steel-chest'])
-item.name = 'proxy-cargo-landing-chest'
-item.place_result = item.name
-item.order = 'c[cargo-landing-pad]-2'
-item.icons = {{icon = item.icon or '__base__/graphics/icons/cargo-landing-pad.png', tint = mod_tint[5], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
-item.icon = nil
-item.icon_size = nil
-item.icon_mipmaps = nil
-item.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
-item.localised_description = {'entity-description.cargo-landing-pad'}
-data:extend({item})
-
-local entity = table.deepcopy(data.raw['container']['steel-chest'])
-entity.name = item.name
-entity.minable.result = item.name
-entity.type = 'proxy-container'
-entity.picture.layers[1].tint = mod_tint[5]
-entity.flags = {'placeable-player', 'player-creation', 'no-automated-item-insertion', 'hide-alt-info'}
-entity.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
-entity.localised_description = {'entity-description.cargo-landing-pad'}
-data:extend({entity})
-
-data:extend({{
-    type = 'recipe',
-    name = item.name,
-    energy_required = 2,
-    enabled = false,
-    ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
-    results = {{type = 'item', name = item.name, amount = 1}},
-    main_product = item.name
-}})
-
-table.insert(data.raw.technology['rocket-silo'].effects, {type = 'unlock-recipe', recipe = item.name})
 
 for _, v in pairs({'carbonic', 'metallic', 'promethium', 'oxide'}) do
     data.raw.item[v .. '-asteroid-chunk'].hidden = true
