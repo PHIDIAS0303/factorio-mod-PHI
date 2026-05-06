@@ -13,6 +13,13 @@ if not mods['space-age'] then
     return
 end
 
+-- GM-SAP C 37 BASE ENTITY
+-- GM-SAP C 16 SPACE_AGE ENTITY
+for k, v in pairs(items['entity_surface_conditions']) do
+    data.raw[v][k].surface_conditions = nil
+end
+
+
 data.raw['utility-constants'].default.default_pipeline_extent = math.max(settings.startup['PHI-MI-PIPE-EXTENT'].value, 960)
 local bss = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
 
@@ -22,9 +29,6 @@ for _, v in pairs(data.raw['inserter']) do
     v.enter_drop_mode_if_held_stack_spoiled = true
 end
 
-for k, v in pairs(items['surface_conditions']) do
-    data.raw[v][k].surface_conditions = nil
-end
 
 for _, v in pairs(data.raw.recipe) do
     v.surface_conditions = nil
