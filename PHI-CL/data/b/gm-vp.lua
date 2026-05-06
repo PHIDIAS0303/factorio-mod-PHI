@@ -39,6 +39,11 @@ if data.raw.technology['space-science-pack'] then
     data.raw.technology['space-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'satellite'}}
 end
 
+-- GM-VP C 1 BASE RESEARCH_EFFECT
+if data.raw.technology['rocket-silo'] then
+    data.raw.technology['rocket-silo'].effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}, {type = 'unlock-recipe', recipe = 'cargo-bay'}}
+end
+
 -- GM-VP C 1 BASE TOOL
 if data.raw.tool['space-science-pack'] then
     data.raw.tool['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'raw-fish', amount = 1}}
@@ -162,7 +167,6 @@ for _, v in pairs({'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yuma
     data.raw['planet']['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = nil
 end
 
-data.raw.technology['rocket-silo'].effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}, {type = 'unlock-recipe', recipe = 'cargo-bay'}}
 
 for _, v in pairs({'concrete', 'automation', 'electronics', 'advanced-circuit', 'engine', 'sulfur-processing', 'solar-energy', 'railway', 'oil-processing'}) do
     data:extend({{
