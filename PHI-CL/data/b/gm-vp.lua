@@ -1,4 +1,5 @@
 local items = require('gm-vp-c')
+local item_sounds = require('__base__/prototypes/item_sounds')
 local mod_tint = {
     [2] = {r=140, g=142, b=200},
     [3] = {r=242, g=161, b=26},
@@ -23,6 +24,8 @@ end
 -- MI C 1 BASE UTILITY_CONSTANTS
 data.raw['utility-constants'].default.default_pipeline_extent = math.max(settings.startup['PHI-MI-PIPE-EXTENT'].value, 960)
 
+-- GM-SAP C 5 BASE ENTITY
+-- GM-SAP C 1 SPACE_AGE ENTITY
 local bss = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
 
 for _, v in pairs(data.raw['inserter']) do
@@ -30,6 +33,53 @@ for _, v in pairs(data.raw['inserter']) do
     v.grab_less_to_match_belt_stack = true
     v.enter_drop_mode_if_held_stack_spoiled = true
 end
+
+-- GM-SAP C 1 BASE TECHNOLOGY_EFFECT
+if data.raw.technology['space-science-pack'] then
+    data.raw.technology['space-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'satellite'}}
+end
+
+-- GM-SAP C 1 BASE TOOL
+if data.raw.tool['space-science-pack'] then
+    data.raw.tool['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'raw-fish', amount = 1}}
+    data.raw.tool['space-science-pack'].send_to_orbit_mode = 'automated'
+end
+
+data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = false
+data.raw['rocket-silo']['rocket-silo'].rocket_parts_required = 100
+data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 1
+data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 0
+data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 0
+
+-- GM-SAP A 2 BASE RECIPE
+data:extend({
+    {
+        type = 'item',
+        name = 'satellite',
+        icon = '__base__/graphics/icons/satellite.png',
+        subgroup = 'space-related',
+        order = 'd[rocket-parts]-e[satellite]',
+        inventory_move_sound = item_sounds.mechanical_inventory_move,
+        pick_sound = item_sounds.mechanical_inventory_pickup,
+        drop_sound = item_sounds.mechanical_inventory_move,
+        stack_size = 1,
+        weight = 1 * tons,
+        rocket_launch_products = {{type = 'item', name = 'space-science-pack', amount = 1000}},
+        send_to_orbit_mode = 'automated'
+    },
+    {
+        type = 'recipe',
+        name = 'satellite',
+        energy_required = 5,
+        enabled = false,
+        category = 'crafting',
+        ingredients = {{type = 'item', name = 'low-density-structure', amount = 100}, {type = 'item', name = 'solar-panel', amount = 100}, {type = 'item', name = 'accumulator', amount = 100}, {type = 'item', name = 'radar', amount = 5}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'rocket-fuel', amount = 50}},
+        results = {{type = 'item', name = 'satellite', amount = 1}},
+        requester_paste_multiplier = 1
+    }
+})
+
+
 
 
 for _, v in pairs(data.raw.recipe) do
@@ -552,45 +602,6 @@ for _, v in pairs({'carbonic', 'metallic', 'promethium', 'oxide'}) do
     data.raw.item[v .. '-asteroid-chunk'].hidden = true
     data.raw.item[v .. '-asteroid-chunk'].hidden_in_factoriopedia = true
 end
-
-data.raw.technology['space-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'satellite'}}
-data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = false
-data.raw['rocket-silo']['rocket-silo'].rocket_parts_required = 100
-data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 1
-data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 0
-data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 0
-
-local item_sounds = require('__base__/prototypes/item_sounds')
-
-data:extend({
-    {
-        type = 'item',
-        name = 'satellite',
-        icon = '__base__/graphics/icons/satellite.png',
-        subgroup = 'space-related',
-        order = 'd[rocket-parts]-e[satellite]',
-        inventory_move_sound = item_sounds.mechanical_inventory_move,
-        pick_sound = item_sounds.mechanical_inventory_pickup,
-        drop_sound = item_sounds.mechanical_inventory_move,
-        stack_size = 1,
-        weight = 1 * tons,
-        rocket_launch_products = {{type = 'item', name = 'space-science-pack', amount = 1000}},
-        send_to_orbit_mode = 'automated'
-    },
-    {
-        type = 'recipe',
-        name = 'satellite',
-        energy_required = 5,
-        enabled = false,
-        category = 'crafting',
-        ingredients = {{type = 'item', name = 'low-density-structure', amount = 100}, {type = 'item', name = 'solar-panel', amount = 100}, {type = 'item', name = 'accumulator', amount = 100}, {type = 'item', name = 'radar', amount = 5}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'rocket-fuel', amount = 50}},
-        results = {{type = 'item', name = 'satellite', amount = 1}},
-        requester_paste_multiplier = 1
-    }
-})
-
-data.raw['tool']['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'raw-fish', amount = 1}}
-data.raw['tool']['space-science-pack'].send_to_orbit_mode = 'automated'
 
 for k, v in pairs(items['technology_vp']) do
     if data.raw.technology[k] then

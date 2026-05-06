@@ -98,7 +98,7 @@ if data.raw['electric-energy-interface']['electric-energy-interface'] then
         item.name = v .. '-energy-void'
         item.place_result = item.name
         item.subgroup = 'energy'
-        item.localised_name = {'name.' .. item.name .. '-energy-void'}
+        item.localised_name = {'name.' .. item.name}
         data:extend({item})
 
         local entity = table.deepcopy(data.raw['electric-energy-interface']['electric-energy-interface'])
@@ -112,7 +112,7 @@ if data.raw['electric-energy-interface']['electric-energy-interface'] then
         entity.energy_production = '0W'
         entity.energy_usage = '1PW'
         entity.gui_mode = 'none'
-        entity.localised_name = {'name.' .. item.name .. '-energy-void'}
+        entity.localised_name = {'name.' .. item.name}
         data:extend({entity})
 
         data:extend({{
@@ -125,7 +125,7 @@ if data.raw['electric-energy-interface']['electric-energy-interface'] then
             ingredients = {{type = 'item', name = 'accumulator', amount = 1}},
             results = {{type = 'item', name = item.name, amount = 1}},
             main_product = item.name,
-            localised_name = {'name.' .. item.name .. '-energy-void'}
+            localised_name = {'name.' .. item.name}
         }})
     end
 end
