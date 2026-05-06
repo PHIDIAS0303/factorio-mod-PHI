@@ -149,27 +149,16 @@ end
 table.insert(data.raw.technology['concrete-productivity'].prerequisites, 'landfill')
 table.insert(data.raw.technology['solar-energy-productivity'].prerequisites, 'electric-energy-accumulators')
 table.insert(data.raw.technology['sulfur-processing-productivity'].prerequisites, 'cliff-explosives')
-table.insert(data.raw.technology['concrete-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'refined-concrete', change = 0.05})
-table.insert(data.raw.technology['concrete-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'landfill', change = 0.05})
-table.insert(data.raw.technology['sulfur-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'sulfuric-acid', change = 0.05})
-table.insert(data.raw.technology['sulfur-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'explosives', change = 0.05})
-table.insert(data.raw.technology['sulfur-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'cliff-explosives', change = 0.05})
-table.insert(data.raw.technology['solar-energy-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'accumulator', change = 0.05})
-table.insert(data.raw.technology['solar-energy-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'battery', change = 0.05})
-table.insert(data.raw.technology['engine-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'electric-engine-unit', change = 0.05})
-table.insert(data.raw.technology['engine-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'flying-robot-frame', change = 0.05})
+data.raw.technology['concrete-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'refined-concrete', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'landfill', change = 0.05}}
+data.raw.technology['engine-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'engine-unit', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'electric-engine-unit', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'flying-robot-frame', change = 0.05}}
 data.raw.technology['oil-processing-productivity'].prerequisites = {'cryogenic-plant'}
-data.raw.technology['oil-processing-productivity'].effects[1].recipe = 'basic-oil-processing'
-table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'advanced-oil-processing', change = 0.05})
-table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'coal-liquefaction', change = 0.05})
-table.insert(data.raw.technology['oil-processing-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'lubricant', change = 0.05})
-data.raw.technology['engine-productivity'].effects[1].recipe = 'engine-unit'
+data.raw.technology['oil-processing-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'basic-oil-processing', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'advanced-oil-processing', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'coal-liquefaction', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'lubricant', change = 0.05}}
 data.raw.technology['sulfur-processing-productivity'].prerequisites = {'cryogenic-plant'}
 data.raw.technology['sulfur-processing-productivity'].effects[1].recipe = 'sulfur'
+data.raw.technology['sulfur-processing-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'sulfur', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'sulfuric-acid', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'explosives', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'cliff-explosives', change = 0.05}}
 data.raw.technology['electronics-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'copper-cable', change = 0.05}}
-data.raw.technology['solar-energy-productivity'].effects[1].recipe = 'solar-panel'
-data.raw.technology['railway-productivity'].effects[1].recipe = 'rail'
-table.insert(data.raw.technology['railway-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.05})
+data.raw.technology['solar-energy-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'solar-panel', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'accumulator', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'battery', change = 0.05}}
+data.raw.technology['railway-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'rail', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.05}}
 data.raw.technology['automation-productivity'].prerequisites[1] = 'logistics-2'
 data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'pipe', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.05}}
 data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
@@ -190,98 +179,6 @@ if data.raw.technology['research-productivity'] then
     data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
 end
 
-
-
-
-for _, v in pairs(data.raw.recipe) do
-    v.surface_conditions = nil
-end
-
-for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
-    data.raw.planet[v].map_gen_settings = nil
-    data.raw.planet[v].hidden = true
-    data.raw.planet[v].hidden_in_factoriopedia = true
-    data.raw['change-surface-achievement']['visit-' .. v] = nil
-end
-
-for _, v in pairs(data.raw['space-location']) do
-    v.hidden = true
-    v.hidden_in_factoriopedia = true
-end
-
-for _, v in pairs(data.raw['space-connection']) do
-    v.hidden = true
-    v.hidden_in_factoriopedia = true
-end
-
-for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
-    data.raw['utility-constants']['default']['main_menu_simulations'][v] = nil
-end
-
-data.raw['dont-build-entity-achievement']['logistic-network-embargo'].research_with = nil
-data.raw['create-platform-achievement']['reach-for-the-stars'] = nil
-data.raw['complete-objective-achievement']['second-star-to-the-right-and-straight-on-till-morning'] = nil
-data.raw['dont-research-before-researching-achievement']['rush-to-space'] = nil
-
-for _, v in pairs({'shattered-planet-1', 'shattered-planet-2', 'shattered-planet-3'}) do
-    data.raw['space-connection-distance-traveled-achievement'][v] = nil
-end
-
-for _, v in pairs({'calcite', 'fluorine-vent', 'lithium-brine', 'scrap', 'tungsten-ore'}) do
-    data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v:gsub('-', '_')] = nil
-    data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v] = nil
-    data.raw.resource[v].hidden = true
-    data.raw.resource[v].hidden_in_factoriopedia = true
-end
-
-data.raw.resource['sulfuric-acid-geyser'].hidden = true
-data.raw.resource['sulfuric-acid-geyser'].hidden_in_factoriopedia = true
-
-for _, v in pairs({'vulcanus_coal', 'tungsten_ore', 'calcite', 'sulfuric_acid_geyser', 'scrap', 'fluorine_vent', 'lithium_brine', 'gleba_stone', 'aquilo_crude_oil', 'gleba_cliff', 'fulgora_cliff', 'vulcanus_volcanism', 'gleba_water', 'gleba_plants', 'gleba_enemy_base', 'fulgora_islands'}) do
-    data.raw['autoplace-control'][v].hidden = true
-    data.raw['autoplace-control'][v].hidden_in_factoriopedia = true
-
-    -- TODO it will show blackscreen if it is nil
-    -- data.raw['autoplace-control'][v] = nil
-
-    local r = v:gsub('_', '-')
-
-    if data.raw['resource'][r] then
-        data.raw['resource'][r].autoplace = nil
-    end
-end
-
-for _, v in pairs({'lichen-decal', 'shroom-decal', 'pink-lichen-decal', 'red-lichen-decal', 'yellow-lettuce-lichen-1x1', 'yellow-lettuce-lichen-3x3', 'yellow-lettuce-lichen-6x6', 'yellow-lettuce-lichen-cups-1x1', 'yellow-lettuce-lichen-cups-3x3', 'yellow-lettuce-lichen-cups-6x6', 'honeycomb-fungus', 'honeycomb-fungus-1x1', 'honeycomb-fungus-decayed', 'green-lettuce-lichen-1x1', 'green-lettuce-lichen-3x3', 'green-lettuce-lichen-6x6', 'green-lettuce-lichen-water-1x1', 'green-lettuce-lichen-water-3x3', 'green-lettuce-lichen-water-6x6', 'split-gill-1x1', 'split-gill-2x2', 'split-gill-dying-1x1', 'split-gill-dying-2x2', 'split-gill-red-1x1', 'split-gill-red-2x2', 'fuchsia-pita', 'wispy-lichen', 'coral-land', 'coral-water', 'black-sceptre', 'pink-phalanges', 'green-cup', 'mycelium', 'veins', 'veins-small', 'brambles', 'blood-grape', 'blood-grape-vibrant', 'brown-cup', 'polycephalum-slime', 'polycephalum-balloon', 'grey-cracked-mud-decal', 'yellow-coral', 'solo-barnacle', 'curly-roots-orange', 'curly-roots-grey', 'pale-lettuce-lichen-cups-1x1', 'pale-lettuce-lichen-cups-3x3', 'pale-lettuce-lichen-cups-6x6', 'pale-lettuce-lichen-1x1', 'pale-lettuce-lichen-3x3', 'pale-lettuce-lichen-6x6', 'pale-lettuce-lichen-water-1x1', 'pale-lettuce-lichen-water-3x3', 'pale-lettuce-lichen-water-6x6', 'matches-small', 'nerve-roots-dense', 'nerve-roots-sparse', 'red-nerve-roots-veins-dense', 'red-nerve-roots-veins-sparse', 'purple-nerve-roots-veins-dense', 'purple-nerve-roots-veins-sparse', 'cream-nerve-roots-veins-dense', 'cream-nerve-roots-veins-sparse', 'white-carpet-grass', 'barnacles-decal', 'coral-stunted-grey', 'coral-stunted', 'gleba-spawner-slime', 'knobbly-roots', 'knobbly-roots-orange', 'fulgoran-ruin-tiny', 'fulgoran-gravewort', 'urchin-cactus', 'medium-fulgora-rock', 'small-fulgora-rock', 'tiny-fulgora-rock', 'aqulio-ice-decal-blue', 'aqulio-snowy-decal', 'floating-iceberg-large', 'floating-iceberg-small', 'lithium-iceberg-medium', 'lithium-iceberg-small', 'lithium-iceberg-tiny', 'snow-drift-decal', 'v-green-hairy-grass', 'v-brown-hairy-grass', 'v-brown-carpet-grass', 'v-red-pita', 'vulcanus-rock-decal-large', 'vulcanus-crack-decal', 'vulcanus-crack-decal-large', 'vulcanus-crack-decal-huge-warm', 'vulcanus-crack-decal-warm', 'calcite-stain', 'calcite-stain-small', 'sulfur-stain', 'sulfur-stain-small', 'sulfuric-acid-puddle', 'sulfuric-acid-puddle-small', 'crater-small', 'crater-large', 'pumice-relief-decal', 'vulcanus-sand-decal', 'vulcanus-dune-decal', 'waves-decal', 'medium-volcanic-rock', 'small-volcanic-rock', 'tiny-volcanic-rock', 'tiny-rock-cluster', 'small-sulfur-rock', 'tiny-sulfur-rock', 'sulfur-rock-cluster', 'vulcanus-lava-fire'}) do
-    data.raw['optimized-decorative'][v].autoplace = nil
-end
-
-data.raw['lightning-attractor']['fulgoran-ruin-attractor'].autoplace = nil
-
-for _, v in pairs({'ashland-lichen-tree', 'ashland-lichen-tree-flaming', 'cuttlepop', 'slipstack', 'funneltrunk', 'hairyclubnub', 'teflilly', 'lickmaw', 'stingfrond', 'boompuff', 'sunnycomb', 'water-cane'}) do
-    data.raw['tree'][v].autoplace = nil
-end
-
-for _, v in pairs({'yumako-tree', 'jellystem'}) do
-    data.raw['plant'][v].autoplace = nil
-end
-
-for _, v in pairs({'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut', 'lowland-brown-blubber', 'lowland-olive-blubber', 'lowland-olive-blubber-2', 'lowland-olive-blubber-3', 'lowland-cream-red', 'lowland-red-vein', 'lowland-red-vein-2', 'lowland-red-vein-3', 'lowland-red-vein-4', 'lowland-red-vein-dead', 'lowland-red-infection', 'ammoniacal-ocean', 'ammoniacal-ocean-2'}) do
-    data.raw['planet']['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = nil
-end
-
-for k, v in pairs(items['technology_reform']) do
-    if v.prerequisites then
-        data.raw.technology[k].prerequisites = v.prerequisites
-    end
-
-    if v.unit then
-        data.raw.technology[k].unit = v.unit
-    end
-
-    if v.effects then
-        data.raw.technology[k].effects = v.effects
-    end
-end
 
 table.insert(data.raw.technology['automation'].effects, {type = 'create-ghost-on-entity-death', modifier = true})
 data.raw.technology['space-platform'].prerequisites = nil
@@ -394,56 +291,21 @@ for _, v in pairs({'space-science-pack', 'electromagnetic-plant', 'foundry', 'cr
     data.raw.technology[v].research_trigger = nil
 end
 
-for k, v in pairs(items['technology']) do
-    if data.raw.technology[k] then
-        data.raw.technology[k].hidden = v
-        data.raw.technology[k].hidden_in_factoriopedia = v
-        data.raw.technology[k].effects = nil
+for _, v in pairs(data.raw.recipe) do
+    v.category = nil
+    v.surface_conditions = nil
 
-        if data.raw.technology[k].research_trigger then
-            data.raw.technology[k].research_trigger = nil
-            data.raw.technology[k].unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
-        end
-
-        if data.raw.technology[k].unit and data.raw.technology[k].unit.ingredients then
-            data.raw.technology[k].unit.ingredients = {{'space-science-pack', 1}}
-        end
+    if items['recipe'][v.name] then
+        v.hidden = true
+        v.hidden_in_factoriopedia = true
     end
 end
 
-for k, v in pairs(items['recipe']) do
-    if data.raw.recipe[k] then
-        data.raw.recipe[k].hidden = v
-        data.raw.recipe[k].hidden_in_factoriopedia = v
-    end
-end
-
-for k, v in pairs(items['item']) do
-    if data.raw.item[k] then
-        data.raw.item[k].hidden = v
-        data.raw.item[k].hidden_in_factoriopedia = v
-    end
-end
-
-for k, v in pairs(items['hidden_data']) do
-    if data.raw[v] and data.raw[v][k] then
-        data.raw[v][k].hidden = true
-        data.raw[v][k].hidden_in_factoriopedia = true
-    end
-end
-
-data.raw.recipe['big-mining-drill'].category = nil
+-- TODO: add category to machine instead
 data.raw.recipe['big-mining-drill'].ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electric-engine-unit', amount = 5}, {type = 'item', name = 'advanced-circuit', amount = 10}}
-data.raw.recipe['big-mining-drill'].energy_required = 20
-data.raw.recipe['turbo-transport-belt'].category = 'crafting-with-fluid'
 data.raw.recipe['turbo-transport-belt'].ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'item', name = 'express-transport-belt', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 20}}
-data.raw.recipe['turbo-underground-belt'].category = 'crafting-with-fluid'
 data.raw.recipe['turbo-underground-belt'].ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'express-underground-belt', amount = 2}, {type = 'fluid', name = 'lubricant', amount = 40}}
-data.raw.recipe['turbo-splitter'].category = 'crafting-with-fluid'
 data.raw.recipe['turbo-splitter'].ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'express-splitter', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 80}}
-data.raw.recipe['express-transport-belt'].category = 'crafting-with-fluid'
-data.raw.recipe['express-underground-belt'].category = 'crafting-with-fluid'
-data.raw.recipe['express-splitter'].category = 'crafting-with-fluid'
 data.raw.recipe['stack-inserter'].ingredients = {{type = 'item', name = 'processing-unit', amount = 3}, {type = 'item', name = 'steel-plate', amount = 8}, {type = 'item', name = 'bulk-inserter', amount = 1}}
 data.raw.recipe['speed-module-3'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'speed-module-2', amount = 4}}
 data.raw.recipe['productivity-module-3'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'productivity-module-2', amount = 4}}
@@ -455,40 +317,28 @@ data.raw.recipe['battery-mk3-equipment'].ingredients = {{type = 'item', name = '
 data.raw.recipe['artillery-turret'].ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'concrete', amount = 60}, {type = 'item', name = 'iron-gear-wheel', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}}
 data.raw.recipe['artillery-wagon'].ingredients = {{type = 'item', name = 'engine-unit', amount = 64}, {type = 'item', name = 'iron-gear-wheel', amount = 10}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'pipe', amount = 16}, {type = 'item', name = 'advanced-circuit', amount = 20}}
 data.raw.recipe['artillery-shell'].ingredients = {{type = 'item', name = 'explosive-cannon-shell', amount = 4}, {type = 'item', name = 'radar', amount = 1}, {type = 'item', name = 'explosives', amount = 8}}
-data.raw.recipe['tesla-ammo'].category = 'crafting-with-fluid'
 data.raw.recipe['tesla-ammo'].ingredients = {{type = 'item', name = 'battery', amount = 1}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 10}}
-data.raw.recipe['teslagun'].category = 'crafting-with-fluid'
-data.raw.recipe['teslagun'].energy_required = 10
 data.raw.recipe['teslagun'].ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
-data.raw.recipe['tesla-turret'].category = 'crafting-with-fluid'
 data.raw.recipe['tesla-turret'].ingredients = {{type = 'item', name = 'teslagun', amount = 1}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 500}}
 data.raw.recipe['mech-armor'].ingredients = {{type = 'item', name = 'power-armor-mk2', amount = 1}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'battery', amount = 50}}
-data.raw.recipe['railgun'].category = 'crafting-with-fluid'
 data.raw.recipe['railgun'].ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'battery', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 10}}
-data.raw.recipe['railgun-turret'].category = 'crafting-with-fluid'
 data.raw.recipe['railgun-turret'].ingredients = {{type = 'item', name = 'steel-plate', amount = 30}, {type = 'item', name = 'processing-unit', amount = 25}, {type = 'item', name = 'battery', amount = 25}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
-data.raw.recipe['rocket-turret'].category = 'crafting'
 data.raw.recipe['rocket-turret'].ingredients = {{type = 'item', name = 'rocket-launcher', amount = 4}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 4}, {type = 'item', name = 'iron-gear-wheel', amount = 20}}
-data.raw.recipe['fusion-reactor'].category = 'crafting'
 data.raw.recipe['fusion-reactor'].ingredients = {{type = 'item', name = 'nuclear-reactor', amount = 1}, {type = 'item', name = 'steel-plate', amount = 300}, {type = 'item', name = 'processing-unit', amount = 400}}
-data.raw.recipe['fusion-generator'].category = 'crafting'
 data.raw.recipe['fusion-generator'].ingredients = {{type = 'item', name = 'steam-turbine', amount = 1}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'processing-unit', amount = 200}}
-data.raw.recipe['fusion-power-cell'].category = 'crafting-with-fluid'
 data.raw.recipe['fusion-power-cell'].ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'fluid', name = 'petroleum-gas', amount = 200}}
 data.raw.recipe['fusion-power-cell'].results = {{type = 'item', name = 'fusion-power-cell', amount = 4}}
-data.raw.recipe['fusion-reactor-equipment'].category = 'crafting'
 data.raw.recipe['fusion-reactor-equipment'].ingredients = {{type = 'item', name = 'fission-reactor-equipment', amount = 1}, {type = 'item', name = 'fusion-power-cell', amount = 10}, {type = 'item', name = 'steel-plate', amount = 350}, {type = 'item', name = 'processing-unit', amount = 275}}
-data.raw.recipe['fluoroketone'].category = 'chemistry'
 data.raw.recipe['fluoroketone'].ingredients = {{type = 'fluid', name = 'light-oil', amount = 50}, {type = 'fluid', name = 'petroleum-gas', amount = 50}, {type = 'item', name = 'steel-plate', amount = 1}}
-data.raw.recipe['fluoroketone-cooling'].category = 'chemistry'
 data.raw.recipe['agricultural-tower'].ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electronic-circuit', amount = 3}, {type = 'item', name = 'landfill', amount = 1}}
-data.raw.recipe['electromagnetic-plant'].category = 'crafting-with-fluid'
 data.raw.recipe['electromagnetic-plant'].ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'processing-unit', amount = 40}, {type = 'item', name = 'assembling-machine-3', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 60}, {type = 'fluid', name = 'sulfuric-acid', amount = 60}}
-data.raw.recipe['cryogenic-plant'].category = 'crafting-with-fluid'
 data.raw.recipe['cryogenic-plant'].ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'processing-unit', amount = 40}, {type = 'item', name = 'chemical-plant', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 60}, {type = 'fluid', name = 'water', amount = 60}}
 data.raw.recipe['biolab'].ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 60}, {type = 'item', name = 'processing-unit', amount = 60}, {type = 'item', name = 'uranium-235', amount = 3}}
-data.raw.recipe['foundry'].category = 'crafting-with-fluid'
 data.raw.recipe['foundry'].ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'processing-unit', amount = 40}, {type = 'item', name = 'coal', amount = 60}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'item', name = 'electric-furnace', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 60}}
+
+
+
+
 
 data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
 data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
@@ -517,6 +367,129 @@ data.raw['unit-spawner']['spitter-spawner'].captured_spawner_entity = nil
 
 for _, v in pairs(data.raw.lab) do
     v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
+end
+
+
+
+
+
+
+
+for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
+    data.raw.planet[v].map_gen_settings = nil
+    data.raw.planet[v].hidden = true
+    data.raw.planet[v].hidden_in_factoriopedia = true
+    data.raw['change-surface-achievement']['visit-' .. v] = nil
+end
+
+for _, v in pairs(data.raw['space-location']) do
+    v.hidden = true
+    v.hidden_in_factoriopedia = true
+end
+
+for _, v in pairs(data.raw['space-connection']) do
+    v.hidden = true
+    v.hidden_in_factoriopedia = true
+end
+
+for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
+    data.raw['utility-constants']['default']['main_menu_simulations'][v] = nil
+end
+
+data.raw['dont-build-entity-achievement']['logistic-network-embargo'].research_with = nil
+data.raw['create-platform-achievement']['reach-for-the-stars'] = nil
+data.raw['complete-objective-achievement']['second-star-to-the-right-and-straight-on-till-morning'] = nil
+data.raw['dont-research-before-researching-achievement']['rush-to-space'] = nil
+
+for _, v in pairs({'shattered-planet-1', 'shattered-planet-2', 'shattered-planet-3'}) do
+    data.raw['space-connection-distance-traveled-achievement'][v] = nil
+end
+
+for _, v in pairs({'calcite', 'fluorine-vent', 'lithium-brine', 'scrap', 'tungsten-ore'}) do
+    data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v:gsub('-', '_')] = nil
+    data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v] = nil
+    data.raw.resource[v].hidden = true
+    data.raw.resource[v].hidden_in_factoriopedia = true
+end
+
+data.raw.resource['sulfuric-acid-geyser'].hidden = true
+data.raw.resource['sulfuric-acid-geyser'].hidden_in_factoriopedia = true
+
+for _, v in pairs({'vulcanus_coal', 'tungsten_ore', 'calcite', 'sulfuric_acid_geyser', 'scrap', 'fluorine_vent', 'lithium_brine', 'gleba_stone', 'aquilo_crude_oil', 'gleba_cliff', 'fulgora_cliff', 'vulcanus_volcanism', 'gleba_water', 'gleba_plants', 'gleba_enemy_base', 'fulgora_islands'}) do
+    data.raw['autoplace-control'][v].hidden = true
+    data.raw['autoplace-control'][v].hidden_in_factoriopedia = true
+
+    -- TODO it will show blackscreen if it is nil
+    -- data.raw['autoplace-control'][v] = nil
+
+    local r = v:gsub('_', '-')
+
+    if data.raw['resource'][r] then
+        data.raw['resource'][r].autoplace = nil
+    end
+end
+
+for _, v in pairs({'lichen-decal', 'shroom-decal', 'pink-lichen-decal', 'red-lichen-decal', 'yellow-lettuce-lichen-1x1', 'yellow-lettuce-lichen-3x3', 'yellow-lettuce-lichen-6x6', 'yellow-lettuce-lichen-cups-1x1', 'yellow-lettuce-lichen-cups-3x3', 'yellow-lettuce-lichen-cups-6x6', 'honeycomb-fungus', 'honeycomb-fungus-1x1', 'honeycomb-fungus-decayed', 'green-lettuce-lichen-1x1', 'green-lettuce-lichen-3x3', 'green-lettuce-lichen-6x6', 'green-lettuce-lichen-water-1x1', 'green-lettuce-lichen-water-3x3', 'green-lettuce-lichen-water-6x6', 'split-gill-1x1', 'split-gill-2x2', 'split-gill-dying-1x1', 'split-gill-dying-2x2', 'split-gill-red-1x1', 'split-gill-red-2x2', 'fuchsia-pita', 'wispy-lichen', 'coral-land', 'coral-water', 'black-sceptre', 'pink-phalanges', 'green-cup', 'mycelium', 'veins', 'veins-small', 'brambles', 'blood-grape', 'blood-grape-vibrant', 'brown-cup', 'polycephalum-slime', 'polycephalum-balloon', 'grey-cracked-mud-decal', 'yellow-coral', 'solo-barnacle', 'curly-roots-orange', 'curly-roots-grey', 'pale-lettuce-lichen-cups-1x1', 'pale-lettuce-lichen-cups-3x3', 'pale-lettuce-lichen-cups-6x6', 'pale-lettuce-lichen-1x1', 'pale-lettuce-lichen-3x3', 'pale-lettuce-lichen-6x6', 'pale-lettuce-lichen-water-1x1', 'pale-lettuce-lichen-water-3x3', 'pale-lettuce-lichen-water-6x6', 'matches-small', 'nerve-roots-dense', 'nerve-roots-sparse', 'red-nerve-roots-veins-dense', 'red-nerve-roots-veins-sparse', 'purple-nerve-roots-veins-dense', 'purple-nerve-roots-veins-sparse', 'cream-nerve-roots-veins-dense', 'cream-nerve-roots-veins-sparse', 'white-carpet-grass', 'barnacles-decal', 'coral-stunted-grey', 'coral-stunted', 'gleba-spawner-slime', 'knobbly-roots', 'knobbly-roots-orange', 'fulgoran-ruin-tiny', 'fulgoran-gravewort', 'urchin-cactus', 'medium-fulgora-rock', 'small-fulgora-rock', 'tiny-fulgora-rock', 'aqulio-ice-decal-blue', 'aqulio-snowy-decal', 'floating-iceberg-large', 'floating-iceberg-small', 'lithium-iceberg-medium', 'lithium-iceberg-small', 'lithium-iceberg-tiny', 'snow-drift-decal', 'v-green-hairy-grass', 'v-brown-hairy-grass', 'v-brown-carpet-grass', 'v-red-pita', 'vulcanus-rock-decal-large', 'vulcanus-crack-decal', 'vulcanus-crack-decal-large', 'vulcanus-crack-decal-huge-warm', 'vulcanus-crack-decal-warm', 'calcite-stain', 'calcite-stain-small', 'sulfur-stain', 'sulfur-stain-small', 'sulfuric-acid-puddle', 'sulfuric-acid-puddle-small', 'crater-small', 'crater-large', 'pumice-relief-decal', 'vulcanus-sand-decal', 'vulcanus-dune-decal', 'waves-decal', 'medium-volcanic-rock', 'small-volcanic-rock', 'tiny-volcanic-rock', 'tiny-rock-cluster', 'small-sulfur-rock', 'tiny-sulfur-rock', 'sulfur-rock-cluster', 'vulcanus-lava-fire'}) do
+    data.raw['optimized-decorative'][v].autoplace = nil
+end
+
+data.raw['lightning-attractor']['fulgoran-ruin-attractor'].autoplace = nil
+
+for _, v in pairs({'ashland-lichen-tree', 'ashland-lichen-tree-flaming', 'cuttlepop', 'slipstack', 'funneltrunk', 'hairyclubnub', 'teflilly', 'lickmaw', 'stingfrond', 'boompuff', 'sunnycomb', 'water-cane'}) do
+    data.raw['tree'][v].autoplace = nil
+end
+
+for _, v in pairs({'yumako-tree', 'jellystem'}) do
+    data.raw['plant'][v].autoplace = nil
+end
+
+for _, v in pairs({'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut', 'lowland-brown-blubber', 'lowland-olive-blubber', 'lowland-olive-blubber-2', 'lowland-olive-blubber-3', 'lowland-cream-red', 'lowland-red-vein', 'lowland-red-vein-2', 'lowland-red-vein-3', 'lowland-red-vein-4', 'lowland-red-vein-dead', 'lowland-red-infection', 'ammoniacal-ocean', 'ammoniacal-ocean-2'}) do
+    data.raw['planet']['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = nil
+end
+
+for k, v in pairs(items['technology_reform']) do
+    if v.prerequisites then
+        data.raw.technology[k].prerequisites = v.prerequisites
+    end
+
+    if v.unit then
+        data.raw.technology[k].unit = v.unit
+    end
+
+    if v.effects then
+        data.raw.technology[k].effects = v.effects
+    end
+end
+
+for k, v in pairs(items['technology']) do
+    if data.raw.technology[k] then
+        data.raw.technology[k].hidden = v
+        data.raw.technology[k].hidden_in_factoriopedia = v
+        data.raw.technology[k].effects = nil
+
+        if data.raw.technology[k].research_trigger then
+            data.raw.technology[k].research_trigger = nil
+            data.raw.technology[k].unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
+        end
+
+        if data.raw.technology[k].unit and data.raw.technology[k].unit.ingredients then
+            data.raw.technology[k].unit.ingredients = {{'space-science-pack', 1}}
+        end
+    end
+end
+
+for k, v in pairs(items['item']) do
+    if data.raw.item[k] then
+        data.raw.item[k].hidden = v
+        data.raw.item[k].hidden_in_factoriopedia = v
+    end
+end
+
+for k, v in pairs(items['hidden_data']) do
+    if data.raw[v] and data.raw[v][k] then
+        data.raw[v][k].hidden = true
+        data.raw[v][k].hidden_in_factoriopedia = true
+    end
 end
 
 for _, v in pairs({'lithium-brine', 'fluorine', 'ammonia', 'ammoniacal-solution', 'electrolyte', 'holmium-solution', 'molten-copper', 'molten-iron', 'lava'}) do
@@ -639,13 +612,6 @@ for k, v in pairs(items['technology_vp']) do
         if data.raw.technology[k].unit and data.raw.technology[k].unit.ingredients then
             data.raw.technology[k].unit.ingredients = {{'space-science-pack', 1}}
         end
-    end
-end
-
-for k, v in pairs(items['recipe_vp']) do
-    if data.raw.recipe[k] then
-        data.raw.recipe[k].hidden = v
-        data.raw.recipe[k].hidden_in_factoriopedia = v
     end
 end
 
