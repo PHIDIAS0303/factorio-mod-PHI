@@ -13,8 +13,9 @@ if not mods['space-age'] then
     return
 end
 
--- GM-SAP C 37 BASE ENTITY
--- GM-SAP C 16 SPACE_AGE ENTITY
+-- GM-SAP C 33 BASE ENTITY
+-- GM-SAP C 6 ELEVATED_RAILS ENTITY
+-- GM-SAP C 14 SPACE_AGE ENTITY
 for k, v in pairs(items['entity_surface_conditions']) do
     data.raw[v][k].surface_conditions = nil
 end

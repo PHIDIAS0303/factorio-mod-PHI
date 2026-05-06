@@ -5,7 +5,6 @@ local items = {
         ['crusher'] = 'assembling-machine',
         ['cryogenic-plant'] = 'assembling-machine',
         ['electromagnetic-plant'] = 'assembling-machine',
-
         ['foundry'] = 'assembling-machine',
         ['agricultural-tower'] = 'agricultural-tower',
         ['asteroid-collector'] = 'asteroid-collector',
@@ -16,16 +15,19 @@ local items = {
         ['recycler'] = 'furnace',
         ['thruster'] = 'thruster',
         ['biolab'] = 'lab',
-        ['rail-support'] = 'rail-support',
 
+        ['rail-support'] = 'rail-support',
         ['rail-ramp'] = 'rail-ramp',
+        ['elevated-straight-rail'] = 'elevated-straight-rail',
+        ['elevated-half-diagonal-rail'] = 'elevated-half-diagonal-rail',
+        ['elevated-curved-rail-a'] = 'elevated-curved-rail-a',
+        ['elevated-curved-rail-b'] = 'elevated-curved-rail-b',
 
         ['rocket-silo'] = 'rocket-silo',
         ['cargo-landing-pad'] = 'cargo-landing-pad',
         ['flamethrower-turret'] = 'fluid-turret',
         ['stone-furnace'] = 'furnace',
         ['steel-furnace'] = 'furnace',
-
         ['burner-mining-drill'] = 'mining-drill',
         ['burner-inserter'] = 'inserter',
         ['boiler'] = 'boiler',
@@ -37,7 +39,6 @@ local items = {
         ['locomotive'] = 'locomotive',
         ['cargo-wagon'] = 'cargo-wagon',
         ['fluid-wagon'] = 'fluid-wagon',
-
         ['artillery-wagon'] = 'artillery-wagon',
         ['train-stop'] = 'train-stop',
         ['rail-signal'] = 'rail-signal',
@@ -49,12 +50,6 @@ local items = {
         ['curved-rail-a'] = 'curved-rail-a',
         ['curved-rail-b'] = 'curved-rail-b',
         ['half-diagonal-rail'] = 'half-diagonal-rail',
-
-        ['elevated-straight-rail'] = 'elevated-straight-rail',
-        ['elevated-half-diagonal-rail'] = 'elevated-half-diagonal-rail',
-        ['elevated-curved-rail-a'] = 'elevated-curved-rail-a',
-        ['elevated-curved-rail-b'] = 'elevated-curved-rail-b',
-
         ['wooden-chest'] = 'container',
         ['iron-chest'] = 'container',
         ['steel-chest'] = 'container',
