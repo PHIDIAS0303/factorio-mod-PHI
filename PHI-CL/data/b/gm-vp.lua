@@ -179,10 +179,17 @@ if data.raw.technology['research-productivity'] then
     data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
 end
 
+-- GM-VP A 1 SPACE_AGE RESEARCH_EFFECT
+if data.raw.technology['automation'] and data.raw.technology['automation'].effects then
+    table.insert(data.raw.technology['automation'].effects, {type = 'create-ghost-on-entity-death', modifier = true})
+end
 
-table.insert(data.raw.technology['automation'].effects, {type = 'create-ghost-on-entity-death', modifier = true})
-data.raw.technology['space-platform'].prerequisites = nil
-data.raw.technology['space-platform'].unit = {count = 100, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
+-- GM-VP C 1 SPACE_AGE RESEARCH
+if data.raw.technology['space-platform'] then
+    data.raw.technology['space-platform'].prerequisites = nil
+    data.raw.technology['space-platform'].unit = {count = 100, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
+end
+
 data.raw.technology['space-platform-thruster'].prerequisites = {'space-platform'}
 data.raw.technology['space-platform-thruster'].unit = {count = 100, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
 data.raw.technology['asteroid-reprocessing'].prerequisites = {'space-platform'}
