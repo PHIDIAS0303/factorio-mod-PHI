@@ -20,8 +20,9 @@ for k, v in pairs(items['entity_surface_conditions']) do
     data.raw[v][k].surface_conditions = nil
 end
 
-
+-- MI C 1 BASE UTILITY_CONSTANTS
 data.raw['utility-constants'].default.default_pipeline_extent = math.max(settings.startup['PHI-MI-PIPE-EXTENT'].value, 960)
+
 local bss = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
 
 for _, v in pairs(data.raw['inserter']) do
