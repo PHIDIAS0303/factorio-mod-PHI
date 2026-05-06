@@ -179,7 +179,7 @@ if data.raw.technology['automation'] and data.raw.technology['automation'].effec
     table.insert(data.raw.technology['automation'].effects, {type = 'create-ghost-on-entity-death', modifier = true})
 end
 
--- GM-VP C 9 BASE RESEARCH
+-- GM-VP C 18 BASE RESEARCH
 -- GM-VP C 14 SPACE_AGE RESEARCH
 for k, v in pairs(items['technology_reform']) do
     if data.raw.technology[k] then
@@ -191,36 +191,22 @@ for k, v in pairs(items['technology_reform']) do
             data.raw.technology[k].unit = v.unit
         end
 
+        if v.unit_ingredients then
+            data.raw.technology[k].unit.ingredients = v.unit_ingredients
+        end
+
         if v.effects then
             data.raw.technology[k].effects = v.effects
         end
     end
 end
 
-data.raw.technology['stronger-explosives-5'].prerequisites = {'stronger-explosives-4'}
-data.raw.technology['stronger-explosives-5'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-data.raw.technology['stronger-explosives-6'].prerequisites = {'stronger-explosives-5'}
-data.raw.technology['stronger-explosives-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-data.raw.technology['stronger-explosives-7'].prerequisites = {'stronger-explosives-6'}
-data.raw.technology['stronger-explosives-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-data.raw.technology['refined-flammables-6'].prerequisites = {'refined-flammables-5'}
-data.raw.technology['refined-flammables-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-data.raw.technology['refined-flammables-7'].prerequisites = {'refined-flammables-6'}
-data.raw.technology['refined-flammables-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
 data.raw.technology['artillery'].prerequisites = {'tank', 'concrete', 'radar'}
 data.raw.technology['artillery'].unit.count = 1500
 data.raw.technology['artillery'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
-data.raw.technology['artillery-shell-range-1'].prerequisites = {'artillery', 'space-science-pack'}
-data.raw.technology['artillery-shell-range-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-data.raw.technology['artillery-shell-speed-1'].prerequisites = {'artillery', 'space-science-pack'}
-data.raw.technology['artillery-shell-speed-1'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
 data.raw.technology['railgun'].prerequisites = {'military-4', 'artillery', 'production-science-pack'}
 data.raw.technology['railgun'].unit.count = 2500
 data.raw.technology['railgun'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-data.raw.technology['worker-robots-speed-6'].prerequisites = {'worker-robots-speed-5'}
-data.raw.technology['worker-robots-speed-6'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-data.raw.technology['worker-robots-speed-7'].prerequisites = {'worker-robots-speed-6', 'space-science-pack'}
-data.raw.technology['worker-robots-speed-7'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
 data.raw.technology['atomic-bomb'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
 data.raw.technology['energy-shield-mk2-equipment'].prerequisites = {'energy-shield-equipment', 'military-4', 'power-armor'}
 data.raw.technology['energy-shield-mk2-equipment'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}

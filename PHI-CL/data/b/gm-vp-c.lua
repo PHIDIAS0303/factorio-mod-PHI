@@ -1,64 +1,70 @@
 local items = {
     ['entity_surface_conditions'] = {
-        ['captive-biter-spawner'] = 'assembling-machine',
-        ['biochamber'] = 'assembling-machine',
-        ['crusher'] = 'assembling-machine',
-        ['cryogenic-plant'] = 'assembling-machine',
-        ['electromagnetic-plant'] = 'assembling-machine',
-        ['foundry'] = 'assembling-machine',
-        ['agricultural-tower'] = 'agricultural-tower',
-        ['asteroid-collector'] = 'asteroid-collector',
-        ['fusion-reactor'] = 'fusion-reactor',
-        ['fusion-generator'] = 'fusion-generator',
-
-        ['heating-tower'] = 'reactor',
-        ['recycler'] = 'furnace',
-        ['thruster'] = 'thruster',
-        ['biolab'] = 'lab',
-
-        ['rail-support'] = 'rail-support',
-        ['rail-ramp'] = 'rail-ramp',
-        ['elevated-straight-rail'] = 'elevated-straight-rail',
-        ['elevated-half-diagonal-rail'] = 'elevated-half-diagonal-rail',
-        ['elevated-curved-rail-a'] = 'elevated-curved-rail-a',
-        ['elevated-curved-rail-b'] = 'elevated-curved-rail-b',
-
+        -- BASE 0
         ['rocket-silo'] = 'rocket-silo',
         ['cargo-landing-pad'] = 'cargo-landing-pad',
         ['flamethrower-turret'] = 'fluid-turret',
         ['stone-furnace'] = 'furnace',
         ['steel-furnace'] = 'furnace',
+        -- BASE 5
         ['burner-mining-drill'] = 'mining-drill',
         ['burner-inserter'] = 'inserter',
         ['boiler'] = 'boiler',
         ['roboport'] = 'roboport',
         ['car'] = 'car',
-
+        -- BASE 10
         ['tank'] = 'car',
         ['spidertron'] = 'spider-vehicle',
         ['locomotive'] = 'locomotive',
         ['cargo-wagon'] = 'cargo-wagon',
         ['fluid-wagon'] = 'fluid-wagon',
+        -- BASE 15
         ['artillery-wagon'] = 'artillery-wagon',
         ['train-stop'] = 'train-stop',
         ['rail-signal'] = 'rail-signal',
         ['rail-chain-signal'] = 'rail-chain-signal',
         ['straight-rail'] = 'straight-rail',
-
+        -- BASE 20
         ['legacy-curved-rail'] = 'legacy-curved-rail',
         ['legacy-straight-rail'] = 'legacy-straight-rail',
         ['curved-rail-a'] = 'curved-rail-a',
         ['curved-rail-b'] = 'curved-rail-b',
         ['half-diagonal-rail'] = 'half-diagonal-rail',
+        -- BASE 25
         ['wooden-chest'] = 'container',
         ['iron-chest'] = 'container',
         ['steel-chest'] = 'container',
-
         ['passive-provider-chest'] = 'logistic-container',
         ['active-provider-chest'] = 'logistic-container',
+        -- BASE 30
         ['storage-chest'] = 'logistic-container',
         ['buffer-chest'] = 'logistic-container',
-        ['requester-chest'] = 'logistic-container'
+        ['requester-chest'] = 'logistic-container',
+        -- ELEVATED_RAIL 0
+        ['rail-support'] = 'rail-support',
+        ['rail-ramp'] = 'rail-ramp',
+        ['elevated-straight-rail'] = 'elevated-straight-rail',
+        ['elevated-half-diagonal-rail'] = 'elevated-half-diagonal-rail',
+        ['elevated-curved-rail-a'] = 'elevated-curved-rail-a',
+        -- ELEVATED_RAIL 5
+        ['elevated-curved-rail-b'] = 'elevated-curved-rail-b',
+        -- SPACE_AGE 0
+        ['captive-biter-spawner'] = 'assembling-machine',
+        ['biochamber'] = 'assembling-machine',
+        ['crusher'] = 'assembling-machine',
+        ['cryogenic-plant'] = 'assembling-machine',
+        ['electromagnetic-plant'] = 'assembling-machine',
+        -- SPACE_AGE 5
+        ['foundry'] = 'assembling-machine',
+        ['agricultural-tower'] = 'agricultural-tower',
+        ['asteroid-collector'] = 'asteroid-collector',
+        ['fusion-reactor'] = 'fusion-reactor',
+        ['fusion-generator'] = 'fusion-generator',
+        -- SPACE_AGE 10
+        ['heating-tower'] = 'reactor',
+        ['recycler'] = 'furnace',
+        ['thruster'] = 'thruster',
+        ['biolab'] = 'lab',
     },
     ['technology_reform'] = {
         -- BASE 0
@@ -99,6 +105,44 @@ local items = {
             ['prerequisites'] = {'rocket-silo'},
             ['effects'] = {{type = 'unlock-recipe', recipe = 'satellite'}},
             ['unit'] = {count = 2000, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
+        },
+        ['stronger-explosives-5'] = {
+            prerequisites = {'stronger-explosives-4'},
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+        },
+        -- BASE 10
+        ['stronger-explosives-6'] = {
+            prerequisites = {'stronger-explosives-5'},
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+        },
+        ['stronger-explosives-7'] = {
+            prerequisites = {'stronger-explosives-6'},
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        },
+        ['refined-flammables-6'] = {
+            prerequisites = {'refined-flammables-5'},
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+        },
+        ['refined-flammables-7'] = {
+            prerequisites = {'refined-flammables-6'},
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        },
+        ['artillery-shell-range-1'] = {
+            prerequisites = {'artillery', 'space-science-pack'},
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        },
+        -- BASE 15
+        ['artillery-shell-speed-1'] = {
+            prerequisites = {'artillery', 'space-science-pack'},
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        },
+        ['worker-robots-speed-6'] = {
+            prerequisites = {'worker-robots-speed-5'},
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+        },
+        ['worker-robots-speed-7'] = {
+            prerequisites = {'worker-robots-speed-6', 'space-science-pack'},
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         },
         -- SPACE_AGE 0
         ['stack-inserter'] = {
@@ -161,7 +205,7 @@ local items = {
         ['calcite-processing'] = {
             ['prerequisites'] = {'space-platform'},
             ['unit'] = {count = 100, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
-        }
+        },
     },
     ['technology'] = {
         ['planet-discovery-vulcanus'] = true,
