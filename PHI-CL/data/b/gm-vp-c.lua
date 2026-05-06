@@ -61,6 +61,46 @@ local items = {
         ['requester-chest'] = 'logistic-container'
     },
     ['technology_reform'] = {
+        -- BASE 0
+        ['speed-module-2'] = {
+            ['prerequisites'] = {'speed-module', 'processing-unit'},
+            ['unit'] = {count = 75, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+        },
+        ['speed-module-3'] = {
+            ['prerequisites'] = {'speed-module-2', 'production-science-pack'},
+            ['unit'] = {count = 300, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+        },
+        ['productivity-module-2'] = {
+            ['prerequisites'] = {'productivity-module', 'processing-unit'},
+            ['unit'] = {count = 75, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+        },
+        ['productivity-module-3'] = {
+            ['prerequisites'] = {'productivity-module-2', 'production-science-pack'},
+            ['unit'] = {count = 300, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+        },
+        ['efficiency-module-2'] = {
+            ['prerequisites'] = {'efficiency-module', 'processing-unit'},
+            ['unit'] = {count = 75, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+        },
+        -- BASE 5
+        ['efficiency-module-3'] = {
+            ['prerequisites'] = {'efficiency-module-2', 'production-science-pack'},
+            ['unit'] = {count = 300, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+        },
+        ['logistic-system'] = {
+            ['prerequisites'] = {'logistic-robotics', 'utility-science-pack'},
+            ['unit'] = {count = 500, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}}
+        },
+        ['effect-transmission'] = {
+            ['prerequisites'] = {'production-science-pack'},
+            ['unit'] = {count = 75, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+        },
+        ['space-science-pack'] = {
+            ['prerequisites'] = {'rocket-silo'},
+            ['effects'] = {{type = 'unlock-recipe', recipe = 'satellite'}},
+            ['unit'] = {count = 2000, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
+        },
+        -- SPACE_AGE 0
         ['stack-inserter'] = {
             ['prerequisites'] = {'bulk-inserter', 'chemical-science-pack', 'processing-unit'},
             ['unit'] = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
@@ -82,6 +122,7 @@ local items = {
             ['unit'] = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
             ['effects'] = {{type = 'unlock-recipe', recipe = 'electromagnetic-plant'}}
         },
+        -- SPACE_AGE 5
         ['foundry'] = {
             ['prerequisites'] = {'automation-3', 'advanced-material-processing-2', 'processing-unit', 'utility-science-pack'},
             ['unit'] = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
@@ -96,37 +137,30 @@ local items = {
             ['prerequisites'] = {'automation-3', 'processing-unit', 'utility-science-pack'},
             ['unit'] = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
         },
-        ['speed-module-2'] = {
-            ['prerequisites'] = {'speed-module', 'processing-unit'},
-            ['unit'] = {count = 75, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+        ['space-platform'] = {
+            ['prerequisites'] = nil,
+            ['unit'] = {count = 100, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
         },
-        ['speed-module-3'] = {
-            ['prerequisites'] = {'speed-module-2', 'production-science-pack'},
-            ['unit'] = {count = 300, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+        ['space-platform-thruster'] = {
+            ['prerequisites'] = {'space-platform'},
+            ['unit'] = {count = 100, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
         },
-        ['productivity-module-2'] = {
-            ['prerequisites'] = {'productivity-module', 'processing-unit'},
-            ['unit'] = {count = 75, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+        -- SPACE_AGE 10
+        ['asteroid-reprocessing'] = {
+            ['prerequisites'] = {'space-platform'},
+            ['unit'] = {count = 100, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
         },
-        ['productivity-module-3'] = {
-            ['prerequisites'] = {'productivity-module-2', 'production-science-pack'},
-            ['unit'] = {count = 300, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+        ['advanced-asteroid-processing'] = {
+            ['prerequisites'] = {'space-platform'},
+            ['unit'] = {count = 100, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
         },
-        ['efficiency-module-2'] = {
-            ['prerequisites'] = {'efficiency-module', 'processing-unit'},
-            ['unit'] = {count = 75, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+        ['asteroid-productivity'] = {
+            ['prerequisites'] = {'space-platform'},
+            ['unit'] = {count = 100, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
         },
-        ['efficiency-module-3'] = {
-            ['prerequisites'] = {'efficiency-module-2', 'production-science-pack'},
-            ['unit'] = {count = 300, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
-        },
-        ['logistic-system'] = {
-            ['prerequisites'] = {'logistic-robotics', 'utility-science-pack'},
-            ['unit'] = {count = 500, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}}
-        },
-        ['effect-transmission'] = {
-            ['prerequisites'] = {'production-science-pack'},
-            ['unit'] = {count = 75, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+        ['calcite-processing'] = {
+            ['prerequisites'] = {'space-platform'},
+            ['unit'] = {count = 100, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
         }
     },
     ['technology'] = {
@@ -161,7 +195,20 @@ local items = {
         ['promethium-science-pack'] = true,
         ['foundation'] = true,
         ['scrap-recycling-productivity'] = true,
-        ['biochamber'] = true
+        ['biochamber'] = true,
+        ['space-platform-thruster'] = true,
+        ['space-platform'] = true,
+        ['asteroid-reprocessing'] = true,
+        ['advanced-asteroid-processing'] = true,
+        ['asteroid-productivity'] = true,
+        ['calcite-processing'] = true,
+        ['artillery-shell-damage-1'] = true,
+        ['electric-weapons-damage-1'] = true,
+        ['electric-weapons-damage-2'] = true,
+        ['electric-weapons-damage-3'] = true,
+        ['electric-weapons-damage-4'] = true,
+        ['railgun-damage-1'] = true,
+        ['railgun-shooting-speed-1'] = true,
     },
     ['recipe'] = {
         ['recycler'] = true,
@@ -288,6 +335,14 @@ local items = {
         ['lithium'] = true,
         ['lithium-plate'] = true,
         ['quantum-processor'] = true,
+        ['ice'] = true,
+        ['carbon'] = true,
+        ['calcite'] = true,
+        ['space-platform-foundation'] = true,
+        ['asteroid-collector'] = true,
+        ['crusher'] = true,
+        ['thruster'] = true,
+        ['space-platform-hub'] = true,
     },
     ['hidden_data'] = {
         ['biochamber'] = 'assembling-machine',
@@ -302,33 +357,13 @@ local items = {
         ['agricultural-science-pack'] = 'tool',
         ['cryogenic-science-pack'] = 'tool',
         ['electromagnetic-science-pack'] = 'tool',
-        ['metallurgic-science-pack'] = 'tool'
-    },
-    ['technology_vp'] = {
-        ['space-platform-thruster'] = true,
-        ['space-platform'] = true,
-        ['asteroid-reprocessing'] = true,
-        ['advanced-asteroid-processing'] = true,
-        ['asteroid-productivity'] = true,
-        ['calcite-processing'] = true,
-    },
-    ['item_vp'] = {
-        ['ice'] = true,
-        ['carbon'] = true,
-        ['calcite'] = true,
-        ['space-platform-foundation'] = true,
-        ['asteroid-collector'] = true,
-        ['crusher'] = true,
-        ['thruster'] = true,
-        ['space-platform-hub'] = true,
-    },
-    ['hidden_data_vp'] = {
+        ['metallurgic-science-pack'] = 'tool',
         ['thruster'] = 'thruster',
         ['crusher'] = 'assembling-machine',
         ['asteroid-collector'] = 'asteroid-collector',
         ['space-platform-hub'] = 'space-platform-hub',
         ['space-platform-starter-pack'] = 'space-platform-starter-pack',
-        ['space-platform'] = 'surface',
+        ['space-platform'] = 'surface'
     }
 }
 
