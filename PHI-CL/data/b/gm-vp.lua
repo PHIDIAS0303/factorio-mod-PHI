@@ -14,18 +14,18 @@ if not mods['space-age'] then
     return
 end
 
--- GM-SAP C 33 BASE ENTITY
--- GM-SAP C 6 ELEVATED_RAILS ENTITY
--- GM-SAP C 14 SPACE_AGE ENTITY
+-- GM-VP C 33 BASE ENTITY
+-- GM-VP C 6 ELEVATED_RAILS ENTITY
+-- GM-VP C 14 SPACE_AGE ENTITY
 for k, v in pairs(items['entity_surface_conditions']) do
     data.raw[v][k].surface_conditions = nil
 end
 
--- MI C 1 BASE UTILITY_CONSTANTS
+-- GM-VP C 1 BASE UTILITY_CONSTANTS
 data.raw['utility-constants'].default.default_pipeline_extent = math.max(settings.startup['PHI-MI-PIPE-EXTENT'].value, 960)
 
--- GM-SAP C 5 BASE ENTITY
--- GM-SAP C 1 SPACE_AGE ENTITY
+-- GM-VP C 5 BASE ENTITY
+-- GM-VP C 1 SPACE_AGE ENTITY
 local bss = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
 
 for _, v in pairs(data.raw['inserter']) do
@@ -34,24 +34,31 @@ for _, v in pairs(data.raw['inserter']) do
     v.enter_drop_mode_if_held_stack_spoiled = true
 end
 
--- GM-SAP C 1 BASE TECHNOLOGY_EFFECT
+-- GM-VP C 1 BASE RESEARCH_EFFECT
 if data.raw.technology['space-science-pack'] then
     data.raw.technology['space-science-pack'].effects = {{type = 'unlock-recipe', recipe = 'satellite'}}
 end
 
--- GM-SAP C 1 BASE TOOL
+-- GM-VP C 1 BASE TOOL
 if data.raw.tool['space-science-pack'] then
     data.raw.tool['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'raw-fish', amount = 1}}
     data.raw.tool['space-science-pack'].send_to_orbit_mode = 'automated'
 end
 
-data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = false
-data.raw['rocket-silo']['rocket-silo'].rocket_parts_required = 100
-data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 1
-data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 0
-data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 0
+-- GM-VP C 1 BASE ENTITY
+if data.raw['rocket-silo'] and data.raw['rocket-silo']['rocket-silo'] then
+    data.raw['rocket-silo']['rocket-silo'].launch_to_space_platforms = false
+    data.raw['rocket-silo']['rocket-silo'].rocket_parts_required = 100
+    data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = 1
+    data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 0
+end
 
--- GM-SAP A 2 BASE RECIPE
+-- GM-VP C 1 BASE ENTITY
+if data.raw['rocket-silo-rocket'] and data.raw['rocket-silo-rocket']['rocket-silo-rocket'] then
+    data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 0
+end
+
+-- GM-VP A 2 BASE RECIPE
 data:extend({
     {
         type = 'item',
@@ -78,9 +85,6 @@ data:extend({
         requester_paste_multiplier = 1
     }
 })
-
-
-
 
 for _, v in pairs(data.raw.recipe) do
     v.surface_conditions = nil
