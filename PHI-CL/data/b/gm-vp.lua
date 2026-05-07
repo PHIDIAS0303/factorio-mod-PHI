@@ -285,6 +285,18 @@ if data.raw['unit-spawner'] then
     end
 end
 
+-- GM-VP H 3 SPACE_AGE SPACE_LOCATION
+for _, v in pairs(data.raw['space-location']) do
+    v.hidden = true
+    v.hidden_in_factoriopedia = true
+end
+
+-- GM-VP H 9 SPACE_AGE SPACE_CONNECTION
+for _, v in pairs(data.raw['space-connection']) do
+    v.hidden = true
+    v.hidden_in_factoriopedia = true
+end
+
 for _, v in pairs(data.raw.recipe) do
     v.category = nil
     v.surface_conditions = nil
@@ -327,16 +339,6 @@ for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
     data.raw.planet[v].hidden = true
     data.raw.planet[v].hidden_in_factoriopedia = true
     data.raw['change-surface-achievement']['visit-' .. v] = nil
-end
-
-for _, v in pairs(data.raw['space-location']) do
-    v.hidden = true
-    v.hidden_in_factoriopedia = true
-end
-
-for _, v in pairs(data.raw['space-connection']) do
-    v.hidden = true
-    v.hidden_in_factoriopedia = true
 end
 
 for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
