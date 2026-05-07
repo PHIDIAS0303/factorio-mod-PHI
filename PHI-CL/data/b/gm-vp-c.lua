@@ -435,6 +435,11 @@ local items = {
             ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'processing-unit', amount = 40}, {type = 'item', name = 'coal', amount = 60}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'item', name = 'electric-furnace', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 60}}
         }
     },
+    ['tips_and_tricks_item'] = {
+        -- SPACE_AGE 0
+        'agriculture',
+        'lava-processing'
+    },
     ['technology'] = {
         ['planet-discovery-vulcanus'] = true,
         ['planet-discovery-gleba'] = true,

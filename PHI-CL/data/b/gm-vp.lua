@@ -245,6 +245,17 @@ if items['recipe_reform'] then
     end
 end
 
+-- GM-VP C 2 SPACE_AGE TIP_AND_TRICK
+-- TODO nil
+if items['tips_and_tricks_item'] then
+    for _, v in pairs(items['tips_and_tricks_item']) do
+        if data.raw['tips-and-tricks-item'][v] then
+            data.raw['tips-and-tricks-item'][v].hidden = true
+            data.raw['tips-and-tricks-item'][v].hidden_in_factoriopedia = true
+        end
+    end
+end
+
 -- GM-VP C 2 BASE ENTITY
 if data.raw['unit-spawner'] then
     if data.raw['unit-spawner']['biter-spawner'] then
@@ -460,9 +471,6 @@ end
 
 data.raw.ammo['capture-robot-rocket'].hidden = true
 data.raw.ammo['capture-robot-rocket'].hidden_in_factoriopedia = true
-
-data.raw['tips-and-tricks-item']['agriculture'] = nil
-data.raw['tips-and-tricks-item']['lava-processing'] = nil
 
 for _, v in pairs({'research-with-metallurgics', 'research-with-agriculture', 'research-with-electromagnetics', 'research-with-cryogenics', 'research-with-promethium'}) do
     data.raw['research-with-science-pack-achievement'][v] = nil
