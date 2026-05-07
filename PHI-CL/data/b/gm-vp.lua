@@ -207,6 +207,7 @@ if items['technology_reform'] then
     end
 end
 
+-- GM-VP A 2 SPACE_AGE RESEARCH_EFFECT
 table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone'})
 table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'})
 
