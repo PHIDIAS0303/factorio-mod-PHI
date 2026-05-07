@@ -219,13 +219,31 @@ for _, v in pairs({'space-science-pack', 'electromagnetic-plant', 'foundry', 'cr
     end
 end
 
-for _, v in pairs(data.raw.recipe) do
-    v.category = nil
-    v.surface_conditions = nil
+-- GM-VP H 4 SPACE_AGE ITEM
+for _, v in pairs({'carbonic', 'metallic', 'promethium', 'oxide'}) do
+    local l = v .. '-asteroid-chunk'
 
-    if items['recipe'][v.name] then
-        v.hidden = true
-        v.hidden_in_factoriopedia = true
+    if data.raw.item[l] then
+        data.raw.item[l].hidden = true
+        data.raw.item[l].hidden_in_factoriopedia = true
+    end
+end
+
+-- GM-VP H 20 SPACE_AGE ENTITY
+for _, a in pairs({'asteroid', 'asteroid-chunk'}) do
+    if data.raw[a] then
+        for _, v in pairs(data.raw[a]) do
+            v.hidden = true
+            v.hidden_in_factoriopedia = true
+        end
+    end
+end
+
+-- GM-VP H 2 SPACE_AGE FLUID
+for _, v in pairs({'thruster-oxidizer', 'thruster-fuel'}) do
+    if data.raw.fluid[v] then
+        data.raw.fluid[v].hidden = true
+        data.raw.fluid[v].hidden_in_factoriopedia = true
     end
 end
 
@@ -264,6 +282,16 @@ if data.raw['unit-spawner'] then
 
     if data.raw['unit-spawner']['spitter-spawner'] then
         data.raw['unit-spawner']['spitter-spawner'].captured_spawner_entity = nil
+    end
+end
+
+for _, v in pairs(data.raw.recipe) do
+    v.category = nil
+    v.surface_conditions = nil
+
+    if items['recipe'][v.name] then
+        v.hidden = true
+        v.hidden_in_factoriopedia = true
     end
 end
 
@@ -495,19 +523,3 @@ data.raw['tile']['space-platform-foundation'].hidden_in_factoriopedia = true
 data.raw['tile']['foundation'].hidden = true
 data.raw['tile']['foundation'].hidden_in_factoriopedia = true
 
-for _, v in pairs({'carbonic', 'metallic', 'promethium', 'oxide'}) do
-    data.raw.item[v .. '-asteroid-chunk'].hidden = true
-    data.raw.item[v .. '-asteroid-chunk'].hidden_in_factoriopedia = true
-end
-
-for _, a in pairs({'asteroid', 'asteroid-chunk'}) do
-    for _, v in pairs(data.raw[a]) do
-        v.hidden = true
-        v.hidden_in_factoriopedia = true
-    end
-end
-
-for _, v in pairs({'thruster-oxidizer', 'thruster-fuel'}) do
-    data.raw.fluid[v].hidden = true
-    data.raw.fluid[v].hidden_in_factoriopedia = true
-end
