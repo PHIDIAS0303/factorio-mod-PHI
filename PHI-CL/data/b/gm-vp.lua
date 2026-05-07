@@ -245,6 +245,17 @@ if items['recipe_reform'] then
     end
 end
 
+-- GM-VP C 2 BASE ENTITY
+if data.raw['unit-spawner'] then
+    if data.raw['unit-spawner']['biter-spawner'] then
+        data.raw['unit-spawner']['biter-spawner'].captured_spawner_entity = nil
+    end
+
+    if data.raw['unit-spawner']['spitter-spawner'] then
+        data.raw['unit-spawner']['spitter-spawner'].captured_spawner_entity = nil
+    end
+end
+
 -- TODO: add category to machine instead
 data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
 data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
@@ -267,9 +278,6 @@ data.raw['lab']['biolab'].energy_usage = '180kW'
 data.raw['lab']['biolab'].energy_source.emissions_per_minute = nil
 data.raw['electric-turret']['tesla-turret'].energy_source.drain = '250kW'
 data.raw['chain-active-trigger']['chain-tesla-turret-chain'].fork_chance = 0.3
-
-data.raw['unit-spawner']['biter-spawner'].captured_spawner_entity = nil
-data.raw['unit-spawner']['spitter-spawner'].captured_spawner_entity = nil
 
 for _, v in pairs(data.raw.lab) do
     v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
