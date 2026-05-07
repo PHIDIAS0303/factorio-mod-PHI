@@ -211,8 +211,12 @@ end
 table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone'})
 table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'})
 
+-- GM-VP C 1 BASE RESEARCH
+-- GM-VP C 6 SPACE_AGE RESEARCH
 for _, v in pairs({'space-science-pack', 'electromagnetic-plant', 'foundry', 'cryogenic-plant', 'big-mining-drill', 'agriculture', 'heating-tower'}) do
-    data.raw.technology[v].research_trigger = nil
+    if data.raw.technology[v] then
+        data.raw.technology[v].research_trigger = nil
+    end
 end
 
 for _, v in pairs(data.raw.recipe) do
@@ -355,7 +359,7 @@ end
 
 for _, v in pairs({'yumako-tree', 'jellystem'}) do
     data.raw['plant'][v].autoplace = nil
-end
+end 
 
 for _, v in pairs({'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut', 'lowland-brown-blubber', 'lowland-olive-blubber', 'lowland-olive-blubber-2', 'lowland-olive-blubber-3', 'lowland-cream-red', 'lowland-red-vein', 'lowland-red-vein-2', 'lowland-red-vein-3', 'lowland-red-vein-4', 'lowland-red-vein-dead', 'lowland-red-infection', 'ammoniacal-ocean', 'ammoniacal-ocean-2'}) do
     data.raw['planet']['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = nil
