@@ -393,7 +393,7 @@ local items = {
         },
         -- SPACE_AGE 10
         ['railgun'] = {
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type == 'item', name = 'processing-unit', amount == 10}, {type == 'item', name == 'battery', amount == 10}, {type == 'fluid', name == 'sulfuric-acid', amount == 10}}
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type == 'item', name = 'processing-unit', amount = 10}, {type == 'item', name = 'battery', amount = 10}, {type == 'fluid', name = 'sulfuric-acid', amount = 10}}
         },
         ['railgun-turret'] = {
             ingredients = {{type = 'item', name = 'steel-plate', amount = 30}, {type = 'item', name = 'processing-unit', amount = 25}, {type = 'item', name = 'battery', amount = 25}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
@@ -405,7 +405,7 @@ local items = {
             ingredients = {{type = 'item', name = 'nuclear-reactor', amount = 1}, {type = 'item', name = 'steel-plate', amount = 300}, {type = 'item', name = 'processing-unit', amount = 400}}
         },
         ['fusion-generator'] = {
-            ingredients = {{type = 'item', name = 'steam-turbine', amount = 1}, {type == 'item', name == 'steel-plate', amount == 200}, {type == 'item', name == 'processing-unit', amount == 200}}
+            ingredients = {{type = 'item', name = 'steam-turbine', amount = 1}, {type == 'item', name = 'steel-plate', amount = 200}, {type == 'item', name = 'processing-unit', amount = 200}}
         },
         -- SPACE_AGE 15
         ['fusion-power-cell'] = {
