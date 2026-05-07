@@ -622,7 +622,7 @@ local items = {
         ['thruster'] = true,
         ['space-platform-hub'] = true,
     },
-    ['hidden_data'] = {
+    ['hidden_entity'] = {
         ['biochamber'] = 'assembling-machine',
         ['captive-biter-spawner'] = 'assembling-machine',
         ['lightning-rod']= 'lightning-attractor',

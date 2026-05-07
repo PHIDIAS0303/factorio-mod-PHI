@@ -249,8 +249,8 @@ for _, v in pairs({'carbonic', 'metallic', 'promethium', 'oxide'}) do
     end
 end
 
--- GM-VP H 2 SPACE_AGE FLUID
-for _, v in pairs({'thruster-oxidizer', 'thruster-fuel'}) do
+-- GM-VP H 11 SPACE_AGE FLUID
+for _, v in pairs({'thruster-oxidizer', 'thruster-fuel', 'lithium-brine', 'fluorine', 'ammonia', 'ammoniacal-solution', 'electrolyte', 'holmium-solution', 'molten-copper', 'molten-iron', 'lava'}) do
     if data.raw.fluid[v] then
         data.raw.fluid[v].hidden = true
         data.raw.fluid[v].hidden_in_factoriopedia = true
@@ -403,16 +403,11 @@ for k, v in pairs(items['item']) do
     end
 end
 
-for k, v in pairs(items['hidden_data']) do
+for k, v in pairs(items['hidden_entity']) do
     if data.raw[v] and data.raw[v][k] then
         data.raw[v][k].hidden = true
         data.raw[v][k].hidden_in_factoriopedia = true
     end
-end
-
-for _, v in pairs({'lithium-brine', 'fluorine', 'ammonia', 'ammoniacal-solution', 'electrolyte', 'holmium-solution', 'molten-copper', 'molten-iron', 'lava'}) do
-    data.raw.fluid[v].hidden = true
-    data.raw.fluid[v].hidden_in_factoriopedia = true
 end
 
 for _, v in pairs(data.raw['tile']) do
