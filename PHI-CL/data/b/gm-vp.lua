@@ -333,8 +333,12 @@ for _, v in pairs(data.raw.recipe) do
 end
 
 -- GM-VP H 18 SPACE_AGE MENU_SIMULATION
-for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
-    data.raw['utility-constants']['default']['main_menu_simulations'][v] = nil
+if data.raw['utility-constants'] and data.raw['utility-constants']['default'] and data.raw['utility-constants']['default']['main_menu_simulations'] then
+    for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
+        if data.raw['utility-constants']['default']['main_menu_simulations'][v] then
+            data.raw['utility-constants']['default']['main_menu_simulations'][v] = nil
+        end
+    end
 end
 
 -- TODO: add category to machine instead
@@ -430,6 +434,7 @@ for _, v in pairs({'bioflux', 'jelly', 'jellynut', 'yumako', 'yumako-mash'}) do
     data.raw['capsule'][v].hidden = true
     data.raw['capsule'][v].hidden_in_factoriopedia = true
 end
+
 for _, v in pairs({'ashland-lichen-tree', 'ashland-lichen-tree-flaming', 'slipstack', 'funneltrunk', 'hairyclubnub', 'teflilly', 'lickmaw', 'stingfrond', 'boompuff', 'sunnycomb', 'cuttlepop', 'water-cane'}) do
     data.raw['tree'][v].hidden = true
     data.raw['tree'][v].hidden_in_factoriopedia = true
