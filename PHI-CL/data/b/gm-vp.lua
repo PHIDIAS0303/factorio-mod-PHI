@@ -323,6 +323,11 @@ for _, v in pairs(data.raw.recipe) do
     end
 end
 
+-- GM-VP H 18 SPACE_AGE MENU_SIMULATION
+for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
+    data.raw['utility-constants']['default']['main_menu_simulations'][v] = nil
+end
+
 -- TODO: add category to machine instead
 data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
 data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
@@ -346,8 +351,6 @@ data.raw['lab']['biolab'].energy_source.emissions_per_minute = nil
 data.raw['electric-turret']['tesla-turret'].energy_source.drain = '250kW'
 data.raw['chain-active-trigger']['chain-tesla-turret-chain'].fork_chance = 0.3
 
-
-
 for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
     data.raw.planet[v].map_gen_settings = nil
     data.raw.planet[v].hidden = true
@@ -355,9 +358,7 @@ for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
     data.raw['change-surface-achievement']['visit-' .. v] = nil
 end
 
-for _, v in pairs({'platform_science', 'platform_moving', 'platform_messy_nuclear', 'vulcanus_lava_forge', 'vulcanus_crossing', 'vulcanus_punishmnent', 'vulcanus_sulfur_drop', 'gleba_agri_towers', 'gleba_pentapod_ponds', 'gleba_egg_escape', 'gleba_farm_attack', 'gleba_grotto', 'fulgora_city_crossing', 'fulgora_recycling_hell', 'fulgora_nightfall', 'fulgora_race', 'aquilo_send_help', 'aquilo_starter'}) do
-    data.raw['utility-constants']['default']['main_menu_simulations'][v] = nil
-end
+
 
 data.raw['dont-build-entity-achievement']['logistic-network-embargo'] = nil
 data.raw['create-platform-achievement']['reach-for-the-stars'] = nil
