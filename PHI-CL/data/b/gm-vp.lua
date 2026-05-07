@@ -207,6 +207,26 @@ if items['technology_reform'] then
     end
 end
 
+-- GM-VP H 38 SPACE_AGE RESEARCH
+if items['technology'] then
+    for _, v in pairs(items['technology']) do
+        if data.raw.technology[v] then
+            data.raw.technology[v].hidden = true
+            data.raw.technology[v].hidden_in_factoriopedia = true
+            data.raw.technology[v].effects = nil
+
+            if data.raw.technology[v].research_trigger then
+                data.raw.technology[v].research_trigger = nil
+                data.raw.technology[v].unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
+            end
+
+            if data.raw.technology[v].unit and data.raw.technology[v].unit.ingredients then
+                data.raw.technology[v].unit.ingredients = {{'space-science-pack', 1}}
+            end
+        end
+    end
+end
+
 -- GM-VP A 2 SPACE_AGE RESEARCH_EFFECT
 table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone'})
 table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'})
@@ -226,16 +246,6 @@ for _, v in pairs({'carbonic', 'metallic', 'promethium', 'oxide'}) do
     if data.raw.item[l] then
         data.raw.item[l].hidden = true
         data.raw.item[l].hidden_in_factoriopedia = true
-    end
-end
-
--- GM-VP H 20 SPACE_AGE ENTITY
-for _, a in pairs({'asteroid', 'asteroid-chunk'}) do
-    if data.raw[a] then
-        for _, v in pairs(data.raw[a]) do
-            v.hidden = true
-            v.hidden_in_factoriopedia = true
-        end
     end
 end
 
@@ -285,16 +295,16 @@ if data.raw['unit-spawner'] then
     end
 end
 
--- GM-VP H 3 SPACE_AGE SPACE_LOCATION
-for _, v in pairs(data.raw['space-location']) do
-    v.hidden = true
-    v.hidden_in_factoriopedia = true
-end
-
+-- GM-VP H 20 SPACE_AGE ENTITY
 -- GM-VP H 9 SPACE_AGE SPACE_CONNECTION
-for _, v in pairs(data.raw['space-connection']) do
-    v.hidden = true
-    v.hidden_in_factoriopedia = true
+-- GM-VP H 3 SPACE_AGE SPACE_LOCATION
+for _, c in pairs({'space-connection', 'space-location', 'asteroid', 'asteroid-chunk'}) do
+    if data.raw[c] then
+        for _, v in pairs(data.raw[c]) do
+            v.hidden = true
+            v.hidden_in_factoriopedia = true
+        end
+    end
 end
 
 for _, v in pairs(data.raw.recipe) do
@@ -384,34 +394,7 @@ end
 
 data.raw['lightning-attractor']['fulgoran-ruin-attractor'].autoplace = nil
 
-for _, v in pairs({'ashland-lichen-tree', 'ashland-lichen-tree-flaming', 'cuttlepop', 'slipstack', 'funneltrunk', 'hairyclubnub', 'teflilly', 'lickmaw', 'stingfrond', 'boompuff', 'sunnycomb', 'water-cane'}) do
-    data.raw['tree'][v].autoplace = nil
-end
 
-for _, v in pairs({'yumako-tree', 'jellystem'}) do
-    data.raw['plant'][v].autoplace = nil
-end 
-
-for _, v in pairs({'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut', 'lowland-brown-blubber', 'lowland-olive-blubber', 'lowland-olive-blubber-2', 'lowland-olive-blubber-3', 'lowland-cream-red', 'lowland-red-vein', 'lowland-red-vein-2', 'lowland-red-vein-3', 'lowland-red-vein-4', 'lowland-red-vein-dead', 'lowland-red-infection', 'ammoniacal-ocean', 'ammoniacal-ocean-2'}) do
-    data.raw['planet']['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = nil
-end
-
-for k, v in pairs(items['technology']) do
-    if data.raw.technology[k] then
-        data.raw.technology[k].hidden = v
-        data.raw.technology[k].hidden_in_factoriopedia = v
-        data.raw.technology[k].effects = nil
-
-        if data.raw.technology[k].research_trigger then
-            data.raw.technology[k].research_trigger = nil
-            data.raw.technology[k].unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
-        end
-
-        if data.raw.technology[k].unit and data.raw.technology[k].unit.ingredients then
-            data.raw.technology[k].unit.ingredients = {{'space-science-pack', 1}}
-        end
-    end
-end
 
 for k, v in pairs(items['item']) do
     if data.raw.item[k] then
@@ -445,44 +428,6 @@ for _, v in pairs({'cliff-fulgora', 'cliff-gleba', 'cliff-vulcanus', 'crater-cli
     data.raw['cliff'][v].hidden_in_factoriopedia = true
 end
 
-for _, v in pairs({'small-wriggler-pentapod-premature', 'medium-wriggler-pentapod-premature', 'big-wriggler-pentapod-premature'}) do
-    data.raw['unit'][v].absorptions_to_join_attack = {pollution = 0}
-    data.raw['unit'][v].hidden = true
-    data.raw['unit'][v].hidden_in_factoriopedia = true
-end
-
-for _, v in pairs({'small-wriggler-pentapod', 'medium-wriggler-pentapod', 'big-wriggler-pentapod'}) do
-    data.raw['unit'][v].absorptions_to_join_attack = {pollution = 2}
-    data.raw['unit'][v].hidden = true
-    data.raw['unit'][v].hidden_in_factoriopedia = true
-end
-
-for _, v in pairs({'small-strafer-pentapod', 'medium-strafer-pentapod', 'big-strafer-pentapod'}) do
-    data.raw['spider-unit'][v].absorptions_to_join_attack = {pollution = 20}
-    data.raw['spider-unit'][v].hidden = true
-    data.raw['spider-unit'][v].hidden_in_factoriopedia = true
-end
-
-for _, v in pairs({'small-stomper-pentapod', 'medium-stomper-pentapod', 'big-stomper-pentapod'}) do
-    data.raw['spider-unit'][v].absorptions_to_join_attack = {pollution = 25}
-    table.remove(data.raw['spider-unit'][v].dying_trigger_effect, 1)
-    data.raw['spider-unit'][v].hidden = true
-    data.raw['spider-unit'][v].hidden_in_factoriopedia = true
-end
-
-for _, v in pairs({'gleba-spawner', 'gleba-spawner-small'}) do
-    data.raw['unit-spawner'][v].loot = nil
-    data.raw['unit-spawner'][v].collision_mask = nil
-    data.raw['unit-spawner'][v].autoplace = nil
-    data.raw['unit-spawner'][v].hidden = true
-    data.raw['unit-spawner'][v].hidden_in_factoriopedia = true
-end
-
-for _, v in pairs({'small-demolisher', 'medium-demolisher', 'big-demolisher'}) do
-    data.raw['segmented-unit'][v].hidden = true
-    data.raw['segmented-unit'][v].hidden_in_factoriopedia = true
-end
-
 for _, v in pairs({'bioflux', 'jelly', 'jellynut', 'yumako', 'yumako-mash'}) do
     data.raw['capsule'][v].hidden = true
     data.raw['capsule'][v].hidden_in_factoriopedia = true
@@ -511,12 +456,6 @@ data.raw['group-attack-achievement']['get-off-my-lawn'] = nil
 data.raw['kill-achievement']['if-it-bleeds'] = nil
 data.raw['kill-achievement']['we-need-bigger-guns'] = nil
 data.raw['kill-achievement']['size-doesnt-matter'] = nil
-
-for _, v in pairs(data.raw.tree) do
-    if v.minable and v.minable.results then
-        v.minable.results = {{type = 'item', name = 'wood', amount = 4}}
-    end
-end
 
 data.raw['tile']['empty-space'].hidden = true
 data.raw['tile']['empty-space'].hidden_in_factoriopedia = true
