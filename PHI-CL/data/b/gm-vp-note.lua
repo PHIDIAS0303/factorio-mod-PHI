@@ -60,4 +60,10 @@ end
 for _, v in pairs({'natural-yumako-soil', 'natural-jellynut-soil', 'wetland-yumako', 'wetland-jellynut', 'lowland-brown-blubber', 'lowland-olive-blubber', 'lowland-olive-blubber-2', 'lowland-olive-blubber-3', 'lowland-cream-red', 'lowland-red-vein', 'lowland-red-vein-2', 'lowland-red-vein-3', 'lowland-red-vein-4', 'lowland-red-vein-dead', 'lowland-red-infection', 'ammoniacal-ocean', 'ammoniacal-ocean-2'}) do
     data.raw['planet']['nauvis'].map_gen_settings.autoplace_settings.tile.settings[v] = nil
 end
+
+for _, v in pairs({'small-stomper-shell', 'medium-stomper-shell', 'big-stomper-shell', 'big-volcanic-rock', 'huge-volcanic-rock', 'copper-stromatolite', 'iron-stromatolite', 'vulcanus-chimney-short', 'vulcanus-chimney-truncated', 'vulcanus-chimney', 'vulcanus-chimney-cold', 'vulcanus-chimney-faded', 'big-fulgora-rock', 'fulgurite', 'fulgurite-small', 'fulgoran-ruin-small', 'fulgoran-ruin-medium', 'fulgoran-ruin-stonehenge', 'fulgoran-ruin-big', 'fulgoran-ruin-colossal', 'fulgoran-ruin-huge', 'fulgoran-ruin-vault', 'lithium-iceberg-big', 'lithium-iceberg-huge', 'small-demolisher-corpse', 'medium-demolisher-corpse', 'big-demolisher-corpse'}) do
+    data.raw['simple-entity'][v].autoplace = nil
+    data.raw['simple-entity'][v].hidden = true
+    data.raw['simple-entity'][v].hidden_in_factoriopedia = true
+end
 ]]
