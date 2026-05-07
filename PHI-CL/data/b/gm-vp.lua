@@ -239,6 +239,14 @@ for _, v in pairs({'space-science-pack', 'electromagnetic-plant', 'foundry', 'cr
     end
 end
 
+-- GM-VP H 2 SPACE_AGE RESEARCH_EFFECT
+if data.raw.quality then
+    for _, v in pairs(data.raw.quality) do
+        v.hidden = true
+        v.hidden_in_factoriopedia = true
+    end
+end
+
 -- GM-VP C 1 BASE ENTITY
 -- GM-VP C 1 SPACE_AGE ENTITY
 for _, v in pairs(data.raw.lab) do
@@ -316,6 +324,7 @@ end
 for _, v in pairs(data.raw.recipe) do
     v.category = nil
     v.surface_conditions = nil
+    v.auto_recycle = false
 
     if items['recipe'][v.name] then
         v.hidden = true
@@ -357,8 +366,6 @@ for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
     data.raw.planet[v].hidden_in_factoriopedia = true
     data.raw['change-surface-achievement']['visit-' .. v] = nil
 end
-
-
 
 data.raw['dont-build-entity-achievement']['logistic-network-embargo'] = nil
 data.raw['create-platform-achievement']['reach-for-the-stars'] = nil
@@ -447,4 +454,3 @@ data.raw['tile']['space-platform-foundation'].hidden = true
 data.raw['tile']['space-platform-foundation'].hidden_in_factoriopedia = true
 data.raw['tile']['foundation'].hidden = true
 data.raw['tile']['foundation'].hidden_in_factoriopedia = true
-
