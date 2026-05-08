@@ -318,6 +318,7 @@ if items['tips_and_tricks_item'] then
     end
 end
 
+-- GM-VP H 21 SPACE_AGE ACHIEVEMENT
 if items['achievement'] then
     for k, v in pairs(items['achievement']) do
         if data.raw[v][k] then
@@ -447,12 +448,10 @@ for _, v in pairs(data.raw['tile']) do
     end
 end
 
-data.raw['tile']['empty-space'].hidden = true
-data.raw['tile']['empty-space'].hidden_in_factoriopedia = true
-data.raw['tile']['space-platform-foundation'].hidden = true
-data.raw['tile']['space-platform-foundation'].hidden_in_factoriopedia = true
-data.raw['tile']['foundation'].hidden = true
-data.raw['tile']['foundation'].hidden_in_factoriopedia = true
+for _, v in pairs({'empty-space', 'space-platform-foundation', 'foundation'}) do
+    data.raw.tile[v].hidden = true
+    data.raw.tile[v].hidden_in_factoriopedia = true
+end
 
 for _, v in pairs({'cliff-fulgora', 'cliff-gleba', 'cliff-vulcanus', 'crater-cliff'}) do
     data.raw['cliff'][v].hidden = true
