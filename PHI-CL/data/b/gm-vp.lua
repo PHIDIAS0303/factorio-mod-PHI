@@ -434,7 +434,7 @@ for k, v in pairs(items['item']) do
     end
 end
 
-for k, v in pairs(items['hidden_entity']) do
+for k, v in pairs(items['hidden']) do
     if data.raw[v] and data.raw[v][k] then
         data.raw[v][k].hidden = true
         data.raw[v][k].hidden_in_factoriopedia = true
@@ -469,9 +469,6 @@ for _, v in pairs({'ashland-lichen-tree', 'ashland-lichen-tree-flaming', 'slipst
     data.raw['tree'][v].hidden = true
     data.raw['tree'][v].hidden_in_factoriopedia = true
 end
-
-data.raw.ammo['capture-robot-rocket'].hidden = true
-data.raw.ammo['capture-robot-rocket'].hidden_in_factoriopedia = true
 
 for _, v in pairs({'research-with-metallurgics', 'research-with-agriculture', 'research-with-electromagnetics', 'research-with-cryogenics', 'research-with-promethium'}) do
     data.raw['research-with-science-pack-achievement'][v] = nil

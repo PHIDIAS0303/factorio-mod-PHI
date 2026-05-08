@@ -622,7 +622,7 @@ local items = {
         ['thruster'] = true,
         ['space-platform-hub'] = true,
     },
-    ['hidden_entity'] = {
+    ['hidden'] = {
         ['biochamber'] = 'assembling-machine',
         ['captive-biter-spawner'] = 'assembling-machine',
         ['lightning-rod']= 'lightning-attractor',
@@ -641,7 +641,23 @@ local items = {
         ['asteroid-collector'] = 'asteroid-collector',
         ['space-platform-hub'] = 'space-platform-hub',
         ['space-platform-starter-pack'] = 'space-platform-starter-pack',
-        ['space-platform'] = 'surface'
+        ['space-platform'] = 'surface',
+        ['capture-robot-rocket'] = 'ammo',
+        ['small-demolisher'] = 'segmented-unit',
+        ['medium-demolisher'] = 'segmented-unit',
+        ['big-demolisher'] = 'segmented-unit',
+        ['small-wriggler-pentapod-premature'] = 'unit',
+        ['medium-wriggler-pentapod-premature'] = 'unit',
+        ['big-wriggler-pentapod-premature'] = 'unit',
+        ['small-wriggler-pentapod'] = 'unit',
+        ['medium-wriggler-pentapod'] = 'unit',
+        ['big-wriggler-pentapod'] = 'unit',
+        ['small-strafer-pentapod'] = 'spider-unit',
+        ['medium-strafer-pentapod'] = 'spider-unit',
+        ['big-strafer-pentapod'] = 'spider-unit',
+        ['small-stomper-pentapod'] = 'spider-unit',
+        ['medium-stomper-pentapod'] = 'spider-unit',
+        ['big-stomper-pentapod'] = 'spider-unit',
     }
 }
 
