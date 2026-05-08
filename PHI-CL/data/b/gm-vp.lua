@@ -431,8 +431,11 @@ if data.raw.planet then
     end
 end
 
--- GM-VP H 6 SPACE_AGE ITEM
--- GM-VP H 16 SPACE_AGE MAP_GENERATION
+-- GM-VP H 1 QUALITY ENTITY
+-- GM-VP H 12 SPACE_AGE ENTITY
+-- GM-VP H 7 SPACE_AGE ITEM
+-- GM-VP H 20 SPACE_AGE MAP_GENERATION
+-- GM-VP H 3 SPACE_AGE TILE
 -- GM-VP H 4 SPACE_AGE TOOL
 if items['hidden'] then
     for k, v in pairs(items['hidden']) do
@@ -470,11 +473,6 @@ for _, v in pairs(data.raw['tile']) do
         v.hidden = true
         v.hidden_in_factoriopedia = true
     end
-end
-
-for _, v in pairs({'empty-space', 'space-platform-foundation', 'foundation'}) do
-    data.raw.tile[v].hidden = true
-    data.raw.tile[v].hidden_in_factoriopedia = true
 end
 
 for _, v in pairs({'ashland-lichen-tree', 'ashland-lichen-tree-flaming', 'slipstack', 'funneltrunk', 'hairyclubnub', 'teflilly', 'lickmaw', 'stingfrond', 'boompuff', 'sunnycomb', 'cuttlepop', 'water-cane'}) do

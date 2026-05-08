@@ -687,22 +687,24 @@ local items = {
         'sulfuric-acid-geyser',
         'fulgora-islands',
         'gleba-enemy-base',
-        -- SPACE_AGE MAP_GENERATION 5
+        -- SPACE_AGE RESOURCE_GENERATION 5
         'fluorine-vent',
         'lithium-brine',
         'gleba-stone',
         'aquilo-crude-oil',
         'gleba-cliff',
-        -- SPACE_AGE MAP_GENERATION 10
+        -- SPACE_AGE RESOURCE_GENERATION 10
         'fulgora-cliff',
         'vulcanus-volcanism',
         'gleba-water',
         'gleba-plants',
         'calcite',
-        -- SPACE_AGE MAP_GENERATION 15
+        -- SPACE_AGE RESOURCE_GENERATION 15
         'scrap',
     },
     ['hidden'] = {
+        -- QUALITY ENTITY 0
+        ['recycler'] = 'furnace',
         -- SPACE_AGE ITEM 0
         ['bioflux'] = 'capsule',
         ['jelly'] = 'capsule',
@@ -711,6 +713,7 @@ local items = {
         ['yumako-mash'] = 'capsule',
         -- SPACE_AGE ITEM 5
         ['capture-robot-rocket'] = 'ammo',
+        ['space-platform-starter-pack'] = 'space-platform-starter-pack',
         -- SPACE_AGE MAP_GENERATION 0
         ['vulcanus_coal'] = 'autoplace-control',
         ['tungsten_ore'] = 'autoplace-control',
@@ -731,6 +734,14 @@ local items = {
         ['gleba_enemy_base'] = 'autoplace-control',
         -- SPACE_AGE MAP_GENERATION 15
         ['fulgora_islands'] = 'autoplace-control',
+        ['cliff-fulgora'] = 'cliff',
+        ['cliff-gleba'] = 'cliff',
+        ['cliff-vulcanus'] = 'cliff',
+        ['crater-cliff'] = 'cliff',
+        -- SPACE_AGE TILE 0
+        ['empty-space'] = 'tile',
+        ['space-platform-foundation'] = 'tile',
+        ['foundation'] = 'tile',
         -- SPACE_AGE TOOL 0
         ['agricultural-science-pack'] = 'tool',
         ['cryogenic-science-pack'] = 'tool',
@@ -739,19 +750,21 @@ local items = {
         -- SPACE_AGE ENTITY 0
         ['biochamber'] = 'assembling-machine',
         ['captive-biter-spawner'] = 'assembling-machine',
+        ['crusher'] = 'assembling-machine',
         ['lightning-rod']= 'lightning-attractor',
         ['lightning-collector'] = 'lightning-attractor',
+        -- SPACE_AGE ENTITY 5
         ['fulgoran-ruin-attractor'] = 'lightning-attractor',
-        ['recycler'] = 'furnace',
-        ['yumako-tree'] = 'plant',
-        ['jellystem'] = 'plant',
-        ['lightning'] = 'lightning',
-        ['thruster'] = 'thruster',
-        ['crusher'] = 'assembling-machine',
         ['asteroid-collector'] = 'asteroid-collector',
         ['space-platform-hub'] = 'space-platform-hub',
-        ['space-platform-starter-pack'] = 'space-platform-starter-pack',
+        ['yumako-tree'] = 'plant',
+        ['jellystem'] = 'plant',
+        -- SPACE_AGE ENTITY 10
+        ['thruster'] = 'thruster',
+        ['lightning'] = 'lightning',
+
         ['space-platform'] = 'surface',
+
         ['small-demolisher'] = 'segmented-unit',
         ['medium-demolisher'] = 'segmented-unit',
         ['big-demolisher'] = 'segmented-unit',
@@ -767,10 +780,6 @@ local items = {
         ['small-stomper-pentapod'] = 'spider-unit',
         ['medium-stomper-pentapod'] = 'spider-unit',
         ['big-stomper-pentapod'] = 'spider-unit',
-        ['cliff-fulgora'] = 'cliff',
-        ['cliff-gleba'] = 'cliff',
-        ['cliff-vulcanus'] = 'cliff',
-        ['crater-cliff'] = 'cliff',
     }
 }
 
