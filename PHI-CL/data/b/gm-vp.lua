@@ -227,6 +227,26 @@ if items['technology'] then
     end
 end
 
+local unwanted = {
+    ['metallurgic-science-pack'] = true,
+    ['agricultural-science-pack'] = true,
+    ['electromagnetic-science-pack'] = true,
+    ['cryogenic-science-pack'] = true,
+    ['promethium-science-pack'] = true,
+}
+
+for _, tech in pairs(data.raw.technology) do
+    if tech.unit and tech.unit.ingredients then
+        local ings = tech.unit.ingredients
+
+        for i = #ings, 1, -1 do
+            if unwanted[ings[i][1]] then
+                table.remove(ings, i)
+            end
+        end
+    end
+end
+
 -- GM-VP A 2 SPACE_AGE RESEARCH_EFFECT
 table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone'})
 table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'})
@@ -322,7 +342,6 @@ for _, c in pairs({'space-connection', 'space-location', 'asteroid', 'asteroid-c
 end
 
 for _, v in pairs(data.raw.recipe) do
-    v.category = nil
     v.surface_conditions = nil
     v.maximum_productivity = nil
     v.auto_recycle = false
@@ -429,6 +448,13 @@ for _, v in pairs(data.raw['tile']) do
     end
 end
 
+data.raw['tile']['empty-space'].hidden = true
+data.raw['tile']['empty-space'].hidden_in_factoriopedia = true
+data.raw['tile']['space-platform-foundation'].hidden = true
+data.raw['tile']['space-platform-foundation'].hidden_in_factoriopedia = true
+data.raw['tile']['foundation'].hidden = true
+data.raw['tile']['foundation'].hidden_in_factoriopedia = true
+
 for _, v in pairs({'cliff-fulgora', 'cliff-gleba', 'cliff-vulcanus', 'crater-cliff'}) do
     data.raw['cliff'][v].hidden = true
     data.raw['cliff'][v].hidden_in_factoriopedia = true
@@ -456,10 +482,3 @@ data.raw['group-attack-achievement']['get-off-my-lawn'] = nil
 data.raw['kill-achievement']['if-it-bleeds'] = nil
 data.raw['kill-achievement']['we-need-bigger-guns'] = nil
 data.raw['kill-achievement']['size-doesnt-matter'] = nil
-
-data.raw['tile']['empty-space'].hidden = true
-data.raw['tile']['empty-space'].hidden_in_factoriopedia = true
-data.raw['tile']['space-platform-foundation'].hidden = true
-data.raw['tile']['space-platform-foundation'].hidden_in_factoriopedia = true
-data.raw['tile']['foundation'].hidden = true
-data.raw['tile']['foundation'].hidden_in_factoriopedia = true
