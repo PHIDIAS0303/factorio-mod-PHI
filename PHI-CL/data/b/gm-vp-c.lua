@@ -681,7 +681,20 @@ local items = {
         ['space-platform-hub'] = true,
     },
     ['hidden'] = {
-        -- SPACE_AGE 0
+        -- SPACE_AGE ITEM 0
+        ['bioflux'] = 'capsule',
+        ['jelly'] = 'capsule',
+        ['jellynut'] = 'capsule',
+        ['yumako'] = 'capsule',
+        ['yumako-mash'] = 'capsule',
+        -- SPACE_AGE ITEM 5
+        ['capture-robot-rocket'] = 'ammo',
+        -- SPACE_AGE TOOL 0
+        ['agricultural-science-pack'] = 'tool',
+        ['cryogenic-science-pack'] = 'tool',
+        ['electromagnetic-science-pack'] = 'tool',
+        ['metallurgic-science-pack'] = 'tool',
+        -- SPACE_AGE ENTITY 0
         ['biochamber'] = 'assembling-machine',
         ['captive-biter-spawner'] = 'assembling-machine',
         ['lightning-rod']= 'lightning-attractor',
@@ -691,17 +704,12 @@ local items = {
         ['yumako-tree'] = 'plant',
         ['jellystem'] = 'plant',
         ['lightning'] = 'lightning',
-        ['agricultural-science-pack'] = 'tool',
-        ['cryogenic-science-pack'] = 'tool',
-        ['electromagnetic-science-pack'] = 'tool',
-        ['metallurgic-science-pack'] = 'tool',
         ['thruster'] = 'thruster',
         ['crusher'] = 'assembling-machine',
         ['asteroid-collector'] = 'asteroid-collector',
         ['space-platform-hub'] = 'space-platform-hub',
         ['space-platform-starter-pack'] = 'space-platform-starter-pack',
         ['space-platform'] = 'surface',
-        ['capture-robot-rocket'] = 'ammo',
         ['small-demolisher'] = 'segmented-unit',
         ['medium-demolisher'] = 'segmented-unit',
         ['big-demolisher'] = 'segmented-unit',
@@ -721,11 +729,6 @@ local items = {
         ['cliff-gleba'] = 'cliff',
         ['cliff-vulcanus'] = 'cliff',
         ['crater-cliff'] = 'cliff',
-        ['bioflux'] = 'capsule',
-        ['jelly'] = 'capsule',
-        ['jellynut'] = 'capsule',
-        ['yumako'] = 'capsule',
-        ['yumako-mash'] = 'capsule',
     }
 }
 

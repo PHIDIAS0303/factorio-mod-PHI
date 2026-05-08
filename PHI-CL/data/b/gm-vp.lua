@@ -431,6 +431,17 @@ if data.raw.planet then
     end
 end
 
+-- GM-VP H 6 SPACE_AGE ITEM
+-- GM-VP H 4 SPACE_AGE TOOL
+if items['hidden'] then
+    for k, v in pairs(items['hidden']) do
+        if data.raw[v] and data.raw[v][k] then
+            data.raw[v][k].hidden = true
+            data.raw[v][k].hidden_in_factoriopedia = true
+        end
+    end
+end
+
 for _, v in pairs({'calcite', 'fluorine-vent', 'lithium-brine', 'scrap', 'tungsten-ore'}) do
     data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v:gsub('-', '_')] = nil
     data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v] = nil
@@ -449,15 +460,6 @@ for _, v in pairs({'vulcanus_coal', 'tungsten_ore', 'calcite', 'sulfuric_acid_ge
 
     if data.raw['resource'][r] then
         data.raw['resource'][r].autoplace = nil
-    end
-end
-
-if items['hidden'] then
-    for k, v in pairs(items['hidden']) do
-        if data.raw[v] and data.raw[v][k] then
-            data.raw[v][k].hidden = true
-            data.raw[v][k].hidden_in_factoriopedia = true
-        end
     end
 end
 
