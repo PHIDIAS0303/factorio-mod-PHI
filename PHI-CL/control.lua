@@ -2,6 +2,7 @@ local cargo_landing_pad = require('control/cargo-landing-pad')
 local cargo_landing_chest = require('control/cargo-landing-chest')
 local lab = require('control/lab')
 local rail_support = require('control/rail-support')
+local trash = require('control/trash')
 
 local inserter_direction = {
     [1] = defines.direction.north,
@@ -99,13 +100,7 @@ local function entity_build(event)
     cargo_landing_chest.build(event)
     lab.build(event)
     rail_support.build(event)
-
-    if event.entity.type == 'infinity-container' and event.entity.name == 'trash-chest' then
-        event.entity.remove_unfiltered_items = true
-
-    elseif event.entity.type == 'infinity-pipe' and event.entity.name == 'trash-pipe' then
-        event.entity.set_infinity_pipe_filter(nil)
-    end
+    trash.build(event)
 end
 
 local function storage_init()
