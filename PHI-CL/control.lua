@@ -1,5 +1,4 @@
-local cargo_landing_pad = require('control/cargo-landing-pad')
-local cargo_landing_chest = require('control/cargo-landing-chest')
+local cargo_landing = require('control/cargo-landing')
 local lab = require('control/lab')
 local rail_support = require('control/rail-support')
 local trash = require('control/trash')
@@ -53,8 +52,7 @@ local function gui_update(player, entity)
 end
 
 local function entity_build(event)
-    cargo_landing_pad.build(event)
-    cargo_landing_chest.build(event)
+    cargo_landing.build(event)
     lab.build(event)
     rail_support.build(event)
     trash.build(event)

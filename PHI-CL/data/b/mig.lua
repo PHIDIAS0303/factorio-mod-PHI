@@ -208,7 +208,7 @@ end
 for _, v in pairs(data.raw['inserter']) do
     if v.energy_source and v.energy_source.type and (v.energy_source.type == 'electric' or v.energy_source.type == 'void' or v.energy_source.type == 'burner') then
         v.allow_custom_vectors = true
-        v.flags = {'placeable-neutral', 'placeable-player', 'player-creation', ((v.hand_size and v.hand_size < 1) and 'building-direction-8-way') or 'building-direction-16-way'}
+        v.flags = {'placeable-neutral', 'placeable-player', 'player-creation', ((v.hand_size and v.hand_size > 0.8) and 'building-direction-16-way') or 'building-direction-8-way'}
 
         if v.energy_source.type == 'burner' then
             v.allow_burner_leech = true
