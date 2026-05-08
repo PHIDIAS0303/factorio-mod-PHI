@@ -350,14 +350,27 @@ for _, c in pairs({'space-connection', 'space-location', 'asteroid', 'asteroid-c
     end
 end
 
-for _, v in pairs(data.raw.recipe) do
-    v.surface_conditions = nil
-    v.maximum_productivity = nil
-    v.auto_recycle = false
+if items['recipe'] then
+    for _, v in pairs(data.raw.recipe) do
+        v.surface_conditions = nil
+        v.maximum_productivity = nil
+        v.auto_recycle = false
 
-    if items['recipe'][v.name] then
-        v.hidden = true
-        v.hidden_in_factoriopedia = true
+        if items['recipe'][v.name] then
+            v.hidden = true
+            v.hidden_in_factoriopedia = true
+        end
+    end
+end
+
+if items['item'] then
+    for _, v in pairs(data.raw.item) do
+        v.auto_recycle = false
+
+        if items['item'][v.name] then
+            v.hidden = true
+            v.hidden_in_factoriopedia = true
+        end
     end
 end
 
@@ -446,14 +459,6 @@ for _, v in pairs({'vulcanus_coal', 'tungsten_ore', 'calcite', 'sulfuric_acid_ge
     end
 end
 
-for k, v in pairs(items['item']) do
-    if data.raw.item[k] then
-        data.raw.item[k].auto_recycle = false
-        data.raw.item[k].hidden = v
-        data.raw.item[k].hidden_in_factoriopedia = v
-    end
-end
-
 for k, v in pairs(items['hidden']) do
     if data.raw[v] and data.raw[v][k] then
         data.raw[v][k].hidden = true
@@ -471,16 +476,6 @@ end
 for _, v in pairs({'empty-space', 'space-platform-foundation', 'foundation'}) do
     data.raw.tile[v].hidden = true
     data.raw.tile[v].hidden_in_factoriopedia = true
-end
-
-for _, v in pairs({'cliff-fulgora', 'cliff-gleba', 'cliff-vulcanus', 'crater-cliff'}) do
-    data.raw['cliff'][v].hidden = true
-    data.raw['cliff'][v].hidden_in_factoriopedia = true
-end
-
-for _, v in pairs({'bioflux', 'jelly', 'jellynut', 'yumako', 'yumako-mash'}) do
-    data.raw['capsule'][v].hidden = true
-    data.raw['capsule'][v].hidden_in_factoriopedia = true
 end
 
 for _, v in pairs({'ashland-lichen-tree', 'ashland-lichen-tree-flaming', 'slipstack', 'funneltrunk', 'hairyclubnub', 'teflilly', 'lickmaw', 'stingfrond', 'boompuff', 'sunnycomb', 'cuttlepop', 'water-cane'}) do

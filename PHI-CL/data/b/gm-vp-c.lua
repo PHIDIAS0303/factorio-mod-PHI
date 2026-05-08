@@ -687,6 +687,15 @@ local items = {
         ['small-stomper-pentapod'] = 'spider-unit',
         ['medium-stomper-pentapod'] = 'spider-unit',
         ['big-stomper-pentapod'] = 'spider-unit',
+        ['cliff-fulgora'] = 'cliff',
+        ['cliff-gleba'] = 'cliff',
+        ['cliff-vulcanus'] = 'cliff',
+        ['crater-cliff'] = 'cliff',
+        ['bioflux'] = 'capsule',
+        ['jelly'] = 'capsule',
+        ['jellynut'] = 'capsule',
+        ['yumako'] = 'capsule',
+        ['yumako-mash'] = 'capsule',
     }
 }
 
