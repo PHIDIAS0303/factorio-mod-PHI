@@ -738,6 +738,21 @@ local items = {
         ['small-stomper-pentapod'] = 'spider-unit',
         ['medium-stomper-pentapod'] = 'spider-unit',
         ['big-stomper-pentapod'] = 'spider-unit',
+        -- SPACE_AGE ENTITY_GENERATION 15
+        ['ashland-lichen-tree'] = 'tree',
+        ['ashland-lichen-tree-flaming'] = 'tree',
+        ['slipstack'] = 'tree',
+        ['funneltrunk'] = 'tree',
+        ['hairyclubnub'] = 'tree',
+        -- SPACE_AGE ENTITY_GENERATION 20
+        ['teflilly'] = 'tree',
+        ['lickmaw'] = 'tree',
+        ['stingfrond'] = 'tree',
+        ['boompuff'] = 'tree',
+        ['sunnycomb'] = 'tree',
+        -- SPACE_AGE ENTITY_GENERATION 25
+        ['cuttlepop'] = 'tree',
+        ['water-cane'] = 'tree',
         -- SPACE_AGE ITEM 0
         ['bioflux'] = 'capsule',
         ['jelly'] = 'capsule',
