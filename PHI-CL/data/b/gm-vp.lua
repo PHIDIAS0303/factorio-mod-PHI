@@ -318,6 +318,16 @@ if items['tips_and_tricks_item'] then
     end
 end
 
+-- nil
+if items['achievement'] then
+    for k, v in pairs(items['achievement']) do
+        if data.raw[v][k] then
+            data.raw[v][k].hidden = true
+            data.raw[v][k].hidden_in_factoriopedia = true
+        end
+    end
+end
+
 -- GM-VP C 2 BASE ENTITY
 if data.raw['unit-spawner'] then
     if data.raw['unit-spawner']['biter-spawner'] then
@@ -390,16 +400,6 @@ for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
     data.raw.planet[v].map_gen_settings = nil
     data.raw.planet[v].hidden = true
     data.raw.planet[v].hidden_in_factoriopedia = true
-    data.raw['change-surface-achievement']['visit-' .. v] = nil
-end
-
-data.raw['dont-build-entity-achievement']['logistic-network-embargo'] = nil
-data.raw['create-platform-achievement']['reach-for-the-stars'] = nil
-data.raw['complete-objective-achievement']['second-star-to-the-right-and-straight-on-till-morning'] = nil
-data.raw['dont-research-before-researching-achievement']['rush-to-space'] = nil
-
-for _, v in pairs({'shattered-planet-1', 'shattered-planet-2', 'shattered-planet-3'}) do
-    data.raw['space-connection-distance-traveled-achievement'][v] = nil
 end
 
 for _, v in pairs({'calcite', 'fluorine-vent', 'lithium-brine', 'scrap', 'tungsten-ore'}) do
@@ -469,13 +469,3 @@ for _, v in pairs({'ashland-lichen-tree', 'ashland-lichen-tree-flaming', 'slipst
     data.raw['tree'][v].hidden = true
     data.raw['tree'][v].hidden_in_factoriopedia = true
 end
-
-for _, v in pairs({'research-with-metallurgics', 'research-with-agriculture', 'research-with-electromagnetics', 'research-with-cryogenics', 'research-with-promethium'}) do
-    data.raw['research-with-science-pack-achievement'][v] = nil
-end
-
-data.raw['group-attack-achievement']['it-stinks-and-they-do-like-it'] = nil
-data.raw['group-attack-achievement']['get-off-my-lawn'] = nil
-data.raw['kill-achievement']['if-it-bleeds'] = nil
-data.raw['kill-achievement']['we-need-bigger-guns'] = nil
-data.raw['kill-achievement']['size-doesnt-matter'] = nil

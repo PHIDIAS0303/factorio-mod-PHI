@@ -658,6 +658,29 @@ local items = {
         ['small-stomper-pentapod'] = 'spider-unit',
         ['medium-stomper-pentapod'] = 'spider-unit',
         ['big-stomper-pentapod'] = 'spider-unit',
+    },
+    ['achievement'] = {
+        ['logistic-network-embargo'] = 'dont-build-entity-achievement',
+        ['reach-for-the-stars'] = 'create-platform-achievement',
+        ['second-star-to-the-right-and-straight-on-till-morning'] = 'complete-objective-achievement',
+        ['rush-to-space'] = 'dont-research-before-researching-achievement',
+        ['shattered-planet-1'] = 'space-connection-distance-traveled-achievement',
+        ['shattered-planet-2'] = 'space-connection-distance-traveled-achievement',
+        ['shattered-planet-3'] = 'space-connection-distance-traveled-achievement',
+        ['research-with-metallurgics'] = 'research-with-science-pack-achievement',
+        ['research-with-agriculture'] = 'research-with-science-pack-achievement',
+        ['research-with-electromagnetics'] = 'research-with-science-pack-achievement',
+        ['research-with-cryogenics'] = 'research-with-science-pack-achievement',
+        ['research-with-promethium'] = 'research-with-science-pack-achievement',
+        ['it-stinks-and-they-do-like-it'] = 'group-attack-achievement',
+        ['get-off-my-lawn'] = 'group-attack-achievement',
+        ['if-it-bleeds'] = 'kill-achievement',
+        ['we-need-bigger-guns'] = 'kill-achievement',
+        ['size-doesnt-matter'] = 'kill-achievement',
+        ['visit-vulcanus'] = 'change-surface-achievement',
+        ['visit-gleba'] = 'change-surface-achievement',
+        ['visit-fulgora'] = 'change-surface-achievement',
+        ['visit-aquilo'] = 'change-surface-achievement'
     }
 }
 
