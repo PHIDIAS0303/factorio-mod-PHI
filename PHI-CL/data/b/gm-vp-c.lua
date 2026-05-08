@@ -720,38 +720,40 @@ local items = {
         -- SPACE_AGE ENTITY 10
         ['thruster'] = 'thruster',
         ['lightning'] = 'lightning',
-        -- SPACE_AGE ENTITY_GENERATION 0
         ['small-demolisher'] = 'segmented-unit',
         ['medium-demolisher'] = 'segmented-unit',
         ['big-demolisher'] = 'segmented-unit',
+        -- SPACE_AGE ENTITY 15
         ['small-wriggler-pentapod-premature'] = 'unit',
         ['medium-wriggler-pentapod-premature'] = 'unit',
-        -- SPACE_AGE ENTITY_GENERATION 5
         ['big-wriggler-pentapod-premature'] = 'unit',
         ['small-wriggler-pentapod'] = 'unit',
         ['medium-wriggler-pentapod'] = 'unit',
+        -- SPACE_AGE ENTITY 20
         ['big-wriggler-pentapod'] = 'unit',
         ['small-strafer-pentapod'] = 'spider-unit',
-        -- SPACE_AGE ENTITY_GENERATION 10
         ['medium-strafer-pentapod'] = 'spider-unit',
         ['big-strafer-pentapod'] = 'spider-unit',
         ['small-stomper-pentapod'] = 'spider-unit',
+        -- SPACE_AGE ENTITY 25
         ['medium-stomper-pentapod'] = 'spider-unit',
         ['big-stomper-pentapod'] = 'spider-unit',
-        -- SPACE_AGE ENTITY_GENERATION 15
+        ['gleba-spawner'] = 'unit-spawner',
+        ['gleba-spawner-small'] = 'unit-spawner',
         ['ashland-lichen-tree'] = 'tree',
+        -- SPACE_AGE ENTITY 30
         ['ashland-lichen-tree-flaming'] = 'tree',
         ['slipstack'] = 'tree',
         ['funneltrunk'] = 'tree',
         ['hairyclubnub'] = 'tree',
-        -- SPACE_AGE ENTITY_GENERATION 20
         ['teflilly'] = 'tree',
+        -- SPACE_AGE ENTITY 35
         ['lickmaw'] = 'tree',
         ['stingfrond'] = 'tree',
         ['boompuff'] = 'tree',
         ['sunnycomb'] = 'tree',
-        -- SPACE_AGE ENTITY_GENERATION 25
         ['cuttlepop'] = 'tree',
+        -- SPACE_AGE ENTITY 40
         ['water-cane'] = 'tree',
         -- SPACE_AGE ITEM 0
         ['bioflux'] = 'capsule',
