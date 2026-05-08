@@ -436,7 +436,6 @@ local items = {
         }
     },
     ['tips_and_tricks_item'] = {
-        -- SPACE_AGE 0
         'quality',
         'space-age',
         'space-platform',

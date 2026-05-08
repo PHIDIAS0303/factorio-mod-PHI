@@ -307,7 +307,8 @@ if items['recipe_reform'] then
     end
 end
 
--- GM-VP C 2 SPACE_AGE TIP_AND_TRICK
+-- GM-VP H 4 QUALITY TIP_AND_TRICK
+-- GM-VP H 16 SPACE_AGE TIP_AND_TRICK
 if items['tips_and_tricks_item'] then
     for _, v in pairs(data.raw['tips-and-tricks-item']) do
         if v.category and items['tips_and_tricks_item'][v.category] then
