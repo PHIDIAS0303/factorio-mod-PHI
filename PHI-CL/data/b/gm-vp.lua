@@ -370,30 +370,54 @@ if data.raw['utility-constants'] and data.raw['utility-constants']['default'] an
     end
 end
 
--- TODO: add category to machine instead
+-- GM-VP C 1 SPACE_AGE ENTITY
+if data.raw['agricultural-tower'] and data.raw['agricultural-tower']['agricultural-tower'] then
+    data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
+end
 
+-- GM-VP C 1 SPACE_AGE ENTITY
+if data.raw['assembling-machine'] and data.raw['assembling-machine']['electromagnetic-plant'] then
+    data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
+    data.raw['assembling-machine']['electromagnetic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['assembling-machine-3'].crafting_categories)}
+    data.raw['assembling-machine']['electromagnetic-plant'].crafting_speed = 2.5
+    data.raw['assembling-machine']['electromagnetic-plant'].energy_usage = '872kW'
+    data.raw['assembling-machine']['electromagnetic-plant'].energy_source.emissions_per_minute.pollution = 4
+end
 
-data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
-data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
-data.raw['assembling-machine']['electromagnetic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['assembling-machine-3'].crafting_categories)}
-data.raw['assembling-machine']['electromagnetic-plant'].crafting_speed = 2.5
-data.raw['assembling-machine']['electromagnetic-plant'].energy_usage = '872kW'
-data.raw['assembling-machine']['electromagnetic-plant'].energy_source.emissions_per_minute.pollution = 4
-data.raw['assembling-machine']['foundry'].effect_receiver = nil
-data.raw['assembling-machine']['foundry'].crafting_categories = {table.unpack(data.raw['furnace']['electric-furnace'].crafting_categories)}
-data.raw['assembling-machine']['foundry'].crafting_speed = 6
-data.raw['assembling-machine']['foundry'].energy_usage = '930kW'
-data.raw['assembling-machine']['foundry'].energy_source.emissions_per_minute.pollution = 3
-data.raw['assembling-machine']['cryogenic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['oil-refinery'].crafting_categories), table.unpack(data.raw['assembling-machine']['chemical-plant'].crafting_categories)}
-data.raw['assembling-machine']['cryogenic-plant'].crafting_speed = 3
-data.raw['assembling-machine']['cryogenic-plant'].energy_usage = '1302kW'
-data.raw['assembling-machine']['cryogenic-plant'].energy_source.emissions_per_minute.pollution = 12
-data.raw['lab']['biolab'].science_pack_drain_rate_percent = 100
-data.raw['lab']['biolab'].researching_speed = 3
-data.raw['lab']['biolab'].energy_usage = '180kW'
-data.raw['lab']['biolab'].energy_source.emissions_per_minute = nil
-data.raw['electric-turret']['tesla-turret'].energy_source.drain = '250kW'
-data.raw['chain-active-trigger']['chain-tesla-turret-chain'].fork_chance = 0.3
+-- GM-VP C 1 SPACE_AGE ENTITY
+if data.raw['assembling-machine'] and data.raw['assembling-machine']['foundry'] then
+    data.raw['assembling-machine']['foundry'].effect_receiver = nil
+    data.raw['assembling-machine']['foundry'].crafting_categories = {table.unpack(data.raw['furnace']['electric-furnace'].crafting_categories)}
+    data.raw['assembling-machine']['foundry'].crafting_speed = 6
+    data.raw['assembling-machine']['foundry'].energy_usage = '930kW'
+    data.raw['assembling-machine']['foundry'].energy_source.emissions_per_minute.pollution = 3
+end
+
+-- GM-VP C 1 SPACE_AGE ENTITY
+if data.raw['assembling-machine'] and data.raw['assembling-machine']['cryogenic-plant'] then
+    data.raw['assembling-machine']['cryogenic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['oil-refinery'].crafting_categories), table.unpack(data.raw['assembling-machine']['chemical-plant'].crafting_categories)}
+    data.raw['assembling-machine']['cryogenic-plant'].crafting_speed = 3
+    data.raw['assembling-machine']['cryogenic-plant'].energy_usage = '1302kW'
+    data.raw['assembling-machine']['cryogenic-plant'].energy_source.emissions_per_minute.pollution = 12
+end
+
+-- GM-VP C 1 SPACE_AGE ENTITY
+if data.raw['lab'] and data.raw['lab']['biolab'] then
+    data.raw['lab']['biolab'].science_pack_drain_rate_percent = 100
+    data.raw['lab']['biolab'].researching_speed = 3
+    data.raw['lab']['biolab'].energy_usage = '180kW'
+    data.raw['lab']['biolab'].energy_source.emissions_per_minute = nil
+end
+
+-- GM-VP C 1 SPACE_AGE ENTITY
+if data.raw['electric-turret'] and data.raw['electric-turret']['tesla-turret'] then
+    data.raw['electric-turret']['tesla-turret'].energy_source.drain = '250kW'
+end
+
+-- GM-VP C 1 SPACE_AGE ENTITY
+if data.raw['chain-active-trigger'] and data.raw['chain-active-trigger']['chain-tesla-turret-chain'] then
+    data.raw['chain-active-trigger']['chain-tesla-turret-chain'].fork_chance = 0.3
+end
 
 for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
     data.raw.planet[v].map_gen_settings = nil
