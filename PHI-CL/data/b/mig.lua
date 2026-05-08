@@ -33,6 +33,29 @@ for _, t in pairs({data.raw['cargo-wagon'], data.raw['fluid-wagon']}) do
 end
 
 -- MI C 1 BASE ENTITY
+for _, v in pairs(data.raw['lamp']) do
+    if v.light and v.light.color then
+        v.light.color = {1, 1, 1}
+    end
+
+    if v.light_when_colored then
+        v.light_when_colored.color = {1, 1, 1}
+    end
+end
+
+-- MI C 1 BASE ENTITY
+for _, v in pairs(data.raw['land-mine']) do
+    if v.flags then
+        for fk, fv in ipairs(v.flags) do
+            if fv == 'placeable-off-grid' then
+                table.remove(v.flags, fk)
+                break
+            end
+        end
+    end
+end
+
+-- MI C 1 BASE ENTITY
 for _, v in pairs(data.raw['locomotive']) do
     v.reversing_power_modifier = 1
 end

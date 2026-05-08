@@ -324,6 +324,7 @@ end
 for _, v in pairs(data.raw.recipe) do
     v.category = nil
     v.surface_conditions = nil
+    v.maximum_productivity = nil
     v.auto_recycle = false
 
     if items['recipe'][v.name] then
@@ -342,6 +343,8 @@ if data.raw['utility-constants'] and data.raw['utility-constants']['default'] an
 end
 
 -- TODO: add category to machine instead
+data.raw['assembling-machine']['captive-biter-spawner'].fixed_recipe = nil
+
 data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
 data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
 data.raw['assembling-machine']['electromagnetic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['assembling-machine-3'].crafting_categories)}
@@ -406,6 +409,7 @@ end
 
 for k, v in pairs(items['item']) do
     if data.raw.item[k] then
+        data.raw.item[k].auto_recycle = false
         data.raw.item[k].hidden = v
         data.raw.item[k].hidden_in_factoriopedia = v
     end
