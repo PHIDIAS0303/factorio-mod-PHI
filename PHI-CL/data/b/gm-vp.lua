@@ -439,9 +439,6 @@ for _, v in pairs({'vulcanus_coal', 'tungsten_ore', 'calcite', 'sulfuric_acid_ge
     data.raw['autoplace-control'][v].hidden = true
     data.raw['autoplace-control'][v].hidden_in_factoriopedia = true
 
-    -- TODO it will show blackscreen if it is nil
-    -- data.raw['autoplace-control'][v] = nil
-
     local r = v:gsub('_', '-')
 
     if data.raw['resource'][r] then
