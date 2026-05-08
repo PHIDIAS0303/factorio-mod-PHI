@@ -444,19 +444,25 @@ if items['hidden'] then
 end
 
 -- GM-VP H 16 SPACE_AGE RESOURCE_GENERATION
+local nauvis_control = data.raw.planet and data.raw.planet['nauvis'] and data.raw.planet['nauvis'].map_gen_settings and data.raw.planet['nauvis'].map_gen_settings.autoplace_controls
+local nauvis_setting = data.raw.planet and data.raw.planet['nauvis'] and data.raw.planet['nauvis'].map_gen_settings and data.raw.planet['nauvis'].map_gen_settings.autoplace_settings and data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity and data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings
+
 if items['hidden'] and data.raw['resource'] then
     for _, v in pairs(items['hidden_resource']) do
         if data.raw['resource'][v] then
             data.raw['resource'][v].hidden = true
             data.raw['resource'][v].hidden_in_factoriopedia = true
             data.raw['resource'][v].autoplace = nil
+
+            if nauvis_control then
+                data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v:gsub('-', '_')] = nil
+            end
+
+            if nauvis_setting then
+                data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v] = nil
+            end
         end
     end
-end
-
-for _, v in pairs({'calcite', 'fluorine-vent', 'lithium-brine', 'scrap', 'tungsten-ore'}) do
-    data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v:gsub('-', '_')] = nil
-    data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v] = nil
 end
 
 for _, v in pairs(data.raw['tile']) do
