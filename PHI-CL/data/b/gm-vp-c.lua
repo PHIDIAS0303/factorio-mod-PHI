@@ -680,6 +680,28 @@ local items = {
         -- SPACE_AGE 35
         ['space-platform-hub'] = true,
     },
+    ['hidden_resource'] = {
+        -- SPACE_AGE RESOURCE_GENERATION 0
+        'vulcanus-coal',
+        'tungsten-ore',
+        'sulfuric-acid-geyser',
+        'fulgora-islands',
+        'gleba-enemy-base',
+        -- SPACE_AGE MAP_GENERATION 5
+        'fluorine-vent',
+        'lithium-brine',
+        'gleba-stone',
+        'aquilo-crude-oil',
+        'gleba-cliff',
+        -- SPACE_AGE MAP_GENERATION 10
+        'fulgora-cliff',
+        'vulcanus-volcanism',
+        'gleba-water',
+        'gleba-plants',
+        'calcite',
+        -- SPACE_AGE MAP_GENERATION 15
+        'scrap',
+    },
     ['hidden'] = {
         -- SPACE_AGE ITEM 0
         ['bioflux'] = 'capsule',
@@ -689,6 +711,26 @@ local items = {
         ['yumako-mash'] = 'capsule',
         -- SPACE_AGE ITEM 5
         ['capture-robot-rocket'] = 'ammo',
+        -- SPACE_AGE MAP_GENERATION 0
+        ['vulcanus_coal'] = 'autoplace-control',
+        ['tungsten_ore'] = 'autoplace-control',
+        ['calcite'] = 'autoplace-control',
+        ['sulfuric_acid_geyser'] = 'autoplace-control',
+        ['scrap'] = 'autoplace-control',
+        -- SPACE_AGE MAP_GENERATION 5
+        ['fluorine_vent'] = 'autoplace-control',
+        ['lithium_brine'] = 'autoplace-control',
+        ['gleba_stone'] = 'autoplace-control',
+        ['aquilo_crude_oil'] = 'autoplace-control',
+        ['gleba_cliff'] = 'autoplace-control',
+        -- SPACE_AGE MAP_GENERATION 10
+        ['fulgora_cliff'] = 'autoplace-control',
+        ['vulcanus_volcanism'] = 'autoplace-control',
+        ['gleba_water'] = 'autoplace-control',
+        ['gleba_plants'] = 'autoplace-control',
+        ['gleba_enemy_base'] = 'autoplace-control',
+        -- SPACE_AGE MAP_GENERATION 15
+        ['fulgora_islands'] = 'autoplace-control',
         -- SPACE_AGE TOOL 0
         ['agricultural-science-pack'] = 'tool',
         ['cryogenic-science-pack'] = 'tool',

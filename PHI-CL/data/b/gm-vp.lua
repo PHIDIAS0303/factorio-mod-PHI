@@ -432,6 +432,7 @@ if data.raw.planet then
 end
 
 -- GM-VP H 6 SPACE_AGE ITEM
+-- GM-VP H 16 SPACE_AGE MAP_GENERATION
 -- GM-VP H 4 SPACE_AGE TOOL
 if items['hidden'] then
     for k, v in pairs(items['hidden']) do
@@ -442,25 +443,20 @@ if items['hidden'] then
     end
 end
 
+-- GM-VP H 16 SPACE_AGE RESOURCE_GENERATION
+if items['hidden'] and data.raw['resource'] then
+    for _, v in pairs(items['hidden_resource']) do
+        if data.raw['resource'][v] then
+            data.raw['resource'][v].hidden = true
+            data.raw['resource'][v].hidden_in_factoriopedia = true
+            data.raw['resource'][v].autoplace = nil
+        end
+    end
+end
+
 for _, v in pairs({'calcite', 'fluorine-vent', 'lithium-brine', 'scrap', 'tungsten-ore'}) do
     data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v:gsub('-', '_')] = nil
     data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v] = nil
-    data.raw.resource[v].hidden = true
-    data.raw.resource[v].hidden_in_factoriopedia = true
-end
-
-data.raw.resource['sulfuric-acid-geyser'].hidden = true
-data.raw.resource['sulfuric-acid-geyser'].hidden_in_factoriopedia = true
-
-for _, v in pairs({'vulcanus_coal', 'tungsten_ore', 'calcite', 'sulfuric_acid_geyser', 'scrap', 'fluorine_vent', 'lithium_brine', 'gleba_stone', 'aquilo_crude_oil', 'gleba_cliff', 'fulgora_cliff', 'vulcanus_volcanism', 'gleba_water', 'gleba_plants', 'gleba_enemy_base', 'fulgora_islands'}) do
-    data.raw['autoplace-control'][v].hidden = true
-    data.raw['autoplace-control'][v].hidden_in_factoriopedia = true
-
-    local r = v:gsub('_', '-')
-
-    if data.raw['resource'][r] then
-        data.raw['resource'][r].autoplace = nil
-    end
 end
 
 for _, v in pairs(data.raw['tile']) do
