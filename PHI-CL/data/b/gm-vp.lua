@@ -452,10 +452,12 @@ for _, v in pairs({'vulcanus_coal', 'tungsten_ore', 'calcite', 'sulfuric_acid_ge
     end
 end
 
-for k, v in pairs(items['hidden']) do
-    if data.raw[v] and data.raw[v][k] then
-        data.raw[v][k].hidden = true
-        data.raw[v][k].hidden_in_factoriopedia = true
+if items['hidden'] then
+    for k, v in pairs(items['hidden']) do
+        if data.raw[v] and data.raw[v][k] then
+            data.raw[v][k].hidden = true
+            data.raw[v][k].hidden_in_factoriopedia = true
+        end
     end
 end
 

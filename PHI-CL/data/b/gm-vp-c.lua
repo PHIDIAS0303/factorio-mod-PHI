@@ -681,6 +681,7 @@ local items = {
         ['space-platform-hub'] = true,
     },
     ['hidden'] = {
+        -- SPACE_AGE 0
         ['biochamber'] = 'assembling-machine',
         ['captive-biter-spawner'] = 'assembling-machine',
         ['lightning-rod']= 'lightning-attractor',
