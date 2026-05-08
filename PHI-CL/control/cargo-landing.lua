@@ -23,6 +23,7 @@ function main.build(event)
         if event.entity.name ~= 'cargo-landing-pad' then
             return
         end
+
         if not prototypes.entity['proxy-cargo-landing-chest'] then
             return
         end
@@ -34,6 +35,10 @@ function main.build(event)
         end
 
         local ep = game.surfaces[event.entity.surface].find_entities_filtered{type='proxy-container', name='proxy-cargo-landing-chest'}
+
+        if not ep then
+            return
+        end
 
         for _, v in pairs(ep) do
             v.proxy_target_entity = ec[1]
