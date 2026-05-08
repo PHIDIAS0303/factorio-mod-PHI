@@ -469,6 +469,7 @@ if items['hidden'] and data.raw['resource'] then
     end
 end
 
+-- GM-VP H 95 SPACE_AGE TILE
 for _, v in pairs(data.raw['tile']) do
     if v.subgroup and (v.subgroup == 'vulcanus-tiles' or v.subgroup == 'gleba-tiles' or v.subgroup == 'gleba-water-tiles' or v.subgroup == 'fulgora-tiles' or v.subgroup == 'aquilo-tiles') then
         v.hidden = true
