@@ -633,42 +633,51 @@ local items = {
         ['crusher'] = true
     },
     ['item'] = {
+        -- QUALITY 0
+        ['recycler'] = true,
+        -- SPACE_AGE 0
         ['artificial-yumako-soil'] = true,
         ['overgrowth-yumako-soil'] = true,
         ['artificial-jellynut-soil'] = true,
         ['overgrowth-jellynut-soil'] = true,
-        ['recycler'] = true,
         ['ice-platform'] = true,
+        -- SPACE_AGE 5
         ['foundation'] = true,
         ['biochamber'] = true,
         ['captive-biter-spawner'] = true,
         ['tungsten-ore'] = true,
         ['tungsten-carbide'] = true,
+        -- SPACE_AGE 10
         ['tungsten-plate'] = true,
         ['scrap'] = true,
         ['holmium-ore'] = true,
         ['holmium-plate'] = true,
         ['superconductor'] = true,
+        -- SPACE_AGE 15
         ['supercapacitor'] = true,
         ['yumako-seed'] = true,
         ['jellynut-seed'] = true,
         ['iron-bacteria'] = true,
         ['copper-bacteria'] = true,
+        -- SPACE_AGE 20
         ['spoilage'] = true,
         ['nutrients'] = true,
         ['carbon-fiber'] = true,
         ['biter-egg'] = true,
         ['pentapod-egg'] = true,
+        -- SPACE_AGE 25
         ['lithium'] = true,
         ['lithium-plate'] = true,
         ['quantum-processor'] = true,
         ['ice'] = true,
         ['carbon'] = true,
+        -- SPACE_AGE 30
         ['calcite'] = true,
         ['space-platform-foundation'] = true,
         ['asteroid-collector'] = true,
         ['crusher'] = true,
         ['thruster'] = true,
+        -- SPACE_AGE 35
         ['space-platform-hub'] = true,
     },
     ['hidden'] = {

@@ -333,8 +333,8 @@ if not items['recipe'] then
     items['recipe'] = {}
 end
 
--- GM-VP H 92 SPACE_AGE RECIPE
 -- GM-VP H 1 QUALITY RECIPE
+-- GM-VP H 92 SPACE_AGE RECIPE
 for _, v in pairs(data.raw.recipe) do
     v.surface_conditions = nil
     v.maximum_productivity = nil
@@ -350,6 +350,8 @@ if items['item'] then
     items['item'] = {}
 end
 
+-- GM-VP H 1 QUALITY ITEM
+-- GM-VP H 36 SPACE_AGE ITEM
 for _, v in pairs(data.raw.item) do
     v.auto_recycle = false
 
