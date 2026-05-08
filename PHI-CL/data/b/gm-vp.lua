@@ -330,14 +330,13 @@ end
 
 -- GM-VP C 2 BASE ENTITY
 if data.raw['unit-spawner'] then
-    if data.raw['unit-spawner']['biter-spawner'] then
-        data.raw['unit-spawner']['biter-spawner'].captured_spawner_entity = nil
-    end
-
-    if data.raw['unit-spawner']['spitter-spawner'] then
-        data.raw['unit-spawner']['spitter-spawner'].captured_spawner_entity = nil
+    for _, v in pairs(data.raw['unit-spawner']) do
+        v.captured_spawner_entity = nil
     end
 end
+
+-- GM-VP C 1 SPACE_AGE ENTITY
+data.raw['assembling-machine']['captive-biter-spawner'].fixed_recipe = nil
 
 -- GM-VP H 20 SPACE_AGE ENTITY
 -- GM-VP H 9 SPACE_AGE SPACE_CONNECTION
@@ -372,7 +371,7 @@ if data.raw['utility-constants'] and data.raw['utility-constants']['default'] an
 end
 
 -- TODO: add category to machine instead
-data.raw['assembling-machine']['captive-biter-spawner'].fixed_recipe = nil
+
 
 data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
 data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
