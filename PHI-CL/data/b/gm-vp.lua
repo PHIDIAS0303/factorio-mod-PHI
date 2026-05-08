@@ -179,43 +179,6 @@ if data.raw.technology['automation'] and data.raw.technology['automation'].effec
     table.insert(data.raw.technology['automation'].effects, {type = 'create-ghost-on-entity-death', modifier = true})
 end
 
--- GM-VP C 26 BASE RESEARCH
--- GM-VP C 35 SPACE_AGE RESEARCH
-if items['technology_reform'] then
-    for k, v in pairs(items['technology_reform']) do
-        if data.raw.technology[k] then
-            data.raw.technology[k].prerequisites = (v.prerequisites and v.prerequisites) or data.raw.technology[k].prerequisites
-            data.raw.technology[k].unit = (v.unit and v.unit) or data.raw.technology[k].unit
-            data.raw.technology[k].effects = (v.effects and v.effects) or data.raw.technology[k].effects
-
-            if data.raw.technology[k].unit then
-                data.raw.technology[k].unit.count = (v.unit_count and v.unit_count) or data.raw.technology[k].unit.count
-                data.raw.technology[k].unit.ingredients = (v.unit_ingredients and v.unit_ingredients) or data.raw.technology[k].unit.ingredients
-            end
-        end
-    end
-end
-
--- GM-VP H 38 SPACE_AGE RESEARCH
-if items['technology'] then
-    for _, v in pairs(items['technology']) do
-        if data.raw.technology[v] then
-            data.raw.technology[v].hidden = true
-            data.raw.technology[v].hidden_in_factoriopedia = true
-            data.raw.technology[v].effects = nil
-
-            if data.raw.technology[v].research_trigger then
-                data.raw.technology[v].research_trigger = nil
-                data.raw.technology[v].unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
-            end
-
-            if data.raw.technology[v].unit and data.raw.technology[v].unit.ingredients then
-                data.raw.technology[v].unit.ingredients = {{'space-science-pack', 1}}
-            end
-        end
-    end
-end
-
 local lab_ingredient_removal = {
     ['metallurgic-science-pack'] = true,
     ['agricultural-science-pack'] = true,
@@ -246,50 +209,10 @@ for _, v in pairs({'space-science-pack', 'electromagnetic-plant', 'foundry', 'cr
     end
 end
 
--- GM-VP H 2 SPACE_AGE RESEARCH_EFFECT
-if data.raw.quality then
-    for _, v in pairs(data.raw.quality) do
-        v.hidden = true
-        v.hidden_in_factoriopedia = true
-    end
-end
-
 -- GM-VP C 1 BASE ENTITY
 -- GM-VP C 1 SPACE_AGE ENTITY
 for _, v in pairs(data.raw.lab) do
     v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
-end
-
--- GM-VP C 8 BASE RESEARCH
--- GM-VP C 23 SPACE_AGE RESEARCH
-if items['recipe_reform'] then
-    for k, v in pairs(items['recipe_reform']) do
-        if data.raw.recipe[k] then
-            data.raw.recipe[k].ingredients = (v.ingredients and v.ingredients) or data.raw.recipe[k].ingredients
-            data.raw.recipe[k].results = (v.results and v.results) or data.raw.recipe[k].results
-        end
-    end
-end
-
--- GM-VP H 4 QUALITY TIP_AND_TRICK
--- GM-VP H 16 SPACE_AGE TIP_AND_TRICK
-if items['tips_and_tricks_item'] then
-    for _, v in pairs(data.raw['tips-and-tricks-item']) do
-        if v.category and items['tips_and_tricks_item'][v.category] then
-            v.hidden = true
-            v.hidden_in_factoriopedia = true
-        end
-    end
-end
-
--- GM-VP H 21 SPACE_AGE ACHIEVEMENT
-if items['achievement'] then
-    for k, v in pairs(items['achievement']) do
-        if data.raw[v][k] then
-            data.raw[v][k].hidden = true
-            data.raw[v][k].hidden_in_factoriopedia = true
-        end
-    end
 end
 
 -- GM-VP C 2 BASE ENTITY
@@ -300,46 +223,15 @@ if data.raw['unit-spawner'] then
 end
 
 -- GM-VP H 20 SPACE_AGE ENTITY
+-- GM-VP H 4 SPACE_AGE QUALITY
 -- GM-VP H 9 SPACE_AGE SPACE_CONNECTION
 -- GM-VP H 3 SPACE_AGE SPACE_LOCATION
-for _, c in pairs({'space-connection', 'space-location', 'asteroid', 'asteroid-chunk'}) do
+for _, c in pairs({'space-connection', 'space-location', 'asteroid', 'asteroid-chunk', 'quality'}) do
     if data.raw[c] then
         for _, v in pairs(data.raw[c]) do
             v.hidden = true
             v.hidden_in_factoriopedia = true
         end
-    end
-end
-
-if not items['recipe'] then
-    items['recipe'] = {}
-end
-
--- GM-VP H 1 QUALITY RECIPE
--- GM-VP H 92 SPACE_AGE RECIPE
-for _, v in pairs(data.raw.recipe) do
-    v.surface_conditions = nil
-    v.maximum_productivity = nil
-    v.auto_recycle = false
-
-    if items['recipe'][v.name] then
-        v.hidden = true
-        v.hidden_in_factoriopedia = true
-    end
-end
-
-if items['item'] then
-    items['item'] = {}
-end
-
--- GM-VP H 1 QUALITY ITEM
--- GM-VP H 40 SPACE_AGE ITEM
-for _, v in pairs(data.raw.item) do
-    v.auto_recycle = false
-
-    if items['item'][v.name] then
-        v.hidden = true
-        v.hidden_in_factoriopedia = true
     end
 end
 
@@ -454,6 +346,89 @@ end
 -- GM-VP H 95 SPACE_AGE TILE
 for _, v in pairs(data.raw['tile']) do
     if v.subgroup and (v.subgroup == 'vulcanus-tiles' or v.subgroup == 'gleba-tiles' or v.subgroup == 'gleba-water-tiles' or v.subgroup == 'fulgora-tiles' or v.subgroup == 'aquilo-tiles') then
+        v.hidden = true
+        v.hidden_in_factoriopedia = true
+    end
+end
+
+-- GM-VP H 21 SPACE_AGE ACHIEVEMENT
+for k, v in pairs(items['achievement']) do
+    if data.raw[v][k] then
+        data.raw[v][k].hidden = true
+        data.raw[v][k].hidden_in_factoriopedia = true
+    end
+end
+
+-- GM-VP H 1 QUALITY ITEM
+-- GM-VP H 40 SPACE_AGE ITEM
+for _, v in pairs(data.raw.item) do
+    v.auto_recycle = false
+
+    if items['item'][v.name] then
+        v.hidden = true
+        v.hidden_in_factoriopedia = true
+    end
+end
+
+-- GM-VP H 1 QUALITY RECIPE
+-- GM-VP H 92 SPACE_AGE RECIPE
+for _, v in pairs(data.raw.recipe) do
+    v.surface_conditions = nil
+    v.maximum_productivity = nil
+    v.auto_recycle = false
+
+    if items['recipe'][v.name] then
+        v.hidden = true
+        v.hidden_in_factoriopedia = true
+    end
+end
+
+-- GM-VP C 8 BASE RESEARCH
+-- GM-VP C 23 SPACE_AGE RESEARCH
+for k, v in pairs(items['recipe_reform']) do
+    if data.raw.recipe[k] then
+        data.raw.recipe[k].ingredients = (v.ingredients and v.ingredients) or data.raw.recipe[k].ingredients
+        data.raw.recipe[k].results = (v.results and v.results) or data.raw.recipe[k].results
+    end
+end
+
+-- GM-VP H 38 SPACE_AGE RESEARCH
+for _, v in pairs(items['technology']) do
+    if data.raw.technology[v] then
+        data.raw.technology[v].hidden = true
+        data.raw.technology[v].hidden_in_factoriopedia = true
+        data.raw.technology[v].effects = nil
+
+        if data.raw.technology[v].research_trigger then
+            data.raw.technology[v].research_trigger = nil
+            data.raw.technology[v].unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
+        end
+
+        if data.raw.technology[v].unit and data.raw.technology[v].unit.ingredients then
+            data.raw.technology[v].unit.ingredients = {{'space-science-pack', 1}}
+        end
+    end
+end
+
+-- GM-VP C 26 BASE RESEARCH
+-- GM-VP C 35 SPACE_AGE RESEARCH
+for k, v in pairs(items['technology_reform']) do
+    if data.raw.technology[k] then
+        data.raw.technology[k].prerequisites = (v.prerequisites and v.prerequisites) or data.raw.technology[k].prerequisites
+        data.raw.technology[k].unit = (v.unit and v.unit) or data.raw.technology[k].unit
+        data.raw.technology[k].effects = (v.effects and v.effects) or data.raw.technology[k].effects
+
+        if data.raw.technology[k].unit then
+            data.raw.technology[k].unit.count = (v.unit_count and v.unit_count) or data.raw.technology[k].unit.count
+            data.raw.technology[k].unit.ingredients = (v.unit_ingredients and v.unit_ingredients) or data.raw.technology[k].unit.ingredients
+        end
+    end
+end
+
+-- GM-VP H 4 QUALITY TIP_AND_TRICK
+-- GM-VP H 16 SPACE_AGE TIP_AND_TRICK
+for _, v in pairs(data.raw['tips-and-tricks-item']) do
+    if v.category and items['tips_and_tricks_item'][v.category] then
         v.hidden = true
         v.hidden_in_factoriopedia = true
     end
