@@ -179,24 +179,6 @@ if data.raw.technology['automation'] and data.raw.technology['automation'].effec
     table.insert(data.raw.technology['automation'].effects, {type = 'create-ghost-on-entity-death', modifier = true})
 end
 
-local lab_ingredient_removal = {
-    ['metallurgic-science-pack'] = true,
-    ['agricultural-science-pack'] = true,
-    ['electromagnetic-science-pack'] = true,
-    ['cryogenic-science-pack'] = true,
-    ['promethium-science-pack'] = true,
-}
-
-for _, tech in pairs(data.raw.technology) do
-    if tech.unit and tech.unit.ingredients then
-        for i = #tech.unit.ingredients, 1, -1 do
-            if lab_ingredient_removal[tech.unit.ingredients[i][1]] then
-                table.remove(tech.unit.ingredients, i)
-            end
-        end
-    end
-end
-
 -- GM-VP A 2 SPACE_AGE RESEARCH_EFFECT
 table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone'})
 table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'})
@@ -406,6 +388,16 @@ for _, v in pairs(items['technology']) do
 
         if data.raw.technology[v].unit and data.raw.technology[v].unit.ingredients then
             data.raw.technology[v].unit.ingredients = {{'space-science-pack', 1}}
+        end
+    end
+end
+
+for _, tech in pairs(data.raw.technology) do
+    if tech.unit and tech.unit.ingredients then
+        for i = #tech.unit.ingredients, 1, -1 do
+            if items['technology_ingredient_removal'][tech.unit.ingredients[i][1]] then
+                table.remove(tech.unit.ingredients, i)
+            end
         end
     end
 end

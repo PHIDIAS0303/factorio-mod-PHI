@@ -66,6 +66,14 @@ local items = {
         ['thruster'] = 'thruster',
         ['biolab'] = 'lab',
     },
+    ['technology_ingredient_removal'] = {
+        -- SPACE_AGE 0
+        ['metallurgic-science-pack'] = true,
+        ['agricultural-science-pack'] = true,
+        ['electromagnetic-science-pack'] = true,
+        ['cryogenic-science-pack'] = true,
+        ['promethium-science-pack'] = true
+    },
     ['technology_reform'] = {
         -- BASE 0
         ['speed-module-2'] = {
