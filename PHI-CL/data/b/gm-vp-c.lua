@@ -755,6 +755,38 @@ local items = {
         ['cuttlepop'] = 'tree',
         -- SPACE_AGE ENTITY 40
         ['water-cane'] = 'tree',
+        ['small-stomper-shell'] = 'simple-entity',
+        ['medium-stomper-shell'] = 'simple-entity',
+        ['big-stomper-shell'] = 'simple-entity',
+        ['big-volcanic-rock'] = 'simple-entity',
+        -- SPACE_AGE ENTITY 45
+        ['huge-volcanic-rock'] = 'simple-entity',
+        ['copper-stromatolite'] = 'simple-entity',
+        ['iron-stromatolite'] = 'simple-entity',
+        ['vulcanus-chimney-short'] = 'simple-entity',
+        ['vulcanus-chimney-truncated'] = 'simple-entity',
+        -- SPACE_AGE ENTITY 50
+        ['vulcanus-chimney'] = 'simple-entity',
+        ['vulcanus-chimney-cold'] = 'simple-entity',
+        ['vulcanus-chimney-faded'] = 'simple-entity',
+        ['big-fulgora-rock'] = 'simple-entity',
+        ['fulgurite'] = 'simple-entity',
+        -- SPACE_AGE ENTITY 55
+        ['fulgurite-small'] = 'simple-entity',
+        ['fulgoran-ruin-small'] = 'simple-entity',
+        ['fulgoran-ruin-medium'] = 'simple-entity',
+        ['fulgoran-ruin-stonehenge'] = 'simple-entity',
+        ['fulgoran-ruin-big'] = 'simple-entity',
+        -- SPACE_AGE ENTITY 60
+        ['fulgoran-ruin-colossal'] = 'simple-entity',
+        ['fulgoran-ruin-huge'] = 'simple-entity',
+        ['fulgoran-ruin-vault'] = 'simple-entity',
+        ['lithium-iceberg-big'] = 'simple-entity',
+        ['lithium-iceberg-huge'] = 'simple-entity',
+        -- SPACE_AGE ENTITY 65
+        ['small-demolisher-corpse'] = 'simple-entity',
+        ['medium-demolisher-corpse'] = 'simple-entity',
+        ['big-demolisher-corpse'] = 'simple-entity',
         -- SPACE_AGE ITEM 0
         ['bioflux'] = 'capsule',
         ['jelly'] = 'capsule',

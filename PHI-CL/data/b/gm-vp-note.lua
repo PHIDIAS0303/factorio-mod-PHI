@@ -34,9 +34,5 @@ for _, v in pairs({'yumako-tree', 'jellystem'}) do
     data.raw['plant'][v].autoplace = nil
 end 
 
-for _, v in pairs({'small-stomper-shell', 'medium-stomper-shell', 'big-stomper-shell', 'big-volcanic-rock', 'huge-volcanic-rock', 'copper-stromatolite', 'iron-stromatolite', 'vulcanus-chimney-short', 'vulcanus-chimney-truncated', 'vulcanus-chimney', 'vulcanus-chimney-cold', 'vulcanus-chimney-faded', 'big-fulgora-rock', 'fulgurite', 'fulgurite-small', 'fulgoran-ruin-small', 'fulgoran-ruin-medium', 'fulgoran-ruin-stonehenge', 'fulgoran-ruin-big', 'fulgoran-ruin-colossal', 'fulgoran-ruin-huge', 'fulgoran-ruin-vault', 'lithium-iceberg-big', 'lithium-iceberg-huge', 'small-demolisher-corpse', 'medium-demolisher-corpse', 'big-demolisher-corpse'}) do
-    data.raw['simple-entity'][v].autoplace = nil
-    data.raw['simple-entity'][v].hidden = true
-    data.raw['simple-entity'][v].hidden_in_factoriopedia = true
-end
+data.raw['simple-entity']['small-stomper-shell'].autoplace = nil
 ]]
