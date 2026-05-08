@@ -308,17 +308,15 @@ if items['recipe_reform'] then
 end
 
 -- GM-VP C 2 SPACE_AGE TIP_AND_TRICK
--- TODO nil
 if items['tips_and_tricks_item'] then
-    for _, v in pairs(items['tips_and_tricks_item']) do
-        if data.raw['tips-and-tricks-item'][v] then
-            data.raw['tips-and-tricks-item'][v].hidden = true
-            data.raw['tips-and-tricks-item'][v].hidden_in_factoriopedia = true
+    for _, v in pairs(data.raw['tips-and-tricks-item']) do
+        if v.category and items['tips_and_tricks_item'][v.category] then
+            v.hidden = true
+            v.hidden_in_factoriopedia = true
         end
     end
 end
 
--- nil
 if items['achievement'] then
     for k, v in pairs(items['achievement']) do
         if data.raw[v][k] then

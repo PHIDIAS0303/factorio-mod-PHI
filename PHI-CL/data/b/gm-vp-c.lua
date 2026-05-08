@@ -437,8 +437,10 @@ local items = {
     },
     ['tips_and_tricks_item'] = {
         -- SPACE_AGE 0
-        'agriculture',
-        'lava-processing'
+        'quality',
+        'space-age',
+        'space-platform',
+        'spoilables'
     },
     ['technology'] = {
         -- SPACE_AGE 0
