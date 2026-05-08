@@ -679,6 +679,10 @@ local items = {
         ['thruster'] = true,
         -- SPACE_AGE 35
         ['space-platform-hub'] = true,
+        ['carbonic-asteroid-chunk'] = true,
+        ['metallic-asteroid-chunk'] = true,
+        ['promethium-asteroid-chunk'] = true,
+        ['oxide-asteroid-chunk'] = true,
     },
     ['hidden_resource'] = {
         -- SPACE_AGE RESOURCE_GENERATION 0
@@ -787,6 +791,20 @@ local items = {
         ['small-demolisher-corpse'] = 'simple-entity',
         ['medium-demolisher-corpse'] = 'simple-entity',
         ['big-demolisher-corpse'] = 'simple-entity',
+        -- SPACE_AGE FLUID 0
+        ['thruster-oxidizer'] = 'fluid',
+        ['thruster-fuel'] = 'fluid',
+        ['lithium-brine'] = 'fluid',
+        ['fluorine'] = 'fluid',
+        ['ammonia'] = 'fluid',
+        -- SPACE_AGE FLUID 5
+        ['ammoniacal-solution'] = 'fluid',
+        ['electrolyte'] = 'fluid',
+        ['holmium-solution'] = 'fluid',
+        ['molten-copper'] = 'fluid',
+        ['molten-iron'] = 'fluid',
+        -- SPACE_AGE FLUID 10
+        ['lava'] = 'fluid',
         -- SPACE_AGE ITEM 0
         ['bioflux'] = 'capsule',
         ['jelly'] = 'capsule',

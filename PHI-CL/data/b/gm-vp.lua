@@ -260,24 +260,6 @@ for _, v in pairs(data.raw.lab) do
     v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
 end
 
--- GM-VP H 4 SPACE_AGE ITEM
-for _, v in pairs({'carbonic', 'metallic', 'promethium', 'oxide'}) do
-    local l = v .. '-asteroid-chunk'
-
-    if data.raw.item[l] then
-        data.raw.item[l].hidden = true
-        data.raw.item[l].hidden_in_factoriopedia = true
-    end
-end
-
--- GM-VP H 11 SPACE_AGE FLUID
-for _, v in pairs({'thruster-oxidizer', 'thruster-fuel', 'lithium-brine', 'fluorine', 'ammonia', 'ammoniacal-solution', 'electrolyte', 'holmium-solution', 'molten-copper', 'molten-iron', 'lava'}) do
-    if data.raw.fluid[v] then
-        data.raw.fluid[v].hidden = true
-        data.raw.fluid[v].hidden_in_factoriopedia = true
-    end
-end
-
 -- GM-VP C 8 BASE RESEARCH
 -- GM-VP C 23 SPACE_AGE RESEARCH
 if items['recipe_reform'] then
@@ -351,7 +333,7 @@ if items['item'] then
 end
 
 -- GM-VP H 1 QUALITY ITEM
--- GM-VP H 36 SPACE_AGE ITEM
+-- GM-VP H 40 SPACE_AGE ITEM
 for _, v in pairs(data.raw.item) do
     v.auto_recycle = false
 
@@ -433,6 +415,7 @@ end
 
 -- GM-VP H 1 QUALITY ENTITY
 -- GM-VP H 68 SPACE_AGE ENTITY
+-- GM-VP H 11 SPACE_AGE FLUID
 -- GM-VP H 7 SPACE_AGE ITEM
 -- GM-VP H 21 SPACE_AGE MAP_GENERATION
 -- GM-VP H 3 SPACE_AGE TILE
