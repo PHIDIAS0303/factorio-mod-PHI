@@ -184,24 +184,13 @@ end
 if items['technology_reform'] then
     for k, v in pairs(items['technology_reform']) do
         if data.raw.technology[k] then
-            if v.prerequisites then
-                data.raw.technology[k].prerequisites = v.prerequisites
-            end
+            data.raw.technology[k].prerequisites = (v.prerequisites and v.prerequisites) or data.raw.technology[k].prerequisites
+            data.raw.technology[k].unit = (v.unit and v.unit) or data.raw.technology[k].unit
+            data.raw.technology[k].effects = (v.effects and v.effects) or data.raw.technology[k].effects
 
-            if v.unit then
-                data.raw.technology[k].unit = v.unit
-            end
-
-            if v.unit_count then
-                data.raw.technology[k].unit.count = v.unit_count
-            end
-
-            if v.unit_ingredients then
-                data.raw.technology[k].unit.ingredients = v.unit_ingredients
-            end
-
-            if v.effects then
-                data.raw.technology[k].effects = v.effects
+            if data.raw.technology[k].unit then
+                data.raw.technology[k].unit.count = (v.unit_count and v.unit_count) or data.raw.technology[k].unit.count
+                data.raw.technology[k].unit.ingredients = (v.unit_ingredients and v.unit_ingredients) or data.raw.technology[k].unit.ingredients
             end
         end
     end
@@ -227,7 +216,7 @@ if items['technology'] then
     end
 end
 
-local unwanted = {
+local lab_ingredient_removal = {
     ['metallurgic-science-pack'] = true,
     ['agricultural-science-pack'] = true,
     ['electromagnetic-science-pack'] = true,
@@ -237,11 +226,9 @@ local unwanted = {
 
 for _, tech in pairs(data.raw.technology) do
     if tech.unit and tech.unit.ingredients then
-        local ings = tech.unit.ingredients
-
-        for i = #ings, 1, -1 do
-            if unwanted[ings[i][1]] then
-                table.remove(ings, i)
+        for i = #tech.unit.ingredients, 1, -1 do
+            if lab_ingredient_removal[tech.unit.ingredients[i][1]] then
+                table.remove(tech.unit.ingredients, i)
             end
         end
     end
@@ -296,13 +283,8 @@ end
 if items['recipe_reform'] then
     for k, v in pairs(items['recipe_reform']) do
         if data.raw.recipe[k] then
-            if v.ingredients then
-                data.raw.recipe[k].ingredients = v.ingredients
-            end
-
-            if v.results then
-                data.raw.recipe[k].results = v.results
-            end
+            data.raw.recipe[k].ingredients = (v.ingredients and v.ingredients) or data.raw.recipe[k].ingredients
+            data.raw.recipe[k].results = (v.results and v.results) or data.raw.recipe[k].results
         end
     end
 end
@@ -335,9 +317,6 @@ if data.raw['unit-spawner'] then
     end
 end
 
--- GM-VP C 1 SPACE_AGE ENTITY
-data.raw['assembling-machine']['captive-biter-spawner'].fixed_recipe = nil
-
 -- GM-VP H 20 SPACE_AGE ENTITY
 -- GM-VP H 9 SPACE_AGE SPACE_CONNECTION
 -- GM-VP H 3 SPACE_AGE SPACE_LOCATION
@@ -350,27 +329,33 @@ for _, c in pairs({'space-connection', 'space-location', 'asteroid', 'asteroid-c
     end
 end
 
-if items['recipe'] then
-    for _, v in pairs(data.raw.recipe) do
-        v.surface_conditions = nil
-        v.maximum_productivity = nil
-        v.auto_recycle = false
+if not items['recipe'] then
+    items['recipe'] = {}
+end
 
-        if items['recipe'][v.name] then
-            v.hidden = true
-            v.hidden_in_factoriopedia = true
-        end
+-- GM-VP H 92 SPACE_AGE RECIPE
+-- GM-VP H 1 QUALITY RECIPE
+for _, v in pairs(data.raw.recipe) do
+    v.surface_conditions = nil
+    v.maximum_productivity = nil
+    v.auto_recycle = false
+
+    if items['recipe'][v.name] then
+        v.hidden = true
+        v.hidden_in_factoriopedia = true
     end
 end
 
 if items['item'] then
-    for _, v in pairs(data.raw.item) do
-        v.auto_recycle = false
+    items['item'] = {}
+end
 
-        if items['item'][v.name] then
-            v.hidden = true
-            v.hidden_in_factoriopedia = true
-        end
+for _, v in pairs(data.raw.item) do
+    v.auto_recycle = false
+
+    if items['item'][v.name] then
+        v.hidden = true
+        v.hidden_in_factoriopedia = true
     end
 end
 
@@ -432,10 +417,16 @@ if data.raw['chain-active-trigger'] and data.raw['chain-active-trigger']['chain-
     data.raw['chain-active-trigger']['chain-tesla-turret-chain'].fork_chance = 0.3
 end
 
-for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
-    data.raw.planet[v].map_gen_settings = nil
-    data.raw.planet[v].hidden = true
-    data.raw.planet[v].hidden_in_factoriopedia = true
+-- GM-VP C 4 SPACE_AGE MAP_GEN_SETTING
+-- GM-VP H 4 SPACE_AGE PLANET
+if data.raw.planet then
+    for _, v in pairs({'vulcanus', 'gleba', 'fulgora', 'aquilo'}) do
+        if data.raw.planet[v] then
+            data.raw.planet[v].map_gen_settings = nil
+            data.raw.planet[v].hidden = true
+            data.raw.planet[v].hidden_in_factoriopedia = true
+        end
+    end
 end
 
 for _, v in pairs({'calcite', 'fluorine-vent', 'lithium-brine', 'scrap', 'tungsten-ore'}) do

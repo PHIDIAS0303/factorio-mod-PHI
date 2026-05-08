@@ -518,97 +518,117 @@ local items = {
         ['visit-aquilo'] = 'change-surface-achievement'
     },
     ['recipe'] = {
+        -- QUALITY 0
         ['recycler'] = true,
+        -- SPACE_AGE 0
         ['lightning-collector'] = true,
         ['lightning-rod'] = true,
         ['agricultural-science-pack'] = true,
         ['cryogenic-science-pack'] = true,
         ['electromagnetic-science-pack'] = true,
+        -- SPACE_AGE 5
         ['metallurgic-science-pack'] = true,
         ['promethium-science-pack'] = true,
         ['space-science-pack'] = true,
         ['burnt-spoilage'] = true,
         ['fish-breeding'] = true,
+        -- SPACE_AGE 10
         ['nutrients-from-fish'] = true,
         ['nutrients-from-biter-egg'] = true,
         ['yumako-processing'] = true,
         ['jellynut-processing'] = true,
         ['copper-bacteria'] = true,
+        -- SPACE_AGE 15
         ['copper-bacteria-cultivation'] = true,
         ['iron-bacteria'] = true,
         ['iron-bacteria-cultivation'] = true,
         ['nutrients-from-spoilage'] = true,
         ['nutrients-from-yumako-mash'] = true,
+        -- SPACE_AGE 20
         ['nutrients-from-bioflux'] = true,
         ['pentapod-egg'] = true,
         ['rocket-fuel-from-jelly'] = true,
         ['bioflux'] = true,
         ['bioplastic'] = true,
+        -- SPACE_AGE 25
         ['biosulfur'] = true,
         ['biolubricant'] = true,
         ['carbon-fiber'] = true,
         ['artificial-yumako-soil'] = true,
         ['overgrowth-yumako-soil'] = true,
+        -- SPACE_AGE 30
         ['artificial-jellynut-soil'] = true,
         ['overgrowth-jellynut-soil'] = true,
         ['biochamber'] = true,
         ['captive-biter-spawner'] = true,
         ['capture-robot-rocket'] = true,
+        -- SPACE_AGE 35
         ['biter-egg'] = true,
         ['spoilage-from-nutrients'] = true,
         ['tungsten-carbide'] = true,
         ['tungsten-plate'] = true,
         ['coal-synthesis'] = true,
+        -- SPACE_AGE 40
         ['spoilage-recycling'] = true,
         ['asteroid-collector'] = true,
         ['ammoniacal-solution-separation'] = true,
         ['lithium'] = true,
         ['lithium-plate'] = true,
+        -- SPACE_AGE 45
         ['ice-platform'] = true,
         ['solid-fuel-from-ammonia'] = true,
         ['ammonia-rocket-fuel'] = true,
         ['quantum-processor'] = true,
         ['holmium-solution'] = true,
+        -- SPACE_AGE 50
         ['holmium-plate'] = true,
         ['electrolyte'] = true,
         ['supercapacitor'] = true,
         ['superconductor'] = true,
         ['molten-iron-from-lava'] = true,
+        -- SPACE_AGE 55
         ['molten-copper-from-lava'] = true,
         ['molten-iron'] = true,
         ['molten-copper'] = true,
         ['casting-iron'] = true,
         ['casting-steel'] = true,
+        -- SPACE_AGE 60
         ['casting-copper'] = true,
         ['casting-iron-gear-wheel'] = true,
         ['casting-iron-stick'] = true,
         ['casting-pipe'] = true,
         ['casting-pipe-to-ground'] = true,
+        -- SPACE_AGE 65
         ['casting-low-density-structure'] = true,
         ['concrete-from-molten-iron'] = true,
         ['casting-copper-cable'] = true,
         ['acid-neutralisation'] = true,
         ['simple-coal-liquefaction'] = true,
+        -- SPACE_AGE 70
         ['scrap-recycling'] = true,
         ['foundation'] = true,
         ['steam-condensation'] = true,
         ['thruster'] = true,
         ['thruster-fuel'] = true,
+        -- SPACE_AGE 75
         ['thruster-oxidizer'] = true,
         ['advanced-thruster-fuel'] = true,
         ['advanced-thruster-oxidizer'] = true,
         ['metallic-asteroid-crushing'] = true,
         ['carbonic-asteroid-crushing'] = true,
+        -- SPACE_AGE 80
         ['oxide-asteroid-crushing'] = true,
         ['advanced-metallic-asteroid-crushing'] = true,
         ['advanced-carbonic-asteroid-crushing'] = true,
         ['advanced-oxide-asteroid-crushing'] = true,
         ['metallic-asteroid-reprocessing'] = true,
+        -- SPACE_AGE 85
         ['carbonic-asteroid-reprocessing'] = true,
         ['oxide-asteroid-reprocessing'] = true,
         ['space-platform-foundation'] = true,
         ['space-platform-starter-pack'] = true,
         ['carbon'] = true,
+        -- SPACE_AGE 90
         ['ice-melting'] = true,
         ['crusher'] = true
     },
