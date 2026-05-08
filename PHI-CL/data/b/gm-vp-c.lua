@@ -705,6 +705,39 @@ local items = {
     ['hidden'] = {
         -- QUALITY ENTITY 0
         ['recycler'] = 'furnace',
+        -- SPACE_AGE ENTITY 0
+        ['biochamber'] = 'assembling-machine',
+        ['captive-biter-spawner'] = 'assembling-machine',
+        ['crusher'] = 'assembling-machine',
+        ['lightning-rod']= 'lightning-attractor',
+        ['lightning-collector'] = 'lightning-attractor',
+        -- SPACE_AGE ENTITY 5
+        ['fulgoran-ruin-attractor'] = 'lightning-attractor',
+        ['asteroid-collector'] = 'asteroid-collector',
+        ['space-platform-hub'] = 'space-platform-hub',
+        ['yumako-tree'] = 'plant',
+        ['jellystem'] = 'plant',
+        -- SPACE_AGE ENTITY 10
+        ['thruster'] = 'thruster',
+        ['lightning'] = 'lightning',
+        -- SPACE_AGE ENTITY_GENERATION 0
+        ['small-demolisher'] = 'segmented-unit',
+        ['medium-demolisher'] = 'segmented-unit',
+        ['big-demolisher'] = 'segmented-unit',
+        ['small-wriggler-pentapod-premature'] = 'unit',
+        ['medium-wriggler-pentapod-premature'] = 'unit',
+        -- SPACE_AGE ENTITY_GENERATION 5
+        ['big-wriggler-pentapod-premature'] = 'unit',
+        ['small-wriggler-pentapod'] = 'unit',
+        ['medium-wriggler-pentapod'] = 'unit',
+        ['big-wriggler-pentapod'] = 'unit',
+        ['small-strafer-pentapod'] = 'spider-unit',
+        -- SPACE_AGE ENTITY_GENERATION 10
+        ['medium-strafer-pentapod'] = 'spider-unit',
+        ['big-strafer-pentapod'] = 'spider-unit',
+        ['small-stomper-pentapod'] = 'spider-unit',
+        ['medium-stomper-pentapod'] = 'spider-unit',
+        ['big-stomper-pentapod'] = 'spider-unit',
         -- SPACE_AGE ITEM 0
         ['bioflux'] = 'capsule',
         ['jelly'] = 'capsule',
@@ -738,6 +771,8 @@ local items = {
         ['cliff-gleba'] = 'cliff',
         ['cliff-vulcanus'] = 'cliff',
         ['crater-cliff'] = 'cliff',
+        -- SPACE_AGE MAP_GENERATION 20
+        ['space-platform'] = 'surface',
         -- SPACE_AGE TILE 0
         ['empty-space'] = 'tile',
         ['space-platform-foundation'] = 'tile',
@@ -747,39 +782,6 @@ local items = {
         ['cryogenic-science-pack'] = 'tool',
         ['electromagnetic-science-pack'] = 'tool',
         ['metallurgic-science-pack'] = 'tool',
-        -- SPACE_AGE ENTITY 0
-        ['biochamber'] = 'assembling-machine',
-        ['captive-biter-spawner'] = 'assembling-machine',
-        ['crusher'] = 'assembling-machine',
-        ['lightning-rod']= 'lightning-attractor',
-        ['lightning-collector'] = 'lightning-attractor',
-        -- SPACE_AGE ENTITY 5
-        ['fulgoran-ruin-attractor'] = 'lightning-attractor',
-        ['asteroid-collector'] = 'asteroid-collector',
-        ['space-platform-hub'] = 'space-platform-hub',
-        ['yumako-tree'] = 'plant',
-        ['jellystem'] = 'plant',
-        -- SPACE_AGE ENTITY 10
-        ['thruster'] = 'thruster',
-        ['lightning'] = 'lightning',
-
-        ['space-platform'] = 'surface',
-
-        ['small-demolisher'] = 'segmented-unit',
-        ['medium-demolisher'] = 'segmented-unit',
-        ['big-demolisher'] = 'segmented-unit',
-        ['small-wriggler-pentapod-premature'] = 'unit',
-        ['medium-wriggler-pentapod-premature'] = 'unit',
-        ['big-wriggler-pentapod-premature'] = 'unit',
-        ['small-wriggler-pentapod'] = 'unit',
-        ['medium-wriggler-pentapod'] = 'unit',
-        ['big-wriggler-pentapod'] = 'unit',
-        ['small-strafer-pentapod'] = 'spider-unit',
-        ['medium-strafer-pentapod'] = 'spider-unit',
-        ['big-strafer-pentapod'] = 'spider-unit',
-        ['small-stomper-pentapod'] = 'spider-unit',
-        ['medium-stomper-pentapod'] = 'spider-unit',
-        ['big-stomper-pentapod'] = 'spider-unit',
     }
 }
 
