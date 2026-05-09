@@ -1,6 +1,7 @@
 local cargo_landing = require('control/cargo-landing')
 local combinator = require('control/combinator')
 local lab = require('control/lab')
+local pump = require('control/pump')
 local rail_support = require('control/rail-support')
 local trash = require('control/trash')
 
@@ -47,6 +48,10 @@ script.on_configuration_changed(function()
 
     combinator.storage_init()
 end)
+
+if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
+    script.on_event({defines.events.on_player_cheat_mode_enabled, defines.events.on_player_cheat_mode_disabled}, pump.recipe_hidden)
+end
 
 if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
     script.on_event(defines.events.on_player_created, function(event)
