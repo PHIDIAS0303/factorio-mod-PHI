@@ -1,4 +1,5 @@
 local cargo_landing = require('control/cargo-landing')
+local combinator = require('control/combinator')
 local lab = require('control/lab')
 local rail_support = require('control/rail-support')
 local trash = require('control/trash')
