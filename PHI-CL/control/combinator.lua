@@ -69,12 +69,22 @@ function main.gui_update(player, entity)
 
     local val = cs1.min or 0
 
-    if player.gui.relative.phi_cl_combinator_config and player.gui.relative.phi_cl_combinator_config['default'] and player.gui.relative.phi_cl_combinator_config['default']['table_research_queue'] then
-        local dropdown = player.gui.relative.phi_cl_combinator_config['default']['table_research_queue']['research_queue_dropdown']
+    if not player.gui.relative.phi_cl_combinator_config then
+        return
+    end
 
-        if dropdown then
-            dropdown.selected_index = ((val < 0 or val > 3) and 1) or (val + 1)
-        end
+    if not player.gui.relative.phi_cl_combinator_config['default'] then
+        return
+    end
+
+    if not player.gui.relative.phi_cl_combinator_config['default']['table_research_queue'] then
+        return
+    end
+
+    local dropdown = player.gui.relative.phi_cl_combinator_config['default']['table_research_queue']['research_queue_dropdown']
+
+    if dropdown then
+        dropdown.selected_index = ((val < 0 or val > 3) and 1) or (val + 1)
     end
 end
 
