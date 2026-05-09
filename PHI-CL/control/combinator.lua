@@ -83,9 +83,11 @@ function main.gui_update(player, entity)
 
     local dropdown = player.gui.relative.phi_cl_combinator_config['default']['table_research_queue']['research_queue_dropdown']
 
-    if dropdown then
-        dropdown.selected_index = ((val < 0 or val > 3) and 1) or (val + 1)
+    if not dropdown then
+        return
     end
+
+    dropdown.selected_index = ((val < 0 or val > 3) and 1) or (val + 1)
 end
 
 function main.handle_research_queue(entity, combinator)
