@@ -137,7 +137,7 @@ function main.handle_research_queue(entity, combinator)
         end
 
         for _, ss in pairs(s) do
-            if ss.signal and (ss.signal.type and ss.signal.type == 'virtual') and (not ss.signal.quality or ss.signal.quality == 'normal') and ss.count > 0 then
+            if ss.signal and ss.signal.type and ss.signal.type == 'virtual' and ss.count > 0 and (not ss.signal.quality or ss.signal.quality == 'normal') then
                 local tn = ss.signal.name:sub(8)
 
                 if prototypes.technology[tn] and prototypes.technology[tn].enabled and prototypes.technology[tn].max_level then
@@ -209,7 +209,7 @@ function main.on_nth_tick_10()
     end
 
     local max_remove = math.floor(head / 100) + 1
-    local remove_count = math.random(0, max_remove)
+    local remove_count = math.random(math.min(5, max_remove), max_remove)
 
     while remove_count > 0 and head > 0 do
         local remove_index = math.random(1, head)
