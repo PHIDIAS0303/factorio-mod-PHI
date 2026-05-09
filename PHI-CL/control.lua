@@ -50,21 +50,25 @@ end)
 
 if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
     script.on_event(defines.events.on_player_created, function(event)
+        if not event.player_index or not game.players[event.player_index] then
+            return
+        end
+
         gui_create(game.players[event.player_index])
     end)
 
     script.on_event(defines.events.on_gui_opened, function(event)
-        local player = game.players[event.player_index]
-
-        if event.entity and player.opened and player.opened == event.entity then
-            gui_update(player, event.entity)
+        if not event.player_index or not event.entity or not game.players[event.player_index] or not game.players[event.player_index].opened or game.players[event.player_index].opened ~= event.entity then
+            return
         end
+
+        gui_update(game.players[event.player_index], event.entity)
     end)
 
     script.on_event(defines.events.on_gui_selection_state_changed, combinator.on_gui_selection_state_changed)
 
     script.on_event({defines.events.on_player_rotated_entity, defines.events.on_player_flipped_entity}, function(event)
-        if not event.player_index or not event.entity or game.players[event.player_index].opened ~= event.entity then
+        if not event.player_index or not event.entity or not game.players[event.player_index] or not game.players[event.player_index].opened or game.players[event.player_index].opened ~= event.entity then
             return
         end
 
@@ -74,6 +78,10 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
     script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_entity, defines.events.on_space_platform_built_entity, defines.events.script_raised_built, defines.events.script_raised_revive}, entity_build)
 
     script.on_event(defines.events.on_entity_cloned, function(event)
+        if not event.destination then
+            return
+        end
+
         entity_build({entity=event.destination})
     end)
 
