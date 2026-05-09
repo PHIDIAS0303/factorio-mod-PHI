@@ -61,50 +61,17 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
         end
     end)
 
-    script.on_event(defines.events.on_gui_selection_state_changed, function(event)
-        local player = game.players[event.player_index]
-
-        if not (player.opened and player.opened.object_name == 'LuaEntity') then
-            return
-        end
-
-        if not player.opened.valid then
-            return
-        end
-
-        if player.opened.type == 'constant-combinator' and player.opened.name == 'super-combinator' and player.gui.relative.phi_cl_combinator_config then
-            local circuit_oc = player.opened.get_or_create_control_behavior()
-
-            if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
-                circuit_oc.add_section()
-            end
-
-            circuit_oc = circuit_oc.sections[1]
-            circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = event.element.parent.parent['table_research_queue']['research_queue_dropdown'].selected_index - 1})
-        end
-    end)
+    script.on_event(defines.events.on_gui_selection_state_changed, combinator.on_gui_selection_state_changed)
 
     script.on_event({defines.events.on_player_rotated_entity, defines.events.on_player_flipped_entity}, function(event)
-        if not event.player_index then
+        if not event.player_index or not event.entity or game.players[event.player_index].opened ~= event.entity then
             return
         end
 
-        local player = game.players[event.player_index]
-
-        if not event.entity then
-            return
-        end
-
-        if player.opened ~= event.entity then
-            return
-        end
-
-        gui_update(player, player.opened)
+        gui_update(game.players[event.player_index], game.players[event.player_index].opened)
     end)
 
-    script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_entity, defines.events.on_space_platform_built_entity, defines.events.script_raised_built, defines.events.script_raised_revive}, function(event)
-        entity_build(event)
-    end)
+    script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_entity, defines.events.on_space_platform_built_entity, defines.events.script_raised_built, defines.events.script_raised_revive}, entity_build)
 
     script.on_event(defines.events.on_entity_cloned, function(event)
         entity_build({entity=event.destination})
@@ -117,10 +84,5 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
     end)
 end
 
-script.on_nth_tick(1800, function(_)
-    combinator.on_nth_tick_1800()
-end)
-
-script.on_nth_tick(10, function(_)
-    combinator.on_nth_tick_10()
-end)
+script.on_nth_tick(1800, combinator.on_nth_tick_1800)
+script.on_nth_tick(10, combinator.on_nth_tick_10)

@@ -70,6 +70,23 @@ function main.gui_update(player, entity)
     dropdown.selected_index = ((val < 0 or val > 3) and 1) or (val + 1)
 end
 
+function main.on_gui_selection_state_changed(event)
+    local player = game.players[event.player_index]
+
+    if not player.opened or not player.opened.object_name or not player.opened.valid or player.opened.object_name ~= 'LuaEntity' or not player.opened.type or player.opened.type ~= 'constant-combinator' or not player.opened.name or player.opened.name ~= 'super-combinator' or not player.gui.relative.phi_cl_combinator_config then
+        return
+    end
+
+    local circuit_oc = player.opened.get_or_create_control_behavior()
+
+    if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
+        circuit_oc.add_section()
+    end
+
+    circuit_oc = circuit_oc.sections[1]
+    circuit_oc.set_slot(1, {value = {type = 'virtual', name = 'signal-SA', quality = 'normal'}, min = event.element.parent.parent['table_research_queue']['research_queue_dropdown'].selected_index - 1})
+end
+
 function main.handle_research_queue(entity, combinator)
     local combinator_slot = combinator.get_slot(1)
 
