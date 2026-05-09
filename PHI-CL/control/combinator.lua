@@ -38,19 +38,7 @@ function main.gui_create(player)
 end
 
 function main.gui_update(player, entity)
-    if not entity.valid then
-        return
-    end
-
-    if not entity.type then
-        return
-    end
-
-    if entity.type ~= 'constant-combinator' then
-        return
-    end
-
-    if entity.name ~= 'super-combinator' then
+    if not entity.valid or not entity.type or entity.type ~= 'constant-combinator' or entity.name ~= 'super-combinator' then
         return
     end
 
@@ -69,15 +57,7 @@ function main.gui_update(player, entity)
 
     local val = cs1.min or 0
 
-    if not player.gui.relative.phi_cl_combinator_config then
-        return
-    end
-
-    if not player.gui.relative.phi_cl_combinator_config['default'] then
-        return
-    end
-
-    if not player.gui.relative.phi_cl_combinator_config['default']['table_research_queue'] then
+    if not player.gui.relative.phi_cl_combinator_config or not player.gui.relative.phi_cl_combinator_config['default'] or not player.gui.relative.phi_cl_combinator_config['default']['table_research_queue'] then
         return
     end
 
@@ -167,30 +147,34 @@ function main.handle_research_queue(entity, combinator)
 end
 
 function main.on_nth_tick_1800()
-    if storage.phi_cl and storage.phi_cl.loop and storage.phi_cl.loop.combinator and game.forces['player'] then
-        storage.phi_cl.combinator.research_progress = math.floor(game.forces['player'].research_progress * 1000)
-        storage.phi_cl.combinator.combinator_list = {}
-        storage.phi_cl.combinator.research_queue = {}
-        storage.phi_cl.combinator.research_queue_set = {}
-        local n = 1
+    if not storage.phi_cl or not storage.phi_cl.loop or not storage.phi_cl.loop.combinator or not game.forces['player'] then
+        return
+    end
 
-        for _, r in pairs(game.forces['player'].research_queue) do
-            if r.name and r.level and r.research_unit_count_formula then
-                storage.phi_cl.combinator.research_queue[r.name] = (storage.phi_cl.combinator.research_queue[r.name] or 0) + math.pow(2, n - 1)
-            end
+    storage.phi_cl.combinator.research_progress = math.floor(game.forces['player'].research_progress * 1000)
+    storage.phi_cl.combinator.combinator_list = {}
+    storage.phi_cl.combinator.research_queue = {}
+    storage.phi_cl.combinator.research_queue_set = {}
+    local n = 1
 
-            n = n + 1
+    for _, r in pairs(game.forces['player'].research_queue) do
+        if r.name and r.level and r.research_unit_count_formula then
+            storage.phi_cl.combinator.research_queue[r.name] = (storage.phi_cl.combinator.research_queue[r.name] or 0) + math.pow(2, n - 1)
         end
 
-        if prototypes.entity['super-combinator'] then
-            for _, s in pairs(game.surfaces) do
-                local c = s.find_entities_filtered{type='constant-combinator', name='super-combinator'}
+        n = n + 1
+    end
 
-                if #c > 0 then
-                    for _, entity in pairs(c) do
-                        table.insert(storage.phi_cl.combinator.combinator_list, entity)
-                    end
-                end
+    if not prototypes.entity['super-combinator'] then
+        return
+    end
+
+    for _, s in pairs(game.surfaces) do
+        local c = s.find_entities_filtered{type='constant-combinator', name='super-combinator'}
+
+        if #c > 0 then
+            for _, entity in pairs(c) do
+                table.insert(storage.phi_cl.combinator.combinator_list, entity)
             end
         end
     end
