@@ -38,28 +38,42 @@ function main.gui_create(player)
 end
 
 function main.gui_update(player, entity)
-    if entity.valid and entity.type and entity.type == 'constant-combinator' and entity.name == 'super-combinator' then
-        local circuit_oc = player.opened.get_or_create_control_behavior()
+    if not entity.valid then
+        return
+    end
 
-        if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
-            circuit_oc.add_section()
-        end
+    if not entity.type then
+        return
+    end
 
-        circuit_oc = circuit_oc.sections[1]
-        local cs1 = circuit_oc.get_slot(1)
+    if entity.type ~= 'constant-combinator' then
+        return
+    end
 
-        if not cs1 or not cs1.value or not cs1.value.name or cs1.value.name ~= 'signal-SA' then
-            return
-        end
+    if entity.name ~= 'super-combinator' then
+        return
+    end
 
-        local val = cs1.min or 0
+    local circuit_oc = player.opened.get_or_create_control_behavior()
 
-        if player.gui.relative.phi_cl_combinator_config and player.gui.relative.phi_cl_combinator_config['default'] and player.gui.relative.phi_cl_combinator_config['default']['table_research_queue'] then
-            local dropdown = player.gui.relative.phi_cl_combinator_config['default']['table_research_queue']['research_queue_dropdown']
+    if circuit_oc and circuit_oc.sections_count and circuit_oc.sections_count == 0 then
+        circuit_oc.add_section()
+    end
 
-            if dropdown then
-                dropdown.selected_index = ((val < 0 or val > 3) and 1) or (val + 1)
-            end
+    circuit_oc = circuit_oc.sections[1]
+    local cs1 = circuit_oc.get_slot(1)
+
+    if not cs1 or not cs1.value or not cs1.value.name or cs1.value.name ~= 'signal-SA' then
+        return
+    end
+
+    local val = cs1.min or 0
+
+    if player.gui.relative.phi_cl_combinator_config and player.gui.relative.phi_cl_combinator_config['default'] and player.gui.relative.phi_cl_combinator_config['default']['table_research_queue'] then
+        local dropdown = player.gui.relative.phi_cl_combinator_config['default']['table_research_queue']['research_queue_dropdown']
+
+        if dropdown then
+            dropdown.selected_index = ((val < 0 or val > 3) and 1) or (val + 1)
         end
     end
 end
