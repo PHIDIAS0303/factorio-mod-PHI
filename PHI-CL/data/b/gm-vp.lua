@@ -32,6 +32,7 @@ for _, v in pairs(data.raw['inserter']) do
     v.max_belt_stack_size = bss
     v.grab_less_to_match_belt_stack = true
     v.enter_drop_mode_if_held_stack_spoiled = true
+    v.wait_for_full_hand = true
 end
 
 -- GM-VP C 1 BASE RESEARCH_EFFECT
