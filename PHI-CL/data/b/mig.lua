@@ -184,7 +184,7 @@ for _, v in pairs(data.raw.fluid) do
             name = 'super-pump-' .. v.name,
             category = 'super-pump-fluid',
             energy_required = 1,
-            enabled = false,
+            enabled = true,
             ingredients = {},
             results = {{type = 'fluid', name = v.name, amount = 12000, temperature = v.default_temperature or 15}},
             main_product = v.name,
@@ -199,7 +199,6 @@ for _, v in pairs(data.raw.fluid) do
 end
 
 if data.raw.fluid['water'] and data.raw.recipe['super-pump-water'] then
-    data.raw.recipe['super-pump-water'].enabled = true
     data.raw.recipe['super-pump-water'].hidden = false
 end
 
