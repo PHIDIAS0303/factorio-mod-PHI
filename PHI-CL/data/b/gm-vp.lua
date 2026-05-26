@@ -259,7 +259,7 @@ if data.raw['assembling-machine'] and data.raw['assembling-machine']['cryogenic-
 end
 
 -- 'electromagnetics'
--- , table.unpack(data.raw['assembling-machine']['foundry'].crafting_categories
+-- 'metallurgy', 'pressing', 'crafting-with-fluid-or-metallurgy', 'metallurgy-or-assembling'
 -- 'cryogenics', 'cryogenics-or-assembling'
 -- GM-VP C 1 SPACE_AGE ENTITY
 if data.raw['lab'] and data.raw['lab']['biolab'] then
