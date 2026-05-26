@@ -235,7 +235,7 @@ end
 -- GM-VP C 1 SPACE_AGE ENTITY
 if data.raw['assembling-machine'] and data.raw['assembling-machine']['electromagnetic-plant'] then
     data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
-    data.raw['assembling-machine']['electromagnetic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['assembling-machine-3'].crafting_categories), 'electromagnetics'}
+    data.raw['assembling-machine']['electromagnetic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['assembling-machine-3'].crafting_categories)}
     data.raw['assembling-machine']['electromagnetic-plant'].crafting_speed = 2.5
     data.raw['assembling-machine']['electromagnetic-plant'].energy_usage = '872kW'
     data.raw['assembling-machine']['electromagnetic-plant'].energy_source.emissions_per_minute.pollution = 4
@@ -244,7 +244,7 @@ end
 -- GM-VP C 1 SPACE_AGE ENTITY
 if data.raw['assembling-machine'] and data.raw['assembling-machine']['foundry'] then
     data.raw['assembling-machine']['foundry'].effect_receiver = nil
-    data.raw['assembling-machine']['foundry'].crafting_categories = {table.unpack(data.raw['furnace']['electric-furnace'].crafting_categories), table.unpack(data.raw['assembling-machine']['foundry'].crafting_categories)}
+    data.raw['assembling-machine']['foundry'].crafting_categories = {table.unpack(data.raw['furnace']['electric-furnace'].crafting_categories)}
     data.raw['assembling-machine']['foundry'].crafting_speed = 6
     data.raw['assembling-machine']['foundry'].energy_usage = '930kW'
     data.raw['assembling-machine']['foundry'].energy_source.emissions_per_minute.pollution = 3
@@ -252,12 +252,15 @@ end
 
 -- GM-VP C 1 SPACE_AGE ENTITY
 if data.raw['assembling-machine'] and data.raw['assembling-machine']['cryogenic-plant'] then
-    data.raw['assembling-machine']['cryogenic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['oil-refinery'].crafting_categories), table.unpack(data.raw['assembling-machine']['chemical-plant'].crafting_categories), 'cryogenics', 'cryogenics-or-assembling'}
+    data.raw['assembling-machine']['cryogenic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['oil-refinery'].crafting_categories), table.unpack(data.raw['assembling-machine']['chemical-plant'].crafting_categories)}
     data.raw['assembling-machine']['cryogenic-plant'].crafting_speed = 3
     data.raw['assembling-machine']['cryogenic-plant'].energy_usage = '1302kW'
     data.raw['assembling-machine']['cryogenic-plant'].energy_source.emissions_per_minute.pollution = 12
 end
 
+-- 'electromagnetics'
+-- , table.unpack(data.raw['assembling-machine']['foundry'].crafting_categories
+-- 'cryogenics', 'cryogenics-or-assembling'
 -- GM-VP C 1 SPACE_AGE ENTITY
 if data.raw['lab'] and data.raw['lab']['biolab'] then
     data.raw['lab']['biolab'].science_pack_drain_rate_percent = 100
