@@ -192,7 +192,6 @@ for _, v in pairs(data.raw.fluid) do
             hidden = false,
             hidden_in_factoriopedia = true,
             allow_productivity = false,
-            crafting_machine_tint = {primary = v.flow_color or {r = 255,g = 255,b = 255}},
             localised_name = {'fluid-name.' .. v.name}
         }})
     end
