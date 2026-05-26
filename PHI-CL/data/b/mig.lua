@@ -453,6 +453,7 @@ for _, v in pairs({{'logistics', 'loader'}, {'logistics-2', 'fast-loader'}, {'lo
     if data.raw['loader'] and data.raw['loader'][v[2]] then
         if data.raw.technology[v[1]] then
             table.insert(data.raw.technology[v[1]].effects, {type = 'unlock-recipe', recipe = v[2]})
+
         else
             data.raw.recipe[v[2]].enabled = true
         end

@@ -367,17 +367,34 @@ local items = {
         ['artillery-shell'] = {
             ingredients = {{type = 'item', name = 'explosive-cannon-shell', amount = 4}, {type = 'item', name = 'radar', amount = 1}, {type = 'item', name = 'explosives', amount = 8}}
         },
+        ['express-transport-belt'] = {
+            category = 'crafting-with-fluid',
+        },
+        ['express-underground-belt'] = {
+            category = 'crafting-with-fluid',
+        },
+        -- BASE 10
+        ['express-splitter'] = {
+            category = 'crafting-with-fluid'
+        },
+        ['transport-belt'] = {
+            category = 'crafting',
+        },
         -- SPACE_AGE 0
         ['big-mining-drill'] = {
+            category = 'crafting',
             ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electric-engine-unit', amount = 5}, {type = 'item', name = 'advanced-circuit', amount = 10}}
         },
         ['turbo-transport-belt'] = {
+            category = 'crafting-with-fluid',
             ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'item', name = 'express-transport-belt', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 20}}
         },
         ['turbo-underground-belt'] = {
+            category = 'crafting-with-fluid',
             ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'express-underground-belt', amount = 2}, {type = 'fluid', name = 'lubricant', amount = 40}}
         },
         ['turbo-splitter'] = {
+            category = 'crafting-with-fluid',
             ingredients = {{type = 'item', name = 'steel-plate', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'express-splitter', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 80}}
         },
         ['toolbelt-equipment'] = {
@@ -388,12 +405,15 @@ local items = {
             ingredients = {{type = 'item', name = 'battery-mk2-equipment', amount = 5}, {type = 'item', name = 'battery', amount = 20}}
         },
         ['tesla-ammo'] = {
+            category = 'crafting-with-fluid',
             ingredients = {{type = 'item', name = 'battery', amount = 1}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 10}}
         },
         ['teslagun'] = {
+            category = 'crafting-with-fluid',
             ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
         },
         ['tesla-turret'] = {
+            category = 'crafting-with-fluid',
             ingredients = {{type = 'item', name = 'teslagun', amount = 1}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 500}}
         },
         ['mech-armor'] = {
@@ -401,22 +421,27 @@ local items = {
         },
         -- SPACE_AGE 10
         ['railgun'] = {
+            category = 'crafting-with-fluid',
             ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'battery', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 10}}
         },
         ['railgun-turret'] = {
+            category = 'crafting-with-fluid',
             ingredients = {{type = 'item', name = 'steel-plate', amount = 30}, {type = 'item', name = 'processing-unit', amount = 25}, {type = 'item', name = 'battery', amount = 25}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
         },
         ['rocket-turret'] = {
             ingredients = {{type = 'item', name = 'rocket-launcher', amount = 4}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 4}, {type = 'item', name = 'iron-gear-wheel', amount = 20}}
         },
         ['fusion-reactor'] = {
+            category = 'crafting',
             ingredients = {{type = 'item', name = 'nuclear-reactor', amount = 1}, {type = 'item', name = 'steel-plate', amount = 300}, {type = 'item', name = 'processing-unit', amount = 400}}
         },
         ['fusion-generator'] = {
+            category = 'crafting',
             ingredients = {{type = 'item', name = 'steam-turbine', amount = 1}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'processing-unit', amount = 200}}
         },
         -- SPACE_AGE 15
         ['fusion-power-cell'] = {
+            category = 'crafting-with-fluid',
             ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'fluid', name = 'petroleum-gas', amount = 200}},
             results = {{type = 'item', name = 'fusion-power-cell', amount = 4}}
         },
@@ -424,6 +449,7 @@ local items = {
             ingredients = {{type = 'item', name = 'fission-reactor-equipment', amount = 1}, {type = 'item', name = 'fusion-power-cell', amount = 10}, {type = 'item', name = 'steel-plate', amount = 350}, {type = 'item', name = 'processing-unit', amount = 275}}
         },
         ['fluoroketone'] = {
+            category = 'chemistry',
             ingredients = {{type = 'fluid', name = 'light-oil', amount = 50}, {type = 'fluid', name = 'petroleum-gas', amount = 50}, {type = 'item', name = 'steel-plate', amount = 1}}
         },
         ['agricultural-tower'] = {
@@ -434,14 +460,22 @@ local items = {
         },
         -- SPACE_AGE 20
         ['cryogenic-plant'] = {
+            category = 'crafting-with-fluid',
             ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'processing-unit', amount = 40}, {type = 'item', name = 'chemical-plant', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 60}, {type = 'fluid', name = 'water', amount = 60}}
         },
         ['biolab'] = {
             ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 60}, {type = 'item', name = 'processing-unit', amount = 60}, {type = 'item', name = 'uranium-235', amount = 3}}
         },
         ['foundry'] = {
+            category = 'crafting-with-fluid',
             ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'processing-unit', amount = 40}, {type = 'item', name = 'coal', amount = 60}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'item', name = 'electric-furnace', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 60}}
-        }
+        },
+        ['turbo-loader'] = {
+            category = 'crafting-with-fluid',
+        },
+        ['fluoroketone-cooling'] = {
+            category = 'chemistry',
+        },
     },
     ['tips_and_tricks_item'] = {
         'quality',

@@ -258,9 +258,6 @@ if data.raw['assembling-machine'] and data.raw['assembling-machine']['cryogenic-
     data.raw['assembling-machine']['cryogenic-plant'].energy_source.emissions_per_minute.pollution = 12
 end
 
--- 'electromagnetics'
--- 'metallurgy', 'pressing', 'crafting-with-fluid-or-metallurgy', 'metallurgy-or-assembling'
--- 'cryogenics', 'cryogenics-or-assembling'
 -- GM-VP C 1 SPACE_AGE ENTITY
 if data.raw['lab'] and data.raw['lab']['biolab'] then
     data.raw['lab']['biolab'].science_pack_drain_rate_percent = 100
@@ -369,10 +366,11 @@ for _, v in pairs(data.raw.recipe) do
     end
 end
 
--- GM-VP C 8 BASE RESEARCH
--- GM-VP C 23 SPACE_AGE RESEARCH
+-- GM-VP C 12 BASE RECIPE
+-- GM-VP C 25 SPACE_AGE RECIPE
 for k, v in pairs(items['recipe_reform']) do
     if data.raw.recipe[k] then
+        data.raw.recipe[k].category = (v.category and v.category) or data.raw.recipe[k].category
         data.raw.recipe[k].ingredients = (v.ingredients and v.ingredients) or data.raw.recipe[k].ingredients
         data.raw.recipe[k].results = (v.results and v.results) or data.raw.recipe[k].results
     end
