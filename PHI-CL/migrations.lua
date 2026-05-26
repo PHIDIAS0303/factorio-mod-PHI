@@ -21,6 +21,7 @@ for _, force in pairs(game.forces) do
                         recipes[vn].reload()
                     end
                 end
+
             elseif (not technologies[v.tech]) or technologies[v.tech].researched then
                 for j=v.min, v.max, 1 do
                     local vn = (v.ref_name or v.name) .. '-' .. j
