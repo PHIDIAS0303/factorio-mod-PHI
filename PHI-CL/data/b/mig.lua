@@ -184,12 +184,12 @@ for _, v in pairs(data.raw.fluid) do
             name = 'super-pump-' .. v.name,
             category = 'super-pump-fluid',
             energy_required = 1,
-            enabled = true,
+            enabled = false,
             ingredients = {},
             results = {{type = 'fluid', name = v.name, amount = 12000, temperature = v.default_temperature or 15}},
             main_product = v.name,
             hide_from_player_crafting = true,
-            hidden = true,
+            hidden = false,
             hidden_in_factoriopedia = true,
             allow_productivity = false,
             crafting_machine_tint = {primary = v.flow_color or {r = 255,g = 255,b = 255}},
@@ -199,7 +199,7 @@ for _, v in pairs(data.raw.fluid) do
 end
 
 if data.raw.fluid['water'] and data.raw.recipe['super-pump-water'] then
-    data.raw.recipe['super-pump-water'].hidden = false
+    data.raw.recipe['super-pump-water'].enabled = true
 end
 
 -- MIG C 5 BASE ENTITY
