@@ -431,7 +431,6 @@ if data.raw['loader'] then
         ln.per_lane_filters = true
         ln.adjustable_belt_stack_size = (data.raw['inserter']['stack-inserter'] and true) or false
         ln.max_belt_stack_size = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
-        ln.wait_for_full_stack = (data.raw['inserter']['stack-inserter'] and true) or false
 
         if data.raw.item[l] then
             data.raw.item[l].hidden = false
