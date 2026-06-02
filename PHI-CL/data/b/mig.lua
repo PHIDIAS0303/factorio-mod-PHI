@@ -503,23 +503,25 @@ if data.raw['proxy-container'] and data.raw['proxy-container']['proxy-container'
     data.raw['proxy-container']['proxy-container'].draw_inventory_content = false
 end
 
--- MIG C 12 BASE ENTITY
+-- MIG C 13 BASE ENTITY
 -- MIG C 5 SPACE_AGE ENTITY
-for _, w in pairs({data.raw['storage-tank'], data.raw['generator'], data.raw['furnace'], data.raw['assembling-machine']}) do
-    for _, v in pairs(w) do
-        v.heating_energy = nil
+for _, w in pairs({'storage-tank', 'generator', 'furnace', 'roboport', 'assembling-machine'}) do
+    if data.raw[w] then
+        for _, v in pairs(data.raw[w]) do
+            v.heating_energy = nil
+        end
     end
 end
 
--- MIG C 1 BASE ENTITY
-for _, v in pairs(data.raw['roboport']) do
-    v.heating_energy = nil
-    v.charging_station_count_affected_by_quality = true
-end
-
+-- 1 ENTITY FROM ABOVE
+-- MIG C 0 BASE ENTITY
 -- MIG C 1 BASE ARMOR_EQUIPMENT
-for _, v in pairs(data.raw['roboport-equipment']) do
-    v.charging_station_count_affected_by_quality = true
+for _, w in pairs({'roboport', 'roboport-equipment'}) do
+    if data.raw[w] then
+        for _, v in pairs(data.raw[w]) do
+            v.charging_station_count_affected_by_quality = true
+        end
+    end
 end
 
 -- MIG C 1 SPAGE_AGE ENTITY
