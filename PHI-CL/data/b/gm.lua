@@ -126,8 +126,10 @@ for _, v in pairs({'artillery-shell-damage-1', 'railgun-damage-1', 'railgun-shoo
 end
 
 -- GM H 1 SPACE_AGE TOOL
-data.raw.tool['promethium-science-pack'].hidden = true
-data.raw.tool['promethium-science-pack'].hidden_in_factoriopedia = true
+if data.raw.tool['promethium-science-pack'] then
+    data.raw.tool['promethium-science-pack'].hidden = true
+    data.raw.tool['promethium-science-pack'].hidden_in_factoriopedia = true
+end
 
 -- GM C 5 BASE RESOURCE
 -- GM C 3 SPACE_AGE RESOURCE
@@ -195,9 +197,11 @@ if data.raw.item['depleted-uranium-fuel-cell'] and data.raw.item['nuclear-fuel']
         localised_description = {'description.charged-train-battery'}
     }})
 
-    for _, v in pairs(data.raw['locomotive']) do
-        if v.energy_source then
-            v.energy_source.burnt_inventory_size = (v.energy_source.burnt_inventory_size and math.max(v.energy_source.burnt_inventory_size, 1)) or 1
+    if data.raw['locomotive'] then
+        for _, v in pairs(data.raw['locomotive']) do
+            if v.energy_source then
+                v.energy_source.burnt_inventory_size = (v.energy_source.burnt_inventory_size and math.max(v.energy_source.burnt_inventory_size, 1)) or 1
+            end
         end
     end
 end

@@ -5,12 +5,14 @@ if settings.startup['PHI-MI-PIPE'].value then
 end
 
 -- MI C 2 BASE ENTITY
-for _, t in pairs({data.raw['construction-robot'], data.raw['logistic-robot']}) do
-    for _, v in pairs(t) do
-        if settings.startup['PHI-MI-ROBOT-ENERGY'].value then
-            v.energy_per_tick = (v.energy_per_tick and '0J') or nil
-            v.energy_per_move = (v.energy_per_move and '0J') or nil
-            v.speed_multiplier_when_out_of_energy = (v.speed_multiplier_when_out_of_energy and 1) or nil
+for _, t in pairs({'construction-robot', 'logistic-robot'}) do
+    if data.raw[t] then
+        for _, v in pairs(data.raw[t]) do
+            if settings.startup['PHI-MI-ROBOT-ENERGY'].value then
+                v.energy_per_tick = (v.energy_per_tick and '0J') or nil
+                v.energy_per_move = (v.energy_per_move and '0J') or nil
+                v.speed_multiplier_when_out_of_energy = (v.speed_multiplier_when_out_of_energy and 1) or nil
+            end
         end
     end
 end

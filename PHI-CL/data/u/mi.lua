@@ -11,7 +11,7 @@ local mod_tint = {
 -- MIGS A 1 BASE ENTITY,ITEM,RECIPE
 -- MIGS A 9 BASE VIRTUAL_SIGNAL
 -- MIGS A 15 SPACE_AGE VIRTUAL_SIGNAL
-if data.raw['constant-combinator']['constant-combinator'] then
+if data.raw['constant-combinator'] and data.raw['constant-combinator']['constant-combinator'] then
     local item = table.deepcopy(data.raw['item']['constant-combinator'])
     item.name = 'super-combinator'
     item.place_result = item.name

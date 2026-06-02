@@ -169,7 +169,7 @@ for _, v in pairs({'processing-unit-productivity', 'steel-plate-productivity', '
 end
 
 -- GM-VP C 1 SPACE_AGE RESEARCH
-if data.raw.technology['research-productivity'] then
+if data.raw.technology['research-productivity'] and data.raw.technology['research-productivity'].unit then
     data.raw.technology['research-productivity'].unit.count_formula = '1500 * (1.5 ^ L)'
     data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
 end
@@ -180,8 +180,10 @@ if data.raw.technology['automation'] and data.raw.technology['automation'].effec
 end
 
 -- GM-VP A 2 SPACE_AGE RESEARCH_EFFECT
-table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone'})
-table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'})
+if data.raw.technology['fusion-reactor'] and data.raw.technology['fusion-reactor'].effects then
+    table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone'})
+    table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'})
+end
 
 -- GM-VP C 1 BASE RESEARCH
 -- GM-VP C 6 SPACE_AGE RESEARCH
@@ -193,8 +195,10 @@ end
 
 -- GM-VP C 1 BASE ENTITY
 -- GM-VP C 1 SPACE_AGE ENTITY
-for _, v in pairs(data.raw.lab) do
-    v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
+if data.raw['lab'] then
+    for _, v in pairs(data.raw['lab']) do
+        v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
+    end
 end
 
 -- GM-VP C 2 BASE ENTITY
