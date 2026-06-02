@@ -10,7 +10,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-MB-ENERGY',
   setting_type = 'startup',
-  default_value = true,
+  default_value = false,
   localised_name = {'phi-cl.setting-category-color', 'MBE', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-ENERGY'}},
   order = 'AA00'
 }, {
