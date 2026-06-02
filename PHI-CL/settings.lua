@@ -4,14 +4,14 @@ data:extend({
   name = 'PHI-MB',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-category-color', {'mod-setting-name-prefix.PHI-MB'}, {'phi-cl.enable', {'mod-setting-name.PHI-MB'}}},
+  localised_name = {'phi-cl.setting-category-color', 'MB', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB'}},
   order = 'A00'
 }, {
   type = 'bool-setting',
   name = 'PHI-MB-ENERGY',
   setting_type = 'startup',
   default_value = true,
-  localised_name = {'phi-cl.setting-category-color', {'mod-setting-name-prefix.PHI-MB-ENERGY'}, {'phi-cl.enable', {'mod-setting-name.PHI-MB-ENERGY'}}},
+  localised_name = {'phi-cl.setting-category-color', 'MBE', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-ENERGY'}},
   order = 'AA00'
 }, {
   type = 'int-setting',
@@ -19,7 +19,7 @@ data:extend({
   setting_type = 'startup',
   default_value = 8,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MB-ENERGY-POWER-TIER'}, {'phi-cl.tier', {'mod-setting-name.PHI-MB-ENERGY-POWER-TIER'}}},
+  localised_name = {'phi-cl.setting-class-color', 'MBE1', {'phi-cl.tier'}, {'mod-setting-name.PHI-MB-ENERGY-POWER-TIER'}},
   order = 'AA01'
 }, {
   type = 'int-setting',
@@ -27,14 +27,14 @@ data:extend({
   setting_type = 'startup',
   default_value = 4,
   allowed_values = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16},
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MB-ENERGY-SOLAR-RATIO'}, {'phi-cl.proportion', {'mod-setting-name.PHI-MB-ENERGY-SOLAR-RATIO'}}},
+  localised_name = {'phi-cl.setting-class-color', 'MBE2', {'phi-cl.proportion'}, {'mod-setting-name.PHI-MB-ENERGY-SOLAR-RATIO'}},
   order = 'AA02'
 }, {
   type = 'bool-setting',
   name = 'PHI-MB-MACHINE',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-category-color', {'mod-setting-name-prefix.PHI-MB-MACHINE'}, {'phi-cl.enable', {'mod-setting-name.PHI-MB-MACHINE'}}},
+  localised_name = {'phi-cl.setting-category-color', 'MBM', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-MACHINE'}},
   order = 'AB00'
 }, {
   type = 'int-setting',
@@ -42,14 +42,14 @@ data:extend({
   setting_type = 'startup',
   default_value = 3,
   allowed_values = {1, 2, 3},
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MB-MACHINE-TIER'}, {'phi-cl.tier', {'mod-setting-name.PHI-MB-MACHINE-TIER'}}},
+  localised_name = {'phi-cl.setting-class-color', 'MBM1', {'phi-cl.tier'}, {'mod-setting-name.PHI-MB-MACHINE-TIER'}},
   order = 'AB01'
 }, {
   type = 'bool-setting',
   name = 'PHI-MB-EQUIPMENT',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-category-color', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT'}, {'phi-cl.enable', {'mod-setting-name.PHI-MB-EQUIPMENT'}}},
+  localised_name = {'phi-cl.setting-category-color', 'MBQ', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-EQUIPMENT'}},
   order = 'AC00'
 }, {
   type = 'int-setting',
@@ -57,35 +57,36 @@ data:extend({
   setting_type = 'startup',
   default_value = 2,
   allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-TIER'}, {'phi-cl.tier', {'mod-setting-name.PHI-MB-EQUIPMENT-TIER'}}},
+  localised_name = {'phi-cl.setting-class-color', 'MBQ1', {'phi-cl.tier'}, {'mod-setting-name.PHI-MB-EQUIPMENT-TIER'}},
   order = 'AC01'
 }, {
   type = 'bool-setting',
   name = 'PHI-MB-EQUIPMENT-ARMOR',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-ARMOR'}, {'phi-cl.enable', {'mod-setting-name.PHI-MB-EQUIPMENT-ARMOR'}}},
+  localised_name = {'phi-cl.setting-class-color', 'MBQ2', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-EQUIPMENT-ARMOR'}},
+  localised_description = (mods['space-age'] and {'', '[item=power-armor-mk2] 3, [item=mech-armor] 2'}) or {''},
   order = 'AC02'
 }, {
   type = 'bool-setting',
   name = 'PHI-MB-EQUIPMENT-SIZE',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MB-EQUIPMENT-SIZE'}, {'phi-cl.enable', {'mod-setting-name.PHI-MB-EQUIPMENT-SIZE'}}},
+  localised_name = {'phi-cl.setting-class-color', 'MBQ3', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-EQUIPMENT-SIZE'}},
   order = 'AC03'
 }, {
   type = 'bool-setting',
   name = 'PHI-MI',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-category-color', {'mod-setting-name-prefix.PHI-MI'}, {'phi-cl.enable', {'mod-setting-name.PHI-MI'}}},
+  localised_name = {'phi-cl.setting-category-color', 'MI', {'phi-cl.enable'}, {'mod-setting-name.PHI-MI'}},
   order = 'B00'
 }, {
   type = 'bool-setting',
   name = 'PHI-MI-GENERIC',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MI-GENERIC'}, {'phi-cl.enable', {'mod-setting-name.PHI-MI-GENERIC'}}},
+  localised_name = {'phi-cl.setting-class-color', 'MI1', {'phi-cl.enable'}, {'mod-setting-name.PHI-MI-GENERIC'}},
   order = 'B01'
 }, {
   type = 'int-setting',
@@ -94,14 +95,14 @@ data:extend({
   default_value = 10,
   minimum_value = 1,
   maximum_value = 160,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MI-PIPE'}, {'phi-cl.proportion', {'mod-setting-name.PHI-MI-PIPE'}}},
+  localised_name = {'phi-cl.setting-class-color', 'MI2', {'phi-cl.proportion'}, {'mod-setting-name.PHI-MI-PIPE'}},
   order = 'B02'
 }, {
   type = 'bool-setting',
   name = 'PHI-MI-ROBOT-ENERGY',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MI-ROBOT-ENERGY'}, {'phi-cl.enable', {'mod-setting-name.PHI-MI-ROBOT-ENERGY'}}},
+  localised_name = {'phi-cl.setting-class-color', 'MI3', {'phi-cl.enable'}, {'mod-setting-name.PHI-MI-ROBOT-ENERGY'}},
   order = 'B03'
 }, {
   type = 'int-setting',
@@ -110,21 +111,22 @@ data:extend({
   default_value = 320,
   minimum_value = 80,
   maximum_value = 10240,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-MI-PIPE-EXTENT'}, {'mod-setting-name.PHI-MI-PIPE-EXTENT'}},
+  localised_name = {'phi-cl.setting-class-color', 'MI4', {'phi-cl.proportion'}, {'mod-setting-name.PHI-MI-PIPE-EXTENT'}},
   order = 'B04'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-category-color', {'mod-setting-name-prefix.PHI-SA'}, {'phi-cl.enable', {'mod-setting-name.PHI-SA'}}},
+  localised_name = {'phi-cl.setting-category-color', 'SA', {'phi-cl.enable'}, {'mod-setting-name.PHI-SA'}},
   order = 'C00'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-SPOIL',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-SA-SPOIL'}, {'phi-cl.enable', {'mod-setting-name.PHI-SA-SPOIL'}}},
+  localised_name = {'phi-cl.setting-class-color', 'SA1', {'phi-cl.enable'}, {'mod-setting-name.PHI-SA-SPOIL'}},
+  localised_description = (mods['space-age'] and {'', '[item=spoilage]'}) or {''},
   order = 'C01'
 }, {
   type = 'int-setting',
@@ -133,14 +135,16 @@ data:extend({
   default_value = 50,
   minimum_value = 0,
   maximum_value = 1000,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-SA-SPOIL-FREEZE-MULTIPLIER'}, {'phi-cl.proportion', {'mod-setting-name.PHI-SA-SPOIL-FREEZE-MULTIPLIER'}}},
+  localised_name = {'phi-cl.setting-class-color', 'SA2', {'phi-cl.proportion'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE-MULTIPLIER'}},
+  localised_description = (mods['space-age'] and {'', '[item=ice]'}) or {''},
   order = 'C02'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA-ENABLE-QUALITY',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-SA-ENABLE-QUALITY'}, {'phi-cl.enable', {'mod-setting-name.PHI-SA-ENABLE-QUALITY'}}},
+  localised_name = {'phi-cl.setting-class-color', 'SA3', {'phi-cl.enable'}, {'mod-setting-name.PHI-SA-ENABLE-QUALITY'}},
+  localised_description = (mods['space-age'] and {'', '[virtual-signal=signal-any-quality]'}) or {''},
   order = 'C03'
 }, {
   type = 'int-setting',
@@ -149,7 +153,8 @@ data:extend({
   default_value = 10,
   minimum_value = 1,
   maximum_value = 100,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-SA-QUALITY'}, {'phi-cl.proportion', {'mod-setting-name.PHI-SA-QUALITY'}}},
+  localised_name = {'phi-cl.setting-class-color', 'SA4', {'phi-cl.proportion'}, {'mod-setting-name.PHI-SA-QUALITY'}},
+  localised_description = (mods['space-age'] and {'', '[item=quality-module-3] x 0.1'}) or {''},
   order = 'C04'
 }, {
   type = 'int-setting',
@@ -158,7 +163,7 @@ data:extend({
   default_value = 10,
   minimum_value = 1,
   maximum_value = 10000,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-SA-ROCKET-CAPACITY'}, {'phi-cl.proportion', {'mod-setting-name.PHI-SA-ROCKET-CAPACITY'}}},
+  localised_name = {'phi-cl.setting-class-color', 'SA5', {'phi-cl.proportion'}, {'mod-setting-name.PHI-SA-ROCKET-CAPACITY'}},
   order = 'C05'
 }, {
   type = 'string-setting',
@@ -167,21 +172,21 @@ data:extend({
   allow_blank = true,
   default_value = '',
   allowed_values = {'', 'SAP', 'VP'},
-  localised_name = {'phi-cl.setting-category-color', {'mod-setting-name-prefix.PHI-GM'}, {'phi-cl.enable', {'mod-setting-name.PHI-GM'}}},
+  localised_name = {'phi-cl.setting-category-color', 'GM', {'phi-cl.enable'}, {'mod-setting-name.PHI-GM'}},
   order = 'D00'
 },  {
   type = 'bool-setting',
   name = 'PHI-CT',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-category-color', {'mod-setting-name-prefix.PHI-CT'}, {'phi-cl.enable', {'mod-setting-name.PHI-CT'}}},
+  localised_name = {'phi-cl.setting-category-color', 'CT', {'phi-cl.enable'}, {'mod-setting-name.PHI-CT'}},
   order = 'E00'
 },  {
   type = 'bool-setting',
   name = 'PHI-CT-TILE',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-CT-TILE'}, {'mod-setting-name.PHI-CT-TILE'}},
+  localised_name = {'phi-cl.setting-class-color', 'CT1', {'phi-cl.enable'}, {'mod-setting-name.PHI-CT-TILE'}},
   order = 'E01'
 }, {
   type = 'string-setting',
@@ -189,15 +194,7 @@ data:extend({
   setting_type = 'startup',
   default_value = 'grass-1',
   allowed_values = {'landfill', 'stone-path', 'concrete', 'refined-concrete', 'water', 'water-mud', 'water-shallow', 'deepwater', 'deepwater-green', 'dirt-1', 'dirt-2', 'dirt-3', 'dirt-4', 'dirt-5', 'dirt-6', 'dirt-7', 'dry-dirt', 'grass-1', 'grass-2', 'grass-3', 'grass-4'},
-  localised_name = {'phi-cl.setting-class-color', {'mod-setting-name-prefix.PHI-CT-TILE-CHOICE'}, {'mod-setting-name.PHI-CT-TILE-CHOICE'}},
+  localised_name = {'phi-cl.setting-class-color', 'CT2', '', {'mod-setting-name.PHI-CT-TILE-CHOICE'}},
   order = 'E02'
 }
 })
-
-if mods['space-age'] then
-    data.raw['bool-setting']['PHI-MB-EQUIPMENT-ARMOR'].localised_description = {'', '[item=power-armor-mk2] 3, [item=mech-armor] 2'}
-    data.raw['bool-setting']['PHI-SA-SPOIL'].localised_description = {'', '[item=spoilage]'}
-    data.raw['int-setting']['PHI-SA-SPOIL-FREEZE-MULTIPLIER'].localised_description = {'', '[item=ice]'}
-    data.raw['bool-setting']['PHI-SA-ENABLE-QUALITY'].localised_description = {'', '[virtual-signal=signal-any-quality]'}
-    data.raw['int-setting']['PHI-SA-QUALITY'].localised_description = {'', '[item=quality-module-3] x 0.1'}
-end
