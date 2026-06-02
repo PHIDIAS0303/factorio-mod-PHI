@@ -49,8 +49,9 @@ if data.raw['constant-combinator'] and data.raw['constant-combinator']['constant
             table.insert(s, {
                 type = 'virtual-signal',
                 name = 'signal-' .. v.name,
-                icon = (v.icon and v.icon) or (v.icons and v.icons[1].icon),
-                icon_size = ((v.icons and v.icons[1].icon_size and v.icons[1].icon_size) or (v.icon_size and v.icon_size)) or 64,
+                icons = (v.icons and v.icons) or nil,
+                icon = (v.icon and v.icon) or nil,
+                icon_size = (v.icon_size and v.icon_size) or nil,
                 subgroup = 'pictographs',
                 order = 'z[technology]-[' .. v.name .. ']',
                 localised_name = {'?', {'technology-name.' .. raw_name}, {'entity-name.' .. raw_name}}
