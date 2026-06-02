@@ -9,66 +9,84 @@ local mod_tint = {
 }
 
 -- MIG C 1 BASE ARMOR_EQUIPMENT
-data.raw['active-defense-equipment']['discharge-defense-equipment'].automatic = true
-
--- MIG C 2 BASE ENTITY
-data.raw['programmable-speaker']['programmable-speaker'].energy_source.usage_priority = 'primary-input'
-table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
-
--- MIG C 3 BASE ENTITY
-for _, v in pairs(data.raw['container']) do
-    v.inventory_type = 'with_filters_and_bar'
+if data.raw['active-defense-equipment'] and data.raw['active-defense-equipment']['discharge-defense-equipment'] then
+    data.raw['active-defense-equipment']['discharge-defense-equipment'].automatic = true
 end
 
--- MIG C 5 BASE ENTITY
-for _, v in pairs(data.raw['logistic-container']) do
-    v.inventory_type = 'with_filters_and_bar'
+-- MIG C 2 BASE ENTITY
+if data.raw['programmable-speaker'] and data.raw['programmable-speaker']['programmable-speaker'] then
+    data.raw['programmable-speaker']['programmable-speaker'].energy_source.usage_priority = 'primary-input'
+end
+
+if data.raw['fluid-turret'] and data.raw['fluid-turret']['flamethrower-turret'] then
+    table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
+end
+
+-- MIG C 8 BASE ENTITY
+for _, t in pairs({'container', 'logistic-container'}) do
+    if data.raw[t] then
+        for _, v in pairs(data.raw[t]) do
+            v.inventory_type = 'with_filters_and_bar'
+        end
+    end
 end
 
 -- MI C 4 BASE ENTITY
-for _, t in pairs({data.raw['cargo-wagon'], data.raw['fluid-wagon']}) do
-    for _, v in pairs(t) do
-        v.quality_affects_inventory_size = true
+for _, t in pairs({'cargo-wagon', 'fluid-wagon'}) do
+    if data.raw[t] then
+        for _, v in pairs(data.raw[t]) do
+            v.quality_affects_inventory_size = true
+        end
     end
 end
 
 -- MI C 1 BASE ENTITY
-for _, v in pairs(data.raw['lamp']) do
-    if v.light and v.light.color then
-        v.light.color = {1, 1, 1}
-    end
+if data.raw['lamp'] then
+    for _, v in pairs(data.raw['lamp']) do
+        if v.light and v.light.color then
+            v.light.color = {1, 1, 1}
+        end
 
-    if v.light_when_colored then
-        v.light_when_colored.color = {1, 1, 1}
+        if v.light_when_colored then
+            v.light_when_colored.color = {1, 1, 1}
+        end
     end
 end
 
 -- MI C 1 BASE ENTITY
-for _, v in pairs(data.raw['land-mine']) do
-    if v.flags then
-        for fk, fv in ipairs(v.flags) do
-            if fv == 'placeable-off-grid' then
-                table.remove(v.flags, fk)
-                break
+if data.raw['land-mine'] then
+    for _, v in pairs(data.raw['land-mine']) do
+        if v.flags then
+            for fk, fv in ipairs(v.flags) do
+                if fv == 'placeable-off-grid' then
+                    table.remove(v.flags, fk)
+                    break
+                end
             end
         end
     end
 end
 
 -- MI C 1 BASE ENTITY
-for _, v in pairs(data.raw['locomotive']) do
-    v.reversing_power_modifier = 1
+if data.raw['locomotive'] then
+    for _, v in pairs(data.raw['locomotive']) do
+        v.reversing_power_modifier = 1
+    end
 end
 
 -- MIG C 1 BASE ENTITY
-for _, v in pairs(data.raw['reactor']) do
-    v.scale_energy_usage = (v.fast_replaceable_group and v.fast_replaceable_group == 'reactor')
+if data.raw['reactor'] then
+    for _, v in pairs(data.raw['reactor']) do
+        v.scale_energy_usage = (v.fast_replaceable_group and v.fast_replaceable_group == 'reactor')
+    end
 end
 
 -- MIG C 5 BASE ENTITY
-for _, t in pairs({data.raw['offshore-pump'], data.raw['pump'], data.raw['pipe'], data.raw['pipe-to-ground'], data.raw['infinity-pipe']}) do
-    for _, v in pairs(t) do
-        v.heating_energy = nil
+for _, t in pairs({'offshore-pump', 'pump', 'pipe', 'pipe-to-ground', 'infinity-pipe'}) do
+    if data.raw[t] then
+        for _, v in pairs(data.raw[t]) do
+            v.heating_energy = nil
+        end
     end
 end
 
@@ -100,7 +118,7 @@ if data.raw['valve'] then
 end
 
 -- MIG A 1 BASE ENTITY,ITEM,RECIPE
-if data.raw['offshore-pump']['offshore-pump'] then
+if data.raw['offshore-pump'] and data.raw['offshore-pump']['offshore-pump'] then
     local item = table.deepcopy(data.raw['item']['offshore-pump'])
     item.name = 'super-pump'
     item.place_result = item.name
@@ -155,22 +173,42 @@ end
 
 -- MIG C 1 BASE ENTITY
 -- MIG C 1 SPACE_AGE ENTITY
-for _, v in pairs(data.raw['mining-drill']) do
-    v.filter_count = 5
-
-    if mods['space-age'] then
-        v.drops_full_belt_stacks = true
+if data.raw['mining-drill'] then
+    for _, v in pairs(data.raw['mining-drill']) do
+        v.filter_count = 5
+        v.drops_full_belt_stacks = (mods['space-age'] and true) or nil
     end
 end
 
 -- MIG C 3 BASE MODULE
-data.raw['module']['efficiency-module'].effect.consumption = math.min(-0.3, data.raw['module']['efficiency-module'].effect.consumption)
-data.raw['module']['efficiency-module-2'].effect.consumption = math.min(-0.6, data.raw['module']['efficiency-module-2'].effect.consumption)
-data.raw['module']['efficiency-module-3'].effect.consumption = math.min(-0.9, data.raw['module']['efficiency-module-3'].effect.consumption)
+if data.raw['module'] then
+    if data.raw['module']['efficiency-module'] then
+        data.raw['module']['efficiency-module'].effect.consumption = math.min(-0.3, data.raw['module']['efficiency-module'].effect.consumption)
+    end
 
--- MIG C 2 BASE RECIPE
-data.raw.recipe['landfill'].ingredients[1].amount = math.min(20, data.raw.recipe['landfill'].ingredients[1].amount)
-data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
+    if data.raw['module']['efficiency-module-2'] then
+        data.raw['module']['efficiency-module-2'].effect.consumption = math.min(-0.6, data.raw['module']['efficiency-module-2'].effect.consumption)
+    end
+
+    if data.raw['module']['efficiency-module-3'] then
+        data.raw['module']['efficiency-module-3'].effect.consumption = math.min(-0.9, data.raw['module']['efficiency-module-3'].effect.consumption)
+    end
+end
+
+-- MIG C 1 BASE RECIPE
+if data.raw.recipe['landfill'] then
+    for _, v in pairs(data.raw.recipe['landfill'].ingredients) do
+        if v.type == 'item' and v.name == 'stone' then
+            v.amount = math.min(20, v.amount)
+            break
+        end
+    end
+end
+
+-- MIG C 1 BASE RECIPE
+if data.raw.recipe['selector-combinator'] then
+    data.raw.recipe['selector-combinator'].ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'decider-combinator', amount = 2}}
+end
 
 -- MIG A 1 BASE RECIPE_CATEGORY
 data:extend({{type='recipe-category', name='super-pump-fluid'}})
@@ -203,13 +241,15 @@ end
 
 -- MIG C 5 BASE ENTITY
 -- MIG C 1 SPACE_AGE ENTITY
-for _, v in pairs(data.raw['inserter']) do
-    if v.energy_source and v.energy_source.type and (v.energy_source.type == 'electric' or v.energy_source.type == 'void' or v.energy_source.type == 'burner') then
-        v.allow_custom_vectors = true
-        v.flags = {'placeable-neutral', 'placeable-player', 'player-creation', ((v.hand_size and v.hand_size > 0.8) and 'building-direction-16-way') or 'building-direction-8-way'}
+if data.raw['inserter'] then
+    for _, v in pairs(data.raw['inserter']) do
+        if v.energy_source and v.energy_source.type and (v.energy_source.type == 'electric' or v.energy_source.type == 'void' or v.energy_source.type == 'burner') then
+            v.allow_custom_vectors = true
+            v.flags = {'placeable-neutral', 'placeable-player', 'player-creation', ((v.hand_size and v.hand_size > 0.8) and 'building-direction-16-way') or 'building-direction-8-way'}
 
-        if v.energy_source.type == 'burner' then
-            v.allow_burner_leech = true
+            if v.energy_source.type == 'burner' then
+                v.allow_burner_leech = true
+            end
         end
     end
 end
@@ -233,7 +273,7 @@ end
 data:extend(s)
 
 -- MIG A 1 ELEVATED_RAILS ENTITY
-if mods['elevated-rails'] and data.raw['electric-pole']['big-electric-pole'] then
+if mods['elevated-rails'] and data.raw['electric-pole'] and data.raw['electric-pole']['big-electric-pole'] then
     local entity = table.deepcopy(data.raw['electric-pole']['big-electric-pole'])
     entity.name = 'rail-support-pole-electric'
     entity.hidden = true
@@ -255,7 +295,7 @@ if mods['elevated-rails'] and data.raw['electric-pole']['big-electric-pole'] the
 end
 
 -- MIG A 1 SPACE_AGE ENTITY
-if mods['space-age'] and data.raw['lightning-attractor']['lightning-rod'] then
+if mods['space-age'] and data.raw['lightning-attractor'] and data.raw['lightning-attractor']['lightning-rod'] then
     local entity = table.deepcopy(data.raw['lightning-attractor']['lightning-rod'])
     entity.name = 'rail-support-pole-lightning'
     entity.enabled = false
@@ -276,7 +316,7 @@ if mods['space-age'] and data.raw['lightning-attractor']['lightning-rod'] then
 end
 
 -- MIG A 1 BASE ENTITY,ITEM,RECIPE,RESEARCH_EFFECT
-if data.raw['container']['steel-chest'] then
+if data.raw['container'] and data.raw['container']['steel-chest'] then
     local item = table.deepcopy(data.raw['item']['steel-chest'])
     item.name = 'trash-chest'
     item.place_result = item.name
@@ -325,7 +365,7 @@ if data.raw['container']['steel-chest'] then
 end
 
 -- MIG A 1 BASE ENTITY,ITEM,RECIPE,RESEARCH_EFFECT
-if data.raw['pipe']['pipe'] then
+if data.raw['pipe'] and data.raw['pipe']['pipe'] then
     local item = table.deepcopy(data.raw['item']['pipe'])
     item.name = 'trash-pipe'
     item.place_result = item.name
@@ -374,7 +414,7 @@ if data.raw['pipe']['pipe'] then
 end
 
 -- MIG A 1 BASE ENTITY,ITEM,RECIPE
-if data.raw['boiler']['boiler'] then
+if data.raw['boiler'] and data.raw['boiler']['boiler'] then
     local item = table.deepcopy(data.raw['item']['boiler'])
     item.name = 'electric-boiler'
     item.place_result = item.name
