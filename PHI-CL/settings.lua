@@ -41,7 +41,7 @@ data:extend({
   type = 'int-setting',
   name = 'PHI-MB-EQUIPMENT',
   setting_type = 'startup',
-  default_value = 2,
+  default_value = 1,
   minimum_value = 1,
   maximum_value = 8,
   localised_name = {'phi-cl.setting-category-color', 'MBQ', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-EQUIPMENT'}},
