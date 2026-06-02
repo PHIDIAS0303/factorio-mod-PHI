@@ -29,7 +29,7 @@ end
 
 -- CT C 1 BASE ENTITY,ITEM
 -- CT A 1 BASE RECIPE
-if data.raw['linked-container']['linked-chest'] then
+if data.raw['linked-container'] and data.raw['linked-container']['linked-chest'] then
     data.raw['item']['linked-chest'].subgroup = 'storage'
     data.raw['item']['linked-chest'].order = 'a[items]-d[linked-chest]'
     data.raw['item']['linked-chest'].stack_size = 50
@@ -56,7 +56,7 @@ if data.raw['linked-container']['linked-chest'] then
 end
 
 -- CT A 1 BASE ENTITY,ITEM,RECIPE
-if data.raw['radar']['radar'] then
+if data.raw['radar'] and data.raw['radar']['radar'] then
     local item = table.deepcopy(data.raw['item']['radar'])
     item.name = 'super-radar'
     item.place_result = item.name
@@ -92,7 +92,7 @@ if data.raw['radar']['radar'] then
 end
 
 -- CT A 2 BASE ENTITY,ITEM,RECIPE
-if data.raw['electric-energy-interface']['electric-energy-interface'] then
+if data.raw['electric-energy-interface'] and data.raw['electric-energy-interface']['electric-energy-interface'] then
     for _, v in pairs({'active', 'passive'}) do
         local item = table.deepcopy(data.raw['item']['electric-energy-interface'])
         item.name = v .. '-energy-void'

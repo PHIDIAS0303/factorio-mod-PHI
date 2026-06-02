@@ -12,7 +12,9 @@ local mod_tint = {
 }
 
 -- MBE C 1 BASE FLUID
-data.raw['fluid']['steam'].max_temperature = ((settings.startup['PHI-MB-ENERGY-POWER-TIER'].value > 1) and 5000) or data.raw['fluid']['steam'].max_temperature
+if data.raw['fluid'] and data.raw['fluid']['steam'] then
+    data.raw['fluid']['steam'].max_temperature = ((settings.startup['PHI-MB-ENERGY-POWER-TIER'].value > 1) and 5000) or data.raw['fluid']['steam'].max_temperature
+end
 
 -- MBE A 7 BASE RESEARCH
 for i = 1, 7 do
