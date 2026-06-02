@@ -1,6 +1,6 @@
 
-if mods['space-age'] then
-    for i=2, settings.startup['PHI-MB-ENERGY-POWER-TIER'].value do
+if mods['space-age'] and settings.startup['PHI-MB-ENERGY'].value > 1 then
+    for i=2, settings.startup['PHI-MB-ENERGY'].value do
         if data.raw.recipe['accumulator-' .. i] then
             data.raw.recipe['accumulator-' .. i].category = 'electronics'
         end
