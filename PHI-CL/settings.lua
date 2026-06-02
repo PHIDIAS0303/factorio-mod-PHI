@@ -27,7 +27,7 @@ data:extend({
   setting_type = 'startup',
   default_value = 4,
   allowed_values = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16},
-  localised_name = {'phi-cl.setting-class-color', 'MBE2', {'phi-cl.proportion'}, {'mod-setting-name.PHI-MB-ENERGY-SOLAR-RATIO'}},
+  localised_name = {'phi-cl.setting-class-color', 'MBE2', {'phi-cl.ratio'}, {'mod-setting-name.PHI-MB-ENERGY-SOLAR-RATIO'}},
   order = 'AA02'
 }, {
   type = 'bool-setting',
@@ -95,7 +95,7 @@ data:extend({
   default_value = 10,
   minimum_value = 1,
   maximum_value = 160,
-  localised_name = {'phi-cl.setting-class-color', 'MI2', {'phi-cl.proportion'}, {'mod-setting-name.PHI-MI-PIPE'}},
+  localised_name = {'phi-cl.setting-class-color', 'MI2', {'phi-cl.ratio'}, {'mod-setting-name.PHI-MI-PIPE'}},
   order = 'B02'
 }, {
   type = 'bool-setting',
@@ -111,7 +111,7 @@ data:extend({
   default_value = 320,
   minimum_value = 80,
   maximum_value = 10240,
-  localised_name = {'phi-cl.setting-class-color', 'MI4', {'phi-cl.proportion'}, {'mod-setting-name.PHI-MI-PIPE-EXTENT'}},
+  localised_name = {'phi-cl.setting-class-color', 'MI4', {'phi-cl.ratio'}, {'mod-setting-name.PHI-MI-PIPE-EXTENT'}},
   order = 'B04'
 }, {
   type = 'bool-setting',
@@ -135,7 +135,7 @@ data:extend({
   default_value = 50,
   minimum_value = 0,
   maximum_value = 1000,
-  localised_name = {'phi-cl.setting-class-color', 'SA2', {'phi-cl.proportion'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE-MULTIPLIER'}},
+  localised_name = {'phi-cl.setting-class-color', 'SA2', {'phi-cl.ratio'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE-MULTIPLIER'}},
   localised_description = (mods['space-age'] and {'', '[item=ice]'}) or {''},
   order = 'C02'
 }, {
@@ -153,7 +153,7 @@ data:extend({
   default_value = 10,
   minimum_value = 1,
   maximum_value = 100,
-  localised_name = {'phi-cl.setting-class-color', 'SA4', {'phi-cl.proportion'}, {'mod-setting-name.PHI-SA-QUALITY'}},
+  localised_name = {'phi-cl.setting-class-color', 'SA4', {'phi-cl.ratio'}, {'mod-setting-name.PHI-SA-QUALITY'}},
   localised_description = (mods['space-age'] and {'', '[item=quality-module-3] x 0.1'}) or {''},
   order = 'C04'
 }, {
@@ -163,7 +163,7 @@ data:extend({
   default_value = 10,
   minimum_value = 1,
   maximum_value = 10000,
-  localised_name = {'phi-cl.setting-class-color', 'SA5', {'phi-cl.proportion'}, {'mod-setting-name.PHI-SA-ROCKET-CAPACITY'}},
+  localised_name = {'phi-cl.setting-class-color', 'SA5', {'phi-cl.ratio'}, {'mod-setting-name.PHI-SA-ROCKET-CAPACITY'}},
   order = 'C05'
 }, {
   type = 'string-setting',
