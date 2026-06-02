@@ -11,6 +11,7 @@ local mod_tint = {
 }
 
 if not mods['space-age'] then
+    error('Space Age mod is not enabled')
     return
 end
 

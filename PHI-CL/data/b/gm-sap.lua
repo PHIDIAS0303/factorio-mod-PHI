@@ -1,3 +1,9 @@
+
+if not mods['space-age'] then
+    error('Space Age mod is not enabled')
+    return
+end
+
 -- GM-SAP C 1 SPACE_AGE RESOURCE
 if data.raw.resource['lithium-brine'] then
     data.raw.resource['lithium-brine'].infinite = true
