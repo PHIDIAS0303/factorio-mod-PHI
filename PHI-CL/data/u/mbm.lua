@@ -33,7 +33,7 @@ for _, v in pairs(items) do
     end
 end
 
-if mods['space-exploration'] and settings.startup['PHI-MB-MACHINE-TIER'].value > 1 then
+if mods['space-exploration'] then
     data.raw['mining-drill']['se-core-miner-drill'].fast_replaceable_group = 'se-core-miner-drill'
 
     local se = {
@@ -45,7 +45,7 @@ if mods['space-exploration'] and settings.startup['PHI-MB-MACHINE-TIER'].value >
         max = 3
     }
 
-    for i = 2, settings.startup['PHI-MB-MACHINE-TIER'].value do
+    for i = 2, settings.startup['PHI-MB-MACHINE'].value do
         local miner_name = 'se-core-miner-drill-' .. i
 
         main.EEE(se, i)

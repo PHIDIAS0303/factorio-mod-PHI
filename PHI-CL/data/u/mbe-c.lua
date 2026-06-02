@@ -5,6 +5,6 @@ return {
         type = 'solar-panel',
         name = 'se-space-solar-panel',
         min = 4,
-        max = settings.startup['PHI-MB-ENERGY-POWER-TIER'].value
+        max = settings.startup['PHI-MB-ENERGY'].value
     }
 }

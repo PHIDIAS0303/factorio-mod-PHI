@@ -13,7 +13,7 @@ local mod_tint = {
 
 -- MBE C 1 BASE FLUID
 if data.raw['fluid'] and data.raw['fluid']['steam'] then
-    data.raw['fluid']['steam'].max_temperature = ((settings.startup['PHI-MB-ENERGY-POWER-TIER'].value > 1) and 5000) or data.raw['fluid']['steam'].max_temperature
+    data.raw['fluid']['steam'].max_temperature = ((settings.startup['PHI-MB-ENERGY'].value > 1) and 5000) or data.raw['fluid']['steam'].max_temperature
 end
 
 -- MBE A 7 BASE RESEARCH
@@ -21,7 +21,7 @@ for i = 1, 7 do
     data:extend({{
         type = 'technology',
         name = 'compound-energy-' .. i,
-        enabled = (i <= tonumber(settings.startup['PHI-MB-ENERGY-POWER-TIER'].value)),
+        enabled = (i <= tonumber(settings.startup['PHI-MB-ENERGY'].value)),
         prerequisites = ((i > 1) and {'compound-energy-' .. (i - 1)}) or {'solar-energy', 'advanced-circuit', 'electric-energy-accumulators'},
         effects = {},
         upgrade = true,
