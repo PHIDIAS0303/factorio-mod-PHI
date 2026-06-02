@@ -49,7 +49,7 @@ if data.raw['constant-combinator'] and data.raw['constant-combinator']['constant
             table.insert(s, {
                 type = 'virtual-signal',
                 name = 'signal-' .. v.name,
-                icons = (v.icons and v.icons) or nil,
+                icons = (v.icons and v.icons[1]) or nil,
                 icon = (v.icon and v.icon) or nil,
                 icon_size = (v.icon_size and v.icon_size) or nil,
                 subgroup = 'pictographs',
