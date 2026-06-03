@@ -504,14 +504,14 @@ local items = {
         },
         -- SPACE_AGE 30
         ['casting-iron-gear-wheel'] = {
-            energy_required = 3.45,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'iron-gear-wheel', amount = 2}}
+            energy_required = 6.9,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 40, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'iron-gear-wheel', amount = 3}}
         },
         ['casting-iron-stick'] = {
-            energy_required = 1.85,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 10, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'iron-stick', amount = 4}}
+            energy_required = 3.7,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'iron-stick', amount = 6}}
         },
         ['casting-pipe'] = {
             energy_required = 3.45,
