@@ -334,9 +334,16 @@ end
 
 -- GM-VP H 21 SPACE_AGE ACHIEVEMENT
 for k, v in pairs(items['achievement']) do
-    if data.raw[v][k] then
-        data.raw[v][k].hidden = true
-        data.raw[v][k].hidden_in_factoriopedia = true
+    if data.raw[v] and data.raw[v][k] then
+        data.raw[v][k] = nil
+    end
+end
+
+-- GM-VP H 4 QUALITY TIP_AND_TRICK
+-- GM-VP H 16 SPACE_AGE TIP_AND_TRICK
+for k, v in pairs(data.raw['tips-and-tricks-item']) do
+    if v.category and items['tips_and_tricks_item'][v.category] then
+        data.raw['tips-and-tricks-item'][k] = nil
     end
 end
 
@@ -440,14 +447,5 @@ for k, v in pairs(items['technology_reform']) do
             data.raw.technology[k].unit.count = (v.unit_count and v.unit_count) or data.raw.technology[k].unit.count
             data.raw.technology[k].unit.ingredients = (v.unit_ingredients and v.unit_ingredients) or data.raw.technology[k].unit.ingredients
         end
-    end
-end
-
--- GM-VP H 4 QUALITY TIP_AND_TRICK
--- GM-VP H 16 SPACE_AGE TIP_AND_TRICK
-for _, v in pairs(data.raw['tips-and-tricks-item']) do
-    if v.category and items['tips_and_tricks_item'][v.category] then
-        v.hidden = true
-        v.hidden_in_factoriopedia = true
     end
 end
