@@ -536,10 +536,10 @@ local items = {
         },
     },
     ['tips_and_tricks_item'] = {
-        'quality',
-        'space-age',
-        'space-platform',
-        'spoilables'
+        ['quality'] = true,
+        ['space-age'] = true,
+        ['space-platform'] = true,
+        ['spoilables'] = true
     },
     ['technology'] = {
         -- SPACE_AGE 0
