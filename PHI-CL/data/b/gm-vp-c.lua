@@ -534,9 +534,6 @@ local items = {
             ingredients = {{type = 'fluid', name = 'molten-copper', amount = 10, fluidbox_multiplier = 10}},
             results = {{type = 'item', name = 'copper-cable', amount = 4}}
         },
-        ['ice-melting'] = {
-            results = {{type = 'fluid', name = 'water', amount = 10}}
-        },
     },
     ['tips_and_tricks_item'] = {
         'quality',

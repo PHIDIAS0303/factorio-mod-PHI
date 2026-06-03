@@ -156,7 +156,7 @@ if data.raw.item['depleted-uranium-fuel-cell'] and data.raw.item['nuclear-fuel']
     data:extend({{
         type = 'recipe',
         name = 'empty-train-battery',
-        energy_required = 30,
+        energy_required = 20,
         enabled = true,
         icon = mod_graphic_location .. 'battery.png',
         icon_size = 64,
@@ -183,7 +183,7 @@ if data.raw.item['depleted-uranium-fuel-cell'] and data.raw.item['nuclear-fuel']
     data:extend({{
         type = 'recipe',
         name = 'charged-train-battery',
-        energy_required = 60,
+        energy_required = 30,
         enabled = true,
         icon = mod_graphic_location .. 'battery.png',
         icon_size = 64,

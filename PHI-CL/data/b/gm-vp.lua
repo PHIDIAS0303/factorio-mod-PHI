@@ -371,7 +371,7 @@ for _, v in pairs(data.raw.recipe) do
 end
 
 -- GM-VP C 12 BASE RECIPE
--- GM-VP C 37 SPACE_AGE RECIPE
+-- GM-VP C 36 SPACE_AGE RECIPE
 for k, v in pairs(items['recipe_reform']) do
     if data.raw.recipe[k] then
         data.raw.recipe[k].category = (v.category and v.category) or data.raw.recipe[k].category
@@ -381,11 +381,12 @@ for k, v in pairs(items['recipe_reform']) do
     end
 end
 
--- FROM ABOVE
--- GM-VP C 0 SPACE_AGE RECIPE
+-- GM-VP C 1 SPACE_AGE RECIPE
 if data.raw.recipe['ice-melting'] then
     data.raw.recipe['ice-melting'].enabled = true
+    data.raw.recipe['ice-melting'].energy_required = 0.5
     data.raw.recipe['ice-melting'].allow_productivity = false
+    data.raw.recipe['ice-melting'].results = {{type = 'fluid', name = 'water', amount = 10}}
 end
 
 -- GM-VP A 1 SPACE_AGE RECIPE
@@ -393,7 +394,7 @@ if data.raw.item['ice'] then
     data:extend({{
         type = 'recipe',
         name = 'ice',
-        energy_required = 1,
+        energy_required = 0.5,
         enabled = true,
         icon = data.raw.item['ice'].icon,
         category = 'crafting-with-fluid',
