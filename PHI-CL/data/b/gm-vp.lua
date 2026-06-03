@@ -169,6 +169,11 @@ for _, v in pairs({'processing-unit-productivity', 'steel-plate-productivity', '
     end
 end
 
+-- GM-VP A 1 SPACE_AGE RESEARCH_EFFECT
+if data.raw.technology['steel-plate-productivity'] then
+    table.insert(data.raw.technology['steel-plate-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'casting-steel', change = 0.05})
+end
+
 -- GM-VP C 1 SPACE_AGE RESEARCH
 if data.raw.technology['research-productivity'] and data.raw.technology['research-productivity'].unit then
     data.raw.technology['research-productivity'].unit.count_formula = '1500 * (1.5 ^ L)'
