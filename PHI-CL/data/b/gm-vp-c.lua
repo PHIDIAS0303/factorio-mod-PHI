@@ -532,7 +532,7 @@ local items = {
         ['casting-copper-cable'] = {
             energy_required = 1.85,
             ingredients = {{type = 'fluid', name = 'molten-copper', amount = 10, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'copper-cable', amount = 4}}
+            results = {{type = 'item', name = 'copper-cable', amount = 3}}
         },
     },
     ['tips_and_tricks_item'] = {
