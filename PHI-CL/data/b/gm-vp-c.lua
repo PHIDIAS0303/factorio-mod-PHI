@@ -504,36 +504,35 @@ local items = {
         },
         -- SPACE_AGE 30
         ['casting-iron-gear-wheel'] = {
-            energy_required = 0.5,
+            energy_required = 3.45,
             ingredients = {{type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'iron-gear-wheel', amount = 1}}
+            results = {{type = 'item', name = 'iron-gear-wheel', amount = 2}}
         },
         ['casting-iron-stick'] = {
-            energy_required = 0.5,
+            energy_required = 1.85,
             ingredients = {{type = 'fluid', name = 'molten-iron', amount = 10, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'iron-stick', amount = 2}}
+            results = {{type = 'item', name = 'iron-stick', amount = 4}}
         },
         ['casting-pipe'] = {
-            energy_required = 0.25,
+            energy_required = 3.45,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'pipe', amount = 3}}
         },
         ['casting-pipe-to-ground'] = {
-            energy_required = 0.25,
+            energy_required = 8.25,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 50, fluidbox_multiplier = 10}, {type = 'item', name = 'pipe', amount = 10}},
+            results = {{type = 'item', name = 'pipe-to-ground', amount = 3}}
         },
         ['concrete-from-molten-iron'] = {
-            energy_required = 10,
+            energy_required = 5,
             ingredients = {{type = 'fluid', name = 'molten-iron', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'stone-brick', amount = 5}},
             results = {{type = 'item', name = 'concrete', amount = 10}}
         },
         -- SPACE_AGE 35
         ['casting-copper-cable'] = {
-            energy_required = 0.5,
+            energy_required = 1.85,
             ingredients = {{type = 'fluid', name = 'molten-copper', amount = 10, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'copper-cable', amount = 2}}
-        },
-        ['casting-low-density-structure'] = {
-            energy_required = 15,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 100, fluidbox_multiplier = 10}, {type = 'fluid', name = 'molten-copper', amount = 200, fluidbox_multiplier = 10}, {type = 'item', name = 'plastic-bar', amount = 5}},
-            results = {{type = 'item', name = 'low-density-structure', amount = 1}}
+            results = {{type = 'item', name = 'copper-cable', amount = 4}}
         },
         ['ice-melting'] = {
             results = {{type = 'fluid', name = 'water', amount = 10}}
@@ -718,7 +717,8 @@ local items = {
         ['space-platform-foundation'] = true,
         ['space-platform-starter-pack'] = true,
         ['carbon'] = true,
-        ['crusher'] = true
+        ['crusher'] = true,
+        ['casting-low-density-structure'] = true
     },
     ['item'] = {
         -- QUALITY 0

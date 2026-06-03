@@ -358,7 +358,7 @@ for _, v in pairs(data.raw.item) do
 end
 
 -- GM-VP H 1 QUALITY RECIPE
--- GM-VP H 79 SPACE_AGE RECIPE
+-- GM-VP H 80 SPACE_AGE RECIPE
 for _, v in pairs(data.raw.recipe) do
     v.surface_conditions = nil
     v.maximum_productivity = nil
@@ -371,7 +371,7 @@ for _, v in pairs(data.raw.recipe) do
 end
 
 -- GM-VP C 12 BASE RECIPE
--- GM-VP C 38 SPACE_AGE RECIPE
+-- GM-VP C 37 SPACE_AGE RECIPE
 for k, v in pairs(items['recipe_reform']) do
     if data.raw.recipe[k] then
         data.raw.recipe[k].category = (v.category and v.category) or data.raw.recipe[k].category
