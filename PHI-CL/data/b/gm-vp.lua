@@ -393,28 +393,27 @@ if data.raw.item['ice'] then
 end
 
 -- GM-VP H 38 SPACE_AGE RESEARCH
-for _, v in pairs(items['technology']) do
-    if data.raw.technology[v] then
-        data.raw.technology[v].hidden = true
-        data.raw.technology[v].hidden_in_factoriopedia = true
-        data.raw.technology[v].effects = nil
+if data.raw.technology and items['technology'] then
+    for _, v in pairs(data.raw.technology) do
+        if items['technology'][v.name] then
+            v.hidden = true
+            v.hidden_in_factoriopedia = true
+            v.effects = nil
 
-        if data.raw.technology[v].research_trigger then
-            data.raw.technology[v].research_trigger = nil
-            data.raw.technology[v].unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
-        end
+            if v.research_trigger then
+                v.research_trigger = nil
+                v.unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
+            end
 
-        if data.raw.technology[v].unit and data.raw.technology[v].unit.ingredients then
-            data.raw.technology[v].unit.ingredients = {{'space-science-pack', 1}}
-        end
-    end
-end
+            if v.unit and v.unit.ingredients then
+                v.unit.ingredients = {{'space-science-pack', 1}}
+            end
 
-for _, tech in pairs(data.raw.technology) do
-    if tech.unit and tech.unit.ingredients then
-        for i = #tech.unit.ingredients, 1, -1 do
-            if items['technology_ingredient_removal'][tech.unit.ingredients[i][1]] then
-                table.remove(tech.unit.ingredients, i)
+        elseif v.unit and v.unit.ingredients then
+            for i = #v.unit.ingredients, 1, -1 do
+                if items['technology_ingredient_removal'][v.unit.ingredients[i][1]] then
+                    table.remove(v.unit.ingredients, i)
+                end
             end
         end
     end
