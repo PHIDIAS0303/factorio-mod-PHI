@@ -171,7 +171,7 @@ end
 
 -- GM-VP A 1 SPACE_AGE RESEARCH_EFFECT
 if data.raw.technology['steel-plate-productivity'] then
-    table.insert(data.raw.technology['steel-plate-productivity'].effects, {type = 'change-recipe-productivity', recipe = 'casting-steel', change = 0.05})
+    data.raw.technology['steel-plate-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'steel-plate', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'casting-steel', change = 0.05}}
 end
 
 -- GM-VP C 1 SPACE_AGE RESEARCH
