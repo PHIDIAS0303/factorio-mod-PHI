@@ -256,6 +256,7 @@ local items = {
         -- SPACE_AGE 15
         ['fusion-reactor'] = {
             prerequisites = {'nuclear-power', 'space-science-pack'},
+            effects = {{type = 'unlock-recipe', recipe = 'fusion-reactor'}, {type = 'unlock-recipe', recipe = 'fusion-generator'}, {type = 'unlock-recipe', recipe = 'fusion-power-cell'}, {type = 'unlock-recipe', recipe = 'fluoroketone'}, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'}},
             unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         },
         ['fusion-reactor-equipment'] = {
@@ -337,7 +338,7 @@ local items = {
         ['tree-seeding'] = {
             prerequisites = {'agriculture'},
             unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
-        }
+        },
         -- SPACE_AGE 35
     },
     ['recipe_reform'] = {
@@ -498,9 +499,9 @@ local items = {
             results = {{type = 'item', name = 'copper-plate', amount = 1}}
         },
         ['casting-steel'] = {
-            energy_required = 16,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 50, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'steel-plate', amount = 2}}
+            energy_required = 32,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 100, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'steel-plate', amount = 3}}
         },
         -- SPACE_AGE 30
         ['casting-iron-gear-wheel'] = {

@@ -180,12 +180,6 @@ if data.raw.technology['automation'] and data.raw.technology['automation'].effec
     table.insert(data.raw.technology['automation'].effects, {type = 'create-ghost-on-entity-death', modifier = true})
 end
 
--- GM-VP A 2 SPACE_AGE RESEARCH_EFFECT
-if data.raw.technology['fusion-reactor'] and data.raw.technology['fusion-reactor'].effects then
-    table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone'})
-    table.insert(data.raw.technology['fusion-reactor'].effects, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'})
-end
-
 -- GM-VP C 1 BASE RESEARCH
 -- GM-VP C 6 SPACE_AGE RESEARCH
 for _, v in pairs({'space-science-pack', 'electromagnetic-plant', 'foundry', 'cryogenic-plant', 'big-mining-drill', 'agriculture', 'heating-tower'}) do
