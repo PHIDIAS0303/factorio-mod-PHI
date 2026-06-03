@@ -212,7 +212,7 @@ local items = {
         ['foundry'] = {
             prerequisites = {'automation-3', 'advanced-material-processing-2', 'processing-unit', 'utility-science-pack'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'foundry'}}
+            effects = {{type = 'unlock-recipe', recipe = 'foundry'}, {type = 'unlock-recipe', recipe = 'molten-iron'}, {type = 'unlock-recipe', recipe = 'molten-copper'}, {type = 'unlock-recipe', recipe = 'casting-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper'}, {type = 'unlock-recipe', recipe = 'casting-steel'}, {type = 'unlock-recipe', recipe = 'casting-iron-gear-wheel'}, {type = 'unlock-recipe', recipe = 'casting-iron-stick'}, {type = 'unlock-recipe', recipe = 'casting-pipe'}, {type = 'unlock-recipe', recipe = 'casting-pipe-to-ground'}, {type = 'unlock-recipe', recipe = 'concrete-from-molten-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper-cable'}, {type = 'unlock-recipe', recipe = 'casting-low-density-structure'}}
         },
         ['cryogenic-plant'] = {
             prerequisites = {'automation-3', 'coal-liquefaction', 'processing-unit', 'utility-science-pack'},
@@ -476,6 +476,68 @@ local items = {
         ['fluoroketone-cooling'] = {
             category = 'chemistry',
         },
+        -- SPACE_AGE 25
+        ['molten-iron'] = {
+            energy_required = 1.6,
+            ingredients = {{type = 'item', name = 'iron-ore', amount = 1}},
+            results = {{type = 'fluid', name = 'molten-iron', amount = 10}}
+        },
+        ['molten-copper'] = {
+            energy_required = 1.6,
+            ingredients = {{type = 'item', name = 'copper-ore', amount = 1}},
+            results = {{type = 'fluid', name = 'molten-copper', amount = 10}}
+        },
+        ['casting-iron'] = {
+            energy_required = 1.6,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 10, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'iron-plate', amount = 1}}
+        },
+        ['casting-copper'] = {
+            energy_required = 1.6,
+            ingredients = {{type = 'fluid', name = 'molten-copper', amount = 10, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'copper-plate', amount = 1}}
+        },
+        ['casting-steel'] = {
+            energy_required = 16,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 50, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'steel-plate', amount = 2}}
+        },
+        -- SPACE_AGE 30
+        ['casting-iron-gear-wheel'] = {
+            energy_required = 0.5,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'iron-gear-wheel', amount = 1}}
+        },
+        ['casting-iron-stick'] = {
+            energy_required = 0.5,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 10, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'iron-stick', amount = 2}}
+        },
+        ['casting-pipe'] = {
+            energy_required = 0.25,
+        },
+        ['casting-pipe-to-ground'] = {
+            energy_required = 0.25,
+        },
+        ['concrete-from-molten-iron'] = {
+            energy_required = 10,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'stone-brick', amount = 5}},
+            results = {{type = 'item', name = 'concrete', amount = 10}}
+        },
+        -- SPACE_AGE 35
+        ['casting-copper-cable'] = {
+            energy_required = 0.5,
+            ingredients = {{type = 'fluid', name = 'molten-copper', amount = 10, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'copper-cable', amount = 2}}
+        },
+        ['casting-low-density-structure'] = {
+            energy_required = 15,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 100, fluidbox_multiplier = 10}, {type = 'fluid', name = 'molten-copper', amount = 200, fluidbox_multiplier = 10}, {type = 'item', name = 'plastic-bar', amount = 5}},
+            results = {{type = 'item', name = 'low-density-structure', amount = 1}}
+        },
+        ['ice-melting'] = {
+            results = {{type = 'fluid', name = 'water', amount = 10}}
+        },
     },
     ['tips_and_tricks_item'] = {
         'quality',
@@ -630,48 +692,32 @@ local items = {
         ['molten-iron-from-lava'] = true,
         -- SPACE_AGE 55
         ['molten-copper-from-lava'] = true,
-        ['molten-iron'] = true,
-        ['molten-copper'] = true,
-        ['casting-iron'] = true,
-        ['casting-steel'] = true,
-        -- SPACE_AGE 60
-        ['casting-copper'] = true,
-        ['casting-iron-gear-wheel'] = true,
-        ['casting-iron-stick'] = true,
-        ['casting-pipe'] = true,
-        ['casting-pipe-to-ground'] = true,
-        -- SPACE_AGE 65
-        ['casting-low-density-structure'] = true,
-        ['concrete-from-molten-iron'] = true,
-        ['casting-copper-cable'] = true,
         ['acid-neutralisation'] = true,
         ['simple-coal-liquefaction'] = true,
-        -- SPACE_AGE 70
         ['scrap-recycling'] = true,
         ['foundation'] = true,
+        -- SPACE_AGE 60
         ['steam-condensation'] = true,
         ['thruster'] = true,
         ['thruster-fuel'] = true,
-        -- SPACE_AGE 75
         ['thruster-oxidizer'] = true,
         ['advanced-thruster-fuel'] = true,
+        -- SPACE_AGE 65
         ['advanced-thruster-oxidizer'] = true,
         ['metallic-asteroid-crushing'] = true,
         ['carbonic-asteroid-crushing'] = true,
-        -- SPACE_AGE 80
         ['oxide-asteroid-crushing'] = true,
         ['advanced-metallic-asteroid-crushing'] = true,
+        -- SPACE_AGE 70
         ['advanced-carbonic-asteroid-crushing'] = true,
         ['advanced-oxide-asteroid-crushing'] = true,
         ['metallic-asteroid-reprocessing'] = true,
-        -- SPACE_AGE 85
         ['carbonic-asteroid-reprocessing'] = true,
         ['oxide-asteroid-reprocessing'] = true,
+        -- SPACE_AGE 75
         ['space-platform-foundation'] = true,
         ['space-platform-starter-pack'] = true,
         ['carbon'] = true,
-        -- SPACE_AGE 90
-        ['ice-melting'] = true,
         ['crusher'] = true
     },
     ['item'] = {

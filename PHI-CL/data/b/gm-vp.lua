@@ -156,7 +156,7 @@ data.raw.technology['electronics-productivity'].effects = {{type = 'change-recip
 data.raw.technology['solar-energy-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'solar-panel', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'accumulator', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'battery', change = 0.05}}
 data.raw.technology['railway-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'rail', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.05}}
 data.raw.technology['automation-productivity'].prerequisites[1] = 'logistics-2'
-data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'pipe', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.05}}
+data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'pipe', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'casting-pipe', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.05}}
 data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
 data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
 
@@ -248,7 +248,7 @@ end
 -- GM-VP C 1 SPACE_AGE ENTITY
 if data.raw['assembling-machine'] and data.raw['assembling-machine']['foundry'] then
     data.raw['assembling-machine']['foundry'].effect_receiver = nil
-    data.raw['assembling-machine']['foundry'].crafting_categories = {table.unpack(data.raw['furnace']['electric-furnace'].crafting_categories)}
+    data.raw['assembling-machine']['foundry'].crafting_categories = {table.unpack(data.raw['furnace']['electric-furnace'].crafting_categories), 'metallurgy'}
     data.raw['assembling-machine']['foundry'].crafting_speed = 6
     data.raw['assembling-machine']['foundry'].energy_usage = '930kW'
     data.raw['assembling-machine']['foundry'].energy_source.emissions_per_minute.pollution = 3
@@ -358,7 +358,7 @@ for _, v in pairs(data.raw.item) do
 end
 
 -- GM-VP H 1 QUALITY RECIPE
--- GM-VP H 92 SPACE_AGE RECIPE
+-- GM-VP H 79 SPACE_AGE RECIPE
 for _, v in pairs(data.raw.recipe) do
     v.surface_conditions = nil
     v.maximum_productivity = nil
@@ -371,13 +371,38 @@ for _, v in pairs(data.raw.recipe) do
 end
 
 -- GM-VP C 12 BASE RECIPE
--- GM-VP C 25 SPACE_AGE RECIPE
+-- GM-VP C 38 SPACE_AGE RECIPE
 for k, v in pairs(items['recipe_reform']) do
     if data.raw.recipe[k] then
         data.raw.recipe[k].category = (v.category and v.category) or data.raw.recipe[k].category
         data.raw.recipe[k].ingredients = (v.ingredients and v.ingredients) or data.raw.recipe[k].ingredients
         data.raw.recipe[k].results = (v.results and v.results) or data.raw.recipe[k].results
+        data.raw.recipe[k].energy_required = (v.energy_required and v.energy_required) or data.raw.recipe[k].energy_required
     end
+end
+
+-- FROM ABOVE
+-- GM-VP C 0 SPACE_AGE RECIPE
+if data.raw.recipe['ice-melting'] then
+    data.raw.recipe['ice-melting'].enabled = true
+    data.raw.recipe['ice-melting'].allow_productivity = false
+end
+
+-- GM-VP A 1 SPACE_AGE RECIPE
+if data.raw.item['ice'] then
+    data:extend({{
+        type = 'recipe',
+        name = 'ice',
+        energy_required = 1,
+        enabled = true,
+        icon = data.raw.item['ice'].icon,
+        category = 'crafting-with-fluid',
+        ingredients = {{type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10}},
+        results = {{type = 'item', name = 'ice', amount = 1}},
+        main_product = 'ice',
+        allow_productivity = false,
+        localised_name = {'item-name.ice'}
+    }})
 end
 
 -- GM-VP H 38 SPACE_AGE RESEARCH
