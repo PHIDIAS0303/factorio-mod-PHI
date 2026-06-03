@@ -302,7 +302,7 @@ local items = {
         },
         ['steel-plate-productivity'] = {
             prerequisites = {'foundry'},
-            effects = {{type = 'change-recipe-productivity', recipe = 'steel-plate', change = 0.05}}
+            effects = {{type = 'change-recipe-productivity', recipe = 'steel-plate', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'casting-steel', change = 0.05}}
         },
         ['low-density-structure-productivity'] = {
             prerequisites = {'low-density-structure', 'electromagnetic-plant'},
