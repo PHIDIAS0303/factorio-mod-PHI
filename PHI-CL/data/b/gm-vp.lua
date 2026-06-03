@@ -332,21 +332,6 @@ for _, v in pairs(data.raw['tile']) do
     end
 end
 
--- GM-VP H 21 SPACE_AGE ACHIEVEMENT
-for k, v in pairs(items['achievement']) do
-    if data.raw[v] and data.raw[v][k] then
-        data.raw[v][k] = nil
-    end
-end
-
--- GM-VP H 4 QUALITY TIP_AND_TRICK
--- GM-VP H 16 SPACE_AGE TIP_AND_TRICK
-for k, v in pairs(data.raw['tips-and-tricks-item']) do
-    if v.category and items['tips_and_tricks_item'][v.category] then
-        data.raw['tips-and-tricks-item'][k] = nil
-    end
-end
-
 -- GM-VP H 1 QUALITY ITEM
 -- GM-VP H 40 SPACE_AGE ITEM
 for _, v in pairs(data.raw.item) do

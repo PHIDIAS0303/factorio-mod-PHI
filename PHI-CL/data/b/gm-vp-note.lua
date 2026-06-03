@@ -35,4 +35,23 @@ for _, v in pairs({'yumako-tree', 'jellystem'}) do
 end 
 
 data.raw['simple-entity']['small-stomper-shell'].autoplace = nil
+
+隱藏 Hide
+成就 Achievement
+-- GM-VP H 21 SPACE_AGE ACHIEVEMENT
+for k, v in pairs(items['achievement']) do
+    if data.raw[v] and data.raw[v][k] then
+        data.raw[v][k] = nil
+    end
+end
+
+隱藏 Hide
+提示 Tip and Trick
+-- GM-VP H 4 QUALITY TIP_AND_TRICK
+-- GM-VP H 16 SPACE_AGE TIP_AND_TRICK
+for k, v in pairs(data.raw['tips-and-tricks-item']) do
+    if v.category and items['tips_and_tricks_item'][v.category] then
+        data.raw['tips-and-tricks-item'][k] = nil
+    end
+end
 ]]

@@ -168,7 +168,7 @@ data:extend({
   default_value = '',
   allowed_values = {'', 'SAP', 'VP'},
   localised_name = {'phi-cl.setting-category-color', 'GM', {'phi-cl.enable'}, {'mod-setting-name.PHI-GM'}},
-  localised_description = {'', {'phi-cl.setting-change-color', '[GM] [60] A26 C25 H9\n[SAP] [30] A3 C27\n[VP] [680] A17 C191 H472'}},
+  localised_description = {'', {'phi-cl.setting-change-color', '[GM] [60] A26 C25 H9\n[SAP] [30] A3 C27\n[VP] [638] A16 C203 H419'}},
   order = 'D00'
 },  {
   type = 'bool-setting',
