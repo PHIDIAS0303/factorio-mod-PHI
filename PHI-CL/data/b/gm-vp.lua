@@ -391,7 +391,7 @@ if data.raw.item['ice'] then
         energy_required = 0.5,
         enabled = true,
         icon = data.raw.item['ice'].icon,
-        category = 'crafting-with-fluid',
+        category = 'chemistry',
         ingredients = {{type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10}},
         results = {{type = 'item', name = 'ice', amount = 1}},
         main_product = 'ice',
