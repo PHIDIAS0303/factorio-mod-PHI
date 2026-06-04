@@ -212,12 +212,12 @@ local items = {
         ['foundry'] = {
             prerequisites = {'automation-3', 'utility-science-pack'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'foundry'}, {type = 'unlock-recipe', recipe = 'molten-iron'}, {type = 'unlock-recipe', recipe = 'molten-copper'}, {type = 'unlock-recipe', recipe = 'casting-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper'}, {type = 'unlock-recipe', recipe = 'casting-steel'}, {type = 'unlock-recipe', recipe = 'casting-iron-gear-wheel'}, {type = 'unlock-recipe', recipe = 'casting-iron-stick'}, {type = 'unlock-recipe', recipe = 'casting-pipe'}, {type = 'unlock-recipe', recipe = 'casting-pipe-to-ground'}, {type = 'unlock-recipe', recipe = 'concrete-from-molten-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper-cable'}, {type = 'unlock-recipe', recipe = 'casting-low-density-structure'}}
+            effects = {{type = 'unlock-recipe', recipe = 'foundry'}, {type = 'unlock-recipe', recipe = 'metallurgic-science-pack'}, {type = 'unlock-recipe', recipe = 'molten-iron'}, {type = 'unlock-recipe', recipe = 'molten-copper'}, {type = 'unlock-recipe', recipe = 'casting-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper'}, {type = 'unlock-recipe', recipe = 'casting-steel'}, {type = 'unlock-recipe', recipe = 'casting-iron-gear-wheel'}, {type = 'unlock-recipe', recipe = 'casting-iron-stick'}, {type = 'unlock-recipe', recipe = 'casting-pipe'}, {type = 'unlock-recipe', recipe = 'casting-pipe-to-ground'}, {type = 'unlock-recipe', recipe = 'concrete-from-molten-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper-cable'}, {type = 'unlock-recipe', recipe = 'casting-low-density-structure'}}
         },
         ['cryogenic-plant'] = {
             prerequisites = {'automation-3', 'coal-liquefaction', 'utility-science-pack'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}}
+            effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}, {type = 'unlock-recipe', recipe = 'cryogenic-science-pack'}, {type = 'unlock-recipe', recipe = 'fluoroketone'}, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'}}
         },
         ['biolab'] = {
             prerequisites = {'automation-3', 'utility-science-pack'},
@@ -255,8 +255,8 @@ local items = {
         },
         -- SPACE_AGE 15
         ['fusion-reactor'] = {
-            prerequisites = {'nuclear-power', 'space-science-pack'},
-            effects = {{type = 'unlock-recipe', recipe = 'fusion-reactor'}, {type = 'unlock-recipe', recipe = 'fusion-generator'}, {type = 'unlock-recipe', recipe = 'fusion-power-cell'}, {type = 'unlock-recipe', recipe = 'fluoroketone'}, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'}},
+            prerequisites = {'nuclear-power', 'cryogenic-plant', 'space-science-pack'},
+            effects = {{type = 'unlock-recipe', recipe = 'fusion-reactor'}, {type = 'unlock-recipe', recipe = 'fusion-generator'}, {type = 'unlock-recipe', recipe = 'fusion-power-cell'}},
             unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         },
         ['fusion-reactor-equipment'] = {
@@ -450,7 +450,7 @@ local items = {
             ingredients = {{type = 'item', name = 'fission-reactor-equipment', amount = 1}, {type = 'item', name = 'fusion-power-cell', amount = 10}, {type = 'item', name = 'steel-plate', amount = 350}, {type = 'item', name = 'processing-unit', amount = 275}}
         },
         ['fluoroketone'] = {
-            category = 'chemistry',
+            category = 'cryogenics',
             ingredients = {{type = 'fluid', name = 'light-oil', amount = 50}, {type = 'fluid', name = 'petroleum-gas', amount = 50}, {type = 'item', name = 'steel-plate', amount = 1}}
         },
         ['agricultural-tower'] = {
@@ -474,15 +474,12 @@ local items = {
         ['turbo-loader'] = {
             category = 'crafting',
         },
-        ['fluoroketone-cooling'] = {
-            category = 'chemistry',
-        },
-        -- SPACE_AGE 25
         ['molten-iron'] = {
             energy_required = 1.6,
             ingredients = {{type = 'item', name = 'iron-ore', amount = 1}},
             results = {{type = 'fluid', name = 'molten-iron', amount = 10}}
         },
+        -- SPACE_AGE 25
         ['molten-copper'] = {
             energy_required = 1.6,
             ingredients = {{type = 'item', name = 'copper-ore', amount = 1}},
@@ -503,12 +500,12 @@ local items = {
             ingredients = {{type = 'fluid', name = 'molten-iron', amount = 100, fluidbox_multiplier = 10}},
             results = {{type = 'item', name = 'steel-plate', amount = 3}}
         },
-        -- SPACE_AGE 30
         ['casting-iron-gear-wheel'] = {
             energy_required = 6.9,
             ingredients = {{type = 'fluid', name = 'molten-iron', amount = 40, fluidbox_multiplier = 10}},
             results = {{type = 'item', name = 'iron-gear-wheel', amount = 3}}
         },
+        -- SPACE_AGE 30
         ['casting-iron-stick'] = {
             energy_required = 3.7,
             ingredients = {{type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
@@ -529,11 +526,31 @@ local items = {
             ingredients = {{type = 'fluid', name = 'molten-iron', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'stone-brick', amount = 5}},
             results = {{type = 'item', name = 'concrete', amount = 10}}
         },
-        -- SPACE_AGE 35
         ['casting-copper-cable'] = {
             energy_required = 1.85,
             ingredients = {{type = 'fluid', name = 'molten-copper', amount = 10, fluidbox_multiplier = 10}},
             results = {{type = 'item', name = 'copper-cable', amount = 3}}
+        },
+        -- SPACE_AGE 35
+        ['metallurgic-science-pack'] = {
+            energy_required = 10,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 200, fluidbox_multiplier = 10}, {type = 'fluid', name = 'molten-copper', amount = 200, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'metallurgic-science-pack', amount = 2}}
+        },
+        ['electromagnetic-science-pack'] = {
+            energy_required = 10,
+            ingredients = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}, {type = 'item', name = 'solar-panel', amount = 1}, {type = 'item', name = 'accumulator', amount = 1}},
+            results = {{type = 'item', name = 'electromagnetic-science-pack', amount = 2}}
+        },
+        ['cryogenic-science-pack'] = {
+            energy_required = 10,
+            ingredients = {{type = 'fluid', name = 'fluoroketone-cold', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}, {type = 'item', name = 'ice', amount = 5}},
+            results = {{type = 'item', name = 'cryogenic-science-pack', amount = 2}, {type = 'fluid', name = 'fluoroketone-hot', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
+        },
+        ['electrolyte'] = {
+            energy_required = 2,
+            ingredients = {{type = 'fluid', name = 'heavy-oil', amount = 10, fluidbox_multiplier = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'stone', amount = 1}},
+            results = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}}
         },
     },
     ['tips_and_tricks_item'] = {
@@ -553,42 +570,39 @@ local items = {
         ['lightning-collector'] = true,
         ['tungsten-carbide'] = true,
         ['tungsten-steel'] = true,
-        ['metallurgic-science-pack'] = true,
         ['yumako'] = true,
-        -- SPACE_AGE 10
         ['jellynut'] = true,
+        -- SPACE_AGE 10
         ['bioflux'] = true,
         ['artificial-soil'] = true,
         ['overgrowth-soil'] = true,
         ['bacteria-cultivation'] = true,
-        -- SPACE_AGE 15
         ['bioflux-processing'] = true,
+        -- SPACE_AGE 15
         ['agricultural-science-pack'] = true,
         ['captivity'] = true,
         ['biter-egg-handling'] = true,
         ['carbon-fiber'] = true,
-        -- SPACE_AGE 20
         ['fish-breeding'] = true,
+        -- SPACE_AGE 20
         ['holmium-processing'] = true,
-        ['electromagnetic-science-pack'] = true,
         ['rail-support-foundations'] = true,
         ['lithium-processing'] = true,
-        -- SPACE_AGE 25
         ['quantum-processor'] = true,
-        ['cryogenic-science-pack'] = true,
         ['captive-biter-spawner'] = true,
+        -- SPACE_AGE 25
         ['promethium-science-pack'] = true,
         ['foundation'] = true,
-        -- SPACE_AGE 30
         ['scrap-recycling-productivity'] = true,
         ['biochamber'] = true,
         ['space-platform-thruster'] = true,
+        -- SPACE_AGE 30
         ['space-platform'] = true,
         ['asteroid-reprocessing'] = true,
-        -- SPACE_AGE 35
         ['advanced-asteroid-processing'] = true,
         ['asteroid-productivity'] = true,
         ['calcite-processing'] = true,
+        -- SPACE_AGE 35
     },
     ['achievement'] = {
         -- SPACE_AGE 0
@@ -625,97 +639,93 @@ local items = {
         ['lightning-collector'] = true,
         ['lightning-rod'] = true,
         ['agricultural-science-pack'] = true,
-        ['cryogenic-science-pack'] = true,
-        ['electromagnetic-science-pack'] = true,
-        -- SPACE_AGE 5
-        ['metallurgic-science-pack'] = true,
         ['promethium-science-pack'] = true,
         ['space-science-pack'] = true,
+        -- SPACE_AGE 5
         ['burnt-spoilage'] = true,
         ['fish-breeding'] = true,
-        -- SPACE_AGE 10
         ['nutrients-from-fish'] = true,
         ['nutrients-from-biter-egg'] = true,
         ['yumako-processing'] = true,
+        -- SPACE_AGE 10
         ['jellynut-processing'] = true,
         ['copper-bacteria'] = true,
-        -- SPACE_AGE 15
         ['copper-bacteria-cultivation'] = true,
         ['iron-bacteria'] = true,
         ['iron-bacteria-cultivation'] = true,
+        -- SPACE_AGE 15
         ['nutrients-from-spoilage'] = true,
         ['nutrients-from-yumako-mash'] = true,
-        -- SPACE_AGE 20
         ['nutrients-from-bioflux'] = true,
         ['pentapod-egg'] = true,
         ['rocket-fuel-from-jelly'] = true,
+        -- SPACE_AGE 20
         ['bioflux'] = true,
         ['bioplastic'] = true,
-        -- SPACE_AGE 25
         ['biosulfur'] = true,
         ['biolubricant'] = true,
         ['carbon-fiber'] = true,
+        -- SPACE_AGE 25
         ['artificial-yumako-soil'] = true,
         ['overgrowth-yumako-soil'] = true,
-        -- SPACE_AGE 30
         ['artificial-jellynut-soil'] = true,
         ['overgrowth-jellynut-soil'] = true,
         ['biochamber'] = true,
+        -- SPACE_AGE 30
         ['captive-biter-spawner'] = true,
         ['capture-robot-rocket'] = true,
-        -- SPACE_AGE 35
         ['biter-egg'] = true,
         ['spoilage-from-nutrients'] = true,
         ['tungsten-carbide'] = true,
+        -- SPACE_AGE 35
         ['tungsten-plate'] = true,
         ['coal-synthesis'] = true,
-        -- SPACE_AGE 40
         ['spoilage-recycling'] = true,
         ['asteroid-collector'] = true,
         ['ammoniacal-solution-separation'] = true,
+        -- SPACE_AGE 40
         ['lithium'] = true,
         ['lithium-plate'] = true,
-        -- SPACE_AGE 45
         ['ice-platform'] = true,
         ['solid-fuel-from-ammonia'] = true,
         ['ammonia-rocket-fuel'] = true,
+        -- SPACE_AGE 45
         ['quantum-processor'] = true,
         ['holmium-solution'] = true,
-        -- SPACE_AGE 50
         ['holmium-plate'] = true,
-        ['electrolyte'] = true,
         ['supercapacitor'] = true,
         ['superconductor'] = true,
+        -- SPACE_AGE 50
         ['molten-iron-from-lava'] = true,
-        -- SPACE_AGE 55
         ['molten-copper-from-lava'] = true,
         ['acid-neutralisation'] = true,
         ['simple-coal-liquefaction'] = true,
         ['scrap-recycling'] = true,
+        -- SPACE_AGE 55
         ['foundation'] = true,
-        -- SPACE_AGE 60
         ['steam-condensation'] = true,
         ['thruster'] = true,
         ['thruster-fuel'] = true,
         ['thruster-oxidizer'] = true,
+        -- SPACE_AGE 60
         ['advanced-thruster-fuel'] = true,
-        -- SPACE_AGE 65
         ['advanced-thruster-oxidizer'] = true,
         ['metallic-asteroid-crushing'] = true,
         ['carbonic-asteroid-crushing'] = true,
         ['oxide-asteroid-crushing'] = true,
+        -- SPACE_AGE 65
         ['advanced-metallic-asteroid-crushing'] = true,
-        -- SPACE_AGE 70
         ['advanced-carbonic-asteroid-crushing'] = true,
         ['advanced-oxide-asteroid-crushing'] = true,
         ['metallic-asteroid-reprocessing'] = true,
         ['carbonic-asteroid-reprocessing'] = true,
+        -- SPACE_AGE 70
         ['oxide-asteroid-reprocessing'] = true,
-        -- SPACE_AGE 75
         ['space-platform-foundation'] = true,
         ['space-platform-starter-pack'] = true,
         ['carbon'] = true,
         ['crusher'] = true,
+        -- SPACE_AGE 75
         ['casting-low-density-structure'] = true
     },
     ['item'] = {
@@ -755,16 +765,15 @@ local items = {
         ['lithium'] = true,
         ['lithium-plate'] = true,
         ['quantum-processor'] = true,
-        ['ice'] = true,
         ['carbon'] = true,
-        -- SPACE_AGE 30
         ['calcite'] = true,
+        -- SPACE_AGE 30
         ['space-platform-foundation'] = true,
         ['asteroid-collector'] = true,
         ['crusher'] = true,
         ['thruster'] = true,
-        -- SPACE_AGE 35
         ['space-platform-hub'] = true,
+        -- SPACE_AGE 35
         ['carbonic-asteroid-chunk'] = true,
         ['metallic-asteroid-chunk'] = true,
         ['promethium-asteroid-chunk'] = true,
@@ -885,11 +894,7 @@ local items = {
         ['ammonia'] = 'fluid',
         -- SPACE_AGE FLUID 5
         ['ammoniacal-solution'] = 'fluid',
-        ['electrolyte'] = 'fluid',
         ['holmium-solution'] = 'fluid',
-        ['molten-copper'] = 'fluid',
-        ['molten-iron'] = 'fluid',
-        -- SPACE_AGE FLUID 10
         ['lava'] = 'fluid',
         -- SPACE_AGE ITEM 0
         ['bioflux'] = 'capsule',
@@ -932,9 +937,7 @@ local items = {
         ['foundation'] = 'tile',
         -- SPACE_AGE TOOL 0
         ['agricultural-science-pack'] = 'tool',
-        ['cryogenic-science-pack'] = 'tool',
-        ['electromagnetic-science-pack'] = 'tool',
-        ['metallurgic-science-pack'] = 'tool',
+        ['promethium-science-pack'] = 'tool',
     }
 }
 

@@ -188,14 +188,6 @@ for _, v in pairs({'space-science-pack', 'electromagnetic-plant', 'foundry', 'cr
     end
 end
 
--- GM-VP C 1 BASE ENTITY
--- GM-VP C 1 SPACE_AGE ENTITY
-if data.raw['lab'] then
-    for _, v in pairs(data.raw['lab']) do
-        v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack'}
-    end
-end
-
 -- GM-VP C 2 BASE ENTITY
 if data.raw['unit-spawner'] then
     for _, v in pairs(data.raw['unit-spawner']) do
@@ -233,7 +225,7 @@ end
 -- GM-VP C 1 SPACE_AGE ENTITY
 if data.raw['assembling-machine'] and data.raw['assembling-machine']['electromagnetic-plant'] then
     data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
-    data.raw['assembling-machine']['electromagnetic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['assembling-machine-3'].crafting_categories)}
+    data.raw['assembling-machine']['electromagnetic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['assembling-machine-3'].crafting_categories), 'electromagnetics'}
     data.raw['assembling-machine']['electromagnetic-plant'].crafting_speed = 2.5
     data.raw['assembling-machine']['electromagnetic-plant'].energy_usage = '872kW'
     data.raw['assembling-machine']['electromagnetic-plant'].energy_source.emissions_per_minute.pollution = 4
@@ -250,7 +242,7 @@ end
 
 -- GM-VP C 1 SPACE_AGE ENTITY
 if data.raw['assembling-machine'] and data.raw['assembling-machine']['cryogenic-plant'] then
-    data.raw['assembling-machine']['cryogenic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['oil-refinery'].crafting_categories), table.unpack(data.raw['assembling-machine']['chemical-plant'].crafting_categories)}
+    data.raw['assembling-machine']['cryogenic-plant'].crafting_categories = {table.unpack(data.raw['assembling-machine']['oil-refinery'].crafting_categories), table.unpack(data.raw['assembling-machine']['chemical-plant'].crafting_categories), 'cryogenics'}
     data.raw['assembling-machine']['cryogenic-plant'].crafting_speed = 3
     data.raw['assembling-machine']['cryogenic-plant'].energy_usage = '1302kW'
     data.raw['assembling-machine']['cryogenic-plant'].energy_source.emissions_per_minute.pollution = 12
@@ -262,6 +254,14 @@ if data.raw['lab'] and data.raw['lab']['biolab'] then
     data.raw['lab']['biolab'].researching_speed = 3
     data.raw['lab']['biolab'].energy_usage = '180kW'
     data.raw['lab']['biolab'].energy_source.emissions_per_minute = nil
+end
+
+-- GM-VP C 1 BASE ENTITY
+-- GM-VP C 1 SPACE_AGE ENTITY
+if data.raw['lab'] then
+    for _, v in pairs(data.raw['lab']) do
+        v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'metallurgic-science-pack', 'electromagnetic-science-pack', 'cryogenic-science-pack', 'space-science-pack'}
+    end
 end
 
 -- GM-VP C 1 SPACE_AGE ENTITY
@@ -288,11 +288,11 @@ end
 
 -- GM-VP H 1 QUALITY ENTITY
 -- GM-VP H 68 SPACE_AGE ENTITY
--- GM-VP H 11 SPACE_AGE FLUID
+-- GM-VP H 8 SPACE_AGE FLUID
 -- GM-VP H 7 SPACE_AGE ITEM
 -- GM-VP H 21 SPACE_AGE MAP_GENERATION
 -- GM-VP H 3 SPACE_AGE TILE
--- GM-VP H 4 SPACE_AGE TOOL
+-- GM-VP H 2 SPACE_AGE TOOL
 if items['hidden'] then
     for k, v in pairs(items['hidden']) do
         if data.raw[v] and data.raw[v][k] then
@@ -333,7 +333,7 @@ for _, v in pairs(data.raw['tile']) do
 end
 
 -- GM-VP H 1 QUALITY ITEM
--- GM-VP H 40 SPACE_AGE ITEM
+-- GM-VP H 39 SPACE_AGE ITEM
 for _, v in pairs(data.raw.item) do
     v.auto_recycle = false
 
@@ -344,7 +344,7 @@ for _, v in pairs(data.raw.item) do
 end
 
 -- GM-VP H 1 QUALITY RECIPE
--- GM-VP H 80 SPACE_AGE RECIPE
+-- GM-VP H 76 SPACE_AGE RECIPE
 for _, v in pairs(data.raw.recipe) do
     v.surface_conditions = nil
     v.maximum_productivity = nil
@@ -357,7 +357,7 @@ for _, v in pairs(data.raw.recipe) do
 end
 
 -- GM-VP C 12 BASE RECIPE
--- GM-VP C 36 SPACE_AGE RECIPE
+-- GM-VP C 39 SPACE_AGE RECIPE
 for k, v in pairs(items['recipe_reform']) do
     if data.raw.recipe[k] then
         data.raw.recipe[k].category = (v.category and v.category) or data.raw.recipe[k].category
@@ -392,7 +392,7 @@ if data.raw.item['ice'] then
     }})
 end
 
--- GM-VP H 38 SPACE_AGE RESEARCH
+-- GM-VP H 35 SPACE_AGE RESEARCH
 if data.raw.technology and items['technology'] then
     for _, v in pairs(data.raw.technology) do
         if items['technology'][v.name] then
