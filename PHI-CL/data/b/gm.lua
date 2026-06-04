@@ -123,3 +123,84 @@ for _, v in pairs(data.raw['resource']) do
         data.raw.item[vn].stack_size = math.max(data.raw.item[vn].stack_size, 100)
     end
 end
+
+-- GM C 3 SPACE_AGE ENTITY
+if data.raw['assembling-machine'] then
+    if data.raw['assembling-machine']['electromagnetic-plant'] then
+        local cct = {}
+        local cc = {}
+
+        if data.raw['assembling-machine']['assembling-machine-3'] and data.raw['assembling-machine']['assembling-machine-3'].crafting_categories then
+            for _, v in pairs(data.raw['assembling-machine']['assembling-machine-3'].crafting_categories) do
+                cct[v] = true
+                table.insert(cc, v)
+            end
+        end
+
+        if data.raw['assembling-machine']['electromagnetic-plant'].crafting_categories then
+            for _, v in pairs(data.raw['assembling-machine']['electromagnetic-plant'].crafting_categories) do
+                if not cct[v] then
+                    cct[v] = true
+                    table.insert(cc, v)
+                end
+            end
+        end
+
+        data.raw['assembling-machine']['electromagnetic-plant'].crafting_categories = cc
+    end
+
+    if data.raw['assembling-machine']['foundry'] then
+        local cct = {}
+        local cc = {}
+
+        if data.raw['furnace'] and data.raw['furnace']['electric-furnace'] and data.raw['furnace']['electric-furnace'].crafting_categories then
+            for _, v in pairs(data.raw['furnace']['electric-furnace'].crafting_categories) do
+                cct[v] = true
+                table.insert(cc, v)
+            end
+        end
+
+        if data.raw['assembling-machine']['foundry'].crafting_categories then
+            for _, v in pairs(data.raw['assembling-machine']['foundry'].crafting_categories) do
+                if not cct[v] then
+                    cct[v] = true
+                    table.insert(cc, v)
+                end
+            end
+        end
+
+        data.raw['assembling-machine']['foundry'].crafting_categories = cc
+    end
+
+    if data.raw['assembling-machine']['cryogenic-plant'] then
+        local cct = {}
+        local cc = {}
+
+        if data.raw['assembling-machine']['oil-refinery'] and data.raw['assembling-machine']['oil-refinery'].crafting_categories then
+            for _, v in pairs(data.raw['assembling-machine']['oil-refinery'].crafting_categories) do
+                cct[v] = true
+                table.insert(cc, v)
+            end
+        end
+
+        if data.raw['assembling-machine']['chemical-plant'] and data.raw['assembling-machine']['chemical-plant'].crafting_categories then
+            for _, v in pairs(data.raw['assembling-machine']['chemical-plant'].crafting_categories) do
+                if not cct[v] then
+                    cct[v] = true
+                    table.insert(cc, v)
+                end
+            end
+        end
+
+        if data.raw['assembling-machine']['cryogenic-plant'].crafting_categories then
+            for _, v in pairs(data.raw['assembling-machine']['cryogenic-plant'].crafting_categories) do
+                if not cct[v] then
+                    cct[v] = true
+                    table.insert(cc, v)
+                end
+            end
+        end
+
+        data.raw['assembling-machine']['cryogenic-plant'].crafting_categories = cc
+    end
+end
