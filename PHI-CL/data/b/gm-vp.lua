@@ -18,8 +18,14 @@ end
 -- GM-VP C 33 BASE ENTITY
 -- GM-VP C 6 ELEVATED_RAILS ENTITY
 -- GM-VP C 14 SPACE_AGE ENTITY
-for k, v in pairs(items['entity_surface_conditions']) do
-    data.raw[v][k].surface_conditions = nil
+if items['entity_surface_conditions'] then
+    for _, v in pairs(items['entity_surface_conditions']) do
+        if data.raw[v] then
+            for _, v2 in pairs(data.raw[v]) do
+                v2.surface_conditions = nil
+            end
+        end
+    end
 end
 
 -- GM-VP C 1 BASE UTILITY_CONSTANTS
