@@ -58,6 +58,559 @@ local items = {
         'thruster',
         'lab',
     },
+    ['recipe_reform'] = {
+        -- BASE 0
+        ['stack-inserter'] = {
+            ingredients = {{type = 'item', name = 'processing-unit', amount = 3}, {type = 'item', name = 'steel-plate', amount = 8}, {type = 'item', name = 'bulk-inserter', amount = 1}}
+        },
+        ['productivity-module-3'] = {
+            ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'productivity-module-2', amount = 4}}
+        },
+        ['efficiency-module-3'] = {
+            ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'efficiency-module-2', amount = 4}}
+        },
+        ['power-armor-mk2'] = {
+            ingredients = {{type = 'item', name = 'efficiency-module-2', amount = 25}, {type = 'item', name = 'speed-module-2', amount = 25}, {type = 'item', name = 'processing-unit', amount = 60}, {type = 'item', name = 'electric-engine-unit', amount = 40}, {type = 'item', name = 'low-density-structure', amount = 30}}
+        },
+        ['personal-roboport-mk2-equipment'] = {
+            ingredients = {{type = 'item', name = 'personal-roboport-equipment', amount = 5}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'low-density-structure', amount = 20}}
+        },
+        -- BASE 5
+        ['artillery-turret'] = {
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'concrete', amount = 60}, {type = 'item', name = 'iron-gear-wheel', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}}
+        },
+        ['artillery-wagon'] = {
+            ingredients = {{type = 'item', name = 'engine-unit', amount = 64}, {type = 'item', name = 'iron-gear-wheel', amount = 10}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'pipe', amount = 16}, {type = 'item', name = 'advanced-circuit', amount = 20}}
+        },
+        ['artillery-shell'] = {
+            ingredients = {{type = 'item', name = 'explosive-cannon-shell', amount = 4}, {type = 'item', name = 'radar', amount = 1}, {type = 'item', name = 'explosives', amount = 8}}
+        },
+        ['express-transport-belt'] = {
+            category = 'crafting-with-fluid',
+        },
+        ['express-underground-belt'] = {
+            category = 'crafting-with-fluid',
+        },
+        -- BASE 10
+        ['express-splitter'] = {
+            category = 'crafting-with-fluid'
+        },
+        ['transport-belt'] = {
+            category = 'crafting',
+        },
+        -- SPACE_AGE 0
+        ['big-mining-drill'] = {
+            category = 'crafting',
+            ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electric-engine-unit', amount = 2}, {type = 'item', name = 'advanced-circuit', amount = 5}}
+        },
+        ['turbo-transport-belt'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 4}, {type = 'item', name = 'express-transport-belt', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 20}}
+        },
+        ['turbo-underground-belt'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'express-underground-belt', amount = 2}, {type = 'fluid', name = 'lubricant', amount = 40}}
+        },
+        ['turbo-splitter'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 4}, {type = 'item', name = 'processing-unit', amount = 2}, {type = 'item', name = 'express-splitter', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 80}}
+        },
+        ['toolbelt-equipment'] = {
+            ingredients = {{type = 'item', name = 'advanced-circuit', amount = 3}, {type = 'item', name = 'steel-plate', amount = 4}}
+        },
+        -- SPACE_AGE 5
+        ['battery-mk3-equipment'] = {
+            ingredients = {{type = 'item', name = 'battery-mk2-equipment', amount = 5}, {type = 'item', name = 'battery', amount = 20}}
+        },
+        ['tesla-ammo'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'battery', amount = 1}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 5}}
+        },
+        ['teslagun'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 25}}
+        },
+        ['tesla-turret'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'teslagun', amount = 1}, {type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
+        },
+        ['mech-armor'] = {
+            ingredients = {{type = 'item', name = 'power-armor-mk2', amount = 1}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'battery', amount = 50}}
+        },
+        -- SPACE_AGE 10
+        ['railgun'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'battery', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 10}}
+        },
+        ['railgun-turret'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 80}, {type = 'item', name = 'processing-unit', amount = 40}, {type = 'item', name = 'battery', amount = 40}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
+        },
+        ['rocket-turret'] = {
+            ingredients = {{type = 'item', name = 'rocket-launcher', amount = 4}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 4}, {type = 'item', name = 'iron-gear-wheel', amount = 20}}
+        },
+        ['fusion-reactor'] = {
+            category = 'crafting',
+            ingredients = {{type = 'item', name = 'nuclear-reactor', amount = 1}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'processing-unit', amount = 320}}
+        },
+        ['fusion-generator'] = {
+            category = 'crafting',
+            ingredients = {{type = 'item', name = 'steam-turbine', amount = 1}, {type = 'item', name = 'steel-plate', amount = 80}, {type = 'item', name = 'processing-unit', amount = 40}}
+        },
+        -- SPACE_AGE 15
+        ['fusion-power-cell'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'fluid', name = 'petroleum-gas', amount = 200}},
+            results = {{type = 'item', name = 'fusion-power-cell', amount = 4}}
+        },
+        ['fusion-reactor-equipment'] = {
+            ingredients = {{type = 'item', name = 'fission-reactor-equipment', amount = 1}, {type = 'item', name = 'fusion-power-cell', amount = 10}, {type = 'item', name = 'steel-plate', amount = 350}, {type = 'item', name = 'processing-unit', amount = 275}}
+        },
+        ['fluoroketone'] = {
+            category = 'cryogenics',
+            ingredients = {{type = 'fluid', name = 'light-oil', amount = 50}, {type = 'fluid', name = 'petroleum-gas', amount = 50}, {type = 'item', name = 'steel-plate', amount = 1}}
+        },
+        ['agricultural-tower'] = {
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electronic-circuit', amount = 3}, {type = 'item', name = 'landfill', amount = 1}}
+        },
+        ['electromagnetic-plant'] = {
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'assembling-machine-3', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'fluid', name = 'sulfuric-acid', amount = 80}}
+        },
+        -- SPACE_AGE 20
+        ['cryogenic-plant'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'chemical-plant', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'fluid', name = 'water', amount = 80}}
+        },
+        ['biolab'] = {
+            ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 60}, {type = 'item', name = 'processing-unit', amount = 60}, {type = 'item', name = 'uranium-235', amount = 3}}
+        },
+        ['foundry'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'coal', amount = 40}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'item', name = 'electric-furnace', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 80}}
+        },
+        ['turbo-loader'] = {
+            category = 'crafting',
+        },
+        ['molten-iron'] = {
+            energy_required = 1.6,
+            ingredients = {{type = 'item', name = 'iron-ore', amount = 1}},
+            results = {{type = 'fluid', name = 'molten-iron', amount = 10}}
+        },
+        -- SPACE_AGE 25
+        ['molten-copper'] = {
+            energy_required = 1.6,
+            ingredients = {{type = 'item', name = 'copper-ore', amount = 1}},
+            results = {{type = 'fluid', name = 'molten-copper', amount = 10}}
+        },
+        ['casting-iron'] = {
+            energy_required = 1.6,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 10, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'iron-plate', amount = 1}}
+        },
+        ['casting-copper'] = {
+            energy_required = 1.6,
+            ingredients = {{type = 'fluid', name = 'molten-copper', amount = 10, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'copper-plate', amount = 1}}
+        },
+        ['casting-steel'] = {
+            energy_required = 32,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 100, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'steel-plate', amount = 3}}
+        },
+        ['casting-iron-gear-wheel'] = {
+            energy_required = 6.9,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 40, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'iron-gear-wheel', amount = 3}}
+        },
+        -- SPACE_AGE 30
+        ['casting-iron-stick'] = {
+            energy_required = 3.7,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'iron-stick', amount = 6}}
+        },
+        ['casting-pipe'] = {
+            energy_required = 3.45,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'pipe', amount = 3}}
+        },
+        ['casting-pipe-to-ground'] = {
+            energy_required = 8.25,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 50, fluidbox_multiplier = 10}, {type = 'item', name = 'pipe', amount = 10}},
+            results = {{type = 'item', name = 'pipe-to-ground', amount = 3}}
+        },
+        ['concrete-from-molten-iron'] = {
+            energy_required = 5,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'stone-brick', amount = 5}},
+            results = {{type = 'item', name = 'concrete', amount = 10}}
+        },
+        ['casting-copper-cable'] = {
+            energy_required = 1.85,
+            ingredients = {{type = 'fluid', name = 'molten-copper', amount = 10, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'copper-cable', amount = 3}}
+        },
+        -- SPACE_AGE 35
+        ['metallurgic-science-pack'] = {
+            energy_required = 10,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 200, fluidbox_multiplier = 10}, {type = 'fluid', name = 'molten-copper', amount = 200, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'metallurgic-science-pack', amount = 2}}
+        },
+        ['electromagnetic-science-pack'] = {
+            energy_required = 10,
+            ingredients = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}, {type = 'item', name = 'solar-panel', amount = 1}, {type = 'item', name = 'accumulator', amount = 1}},
+            results = {{type = 'item', name = 'electromagnetic-science-pack', amount = 2}}
+        },
+        ['cryogenic-science-pack'] = {
+            energy_required = 10,
+            ingredients = {{type = 'fluid', name = 'fluoroketone-cold', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}, {type = 'item', name = 'ice', amount = 5}},
+            results = {{type = 'item', name = 'cryogenic-science-pack', amount = 2}, {type = 'fluid', name = 'fluoroketone-hot', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
+        },
+        ['electrolyte'] = {
+            energy_required = 2,
+            ingredients = {{type = 'fluid', name = 'heavy-oil', amount = 10, fluidbox_multiplier = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'stone', amount = 1}},
+            results = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}}
+        },
+    },
+    ['recipe'] = {
+        -- QUALITY 0
+        ['recycler'] = true,
+        -- SPACE_AGE 0
+        ['lightning-collector'] = true,
+        ['lightning-rod'] = true,
+        ['agricultural-science-pack'] = true,
+        ['promethium-science-pack'] = true,
+        ['space-science-pack'] = true,
+        -- SPACE_AGE 5
+        ['burnt-spoilage'] = true,
+        ['fish-breeding'] = true,
+        ['nutrients-from-fish'] = true,
+        ['nutrients-from-biter-egg'] = true,
+        ['yumako-processing'] = true,
+        -- SPACE_AGE 10
+        ['jellynut-processing'] = true,
+        ['copper-bacteria'] = true,
+        ['copper-bacteria-cultivation'] = true,
+        ['iron-bacteria'] = true,
+        ['iron-bacteria-cultivation'] = true,
+        -- SPACE_AGE 15
+        ['nutrients-from-spoilage'] = true,
+        ['nutrients-from-yumako-mash'] = true,
+        ['nutrients-from-bioflux'] = true,
+        ['pentapod-egg'] = true,
+        ['rocket-fuel-from-jelly'] = true,
+        -- SPACE_AGE 20
+        ['bioflux'] = true,
+        ['bioplastic'] = true,
+        ['biosulfur'] = true,
+        ['biolubricant'] = true,
+        ['carbon-fiber'] = true,
+        -- SPACE_AGE 25
+        ['artificial-yumako-soil'] = true,
+        ['overgrowth-yumako-soil'] = true,
+        ['artificial-jellynut-soil'] = true,
+        ['overgrowth-jellynut-soil'] = true,
+        ['biochamber'] = true,
+        -- SPACE_AGE 30
+        ['captive-biter-spawner'] = true,
+        ['capture-robot-rocket'] = true,
+        ['biter-egg'] = true,
+        ['spoilage-from-nutrients'] = true,
+        ['tungsten-carbide'] = true,
+        -- SPACE_AGE 35
+        ['tungsten-plate'] = true,
+        ['coal-synthesis'] = true,
+        ['spoilage-recycling'] = true,
+        ['asteroid-collector'] = true,
+        ['ammoniacal-solution-separation'] = true,
+        -- SPACE_AGE 40
+        ['lithium'] = true,
+        ['lithium-plate'] = true,
+        ['ice-platform'] = true,
+        ['solid-fuel-from-ammonia'] = true,
+        ['ammonia-rocket-fuel'] = true,
+        -- SPACE_AGE 45
+        ['quantum-processor'] = true,
+        ['holmium-solution'] = true,
+        ['holmium-plate'] = true,
+        ['supercapacitor'] = true,
+        ['superconductor'] = true,
+        -- SPACE_AGE 50
+        ['molten-iron-from-lava'] = true,
+        ['molten-copper-from-lava'] = true,
+        ['acid-neutralisation'] = true,
+        ['simple-coal-liquefaction'] = true,
+        ['scrap-recycling'] = true,
+        -- SPACE_AGE 55
+        ['foundation'] = true,
+        ['steam-condensation'] = true,
+        ['thruster'] = true,
+        ['thruster-fuel'] = true,
+        ['thruster-oxidizer'] = true,
+        -- SPACE_AGE 60
+        ['advanced-thruster-fuel'] = true,
+        ['advanced-thruster-oxidizer'] = true,
+        ['metallic-asteroid-crushing'] = true,
+        ['carbonic-asteroid-crushing'] = true,
+        ['oxide-asteroid-crushing'] = true,
+        -- SPACE_AGE 65
+        ['advanced-metallic-asteroid-crushing'] = true,
+        ['advanced-carbonic-asteroid-crushing'] = true,
+        ['advanced-oxide-asteroid-crushing'] = true,
+        ['metallic-asteroid-reprocessing'] = true,
+        ['carbonic-asteroid-reprocessing'] = true,
+        -- SPACE_AGE 70
+        ['oxide-asteroid-reprocessing'] = true,
+        ['space-platform-foundation'] = true,
+        ['space-platform-starter-pack'] = true,
+        ['carbon'] = true,
+        ['crusher'] = true,
+        -- SPACE_AGE 75
+        ['casting-low-density-structure'] = true
+    },
+    ['item'] = {
+        -- QUALITY 0
+        ['recycler'] = true,
+        -- SPACE_AGE 0
+        ['artificial-yumako-soil'] = true,
+        ['overgrowth-yumako-soil'] = true,
+        ['artificial-jellynut-soil'] = true,
+        ['overgrowth-jellynut-soil'] = true,
+        ['ice-platform'] = true,
+        -- SPACE_AGE 5
+        ['foundation'] = true,
+        ['biochamber'] = true,
+        ['captive-biter-spawner'] = true,
+        ['tungsten-ore'] = true,
+        ['tungsten-carbide'] = true,
+        -- SPACE_AGE 10
+        ['tungsten-plate'] = true,
+        ['scrap'] = true,
+        ['holmium-ore'] = true,
+        ['holmium-plate'] = true,
+        ['superconductor'] = true,
+        -- SPACE_AGE 15
+        ['supercapacitor'] = true,
+        ['yumako-seed'] = true,
+        ['jellynut-seed'] = true,
+        ['iron-bacteria'] = true,
+        ['copper-bacteria'] = true,
+        -- SPACE_AGE 20
+        ['spoilage'] = true,
+        ['nutrients'] = true,
+        ['carbon-fiber'] = true,
+        ['biter-egg'] = true,
+        ['pentapod-egg'] = true,
+        -- SPACE_AGE 25
+        ['lithium'] = true,
+        ['lithium-plate'] = true,
+        ['quantum-processor'] = true,
+        ['carbon'] = true,
+        ['calcite'] = true,
+        -- SPACE_AGE 30
+        ['space-platform-foundation'] = true,
+        ['asteroid-collector'] = true,
+        ['crusher'] = true,
+        ['thruster'] = true,
+        ['space-platform-hub'] = true,
+        -- SPACE_AGE 35
+        ['carbonic-asteroid-chunk'] = true,
+        ['metallic-asteroid-chunk'] = true,
+        ['promethium-asteroid-chunk'] = true,
+        ['oxide-asteroid-chunk'] = true,
+    },
+    ['tips_and_tricks_item'] = {
+        ['quality'] = true,
+        ['space-age'] = true,
+        ['space-platform'] = true,
+        ['spoilables'] = true
+    },
+    ['achievement'] = {
+        -- SPACE_AGE 0
+        ['logistic-network-embargo'] = 'dont-build-entity-achievement',
+        ['reach-for-the-stars'] = 'create-platform-achievement',
+        ['second-star-to-the-right-and-straight-on-till-morning'] = 'complete-objective-achievement',
+        ['rush-to-space'] = 'dont-research-before-researching-achievement',
+        ['shattered-planet-1'] = 'space-connection-distance-traveled-achievement',
+        -- SPACE_AGE 5
+        ['shattered-planet-2'] = 'space-connection-distance-traveled-achievement',
+        ['shattered-planet-3'] = 'space-connection-distance-traveled-achievement',
+        ['research-with-metallurgics'] = 'research-with-science-pack-achievement',
+        ['research-with-agriculture'] = 'research-with-science-pack-achievement',
+        ['research-with-electromagnetics'] = 'research-with-science-pack-achievement',
+        -- SPACE_AGE 10
+        ['research-with-cryogenics'] = 'research-with-science-pack-achievement',
+        ['research-with-promethium'] = 'research-with-science-pack-achievement',
+        ['it-stinks-and-they-do-like-it'] = 'group-attack-achievement',
+        ['get-off-my-lawn'] = 'group-attack-achievement',
+        ['if-it-bleeds'] = 'kill-achievement',
+        -- SPACE_AGE 15
+        ['we-need-bigger-guns'] = 'kill-achievement',
+        ['size-doesnt-matter'] = 'kill-achievement',
+        ['visit-vulcanus'] = 'change-surface-achievement',
+        ['visit-gleba'] = 'change-surface-achievement',
+        ['visit-fulgora'] = 'change-surface-achievement',
+        -- SPACE_AGE 20
+        ['visit-aquilo'] = 'change-surface-achievement'
+    },
+    ['hidden_resource'] = {
+        -- SPACE_AGE RESOURCE_GENERATION 0
+        'vulcanus-coal',
+        'tungsten-ore',
+        'sulfuric-acid-geyser',
+        'fulgora-islands',
+        'gleba-enemy-base',
+        -- SPACE_AGE RESOURCE_GENERATION 5
+        'fluorine-vent',
+        'lithium-brine',
+        'gleba-stone',
+        'aquilo-crude-oil',
+        'gleba-cliff',
+        -- SPACE_AGE RESOURCE_GENERATION 10
+        'fulgora-cliff',
+        'vulcanus-volcanism',
+        'gleba-water',
+        'gleba-plants',
+        'calcite',
+        -- SPACE_AGE RESOURCE_GENERATION 15
+        'scrap',
+    },
+    ['hidden'] = {
+        -- QUALITY ENTITY 0
+        ['recycler'] = 'furnace',
+        -- SPACE_AGE ENTITY 0
+        ['biochamber'] = 'assembling-machine',
+        ['captive-biter-spawner'] = 'assembling-machine',
+        ['crusher'] = 'assembling-machine',
+        ['lightning-rod']= 'lightning-attractor',
+        ['lightning-collector'] = 'lightning-attractor',
+        -- SPACE_AGE ENTITY 5
+        ['fulgoran-ruin-attractor'] = 'lightning-attractor',
+        ['asteroid-collector'] = 'asteroid-collector',
+        ['space-platform-hub'] = 'space-platform-hub',
+        ['yumako-tree'] = 'plant',
+        ['jellystem'] = 'plant',
+        -- SPACE_AGE ENTITY 10
+        ['thruster'] = 'thruster',
+        ['lightning'] = 'lightning',
+        ['small-demolisher'] = 'segmented-unit',
+        ['medium-demolisher'] = 'segmented-unit',
+        ['big-demolisher'] = 'segmented-unit',
+        -- SPACE_AGE ENTITY 15
+        ['small-wriggler-pentapod-premature'] = 'unit',
+        ['medium-wriggler-pentapod-premature'] = 'unit',
+        ['big-wriggler-pentapod-premature'] = 'unit',
+        ['small-wriggler-pentapod'] = 'unit',
+        ['medium-wriggler-pentapod'] = 'unit',
+        -- SPACE_AGE ENTITY 20
+        ['big-wriggler-pentapod'] = 'unit',
+        ['small-strafer-pentapod'] = 'spider-unit',
+        ['medium-strafer-pentapod'] = 'spider-unit',
+        ['big-strafer-pentapod'] = 'spider-unit',
+        ['small-stomper-pentapod'] = 'spider-unit',
+        -- SPACE_AGE ENTITY 25
+        ['medium-stomper-pentapod'] = 'spider-unit',
+        ['big-stomper-pentapod'] = 'spider-unit',
+        ['gleba-spawner'] = 'unit-spawner',
+        ['gleba-spawner-small'] = 'unit-spawner',
+        ['ashland-lichen-tree'] = 'tree',
+        -- SPACE_AGE ENTITY 30
+        ['ashland-lichen-tree-flaming'] = 'tree',
+        ['slipstack'] = 'tree',
+        ['funneltrunk'] = 'tree',
+        ['hairyclubnub'] = 'tree',
+        ['teflilly'] = 'tree',
+        -- SPACE_AGE ENTITY 35
+        ['lickmaw'] = 'tree',
+        ['stingfrond'] = 'tree',
+        ['boompuff'] = 'tree',
+        ['sunnycomb'] = 'tree',
+        ['cuttlepop'] = 'tree',
+        -- SPACE_AGE ENTITY 40
+        ['water-cane'] = 'tree',
+        ['small-stomper-shell'] = 'simple-entity',
+        ['medium-stomper-shell'] = 'simple-entity',
+        ['big-stomper-shell'] = 'simple-entity',
+        ['big-volcanic-rock'] = 'simple-entity',
+        -- SPACE_AGE ENTITY 45
+        ['huge-volcanic-rock'] = 'simple-entity',
+        ['copper-stromatolite'] = 'simple-entity',
+        ['iron-stromatolite'] = 'simple-entity',
+        ['vulcanus-chimney-short'] = 'simple-entity',
+        ['vulcanus-chimney-truncated'] = 'simple-entity',
+        -- SPACE_AGE ENTITY 50
+        ['vulcanus-chimney'] = 'simple-entity',
+        ['vulcanus-chimney-cold'] = 'simple-entity',
+        ['vulcanus-chimney-faded'] = 'simple-entity',
+        ['big-fulgora-rock'] = 'simple-entity',
+        ['fulgurite'] = 'simple-entity',
+        -- SPACE_AGE ENTITY 55
+        ['fulgurite-small'] = 'simple-entity',
+        ['fulgoran-ruin-small'] = 'simple-entity',
+        ['fulgoran-ruin-medium'] = 'simple-entity',
+        ['fulgoran-ruin-stonehenge'] = 'simple-entity',
+        ['fulgoran-ruin-big'] = 'simple-entity',
+        -- SPACE_AGE ENTITY 60
+        ['fulgoran-ruin-colossal'] = 'simple-entity',
+        ['fulgoran-ruin-huge'] = 'simple-entity',
+        ['fulgoran-ruin-vault'] = 'simple-entity',
+        ['lithium-iceberg-big'] = 'simple-entity',
+        ['lithium-iceberg-huge'] = 'simple-entity',
+        -- SPACE_AGE ENTITY 65
+        ['small-demolisher-corpse'] = 'simple-entity',
+        ['medium-demolisher-corpse'] = 'simple-entity',
+        ['big-demolisher-corpse'] = 'simple-entity',
+        -- SPACE_AGE FLUID 0
+        ['thruster-oxidizer'] = 'fluid',
+        ['thruster-fuel'] = 'fluid',
+        ['lithium-brine'] = 'fluid',
+        ['fluorine'] = 'fluid',
+        ['ammonia'] = 'fluid',
+        -- SPACE_AGE FLUID 5
+        ['ammoniacal-solution'] = 'fluid',
+        ['holmium-solution'] = 'fluid',
+        ['lava'] = 'fluid',
+        -- SPACE_AGE ITEM 0
+        ['bioflux'] = 'capsule',
+        ['jelly'] = 'capsule',
+        ['jellynut'] = 'capsule',
+        ['yumako'] = 'capsule',
+        ['yumako-mash'] = 'capsule',
+        -- SPACE_AGE ITEM 5
+        ['capture-robot-rocket'] = 'ammo',
+        ['space-platform-starter-pack'] = 'space-platform-starter-pack',
+        -- SPACE_AGE MAP_GENERATION 0
+        ['vulcanus_coal'] = 'autoplace-control',
+        ['tungsten_ore'] = 'autoplace-control',
+        ['calcite'] = 'autoplace-control',
+        ['sulfuric_acid_geyser'] = 'autoplace-control',
+        ['scrap'] = 'autoplace-control',
+        -- SPACE_AGE MAP_GENERATION 5
+        ['fluorine_vent'] = 'autoplace-control',
+        ['lithium_brine'] = 'autoplace-control',
+        ['gleba_stone'] = 'autoplace-control',
+        ['aquilo_crude_oil'] = 'autoplace-control',
+        ['gleba_cliff'] = 'autoplace-control',
+        -- SPACE_AGE MAP_GENERATION 10
+        ['fulgora_cliff'] = 'autoplace-control',
+        ['vulcanus_volcanism'] = 'autoplace-control',
+        ['gleba_water'] = 'autoplace-control',
+        ['gleba_plants'] = 'autoplace-control',
+        ['gleba_enemy_base'] = 'autoplace-control',
+        -- SPACE_AGE MAP_GENERATION 15
+        ['fulgora_islands'] = 'autoplace-control',
+        ['cliff-fulgora'] = 'cliff',
+        ['cliff-gleba'] = 'cliff',
+        ['cliff-vulcanus'] = 'cliff',
+        ['crater-cliff'] = 'cliff',
+        -- SPACE_AGE MAP_GENERATION 20
+        ['space-platform'] = 'surface',
+        -- SPACE_AGE TILE 0
+        ['empty-space'] = 'tile',
+        ['space-platform-foundation'] = 'tile',
+        ['foundation'] = 'tile',
+        -- SPACE_AGE TOOL 0
+        ['agricultural-science-pack'] = 'tool',
+        ['promethium-science-pack'] = 'tool',
+    },
     ['technology_reform'] = {
         -- BASE 0
         ['speed-module-2'] = {
@@ -360,559 +913,6 @@ local items = {
         ['calcite-processing'] = true,
         -- SPACE_AGE 35
     },
-    ['recipe_reform'] = {
-        -- BASE 0
-        ['stack-inserter'] = {
-            ingredients = {{type = 'item', name = 'processing-unit', amount = 3}, {type = 'item', name = 'steel-plate', amount = 8}, {type = 'item', name = 'bulk-inserter', amount = 1}}
-        },
-        ['productivity-module-3'] = {
-            ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'productivity-module-2', amount = 4}}
-        },
-        ['efficiency-module-3'] = {
-            ingredients = {{type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'efficiency-module-2', amount = 4}}
-        },
-        ['power-armor-mk2'] = {
-            ingredients = {{type = 'item', name = 'efficiency-module-2', amount = 25}, {type = 'item', name = 'speed-module-2', amount = 25}, {type = 'item', name = 'processing-unit', amount = 60}, {type = 'item', name = 'electric-engine-unit', amount = 40}, {type = 'item', name = 'low-density-structure', amount = 30}}
-        },
-        ['personal-roboport-mk2-equipment'] = {
-            ingredients = {{type = 'item', name = 'personal-roboport-equipment', amount = 5}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'low-density-structure', amount = 20}}
-        },
-        -- BASE 5
-        ['artillery-turret'] = {
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'concrete', amount = 60}, {type = 'item', name = 'iron-gear-wheel', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}}
-        },
-        ['artillery-wagon'] = {
-            ingredients = {{type = 'item', name = 'engine-unit', amount = 64}, {type = 'item', name = 'iron-gear-wheel', amount = 10}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'pipe', amount = 16}, {type = 'item', name = 'advanced-circuit', amount = 20}}
-        },
-        ['artillery-shell'] = {
-            ingredients = {{type = 'item', name = 'explosive-cannon-shell', amount = 4}, {type = 'item', name = 'radar', amount = 1}, {type = 'item', name = 'explosives', amount = 8}}
-        },
-        ['express-transport-belt'] = {
-            category = 'crafting-with-fluid',
-        },
-        ['express-underground-belt'] = {
-            category = 'crafting-with-fluid',
-        },
-        -- BASE 10
-        ['express-splitter'] = {
-            category = 'crafting-with-fluid'
-        },
-        ['transport-belt'] = {
-            category = 'crafting',
-        },
-        -- SPACE_AGE 0
-        ['big-mining-drill'] = {
-            category = 'crafting',
-            ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electric-engine-unit', amount = 2}, {type = 'item', name = 'advanced-circuit', amount = 5}}
-        },
-        ['turbo-transport-belt'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 4}, {type = 'item', name = 'express-transport-belt', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 20}}
-        },
-        ['turbo-underground-belt'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'express-underground-belt', amount = 2}, {type = 'fluid', name = 'lubricant', amount = 40}}
-        },
-        ['turbo-splitter'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 4}, {type = 'item', name = 'processing-unit', amount = 2}, {type = 'item', name = 'express-splitter', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 80}}
-        },
-        ['toolbelt-equipment'] = {
-            ingredients = {{type = 'item', name = 'advanced-circuit', amount = 3}, {type = 'item', name = 'steel-plate', amount = 4}}
-        },
-        -- SPACE_AGE 5
-        ['battery-mk3-equipment'] = {
-            ingredients = {{type = 'item', name = 'battery-mk2-equipment', amount = 5}, {type = 'item', name = 'battery', amount = 20}}
-        },
-        ['tesla-ammo'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'battery', amount = 1}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 5}}
-        },
-        ['teslagun'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 25}}
-        },
-        ['tesla-turret'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'teslagun', amount = 1}, {type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
-        },
-        ['mech-armor'] = {
-            ingredients = {{type = 'item', name = 'power-armor-mk2', amount = 1}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'battery', amount = 50}}
-        },
-        -- SPACE_AGE 10
-        ['railgun'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'battery', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 10}}
-        },
-        ['railgun-turret'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 80}, {type = 'item', name = 'processing-unit', amount = 40}, {type = 'item', name = 'battery', amount = 40}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
-        },
-        ['rocket-turret'] = {
-            ingredients = {{type = 'item', name = 'rocket-launcher', amount = 4}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 4}, {type = 'item', name = 'iron-gear-wheel', amount = 20}}
-        },
-        ['fusion-reactor'] = {
-            category = 'crafting',
-            ingredients = {{type = 'item', name = 'nuclear-reactor', amount = 1}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'processing-unit', amount = 320}}
-        },
-        ['fusion-generator'] = {
-            category = 'crafting',
-            ingredients = {{type = 'item', name = 'steam-turbine', amount = 1}, {type = 'item', name = 'steel-plate', amount = 80}, {type = 'item', name = 'processing-unit', amount = 40}}
-        },
-        -- SPACE_AGE 15
-        ['fusion-power-cell'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'fluid', name = 'petroleum-gas', amount = 200}},
-            results = {{type = 'item', name = 'fusion-power-cell', amount = 4}}
-        },
-        ['fusion-reactor-equipment'] = {
-            ingredients = {{type = 'item', name = 'fission-reactor-equipment', amount = 1}, {type = 'item', name = 'fusion-power-cell', amount = 10}, {type = 'item', name = 'steel-plate', amount = 350}, {type = 'item', name = 'processing-unit', amount = 275}}
-        },
-        ['fluoroketone'] = {
-            category = 'cryogenics',
-            ingredients = {{type = 'fluid', name = 'light-oil', amount = 50}, {type = 'fluid', name = 'petroleum-gas', amount = 50}, {type = 'item', name = 'steel-plate', amount = 1}}
-        },
-        ['agricultural-tower'] = {
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electronic-circuit', amount = 3}, {type = 'item', name = 'landfill', amount = 1}}
-        },
-        ['electromagnetic-plant'] = {
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'assembling-machine-3', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'fluid', name = 'sulfuric-acid', amount = 80}}
-        },
-        -- SPACE_AGE 20
-        ['cryogenic-plant'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'chemical-plant', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'fluid', name = 'water', amount = 80}}
-        },
-        ['biolab'] = {
-            ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 60}, {type = 'item', name = 'processing-unit', amount = 60}, {type = 'item', name = 'uranium-235', amount = 3}}
-        },
-        ['foundry'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'coal', amount = 40}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'item', name = 'electric-furnace', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 80}}
-        },
-        ['turbo-loader'] = {
-            category = 'crafting',
-        },
-        ['molten-iron'] = {
-            energy_required = 1.6,
-            ingredients = {{type = 'item', name = 'iron-ore', amount = 1}},
-            results = {{type = 'fluid', name = 'molten-iron', amount = 10}}
-        },
-        -- SPACE_AGE 25
-        ['molten-copper'] = {
-            energy_required = 1.6,
-            ingredients = {{type = 'item', name = 'copper-ore', amount = 1}},
-            results = {{type = 'fluid', name = 'molten-copper', amount = 10}}
-        },
-        ['casting-iron'] = {
-            energy_required = 1.6,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 10, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'iron-plate', amount = 1}}
-        },
-        ['casting-copper'] = {
-            energy_required = 1.6,
-            ingredients = {{type = 'fluid', name = 'molten-copper', amount = 10, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'copper-plate', amount = 1}}
-        },
-        ['casting-steel'] = {
-            energy_required = 32,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 100, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'steel-plate', amount = 3}}
-        },
-        ['casting-iron-gear-wheel'] = {
-            energy_required = 6.9,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 40, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'iron-gear-wheel', amount = 3}}
-        },
-        -- SPACE_AGE 30
-        ['casting-iron-stick'] = {
-            energy_required = 3.7,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'iron-stick', amount = 6}}
-        },
-        ['casting-pipe'] = {
-            energy_required = 3.45,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'pipe', amount = 3}}
-        },
-        ['casting-pipe-to-ground'] = {
-            energy_required = 8.25,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 50, fluidbox_multiplier = 10}, {type = 'item', name = 'pipe', amount = 10}},
-            results = {{type = 'item', name = 'pipe-to-ground', amount = 3}}
-        },
-        ['concrete-from-molten-iron'] = {
-            energy_required = 5,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'stone-brick', amount = 5}},
-            results = {{type = 'item', name = 'concrete', amount = 10}}
-        },
-        ['casting-copper-cable'] = {
-            energy_required = 1.85,
-            ingredients = {{type = 'fluid', name = 'molten-copper', amount = 10, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'copper-cable', amount = 3}}
-        },
-        -- SPACE_AGE 35
-        ['metallurgic-science-pack'] = {
-            energy_required = 10,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 200, fluidbox_multiplier = 10}, {type = 'fluid', name = 'molten-copper', amount = 200, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'metallurgic-science-pack', amount = 2}}
-        },
-        ['electromagnetic-science-pack'] = {
-            energy_required = 10,
-            ingredients = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}, {type = 'item', name = 'solar-panel', amount = 1}, {type = 'item', name = 'accumulator', amount = 1}},
-            results = {{type = 'item', name = 'electromagnetic-science-pack', amount = 2}}
-        },
-        ['cryogenic-science-pack'] = {
-            energy_required = 10,
-            ingredients = {{type = 'fluid', name = 'fluoroketone-cold', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}, {type = 'item', name = 'ice', amount = 5}},
-            results = {{type = 'item', name = 'cryogenic-science-pack', amount = 2}, {type = 'fluid', name = 'fluoroketone-hot', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
-        },
-        ['electrolyte'] = {
-            energy_required = 2,
-            ingredients = {{type = 'fluid', name = 'heavy-oil', amount = 10, fluidbox_multiplier = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'stone', amount = 1}},
-            results = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}}
-        },
-    },
-    ['tips_and_tricks_item'] = {
-        ['quality'] = true,
-        ['space-age'] = true,
-        ['space-platform'] = true,
-        ['spoilables'] = true
-    },
-    ['achievement'] = {
-        -- SPACE_AGE 0
-        ['logistic-network-embargo'] = 'dont-build-entity-achievement',
-        ['reach-for-the-stars'] = 'create-platform-achievement',
-        ['second-star-to-the-right-and-straight-on-till-morning'] = 'complete-objective-achievement',
-        ['rush-to-space'] = 'dont-research-before-researching-achievement',
-        ['shattered-planet-1'] = 'space-connection-distance-traveled-achievement',
-        -- SPACE_AGE 5
-        ['shattered-planet-2'] = 'space-connection-distance-traveled-achievement',
-        ['shattered-planet-3'] = 'space-connection-distance-traveled-achievement',
-        ['research-with-metallurgics'] = 'research-with-science-pack-achievement',
-        ['research-with-agriculture'] = 'research-with-science-pack-achievement',
-        ['research-with-electromagnetics'] = 'research-with-science-pack-achievement',
-        -- SPACE_AGE 10
-        ['research-with-cryogenics'] = 'research-with-science-pack-achievement',
-        ['research-with-promethium'] = 'research-with-science-pack-achievement',
-        ['it-stinks-and-they-do-like-it'] = 'group-attack-achievement',
-        ['get-off-my-lawn'] = 'group-attack-achievement',
-        ['if-it-bleeds'] = 'kill-achievement',
-        -- SPACE_AGE 15
-        ['we-need-bigger-guns'] = 'kill-achievement',
-        ['size-doesnt-matter'] = 'kill-achievement',
-        ['visit-vulcanus'] = 'change-surface-achievement',
-        ['visit-gleba'] = 'change-surface-achievement',
-        ['visit-fulgora'] = 'change-surface-achievement',
-        -- SPACE_AGE 20
-        ['visit-aquilo'] = 'change-surface-achievement'
-    },
-    ['recipe'] = {
-        -- QUALITY 0
-        ['recycler'] = true,
-        -- SPACE_AGE 0
-        ['lightning-collector'] = true,
-        ['lightning-rod'] = true,
-        ['agricultural-science-pack'] = true,
-        ['promethium-science-pack'] = true,
-        ['space-science-pack'] = true,
-        -- SPACE_AGE 5
-        ['burnt-spoilage'] = true,
-        ['fish-breeding'] = true,
-        ['nutrients-from-fish'] = true,
-        ['nutrients-from-biter-egg'] = true,
-        ['yumako-processing'] = true,
-        -- SPACE_AGE 10
-        ['jellynut-processing'] = true,
-        ['copper-bacteria'] = true,
-        ['copper-bacteria-cultivation'] = true,
-        ['iron-bacteria'] = true,
-        ['iron-bacteria-cultivation'] = true,
-        -- SPACE_AGE 15
-        ['nutrients-from-spoilage'] = true,
-        ['nutrients-from-yumako-mash'] = true,
-        ['nutrients-from-bioflux'] = true,
-        ['pentapod-egg'] = true,
-        ['rocket-fuel-from-jelly'] = true,
-        -- SPACE_AGE 20
-        ['bioflux'] = true,
-        ['bioplastic'] = true,
-        ['biosulfur'] = true,
-        ['biolubricant'] = true,
-        ['carbon-fiber'] = true,
-        -- SPACE_AGE 25
-        ['artificial-yumako-soil'] = true,
-        ['overgrowth-yumako-soil'] = true,
-        ['artificial-jellynut-soil'] = true,
-        ['overgrowth-jellynut-soil'] = true,
-        ['biochamber'] = true,
-        -- SPACE_AGE 30
-        ['captive-biter-spawner'] = true,
-        ['capture-robot-rocket'] = true,
-        ['biter-egg'] = true,
-        ['spoilage-from-nutrients'] = true,
-        ['tungsten-carbide'] = true,
-        -- SPACE_AGE 35
-        ['tungsten-plate'] = true,
-        ['coal-synthesis'] = true,
-        ['spoilage-recycling'] = true,
-        ['asteroid-collector'] = true,
-        ['ammoniacal-solution-separation'] = true,
-        -- SPACE_AGE 40
-        ['lithium'] = true,
-        ['lithium-plate'] = true,
-        ['ice-platform'] = true,
-        ['solid-fuel-from-ammonia'] = true,
-        ['ammonia-rocket-fuel'] = true,
-        -- SPACE_AGE 45
-        ['quantum-processor'] = true,
-        ['holmium-solution'] = true,
-        ['holmium-plate'] = true,
-        ['supercapacitor'] = true,
-        ['superconductor'] = true,
-        -- SPACE_AGE 50
-        ['molten-iron-from-lava'] = true,
-        ['molten-copper-from-lava'] = true,
-        ['acid-neutralisation'] = true,
-        ['simple-coal-liquefaction'] = true,
-        ['scrap-recycling'] = true,
-        -- SPACE_AGE 55
-        ['foundation'] = true,
-        ['steam-condensation'] = true,
-        ['thruster'] = true,
-        ['thruster-fuel'] = true,
-        ['thruster-oxidizer'] = true,
-        -- SPACE_AGE 60
-        ['advanced-thruster-fuel'] = true,
-        ['advanced-thruster-oxidizer'] = true,
-        ['metallic-asteroid-crushing'] = true,
-        ['carbonic-asteroid-crushing'] = true,
-        ['oxide-asteroid-crushing'] = true,
-        -- SPACE_AGE 65
-        ['advanced-metallic-asteroid-crushing'] = true,
-        ['advanced-carbonic-asteroid-crushing'] = true,
-        ['advanced-oxide-asteroid-crushing'] = true,
-        ['metallic-asteroid-reprocessing'] = true,
-        ['carbonic-asteroid-reprocessing'] = true,
-        -- SPACE_AGE 70
-        ['oxide-asteroid-reprocessing'] = true,
-        ['space-platform-foundation'] = true,
-        ['space-platform-starter-pack'] = true,
-        ['carbon'] = true,
-        ['crusher'] = true,
-        -- SPACE_AGE 75
-        ['casting-low-density-structure'] = true
-    },
-    ['item'] = {
-        -- QUALITY 0
-        ['recycler'] = true,
-        -- SPACE_AGE 0
-        ['artificial-yumako-soil'] = true,
-        ['overgrowth-yumako-soil'] = true,
-        ['artificial-jellynut-soil'] = true,
-        ['overgrowth-jellynut-soil'] = true,
-        ['ice-platform'] = true,
-        -- SPACE_AGE 5
-        ['foundation'] = true,
-        ['biochamber'] = true,
-        ['captive-biter-spawner'] = true,
-        ['tungsten-ore'] = true,
-        ['tungsten-carbide'] = true,
-        -- SPACE_AGE 10
-        ['tungsten-plate'] = true,
-        ['scrap'] = true,
-        ['holmium-ore'] = true,
-        ['holmium-plate'] = true,
-        ['superconductor'] = true,
-        -- SPACE_AGE 15
-        ['supercapacitor'] = true,
-        ['yumako-seed'] = true,
-        ['jellynut-seed'] = true,
-        ['iron-bacteria'] = true,
-        ['copper-bacteria'] = true,
-        -- SPACE_AGE 20
-        ['spoilage'] = true,
-        ['nutrients'] = true,
-        ['carbon-fiber'] = true,
-        ['biter-egg'] = true,
-        ['pentapod-egg'] = true,
-        -- SPACE_AGE 25
-        ['lithium'] = true,
-        ['lithium-plate'] = true,
-        ['quantum-processor'] = true,
-        ['carbon'] = true,
-        ['calcite'] = true,
-        -- SPACE_AGE 30
-        ['space-platform-foundation'] = true,
-        ['asteroid-collector'] = true,
-        ['crusher'] = true,
-        ['thruster'] = true,
-        ['space-platform-hub'] = true,
-        -- SPACE_AGE 35
-        ['carbonic-asteroid-chunk'] = true,
-        ['metallic-asteroid-chunk'] = true,
-        ['promethium-asteroid-chunk'] = true,
-        ['oxide-asteroid-chunk'] = true,
-    },
-    ['hidden_resource'] = {
-        -- SPACE_AGE RESOURCE_GENERATION 0
-        'vulcanus-coal',
-        'tungsten-ore',
-        'sulfuric-acid-geyser',
-        'fulgora-islands',
-        'gleba-enemy-base',
-        -- SPACE_AGE RESOURCE_GENERATION 5
-        'fluorine-vent',
-        'lithium-brine',
-        'gleba-stone',
-        'aquilo-crude-oil',
-        'gleba-cliff',
-        -- SPACE_AGE RESOURCE_GENERATION 10
-        'fulgora-cliff',
-        'vulcanus-volcanism',
-        'gleba-water',
-        'gleba-plants',
-        'calcite',
-        -- SPACE_AGE RESOURCE_GENERATION 15
-        'scrap',
-    },
-    ['hidden'] = {
-        -- QUALITY ENTITY 0
-        ['recycler'] = 'furnace',
-        -- SPACE_AGE ENTITY 0
-        ['biochamber'] = 'assembling-machine',
-        ['captive-biter-spawner'] = 'assembling-machine',
-        ['crusher'] = 'assembling-machine',
-        ['lightning-rod']= 'lightning-attractor',
-        ['lightning-collector'] = 'lightning-attractor',
-        -- SPACE_AGE ENTITY 5
-        ['fulgoran-ruin-attractor'] = 'lightning-attractor',
-        ['asteroid-collector'] = 'asteroid-collector',
-        ['space-platform-hub'] = 'space-platform-hub',
-        ['yumako-tree'] = 'plant',
-        ['jellystem'] = 'plant',
-        -- SPACE_AGE ENTITY 10
-        ['thruster'] = 'thruster',
-        ['lightning'] = 'lightning',
-        ['small-demolisher'] = 'segmented-unit',
-        ['medium-demolisher'] = 'segmented-unit',
-        ['big-demolisher'] = 'segmented-unit',
-        -- SPACE_AGE ENTITY 15
-        ['small-wriggler-pentapod-premature'] = 'unit',
-        ['medium-wriggler-pentapod-premature'] = 'unit',
-        ['big-wriggler-pentapod-premature'] = 'unit',
-        ['small-wriggler-pentapod'] = 'unit',
-        ['medium-wriggler-pentapod'] = 'unit',
-        -- SPACE_AGE ENTITY 20
-        ['big-wriggler-pentapod'] = 'unit',
-        ['small-strafer-pentapod'] = 'spider-unit',
-        ['medium-strafer-pentapod'] = 'spider-unit',
-        ['big-strafer-pentapod'] = 'spider-unit',
-        ['small-stomper-pentapod'] = 'spider-unit',
-        -- SPACE_AGE ENTITY 25
-        ['medium-stomper-pentapod'] = 'spider-unit',
-        ['big-stomper-pentapod'] = 'spider-unit',
-        ['gleba-spawner'] = 'unit-spawner',
-        ['gleba-spawner-small'] = 'unit-spawner',
-        ['ashland-lichen-tree'] = 'tree',
-        -- SPACE_AGE ENTITY 30
-        ['ashland-lichen-tree-flaming'] = 'tree',
-        ['slipstack'] = 'tree',
-        ['funneltrunk'] = 'tree',
-        ['hairyclubnub'] = 'tree',
-        ['teflilly'] = 'tree',
-        -- SPACE_AGE ENTITY 35
-        ['lickmaw'] = 'tree',
-        ['stingfrond'] = 'tree',
-        ['boompuff'] = 'tree',
-        ['sunnycomb'] = 'tree',
-        ['cuttlepop'] = 'tree',
-        -- SPACE_AGE ENTITY 40
-        ['water-cane'] = 'tree',
-        ['small-stomper-shell'] = 'simple-entity',
-        ['medium-stomper-shell'] = 'simple-entity',
-        ['big-stomper-shell'] = 'simple-entity',
-        ['big-volcanic-rock'] = 'simple-entity',
-        -- SPACE_AGE ENTITY 45
-        ['huge-volcanic-rock'] = 'simple-entity',
-        ['copper-stromatolite'] = 'simple-entity',
-        ['iron-stromatolite'] = 'simple-entity',
-        ['vulcanus-chimney-short'] = 'simple-entity',
-        ['vulcanus-chimney-truncated'] = 'simple-entity',
-        -- SPACE_AGE ENTITY 50
-        ['vulcanus-chimney'] = 'simple-entity',
-        ['vulcanus-chimney-cold'] = 'simple-entity',
-        ['vulcanus-chimney-faded'] = 'simple-entity',
-        ['big-fulgora-rock'] = 'simple-entity',
-        ['fulgurite'] = 'simple-entity',
-        -- SPACE_AGE ENTITY 55
-        ['fulgurite-small'] = 'simple-entity',
-        ['fulgoran-ruin-small'] = 'simple-entity',
-        ['fulgoran-ruin-medium'] = 'simple-entity',
-        ['fulgoran-ruin-stonehenge'] = 'simple-entity',
-        ['fulgoran-ruin-big'] = 'simple-entity',
-        -- SPACE_AGE ENTITY 60
-        ['fulgoran-ruin-colossal'] = 'simple-entity',
-        ['fulgoran-ruin-huge'] = 'simple-entity',
-        ['fulgoran-ruin-vault'] = 'simple-entity',
-        ['lithium-iceberg-big'] = 'simple-entity',
-        ['lithium-iceberg-huge'] = 'simple-entity',
-        -- SPACE_AGE ENTITY 65
-        ['small-demolisher-corpse'] = 'simple-entity',
-        ['medium-demolisher-corpse'] = 'simple-entity',
-        ['big-demolisher-corpse'] = 'simple-entity',
-        -- SPACE_AGE FLUID 0
-        ['thruster-oxidizer'] = 'fluid',
-        ['thruster-fuel'] = 'fluid',
-        ['lithium-brine'] = 'fluid',
-        ['fluorine'] = 'fluid',
-        ['ammonia'] = 'fluid',
-        -- SPACE_AGE FLUID 5
-        ['ammoniacal-solution'] = 'fluid',
-        ['holmium-solution'] = 'fluid',
-        ['lava'] = 'fluid',
-        -- SPACE_AGE ITEM 0
-        ['bioflux'] = 'capsule',
-        ['jelly'] = 'capsule',
-        ['jellynut'] = 'capsule',
-        ['yumako'] = 'capsule',
-        ['yumako-mash'] = 'capsule',
-        -- SPACE_AGE ITEM 5
-        ['capture-robot-rocket'] = 'ammo',
-        ['space-platform-starter-pack'] = 'space-platform-starter-pack',
-        -- SPACE_AGE MAP_GENERATION 0
-        ['vulcanus_coal'] = 'autoplace-control',
-        ['tungsten_ore'] = 'autoplace-control',
-        ['calcite'] = 'autoplace-control',
-        ['sulfuric_acid_geyser'] = 'autoplace-control',
-        ['scrap'] = 'autoplace-control',
-        -- SPACE_AGE MAP_GENERATION 5
-        ['fluorine_vent'] = 'autoplace-control',
-        ['lithium_brine'] = 'autoplace-control',
-        ['gleba_stone'] = 'autoplace-control',
-        ['aquilo_crude_oil'] = 'autoplace-control',
-        ['gleba_cliff'] = 'autoplace-control',
-        -- SPACE_AGE MAP_GENERATION 10
-        ['fulgora_cliff'] = 'autoplace-control',
-        ['vulcanus_volcanism'] = 'autoplace-control',
-        ['gleba_water'] = 'autoplace-control',
-        ['gleba_plants'] = 'autoplace-control',
-        ['gleba_enemy_base'] = 'autoplace-control',
-        -- SPACE_AGE MAP_GENERATION 15
-        ['fulgora_islands'] = 'autoplace-control',
-        ['cliff-fulgora'] = 'cliff',
-        ['cliff-gleba'] = 'cliff',
-        ['cliff-vulcanus'] = 'cliff',
-        ['crater-cliff'] = 'cliff',
-        -- SPACE_AGE MAP_GENERATION 20
-        ['space-platform'] = 'surface',
-        -- SPACE_AGE TILE 0
-        ['empty-space'] = 'tile',
-        ['space-platform-foundation'] = 'tile',
-        ['foundation'] = 'tile',
-        -- SPACE_AGE TOOL 0
-        ['agricultural-science-pack'] = 'tool',
-        ['promethium-science-pack'] = 'tool',
-    }
 }
 
 return items
