@@ -15,7 +15,7 @@ data:extend({
   minimum_value = 1,
   maximum_value = 8,
   localised_name = {'phi-cl.setting-category-color', 'MBE', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-ENERGY'}},
-  localised_description = {'', '[item=solar-panel]', {'phi-cl.setting-change-color', '\n[173] A172 C1'}},
+  localised_description = {'', '[item=solar-panel]', {'phi-cl.setting-change-color', '\n[159] A158 C1'}},
   order = 'AA00'
 }, {
   type = 'int-setting',
@@ -35,7 +35,7 @@ data:extend({
   minimum_value = 1,
   maximum_value = 3,
   localised_name = {'phi-cl.setting-category-color', 'MBM', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-MACHINE'}},
-  localised_description = {'', '[item=assembling-machine-3]', {'phi-cl.setting-change-color', '\n[342] A342'}},
+  localised_description = {'', '[item=assembling-machine-3]', {'phi-cl.setting-change-color', '\n[150] A150'}},
   order = 'AB00'
 }, {
   type = 'int-setting',

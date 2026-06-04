@@ -4,6 +4,7 @@ Date: 2026-06-21
 
   Changes:
     - [GM] Generic code layout restructure.
+    - [MB] Dropped support for AAI, SE.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.144
