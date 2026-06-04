@@ -218,14 +218,6 @@ if data.raw.technology['automation'] and data.raw.technology['automation'].effec
     table.insert(data.raw.technology['automation'].effects, {type = 'create-ghost-on-entity-death', modifier = true})
 end
 
--- GM-VP C 1 BASE RESEARCH
--- GM-VP C 6 SPACE_AGE RESEARCH
-for _, v in pairs({'space-science-pack', 'electromagnetic-plant', 'foundry', 'cryogenic-plant', 'big-mining-drill', 'agriculture', 'heating-tower'}) do
-    if data.raw.technology[v] then
-        data.raw.technology[v].research_trigger = nil
-    end
-end
-
 -- GM-VP C 2 BASE ENTITY
 if data.raw['unit-spawner'] then
     for _, v in pairs(data.raw['unit-spawner']) do
@@ -293,7 +285,6 @@ if data.raw['lab'] and data.raw['lab']['biolab'] then
     data.raw['lab']['biolab'].energy_usage = '180kW'
     data.raw['lab']['biolab'].energy_source.emissions_per_minute = nil
 end
-
 
 -- GM-VP C 1 SPACE_AGE ENTITY
 if data.raw['electric-turret'] and data.raw['electric-turret']['tesla-turret'] then
