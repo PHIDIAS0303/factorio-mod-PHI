@@ -124,7 +124,7 @@ for _, force in pairs(game.forces) do
         recipes['super-pump'].reload()
     end
 
-    if settings.startup['PHI-MB'].value and script.active_mods['space-exploration'] then
+    if settings.startup['PHI-MB'].value and settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE'].value > 1 and script.active_mods['space-exploration'] then
         if technologies['se-core-miner'].researched then
             for i = 2, settings.startup['PHI-MB-MACHINE'].value do
                 recipes['se-core-miner-drill-' .. i].enabled = true
