@@ -595,8 +595,8 @@ if data.raw['reactor'] and data.raw['reactor']['heating-tower'] then
     table.insert(data.raw.technology['heating-tower'].effects, {type = 'unlock-recipe', recipe = item.name})
 end
 
--- GM A 2 BASE ITEM,RECIPE
--- GM C 1 BASE ENTITY
+-- MIG A 2 BASE ITEM,RECIPE
+-- MIG C 1 BASE ENTITY
 if data.raw.item['depleted-uranium-fuel-cell'] and data.raw.item['nuclear-fuel'] then
     local item = table.deepcopy(data.raw.item['depleted-uranium-fuel-cell'])
     item.name = 'empty-train-battery'
