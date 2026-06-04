@@ -403,6 +403,7 @@ if data.raw.technology and items['technology'] and items['technology_reform'] th
             v.effects = (items['technology_reform'][v.name].effects and items['technology_reform'][v.name].effects) or v.effects
 
             if v.unit then
+                v.research_trigger = nil
                 v.unit.count = (items['technology_reform'][v.name].unit_count and items['technology_reform'][v.name].unit_count) or v.unit.count
                 v.unit.ingredients = (items['technology_reform'][v.name].unit_ingredients and items['technology_reform'][v.name].unit_ingredients) or v.unit.ingredients
             end
