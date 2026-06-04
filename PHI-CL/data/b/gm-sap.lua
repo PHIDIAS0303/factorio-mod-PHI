@@ -60,24 +60,6 @@ if data.raw.item['space-platform-foundation'] then
     data.raw.item['space-platform-foundation'].stack_size = math.max(100, data.raw.item['space-platform-foundation'].stack_size)
 end
 
--- GM-SAP A 2 SPACE_AGE RESEARCH_EFFECT
-if data.raw.technology['cryogenic-science-pack'] then
-    table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'solar-system-edge'})
-    table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'shattered-planet'})
-end
-
--- GM-SAP C 1 SPACE_AGE RESEARCH
-if data.raw.technology['research-productivity'] then
-    data.raw.technology['research-productivity'].prerequisites = {'cryogenic-science-pack'}
-    data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}, {'agricultural-science-pack', 1}, {'cryogenic-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'metallurgic-science-pack', 1}}
-end
-
--- GM-SAP C 1 BASE ENTITY
--- GM-SAP C 1 SPACE_AGE ENTITY
-for _, v in pairs(data.raw.lab) do
-    v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'space-science-pack', 'agricultural-science-pack', 'cryogenic-science-pack', 'electromagnetic-science-pack', 'metallurgic-science-pack'}
-end
-
 -- GM-SAP A 1 BASE RESEARCH
 data:extend({{
     type = 'technology',

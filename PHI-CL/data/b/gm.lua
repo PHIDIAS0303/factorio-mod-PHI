@@ -105,19 +105,13 @@ for _, v in pairs({{'stronger-explosives-4', 'ammo-damage', 'artillery-shell', 0
     end
 end
 
--- GM H 8 SPACE_AGE RESEARCH
-for _, v in pairs({'artillery-shell-damage-1', 'railgun-damage-1', 'railgun-shooting-speed-1', 'electric-weapons-damage-1', 'electric-weapons-damage-2', 'electric-weapons-damage-3', 'electric-weapons-damage-4', 'promethium-science-pack'}) do
+-- GM H 7 SPACE_AGE RESEARCH
+for _, v in pairs({'artillery-shell-damage-1', 'railgun-damage-1', 'railgun-shooting-speed-1', 'electric-weapons-damage-1', 'electric-weapons-damage-2', 'electric-weapons-damage-3', 'electric-weapons-damage-4'}) do
     if data.raw.technology[v] then
         data.raw.technology[v].hidden = true
         data.raw.technology[v].hidden_in_factoriopedia = true
         data.raw.technology[v].effects = nil
     end
-end
-
--- GM H 1 SPACE_AGE TOOL
-if data.raw.tool['promethium-science-pack'] then
-    data.raw.tool['promethium-science-pack'].hidden = true
-    data.raw.tool['promethium-science-pack'].hidden_in_factoriopedia = true
 end
 
 -- GM C 5 BASE RESOURCE
