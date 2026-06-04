@@ -650,7 +650,7 @@ if data.raw.item['depleted-uranium-fuel-cell'] and data.raw.item['nuclear-fuel']
 end
 
 -- MIG A 1 BASE ITEM,ENTITY,RECIPE,RESEARCH_EFFECT
-if data.raw['container'] and data.raw['container']['steel-chest'] then
+if data.raw['container'] and data.raw['container']['steel-chest'] and data.raw['item']['steel-chest'] then
     local item = table.deepcopy(data.raw['item']['steel-chest'])
     item.name = 'proxy-cargo-landing-chest'
     item.place_result = item.name
