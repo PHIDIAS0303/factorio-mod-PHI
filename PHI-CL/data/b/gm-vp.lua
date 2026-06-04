@@ -395,7 +395,7 @@ end
 -- GM-VP C 26 BASE RESEARCH
 -- GM-VP C 35 SPACE_AGE RESEARCH
 -- GM-VP H 35 SPACE_AGE RESEARCH
-if data.raw.technology and items['technology'] then
+if data.raw.technology and items['technology'] and items['technology_reform'] then
     for _, v in pairs(data.raw.technology) do
         if items['technology_reform'][v.name] then
             v.prerequisites = (items['technology_reform'][v.name].prerequisites and items['technology_reform'][v.name].prerequisites) or v.prerequisites
