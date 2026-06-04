@@ -15,17 +15,19 @@ for _, v in pairs({'lithium-brine', 'fluorine-vent'}) do
 end
 
 -- GM-SAP C 16 SPACE_AGE ENTITY
-for _, asteroid in pairs(data.raw['asteroid']) do
-    if asteroid.dying_trigger_effect then
-        for _, trigger in pairs(asteroid.dying_trigger_effect) do
-            if trigger.type == 'create-asteroid-chunk' then
-                trigger.probability = (trigger.probability or 1) / 4
+if data.raw['asteroid'] then
+    for _, asteroid in pairs(data.raw['asteroid']) do
+        if asteroid.dying_trigger_effect then
+            for _, trigger in pairs(asteroid.dying_trigger_effect) do
+                if trigger.type == 'create-asteroid-chunk' then
+                    trigger.probability = (trigger.probability or 1) / 4
+                end
             end
         end
-    end
 
-    for _, r in pairs(asteroid.resistances) do
-        r.percent = (r.percent > 98 and 98) or r.percent
+        for _, r in pairs(asteroid.resistances) do
+            r.percent = (r.percent > 98 and 98) or r.percent
+        end
     end
 end
 
