@@ -168,16 +168,12 @@ end
 
 -- MIG C 3 BASE MODULE
 if data.raw['module'] then
-    if data.raw['module']['efficiency-module'] then
-        data.raw['module']['efficiency-module'].effect.consumption = math.min(-0.3, data.raw['module']['efficiency-module'].effect.consumption)
-    end
+    for _, v in pairs({{['n'] = '', ['v'] = 1}, {['n'] = '-2', ['v'] = 2}, {['n'] = '-3', ['v'] = 3}}) do
+        local n = 'efficiency-module' .. v['n']
 
-    if data.raw['module']['efficiency-module-2'] then
-        data.raw['module']['efficiency-module-2'].effect.consumption = math.min(-0.6, data.raw['module']['efficiency-module-2'].effect.consumption)
-    end
-
-    if data.raw['module']['efficiency-module-3'] then
-        data.raw['module']['efficiency-module-3'].effect.consumption = math.min(-0.9, data.raw['module']['efficiency-module-3'].effect.consumption)
+        if data.raw['module'][n] and data.raw['module'][n].effect and data.raw['module'][n].effect.consumption then
+            data.raw['module'][n].effect.consumption = math.min(-0.3 * v['v'], data.raw['module'][n].effect.consumption)
+        end
     end
 end
 
