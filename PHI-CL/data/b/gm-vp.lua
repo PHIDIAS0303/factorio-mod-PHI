@@ -314,19 +314,20 @@ local nauvis_control = data.raw.planet and data.raw.planet['nauvis'] and data.ra
 local nauvis_setting = data.raw.planet and data.raw.planet['nauvis'] and data.raw.planet['nauvis'].map_gen_settings and data.raw.planet['nauvis'].map_gen_settings.autoplace_settings and data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity and data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings
 
 -- GM-VP H 16 SPACE_AGE RESOURCE_GENERATION
-if items['hidden'] and data.raw['resource'] then
+if items['hidden_resource'] and data.raw['resource'] then
     for _, v in pairs(items['hidden_resource']) do
         if data.raw['resource'][v] then
             data.raw['resource'][v].hidden = true
             data.raw['resource'][v].hidden_in_factoriopedia = true
             data.raw['resource'][v].autoplace = nil
+            local v_low = v:gsub('-', '_')
 
-            if nauvis_control then
-                data.raw.planet['nauvis'].map_gen_settings.autoplace_controls[v:gsub('-', '_')] = nil
+            if nauvis_control and nauvis_control[v_low] then
+                nauvis_control[v_low] = nil
             end
 
-            if nauvis_setting then
-                data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings[v] = nil
+            if nauvis_setting and nauvis_setting[v] then
+                nauvis_setting[v] = nil
             end
         end
     end
