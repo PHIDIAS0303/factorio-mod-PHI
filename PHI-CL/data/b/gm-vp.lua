@@ -197,7 +197,6 @@ end
 
 data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
 -- data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
--- 'metallurgic-science-pack', 'electromagnetic-science-pack', 'cryogenic-science-pack'
 
 -- GM-VP A 1 SPACE_AGE RESEARCH_EFFECT
 if data.raw.technology['automation'] and data.raw.technology['automation'].effects then

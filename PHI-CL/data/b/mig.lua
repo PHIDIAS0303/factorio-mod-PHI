@@ -1,3 +1,5 @@
+local mod_graphic_location = '__PHI-CL__/graphics/'
+
 local mod_tint = {
     [2] = {r=140, g=142, b=200},
     [3] = {r=242, g=161, b=26},
@@ -78,15 +80,6 @@ end
 if data.raw['reactor'] then
     for _, v in pairs(data.raw['reactor']) do
         v.scale_energy_usage = (v.fast_replaceable_group and v.fast_replaceable_group == 'reactor')
-    end
-end
-
--- MIG C 5 BASE ENTITY
-for _, t in pairs({'offshore-pump', 'pump', 'pipe', 'pipe-to-ground', 'infinity-pipe'}) do
-    if data.raw[t] then
-        for _, v in pairs(data.raw[t]) do
-            v.heating_energy = nil
-        end
     end
 end
 
@@ -503,9 +496,9 @@ if data.raw['proxy-container'] and data.raw['proxy-container']['proxy-container'
     data.raw['proxy-container']['proxy-container'].draw_inventory_content = false
 end
 
--- MIG C 13 BASE ENTITY
+-- MIG C 18 BASE ENTITY
 -- MIG C 5 SPACE_AGE ENTITY
-for _, w in pairs({'storage-tank', 'generator', 'furnace', 'roboport', 'assembling-machine'}) do
+for _, w in pairs({'storage-tank', 'generator', 'furnace', 'roboport', 'assembling-machine', 'offshore-pump', 'pump', 'pipe', 'pipe-to-ground', 'infinity-pipe'}) do
     if data.raw[w] then
         for _, v in pairs(data.raw[w]) do
             v.heating_energy = nil
@@ -519,6 +512,17 @@ end
 for _, w in pairs({'roboport', 'roboport-equipment'}) do
     if data.raw[w] then
         for _, v in pairs(data.raw[w]) do
+            if v.energy_source then
+                v.energy_source.input_flow_limit = nil
+            end
+
+            if w == 'roboport' then
+                v.robot_slots_count = 10
+                v.material_slots_count = 2
+            end
+
+            v.charging_energy = tostring(tonumber(string.match(v.charging_energy, '[%d%.]+')) * 2) .. string.match(v.charging_energy, '%a+')
+            v.charging_station_count = 8
             v.charging_station_count_affected_by_quality = true
         end
     end
@@ -526,8 +530,13 @@ end
 
 -- MIG C 1 SPAGE_AGE ENTITY
 if data.raw['thruster'] and data.raw['thruster']['thruster'] then
-    table.insert(data.raw['thruster']['thruster'].fuel_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.west, position = {-1.5, 2}})
-    table.insert(data.raw['thruster']['thruster'].oxidizer_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.east, position = {1.5, 2}})
+    if data.raw['thruster']['thruster'].fuel_fluid_box then
+        table.insert(data.raw['thruster']['thruster'].fuel_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.west, position = {-1.5, 2}})
+    end
+
+    if data.raw['thruster']['thruster'].oxidizer_fluid_box then
+        table.insert(data.raw['thruster']['thruster'].oxidizer_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.east, position = {1.5, 2}})
+    end
 end
 
 -- MIG C 1 SPAGE_AGE ENTITY
@@ -584,4 +593,69 @@ if data.raw['reactor'] and data.raw['reactor']['heating-tower'] then
     data.raw['reactor']['electric-heating-tower'].fast_replaceable_group = data.raw['reactor']['heating-tower'].fast_replaceable_group
 
     table.insert(data.raw.technology['heating-tower'].effects, {type = 'unlock-recipe', recipe = item.name})
+end
+
+-- GM A 2 BASE ITEM,RECIPE
+-- GM C 1 BASE ENTITY
+if data.raw.item['depleted-uranium-fuel-cell'] and data.raw.item['nuclear-fuel'] then
+    local item = table.deepcopy(data.raw.item['depleted-uranium-fuel-cell'])
+    item.name = 'empty-train-battery'
+    item.icon = mod_graphic_location .. 'battery.png'
+    item.order = 'qa'
+    item.stack_size = 100
+    item.localised_name = {'name.empty-train-battery'}
+    item.localised_description = {'description.empty-train-battery'}
+    data:extend({item})
+
+    data:extend({{
+        type = 'recipe',
+        name = 'empty-train-battery',
+        energy_required = 20,
+        enabled = true,
+        icon = mod_graphic_location .. 'battery.png',
+        icon_size = 64,
+        subgroup = 'intermediate-product',
+        order = 'zc',
+        allow_productivity = false,
+        ingredients = {{type = 'item', name = 'battery', amount = 100}},
+        results = {{type = 'item', name = 'empty-train-battery', amount = 1}},
+        main_product = 'empty-train-battery',
+        localised_name = {'name.empty-train-battery'},
+        localised_description = {'description.empty-train-battery'}
+    }})
+
+    item = table.deepcopy(data.raw.item['nuclear-fuel'])
+    item.name = 'charged-train-battery'
+    item.burnt_result = 'empty-train-battery'
+    item.fuel_value = '1GJ'
+    item.icon = mod_graphic_location .. 'battery.png'
+    item.stack_size = 10
+    item.localised_name = {'name.charged-train-battery'}
+    item.localised_description = {'description.charged-train-battery'}
+    data:extend({item})
+
+    data:extend({{
+        type = 'recipe',
+        name = 'charged-train-battery',
+        energy_required = 30,
+        enabled = true,
+        icon = mod_graphic_location .. 'battery.png',
+        icon_size = 64,
+        subgroup = 'intermediate-product',
+        order = 'zd',
+        allow_productivity = false,
+        ingredients = {{type = 'item', name = 'empty-train-battery', amount = 1}},
+        results = {{type = 'item', name = 'charged-train-battery', probability = 0.995, amount = 1}, {type = 'item', name = 'battery', probability = 0.005, amount = 5}},
+        main_product = 'charged-train-battery',
+        localised_name = {'name.charged-train-battery'},
+        localised_description = {'description.charged-train-battery'}
+    }})
+
+    if data.raw['locomotive'] then
+        for _, v in pairs(data.raw['locomotive']) do
+            if v.energy_source then
+                v.energy_source.burnt_inventory_size = (v.energy_source.burnt_inventory_size and math.max(v.energy_source.burnt_inventory_size, 1)) or 1
+            end
+        end
+    end
 end

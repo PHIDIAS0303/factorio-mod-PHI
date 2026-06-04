@@ -1,6 +1,4 @@
 
-local mod_graphic_location = '__PHI-CL__/graphics/'
-
 -- GM C 1 SPACE_AGE ENTITY
 if data.raw['cargo-bay'] and data.raw['cargo-bay']['cargo-bay'] then
     data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus = math.max(40, data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus)
@@ -54,15 +52,6 @@ end
 -- GM C 1 BASE RECIPE
 if data.raw.recipe['artillery-wagon'] then
     data.raw.recipe['artillery-wagon'].ingredients = {{type = 'item', name = 'engine-unit', amount = 64}, {type = 'item', name = 'iron-gear-wheel', amount = 10}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'pipe', amount = 16}, {type = 'item', name = 'advanced-circuit', amount = 20}}
-end
-
--- GM C 1 BASE ENTITY
-if data.raw['roboport'] and data.raw['roboport']['roboport'] then
-    data.raw['roboport']['roboport'].energy_source.input_flow_limit = nil
-    data.raw['roboport']['roboport'].charging_energy = tostring(tonumber(string.match(data.raw['roboport']['roboport'].charging_energy, '[%d%.]+')) * 2) .. string.match(data.raw['roboport']['roboport'].charging_energy, '%a+')
-    data.raw['roboport']['roboport'].robot_slots_count = 10
-    data.raw['roboport']['roboport'].material_slots_count = 2
-    data.raw['roboport']['roboport'].charging_station_count = 8
 end
 
 -- GM C 1 BASE ITEM
@@ -138,70 +127,5 @@ for _, v in pairs(data.raw['resource']) do
 
     if data.raw.item[vn] and data.raw.item[vn].stack_size then
         data.raw.item[vn].stack_size = math.max(data.raw.item[vn].stack_size, 100)
-    end
-end
-
--- GM A 2 BASE ITEM,RECIPE
--- GM C 1 BASE ENTITY
-if data.raw.item['depleted-uranium-fuel-cell'] and data.raw.item['nuclear-fuel'] then
-    local item = table.deepcopy(data.raw.item['depleted-uranium-fuel-cell'])
-    item.name = 'empty-train-battery'
-    item.icon = mod_graphic_location .. 'battery.png'
-    item.order = 'qa'
-    item.stack_size = 100
-    item.localised_name = {'name.empty-train-battery'}
-    item.localised_description = {'description.empty-train-battery'}
-    data:extend({item})
-
-    data:extend({{
-        type = 'recipe',
-        name = 'empty-train-battery',
-        energy_required = 20,
-        enabled = true,
-        icon = mod_graphic_location .. 'battery.png',
-        icon_size = 64,
-        subgroup = 'intermediate-product',
-        order = 'zc',
-        allow_productivity = false,
-        ingredients = {{type = 'item', name = 'battery', amount = 100}},
-        results = {{type = 'item', name = 'empty-train-battery', amount = 1}},
-        main_product = 'empty-train-battery',
-        localised_name = {'name.empty-train-battery'},
-        localised_description = {'description.empty-train-battery'}
-    }})
-
-    item = table.deepcopy(data.raw.item['nuclear-fuel'])
-    item.name = 'charged-train-battery'
-    item.burnt_result = 'empty-train-battery'
-    item.fuel_value = '1GJ'
-    item.icon = mod_graphic_location .. 'battery.png'
-    item.stack_size = 10
-    item.localised_name = {'name.charged-train-battery'}
-    item.localised_description = {'description.charged-train-battery'}
-    data:extend({item})
-
-    data:extend({{
-        type = 'recipe',
-        name = 'charged-train-battery',
-        energy_required = 30,
-        enabled = true,
-        icon = mod_graphic_location .. 'battery.png',
-        icon_size = 64,
-        subgroup = 'intermediate-product',
-        order = 'zd',
-        allow_productivity = false,
-        ingredients = {{type = 'item', name = 'empty-train-battery', amount = 1}},
-        results = {{type = 'item', name = 'charged-train-battery', probability = 0.995, amount = 1}, {type = 'item', name = 'battery', probability = 0.005, amount = 5}},
-        main_product = 'charged-train-battery',
-        localised_name = {'name.charged-train-battery'},
-        localised_description = {'description.charged-train-battery'}
-    }})
-
-    if data.raw['locomotive'] then
-        for _, v in pairs(data.raw['locomotive']) do
-            if v.energy_source then
-                v.energy_source.burnt_inventory_size = (v.energy_source.burnt_inventory_size and math.max(v.energy_source.burnt_inventory_size, 1)) or 1
-            end
-        end
     end
 end
