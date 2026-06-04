@@ -4,18 +4,14 @@ if not mods['space-age'] then
     return
 end
 
--- GM-SAP C 1 SPACE_AGE RESOURCE
-if data.raw.resource['lithium-brine'] then
-    data.raw.resource['lithium-brine'].infinite = true
-    data.raw.resource['lithium-brine'].minimum = math.max(60000, data.raw.resource['lithium-brine'].minimum or 0)
-    data.raw.resource['lithium-brine'].normal = math.max(300000, data.raw.resource['lithium-brine'].normal or 0)
-    data.raw.resource['lithium-brine'].infinite_depletion_amount = math.min(10, data.raw.resource['lithium-brine'].infinite_depletion_amount or 999)
-end
-
--- GM-SAP C 1 SPACE_AGE RESOURCE
-if data.raw.resource['fluorine-vent'] then
-    data.raw.resource['fluorine-vent'].minimum = math.max(60000, data.raw.resource['fluorine-vent'].minimum or 0)
-    data.raw.resource['fluorine-vent'].normal = math.max(300000, data.raw.resource['fluorine-vent'].normal or 0)
+-- GM-SAP C 2 SPACE_AGE RESOURCE
+for _, v in pairs({'lithium-brine', 'fluorine-vent'}) do
+    if data.raw.resource[v] then
+        data.raw.resource[v].infinite = true
+        data.raw.resource[v].minimum = math.max(60000, data.raw.resource[v].minimum or 0)
+        data.raw.resource[v].normal = math.max(300000, data.raw.resource[v].normal or 0)
+        data.raw.resource[v].infinite_depletion_amount = math.min(10, data.raw.resource[v].infinite_depletion_amount or 999)
+    end
 end
 
 -- GM-SAP C 16 SPACE_AGE ENTITY
