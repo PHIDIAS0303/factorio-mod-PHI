@@ -189,27 +189,68 @@ if data.raw['agricultural-tower'] and data.raw['agricultural-tower']['agricultur
     data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = {pollution = -1}
 end
 
--- GM-VP C 1 SPACE_AGE ENTITY
-if data.raw['assembling-machine'] and data.raw['assembling-machine']['electromagnetic-plant'] then
-    data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
-    data.raw['assembling-machine']['electromagnetic-plant'].crafting_speed = 2.5
-    data.raw['assembling-machine']['electromagnetic-plant'].energy_usage = '872kW'
-    data.raw['assembling-machine']['electromagnetic-plant'].energy_source.emissions_per_minute.pollution = 4
-end
+-- GM-VP C 3 SPACE_AGE ENTITY
+if data.raw['assembling-machine'] then
+    if data.raw['assembling-machine']['electromagnetic-plant'] then
+        data.raw['assembling-machine']['electromagnetic-plant'].effect_receiver = nil
+        data.raw['assembling-machine']['electromagnetic-plant'].crafting_speed = 2.5
+        data.raw['assembling-machine']['electromagnetic-plant'].energy_usage = '872kW'
+        data.raw['assembling-machine']['electromagnetic-plant'].energy_source.emissions_per_minute.pollution = 4
+        local cc = {}
 
--- GM-VP C 1 SPACE_AGE ENTITY
-if data.raw['assembling-machine'] and data.raw['assembling-machine']['foundry'] then
-    data.raw['assembling-machine']['foundry'].effect_receiver = nil
-    data.raw['assembling-machine']['foundry'].crafting_speed = 6
-    data.raw['assembling-machine']['foundry'].energy_usage = '930kW'
-    data.raw['assembling-machine']['foundry'].energy_source.emissions_per_minute.pollution = 3
-end
+        if data.raw['assembling-machine']['assembling-machine-3'] and data.raw['assembling-machine']['assembling-machine-3'].crafting_categories then
+            for _, v in pairs(data.raw['assembling-machine']['assembling-machine-3'].crafting_categories) do
+                table.insert(cc, v)
+            end
+        end
 
--- GM-VP C 1 SPACE_AGE ENTITY
-if data.raw['assembling-machine'] and data.raw['assembling-machine']['cryogenic-plant'] then
-    data.raw['assembling-machine']['cryogenic-plant'].crafting_speed = 3
-    data.raw['assembling-machine']['cryogenic-plant'].energy_usage = '1302kW'
-    data.raw['assembling-machine']['cryogenic-plant'].energy_source.emissions_per_minute.pollution = 12
+        table.insert(cc, 'electromagnetics')
+        data.raw['assembling-machine']['electromagnetic-plant'].crafting_categories = cc
+    end
+
+    if data.raw['assembling-machine']['foundry'] then
+        data.raw['assembling-machine']['foundry'].effect_receiver = nil
+        data.raw['assembling-machine']['foundry'].crafting_speed = 6
+        data.raw['assembling-machine']['foundry'].energy_usage = '930kW'
+        data.raw['assembling-machine']['foundry'].energy_source.emissions_per_minute.pollution = 3
+        local cc = {}
+
+        if data.raw['furnace'] and data.raw['furnace']['electric-furnace'] and data.raw['furnace']['electric-furnace'].crafting_categories then
+            for _, v in pairs(data.raw['furnace']['electric-furnace'].crafting_categories) do
+                table.insert(cc, v)
+            end
+        end
+
+        table.insert(cc, 'metallurgy')
+        data.raw['assembling-machine']['foundry'].crafting_categories = cc
+    end
+
+    if data.raw['assembling-machine']['cryogenic-plant'] then
+        data.raw['assembling-machine']['cryogenic-plant'].crafting_speed = 3
+        data.raw['assembling-machine']['cryogenic-plant'].energy_usage = '1302kW'
+        data.raw['assembling-machine']['cryogenic-plant'].energy_source.emissions_per_minute.pollution = 12
+        local cct = {}
+        local cc = {}
+
+        if data.raw['assembling-machine']['oil-refinery'] and data.raw['assembling-machine']['oil-refinery'].crafting_categories then
+            for _, v in pairs(data.raw['assembling-machine']['oil-refinery'].crafting_categories) do
+                cct[v] = true
+                table.insert(cc, v)
+            end
+        end
+
+        if data.raw['assembling-machine']['chemical-plant'] and data.raw['assembling-machine']['chemical-plant'].crafting_categories then
+            for _, v in pairs(data.raw['assembling-machine']['chemical-plant'].crafting_categories) do
+                if not cct[v] then
+                    cct[v] = true
+                    table.insert(cc, v)
+                end
+            end
+        end
+
+        table.insert(cc, 'cryogenics')
+        data.raw['assembling-machine']['cryogenic-plant'].crafting_categories = cc
+    end
 end
 
 -- GM-VP C 1 SPACE_AGE ENTITY
