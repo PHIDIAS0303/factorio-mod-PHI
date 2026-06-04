@@ -45,7 +45,7 @@ end
 -- MI C 1 BASE ENTITY
 if data.raw['lamp'] then
     for _, v in pairs(data.raw['lamp']) do
-        if v.light and v.light.color then
+        if v.light then
             v.light.color = {1, 1, 1}
         end
 
@@ -58,14 +58,7 @@ end
 -- MI C 1 BASE ENTITY
 if data.raw['land-mine'] then
     for _, v in pairs(data.raw['land-mine']) do
-        if v.flags then
-            for fk, fv in ipairs(v.flags) do
-                if fv == 'placeable-off-grid' then
-                    table.remove(v.flags, fk)
-                    break
-                end
-            end
-        end
+        v.flags = {'placeable-player', 'placeable-enemy', 'player-creation', 'not-on-map'}
     end
 end
 
