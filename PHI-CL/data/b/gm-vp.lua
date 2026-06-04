@@ -262,13 +262,6 @@ if data.raw['lab'] and data.raw['lab']['biolab'] then
     data.raw['lab']['biolab'].energy_source.emissions_per_minute = nil
 end
 
--- GM-VP C 1 BASE ENTITY
--- GM-VP C 1 SPACE_AGE ENTITY
-if data.raw['lab'] then
-    for _, v in pairs(data.raw['lab']) do
-        v.inputs = {'automation-science-pack', 'logistic-science-pack', 'military-science-pack', 'chemical-science-pack', 'production-science-pack', 'utility-science-pack', 'metallurgic-science-pack', 'electromagnetic-science-pack', 'cryogenic-science-pack', 'space-science-pack'}
-    end
-end
 
 -- GM-VP C 1 SPACE_AGE ENTITY
 if data.raw['electric-turret'] and data.raw['electric-turret']['tesla-turret'] then
@@ -398,6 +391,20 @@ if data.raw.item['ice'] then
     }})
 end
 
+-- GM-VP C 1 BASE ENTITY
+-- GM-VP C 1 SPACE_AGE ENTITY
+if data.raw['lab'] then
+    for _, v in pairs(data.raw['lab']) do
+        v.inputs = {}
+
+        for _, v2 in pairs(data.raw['tool']) do
+            if not v2.hidden then
+                table.insert(v.inputs, v2.name)
+            end
+        end
+    end
+end
+
 -- GM-VP C 26 BASE RESEARCH
 -- GM-VP C 32 SPACE_AGE RESEARCH
 -- GM-VP H 35 SPACE_AGE RESEARCH
@@ -430,7 +437,7 @@ if data.raw.technology and items['technology'] and items['technology_reform'] th
 
         elseif v.unit and v.unit.ingredients then
             for i = #v.unit.ingredients, 1, -1 do
-                if items['technology_ingredient_removal'][v.unit.ingredients[i][1]] then
+                if data.raw['tool'][v.unit.ingredients[i][1]].hidden then
                     table.remove(v.unit.ingredients, i)
                 end
             end

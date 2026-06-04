@@ -58,11 +58,6 @@ local items = {
         'thruster',
         'lab',
     },
-    ['technology_ingredient_removal'] = {
-        -- SPACE_AGE 0
-        ['agricultural-science-pack'] = true,
-        ['promethium-science-pack'] = true
-    },
     ['technology_reform'] = {
         -- BASE 0
         ['speed-module-2'] = {
@@ -320,6 +315,51 @@ local items = {
             effects = {{type = 'unlock-recipe', recipe = 'cryogenic-science-pack'}}
         },
     },
+    ['technology'] = {
+        -- SPACE_AGE 0
+        ['planet-discovery-vulcanus'] = true,
+        ['planet-discovery-gleba'] = true,
+        ['planet-discovery-fulgora'] = true,
+        ['planet-discovery-aquilo'] = true,
+        ['recycling'] = true,
+        -- SPACE_AGE 5
+        ['lightning-collector'] = true,
+        ['tungsten-carbide'] = true,
+        ['tungsten-steel'] = true,
+        ['yumako'] = true,
+        ['jellynut'] = true,
+        -- SPACE_AGE 10
+        ['bioflux'] = true,
+        ['artificial-soil'] = true,
+        ['overgrowth-soil'] = true,
+        ['bacteria-cultivation'] = true,
+        ['bioflux-processing'] = true,
+        -- SPACE_AGE 15
+        ['agricultural-science-pack'] = true,
+        ['captivity'] = true,
+        ['biter-egg-handling'] = true,
+        ['carbon-fiber'] = true,
+        ['fish-breeding'] = true,
+        -- SPACE_AGE 20
+        ['holmium-processing'] = true,
+        ['rail-support-foundations'] = true,
+        ['lithium-processing'] = true,
+        ['quantum-processor'] = true,
+        ['captive-biter-spawner'] = true,
+        -- SPACE_AGE 25
+        ['promethium-science-pack'] = true,
+        ['foundation'] = true,
+        ['scrap-recycling-productivity'] = true,
+        ['biochamber'] = true,
+        ['space-platform-thruster'] = true,
+        -- SPACE_AGE 30
+        ['space-platform'] = true,
+        ['asteroid-reprocessing'] = true,
+        ['advanced-asteroid-processing'] = true,
+        ['asteroid-productivity'] = true,
+        ['calcite-processing'] = true,
+        -- SPACE_AGE 35
+    },
     ['recipe_reform'] = {
         -- BASE 0
         ['stack-inserter'] = {
@@ -537,51 +577,6 @@ local items = {
         ['space-age'] = true,
         ['space-platform'] = true,
         ['spoilables'] = true
-    },
-    ['technology'] = {
-        -- SPACE_AGE 0
-        ['planet-discovery-vulcanus'] = true,
-        ['planet-discovery-gleba'] = true,
-        ['planet-discovery-fulgora'] = true,
-        ['planet-discovery-aquilo'] = true,
-        ['recycling'] = true,
-        -- SPACE_AGE 5
-        ['lightning-collector'] = true,
-        ['tungsten-carbide'] = true,
-        ['tungsten-steel'] = true,
-        ['yumako'] = true,
-        ['jellynut'] = true,
-        -- SPACE_AGE 10
-        ['bioflux'] = true,
-        ['artificial-soil'] = true,
-        ['overgrowth-soil'] = true,
-        ['bacteria-cultivation'] = true,
-        ['bioflux-processing'] = true,
-        -- SPACE_AGE 15
-        ['agricultural-science-pack'] = true,
-        ['captivity'] = true,
-        ['biter-egg-handling'] = true,
-        ['carbon-fiber'] = true,
-        ['fish-breeding'] = true,
-        -- SPACE_AGE 20
-        ['holmium-processing'] = true,
-        ['rail-support-foundations'] = true,
-        ['lithium-processing'] = true,
-        ['quantum-processor'] = true,
-        ['captive-biter-spawner'] = true,
-        -- SPACE_AGE 25
-        ['promethium-science-pack'] = true,
-        ['foundation'] = true,
-        ['scrap-recycling-productivity'] = true,
-        ['biochamber'] = true,
-        ['space-platform-thruster'] = true,
-        -- SPACE_AGE 30
-        ['space-platform'] = true,
-        ['asteroid-reprocessing'] = true,
-        ['advanced-asteroid-processing'] = true,
-        ['asteroid-productivity'] = true,
-        ['calcite-processing'] = true,
-        -- SPACE_AGE 35
     },
     ['achievement'] = {
         -- SPACE_AGE 0
