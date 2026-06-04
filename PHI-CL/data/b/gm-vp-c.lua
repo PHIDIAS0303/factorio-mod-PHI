@@ -188,11 +188,11 @@ local items = {
         },
         -- SPACE_AGE 0
         ['stack-inserter'] = {
-            prerequisites = {'bulk-inserter', 'chemical-science-pack', 'processing-unit'},
+            prerequisites = {'bulk-inserter', 'processing-unit'},
             unit = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
         },
         ['transport-belt-capacity-1'] = {
-            prerequisites = {'stack-inserter', 'logistics-3', 'production-science-pack', 'utility-science-pack'},
+            prerequisites = {'stack-inserter', 'logistics-3', 'utility-science-pack'},
             unit = {count = 1600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
         },
         ['transport-belt-capacity-2'] = {
@@ -200,27 +200,27 @@ local items = {
             unit = {count = 2400, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}}
         },
         ['turbo-transport-belt'] = {
-            prerequisites = {'logistics-3', 'production-science-pack', 'utility-science-pack'},
+            prerequisites = {'logistics-3', 'utility-science-pack'},
             unit = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
         },
         ['electromagnetic-plant'] = {
-            prerequisites = {'automation-3', 'processing-unit', 'utility-science-pack'},
+            prerequisites = {'automation-3', 'utility-science-pack'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-plant'}}
         },
         -- SPACE_AGE 5
         ['foundry'] = {
-            prerequisites = {'automation-3', 'advanced-material-processing-2', 'processing-unit', 'utility-science-pack'},
+            prerequisites = {'automation-3', 'utility-science-pack'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'foundry'}, {type = 'unlock-recipe', recipe = 'molten-iron'}, {type = 'unlock-recipe', recipe = 'molten-copper'}, {type = 'unlock-recipe', recipe = 'casting-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper'}, {type = 'unlock-recipe', recipe = 'casting-steel'}, {type = 'unlock-recipe', recipe = 'casting-iron-gear-wheel'}, {type = 'unlock-recipe', recipe = 'casting-iron-stick'}, {type = 'unlock-recipe', recipe = 'casting-pipe'}, {type = 'unlock-recipe', recipe = 'casting-pipe-to-ground'}, {type = 'unlock-recipe', recipe = 'concrete-from-molten-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper-cable'}, {type = 'unlock-recipe', recipe = 'casting-low-density-structure'}}
         },
         ['cryogenic-plant'] = {
-            prerequisites = {'automation-3', 'coal-liquefaction', 'processing-unit', 'utility-science-pack'},
+            prerequisites = {'automation-3', 'coal-liquefaction', 'utility-science-pack'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}}
         },
         ['biolab'] = {
-            prerequisites = {'automation-3', 'processing-unit', 'utility-science-pack'},
+            prerequisites = {'automation-3', 'utility-science-pack'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
         },
         ['space-platform'] = {
@@ -282,7 +282,7 @@ local items = {
             unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
         },
         ['tesla-weapons'] = {
-            prerequisites = {'military-4', 'processing-unit'},
+            prerequisites = {'military-4'},
             unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
         },
         ['mech-armor'] = {
@@ -298,7 +298,7 @@ local items = {
         },
         -- SPACE_AGE 25
         ['processing-unit-productivity'] = {
-            prerequisites = {'processing-unit', 'electromagnetic-plant'},
+            prerequisites = {'electromagnetic-plant'},
             effects = {{type = 'change-recipe-productivity', recipe = 'processing-unit', change = 0.05}}
         },
         ['steel-plate-productivity'] = {
@@ -306,11 +306,11 @@ local items = {
             effects = {{type = 'change-recipe-productivity', recipe = 'steel-plate', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'casting-steel', change = 0.05}}
         },
         ['low-density-structure-productivity'] = {
-            prerequisites = {'low-density-structure', 'electromagnetic-plant'},
+            prerequisites = {'electromagnetic-plant'},
             effects = {{type = 'change-recipe-productivity', recipe = 'low-density-structure', change = 0.05}}
         },
         ['plastic-bar-productivity'] = {
-            prerequisites = {'plastics', 'cryogenic-plant'},
+            prerequisites = {'cryogenic-plant'},
             effects = {{type = 'change-recipe-productivity', recipe = 'plastic-bar', change = 0.05}}
         },
         ['rocket-fuel-productivity'] = {
