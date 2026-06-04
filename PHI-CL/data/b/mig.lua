@@ -1,5 +1,4 @@
 local mod_graphic_location = '__PHI-CL__/graphics/'
-
 local mod_tint = {
     [2] = {r=140, g=142, b=200},
     [3] = {r=242, g=161, b=26},

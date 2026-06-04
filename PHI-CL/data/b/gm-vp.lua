@@ -1,14 +1,5 @@
 local items = require('gm-vp-c')
 local item_sounds = require('__base__/prototypes/item_sounds')
-local mod_tint = {
-    [2] = {r=140, g=142, b=200},
-    [3] = {r=242, g=161, b=26},
-    [4] = {r=255, g=254, b=42},
-    [5] = {r=54, g=228, b=255},
-    [6] = {r=253, g=0, b=97},
-    [7] = {r=0, g=209, b=102},
-    [8] = {r=233, g=63, b=233}
-}
 
 if not mods['space-age'] then
     error('Mod not found\nSpace Age is not enabled\n太空時代尚未啟用\nSpace Age が有効になっていません')
