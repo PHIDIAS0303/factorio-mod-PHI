@@ -392,9 +392,22 @@ if data.raw.item['ice'] then
     }})
 end
 
+-- GM-VP C 26 BASE RESEARCH
+-- GM-VP C 35 SPACE_AGE RESEARCH
 -- GM-VP H 35 SPACE_AGE RESEARCH
 if data.raw.technology and items['technology'] then
     for _, v in pairs(data.raw.technology) do
+        if items['technology_reform'][v.name] then
+            v.prerequisites = (items['technology_reform'][v.name].prerequisites and items['technology_reform'][v.name].prerequisites) or v.prerequisites
+            v.unit = (items['technology_reform'][v.name].unit and items['technology_reform'][v.name].unit) or v.unit
+            v.effects = (items['technology_reform'][v.name].effects and items['technology_reform'][v.name].effects) or v.effects
+
+            if v.unit then
+                v.unit.count = (items['technology_reform'][v.name].unit_count and items['technology_reform'][v.name].unit_count) or v.unit.count
+                v.unit.ingredients = (items['technology_reform'][v.name].unit_ingredients and items['technology_reform'][v.name].unit_ingredients) or v.unit.ingredients
+            end
+        end
+
         if items['technology'][v.name] then
             v.hidden = true
             v.hidden_in_factoriopedia = true
@@ -415,21 +428,6 @@ if data.raw.technology and items['technology'] then
                     table.remove(v.unit.ingredients, i)
                 end
             end
-        end
-    end
-end
-
--- GM-VP C 26 BASE RESEARCH
--- GM-VP C 35 SPACE_AGE RESEARCH
-for k, v in pairs(items['technology_reform']) do
-    if data.raw.technology[k] then
-        data.raw.technology[k].prerequisites = (v.prerequisites and v.prerequisites) or data.raw.technology[k].prerequisites
-        data.raw.technology[k].unit = (v.unit and v.unit) or data.raw.technology[k].unit
-        data.raw.technology[k].effects = (v.effects and v.effects) or data.raw.technology[k].effects
-
-        if data.raw.technology[k].unit then
-            data.raw.technology[k].unit.count = (v.unit_count and v.unit_count) or data.raw.technology[k].unit.count
-            data.raw.technology[k].unit.ingredients = (v.unit_ingredients and v.unit_ingredients) or data.raw.technology[k].unit.ingredients
         end
     end
 end
