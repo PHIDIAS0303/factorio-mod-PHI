@@ -36,6 +36,7 @@ end
 if settings.startup['PHI-GM'].value then
     if settings.startup['PHI-GM'].value == 'SAP' then
         require('data.b.gm-sap')
+
     elseif settings.startup['PHI-GM'].value == 'VP' then
         require('data.b.gm-vp')
     end
