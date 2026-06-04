@@ -68,10 +68,7 @@ local items = {
     },
     ['technology_ingredient_removal'] = {
         -- SPACE_AGE 0
-        ['metallurgic-science-pack'] = true,
         ['agricultural-science-pack'] = true,
-        ['electromagnetic-science-pack'] = true,
-        ['cryogenic-science-pack'] = true,
         ['promethium-science-pack'] = true
     },
     ['technology_reform'] = {
@@ -212,12 +209,12 @@ local items = {
         ['foundry'] = {
             prerequisites = {'automation-3', 'utility-science-pack'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'foundry'}, {type = 'unlock-recipe', recipe = 'metallurgic-science-pack'}, {type = 'unlock-recipe', recipe = 'molten-iron'}, {type = 'unlock-recipe', recipe = 'molten-copper'}, {type = 'unlock-recipe', recipe = 'casting-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper'}, {type = 'unlock-recipe', recipe = 'casting-steel'}, {type = 'unlock-recipe', recipe = 'casting-iron-gear-wheel'}, {type = 'unlock-recipe', recipe = 'casting-iron-stick'}, {type = 'unlock-recipe', recipe = 'casting-pipe'}, {type = 'unlock-recipe', recipe = 'casting-pipe-to-ground'}, {type = 'unlock-recipe', recipe = 'concrete-from-molten-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper-cable'}, {type = 'unlock-recipe', recipe = 'casting-low-density-structure'}}
+            effects = {{type = 'unlock-recipe', recipe = 'foundry'}, {type = 'unlock-recipe', recipe = 'molten-iron'}, {type = 'unlock-recipe', recipe = 'molten-copper'}, {type = 'unlock-recipe', recipe = 'casting-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper'}, {type = 'unlock-recipe', recipe = 'casting-steel'}, {type = 'unlock-recipe', recipe = 'casting-iron-gear-wheel'}, {type = 'unlock-recipe', recipe = 'casting-iron-stick'}, {type = 'unlock-recipe', recipe = 'casting-pipe'}, {type = 'unlock-recipe', recipe = 'casting-pipe-to-ground'}, {type = 'unlock-recipe', recipe = 'concrete-from-molten-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper-cable'}, {type = 'unlock-recipe', recipe = 'casting-low-density-structure'}}
         },
         ['cryogenic-plant'] = {
             prerequisites = {'automation-3', 'coal-liquefaction', 'utility-science-pack'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}, {type = 'unlock-recipe', recipe = 'cryogenic-science-pack'}, {type = 'unlock-recipe', recipe = 'fluoroketone'}, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'}}
+            effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}, {type = 'unlock-recipe', recipe = 'fluoroketone'}, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'}}
         },
         ['biolab'] = {
             prerequisites = {'automation-3', 'utility-science-pack'},
@@ -313,6 +310,22 @@ local items = {
         ['tree-seeding'] = {
             prerequisites = {'agriculture'},
             unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+        },
+        ['metallurgic-science-pack'] = {
+            prerequisites = {'foundry'},
+            unit = {count = 300, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'metallurgic-science-pack'}}
+        },
+        -- SPACE_AGE 30
+        ['electromagnetic-science-pack'] = {
+            prerequisites = {'electromagnetic-plant'},
+            unit = {count = 300, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-science-pack'}}
+        },
+        ['cryogenic-science-pack'] = {
+            prerequisites = {'cryogenic-plant'},
+            unit = {count = 300, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'cryogenic-science-pack'}}
         },
     },
     ['recipe_reform'] = {
