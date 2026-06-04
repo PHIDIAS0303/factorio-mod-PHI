@@ -57,6 +57,9 @@ local items = {
         'furnace',
         'thruster',
         'lab',
+        -- 3X
+        'plant',
+        -- SPACE_AGE 15
     },
     ['recipe_reform'] = {
         -- BASE 0

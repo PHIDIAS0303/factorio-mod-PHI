@@ -17,7 +17,7 @@ end
 
 -- GM-VP C 33 BASE ENTITY
 -- GM-VP C 6 ELEVATED_RAILS ENTITY
--- GM-VP C 14 SPACE_AGE ENTITY
+-- GM-VP C 17 SPACE_AGE ENTITY
 if items['entity_surface_conditions'] then
     for _, v in pairs(items['entity_surface_conditions']) do
         if data.raw[v] then
