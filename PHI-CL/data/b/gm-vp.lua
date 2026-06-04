@@ -125,45 +125,6 @@ data:extend({
     }
 })
 
--- GM-VP A 1 BASE ITEM,ENTITY,RECIPE,RESEARCH_EFFECT
-do
-    local item = table.deepcopy(data.raw['item']['steel-chest'])
-    item.name = 'proxy-cargo-landing-chest'
-    item.place_result = item.name
-    item.order = 'c[cargo-landing-pad]-2'
-    item.icons = {{icon = item.icon or '__base__/graphics/icons/cargo-landing-pad.png', tint = mod_tint[5], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
-    item.icon = nil
-    item.icon_size = nil
-    item.icon_mipmaps = nil
-    item.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
-    item.localised_description = {'entity-description.cargo-landing-pad'}
-    data:extend({item})
-
-    local entity = table.deepcopy(data.raw['container']['steel-chest'])
-    entity.name = item.name
-    entity.minable.result = item.name
-    entity.type = 'proxy-container'
-    entity.picture.layers[1].tint = mod_tint[5]
-    entity.flags = {'placeable-player', 'player-creation', 'no-automated-item-insertion', 'hide-alt-info'}
-    entity.localised_name = {'phi-cl.combine', {'entity-name.cargo-landing-pad'}, ' (II)'}
-    entity.localised_description = {'entity-description.cargo-landing-pad'}
-    data:extend({entity})
-
-    data:extend({{
-        type = 'recipe',
-        name = item.name,
-        energy_required = 2,
-        enabled = (data.raw.technology['rocket-silo'] and false) or true,
-        ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
-        results = {{type = 'item', name = item.name, amount = 1}},
-        main_product = item.name
-    }})
-
-    if data.raw.technology['rocket-silo'] then
-        table.insert(data.raw.technology['rocket-silo'].effects, {type = 'unlock-recipe', recipe = 'proxy-cargo-landing-chest'})
-    end
-end
-
 -- GM-VP A 9 BASE RESEARCH
 if items['technology_productivity'] then
     for k, v in pairs(items['technology_productivity']) do
