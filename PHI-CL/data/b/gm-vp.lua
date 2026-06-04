@@ -406,9 +406,8 @@ if data.raw.technology and items['technology'] and items['technology_reform'] th
                 v.unit.count = (items['technology_reform'][v.name].unit_count and items['technology_reform'][v.name].unit_count) or v.unit.count
                 v.unit.ingredients = (items['technology_reform'][v.name].unit_ingredients and items['technology_reform'][v.name].unit_ingredients) or v.unit.ingredients
             end
-        end
 
-        if items['technology'][v.name] then
+        elseif items['technology'][v.name] then
             v.hidden = true
             v.hidden_in_factoriopedia = true
             v.effects = nil
