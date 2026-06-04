@@ -32,21 +32,16 @@ if data.raw['asteroid'] then
 end
 
 -- GM-SAP C 4 SPACE_AGE ENTITY
-for _, chunk in pairs({'carbonic-asteroid-chunk', 'metallic-asteroid-chunk', 'promethium-asteroid-chunk', 'oxide-asteroid-chunk'}) do
-    data.raw['asteroid-chunk'][chunk].minable.count = (data.raw['asteroid-chunk'][chunk].minable.count or 1) * 4
-    data.raw.item[chunk].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
-end
+if data.raw['asteroid-chunk'] and data.raw.item then
+    for _, chunk in pairs({'carbonic-asteroid-chunk', 'metallic-asteroid-chunk', 'promethium-asteroid-chunk', 'oxide-asteroid-chunk'}) do
+        if data.raw['asteroid-chunk'][chunk] and data.raw['asteroid-chunk'][chunk].minable then
+            data.raw['asteroid-chunk'][chunk].minable.count = (data.raw['asteroid-chunk'][chunk].minable.count or 1) * 4
+        end
 
--- GM-SAP A 2 SPACE_AGE RESEARCH_EFFECT
-if data.raw.technology['cryogenic-science-pack'] then
-    table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'solar-system-edge'})
-    table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'shattered-planet'})
-end
-
--- GM-SAP C 1 SPACE_AGE RESEARCH
-if data.raw.technology['research-productivity'] then
-    data.raw.technology['research-productivity'].prerequisites = {'cryogenic-science-pack'}
-    data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}, {'agricultural-science-pack', 1}, {'cryogenic-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'metallurgic-science-pack', 1}}
+        if data.raw.item[chunk] then
+            data.raw.item[chunk].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
+        end
+    end
 end
 
 -- GM-SAP C 1 SPACE_AGE ENTITY
@@ -63,6 +58,18 @@ end
 -- GM-SAP C 1 SPACE_AGE ITEM
 if data.raw.item['space-platform-foundation'] then
     data.raw.item['space-platform-foundation'].stack_size = math.max(100, data.raw.item['space-platform-foundation'].stack_size)
+end
+
+-- GM-SAP A 2 SPACE_AGE RESEARCH_EFFECT
+if data.raw.technology['cryogenic-science-pack'] then
+    table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'solar-system-edge'})
+    table.insert(data.raw.technology['cryogenic-science-pack'].effects, {type = 'unlock-space-location', space_location = 'shattered-planet'})
+end
+
+-- GM-SAP C 1 SPACE_AGE RESEARCH
+if data.raw.technology['research-productivity'] then
+    data.raw.technology['research-productivity'].prerequisites = {'cryogenic-science-pack'}
+    data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}, {'agricultural-science-pack', 1}, {'cryogenic-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'metallurgic-science-pack', 1}}
 end
 
 -- GM-SAP C 1 BASE ENTITY
