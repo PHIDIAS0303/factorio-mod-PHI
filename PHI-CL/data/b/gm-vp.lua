@@ -165,53 +165,39 @@ do
 end
 
 -- GM-VP A 9 BASE RESEARCH
-for _, v in pairs({'concrete', 'automation', 'electronics', 'advanced-circuit', 'engine', 'sulfur-processing', 'solar-energy', 'railway', 'oil-processing'}) do
-    data:extend({{
-        type = 'technology',
-        name = v .. '-productivity',
-        prerequisites = {'electromagnetic-plant'},
-        effects = {{type = 'change-recipe-productivity', recipe = v, change = 0.05}},
-        unit = {count_formula = '1000 * (1.5 ^ (L - 1))', ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}, time = 60},
-        icons = {{icon = '__base__/graphics/technology/' .. v ..'.png', icon_size = 256}, {icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png', icon_size = 128, scale = 0.5, shift = {50, 50}}},
-        order = 'a-i-d',
-        max_level = 10,
-        upgrade = true,
-        localised_name = {'technology-name.' .. v}
-    }})
-end
+if items['technology_productivity'] then
+    for k, v in pairs(items['technology_productivity']) do
+        local base_prerequisites = v.prerequisites
+        local base_ingredient = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+        local base_effect = {}
 
-table.insert(data.raw.technology['concrete-productivity'].prerequisites, 'landfill')
-table.insert(data.raw.technology['solar-energy-productivity'].prerequisites, 'electric-energy-accumulators')
-table.insert(data.raw.technology['sulfur-processing-productivity'].prerequisites, 'cliff-explosives')
-data.raw.technology['concrete-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'concrete', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'concrete-from-molten-iron', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'refined-concrete', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'landfill', change = 0.05}}
-data.raw.technology['engine-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'engine-unit', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'electric-engine-unit', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'flying-robot-frame', change = 0.05}}
-data.raw.technology['oil-processing-productivity'].prerequisites = {'cryogenic-plant'}
-data.raw.technology['oil-processing-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'basic-oil-processing', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'advanced-oil-processing', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'coal-liquefaction', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'lubricant', change = 0.05}}
-data.raw.technology['sulfur-processing-productivity'].prerequisites = {'cryogenic-plant'}
-data.raw.technology['sulfur-processing-productivity'].effects[1].recipe = 'sulfur'
-data.raw.technology['sulfur-processing-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'sulfur', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'sulfuric-acid', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'explosives', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'cliff-explosives', change = 0.05}}
-data.raw.technology['electronics-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'electronic-circuit', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'copper-cable', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'casting-copper-cable', change = 0.05}}
-data.raw.technology['solar-energy-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'solar-panel', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'accumulator', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'battery', change = 0.05}}
-data.raw.technology['railway-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'rail', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-stick', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'casting-iron-stick', change = 0.05}}
-data.raw.technology['automation-productivity'].prerequisites[1] = 'logistics-2'
-data.raw.technology['automation-productivity'].effects = {{type = 'change-recipe-productivity', recipe = 'pipe', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'casting-pipe', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'iron-gear-wheel', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'casting-iron-gear-wheel', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'barrel', change = 0.05}}
-data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
-data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
+        for _, v2 in pairs(v.ingredients) do
+            table.insert(base_ingredient, {v2, 1})
+            table.insert(base_prerequisites, v2)
+        end
 
--- GM-VP C 7 SPACE_AGE RESEARCH
-for _, v in pairs({'processing-unit-productivity', 'steel-plate-productivity', 'low-density-structure-productivity', 'plastic-bar-productivity', 'rocket-fuel-productivity', 'rocket-part-productivity', 'research-productivity'}) do
-    if data.raw.technology[v] then
-        data.raw.technology[v].unit.count_formula = '1000 * (1.5 ^ (L - 1))'
-        data.raw.technology[v].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-        data.raw.technology[v].max_level = 10
+        for _, v2 in pairs(v.effect) do
+            table.insert(base_effect, {type = 'change-recipe-productivity', recipe = v2, change = 0.05})
+        end
+
+        data:extend({{
+            type = 'technology',
+            name = k .. '-productivity',
+            prerequisites = base_prerequisites,
+            effects = base_effect,
+            unit = {count_formula = '1000 * (1.5 ^ (L - 1))', ingredients = base_ingredient, time = 60},
+            icons = {{icon = '__base__/graphics/technology/' .. k ..'.png', icon_size = 256}, {icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png', icon_size = 128, scale = 0.5, shift = {50, 50}}},
+            order = 'a-i-d',
+            max_level = 10,
+            upgrade = true,
+            localised_name = {'technology-name.' .. k}
+        }})
     end
 end
 
--- GM-VP C 1 SPACE_AGE RESEARCH
-if data.raw.technology['research-productivity'] and data.raw.technology['research-productivity'].unit then
-    data.raw.technology['research-productivity'].unit.count_formula = '1500 * (1.5 ^ L)'
-    data.raw.technology['research-productivity'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-end
+data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
+-- data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
+-- 'metallurgic-science-pack', 'electromagnetic-science-pack', 'cryogenic-science-pack'
 
 -- GM-VP A 1 SPACE_AGE RESEARCH_EFFECT
 if data.raw.technology['automation'] and data.raw.technology['automation'].effects then
@@ -405,8 +391,10 @@ if data.raw.technology and items['technology'] and items['technology_reform'] th
 
             if v.unit then
                 v.research_trigger = nil
-                v.unit.count = (items['technology_reform'][v.name].unit_count and items['technology_reform'][v.name].unit_count) or v.unit.count
                 v.unit.ingredients = (items['technology_reform'][v.name].unit_ingredients and items['technology_reform'][v.name].unit_ingredients) or v.unit.ingredients
+                v.unit.count = (items['technology_reform'][v.name].unit_count and items['technology_reform'][v.name].unit_count) or v.unit.count
+                v.unit.count_formula = (items['technology_reform'][v.name].unit_count_formula and items['technology_reform'][v.name].unit_count_formula) or v.unit.count_formula
+                v.max_level = (items['technology_reform'][v.name].max_level and items['technology_reform'][v.name].max_level) or v.max_level
             end
 
         elseif items['technology'][v.name] then
