@@ -4,6 +4,7 @@ Date: 2026-06-21
 
   Changes:
     - [GM] Some adjust to research packs for VP mode.
+    - [GM] Generic code layout restructure.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.143
@@ -11,6 +12,7 @@ Date: 2026-06-07
 
   Changes:
     - [GM] Added fluid recipe for VP mode.
+    - [GM] Generic code layout restructure.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.142
