@@ -52,7 +52,7 @@ data:extend({
   name = 'PHI-MB-EQUIPMENT-ARMOR',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-class-color', 'MBQ2', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-EQUIPMENT-ARMOR'}},
+  localised_name = {'phi-cl.setting-class-color', 'MBQ1', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-EQUIPMENT-ARMOR'}},
   localised_description = (mods['space-age'] and {'', '[item=power-armor-mk2] 3, [item=mech-armor] 2', {'phi-cl.setting-change-color', '\n[8] A8'}}) or {'', '[item=power-armor-mk2] 3', {'phi-cl.setting-change-color', '\n[8] A8'}},
   order = 'AC01'
 }, {
@@ -60,7 +60,7 @@ data:extend({
   name = 'PHI-MB-EQUIPMENT-SIZE',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-class-color', 'MBQ3', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-EQUIPMENT-SIZE'}},
+  localised_name = {'phi-cl.setting-class-color', 'MBQ2', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-EQUIPMENT-SIZE'}},
   localised_description = {'', '1x1', {'phi-cl.setting-change-color', '\n[11] A11'}},
   order = 'AC02'
 }, {
@@ -130,7 +130,7 @@ data:extend({
   minimum_value = 0,
   maximum_value = 1000,
   localised_name = {'phi-cl.setting-class-color', 'SA2', {'phi-cl.ratio'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE-MULTIPLIER'}},
-  localised_description = (mods['space-age'] and {'', '[item=ice][virtual-signal=signal-clock] x0.1', {'phi-cl.setting-change-color', '[55] A55'}}) or nil,
+  localised_description = (mods['space-age'] and {'', '[item=ice][virtual-signal=signal-clock] x0.1', {'phi-cl.setting-change-color', '\n[55] A55'}}) or nil,
   order = 'C02'
 }, {
   type = 'bool-setting',
