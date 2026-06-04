@@ -420,21 +420,20 @@ local items = {
             ingredients = {{type = 'item', name = 'rocket-launcher', amount = 4}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 4}, {type = 'item', name = 'iron-gear-wheel', amount = 20}}
         },
         ['fusion-reactor'] = {
-            category = 'cryogenics',
+            category = 'crafting',
             ingredients = {{type = 'item', name = 'nuclear-reactor', amount = 1}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'processing-unit', amount = 320}}
         },
         ['fusion-generator'] = {
-            category = 'cryogenics',
+            category = 'crafting',
             ingredients = {{type = 'item', name = 'steam-turbine', amount = 1}, {type = 'item', name = 'steel-plate', amount = 80}, {type = 'item', name = 'processing-unit', amount = 40}}
         },
         -- SPACE_AGE 15
         ['fusion-power-cell'] = {
-            category = 'cryogenics',
+            category = 'crafting-with-fluid',
             ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'fluid', name = 'petroleum-gas', amount = 200}},
             results = {{type = 'item', name = 'fusion-power-cell', amount = 4}}
         },
         ['fusion-reactor-equipment'] = {
-            category = 'cryogenics',
             ingredients = {{type = 'item', name = 'fission-reactor-equipment', amount = 1}, {type = 'item', name = 'fusion-power-cell', amount = 10}, {type = 'item', name = 'steel-plate', amount = 350}, {type = 'item', name = 'processing-unit', amount = 275}}
         },
         ['fluoroketone'] = {
