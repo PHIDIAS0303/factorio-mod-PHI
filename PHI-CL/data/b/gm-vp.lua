@@ -219,7 +219,7 @@ end
 
 -- GM-VP C 1 SPACE_AGE ENTITY
 if data.raw['agricultural-tower'] and data.raw['agricultural-tower']['agricultural-tower'] then
-    data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = { pollution = -1 }
+    data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = {pollution = -1}
 end
 
 -- GM-VP C 1 SPACE_AGE ENTITY
