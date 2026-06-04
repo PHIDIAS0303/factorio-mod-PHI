@@ -621,7 +621,7 @@ local items = {
             effect = {'concrete', 'concrete-from-molten-iron', 'refined-concrete', 'landfill'}
         },
         ['automation'] = {
-            prerequisites = {'logistics-2'},
+            prerequisites = {},
             ingredients = {'metallurgic-science-pack', 'electromagnetic-science-pack'},
             effect = {'pipe', 'casting-pipe', 'iron-gear-wheel', 'casting-iron-gear-wheel', 'barrel'}
         },
