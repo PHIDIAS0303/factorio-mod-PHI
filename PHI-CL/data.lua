@@ -1,3 +1,16 @@
+if settings.startup['PHI-MB'].value then
+    if settings.startup['PHI-MB-ENERGY'].value and settings.startup['PHI-MB-ENERGY'].value > 1 then
+        require('data.b.mbe')
+    end
+
+    if settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE'].value > 1 then
+        require('data.b.mbm')
+    end
+
+    if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIPMENT'].value > 1 then
+        require('data.b.mbq')
+    end
+end
 
 if settings.startup['PHI-CT'].value then
     require('data.b.ct')
@@ -25,19 +38,5 @@ if settings.startup['PHI-GM'].value then
 
     elseif settings.startup['PHI-GM'].value == 'VP' then
         require('data.b.gm-vp')
-    end
-end
-
-if settings.startup['PHI-MB'].value then
-    if settings.startup['PHI-MB-ENERGY'].value and settings.startup['PHI-MB-ENERGY'].value > 1 then
-        require('data.b.mbe')
-    end
-
-    if settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE'].value > 1 then
-        require('data.b.mbm')
-    end
-
-    if settings.startup['PHI-MB-EQUIPMENT'].value and settings.startup['PHI-MB-EQUIPMENT'].value > 1 then
-        require('data.b.mbq')
     end
 end
