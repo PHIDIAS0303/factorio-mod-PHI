@@ -81,10 +81,8 @@ function main.EEE(source, tier)
         end
 
         if item.energy_source.emissions_per_minute then
-            local m = ((source.tech == 'compound-energy' and ((source.type == 'boiler') or (source.name == 'kr-gas-power-station'))) and (tier - source.min + 2)) or (2 ^ (tier - source.min + 1))
-
             for k, _ in pairs(item.energy_source.emissions_per_minute) do
-                item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (tier - source.min + 2)
+                item.energy_source.emissions_per_minute[k] = item.energy_source.emissions_per_minute[k] * (2 ^ (tier - source.min + 1))
             end
         end
     end
@@ -140,36 +138,36 @@ function main.EEE(source, tier)
             end
 
         elseif (source.type == 'boiler') then
-            item.energy_consumption = tostring(tonumber(string.match(item.energy_consumption, '[%d%.]+')) * tier) .. string.match(item.energy_consumption, '%a+')
-            item.target_temperature = 15 + ((item.target_temperature - 15) * tier)
+            item.energy_consumption = tostring(tonumber(string.match(item.energy_consumption, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.energy_consumption, '%a+')
+            item.target_temperature = 15 + ((item.target_temperature - 15) * (2 * (tier - source.min + 1)))
 
             if (source.name == 'heat-exchanger') then
-                item.energy_source.min_working_temperature = 15 + ((item.energy_source.min_working_temperature - 15) * tier)
-                item.energy_source.max_temperature = item.energy_source.max_temperature * tier
-                item.energy_source.max_transfer = tostring(tonumber(string.match(item.energy_source.max_transfer, '[%d%.]+')) * tier) .. string.match(item.energy_source.max_transfer, '%a+')
+                item.energy_source.min_working_temperature = 15 + ((item.energy_source.min_working_temperature - 15) * (2 * (tier - source.min + 1)))
+                item.energy_source.max_temperature = item.energy_source.max_temperature * (2 * (tier - source.min + 1))
+                item.energy_source.max_transfer = tostring(tonumber(string.match(item.energy_source.max_transfer, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.energy_source.max_transfer, '%a+')
             end
 
         elseif (source.type == 'generator') then
-            item.max_power_output = (item.max_power_output and (tonumber(string.match(item.max_power_output, '[%d%.]+')) * (tier - source.min + 2)) .. string.match(item.max_power_output, '%a+')) or nil
-            item.maximum_temperature = (item.maximum_temperature and 15 + ((item.maximum_temperature - 15) * tier)) or nil
+            item.max_power_output = (item.max_power_output and (tonumber(string.match(item.max_power_output, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.max_power_output, '%a+')) or nil
+            item.maximum_temperature = (item.maximum_temperature and 15 + ((item.maximum_temperature - 15) * (2 * (tier - source.min + 1)))) or nil
 
         elseif (source.type == 'reactor') then
-            item.consumption = tostring(tonumber(string.match(item.consumption, '[%d%.]+')) * tier) .. string.match(item.consumption, '%a+')
-            item.heat_buffer.max_temperature = item.heat_buffer.max_temperature * tier
-            item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * tier)  .. string.match(item.heat_buffer.max_transfer, '%a+')
+            item.consumption = tostring(tonumber(string.match(item.consumption, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.consumption, '%a+')
+            item.heat_buffer.max_temperature = item.heat_buffer.max_temperature * (2 * (tier - source.min + 1))
+            item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * (2 * (tier - source.min + 1)))  .. string.match(item.heat_buffer.max_transfer, '%a+')
             tint_handle(item, tier, {'connection_patches_connected', 'connection_patches_disconnected', 'heat_connection_patches_connected', 'heat_connection_patches_disconnected', 'lower_layer_picture'})
 
         elseif (source.type == 'fusion-reactor') then
-            item.power_input = tostring(tonumber(string.match(item.power_input, '[%d%.]+')) * tier) .. string.match(item.power_input, '%a+')
-            item.max_fluid_usage = item.max_fluid_usage * tier
+            item.power_input = tostring(tonumber(string.match(item.power_input, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.power_input, '%a+')
+            item.max_fluid_usage = item.max_fluid_usage * (2 * (tier - source.min + 1))
 
         elseif (source.type == 'fusion-generator') then
-            item.energy_source.output_flow_limit = tostring(tonumber(string.match(item.energy_source.output_flow_limit, '[%d%.]+')) * tier) .. string.match(item.energy_source.output_flow_limit, '%a+')
-            item.max_fluid_usage = item.max_fluid_usage * tier
+            item.energy_source.output_flow_limit = tostring(tonumber(string.match(item.energy_source.output_flow_limit, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.energy_source.output_flow_limit, '%a+')
+            item.max_fluid_usage = item.max_fluid_usage * (2 * (tier - source.min + 1))
 
         elseif (source.type == 'heat-pipe') then
-            item.heat_buffer.max_temperature = item.heat_buffer.max_temperature * tier
-            item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * tier)  .. string.match(item.heat_buffer.max_transfer, '%a+')
+            item.heat_buffer.max_temperature = item.heat_buffer.max_temperature * (2 * (tier - source.min + 1))
+            item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * (2 * (tier - source.min + 1)))  .. string.match(item.heat_buffer.max_transfer, '%a+')
             tint_handle(item, tier, {'connection_sprites', 'heat_glow_sprites'})
         end
     end
