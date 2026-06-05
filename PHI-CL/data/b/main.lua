@@ -54,14 +54,6 @@ end
 
 -- entity
 function main.EEE(source, tier)
-    if not data.raw[source.type] then
-        return
-    end
-
-    if not data.raw[source.type] then
-        return
-    end
-
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
     item.name = source.name .. '-' .. tier
     item.minable.result = item.name
