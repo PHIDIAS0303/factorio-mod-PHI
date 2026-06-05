@@ -611,7 +611,6 @@ local items = {
         ['space-platform-foundation'] = 'tile',
         ['foundation'] = 'tile',
         -- SPACE_AGE TOOL 0
-        ['agricultural-science-pack'] = 'tool',
         ['promethium-science-pack'] = 'tool',
     },
     ['technology_productivity'] = {

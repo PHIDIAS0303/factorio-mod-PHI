@@ -290,7 +290,7 @@ end
 -- GM-VP H 7 SPACE_AGE ITEM
 -- GM-VP H 21 SPACE_AGE MAP_GENERATION
 -- GM-VP H 3 SPACE_AGE TILE
--- GM-VP H 2 SPACE_AGE TOOL
+-- GM-VP H 1 SPACE_AGE TOOL
 if items['hidden'] then
     for k, v in pairs(items['hidden']) do
         if data.raw[v] and data.raw[v][k] then
