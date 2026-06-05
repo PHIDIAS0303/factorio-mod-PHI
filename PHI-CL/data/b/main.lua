@@ -58,7 +58,7 @@ function main.EEE(source, tier)
         return
     end
 
-    if not data.raw[source.type][source.ref_name] then
+    if not data.raw[source.type] then
         return
     end
 
