@@ -140,10 +140,10 @@ end
 
 if data.raw['battery-equipment'] and data.raw['battery-equipment']['battery-equipment'] and settings.startup['PHI-MB-EQUIPMENT'].value > 1 then
     for i = 4, settings.startup['PHI-MB-EQUIPMENT'].value + 2 do
-        if data.raw['battery-equipment']['battery-equipment-mk' .. i .. '-equipment'] then
-            data.raw['battery-equipment']['battery-equipment-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'equipment-name.battery-equipment'}, tostring(i)}
-            data.raw['item']['battery-equipment-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'equipment-name.battery-equipment'}, tostring(i)}
-            data.raw['recipe']['battery-equipment-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'equipment-name.battery-equipment'}, tostring(i)}
+        if data.raw['battery-equipment']['battery-mk' .. i .. '-equipment'] then
+            data.raw['battery-equipment']['battery-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'equipment-name.battery-equipment'}, tostring(i)}
+            data.raw['item']['battery-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'equipment-name.battery-equipment'}, tostring(i)}
+            data.raw['recipe']['battery-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'equipment-name.battery-equipment'}, tostring(i)}
         end
     end
 end
