@@ -45,7 +45,7 @@ data:extend({
   minimum_value = 1,
   maximum_value = 8,
   localised_name = {'phi-cl.setting-category-color', 'MBQ', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-EQUIPMENT'}},
-  localised_description = {'', '[item=personal-laser-defense-equipment]', {'phi-cl.setting-change-color', '\n[168] A168'}},
+  localised_description = {'', '[item=personal-laser-defense-equipment]', {'phi-cl.setting-change-color', '\n[63] A63'}},
   order = 'AC00'
 }, {
   type = 'bool-setting',
