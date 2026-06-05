@@ -95,13 +95,15 @@ if items['technology_productivity'] then
             table.insert(base_effect, {type = 'change-recipe-productivity', recipe = v2, change = 0.05})
         end
 
+        local icon = ((v.mod and v.mod == 'base') and '__base__/graphics/technology/' .. k ..'.png') or ('__space-age__/graphics/technology/' .. k ..'.png')
+
         data:extend({{
             type = 'technology',
             name = k .. '-productivity',
             prerequisites = base_prerequisites,
             effects = base_effect,
             unit = {count_formula = '1000 * (1.5 ^ (L - 1))', ingredients = base_ingredient, time = 60},
-            icons = {{icon = '__base__/graphics/technology/' .. k ..'.png', icon_size = 256}, {icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png', icon_size = 128, scale = 0.5, shift = {50, 50}}},
+            icons = {{icon = icon, icon_size = 256}, {icon = '__core__/graphics/icons/technology/constants/constant-recipe-productivity.png', icon_size = 128, scale = 0.5, shift = {50, 50}}},
             order = 'a-i-d',
             max_level = 10,
             upgrade = true,
