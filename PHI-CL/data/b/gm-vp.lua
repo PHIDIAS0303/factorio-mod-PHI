@@ -18,38 +18,6 @@ if items['entity_surface_conditions'] then
     end
 end
 
--- GM-VP H 1 QUALITY ITEM
--- GM-VP H 39 SPACE_AGE ITEM
-for _, v in pairs(data.raw.item) do
-    v.auto_recycle = false
-
-    if items['item'][v.name] then
-        v.hidden = true
-        v.hidden_in_factoriopedia = true
-    end
-end
-
--- GM-VP C 12 BASE RECIPE
--- GM-VP C 40 SPACE_AGE RECIPE
--- GM-VP H 1 QUALITY RECIPE
--- GM-VP H 76 SPACE_AGE RECIPE
-for _, v in pairs(data.raw.recipe) do
-    v.surface_conditions = nil
-    v.maximum_productivity = nil
-    v.auto_recycle = false
-
-    if items['recipe_reform'][v.name] then
-        v.category = (items['recipe_reform'][v.name].category and items['recipe_reform'][v.name].category) or v.category
-        v.ingredients = (items['recipe_reform'][v.name].ingredients and items['recipe_reform'][v.name].ingredients) or v.ingredients
-        v.results = (items['recipe_reform'][v.name].results and items['recipe_reform'][v.name].results) or v.results
-        v.energy_required = (items['recipe_reform'][v.name].energy_required and items['recipe_reform'][v.name].energy_required) or v.energy_required
-
-    elseif items['recipe'][v.name] then
-        v.hidden = true
-        v.hidden_in_factoriopedia = true
-    end
-end
-
 -- GM-VP C 1 BASE UTILITY_CONSTANTS
 data.raw['utility-constants'].default.default_pipeline_extent = math.max(settings.startup['PHI-MI-PIPE-EXTENT'].value, 960)
 
@@ -413,5 +381,37 @@ if settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE
                 table.insert(data.raw.technology[mbm[v].tech].effects, {type = 'unlock-recipe', recipe = v .. '-' .. i})
             end
         end
+    end
+end
+
+-- GM-VP H 1 QUALITY ITEM
+-- GM-VP H 39 SPACE_AGE ITEM
+for _, v in pairs(data.raw.item) do
+    v.auto_recycle = false
+
+    if items['item'][v.name] then
+        v.hidden = true
+        v.hidden_in_factoriopedia = true
+    end
+end
+
+-- GM-VP C 12 BASE RECIPE
+-- GM-VP C 40 SPACE_AGE RECIPE
+-- GM-VP H 1 QUALITY RECIPE
+-- GM-VP H 76 SPACE_AGE RECIPE
+for _, v in pairs(data.raw.recipe) do
+    v.surface_conditions = nil
+    v.maximum_productivity = nil
+    v.auto_recycle = false
+
+    if items['recipe_reform'][v.name] then
+        v.category = (items['recipe_reform'][v.name].category and items['recipe_reform'][v.name].category) or v.category
+        v.ingredients = (items['recipe_reform'][v.name].ingredients and items['recipe_reform'][v.name].ingredients) or v.ingredients
+        v.results = (items['recipe_reform'][v.name].results and items['recipe_reform'][v.name].results) or v.results
+        v.energy_required = (items['recipe_reform'][v.name].energy_required and items['recipe_reform'][v.name].energy_required) or v.energy_required
+
+    elseif items['recipe'][v.name] then
+        v.hidden = true
+        v.hidden_in_factoriopedia = true
     end
 end
