@@ -346,7 +346,7 @@ end
 
 -- GM-VP C 26 BASE RESEARCH
 -- GM-VP C 33 SPACE_AGE RESEARCH
--- GM-VP H 35 SPACE_AGE RESEARCH
+-- GM-VP H 31 SPACE_AGE RESEARCH
 if data.raw.technology and items['technology'] and items['technology_reform'] then
     for _, v in pairs(data.raw.technology) do
         if items['technology_reform'][v.name] then
