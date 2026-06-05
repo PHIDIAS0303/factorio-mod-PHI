@@ -1,11 +1,9 @@
 local items = require('gm-vp-c')
 local mbm = require('mbm-c')
+local mc = require('mc')
 local item_sounds = require('__base__/prototypes/item_sounds')
 
-if not mods['space-age'] then
-    error('Mod not found\nSpace Age is not enabled\n太空時代尚未啟用\nSpace Age が有効になっていません')
-    return
-end
+mc.space_age()
 
 -- GM-VP C 33 BASE ENTITY
 -- GM-VP C 6 ELEVATED_RAILS ENTITY

@@ -1,8 +1,6 @@
+local mc = require('mc')
 
-if not mods['space-age'] then
-    error('Mod not found\nSpace Age is not enabled\n太空時代尚未啟用\nSpace Age が有効になっていません')
-    return
-end
+mc.space_age()
 
 -- GM-SAP C 2 SPACE_AGE RESOURCE
 for _, v in pairs({'lithium-brine', 'fluorine-vent'}) do

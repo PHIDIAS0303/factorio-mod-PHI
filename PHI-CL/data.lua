@@ -11,15 +11,15 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
     require('data.b.mig')
 end
 
-if mods['space-age'] then
+if settings.startup['PHI-SA'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
     require('data.b.sa')
-
-    if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '' then
-        require('data.b.gm')
-    end
 end
 
 if settings.startup['PHI-GM'].value then
+    if settings.startup['PHI-GM'].value ~= '' then
+        require('data.b.gm')
+    end
+
     if settings.startup['PHI-GM'].value == 'SAP' then
         require('data.b.gm-sap')
 

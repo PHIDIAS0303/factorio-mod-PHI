@@ -1,3 +1,6 @@
+local mc = require('mc')
+
+mc.space_age()
 
 local function spoil_handle(i)
     i.spoil_ticks = nil
