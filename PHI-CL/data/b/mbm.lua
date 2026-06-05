@@ -28,6 +28,7 @@ if data.raw['assembling-machine'] and data.raw['assembling-machine']['assembling
         if data.raw['assembling-machine']['assembling-machine-' .. i] then
             data.raw['assembling-machine']['assembling-machine-' .. i].localised_name = {'phi-cl.combine', {'?', {'entity-name.assembling-machine'}, {'name.assembling-machine'}}, tostring(i)}
             data.raw['item']['assembling-machine-' .. i].localised_name = {'phi-cl.combine', {'?', {'entity-name.assembling-machine'}, {'name.assembling-machine'}}, tostring(i)}
+            data.raw['recipe']['assembling-machine-' .. i].localised_name = {'phi-cl.combine', {'?', {'entity-name.assembling-machine'}, {'name.assembling-machine'}}, tostring(i)}
         end
     end
 end

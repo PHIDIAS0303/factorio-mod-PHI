@@ -143,6 +143,7 @@ if data.raw['battery-equipment'] and data.raw['battery-equipment']['battery-equi
         if data.raw['battery-equipment']['battery-equipment-mk' .. i .. '-equipment'] then
             data.raw['battery-equipment']['battery-equipment-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'?', {'equipment-name.battery-equipment'}, {'name.battery-equipment'}}, tostring(i)}
             data.raw['item']['battery-equipment-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'?', {'equipment-name.battery-equipment'}, {'name.battery-equipment'}}, tostring(i)}
+            data.raw['recipe']['battery-equipment-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'?', {'equipment-name.battery-equipment'}, {'name.battery-equipment'}}, tostring(i)}
         end
     end
 end
@@ -152,6 +153,7 @@ if data.raw['energy-shield-equipment'] and data.raw['energy-shield-equipment']['
         if data.raw['energy-shield-equipment']['energy-shield-mk' .. i .. '-equipment'] then
             data.raw['energy-shield-equipment']['energy-shield-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'?', {'equipment-name.energy-shield'}, {'name.energy-shield'}}, tostring(i)}
             data.raw['item']['energy-shield-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'?', {'equipment-name.energy-shield'}, {'name.energy-shield'}}, tostring(i)}
+            data.raw['recipe']['energy-shield-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'?', {'equipment-name.energy-shield'}, {'name.energy-shield'}}, tostring(i)}
         end
     end
 end
@@ -161,6 +163,7 @@ if data.raw['personal-roboport-equipment'] and data.raw['personal-roboport-equip
         if data.raw['personal-roboport-equipment']['personal-roboport-mk' .. i .. '-equipment'] then
             data.raw['personal-roboport-equipment']['personal-roboport-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'?', {'equipment-name.personal-roboport'}, {'name.personal-roboport'}}, tostring(i)}
             data.raw['item']['personal-roboport-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'?', {'equipment-name.personal-roboport'}, {'name.personal-roboport'}}, tostring(i)}
+            data.raw['recipe']['personal-roboport-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'?', {'equipment-name.personal-roboport'}, {'name.personal-roboport'}}, tostring(i)}
         end
     end
 end
