@@ -32,7 +32,7 @@ for _, v in pairs(data.raw.item) do
 end
 
 -- GM-VP C 12 BASE RECIPE
--- GM-VP C 39 SPACE_AGE RECIPE
+-- GM-VP C 40 SPACE_AGE RECIPE
 -- GM-VP H 1 QUALITY RECIPE
 -- GM-VP H 76 SPACE_AGE RECIPE
 for _, v in pairs(data.raw.recipe) do
@@ -371,7 +371,7 @@ if data.raw['lab'] then
 end
 
 -- GM-VP C 26 BASE RESEARCH
--- GM-VP C 32 SPACE_AGE RESEARCH
+-- GM-VP C 33 SPACE_AGE RESEARCH
 -- GM-VP H 35 SPACE_AGE RESEARCH
 if data.raw.technology and items['technology'] and items['technology_reform'] then
     for _, v in pairs(data.raw.technology) do

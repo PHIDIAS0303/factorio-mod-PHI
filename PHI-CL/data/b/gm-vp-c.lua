@@ -267,11 +267,17 @@ local items = {
             ingredients = {{type = 'fluid', name = 'fluoroketone-cold', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}, {type = 'item', name = 'ice', amount = 5}},
             results = {{type = 'item', name = 'cryogenic-science-pack', amount = 2}, {type = 'fluid', name = 'fluoroketone-hot', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
         },
+        ['agricultural-science-pack'] = {
+            energy_required = 10,
+            ingredients = {{type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'wood', amount = 1}},
+            results = {{type = 'item', name = 'agricultural-science-pack', amount = 2}}
+        },
         ['electrolyte'] = {
             energy_required = 2,
             ingredients = {{type = 'fluid', name = 'heavy-oil', amount = 10, fluidbox_multiplier = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'stone', amount = 1}},
             results = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}}
         },
+        -- SPACE_AGE 40
     },
     ['recipe'] = {
         -- QUALITY 0
@@ -918,8 +924,8 @@ local items = {
             unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
         },
         ['tree-seeding'] = {
-            prerequisites = {'agriculture'},
-            unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+            prerequisites = {'agricultural-science-pack'},
+            unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}}
         },
         ['metallurgic-science-pack'] = {
             prerequisites = {'foundry'},
@@ -936,6 +942,11 @@ local items = {
             prerequisites = {'cryogenic-plant'},
             unit = {count = 300, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'cryogenic-science-pack'}}
+        },
+        ['agricultural-science-pack'] = {
+            prerequisites = {'agriculture'},
+            unit = {count = 300, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'agricultural-science-pack'}}
         },
     },
     ['technology'] = {
@@ -958,7 +969,7 @@ local items = {
         ['bacteria-cultivation'] = true,
         ['bioflux-processing'] = true,
         -- SPACE_AGE 15
-        ['agricultural-science-pack'] = true,
+        ['calcite-processing'] = true,
         ['captivity'] = true,
         ['biter-egg-handling'] = true,
         ['carbon-fiber'] = true,
@@ -980,7 +991,6 @@ local items = {
         ['asteroid-reprocessing'] = true,
         ['advanced-asteroid-processing'] = true,
         ['asteroid-productivity'] = true,
-        ['calcite-processing'] = true,
         -- SPACE_AGE 35
     },
 }
