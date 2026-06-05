@@ -11,17 +11,17 @@ return {
         name = 'accumulator',
         max = settings.startup['PHI-MB-ENERGY'].value
     },
-    -- MBE A 4 BASE ENTITY,RECIPE,RESEARCH_EFFECT
+    -- MBE A 2 BASE ENTITY,RECIPE,RESEARCH_EFFECT
     ['boiler'] = {
         type = 'boiler',
         name = 'boiler',
-        max = math.min(tonumber(settings.startup['PHI-MB-ENERGY'].value) or 1, 5)
+        max = math.min(tonumber(settings.startup['PHI-MB-ENERGY'].value) or 1, 3)
     },
-    -- MBE A 4 BASE ENTITY,RECIPE,RESEARCH_EFFECT
+    -- MBE A 2 BASE ENTITY,RECIPE,RESEARCH_EFFECT
     ['steam-engine'] = {
         type = 'generator',
         name = 'steam-engine',
-        max = math.min(tonumber(settings.startup['PHI-MB-ENERGY'].value) or 1, 5)
+        max = math.min(tonumber(settings.startup['PHI-MB-ENERGY'].value) or 1, 3)
     },
     -- MBE A 4 BASE ENTITY,RECIPE,RESEARCH_EFFECT
     ['nuclear-reactor'] = {
