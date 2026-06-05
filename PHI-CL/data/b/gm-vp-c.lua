@@ -269,7 +269,7 @@ local items = {
         },
         ['agricultural-science-pack'] = {
             energy_required = 10,
-            ingredients = {{type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'wood', amount = 1}},
+            ingredients = {{type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'yumako-mash', amount = 1}, {type = 'item', name = 'jelly', amount = 1}},
             results = {{type = 'item', name = 'agricultural-science-pack', amount = 2}}
         },
         ['electrolyte'] = {
@@ -278,13 +278,21 @@ local items = {
             results = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}}
         },
         -- SPACE_AGE 40
+        ['yumako-processing'] = {
+            energy_required = 10,
+            ingredients = {{type = 'item', name = 'yumako', amount = 10}, {type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}},
+            results = {{type = 'item', name = 'yumako-mash', amount = 10}, {type = 'item', name = 'yumako-seed', amount = 1}, {type = 'fluid', name = 'steam', temperature = 165, amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
+        },
+        ['jellynut-processing'] = {
+            energy_required = 10,
+            ingredients = {{type = 'item', name = 'jellynut', amount = 10}, {type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}},
+            results = {{type = 'item', name = 'jelly', amount = 10}, {type = 'item', name = 'jellynut-seed', amount = 1}, {type = 'fluid', name = 'steam', temperature = 165, amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
+        },
+        -- SPACE_AGE 40
         --[[
-        
-        ['agricultural-science-pack'] = true,
         ['fish-breeding'] = true,
         ['nutrients-from-fish'] = true,
-        ['yumako-processing'] = true,
-        ['jellynut-processing'] = true,
+        ['steam-condensation'] = true,
         ]]
     },
     ['recipe'] = {
@@ -352,30 +360,29 @@ local items = {
         ['scrap-recycling'] = true,
         -- SPACE_AGE 50
         ['foundation'] = true,
-        ['steam-condensation'] = true,
         ['thruster'] = true,
         ['thruster-fuel'] = true,
         ['thruster-oxidizer'] = true,
-        -- SPACE_AGE 55
         ['advanced-thruster-fuel'] = true,
+        -- SPACE_AGE 55
         ['advanced-thruster-oxidizer'] = true,
         ['metallic-asteroid-crushing'] = true,
         ['carbonic-asteroid-crushing'] = true,
         ['oxide-asteroid-crushing'] = true,
-        -- SPACE_AGE 60
         ['advanced-metallic-asteroid-crushing'] = true,
+        -- SPACE_AGE 60
         ['advanced-carbonic-asteroid-crushing'] = true,
         ['advanced-oxide-asteroid-crushing'] = true,
         ['metallic-asteroid-reprocessing'] = true,
         ['carbonic-asteroid-reprocessing'] = true,
-        -- SPACE_AGE 65
         ['oxide-asteroid-reprocessing'] = true,
+        -- SPACE_AGE 65
         ['space-platform-foundation'] = true,
         ['space-platform-starter-pack'] = true,
         ['carbon'] = true,
         ['crusher'] = true,
-        -- SPACE_AGE 70
         ['casting-low-density-structure'] = true
+        -- SPACE_AGE 70
     },
     ['item'] = {
         -- QUALITY 0

@@ -38,7 +38,7 @@ data.raw['simple-entity']['small-stomper-shell'].autoplace = nil
 
 隱藏 Hide
 成就 Achievement
--- GM-VP H 21 SPACE_AGE ACHIEVEMENT
+-- GM-VP H 16 SPACE_AGE ACHIEVEMENT
 for k, v in pairs(items['achievement']) do
     if data.raw[v] and data.raw[v][k] then
         data.raw[v][k] = nil

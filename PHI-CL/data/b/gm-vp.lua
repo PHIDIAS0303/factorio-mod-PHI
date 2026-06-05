@@ -157,10 +157,12 @@ if data.raw['plant'] and data.raw['plant']['tree-plant'] and data.raw['plant']['
 
     if data.raw['plant']['yumako-tree'] and data.raw['plant']['yumako-tree'] then
         data.raw['plant']['yumako-tree'].autoplace.tile_restriction = nil
+        data.raw['plant']['yumako-tree'].harvest_emissions = nil
     end
 
     if data.raw['plant']['jellystem'] and data.raw['plant']['jellystem'] then
         data.raw['plant']['jellystem'].autoplace.tile_restriction = nil
+        data.raw['plant']['jellystem'].harvest_emissions = nil
     end
 end
 
@@ -406,7 +408,7 @@ end
 -- GM-VP C 12 BASE RECIPE
 -- GM-VP C 40 SPACE_AGE RECIPE
 -- GM-VP H 1 QUALITY RECIPE
--- GM-VP H 71 SPACE_AGE RECIPE
+-- GM-VP H 70 SPACE_AGE RECIPE
 for _, v in pairs(data.raw.recipe) do
     v.surface_conditions = nil
     v.maximum_productivity = nil
