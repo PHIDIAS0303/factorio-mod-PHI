@@ -15,7 +15,7 @@ data:extend({
   minimum_value = 1,
   maximum_value = 8,
   localised_name = {'phi-cl.setting-category-color', 'MBE', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-ENERGY'}},
-  localised_description = {'', '[item=solar-panel]', {'phi-cl.setting-change-color', '\n[159] A158 C1'}},
+  localised_description = {'', '[item=solar-panel]', {'phi-cl.setting-change-color', '\n[104] A103 C1'}},
   order = 'AA00'
 }, {
   type = 'int-setting',
