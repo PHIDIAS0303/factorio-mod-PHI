@@ -50,11 +50,6 @@ if data.raw['rocket-silo'] and data.raw['rocket-silo']['rocket-silo'] then
     data.raw['rocket-silo']['rocket-silo'].logistic_trash_inventory_size = 0
 end
 
--- GM-VP C 1 BASE ENTITY
-if data.raw['rocket-silo-rocket'] and data.raw['rocket-silo-rocket']['rocket-silo-rocket'] then
-    data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = 0
-end
-
 -- GM-VP A 2 BASE RECIPE
 data:extend({
     {
@@ -154,6 +149,19 @@ end
 -- GM-VP C 1 SPACE_AGE ENTITY
 if data.raw['agricultural-tower'] and data.raw['agricultural-tower']['agricultural-tower'] then
     data.raw['agricultural-tower']['agricultural-tower'].energy_source.emissions_per_minute = {pollution = -1}
+end
+
+-- GM-VP C 3 SPACE_AGE ENTITY
+if data.raw['plant'] and data.raw['plant']['tree-plant'] and data.raw['plant']['tree-plant'].autoplace then
+    data.raw['plant']['tree-plant'].autoplace.tile_restriction = nil
+
+    if data.raw['plant']['yumako-tree'] and data.raw['plant']['yumako-tree'] then
+        data.raw['plant']['yumako-tree'].autoplace.tile_restriction = nil
+    end
+
+    if data.raw['plant']['jellystem'] and data.raw['plant']['jellystem'] then
+        data.raw['plant']['jellystem'].autoplace.tile_restriction = nil
+    end
 end
 
 -- GM-VP C 3 SPACE_AGE ENTITY
