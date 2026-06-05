@@ -288,12 +288,27 @@ local items = {
             ingredients = {{type = 'item', name = 'jellynut', amount = 10}, {type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}},
             results = {{type = 'item', name = 'jelly', amount = 10}, {type = 'item', name = 'jellynut-seed', amount = 1}, {type = 'fluid', name = 'steam', temperature = 165, amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
         },
-        -- SPACE_AGE 40
-        --[[
-        ['fish-breeding'] = true,
-        ['nutrients-from-fish'] = true,
-        ['steam-condensation'] = true,
-        ]]
+        ['steam-condensation'] = {
+            energy_required = 10,
+            ingredients = {{type = 'fluid', name = 'steam', amount = 1000, fluidbox_multiplier = 10}},
+            results = {{type = 'fluid', name = 'water', amount = 700, fluidbox_multiplier = 10}}
+        },
+        ['nutrients-from-yumako-mash'] = {
+            energy_required = 10,
+            ingredients = {{type = 'item', name = 'yumako-mash', amount = 10}},
+            results = {{type = 'item', name = 'nutrients', amount = 10}}
+        },
+        ['nutrients-from-fish'] = {
+            energy_required = 10,
+            ingredients = {{type = 'item', name = 'raw-fish', amount = 1}},
+            results = {{type = 'item', name = 'nutrients', amount = 10}}
+        },
+        -- SPACE_AGE 45
+        ['fish-breeding'] = {
+            energy_required = 10,
+            ingredients = {{type = 'item', name = 'raw-fish', amount = 8}, {type = 'item', name = 'nutrients', amount = 80}, {type = 'fluid', name = 'water', amount = 1000, fluidbox_multiplier = 10, ignored_by_stats = 1000}},
+            results = {{type = 'item', name = 'raw-fish', amount = 16}, {type = 'fluid', name = 'water', amount = 1000, fluidbox_multiplier = 10, ignored_by_stats = 1000}}
+        },
     },
     ['recipe'] = {
         -- QUALITY 0
@@ -312,10 +327,10 @@ local items = {
         ['iron-bacteria-cultivation'] = true,
         -- SPACE_AGE 10
         ['nutrients-from-spoilage'] = true,
-        ['nutrients-from-yumako-mash'] = true,
         ['nutrients-from-bioflux'] = true,
         ['pentapod-egg'] = true,
         ['rocket-fuel-from-jelly'] = true,
+        ['casting-low-density-structure'] = true,
         -- SPACE_AGE 15
         ['bioflux'] = true,
         ['bioplastic'] = true,
@@ -381,8 +396,6 @@ local items = {
         ['space-platform-starter-pack'] = true,
         ['carbon'] = true,
         ['crusher'] = true,
-        ['casting-low-density-structure'] = true
-        -- SPACE_AGE 70
     },
     ['item'] = {
         -- QUALITY 0
@@ -613,6 +626,7 @@ local items = {
         ['promethium-science-pack'] = 'tool',
     },
     ['technology_productivity'] = {
+        -- BASE 0
         ['concrete'] = {
             prerequisites = {'landfill'},
             ingredients = {'metallurgic-science-pack', 'electromagnetic-science-pack'},
@@ -638,6 +652,7 @@ local items = {
             ingredients = {'electromagnetic-science-pack'},
             effect = {'engine-unit', 'electric-engine-unit', 'flying-robot-frame'}
         },
+        -- BASE 5
         ['solar-energy'] = {
             prerequisites = {},
             ingredients = {'electromagnetic-science-pack'},
@@ -657,6 +672,12 @@ local items = {
             prerequisites = {},
             ingredients = {'cryogenic-science-pack'},
             effect = {'basic-oil-processing', 'advanced-oil-processing', 'coal-liquefaction', 'lubricant'}
+        },
+        -- SPACE_AGE 0
+        ['agriculture'] = {
+            prerequisites = {},
+            ingredients = {'agricultural-science-pack'},
+            effect = {'yumako-processing', 'jellynut-processing'}
         },
     },
     ['technology_reform'] = {

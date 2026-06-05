@@ -79,6 +79,7 @@ data:extend({
 })
 
 -- GM-VP A 9 BASE RESEARCH
+-- GM-VP A 1 SPACE_AGE RESEARCH
 if items['technology_productivity'] then
     for k, v in pairs(items['technology_productivity']) do
         local base_prerequisites = v.prerequisites
@@ -408,7 +409,7 @@ end
 -- GM-VP C 12 BASE RECIPE
 -- GM-VP C 40 SPACE_AGE RECIPE
 -- GM-VP H 1 QUALITY RECIPE
--- GM-VP H 70 SPACE_AGE RECIPE
+-- GM-VP H 69 SPACE_AGE RECIPE
 for _, v in pairs(data.raw.recipe) do
     v.surface_conditions = nil
     v.maximum_productivity = nil
