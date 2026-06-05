@@ -576,11 +576,6 @@ local items = {
         ['lava'] = 'fluid',
         -- SPACE_AGE ITEM 0
         ['bioflux'] = 'capsule',
-        ['jelly'] = 'capsule',
-        ['jellynut'] = 'capsule',
-        ['yumako'] = 'capsule',
-        ['yumako-mash'] = 'capsule',
-        -- SPACE_AGE ITEM 5
         ['capture-robot-rocket'] = 'ammo',
         ['space-platform-starter-pack'] = 'space-platform-starter-pack',
         -- SPACE_AGE MAP_GENERATION 0
@@ -857,8 +852,8 @@ local items = {
             prerequisites = {'power-armor', 'military-4', 'speed-module-2', 'efficiency-module-2'}
         },
         ['health'] = {
-            prerequisites = {'utility-science-pack', 'space-science-pack'},
-            unit_ingredients = {{'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+            prerequisites = {'utility-science-pack', 'space-science-pack', 'agricultural-science-pack'},
+            unit_ingredients = {{'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}, {'agricultural-science-pack', 1}}
         },
         ['processing-unit-productivity'] = {
             prerequisites = {'electromagnetic-science-pack'},
@@ -917,12 +912,12 @@ local items = {
         },
         ['agriculture'] = {
             prerequisites = {'chemical-science-pack'},
-            effects = {{type = 'unlock-recipe', recipe = 'agricultural-tower'}},
-            unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+            effects = {{type = 'unlock-recipe', recipe = 'agricultural-tower'}, {type = 'unlock-recipe', recipe = 'yumako-processing'}, {type = 'unlock-recipe', recipe = 'jellynut-processing'}},
+            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
         },
         ['tree-seeding'] = {
             prerequisites = {'agricultural-science-pack'},
-            unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}}
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}}
         },
         ['metallurgic-science-pack'] = {
             prerequisites = {'foundry'},
@@ -945,11 +940,11 @@ local items = {
             unit = {count = 300, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'agricultural-science-pack'}}
         },
-        --[[
-        ['yumako'] = true,
-        ['jellynut'] = true,
-        ['fish-breeding'] = true,
-        ]]
+        ['fish-breeding'] = {
+            prerequisites = {'agricultural-science-pack'},
+            unit = {count = 300, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'fish-breeding'}}
+        },
     },
     ['technology'] = {
         -- SPACE_AGE 0
@@ -990,6 +985,8 @@ local items = {
         ['asteroid-reprocessing'] = true,
         -- SPACE_AGE 30
         ['advanced-asteroid-processing'] = true,
+        ['yumako'] = true,
+        ['jellynut'] = true,
     },
 }
 
