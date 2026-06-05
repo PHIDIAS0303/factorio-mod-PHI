@@ -300,6 +300,7 @@ local items = {
         },
         ['nutrients-from-fish'] = {
             energy_required = 10,
+            allow_productivity = true,
             ingredients = {{type = 'item', name = 'raw-fish', amount = 1}},
             results = {{type = 'item', name = 'nutrients', amount = 10}}
         },
@@ -930,13 +931,13 @@ local items = {
         },
         ['heating-tower'] = {
             prerequisites = {'chemical-science-pack'},
+            unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'heating-tower'}},
-            unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
         },
         ['agriculture'] = {
             prerequisites = {'chemical-science-pack'},
-            effects = {{type = 'unlock-recipe', recipe = 'agricultural-tower'}, {type = 'unlock-recipe', recipe = 'yumako-processing'}, {type = 'unlock-recipe', recipe = 'jellynut-processing'}},
-            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'agricultural-tower'}, {type = 'unlock-recipe', recipe = 'yumako-processing'}, {type = 'unlock-recipe', recipe = 'jellynut-processing'}, {type = 'unlock-recipe', recipe = 'steam-condensation'}},
         },
         ['tree-seeding'] = {
             prerequisites = {'agricultural-science-pack'},
@@ -944,29 +945,29 @@ local items = {
         },
         ['metallurgic-science-pack'] = {
             prerequisites = {'foundry'},
-            unit = {count = 300, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+            unit = {count = 400, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'metallurgic-science-pack'}}
         },
         -- SPACE_AGE 30
         ['electromagnetic-science-pack'] = {
             prerequisites = {'electromagnetic-plant'},
-            unit = {count = 300, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+            unit = {count = 400, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-science-pack'}}
         },
         ['cryogenic-science-pack'] = {
             prerequisites = {'cryogenic-plant'},
-            unit = {count = 300, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+            unit = {count = 400, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'cryogenic-science-pack'}}
         },
         ['agricultural-science-pack'] = {
             prerequisites = {'agriculture'},
-            unit = {count = 300, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}},
+            unit = {count = 400, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'agricultural-science-pack'}}
         },
         ['fish-breeding'] = {
             prerequisites = {'agricultural-science-pack'},
-            unit = {count = 300, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'fish-breeding'}}
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'fish-breeding'}, {type = 'unlock-recipe', recipe = 'nutrients-from-fish'}, {type = 'unlock-recipe', recipe = 'nutrients-from-yumako-mash'}}
         },
     },
     ['technology'] = {
