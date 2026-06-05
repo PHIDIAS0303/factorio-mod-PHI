@@ -158,14 +158,26 @@ end
 if data.raw['plant'] and data.raw['plant']['tree-plant'] and data.raw['plant']['tree-plant'].autoplace then
     data.raw['plant']['tree-plant'].autoplace.tile_restriction = nil
 
+    if data.raw['plant']['tree-plant'].minable then
+        data.raw['plant']['tree-plant'].minable.results = {type = 'item', name = 'wood', amount = 20}
+    end
+
     if data.raw['plant']['yumako-tree'] and data.raw['plant']['yumako-tree'] then
         data.raw['plant']['yumako-tree'].autoplace.tile_restriction = nil
         data.raw['plant']['yumako-tree'].harvest_emissions = nil
+
+        if data.raw['plant']['yumako-tree'].minable then
+            data.raw['plant']['yumako-tree'].minable.results = {type = 'item', name = 'yumako', amount = 100}
+        end
     end
 
     if data.raw['plant']['jellystem'] and data.raw['plant']['jellystem'] then
         data.raw['plant']['jellystem'].autoplace.tile_restriction = nil
         data.raw['plant']['jellystem'].harvest_emissions = nil
+
+        if data.raw['plant']['jellystem'].minable then
+            data.raw['plant']['jellystem'].minable.results = {type = 'item', name = 'jellynut', amount = 100}
+        end
     end
 end
 

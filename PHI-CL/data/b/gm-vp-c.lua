@@ -268,6 +268,7 @@ local items = {
             results = {{type = 'item', name = 'cryogenic-science-pack', amount = 2}, {type = 'fluid', name = 'fluoroketone-hot', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
         },
         ['agricultural-science-pack'] = {
+            category = 'crafting-with-fluid',
             energy_required = 10,
             ingredients = {{type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'yumako-mash', amount = 1}, {type = 'item', name = 'jelly', amount = 1}},
             results = {{type = 'item', name = 'agricultural-science-pack', amount = 2}}
