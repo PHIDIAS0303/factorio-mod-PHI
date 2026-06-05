@@ -802,7 +802,7 @@ local items = {
         },
         -- BASE 25
         ['mining-productivity-3'] = {
-            prerequisites = {'mining-productivity-2', 'production-science-pack', 'utility-science-pack', 'space-science-pack'},
+            prerequisites = {'mining-productivity-2', 'space-science-pack'},
             unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         },
         -- SPACE_AGE 0
