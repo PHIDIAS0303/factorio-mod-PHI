@@ -54,9 +54,9 @@ end
 -- SA C 6 SPACE_AGE CAPSULE
 -- SA C 4 SPACE_AGE ITEM
 -- SA C 1 SPACE_AGE TOOL
-if settings.startup['PHI-SA'].value then
-    local spoil_set = (not settings.startup['PHI-SA-SPOIL'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP')
-    local spoil_freeze_set = settings.startup['PHI-SA-SPOIL'].value and settings.startup['PHI-SA-SPOIL-FREEZE-MULTIPLIER'].value and settings.startup['PHI-SA-SPOIL-FREEZE-MULTIPLIER'].value > 0
+do
+    local spoil_set = (settings.startup['PHI-SA'].value and not settings.startup['PHI-SA-SPOIL'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '')
+    local spoil_freeze_set = settings.startup['PHI-SA'].value and settings.startup['PHI-SA-SPOIL'].value and settings.startup['PHI-SA-SPOIL-FREEZE-MULTIPLIER'].value and settings.startup['PHI-SA-SPOIL-FREEZE-MULTIPLIER'].value > 0
 
     for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg'}) do
         if spoil_set then
@@ -98,7 +98,7 @@ if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].v
         subgroup = 'agriculture-processes',
         order = 'c[nutrients]-z',
         energy_required = 2,
-        enabled = false,
+        enabled = (data.raw.technology['agriculture'] and false) or true,
         allow_productivity = true,
         ingredients = {{type = 'item', name = 'nutrients', amount = 1}},
         results = {{type = 'item', name = 'spoilage', amount = 8}},
@@ -106,23 +106,13 @@ if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].v
         localised_name = {'item-name.spoilage'}
     }})
 
-    table.insert(data.raw.technology['agriculture'].effects, {type = 'unlock-recipe', recipe = 'spoilage-from-nutrients'})
+    if data.raw.technology['agriculture'] and data.raw.technology['agriculture'].effects then
+        table.insert(data.raw.technology['agriculture'].effects, {type = 'unlock-recipe', recipe = 'spoilage-from-nutrients'})
+    end
 
     for _, v in pairs({'spoilables', 'spoilables-result', 'spoilables-research'}) do
         data.raw['tips-and-tricks-item'][v].hidden = true
         data.raw['tips-and-tricks-item'][v].hidden_in_factoriopedia = true
-    end
-end
-
--- SA C 3 SPACE_AGE MODULE
-if settings.startup['PHI-SA'].value and settings.startup['PHI-SA-QUALITY'].value then
-    for _, v in pairs(data.raw.module) do
-        if v.category and v.category == 'quality' then
-            v.effect.quality = v.effect.quality * settings.startup['PHI-SA-QUALITY'].value / 10
-
-        elseif v.category and v.category == 'speed' and settings.startup['PHI-SA-QUALITY'].value ~= 10 then
-            v.effect.quality = nil
-        end
     end
 end
 
@@ -176,7 +166,21 @@ if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-ENABLE-QU
     end
 end
 
--- SA C 1 SPACE_AGE CONSTANT
-if settings.startup['PHI-SA'].value then
-    data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-SA-ROCKET-CAPACITY'].value * 1000000
+if not settings.startup['PHI-SA'].value then
+    return
 end
+
+-- SA C 3 SPACE_AGE MODULE
+if settings.startup['PHI-SA-QUALITY'].value then
+    for _, v in pairs(data.raw.module) do
+        if v.category and v.category == 'quality' then
+            v.effect.quality = v.effect.quality * settings.startup['PHI-SA-QUALITY'].value / 10
+
+        elseif v.category and v.category == 'speed' and settings.startup['PHI-SA-QUALITY'].value ~= 10 then
+            v.effect.quality = nil
+        end
+    end
+end
+
+-- SA C 1 SPACE_AGE CONSTANT
+data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-SA-ROCKET-CAPACITY'].value * 1000000
