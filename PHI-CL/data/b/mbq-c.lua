@@ -4,8 +4,8 @@ return {
         type = 'battery-equipment',
         name = 'battery',
         ref_name = (mods['space-age'] and 'battery-mk3-equipment') or 'battery-mk2-equipment',
-        tech = (mods['space-age'] and 'battery-mk3-equipment') or (mods['space-exploration'] and 'battery-equipment') or 'battery-mk2-equipment',
-        min = (mods['space-age'] and 4) or (mods['space-exploration'] and 2) or 3,
+        tech = (mods['space-age'] and 'battery-mk3-equipment') or 'battery-mk2-equipment',
+        min = (mods['space-age'] and 4) or 3,
         max = settings.startup['PHI-MB-EQUIPMENT'].value
     },
     -- MBQ A 7 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
@@ -19,9 +19,9 @@ return {
     ['energy-shield-equipment'] = {
         type = 'energy-shield-equipment',
         name = 'energy-shield',
-        ref_name = (mods['space-exploration'] and 'energy-shield-equipment') or 'energy-shield-mk2-equipment',
+        ref_name = 'energy-shield-mk2-equipment',
         tech = 'energy-shield-mk2-equipment',
-        min = (mods['space-exploration'] and 2) or 3,
+        min = 3,
         max = settings.startup['PHI-MB-EQUIPMENT'].value
     },
     -- MBQ A 1 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
@@ -35,7 +35,7 @@ return {
     ['fission-reactor-equipment'] = {
         type = 'generator-equipment',
         name = 'fission-reactor',
-        ref_name = (mods['space-exploration'] and 'se-rtg-equipment') or 'fission-reactor-equipment',
+        ref_name = 'fission-reactor-equipment',
         tech = 'fission-reactor-equipment',
         max = settings.startup['PHI-MB-EQUIPMENT'].value
     },
@@ -58,8 +58,8 @@ return {
         type = 'roboport-equipment',
         name = 'personal-roboport',
         ref_name = 'personal-roboport-mk2-equipment',
-        tech = (mods['space-exploration'] and 'personal-roboport-equipment') or 'personal-roboport-mk2-equipment',
-        min = (mods['space-exploration'] and 2) or 3,
+        tech = 'personal-roboport-mk2-equipment',
+        min = 3,
         max = settings.startup['PHI-MB-EQUIPMENT'].value
     },
     -- MBQ A 7 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
