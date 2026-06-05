@@ -1,4 +1,5 @@
 local items = require('gm-vp-c')
+local mbm = require('mbm-c')
 local item_sounds = require('__base__/prototypes/item_sounds')
 
 if not mods['space-age'] then
@@ -402,6 +403,16 @@ if data.raw.technology and items['technology'] and items['technology_reform'] th
                 if data.raw['tool'][v.unit.ingredients[i][1]].hidden then
                     table.remove(v.unit.ingredients, i)
                 end
+            end
+        end
+    end
+end
+
+if settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE'].value > 1 and mbm and data.raw.technology and data.raw.recipe then
+    for i = 2, settings.startup['PHI-MB-MACHINE'].value do
+        for _, v in pairs({'foundry', 'electromagnetic-plant', 'cryogenic-plant'}) do
+            if mbm[v] and mbm[v].max and mbm[v].max >= i and mbm[v].tech and data.raw.technology[mbm[v].tech] and data.raw.recipe[v .. '-' .. i] then
+                table.insert(data.raw.technology[mbm[v].tech].effects, {type = 'unlock-recipe', recipe = v .. '-' .. i})
             end
         end
     end

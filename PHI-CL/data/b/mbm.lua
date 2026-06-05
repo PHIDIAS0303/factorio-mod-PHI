@@ -25,4 +25,5 @@ end
 
 for i = 4, settings.startup['PHI-MB-MACHINE'].value + 2 do
     data.raw['assembling-machine']['assembling-machine-' .. i].localised_name = {'phi-cl.combine', {'?', {'entity-name.assembling-machine'}, {'name.assembling-machine'}}, tostring(i)}
+    data.raw['item']['assembling-machine-' .. i].localised_name = {'phi-cl.combine', {'?', {'entity-name.assembling-machine'}, {'name.assembling-machine'}}, tostring(i)}
 end
