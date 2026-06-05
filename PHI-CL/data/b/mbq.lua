@@ -114,7 +114,7 @@ for _, v in pairs(items) do
     v.mod = v.mod or 'base'
     v.min = v.min or 2
 
-    if (v.mod and mods[v.mod]) and (v.max >= v.min) then
+    if (v.mod and mods[v.mod]) and (v.max >= v.min) and data.raw[v.type] and data.raw[v.type][v.name] and not data.raw[v.type][v.name].hidden then
         v.category = 'equipment'
         v.ref_name = v.ref_name or v.name .. '-equipment'
 

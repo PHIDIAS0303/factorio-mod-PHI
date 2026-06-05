@@ -338,20 +338,8 @@ function main.ER(source, tier)
         ingredient_name = (tier > source.min and (source.name .. '-' .. (tier - 1))) or source.ref_name
     end
 
-    if source.tech == 'compound-energy' then
-        if source.type == 'solar-panel' or source.type == 'accumulator' then
-            table.insert(ingredients, {type = 'item', name = ingredient_name, amount = tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value) or 4})
-
-        else
-            if tier > source.min then
-                table.insert(ingredients, {type = 'item', name = ingredient_name, amount = 1})
-                table.insert(ingredients, {type = 'item', name = source.ref_name, amount = 1})
-
-
-            else
-                table.insert(ingredients, {type = 'item', name = source.ref_name, amount = 2})
-            end
-        end
+    if source.tech == 'compound-energy' and (source.type == 'solar-panel' or source.type == 'accumulator') then
+        table.insert(ingredients, {type = 'item', name = ingredient_name, amount = tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value) or 4})
 
     else
         table.insert(ingredients, {type = 'item', name = ingredient_name, amount = 2})
@@ -375,19 +363,31 @@ end
 function main.ET(source, tier)
     if (source.tech == 'compound-energy') then
         table.insert(data.raw.technology['compound-energy-' .. (tier - 1)].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
+        return
+    end
 
-    elseif data.raw.technology[source.tech] then
-        local recipe_name = (source.category == 'equipment' and (source.name .. '-mk' .. tier .. '-equipment')) or (source.name .. '-' .. tier)
+    if not data.raw.technology[source.tech] then
+        return
+    end
+
+    local recipe_name = (source.category == 'equipment' and (source.name .. '-mk' .. tier .. '-equipment')) or (source.name .. '-' .. tier)
+
+    if data.raw.technology[source.tech].effects then
         table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=recipe_name})
 
-        if source.type == 'ammo-turret' or source.type == 'fluid-turret' then
-            for i=1, #research_modifier[source.type], 1 do
-                for j=1, #data.raw.technology[research_modifier[source.type][i]].effects, 1 do
-                    if (data.raw.technology[research_modifier[source.type][i]].effects[j].type == 'turret-attack') then
-                        if (data.raw.technology[research_modifier[source.type][i]].effects[j].turret_id == source.ref_name) then
-                            table.insert(data.raw.technology[research_modifier[source.type][i]].effects, {type='turret-attack', turret_id=source.name .. '-' .. tier, modifier=data.raw.technology[research_modifier[source.type][i]].effects[j].modifier})
-                        end
-                    end
+    else
+        data.raw.technology[source.tech].effects = {{type='unlock-recipe', recipe=recipe_name}}
+    end
+
+    if source.type ~= 'ammo-turret' and source.type ~= 'fluid-turret' then
+        return
+    end
+
+    for i=1, #research_modifier[source.type], 1 do
+        if data.raw.technology[research_modifier[source.type][i]] and data.raw.technology[research_modifier[source.type][i]].effects then
+            for j=1, #data.raw.technology[research_modifier[source.type][i]].effects, 1 do
+                if (data.raw.technology[research_modifier[source.type][i]].effects[j].type == 'turret-attack') and (data.raw.technology[research_modifier[source.type][i]].effects[j].turret_id == source.ref_name) then
+                    table.insert(data.raw.technology[research_modifier[source.type][i]].effects, {type='turret-attack', turret_id=source.name .. '-' .. tier, modifier=data.raw.technology[research_modifier[source.type][i]].effects[j].modifier})
                 end
             end
         end
@@ -404,10 +404,12 @@ function main.EL(source)
         data.raw[source.type][source.name .. '-' .. 2].fast_replaceable_group = data.raw[source.type][source.ref_name].fast_replaceable_group
     end
 
-    if source.max > source.min then
-        for j=source.min + 1, source.max do
-            data.raw[source.type][source.name .. '-' .. j].fast_replaceable_group = data.raw[source.type][source.name .. '-' .. (j - 1)].fast_replaceable_group
-        end
+    if source.max <= source.min then
+        return
+    end
+
+    for j=source.min + 1, source.max do
+        data.raw[source.type][source.name .. '-' .. j].fast_replaceable_group = data.raw[source.type][source.name .. '-' .. (j - 1)].fast_replaceable_group
     end
 end
 
