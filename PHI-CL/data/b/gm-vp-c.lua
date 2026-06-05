@@ -174,7 +174,7 @@ local items = {
             ingredients = {{type = 'fluid', name = 'light-oil', amount = 50}, {type = 'fluid', name = 'petroleum-gas', amount = 50}, {type = 'item', name = 'steel-plate', amount = 1}}
         },
         ['agricultural-tower'] = {
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electronic-circuit', amount = 3}, {type = 'item', name = 'landfill', amount = 1}}
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'electronic-circuit', amount = 10}, {type = 'item', name = 'landfill', amount = 4}}
         },
         ['electromagnetic-plant'] = {
             ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'assembling-machine-3', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'fluid', name = 'sulfuric-acid', amount = 80}}
@@ -279,34 +279,34 @@ local items = {
         },
         -- SPACE_AGE 40
         ['yumako-processing'] = {
-            energy_required = 10,
-            ingredients = {{type = 'item', name = 'yumako', amount = 10}, {type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}},
-            results = {{type = 'item', name = 'yumako-mash', amount = 10}, {type = 'item', name = 'yumako-seed', amount = 1}, {type = 'fluid', name = 'steam', temperature = 165, amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
+            energy_required = 15,
+            ingredients = {{type = 'item', name = 'yumako', amount = 20}, {type = 'fluid', name = 'water', amount = 400, fluidbox_multiplier = 10, ignored_by_stats = 400}},
+            results = {{type = 'item', name = 'yumako-mash', amount = 20}, {type = 'item', name = 'yumako-seed', amount = 1}, {type = 'fluid', name = 'steam', temperature = 500, amount = 320, fluidbox_multiplier = 10, ignored_by_stats = 320, ignored_by_productivity = 320}}
         },
         ['jellynut-processing'] = {
-            energy_required = 10,
-            ingredients = {{type = 'item', name = 'jellynut', amount = 10}, {type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}},
-            results = {{type = 'item', name = 'jelly', amount = 10}, {type = 'item', name = 'jellynut-seed', amount = 1}, {type = 'fluid', name = 'steam', temperature = 165, amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
+            energy_required = 15,
+            ingredients = {{type = 'item', name = 'jellynut', amount = 20}, {type = 'fluid', name = 'water', amount = 400, fluidbox_multiplier = 10, ignored_by_stats = 400}},
+            results = {{type = 'item', name = 'jelly', amount = 20}, {type = 'item', name = 'jellynut-seed', amount = 1}, {type = 'fluid', name = 'steam', temperature = 500, amount = 320, fluidbox_multiplier = 10, ignored_by_stats = 320, ignored_by_productivity = 320}}
         },
         ['steam-condensation'] = {
             energy_required = 10,
-            ingredients = {{type = 'fluid', name = 'steam', amount = 1000, fluidbox_multiplier = 10}},
-            results = {{type = 'fluid', name = 'water', amount = 700, fluidbox_multiplier = 10}}
+            ingredients = {{type = 'fluid', name = 'steam', amount = 800, fluidbox_multiplier = 10}},
+            results = {{type = 'fluid', name = 'water', amount = 640, fluidbox_multiplier = 10}}
         },
         ['nutrients-from-yumako-mash'] = {
-            energy_required = 10,
+            energy_required = 15,
             ingredients = {{type = 'item', name = 'yumako-mash', amount = 10}},
             results = {{type = 'item', name = 'nutrients', amount = 10}}
         },
         ['nutrients-from-fish'] = {
-            energy_required = 10,
+            energy_required = 15,
             allow_productivity = true,
             ingredients = {{type = 'item', name = 'raw-fish', amount = 1}},
             results = {{type = 'item', name = 'nutrients', amount = 10}}
         },
         -- SPACE_AGE 45
         ['fish-breeding'] = {
-            energy_required = 10,
+            energy_required = 30,
             allow_productivity = true,
             ingredients = {{type = 'item', name = 'raw-fish', amount = 8}, {type = 'item', name = 'nutrients', amount = 80}, {type = 'fluid', name = 'water', amount = 1000, fluidbox_multiplier = 10, ignored_by_stats = 1000}},
             results = {{type = 'item', name = 'raw-fish', amount = 12}, {type = 'fluid', name = 'water', amount = 1000, fluidbox_multiplier = 10, ignored_by_stats = 1000, ignored_by_productivity = 1000}}
@@ -728,7 +728,7 @@ local items = {
             unit = {count = 75, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
         },
         ['space-science-pack'] = {
-            prerequisites = {'rocket-silo'},
+            prerequisites = {'rocket-silo', 'production-science-pack', 'utility-science-pack'},
             effects = {{type = 'unlock-recipe', recipe = 'satellite'}},
             unit = {count = 2000, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
         },
@@ -857,7 +857,7 @@ local items = {
             unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         },
         ['battery-mk3-equipment'] = {
-            prerequisites = {'battery-mk2-equipment'},
+            prerequisites = {'battery-mk2-equipment', 'space-science-pack'},
             unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         },
         ['rocket-turret'] = {
@@ -886,7 +886,7 @@ local items = {
             prerequisites = {'power-armor', 'military-4', 'speed-module-2', 'efficiency-module-2'}
         },
         ['health'] = {
-            prerequisites = {'utility-science-pack', 'space-science-pack', 'agricultural-science-pack'},
+            prerequisites = {'space-science-pack', 'agricultural-science-pack'},
             unit_ingredients = {{'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}, {'agricultural-science-pack', 1}}
         },
         ['processing-unit-productivity'] = {
@@ -947,7 +947,7 @@ local items = {
         ['agriculture'] = {
             prerequisites = {'chemical-science-pack'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'agricultural-tower'}, {type = 'unlock-recipe', recipe = 'yumako-processing'}, {type = 'unlock-recipe', recipe = 'jellynut-processing'}, {type = 'unlock-recipe', recipe = 'steam-condensation'}},
+            effects = {{type = 'unlock-recipe', recipe = 'agricultural-tower'}, {type = 'unlock-recipe', recipe = 'yumako-processing'}, {type = 'unlock-recipe', recipe = 'jellynut-processing'}, {type = 'unlock-recipe', recipe = 'steam-condensation'}, {type = 'give-item', item = 'yumako-seed', count = 2}, {type = 'give-item', item = 'jellynut-seed', count = 2}},
         },
         ['tree-seeding'] = {
             prerequisites = {'agricultural-science-pack'},
