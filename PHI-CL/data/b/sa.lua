@@ -16,8 +16,8 @@ local function spoil_freeze_handle(i)
     item.icon = nil
     item.icon_size = nil
     item.icon_mipmaps = nil
-    item.spoil_ticks = math.floor(i.spoil_ticks * settings.startup['PHI-SA-SPOIL-FREEZE-MULTIPLIER'].value / 10)
-    item.spoil_result = i.name
+    item.spoil_ticks = (i.spoil_ticks and math.floor(i.spoil_ticks * settings.startup['PHI-SA-SPOIL-FREEZE-MULTIPLIER'].value / 10)) or nil
+    item.spoil_result = (i.spoil_ticks and i.name) or nil
     item.spoil_to_trigger_result = nil
     item.localised_name = {'item-name.' .. i.name}
     data:extend({item})
