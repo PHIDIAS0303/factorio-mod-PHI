@@ -113,10 +113,10 @@ end
 for _, v in pairs(items) do
     v.mod = v.mod or 'base'
     v.min = v.min or 2
+    v.ref_name = v.ref_name or v.name .. '-equipment'
 
-    if (v.mod and mods[v.mod]) and (v.max >= v.min) and data.raw[v.type] and data.raw[v.type][v.name] and not data.raw[v.type][v.name].hidden then
+    if (v.mod and mods[v.mod]) and (v.max >= v.min) and data.raw[v.type] and data.raw[v.type][v.ref_name] and not data.raw[v.type][v.ref_name].hidden then
         v.category = 'equipment'
-        v.ref_name = v.ref_name or v.name .. '-equipment'
 
         for j=v.min, v.max, 1 do
             main.EEQ(v, j)
