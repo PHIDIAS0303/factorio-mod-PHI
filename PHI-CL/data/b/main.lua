@@ -205,7 +205,7 @@ function main.EEE(source, tier)
         end
 
     elseif source.type == 'reactor' and source.name == 'heating-tower' then
-        item.consumption = tostring(tonumber(string.match(item.consumption, '[%d%.]+')) * tier) .. string.match(item.consumption, '%a+')
+        item.consumption = tostring(tonumber(string.match(item.consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.consumption, '%a+')
 
     elseif source.type == 'agricultural-tower' then
         item.radius = item.radius + (1 * (tier - source.min + 1))

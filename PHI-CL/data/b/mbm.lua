@@ -23,7 +23,7 @@ for _, v in pairs(items) do
     end
 end
 
-if data.raw['assembling-machine'] and data.raw['assembling-machine']['assembling-machine'] and settings.startup['PHI-MB-MACHINE'].value > 1 then
+if data.raw['assembling-machine'] and data.raw['assembling-machine']['assembling-machine-1'] and settings.startup['PHI-MB-MACHINE'].value > 1 then
     for i = 4, settings.startup['PHI-MB-MACHINE'].value + 2 do
         if data.raw['assembling-machine']['assembling-machine-' .. i] then
             data.raw['assembling-machine']['assembling-machine-' .. i].localised_name = {'phi-cl.combine', {'entity-name.assembling-machine-1'}, tostring(i)}
