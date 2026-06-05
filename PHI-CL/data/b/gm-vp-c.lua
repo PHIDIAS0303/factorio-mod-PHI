@@ -278,6 +278,14 @@ local items = {
             results = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}}
         },
         -- SPACE_AGE 40
+        --[[
+        
+        ['agricultural-science-pack'] = true,
+        ['fish-breeding'] = true,
+        ['nutrients-from-fish'] = true,
+        ['yumako-processing'] = true,
+        ['jellynut-processing'] = true,
+        ]]
     },
     ['recipe'] = {
         -- QUALITY 0
@@ -285,94 +293,88 @@ local items = {
         -- SPACE_AGE 0
         ['lightning-collector'] = true,
         ['lightning-rod'] = true,
-        ['agricultural-science-pack'] = true,
         ['promethium-science-pack'] = true,
         ['space-science-pack'] = true,
-        -- SPACE_AGE 5
         ['burnt-spoilage'] = true,
-        ['fish-breeding'] = true,
-        ['nutrients-from-fish'] = true,
+        -- SPACE_AGE 5
         ['nutrients-from-biter-egg'] = true,
-        ['yumako-processing'] = true,
-        -- SPACE_AGE 10
-        ['jellynut-processing'] = true,
         ['copper-bacteria'] = true,
         ['copper-bacteria-cultivation'] = true,
         ['iron-bacteria'] = true,
         ['iron-bacteria-cultivation'] = true,
-        -- SPACE_AGE 15
+        -- SPACE_AGE 10
         ['nutrients-from-spoilage'] = true,
         ['nutrients-from-yumako-mash'] = true,
         ['nutrients-from-bioflux'] = true,
         ['pentapod-egg'] = true,
         ['rocket-fuel-from-jelly'] = true,
-        -- SPACE_AGE 20
+        -- SPACE_AGE 15
         ['bioflux'] = true,
         ['bioplastic'] = true,
         ['biosulfur'] = true,
         ['biolubricant'] = true,
         ['carbon-fiber'] = true,
-        -- SPACE_AGE 25
+        -- SPACE_AGE 20
         ['artificial-yumako-soil'] = true,
         ['overgrowth-yumako-soil'] = true,
         ['artificial-jellynut-soil'] = true,
         ['overgrowth-jellynut-soil'] = true,
         ['biochamber'] = true,
-        -- SPACE_AGE 30
+        -- SPACE_AGE 25
         ['captive-biter-spawner'] = true,
         ['capture-robot-rocket'] = true,
         ['biter-egg'] = true,
         ['spoilage-from-nutrients'] = true,
         ['tungsten-carbide'] = true,
-        -- SPACE_AGE 35
+        -- SPACE_AGE 30
         ['tungsten-plate'] = true,
         ['coal-synthesis'] = true,
         ['spoilage-recycling'] = true,
         ['asteroid-collector'] = true,
         ['ammoniacal-solution-separation'] = true,
-        -- SPACE_AGE 40
+        -- SPACE_AGE 35
         ['lithium'] = true,
         ['lithium-plate'] = true,
         ['ice-platform'] = true,
         ['solid-fuel-from-ammonia'] = true,
         ['ammonia-rocket-fuel'] = true,
-        -- SPACE_AGE 45
+        -- SPACE_AGE 40
         ['quantum-processor'] = true,
         ['holmium-solution'] = true,
         ['holmium-plate'] = true,
         ['supercapacitor'] = true,
         ['superconductor'] = true,
-        -- SPACE_AGE 50
+        -- SPACE_AGE 45
         ['molten-iron-from-lava'] = true,
         ['molten-copper-from-lava'] = true,
         ['acid-neutralisation'] = true,
         ['simple-coal-liquefaction'] = true,
         ['scrap-recycling'] = true,
-        -- SPACE_AGE 55
+        -- SPACE_AGE 50
         ['foundation'] = true,
         ['steam-condensation'] = true,
         ['thruster'] = true,
         ['thruster-fuel'] = true,
         ['thruster-oxidizer'] = true,
-        -- SPACE_AGE 60
+        -- SPACE_AGE 55
         ['advanced-thruster-fuel'] = true,
         ['advanced-thruster-oxidizer'] = true,
         ['metallic-asteroid-crushing'] = true,
         ['carbonic-asteroid-crushing'] = true,
         ['oxide-asteroid-crushing'] = true,
-        -- SPACE_AGE 65
+        -- SPACE_AGE 60
         ['advanced-metallic-asteroid-crushing'] = true,
         ['advanced-carbonic-asteroid-crushing'] = true,
         ['advanced-oxide-asteroid-crushing'] = true,
         ['metallic-asteroid-reprocessing'] = true,
         ['carbonic-asteroid-reprocessing'] = true,
-        -- SPACE_AGE 70
+        -- SPACE_AGE 65
         ['oxide-asteroid-reprocessing'] = true,
         ['space-platform-foundation'] = true,
         ['space-platform-starter-pack'] = true,
         ['carbon'] = true,
         ['crusher'] = true,
-        -- SPACE_AGE 75
+        -- SPACE_AGE 70
         ['casting-low-density-structure'] = true
     },
     ['item'] = {
@@ -398,33 +400,30 @@ local items = {
         ['superconductor'] = true,
         -- SPACE_AGE 15
         ['supercapacitor'] = true,
-        ['yumako-seed'] = true,
-        ['jellynut-seed'] = true,
         ['iron-bacteria'] = true,
         ['copper-bacteria'] = true,
-        -- SPACE_AGE 20
         ['spoilage'] = true,
-        ['nutrients'] = true,
         ['carbon-fiber'] = true,
+        -- SPACE_AGE 20
         ['biter-egg'] = true,
         ['pentapod-egg'] = true,
-        -- SPACE_AGE 25
         ['lithium'] = true,
         ['lithium-plate'] = true,
         ['quantum-processor'] = true,
+        -- SPACE_AGE 25
         ['carbon'] = true,
         ['calcite'] = true,
-        -- SPACE_AGE 30
         ['space-platform-foundation'] = true,
-        ['asteroid-collector'] = true,
-        ['crusher'] = true,
-        ['thruster'] = true,
         ['space-platform-hub'] = true,
-        -- SPACE_AGE 35
+        ['asteroid-collector'] = true,
+        -- SPACE_AGE 30
         ['carbonic-asteroid-chunk'] = true,
         ['metallic-asteroid-chunk'] = true,
         ['promethium-asteroid-chunk'] = true,
         ['oxide-asteroid-chunk'] = true,
+        ['crusher'] = true,
+        -- SPACE_AGE 35
+        ['thruster'] = true,
     },
     ['tips_and_tricks_item'] = {
         ['quality'] = true,
@@ -495,77 +494,75 @@ local items = {
         ['fulgoran-ruin-attractor'] = 'lightning-attractor',
         ['asteroid-collector'] = 'asteroid-collector',
         ['space-platform-hub'] = 'space-platform-hub',
-        ['yumako-tree'] = 'plant',
-        ['jellystem'] = 'plant',
-        -- SPACE_AGE ENTITY 10
         ['thruster'] = 'thruster',
         ['lightning'] = 'lightning',
+        -- SPACE_AGE ENTITY 10
         ['small-demolisher'] = 'segmented-unit',
         ['medium-demolisher'] = 'segmented-unit',
         ['big-demolisher'] = 'segmented-unit',
-        -- SPACE_AGE ENTITY 15
         ['small-wriggler-pentapod-premature'] = 'unit',
         ['medium-wriggler-pentapod-premature'] = 'unit',
+        -- SPACE_AGE ENTITY 15
         ['big-wriggler-pentapod-premature'] = 'unit',
         ['small-wriggler-pentapod'] = 'unit',
         ['medium-wriggler-pentapod'] = 'unit',
-        -- SPACE_AGE ENTITY 20
         ['big-wriggler-pentapod'] = 'unit',
         ['small-strafer-pentapod'] = 'spider-unit',
+        -- SPACE_AGE ENTITY 20
         ['medium-strafer-pentapod'] = 'spider-unit',
         ['big-strafer-pentapod'] = 'spider-unit',
         ['small-stomper-pentapod'] = 'spider-unit',
-        -- SPACE_AGE ENTITY 25
         ['medium-stomper-pentapod'] = 'spider-unit',
         ['big-stomper-pentapod'] = 'spider-unit',
+        -- SPACE_AGE ENTITY 25
         ['gleba-spawner'] = 'unit-spawner',
         ['gleba-spawner-small'] = 'unit-spawner',
         ['ashland-lichen-tree'] = 'tree',
-        -- SPACE_AGE ENTITY 30
         ['ashland-lichen-tree-flaming'] = 'tree',
         ['slipstack'] = 'tree',
+        -- SPACE_AGE ENTITY 30
         ['funneltrunk'] = 'tree',
         ['hairyclubnub'] = 'tree',
         ['teflilly'] = 'tree',
-        -- SPACE_AGE ENTITY 35
         ['lickmaw'] = 'tree',
         ['stingfrond'] = 'tree',
+        -- SPACE_AGE ENTITY 35
         ['boompuff'] = 'tree',
         ['sunnycomb'] = 'tree',
         ['cuttlepop'] = 'tree',
-        -- SPACE_AGE ENTITY 40
         ['water-cane'] = 'tree',
         ['small-stomper-shell'] = 'simple-entity',
+        -- SPACE_AGE ENTITY 40
         ['medium-stomper-shell'] = 'simple-entity',
         ['big-stomper-shell'] = 'simple-entity',
         ['big-volcanic-rock'] = 'simple-entity',
-        -- SPACE_AGE ENTITY 45
         ['huge-volcanic-rock'] = 'simple-entity',
         ['copper-stromatolite'] = 'simple-entity',
+        -- SPACE_AGE ENTITY 45
         ['iron-stromatolite'] = 'simple-entity',
         ['vulcanus-chimney-short'] = 'simple-entity',
         ['vulcanus-chimney-truncated'] = 'simple-entity',
-        -- SPACE_AGE ENTITY 50
         ['vulcanus-chimney'] = 'simple-entity',
         ['vulcanus-chimney-cold'] = 'simple-entity',
+        -- SPACE_AGE ENTITY 50
         ['vulcanus-chimney-faded'] = 'simple-entity',
         ['big-fulgora-rock'] = 'simple-entity',
         ['fulgurite'] = 'simple-entity',
-        -- SPACE_AGE ENTITY 55
         ['fulgurite-small'] = 'simple-entity',
         ['fulgoran-ruin-small'] = 'simple-entity',
+        -- SPACE_AGE ENTITY 55
         ['fulgoran-ruin-medium'] = 'simple-entity',
         ['fulgoran-ruin-stonehenge'] = 'simple-entity',
         ['fulgoran-ruin-big'] = 'simple-entity',
-        -- SPACE_AGE ENTITY 60
         ['fulgoran-ruin-colossal'] = 'simple-entity',
         ['fulgoran-ruin-huge'] = 'simple-entity',
+        -- SPACE_AGE ENTITY 60
         ['fulgoran-ruin-vault'] = 'simple-entity',
         ['lithium-iceberg-big'] = 'simple-entity',
         ['lithium-iceberg-huge'] = 'simple-entity',
-        -- SPACE_AGE ENTITY 65
         ['small-demolisher-corpse'] = 'simple-entity',
         ['medium-demolisher-corpse'] = 'simple-entity',
+        -- SPACE_AGE ENTITY 65
         ['big-demolisher-corpse'] = 'simple-entity',
         -- SPACE_AGE FLUID 0
         ['thruster-oxidizer'] = 'fluid',

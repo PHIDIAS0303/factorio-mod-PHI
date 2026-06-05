@@ -259,7 +259,7 @@ if data.raw.planet then
 end
 
 -- GM-VP H 1 QUALITY ENTITY
--- GM-VP H 68 SPACE_AGE ENTITY
+-- GM-VP H 66 SPACE_AGE ENTITY
 -- GM-VP H 8 SPACE_AGE FLUID
 -- GM-VP H 7 SPACE_AGE ITEM
 -- GM-VP H 21 SPACE_AGE MAP_GENERATION
@@ -393,7 +393,7 @@ if settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE
 end
 
 -- GM-VP H 1 QUALITY ITEM
--- GM-VP H 39 SPACE_AGE ITEM
+-- GM-VP H 36 SPACE_AGE ITEM
 for _, v in pairs(data.raw.item) do
     v.auto_recycle = false
 
@@ -406,7 +406,7 @@ end
 -- GM-VP C 12 BASE RECIPE
 -- GM-VP C 40 SPACE_AGE RECIPE
 -- GM-VP H 1 QUALITY RECIPE
--- GM-VP H 76 SPACE_AGE RECIPE
+-- GM-VP H 71 SPACE_AGE RECIPE
 for _, v in pairs(data.raw.recipe) do
     v.surface_conditions = nil
     v.maximum_productivity = nil
