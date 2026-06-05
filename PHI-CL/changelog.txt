@@ -4,6 +4,7 @@ Date: 2026-06-21
 
   Changes:
     - [GM] Generic code layout restructure.
+    - [GM] Further adjustment to VP mode.
     - [MB] Dropped support for AAI, SE.
     - [MB] Reduced MBE settings.
     - [MB] Reduced MBQ settings.
