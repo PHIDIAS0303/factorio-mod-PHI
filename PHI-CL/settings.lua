@@ -43,7 +43,7 @@ data:extend({
   setting_type = 'startup',
   default_value = 1,
   minimum_value = 1,
-  maximum_value = 8,
+  maximum_value = 5,
   localised_name = {'phi-cl.setting-category-color', 'MBQ', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-EQUIPMENT'}},
   localised_description = {'', '[item=personal-laser-defense-equipment]', {'phi-cl.setting-change-color', '\n[63] A63'}},
   order = 'AC00'
