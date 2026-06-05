@@ -407,7 +407,7 @@ for _, v in pairs(data.raw.item) do
 end
 
 -- GM-VP C 12 BASE RECIPE
--- GM-VP C 40 SPACE_AGE RECIPE
+-- GM-VP C 46 SPACE_AGE RECIPE
 -- GM-VP H 1 QUALITY RECIPE
 -- GM-VP H 69 SPACE_AGE RECIPE
 for _, v in pairs(data.raw.recipe) do
