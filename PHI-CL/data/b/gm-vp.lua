@@ -419,6 +419,7 @@ for _, v in pairs(data.raw.recipe) do
         v.category = (items['recipe_reform'][v.name].category and items['recipe_reform'][v.name].category) or v.category
         v.ingredients = (items['recipe_reform'][v.name].ingredients and items['recipe_reform'][v.name].ingredients) or v.ingredients
         v.results = (items['recipe_reform'][v.name].results and items['recipe_reform'][v.name].results) or v.results
+        v.allow_productivity = (items['recipe_reform'][v.name].allow_productivity and items['recipe_reform'][v.name].allow_productivity) or v.allow_productivity
         v.energy_required = (items['recipe_reform'][v.name].energy_required and items['recipe_reform'][v.name].energy_required) or v.energy_required
 
     elseif items['recipe'][v.name] then

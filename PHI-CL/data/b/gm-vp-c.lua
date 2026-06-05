@@ -306,8 +306,9 @@ local items = {
         -- SPACE_AGE 45
         ['fish-breeding'] = {
             energy_required = 10,
+            allow_productivity = true,
             ingredients = {{type = 'item', name = 'raw-fish', amount = 8}, {type = 'item', name = 'nutrients', amount = 80}, {type = 'fluid', name = 'water', amount = 1000, fluidbox_multiplier = 10, ignored_by_stats = 1000}},
-            results = {{type = 'item', name = 'raw-fish', amount = 16}, {type = 'fluid', name = 'water', amount = 1000, fluidbox_multiplier = 10, ignored_by_stats = 1000}}
+            results = {{type = 'item', name = 'raw-fish', amount = 12}, {type = 'fluid', name = 'water', amount = 1000, fluidbox_multiplier = 10, ignored_by_stats = 1000, ignored_by_productivity = 1000}}
         },
     },
     ['recipe'] = {
