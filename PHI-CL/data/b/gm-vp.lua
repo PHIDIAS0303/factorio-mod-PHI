@@ -316,6 +316,8 @@ end
 if data.raw['resource'] and data.raw['resource']['tungsten-ore'] and data.raw['resource']['tungsten-ore'].autoplace then
     data.raw['resource']['tungsten-ore'].autoplace.probability_expression = "(var('control:tungsten_ore:size') > 0) * (clamp(var('default-coal-patches'), 0, 1))"
     data.raw['resource']['tungsten-ore'].autoplace.richness_expression = "(var('control:tungsten_ore:size') > 0) * (1*var('control:tungsten_ore:richness')*(var('default-coal-patches'))*max((1000+distance)/2600,1))"
+    nauvis_control['tungsten_ore'] = {}
+    nauvis_setting['tungsten-ore'] = {}
 end
 
 -- GM-VP H 95 SPACE_AGE TILE
