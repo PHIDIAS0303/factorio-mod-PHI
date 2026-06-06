@@ -432,15 +432,15 @@ local items = {
         ['iron-bacteria'] = true,
         ['copper-bacteria'] = true,
         ['spoilage'] = true,
-        ['carbon-fiber'] = true,
+        ['quantum-processor'] = true,
         -- SPACE_AGE 20
         ['biter-egg'] = true,
         ['pentapod-egg'] = true,
         ['lithium'] = true,
         ['lithium-plate'] = true,
-        ['quantum-processor'] = true,
+        ['crusher'] = true,
         -- SPACE_AGE 25
-        ['carbon'] = true,
+        ['thruster'] = true,
         ['calcite'] = true,
         ['space-platform-foundation'] = true,
         ['space-platform-hub'] = true,
@@ -450,9 +450,6 @@ local items = {
         ['metallic-asteroid-chunk'] = true,
         ['promethium-asteroid-chunk'] = true,
         ['oxide-asteroid-chunk'] = true,
-        ['crusher'] = true,
-        -- SPACE_AGE 35
-        ['thruster'] = true,
     },
     ['tips_and_tricks_item'] = {
         ['quality'] = true,
@@ -598,7 +595,6 @@ local items = {
         ['holmium-solution'] = 'fluid',
         ['lava'] = 'fluid',
         -- SPACE_AGE ITEM 0
-        ['bioflux'] = 'capsule',
         ['capture-robot-rocket'] = 'ammo',
         ['space-platform-starter-pack'] = 'space-platform-starter-pack',
         -- SPACE_AGE MAP_GENERATION 0
@@ -986,6 +982,11 @@ local items = {
             unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'fish-breeding'}, {type = 'unlock-recipe', recipe = 'nutrients-from-fish'}, {type = 'unlock-recipe', recipe = 'nutrients-from-yumako-mash'}}
         },
+        --[[
+        ['bioflux'] = true,
+        ['bioflux-processing'] = true,
+        ['carbon-fiber'] = true,
+        ]]
     },
     ['technology'] = {
         -- SPACE_AGE 0
@@ -1001,17 +1002,17 @@ local items = {
         ['foundation'] = true,
         ['biochamber'] = true,
         -- SPACE_AGE 10
-        ['bioflux'] = true,
         ['artificial-soil'] = true,
         ['overgrowth-soil'] = true,
         ['bacteria-cultivation'] = true,
-        ['bioflux-processing'] = true,
+        ['yumako'] = true,
+        ['jellynut'] = true,
         -- SPACE_AGE 15
         ['calcite-processing'] = true,
         ['captivity'] = true,
         ['biter-egg-handling'] = true,
-        ['carbon-fiber'] = true,
         ['promethium-science-pack'] = true,
+        ['advanced-asteroid-processing'] = true,
         -- SPACE_AGE 20
         ['holmium-processing'] = true,
         ['rail-support-foundations'] = true,
@@ -1025,9 +1026,6 @@ local items = {
         ['asteroid-productivity'] = true,
         ['asteroid-reprocessing'] = true,
         -- SPACE_AGE 30
-        ['advanced-asteroid-processing'] = true,
-        ['yumako'] = true,
-        ['jellynut'] = true,
     },
 }
 
