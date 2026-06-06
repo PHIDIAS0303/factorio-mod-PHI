@@ -449,7 +449,7 @@ local items = {
         ['foundation'] = true,
         ['biochamber'] = true,
         ['captive-biter-spawner'] = true,
-        ['tungsten-ore'] = true,
+        ['asteroid-collector'] = true,
         ['tungsten-carbide'] = true,
         -- SPACE_AGE 10
         ['tungsten-plate'] = true,
@@ -474,9 +474,8 @@ local items = {
         ['calcite'] = true,
         ['space-platform-foundation'] = true,
         ['space-platform-hub'] = true,
-        ['asteroid-collector'] = true,
-        -- SPACE_AGE 30
         ['carbonic-asteroid-chunk'] = true,
+        -- SPACE_AGE 30
         ['metallic-asteroid-chunk'] = true,
         ['promethium-asteroid-chunk'] = true,
         ['oxide-asteroid-chunk'] = true,
@@ -628,7 +627,7 @@ local items = {
         ['space-platform-starter-pack'] = 'space-platform-starter-pack',
         -- SPACE_AGE MAP_GENERATION 0
         ['vulcanus_coal'] = 'autoplace-control',
-        ['tungsten_ore'] = 'autoplace-control',
+        ['fulgora_islands'] = 'autoplace-control',
         ['calcite'] = 'autoplace-control',
         ['sulfuric_acid_geyser'] = 'autoplace-control',
         ['scrap'] = 'autoplace-control',
@@ -645,13 +644,12 @@ local items = {
         ['gleba_plants'] = 'autoplace-control',
         ['gleba_enemy_base'] = 'autoplace-control',
         -- SPACE_AGE MAP_GENERATION 15
-        ['fulgora_islands'] = 'autoplace-control',
         ['cliff-fulgora'] = 'cliff',
         ['cliff-gleba'] = 'cliff',
         ['cliff-vulcanus'] = 'cliff',
         ['crater-cliff'] = 'cliff',
-        -- SPACE_AGE MAP_GENERATION 20
         ['space-platform'] = 'surface',
+        -- SPACE_AGE MAP_GENERATION 20
         -- SPACE_AGE TILE 0
         ['empty-space'] = 'tile',
         ['space-platform-foundation'] = 'tile',

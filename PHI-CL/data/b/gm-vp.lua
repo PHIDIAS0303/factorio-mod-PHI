@@ -278,7 +278,7 @@ end
 -- GM-VP H 66 SPACE_AGE ENTITY
 -- GM-VP H 8 SPACE_AGE FLUID
 -- GM-VP H 2 SPACE_AGE ITEM
--- GM-VP H 21 SPACE_AGE MAP_GENERATION
+-- GM-VP H 20 SPACE_AGE MAP_GENERATION
 -- GM-VP H 3 SPACE_AGE TILE
 -- GM-VP H 1 SPACE_AGE TOOL
 if items['hidden'] then
@@ -416,7 +416,7 @@ if settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE
 end
 
 -- GM-VP H 1 QUALITY ITEM
--- GM-VP H 34 SPACE_AGE ITEM
+-- GM-VP H 33 SPACE_AGE ITEM
 for _, v in pairs(data.raw.item) do
     v.auto_recycle = false
 
