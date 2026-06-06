@@ -982,11 +982,22 @@ local items = {
             unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'fish-breeding'}, {type = 'unlock-recipe', recipe = 'nutrients-from-fish'}, {type = 'unlock-recipe', recipe = 'nutrients-from-yumako-mash'}}
         },
-        --[[
-        ['bioflux'] = true,
-        ['bioflux-processing'] = true,
-        ['carbon-fiber'] = true,
-        ]]
+        ['bioflux'] = {
+            prerequisites = {'agricultural-science-pack'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'bioflux'}, {type = 'unlock-recipe', recipe = 'nutrients-from-bioflux'}, {type = 'unlock-recipe', recipe = 'biolubricant'}, {type = 'unlock-recipe', recipe = 'bioplastic'}, {type = 'unlock-recipe', recipe = 'biosulfur'}, {type = 'unlock-recipe', recipe = 'rocket-fuel-from-jelly'}}
+        },
+        -- SPACE_AGE 35
+        ['bioflux-processing'] = {
+            prerequisites = {'bioflux'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'biolubricant'}, {type = 'unlock-recipe', recipe = 'bioplastic'}, {type = 'unlock-recipe', recipe = 'biosulfur'}, {type = 'unlock-recipe', recipe = 'rocket-fuel-from-jelly'}}
+        },
+        ['carbon-fiber'] = {
+            prerequisites = {'agricultural-science-pack'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'carbon'}, {type = 'unlock-recipe', recipe = 'carbon-fiber'}}
+        },
     },
     ['technology'] = {
         -- SPACE_AGE 0
