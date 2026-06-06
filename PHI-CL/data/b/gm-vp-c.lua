@@ -281,13 +281,13 @@ local items = {
         -- SPACE_AGE 40
         ['yumako-processing'] = {
             energy_required = 15,
-            ingredients = {{type = 'item', name = 'yumako', amount = 20}, {type = 'fluid', name = 'water', amount = 400, fluidbox_multiplier = 10, ignored_by_stats = 400}},
-            results = {{type = 'item', name = 'yumako-mash', amount = 20}, {type = 'item', name = 'yumako-seed', amount = 1}, {type = 'fluid', name = 'steam', temperature = 500, amount = 320, fluidbox_multiplier = 10, ignored_by_stats = 320, ignored_by_productivity = 320}}
+            ingredients = {{type = 'item', name = 'yumako', amount = 40}, {type = 'fluid', name = 'water', amount = 800, fluidbox_multiplier = 10, ignored_by_stats = 800}},
+            results = {{type = 'item', name = 'yumako-mash', amount = 40}, {type = 'item', name = 'yumako-seed', amount = 1}, {type = 'fluid', name = 'steam', temperature = 500, amount = 640, fluidbox_multiplier = 10, ignored_by_stats = 640, ignored_by_productivity = 640}}
         },
         ['jellynut-processing'] = {
             energy_required = 15,
-            ingredients = {{type = 'item', name = 'jellynut', amount = 20}, {type = 'fluid', name = 'water', amount = 400, fluidbox_multiplier = 10, ignored_by_stats = 400}},
-            results = {{type = 'item', name = 'jelly', amount = 20}, {type = 'item', name = 'jellynut-seed', amount = 1}, {type = 'fluid', name = 'steam', temperature = 500, amount = 320, fluidbox_multiplier = 10, ignored_by_stats = 320, ignored_by_productivity = 320}}
+            ingredients = {{type = 'item', name = 'jellynut', amount = 40}, {type = 'fluid', name = 'water', amount = 800, fluidbox_multiplier = 10, ignored_by_stats = 800}},
+            results = {{type = 'item', name = 'jelly', amount = 40}, {type = 'item', name = 'jellynut-seed', amount = 1}, {type = 'fluid', name = 'steam', temperature = 500, amount = 640, fluidbox_multiplier = 10, ignored_by_stats = 640, ignored_by_productivity = 640}}
         },
         ['steam-condensation'] = {
             energy_required = 10,
@@ -312,6 +312,7 @@ local items = {
             ingredients = {{type = 'item', name = 'raw-fish', amount = 8}, {type = 'item', name = 'nutrients', amount = 80}, {type = 'fluid', name = 'water', amount = 1000, fluidbox_multiplier = 10, ignored_by_stats = 1000}},
             results = {{type = 'item', name = 'raw-fish', amount = 12}, {type = 'fluid', name = 'water', amount = 1000, fluidbox_multiplier = 10, ignored_by_stats = 1000, ignored_by_productivity = 1000}}
         },
+        -- ['biolubricant'] = true,
     },
     ['recipe'] = {
         -- QUALITY 0
@@ -338,7 +339,7 @@ local items = {
         ['bioflux'] = true,
         ['bioplastic'] = true,
         ['biosulfur'] = true,
-        ['biolubricant'] = true,
+        ['carbon'] = true,
         ['carbon-fiber'] = true,
         -- SPACE_AGE 20
         ['artificial-yumako-soil'] = true,
@@ -397,7 +398,6 @@ local items = {
         -- SPACE_AGE 65
         ['space-platform-foundation'] = true,
         ['space-platform-starter-pack'] = true,
-        ['carbon'] = true,
         ['crusher'] = true,
     },
     ['item'] = {
