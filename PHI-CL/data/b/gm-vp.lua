@@ -113,7 +113,6 @@ if items['technology_productivity'] then
 end
 
 data.raw.technology['automation-productivity'].icons[1].icon = '__base__/graphics/technology/automation-2.png'
--- data.raw.technology['automation-productivity'].localised_name = {'phi-cl.combine', {'technology-name.automation'}, ''}
 
 -- GM-VP A 1 SPACE_AGE RESEARCH_EFFECT
 if data.raw.technology['automation'] and data.raw.technology['automation'].effects then
@@ -294,7 +293,7 @@ end
 local nauvis_control = data.raw.planet and data.raw.planet['nauvis'] and data.raw.planet['nauvis'].map_gen_settings and data.raw.planet['nauvis'].map_gen_settings.autoplace_controls
 local nauvis_setting = data.raw.planet and data.raw.planet['nauvis'] and data.raw.planet['nauvis'].map_gen_settings and data.raw.planet['nauvis'].map_gen_settings.autoplace_settings and data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity and data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings
 
--- GM-VP H 16 SPACE_AGE RESOURCE_GENERATION
+-- GM-VP H 15 SPACE_AGE RESOURCE_GENERATION
 if items['hidden_resource'] and data.raw['resource'] then
     for _, v in pairs(items['hidden_resource']) do
         if data.raw['resource'][v] then
@@ -312,6 +311,11 @@ if items['hidden_resource'] and data.raw['resource'] then
             end
         end
     end
+end
+
+if data.raw['resource'] and data.raw['resource']['tungsten-ore'] and data.raw['resource']['tungsten-ore'].autoplace then
+    data.raw['resource']['tungsten-ore'].autoplace.probability_expression = "(var('control:tungsten_ore:size') > 0) * (clamp(var('default-coal-patches'), 0, 1))"
+    data.raw['resource']['tungsten-ore'].autoplace.richness_expression = "(var('control:tungsten_ore:size') > 0) * (1*var('control:tungsten_ore:richness')*(var('default-coal-patches'))*max((1000+distance)/2600,1))"
 end
 
 -- GM-VP H 95 SPACE_AGE TILE

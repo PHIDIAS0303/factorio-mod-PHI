@@ -512,24 +512,23 @@ local items = {
     ['hidden_resource'] = {
         -- SPACE_AGE RESOURCE_GENERATION 0
         'vulcanus-coal',
-        'tungsten-ore',
         'sulfuric-acid-geyser',
         'fulgora-islands',
         'gleba-enemy-base',
+        'fulgora-cliff',
         -- SPACE_AGE RESOURCE_GENERATION 5
-        'fluorine-vent',
-        'lithium-brine',
         'gleba-stone',
         'aquilo-crude-oil',
         'gleba-cliff',
-        -- SPACE_AGE RESOURCE_GENERATION 10
-        'fulgora-cliff',
-        'vulcanus-volcanism',
         'gleba-water',
         'gleba-plants',
+        -- SPACE_AGE RESOURCE_GENERATION 10
+        'vulcanus-volcanism',
         'calcite',
-        -- SPACE_AGE RESOURCE_GENERATION 15
         'scrap',
+        'fluorine-vent',
+        'lithium-brine',
+        -- SPACE_AGE RESOURCE_GENERATION 15
     },
     ['hidden'] = {
         -- QUALITY ENTITY 0
@@ -1033,10 +1032,10 @@ local items = {
         ['recycling'] = true,
         -- SPACE_AGE 5
         ['lightning-collector'] = true,
-        ['tungsten-carbide'] = true,
-        ['tungsten-steel'] = true,
         ['foundation'] = true,
         ['biochamber'] = true,
+        ['asteroid-productivity'] = true,
+        ['asteroid-reprocessing'] = true,
         -- SPACE_AGE 10
         ['artificial-soil'] = true,
         ['overgrowth-soil'] = true,
@@ -1050,19 +1049,19 @@ local items = {
         ['promethium-science-pack'] = true,
         ['advanced-asteroid-processing'] = true,
         -- SPACE_AGE 20
-        ['holmium-processing'] = true,
         ['rail-support-foundations'] = true,
-        ['lithium-processing'] = true,
-        ['quantum-processor'] = true,
         ['captive-biter-spawner'] = true,
-        -- SPACE_AGE 25
-        ['scrap-recycling-productivity'] = true,
         ['space-platform-thruster'] = true,
         ['space-platform'] = true,
-        ['asteroid-productivity'] = true,
-        ['asteroid-reprocessing'] = true,
-        -- SPACE_AGE 30
+        ['scrap-recycling-productivity'] = true,
+        -- SPACE_AGE 25
         ['bioflux-processing'] = true,
+        -- SPACE_AGE 30
+        ['tungsten-carbide'] = true,
+        ['tungsten-steel'] = true,
+        ['holmium-processing'] = true,
+        ['lithium-processing'] = true,
+        ['quantum-processor'] = true,
     },
 }
 
