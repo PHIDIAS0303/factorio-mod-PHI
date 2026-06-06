@@ -988,11 +988,6 @@ local items = {
             effects = {{type = 'unlock-recipe', recipe = 'bioflux'}, {type = 'unlock-recipe', recipe = 'nutrients-from-bioflux'}, {type = 'unlock-recipe', recipe = 'biolubricant'}, {type = 'unlock-recipe', recipe = 'bioplastic'}, {type = 'unlock-recipe', recipe = 'biosulfur'}, {type = 'unlock-recipe', recipe = 'rocket-fuel-from-jelly'}}
         },
         -- SPACE_AGE 35
-        ['bioflux-processing'] = {
-            prerequisites = {'bioflux'},
-            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'biolubricant'}, {type = 'unlock-recipe', recipe = 'bioplastic'}, {type = 'unlock-recipe', recipe = 'biosulfur'}, {type = 'unlock-recipe', recipe = 'rocket-fuel-from-jelly'}}
-        },
         ['carbon-fiber'] = {
             prerequisites = {'agricultural-science-pack'},
             unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
@@ -1037,6 +1032,7 @@ local items = {
         ['asteroid-productivity'] = true,
         ['asteroid-reprocessing'] = true,
         -- SPACE_AGE 30
+        ['bioflux-processing'] = true,
     },
 }
 
