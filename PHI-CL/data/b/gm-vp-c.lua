@@ -279,28 +279,33 @@ local items = {
             results = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}}
         },
         -- SPACE_AGE 40
+        ['steam-condensation'] = {
+            energy_required = 10,
+            category = 'chemistry',
+            ingredients = {{type = 'fluid', name = 'steam', amount = 800, fluidbox_multiplier = 10}},
+            results = {{type = 'fluid', name = 'water', amount = 640, fluidbox_multiplier = 10}}
+        },
         ['yumako-processing'] = {
             energy_required = 15,
+            category = 'chemistry',
             ingredients = {{type = 'item', name = 'yumako', amount = 40}, {type = 'fluid', name = 'water', amount = 800, fluidbox_multiplier = 10, ignored_by_stats = 800}},
             results = {{type = 'item', name = 'yumako-mash', amount = 40}, {type = 'item', name = 'yumako-seed', amount = 1}, {type = 'fluid', name = 'steam', temperature = 500, amount = 640, fluidbox_multiplier = 10, ignored_by_stats = 640, ignored_by_productivity = 640}}
         },
         ['jellynut-processing'] = {
             energy_required = 15,
+            category = 'chemistry',
             ingredients = {{type = 'item', name = 'jellynut', amount = 40}, {type = 'fluid', name = 'water', amount = 800, fluidbox_multiplier = 10, ignored_by_stats = 800}},
             results = {{type = 'item', name = 'jelly', amount = 40}, {type = 'item', name = 'jellynut-seed', amount = 1}, {type = 'fluid', name = 'steam', temperature = 500, amount = 640, fluidbox_multiplier = 10, ignored_by_stats = 640, ignored_by_productivity = 640}}
         },
-        ['steam-condensation'] = {
-            energy_required = 10,
-            ingredients = {{type = 'fluid', name = 'steam', amount = 800, fluidbox_multiplier = 10}},
-            results = {{type = 'fluid', name = 'water', amount = 640, fluidbox_multiplier = 10}}
-        },
         ['nutrients-from-yumako-mash'] = {
             energy_required = 15,
+            category = 'chemistry',
             ingredients = {{type = 'item', name = 'yumako-mash', amount = 10}},
             results = {{type = 'item', name = 'nutrients', amount = 10}}
         },
         ['nutrients-from-fish'] = {
             energy_required = 15,
+            category = 'chemistry',
             allow_productivity = true,
             ingredients = {{type = 'item', name = 'raw-fish', amount = 1}},
             results = {{type = 'item', name = 'nutrients', amount = 10}}
@@ -308,25 +313,47 @@ local items = {
         -- SPACE_AGE 45
         ['fish-breeding'] = {
             energy_required = 30,
+            category = 'chemistry',
             allow_productivity = true,
             ingredients = {{type = 'item', name = 'raw-fish', amount = 8}, {type = 'item', name = 'nutrients', amount = 80}, {type = 'fluid', name = 'water', amount = 1000, fluidbox_multiplier = 10, ignored_by_stats = 1000}},
             results = {{type = 'item', name = 'raw-fish', amount = 12}, {type = 'fluid', name = 'water', amount = 1000, fluidbox_multiplier = 10, ignored_by_stats = 1000, ignored_by_productivity = 1000}}
         },
         ['biolubricant'] = {
             energy_required = 10,
+            category = 'chemistry',
             allow_productivity = true,
             ingredients = {{type = 'item', name = 'jelly', amount = 10}, {type = 'fluid', name = 'water', amount = 40, fluidbox_multiplier = 10}},
             results = {{type = 'fluid', name = 'lubricant', amount = 40, fluidbox_multiplier = 10}}
         },
-        --[[
-        ['bioflux'] = true,
-        ['bioplastic'] = true,
-        ['biosulfur'] = true,
-        ['carbon'] = true,
-        ['carbon-fiber'] = true,
-        ['nutrients-from-bioflux'] = true,
-        ['rocket-fuel-from-jelly'] = true,
-        ]]
+        ['bioflux'] = {
+            energy_required = 10,
+            category = 'chemistry',
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'jelly', amount = 10}, {type = 'item', name = 'yumako-mash', amount = 10}, {type = 'fluid', name = 'water', amount = 40, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'bioflux', amount = 5}}
+        },
+        ['nutrients-from-bioflux'] = {
+            energy_required = 10,
+            category = 'chemistry',
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'bioflux', amount = 10}},
+            results = {{type = 'item', name = 'nutrients', amount = 20}}
+        },
+        ['carbon'] = {
+            energy_required = 5,
+            category = 'chemistry',
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'coal', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 80, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'carbon', amount = 10}}
+        },
+        -- SPACE_AGE 50
+        ['carbon-fiber'] = {
+            energy_required = 5,
+            category = 'chemistry',
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'bioflux', amount = 10}, {type = 'item', name = 'carbon', amount = 10}},
+            results = {{type = 'item', name = 'carbon-fiber', amount = 10}}
+        },
     },
     ['recipe'] = {
         -- QUALITY 0
@@ -405,6 +432,9 @@ local items = {
         ['advanced-metallic-asteroid-crushing'] = true,
         -- SPACE_AGE 60
         ['crusher'] = true,
+        ['bioplastic'] = true,
+        ['biosulfur'] = true,
+        ['rocket-fuel-from-jelly'] = true,
     },
     ['item'] = {
         -- QUALITY 0
@@ -985,7 +1015,7 @@ local items = {
         ['bioflux'] = {
             prerequisites = {'agricultural-science-pack'},
             unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'bioflux'}, {type = 'unlock-recipe', recipe = 'nutrients-from-bioflux'}, {type = 'unlock-recipe', recipe = 'biolubricant'}, {type = 'unlock-recipe', recipe = 'bioplastic'}, {type = 'unlock-recipe', recipe = 'biosulfur'}, {type = 'unlock-recipe', recipe = 'rocket-fuel-from-jelly'}}
+            effects = {{type = 'unlock-recipe', recipe = 'bioflux'}, {type = 'unlock-recipe', recipe = 'nutrients-from-bioflux'}, {type = 'unlock-recipe', recipe = 'biolubricant'}}
         },
         -- SPACE_AGE 35
         ['carbon-fiber'] = {
