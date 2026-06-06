@@ -312,7 +312,21 @@ local items = {
             ingredients = {{type = 'item', name = 'raw-fish', amount = 8}, {type = 'item', name = 'nutrients', amount = 80}, {type = 'fluid', name = 'water', amount = 1000, fluidbox_multiplier = 10, ignored_by_stats = 1000}},
             results = {{type = 'item', name = 'raw-fish', amount = 12}, {type = 'fluid', name = 'water', amount = 1000, fluidbox_multiplier = 10, ignored_by_stats = 1000, ignored_by_productivity = 1000}}
         },
-        -- ['biolubricant'] = true,
+        ['biolubricant'] = {
+            energy_required = 10,
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'jelly', amount = 10}, {type = 'fluid', name = 'water', amount = 40, fluidbox_multiplier = 10}},
+            results = {{type = 'fluid', name = 'lubricant', amount = 40, fluidbox_multiplier = 10}}
+        },
+        --[[
+        ['bioflux'] = true,
+        ['bioplastic'] = true,
+        ['biosulfur'] = true,
+        ['carbon'] = true,
+        ['carbon-fiber'] = true,
+        ['nutrients-from-bioflux'] = true,
+        ['rocket-fuel-from-jelly'] = true,
+        ]]
     },
     ['recipe'] = {
         -- QUALITY 0
@@ -331,16 +345,16 @@ local items = {
         ['iron-bacteria-cultivation'] = true,
         -- SPACE_AGE 10
         ['nutrients-from-spoilage'] = true,
-        ['nutrients-from-bioflux'] = true,
-        ['pentapod-egg'] = true,
-        ['rocket-fuel-from-jelly'] = true,
+        ['spoilage-from-nutrients'] = true,
         ['casting-low-density-structure'] = true,
+        ['space-platform-foundation'] = true,
+        ['space-platform-starter-pack'] = true,
         -- SPACE_AGE 15
-        ['bioflux'] = true,
-        ['bioplastic'] = true,
-        ['biosulfur'] = true,
-        ['carbon'] = true,
-        ['carbon-fiber'] = true,
+        ['advanced-carbonic-asteroid-crushing'] = true,
+        ['advanced-oxide-asteroid-crushing'] = true,
+        ['metallic-asteroid-reprocessing'] = true,
+        ['carbonic-asteroid-reprocessing'] = true,
+        ['oxide-asteroid-reprocessing'] = true,
         -- SPACE_AGE 20
         ['artificial-yumako-soil'] = true,
         ['overgrowth-yumako-soil'] = true,
@@ -351,7 +365,7 @@ local items = {
         ['captive-biter-spawner'] = true,
         ['capture-robot-rocket'] = true,
         ['biter-egg'] = true,
-        ['spoilage-from-nutrients'] = true,
+        ['pentapod-egg'] = true,
         ['tungsten-carbide'] = true,
         -- SPACE_AGE 30
         ['tungsten-plate'] = true,
@@ -390,14 +404,6 @@ local items = {
         ['oxide-asteroid-crushing'] = true,
         ['advanced-metallic-asteroid-crushing'] = true,
         -- SPACE_AGE 60
-        ['advanced-carbonic-asteroid-crushing'] = true,
-        ['advanced-oxide-asteroid-crushing'] = true,
-        ['metallic-asteroid-reprocessing'] = true,
-        ['carbonic-asteroid-reprocessing'] = true,
-        ['oxide-asteroid-reprocessing'] = true,
-        -- SPACE_AGE 65
-        ['space-platform-foundation'] = true,
-        ['space-platform-starter-pack'] = true,
         ['crusher'] = true,
     },
     ['item'] = {
