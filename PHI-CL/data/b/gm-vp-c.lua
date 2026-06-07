@@ -254,17 +254,17 @@ local items = {
         -- SPACE_AGE 35
         ['metallurgic-science-pack'] = {
             energy_required = 10,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 200, fluidbox_multiplier = 10}, {type = 'fluid', name = 'molten-copper', amount = 200, fluidbox_multiplier = 10}},
+            ingredients = {{type = 'item', name = 'tungsten-carbide', amount = 3}, {type = 'item', name = 'tungsten-plate', amount = 2}, {type = 'fluid', name = 'molten-iron', amount = 200, fluidbox_multiplier = 10}, {type = 'fluid', name = 'molten-copper', amount = 200, fluidbox_multiplier = 10}},
             results = {{type = 'item', name = 'metallurgic-science-pack', amount = 2}}
         },
         ['electromagnetic-science-pack'] = {
             energy_required = 10,
-            ingredients = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}, {type = 'item', name = 'solar-panel', amount = 1}, {type = 'item', name = 'accumulator', amount = 1}},
+            ingredients = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}, {type = 'item', name = 'solar-panel', amount = 1}, {type = 'item', name = 'accumulator', amount = 1}, {type = 'item', name = 'supercapacitor', amount = 1}, {type = 'item', name = 'holmium-plate', amount = 1}},
             results = {{type = 'item', name = 'electromagnetic-science-pack', amount = 2}}
         },
         ['cryogenic-science-pack'] = {
             energy_required = 10,
-            ingredients = {{type = 'fluid', name = 'fluoroketone-cold', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}, {type = 'item', name = 'ice', amount = 5}},
+            ingredients = {{type = 'fluid', name = 'fluoroketone-cold', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}, {type = 'item', name = 'ice', amount = 5}, {type = 'item', name = 'lithium-plate', amount = 2}},
             results = {{type = 'item', name = 'cryogenic-science-pack', amount = 2}, {type = 'fluid', name = 'fluoroketone-hot', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
         },
         ['agricultural-science-pack'] = {
@@ -390,14 +390,39 @@ local items = {
             ingredients = {{type = 'item', name = 'copper-plate', amount = 2}, {type = 'item', name = 'holmium-plate', amount = 2}, {type = 'item', name = 'plastic-bar', amount = 2}, {type = 'fluid', name = 'light-oil', amount = 10, fluidbox_multiplier = 10}},
             results = {{type = 'item', name = 'superconductor', amount = 4}}
         },
-
-        --[[
-        ['tungsten-plate'] = true,
-        ['tungsten-carbide'] = true,
-        ['lithium'] = true,
-        ['lithium-plate'] = true,
-        ['quantum-processor'] = true,
-        ]]
+        ['tungsten-carbide'] = {
+            energy_required = 1,
+            category = 'crafting-with-fluid',
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'carbon', amount = 2}, {type = 'item', name = 'tungsten-ore', amount = 4}, {type = 'fluid', name = 'sulfuric-acid', amount = 20, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'tungsten-carbide', amount = 2}}
+        },
+        ['tungsten-plate'] = {
+            energy_required = 5,
+            category = 'metallurgic',
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'tungsten-ore', amount = 8}, {type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'tungsten-plate', amount = 2}}
+        },
+        ['lithium'] = {
+            energy_required = 5,
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'holmium-plate', amount = 1}, {type = 'fluid', name = 'lithium-brine', amount = 25, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'lithium', amount = 5}}
+        },
+        ['lithium-plate'] = {
+            energy_required = 5,
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'lithium', amount = 5}},
+            results = {{type = 'item', name = 'lithium-plate', amount = 5}}
+        },
+        -- SPACE_AGE 60
+        ['quantum-processor'] = {
+            energy_required = 15,
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'lithium-plate', amount = 4}, {type = 'item', name = 'carbon-fiber', amount = 2}, {type = 'item', name = 'processing-unit', amount = 2}, {type = 'item', name = 'tungsten-carbide', amount = 2}, {type = 'item', name = 'superconductor', amount = 2}, {type = 'fluid', name = 'fluoroketone-cold', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}},
+            results = {{type = 'item', name = 'quantum-processor', amount = 2}, {type = 'fluid', name = 'fluoroketone-hot', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
+        },
     },
     ['recipe'] = {
         -- QUALITY 0
