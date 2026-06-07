@@ -379,12 +379,16 @@ local items = {
             energy_required = 5,
             category = 'crafting-with-fluid',
             allow_productivity = true,
+            ingredients = {{type = 'item', name = 'holmium-plate', amount = 4}, {type = 'item', name = 'superconductor', amount = 4}, {type = 'item', name = 'electronic-circuit', amount = 8}, {type = 'item', name = 'battery', amount = 2}, {type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'supercapacitor', amount = 2}}
         },
         -- SPACE_AGE 55
         ['superconductor'] = {
             energy_required = 2,
             category = 'crafting-with-fluid',
             allow_productivity = true,
+            ingredients = {{type = 'item', name = 'copper-plate', amount = 2}, {type = 'item', name = 'holmium-plate', amount = 2}, {type = 'item', name = 'plastic-bar', amount = 2}, {type = 'fluid', name = 'light-oil', amount = 10, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'superconductor', amount = 4}}
         },
 
         --[[
