@@ -525,9 +525,6 @@ local items = {
         'vulcanus-volcanism',
         'calcite',
         'scrap',
-        'fluorine-vent',
-        'lithium-brine',
-        -- SPACE_AGE RESOURCE_GENERATION 15
     },
     ['hidden'] = {
         -- QUALITY ENTITY 0

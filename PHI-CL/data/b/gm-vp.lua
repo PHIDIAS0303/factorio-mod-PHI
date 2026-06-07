@@ -293,7 +293,7 @@ end
 local nauvis_control = data.raw.planet and data.raw.planet['nauvis'] and data.raw.planet['nauvis'].map_gen_settings and data.raw.planet['nauvis'].map_gen_settings.autoplace_controls
 local nauvis_setting = data.raw.planet and data.raw.planet['nauvis'] and data.raw.planet['nauvis'].map_gen_settings and data.raw.planet['nauvis'].map_gen_settings.autoplace_settings and data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity and data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings
 
--- GM-VP H 15 SPACE_AGE RESOURCE_GENERATION
+-- GM-VP H 13 SPACE_AGE RESOURCE_GENERATION
 if items['hidden_resource'] and data.raw['resource'] then
     for _, v in pairs(items['hidden_resource']) do
         if data.raw['resource'][v] then
@@ -306,12 +306,30 @@ if items['hidden_resource'] and data.raw['resource'] then
     end
 end
 
+-- GM-VP C 1 SPACE_AGE RESOURCE_GENERATION
 if data.raw['resource'] and data.raw['resource']['tungsten-ore'] and data.raw['resource']['tungsten-ore'].autoplace then
     data.raw['resource']['tungsten-ore'].autoplace.probability_expression = "(control:tungsten_ore:size > 0) * (1000 * ((1 + vulcanus_tungsten_ore_region) * random_penalty_between(0.9, 1, 1) - 1))"
     data.raw['resource']['tungsten-ore'].autoplace.richness_expression = "vulcanus_tungsten_ore_region * random_penalty_between(0.9, 1, 1) * 10000 * vulcanus_starting_area_multiplier * control:tungsten_ore:richness / vulcanus_tungsten_ore_size"
     nauvis_control['tungsten_ore'] = {}
     nauvis_setting['tungsten-ore'] = {}
 end
+
+-- GM-VP C 1 SPACE_AGE RESOURCE_GENERATION
+if data.raw['resource'] and data.raw['resource']['lithium-brine'] and data.raw['resource']['lithium-brine'].autoplace then
+    data.raw['resource']['lithium-brine'].autoplace.probability_expression = "(control:lithium_brine:size > 0) * (max(aquilo_starting_lithium_brine * 0.02, min(aquilo_starting_mask, aquilo_lithium_brine_spots) * 0.012))"
+    data.raw['resource']['lithium-brine'].autoplace.richness_expression = "max(aquilo_starting_lithium_brine * 480000, aquilo_lithium_brine_spots * 720000) * control:lithium_brine:richness"
+    nauvis_control['lithium_brine'] = {}
+    nauvis_setting['lithium-brine'] = {}
+end
+
+-- GM-VP C 1 SPACE_AGE RESOURCE_GENERATION
+if data.raw['resource'] and data.raw['resource']['fluorine-vent'] and data.raw['resource']['fluorine-vent'].autoplace then
+    data.raw['resource']['fluorine-vent'].autoplace.probability_expression = "(control:fluorine_vent:size > 0) * (max(aquilo_starting_flourine_vent * 0.02, aquilo_starting_flourine_vent_tiny > 0, min(aquilo_starting_mask, aquilo_flourine_vent_spots) * 0.008))"
+    data.raw['resource']['fluorine-vent'].autoplace.richness_expression = "max(aquilo_starting_flourine_vent * 420000, (aquilo_starting_flourine_vent_tiny > 0) * 420000, aquilo_flourine_vent_spots * 520000) * control:fluorine_vent:richness"
+    nauvis_control['fluorine_vent'] = {}
+    nauvis_setting['fluorine-vent'] = {}
+end
+
 
 -- GM-VP H 95 SPACE_AGE TILE
 if data.raw['tile'] then
