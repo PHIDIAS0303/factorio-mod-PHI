@@ -399,7 +399,7 @@ local items = {
         },
         ['tungsten-plate'] = {
             energy_required = 5,
-            category = 'metallurgic',
+            category = 'metallurgy',
             allow_productivity = true,
             ingredients = {{type = 'item', name = 'tungsten-ore', amount = 8}, {type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
             results = {{type = 'item', name = 'tungsten-plate', amount = 2}}
