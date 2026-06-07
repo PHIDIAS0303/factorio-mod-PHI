@@ -306,38 +306,28 @@ if items['hidden_resource'] and data.raw['resource'] then
     end
 end
 
--- GM-VP C 1 SPACE_AGE RESOURCE_GENERATION
-if data.raw['resource'] and data.raw['resource']['tungsten-ore'] and data.raw['resource']['tungsten-ore'].autoplace then
-    data.raw['resource']['tungsten-ore'].autoplace.probability_expression = "(control:tungsten_ore:size > 0) * (1000 * ((1 + vulcanus_tungsten_ore_region) * random_penalty_between(0.9, 1, 1) - 1))"
-    data.raw['resource']['tungsten-ore'].autoplace.richness_expression = "vulcanus_tungsten_ore_region * random_penalty_between(0.9, 1, 1) * 10000 * vulcanus_starting_area_multiplier * control:tungsten_ore:richness / vulcanus_tungsten_ore_size"
-    nauvis_control['tungsten_ore'] = {}
-    nauvis_setting['tungsten-ore'] = {}
-end
+-- GM-VP C 4 SPACE_AGE RESOURCE_GENERATION
+if data.raw['resource'] then
+    for _, v in pairs({'tungsten-ore', 'scrap'}) do
+        if data.raw['resource'][v] and data.raw['resource'][v].autoplace then
+            local vl = v:gsub('-', '_')
+            data.raw['resource'][v].autoplace.probability_expression = "(var('control:" .. vl .. ":size') > 0) * (clamp(var('default-coal-patches'), 0, 1))"
+            data.raw['resource'][v].autoplace.richness_expression = "(var('control:" .. vl .. ":size') > 0) * (1*var('control:" .. vl .. ":richness')*(var('default-coal-patches'))*max((1000+distance)/2600,1))"
+            nauvis_control[vl] = {}
+            nauvis_setting[v] = {}
+        end
+    end
 
--- GM-VP C 1 SPACE_AGE RESOURCE_GENERATION
-if data.raw['resource'] and data.raw['resource']['scrap'] and data.raw['resource']['scrap'].autoplace then
-    data.raw['resource']['scrap'].autoplace.probability_expression = "(control:scrap:size > 0) * (1000 * ((1 + vulcanus_tungsten_ore_region) * random_penalty_between(0.9, 1, 1) - 1))"
-    data.raw['resource']['scrap'].autoplace.richness_expression = "vulcanus_tungsten_ore_region * random_penalty_between(0.9, 1, 1) * 10000 * vulcanus_starting_area_multiplier * control:scrap:richness / vulcanus_tungsten_ore_size"
-    nauvis_control['scrap'] = {}
-    nauvis_setting['scrap'] = {}
+    for _, v in pairs({'lithium-brine', 'fluorine-vent'}) do
+        if data.raw['resource'][v] and data.raw['resource'][v].autoplace then
+            local vl = v:gsub('-', '_')
+            data.raw['resource'][v].autoplace.probability_expression = "(var('control:" .. vl .. ":size') > 0) * (clamp(var('default-crude-oil-patches'), 0, 1)* random_penalty{x = x, y = y, source = 1, amplitude = 1 /0.020833333333333})"
+            data.raw['resource'][v].autoplace.richness_expression = "(var('control:" .. vl .. ":size') > 0) * (1*var('control:" .. vl .. ":richness')*(var('default-crude-oil-patches')/0.020833333333333+220000)*max((1000+distance)/2600,1))"
+            nauvis_control[vl] = {}
+            nauvis_setting[v] = {}
+        end
+    end
 end
-
--- GM-VP C 1 SPACE_AGE RESOURCE_GENERATION
-if data.raw['resource'] and data.raw['resource']['lithium-brine'] and data.raw['resource']['lithium-brine'].autoplace then
-    data.raw['resource']['lithium-brine'].autoplace.probability_expression = "(control:lithium_brine:size > 0) * (max(aquilo_starting_lithium_brine * 0.02, min(aquilo_starting_mask, aquilo_lithium_brine_spots) * 0.012))"
-    data.raw['resource']['lithium-brine'].autoplace.richness_expression = "max(aquilo_starting_lithium_brine * 480000, aquilo_lithium_brine_spots * 720000) * control:lithium_brine:richness"
-    nauvis_control['lithium_brine'] = {}
-    nauvis_setting['lithium-brine'] = {}
-end
-
--- GM-VP C 1 SPACE_AGE RESOURCE_GENERATION
-if data.raw['resource'] and data.raw['resource']['fluorine-vent'] and data.raw['resource']['fluorine-vent'].autoplace then
-    data.raw['resource']['fluorine-vent'].autoplace.probability_expression = "(control:fluorine_vent:size > 0) * (max(aquilo_starting_flourine_vent * 0.02, aquilo_starting_flourine_vent_tiny > 0, min(aquilo_starting_mask, aquilo_flourine_vent_spots) * 0.008))"
-    data.raw['resource']['fluorine-vent'].autoplace.richness_expression = "max(aquilo_starting_flourine_vent * 420000, (aquilo_starting_flourine_vent_tiny > 0) * 420000, aquilo_flourine_vent_spots * 520000) * control:fluorine_vent:richness"
-    nauvis_control['fluorine_vent'] = {}
-    nauvis_setting['fluorine-vent'] = {}
-end
-
 
 -- GM-VP H 95 SPACE_AGE TILE
 if data.raw['tile'] then
