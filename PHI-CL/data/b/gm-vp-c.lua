@@ -354,6 +354,46 @@ local items = {
             ingredients = {{type = 'item', name = 'bioflux', amount = 10}, {type = 'item', name = 'carbon', amount = 10}},
             results = {{type = 'item', name = 'carbon-fiber', amount = 10}}
         },
+        ['scrap-recycling'] = {
+            energy_required = 5,
+            category = 'crafting-with-fluid',
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'scrap', amount = 10}},
+            results = {{type = 'item', name = 'iron-ore', amount = 3}, {type = 'item', name = 'copper-ore', amount = 2}, {type = 'item', name = 'stone', amount = 1}, {type = 'item', name = 'coal', amount = 1}, {type = 'item', name = 'solid-fuel', amount = 1}, {type = 'item', name = 'ice', amount = 1}, {type = 'item', name = 'holmium-ore', amount = 1}}
+        },
+        ['holmium-solution'] = {
+            energy_required = 5,
+            category = 'crafting-with-fluid',
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'holmium-ore', amount = 8}, {type = 'item', name = 'stone', amount = 2}, {type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10}},
+            results = {{type = 'fluid', name = 'holmium-solution', amount = 100, fluidbox_multiplier = 10}}
+        },
+        ['holmium-plate'] = {
+            energy_required = 5,
+            category = 'crafting-with-fluid',
+            allow_productivity = true,
+            ingredients = {{type = 'fluid', name = 'holmium-solution', amount = 100, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'holmium-plate', amount = 10}}
+        },
+        ['supercapacitor'] = {
+            energy_required = 5,
+            category = 'crafting-with-fluid',
+            allow_productivity = true,
+        },
+        -- SPACE_AGE 55
+        ['superconductor'] = {
+            energy_required = 2,
+            category = 'crafting-with-fluid',
+            allow_productivity = true,
+        },
+
+        --[[
+        ['tungsten-plate'] = true,
+        ['tungsten-carbide'] = true,
+        ['lithium'] = true,
+        ['lithium-plate'] = true,
+        ['quantum-processor'] = true,
+        ]]
     },
     ['recipe'] = {
         -- QUALITY 0
@@ -405,7 +445,7 @@ local items = {
         ['molten-copper-from-lava'] = true,
         ['acid-neutralisation'] = true,
         ['simple-coal-liquefaction'] = true,
-        ['scrap-recycling'] = true,
+        ['advanced-thruster-oxidizer'] = true,
         -- SPACE_AGE 40
         ['crusher'] = true,
         ['bioplastic'] = true,
@@ -419,22 +459,10 @@ local items = {
         ['thruster-oxidizer'] = true,
         ['advanced-thruster-fuel'] = true,
         -- SPACE_AGE 50
-        ['advanced-thruster-oxidizer'] = true,
         ['metallic-asteroid-crushing'] = true,
         ['carbonic-asteroid-crushing'] = true,
         ['oxide-asteroid-crushing'] = true,
         ['advanced-metallic-asteroid-crushing'] = true,
-        -- SPACE_AGE 55
-
-        ['tungsten-plate'] = true,
-        ['tungsten-carbide'] = true,
-        ['lithium'] = true,
-        ['lithium-plate'] = true,
-        ['quantum-processor'] = true,
-        ['holmium-solution'] = true,
-        ['holmium-plate'] = true,
-        ['supercapacitor'] = true,
-        ['superconductor'] = true,
     },
     ['item'] = {
         -- QUALITY 0
