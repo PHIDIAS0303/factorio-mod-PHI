@@ -450,35 +450,35 @@ local items = {
         ['biochamber'] = true,
         ['captive-biter-spawner'] = true,
         ['asteroid-collector'] = true,
-        ['tungsten-carbide'] = true,
+        ['crusher'] = true,
         -- SPACE_AGE 10
-        ['tungsten-plate'] = true,
         ['scrap'] = true,
-        ['holmium-ore'] = true,
-        ['holmium-plate'] = true,
-        ['superconductor'] = true,
-        -- SPACE_AGE 15
-        ['supercapacitor'] = true,
         ['iron-bacteria'] = true,
         ['copper-bacteria'] = true,
-        ['spoilage'] = true,
-        ['quantum-processor'] = true,
-        -- SPACE_AGE 20
         ['biter-egg'] = true,
         ['pentapod-egg'] = true,
-        ['lithium'] = true,
-        ['lithium-plate'] = true,
-        ['crusher'] = true,
-        -- SPACE_AGE 25
-        ['thruster'] = true,
-        ['calcite'] = true,
-        ['space-platform-foundation'] = true,
+        -- SPACE_AGE 15
         ['space-platform-hub'] = true,
         ['carbonic-asteroid-chunk'] = true,
-        -- SPACE_AGE 30
         ['metallic-asteroid-chunk'] = true,
         ['promethium-asteroid-chunk'] = true,
         ['oxide-asteroid-chunk'] = true,
+        -- SPACE_AGE 20
+        ['spoilage'] = true,
+        ['thruster'] = true,
+        ['calcite'] = true,
+        ['space-platform-foundation'] = true,
+        -- SPACE_AGE 25
+        -- SPACE_AGE 30
+        ['quantum-processor'] = true,
+        ['tungsten-carbide'] = true,
+        ['tungsten-plate'] = true,
+        ['holmium-ore'] = true,
+        ['holmium-plate'] = true,
+        ['lithium'] = true,
+        ['lithium-plate'] = true,
+        ['superconductor'] = true,
+        ['supercapacitor'] = true,
     },
     ['tips_and_tricks_item'] = {
         ['quality'] = true,
