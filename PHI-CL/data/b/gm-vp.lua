@@ -300,31 +300,26 @@ if items['hidden_resource'] and data.raw['resource'] then
             data.raw['resource'][v].hidden = true
             data.raw['resource'][v].hidden_in_factoriopedia = true
             data.raw['resource'][v].autoplace = nil
-            local v_low = v:gsub('-', '_')
-
-            if nauvis_control and nauvis_control[v_low] then
-                nauvis_control[v_low] = nil
-            end
-
-            if nauvis_setting and nauvis_setting[v] then
-                nauvis_setting[v] = nil
-            end
+            nauvis_control[v:gsub('-', '_')] = nil
+            nauvis_setting[v] = nil
         end
     end
 end
 
 if data.raw['resource'] and data.raw['resource']['tungsten-ore'] and data.raw['resource']['tungsten-ore'].autoplace then
-    data.raw['resource']['tungsten-ore'].autoplace.probability_expression = "(var('control:tungsten_ore:size') > 0) * (clamp(var('default-coal-patches'), 0, 1))"
-    data.raw['resource']['tungsten-ore'].autoplace.richness_expression = "(var('control:tungsten_ore:size') > 0) * (1*var('control:tungsten_ore:richness')*(var('default-coal-patches'))*max((1000+distance)/2600,1))"
+    data.raw['resource']['tungsten-ore'].autoplace.probability_expression = "(control:tungsten_ore:size > 0) * (1000 * ((1 + vulcanus_tungsten_ore_region) * random_penalty_between(0.9, 1, 1) - 1))"
+    data.raw['resource']['tungsten-ore'].autoplace.richness_expression = "vulcanus_tungsten_ore_region * random_penalty_between(0.9, 1, 1) * 10000 * vulcanus_starting_area_multiplier * control:tungsten_ore:richness / vulcanus_tungsten_ore_size"
     nauvis_control['tungsten_ore'] = {}
     nauvis_setting['tungsten-ore'] = {}
 end
 
 -- GM-VP H 95 SPACE_AGE TILE
-for _, v in pairs(data.raw['tile']) do
-    if v.subgroup and (v.subgroup == 'vulcanus-tiles' or v.subgroup == 'gleba-tiles' or v.subgroup == 'gleba-water-tiles' or v.subgroup == 'fulgora-tiles' or v.subgroup == 'aquilo-tiles') then
-        v.hidden = true
-        v.hidden_in_factoriopedia = true
+if data.raw['tile'] then
+    for _, v in pairs(data.raw['tile']) do
+        if v.subgroup and (v.subgroup == 'vulcanus-tiles' or v.subgroup == 'gleba-tiles' or v.subgroup == 'gleba-water-tiles' or v.subgroup == 'fulgora-tiles' or v.subgroup == 'aquilo-tiles') then
+            v.hidden = true
+            v.hidden_in_factoriopedia = true
+        end
     end
 end
 
