@@ -379,8 +379,8 @@ if data.raw['lab'] then
 end
 
 -- GM-VP C 26 BASE RESEARCH
--- GM-VP C 36 SPACE_AGE RESEARCH
--- GM-VP H 25 SPACE_AGE RESEARCH
+-- GM-VP C 38 SPACE_AGE RESEARCH
+-- GM-VP H 29 SPACE_AGE RESEARCH
 if data.raw.technology and items['technology'] and items['technology_reform'] then
     for _, v in pairs(data.raw.technology) do
         if items['technology_reform'][v.name] then

@@ -1054,14 +1054,14 @@ local items = {
             unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'carbon'}, {type = 'unlock-recipe', recipe = 'carbon-fiber'}}
         },
-        --[[
-        ['scrap-recycling-productivity'] = true,
-        ['tungsten-carbide'] = true,
-        ['tungsten-steel'] = true,
-        ['holmium-processing'] = true,
-        ['lithium-processing'] = true,
-        ['quantum-processor'] = true,
-        ]]
+        ['scrap-recycling-productivity'] = {
+            prerequisites = {'electromagnetic-science-pack'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'electromagnetic-science-pack', 1}}},
+        },
+        ['quantum-processor'] = {
+            prerequisites = {'electromagnetic-science-pack'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'electromagnetic-science-pack', 1}}},
+        },
     },
     ['technology'] = {
         -- SPACE_AGE 0
@@ -1095,6 +1095,10 @@ local items = {
         ['space-platform'] = true,
         ['bioflux-processing'] = true,
         -- SPACE_AGE 25
+        ['tungsten-carbide'] = true,
+        ['tungsten-steel'] = true,
+        ['holmium-processing'] = true,
+        ['lithium-processing'] = true,
     },
 }
 
