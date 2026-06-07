@@ -2,16 +2,6 @@ local mc = require('mc')
 
 mc.space_age()
 
--- GM-SAP C 2 SPACE_AGE RESOURCE
-for _, v in pairs({'lithium-brine', 'fluorine-vent'}) do
-    if data.raw.resource[v] then
-        data.raw.resource[v].infinite = true
-        data.raw.resource[v].minimum = math.max(60000, data.raw.resource[v].minimum or 0)
-        data.raw.resource[v].normal = math.max(300000, data.raw.resource[v].normal or 0)
-        data.raw.resource[v].infinite_depletion_amount = math.min(10, data.raw.resource[v].infinite_depletion_amount or 999)
-    end
-end
-
 -- GM-SAP C 16 SPACE_AGE ENTITY
 if data.raw['asteroid'] then
     for _, asteroid in pairs(data.raw['asteroid']) do

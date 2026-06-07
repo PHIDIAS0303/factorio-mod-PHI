@@ -316,8 +316,8 @@ end
 
 -- GM-VP C 1 SPACE_AGE RESOURCE_GENERATION
 if data.raw['resource'] and data.raw['resource']['scrap'] and data.raw['resource']['scrap'].autoplace then
-    data.raw['resource']['scrap'].autoplace.probability_expression = "(control:scrap:size > 0) * (1 - fulgora_starting_mask) * (min((fulgora_structure_cells < min(0.1 * frequency, 0.05 + 0.05 * frequency)) * (1 + fulgora_structure_subnoise) * abs_mult_height_over * fulgora_artificial_mask + (fulgora_spots_prebanding < (1.2 + 0.4 * linear_size)) * fulgora_vaults_and_starting_vault * 10, 0.5) * (1 - fulgora_road_paving_2c))"
-    data.raw['resource']['scrap'].autoplace.richness_expression = "(1 + fulgora_structure_subnoise) * 1000 * (7 / (6 + frequency) + 100 * fulgora_vaults_and_starting_vault) * richness"
+    data.raw['resource']['scrap'].autoplace.probability_expression = "(control:scrap:size > 0) * (1000 * ((1 + vulcanus_tungsten_ore_region) * random_penalty_between(0.9, 1, 1) - 1))"
+    data.raw['resource']['scrap'].autoplace.richness_expression = "vulcanus_tungsten_ore_region * random_penalty_between(0.9, 1, 1) * 10000 * vulcanus_starting_area_multiplier * control:scrap:richness / vulcanus_tungsten_ore_size"
     nauvis_control['scrap'] = {}
     nauvis_setting['scrap'] = {}
 end

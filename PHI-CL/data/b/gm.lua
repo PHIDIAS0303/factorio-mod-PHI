@@ -25,6 +25,16 @@ if data.raw.recipe['foundation'] then
     data.raw.recipe['foundation'].results = {{type = 'item', name = 'foundation', amount = 1}}
 end
 
+-- GM-SAP C 2 SPACE_AGE RESOURCE
+for _, v in pairs({'lithium-brine', 'fluorine-vent'}) do
+    if data.raw.resource[v] then
+        data.raw.resource[v].infinite = true
+        data.raw.resource[v].minimum = math.max(60000, data.raw.resource[v].minimum or 0)
+        data.raw.resource[v].normal = math.max(300000, data.raw.resource[v].normal or 0)
+        data.raw.resource[v].infinite_depletion_amount = math.min(10, data.raw.resource[v].infinite_depletion_amount or 999)
+    end
+end
+
 -- GM C 1 BASE RECIPE
 if data.raw.recipe['atomic-bomb'] then
     for _, v in pairs(data.raw.recipe['atomic-bomb'].ingredients) do
