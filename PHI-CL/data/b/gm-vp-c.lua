@@ -524,18 +524,6 @@ local items = {
         ['spoilage'] = true,
         ['thruster'] = true,
         ['calcite'] = true,
-        -- SPACE_AGE 25
-        -- SPACE_AGE 30
-        ['quantum-processor'] = true,
-        ['tungsten-carbide'] = true,
-        ['tungsten-plate'] = true,
-        ['holmium-ore'] = true,
-        ['holmium-plate'] = true,
-        ['lithium'] = true,
-        ['lithium-plate'] = true,
-        ['superconductor'] = true,
-        ['supercapacitor'] = true,
-        ['scrap'] = true,
     },
     ['tips_and_tricks_item'] = {
         ['quality'] = true,
@@ -1066,6 +1054,14 @@ local items = {
             unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'carbon'}, {type = 'unlock-recipe', recipe = 'carbon-fiber'}}
         },
+        --[[
+        ['scrap-recycling-productivity'] = true,
+        ['tungsten-carbide'] = true,
+        ['tungsten-steel'] = true,
+        ['holmium-processing'] = true,
+        ['lithium-processing'] = true,
+        ['quantum-processor'] = true,
+        ]]
     },
     ['technology'] = {
         -- SPACE_AGE 0
@@ -1097,15 +1093,8 @@ local items = {
         ['captive-biter-spawner'] = true,
         ['space-platform-thruster'] = true,
         ['space-platform'] = true,
-        ['scrap-recycling-productivity'] = true,
-        -- SPACE_AGE 25
         ['bioflux-processing'] = true,
-        -- SPACE_AGE 30
-        ['tungsten-carbide'] = true,
-        ['tungsten-steel'] = true,
-        ['holmium-processing'] = true,
-        ['lithium-processing'] = true,
-        ['quantum-processor'] = true,
+        -- SPACE_AGE 25
     },
 }
 

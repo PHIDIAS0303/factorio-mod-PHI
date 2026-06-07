@@ -380,7 +380,7 @@ end
 
 -- GM-VP C 26 BASE RESEARCH
 -- GM-VP C 36 SPACE_AGE RESEARCH
--- GM-VP H 31 SPACE_AGE RESEARCH
+-- GM-VP H 25 SPACE_AGE RESEARCH
 if data.raw.technology and items['technology'] and items['technology_reform'] then
     for _, v in pairs(data.raw.technology) do
         if items['technology_reform'][v.name] then
@@ -427,7 +427,7 @@ if settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE
 end
 
 -- GM-VP H 1 QUALITY ITEM
--- GM-VP H 33 SPACE_AGE ITEM
+-- GM-VP H 23 SPACE_AGE ITEM
 for _, v in pairs(data.raw.item) do
     v.auto_recycle = false
 
