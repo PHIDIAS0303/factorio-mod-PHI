@@ -612,13 +612,11 @@ local items = {
         -- SPACE_AGE FLUID 0
         ['thruster-oxidizer'] = 'fluid',
         ['thruster-fuel'] = 'fluid',
-        ['lithium-brine'] = 'fluid',
-        ['fluorine'] = 'fluid',
         ['ammonia'] = 'fluid',
-        -- SPACE_AGE FLUID 5
         ['ammoniacal-solution'] = 'fluid',
-        ['holmium-solution'] = 'fluid',
         ['lava'] = 'fluid',
+        -- SPACE_AGE FLUID 5
+        ['holmium-solution'] = 'fluid',
         -- SPACE_AGE ITEM 0
         ['capture-robot-rocket'] = 'ammo',
         ['space-platform-starter-pack'] = 'space-platform-starter-pack',
@@ -629,24 +627,21 @@ local items = {
         ['sulfuric_acid_geyser'] = 'autoplace-control',
         ['scrap'] = 'autoplace-control',
         -- SPACE_AGE MAP_GENERATION 5
-        ['fluorine_vent'] = 'autoplace-control',
-        ['lithium_brine'] = 'autoplace-control',
         ['gleba_stone'] = 'autoplace-control',
         ['aquilo_crude_oil'] = 'autoplace-control',
         ['gleba_cliff'] = 'autoplace-control',
+        ['gleba_plants'] = 'autoplace-control',
+        ['gleba_enemy_base'] = 'autoplace-control',
         -- SPACE_AGE MAP_GENERATION 10
         ['fulgora_cliff'] = 'autoplace-control',
         ['vulcanus_volcanism'] = 'autoplace-control',
         ['gleba_water'] = 'autoplace-control',
-        ['gleba_plants'] = 'autoplace-control',
-        ['gleba_enemy_base'] = 'autoplace-control',
+        ['crater-cliff'] = 'cliff',
+        ['space-platform'] = 'surface',
         -- SPACE_AGE MAP_GENERATION 15
         ['cliff-fulgora'] = 'cliff',
         ['cliff-gleba'] = 'cliff',
         ['cliff-vulcanus'] = 'cliff',
-        ['crater-cliff'] = 'cliff',
-        ['space-platform'] = 'surface',
-        -- SPACE_AGE MAP_GENERATION 20
         -- SPACE_AGE TILE 0
         ['empty-space'] = 'tile',
         ['space-platform-foundation'] = 'tile',
