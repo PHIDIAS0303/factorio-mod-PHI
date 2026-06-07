@@ -452,7 +452,7 @@ local items = {
         ['asteroid-collector'] = true,
         ['crusher'] = true,
         -- SPACE_AGE 10
-        ['scrap'] = true,
+        ['space-platform-foundation'] = true,
         ['iron-bacteria'] = true,
         ['copper-bacteria'] = true,
         ['biter-egg'] = true,
@@ -467,7 +467,6 @@ local items = {
         ['spoilage'] = true,
         ['thruster'] = true,
         ['calcite'] = true,
-        ['space-platform-foundation'] = true,
         -- SPACE_AGE 25
         -- SPACE_AGE 30
         ['quantum-processor'] = true,
@@ -479,6 +478,7 @@ local items = {
         ['lithium-plate'] = true,
         ['superconductor'] = true,
         ['supercapacitor'] = true,
+        ['scrap'] = true,
     },
     ['tips_and_tricks_item'] = {
         ['quality'] = true,
@@ -524,7 +524,6 @@ local items = {
         -- SPACE_AGE RESOURCE_GENERATION 10
         'vulcanus-volcanism',
         'calcite',
-        'scrap',
     },
     ['hidden'] = {
         -- QUALITY ENTITY 0
@@ -616,7 +615,6 @@ local items = {
         ['ammoniacal-solution'] = 'fluid',
         ['lava'] = 'fluid',
         -- SPACE_AGE FLUID 5
-        ['holmium-solution'] = 'fluid',
         -- SPACE_AGE ITEM 0
         ['capture-robot-rocket'] = 'ammo',
         ['space-platform-starter-pack'] = 'space-platform-starter-pack',
@@ -625,7 +623,7 @@ local items = {
         ['fulgora_islands'] = 'autoplace-control',
         ['calcite'] = 'autoplace-control',
         ['sulfuric_acid_geyser'] = 'autoplace-control',
-        ['scrap'] = 'autoplace-control',
+        ['space-platform'] = 'surface',
         -- SPACE_AGE MAP_GENERATION 5
         ['gleba_stone'] = 'autoplace-control',
         ['aquilo_crude_oil'] = 'autoplace-control',
@@ -637,11 +635,10 @@ local items = {
         ['vulcanus_volcanism'] = 'autoplace-control',
         ['gleba_water'] = 'autoplace-control',
         ['crater-cliff'] = 'cliff',
-        ['space-platform'] = 'surface',
+        ['cliff-vulcanus'] = 'cliff',
         -- SPACE_AGE MAP_GENERATION 15
         ['cliff-fulgora'] = 'cliff',
         ['cliff-gleba'] = 'cliff',
-        ['cliff-vulcanus'] = 'cliff',
         -- SPACE_AGE TILE 0
         ['empty-space'] = 'tile',
         ['space-platform-foundation'] = 'tile',

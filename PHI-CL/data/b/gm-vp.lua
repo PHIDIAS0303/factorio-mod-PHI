@@ -276,9 +276,9 @@ end
 
 -- GM-VP H 1 QUALITY ENTITY
 -- GM-VP H 66 SPACE_AGE ENTITY
--- GM-VP H 6 SPACE_AGE FLUID
+-- GM-VP H 5 SPACE_AGE FLUID
 -- GM-VP H 2 SPACE_AGE ITEM
--- GM-VP H 18 SPACE_AGE MAP_GENERATION
+-- GM-VP H 17 SPACE_AGE MAP_GENERATION
 -- GM-VP H 3 SPACE_AGE TILE
 -- GM-VP H 1 SPACE_AGE TOOL
 if items['hidden'] then
@@ -293,7 +293,7 @@ end
 local nauvis_control = data.raw.planet and data.raw.planet['nauvis'] and data.raw.planet['nauvis'].map_gen_settings and data.raw.planet['nauvis'].map_gen_settings.autoplace_controls
 local nauvis_setting = data.raw.planet and data.raw.planet['nauvis'] and data.raw.planet['nauvis'].map_gen_settings and data.raw.planet['nauvis'].map_gen_settings.autoplace_settings and data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity and data.raw.planet['nauvis'].map_gen_settings.autoplace_settings.entity.settings
 
--- GM-VP H 13 SPACE_AGE RESOURCE_GENERATION
+-- GM-VP H 12 SPACE_AGE RESOURCE_GENERATION
 if items['hidden_resource'] and data.raw['resource'] then
     for _, v in pairs(items['hidden_resource']) do
         if data.raw['resource'][v] then
@@ -304,6 +304,14 @@ if items['hidden_resource'] and data.raw['resource'] then
             nauvis_setting[v] = nil
         end
     end
+end
+
+-- GM-VP C 1 SPACE_AGE RESOURCE_GENERATION
+if data.raw['resource'] and data.raw['resource']['tungsten-ore'] and data.raw['resource']['tungsten-ore'].autoplace then
+    data.raw['resource']['tungsten-ore'].autoplace.probability_expression = "(control:tungsten_ore:size > 0) * (1000 * ((1 + vulcanus_tungsten_ore_region) * random_penalty_between(0.9, 1, 1) - 1))"
+    data.raw['resource']['tungsten-ore'].autoplace.richness_expression = "vulcanus_tungsten_ore_region * random_penalty_between(0.9, 1, 1) * 10000 * vulcanus_starting_area_multiplier * control:tungsten_ore:richness / vulcanus_tungsten_ore_size"
+    nauvis_control['tungsten_ore'] = {}
+    nauvis_setting['tungsten-ore'] = {}
 end
 
 -- GM-VP C 1 SPACE_AGE RESOURCE_GENERATION
