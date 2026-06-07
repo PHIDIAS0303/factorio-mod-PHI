@@ -393,48 +393,48 @@ local items = {
         ['capture-robot-rocket'] = true,
         ['biter-egg'] = true,
         ['pentapod-egg'] = true,
-        ['tungsten-carbide'] = true,
-        -- SPACE_AGE 30
-        ['tungsten-plate'] = true,
         ['coal-synthesis'] = true,
+        -- SPACE_AGE 30
         ['spoilage-recycling'] = true,
         ['asteroid-collector'] = true,
         ['ammoniacal-solution-separation'] = true,
-        -- SPACE_AGE 35
-        ['lithium'] = true,
-        ['lithium-plate'] = true,
-        ['ice-platform'] = true,
         ['solid-fuel-from-ammonia'] = true,
         ['ammonia-rocket-fuel'] = true,
-        -- SPACE_AGE 40
-        ['quantum-processor'] = true,
-        ['holmium-solution'] = true,
-        ['holmium-plate'] = true,
-        ['supercapacitor'] = true,
-        ['superconductor'] = true,
-        -- SPACE_AGE 45
+        -- SPACE_AGE 35
         ['molten-iron-from-lava'] = true,
         ['molten-copper-from-lava'] = true,
         ['acid-neutralisation'] = true,
         ['simple-coal-liquefaction'] = true,
         ['scrap-recycling'] = true,
-        -- SPACE_AGE 50
+        -- SPACE_AGE 40
+        ['crusher'] = true,
+        ['bioplastic'] = true,
+        ['biosulfur'] = true,
+        ['rocket-fuel-from-jelly'] = true,
+        ['ice-platform'] = true,
+        -- SPACE_AGE 45
         ['foundation'] = true,
         ['thruster'] = true,
         ['thruster-fuel'] = true,
         ['thruster-oxidizer'] = true,
         ['advanced-thruster-fuel'] = true,
-        -- SPACE_AGE 55
+        -- SPACE_AGE 50
         ['advanced-thruster-oxidizer'] = true,
         ['metallic-asteroid-crushing'] = true,
         ['carbonic-asteroid-crushing'] = true,
         ['oxide-asteroid-crushing'] = true,
         ['advanced-metallic-asteroid-crushing'] = true,
-        -- SPACE_AGE 60
-        ['crusher'] = true,
-        ['bioplastic'] = true,
-        ['biosulfur'] = true,
-        ['rocket-fuel-from-jelly'] = true,
+        -- SPACE_AGE 55
+
+        ['tungsten-plate'] = true,
+        ['tungsten-carbide'] = true,
+        ['lithium'] = true,
+        ['lithium-plate'] = true,
+        ['quantum-processor'] = true,
+        ['holmium-solution'] = true,
+        ['holmium-plate'] = true,
+        ['supercapacitor'] = true,
+        ['superconductor'] = true,
     },
     ['item'] = {
         -- QUALITY 0
