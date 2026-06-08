@@ -313,10 +313,11 @@ if data.raw['resource'] then
         if data.raw['resource'][v] and data.raw['resource'][v].autoplace then
             nauvis_control[v:gsub('-', '_')] = {}
             nauvis_setting[v] = {}
-            resource_autoplace.resource_autoplace_settings{
+            data.raw['resource'][v].autoplace = resource_autoplace.resource_autoplace_settings{
                 name = v,
                 order = 'b',
-                base_density = 8,
+                base_density = 6,
+                base_spots_per_km2 = 1.5,
                 has_starting_area_placement = true,
                 regular_rq_factor_multiplier = 1.0,
                 starting_rq_factor_multiplier = 1.1
@@ -328,7 +329,7 @@ if data.raw['resource'] then
         if data.raw['resource'][v] and data.raw['resource'][v].autoplace then
             nauvis_control[v:gsub('-', '_')] = {}
             nauvis_setting[v] = {}
-            resource_autoplace.resource_autoplace_settings{
+            data.raw['resource'][v].autoplace = resource_autoplace.resource_autoplace_settings{
                 name = v,
                 order = 'c',
                 base_density = 8.2,
