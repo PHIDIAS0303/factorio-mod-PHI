@@ -321,15 +321,15 @@ local items = {
             energy_required = 5,
             category = 'crafting-with-fluid',
             allow_productivity = true,
-            ingredients = {{type = 'item', name = 'holmium-ore', amount = 8}, {type = 'item', name = 'stone', amount = 2}, {type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10}},
-            results = {{type = 'fluid', name = 'holmium-solution', amount = 100, fluidbox_multiplier = 10}}
+            ingredients = {{type = 'item', name = 'holmium-ore', amount = 7}, {type = 'item', name = 'stone', amount = 1}, {type = 'fluid', name = 'water', amount = 5, fluidbox_multiplier = 10}},
+            results = {{type = 'fluid', name = 'holmium-solution', amount = 10, fluidbox_multiplier = 10}}
         },
         -- SPACE_AGE 40
         ['holmium-plate'] = {
             energy_required = 5,
             category = 'crafting-with-fluid',
             allow_productivity = true,
-            ingredients = {{type = 'fluid', name = 'holmium-solution', amount = 100, fluidbox_multiplier = 10}},
+            ingredients = {{type = 'fluid', name = 'holmium-solution', amount = 10, fluidbox_multiplier = 10}},
             results = {{type = 'item', name = 'holmium-plate', amount = 10}}
         },
         ['supercapacitor'] = {
