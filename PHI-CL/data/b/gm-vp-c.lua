@@ -193,7 +193,7 @@ local items = {
             results = {{type = 'item', name = 'carbon-fiber', amount = 10}}
         },
         ['rocket-turret'] = {
-            ingredients = {{type = 'item', name = 'rocket-launcher', amount = 2}, {type = 'item', name = 'steel', amount = 10}, {type = 'item', name = 'advanced-circuit', amount = 10}, {type = 'item', name = 'carbon-fiber', amount = 6}, {type = 'item', name = 'iron-gear-wheel', amount = 15}}
+            ingredients = {{type = 'item', name = 'rocket-launcher', amount = 2}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'advanced-circuit', amount = 10}, {type = 'item', name = 'carbon-fiber', amount = 6}, {type = 'item', name = 'iron-gear-wheel', amount = 15}}
         },
         -- SPACE_AGE 15
         ['foundry'] = {
