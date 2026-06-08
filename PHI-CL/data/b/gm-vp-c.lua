@@ -198,7 +198,7 @@ local items = {
         -- SPACE_AGE 15
         ['foundry'] = {
             category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}, {type = 'item', name = 'coal', amount = 20}, {type = 'item', name = 'refined-concrete', amount = 20}, {type = 'item', name = 'electric-furnace', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 40}}
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'electric-furnace', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 20}}
         },
         ['metallurgic-science-pack'] = {
             energy_required = 10,
@@ -298,7 +298,7 @@ local items = {
         },
         -- SPACE_AGE 35
         ['electromagnetic-plant'] = {
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'assembling-machine-3', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'fluid', name = 'sulfuric-acid', amount = 80}}
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'assembling-machine-3', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 20}}
         },
         ['electromagnetic-science-pack'] = {
             energy_required = 10,
@@ -351,7 +351,7 @@ local items = {
         },
         ['cryogenic-plant'] = {
             category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}, {type = 'item', name = 'chemical-plant', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'fluid', name = 'water', amount = 80}}
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'chemical-plant', amount = 1}, {type = 'fluid', name = 'water', amount = 20}}
         },
         -- SPACE_AGE 45
         ['cryogenic-science-pack'] = {
@@ -1006,8 +1006,8 @@ local items = {
             unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'metallurgic-science-pack', 1}}}
         },
         ['big-mining-drill'] = {
-            prerequisites = {'electric-mining-drill', 'automation-3'},
-            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+            prerequisites = {'electric-mining-drill', 'metallurgic-science-pack'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'metallurgic-science-pack', 1}}}
         },
         -- SPACE_AGE 25
         ['electromagnetic-plant'] = {
