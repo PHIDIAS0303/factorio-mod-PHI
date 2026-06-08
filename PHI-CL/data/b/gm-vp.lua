@@ -2,6 +2,7 @@ local items = require('gm-vp-c')
 local mbm = require('mbm-c')
 local mc = require('mc')
 local item_sounds = require('__base__/prototypes/item_sounds')
+local resource_autoplace = require('resource-autoplace')
 
 mc.space_age()
 
@@ -310,21 +311,35 @@ end
 if data.raw['resource'] then
     for _, v in pairs({'tungsten-ore', 'scrap'}) do
         if data.raw['resource'][v] and data.raw['resource'][v].autoplace then
-            local vl = v:gsub('-', '_')
-            data.raw['resource'][v].autoplace.probability_expression = "(var('control:" .. vl .. ":size') > 0) * (clamp(var('default-" .. v .. "-patches'), 0, 1))"
-            data.raw['resource'][v].autoplace.richness_expression = "(var('control:" .. vl .. ":size') > 0) * (1*var('control:" .. vl .. ":richness')*(var('default-" .. v .. "-patches'))*max((1000+distance)/2600,1))"
-            nauvis_control[vl] = {}
+            nauvis_control[v:gsub('-', '_')] = {}
             nauvis_setting[v] = {}
+            resource_autoplace.resource_autoplace_settings{
+                name = v,
+                order = 'b',
+                base_density = 8,
+                has_starting_area_placement = true,
+                regular_rq_factor_multiplier = 1.0,
+                starting_rq_factor_multiplier = 1.1
+            }
         end
     end
 
     for _, v in pairs({'lithium-brine', 'fluorine-vent'}) do
         if data.raw['resource'][v] and data.raw['resource'][v].autoplace then
-            local vl = v:gsub('-', '_')
-            data.raw['resource'][v].autoplace.probability_expression = "(var('control:" .. vl .. ":size') > 0) * (clamp(var('default-" .. v .. "-patches'), 0, 1)* random_penalty{x = x, y = y, source = 1, amplitude = 1 /0.020833333333333})"
-            data.raw['resource'][v].autoplace.richness_expression = "(var('control:" .. vl .. ":size') > 0) * (1*var('control:" .. vl .. ":richness')*(var('default-" .. v .. "-patches')/0.020833333333333+220000)*max((1000+distance)/2600,1))"
-            nauvis_control[vl] = {}
+            nauvis_control[v:gsub('-', '_')] = {}
             nauvis_setting[v] = {}
+            resource_autoplace.resource_autoplace_settings{
+                name = v,
+                order = 'c',
+                base_density = 8.2,
+                has_starting_area_placement = false,
+                regular_rq_factor_multiplier = 1.0,
+                base_spots_per_km2 = 1.8,
+                random_probability = 1/48,
+                random_spot_size_minimum = 1,
+                random_spot_size_maximum = 1,
+                additional_richness = 220000,
+            }
         end
     end
 end
