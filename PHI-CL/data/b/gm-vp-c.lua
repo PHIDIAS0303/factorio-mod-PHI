@@ -705,75 +705,75 @@ local items = {
             mod = 'base',
             prerequisites = {'landfill'},
             ingredients = {'metallurgic-science-pack', 'electromagnetic-science-pack'},
-            effect = {'concrete', 'concrete-from-molten-iron', 'refined-concrete', 'landfill'}
+            effects = {'concrete', 'concrete-from-molten-iron', 'refined-concrete', 'landfill'}
         },
         ['automation'] = {
             mod = 'base',
             prerequisites = {},
             ingredients = {'metallurgic-science-pack', 'electromagnetic-science-pack'},
-            effect = {'pipe', 'casting-pipe', 'iron-gear-wheel', 'casting-iron-gear-wheel', 'barrel'}
+            effects = {'pipe', 'casting-pipe', 'iron-gear-wheel', 'casting-iron-gear-wheel', 'barrel'}
         },
         ['electronics'] = {
             mod = 'base',
             prerequisites = {},
             ingredients = {'metallurgic-science-pack', 'electromagnetic-science-pack'},
-            effect = {'electronic-circuit', 'copper-cable', 'casting-copper-cable'}
+            effects = {'electronic-circuit', 'copper-cable', 'casting-copper-cable'}
         },
         ['advanced-circuit'] = {
             mod = 'base',
             prerequisites = {},
             ingredients = {'electromagnetic-science-pack'},
-            effect = {'advanced-circuit'}
+            effects = {'advanced-circuit'}
         },
         ['engine'] = {
             mod = 'base',
             prerequisites = {},
             ingredients = {'electromagnetic-science-pack'},
-            effect = {'engine-unit', 'electric-engine-unit', 'flying-robot-frame'}
+            effects = {'engine-unit', 'electric-engine-unit', 'flying-robot-frame'}
         },
         -- BASE 5
         ['solar-energy'] = {
             mod = 'base',
             prerequisites = {},
             ingredients = {'electromagnetic-science-pack'},
-            effect = {'solar-panel', 'accumulator', 'battery'}
+            effects = {'solar-panel', 'accumulator', 'battery'}
         },
         ['railway'] = {
             mod = 'base',
             prerequisites = {},
             ingredients = {'electromagnetic-science-pack'},
-            effect = {'rail', 'iron-stick', 'casting-iron-stick'}
+            effects = {'rail', 'iron-stick', 'casting-iron-stick'}
         },
         ['sulfur-processing'] = {
             mod = 'base',
             prerequisites = {'cliff-explosives'},
             ingredients = {'cryogenic-science-pack'},
-            effect = {'sulfur', 'sulfuric-acid', 'explosives', 'cliff-explosives'}
+            effects = {'sulfur', 'sulfuric-acid', 'explosives', 'cliff-explosives'}
         },
         ['oil-processing'] = {
             mod = 'base',
             prerequisites = {},
             ingredients = {'cryogenic-science-pack'},
-            effect = {'basic-oil-processing', 'advanced-oil-processing', 'coal-liquefaction', 'lubricant'}
+            effects = {'basic-oil-processing', 'advanced-oil-processing', 'coal-liquefaction', 'lubricant'}
         },
         -- SPACE_AGE 0
         ['agriculture'] = {
             mod = 'space-age',
             prerequisites = {},
             ingredients = {'agricultural-science-pack'},
-            effect = {'yumako-processing', 'jellynut-processing'}
+            effects = {'yumako-processing', 'jellynut-processing'}
         },
         ['tungsten-plate'] = {
             mod = 'space-age',
             prerequisites = {},
             ingredients = {'metallurgic-science-pack'},
-            effect = {'tungsten-plate', 'tungsten-carbide'}
+            effects = {'tungsten-plate', 'tungsten-carbide'}
         },
         ['quantum-processor'] = {
             mod = 'space-age',
             prerequisites = {},
             ingredients = {'agricultural-science-pack', 'electromagnetic-science-pack', 'metallurgic-science-pack', 'cryogenic-science-pack'},
-            effect = {'quantum-processor', 'superconductor', 'supercapacitor'}
+            effects = {'quantum-processor', 'superconductor', 'supercapacitor'}
         },
     },
     ['technology_reform'] = {

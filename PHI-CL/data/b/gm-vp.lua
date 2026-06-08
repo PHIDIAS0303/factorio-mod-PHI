@@ -80,7 +80,7 @@ data:extend({
 })
 
 -- GM-VP A 9 BASE RESEARCH
--- GM-VP A 1 SPACE_AGE RESEARCH
+-- GM-VP A 3 SPACE_AGE RESEARCH
 if items['technology_productivity'] then
     for k, v in pairs(items['technology_productivity']) do
         local base_prerequisites = v.prerequisites
@@ -92,7 +92,7 @@ if items['technology_productivity'] then
             table.insert(base_prerequisites, v2)
         end
 
-        for _, v2 in pairs(v.effect) do
+        for _, v2 in pairs(v.effects) do
             table.insert(base_effect, {type = 'change-recipe-productivity', recipe = v2, change = 0.05})
         end
 
