@@ -207,7 +207,7 @@ local items = {
         },
         ['big-mining-drill'] = {
             category = 'crafting',
-            ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'tungsten-plate', amount = 6}, {type = 'item', name = 'tungsten-carbide', amount = 6}, {type = 'item', name = 'electric-engine-unit', amount = 2}, {type = 'item', name = 'advanced-circuit', amount = 5}}
+            ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 6}, {type = 'item', name = 'coal', amount = 6}, {type = 'item', name = 'electric-engine-unit', amount = 2}, {type = 'item', name = 'advanced-circuit', amount = 5}}
         },
         ['turbo-transport-belt'] = {
             category = 'crafting-with-fluid',
@@ -286,7 +286,7 @@ local items = {
             energy_required = 1,
             category = 'crafting-with-fluid',
             allow_productivity = true,
-            ingredients = {{type = 'item', name = 'carbon', amount = 2}, {type = 'item', name = 'tungsten-ore', amount = 4}, {type = 'fluid', name = 'sulfuric-acid', amount = 20, fluidbox_multiplier = 10}},
+            ingredients = {{type = 'item', name = 'coal', amount = 4}, {type = 'item', name = 'tungsten-ore', amount = 4}, {type = 'fluid', name = 'sulfuric-acid', amount = 20, fluidbox_multiplier = 10}},
             results = {{type = 'item', name = 'tungsten-carbide', amount = 2}}
         },
         ['tungsten-plate'] = {
@@ -1012,8 +1012,8 @@ local items = {
             unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'metallurgic-science-pack', 1}}}
         },
         ['big-mining-drill'] = {
-            prerequisites = {'electric-mining-drill', 'metallurgic-science-pack'},
-            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'metallurgic-science-pack', 1}}}
+            prerequisites = {'electric-mining-drill', 'automation-3'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
         },
         -- SPACE_AGE 25
         ['electromagnetic-plant'] = {
