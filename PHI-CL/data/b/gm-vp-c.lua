@@ -763,7 +763,7 @@ local items = {
             ingredients = {'agricultural-science-pack'},
             effects = {'yumako-processing', 'jellynut-processing'}
         },
-        ['tungsten-plate'] = {
+        ['tungsten-steel'] = {
             mod = 'space-age',
             prerequisites = {},
             ingredients = {'metallurgic-science-pack'},

@@ -4,6 +4,7 @@ Date: 2026-06-21
 
   Changes:
     - [GM] Generic code layout restructure.
+    - [GM] Science rehaul to VP mode.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.145
