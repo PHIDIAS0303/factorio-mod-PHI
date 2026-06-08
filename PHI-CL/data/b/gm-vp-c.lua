@@ -406,9 +406,10 @@ local items = {
         },
         ['lithium'] = {
             energy_required = 5,
+            category = 'crafting-with-fluid',
             allow_productivity = true,
-            ingredients = {{type = 'item', name = 'holmium-plate', amount = 1}, {type = 'fluid', name = 'lithium-brine', amount = 25, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'lithium', amount = 5}}
+            ingredients = {{type = 'fluid', name = 'lithium-brine', amount = 10, fluidbox_multiplier = 10}, {type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}},
+            results = {{type = 'item', name = 'lithium', amount = 5}, {type = 'fluid', name = 'steam', temperature = 500, amount = 12, fluidbox_multiplier = 10, ignored_by_stats = 12, ignored_by_productivity = 12}}
         },
         ['lithium-plate'] = {
             energy_required = 5,
