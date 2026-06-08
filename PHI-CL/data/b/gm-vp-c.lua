@@ -1022,7 +1022,8 @@ local items = {
         },
         ['scrap-recycling-productivity'] = {
             prerequisites = {'electromagnetic-science-pack'},
-            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'electromagnetic-science-pack', 1}}},
+            unit = {count_formula = '1000 * (1.5 ^ (L - 1))', ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'electromagnetic-science-pack', 1}}, time = 60},
+            max_level = 10
         },
         ['battery-mk3-equipment'] = {
             prerequisites = {'battery-mk2-equipment', 'electromagnetic-science-pack'},
