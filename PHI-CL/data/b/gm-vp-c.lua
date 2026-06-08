@@ -310,6 +310,13 @@ local items = {
             ingredients = {{type = 'fluid', name = 'heavy-oil', amount = 10, fluidbox_multiplier = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'stone', amount = 1}},
             results = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}}
         },
+        ['scrap-recycling'] = {
+            energy_required = 5,
+            category = 'crafting-with-fluid',
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'scrap', amount = 10}},
+            results = {{type = 'item', name = 'iron-plate', amount = 3}, {type = 'item', name = 'copper-plate', amount = 3}, {type = 'item', name = 'solid-fuel', amount = 2}, {type = 'item', name = 'ice', amount = 1}, {type = 'item', name = 'holmium-ore', amount = 1}}
+        },
         ['holmium-solution'] = {
             energy_required = 5,
             category = 'crafting-with-fluid',
@@ -317,20 +324,13 @@ local items = {
             ingredients = {{type = 'item', name = 'holmium-ore', amount = 8}, {type = 'item', name = 'stone', amount = 2}, {type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10}},
             results = {{type = 'fluid', name = 'holmium-solution', amount = 100, fluidbox_multiplier = 10}}
         },
+        -- SPACE_AGE 40
         ['holmium-plate'] = {
             energy_required = 5,
             category = 'crafting-with-fluid',
             allow_productivity = true,
             ingredients = {{type = 'fluid', name = 'holmium-solution', amount = 100, fluidbox_multiplier = 10}},
             results = {{type = 'item', name = 'holmium-plate', amount = 10}}
-        },
-        -- SPACE_AGE 40
-        ['scrap-recycling'] = {
-            energy_required = 5,
-            category = 'crafting-with-fluid',
-            allow_productivity = true,
-            ingredients = {{type = 'item', name = 'scrap', amount = 10}},
-            results = {{type = 'item', name = 'iron-ore', amount = 3}, {type = 'item', name = 'copper-ore', amount = 2}, {type = 'item', name = 'stone', amount = 1}, {type = 'item', name = 'coal', amount = 1}, {type = 'item', name = 'solid-fuel', amount = 1}, {type = 'item', name = 'ice', amount = 1}, {type = 'item', name = 'holmium-ore', amount = 1}}
         },
         ['supercapacitor'] = {
             energy_required = 5,
