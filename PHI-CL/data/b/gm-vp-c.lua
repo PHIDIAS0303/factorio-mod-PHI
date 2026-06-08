@@ -196,6 +196,10 @@ local items = {
             ingredients = {{type = 'item', name = 'rocket-launcher', amount = 2}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'advanced-circuit', amount = 10}, {type = 'item', name = 'carbon-fiber', amount = 6}, {type = 'item', name = 'iron-gear-wheel', amount = 15}}
         },
         -- SPACE_AGE 15
+        ['big-mining-drill'] = {
+            category = 'crafting',
+            ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 6}, {type = 'item', name = 'coal', amount = 6}, {type = 'item', name = 'electric-engine-unit', amount = 2}, {type = 'item', name = 'advanced-circuit', amount = 5}}
+        },
         ['foundry'] = {
             category = 'crafting-with-fluid',
             ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'electric-furnace', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 20}}
@@ -204,10 +208,6 @@ local items = {
             energy_required = 10,
             ingredients = {{type = 'item', name = 'tungsten-carbide', amount = 3}, {type = 'item', name = 'tungsten-plate', amount = 2}, {type = 'fluid', name = 'molten-iron', amount = 200, fluidbox_multiplier = 10}, {type = 'fluid', name = 'molten-copper', amount = 200, fluidbox_multiplier = 10}},
             results = {{type = 'item', name = 'metallurgic-science-pack', amount = 2}}
-        },
-        ['big-mining-drill'] = {
-            category = 'crafting',
-            ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 6}, {type = 'item', name = 'coal', amount = 6}, {type = 'item', name = 'electric-engine-unit', amount = 2}, {type = 'item', name = 'advanced-circuit', amount = 5}}
         },
         ['turbo-transport-belt'] = {
             category = 'crafting-with-fluid',
