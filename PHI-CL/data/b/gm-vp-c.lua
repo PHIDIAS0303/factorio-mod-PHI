@@ -366,20 +366,20 @@ local items = {
         },
         ['teslagun'] = {
             category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 25}}
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 25}}
         },
         ['tesla-turret'] = {
             category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'teslagun', amount = 1}, {type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
+            ingredients = {{type = 'item', name = 'teslagun', amount = 1}, {type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'advanced-circuit', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
         },
         ['fusion-reactor'] = {
             category = 'crafting',
-            ingredients = {{type = 'item', name = 'nuclear-reactor', amount = 1}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'processing-unit', amount = 320}}
+            ingredients = {{type = 'item', name = 'nuclear-reactor', amount = 1}, {type = 'item', name = 'tungsten-plate', amount = 80}, {type = 'item', name = 'supercapacitor', amount = 40}, {type = 'item', name = 'processing-unit', amount = 40}}
         },
         -- SPACE_AGE 50
         ['fusion-generator'] = {
             category = 'crafting',
-            ingredients = {{type = 'item', name = 'steam-turbine', amount = 1}, {type = 'item', name = 'steel-plate', amount = 80}, {type = 'item', name = 'processing-unit', amount = 40}}
+            ingredients = {{type = 'item', name = 'steam-turbine', amount = 1}, {type = 'item', name = 'tungsten-plate', amount = 20}, {type = 'item', name = 'supercapacitor', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}}
         },
         ['fusion-power-cell'] = {
             category = 'crafting-with-fluid',
@@ -418,18 +418,18 @@ local items = {
         },
         ['railgun'] = {
             category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'battery', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 10}}
+            ingredients = {{type = 'item', name = 'tungsten-plate', amount = 4}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'supercapacitor', amount = 4}, {type = 'fluid', name = 'sulfuric-acid', amount = 10}}
         },
         ['railgun-turret'] = {
             category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 80}, {type = 'item', name = 'processing-unit', amount = 40}, {type = 'item', name = 'battery', amount = 40}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
+            ingredients = {{type = 'item', name = 'tungsten-plate', amount = 20}, {type = 'item', name = 'quantum-processor', amount = 6}, {type = 'item', name = 'battery', amount = 40}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
         },
         ['mech-armor'] = {
-            ingredients = {{type = 'item', name = 'power-armor-mk2', amount = 1}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'battery', amount = 50}}
+            ingredients = {{type = 'item', name = 'power-armor-mk2', amount = 1}, {type = 'item', name = 'quantum-processor', amount = 4}, {type = 'item', name = 'tungsten-plate', amount = 20}, {type = 'item', name = 'supercapacitor', amount = 10}}
         },
         -- SPACE_AGE 60  
         ['biolab'] = {
-            ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 60}, {type = 'item', name = 'processing-unit', amount = 60}, {type = 'item', name = 'uranium-235', amount = 3}}
+            ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 60}, {type = 'item', name = 'quantum-processor', amount = 6}, {type = 'item', name = 'uranium-235', amount = 3}}
         },
     },
     ['recipe'] = {
@@ -1040,8 +1040,8 @@ local items = {
             effects = {{type = 'unlock-recipe', recipe = 'cryogenic-science-pack'}}
         },
         ['fusion-reactor'] = {
-            prerequisites = {'nuclear-power', 'cryogenic-science-pack', 'processing-unit'},
-            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'cryogenic-science-pack', 1}}},
+            prerequisites = {'nuclear-power', 'metallurgic-science-pack', 'electromagnetic-science-pack', 'cryogenic-science-pack'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'metallurgic-science-pack', 1}, {'cryogenic-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'fusion-reactor'}, {type = 'unlock-recipe', recipe = 'fusion-generator'}, {type = 'unlock-recipe', recipe = 'fusion-power-cell'}},
         },
         ['fusion-reactor-equipment'] = {
@@ -1049,8 +1049,8 @@ local items = {
             unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'cryogenic-science-pack', 1}}},
         },
         ['tesla-weapons'] = {
-            prerequisites = {'military-3', 'cryogenic-science-pack', 'processing-unit'},
-            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'cryogenic-science-pack', 1}}
+            prerequisites = {'military-3', 'cryogenic-science-pack'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'cryogenic-science-pack', 1}}},
         },
         ['quantum-processor'] = {
             prerequisites = {'agricultural-science-pack', 'electromagnetic-science-pack', 'metallurgic-science-pack', 'cryogenic-science-pack'},
