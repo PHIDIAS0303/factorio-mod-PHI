@@ -763,6 +763,12 @@ local items = {
             ingredients = {'agricultural-science-pack'},
             effect = {'yumako-processing', 'jellynut-processing'}
         },
+        ['quantum-processor'] = {
+            mod = 'space-age',
+            prerequisites = {},
+            ingredients = {'agricultural-science-pack', 'electromagnetic-science-pack', 'metallurgic-science-pack', 'cryogenic-science-pack'},
+            effect = {'quantum-processor'}
+        },
     },
     ['technology_reform'] = {
         -- BASE 0
