@@ -336,7 +336,7 @@ if data.raw['resource'] then
                 base_density = 8.2,
                 has_starting_area_placement = false,
                 regular_rq_factor_multiplier = 1.0,
-                base_spots_per_km2 = 1.8,
+                base_spots_per_km2 = 1.35,
                 random_probability = 1/48,
                 random_spot_size_minimum = 1,
                 random_spot_size_maximum = 1,
