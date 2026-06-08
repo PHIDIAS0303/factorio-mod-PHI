@@ -351,7 +351,7 @@ local items = {
         },
         ['cryogenic-plant'] = {
             category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'chemical-plant', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'fluid', name = 'water', amount = 80}}
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}, {type = 'item', name = 'chemical-plant', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'fluid', name = 'water', amount = 80}}
         },
         -- SPACE_AGE 45
         ['cryogenic-science-pack'] = {
@@ -951,7 +951,7 @@ local items = {
         },
         ['agricultural-science-pack'] = {
             prerequisites = {'agriculture'},
-            unit = {count = 400, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'agricultural-science-pack'}}
         },
         ['tree-seeding'] = {
@@ -983,9 +983,9 @@ local items = {
             unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
         },
         ['rocket-turret'] = {
-            prerequisites = {'rocketry', 'stronger-explosives-2', 'processing-unit'},
+            prerequisites = {'rocketry', 'stronger-explosives-2', 'carbon-fiber'},
             effects = {{type = 'unlock-recipe', recipe = 'rocket-turret'}},
-            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}
         },
         -- SPACE_AGE 20
         ['foundry'] = {
@@ -1017,58 +1017,57 @@ local items = {
         },
         ['electromagnetic-science-pack'] = {
             prerequisites = {'electromagnetic-plant'},
-            unit = {count = 400, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-science-pack'}, {type = 'unlock-recipe', recipe = 'superconductor'}, {type = 'unlock-recipe', recipe = 'supercapacitor'}}
         },
         ['scrap-recycling-productivity'] = {
             prerequisites = {'electromagnetic-science-pack'},
-            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'electromagnetic-science-pack', 1}}},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'electromagnetic-science-pack', 1}}},
         },
         ['battery-mk3-equipment'] = {
-            prerequisites = {'battery-mk2-equipment', 'space-science-pack'},
-            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+            prerequisites = {'battery-mk2-equipment', 'electromagnetic-science-pack'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'electromagnetic-science-pack', 1}}},
         },
         ['cryogenic-plant'] = {
-            prerequisites = {'automation-3', 'coal-liquefaction', 'utility-science-pack'},
-            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+            prerequisites = {'automation-3', 'coal-liquefaction'},
+            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}, {type = 'unlock-recipe', recipe = 'fluoroketone'}, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'}, {type = 'unlock-recipe', recipe = 'lithium'}, {type = 'unlock-recipe', recipe = 'lithium-plate'}}
         },
         -- SPACE_AGE 30
         ['cryogenic-science-pack'] = {
             prerequisites = {'cryogenic-plant'},
-            unit = {count = 400, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'cryogenic-science-pack'}}
         },
         ['fusion-reactor'] = {
-            prerequisites = {'nuclear-power', 'cryogenic-plant', 'space-science-pack'},
+            prerequisites = {'nuclear-power', 'cryogenic-science-pack', 'processing-unit'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'cryogenic-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'fusion-reactor'}, {type = 'unlock-recipe', recipe = 'fusion-generator'}, {type = 'unlock-recipe', recipe = 'fusion-power-cell'}},
-            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         },
         ['fusion-reactor-equipment'] = {
             prerequisites = {'fission-reactor-equipment', 'fusion-reactor'},
-            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'cryogenic-science-pack', 1}}},
         },
         ['tesla-weapons'] = {
-            prerequisites = {'military-4'},
-            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
+            prerequisites = {'military-3', 'cryogenic-science-pack', 'processing-unit'},
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'cryogenic-science-pack', 1}}
         },
         ['quantum-processor'] = {
-            prerequisites = {'electromagnetic-science-pack'},
-            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'electromagnetic-science-pack', 1}}},
+            prerequisites = {'agricultural-science-pack', 'electromagnetic-science-pack', 'metallurgic-science-pack', 'cryogenic-science-pack'},
+            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'agricultural-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'metallurgic-science-pack', 1}, {'cryogenic-science-pack', 1}}},
         },
         -- SPACE_AGE 35
         ['mech-armor'] = {
-            prerequisites = {'power-armor-mk2', 'space-science-pack'},
-            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+            prerequisites = {'power-armor-mk2', 'quantum-processor'},
+            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'agricultural-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'metallurgic-science-pack', 1}, {'cryogenic-science-pack', 1}}},
         },
         ['railgun'] = {
-            prerequisites = {'military-4', 'artillery', 'production-science-pack'},
-            unit_count = 2500,
-            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+            prerequisites = {'military-4', 'artillery', 'quantum-processor'},
+            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'agricultural-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'metallurgic-science-pack', 1}, {'cryogenic-science-pack', 1}}},
         },
         ['biolab'] = {
-            prerequisites = {'automation-3', 'metallurgic-science-pack', 'electromagnetic-science-pack', 'cryogenic-science-pack'},
-            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'metallurgic-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'cryogenic-science-pack', 1}}}
+            prerequisites = {'quantum-processor'},
+            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'agricultural-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'metallurgic-science-pack', 1}, {'cryogenic-science-pack', 1}}},
         },
     },
     ['technology'] = {
