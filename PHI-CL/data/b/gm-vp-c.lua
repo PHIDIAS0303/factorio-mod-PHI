@@ -265,6 +265,7 @@ local items = {
         },
         ['cryogenic-science-pack'] = {
             energy_required = 10,
+            main_product = 'cryogenic-science-pack',
             ingredients = {{type = 'fluid', name = 'fluoroketone-cold', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}, {type = 'item', name = 'ice', amount = 5}, {type = 'item', name = 'lithium-plate', amount = 2}},
             results = {{type = 'item', name = 'cryogenic-science-pack', amount = 2}, {type = 'fluid', name = 'fluoroketone-hot', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
         },
@@ -289,12 +290,14 @@ local items = {
         ['yumako-processing'] = {
             energy_required = 15,
             category = 'chemistry',
+            main_product = 'yumako-mash',
             ingredients = {{type = 'item', name = 'yumako', amount = 40}, {type = 'fluid', name = 'water', amount = 800, fluidbox_multiplier = 10, ignored_by_stats = 800}},
             results = {{type = 'item', name = 'yumako-mash', amount = 40}, {type = 'item', name = 'yumako-seed', amount = 1}, {type = 'fluid', name = 'steam', temperature = 500, amount = 640, fluidbox_multiplier = 10, ignored_by_stats = 640, ignored_by_productivity = 640}}
         },
         ['jellynut-processing'] = {
             energy_required = 15,
             category = 'chemistry',
+            main_product = 'jelly',
             ingredients = {{type = 'item', name = 'jellynut', amount = 40}, {type = 'fluid', name = 'water', amount = 800, fluidbox_multiplier = 10, ignored_by_stats = 800}},
             results = {{type = 'item', name = 'jelly', amount = 40}, {type = 'item', name = 'jellynut-seed', amount = 1}, {type = 'fluid', name = 'steam', temperature = 500, amount = 640, fluidbox_multiplier = 10, ignored_by_stats = 640, ignored_by_productivity = 640}}
         },
@@ -316,6 +319,7 @@ local items = {
             energy_required = 30,
             category = 'chemistry',
             allow_productivity = true,
+            main_product = 'raw-fish',
             ingredients = {{type = 'item', name = 'raw-fish', amount = 8}, {type = 'item', name = 'nutrients', amount = 80}, {type = 'fluid', name = 'water', amount = 1000, fluidbox_multiplier = 10, ignored_by_stats = 1000}},
             results = {{type = 'item', name = 'raw-fish', amount = 12}, {type = 'fluid', name = 'water', amount = 1000, fluidbox_multiplier = 10, ignored_by_stats = 1000, ignored_by_productivity = 1000}}
         },
@@ -409,6 +413,7 @@ local items = {
             energy_required = 5,
             category = 'crafting-with-fluid',
             allow_productivity = true,
+            main_product = 'lithium',
             ingredients = {{type = 'fluid', name = 'lithium-brine', amount = 10, fluidbox_multiplier = 10}, {type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}},
             results = {{type = 'item', name = 'lithium', amount = 5}, {type = 'fluid', name = 'steam', temperature = 500, amount = 12, fluidbox_multiplier = 10, ignored_by_stats = 12, ignored_by_productivity = 12}}
         },
@@ -422,6 +427,7 @@ local items = {
         ['quantum-processor'] = {
             energy_required = 15,
             allow_productivity = true,
+            main_product = 'quantum-processor',
             ingredients = {{type = 'item', name = 'lithium-plate', amount = 4}, {type = 'item', name = 'carbon-fiber', amount = 2}, {type = 'item', name = 'processing-unit', amount = 2}, {type = 'item', name = 'tungsten-carbide', amount = 2}, {type = 'item', name = 'superconductor', amount = 2}, {type = 'fluid', name = 'fluoroketone-cold', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}},
             results = {{type = 'item', name = 'quantum-processor', amount = 2}, {type = 'fluid', name = 'fluoroketone-hot', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
         },
