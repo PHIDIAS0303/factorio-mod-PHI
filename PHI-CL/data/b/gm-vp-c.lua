@@ -102,172 +102,8 @@ local items = {
             category = 'crafting',
         },
         -- SPACE_AGE 0
-        ['big-mining-drill'] = {
-            category = 'crafting',
-            ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'electric-engine-unit', amount = 2}, {type = 'item', name = 'advanced-circuit', amount = 5}}
-        },
-        ['turbo-transport-belt'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 4}, {type = 'item', name = 'express-transport-belt', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 20}}
-        },
-        ['turbo-underground-belt'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'express-underground-belt', amount = 2}, {type = 'fluid', name = 'lubricant', amount = 40}}
-        },
-        ['turbo-splitter'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 4}, {type = 'item', name = 'processing-unit', amount = 2}, {type = 'item', name = 'express-splitter', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 80}}
-        },
-        ['toolbelt-equipment'] = {
-            ingredients = {{type = 'item', name = 'advanced-circuit', amount = 3}, {type = 'item', name = 'steel-plate', amount = 4}}
-        },
-        -- SPACE_AGE 5
-        ['battery-mk3-equipment'] = {
-            ingredients = {{type = 'item', name = 'battery-mk2-equipment', amount = 5}, {type = 'item', name = 'battery', amount = 20}}
-        },
-        ['tesla-ammo'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'battery', amount = 1}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 5}}
-        },
-        ['teslagun'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 25}}
-        },
-        ['tesla-turret'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'teslagun', amount = 1}, {type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
-        },
-        ['mech-armor'] = {
-            ingredients = {{type = 'item', name = 'power-armor-mk2', amount = 1}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'battery', amount = 50}}
-        },
-        -- SPACE_AGE 10
-        ['railgun'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'battery', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 10}}
-        },
-        ['railgun-turret'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 80}, {type = 'item', name = 'processing-unit', amount = 40}, {type = 'item', name = 'battery', amount = 40}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
-        },
-        ['rocket-turret'] = {
-            ingredients = {{type = 'item', name = 'rocket-launcher', amount = 4}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 4}, {type = 'item', name = 'iron-gear-wheel', amount = 20}}
-        },
-        ['fusion-reactor'] = {
-            category = 'crafting',
-            ingredients = {{type = 'item', name = 'nuclear-reactor', amount = 1}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'processing-unit', amount = 320}}
-        },
-        ['fusion-generator'] = {
-            category = 'crafting',
-            ingredients = {{type = 'item', name = 'steam-turbine', amount = 1}, {type = 'item', name = 'steel-plate', amount = 80}, {type = 'item', name = 'processing-unit', amount = 40}}
-        },
-        -- SPACE_AGE 15
-        ['fusion-power-cell'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'fluid', name = 'petroleum-gas', amount = 200}},
-            results = {{type = 'item', name = 'fusion-power-cell', amount = 4}}
-        },
-        ['fusion-reactor-equipment'] = {
-            ingredients = {{type = 'item', name = 'fission-reactor-equipment', amount = 1}, {type = 'item', name = 'fusion-power-cell', amount = 10}, {type = 'item', name = 'steel-plate', amount = 350}, {type = 'item', name = 'processing-unit', amount = 275}}
-        },
-        ['fluoroketone'] = {
-            category = 'cryogenics',
-            ingredients = {{type = 'fluid', name = 'fluorine', amount = 100, fluidbox_multiplier = 10}, {type = 'fluid', name = 'light-oil', amount = 50}, {type = 'fluid', name = 'petroleum-gas', amount = 50}},
-            results = {{type = 'fluid', name = 'fluoroketone-hot', amount = 200}}
-        },
         ['agricultural-tower'] = {
             ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'electronic-circuit', amount = 10}, {type = 'item', name = 'landfill', amount = 4}}
-        },
-        ['electromagnetic-plant'] = {
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'assembling-machine-3', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'fluid', name = 'sulfuric-acid', amount = 80}}
-        },
-        -- SPACE_AGE 20
-        ['cryogenic-plant'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'chemical-plant', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'fluid', name = 'water', amount = 80}}
-        },
-        ['biolab'] = {
-            ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 60}, {type = 'item', name = 'processing-unit', amount = 60}, {type = 'item', name = 'uranium-235', amount = 3}}
-        },
-        ['foundry'] = {
-            category = 'crafting-with-fluid',
-            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'coal', amount = 40}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'item', name = 'electric-furnace', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 80}}
-        },
-        ['turbo-loader'] = {
-            category = 'crafting',
-        },
-        ['molten-iron'] = {
-            energy_required = 1.6,
-            ingredients = {{type = 'item', name = 'iron-ore', amount = 1}},
-            results = {{type = 'fluid', name = 'molten-iron', amount = 10}}
-        },
-        -- SPACE_AGE 25
-        ['molten-copper'] = {
-            energy_required = 1.6,
-            ingredients = {{type = 'item', name = 'copper-ore', amount = 1}},
-            results = {{type = 'fluid', name = 'molten-copper', amount = 10}}
-        },
-        ['casting-iron'] = {
-            energy_required = 1.6,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 10, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'iron-plate', amount = 1}}
-        },
-        ['casting-copper'] = {
-            energy_required = 1.6,
-            ingredients = {{type = 'fluid', name = 'molten-copper', amount = 10, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'copper-plate', amount = 1}}
-        },
-        ['casting-steel'] = {
-            energy_required = 32,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 100, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'steel-plate', amount = 3}}
-        },
-        ['casting-iron-gear-wheel'] = {
-            energy_required = 6.9,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 40, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'iron-gear-wheel', amount = 3}}
-        },
-        -- SPACE_AGE 30
-        ['casting-iron-stick'] = {
-            energy_required = 3.7,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'iron-stick', amount = 6}}
-        },
-        ['casting-pipe'] = {
-            energy_required = 3.45,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'pipe', amount = 3}}
-        },
-        ['casting-pipe-to-ground'] = {
-            energy_required = 8.25,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 50, fluidbox_multiplier = 10}, {type = 'item', name = 'pipe', amount = 10}},
-            results = {{type = 'item', name = 'pipe-to-ground', amount = 3}}
-        },
-        ['concrete-from-molten-iron'] = {
-            energy_required = 5,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'stone-brick', amount = 5}},
-            results = {{type = 'item', name = 'concrete', amount = 10}}
-        },
-        ['casting-copper-cable'] = {
-            energy_required = 1.85,
-            ingredients = {{type = 'fluid', name = 'molten-copper', amount = 10, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'copper-cable', amount = 3}}
-        },
-        -- SPACE_AGE 35
-        ['metallurgic-science-pack'] = {
-            energy_required = 10,
-            ingredients = {{type = 'item', name = 'tungsten-carbide', amount = 3}, {type = 'item', name = 'tungsten-plate', amount = 2}, {type = 'fluid', name = 'molten-iron', amount = 200, fluidbox_multiplier = 10}, {type = 'fluid', name = 'molten-copper', amount = 200, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'metallurgic-science-pack', amount = 2}}
-        },
-        ['electromagnetic-science-pack'] = {
-            energy_required = 10,
-            ingredients = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}, {type = 'item', name = 'solar-panel', amount = 1}, {type = 'item', name = 'accumulator', amount = 1}, {type = 'item', name = 'supercapacitor', amount = 1}},
-            results = {{type = 'item', name = 'electromagnetic-science-pack', amount = 2}}
-        },
-        ['cryogenic-science-pack'] = {
-            energy_required = 10,
-            main_product = 'cryogenic-science-pack',
-            ingredients = {{type = 'fluid', name = 'fluoroketone-cold', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}, {type = 'item', name = 'ice', amount = 5}, {type = 'item', name = 'lithium-plate', amount = 2}},
-            results = {{type = 'item', name = 'cryogenic-science-pack', amount = 2}, {type = 'fluid', name = 'fluoroketone-hot', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
         },
         ['agricultural-science-pack'] = {
             category = 'crafting-with-fluid',
@@ -275,17 +111,8 @@ local items = {
             ingredients = {{type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'yumako-mash', amount = 1}, {type = 'item', name = 'jelly', amount = 1}},
             results = {{type = 'item', name = 'agricultural-science-pack', amount = 2}}
         },
-        ['electrolyte'] = {
-            energy_required = 2,
-            ingredients = {{type = 'fluid', name = 'heavy-oil', amount = 10, fluidbox_multiplier = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'stone', amount = 1}},
-            results = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}}
-        },
-        -- SPACE_AGE 40
-        ['steam-condensation'] = {
-            energy_required = 10,
-            category = 'chemistry',
-            ingredients = {{type = 'fluid', name = 'steam', amount = 800, fluidbox_multiplier = 10}},
-            results = {{type = 'fluid', name = 'water', amount = 640, fluidbox_multiplier = 10}}
+        ['toolbelt-equipment'] = {
+            ingredients = {{type = 'item', name = 'advanced-circuit', amount = 3}, {type = 'item', name = 'carbon-fiber', amount = 3}}
         },
         ['yumako-processing'] = {
             energy_required = 15,
@@ -301,6 +128,13 @@ local items = {
             ingredients = {{type = 'item', name = 'jellynut', amount = 40}, {type = 'fluid', name = 'water', amount = 800, fluidbox_multiplier = 10, ignored_by_stats = 800}},
             results = {{type = 'item', name = 'jelly', amount = 40}, {type = 'item', name = 'jellynut-seed', amount = 1}, {type = 'fluid', name = 'steam', temperature = 500, amount = 640, fluidbox_multiplier = 10, ignored_by_stats = 640, ignored_by_productivity = 640}}
         },
+        -- SPACE_AGE 5
+        ['steam-condensation'] = {
+            energy_required = 10,
+            category = 'chemistry',
+            ingredients = {{type = 'fluid', name = 'steam', amount = 800, fluidbox_multiplier = 10}},
+            results = {{type = 'fluid', name = 'water', amount = 640, fluidbox_multiplier = 10}}
+        },
         ['nutrients-from-yumako-mash'] = {
             energy_required = 15,
             category = 'chemistry',
@@ -314,7 +148,6 @@ local items = {
             ingredients = {{type = 'item', name = 'raw-fish', amount = 1}},
             results = {{type = 'item', name = 'nutrients', amount = 10}}
         },
-        -- SPACE_AGE 45
         ['fish-breeding'] = {
             energy_required = 30,
             category = 'chemistry',
@@ -330,6 +163,7 @@ local items = {
             ingredients = {{type = 'item', name = 'jelly', amount = 10}, {type = 'fluid', name = 'water', amount = 40, fluidbox_multiplier = 10}},
             results = {{type = 'fluid', name = 'lubricant', amount = 40, fluidbox_multiplier = 10}}
         },
+        -- SPACE_AGE 10
         ['bioflux'] = {
             energy_required = 10,
             category = 'chemistry',
@@ -351,7 +185,6 @@ local items = {
             ingredients = {{type = 'item', name = 'coal', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 80, fluidbox_multiplier = 10}},
             results = {{type = 'item', name = 'carbon', amount = 10}}
         },
-        -- SPACE_AGE 50
         ['carbon-fiber'] = {
             energy_required = 5,
             category = 'chemistry',
@@ -359,41 +192,95 @@ local items = {
             ingredients = {{type = 'item', name = 'bioflux', amount = 10}, {type = 'item', name = 'carbon', amount = 10}},
             results = {{type = 'item', name = 'carbon-fiber', amount = 10}}
         },
-        ['scrap-recycling'] = {
-            energy_required = 5,
-            category = 'crafting-with-fluid',
-            allow_productivity = true,
-            ingredients = {{type = 'item', name = 'scrap', amount = 10}},
-            results = {{type = 'item', name = 'iron-ore', amount = 3}, {type = 'item', name = 'copper-ore', amount = 2}, {type = 'item', name = 'stone', amount = 1}, {type = 'item', name = 'coal', amount = 1}, {type = 'item', name = 'solid-fuel', amount = 1}, {type = 'item', name = 'ice', amount = 1}, {type = 'item', name = 'holmium-ore', amount = 1}}
+        ['rocket-turret'] = {
+            ingredients = {{type = 'item', name = 'rocket-launcher', amount = 2}, {type = 'item', name = 'steel', amount = 10}, {type = 'item', name = 'advanced-circuit', amount = 10}, {type = 'item', name = 'carbon-fiber', amount = 6}, {type = 'item', name = 'iron-gear-wheel', amount = 15}}
         },
-        ['holmium-solution'] = {
-            energy_required = 5,
+        -- SPACE_AGE 15
+        ['foundry'] = {
             category = 'crafting-with-fluid',
-            allow_productivity = true,
-            ingredients = {{type = 'item', name = 'holmium-ore', amount = 8}, {type = 'item', name = 'stone', amount = 2}, {type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10}},
-            results = {{type = 'fluid', name = 'holmium-solution', amount = 100, fluidbox_multiplier = 10}}
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}, {type = 'item', name = 'coal', amount = 20}, {type = 'item', name = 'refined-concrete', amount = 20}, {type = 'item', name = 'electric-furnace', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 40}}
         },
-        ['holmium-plate'] = {
-            energy_required = 5,
-            category = 'crafting-with-fluid',
-            allow_productivity = true,
-            ingredients = {{type = 'fluid', name = 'holmium-solution', amount = 100, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'holmium-plate', amount = 10}}
+        ['metallurgic-science-pack'] = {
+            energy_required = 10,
+            ingredients = {{type = 'item', name = 'tungsten-carbide', amount = 3}, {type = 'item', name = 'tungsten-plate', amount = 2}, {type = 'fluid', name = 'molten-iron', amount = 200, fluidbox_multiplier = 10}, {type = 'fluid', name = 'molten-copper', amount = 200, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'metallurgic-science-pack', amount = 2}}
         },
-        ['supercapacitor'] = {
-            energy_required = 5,
-            category = 'crafting-with-fluid',
-            allow_productivity = true,
-            ingredients = {{type = 'item', name = 'holmium-plate', amount = 4}, {type = 'item', name = 'superconductor', amount = 4}, {type = 'item', name = 'electronic-circuit', amount = 8}, {type = 'item', name = 'battery', amount = 2}, {type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'supercapacitor', amount = 2}}
+        ['big-mining-drill'] = {
+            category = 'crafting',
+            ingredients = {{type = 'item', name = 'electric-mining-drill', amount = 1}, {type = 'item', name = 'tungsten-plate', amount = 6}, {type = 'item', name = 'tungsten-carbide', amount = 6}, {type = 'item', name = 'electric-engine-unit', amount = 2}, {type = 'item', name = 'advanced-circuit', amount = 5}}
         },
-        -- SPACE_AGE 55
-        ['superconductor'] = {
-            energy_required = 2,
+        ['turbo-transport-belt'] = {
             category = 'crafting-with-fluid',
-            allow_productivity = true,
-            ingredients = {{type = 'item', name = 'copper-plate', amount = 2}, {type = 'item', name = 'holmium-plate', amount = 2}, {type = 'item', name = 'plastic-bar', amount = 2}, {type = 'fluid', name = 'light-oil', amount = 10, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'superconductor', amount = 4}}
+            ingredients = {{type = 'item', name = 'tungsten-plate', amount = 3}, {type = 'item', name = 'express-transport-belt', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 10}}
+        },
+        ['turbo-underground-belt'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'tungsten-plate', amount = 20}, {type = 'item', name = 'express-underground-belt', amount = 2}, {type = 'fluid', name = 'lubricant', amount = 20}}
+        },
+        -- SPACE_AGE 20
+        ['turbo-splitter'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'tungsten-plate', amount = 8}, {type = 'item', name = 'processing-unit', amount = 2}, {type = 'item', name = 'express-splitter', amount = 1}, {type = 'fluid', name = 'lubricant', amount = 40}}
+        },
+        ['turbo-loader'] = {
+            category = 'crafting',
+        },
+        ['molten-iron'] = {
+            energy_required = 1.6,
+            ingredients = {{type = 'item', name = 'iron-ore', amount = 1}},
+            results = {{type = 'fluid', name = 'molten-iron', amount = 10}}
+        },
+        ['molten-copper'] = {
+            energy_required = 1.6,
+            ingredients = {{type = 'item', name = 'copper-ore', amount = 1}},
+            results = {{type = 'fluid', name = 'molten-copper', amount = 10}}
+        },
+        ['casting-iron'] = {
+            energy_required = 1.6,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 10, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'iron-plate', amount = 1}}
+        },
+        -- SPACE_AGE 25
+        ['casting-copper'] = {
+            energy_required = 1.6,
+            ingredients = {{type = 'fluid', name = 'molten-copper', amount = 10, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'copper-plate', amount = 1}}
+        },
+        ['casting-steel'] = {
+            energy_required = 32,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 100, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'steel-plate', amount = 3}}
+        },
+        ['casting-iron-gear-wheel'] = {
+            energy_required = 6.9,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 40, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'iron-gear-wheel', amount = 3}}
+        },
+        ['casting-iron-stick'] = {
+            energy_required = 3.7,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'iron-stick', amount = 6}}
+        },
+        ['casting-pipe'] = {
+            energy_required = 3.45,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'pipe', amount = 3}}
+        },
+        -- SPACE_AGE 30
+        ['casting-pipe-to-ground'] = {
+            energy_required = 8.25,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 50, fluidbox_multiplier = 10}, {type = 'item', name = 'pipe', amount = 10}},
+            results = {{type = 'item', name = 'pipe-to-ground', amount = 3}}
+        },
+        ['concrete-from-molten-iron'] = {
+            energy_required = 5,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'stone-brick', amount = 5}},
+            results = {{type = 'item', name = 'concrete', amount = 10}}
+        },
+        ['casting-copper-cable'] = {
+            energy_required = 1.85,
+            ingredients = {{type = 'fluid', name = 'molten-copper', amount = 10, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'copper-cable', amount = 3}}
         },
         ['tungsten-carbide'] = {
             energy_required = 1,
@@ -409,6 +296,104 @@ local items = {
             ingredients = {{type = 'item', name = 'tungsten-ore', amount = 8}, {type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
             results = {{type = 'item', name = 'tungsten-plate', amount = 2}}
         },
+        -- SPACE_AGE 35
+        ['electromagnetic-plant'] = {
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'assembling-machine-3', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'fluid', name = 'sulfuric-acid', amount = 80}}
+        },
+        ['electromagnetic-science-pack'] = {
+            energy_required = 10,
+            ingredients = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}, {type = 'item', name = 'solar-panel', amount = 1}, {type = 'item', name = 'accumulator', amount = 1}, {type = 'item', name = 'supercapacitor', amount = 1}},
+            results = {{type = 'item', name = 'electromagnetic-science-pack', amount = 2}}
+        },
+        ['electrolyte'] = {
+            energy_required = 2,
+            ingredients = {{type = 'fluid', name = 'heavy-oil', amount = 10, fluidbox_multiplier = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 10, fluidbox_multiplier = 10}, {type = 'item', name = 'stone', amount = 1}},
+            results = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}}
+        },
+        ['holmium-solution'] = {
+            energy_required = 5,
+            category = 'crafting-with-fluid',
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'holmium-ore', amount = 8}, {type = 'item', name = 'stone', amount = 2}, {type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10}},
+            results = {{type = 'fluid', name = 'holmium-solution', amount = 100, fluidbox_multiplier = 10}}
+        },
+        ['holmium-plate'] = {
+            energy_required = 5,
+            category = 'crafting-with-fluid',
+            allow_productivity = true,
+            ingredients = {{type = 'fluid', name = 'holmium-solution', amount = 100, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'holmium-plate', amount = 10}}
+        },
+        -- SPACE_AGE 40
+        ['scrap-recycling'] = {
+            energy_required = 5,
+            category = 'crafting-with-fluid',
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'scrap', amount = 10}},
+            results = {{type = 'item', name = 'iron-ore', amount = 3}, {type = 'item', name = 'copper-ore', amount = 2}, {type = 'item', name = 'stone', amount = 1}, {type = 'item', name = 'coal', amount = 1}, {type = 'item', name = 'solid-fuel', amount = 1}, {type = 'item', name = 'ice', amount = 1}, {type = 'item', name = 'holmium-ore', amount = 1}}
+        },
+        ['supercapacitor'] = {
+            energy_required = 5,
+            category = 'crafting-with-fluid',
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'holmium-plate', amount = 4}, {type = 'item', name = 'superconductor', amount = 4}, {type = 'item', name = 'electronic-circuit', amount = 8}, {type = 'item', name = 'battery', amount = 2}, {type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'supercapacitor', amount = 2}}
+        },
+        ['superconductor'] = {
+            energy_required = 2,
+            category = 'crafting-with-fluid',
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'copper-plate', amount = 2}, {type = 'item', name = 'holmium-plate', amount = 2}, {type = 'item', name = 'plastic-bar', amount = 2}, {type = 'fluid', name = 'light-oil', amount = 10, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'superconductor', amount = 4}}
+        },
+        ['battery-mk3-equipment'] = {
+            ingredients = {{type = 'item', name = 'battery-mk2-equipment', amount = 5}, {type = 'item', name = 'supercapacitor', amount = 5}}
+        },
+        ['cryogenic-plant'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'processing-unit', amount = 20}, {type = 'item', name = 'chemical-plant', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 40}, {type = 'fluid', name = 'water', amount = 80}}
+        },
+        -- SPACE_AGE 45
+        ['cryogenic-science-pack'] = {
+            energy_required = 10,
+            main_product = 'cryogenic-science-pack',
+            ingredients = {{type = 'fluid', name = 'fluoroketone-cold', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}, {type = 'item', name = 'ice', amount = 5}, {type = 'item', name = 'lithium-plate', amount = 2}},
+            results = {{type = 'item', name = 'cryogenic-science-pack', amount = 2}, {type = 'fluid', name = 'fluoroketone-hot', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
+        },
+        ['tesla-ammo'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'battery', amount = 1}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 5}}
+        },
+        ['teslagun'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 5}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 25}}
+        },
+        ['tesla-turret'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'teslagun', amount = 1}, {type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
+        },
+        ['fusion-reactor'] = {
+            category = 'crafting',
+            ingredients = {{type = 'item', name = 'nuclear-reactor', amount = 1}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'processing-unit', amount = 320}}
+        },
+        -- SPACE_AGE 50
+        ['fusion-generator'] = {
+            category = 'crafting',
+            ingredients = {{type = 'item', name = 'steam-turbine', amount = 1}, {type = 'item', name = 'steel-plate', amount = 80}, {type = 'item', name = 'processing-unit', amount = 40}}
+        },
+        ['fusion-power-cell'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'fluid', name = 'petroleum-gas', amount = 200}},
+            results = {{type = 'item', name = 'fusion-power-cell', amount = 4}}
+        },
+        ['fusion-reactor-equipment'] = {
+            ingredients = {{type = 'item', name = 'fission-reactor-equipment', amount = 1}, {type = 'item', name = 'fusion-power-cell', amount = 10}, {type = 'item', name = 'steel-plate', amount = 350}, {type = 'item', name = 'processing-unit', amount = 275}}
+        },
+        ['fluoroketone'] = {
+            category = 'cryogenics',
+            ingredients = {{type = 'fluid', name = 'fluorine', amount = 100, fluidbox_multiplier = 10}, {type = 'fluid', name = 'light-oil', amount = 50}, {type = 'fluid', name = 'petroleum-gas', amount = 50}},
+            results = {{type = 'fluid', name = 'fluoroketone-hot', amount = 200}}
+        },
         ['lithium'] = {
             energy_required = 5,
             category = 'crafting-with-fluid',
@@ -417,19 +402,34 @@ local items = {
             ingredients = {{type = 'fluid', name = 'lithium-brine', amount = 10, fluidbox_multiplier = 10}, {type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}},
             results = {{type = 'item', name = 'lithium', amount = 5}, {type = 'fluid', name = 'steam', temperature = 500, amount = 12, fluidbox_multiplier = 10, ignored_by_stats = 12, ignored_by_productivity = 12}}
         },
+        -- SPACE_AGE 55
         ['lithium-plate'] = {
             energy_required = 5,
             allow_productivity = true,
             ingredients = {{type = 'item', name = 'lithium', amount = 5}},
             results = {{type = 'item', name = 'lithium-plate', amount = 5}}
         },
-        -- SPACE_AGE 60
         ['quantum-processor'] = {
             energy_required = 15,
             allow_productivity = true,
             main_product = 'quantum-processor',
             ingredients = {{type = 'item', name = 'lithium-plate', amount = 4}, {type = 'item', name = 'carbon-fiber', amount = 2}, {type = 'item', name = 'processing-unit', amount = 2}, {type = 'item', name = 'tungsten-carbide', amount = 2}, {type = 'item', name = 'superconductor', amount = 2}, {type = 'fluid', name = 'fluoroketone-cold', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}},
             results = {{type = 'item', name = 'quantum-processor', amount = 2}, {type = 'fluid', name = 'fluoroketone-hot', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
+        },
+        ['railgun'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}, {type = 'item', name = 'battery', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 10}}
+        },
+        ['railgun-turret'] = {
+            category = 'crafting-with-fluid',
+            ingredients = {{type = 'item', name = 'steel-plate', amount = 80}, {type = 'item', name = 'processing-unit', amount = 40}, {type = 'item', name = 'battery', amount = 40}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
+        },
+        ['mech-armor'] = {
+            ingredients = {{type = 'item', name = 'power-armor-mk2', amount = 1}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'steel-plate', amount = 200}, {type = 'item', name = 'battery', amount = 50}}
+        },
+        -- SPACE_AGE 60  
+        ['biolab'] = {
+            ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 60}, {type = 'item', name = 'processing-unit', amount = 60}, {type = 'item', name = 'uranium-235', amount = 3}}
         },
     },
     ['recipe'] = {
@@ -877,90 +877,6 @@ local items = {
             unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         },
         -- SPACE_AGE 0
-        ['stack-inserter'] = {
-            prerequisites = {'bulk-inserter', 'processing-unit'},
-            unit = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
-        },
-        ['transport-belt-capacity-1'] = {
-            prerequisites = {'stack-inserter', 'logistics-3', 'utility-science-pack'},
-            unit = {count = 1600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
-        },
-        ['transport-belt-capacity-2'] = {
-            prerequisites = {'transport-belt-capacity-1', 'space-science-pack'},
-            unit = {count = 2400, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}}
-        },
-        ['turbo-transport-belt'] = {
-            prerequisites = {'logistics-3', 'utility-science-pack'},
-            unit = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
-        },
-        ['electromagnetic-plant'] = {
-            prerequisites = {'automation-3', 'utility-science-pack'},
-            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-plant'}, {type = 'unlock-recipe', recipe = 'electrolyte'}, {type = 'unlock-recipe', recipe = 'holmium-plate'}, {type = 'unlock-recipe', recipe = 'holmium-solution'}, {type = 'unlock-recipe', recipe = 'scrap-recycling'}}
-        },
-        -- SPACE_AGE 5
-        ['foundry'] = {
-            prerequisites = {'automation-3', 'utility-science-pack'},
-            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'foundry'}, {type = 'unlock-recipe', recipe = 'molten-iron'}, {type = 'unlock-recipe', recipe = 'molten-copper'}, {type = 'unlock-recipe', recipe = 'casting-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper'}, {type = 'unlock-recipe', recipe = 'casting-steel'}, {type = 'unlock-recipe', recipe = 'casting-iron-gear-wheel'}, {type = 'unlock-recipe', recipe = 'casting-iron-stick'}, {type = 'unlock-recipe', recipe = 'casting-pipe'}, {type = 'unlock-recipe', recipe = 'casting-pipe-to-ground'}, {type = 'unlock-recipe', recipe = 'concrete-from-molten-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper-cable'}, {type = 'unlock-recipe', recipe = 'casting-low-density-structure'}}
-        },
-        ['cryogenic-plant'] = {
-            prerequisites = {'automation-3', 'coal-liquefaction', 'utility-science-pack'},
-            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}, {type = 'unlock-recipe', recipe = 'fluoroketone'}, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'}, {type = 'unlock-recipe', recipe = 'lithium'}, {type = 'unlock-recipe', recipe = 'lithium-plate'}}
-        },
-        ['biolab'] = {
-            prerequisites = {'automation-3', 'utility-science-pack'},
-            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
-        },
-        ['railgun'] = {
-            prerequisites = {'military-4', 'artillery', 'production-science-pack'},
-            unit_count = 2500,
-            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-        },
-        ['fusion-reactor'] = {
-            prerequisites = {'nuclear-power', 'cryogenic-plant', 'space-science-pack'},
-            effects = {{type = 'unlock-recipe', recipe = 'fusion-reactor'}, {type = 'unlock-recipe', recipe = 'fusion-generator'}, {type = 'unlock-recipe', recipe = 'fusion-power-cell'}},
-            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-        },
-        -- SPACE_AGE 10
-        ['fusion-reactor-equipment'] = {
-            prerequisites = {'fission-reactor-equipment', 'fusion-reactor'},
-            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-        },
-        ['battery-mk3-equipment'] = {
-            prerequisites = {'battery-mk2-equipment', 'space-science-pack'},
-            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-        },
-        ['rocket-turret'] = {
-            prerequisites = {'rocketry', 'stronger-explosives-2', 'processing-unit'},
-            effects = {{type = 'unlock-recipe', recipe = 'rocket-turret'}},
-            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
-        },
-        ['toolbelt-equipment'] = {
-            prerequisites = {'power-armor', 'toolbelt'},
-            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}
-        },
-        ['big-mining-drill'] = {
-            prerequisites = {'electric-mining-drill', 'automation-3'},
-            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
-        },
-        -- SPACE_AGE 15
-        ['tesla-weapons'] = {
-            prerequisites = {'military-4'},
-            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
-        },
-        ['mech-armor'] = {
-            prerequisites = {'power-armor-mk2', 'space-science-pack'},
-            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
-        },
-        ['power-armor-mk2'] = {
-            prerequisites = {'power-armor', 'military-4', 'speed-module-2', 'efficiency-module-2'}
-        },
-        ['health'] = {
-            prerequisites = {'space-science-pack', 'agricultural-science-pack'},
-            unit_ingredients = {{'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}, {'agricultural-science-pack', 1}}
-        },
         ['processing-unit-productivity'] = {
             prerequisites = {'electromagnetic-science-pack'},
             unit_count_formula = '1000 * (1.5 ^ (L - 1))',
@@ -968,7 +884,6 @@ local items = {
             max_level = 10,
             effects = {{type = 'change-recipe-productivity', recipe = 'processing-unit', change = 0.05}}
         },
-        -- SPACE_AGE 20
         ['steel-plate-productivity'] = {
             prerequisites = {'metallurgic-science-pack'},
             unit_count_formula = '1000 * (1.5 ^ (L - 1))',
@@ -997,6 +912,7 @@ local items = {
             max_level = 10,
             effects = {{type = 'change-recipe-productivity', recipe = 'solid-fuel-from-petroleum-gas', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'solid-fuel-from-light-oil', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'solid-fuel-from-heavy-oil', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'rocket-fuel', change = 0.05}}
         },
+        -- SPACE_AGE 5
         ['rocket-part-productivity'] = {
             prerequisites = {'rocket-silo', 'electromagnetic-science-pack'},
             unit_count_formula = '1000 * (1.5 ^ (L - 1))',
@@ -1004,13 +920,25 @@ local items = {
             max_level = 10,
             effects = {{type = 'change-recipe-productivity', recipe = 'rocket-part', change = 0.05}}
         },
-        -- SPACE_AGE 25
         ['research-productivity'] = {
             prerequisites = {'space-science-pack', 'biolab', 'metallurgic-science-pack', 'electromagnetic-science-pack', 'cryogenic-science-pack'},
             unit_count_formula = '1500 * (1.5 ^ L)',
             unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}, {'metallurgic-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'cryogenic-science-pack', 1}},
             max_level = 10,
         },
+        ['stack-inserter'] = {
+            prerequisites = {'bulk-inserter', 'processing-unit'},
+            unit = {count = 800, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}}
+        },
+        ['transport-belt-capacity-1'] = {
+            prerequisites = {'stack-inserter', 'logistics-3', 'utility-science-pack'},
+            unit = {count = 1600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}}
+        },
+        ['transport-belt-capacity-2'] = {
+            prerequisites = {'transport-belt-capacity-1', 'space-science-pack'},
+            unit = {count = 2400, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}}
+        },
+        -- SPACE_AGE 10
         ['heating-tower'] = {
             prerequisites = {'chemical-science-pack'},
             unit = {count = 400, time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}},
@@ -1021,54 +949,126 @@ local items = {
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'agricultural-tower'}, {type = 'unlock-recipe', recipe = 'yumako-processing'}, {type = 'unlock-recipe', recipe = 'jellynut-processing'}, {type = 'unlock-recipe', recipe = 'steam-condensation'}, {type = 'give-item', item = 'yumako-seed', count = 2}, {type = 'give-item', item = 'jellynut-seed', count = 2}},
         },
-        ['tree-seeding'] = {
-            prerequisites = {'agricultural-science-pack'},
-            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}}
-        },
-        ['metallurgic-science-pack'] = {
-            prerequisites = {'foundry'},
-            unit = {count = 400, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'metallurgic-science-pack'}, {type = 'unlock-recipe', recipe = 'tungsten-carbide'}, {type = 'unlock-recipe', recipe = 'tungsten-plate'}}
-        },
-        -- SPACE_AGE 30
-        ['electromagnetic-science-pack'] = {
-            prerequisites = {'electromagnetic-plant'},
-            unit = {count = 400, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-science-pack'}, {type = 'unlock-recipe', recipe = 'superconductor'}, {type = 'unlock-recipe', recipe = 'supercapacitor'}}
-        },
-        ['cryogenic-science-pack'] = {
-            prerequisites = {'cryogenic-plant'},
-            unit = {count = 400, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'cryogenic-science-pack'}}
-        },
         ['agricultural-science-pack'] = {
             prerequisites = {'agriculture'},
             unit = {count = 400, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'agricultural-science-pack'}}
         },
-        ['fish-breeding'] = {
+        ['tree-seeding'] = {
             prerequisites = {'agricultural-science-pack'},
-            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'fish-breeding'}, {type = 'unlock-recipe', recipe = 'nutrients-from-fish'}, {type = 'unlock-recipe', recipe = 'nutrients-from-yumako-mash'}}
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}}
         },
         ['bioflux'] = {
             prerequisites = {'agricultural-science-pack'},
             unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'bioflux'}, {type = 'unlock-recipe', recipe = 'nutrients-from-bioflux'}, {type = 'unlock-recipe', recipe = 'biolubricant'}}
         },
-        -- SPACE_AGE 35
+        -- SPACE_AGE 15
+        ['fish-breeding'] = {
+            prerequisites = {'agricultural-science-pack'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'fish-breeding'}, {type = 'unlock-recipe', recipe = 'nutrients-from-fish'}, {type = 'unlock-recipe', recipe = 'nutrients-from-yumako-mash'}}
+        },
+        ['health'] = {
+            prerequisites = {'space-science-pack', 'agricultural-science-pack'},
+            unit_ingredients = {{'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}, {'agricultural-science-pack', 1}}
+        },
         ['carbon-fiber'] = {
             prerequisites = {'agricultural-science-pack'},
             unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'carbon'}, {type = 'unlock-recipe', recipe = 'carbon-fiber'}}
         },
+        ['toolbelt-equipment'] = {
+            prerequisites = {'power-armor', 'carbon-fiber'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}},
+        },
+        ['rocket-turret'] = {
+            prerequisites = {'rocketry', 'stronger-explosives-2', 'processing-unit'},
+            effects = {{type = 'unlock-recipe', recipe = 'rocket-turret'}},
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}}
+        },
+        -- SPACE_AGE 20
+        ['foundry'] = {
+            prerequisites = {'production-science-pack', 'low-density-structure'},
+            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'foundry'}, {type = 'unlock-recipe', recipe = 'molten-iron'}, {type = 'unlock-recipe', recipe = 'molten-copper'}, {type = 'unlock-recipe', recipe = 'casting-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper'}, {type = 'unlock-recipe', recipe = 'casting-steel'}, {type = 'unlock-recipe', recipe = 'casting-iron-gear-wheel'}, {type = 'unlock-recipe', recipe = 'casting-iron-stick'}, {type = 'unlock-recipe', recipe = 'casting-pipe'}, {type = 'unlock-recipe', recipe = 'casting-pipe-to-ground'}, {type = 'unlock-recipe', recipe = 'concrete-from-molten-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper-cable'}, {type = 'unlock-recipe', recipe = 'casting-low-density-structure'}}
+        },
+        ['power-armor-mk2'] = {
+            prerequisites = {'power-armor', 'military-4', 'speed-module-2', 'efficiency-module-2'}
+        },
+        ['metallurgic-science-pack'] = {
+            prerequisites = {'foundry'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'metallurgic-science-pack'}, {type = 'unlock-recipe', recipe = 'tungsten-carbide'}, {type = 'unlock-recipe', recipe = 'tungsten-plate'}}
+        },
+        ['turbo-transport-belt'] = {
+            prerequisites = {'logistics-3', 'metallurgic-science-pack'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'metallurgic-science-pack', 1}}}
+        },
+        ['big-mining-drill'] = {
+            prerequisites = {'electric-mining-drill', 'automation-3'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+        },
+        -- SPACE_AGE 25
+        ['electromagnetic-plant'] = {
+            prerequisites = {'automation-3', 'utility-science-pack'},
+            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-plant'}, {type = 'unlock-recipe', recipe = 'electrolyte'}, {type = 'unlock-recipe', recipe = 'holmium-plate'}, {type = 'unlock-recipe', recipe = 'holmium-solution'}, {type = 'unlock-recipe', recipe = 'scrap-recycling'}}
+        },
+        ['electromagnetic-science-pack'] = {
+            prerequisites = {'electromagnetic-plant'},
+            unit = {count = 400, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-science-pack'}, {type = 'unlock-recipe', recipe = 'superconductor'}, {type = 'unlock-recipe', recipe = 'supercapacitor'}}
+        },
         ['scrap-recycling-productivity'] = {
             prerequisites = {'electromagnetic-science-pack'},
-            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'electromagnetic-science-pack', 1}}},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'electromagnetic-science-pack', 1}}},
+        },
+        ['battery-mk3-equipment'] = {
+            prerequisites = {'battery-mk2-equipment', 'space-science-pack'},
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        },
+        ['cryogenic-plant'] = {
+            prerequisites = {'automation-3', 'coal-liquefaction', 'utility-science-pack'},
+            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}, {type = 'unlock-recipe', recipe = 'fluoroketone'}, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'}, {type = 'unlock-recipe', recipe = 'lithium'}, {type = 'unlock-recipe', recipe = 'lithium-plate'}}
+        },
+        -- SPACE_AGE 30
+        ['cryogenic-science-pack'] = {
+            prerequisites = {'cryogenic-plant'},
+            unit = {count = 400, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'cryogenic-science-pack'}}
+        },
+        ['fusion-reactor'] = {
+            prerequisites = {'nuclear-power', 'cryogenic-plant', 'space-science-pack'},
+            effects = {{type = 'unlock-recipe', recipe = 'fusion-reactor'}, {type = 'unlock-recipe', recipe = 'fusion-generator'}, {type = 'unlock-recipe', recipe = 'fusion-power-cell'}},
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        },
+        ['fusion-reactor-equipment'] = {
+            prerequisites = {'fission-reactor-equipment', 'fusion-reactor'},
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        },
+        ['tesla-weapons'] = {
+            prerequisites = {'military-4'},
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'utility-science-pack', 1}}
         },
         ['quantum-processor'] = {
             prerequisites = {'electromagnetic-science-pack'},
             unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'electromagnetic-science-pack', 1}}},
+        },
+        -- SPACE_AGE 35
+        ['mech-armor'] = {
+            prerequisites = {'power-armor-mk2', 'space-science-pack'},
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
+        },
+        ['railgun'] = {
+            prerequisites = {'military-4', 'artillery', 'production-science-pack'},
+            unit_count = 2500,
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+        },
+        ['biolab'] = {
+            prerequisites = {'automation-3', 'metallurgic-science-pack', 'electromagnetic-science-pack', 'cryogenic-science-pack'},
+            unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'metallurgic-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'cryogenic-science-pack', 1}}}
         },
     },
     ['technology'] = {
