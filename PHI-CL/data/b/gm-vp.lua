@@ -311,8 +311,8 @@ if data.raw['resource'] then
     for _, v in pairs({'tungsten-ore', 'scrap'}) do
         if data.raw['resource'][v] and data.raw['resource'][v].autoplace then
             local vl = v:gsub('-', '_')
-            data.raw['resource'][v].autoplace.probability_expression = "(var('control:" .. vl .. ":size') > 0) * (clamp(var('default-coal-patches'), 0, 1))"
-            data.raw['resource'][v].autoplace.richness_expression = "(var('control:" .. vl .. ":size') > 0) * (1*var('control:" .. vl .. ":richness')*(var('default-coal-patches'))*max((1000+distance)/2600,1))"
+            data.raw['resource'][v].autoplace.probability_expression = "(var('control:" .. vl .. ":size') > 0) * (clamp(var('default-" .. v .. "-patches'), 0, 1))"
+            data.raw['resource'][v].autoplace.richness_expression = "(var('control:" .. vl .. ":size') > 0) * (1*var('control:" .. vl .. ":richness')*(var('default-" .. v .. "-patches'))*max((1000+distance)/2600,1))"
             nauvis_control[vl] = {}
             nauvis_setting[v] = {}
         end
@@ -321,8 +321,8 @@ if data.raw['resource'] then
     for _, v in pairs({'lithium-brine', 'fluorine-vent'}) do
         if data.raw['resource'][v] and data.raw['resource'][v].autoplace then
             local vl = v:gsub('-', '_')
-            data.raw['resource'][v].autoplace.probability_expression = "(var('control:" .. vl .. ":size') > 0) * (clamp(var('default-crude-oil-patches'), 0, 1)* random_penalty{x = x, y = y, source = 1, amplitude = 1 /0.020833333333333})"
-            data.raw['resource'][v].autoplace.richness_expression = "(var('control:" .. vl .. ":size') > 0) * (1*var('control:" .. vl .. ":richness')*(var('default-crude-oil-patches')/0.020833333333333+220000)*max((1000+distance)/2600,1))"
+            data.raw['resource'][v].autoplace.probability_expression = "(var('control:" .. vl .. ":size') > 0) * (clamp(var('default-" .. v .. "-patches'), 0, 1)* random_penalty{x = x, y = y, source = 1, amplitude = 1 /0.020833333333333})"
+            data.raw['resource'][v].autoplace.richness_expression = "(var('control:" .. vl .. ":size') > 0) * (1*var('control:" .. vl .. ":richness')*(var('default-" .. v .. "-patches')/0.020833333333333+220000)*max((1000+distance)/2600,1))"
             nauvis_control[vl] = {}
             nauvis_setting[v] = {}
         end
