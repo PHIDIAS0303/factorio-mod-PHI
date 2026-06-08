@@ -171,7 +171,8 @@ local items = {
         },
         ['fluoroketone'] = {
             category = 'cryogenics',
-            ingredients = {{type = 'fluid', name = 'light-oil', amount = 50}, {type = 'fluid', name = 'petroleum-gas', amount = 50}, {type = 'item', name = 'steel-plate', amount = 1}}
+            ingredients = {{type = 'fluid', name = 'fluorine', amount = 100, fluidbox_multiplier = 10}, {type = 'fluid', name = 'light-oil', amount = 50}, {type = 'fluid', name = 'petroleum-gas', amount = 50}},
+            results = {{type = 'fluid', name = 'fluoroketone-hot', amount = 200}}
         },
         ['agricultural-tower'] = {
             ingredients = {{type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'electronic-circuit', amount = 10}, {type = 'item', name = 'landfill', amount = 4}}
