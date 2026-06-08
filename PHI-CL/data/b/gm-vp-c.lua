@@ -994,13 +994,17 @@ local items = {
             unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}, {'chemical-science-pack', 1}, {'agricultural-science-pack', 1}}
         },
         -- SPACE_AGE 20
+        ['power-armor-mk2'] = {
+            prerequisites = {'power-armor', 'military-4', 'speed-module-2', 'efficiency-module-2'}
+        },
+        ['big-mining-drill'] = {
+            prerequisites = {'electric-mining-drill', 'automation-3'},
+            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
+        },
         ['foundry'] = {
             prerequisites = {'production-science-pack', 'low-density-structure'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}},
             effects = {{type = 'unlock-recipe', recipe = 'foundry'}, {type = 'unlock-recipe', recipe = 'molten-iron'}, {type = 'unlock-recipe', recipe = 'molten-copper'}, {type = 'unlock-recipe', recipe = 'casting-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper'}, {type = 'unlock-recipe', recipe = 'casting-steel'}, {type = 'unlock-recipe', recipe = 'casting-iron-gear-wheel'}, {type = 'unlock-recipe', recipe = 'casting-iron-stick'}, {type = 'unlock-recipe', recipe = 'casting-pipe'}, {type = 'unlock-recipe', recipe = 'casting-pipe-to-ground'}, {type = 'unlock-recipe', recipe = 'concrete-from-molten-iron'}, {type = 'unlock-recipe', recipe = 'casting-copper-cable'}, {type = 'unlock-recipe', recipe = 'casting-low-density-structure'}}
-        },
-        ['power-armor-mk2'] = {
-            prerequisites = {'power-armor', 'military-4', 'speed-module-2', 'efficiency-module-2'}
         },
         ['metallurgic-science-pack'] = {
             prerequisites = {'foundry'},
@@ -1010,10 +1014,6 @@ local items = {
         ['turbo-transport-belt'] = {
             prerequisites = {'logistics-3', 'metallurgic-science-pack'},
             unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'metallurgic-science-pack', 1}}}
-        },
-        ['big-mining-drill'] = {
-            prerequisites = {'electric-mining-drill', 'automation-3'},
-            unit = {count = 600, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}}}
         },
         -- SPACE_AGE 25
         ['electromagnetic-plant'] = {
