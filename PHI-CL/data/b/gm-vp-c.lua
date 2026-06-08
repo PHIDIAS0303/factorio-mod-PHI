@@ -391,7 +391,7 @@ local items = {
         },
         ['fluoroketone'] = {
             category = 'cryogenics',
-            ingredients = {{type = 'fluid', name = 'fluorine', amount = 40, fluidbox_multiplier = 10}, {type = 'fluid', name = 'water', amount = 80}, {type = 'fluid', name = 'petroleum-gas', amount = 80}},
+            ingredients = {{type = 'fluid', name = 'fluorine', amount = 100, fluidbox_multiplier = 10}, {type = 'fluid', name = 'water', amount = 60}, {type = 'fluid', name = 'petroleum-gas', amount = 40}},
             results = {{type = 'fluid', name = 'fluoroketone-hot', amount = 200}}
         },
         ['lithium'] = {
@@ -399,8 +399,8 @@ local items = {
             category = 'crafting-with-fluid',
             allow_productivity = true,
             main_product = 'lithium',
-            ingredients = {{type = 'fluid', name = 'lithium-brine', amount = 10, fluidbox_multiplier = 10}, {type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}},
-            results = {{type = 'item', name = 'lithium', amount = 5}, {type = 'fluid', name = 'steam', temperature = 500, amount = 12, fluidbox_multiplier = 10, ignored_by_stats = 12, ignored_by_productivity = 12}}
+            ingredients = {{type = 'fluid', name = 'lithium-brine', amount = 50, fluidbox_multiplier = 10}, {type = 'fluid', name = 'water', amount = 30, fluidbox_multiplier = 10, ignored_by_stats = 10}},
+            results = {{type = 'item', name = 'lithium', amount = 5}, {type = 'fluid', name = 'steam', temperature = 500, amount = 36, fluidbox_multiplier = 10, ignored_by_stats = 36, ignored_by_productivity = 36}}
         },
         -- SPACE_AGE 55
         ['lithium-plate'] = {

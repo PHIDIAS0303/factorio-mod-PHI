@@ -317,8 +317,8 @@ if data.raw['resource'] then
                 name = v,
                 order = 'b',
                 base_density = 6,
-                base_spots_per_km2 = 1.5,
-                has_starting_area_placement = true,
+                base_spots_per_km2 = 1.35,
+                has_starting_area_placement = false,
                 regular_rq_factor_multiplier = 1.0,
                 starting_rq_factor_multiplier = 1.1
             }
@@ -329,6 +329,7 @@ if data.raw['resource'] then
         if data.raw['resource'][v] and data.raw['resource'][v].autoplace then
             nauvis_control[v:gsub('-', '_')] = {}
             nauvis_setting[v] = {}
+            data.raw['resource'][v].minable = {mining_time = 1, results = {{type = 'fluid', name = v, amount_min = 10, amount_max = 10, probability = 1}}}
             data.raw['resource'][v].autoplace = resource_autoplace.resource_autoplace_settings{
                 name = v,
                 order = 'c',
