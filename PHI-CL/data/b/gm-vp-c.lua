@@ -259,7 +259,7 @@ local items = {
         },
         ['electromagnetic-science-pack'] = {
             energy_required = 10,
-            ingredients = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}, {type = 'item', name = 'solar-panel', amount = 1}, {type = 'item', name = 'accumulator', amount = 1}, {type = 'item', name = 'supercapacitor', amount = 1}, {type = 'item', name = 'holmium-plate', amount = 1}},
+            ingredients = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}, {type = 'item', name = 'solar-panel', amount = 1}, {type = 'item', name = 'accumulator', amount = 1}, {type = 'item', name = 'supercapacitor', amount = 1}},
             results = {{type = 'item', name = 'electromagnetic-science-pack', amount = 2}}
         },
         ['cryogenic-science-pack'] = {
@@ -888,7 +888,7 @@ local items = {
         ['electromagnetic-plant'] = {
             prerequisites = {'automation-3', 'utility-science-pack'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-plant'}, {type = 'unlock-recipe', recipe = 'electrolyte'}}
+            effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-plant'}, {type = 'unlock-recipe', recipe = 'electrolyte'}, {type = 'unlock-recipe', recipe = 'holmium-plate'}, {type = 'unlock-recipe', recipe = 'holmium-solution'}, {type = 'unlock-recipe', recipe = 'scrap-recycling'}}
         },
         -- SPACE_AGE 5
         ['foundry'] = {
@@ -899,7 +899,7 @@ local items = {
         ['cryogenic-plant'] = {
             prerequisites = {'automation-3', 'coal-liquefaction', 'utility-science-pack'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}, {type = 'unlock-recipe', recipe = 'fluoroketone'}, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'}}
+            effects = {{type = 'unlock-recipe', recipe = 'cryogenic-plant'}, {type = 'unlock-recipe', recipe = 'fluoroketone'}, {type = 'unlock-recipe', recipe = 'fluoroketone-cooling'}, {type = 'unlock-recipe', recipe = 'lithium'}, {type = 'unlock-recipe', recipe = 'lithium-plate'}}
         },
         ['biolab'] = {
             prerequisites = {'automation-3', 'utility-science-pack'},
@@ -1020,13 +1020,13 @@ local items = {
         ['metallurgic-science-pack'] = {
             prerequisites = {'foundry'},
             unit = {count = 400, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'metallurgic-science-pack'}}
+            effects = {{type = 'unlock-recipe', recipe = 'metallurgic-science-pack'}, {type = 'unlock-recipe', recipe = 'tungsten-carbide'}, {type = 'unlock-recipe', recipe = 'tungsten-plate'}}
         },
         -- SPACE_AGE 30
         ['electromagnetic-science-pack'] = {
             prerequisites = {'electromagnetic-plant'},
             unit = {count = 400, time = 45, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-science-pack'}}
+            effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-science-pack'}, {type = 'unlock-recipe', recipe = 'superconductor'}, {type = 'unlock-recipe', recipe = 'supercapacitor'}}
         },
         ['cryogenic-science-pack'] = {
             prerequisites = {'cryogenic-plant'},
