@@ -283,11 +283,11 @@ local items = {
             results = {{type = 'item', name = 'copper-cable', amount = 6}}
         },
         ['tungsten-carbide'] = {
-            energy_required = 1,
+            energy_required = 0.5,
             category = 'crafting-with-fluid',
             allow_productivity = true,
-            ingredients = {{type = 'item', name = 'coal', amount = 4}, {type = 'item', name = 'tungsten-ore', amount = 4}, {type = 'fluid', name = 'sulfuric-acid', amount = 20, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'tungsten-carbide', amount = 2}}
+            ingredients = {{type = 'item', name = 'coal', amount = 2}, {type = 'item', name = 'tungsten-ore', amount = 2}, {type = 'fluid', name = 'sulfuric-acid', amount = 5, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'tungsten-carbide', amount = 1}}
         },
         ['tungsten-plate'] = {
             energy_required = 5,
@@ -333,21 +333,21 @@ local items = {
             results = {{type = 'item', name = 'holmium-plate', amount = 10}}
         },
         ['supercapacitor'] = {
-            energy_required = 5,
-            category = 'crafting-with-fluid',
-            allow_productivity = true,
-            ingredients = {{type = 'item', name = 'holmium-plate', amount = 4}, {type = 'item', name = 'superconductor', amount = 4}, {type = 'item', name = 'electronic-circuit', amount = 8}, {type = 'item', name = 'battery', amount = 2}, {type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'supercapacitor', amount = 2}}
-        },
-        ['superconductor'] = {
             energy_required = 2,
             category = 'crafting-with-fluid',
             allow_productivity = true,
-            ingredients = {{type = 'item', name = 'copper-plate', amount = 2}, {type = 'item', name = 'holmium-plate', amount = 2}, {type = 'item', name = 'plastic-bar', amount = 2}, {type = 'fluid', name = 'light-oil', amount = 10, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'superconductor', amount = 4}}
+            ingredients = {{type = 'item', name = 'holmium-plate', amount = 2}, {type = 'item', name = 'superconductor', amount = 2}, {type = 'item', name = 'electronic-circuit', amount = 5}, {type = 'item', name = 'battery', amount = 1}, {type = 'fluid', name = 'electrolyte', amount = 5, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'supercapacitor', amount = 1}}
+        },
+        ['superconductor'] = {
+            energy_required = 1,
+            category = 'crafting-with-fluid',
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'copper-plate', amount = 1}, {type = 'item', name = 'holmium-plate', amount = 1}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'light-oil', amount = 5, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'superconductor', amount = 2}}
         },
         ['battery-mk3-equipment'] = {
-            ingredients = {{type = 'item', name = 'battery-mk2-equipment', amount = 5}, {type = 'item', name = 'supercapacitor', amount = 5}}
+            ingredients = {{type = 'item', name = 'battery-mk2-equipment', amount = 4}, {type = 'item', name = 'supercapacitor', amount = 4}}
         },
         ['cryogenic-plant'] = {
             category = 'crafting-with-fluid',
@@ -360,6 +360,20 @@ local items = {
             ingredients = {{type = 'fluid', name = 'fluoroketone-cold', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}, {type = 'item', name = 'ice', amount = 5}, {type = 'item', name = 'lithium-plate', amount = 2}},
             results = {{type = 'item', name = 'cryogenic-science-pack', amount = 2}, {type = 'fluid', name = 'fluoroketone-hot', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
         },
+        ['lithium'] = {
+            energy_required = 1,
+            category = 'crafting-with-fluid',
+            allow_productivity = true,
+            main_product = 'lithium',
+            ingredients = {{type = 'fluid', name = 'lithium-brine', amount = 5, fluidbox_multiplier = 10}, {type = 'fluid', name = 'water', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5}},
+            results = {{type = 'item', name = 'lithium', amount = 1}, {type = 'fluid', name = 'steam', temperature = 500, amount = 8, fluidbox_multiplier = 10, ignored_by_stats = 8, ignored_by_productivity = 8}}
+        },
+        ['lithium-plate'] = {
+            energy_required = 1,
+            allow_productivity = true,
+            ingredients = {{type = 'item', name = 'lithium', amount = 1}},
+            results = {{type = 'item', name = 'lithium-plate', amount = 1}}
+        },
         ['tesla-ammo'] = {
             category = 'crafting-with-fluid',
             ingredients = {{type = 'item', name = 'battery', amount = 1}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 5}}
@@ -368,6 +382,7 @@ local items = {
             category = 'crafting-with-fluid',
             ingredients = {{type = 'item', name = 'steel-plate', amount = 10}, {type = 'item', name = 'advanced-circuit', amount = 5}, {type = 'item', name = 'plastic-bar', amount = 1}, {type = 'fluid', name = 'sulfuric-acid', amount = 25}}
         },
+        -- SPACE_AGE 50
         ['tesla-turret'] = {
             category = 'crafting-with-fluid',
             ingredients = {{type = 'item', name = 'teslagun', amount = 1}, {type = 'item', name = 'steel-plate', amount = 20}, {type = 'item', name = 'advanced-circuit', amount = 10}, {type = 'fluid', name = 'sulfuric-acid', amount = 100}}
@@ -376,7 +391,6 @@ local items = {
             category = 'crafting',
             ingredients = {{type = 'item', name = 'nuclear-reactor', amount = 1}, {type = 'item', name = 'tungsten-plate', amount = 80}, {type = 'item', name = 'supercapacitor', amount = 40}, {type = 'item', name = 'processing-unit', amount = 40}}
         },
-        -- SPACE_AGE 50
         ['fusion-generator'] = {
             category = 'crafting',
             ingredients = {{type = 'item', name = 'steam-turbine', amount = 1}, {type = 'item', name = 'tungsten-plate', amount = 20}, {type = 'item', name = 'supercapacitor', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}}
@@ -387,34 +401,20 @@ local items = {
             results = {{type = 'item', name = 'fusion-power-cell', amount = 4}}
         },
         ['fusion-reactor-equipment'] = {
-            ingredients = {{type = 'item', name = 'fission-reactor-equipment', amount = 1}, {type = 'item', name = 'fusion-power-cell', amount = 10}, {type = 'item', name = 'steel-plate', amount = 350}, {type = 'item', name = 'processing-unit', amount = 275}}
+            ingredients = {{type = 'item', name = 'fission-reactor-equipment', amount = 1}, {type = 'item', name = 'fusion-power-cell', amount = 10}, {type = 'item', name = 'tungsten-plate', amount = 30}, {type = 'item', name = 'supercapacitor', amount = 10}, {type = 'item', name = 'processing-unit', amount = 10}}
         },
+        -- SPACE_AGE 55
         ['fluoroketone'] = {
             category = 'cryogenics',
             ingredients = {{type = 'fluid', name = 'fluorine', amount = 100, fluidbox_multiplier = 10}, {type = 'fluid', name = 'water', amount = 60}, {type = 'fluid', name = 'petroleum-gas', amount = 40}},
             results = {{type = 'fluid', name = 'fluoroketone-hot', amount = 200}}
         },
-        ['lithium'] = {
-            energy_required = 5,
-            category = 'crafting-with-fluid',
-            allow_productivity = true,
-            main_product = 'lithium',
-            ingredients = {{type = 'fluid', name = 'lithium-brine', amount = 50, fluidbox_multiplier = 10}, {type = 'fluid', name = 'water', amount = 30, fluidbox_multiplier = 10, ignored_by_stats = 10}},
-            results = {{type = 'item', name = 'lithium', amount = 5}, {type = 'fluid', name = 'steam', temperature = 500, amount = 36, fluidbox_multiplier = 10, ignored_by_stats = 36, ignored_by_productivity = 36}}
-        },
-        -- SPACE_AGE 55
-        ['lithium-plate'] = {
-            energy_required = 5,
-            allow_productivity = true,
-            ingredients = {{type = 'item', name = 'lithium', amount = 5}},
-            results = {{type = 'item', name = 'lithium-plate', amount = 5}}
-        },
         ['quantum-processor'] = {
-            energy_required = 15,
+            energy_required = 30,
             allow_productivity = true,
             main_product = 'quantum-processor',
-            ingredients = {{type = 'item', name = 'lithium-plate', amount = 4}, {type = 'item', name = 'carbon-fiber', amount = 2}, {type = 'item', name = 'processing-unit', amount = 2}, {type = 'item', name = 'tungsten-carbide', amount = 2}, {type = 'item', name = 'superconductor', amount = 2}, {type = 'fluid', name = 'fluoroketone-cold', amount = 10, fluidbox_multiplier = 10, ignored_by_stats = 10}},
-            results = {{type = 'item', name = 'quantum-processor', amount = 2}, {type = 'fluid', name = 'fluoroketone-hot', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
+            ingredients = {{type = 'item', name = 'lithium-plate', amount = 1}, {type = 'item', name = 'carbon-fiber', amount = 1}, {type = 'item', name = 'processing-unit', amount = 1}, {type = 'item', name = 'tungsten-carbide', amount = 1}, {type = 'item', name = 'superconductor', amount = 1}, {type = 'fluid', name = 'fluoroketone-cold', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5}},
+            results = {{type = 'item', name = 'quantum-processor', amount = 1}, {type = 'fluid', name = 'fluoroketone-hot', amount = 5, fluidbox_multiplier = 10, ignored_by_stats = 5, ignored_by_productivity = 5}}
         },
         ['railgun'] = {
             category = 'crafting-with-fluid',
@@ -763,11 +763,17 @@ local items = {
             ingredients = {'agricultural-science-pack'},
             effect = {'yumako-processing', 'jellynut-processing'}
         },
+        ['tungsten-plate'] = {
+            mod = 'space-age',
+            prerequisites = {},
+            ingredients = {'metallurgic-science-pack'},
+            effect = {'tungsten-plate', 'tungsten-carbide'}
+        },
         ['quantum-processor'] = {
             mod = 'space-age',
             prerequisites = {},
             ingredients = {'agricultural-science-pack', 'electromagnetic-science-pack', 'metallurgic-science-pack', 'cryogenic-science-pack'},
-            effect = {'quantum-processor'}
+            effect = {'quantum-processor', 'superconductor', 'supercapacitor'}
         },
     },
     ['technology_reform'] = {
@@ -1029,7 +1035,8 @@ local items = {
         ['scrap-recycling-productivity'] = {
             prerequisites = {'electromagnetic-science-pack'},
             unit = {count_formula = '1000 * (1.5 ^ (L - 1))', ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'electromagnetic-science-pack', 1}}, time = 60},
-            max_level = 10
+            max_level = 10,
+            effects = {{type = 'change-recipe-productivity', recipe = 'scrap-recycling', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'holmium-solution', change = 0.05}, {type = 'change-recipe-productivity', recipe = 'holmium-plate', change = 0.05}}
         },
         ['battery-mk3-equipment'] = {
             prerequisites = {'battery-mk2-equipment', 'electromagnetic-science-pack'},
