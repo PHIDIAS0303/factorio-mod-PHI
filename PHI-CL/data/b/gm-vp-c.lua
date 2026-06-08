@@ -391,7 +391,7 @@ local items = {
         },
         ['fluoroketone'] = {
             category = 'cryogenics',
-            ingredients = {{type = 'fluid', name = 'fluorine', amount = 100, fluidbox_multiplier = 10}, {type = 'fluid', name = 'light-oil', amount = 50}, {type = 'fluid', name = 'petroleum-gas', amount = 50}},
+            ingredients = {{type = 'fluid', name = 'fluorine', amount = 40, fluidbox_multiplier = 10}, {type = 'fluid', name = 'water', amount = 80}, {type = 'fluid', name = 'petroleum-gas', amount = 80}},
             results = {{type = 'fluid', name = 'fluoroketone-hot', amount = 200}}
         },
         ['lithium'] = {
