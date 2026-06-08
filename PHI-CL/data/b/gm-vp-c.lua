@@ -252,14 +252,14 @@ local items = {
             results = {{type = 'item', name = 'steel-plate', amount = 3}}
         },
         ['casting-iron-gear-wheel'] = {
-            energy_required = 6.9,
-            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 40, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'iron-gear-wheel', amount = 3}}
+            energy_required = 13.8,
+            ingredients = {{type = 'fluid', name = 'molten-iron', amount = 80, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'iron-gear-wheel', amount = 5}}
         },
         ['casting-iron-stick'] = {
             energy_required = 3.7,
             ingredients = {{type = 'fluid', name = 'molten-iron', amount = 20, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'iron-stick', amount = 6}}
+            results = {{type = 'item', name = 'iron-stick', amount = 5}}
         },
         ['casting-pipe'] = {
             energy_required = 3.45,
@@ -279,8 +279,8 @@ local items = {
         },
         ['casting-copper-cable'] = {
             energy_required = 1.85,
-            ingredients = {{type = 'fluid', name = 'molten-copper', amount = 10, fluidbox_multiplier = 10}},
-            results = {{type = 'item', name = 'copper-cable', amount = 3}}
+            ingredients = {{type = 'fluid', name = 'molten-copper', amount = 20, fluidbox_multiplier = 10}},
+            results = {{type = 'item', name = 'copper-cable', amount = 5}}
         },
         ['tungsten-carbide'] = {
             energy_required = 1,
