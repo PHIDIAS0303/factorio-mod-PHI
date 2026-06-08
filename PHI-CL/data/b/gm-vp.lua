@@ -329,7 +329,8 @@ if data.raw['resource'] then
         if data.raw['resource'][v] and data.raw['resource'][v].autoplace then
             nauvis_control[v:gsub('-', '_')] = {}
             nauvis_setting[v] = {}
-            data.raw['resource'][v].minable = {mining_time = 1, results = {{type = 'fluid', name = v, amount_min = 10, amount_max = 10, probability = 1}}}
+            data.raw['resource'][v].minable.results[1].amount_min = 10
+            data.raw['resource'][v].minable.results[1].amount_max = 10
             data.raw['resource'][v].autoplace = resource_autoplace.resource_autoplace_settings{
                 name = v,
                 order = 'c',
