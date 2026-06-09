@@ -75,7 +75,7 @@ function main.EEE(source, tier)
 
     if item.energy_source then
         for _, v in pairs({'buffer_capacity', 'input_flow_limit', 'output_flow_limit'}) do
-            if not (source.tech == 'compound-energy' and (source.type == 'solar-panel' or source.type == 'accumulator')) and item[v] then
+            if not (source.tech == 'compound-energy' and (source.type == 'solar-panel' or source.type == 'accumulator')) and item.energy_source[v] then
                 item.energy_source[v] = tonumber(string.match(item.energy_source[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_source[v], '%a+')
             end
         end
