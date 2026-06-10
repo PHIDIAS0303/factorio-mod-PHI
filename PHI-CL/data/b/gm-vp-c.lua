@@ -933,7 +933,7 @@ local items = {
             effects = {{type = 'change-recipe-productivity', recipe = 'rocket-part', change = 0.05}}
         },
         ['research-productivity'] = {
-            prerequisites = {'space-science-pack', 'biolab', 'metallurgic-science-pack', 'electromagnetic-science-pack', 'cryogenic-science-pack'},
+            prerequisites = {'space-science-pack', 'biolab'},
             unit_count_formula = '1500 * (1.5 ^ L)',
             unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}, {'metallurgic-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'cryogenic-science-pack', 1}},
             max_level = 10,
