@@ -6,7 +6,7 @@
     "title": "Phidias Collection",
     "author": "PHIDIAS0303",
     "contributers": "",
-    "homepage": "https://wiki.aperx.org/aperx/phi-cl",
+    "homepage": "https://wiki.aperx.org/game/factorio/phi-cl",
     "description": "Regular PHI-CL VP or SAP server hosted on APERX\nVanilla Plus, VP (Space Age, Production Focus. No Quality, No Planet)\nSpace Age Plus, SAP (Enhanced)\nhttps://wiki.aperx.org",
     "dependencies": [
         "base >= 2.0.0",

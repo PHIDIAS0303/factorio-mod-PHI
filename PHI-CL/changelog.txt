@@ -3,7 +3,7 @@ Version: 3.0.148
 Date: 2026-06-21
 
   Changes:
-    - [GM] Generic code layout restructure.
+    - [GM] Generic locale update.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.0.147
