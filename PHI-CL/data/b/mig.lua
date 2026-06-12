@@ -156,6 +156,15 @@ if data.raw['offshore-pump'] and data.raw['offshore-pump']['offshore-pump'] then
     }})
 end
 
+--[[
+-- MIG C 3 SPACE_AGE RECIPE
+for _, v in pairs({'metallic-asteroid-reprocessing', 'carbonic-asteroid-reprocessing', 'oxide-asteroid-reprocessing'}) do
+    if data.raw['recipe'][v] then
+        data.raw['recipe'][v].allow_quality = true
+    end
+end
+]]
+
 -- MIG C 1 BASE ENTITY
 -- MIG C 1 SPACE_AGE ENTITY
 if data.raw['mining-drill'] then
