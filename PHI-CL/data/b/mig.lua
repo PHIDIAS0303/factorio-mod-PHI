@@ -702,12 +702,17 @@ end
 -- GM-VP C 3 SPACE_AGE ENTITY, ITEM
 if items['tooltip'] and data.raw.item then
     for k, v in pairs(items['tooltip']) do
+        local custom_tooltip = {
+            name = k .. '-signal-color',
+            value = '[virtual-signal=signal-' .. v.color .. ']',
+        }
+
         if v.type and v.color and data.raw[v.type] and data.raw[v.type][k] then
             if not data.raw[v.type][k].custom_tooltip_fields then
                 data.raw[v.type][k].custom_tooltip_fields = {}
             end
 
-            table.insert(data.raw[v.type][k].custom_tooltip_fields, '[virtual-signal=signal-' .. v.color .. ']')
+            table.insert(data.raw[v.type][k].custom_tooltip_fields, custom_tooltip)
         end
 
         if v.color and data.raw.item[k] then
@@ -715,7 +720,7 @@ if items['tooltip'] and data.raw.item then
                 data.raw.item[k].custom_tooltip_fields = {}
             end
 
-            table.insert(data.raw.item[k].custom_tooltip_fields, '[virtual-signal=signal-' .. v.color .. ']')
+            table.insert(data.raw.item[k].custom_tooltip_fields, custom_tooltip)
         end
     end
 end
