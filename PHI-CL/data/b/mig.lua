@@ -703,7 +703,7 @@ if items['tooltip'] and data.raw.item then
     for k, v in pairs(items['tooltip']) do
         local custom_tooltip = {
             name = '[virtual-signal=signal-info]',
-            value = {'', '[virtual-signal=signal-' .. v.color .. ']', {'virtual-signal.signal-' .. v.color}},
+            value = {'', '[virtual-signal=signal-' .. v.color .. ']', {'virtual-signal-name.signal-' .. v.color}},
             order = 99,
         }
 
