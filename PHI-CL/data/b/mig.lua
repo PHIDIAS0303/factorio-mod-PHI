@@ -252,7 +252,7 @@ local s = {}
 for i = 1, #vir_sig do
     local char = vir_sig:sub(i, i)
 
-    for _, j in {'A', 'B'} do
+    for _, j in pairs({'A', 'B'}) do
         table.insert(s, {
             type = 'virtual-signal',
             name = 'signal-' .. char .. j,
