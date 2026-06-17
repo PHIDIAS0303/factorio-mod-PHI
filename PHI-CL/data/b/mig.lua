@@ -269,18 +269,24 @@ data:extend({{
     type = 'item-group',
     name = 'signals-2',
     order = 'g2',
+    localised_name = {'', {'item-group-name.signals'}},
+    localised_description = {'', {'item-group-description.signals'}},
     icon = '__PHI-CL__/graphics/signals.png',
     icon_size = 64,
 }, {
     type = 'item-subgroup',
     name = 'virtual-signal-number-2',
     group = 'signals-2',
-    order = 'b'
+    order = 'b',
+    localised_name = {'', {'item-subgroup-name.virtual-signal-number'}},
+    localised_description = {'', {'item-subgroup-description.virtual-signal-number'}}
 }, {
     type = 'item-subgroup',
     name = 'virtual-signal-letter-2',
     group = 'signals-2',
-    order = 'c'
+    order = 'c',
+    localised_name = {'', {'item-subgroup-name.virtual-signal-letter'}},
+    localised_description = {'', {'item-subgroup-description.virtual-signal-letter'}}
 }})
 
 data:extend(s)
