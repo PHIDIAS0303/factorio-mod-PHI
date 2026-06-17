@@ -269,7 +269,7 @@ data:extend({{
     type = 'item-group',
     name = 'signals-2',
     order = 'g2',
-    localised_name = {'', {'item-group-name.signals'}},
+    localised_name = {'phi-cl.combine', {'item-group-name.signals'}, '(II)'},
     localised_description = {'', {'item-group-description.signals'}},
     icon = '__PHI-CL__/graphics/signals.png',
     icon_size = 64,
@@ -278,14 +278,14 @@ data:extend({{
     name = 'virtual-signal-number-2',
     group = 'signals-2',
     order = 'b',
-    localised_name = {'', {'item-subgroup-name.virtual-signal-number'}},
+    localised_name = {'phi-cl.combine', {'item-subgroup-name.virtual-signal-number'}, '(II)'},
     localised_description = {'', {'item-subgroup-description.virtual-signal-number'}}
 }, {
     type = 'item-subgroup',
     name = 'virtual-signal-letter-2',
     group = 'signals-2',
     order = 'c',
-    localised_name = {'', {'item-subgroup-name.virtual-signal-letter'}},
+    localised_name = {'phi-cl.combine', {'item-subgroup-name.virtual-signal-letter'}, '(II)'},
     localised_description = {'', {'item-subgroup-description.virtual-signal-letter'}}
 }})
 
