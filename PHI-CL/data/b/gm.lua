@@ -120,7 +120,7 @@ for _, v in pairs({'artillery-shell-damage-1', 'railgun-damage-1', 'railgun-shoo
     if data.raw.technology[v] then
         data.raw.technology[v].hidden = true
         data.raw.technology[v].hidden_in_factoriopedia = true
-        data.raw.technology[v].effects = nil
+        data.raw.technology[v].effects = {}
     end
 end
 
