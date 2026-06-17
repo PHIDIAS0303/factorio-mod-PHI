@@ -132,7 +132,7 @@ if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-ENABLE-QU
             data.raw.technology[v].hidden = true
             data.raw.technology[v].hidden_in_factoriopedia = true
             data.raw.technology[v].unit.ingredients = {{'space-science-pack', 1}}
-            data.raw.technology[v].effects = nil
+            data.raw.technology[v].effects = {}
         end
 
         if data.raw.module[v] then
@@ -151,7 +151,7 @@ if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-ENABLE-QU
             data.raw.technology[v].hidden = true
             data.raw.technology[v].hidden_in_factoriopedia = true
             data.raw.technology[v].unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
-            data.raw.technology[v].effects = nil
+            data.raw.technology[v].effects = {}
         end
     end
 
