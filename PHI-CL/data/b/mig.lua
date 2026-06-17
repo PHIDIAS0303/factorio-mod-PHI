@@ -251,15 +251,36 @@ local s = {}
 
 for i = 1, #vir_sig do
     local char = vir_sig:sub(i, i)
-    table.insert(s, {
-        type = 'virtual-signal',
-        name = 'signal-' .. char .. 'A',
-        icon = '__PHI-CL__/graphics/signal/signal_' .. char .. '.png',
-        subgroup = (i < 11 and 'virtual-signal-number') or 'virtual-signal-letter',
-        order = ((i < 11 and 'b[numbers]2-[') or 'c[letters]2-[') .. char .. ']',
-        localised_name = {'phi-cl.combine', {'virtual-signal-name.signal-' .. char}, '(II)'}
-    })
+
+    for _, j in {'A', 'B'} do
+        table.insert(s, {
+            type = 'virtual-signal',
+            name = 'signal-' .. char .. j,
+            icon = '__PHI-CL__/graphics/signal-' .. j .. '/signal_' .. char .. '.png',
+            subgroup = (i < 11 and 'virtual-signal-number-2') or 'virtual-signal-letter-2',
+            order = ((i < 11 and 'b[numbers]-[') or 'c[letters]-[') .. j .. '-' .. char .. ']',
+            localised_name = {'phi-cl.combine', {'virtual-signal-name.signal-' .. char}, j}
+        })
+    end
 end
+
+data:extend({{
+    type = 'item-group',
+    name = 'signals-2',
+    order = 'g2',
+    icon = '__PHI-CL__/graphics/signals.png',
+    icon_size = 64,
+}, {
+    type = 'item-subgroup',
+    name = 'virtual-signal-number-2',
+    group = 'signals',
+    order = 'b'
+}, {
+    type = 'item-subgroup',
+    name = 'virtual-signal-letter-2',
+    group = 'signals-2',
+    order = 'c'
+}})
 
 data:extend(s)
 
@@ -703,8 +724,7 @@ if items['tooltip'] and data.raw.item then
     for k, v in pairs(items['tooltip']) do
         local custom_tooltip = {
             name = '[virtual-signal=signal-info]',
-            value = {'phi-cl.combine', '[virtual-signal=signal-' .. v.color .. ']', {'virtual-signal-name.signal-' .. v.color}},
-            order = 99,
+            value = {'phi-cl.combine', '[virtual-signal=signal-' .. v.color .. ']', {'virtual-signal-name.signal-' .. v.color}}
         }
 
         if v.type and v.color and data.raw[v.type] and data.raw[v.type][k] then
