@@ -139,15 +139,19 @@ local items = {
             type = 'item',
             color = 'pink'
         },
+        ['burner-inserter'] = {
+            type = 'item',
+            color = 'black'
+        },
         ['inserter'] = {
             type = 'item',
             color = 'yellow'
         },
+        -- BASE ITEM 35
         ['long-handed-inserter'] = {
             type = 'item',
             color = 'red'
         },
-        -- BASE ITEM 35
         ['fast-inserter'] = {
             type = 'item',
             color = 'blue'
