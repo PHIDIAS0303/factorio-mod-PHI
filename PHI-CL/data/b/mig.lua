@@ -703,8 +703,9 @@ end
 if items['tooltip'] and data.raw.item then
     for k, v in pairs(items['tooltip']) do
         local custom_tooltip = {
-            name = k .. '-signal-color',
+            name = '[virtual-signal=signal-info]',
             value = '[virtual-signal=signal-' .. v.color .. ']',
+            order = 99,
         }
 
         if v.type and v.color and data.raw[v.type] and data.raw[v.type][k] then

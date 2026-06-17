@@ -32,7 +32,7 @@ local items = {
         },
         ['production-science-pack'] = {
             type = 'tool',
-            color = 'purple'
+            color = 'pink'
         },
         ['utility-science-pack'] = {
             type = 'tool',
@@ -137,7 +137,7 @@ local items = {
         },
         ['active-provider-chest'] = {
             type = 'logistic-container',
-            color = 'purple'
+            color = 'pink'
         },
         ['inserter'] = {
             type = 'inserter',
