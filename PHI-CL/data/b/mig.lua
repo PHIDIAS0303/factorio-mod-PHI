@@ -1,4 +1,5 @@
 local mod_graphic_location = '__PHI-CL__/graphics/'
+local items = require('mig-c')
 local mod_tint = {
     [2] = {r=140, g=142, b=200},
     [3] = {r=242, g=161, b=26},
@@ -693,5 +694,28 @@ if data.raw['container'] and data.raw['container']['steel-chest'] and data.raw['
 
     if data.raw.technology['rocket-silo'] then
         table.insert(data.raw.technology['rocket-silo'].effects, {type = 'unlock-recipe', recipe = 'proxy-cargo-landing-chest'})
+    end
+end
+
+-- GM-VP C 19 BASE ENTITY
+-- GM-VP C 38 BASE ITEM
+-- GM-VP C 3 SPACE_AGE ENTITY, ITEM
+if items['tooltip'] and data.raw.item then
+    for k, v in pairs(items['tooltip']) do
+        if v.type and v.color and data.raw[v.type] and data.raw[v.type][k] then
+            if not data.raw[v.type][k].custom_tooltip_fields then
+                data.raw[v.type][k].custom_tooltip_fields = {}
+            end
+
+            table.insert(data.raw[v.type][k].custom_tooltip_fields, '[virtual-signal=signal-' .. v.color .. ']')
+        end
+
+        if v.color and data.raw.item[k] then
+            if not data.raw.item[k].custom_tooltip_fields then
+                data.raw.item[k].custom_tooltip_fields = {}
+            end
+
+            table.insert(data.raw.item[k].custom_tooltip_fields, '[virtual-signal=signal-' .. v.color .. ']')
+        end
     end
 end
