@@ -714,13 +714,5 @@ if items['tooltip'] and data.raw.item then
 
             table.insert(data.raw[v.type][k].custom_tooltip_fields, custom_tooltip)
         end
-
-        if v.color and data.raw.item[k] then
-            if not data.raw.item[k].custom_tooltip_fields then
-                data.raw.item[k].custom_tooltip_fields = {}
-            end
-
-            table.insert(data.raw.item[k].custom_tooltip_fields, custom_tooltip)
-        end
     end
 end
