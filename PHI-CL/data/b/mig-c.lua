@@ -80,6 +80,82 @@ local items = {
             type = 'module',
             color = 'yellow'
         },
+        ['transport-belt'] = {
+            type = 'item',
+            color = 'yellow'
+        },
+        -- BASE ITEM 20
+        ['fast-transport-belt'] = {
+            type = 'item',
+            color = 'red'
+        },
+        ['express-transport-belt'] = {
+            type = 'item',
+            color = 'blue'
+        },
+        ['underground-belt'] = {
+            type = 'item',
+            color = 'yellow'
+        },
+        ['fast-underground-belt'] = {
+            type = 'item',
+            color = 'red'
+        },
+        ['express-underground-belt'] = {
+            type = 'item',
+            color = 'blue'
+        },
+        -- BASE ITEM 25
+        ['splitter'] = {
+            type = 'item',
+            color = 'yellow'
+        },
+        ['fast-splitter'] = {
+            type = 'item',
+            color = 'red'
+        },
+        ['express-splitter'] = {
+            type = 'item',
+            color = 'blue'
+        },
+        ['passive-provider-chest'] = {
+            type = 'item',
+            color = 'red'
+        },
+        ['storage-chest'] = {
+            type = 'item',
+            color = 'yellow'
+        },
+        -- BASE ITEM 30
+        ['requester-chest'] = {
+            type = 'item',
+            color = 'red'
+        },
+        ['buffer-chest'] = {
+            type = 'item',
+            color = 'green'
+        },
+        ['active-provider-chest'] = {
+            type = 'item',
+            color = 'pink'
+        },
+        ['inserter'] = {
+            type = 'item',
+            color = 'yellow'
+        },
+        ['long-handed-inserter'] = {
+            type = 'item',
+            color = 'red'
+        },
+        -- BASE ITEM 35
+        ['fast-inserter'] = {
+            type = 'item',
+            color = 'blue'
+        },
+        ['bulk-inserter'] = {
+            type = 'item',
+            color = 'green'
+        },
         -- SPACE_AGE ITEM 0
         ['metallurgic-science-pack'] = {
             type = 'tool',
@@ -101,97 +177,21 @@ local items = {
             type = 'tool',
             color = 'black'
         },
-        -- BASE ENTITY, ITEM 0
-        ['transport-belt'] = {
-            type = 'transport-belt',
-            color = 'yellow'
-        },
-        ['fast-transport-belt'] = {
-            type = 'transport-belt',
-            color = 'red'
-        },
-        ['express-transport-belt'] = {
-            type = 'transport-belt',
-            color = 'blue'
-        },
-        ['underground-belt'] = {
-            type = 'underground-belt',
-            color = 'yellow'
-        },
-        ['fast-underground-belt'] = {
-            type = 'underground-belt',
-            color = 'red'
-        },
-        -- BASE ENTITY, ITEM 5
-        ['express-underground-belt'] = {
-            type = 'underground-belt',
-            color = 'blue'
-        },
-        ['splitter'] = {
-            type = 'splitter',
-            color = 'yellow'
-        },
-        ['fast-splitter'] = {
-            type = 'splitter',
-            color = 'red'
-        },
-        ['express-splitter'] = {
-            type = 'splitter',
-            color = 'blue'
-        },
-        ['passive-provider-chest'] = {
-            type = 'logistic-container',
-            color = 'red'
-        },
-        -- BASE ENTITY, ITEM 10
-        ['storage-chest'] = {
-            type = 'logistic-container',
-            color = 'yellow'
-        },
-        ['requester-chest'] = {
-            type = 'blue-container',
-            color = 'red'
-        },
-        ['buffer-chest'] = {
-            type = 'logistic-container',
-            color = 'green'
-        },
-        ['active-provider-chest'] = {
-            type = 'logistic-container',
-            color = 'pink'
-        },
-        ['inserter'] = {
-            type = 'inserter',
-            color = 'yellow'
-        },
-        -- BASE ENTITY, ITEM 15
-        ['long-handed-inserter'] = {
-            type = 'inserter',
-            color = 'red'
-        },
-        ['fast-inserter'] = {
-            type = 'inserter',
-            color = 'blue'
-        },
-        ['bulk-inserter'] = {
-            type = 'inserter',
-            color = 'green'
-        },
-        -- SPACE_AGE ENTITY, ITEM 0
+        -- SPACE_AGE ITEM 5
         ['turbo-transport-belt'] = {
-            type = 'transport-belt',
+            type = 'item',
             color = 'green'
         },
         ['turbo-underground-belt'] = {
-            type = 'underground-belt',
+            type = 'item',
             color = 'green'
         },
         ['turbo-splitter'] = {
-            type = 'splitter',
+            type = 'item',
             color = 'green'
         },
         ['stack-inserter'] = {
-            type = 'inserter',
+            type = 'item',
             color = 'white'
         },
     }
