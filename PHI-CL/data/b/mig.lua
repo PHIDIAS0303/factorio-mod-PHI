@@ -260,7 +260,7 @@ for i = 1, #vir_sig do
             icon_size = (j == 'B' and 32) or 64,
             subgroup = (i < 11 and 'virtual-signal-number-2') or 'virtual-signal-letter-2',
             order = ((i < 11 and 'b[numbers]-[') or 'c[letters]-[') .. j .. '-' .. char .. ']',
-            localised_name = {'phi-cl.combine', {'virtual-signal-name.signal-' .. char}, j}
+            localised_name = {'phi-cl.combine', {'virtual-signal-name.signal-' .. char}, (j == 'A' and '(II)') or '(III)'}
         })
     end
 end
@@ -274,7 +274,7 @@ data:extend({{
 }, {
     type = 'item-subgroup',
     name = 'virtual-signal-number-2',
-    group = 'signals',
+    group = 'signals-2',
     order = 'b'
 }, {
     type = 'item-subgroup',
