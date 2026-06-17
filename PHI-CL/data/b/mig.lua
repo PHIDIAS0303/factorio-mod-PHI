@@ -703,7 +703,7 @@ if items['tooltip'] and data.raw.item then
     for k, v in pairs(items['tooltip']) do
         local custom_tooltip = {
             name = '[virtual-signal=signal-info]',
-            value = '[virtual-signal=signal-' .. v.color .. ']',
+            value = {'', '[virtual-signal=signal-' .. v.color .. ']', {'virtual-signal.signal-' .. v.color}},
             order = 99,
         }
 
@@ -715,6 +715,7 @@ if items['tooltip'] and data.raw.item then
             table.insert(data.raw[v.type][k].custom_tooltip_fields, custom_tooltip)
         end
 
+        --[[
         if v.color and data.raw.recipe[k] then
             if not data.raw.recipe[k].custom_tooltip_fields then
                 data.raw.recipe[k].custom_tooltip_fields = {}
@@ -722,5 +723,6 @@ if items['tooltip'] and data.raw.item then
 
             table.insert(data.raw.recipe[k].custom_tooltip_fields, custom_tooltip)
         end
+        ]]
     end
 end
