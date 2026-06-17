@@ -169,7 +169,7 @@ local items = {
             type = 'tool',
             color = 'pink'
         },
-        ['cyrogenic-science-pack'] = {
+        ['cryogenic-science-pack'] = {
             type = 'tool',
             color = 'blue'
         },
