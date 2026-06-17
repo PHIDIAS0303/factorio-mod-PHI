@@ -245,7 +245,7 @@ if data.raw['inserter'] then
     end
 end
 
--- MIG A 36 BASE VIRTUAL_SIGNAL
+-- MIG A 72 BASE VIRTUAL_SIGNAL
 local vir_sig = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 local s = {}
 
@@ -265,6 +265,7 @@ for i = 1, #vir_sig do
     end
 end
 
+-- MIG A 3 BASE ITEM_CATEGORY
 data:extend({{
     type = 'item-group',
     name = 'signals-2',
