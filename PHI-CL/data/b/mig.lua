@@ -697,9 +697,10 @@ if data.raw['container'] and data.raw['container']['steel-chest'] and data.raw['
     end
 end
 
--- GM-VP C 19 BASE ENTITY
--- GM-VP C 38 BASE ITEM
--- GM-VP C 3 SPACE_AGE ENTITY, ITEM
+-- GM-VP C 18 BASE ENTITY
+-- GM-VP C 37 BASE ITEM
+-- GM-VP C 4 SPACE_AGE ENTITY
+-- GM-VP C 9 SPACE_AGE ITEM
 if items['tooltip'] and data.raw.item then
     for k, v in pairs(items['tooltip']) do
         local custom_tooltip = {

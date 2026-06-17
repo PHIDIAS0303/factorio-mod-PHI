@@ -28,7 +28,7 @@ local items = {
         },
         ['chemical-science-pack'] = {
             type = 'tool',
-            color = 'blue'
+            color = 'cyan'
         },
         ['production-science-pack'] = {
             type = 'tool',
@@ -79,6 +79,27 @@ local items = {
         ['productivity-module-3'] = {
             type = 'module',
             color = 'yellow'
+        },
+        -- SPACE_AGE ITEM 0
+        ['metallurgic-science-pack'] = {
+            type = 'tool',
+            color = 'yellow'
+        },
+        ['agricultural-science-pack'] = {
+            type = 'tool',
+            color = 'green'
+        },
+        ['electromagnetic-science-pack'] = {
+            type = 'tool',
+            color = 'pink'
+        },
+        ['cyrogenic-science-pack'] = {
+            type = 'tool',
+            color = 'blue'
+        },
+        ['promethium-science-pack'] = {
+            type = 'tool',
+            color = 'black'
         },
         -- BASE ENTITY, ITEM 0
         ['transport-belt'] = {
@@ -156,10 +177,6 @@ local items = {
             type = 'inserter',
             color = 'green'
         },
-        ['stack-inserter'] = {
-            type = 'inserter',
-            color = 'white'
-        },
         -- SPACE_AGE ENTITY, ITEM 0
         ['turbo-transport-belt'] = {
             type = 'transport-belt',
@@ -172,6 +189,10 @@ local items = {
         ['turbo-splitter'] = {
             type = 'splitter',
             color = 'green'
+        },
+        ['stack-inserter'] = {
+            type = 'inserter',
+            color = 'white'
         },
     }
 }
