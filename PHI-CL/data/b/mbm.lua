@@ -178,6 +178,7 @@ function main_entity(source, tier)
                     if item['graphics_set']['animation'][d] then
                         for _, l in pairs(item['graphics_set']['animation'][d].layers) do
                             if not l.draw_as_shadow then
+                                l.apply_runtime_tint = true
                                 l.tint = mod_tint[tier]
                             end
                         end
