@@ -60,10 +60,8 @@ function main_entity(source, tier)
     item.max_health = item.max_health * (tier - source.min + 2)
     item.next_upgrade = ((tier < source.max) and source.name .. '-' .. (tier + 1)) or nil
 
-    for _, v in pairs({'mining_speed', 'crafting_speed'}) do
-        if item[v] then
-            item[v] = tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))
-        end
+    if item['crafting_speed'] then
+        item['crafting_speed'] = tonumber(string.match(item['crafting_speed'], '[%d%.]+')) * (2 ^ (tier - source.min + 1))
     end
 
     for _, v in pairs({'energy_usage', 'heating_energy', 'crane_energy_usage', 'energy_per_shot'}) do
@@ -128,12 +126,19 @@ function main_entity(source, tier)
         end
 
     elseif (source.type == 'mining-drill') then
+        if item['mining_speed'] then
+            item['mining_speed'] = tonumber(string.match(item['mining_speed'], '[%d%.]+')) * (2 ^ (tier - source.min + 1))
+        end
+
         for _, e in pairs({'graphics_set', 'wet_mining_graphics_set'}) do
             if item[e] and item[e].animation then
                 for _, d in pairs(item[e].animation) do
                     if d.layers then
-                        d.layers[1].tint = mod_tint[tier]
-                        d.layers[2].tint = mod_tint[tier]
+                        for _, l in pairs(d.layers) do
+                            if not l.draw_as_shadow then
+                                l.tint = mod_tint[tier]
+                            end
+                        end
                     end
                 end
             end
