@@ -92,6 +92,20 @@ function main_entity(source, tier)
                     end
                 end
             end
+
+            if (source.name == 'electromagnetic-plant') then
+                if item['graphics_set'] and item['graphics_set']['working_visualisations'] then
+                    for _, d in pairs(item['graphics_set']['working_visualisations']) do
+                        if d.animation and d.animation.layers then
+                            for _, l in pairs(d.animation.layers) do
+                                if not l.draw_as_shadow then
+                                    l.tint = mod_tint[tier]
+                                end
+                            end
+                        end
+                    end
+                end
+            end
         end
 
     elseif (source.type == 'furnace') then
@@ -157,6 +171,14 @@ function main_entity(source, tier)
                 end
             end
 
+            if item['integration_patch'] then
+                for _, d in pairs({'north', 'east', 'south', 'west'}) do
+                    if item['integration_patch'][d] then
+                        item['integration_patch'][d].tint = mod_tint[tier]
+                    end
+                end
+            end
+
         elseif (source.name == 'pumpjack') then
             if item['graphics_set'] and item['graphics_set']['animation'] then
                 for _, d in pairs({'north', 'east', 'south', 'west'}) do
@@ -166,6 +188,14 @@ function main_entity(source, tier)
                                 l.tint = mod_tint[tier]
                             end
                         end
+                    end
+                end
+            end
+
+            if item['base_picture'] and item['base_picture']['sheets'] then
+                for _, l in pairs(item['base_picture']['sheets']) do
+                    if not l.draw_as_shadow then
+                        l.tint = mod_tint[tier]
                     end
                 end
             end
