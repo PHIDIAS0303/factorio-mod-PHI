@@ -132,8 +132,8 @@ local items = {
         ['steam-condensation'] = {
             energy_required = 10,
             category = 'chemistry',
-            ingredients = {{type = 'fluid', name = 'steam', amount = 800, fluidbox_multiplier = 10}},
-            results = {{type = 'fluid', name = 'water', amount = 640, fluidbox_multiplier = 10}}
+            ingredients = {{type = 'fluid', name = 'steam', amount = 800, temperature = 500, fluidbox_multiplier = 10}},
+            results = {{type = 'fluid', name = 'water', amount = 640, temperature = 15, fluidbox_multiplier = 10}}
         },
         ['nutrients-from-yumako-mash'] = {
             energy_required = 15,
