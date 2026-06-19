@@ -164,27 +164,12 @@ function main_entity(source, tier)
                             if d.layers then
                                 for _, l in pairs(d.layers) do
                                     if not l.draw_as_shadow then
+                                        l.apply_runtime_tint = true
                                         l.tint = mod_tint[tier]
                                     end
                                 end
                             end
                         end
-                    end
-
-                    if item[e]['working_visualisations'] then
-                        for _, d in pairs(item[e]['working_visualisations']) do
-                            if d.animation and not d.animation.draw_as_shadow then
-                                d.animation.tint = mod_tint[tier]
-                            end
-                        end
-                    end
-                end
-            end
-
-            if item['integration_patch'] then
-                for _, d in pairs({'north', 'east', 'south', 'west'}) do
-                    if item['integration_patch'][d] then
-                        item['integration_patch'][d].tint = mod_tint[tier]
                     end
                 end
             end
