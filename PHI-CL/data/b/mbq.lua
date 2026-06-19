@@ -108,6 +108,54 @@ if settings.startup['PHI-MB-EQUIPMENT-ARMOR'].value then
     end
 end
 
+function equipment(source, tier)
+    local item = table.deepcopy(data.raw[source.type][source.ref_name])
+    item.name = source.name .. '-mk' .. tier .. '-equipment'
+    item.take_result = item.name
+
+    for _, v in pairs({'power', 'energy_consumption', 'energy_input', 'charging_energy'}) do
+        item[v] = (item[v] and tostring(tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item[v], '%a+')) or nil
+    end
+
+    if item.energy_source then
+        for _, v in pairs({'buffer_capacity', 'input_flow_limit', 'output_flow_limit'}) do
+            item.energy_source[v] = (item.energy_source[v] and tostring(tonumber(string.match(item.energy_source[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.energy_source[v], '%a+')) or nil
+        end
+    end
+
+    for _, v in pairs({'max_shield_value', 'movement_bonus', 'inventory_size_bonus'}) do
+        item[v] = (item[v] and item[v] * (2 ^ (tier - source.min + 1))) or nil
+    end
+
+    if item.darkness_to_turn_on and item.color_lookup then
+        item.darkness_to_turn_on = 0
+        item.color_lookup = {{0, '__core__/graphics/color_luts/lut-sunset.png'}}
+    end
+
+    if item.attack_parameters then
+        item.attack_parameters.cooldown = (item.attack_parameters.cooldown and item.attack_parameters.cooldown * ((24 - tier + source.min) / 25)) or nil
+        item.attack_parameters.damage_modifier = (item.attack_parameters.damage_modifier and item.attack_parameters.damage_modifier * (2 ^ (tier - source.min + 1))) or nil
+        item.attack_parameters.range = (item.attack_parameters.range and item.attack_parameters.range + (tier - source.min + 1)) or nil
+
+        if item.attack_parameters.ammo_type then
+            item.attack_parameters.ammo_type.energy_consumption = (item.attack_parameters.ammo_type.energy_consumption and tostring(tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+')) or nil
+
+            if item.attack_parameters.ammo_type.action_delivery then
+                item.attack_parameters.ammo_type.action_delivery.max_length = item.attack_parameters.ammo_type.action_delivery.max_length + (tier - source.min + 1)
+            end
+        end
+    end
+
+    if item.sprite then
+        item.sprite.tint = mod_tint[tier]
+    end
+
+    item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'equipment-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'equipment-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
+    item.localised_description = {'?', {'equipment-description.' .. source.ref_name}, {'description.' .. source.ref_name}}
+
+    data:extend({item})
+end
+
 -- MBQ A 48 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
 -- MBQ A 8 SPACE_AGE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
 for _, v in pairs(items) do
@@ -119,7 +167,7 @@ for _, v in pairs(items) do
         v.category = 'equipment'
 
         for j=v.min, v.max, 1 do
-            main.EEQ(v, j)
+            equipment(v, j)
             main.EI(v, j)
             main.ER(v, j)
             main.ET(v, j)
