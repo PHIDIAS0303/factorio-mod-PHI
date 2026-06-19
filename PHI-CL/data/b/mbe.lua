@@ -231,26 +231,6 @@ function main_recipe(source, tier)
     }})
 end
 
-function main_technology(source, tier)
-    if (source.tech == 'compound-energy') then
-        table.insert(data.raw.technology['compound-energy-' .. (tier - 1)].effects, {type='unlock-recipe', recipe=source.name .. '-' .. tier})
-        return
-    end
-
-    if not data.raw.technology[source.tech] then
-        return
-    end
-
-    local recipe_name = source.name .. '-' .. tier
-
-    if data.raw.technology[source.tech].effects then
-        table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=recipe_name})
-
-    else
-        data.raw.technology[source.tech].effects = {{type='unlock-recipe', recipe=recipe_name}}
-    end
-end
-
 -- fast replace group
 function main_replace_group(source)
     if not data.raw[source.type][source.ref_name].fast_replaceable_group then
@@ -285,7 +265,7 @@ for _, v in pairs(items) do
             main_entity(v, j)
             main_item(v, j)
             main_recipe(v, j)
-            main_technology(v, j)
+            table.insert(data.raw.technology['compound-energy-' .. (j - 1)].effects, {type='unlock-recipe', recipe=v.name .. '-' .. j})
         end
 
         main_replace_group(v)

@@ -254,12 +254,11 @@ function main.ET(source, tier)
 
     local recipe_name = (source.category == 'equipment' and (source.name .. '-mk' .. tier .. '-equipment')) or (source.name .. '-' .. tier)
 
-    if data.raw.technology[source.tech].effects then
-        table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=recipe_name})
-
-    else
-        data.raw.technology[source.tech].effects = {{type='unlock-recipe', recipe=recipe_name}}
+    if not data.raw.technology[source.tech].effects then
+        data.raw.technology[source.tech].effects = {}
     end
+
+    table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=recipe_name})
 
     if source.type ~= 'ammo-turret' and source.type ~= 'fluid-turret' then
         return
