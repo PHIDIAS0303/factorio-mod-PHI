@@ -60,9 +60,7 @@ function main_entity(source, tier)
     --[[
     electric-furnace
     pumpjack
-    laser-turret
     flamethrower-turret
-    tesla-turret
     recycler
     ]]
 
@@ -180,14 +178,42 @@ function main_entity(source, tier)
         end
 
     elseif source.type == 'electric-turret' then
+        if (source.name == 'laser-turret') then
+            if item['graphics_set'] and item['graphics_set']['base_visualisation'] and item['graphics_set']['base_visualisation']['animation'] and item['graphics_set']['base_visualisation']['animation'].layers then
+                for _, l in pairs(item['graphics_set']['base_visualisation']['animation'].layers) do
+                    if not l.draw_as_shadow then
+                        l.tint = mod_tint[tier]
+                    end
+                end
+            end
+
+        elseif (source.name == 'tesla-turret') then
+            if item['graphics_set'] and item['graphics_set']['base_visualisation'] then
+                for _, v in pairs(item['graphics_set']['base_visualisation']) do
+                    if v.animation and v.animation.layers then
+                        for _, l in pairs(v.animation.layers) do
+                            if not l.draw_as_shadow then
+                                l.tint = mod_tint[tier]
+                            end
+                        end
+                    end
+                end
+            end
+        end
+
         item.glow_light_intensity = 1
 
         if item.attack_parameters then
             item.attack_parameters.damage_modifier = (item.attack_parameters.damage_modifier and (item.attack_parameters.damage_modifier * 2)) or nil
 
             if item.attack_parameters.ammo_type then
-                item.attack_parameters.ammo_type.action.action_delivery.max_length = ((item.attack_parameters.ammo_type.action and item.attack_parameters.ammo_type.action.action_delivery and item.attack_parameters.ammo_type.action.action_delivery.max_length) and (item.attack_parameters.ammo_type.action.action_delivery.max_length + (2 * (tier - source.min + 1)))) or nil
-                item.attack_parameters.ammo_type.energy_consumption = (item.attack_parameters.ammo_type.energy_consumption and (tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+'))) or nil
+                if item.attack_parameters.ammo_type.action and item.attack_parameters.ammo_type.action.action_delivery and item.attack_parameters.ammo_type.action.action_delivery.max_length then
+                    item.attack_parameters.ammo_type.action.action_delivery.max_length = item.attack_parameters.ammo_type.action.action_delivery.max_length + (2 * (tier - source.min + 1))
+                end
+
+                if item.attack_parameters.ammo_type.energy_consumption then
+                    item.attack_parameters.ammo_type.energy_consumption = tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+')
+                end
             end
         end
 
