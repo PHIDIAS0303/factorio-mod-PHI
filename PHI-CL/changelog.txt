@@ -3,7 +3,7 @@ Version: 3.0.150
 Date: 2026-07-05
 
   Changes:
-    - [GM] Generic code layout restructure.
+    - [MB] Generic code layout restructure.
     - [GM] Removed super combinator, and its function like research control.
     - [CT] Removed proxy chest on lab for reading its content.
 
