@@ -19,7 +19,7 @@ function main_entity(source, tier)
     item.max_health = item.max_health * (tier - source.min + 2)
     item.next_upgrade = ((tier < source.max) and source.name .. '-' .. (tier + 1)) or nil
 
-    for _, v in pairs({'energy_usage', 'heating_energy', 'crane_energy_usage', 'energy_per_shot'}) do
+    for _, v in pairs({'energy_usage', 'heating_energy', 'energy_per_shot'}) do
         if item[v] then
             item[v] = (tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. (string.match(item[v], '%a+') or '')
         end
@@ -56,13 +56,6 @@ function main_entity(source, tier)
     if item.call_for_help_radius then
         item.call_for_help_radius = item.call_for_help_radius + (2 * (tier - source.min + 1))
     end
-
-    --[[
-    electric-furnace
-    pumpjack
-    flamethrower-turret
-    recycler
-    ]]
 
     if (source.type == 'assembling-machine') then
         if item['crafting_speed'] then
@@ -101,6 +94,34 @@ function main_entity(source, tier)
             end
         end
 
+    elseif (source.type == 'furnace') then
+        if item['crafting_speed'] then
+            item['crafting_speed'] = tonumber(string.match(item['crafting_speed'], '[%d%.]+')) * (2 ^ (tier - source.min + 1))
+        end
+
+        if (source.name == 'electric-furnace') then
+            if item['graphics_set'] and item['graphics_set']['animation'] and item['graphics_set']['animation'].layers then
+                for _, l in pairs(item['graphics_set']['animation'].layers) do
+                    if not l.draw_as_shadow then
+                        l.tint = mod_tint[tier]
+                    end
+                end
+            end
+
+        elseif (source.name == 'recycler') then
+            if item['graphics_set'] and item['graphics_set']['animation'] then
+                for _, d in pairs({'north', 'east', 'south', 'west'}) do
+                    if item['graphics_set']['animation'][d] then
+                        for _, l in pairs(item['graphics_set']['animation'][d].layers) do
+                            if not l.draw_as_shadow then
+                                l.tint = mod_tint[tier]
+                            end
+                        end
+                    end
+                end
+            end
+        end
+
     elseif (source.type == 'lab') then
         if item['researching_speed'] then
             item['researching_speed'] = tonumber(string.match(item['researching_speed'], '[%d%.]+')) * (2 ^ (tier - source.min + 1))
@@ -121,11 +142,26 @@ function main_entity(source, tier)
             item['mining_speed'] = tonumber(string.match(item['mining_speed'], '[%d%.]+')) * (2 ^ (tier - source.min + 1))
         end
 
-        for _, e in pairs({'graphics_set', 'wet_mining_graphics_set'}) do
-            if item[e] and item[e].animation then
-                for _, d in pairs(item[e].animation) do
-                    if d.layers then
-                        for _, l in pairs(d.layers) do
+        if (source.name == 'mining-drill' or source.name == 'big-mining-drill') then
+            for _, e in pairs({'graphics_set', 'wet_mining_graphics_set'}) do
+                if item[e] and item[e].animation then
+                    for _, d in pairs(item[e].animation) do
+                        if d.layers then
+                            for _, l in pairs(d.layers) do
+                                if not l.draw_as_shadow then
+                                    l.tint = mod_tint[tier]
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+
+        elseif (source.name == 'pumpjack') then
+            if item['graphics_set'] and item['graphics_set']['animation'] then
+                for _, d in pairs({'north', 'east', 'south', 'west'}) do
+                    if item['graphics_set']['animation'][d] then
+                        for _, l in pairs(item['graphics_set']['animation'][d].layers) do
                             if not l.draw_as_shadow then
                                 l.tint = mod_tint[tier]
                             end
@@ -136,8 +172,13 @@ function main_entity(source, tier)
         end
 
     elseif source.type == 'radar' then
-        item.max_distance_of_sector_revealed = item.max_distance_of_sector_revealed + (2 * (tier - source.min + 1))
-        item.max_distance_of_nearby_sector_revealed = item.max_distance_of_nearby_sector_revealed + (2 * (tier - source.min + 1))
+        if item.max_distance_of_sector_revealed then
+            item.max_distance_of_sector_revealed = item.max_distance_of_sector_revealed + (2 * (tier - source.min + 1))
+        end
+
+        if item.max_distance_of_nearby_sector_revealed then
+            item.max_distance_of_nearby_sector_revealed = item.max_distance_of_nearby_sector_revealed + (2 * (tier - source.min + 1))
+        end
 
         if item['pictures'] and item['pictures'].layers then
             for _, l in pairs(item['pictures'].layers) do
@@ -153,7 +194,9 @@ function main_entity(source, tier)
 
     elseif source.type == 'thruster' then
         for _, v in pairs({'min_performance', 'max_performance'}) do
-            item[v].fluid_usage = (item[v].fluid_usage and item[v].fluid_usage * (2 ^ (tier - source.min + 1))) or nil
+            if item[v] and item[v].fluid_usage then
+                item[v].fluid_usage = item[v].fluid_usage * (2 ^ (tier - source.min + 1))
+            end
         end
 
         if item['graphics_set'] then
@@ -167,7 +210,13 @@ function main_entity(source, tier)
         end
 
     elseif source.type == 'agricultural-tower' then
-        item.radius = item.radius + (1 * (tier - source.min + 1))
+        if item['crane_energy_usage'] then
+            item['crane_energy_usage'] = (tonumber(string.match(item['crane_energy_usage'], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. (string.match(item['crane_energy_usage'], '%a+') or '')
+        end
+
+        if item['radius'] then
+            item['radius'] = item['radius'] + (1 * (tier - source.min + 1))
+        end
 
         if item['graphics_set'] and item['graphics_set']['animation'] and item['graphics_set']['animation'].layers then
             for _, l in pairs(item['graphics_set']['animation'].layers) do
@@ -243,6 +292,18 @@ function main_entity(source, tier)
 
     elseif source.type == 'fluid-turret' then
         item.prepare_range = item.prepare_range + (2 * (tier - source.min + 1))
+
+        if item['graphics_set'] and item['graphics_set']['base_visualisation'] and item['graphics_set']['base_visualisation']['animation'] then
+            for _, d in pairs({'north', 'north_east', 'east', 'south_east', 'south', 'south_west', 'west', 'north_west'}) do
+                if item['graphics_set']['base_visualisation']['animation'][d] then
+                    for _, l in pairs(item['graphics_set']['base_visualisation']['animation'][d].layers) do
+                        if not l.draw_as_shadow then
+                            l.tint = mod_tint[tier]
+                        end
+                    end
+                end
+            end
+        end
     end
 
     item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
