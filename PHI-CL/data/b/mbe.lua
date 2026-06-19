@@ -32,10 +32,6 @@ for i = 1, 7 do
     }})
 end
 
-function icon_add_number(i, t)
-    table.insert(i, {icon = '__base__/graphics/icons/signal/signal_' .. t .. '.png', icon_size = 64, scale = 0.25, shift = {12, 12}})
-end
-
 function main_entity(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
     item.name = source.name .. '-' .. tier
@@ -43,7 +39,7 @@ function main_entity(source, tier)
     item.max_health = item.max_health * (tier - source.min + 2)
     item.next_upgrade = ((tier < source.max) and source.name .. '-' .. (tier + 1)) or nil
 
-    for _, v in pairs({'energy_usage', 'heating_energy'}) do
+    for _, v in pairs({'energy_usage'}) do
         if not (source.tech == 'compound-energy' and (source.type == 'solar-panel' or source.type == 'accumulator')) and item[v] then
             item[v] = (tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. (string.match(item[v], '%a+') or '')
         end
@@ -81,7 +77,7 @@ function main_entity(source, tier)
                 end
             end
 
-            icon_add_number(item['picture'].layers, tier)
+            table.insert(item['picture'].layers, {filename = '__base__/graphics/icons/signal/signal_' .. tier .. '.png', width = 120, height = 64, frame_count = 1, scale = 0.25, shift = {12, 12}})
         end
 
     elseif (source.type == 'accumulator') then
@@ -101,7 +97,7 @@ function main_entity(source, tier)
             end
 
             if item['chargable_graphics']['picture'] then
-                icon_add_number(item['chargable_graphics']['picture'].layers, tier)
+                table.insert(item['chargable_graphics']['picture'].layers, {filename = '__base__/graphics/icons/signal/signal_' .. tier .. '.png', width = 120, height = 64, frame_count = 1, scale = 0.25, shift = {12, 12}})
             end
         end
 
@@ -123,8 +119,6 @@ function main_entity(source, tier)
                             l.tint = mod_tint[tier]
                         end
                     end
-
-                    icon_add_number(item['picture'][c].structure.layers, tier)
                 end
             end
         end
@@ -140,8 +134,6 @@ function main_entity(source, tier)
                         l.tint = mod_tint[tier]
                     end
                 end
-
-                icon_add_number(item[c].layers, tier)
             end
         end
 
@@ -156,8 +148,6 @@ function main_entity(source, tier)
                     l.tint = mod_tint[tier]
                 end
             end
-
-            icon_add_number(item['picture'].layers, tier)
         end
 
     elseif (source.type == 'fusion-reactor') then
@@ -170,8 +160,6 @@ function main_entity(source, tier)
                     l.tint = mod_tint[tier]
                 end
             end
-
-            icon_add_number(item['graphics_set']['structure'].layers, tier)
         end
 
     elseif (source.type == 'fusion-generator') then
@@ -186,8 +174,6 @@ function main_entity(source, tier)
                             l.tint = mod_tint[tier]
                         end
                     end
-
-                    icon_add_number(item['graphics_set'][c].animation.layers, tier)
                 end
             end
         end
@@ -199,8 +185,6 @@ function main_entity(source, tier)
                     for _, l in pairs(item['connection_sprites'][c]) do
                         l.tint = mod_tint[tier]
                     end
-
-                    icon_add_number(item['connection_sprites'][c], tier)
                 end
             end
         end
