@@ -220,17 +220,6 @@ end
 -- recipe
 function main.ER(source, tier)
     local result_name = source.name .. ((source.category == 'equipment' and ('-mk' .. tier .. '-equipment')) or ('-' .. tier))
-    local ingredients = {}
-    local ingredient_name
-
-    if source.category == 'equipment' then
-        ingredient_name = (tier == source.min and source.ref_name) or (source.name .. '-mk' .. (tier - 1) .. '-equipment')
-
-    else
-        ingredient_name = (tier > source.min and (source.name .. '-' .. (tier - 1))) or source.ref_name
-    end
-
-    table.insert(ingredients, {type = 'item', name = ingredient_name, amount = 2})
 
     data:extend({{
         type = 'recipe',
@@ -238,7 +227,7 @@ function main.ER(source, tier)
         icons = table.deepcopy(data.raw.item[source.ref_name].icons),
         energy_required = 2,
         enabled = false,
-        ingredients = ingredients,
+        ingredients = {{type = 'item', name = (tier > source.min and (source.name .. '-' .. (tier - 1))) or source.ref_name, amount = 2}},
         results = {{type = 'item', name = result_name, amount = 1}},
         main_product = result_name,
         localised_name = {'?', data.raw[source.type][result_name].localised_name, ''},
@@ -252,13 +241,11 @@ function main.ET(source, tier)
         return
     end
 
-    local recipe_name = (source.category == 'equipment' and (source.name .. '-mk' .. tier .. '-equipment')) or (source.name .. '-' .. tier)
-
     if not data.raw.technology[source.tech].effects then
         data.raw.technology[source.tech].effects = {}
     end
 
-    table.insert(data.raw.technology[source.tech].effects, {type='unlock-recipe', recipe=recipe_name})
+    table.insert(data.raw.technology[source.tech].effects, {type = 'unlock-recipe', recipe = source.name .. '-' .. tier})
 
     if source.type ~= 'ammo-turret' and source.type ~= 'fluid-turret' then
         return

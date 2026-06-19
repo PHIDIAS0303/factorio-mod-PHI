@@ -12,8 +12,7 @@ data:extend({
   name = 'PHI-MB-ENERGY',
   setting_type = 'startup',
   default_value = 1,
-  minimum_value = 1,
-  maximum_value = 8,
+  allowed_values = {1, 2, 3, 4, 5, 6, 7, 8},
   localised_name = {'phi-cl.setting-category-color', 'MBE', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-ENERGY'}},
   localised_description = {'', '[item=solar-panel]', {'phi-cl.setting-change-color', '\n[104] A103 C1'}},
   order = 'AA00'
@@ -22,8 +21,7 @@ data:extend({
   name = 'PHI-MB-ENERGY-SOLAR-RATIO',
   setting_type = 'startup',
   default_value = 4,
-  minimum_value = 2,
-  maximum_value = 16,
+  allowed_values = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16},
   localised_name = {'phi-cl.setting-class-color', 'MBE1', {'phi-cl.ratio'}, {'mod-setting-name.PHI-MB-ENERGY-SOLAR-RATIO'}},
   localised_description = {'', '[item=beacon]'},
   order = 'AA01'
@@ -32,8 +30,7 @@ data:extend({
   name = 'PHI-MB-MACHINE',
   setting_type = 'startup',
   default_value = 1,
-  minimum_value = 1,
-  maximum_value = 3,
+  allowed_values = {1, 2, 3},
   localised_name = {'phi-cl.setting-category-color', 'MBM', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-MACHINE'}},
   localised_description = {'', '[item=assembling-machine-3]', {'phi-cl.setting-change-color', '\n[150] A150'}},
   order = 'AB00'
@@ -42,8 +39,7 @@ data:extend({
   name = 'PHI-MB-EQUIPMENT',
   setting_type = 'startup',
   default_value = 1,
-  minimum_value = 1,
-  maximum_value = 3,
+  allowed_values = {1, 2, 3},
   localised_name = {'phi-cl.setting-category-color', 'MBQ', {'phi-cl.enable'}, {'mod-setting-name.PHI-MB-EQUIPMENT'}},
   localised_description = {'', '[item=personal-laser-defense-equipment]', {'phi-cl.setting-change-color', '\n[63] A63'}},
   order = 'AC00'
