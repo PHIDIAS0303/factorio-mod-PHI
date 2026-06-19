@@ -49,22 +49,7 @@ function main_entity(source, tier)
         item.call_for_help_radius = (item.call_for_help_radius and (item.call_for_help_radius + (2 * (tier - source.min + 1)))) or nil
     end
 
-    if source.type == 'electric-turret' then
-        item.glow_light_intensity = 1
 
-        if item.attack_parameters then
-            item.attack_parameters.damage_modifier = (item.attack_parameters.damage_modifier and (item.attack_parameters.damage_modifier * 2)) or nil
-
-            if item.attack_parameters.ammo_type then
-                item.attack_parameters.ammo_type.action.action_delivery.max_length = ((item.attack_parameters.ammo_type.action and item.attack_parameters.ammo_type.action.action_delivery and item.attack_parameters.ammo_type.action.action_delivery.max_length) and (item.attack_parameters.ammo_type.action.action_delivery.max_length + (2 * (tier - source.min + 1)))) or nil
-                item.attack_parameters.ammo_type.energy_consumption = (item.attack_parameters.ammo_type.energy_consumption and (tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+'))) or nil
-            end
-        end
-    end
-
-    if source.type == 'fluid-turret' then
-        item.prepare_range = item.prepare_range + (2 * (tier - source.min + 1))
-    end
 
     --[[
     electric-furnace
@@ -190,6 +175,24 @@ function main_entity(source, tier)
                 end
             end
         end
+
+    elseif source.type == 'electric-turret' then
+        item.glow_light_intensity = 1
+
+        if item.attack_parameters then
+            item.attack_parameters.damage_modifier = (item.attack_parameters.damage_modifier and (item.attack_parameters.damage_modifier * 2)) or nil
+
+            if item.attack_parameters.ammo_type then
+                item.attack_parameters.ammo_type.action.action_delivery.max_length = ((item.attack_parameters.ammo_type.action and item.attack_parameters.ammo_type.action.action_delivery and item.attack_parameters.ammo_type.action.action_delivery.max_length) and (item.attack_parameters.ammo_type.action.action_delivery.max_length + (2 * (tier - source.min + 1)))) or nil
+                item.attack_parameters.ammo_type.energy_consumption = (item.attack_parameters.ammo_type.energy_consumption and (tonumber(string.match(item.attack_parameters.ammo_type.energy_consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.attack_parameters.ammo_type.energy_consumption, '%a+'))) or nil
+            end
+        end
+
+    elseif source.type == 'ammo-turret' then
+        --
+
+    elseif source.type == 'fluid-turret' then
+        item.prepare_range = item.prepare_range + (2 * (tier - source.min + 1))
     end
 
     item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
