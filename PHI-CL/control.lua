@@ -3,16 +3,6 @@ local pump = require('control/pump')
 local rail_support = require('control/rail-support')
 local trash = require('control/trash')
 
-local function gui_create(player)
-    if player.gui.relative.phi_cl_inserter_config then
-        player.gui.relative.phi_cl_inserter_config.destroy()
-    end
-
-    if player.gui.relative.phi_cl_combinator_config then
-        player.gui.relative.phi_cl_combinator_config.destroy()
-    end
-end
-
 local function entity_build(event)
     cargo_landing.build(event)
     rail_support.build(event)
@@ -29,7 +19,13 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
             return
         end
 
-        gui_create(game.players[event.player_index])
+        if game.players[event.player_index].gui.relative.phi_cl_inserter_config then
+            game.players[event.player_index].gui.relative.phi_cl_inserter_config.destroy()
+        end
+
+        if game.players[event.player_index].gui.relative.phi_cl_combinator_config then
+            game.players[event.player_index].gui.relative.phi_cl_combinator_config.destroy()
+        end
     end)
 
     script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_entity, defines.events.on_space_platform_built_entity, defines.events.script_raised_built, defines.events.script_raised_revive}, entity_build)
