@@ -182,7 +182,7 @@ function main_item(source, tier)
 end
 
 function main_recipe(source, tier)
-    local result_name = source.name .. ((source.category == 'equipment' and ('-mk' .. tier .. '-equipment')) or ('-' .. tier))
+    local result_name = source.name .. '-mk' .. tier .. '-equipment'
 
     data:extend({{
         type = 'recipe',
@@ -218,8 +218,6 @@ for _, v in pairs(items) do
     v.ref_name = v.ref_name or v.name .. '-equipment'
 
     if (v.mod and mods[v.mod]) and (v.max >= v.min) and data.raw[v.type] and data.raw[v.type][v.ref_name] and not data.raw[v.type][v.ref_name].hidden then
-        v.category = 'equipment'
-
         for j=v.min, v.max, 1 do
             main_equipment(v, j)
             main_item(v, j)
