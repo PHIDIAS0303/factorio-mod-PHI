@@ -60,7 +60,7 @@ function main_entity(source, tier)
     item.max_health = item.max_health * (tier - source.min + 2)
     item.next_upgrade = ((tier < source.max) and source.name .. '-' .. (tier + 1)) or nil
 
-    for _, v in pairs({'researching_speed', 'mining_speed', 'crafting_speed'}) do
+    for _, v in pairs({'mining_speed', 'crafting_speed'}) do
         if item[v] then
             item[v] = tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))
         end
@@ -113,11 +113,15 @@ function main_entity(source, tier)
     end
 
     if (source.type == 'lab') then
-        for _, v in pairs({{['a'] = 'on_animation', ['n'] = 3}, {['a'] = 'off_animation', ['n'] = 2}}) do
-            if item[v['a']] and item[v['a']].layers then
-                for i=1, v['n'], 1 do
-                    if item[v['a']].layers[i] then
-                        item[v['a']].layers[i].tint = mod_tint[tier]
+        if item['researching_speed'] then
+            item['researching_speed'] = tonumber(string.match(item['researching_speed'], '[%d%.]+')) * (2 ^ (tier - source.min + 1))
+        end
+
+        for _, c in pairs({'on_animation', 'off_animation'}) do
+            if item[c] and item[c].layers then
+                for _, l in pairs(item[c].layers) do
+                    if not l.draw_as_shadow then
+                        l.tint = mod_tint[tier]
                     end
                 end
             end
