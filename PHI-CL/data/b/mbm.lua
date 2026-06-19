@@ -39,17 +39,23 @@ function main_entity(source, tier)
         end
     end
 
-    if (source.type == 'electric-turret') or (source.type == 'ammo-turret') or (source.type == 'fluid-turret') then
-        if item.attack_parameters then
+    if item.attack_parameters then
+        if item.attack_parameters.damage_modifier then
             item.attack_parameters.damage_modifier = 2 ^ (tier - source.min + 1)
-            item.attack_parameters.range = item.attack_parameters.range + (2 * (tier - source.min + 1))
-            item.attack_parameters.cooldown = (item.attack_parameters.cooldown and (item.attack_parameters.cooldown * ((24 - tier + source.min) / 25))) or nil
         end
 
-        item.call_for_help_radius = (item.call_for_help_radius and (item.call_for_help_radius + (2 * (tier - source.min + 1)))) or nil
+        if item.attack_parameters.range then
+            item.attack_parameters.range = item.attack_parameters.range + (2 * (tier - source.min + 1))
+        end
+
+        if item.attack_parameters.cooldown then
+            item.attack_parameters.cooldown = item.attack_parameters.cooldown * ((24 - tier + source.min) / 25)
+        end
     end
 
-
+    if item.call_for_help_radius then
+        item.call_for_help_radius = item.call_for_help_radius + (2 * (tier - source.min + 1))
+    end
 
     --[[
     electric-furnace
