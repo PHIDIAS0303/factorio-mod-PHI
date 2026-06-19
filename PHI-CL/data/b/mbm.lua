@@ -136,6 +136,14 @@ function main_entity(source, tier)
 
     elseif source.type == 'agricultural-tower' then
         item.radius = item.radius + (1 * (tier - source.min + 1))
+
+        if item['graphics_set'] and item['graphics_set']['animation'] and item['graphics_set']['animation'].layers then
+            for _, l in pairs(item['graphics_set']['animation'].layers) do
+                if not l.draw_as_shadow then
+                    l.tint = mod_tint[tier]
+                end
+            end
+        end
     end
 
     item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
