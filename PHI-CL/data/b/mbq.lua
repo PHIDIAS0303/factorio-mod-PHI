@@ -1,4 +1,3 @@
-local main = require('main')
 local items = require('mbq-c')
 
 local mod_tint = {
@@ -108,7 +107,7 @@ if settings.startup['PHI-MB-EQUIPMENT-ARMOR'].value then
     end
 end
 
-function equipment(source, tier)
+function main_equipment(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
     item.name = source.name .. '-mk' .. tier .. '-equipment'
     item.take_result = item.name
@@ -156,6 +155,61 @@ function equipment(source, tier)
     data:extend({item})
 end
 
+function main_item(source, tier)
+    local item = table.deepcopy(data.raw.item[source.ref_name])
+    item.name = source.name .. '-mk' .. tier .. '-equipment'
+    item['place_as_equipment_result'] = item.name
+
+    if item.icons and item.icons[1] then
+        item.icons[1].tint = mod_tint[tier]
+
+    elseif item.icon then
+        item.icons = {{icon = item.icon, tint = mod_tint[tier]}}
+        item.icon = nil
+
+        if item.icon_size then
+            item.icons[1].icon_size = item.icon_size
+            item.icon_size = nil
+        end
+    end
+
+    table.insert(item.icons, {icon = '__base__/graphics/icons/signal/signal_' .. tier .. '.png', icon_size = 64, scale = 0.25, shift = {12, 12}})
+    item.order = item.order .. tier
+    item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'entity-name.' .. source.ref_name}, {'equipment-name.' .. source.ref_name}, {'item-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-name.' .. source.ref_name}, {'equipment-name.' .. source.ref_name}, {'item-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
+    item.localised_description = {'?', {'entity-description.' .. source.ref_name}, {'equipment-description.' .. source.ref_name}, {'item-description.' .. source.ref_name}, {'description.' .. source.ref_name}}
+
+    data:extend({item})
+end
+
+function main_recipe(source, tier)
+    local result_name = source.name .. ((source.category == 'equipment' and ('-mk' .. tier .. '-equipment')) or ('-' .. tier))
+
+    data:extend({{
+        type = 'recipe',
+        name = result_name,
+        icons = table.deepcopy(data.raw.item[source.ref_name].icons),
+        energy_required = 2,
+        enabled = false,
+        ingredients = {{type = 'item', name = (tier == source.min and source.ref_name) or (source.name .. '-mk' .. (tier - 1) .. '-equipment'), amount = 2}},
+        results = {{type = 'item', name = result_name, amount = 1}},
+        main_product = result_name,
+        localised_name = {'?', data.raw[source.type][result_name].localised_name, ''},
+        localised_description = {'?', data.raw[source.type][result_name].localised_description, ''}
+    }})
+end
+
+function main_technology(source, tier)
+    if not data.raw.technology[source.tech] then
+        return
+    end
+
+    if not data.raw.technology[source.tech].effects then
+        data.raw.technology[source.tech].effects = {}
+    end
+
+    table.insert(data.raw.technology[source.tech].effects, {type = 'unlock-recipe', recipe = source.name .. '-mk' .. tier .. '-equipment'})
+end
+
 -- MBQ A 48 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
 -- MBQ A 8 SPACE_AGE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
 for _, v in pairs(items) do
@@ -167,10 +221,10 @@ for _, v in pairs(items) do
         v.category = 'equipment'
 
         for j=v.min, v.max, 1 do
-            equipment(v, j)
-            main.EI(v, j)
-            main.ER(v, j)
-            main.ET(v, j)
+            main_equipment(v, j)
+            main_item(v, j)
+            main_recipe(v, j)
+            main_technology(v, j)
         end
     end
 end
