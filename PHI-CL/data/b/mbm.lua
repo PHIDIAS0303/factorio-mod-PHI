@@ -62,9 +62,6 @@ function main_entity(source, tier)
     pumpjack
     laser-turret
     flamethrower-turret
-    gun-turret
-    railgun-turret
-    rocket-turret
     tesla-turret
     recycler
     ]]
@@ -195,7 +192,28 @@ function main_entity(source, tier)
         end
 
     elseif source.type == 'ammo-turret' then
-        --
+        if (source.name == 'gun-turret' or source.name == 'rocket-turret') then
+            if item['graphics_set'] and item['graphics_set']['base_visualisation'] and item['graphics_set']['base_visualisation']['animation'] and item['graphics_set']['base_visualisation']['animation'].layers then
+                for _, l in pairs(item['graphics_set']['base_visualisation']['animation'].layers) do
+                    if not l.draw_as_shadow then
+                        l.tint = mod_tint[tier]
+                    end
+                end
+            end
+
+        elseif (source.name == 'railgun-turret') then
+            if item['graphics_set'] and item['graphics_set']['base_visualisation'] and item['graphics_set']['base_visualisation']['animation'] then
+                for _, d in pairs({'north', 'north_east', 'east', 'south_east', 'south', 'south_west', 'west', 'north_west'}) do
+                    if item['graphics_set']['base_visualisation']['animation'][d] then
+                        for _, l in pairs(item['graphics_set']['base_visualisation']['animation'][d].layers) do
+                            if not l.draw_as_shadow then
+                                l.tint = mod_tint[tier]
+                            end
+                        end
+                    end
+                end
+            end
+        end
 
     elseif source.type == 'fluid-turret' then
         item.prepare_range = item.prepare_range + (2 * (tier - source.min + 1))
