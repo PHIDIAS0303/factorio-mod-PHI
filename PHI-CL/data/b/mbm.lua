@@ -158,13 +158,23 @@ function main_entity(source, tier)
 
         if (source.name == 'mining-drill' or source.name == 'big-mining-drill') then
             for _, e in pairs({'graphics_set', 'wet_mining_graphics_set'}) do
-                if item[e] and item[e].animation then
-                    for _, d in pairs(item[e].animation) do
-                        if d.layers then
-                            for _, l in pairs(d.layers) do
-                                if not l.draw_as_shadow then
-                                    l.tint = mod_tint[tier]
+                if item[e] then
+                    if item[e]['animation'] then
+                        for _, d in pairs(item[e]['animation']) do
+                            if d.layers then
+                                for _, l in pairs(d.layers) do
+                                    if not l.draw_as_shadow then
+                                        l.tint = mod_tint[tier]
+                                    end
                                 end
+                            end
+                        end
+                    end
+
+                    if item[e]['working_visualisations'] then
+                        for _, d in pairs(item[e]['working_visualisations']) do
+                            if d.animation and not d.animation.draw_as_shadow then
+                                d.animation.tint = mod_tint[tier]
                             end
                         end
                     end
