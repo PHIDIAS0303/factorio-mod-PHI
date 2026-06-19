@@ -260,10 +260,10 @@ if data.raw['energy-shield-equipment'] and data.raw['energy-shield-equipment']['
     end
 end
 
-if data.raw['personal-roboport-equipment'] and data.raw['personal-roboport-equipment']['personal-roboport-equipment'] and settings.startup['PHI-MB-EQUIPMENT'].value > 1 then
+if data.raw['roboport-equipment'] and data.raw['roboport-equipment']['personal-roboport-equipment'] and settings.startup['PHI-MB-EQUIPMENT'].value > 1 then
     for i = 3, settings.startup['PHI-MB-EQUIPMENT'].value + 1 do
-        if data.raw['personal-roboport-equipment']['personal-roboport-mk' .. i .. '-equipment'] then
-            data.raw['personal-roboport-equipment']['personal-roboport-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'equipment-name.personal-roboport-equipment'}, tostring(i)}
+        if data.raw['roboport-equipment']['personal-roboport-mk' .. i .. '-equipment'] then
+            data.raw['roboport-equipment']['personal-roboport-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'equipment-name.personal-roboport-equipment'}, tostring(i)}
             data.raw['item']['personal-roboport-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'equipment-name.personal-roboport-equipment'}, tostring(i)}
             data.raw['recipe']['personal-roboport-mk' .. i .. '-equipment'].localised_name = {'phi-cl.combine', {'equipment-name.personal-roboport-equipment'}, tostring(i)}
         end
