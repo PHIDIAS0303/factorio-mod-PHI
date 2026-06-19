@@ -31,28 +31,6 @@ local mod_tint = {
     [8] = {r=233, g=63, b=233}
 }
 
-local function tint_handle(item, tier, tl)
-    for _, ve in pairs(tl) do
-        if item[ve] then
-            for _, tc in pairs({'layers', 'sheets', 'structure', 'frames'}) do
-                if item[ve][tc] and type(item[ve][tc]) == 'table' then
-                    for _, v2 in pairs(item[ve][tc]) do
-                        v2.tint = mod_tint[tier]
-
-                        if v2.frames then
-                            for _, v3 in pairs(v2.frames) do
-                                v3.tint = mod_tint[tier]
-                            end
-                        end
-                    end
-                end
-            end
-
-            item[ve].tint = mod_tint[tier]
-        end
-    end
-end
-
 function main_entity(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
     item.name = source.name .. '-' .. tier
@@ -65,14 +43,14 @@ function main_entity(source, tier)
     end
 
     for _, v in pairs({'energy_usage', 'heating_energy', 'crane_energy_usage', 'energy_per_shot'}) do
-        if not (source.tech == 'compound-energy' and (source.type == 'solar-panel' or source.type == 'accumulator')) and item[v] then
+        if item[v] then
             item[v] = (tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. (string.match(item[v], '%a+') or '')
         end
     end
 
     if item.energy_source then
         for _, v in pairs({'buffer_capacity', 'input_flow_limit', 'output_flow_limit'}) do
-            if not (source.tech == 'compound-energy' and (source.type == 'solar-panel' or source.type == 'accumulator')) and item.energy_source[v] then
+            if item.energy_source[v] then
                 item.energy_source[v] = tonumber(string.match(item.energy_source[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1)) .. string.match(item.energy_source[v], '%a+')
             end
         end
@@ -148,6 +126,18 @@ function main_entity(source, tier)
         item.max_distance_of_sector_revealed = item.max_distance_of_sector_revealed + (2 * (tier - source.min + 1))
         item.max_distance_of_nearby_sector_revealed = item.max_distance_of_nearby_sector_revealed + (2 * (tier - source.min + 1))
 
+        if item['pictures'] and item['pictures'].layers then
+            for _, l in pairs(item['pictures'].layers) do
+                if not l.draw_as_shadow then
+                    l.tint = mod_tint[tier]
+                end
+            end
+        end
+
+        if item['integration_patch'] then
+            item['integration_patch'].tint = mod_tint[tier]
+        end
+
     elseif source.type == 'thruster' then
         for _, v in pairs({'min_performance', 'max_performance'}) do
             item[v].fluid_usage = (item[v].fluid_usage and item[v].fluid_usage * (2 ^ (tier - source.min + 1))) or nil
@@ -158,38 +148,6 @@ function main_entity(source, tier)
 
     elseif source.type == 'agricultural-tower' then
         item.radius = item.radius + (1 * (tier - source.min + 1))
-    end
-
-    tint_handle(item, tier, {'picture', 'pictures', 'animation', 'structure', 'integration_patch', 'horizontal_animation', 'vertical_animation'})
-
-    for _, v in pairs({'graphics_set', 'graphics_set_flipped'}) do
-        if item[v] then
-            tint_handle(item[v], tier, {'animation', 'idle_animation', 'frozen_patch'})
-
-            if item[v].working_visualisations then
-                tint_handle(item[v].working_visualisations, tier, {'north_animation', 'east_animation', 'south_animation', 'west_animation', 'animation'})
-            end
-        end
-    end
-
-    if item.idle_animation and item.idle_animation.layers then
-        local i = 1
-
-        while i < #item.idle_animation.layers do
-            if item.idle_animation.layers[i] then
-                item.idle_animation.layers[i].tint = mod_tint[tier]
-            end
-
-            i = i + 2
-
-            if not item.idle_animation.layers[i] then
-                break
-            end
-        end
-    end
-
-    if item.base_picture and item.base_picture.sheets then
-        item.base_picture.sheets[1].tint = mod_tint[tier]
     end
 
     item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
