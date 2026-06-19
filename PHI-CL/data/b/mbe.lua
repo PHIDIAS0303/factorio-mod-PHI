@@ -54,6 +54,18 @@ local function tint_handle(item, tier, tl)
     end
 end
 
+function tint_layer(p, t)
+    if p and p.layers then
+        for _, v in pairs(p.layers) do
+            if not v.draw_as_shadow then
+                v.tint = mod_tint[t]
+            end
+        end
+
+        table.insert(p.layers, {icon = '__base__/graphics/icons/signal/signal_' .. t .. '.png', icon_size = 64, scale = 0.25, shift = {12, 12}})
+    end
+end
+
 function main_entity(source, tier)
     local item = table.deepcopy(data.raw[source.type][source.ref_name])
     item.name = source.name .. '-' .. tier
@@ -90,17 +102,7 @@ function main_entity(source, tier)
         table.insert(item.surface_conditions, {property = 'gravity', min = 0.01})
     end
 
-    if (source.type == 'accumulator') and item['chargable_graphics'] then
-        if item['chargable_graphics']['picture'].layers and item['chargable_graphics']['picture'].layers[1] then
-            item['chargable_graphics']['picture'].layers[1].tint = mod_tint[tier]
-        end
-
-        for _, v in pairs({item['chargable_graphics']['charge_animation'], item['chargable_graphics']['discharge_animation']}) do
-            if v.layers and v.layers[1] and v.layers[1].layers and v.layers[1].layers[1] then
-                v.layers[1].layers[1].tint = mod_tint[tier]
-            end
-        end
-
+    if (source.type == 'accumulator') then
         for _, v in pairs({'buffer_capacity', 'input_flow_limit', 'output_flow_limit'}) do
             item.energy_source[v] = (item.energy_source[v] and (tonumber(string.match(item.energy_source[v], '[%d%.]+')) * (settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value ^ (tier - source.min + 1)) .. string.match(item.energy_source[v], '%a+'))) or nil
         end
@@ -137,6 +139,22 @@ function main_entity(source, tier)
         item.heat_buffer.max_temperature = item.heat_buffer.max_temperature * (2 * (tier - source.min + 1))
         item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * (2 * (tier - source.min + 1)))  .. string.match(item.heat_buffer.max_transfer, '%a+')
         tint_handle(item, tier, {'connection_sprites', 'heat_glow_sprites'})
+    end
+
+    -- picture: solar-panel
+    for _, v in pairs({'picture'}) do
+        if item[v] then
+            tint_layer(item[v], tier)
+        end
+    end
+
+    -- chargable_graphics: accumulator
+    if item['chargable_graphics'] then
+        for _, v in pairs({'picture', 'charge_animation', 'discharge_animation'}) do
+            if item['chargable_graphics'][v] then
+                tint_layer(item['chargable_graphics'][v], tier)
+            end
+        end
     end
 
     tint_handle(item, tier, {'picture', 'pictures', 'animation', 'structure', 'integration_patch', 'horizontal_animation', 'vertical_animation'})
