@@ -130,6 +130,9 @@ function main_entity(source, tier)
         end
 
     elseif (source.type == 'generator') then
+        item.max_power_output = (item.max_power_output and (tonumber(string.match(item.max_power_output, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.max_power_output, '%a+')) or nil
+        item.maximum_temperature = (item.maximum_temperature and 15 + ((item.maximum_temperature - 15) * (2 * (tier - source.min + 1)))) or nil
+
         for _, c in pairs({'horizontal_animation', 'vertical_animation'}) do
             if item[c] and item[c].layers then
                 for _, l in pairs(item[c].layers) do
@@ -142,14 +145,10 @@ function main_entity(source, tier)
             end
         end
 
-        item.max_power_output = (item.max_power_output and (tonumber(string.match(item.max_power_output, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.max_power_output, '%a+')) or nil
-        item.maximum_temperature = (item.maximum_temperature and 15 + ((item.maximum_temperature - 15) * (2 * (tier - source.min + 1)))) or nil
-
     elseif (source.type == 'reactor') then
         item.consumption = tostring(tonumber(string.match(item.consumption, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.consumption, '%a+')
         item.heat_buffer.max_temperature = item.heat_buffer.max_temperature * (2 * (tier - source.min + 1))
         item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * (2 * (tier - source.min + 1)))  .. string.match(item.heat_buffer.max_transfer, '%a+')
-
 
         if item['picture'] and item['picture'].layers then
             for _, l in pairs(item['picture'].layers) do
@@ -165,9 +164,33 @@ function main_entity(source, tier)
         item.power_input = tostring(tonumber(string.match(item.power_input, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.power_input, '%a+')
         item.max_fluid_usage = item.max_fluid_usage * (2 * (tier - source.min + 1))
 
+        if item['graphics_set'] and item['graphics_set']['structure'] and item['graphics_set']['structure'].layers then
+            for _, l in pairs(item['graphics_set']['structure'].layers) do
+                if not l.draw_as_shadow then
+                    l.tint = mod_tint[tier]
+                end
+            end
+
+            icon_add_number(item['graphics_set']['structure'].layers, tier)
+        end
+
     elseif (source.type == 'fusion-generator') then
         item.energy_source.output_flow_limit = tostring(tonumber(string.match(item.energy_source.output_flow_limit, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.energy_source.output_flow_limit, '%a+')
         item.max_fluid_usage = item.max_fluid_usage * (2 * (tier - source.min + 1))
+
+        if item['graphics_set'] then
+            for _, c in pairs({'north_graphics_set', 'east_graphics_set', 'south_graphics_set', 'west_graphics_set'}) do
+                if item['graphics_set'][c] and item['graphics_set'][c].animation and item['graphics_set'][c].animation.layers then
+                    for _, l in pairs(item['graphics_set'][c].animation.layers) do
+                        if not l.draw_as_shadow then
+                            l.tint = mod_tint[tier]
+                        end
+                    end
+
+                    icon_add_number(item['graphics_set'][c].animation.layers, tier)
+                end
+            end
+        end
 
     elseif (source.type == 'heat-pipe') then
         if item['connection_sprites'] then
@@ -185,13 +208,6 @@ function main_entity(source, tier)
         item.heat_buffer.max_temperature = item.heat_buffer.max_temperature * (2 * (tier - source.min + 1))
         item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * (2 * (tier - source.min + 1)))  .. string.match(item.heat_buffer.max_transfer, '%a+')
     end
-
-    --[[
-    nuclear-reactor    
-    fusion-reactor
-    fusion-generator
-    heating-tower
-    ]]
 
     item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
     item.localised_description = {'?', {'entity-description.' .. source.ref_name}, {'description.' .. source.ref_name}}
@@ -237,7 +253,6 @@ function main_recipe(source, tier)
     }})
 end
 
--- fast replace group
 function main_replace_group(source)
     if not data.raw[source.type][source.ref_name].fast_replaceable_group then
         data.raw[source.type][source.ref_name].fast_replaceable_group = source.ref_name
