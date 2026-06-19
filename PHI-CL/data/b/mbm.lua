@@ -74,8 +74,8 @@ function main_entity(source, tier)
         elseif (source.name == 'oil-refinery' or source.name == 'chemical-plant' or source.name == 'crusher') then
             if item['graphics_set'] and item['graphics_set']['animation'] then
                 for _, d in pairs({'north', 'east', 'south', 'west'}) do
-                    if item['graphics_set']['animation'][d] then
-                        for _, l in pairs(item['graphics_set']['animation'][d]) do
+                    if item['graphics_set']['animation'][d] and item['graphics_set']['animation'][d].layers then
+                        for _, l in pairs(item['graphics_set']['animation'][d].layers) do
                             if not l.draw_as_shadow then
                                 l.tint = mod_tint[tier]
                             end
