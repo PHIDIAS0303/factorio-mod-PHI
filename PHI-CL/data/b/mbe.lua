@@ -32,56 +32,8 @@ for i = 1, 7 do
     }})
 end
 
-local function tint_handle(item, tier, tl)
-    for _, ve in pairs(tl) do
-        if item[ve] then
-            for _, tc in pairs({'layers', 'sheets', 'structure', 'frames'}) do
-                if item[ve][tc] and type(item[ve][tc]) == 'table' then
-                    for _, v2 in pairs(item[ve][tc]) do
-                        v2.tint = mod_tint[tier]
-
-                        if v2.frames then
-                            for _, v3 in pairs(v2.frames) do
-                                v3.tint = mod_tint[tier]
-                            end
-                        end
-                    end
-                end
-            end
-
-            item[ve].tint = mod_tint[tier]
-        end
-    end
-end
-
-function tint_layer(al, t)
-    for _, l in pairs(al) do
-        if not l.draw_as_shadow then
-            l.tint = mod_tint[t]
-        end
-    end
-end
-
-function tint(i, p, t)
-    if not i then
-        return
-    end
-
-    if p then
-        for _, c in pairs(p) do
-            if i[c] and i[c].layers then
-                tint_layer(i[c].layers, t)
-            end
-
-            if c == 'picture' then
-                table.insert(i[c].layers, {icon = '__base__/graphics/icons/signal/signal_' .. t .. '.png', icon_size = 64, scale = 0.25, shift = {12, 12}})
-            end
-        end
-
-    else
-        tint_layer(i.layers, t)
-        table.insert(i.layers, {icon = '__base__/graphics/icons/signal/signal_' .. t .. '.png', icon_size = 64, scale = 0.25, shift = {12, 12}})
-    end
+function icon_add_number(i, t)
+    table.insert(i, {icon = '__base__/graphics/icons/signal/signal_' .. t .. '.png', icon_size = 64, scale = 0.25, shift = {12, 12}})
 end
 
 function main_entity(source, tier)
@@ -124,26 +76,36 @@ function main_entity(source, tier)
 
         if item['picture'] and item['picture'].layers then
             for _, l in pairs(item['picture'].layers) do
-            if not l.draw_as_shadow then
-                l.tint = mod_tint[tier]
+                if not l.draw_as_shadow then
+                    l.tint = mod_tint[tier]
+                end
             end
+
+            icon_add_number(item['picture'].layers, tier)
         end
-    end
 
     elseif (source.type == 'accumulator') then
-        if item['chargable_graphics'] then
-            tint(item['chargable_graphics'], {'picture', 'charge_animation', 'discharge_animation'}, tier)
-        end
-
         for _, v in pairs({'buffer_capacity', 'input_flow_limit', 'output_flow_limit'}) do
             item.energy_source[v] = (item.energy_source[v] and (tonumber(string.match(item.energy_source[v], '[%d%.]+')) * (settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value ^ (tier - source.min + 1)) .. string.match(item.energy_source[v], '%a+'))) or nil
         end
 
-    elseif (source.type == 'boiler') then
-        if item['picture'] then
-            tint(item['picture'], {'north', 'east', 'south', 'west'}, tier)
+        if item['chargable_graphics'] then
+            for _, c in pairs({'picture', 'charge_animation', 'discharge_animation'}) do
+                if item['chargable_graphics'][c] and item['chargable_graphics'][c].layers then
+                    for _, l in pairs(item['chargable_graphics'][c].layers) do
+                        if not l.draw_as_shadow then
+                            l.tint = mod_tint[tier]
+                        end
+                    end
+                end
+            end
+
+            if item['chargable_graphics']['picture'] then
+                icon_add_number(item['chargable_graphics']['picture'].layers, tier)
+            end
         end
 
+    elseif (source.type == 'boiler') then
         item.energy_consumption = tostring(tonumber(string.match(item.energy_consumption, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.energy_consumption, '%a+')
         item.target_temperature = 15 + ((item.target_temperature - 15) * (2 * (tier - source.min + 1)))
 
@@ -153,10 +115,30 @@ function main_entity(source, tier)
             item.energy_source.max_transfer = tostring(tonumber(string.match(item.energy_source.max_transfer, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.energy_source.max_transfer, '%a+')
         end
 
+        if item['picture'] then
+            for _, c in pairs({'north', 'east', 'south', 'west'}) do
+                if item['picture'][c] and item['picture'][c].structure and item['picture'][c].structure.layers then
+                    for _, l in pairs(item['picture'][c].structure.layers) do
+                        if not l.draw_as_shadow then
+                            l.tint = mod_tint[tier]
+                        end
+                    end
+
+                    icon_add_number(item['picture'][c].structure.layers, tier)
+                end
+            end
+        end
+
     elseif (source.type == 'generator') then
         for _, c in pairs({'horizontal_animation', 'vertical_animation'}) do
-            if item[c] then
-                tint(item[c], nil, tier)
+            if item[c] and item[c].layers then
+                for _, l in pairs(item[c].layers) do
+                    if not l.draw_as_shadow then
+                        l.tint = mod_tint[tier]
+                    end
+                end
+
+                icon_add_number(item[c].layers, tier)
             end
         end
 
@@ -167,7 +149,17 @@ function main_entity(source, tier)
         item.consumption = tostring(tonumber(string.match(item.consumption, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.consumption, '%a+')
         item.heat_buffer.max_temperature = item.heat_buffer.max_temperature * (2 * (tier - source.min + 1))
         item.heat_buffer.max_transfer = tostring(tonumber(string.match(item.heat_buffer.max_transfer, '[%d%.]+')) * (2 * (tier - source.min + 1)))  .. string.match(item.heat_buffer.max_transfer, '%a+')
-        tint_handle(item, tier, {'connection_patches_connected', 'connection_patches_disconnected', 'heat_connection_patches_connected', 'heat_connection_patches_disconnected', 'lower_layer_picture'})
+
+
+        if item['picture'] and item['picture'].layers then
+            for _, l in pairs(item['picture'].layers) do
+                if not l.draw_as_shadow then
+                    l.tint = mod_tint[tier]
+                end
+            end
+
+            icon_add_number(item['picture'].layers, tier)
+        end
 
     elseif (source.type == 'fusion-reactor') then
         item.power_input = tostring(tonumber(string.match(item.power_input, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.power_input, '%a+')
@@ -178,9 +170,15 @@ function main_entity(source, tier)
         item.max_fluid_usage = item.max_fluid_usage * (2 * (tier - source.min + 1))
 
     elseif (source.type == 'heat-pipe') then
-        for _, c in pairs({'connection_sprites', 'heat_glow_sprites'}) do
-            if item[c] then
-                tint(item[c], {'single', 'straight_vertical', 'straight_horizontal', 'corner_right_up', 'corner_left_up', 'corner_right_down', 'corner_left_down', 't_up', 't_down', 't_right', 't_left', 'cross', 'ending_up', 'ending_down', 'ending_right', 'ending_left'}, tier)
+        if item['connection_sprites'] then
+            for _, c in pairs({'single', 'straight_vertical', 'straight_horizontal', 'corner_right_up', 'corner_left_up', 'corner_right_down', 'corner_left_down', 't_up', 't_down', 't_right', 't_left', 'cross', 'ending_up', 'ending_down', 'ending_right', 'ending_left'}) do
+                if item['connection_sprites'][c] then
+                    for _, l in pairs(item['connection_sprites'][c]) do
+                        l.tint = mod_tint[tier]
+                    end
+
+                    icon_add_number(item['connection_sprites'][c], tier)
+                end
             end
         end
 
@@ -193,22 +191,7 @@ function main_entity(source, tier)
     fusion-reactor
     fusion-generator
     heating-tower
-
-    reactor
-    
-    tint(item, {'picture'}, tier)
-
-    if item['heat_buffer'] then
-        tint(item['heat_buffer'], {'heat_picture'}, tier)
-    end
-
-        for _, c in pairs({'horizontal_animation', 'vertical_animation'}) do
-            if item[c] then
-                tint(item[c], nil, tier)
-            end
-        end
     ]]
-
 
     item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
     item.localised_description = {'?', {'entity-description.' .. source.ref_name}, {'description.' .. source.ref_name}}
