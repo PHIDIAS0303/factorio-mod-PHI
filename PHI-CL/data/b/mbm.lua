@@ -1,25 +1,6 @@
 local items = require('mbm-c')
 
-local research_modifier = {
-    ['ammo-turret'] = {
-        'physical-projectile-damage-1',
-        'physical-projectile-damage-2',
-        'physical-projectile-damage-3',
-        'physical-projectile-damage-4',
-        'physical-projectile-damage-5',
-        'physical-projectile-damage-6',
-        'physical-projectile-damage-7'
-    },
-    ['fluid-turret'] = {
-        'refined-flammables-1',
-        'refined-flammables-2',
-        'refined-flammables-3',
-        'refined-flammables-4',
-        'refined-flammables-5',
-        'refined-flammables-6',
-        'refined-flammables-7'
-    }
-}
+
 
 local mod_tint = {
     [2] = {r=140, g=142, b=200},
@@ -143,8 +124,15 @@ function main_entity(source, tier)
             item[v].fluid_usage = (item[v].fluid_usage and item[v].fluid_usage * (2 ^ (tier - source.min + 1))) or nil
         end
 
-    elseif source.type == 'reactor' and source.name == 'heating-tower' then
-        item.consumption = tostring(tonumber(string.match(item.consumption, '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. string.match(item.consumption, '%a+')
+        if item['graphics_set'] then
+            if item['graphics_set']['animation'] then
+                item['graphics_set']['animation'].tint = mod_tint[tier]
+            end
+
+            if item['graphics_set']['integration_patch'] then
+                item['graphics_set']['integration_patch'].tint = mod_tint[tier]
+            end
+        end
 
     elseif source.type == 'agricultural-tower' then
         item.radius = item.radius + (1 * (tier - source.min + 1))
@@ -204,20 +192,6 @@ function main_technology(source, tier)
     end
 
     table.insert(data.raw.technology[source.tech].effects, {type = 'unlock-recipe', recipe = source.name .. '-' .. tier})
-
-    if source.type ~= 'ammo-turret' and source.type ~= 'fluid-turret' then
-        return
-    end
-
-    for i=1, #research_modifier[source.type], 1 do
-        if data.raw.technology[research_modifier[source.type][i]] and data.raw.technology[research_modifier[source.type][i]].effects then
-            for j=1, #data.raw.technology[research_modifier[source.type][i]].effects, 1 do
-                if (data.raw.technology[research_modifier[source.type][i]].effects[j].type == 'turret-attack') and (data.raw.technology[research_modifier[source.type][i]].effects[j].turret_id == source.ref_name) then
-                    table.insert(data.raw.technology[research_modifier[source.type][i]].effects, {type='turret-attack', turret_id=source.name .. '-' .. tier, modifier=data.raw.technology[research_modifier[source.type][i]].effects[j].modifier})
-                end
-            end
-        end
-    end
 end
 
 function main_replace_group(source)
@@ -266,6 +240,38 @@ if data.raw['assembling-machine'] and data.raw['assembling-machine']['assembling
             data.raw['assembling-machine']['assembling-machine-' .. i].localised_name = {'phi-cl.combine', {'entity-name.assembling-machine-1'}, tostring(i)}
             data.raw['item']['assembling-machine-' .. i].localised_name = {'phi-cl.combine', {'entity-name.assembling-machine-1'}, tostring(i)}
             data.raw['recipe']['assembling-machine-' .. i].localised_name = {'phi-cl.combine', {'entity-name.assembling-machine-1'}, tostring(i)}
+        end
+    end
+end
+
+if data.raw['ammo-turret'] and data.raw['ammo-turret']['gun-turret'] and settings.startup['PHI-MB-MACHINE'].value > 1 then
+    for i = 1, 7 do
+        if data.raw.technology['physical-projectile-damage-' .. i] and data.raw.technology['physical-projectile-damage-' .. i].effects then
+            for _, j in pairs(data.raw.technology['physical-projectile-damage-' .. i].effects) do
+                if j.type and j.turret_id and j.type == 'turret-attack' and j.turret_id == 'gun-turret' then
+                    for k = 2, settings.startup['PHI-MB-MACHINE'].value do
+                        if data.raw['ammo-turret']['gun-turret-' .. k] then
+                            table.insert(data.raw.technology['physical-projectile-damage-' .. i].effects, {type = 'turret-attack', turret_id = 'gun-turret-' .. k, modifier = j.modifier})
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+if data.raw['fluid-turret'] and data.raw['fluid-turret']['flamethrower-turret'] and settings.startup['PHI-MB-MACHINE'].value > 1 then
+    for i = 1, 7 do
+        if data.raw.technology['refined-flammables-' .. i] and data.raw.technology['refined-flammables-' .. i].effects then
+            for _, j in pairs(data.raw.technology['refined-flammables-' .. i].effects) do
+                if j.type and j.turret_id and j.type == 'turret-attack' and j.turret_id == 'flamethrower-turret' then
+                    for k = 2, settings.startup['PHI-MB-MACHINE'].value do
+                        if data.raw['fluid-turret']['flamethrower-turret-' .. k] then
+                            table.insert(data.raw.technology['refined-flammables-' .. i].effects, {type = 'turret-attack', turret_id = 'flamethrower-turret-' .. k, modifier = j.modifier})
+                        end
+                    end
+                end
+            end
         end
     end
 end
