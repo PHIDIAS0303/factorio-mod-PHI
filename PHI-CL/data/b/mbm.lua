@@ -19,10 +19,6 @@ function main_entity(source, tier)
     item.max_health = item.max_health * (tier - source.min + 2)
     item.next_upgrade = ((tier < source.max) and source.name .. '-' .. (tier + 1)) or nil
 
-    if item['crafting_speed'] then
-        item['crafting_speed'] = tonumber(string.match(item['crafting_speed'], '[%d%.]+')) * (2 ^ (tier - source.min + 1))
-    end
-
     for _, v in pairs({'energy_usage', 'heating_energy', 'crane_energy_usage', 'energy_per_shot'}) do
         if item[v] then
             item[v] = (tonumber(string.match(item[v], '[%d%.]+')) * (2 ^ (tier - source.min + 1))) .. (string.match(item[v], '%a+') or '')
@@ -70,7 +66,56 @@ function main_entity(source, tier)
         item.prepare_range = item.prepare_range + (2 * (tier - source.min + 1))
     end
 
-    if (source.type == 'lab') then
+    --[[
+    electric-furnace
+    pumpjack
+    laser-turret
+    flamethrower-turret
+    gun-turret
+    railgun-turret
+    rocket-turret
+    tesla-turret
+    recycler
+    ]]
+
+    if (source.type == 'assembling-machine') then
+        if item['crafting_speed'] then
+            item['crafting_speed'] = tonumber(string.match(item['crafting_speed'], '[%d%.]+')) * (2 ^ (tier - source.min + 1))
+        end
+
+        if (source.name == 'assembling-machine' or source.name == 'biochamber' or source.name == 'foundry' or source.name == 'cryogenic-plant') then
+            if item['graphics_set'] and item['graphics_set']['animation'] and item['graphics_set']['animation'].layers then
+                for _, l in pairs(item['graphics_set']['animation'].layers) do
+                    if not l.draw_as_shadow then
+                        l.tint = mod_tint[tier]
+                    end
+                end
+            end
+
+        elseif (source.name == 'oil-refinery' or source.name == 'chemical-plant' or source.name == 'crusher') then
+            if item['graphics_set'] and item['graphics_set']['animation'] then
+                for _, d in pairs({'north', 'east', 'south', 'west'}) do
+                    if item['graphics_set']['animation'][d] then
+                        for _, l in pairs(item['graphics_set']['animation'][d]) do
+                            if not l.draw_as_shadow then
+                                l.tint = mod_tint[tier]
+                            end
+                        end
+                    end
+                end
+            end
+
+        elseif (source.name == 'centrifuge' or source.name == 'electromagnetic-plant') then
+            if item['graphics_set'] and item['graphics_set']['idle_animation'] and item['graphics_set']['idle_animation'].layers then
+                for _, l in pairs(item['graphics_set']['idle_animation'].layers) do
+                    if not l.draw_as_shadow then
+                        l.tint = mod_tint[tier]
+                    end
+                end
+            end
+        end
+
+    elseif (source.type == 'lab') then
         if item['researching_speed'] then
             item['researching_speed'] = tonumber(string.match(item['researching_speed'], '[%d%.]+')) * (2 ^ (tier - source.min + 1))
         end
