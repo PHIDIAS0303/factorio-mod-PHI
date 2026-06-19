@@ -173,7 +173,6 @@ function main_entity(source, tier)
         end
 
     elseif (source.type == 'fusion-generator') then
-        item.energy_source.output_flow_limit = tostring(tonumber(string.match(item.energy_source.output_flow_limit, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.energy_source.output_flow_limit, '%a+')
         item.max_fluid_usage = item.max_fluid_usage * (2 * (tier - source.min + 1))
 
         if item['graphics_set'] then
