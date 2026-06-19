@@ -164,13 +164,8 @@ function main_item(source, tier)
         item.icons[1].tint = mod_tint[tier]
 
     elseif item.icon then
-        item.icons = {{icon = item.icon, tint = mod_tint[tier]}}
+        item.icons = {{icon = item.icon, icon_size = (item.icon_size and item.icon_size) or nil, tint = mod_tint[tier]}}
         item.icon = nil
-
-        if item.icon_size then
-            item.icons[1].icon_size = item.icon_size
-            item.icon_size = nil
-        end
     end
 
     table.insert(item.icons, {icon = '__base__/graphics/icons/signal/signal_' .. tier .. '.png', icon_size = 64, scale = 0.25, shift = {12, 12}})
