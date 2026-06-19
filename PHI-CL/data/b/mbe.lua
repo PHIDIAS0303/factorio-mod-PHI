@@ -76,8 +76,6 @@ function main_entity(source, tier)
                     l.tint = mod_tint[tier]
                 end
             end
-
-            table.insert(item['picture'].layers, {filename = '__base__/graphics/icons/signal/signal_' .. tier .. '.png', width = 120, height = 64, frame_count = 1, scale = 0.25, shift = {12, 12}})
         end
 
     elseif (source.type == 'accumulator') then
@@ -86,18 +84,30 @@ function main_entity(source, tier)
         end
 
         if item['chargable_graphics'] then
-            for _, c in pairs({'picture', 'charge_animation', 'discharge_animation'}) do
-                if item['chargable_graphics'][c] and item['chargable_graphics'][c].layers then
-                    for _, l in pairs(item['chargable_graphics'][c].layers) do
-                        if not l.draw_as_shadow then
-                            l.tint = mod_tint[tier]
-                        end
+            if item['chargable_graphics']['picture'] and item['chargable_graphics']['picture'].layers then
+                for _, l in pairs(item['chargable_graphics']['picture'].layers) do
+                    if not l.draw_as_glow then
+                        l.tint = mod_tint[tier]
                     end
                 end
             end
 
-            if item['chargable_graphics']['picture'] then
-                table.insert(item['chargable_graphics']['picture'].layers, {filename = '__base__/graphics/icons/signal/signal_' .. tier .. '.png', width = 120, height = 64, frame_count = 1, scale = 0.25, shift = {12, 12}})
+            for _, c in pairs({'charge_animation', 'discharge_animation'}) do
+                if item['chargable_graphics'][c] and item['chargable_graphics'][c].layers then
+                    for _, l in pairs(item['chargable_graphics'][c].layers) do
+                        if l.layers then
+                            for _, ll in pairs(l.layers) do
+                                if not ll.draw_as_glow then
+                                    ll.tint = mod_tint[tier]
+                                end
+                            end
+                        end
+
+                        if not l.draw_as_glow then
+                            l.tint = mod_tint[tier]
+                        end
+                    end
+                end
             end
         end
 
@@ -111,10 +121,10 @@ function main_entity(source, tier)
             item.energy_source.max_transfer = tostring(tonumber(string.match(item.energy_source.max_transfer, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.energy_source.max_transfer, '%a+')
         end
 
-        if item['picture'] then
+        if item['pictures'] then
             for _, c in pairs({'north', 'east', 'south', 'west'}) do
-                if item['picture'][c] and item['picture'][c].structure and item['picture'][c].structure.layers then
-                    for _, l in pairs(item['picture'][c].structure.layers) do
+                if item['pictures'][c] and item['pictures'][c].structure and item['pictures'][c].structure.layers then
+                    for _, l in pairs(item['pictures'][c].structure.layers) do
                         if not l.draw_as_shadow then
                             l.tint = mod_tint[tier]
                         end
