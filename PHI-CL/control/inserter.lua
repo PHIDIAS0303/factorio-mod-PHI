@@ -14,17 +14,12 @@ function main.calc(entity)
     local belt_stack_size_bonus = entity.force.belt_stack_size_bonus or 1
 
     for _, belt_speed in ipairs({pickup_belt_speed, drop_belt_speed}) do
-        if belt_speed and stack_size > 1 then
-            local remaining = stack_size - belt_stack_size_bonus
-
-            if remaining > 0 then
-                ticks_per_cycle = ticks_per_cycle + math.ceil(math.ceil(remaining / belt_stack_size_bonus) * 0.25 / belt_speed)
-            end
+        if belt_speed and stack_size > 1 and stack_size > belt_stack_size_bonus then
+            ticks_per_cycle = ticks_per_cycle + math.ceil(math.ceil((stack_size - belt_stack_size_bonus) / belt_stack_size_bonus) * 0.25 / belt_speed)
         end
     end
 
-    stack_size = math.min(stack_size, drop_belt_speed and drop_belt_speed * ticks_per_cycle * 4 or math.huge, pickup_belt_speed and pickup_belt_speed * ticks_per_cycle * 8 or math.huge)
-    return stack_size * 60 / ticks_per_cycle
+    return math.min(stack_size, drop_belt_speed and drop_belt_speed * ticks_per_cycle * 4 or math.huge, pickup_belt_speed and pickup_belt_speed * ticks_per_cycle * 8 or math.huge) * 60 / ticks_per_cycle
 end
 
 return main
