@@ -3,13 +3,14 @@ local main = {}
 
 function main.get_belt_penalty(belt_speed, inserter_stack_size, belt_stack_size)
     local penalty = 0
-    inserter_stack_size = inserter_stack_size - 1
+    local remaining = math.min(inserter_stack_size, belt_stack_size)
+    inserter_stack_size = inserter_stack_size - remaining
     local item_center_offset = belt_speed
     local acted = true
 
     while inserter_stack_size > 0 do
         if item_center_offset > 0 then
-            inserter_stack_size = inserter_stack_size - 1
+            inserter_stack_size = inserter_stack_size - remaining
             item_center_offset = item_center_offset - 0.25
             acted = true
         end
@@ -17,12 +18,13 @@ function main.get_belt_penalty(belt_speed, inserter_stack_size, belt_stack_size)
         item_center_offset = item_center_offset + belt_speed
 
         if not acted and (item_center_offset > 0) then
-            inserter_stack_size = inserter_stack_size - 1
+            inserter_stack_size = inserter_stack_size - remaining
             item_center_offset = item_center_offset - 0.25
             acted = true
         end
 
         penalty = penalty + 1
+        remaining = math.min(inserter_stack_size, belt_stack_size)
         acted = false
     end
 
