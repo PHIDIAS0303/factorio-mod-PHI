@@ -1,15 +1,15 @@
 
 local main = {}
 
-function main.get_belt_penalty(belt_speed, stack_size)
+function main.get_belt_penalty(belt_speed, inserter_stack_size, belt_stack_size)
     local penalty = 0
-    stack_size = stack_size - 1
+    inserter_stack_size = inserter_stack_size - 1
     local item_center_offset = belt_speed
     local acted = true
 
-    while stack_size > 0 do
+    while inserter_stack_size > 0 do
         if item_center_offset > 0 then
-            stack_size = stack_size - 1
+            inserter_stack_size = inserter_stack_size - 1
             item_center_offset = item_center_offset - 0.25
             acted = true
         end
@@ -17,7 +17,7 @@ function main.get_belt_penalty(belt_speed, stack_size)
         item_center_offset = item_center_offset + belt_speed
 
         if not acted and (item_center_offset > 0) then
-            stack_size = stack_size - 1
+            inserter_stack_size = inserter_stack_size - 1
             item_center_offset = item_center_offset - 0.25
             acted = true
         end
@@ -29,10 +29,6 @@ function main.get_belt_penalty(belt_speed, stack_size)
     return penalty
 end
 
---[[
-(prototype.inserter_max_belt_stack_size or 1)
-(entity.force.belt_stack_size_bonus or 1)
-]]
 function main.calc(entity)
     local prototype = entity.type == 'entity-ghost' and entity.ghost_prototype or entity.prototype
     local pickup_target = entity.pickup_target and entity.pickup_target or entity.surface.find_entities_filtered{position = entity.pickup_position, limit = 1}[1]
@@ -46,9 +42,9 @@ function main.calc(entity)
     ticks_per_cycle = ticks_per_cycle < extension_time and extension_time or ticks_per_cycle
     ticks_per_cycle = ticks_per_cycle < 2 and 2 or ticks_per_cycle
     local pickup_belt_speed = pickup_target and (pickup_target.type == 'entity-ghost' and pickup_target.ghost_prototype.belt_speed or pickup_target.prototype.belt_speed) or nil
-    ticks_per_cycle = (pickup_belt_speed and (stack_size > 1)) and (ticks_per_cycle + main.get_belt_penalty(pickup_belt_speed, stack_size)) or ticks_per_cycle
+    ticks_per_cycle = (pickup_belt_speed and (stack_size > 1)) and (ticks_per_cycle + main.get_belt_penalty(pickup_belt_speed, stack_size, entity.force.belt_stack_size_bonus or 1)) or ticks_per_cycle
     local drop_belt_speed = drop_target and (drop_target.type == 'entity-ghost' and drop_target.ghost_prototype.belt_speed or drop_target.prototype.belt_speed) or nil
-    ticks_per_cycle = (drop_belt_speed and (stack_size > 1)) and (ticks_per_cycle + main.get_belt_penalty(drop_belt_speed, stack_size)) or ticks_per_cycle
+    ticks_per_cycle = (drop_belt_speed and (stack_size > 1)) and (ticks_per_cycle + main.get_belt_penalty(drop_belt_speed, stack_size, entity.force.belt_stack_size_bonus or 1)) or ticks_per_cycle
     stack_size = drop_belt_speed and math.min(stack_size, drop_belt_speed * ticks_per_cycle * 4) or stack_size
     stack_size = pickup_belt_speed and math.min(stack_size, pickup_belt_speed * ticks_per_cycle * 8) or stack_size
     return stack_size * 60 / ticks_per_cycle
