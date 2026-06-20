@@ -46,15 +46,7 @@ function main.calc(entity)
 
     if pickup_length > 0 and drop_length > 0 then
         local ratio = ((entity.pickup_position.x - entity.position.x) * (entity.drop_position.x - entity.position.x) + (entity.pickup_position.y - entity.position.y) * (entity.drop_position.y - entity.position.y)) / (pickup_length * drop_length)
-
-        if ratio > 1 then
-            ratio = 1
-
-        elseif ratio < -1 then
-            ratio = -1
-        end
-
-        angle = math.acos(ratio)
+        angle = math.acos(math.max(-1, math.min(1, ratio)))
     end
 
     local ticks_per_cycle = 2 * math.ceil((angle / (math.pi * 2) - 0.001) / prototype.get_inserter_rotation_speed(entity.quality))
