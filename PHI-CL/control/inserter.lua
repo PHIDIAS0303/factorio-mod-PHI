@@ -11,34 +11,15 @@ function main.calc(entity)
     local ticks_per_cycle = math.max((2 * math.ceil((((pickup_length > 0 and drop_length > 0) and math.acos(math.max(-1, math.min(1, (((entity.pickup_position.x - entity.position.x) * (entity.drop_position.x - entity.position.x) + (entity.pickup_position.y - entity.position.y) * (entity.drop_position.y - entity.position.y)) / (pickup_length * drop_length))))) or 0) / (math.pi * 2) - 0.001) / prototype.get_inserter_rotation_speed(entity.quality))), (2 * math.ceil(math.abs(pickup_length - drop_length) / prototype.get_inserter_extension_speed(entity.quality))), 2)
     local pickup_belt_speed = pickup_target and (pickup_target.type == 'entity-ghost' and pickup_target.ghost_prototype.belt_speed or pickup_target.prototype.belt_speed) or nil
     local drop_belt_speed = drop_target and (drop_target.type == 'entity-ghost' and drop_target.ghost_prototype.belt_speed or drop_target.prototype.belt_speed) or nil
+    local belt_stack_size_bonus = entity.force.belt_stack_size_bonus or 1
 
     for _, belt_speed in ipairs({pickup_belt_speed, drop_belt_speed}) do
         if belt_speed and stack_size > 1 then
-            local penalty = 0
-            local items_left = stack_size - 1
-            local offset = belt_speed
-            local picked = true
+            local remaining = stack_size - belt_stack_size_bonus
 
-            while items_left > 0 do
-                if offset > 0 then
-                    items_left = items_left - 1
-                    offset = offset - 0.25
-                    picked = true
-                end
-
-                offset = offset + belt_speed
-
-                if not picked and (offset > 0) then
-                    items_left = items_left - 1
-                    offset = offset - 0.25
-                    picked = true
-                end
-
-                penalty = penalty + 1
-                picked = false
+            if remaining > 0 then
+                ticks_per_cycle = ticks_per_cycle + math.ceil(math.ceil(remaining / belt_stack_size_bonus) * 0.25 / belt_speed)
             end
-
-            ticks_per_cycle = ticks_per_cycle + penalty
         end
     end
 
