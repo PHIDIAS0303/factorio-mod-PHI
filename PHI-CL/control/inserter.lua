@@ -41,12 +41,8 @@ function main.calc(entity)
     local drop_belt_speed = drop_target and (drop_target.type == 'entity-ghost' and drop_target.ghost_prototype.belt_speed or drop_target.prototype.belt_speed) or nil
     local pickup_length = math.sqrt((entity.pickup_position.x - entity.position.x) * (entity.pickup_position.x - entity.position.x) + (entity.pickup_position.y - entity.position.y) * (entity.pickup_position.y - entity.position.y))
     local drop_length = math.sqrt((entity.drop_position.x - entity.position.x) * (entity.drop_position.x - entity.position.x) + (entity.drop_position.y - entity.position.y) * (entity.drop_position.y - entity.position.y))
+    local stack_size = entity.inserter_stack_size_override == 0 and (1 + prototype.inserter_stack_size_bonus + ((prototype.bulk and entity.force.bulk_inserter_capacity_bonus) or entity.force.inserter_stack_size_bonus)) or entity.inserter_stack_size_override
     local angle = 0
-    local stack_size = entity.inserter_stack_size_override
-
-    if stack_size == 0 then
-        stack_size = 1 + prototype.inserter_stack_size_bonus + ((prototype.bulk and entity.force.bulk_inserter_capacity_bonus) or entity.force.inserter_stack_size_bonus)
-    end
 
     if pickup_length > 0 and drop_length > 0 then
         local ratio = ((entity.pickup_position.x - entity.position.x) * (entity.drop_position.x - entity.position.x) + (entity.pickup_position.y - entity.position.y) * (entity.drop_position.y - entity.position.y)) / (pickup_length * drop_length)
@@ -63,22 +59,10 @@ function main.calc(entity)
 
     local ticks_per_cycle = 2 * math.ceil((angle / (math.pi * 2) - 0.001) / prototype.get_inserter_rotation_speed(entity.quality))
     local extension_time = 2 * math.ceil(math.abs(pickup_length - drop_length) / prototype.get_inserter_extension_speed(entity.quality))
-
-    if ticks_per_cycle < extension_time then
-        ticks_per_cycle = extension_time
-    end
-
-    if ticks_per_cycle < 2 then
-        ticks_per_cycle = 2
-    end
-
-    if pickup_belt_speed and (stack_size > 1) then
-        ticks_per_cycle = ticks_per_cycle + main.get_belt_penalty(pickup_belt_speed, stack_size)
-    end
-
-    if drop_belt_speed and (stack_size > 1) then
-        ticks_per_cycle = ticks_per_cycle + main.get_belt_penalty(drop_belt_speed, stack_size)
-    end
+    ticks_per_cycle = ticks_per_cycle < extension_time and extension_time or ticks_per_cycle
+    ticks_per_cycle = ticks_per_cycle < 2 and 2 or ticks_per_cycle
+    ticks_per_cycle = (pickup_belt_speed and (stack_size > 1)) and (ticks_per_cycle + main.get_belt_penalty(pickup_belt_speed, stack_size)) or ticks_per_cycle
+    ticks_per_cycle = (drop_belt_speed and (stack_size > 1)) and (ticks_per_cycle + main.get_belt_penalty(drop_belt_speed, stack_size)) or ticks_per_cycle
 
     if drop_belt_speed then
         local max = drop_belt_speed * ticks_per_cycle * 4
