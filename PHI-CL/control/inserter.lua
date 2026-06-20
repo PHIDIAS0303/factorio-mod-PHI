@@ -1,0 +1,92 @@
+
+local main = {}
+
+function main.get_belt_penalty(belt_speed, stack_size)
+    local penalty = 0
+    stack_size = stack_size - 1
+    local item_center_offset = belt_speed
+    local acted = true
+
+    while stack_size > 0 do
+        if item_center_offset > 0 then
+            stack_size = stack_size - 1
+            item_center_offset = item_center_offset - 0.25
+            acted = true
+        end
+
+        item_center_offset = item_center_offset + belt_speed
+
+        if not acted and (item_center_offset > 0) then
+            stack_size = stack_size - 1
+            item_center_offset = item_center_offset - 0.25
+            acted = true
+        end
+
+        penalty = penalty + 1
+        acted = false
+    end
+
+    return penalty
+end
+
+function main.calc(entity)
+    local prototype = entity.type == 'entity-ghost' and entity.ghost_prototype or entity.prototype
+    local pickup_target = entity.pickup_target and entity.pickup_target or entity.surface.find_entities_filtered{position = entity.pickup_position, limit = 1}[1]
+    local pickup_belt_speed = pickup_target and (pickup_target.type == 'entity-ghost' and pickup_target.ghost_prototype.belt_speed or pickup_target.prototype.belt_speed) or nil
+    local drop_target = entity.drop_target and entity.drop_target or entity.surface.find_entities_filtered{position = entity.drop_position, limit = 1}[1]
+    local drop_belt_speed = drop_target and (drop_target.type == 'entity-ghost' and drop_target.ghost_prototype.belt_speed or drop_target.prototype.belt_speed) or nil
+    local pickup_length = math.sqrt((entity.pickup_position.x - entity.position.x) * (entity.pickup_position.x - entity.position.x) + (entity.pickup_position.y - entity.position.y) * (entity.pickup_position.y - entity.position.y))
+    local drop_length = math.sqrt((entity.drop_position.x - entity.position.x) * (entity.drop_position.x - entity.position.x) + (entity.drop_position.y - entity.position.y) * (entity.drop_position.y - entity.position.y))
+    local angle = 0
+    local stack_size = entity.inserter_stack_size_override
+
+    if stack_size == 0 then
+        stack_size = 1 + prototype.inserter_stack_size_bonus + ((prototype.bulk and entity.force.bulk_inserter_capacity_bonus) or entity.force.inserter_stack_size_bonus)
+    end
+
+    if pickup_length > 0 and drop_length > 0 then
+        local ratio = ((entity.pickup_position.x - entity.position.x) * (entity.drop_position.x - entity.position.x) + (entity.pickup_position.y - entity.position.y) * (entity.drop_position.y - entity.position.y)) / (pickup_length * drop_length)
+
+        if ratio > 1 then
+            ratio = 1
+
+        elseif ratio < -1 then
+            ratio = -1
+        end
+
+        angle = math.acos(ratio)
+    end
+
+    local ticks_per_cycle = 2 * math.ceil((angle / (math.pi * 2) - 0.001) / prototype.get_inserter_rotation_speed(entity.quality))
+    local extension_time = 2 * math.ceil(math.abs(pickup_length - drop_length) / prototype.get_inserter_extension_speed(entity.quality))
+
+    if ticks_per_cycle < extension_time then
+        ticks_per_cycle = extension_time
+    end
+
+    if ticks_per_cycle < 2 then
+        ticks_per_cycle = 2
+    end
+
+    if pickup_belt_speed and (stack_size > 1) then
+        ticks_per_cycle = ticks_per_cycle + main.get_belt_penalty(pickup_belt_speed, stack_size)
+    end
+
+    if drop_belt_speed and (stack_size > 1) then
+        ticks_per_cycle = ticks_per_cycle + main.get_belt_penalty(drop_belt_speed, stack_size)
+    end
+
+    if drop_belt_speed then
+        local max = drop_belt_speed * ticks_per_cycle * 4
+        stack_size = (stack_size > max and max) or stack_size
+    end
+
+    if pickup_belt_speed then
+        local max = pickup_belt_speed * ticks_per_cycle * 8
+        stack_size = (stack_size > max and max) or stack_size
+    end
+
+    return stack_size * 60 / ticks_per_cycle
+end
+
+return main
