@@ -1,34 +1,6 @@
 
 local main = {}
 
-function main.get_belt_penalty(belt_speed, inserter_stack_size)
-    local penalty = 0
-    local items_left = inserter_stack_size - 1
-    local offset = belt_speed
-    local picked = true
-
-    while items_left > 0 do
-        if offset > 0 then
-            items_left = items_left - 1
-            offset = offset - 0.25
-            picked = true
-        end
-
-        offset = offset + belt_speed
-
-        if not picked and (offset > 0) then
-            items_left = items_left - 1
-            offset = offset - 0.25
-            picked = true
-        end
-
-        penalty = penalty + 1
-        picked = false
-    end
-
-    return penalty
-end
-
 function main.calc(entity)
     local prototype = entity.type == 'entity-ghost' and entity.ghost_prototype or entity.prototype
     local pickup_target = entity.pickup_target and entity.pickup_target or entity.surface.find_entities_filtered{position = entity.pickup_position, limit = 1}[1]
@@ -44,12 +16,34 @@ function main.calc(entity)
 
     for _, belt_speed in ipairs({pickup_belt_speed, drop_belt_speed}) do
         if belt_speed and stack_size > 1 then
-            ticks_per_cycle = ticks_per_cycle + main.get_belt_penalty(belt_speed, stack_size)
+            local penalty = 0
+            local items_left = stack_size - 1
+            local offset = belt_speed
+            local picked = true
+
+            while items_left > 0 do
+                if offset > 0 then
+                    items_left = items_left - 1
+                    offset = offset - 0.25
+                    picked = true
+                end
+
+                offset = offset + belt_speed
+
+                if not picked and (offset > 0) then
+                    items_left = items_left - 1
+                    offset = offset - 0.25
+                    picked = true
+                end
+
+                penalty = penalty + 1
+                picked = false
+            end
+
+            ticks_per_cycle = ticks_per_cycle + penalty
         end
     end
 
-    ticks_per_cycle = (pickup_belt_speed and (stack_size > 1)) and (ticks_per_cycle + main.get_belt_penalty(pickup_belt_speed, stack_size)) or ticks_per_cycle
-    ticks_per_cycle = (drop_belt_speed and (stack_size > 1)) and (ticks_per_cycle + main.get_belt_penalty(drop_belt_speed, stack_size)) or ticks_per_cycle
     stack_size = math.min(stack_size, drop_belt_speed and drop_belt_speed * ticks_per_cycle * 4 or math.huge, pickup_belt_speed and pickup_belt_speed * ticks_per_cycle * 8 or math.huge)
     return stack_size * 60 / ticks_per_cycle
 end
