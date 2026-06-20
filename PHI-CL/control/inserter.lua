@@ -69,11 +69,11 @@ function main.calc(entity)
     end
 
     if pickup_belt_speed and (stack_size > 1) then
-        ticks_per_cycle = ticks_per_cycle + main.get_belt_penalty(pickup_belt_speed, stack_size)
+        ticks_per_cycle = ticks_per_cycle + main.get_belt_penalty(pickup_belt_speed * (entity.force.belt_stack_size_bonus or 1), stack_size)
     end
 
     if drop_belt_speed and (stack_size > 1) then
-        ticks_per_cycle = ticks_per_cycle + main.get_belt_penalty(drop_belt_speed, stack_size)
+        ticks_per_cycle = ticks_per_cycle + main.get_belt_penalty(drop_belt_speed * (prototype.inserter_max_belt_stack_size or 1), stack_size)
     end
 
     if drop_belt_speed then
