@@ -30,8 +30,8 @@ function main.get_belt_penalty(belt_speed, stack_size)
 end
 
 --[[
-* (prototype.inserter_max_belt_stack_size or 1)
-* (entity.force.belt_stack_size_bonus or 1)
+(prototype.inserter_max_belt_stack_size or 1)
+(entity.force.belt_stack_size_bonus or 1)
 ]]
 function main.calc(entity)
     local prototype = entity.type == 'entity-ghost' and entity.ghost_prototype or entity.prototype
