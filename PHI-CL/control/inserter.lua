@@ -29,6 +29,10 @@ function main.get_belt_penalty(belt_speed, stack_size)
     return penalty
 end
 
+--[[
+* (prototype.inserter_max_belt_stack_size or 1)
+* (entity.force.belt_stack_size_bonus or 1)
+]]
 function main.calc(entity)
     local prototype = entity.type == 'entity-ghost' and entity.ghost_prototype or entity.prototype
     local pickup_target = entity.pickup_target and entity.pickup_target or entity.surface.find_entities_filtered{position = entity.pickup_position, limit = 1}[1]
@@ -77,12 +81,12 @@ function main.calc(entity)
     end
 
     if drop_belt_speed then
-        local max = drop_belt_speed * ticks_per_cycle * 4 * (entity.force.belt_stack_size_bonus or 1)
+        local max = drop_belt_speed * ticks_per_cycle * 4
         stack_size = (stack_size > max and max) or stack_size
     end
 
     if pickup_belt_speed then
-        local max = pickup_belt_speed * ticks_per_cycle * 8 * (prototype.inserter_max_belt_stack_size or 1)
+        local max = pickup_belt_speed * ticks_per_cycle * 8
         stack_size = (stack_size > max and max) or stack_size
     end
 
