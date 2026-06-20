@@ -42,13 +42,7 @@ function main.calc(entity)
     local pickup_length = math.sqrt((entity.pickup_position.x - entity.position.x) * (entity.pickup_position.x - entity.position.x) + (entity.pickup_position.y - entity.position.y) * (entity.pickup_position.y - entity.position.y))
     local drop_length = math.sqrt((entity.drop_position.x - entity.position.x) * (entity.drop_position.x - entity.position.x) + (entity.drop_position.y - entity.position.y) * (entity.drop_position.y - entity.position.y))
     local stack_size = entity.inserter_stack_size_override == 0 and (1 + prototype.inserter_stack_size_bonus + ((prototype.bulk and entity.force.bulk_inserter_capacity_bonus) or entity.force.inserter_stack_size_bonus)) or entity.inserter_stack_size_override
-    local angle = 0
-
-    if pickup_length > 0 and drop_length > 0 then
-        local ratio = ((entity.pickup_position.x - entity.position.x) * (entity.drop_position.x - entity.position.x) + (entity.pickup_position.y - entity.position.y) * (entity.drop_position.y - entity.position.y)) / (pickup_length * drop_length)
-        angle = math.acos(math.max(-1, math.min(1, ratio)))
-    end
-
+    local angle = (pickup_length > 0 and drop_length > 0) and math.acos(math.max(-1, math.min(1, (((entity.pickup_position.x - entity.position.x) * (entity.drop_position.x - entity.position.x) + (entity.pickup_position.y - entity.position.y) * (entity.drop_position.y - entity.position.y)) / (pickup_length * drop_length))))) or 0
     local ticks_per_cycle = 2 * math.ceil((angle / (math.pi * 2) - 0.001) / prototype.get_inserter_rotation_speed(entity.quality))
     local extension_time = 2 * math.ceil(math.abs(pickup_length - drop_length) / prototype.get_inserter_extension_speed(entity.quality))
     ticks_per_cycle = ticks_per_cycle < extension_time and extension_time or ticks_per_cycle
