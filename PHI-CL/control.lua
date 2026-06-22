@@ -16,7 +16,7 @@ end
 
 local function gui_create(player)
     if player.gui.relative.phi_cl_inserter_config then
-        player.relative.phi_cl_inserter_config.destroy()
+        player.gui.relative.phi_cl_inserter_config.destroy()
     end
 
     if player.gui.relative.phi_cl_combinator_config then
@@ -24,7 +24,7 @@ local function gui_create(player)
     end
 
     if player.gui.relative.phi_cl_inserter then
-        player.relative.phi_cl_inserter.destroy()
+        player.gui.relative.phi_cl_inserter.destroy()
     end
 
     do
