@@ -23,6 +23,10 @@ local function gui_create(player)
         player.gui.relative.phi_cl_combinator_config.destroy()
     end
 
+    if player.gui.relative.phi_cl_inserter then
+        player.relative.phi_cl_inserter.destroy()
+    end
+
     do
         local frame = player.gui.relative.add({type = 'frame', name = 'phi_cl_inserter', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right, type = 'inserter', ghost_mode = 'both'}})
         frame.add({type = 'label', name = 'inserter_throughput', caption = 0, style = 'heading_2_label'})
