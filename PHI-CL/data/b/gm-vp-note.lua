@@ -54,4 +54,21 @@ for k, v in pairs(data.raw['tips-and-tricks-item']) do
         data.raw['tips-and-tricks-item'][k] = nil
     end
 end
+
+-- GM-VP C 6 QUALITY ACHIEVEMENT
+-- GM-VP H 4 QUALITY TIPS_AND_TRICKS
+for _, v in pairs({{'produce-achievement', 'crafting-with-quality'}, {'module-transfer-achievement', 'make-it-better'}, {'produce-achievement', 'my-modules-are-legendary'}, {'equip-armor-achievement', 'look-at-my-shiny-rare-armor'}, {'use-item-achievement', 'todays-fish-is-trout-a-la-creme'}, {'place-equipment-achievement', 'no-room-for-more'}}) do
+    if data.raw[v[1] ] and data.raw[v[1] ][v[2] ] then
+        data.raw[v[1] ][v[2] ].hidden = true
+        data.raw[v[1] ][v[2] ].hidden_in_factoriopedia = true
+    end
+end
+
+for _, v in pairs({'quality', 'quality-modules', 'quality-factoriopedia', 'quality-probabilities'}) do
+    if data.raw['tips-and-tricks-item'][v] then
+        data.raw['tips-and-tricks-item'][v].hidden = true
+        data.raw['tips-and-tricks-item'][v].hidden_in_factoriopedia = true
+    end
+end
+
 ]]
