@@ -38,9 +38,9 @@ if data.raw.technology['rocket-silo'] then
 end
 
 -- GM-VP C 1 BASE TOOL
-if data.raw.tool['space-science-pack'] then
-    data.raw.tool['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'raw-fish', amount = 1}}
-    data.raw.tool['space-science-pack'].send_to_orbit_mode = 'automated'
+if data.raw.item['space-science-pack'] then
+    data.raw.item['space-science-pack'].rocket_launch_products = {{type = 'item', name = 'raw-fish', amount = 1}}
+    data.raw.item['space-science-pack'].send_to_orbit_mode = 'automated'
 end
 
 -- GM-VP C 1 BASE ENTITY
