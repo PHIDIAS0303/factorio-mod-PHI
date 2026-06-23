@@ -423,7 +423,7 @@ if data.raw.technology and items['technology'] and items['technology_reform'] th
 
         elseif v.unit and v.unit.ingredients then
             for i = #v.unit.ingredients, 1, -1 do
-                if data.raw['tool'][v.unit.ingredients[i][1]].hidden then
+                if data.raw.item[v.unit.ingredients[i][1]].hidden then
                     table.remove(v.unit.ingredients, i)
                 end
             end
