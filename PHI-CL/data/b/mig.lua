@@ -680,7 +680,7 @@ if data.raw.item['depleted-uranium-fuel-cell'] and data.raw.item['nuclear-fuel']
         order = 'zd',
         allow_productivity = false,
         ingredients = {{type = 'item', name = 'empty-train-battery', amount = 1}},
-        results = {{type = 'item', name = 'charged-train-battery', probability = 0.995, amount = 1}, {type = 'item', name = 'battery', probability = 0.005, amount = 5}},
+        results = {{type = 'item', name = 'charged-train-battery', independent_probability = 0.995, amount = 1}, {type = 'item', name = 'battery', independent_probability = 0.005, amount = 5}},
         main_product = 'charged-train-battery',
         localised_name = {'name.charged-train-battery'},
         localised_description = {'description.charged-train-battery'}
