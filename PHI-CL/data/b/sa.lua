@@ -113,64 +113,6 @@ if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].v
     end
 end
 
--- SA C 3 SPACE_AGE MODULE,RECIPE,RESEARCH_EFFECT
--- SA C 5 SPACE_AGE QUALITY,RESEARCH
--- SA C 6 SPACE_AGE ACHIEVEMENT
--- SA H 5 SPACE_AGE QUALITY
--- SA H 4 SPACE_AGE TIPS_AND_TRICKS
-if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-ENABLE-QUALITY'].value)) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP') then
-    for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
-        if data.raw.technology[v] then
-            data.raw.technology[v].hidden = true
-            data.raw.technology[v].hidden_in_factoriopedia = true
-            data.raw.technology[v].unit.ingredients = {{'space-science-pack', 1}}
-            data.raw.technology[v].effects = {}
-        end
-
-        if data.raw.module[v] then
-            data.raw.module[v].hidden = true
-            data.raw.module[v].hidden_in_factoriopedia = true
-        end
-
-        if data.raw.recipe[v] then
-            data.raw.recipe[v].hidden = true
-            data.raw.recipe[v].hidden_in_factoriopedia = true
-        end
-    end
-
-    for _, v in pairs({'epic-quality', 'legendary-quality'}) do
-        if data.raw.technology[v] then
-            data.raw.technology[v].hidden = true
-            data.raw.technology[v].hidden_in_factoriopedia = true
-            data.raw.technology[v].unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
-            data.raw.technology[v].effects = {}
-        end
-    end
-
-    for _, v in pairs({'normal', 'uncommon', 'rare', 'epic', 'legendary'}) do
-        if data.raw.quality[v] then
-            data.raw.quality[v].next = nil
-            data.raw.quality[v].next_probability = nil
-            data.raw.quality[v].hidden = true
-            data.raw.quality[v].hidden_in_factoriopedia = true
-        end
-    end
-
-    for _, v in pairs({{'produce-achievement', 'crafting-with-quality'}, {'module-transfer-achievement', 'make-it-better'}, {'produce-achievement', 'my-modules-are-legendary'}, {'equip-armor-achievement', 'look-at-my-shiny-rare-armor'}, {'use-item-achievement', 'todays-fish-is-trout-a-la-creme'}, {'place-equipment-achievement', 'no-room-for-more'}}) do
-        if data.raw[v[1]] and data.raw[v[1]][v[2]] then
-            data.raw[v[1]][v[2]].hidden = true
-            data.raw[v[1]][v[2]].hidden_in_factoriopedia = true
-        end
-    end
-
-    for _, v in pairs({'quality', 'quality-modules', 'quality-factoriopedia', 'quality-probabilities'}) do
-        if data.raw['tips-and-tricks-item'][v] then
-            data.raw['tips-and-tricks-item'][v].hidden = true
-            data.raw['tips-and-tricks-item'][v].hidden_in_factoriopedia = true
-        end
-    end
-end
-
 if not settings.startup['PHI-SA'].value then
     return
 end
