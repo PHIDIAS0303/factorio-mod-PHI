@@ -225,12 +225,12 @@ local items = {
         ['turbo-loader'] = {
             category = 'crafting',
         },
-        ['molten-iron'] = {
+        ['iron-ore-melting'] = {
             energy_required = 1.6,
             ingredients = {{type = 'item', name = 'iron-ore', amount = 1}},
             results = {{type = 'fluid', name = 'molten-iron', amount = 10}}
         },
-        ['molten-copper'] = {
+        ['copper-ore-melting'] = {
             energy_required = 1.6,
             ingredients = {{type = 'item', name = 'copper-ore', amount = 1}},
             results = {{type = 'fluid', name = 'molten-copper', amount = 10}}
@@ -532,6 +532,7 @@ local items = {
         ['spoilage'] = true,
         ['thruster'] = true,
         ['calcite'] = true,
+        ['promethium-science-pack'] = true,
     },
     ['tips_and_tricks_item'] = {
         ['quality'] = true,
@@ -696,8 +697,6 @@ local items = {
         ['empty-space'] = 'tile',
         ['space-platform-foundation'] = 'tile',
         ['foundation'] = 'tile',
-        -- SPACE_AGE TOOL 0
-        ['promethium-science-pack'] = 'tool',
     },
     ['technology_productivity'] = {
         -- BASE 0

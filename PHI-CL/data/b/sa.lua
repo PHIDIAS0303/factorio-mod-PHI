@@ -61,7 +61,7 @@ do
     local spoil_set = (settings.startup['PHI-SA'].value and not settings.startup['PHI-SA-SPOIL'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '')
     local spoil_freeze_set = settings.startup['PHI-SA'].value and settings.startup['PHI-SA-SPOIL'].value and settings.startup['PHI-SA-SPOIL-FREEZE-MULTIPLIER'].value and settings.startup['PHI-SA-SPOIL-FREEZE-MULTIPLIER'].value > 0
 
-    for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg'}) do
+    for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg', 'agricultural-science-pack'}) do
         if spoil_set then
             spoil_handle(data.raw['item'][v])
         end
@@ -79,14 +79,6 @@ do
         if spoil_freeze_set then
             spoil_freeze_handle(data.raw['capsule'][v])
         end
-    end
-
-    if spoil_set then
-        spoil_handle(data.raw['tool']['agricultural-science-pack'])
-    end
-
-    if spoil_freeze_set then
-        spoil_freeze_handle(data.raw['tool']['agricultural-science-pack'])
     end
 end
 
