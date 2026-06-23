@@ -129,23 +129,15 @@ data:extend({
   localised_description = (mods['space-age'] and {'', '[item=ice][virtual-signal=signal-clock] x0.1', {'phi-cl.setting-change-color', '\n[55] A55'}}) or nil,
   order = 'C02'
 }, {
-  type = 'bool-setting',
-  name = 'PHI-SA-ENABLE-QUALITY',
-  setting_type = 'startup',
-  default_value = false,
-  localised_name = {'phi-cl.setting-class-color', 'SA3', {'phi-cl.enable'}, {'mod-setting-name.PHI-SA-ENABLE-QUALITY'}},
-  localised_description = (mods['space-age'] and {'', '[virtual-signal=signal-any-quality]', {'phi-cl.setting-change-color', '\n[17] H17'}}) or nil,
-  order = 'C03'
-}, {
   type = 'int-setting',
   name = 'PHI-SA-QUALITY',
   setting_type = 'startup',
   default_value = 10,
   minimum_value = 1,
   maximum_value = 100,
-  localised_name = {'phi-cl.setting-class-color', 'SA4', {'phi-cl.ratio'}, {'mod-setting-name.PHI-SA-QUALITY'}},
+  localised_name = {'phi-cl.setting-class-color', 'SA3', {'phi-cl.ratio'}, {'mod-setting-name.PHI-SA-QUALITY'}},
   localised_description = (mods['space-age'] and {'', '[item=quality-module-3] x 0.1', {'phi-cl.setting-change-color', '\n[34] C25 H9'}}) or nil,
-  order = 'C04'
+  order = 'C03'
 }, {
   type = 'int-setting',
   name = 'PHI-SA-ROCKET-CAPACITY',
@@ -153,9 +145,9 @@ data:extend({
   default_value = 10,
   minimum_value = 1,
   maximum_value = 10000,
-  localised_name = {'phi-cl.setting-class-color', 'SA5', {'phi-cl.ratio'}, {'mod-setting-name.PHI-SA-ROCKET-CAPACITY'}},
+  localised_name = {'phi-cl.setting-class-color', 'SA4', {'phi-cl.ratio'}, {'mod-setting-name.PHI-SA-ROCKET-CAPACITY'}},
   localised_description = {'', '[item=rocket-silo] 000 KG', {'phi-cl.setting-change-color', '\n[1] C1'}},
-  order = 'C05'
+  order = 'C04'
 }, {
   type = 'string-setting',
   name = 'PHI-GM',
@@ -164,7 +156,7 @@ data:extend({
   default_value = '',
   allowed_values = {'', 'SAP', 'VP'},
   localised_name = {'phi-cl.setting-category-color', 'GM', {'phi-cl.enable'}, {'mod-setting-name.PHI-GM'}},
-  localised_description = {'', {'phi-cl.setting-change-color', '[GM] [50] A20 C23 H7\n[SAP] [31] A3 C28\n[VP] [610] A15 C226 H369'}},
+  localised_description = {'', {'phi-cl.setting-change-color', '[GM] [50] A20 C23 H7\n[SAP] [31] A3 C28\n[VP] [617] A15 C232 H370'}},
   order = 'D00'
 },  {
   type = 'bool-setting',
