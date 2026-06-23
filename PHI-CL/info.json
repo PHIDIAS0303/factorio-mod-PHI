@@ -10,8 +10,8 @@
     "description": "Regular PHI-CL VP or SAP server hosted on APERX\nVanilla Plus, VP (Space Age, Production Focus. No Quality, No Planet)\nSpace Age Plus, SAP (Enhanced)\nhttps://wiki.aperx.org",
     "dependencies": [
         "base >= 2.1.0",
-        "? space-age >= 2.1.0",
-        "? elevated-rails >= 2.1.0",
+        "+ space-age >= 2.1.0",
+        "+ elevated-rails >= 2.1.0",
         "? recycler >= 2.1.0",
         "? quality >= 2.1.0"
     ],
