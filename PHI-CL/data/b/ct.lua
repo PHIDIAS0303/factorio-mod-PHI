@@ -19,6 +19,7 @@ for _, v in pairs({'infinity-chest', 'infinity-cargo-wagon', 'infinity-pipe'}) d
         name = data.raw['item'][v].name,
         energy_required = 2,
         enabled = true,
+        categories = {'crafting'},
         hidden = true,
         hidden_in_factoriopedia = true,
         ingredients = {},
@@ -36,7 +37,6 @@ if data.raw['linked-container'] and data.raw['linked-container']['linked-chest']
 
     data.raw['linked-container']['linked-chest'].circuit_connector = table.deepcopy(data.raw['container']['steel-chest'].circuit_connector)
     data.raw['linked-container']['linked-chest'].circuit_wire_max_distance = data.raw['container']['steel-chest'].circuit_wire_max_distance
-    -- data.raw['linked-container']['linked-chest'].quality_affects_inventory_size = false
     data.raw['linked-container']['linked-chest'].inventory_type = 'with_filters_and_bar'
     data.raw['linked-container']['linked-chest'].inventory_size = data.raw['container']['steel-chest'].inventory_size
     data.raw['linked-container']['linked-chest'].gui_mode = 'all'
@@ -47,6 +47,7 @@ if data.raw['linked-container'] and data.raw['linked-container']['linked-chest']
         name = 'linked-chest',
         energy_required = 2,
         enabled = true,
+        categories = {'crafting'},
         hidden = true,
         hidden_in_factoriopedia = true,
         ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
@@ -82,6 +83,7 @@ if data.raw['radar'] and data.raw['radar']['radar'] then
         name = item.name,
         energy_required = 2,
         enabled = true,
+        categories = {'crafting'},
         hidden = true,
         hidden_in_factoriopedia = true,
         ingredients = {{type = 'item', name = 'electronic-circuit', amount = 5}, {type = 'item', name = 'iron-gear-wheel', amount = 5}, {type = 'item', name = 'iron-plate', amount = 10}},
@@ -120,6 +122,7 @@ if data.raw['electric-energy-interface'] and data.raw['electric-energy-interface
             name = item.name,
             energy_required = 2,
             enabled = true,
+            categories = {'crafting'},
             hidden = true,
             hidden_in_factoriopedia = true,
             ingredients = {{type = 'item', name = 'accumulator', amount = 1}},

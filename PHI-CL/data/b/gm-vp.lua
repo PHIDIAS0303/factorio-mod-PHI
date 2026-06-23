@@ -6,7 +6,7 @@ local resource_autoplace = require('resource-autoplace')
 
 mc.space_age()
 
--- GM-VP C 33 BASE ENTITY
+-- GM-VP C 31 BASE ENTITY
 -- GM-VP C 6 ELEVATED_RAILS ENTITY
 -- GM-VP C 17 SPACE_AGE ENTITY
 if items['entity_surface_conditions'] then
@@ -72,7 +72,7 @@ data:extend({
         name = 'satellite',
         energy_required = 5,
         enabled = false,
-        category = 'crafting',
+        categories = {'crafting'},
         ingredients = {{type = 'item', name = 'low-density-structure', amount = 100}, {type = 'item', name = 'solar-panel', amount = 100}, {type = 'item', name = 'accumulator', amount = 100}, {type = 'item', name = 'radar', amount = 5}, {type = 'item', name = 'processing-unit', amount = 100}, {type = 'item', name = 'rocket-fuel', amount = 50}},
         results = {{type = 'item', name = 'satellite', amount = 1}},
         requester_paste_multiplier = 1
@@ -127,8 +127,8 @@ if data.raw['unit-spawner'] then
     end
 end
 
+-- GM-VP H 4 QUALITY QUALITY
 -- GM-VP H 20 SPACE_AGE ENTITY
--- GM-VP H 4 SPACE_AGE QUALITY
 -- GM-VP H 9 SPACE_AGE SPACE_CONNECTION
 -- GM-VP H 3 SPACE_AGE SPACE_LOCATION
 for _, c in pairs({'space-connection', 'space-location', 'asteroid', 'asteroid-chunk', 'quality'}) do
@@ -372,7 +372,7 @@ if data.raw.item['ice'] then
         energy_required = 0.5,
         enabled = true,
         icon = data.raw.item['ice'].icon,
-        category = 'chemistry',
+        categories = {'chemistry'},
         ingredients = {{type = 'fluid', name = 'water', amount = 10, fluidbox_multiplier = 10}},
         results = {{type = 'item', name = 'ice', amount = 1}},
         main_product = 'ice',

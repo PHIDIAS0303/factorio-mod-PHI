@@ -25,17 +25,15 @@ local items = {
         'rail-chain-signal',
         'straight-rail',
         -- BASE 20
-        'legacy-curved-rail',
-        'legacy-straight-rail',
         'curved-rail-a',
         'curved-rail-b',
         'half-diagonal-rail',
+        -- 3X
+        'container',
         -- BASE 25
         -- 5X
         'logistic-container',
         -- BASE 30
-        -- 3X
-        'container',
         -- ELEVATED_RAIL 0
         'rail-support',
         'rail-ramp',
@@ -433,7 +431,7 @@ local items = {
         },
     },
     ['recipe'] = {
-        -- QUALITY 0
+        -- RECYCLER 0
         ['recycler'] = true,
         -- SPACE_AGE 0
         ['lightning-collector'] = true,
@@ -502,7 +500,7 @@ local items = {
         ['advanced-metallic-asteroid-crushing'] = true,
     },
     ['item'] = {
-        -- QUALITY 0
+        -- RECYCLER 0
         ['recycler'] = true,
         -- SPACE_AGE 0
         ['artificial-yumako-soil'] = true,
@@ -580,7 +578,7 @@ local items = {
         'calcite',
     },
     ['hidden'] = {
-        -- QUALITY ENTITY 0
+        -- RECYCLER ENTITY 0
         ['recycler'] = 'furnace',
         -- SPACE_AGE ENTITY 0
         ['biochamber'] = 'assembling-machine',

@@ -1,7 +1,5 @@
 local items = require('mbm-c')
 
-
-
 local mod_tint = {
     [2] = {r=140, g=142, b=200},
     [3] = {r=242, g=161, b=26},
@@ -366,6 +364,7 @@ function main_recipe(source, tier)
         icons = table.deepcopy(data.raw.item[source.ref_name].icons),
         energy_required = 2,
         enabled = false,
+        categories = {'crafting'},
         ingredients = {{type = 'item', name = (tier > source.min and (source.name .. '-' .. (tier - 1))) or source.ref_name, amount = 2}},
         results = {{type = 'item', name = result_name, amount = 1}},
         main_product = result_name,
@@ -406,7 +405,7 @@ end
 
 -- MBE A 24 BASE ENTITY,RECIPE,RESEARCH_EFFECT
 -- MBE A 24 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT
--- MBE A 2 QUALITY ENTITY,RECIPE,RESEARCH_EFFECT
+-- MBE A 2 RECYCLER ENTITY,RECIPE,RESEARCH_EFFECT
 for _, v in pairs(items) do
     v.mod = v.mod or 'base'
     v.min = v.min or 2

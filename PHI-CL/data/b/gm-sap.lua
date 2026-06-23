@@ -34,18 +34,18 @@ end
 
 -- GM-SAP C 1 SPACE_AGE ENTITY
 if data.raw['space-platform-hub'] and data.raw['space-platform-hub']['space-platform-hub'] then
-    data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier = math.max(2, data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier)
-    data.raw['space-platform-hub']['space-platform-hub'].inventory_size = math.max(119, data.raw['space-platform-hub']['space-platform-hub'].inventory_size)
+    data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier = math.max(2, data.raw['space-platform-hub']['space-platform-hub'].platform_repair_speed_modifier or 0)
+    data.raw['space-platform-hub']['space-platform-hub'].inventory_size = math.max(119, data.raw['space-platform-hub']['space-platform-hub'].inventory_size or 0)
 end
 
 -- GM-SAP C 1 SPACE_AGE TILE
 if data.raw.tile['space-platform-foundation'] then
-    data.raw.tile['space-platform-foundation'].max_health = data.raw.tile['space-platform-foundation'].max_health * 2
+    data.raw.tile['space-platform-foundation'].max_health = (data.raw.tile['space-platform-foundation'].max_health or 0) * 2
 end
 
 -- GM-SAP C 1 SPACE_AGE ITEM
 if data.raw.item['space-platform-foundation'] then
-    data.raw.item['space-platform-foundation'].stack_size = math.max(100, data.raw.item['space-platform-foundation'].stack_size)
+    data.raw.item['space-platform-foundation'].stack_size = math.max(100, data.raw.item['space-platform-foundation'].stack_size or 0)
 end
 
 -- GM-SAP A 1 BASE RESEARCH

@@ -14,32 +14,32 @@ local items = {
             color = 'blue'
         },
         ['automation-science-pack'] = {
-            type = 'tool',
+            type = 'item',
             color = 'red'
         },
         ['logistic-science-pack'] = {
-            type = 'tool',
+            type = 'item',
             color = 'green'
         },
         -- BASE ITEM 5
         ['military-science-pack'] = {
-            type = 'tool',
+            type = 'item',
             color = 'grey'
         },
         ['chemical-science-pack'] = {
-            type = 'tool',
+            type = 'item',
             color = 'cyan'
         },
         ['production-science-pack'] = {
-            type = 'tool',
+            type = 'item',
             color = 'pink'
         },
         ['utility-science-pack'] = {
-            type = 'tool',
+            type = 'item',
             color = 'yellow'
         },
         ['space-science-pack'] = {
-            type = 'tool',
+            type = 'item',
             color = 'white'
         },
         -- BASE ITEM 10
@@ -162,23 +162,23 @@ local items = {
         },
         -- SPACE_AGE ITEM 0
         ['metallurgic-science-pack'] = {
-            type = 'tool',
+            type = 'item',
             color = 'yellow'
         },
         ['agricultural-science-pack'] = {
-            type = 'tool',
+            type = 'item',
             color = 'green'
         },
         ['electromagnetic-science-pack'] = {
-            type = 'tool',
+            type = 'item',
             color = 'pink'
         },
         ['cryogenic-science-pack'] = {
-            type = 'tool',
+            type = 'item',
             color = 'blue'
         },
         ['promethium-science-pack'] = {
-            type = 'tool',
+            type = 'item',
             color = 'black'
         },
         -- SPACE_AGE ITEM 5

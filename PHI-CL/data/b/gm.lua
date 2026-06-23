@@ -1,26 +1,27 @@
 
 -- GM C 1 SPACE_AGE ENTITY
 if data.raw['cargo-bay'] and data.raw['cargo-bay']['cargo-bay'] then
-    data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus = math.max(40, data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus)
+    data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus = math.max(40, data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus or 0)
 end
 
 -- GM C 1 BASE ENTITY
 if data.raw['rocket-silo'] and data.raw['rocket-silo']['rocket-silo'] then
-    data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = math.max(60, data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size)
+    data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = math.max(60, data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size or 0)
 end
 
 -- GM C 1 BASE ENTITY
 if data.raw['rocket-silo-rocket'] and data.raw['rocket-silo-rocket']['rocket-silo-rocket'] then
-    data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = math.max(60, data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size)
+    data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size = math.max(60, data.raw['rocket-silo-rocket']['rocket-silo-rocket'].inventory_size or 0)
 end
 
 -- GM C 1 BASE ENTITY
 if data.raw['cargo-wagon'] and data.raw['cargo-wagon']['cargo-wagon'] then
-    data.raw['cargo-wagon']['cargo-wagon'].inventory_size = math.max(80, data.raw['cargo-wagon']['cargo-wagon'].inventory_size)
+    data.raw['cargo-wagon']['cargo-wagon'].inventory_size = math.max(80, data.raw['cargo-wagon']['cargo-wagon'].inventory_size or 0)
 end
 
 -- GM C 1 SPACE_AGE RECIPE
 if data.raw.recipe['foundation'] then
+    data.raw.recipe['foundation'].categories = {'crafting'}
     data.raw.recipe['foundation'].ingredients = {{type = 'item', name = 'landfill', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 10}, {type = 'item', name = 'steel-plate', amount = 10}}
     data.raw.recipe['foundation'].results = {{type = 'item', name = 'foundation', amount = 1}}
 end
