@@ -385,11 +385,9 @@ end
 -- GM-VP C 1 SPACE_AGE ENTITY
 if data.raw['lab'] then
     for _, v in pairs(data.raw['lab']) do
-        v.inputs = {}
-
-        for _, v2 in pairs(data.raw['tool']) do
-            if not v2.hidden then
-                table.insert(v.inputs, v2.name)
+        for i = #v.inputs, 1, -1 do
+            if data.raw.item[v.inputs[i]] and data.raw.item[v.inputs[i]].hidden then
+                table.remove(v.inputs, i)
             end
         end
     end
