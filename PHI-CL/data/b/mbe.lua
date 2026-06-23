@@ -12,7 +12,7 @@ local mod_tint = {
 
 -- MBE C 1 BASE FLUID
 if data.raw['fluid'] and data.raw['fluid']['steam'] then
-    data.raw['fluid']['steam'].max_temperature = math.max(((settings.startup['PHI-MB-ENERGY'].value > 1) and 5000) or 500, data.raw['fluid']['steam'].max_temperature)
+    data.raw['fluid']['steam'].max_temperature = math.max(((settings.startup['PHI-MB-ENERGY'].value > 1) and 2000) or 500, data.raw['fluid']['steam'].max_temperature)
 end
 
 -- MBE A 7 BASE RESEARCH
