@@ -8,7 +8,7 @@ mc.space_age()
 
 -- GM-VP C 31 BASE ENTITY
 -- GM-VP C 6 ELEVATED_RAILS ENTITY
--- GM-VP C 17 SPACE_AGE ENTITY
+-- GM-VP C 19 SPACE_AGE ENTITY
 if items['entity_surface_conditions'] then
     for _, v in pairs(items['entity_surface_conditions']) do
         if data.raw[v] then
@@ -394,7 +394,7 @@ if data.raw['lab'] then
 end
 
 -- GM-VP C 26 BASE RESEARCH
--- GM-VP C 38 SPACE_AGE RESEARCH
+-- GM-VP C 39 SPACE_AGE RESEARCH
 -- GM-VP H 29 SPACE_AGE RESEARCH
 if data.raw.technology and items['technology'] and items['technology_reform'] then
     for _, v in pairs(data.raw.technology) do
@@ -452,7 +452,7 @@ for _, v in pairs(data.raw.item) do
     end
 end
 
--- GM-VP C 12 BASE RECIPE
+-- GM-VP C 17 BASE RECIPE
 -- GM-VP C 61 SPACE_AGE RECIPE
 -- GM-VP H 1 QUALITY RECIPE
 -- GM-VP H 54 SPACE_AGE RECIPE

@@ -55,9 +55,11 @@ local items = {
         'furnace',
         'thruster',
         'lab',
+        -- 2X
+        'cargo-bay',
+        -- SPACE_AGE 15
         -- 3X
         'plant',
-        -- SPACE_AGE 15
     },
     ['recipe_reform'] = {
         -- BASE 0
@@ -97,6 +99,22 @@ local items = {
             categories = {'crafting-with-fluid'},
         },
         ['transport-belt'] = {
+            categories = {'crafting'},
+        },
+        ['fast-transport-belt'] = {
+            categories = {'crafting'},
+        },
+        ['underground-belt'] = {
+            categories = {'crafting'},
+        },
+        ['fast-underground-belt'] = {
+            categories = {'crafting'},
+        },
+        -- BASE 15
+        ['splitter'] = {
+            categories = {'crafting'},
+        },
+        ['fast-splitter'] = {
             categories = {'crafting'},
         },
         -- SPACE_AGE 0
@@ -1080,6 +1098,10 @@ local items = {
             prerequisites = {'quantum-processor'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'agricultural-science-pack', 1}, {'electromagnetic-science-pack', 1}, {'metallurgic-science-pack', 1}, {'cryogenic-science-pack', 1}}},
         },
+        ['landing-pad-unloading-bay'] = {
+            prerequisites = {'rocket-silo'},
+            unit = {count = 800, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
+        },
     },
     ['technology'] = {
         -- SPACE_AGE 0
@@ -1117,6 +1139,8 @@ local items = {
         ['tungsten-steel'] = true,
         ['holmium-processing'] = true,
         ['lithium-processing'] = true,
+        ['stellar-discovery-solar-system-edge'] = true,
+        -- SPACE_AGE 30
     },
 }
 

@@ -4,6 +4,11 @@ if data.raw['cargo-bay'] and data.raw['cargo-bay']['cargo-bay'] then
     data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus = math.max(40, data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus or 0)
 end
 
+-- GM C 1 SPACE_AGE ENTITY
+if data.raw['cargo-bay'] and data.raw['cargo-bay']['landing-pad-unloading-bay'] then
+    data.raw['cargo-bay']['landing-pad-unloading-bay'].inventory_size_bonus = math.max(40, data.raw['cargo-bay']['landing-pad-unloading-bay'].inventory_size_bonus or 0)
+end
+
 -- GM C 1 BASE ENTITY
 if data.raw['rocket-silo'] and data.raw['rocket-silo']['rocket-silo'] then
     data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size = math.max(60, data.raw['rocket-silo']['rocket-silo'].to_be_inserted_to_rocket_inventory_size or 0)
