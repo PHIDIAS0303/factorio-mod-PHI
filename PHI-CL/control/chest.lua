@@ -13,11 +13,11 @@ function main.build(event)
 
     local contents = inventory.get_contents()
 
-    if not contents or #contents ~= 1 then
+    if not contents or #contents ~= 1 or not contents[1].name then
         return
     end
 
-    event.entity.storage_filter = {name = contents[1].name, quality = contents[1].quality}
+    event.entity.storage_filter = {name = contents[1].name, quality = contents[1].quality or 'normal'}
 end
 
 return main
