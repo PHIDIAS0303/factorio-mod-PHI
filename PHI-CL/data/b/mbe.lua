@@ -137,11 +137,13 @@ function main_entity(source, tier)
         item.max_power_output = (item.max_power_output and (tonumber(string.match(item.max_power_output, '[%d%.]+')) * (2 * (tier - source.min + 1))) .. string.match(item.max_power_output, '%a+')) or nil
         item.maximum_temperature = (item.maximum_temperature and 15 + ((item.maximum_temperature - 15) * (2 * (tier - source.min + 1)))) or nil
 
-        for _, c in pairs({'horizontal_animation', 'vertical_animation'}) do
-            if item[c] and item[c].layers then
-                for _, l in pairs(item[c].layers) do
-                    if not l.draw_as_shadow then
-                        l.tint = mod_tint[tier]
+        if item['pictures'] then
+            for _, c in pairs({'north', 'east'}) do
+                if item['pictures'][c] and item['pictures'][c].animation and item['pictures'][c].animation.layers then
+                    for _, l in pairs(item['pictures'][c].animation.layers) do
+                        if not l.draw_as_shadow then
+                            l.tint = mod_tint[tier]
+                        end
                     end
                 end
             end
