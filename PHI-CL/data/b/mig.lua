@@ -744,6 +744,15 @@ if data.raw['agricultural-tower'] and data.raw['agricultural-tower']['agricultur
     data.raw['agricultural-tower']['agricultural-tower'].allowed_module_categories = {'efficiency'}
 end
 
+-- GM-VP C 1 BASE ENTITY
+if data.raw['wall'] then
+    for _, v in pairs(data.raw['wall']) do
+        if v.pictures then
+            v.pictures.water_connection_patch = nil
+        end
+    end
+end
+
 -- GM-VP C 38 BASE ITEM
 -- GM-VP C 9 SPACE_AGE ITEM
 if items['tooltip'] and data.raw.item then
