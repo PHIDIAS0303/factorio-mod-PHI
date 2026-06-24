@@ -735,6 +735,15 @@ if data.raw['container'] and data.raw['container']['steel-chest'] and data.raw['
     end
 end
 
+-- GM-VP C 1 SPACE_AGE ENTITY
+if data.raw['agricultural-tower'] and data.raw['agricultural-tower']['agricultural-tower'] then
+    data.raw['agricultural-tower']['agricultural-tower'].input_inventory_size = math.max(5, data.raw['agricultural-tower']['agricultural-tower'].input_inventory_size or 0)
+    data.raw['agricultural-tower']['agricultural-tower'].output_inventory_size = math.max(5, data.raw['agricultural-tower']['agricultural-tower'].output_inventory_size or 0)
+    data.raw['agricultural-tower']['agricultural-tower'].module_slots = math.max(2, data.raw['agricultural-tower']['agricultural-tower'].module_slots or 0)
+    data.raw['agricultural-tower']['agricultural-tower'].allowed_effects = {'consumption'}
+    data.raw['agricultural-tower']['agricultural-tower'].allowed_module_categories = {'efficiency'}
+end
+
 -- GM-VP C 38 BASE ITEM
 -- GM-VP C 9 SPACE_AGE ITEM
 if items['tooltip'] and data.raw.item then
