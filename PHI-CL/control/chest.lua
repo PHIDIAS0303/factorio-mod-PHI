@@ -1,7 +1,7 @@
 local main = {}
 
 function main.build(event)
-    if event.entity.type ~= 'logistic-container' or not event.entity.logistic_mode or event.entity.logistic_mode ~= 'storage' then
+    if event.entity.type ~= 'logistic-container' or event.entity.logistic_mode ~= 'storage' then
         return
     end
 
