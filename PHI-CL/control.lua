@@ -17,16 +17,10 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
 end
 
 local function gui_create(player)
-    if player.gui.relative.phi_cl_inserter_config then
-        player.gui.relative.phi_cl_inserter_config.destroy()
-    end
-
-    if player.gui.relative.phi_cl_combinator_config then
-        player.gui.relative.phi_cl_combinator_config.destroy()
-    end
-
-    if player.gui.relative.phi_cl_inserter then
-        player.gui.relative.phi_cl_inserter.destroy()
+    for _, v in pairs({'phi_cl_inserter_config', 'phi_cl_combinator_config', 'phi_cl_inserter'}) do
+        if player.gui.relative[v] then
+            player.gui.relative[v].destroy()
+        end
     end
 
     do
