@@ -256,6 +256,8 @@ end
 -- GM-VP C 1 RECYCLER ENTITY
 if data.raw['furnace'] and data.raw['furnace']['recycler'] then
     data.raw['furnace']['recycler'].result_inventory_size = 5
+    data.raw['furnace']['recycler'].type = 'assembling-machine'
+    data.raw['assembling-machine']['recycler'].fixed_recipe = 'scrap-recycling'
 end
 
 -- GM-VP C 1 SPACE_AGE ENTITY
@@ -461,7 +463,7 @@ end
 -- GM-VP C 61 SPACE_AGE RECIPE
 -- GM-VP H 1 QUALITY RECIPE
 -- GM-VP H 54 SPACE_AGE RECIPE
-for rk, v in pairs(data.raw.recipe) do
+for _, v in pairs(data.raw.recipe) do
     v.surface_conditions = nil
     v.maximum_productivity = nil
     v.auto_recycle = false
@@ -474,10 +476,6 @@ for rk, v in pairs(data.raw.recipe) do
     elseif items['recipe'][v.name] then
         v.hidden = true
         v.hidden_in_factoriopedia = true
-    end
-
-    if v.categories and v.categories == {'recycling'} and v.hidden then
-        data.raw.recipe[rk] = nil
     end
 end
 
