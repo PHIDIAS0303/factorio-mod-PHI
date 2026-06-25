@@ -3,7 +3,7 @@ Version: 3.1.2
 Date: 2026-07-05
 
   Changes:
-    - [GM] Generic Code layout restructure.
+    - [GM] Fixed incorrect recipe category in VP mode.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.1.1
