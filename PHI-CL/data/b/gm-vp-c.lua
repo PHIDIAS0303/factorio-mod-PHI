@@ -1033,7 +1033,7 @@ local items = {
         ['electromagnetic-plant'] = {
             prerequisites = {'automation-3', 'utility-science-pack'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-plant'}, {type = 'unlock-recipe', recipe = 'electrolyte'}, {type = 'unlock-recipe', recipe = 'holmium-plate'}, {type = 'unlock-recipe', recipe = 'holmium-solution'}, {type = 'unlock-recipe', recipe = 'scrap-recycling'}}
+            effects = {{type = 'unlock-recipe', recipe = 'electromagnetic-plant'}, {type = 'unlock-recipe', recipe = 'electrolyte'}, {type = 'unlock-recipe', recipe = 'holmium-plate'}, {type = 'unlock-recipe', recipe = 'holmium-solution'}, {type = 'unlock-recipe', recipe = 'recycler'}, {type = 'unlock-recipe', recipe = 'scrap-recycling'}}
         },
         ['electromagnetic-science-pack'] = {
             prerequisites = {'electromagnetic-plant'},
