@@ -30,11 +30,15 @@ local function gui_create(player)
 end
 
 local function gui_update(player, entity)
-    if not entity.valid then
+    if not entity.valid or not entity.type then
         return
     end
 
-    if entity.type and (entity.type ~= 'inserter' or (entity.type == 'entity-ghost' and entity.ghost_type ~= 'inserter')) then
+    if entity.type ~= 'inserter' then
+        return
+    end
+
+    if entity.type == 'entity-ghost' and entity.ghost_type ~= 'inserter' then
         return
     end
 
