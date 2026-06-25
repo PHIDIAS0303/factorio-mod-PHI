@@ -461,7 +461,7 @@ end
 -- GM-VP C 61 SPACE_AGE RECIPE
 -- GM-VP H 1 QUALITY RECIPE
 -- GM-VP H 54 SPACE_AGE RECIPE
-for _, v in pairs(data.raw.recipe) do
+for rk, v in pairs(data.raw.recipe) do
     v.surface_conditions = nil
     v.maximum_productivity = nil
     v.auto_recycle = false
@@ -474,6 +474,10 @@ for _, v in pairs(data.raw.recipe) do
     elseif items['recipe'][v.name] then
         v.hidden = true
         v.hidden_in_factoriopedia = true
+    end
+
+    if v.categories and v.categories == {'recycling'} and v.hidden then
+        data.raw.recipe[rk] = nil
     end
 end
 
