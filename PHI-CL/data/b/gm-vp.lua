@@ -477,6 +477,10 @@ for _, v in pairs(data.raw.recipe) do
     end
 end
 
+if data.raw.recipe['scrap-recycling'] then
+    data.raw.recipe['scrap-recycling'].allow_decomposition = false
+end
+
 -- GM-VP C 3 QUALITY MODULE,RECIPE
 -- GM-VP C 5 QUALITY RESEARCH
 -- GM-VP H 4 QUALITY QUALITY
