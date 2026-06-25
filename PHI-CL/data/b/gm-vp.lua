@@ -461,23 +461,19 @@ end
 -- GM-VP C 61 SPACE_AGE RECIPE
 -- GM-VP H 1 QUALITY RECIPE
 -- GM-VP H 54 SPACE_AGE RECIPE
-for k, v in pairs(data.raw.recipe) do
+for _, v in pairs(data.raw.recipe) do
     v.surface_conditions = nil
     v.maximum_productivity = nil
     v.auto_recycle = false
 
     if items['recipe_reform'][v.name] then
-        for k2, _ in pairs(items['recipe_reform'][v.name]) do
-            v[k2] = (items['recipe_reform'][v.name][k2] and items['recipe_reform'][v.name][k2]) or v[k2]
+        for k, _ in pairs(items['recipe_reform'][v.name]) do
+            v[k] = (items['recipe_reform'][v.name][k] and items['recipe_reform'][v.name][k]) or v[k]
         end
 
     elseif items['recipe'][v.name] then
         v.hidden = true
         v.hidden_in_factoriopedia = true
-    end
-
-    if v.categories and v.categories == {'recycling'} and v.hidden then
-        data.raw.recipe[k] = nil
     end
 end
 
