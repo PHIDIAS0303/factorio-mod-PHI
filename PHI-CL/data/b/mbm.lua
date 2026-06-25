@@ -356,24 +356,19 @@ function main_item(source, tier)
 end
 
 function main_recipe(source, tier)
-    local result_name = source.name .. '-' .. tier
+    local recipe = table.deepcopy(data.raw.recipe[source.ref_name])
+    recipe.name = source.name .. '-' .. tier
+    recipe.icons = table.deepcopy(data.raw.item[source.ref_name].icons)
+    recipe.energy_required = 2
+    recipe.enabled = false
+    recipe.categories = {'crafting'}
+    recipe.ingredients = {{type = 'item', name = (tier > source.min and (source.name .. '-' .. (tier - 1))) or source.ref_name, amount = 2}}
+    recipe.results = {{type = 'item', name = recipe.name, amount = 1}}
+    recipe.main_product = recipe.name
+    recipe.localised_name = {'?', data.raw[source.type][recipe.name].localised_name, ''}
+    recipe.localised_description = {'?', data.raw[source.type][recipe.name].localised_description, ''}
 
-    data:extend({{
-        type = 'recipe',
-        name = result_name,
-        icons = table.deepcopy(data.raw.item[source.ref_name].icons),
-        energy_required = 2,
-        enabled = false,
-        categories = {'crafting'},
-        auto_recycle = data.raw.recipe[source.ref_name].auto_recycle,
-        maximum_productivity = data.raw.recipe[source.ref_name].maximum_productivity,
-        surface_conditions = data.raw.recipe[source.ref_name].surface_conditions,
-        ingredients = {{type = 'item', name = (tier > source.min and (source.name .. '-' .. (tier - 1))) or source.ref_name, amount = 2}},
-        results = {{type = 'item', name = result_name, amount = 1}},
-        main_product = result_name,
-        localised_name = {'?', data.raw[source.type][result_name].localised_name, ''},
-        localised_description = {'?', data.raw[source.type][result_name].localised_description, ''}
-    }})
+    data:extend({recipe})
 end
 
 function main_technology(source, tier)
