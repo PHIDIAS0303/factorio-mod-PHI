@@ -448,8 +448,6 @@ local items = {
         },
     },
     ['recipe'] = {
-        -- RECYCLER 0
-        ['recycler'] = true,
         -- SPACE_AGE 0
         ['lightning-collector'] = true,
         ['lightning-rod'] = true,
@@ -517,8 +515,6 @@ local items = {
         ['advanced-metallic-asteroid-crushing'] = true,
     },
     ['item'] = {
-        -- RECYCLER 0
-        ['recycler'] = true,
         -- SPACE_AGE 0
         ['artificial-yumako-soil'] = true,
         ['overgrowth-yumako-soil'] = true,
@@ -595,8 +591,6 @@ local items = {
         'calcite',
     },
     ['hidden'] = {
-        -- RECYCLER ENTITY 0
-        ['recycler'] = 'furnace',
         -- SPACE_AGE ENTITY 0
         ['biochamber'] = 'assembling-machine',
         ['captive-biter-spawner'] = 'assembling-machine',
