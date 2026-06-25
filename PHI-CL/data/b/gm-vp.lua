@@ -467,8 +467,8 @@ for k, v in pairs(data.raw.recipe) do
     v.auto_recycle = false
 
     if items['recipe_reform'][v.name] then
-        for k, _ in pairs(items['recipe_reform'][v.name]) do
-            v[k] = (items['recipe_reform'][v.name][k] and items['recipe_reform'][v.name][k]) or v[k]
+        for k2, _ in pairs(items['recipe_reform'][v.name]) do
+            v[k2] = (items['recipe_reform'][v.name][k2] and items['recipe_reform'][v.name][k2]) or v[k2]
         end
 
     elseif items['recipe'][v.name] then
