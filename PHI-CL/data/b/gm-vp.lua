@@ -253,6 +253,11 @@ if data.raw['lab'] and data.raw['lab']['biolab'] then
     data.raw['lab']['biolab'].energy_source.emissions_per_minute = nil
 end
 
+-- GM-VP C 1 RECYCLER ENTITY
+if data.raw['furnace'] and data.raw['furnace']['recycler'] then
+    data.raw['furnace']['recycler'].result_inventory_size = 5
+end
+
 -- GM-VP C 1 SPACE_AGE ENTITY
 if data.raw['electric-turret'] and data.raw['electric-turret']['tesla-turret'] then
     data.raw['electric-turret']['tesla-turret'].energy_source.drain = '250kW'
