@@ -34,11 +34,7 @@ local function gui_update(player, entity)
         return
     end
 
-    if entity.type and entity.type ~= 'inserter' then
-        return
-    end
-
-    if entity.type and entity.type == 'entity-ghost' and entity.ghost_type ~= 'inserter' then
+    if entity.type and (entity.type ~= 'inserter' or (entity.type == 'entity-ghost' and entity.ghost_type ~= 'inserter')) then
         return
     end
 
