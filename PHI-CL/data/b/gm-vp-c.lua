@@ -328,7 +328,6 @@ local items = {
         },
         ['scrap-recycling'] = {
             energy_required = 5,
-            categories = {'crafting-with-fluid'},
             allow_productivity = true,
             ingredients = {{type = 'item', name = 'scrap', amount = 10}},
             results = {{type = 'item', name = 'iron-plate', amount = 3}, {type = 'item', name = 'copper-plate', amount = 3}, {type = 'item', name = 'solid-fuel', amount = 2}, {type = 'item', name = 'ice', amount = 1}, {type = 'item', name = 'holmium-ore', amount = 1}}
