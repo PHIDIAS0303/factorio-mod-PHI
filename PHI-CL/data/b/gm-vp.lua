@@ -255,7 +255,6 @@ end
 
 -- GM-VP C 1 RECYCLER ENTITY
 if data.raw['furnace'] and data.raw['furnace']['recycler'] then
-    -- data.raw['furnace']['recycler'].result_inventory_size = 5
     local asm = table.deepcopy(data.raw['furnace']['recycler'])
     asm.type = 'assembling-machine'
     asm.fixed_recipe = 'scrap-recycling'
