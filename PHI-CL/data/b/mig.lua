@@ -492,6 +492,8 @@ if data.raw['loader'] then
     for _, ln in pairs(data.raw['loader']) do
         local l = ln.name
 
+        ln.hidden = false
+        ln.hidden_in_factoriopedia = false
         ln.filter_count = 2
         ln.per_lane_filters = true
         ln.adjustable_belt_stack_size = (data.raw['inserter']['stack-inserter'] and true) or false
