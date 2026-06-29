@@ -27,6 +27,7 @@ function main.build(event)
 
     event.entity.remove_unfiltered_items = true
     event.entity.infinity_container_filters = chest_filter[event.entity.quality.name]
+    event.entity.get_inventory(defines.inventory.chest).set_bar()
 end
 
 return main
