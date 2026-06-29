@@ -1,6 +1,6 @@
 local cargo_landing = require('control/cargo-landing')
 local chest = require('control/chest')
-local infinity_container = require('control/infinity-infinity_containercontainer')
+local infinity_container = require('control/infinity-container')
 local inserter = require('control/inserter')
 local pump = require('control/pump')
 local rail_support = require('control/rail-support')
