@@ -6,7 +6,7 @@ local hide = {
 if data.raw['infinity-container']['super-infinity-chest'] then
     local sc = 1
 
-    for _, c in pairs(defines.prototypes.item) do
+    for c, _ in pairs(defines.prototypes.item) do
         if data.raw[c] then
             for _, i in pairs(data.raw[c]) do
                 if not (i.hidden or (i.subgroup and hide[i.subgroup])) then
