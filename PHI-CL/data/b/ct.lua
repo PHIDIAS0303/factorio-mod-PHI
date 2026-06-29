@@ -149,7 +149,7 @@ if data.raw['infinity-container'] and data.raw['infinity-container']['infinity-c
     entity.name = item.name
     entity.minable.result = item.name
     entity.gui_mode = 'none'
-    entity.pictures.layers[1].tint = mod_tint[8]
+    entity.picture.layers[1].tint = mod_tint[8]
     entity.localised_name = {'', {'name.super-entity'}, {'entity-name.infinity-chest'}}
     data:extend({entity})
 
