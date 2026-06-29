@@ -168,6 +168,18 @@ if data.raw['infinity-container'] and data.raw['infinity-container']['infinity-c
     }})
 end
 
+-- CT A 1 BASE SHORTCUT
+if data.raw['blueprint-book'] and data.raw['blueprint-book']['blueprint-book'] then
+    data:extend({{
+        type = 'shortcut',
+        name = 'phi-cl-toggle-editor',
+        action = 'lua',
+        toggleable = true,
+        icon = data.raw['blueprint-book']['blueprint-book'].icon,
+        icon_size = data.raw['blueprint-book']['blueprint-book'].icon_size
+    }})
+end
+
 -- CT A 1 BASE MAP_GEN_PRESET
 if settings.startup['PHI-CT-TILE'].value then
     data.raw['map-gen-presets']['default']['empty-world'] = {

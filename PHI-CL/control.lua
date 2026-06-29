@@ -4,6 +4,7 @@ local infinity_container = require('control/infinity-container')
 local inserter = require('control/inserter')
 local pump = require('control/pump')
 local rail_support = require('control/rail-support')
+local shortcut = require('control/shortcut')
 local trash = require('control/trash')
 
 local function entity_build(event)
@@ -114,4 +115,9 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 
         entity_build({entity=event.destination})
     end)
+end
+
+if settings.startup['PHI-CT'].value then
+    script.on_event(defines.events.on_lua_shortcut, shortcut.toggle)
+    script.on_event(defines.events.on_player_toggled_map_editor, shortcut.after_toggle)
 end
