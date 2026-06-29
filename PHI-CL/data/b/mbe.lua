@@ -212,7 +212,7 @@ function main_entity(source, tier)
         item.icon = nil
     end
 
-    table.insert(item.icons, {icon = '__base__/graphics/icons/signal/signal_' .. tier .. '.png', icon_size = 64, scale = 0.25, shift = {12, 12}})
+    table.insert(item.icons, {icon = '__base__/graphics/icons/signal/signal_' .. tier .. '.png', icon_size = 64, floating = true, scale = 0.25, shift = {-8, 0}})
     item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
     item.localised_description = {'?', {'entity-description.' .. source.ref_name}, {'description.' .. source.ref_name}}
 
@@ -232,7 +232,7 @@ function main_item(source, tier)
         item.icon = nil
     end
 
-    table.insert(item.icons, {icon = '__base__/graphics/icons/signal/signal_' .. tier .. '.png', icon_size = 64, scale = 0.25, shift = {12, 12}})
+    table.insert(item.icons, {icon = '__base__/graphics/icons/signal/signal_' .. tier .. '.png', icon_size = 64, floating = true, scale = 0.25, shift = {-8, 0}})
     item.order = item.order .. tier
     item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'entity-name.' .. source.ref_name}, {'equipment-name.' .. source.ref_name}, {'item-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-name.' .. source.ref_name}, {'equipment-name.' .. source.ref_name}, {'item-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
     item.localised_description = {'?', {'entity-description.' .. source.ref_name}, {'equipment-description.' .. source.ref_name}, {'item-description.' .. source.ref_name}, {'description.' .. source.ref_name}}
