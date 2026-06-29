@@ -13,7 +13,7 @@ do
     local j = 1
 
     for _, i in pairs(prototypes.item) do
-        if not (i.hidden or (i.subgroup and hide[i.subgroup])) then
+        if not (i.hidden or (i.subgroup and i.subgroup.name and hide[i.subgroup.name])) then
             for _, q in pairs(prototypes.quality) do
                 table.insert(chest_filter[q.name], {index = j, name = i.name, quality = q.name, mode = 'exactly', count = i.stack_size})
             end
