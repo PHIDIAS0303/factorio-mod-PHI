@@ -25,7 +25,7 @@ for i = 1, 7 do
         effects = {},
         upgrade = true,
         unit = {count = math.floor(125 * (i ^ 2)), ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, time = 30},
-        icons = {{icon = '__base__/graphics/technology/solar-energy.png', icon_size = 256, tint = mod_tint[i]}, {icon = '__base__/graphics/icons/signal/signal_' .. i .. '.png', icon_size = 64, scale = 0.5, shift = {50, 50}}},
+        icons = {{icon = '__base__/graphics/technology/solar-energy.png', icon_size = 256, tint = mod_tint[i]}, {icon = '__base__/graphics/icons/signal/signal_' .. i .. '.png', icon_size = 64, scale = 0.5, shift = {32, 32}}},
         order = 'a-h-' .. i,
         localised_name = {'phi-cl.combine', {'technology-name.compound-energy'}, tostring(i)},
         localised_description = {'technology-description.compound-energy'}
