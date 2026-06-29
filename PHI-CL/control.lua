@@ -1,7 +1,6 @@
 local cargo_landing = require('control/cargo-landing')
 local chest = require('control/chest')
 local inserter = require('control/inserter')
-local loader = require('control/loader')
 local pump = require('control/pump')
 local rail_support = require('control/rail-support')
 local trash = require('control/trash')
@@ -9,13 +8,11 @@ local trash = require('control/trash')
 local function entity_build(event)
     cargo_landing.build(event)
     chest.build(event)
-    loader.build(event)
     rail_support.build(event)
     trash.build(event)
 end
 
 local function entity_destroy(event)
-    loader.destroy(event)
     rail_support.destroy(event)
 end
 
