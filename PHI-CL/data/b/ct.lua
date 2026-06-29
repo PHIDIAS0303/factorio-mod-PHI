@@ -133,6 +133,41 @@ if data.raw['electric-energy-interface'] and data.raw['electric-energy-interface
     end
 end
 
+-- CT A 1 BASE ENTITY,ITEM,RECIPE
+if data.raw['infinity-container'] and data.raw['infinity-container']['infinity-chest'] then
+    local item = table.deepcopy(data.raw['item']['infinity-chest'])
+    item.name = 'super-infinity-chest'
+    item.place_result = item.name
+    item.icons = {{icon = item.icon or '__base__/graphics/icons/infinity-chest.png', tint = mod_tint[8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
+    item.icon = nil
+    item.icon_size = nil
+    item.icon_mipmaps = nil
+    item.localised_name = {'', {'name.super-entity'}, {'entity-name.infinity-chest'}}
+    data:extend({item})
+
+    local entity = table.deepcopy(data.raw['infinity-container']['infinity-chest'])
+    entity.name = item.name
+    entity.minable.result = item.name
+    entity.gui_mode = 'none'
+    entity.pictures.layers[1].tint = mod_tint[8]
+    entity.localised_name = {'', {'name.super-entity'}, {'entity-name.infinity-chest'}}
+    data:extend({entity})
+
+    data:extend({{
+        type = 'recipe',
+        name = item.name,
+        energy_required = 2,
+        enabled = true,
+        categories = {'crafting'},
+        hidden = true,
+        hidden_in_factoriopedia = true,
+        ingredients = {{type = 'item', name = 'steel-chest', amount = 1}},
+        results = {{type = 'item', name = item.name, amount = 1}},
+        main_product = item.name,
+        localised_name = {'', {'name.super-entity'}, {'entity-name.infinity-chest'}}
+    }})
+end
+
 -- CT A 1 BASE MAP_GEN_PRESET
 if settings.startup['PHI-CT-TILE'].value then
     data.raw['map-gen-presets']['default']['empty-world'] = {
