@@ -176,7 +176,10 @@ if data.raw['blueprint-book'] and data.raw['blueprint-book']['blueprint-book'] t
         action = 'lua',
         toggleable = true,
         icon = data.raw['blueprint-book']['blueprint-book'].icon,
-        icon_size = data.raw['blueprint-book']['blueprint-book'].icon_size
+        icon_size = data.raw['blueprint-book']['blueprint-book'].icon_size,
+        small_icon = data.raw['blueprint-book']['blueprint-book'].icon,
+        small_icon_size = data.raw['blueprint-book']['blueprint-book'].icon_size,
+        localised_name = {'', {'name.super-entity'}, {'gui-permissions-names.ToggleMapEditor'}}
     }})
 end
 
