@@ -107,7 +107,7 @@ end
 for i=5, 7 do
     local tn = 'laser-weapons-damage-' .. i
 
-    if data.raw.technology[tn] then
+    if data.raw.technology[tn] and data.raw.technology[tn].effects then
         table.insert(data.raw.technology[tn].effects, {type = 'ammo-damage', ammo_category = 'tesla', modifier = 0.7})
         table.insert(data.raw.technology[tn].effects, {type = 'ammo-damage', ammo_category = 'electric', modifier = 0.7})
         table.insert(data.raw.technology[tn].effects, {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.6})
@@ -116,7 +116,7 @@ end
 
 -- GM A 13 BASE RESEARCH_EFFECT
 for _, v in pairs({{'stronger-explosives-4', 'ammo-damage', 'artillery-shell', 0.1}, {'stronger-explosives-5', 'ammo-damage', 'artillery-shell', 0.1}, {'stronger-explosives-6', 'ammo-damage', 'artillery-shell', 0.2}, {'stronger-explosives-7', 'ammo-damage', 'artillery-shell', 0.2}, {'laser-weapons-damage-3', 'ammo-damage', 'beam', 0.3}, {'laser-weapons-damage-4', 'ammo-damage', 'beam', 0.4}, {'laser-shooting-speed-5', 'gun-speed', 'electric', 0.2}, {'laser-shooting-speed-6', 'gun-speed', 'electric', 0.3}, {'laser-shooting-speed-7', 'gun-speed', 'electric', 0.5}, {'physical-projectile-damage-6', 'ammo-damage', 'railgun', 0.2}, {'physical-projectile-damage-7', 'ammo-damage', 'railgun', 0.4}, {'weapon-shooting-speed-6', 'gun-speed', 'railgun', 0.2}, {'artillery-shell-speed-1', 'gun-speed', 'railgun', 0.2}}) do
-    if data.raw.technology[v[1]] then
+    if data.raw.technology[v[1]] and data.raw.technology[v[1]].effects then
         table.insert(data.raw.technology[v[1]].effects, {type = v[2], ammo_category = v[3], modifier = v[4]})
     end
 end
