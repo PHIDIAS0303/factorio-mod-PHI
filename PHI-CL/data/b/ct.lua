@@ -159,6 +159,18 @@ if data.raw['loader-1x1'] and data.raw['loader-1x1']['loader-1x1'] then
         item.hidden_in_factoriopedia = false
     end
 
+    if data.raw.recipe['loader'] then
+        local recipe = table.deepcopy(data.raw.recipe['loader'])
+        recipe.name = 'loader-1x1'
+        recipe.enabled = false
+        recipe.results = {{type = 'item', name = recipe.name, amount = 1}}
+        recipe.main_product = recipe.name
+        recipe.hidden = false
+        recipe.hidden_in_factoriopedia = false
+        recipe.localised_name = {'?', data.raw['loader-1x1']['loader-1x1'].localised_name, ''}
+        recipe.localised_description = {'?', data.raw['loader-1x1']['loader-1x1'].localised_description, ''}
+    end
+
     if data.raw['infinity-container'] and data.raw['infinity-container']['infinity-chest'] then
         local entity = table.deepcopy(data.raw['infinity-container']['infinity-chest'])
         entity.name = 'loader-1x1-infinity-chest'
