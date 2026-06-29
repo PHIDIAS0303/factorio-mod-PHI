@@ -328,6 +328,15 @@ function main_entity(source, tier)
         end
     end
 
+    if item.icons and item.icons[1] then
+        item.icons[1].tint = mod_tint[tier]
+
+    elseif item.icon then
+        item.icons = {{icon = item.icon, icon_size = (item.icon_size and item.icon_size) or nil, tint = mod_tint[tier]}}
+        item.icon = nil
+    end
+
+    table.insert(item.icons, {icon = '__base__/graphics/icons/signal/signal_' .. tier .. '.png', icon_size = 64, scale = 0.25, shift = {12, 12}})
     item.localised_name = (tier > 1 and {'phi-cl.combine', {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}, tostring(tier)}) or {'?', {'entity-name.' .. source.ref_name}, {'name.' .. source.ref_name}}
     item.localised_description = {'?', {'entity-description.' .. source.ref_name}, {'description.' .. source.ref_name}}
 
