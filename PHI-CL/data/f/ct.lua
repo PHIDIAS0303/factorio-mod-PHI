@@ -53,7 +53,7 @@ if settings.startup['PHI-CT-STATUS'].value and items['status'] and items['status
         return positions
     end
 
-    for _, c in pairs({'assembling-machine', 'furnace', 'rocket-silo', 'mining-drill'}) do
+    for _, c in pairs({'assembling-machine', 'furnace', 'mining-drill'}) do
         for _, v in pairs(data.raw[c]) do
             if not v.bottleneck_ignore and not items['status_ignore'][v.name] then
                 for _, a in pairs({'graphics_set', 'wet_mining_graphics_set', 'graphics_set_flipped'}) do
