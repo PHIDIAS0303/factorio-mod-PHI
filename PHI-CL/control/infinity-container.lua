@@ -8,7 +8,7 @@ do
         chest_filter[q_name] = {}
 
         for _, i in pairs(prototypes.item) do
-            if not i.hidden and not (i.subgroup and i.subgroup == 'parameters') then
+            if not i.hidden and not (i.subgroup and (i.subgroup == 'parameters' or i.subgroup == 'spawnables')) then
                 j = j + 1
                 table.insert(chest_filter[q_name], {index = j, name = i.name, quality = q_name, mode = 'exactly', count = i.stack_size})
             end
