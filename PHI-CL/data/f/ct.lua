@@ -16,7 +16,10 @@ if data.raw['infinity-container']['super-infinity-chest'] and items['hide'] then
     data.raw['infinity-container']['super-infinity-chest'].inventory_size = sc
 end
 
-if items['status'] and items['status_ignore'] then
+-- MIG C 11 BASE ENTITY
+-- MIG C 1 RECYCLER ENTITY
+-- MIG C 7 SPACE_AGE ENTITY
+if settings.startup['PHI-CT-STATUS'].value and items['status'] and items['status_ignore'] then
     function main_entity_number_position(entity)
         local box = entity.selection_box or entity.collision_box
 

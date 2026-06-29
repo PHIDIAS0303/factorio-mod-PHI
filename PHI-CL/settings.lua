@@ -164,23 +164,31 @@ data:extend({
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.setting-category-color', 'CT', {'phi-cl.enable'}, {'mod-setting-name.PHI-CT'}},
-  localised_description = {'', {'phi-cl.setting-change-color', '[17] A12 C2 U3'}},
+  localised_description = {'', {'phi-cl.setting-change-color', '[20] A15 C2 U3'}},
   order = 'E00'
 },  {
+  type = 'bool-setting',
+  name = 'PHI-CT-STATUS',
+  setting_type = 'startup',
+  default_value = false,
+  localised_name = {'phi-cl.setting-class-color', 'CT1', {'phi-cl.enable'}, {'mod-setting-name.PHI-CT-STATUS'}},
+  localised_description = {'', {'phi-cl.setting-change-color', '[19] C19'}},
+  order = 'E01'
+}, {
   type = 'bool-setting',
   name = 'PHI-CT-TILE',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-class-color', 'CT1', {'phi-cl.enable'}, {'mod-setting-name.PHI-CT-TILE'}},
+  localised_name = {'phi-cl.setting-class-color', 'CT2', {'phi-cl.enable'}, {'mod-setting-name.PHI-CT-TILE'}},
   localised_description = {'', {'phi-cl.setting-change-color', '[1] C1'}},
-  order = 'E01'
+  order = 'E02'
 }, {
   type = 'string-setting',
   name = 'PHI-CT-TILE-CHOICE',
   setting_type = 'startup',
   default_value = 'grass-1',
   allowed_values = {'landfill', 'stone-path', 'concrete', 'refined-concrete', 'water', 'water-mud', 'water-shallow', 'deepwater', 'deepwater-green', 'dirt-1', 'dirt-2', 'dirt-3', 'dirt-4', 'dirt-5', 'dirt-6', 'dirt-7', 'dry-dirt', 'grass-1', 'grass-2', 'grass-3', 'grass-4'},
-  localised_name = {'phi-cl.setting-class-color', 'CT2', '', {'mod-setting-name.PHI-CT-TILE-CHOICE'}},
-  order = 'E02'
+  localised_name = {'phi-cl.setting-class-color', 'CT3', '', {'mod-setting-name.PHI-CT-TILE-CHOICE'}},
+  order = 'E03'
 }
 })
