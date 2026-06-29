@@ -11,7 +11,7 @@ function main.toggle(event)
         return
     end
 
-    if player.admin then
+    if not player.admin then
         return
     end
 
