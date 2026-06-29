@@ -3,15 +3,18 @@ local chest_filter = {}
 
 do
     for _, q in pairs(prototypes.quality) do
-        local q_name = q.name
-        local j = 0
-        chest_filter[q_name] = {}
+        chest_filter[q.name] = {}
+    end
 
-        for _, i in pairs(prototypes.item) do
-            if not i.hidden and not (i.subgroup and (i.subgroup == 'parameters' or i.subgroup == 'spawnables')) then
-                j = j + 1
-                table.insert(chest_filter[q_name], {index = j, name = i.name, quality = q_name, mode = 'exactly', count = i.stack_size})
+    local j = 1
+
+    for _, i in pairs(prototypes.item) do
+        if not i.hidden and not (i.subgroup and (i.subgroup == 'parameters' or i.subgroup == 'spawnables')) then
+            for _, q in pairs(prototypes.quality) do
+                table.insert(chest_filter[q.name], {index = j, name = i.name, quality = q.name, mode = 'exactly', count = i.stack_size})
             end
+
+            j = j + 1
         end
     end
 end
