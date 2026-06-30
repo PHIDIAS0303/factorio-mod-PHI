@@ -1,7 +1,7 @@
 local cargo_landing = require('control/cargo-landing')
 local chest = require('control/chest')
 local editor = require('control/editor')
-local infinity_container = require('control/infinity-container')
+local infinity = require('control/infinity')
 local inserter = require('control/inserter')
 local pump = require('control/pump')
 local rail_support = require('control/rail-support')
@@ -10,18 +10,13 @@ local trash = require('control/trash')
 local function entity_build(event)
     cargo_landing.build(event)
     chest.build(event)
-    infinity_container.build(event)
+    infinity.build(event)
     rail_support.build(event)
     trash.build(event)
 end
 
 local function entity_destroy(event)
     rail_support.destroy(event)
-end
-
-local function shortcut_button_toggle(event)
-    calculator.toggle(event)
-    editor.toggle(event)
 end
 
 if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
@@ -123,6 +118,6 @@ if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and set
 end
 
 if settings.startup['PHI-CT'].value then
-    script.on_event(defines.events.on_lua_shortcut, shortcut_button_toggle)
+    script.on_event(defines.events.on_lua_shortcut, editor.toggle)
     script.on_event(defines.events.on_player_toggled_map_editor, editor.toggle_editor)
 end

@@ -164,7 +164,7 @@ data:extend({
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.setting-category-color', 'CT', {'phi-cl.enable'}, {'mod-setting-name.PHI-CT'}},
-  localised_description = {'', {'phi-cl.setting-change-color', '[20] A15 C2 U3'}},
+  localised_description = {'', {'phi-cl.setting-change-color', '[24] A19 C2 U3'}},
   order = 'E00'
 },  {
   type = 'bool-setting',

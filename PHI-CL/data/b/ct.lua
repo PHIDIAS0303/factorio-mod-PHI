@@ -168,6 +168,54 @@ if data.raw['infinity-container'] and data.raw['infinity-container']['infinity-c
     }})
 end
 
+-- CT A 1 BASE ENTITY,ITEM,RECIPE
+if data.raw['infinity-cargo-wagon'] and data.raw['infinity-cargo-wagon']['infinity-cargo-wagon'] then
+    local item = table.deepcopy(data.raw['item']['infinity-cargo-wagon'])
+    item.name = 'super-infinity-cargo-wagon'
+    item.place_result = item.name
+    item.icons = {{icon = item.icon or '__base__/graphics/icons/cargo-wagon.png', tint = mod_tint[8], icon_size = item.icon_size or 64, icon_mipmaps = item.icon_mipmaps or 4}}
+    item.icon = nil
+    item.icon_size = nil
+    item.icon_mipmaps = nil
+    item.localised_name = {'', {'name.super-entity'}, {'entity-name.infinity-cargo-wagon'}}
+    data:extend({item})
+
+    local entity = table.deepcopy(data.raw['infinity-cargo-wagon']['infinity-cargo-wagon'])
+    entity.name = item.name
+    entity.minable.result = item.name
+    entity.gui_mode = 'none'
+
+    if entity.pictures then
+        for _, d in pairs({'rotated', 'sloped'}) do
+            if entity.pictures[d] and entity.pictures[d].layers then
+                for _, l in pairs(entity.pictures[d].layers) do
+                    if not l.draw_as_shadow then
+                        l.apply_runtime_tint = true
+                        l.tint = mod_tint[8]
+                    end
+                end
+            end
+        end
+    end
+
+    entity.localised_name = {'', {'name.super-entity'}, {'entity-name.infinity-cargo-wagon'}}
+    data:extend({entity})
+
+    data:extend({{
+        type = 'recipe',
+        name = item.name,
+        energy_required = 2,
+        enabled = true,
+        categories = {'crafting'},
+        hidden = true,
+        hidden_in_factoriopedia = true,
+        ingredients = {{type = 'item', name = 'cargo-wagon', amount = 1}},
+        results = {{type = 'item', name = item.name, amount = 1}},
+        main_product = item.name,
+        localised_name = {'', {'name.super-entity'}, {'entity-name.infinity-cargo-wagon'}}
+    }})
+end
+
 -- CT A 1 BASE SHORTCUT
 if data.raw['blueprint-book'] and data.raw['blueprint-book']['blueprint-book'] then
     data:extend({{

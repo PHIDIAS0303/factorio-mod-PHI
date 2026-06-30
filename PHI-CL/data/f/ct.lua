@@ -1,6 +1,6 @@
 local items = require('ct-c')
 
-if data.raw['infinity-container']['super-infinity-chest'] and items['hide'] then
+if items['hide'] then
     local sc = 1
 
     for c, _ in pairs(defines.prototypes.item) do
@@ -13,7 +13,13 @@ if data.raw['infinity-container']['super-infinity-chest'] and items['hide'] then
         end
     end
 
-    data.raw['infinity-container']['super-infinity-chest'].inventory_size = sc
+    if data.raw['infinity-container']['super-infinity-chest'] then
+        data.raw['infinity-container']['super-infinity-chest'].inventory_size = sc
+    end
+
+    if data.raw['infinity-cargo-wagon']['super-infinity-cargo-wagon'] then
+        data.raw['infinity-cargo-wagon']['super-infinity-cargo-wagon'].inventory_size = sc
+    end
 end
 
 -- MIG C 11 BASE ENTITY

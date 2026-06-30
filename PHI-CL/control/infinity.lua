@@ -24,17 +24,21 @@ do
 end
 
 function main.build(event)
-    if event.entity.type ~= 'infinity-container' then
+    if event.entity.type ~= 'infinity-container' and event.entity.type ~= 'infinity-cargo-wagon' then
         return
     end
 
-    if event.entity.name ~= 'super-infinity-chest' then
-        return
+    if event.entity.name == 'super-infinity-chest' then
+        event.entity.remove_unfiltered_items = true
+        event.entity.infinity_container_filters = chest_filter[event.entity.quality.name]
+        event.entity.get_inventory(defines.inventory.chest).set_bar()
     end
 
-    event.entity.remove_unfiltered_items = true
-    event.entity.infinity_container_filters = chest_filter[event.entity.quality.name]
-    event.entity.get_inventory(defines.inventory.chest).set_bar()
+    if event.entity.name == 'super-infinity-cargo-wagon' then
+        event.entity.remove_unfiltered_items = true
+        event.entity.infinity_container_filters = chest_filter[event.entity.quality.name]
+        event.entity.get_inventory(defines.inventory.cargo_wagon).set_bar()
+    end
 end
 
 return main
