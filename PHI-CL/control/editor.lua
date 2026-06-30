@@ -18,7 +18,7 @@ function main.toggle(event)
     player.toggle_map_editor()
 end
 
-function main.after_toggle(event)
+function main.toggle_editor(event)
     local player = game.players[event.player_index]
     player.set_shortcut_toggled('phi-cl-toggle-editor', player.physical_controller_type == defines.controllers.editor)
     game.tick_paused = false
