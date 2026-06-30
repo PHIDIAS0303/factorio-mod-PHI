@@ -1,9 +1,4 @@
 
-if settings.startup['PHI-MI-PIPE'].value then
-    -- MI C 1 BASE UTILITY_CONSTANTS
-    data.raw['utility-constants'].default.max_fluid_flow = 10 * settings.startup['PHI-MI-PIPE'].value
-end
-
 -- MI C 2 BASE ENTITY
 for _, t in pairs({'construction-robot', 'logistic-robot'}) do
     if data.raw[t] then

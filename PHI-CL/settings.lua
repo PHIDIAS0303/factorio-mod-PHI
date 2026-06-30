@@ -76,23 +76,13 @@ data:extend({
   localised_description = {'', {'phi-cl.setting-change-color', '[243] A117 C126'}},
   order = 'B01'
 }, {
-  type = 'int-setting',
-  name = 'PHI-MI-PIPE',
-  setting_type = 'startup',
-  default_value = 10,
-  minimum_value = 1,
-  maximum_value = 160,
-  localised_name = {'phi-cl.setting-class-color', 'MI2', {'phi-cl.ratio'}, {'mod-setting-name.PHI-MI-PIPE'}},
-  localised_description = {'', '[item=pipe] x0.1', {'phi-cl.setting-change-color', '\n[9] C9'}},
-  order = 'B02'
-}, {
   type = 'bool-setting',
   name = 'PHI-MI-ROBOT-ENERGY',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-class-color', 'MI3', {'phi-cl.enable'}, {'mod-setting-name.PHI-MI-ROBOT-ENERGY'}},
+  localised_name = {'phi-cl.setting-class-color', 'MI2', {'phi-cl.enable'}, {'mod-setting-name.PHI-MI-ROBOT-ENERGY'}},
   localised_description = {'', '[item=battery]', {'phi-cl.setting-change-color', '\n[2] C2'}},
-  order = 'B03'
+  order = 'B02'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-PIPE-EXTENT',
@@ -100,9 +90,9 @@ data:extend({
   default_value = 320,
   minimum_value = 80,
   maximum_value = 10240,
-  localised_name = {'phi-cl.setting-class-color', 'MI4', {'phi-cl.ratio'}, {'mod-setting-name.PHI-MI-PIPE-EXTENT'}},
+  localised_name = {'phi-cl.setting-class-color', 'MI3', {'phi-cl.ratio'}, {'mod-setting-name.PHI-MI-PIPE-EXTENT'}},
   localised_description = {'', '[item=pipe-to-ground]', {'phi-cl.setting-change-color', '\n[1] C1'}},
-  order = 'B04'
+  order = 'B03'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA',
