@@ -1,6 +1,6 @@
 local items = require('ct-c')
 
-if items['hide'] then
+if items['hide'] and (data.raw['infinity-container']['super-infinity-chest'] or data.raw['infinity-cargo-wagon']['super-infinity-cargo-wagon']) then
     local sc = 1
 
     for c, _ in pairs(defines.prototypes.item) do
