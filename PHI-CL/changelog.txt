@@ -4,6 +4,7 @@ Date: 2026-07-12
 
   Changes:
     - [GM] Generic Code layout restructure.
+    - [MI] Generic Code layout restructure.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.1.5
