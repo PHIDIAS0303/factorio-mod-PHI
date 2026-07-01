@@ -99,3 +99,51 @@ if settings.startup['PHI-CT-STATUS'].value and items['status'] and items['status
         end
     end
 end
+
+-- CT A 1 BASE MAP_GEN_PRESET
+if settings.startup['PHI-CT-TILE'].value then
+    local autoplace_settings = {
+        tile = {
+            treat_missing_as_default = false,
+            settings = {
+                [settings.startup['PHI-CT-TILE-CHOICE'].value] = {
+                    frequency = 1.0,
+                    size = 1.0,
+                    richness = 1.0
+                }
+            }
+        },
+        entity = {
+            treat_missing_as_default = false
+        },
+        decorative = {
+            treat_missing_as_default = false
+        }
+    }
+
+    data.raw.planet['nauvis'].map_gen_settings = {
+        autoplace_controls = {},
+        autoplace_settings = autoplace_settings
+    }
+
+    data.raw['map-gen-presets']['default']['empty-world'] = {
+        order = 'zz',
+        basic_settings = {
+            default_enable_all_autoplace_controls = false,
+            autoplace_controls = {},
+            autoplace_settings = autoplace_settings,
+            no_enemies_mode = true
+        },
+        advanced_settings = {
+            pollution = {
+                enabled = false
+            },
+            enemy_evolution = {
+                enabled = false
+            },
+            enemy_expansion = {
+                enabled = false
+            }
+        }
+    }
+end
