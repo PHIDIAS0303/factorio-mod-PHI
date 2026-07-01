@@ -102,36 +102,64 @@ end
 
 -- CT A 1 BASE MAP_GEN_PRESET
 if settings.startup['PHI-CT-TILE'].value then
-    local autoplace_settings = {
-        tile = {
-            treat_missing_as_default = false,
-            settings = {
-                [settings.startup['PHI-CT-TILE-CHOICE'].value] = {
-                    frequency = 1.0,
-                    size = 1.0,
-                    richness = 1.0
-                }
-            }
-        },
-        entity = {
-            treat_missing_as_default = false
-        },
-        decorative = {
-            treat_missing_as_default = false
+    local autoplace_setting_decorative = {}
+    local autoplace_setting_entity = {}
+    local autoplace_setting_tile = {}
+
+    for k, _ in pairs(data.raw.tile) do
+        autoplace_setting_tile[k] = {
+            frequency = 0,
+            size = 0,
+            richness = 0
         }
+    end
+
+    autoplace_setting_tile[settings.startup['PHI-CT-TILE-CHOICE'].value] = {
+        frequency = 1,
+        size = 1,
+        richness = 1
     }
 
-    data.raw.planet['nauvis'].map_gen_settings = {
-        autoplace_controls = {},
-        autoplace_settings = autoplace_settings
-    }
+    for c, _ in pairs(defines.prototypes.entity) do
+        if data.raw[c] then
+            for k, _ in pairs(data.raw[c]) do
+
+                autoplace_setting_entity[k] = {
+                    frequency = 0,
+                    size = 0,
+                    richness = 0
+                }
+            end
+        end
+    end
+
+    for k, _ in pairs(data.raw['optimized-decorative']) do
+        autoplace_setting_decorative[k] = {
+            frequency = 0,
+            size = 0,
+            richness = 0
+        }
+    end
 
     data.raw['map-gen-presets']['default']['empty-world'] = {
         order = 'zz',
         basic_settings = {
             default_enable_all_autoplace_controls = false,
             autoplace_controls = {},
-            autoplace_settings = autoplace_settings,
+            autoplace_settings = {
+                tile = {
+                    treat_missing_as_default = false,
+                    settings = autoplace_setting_tile
+                },
+                entity = {
+                    treat_missing_as_default = false,
+                    settings = autoplace_setting_entity
+                },
+                decorative = {
+                    treat_missing_as_default = false,
+                    settings = autoplace_setting_decorative
+                }
+            },
             no_enemies_mode = true
         },
         advanced_settings = {

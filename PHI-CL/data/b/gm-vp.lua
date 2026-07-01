@@ -9,12 +9,11 @@ mc.space_age()
 -- GM-VP C 31 BASE ENTITY
 -- GM-VP C 6 ELEVATED_RAILS ENTITY
 -- GM-VP C 19 SPACE_AGE ENTITY
-if items['entity_surface_conditions'] then
-    for _, v in pairs(items['entity_surface_conditions']) do
-        if data.raw[v] then
-            for _, v2 in pairs(data.raw[v]) do
-                v2.surface_conditions = nil
-            end
+-- entity_surface_conditions
+for c, _ in pairs(defines.prototypes.entity) do
+    if data.raw[c] then
+        for _, v in pairs(data.raw[c]) do
+            v.surface_conditions = nil
         end
     end
 end
@@ -452,12 +451,16 @@ end
 
 -- GM-VP H 1 QUALITY ITEM
 -- GM-VP H 24 SPACE_AGE ITEM
-for _, v in pairs(data.raw.item) do
-    v.auto_recycle = false
+for c, _ in pairs(defines.prototypes.item) do
+    if data.raw[c] then
+        for _, v in pairs(data.raw[c]) do
+            v.auto_recycle = false
 
-    if items['item'][v.name] then
-        v.hidden = true
-        v.hidden_in_factoriopedia = true
+            if items['item'][v.name] then
+                v.hidden = true
+                v.hidden_in_factoriopedia = true
+            end
+        end
     end
 end
 
