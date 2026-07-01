@@ -1,6 +1,27 @@
 
 local main = {}
 
+function main.create(player)
+    local frame = player.gui.relative.add({type = 'frame', name = 'phi_cl_inserter', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right, type = 'inserter', ghost_mode = 'both'}})
+    frame.add({type = 'label', name = 'inserter_throughput', caption = 0, style = 'heading_2_label'})
+end
+
+function main.update(player, entity)
+    if not entity.valid or not entity.type then
+        return
+    end
+
+    if entity.type ~= 'inserter' then
+        return
+    end
+
+    if entity.type == 'entity-ghost' and entity.ghost_type ~= 'inserter' then
+        return
+    end
+
+    player.gui.relative.phi_cl_inserter['inserter_throughput'].caption = string.format('%.2f', main.calc(entity))
+end
+
 function main.calc(entity)
     local prototype = entity.type == 'entity-ghost' and entity.ghost_prototype or entity.prototype
     local pickup_target = entity.pickup_target and entity.pickup_target or entity.surface.find_entities_filtered{position = entity.pickup_position, limit = 1}[1]

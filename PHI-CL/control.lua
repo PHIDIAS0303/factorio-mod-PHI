@@ -30,26 +30,11 @@ local function gui_create(player)
         end
     end
 
-    do
-        local frame = player.gui.relative.add({type = 'frame', name = 'phi_cl_inserter', anchor = {gui = defines.relative_gui_type.inserter_gui, position = defines.relative_gui_position.right, type = 'inserter', ghost_mode = 'both'}})
-        frame.add({type = 'label', name = 'inserter_throughput', caption = 0, style = 'heading_2_label'})
-    end
+    inserter.create(player)
 end
 
 local function gui_update(player, entity)
-    if not entity.valid or not entity.type then
-        return
-    end
-
-    if entity.type ~= 'inserter' then
-        return
-    end
-
-    if entity.type == 'entity-ghost' and entity.ghost_type ~= 'inserter' then
-        return
-    end
-
-    player.gui.relative.phi_cl_inserter['inserter_throughput'].caption = string.format('%.2f', inserter.calc(entity))
+    inserter.update(player, entity)
 end
 
 script.on_init(function()
