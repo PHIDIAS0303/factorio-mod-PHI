@@ -23,7 +23,7 @@ if items['hide'] and (data.raw['infinity-container']['super-infinity-chest'] or 
 end
 
 -- CT A 1 BASE MAP_GEN_PRESET
-if settings.startup['PHI-CT-TILE'].value then
+if data.raw.tile[settings.startup['PHI-CT-TILE'].value] then
     local autoplace_setting_decorative = {}
     local autoplace_setting_entity = {}
     local autoplace_setting_tile = {}
@@ -36,7 +36,7 @@ if settings.startup['PHI-CT-TILE'].value then
         }
     end
 
-    autoplace_setting_tile[settings.startup['PHI-CT-TILE-CHOICE'].value] = {
+    autoplace_setting_tile[settings.startup['PHI-CT-TILE'].value] = {
         frequency = 1,
         size = 1,
         richness = 1
