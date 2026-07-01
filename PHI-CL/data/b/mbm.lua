@@ -275,7 +275,7 @@ function main_entity(source, tier)
         item.glow_light_intensity = 1
 
         if item.attack_parameters then
-            item.attack_parameters.damage_modifier = (item.attack_parameters.damage_modifier and (item.attack_parameters.damage_modifier * 2)) or nil
+            item.attack_parameters.damage_modifier = (item.attack_parameters.damage_modifier and (item.attack_parameters.damage_modifier * 2)) or (2 ^ (tier - source.min + 1))
 
             if item.attack_parameters.ammo_type then
                 if item.attack_parameters.ammo_type.action and item.attack_parameters.ammo_type.action.action_delivery and item.attack_parameters.ammo_type.action.action_delivery.max_length then
@@ -289,6 +289,10 @@ function main_entity(source, tier)
         end
 
     elseif source.type == 'ammo-turret' then
+        if item.attack_parameters then
+            item.attack_parameters.damage_modifier = (item.attack_parameters.damage_modifier and (item.attack_parameters.damage_modifier * 2)) or (2 ^ (tier - source.min + 1))
+        end
+
         if (source.name == 'gun-turret' or source.name == 'rocket-turret') then
             if item['graphics_set'] and item['graphics_set']['base_visualisation'] and item['graphics_set']['base_visualisation']['animation'] and item['graphics_set']['base_visualisation']['animation'].layers then
                 for _, l in pairs(item['graphics_set']['base_visualisation']['animation'].layers) do
@@ -313,6 +317,10 @@ function main_entity(source, tier)
         end
 
     elseif source.type == 'fluid-turret' then
+        if item.attack_parameters then
+            item.attack_parameters.damage_modifier = (item.attack_parameters.damage_modifier and (item.attack_parameters.damage_modifier * 2)) or (2 ^ (tier - source.min + 1))
+        end
+
         item.prepare_range = item.prepare_range + (2 * (tier - source.min + 1))
 
         if item['graphics_set'] and item['graphics_set']['base_visualisation'] and item['graphics_set']['base_visualisation']['animation'] then
