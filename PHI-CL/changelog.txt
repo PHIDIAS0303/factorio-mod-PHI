@@ -3,7 +3,7 @@ Version: 3.1.5
 Date: 2026-07-12
 
   Changes:
-    - [GM] Generic Code layout restructure.
+    - [CT] Changes to CT2 map generation.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.1.4
