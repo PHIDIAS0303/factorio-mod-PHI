@@ -1,6 +1,6 @@
 local items = require('mi-c')
 
-function main_entity_number_position(entity)
+function status_number_position(entity)
     local box = entity.selection_box or entity.collision_box
 
     if not box then
@@ -33,7 +33,7 @@ function main_entity_number_position(entity)
     return positions
 end
 
-function main_entity_apply(entity_graphic, positions)
+function status_apply(entity_graphic, positions)
     entity_graphic.status_colors = items['status']
 
     if not entity_graphic.working_visualisations then
@@ -65,20 +65,28 @@ function main_entity_apply(entity_graphic, positions)
     }
 end
 
+function status(entity)
+    if entity.bottleneck_ignore or items['status_ignore'][entity.name] then
+        return
+    end
+
+    local pos = status_number_position(entity)
+
+    for _, a in pairs({'graphics_set', 'wet_mining_graphics_set', 'graphics_set_flipped'}) do
+        if entity[a] then
+            status_apply(entity[a], pos)
+        end
+    end
+end
+
 -- MI C 11 BASE ENTITY
 -- MI C 1 RECYCLER ENTITY
 -- MI C 7 SPACE_AGE ENTITY
 if settings.startup['PHI-MI-STATUS'].value and items['status'] and items['status_ignore'] then
     for _, c in pairs({'assembling-machine', 'furnace', 'mining-drill'}) do
-        for _, v in pairs(data.raw[c]) do
-            if not v.bottleneck_ignore and not items['status_ignore'][v.name] then
-                local pos = main_entity_number_position(v)
-
-                for _, a in pairs({'graphics_set', 'wet_mining_graphics_set', 'graphics_set_flipped'}) do
-                    if v[a] then
-                        main_entity_apply(v[a], pos)
-                    end
-                end
+        if data.raw[c] then
+            for _, v in pairs(data.raw[c]) do
+                status(v)
             end
         end
     end
