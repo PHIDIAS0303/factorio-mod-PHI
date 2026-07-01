@@ -81,9 +81,9 @@ end
 
 -- MI C 11 BASE ENTITY
 -- MI C 1 RECYCLER ENTITY
--- MI C 7 SPACE_AGE ENTITY
+-- MI C 9 SPACE_AGE ENTITY
 if settings.startup['PHI-MI-STATUS'].value and items['status'] and items['status_ignore'] then
-    for _, c in pairs({'assembling-machine', 'furnace', 'mining-drill'}) do
+    for _, c in pairs({'assembling-machine', 'furnace', 'mining-drill', 'thruster', 'agricultural-tower'}) do
         if data.raw[c] then
             for _, v in pairs(data.raw[c]) do
                 status(v)
