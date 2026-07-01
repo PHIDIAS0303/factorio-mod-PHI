@@ -52,32 +52,42 @@ if data.raw.ammo['artillery-shell'] then
     data.raw.ammo['artillery-shell'].stack_size = data.raw['inserter']['stack-inserter'].max_belt_stack_size
 end
 
--- GM C 1 SPACE_AGE TECHNOLOGY
-if data.raw.technology['foundation'] then
-    data.raw.technology['foundation'].prerequisites = {'rail-support-foundations'}
-    data.raw.technology['foundation'].unit.count = 1000
-    data.raw.technology['foundation'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-end
-
--- GM C 1 SPACE_AGE TECHNOLOGY
-if data.raw.technology['rail-support-foundations'] then
-    data.raw.technology['rail-support-foundations'].prerequisites = {'elevated-rail', 'planet-discovery-fulgora'}
-    data.raw.technology['rail-support-foundations'].unit.count = 600
-    data.raw.technology['rail-support-foundations'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
-end
-
--- GM C 1 ELEVATED_RAIL TECHNOLOGY
-if data.raw.technology['elevated-rail'] then
-    data.raw.technology['elevated-rail'].prerequisites = {'concrete', 'railway'}
-    data.raw.technology['elevated-rail'].unit.count = 400
-    data.raw.technology['elevated-rail'].unit.ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}
-end
-
 -- GM C 1 BASE RESEARCH
-if data.raw.technology['cliff-explosives'] then
-    data.raw.technology['cliff-explosives'].prerequisites = {'explosives', 'military-2'}
-    data.raw.technology['cliff-explosives'].unit = {count = 200, time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}}
-    data.raw.technology['cliff-explosives'].effects = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
+-- GM C 1 ELEVATED_RAIL RESEARCH
+-- GM C 2 SPACE_AGE RESEARCH
+if items['technology_reform'] then
+    for t, l in pairs(items['technology_reform']) do
+        if data.raw.technology[t] then
+            for _, c in pairs({'prerequisites', 'effects', 'max_level', 'unit'}) do
+                if l[c] then
+                    data.raw.technology[t][c] = l[c]
+                end
+            end
+
+            if data.raw.technology[t]['unit'] then
+                data.raw.technology[t].research_trigger = nil
+
+                for _, c in pairs({'ingredients', 'count', 'count_formula'}) do
+                    if l['unit_' .. c] then
+                        data.raw.technology[t]['unit'][c] = l['unit_' .. c]
+                    end
+                end
+            end
+        end
+    end
+end
+
+-- GM H 7 SPACE_AGE RESEARCH
+if items['technology'] then
+    for t, _ in pairs(items['technology']) do
+        if data.raw.technology[t] then
+            data.raw.technology[t].hidden = true
+            data.raw.technology[t].hidden_in_factoriopedia = true
+            data.raw.technology[t].effects = nil
+            data.raw.technology[t].research_trigger = nil
+            data.raw.technology[t].unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
+        end
+    end
 end
 
 -- GM A 9 BASE RESEARCH_EFFECT
@@ -95,15 +105,6 @@ end
 for _, v in pairs({{'stronger-explosives-4', 'ammo-damage', 'artillery-shell', 0.1}, {'stronger-explosives-5', 'ammo-damage', 'artillery-shell', 0.1}, {'stronger-explosives-6', 'ammo-damage', 'artillery-shell', 0.2}, {'stronger-explosives-7', 'ammo-damage', 'artillery-shell', 0.2}, {'laser-weapons-damage-3', 'ammo-damage', 'beam', 0.3}, {'laser-weapons-damage-4', 'ammo-damage', 'beam', 0.4}, {'laser-shooting-speed-5', 'gun-speed', 'electric', 0.2}, {'laser-shooting-speed-6', 'gun-speed', 'electric', 0.3}, {'laser-shooting-speed-7', 'gun-speed', 'electric', 0.5}, {'physical-projectile-damage-6', 'ammo-damage', 'railgun', 0.2}, {'physical-projectile-damage-7', 'ammo-damage', 'railgun', 0.4}, {'weapon-shooting-speed-6', 'gun-speed', 'railgun', 0.2}, {'artillery-shell-speed-1', 'gun-speed', 'railgun', 0.2}}) do
     if data.raw.technology[v[1]] and data.raw.technology[v[1]].effects then
         table.insert(data.raw.technology[v[1]].effects, {type = v[2], ammo_category = v[3], modifier = v[4]})
-    end
-end
-
--- GM H 7 SPACE_AGE RESEARCH
-for _, v in pairs({'artillery-shell-damage-1', 'railgun-damage-1', 'railgun-shooting-speed-1', 'electric-weapons-damage-1', 'electric-weapons-damage-2', 'electric-weapons-damage-3', 'electric-weapons-damage-4'}) do
-    if data.raw.technology[v] then
-        data.raw.technology[v].hidden = true
-        data.raw.technology[v].hidden_in_factoriopedia = true
-        data.raw.technology[v].effects = {}
     end
 end
 

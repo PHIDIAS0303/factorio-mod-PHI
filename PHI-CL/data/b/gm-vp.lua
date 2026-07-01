@@ -402,6 +402,16 @@ if data.raw['lab'] then
     end
 end
 
+for _, v in pairs(data.raw.technology) do
+    if v.unit and v.unit.ingredients then
+        for i = #v.unit.ingredients, 1, -1 do
+            if data.raw.item[v.unit.ingredients[i][1]].hidden then
+                table.remove(v.unit.ingredients, i)
+            end
+        end
+    end
+end
+
 -- GM-VP H 30 SPACE_AGE RESEARCH
 -- GM-VP H 5 QUALITY RESEARCH
 if items['technology'] then
@@ -419,28 +429,32 @@ end
 -- GM-VP C 27 BASE RESEARCH
 -- GM-VP C 39 SPACE_AGE RESEARCH
 if items['technology_reform'] then
+    for t, l in pairs(items['technology_reform']) do
+        if data.raw.technology[t] then
+            for _, c in pairs({'prerequisites', 'effects', 'max_level', 'unit'}) do
+                if l[c] then
+                    data.raw.technology[t][c] = l[c]
+                end
+            end
+
+            if data.raw.technology[t]['unit'] then
+                data.raw.technology[t].research_trigger = nil
+
+                for _, c in pairs({'ingredients', 'count', 'count_formula'}) do
+                    if l['unit_' .. c] then
+                        data.raw.technology[t]['unit'][c] = l['unit_' .. c]
+                    end
+                end
+            end
+        end
+    end
+end
+
+if items['technology_reform'] then
     for _, v in pairs(data.raw.technology) do
         if items['technology_reform'][v.name] then
-            v.prerequisites = (items['technology_reform'][v.name].prerequisites and items['technology_reform'][v.name].prerequisites) or v.prerequisites
-            v.effects = (items['technology_reform'][v.name].effects and items['technology_reform'][v.name].effects) or v.effects
-            v.max_level = (items['technology_reform'][v.name].max_level and items['technology_reform'][v.name].max_level) or v.max_level
-
-            if items['technology_reform'][v.name].unit then
-                v.unit = items['technology_reform'][v.name].unit
-            end
-
             if v.unit then
-                v.research_trigger = nil
-                v.unit.ingredients = (items['technology_reform'][v.name].unit_ingredients and items['technology_reform'][v.name].unit_ingredients) or v.unit.ingredients
-                v.unit.count = (items['technology_reform'][v.name].unit_count and items['technology_reform'][v.name].unit_count) or v.unit.count
-                v.unit.count_formula = (items['technology_reform'][v.name].unit_count_formula and items['technology_reform'][v.name].unit_count_formula) or v.unit.count_formula
-            end
 
-        elseif v.unit and v.unit.ingredients then
-            for i = #v.unit.ingredients, 1, -1 do
-                if data.raw.item[v.unit.ingredients[i][1]].hidden then
-                    table.remove(v.unit.ingredients, i)
-                end
             end
         end
     end

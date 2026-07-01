@@ -24,6 +24,42 @@ local items = {
             results = {{type = 'item', name = 'foundation', amount = 1}}
         }
     },
+    ['technology_reform'] = {
+        -- BASE 0
+        ['cliff-explosives'] = {
+            prerequisites = {'explosives', 'military-2'},
+            unit = {count = 200, time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}},
+            effects = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}, {type = 'cliff-deconstruction-enabled', modifier = true}}
+        },
+        -- ELEVATED_RAIL 0
+        ['elevated-rail'] = {
+            prerequisites = {'concrete', 'railway'},
+            unit_count = 400,
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}
+        },
+        -- SPACE_AGE 0
+        ['foundation'] = {
+            prerequisites = {'rail-support-foundations'},
+            unit_count = 1000,
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+        },
+        ['rail-support-foundations'] = {
+            prerequisites = {'elevated-rail', 'planet-discovery-fulgora'},
+            unit_count = 600,
+            unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}}
+        },
+    },
+    ['technology'] = {
+        -- SPACE_AGE 0
+        ['artillery-shell-damage-1'] = true,
+        ['railgun-damage-1'] = true,
+        ['railgun-shooting-speed-1'] = true,
+        ['electric-weapons-damage-1'] = true,
+        ['electric-weapons-damage-2'] = true,
+        -- SPACE_AGE 5
+        ['electric-weapons-damage-3'] = true,
+        ['electric-weapons-damage-4'] = true,
+    }
 }
 
 return items
