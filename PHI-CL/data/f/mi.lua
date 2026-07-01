@@ -79,7 +79,7 @@ function status(entity)
     end
 end
 
--- MI C 11 BASE ENTITY
+-- MI C 10 BASE ENTITY
 -- MI C 1 RECYCLER ENTITY
 -- MI C 9 SPACE_AGE ENTITY
 if settings.startup['PHI-MI-STATUS'].value and items['status'] and items['status_ignore'] then
