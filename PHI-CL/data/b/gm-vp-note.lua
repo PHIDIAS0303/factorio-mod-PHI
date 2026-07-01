@@ -1,18 +1,10 @@
 --[[
 裝飾生成 Decoration Generation
 地磚生成 Tile Generation
-
-for _, v in pairs(data.raw['tile']) do
-    if v.subgroup and (v.subgroup == 'vulcanus-tiles' or v.subgroup == 'gleba-tiles' or v.subgroup == 'gleba-water-tiles' or v.subgroup == 'fulgora-tiles' or v.subgroup == 'aquilo-tiles') then
-        v.autoplace = nil
-    end
-end
-
-for _, v in pairs({'lichen-decal', 'shroom-decal', 'pink-lichen-decal', 'red-lichen-decal', 'yellow-lettuce-lichen-1x1', 'yellow-lettuce-lichen-3x3', 'yellow-lettuce-lichen-6x6', 'yellow-lettuce-lichen-cups-1x1', 'yellow-lettuce-lichen-cups-3x3', 'yellow-lettuce-lichen-cups-6x6', 'honeycomb-fungus', 'honeycomb-fungus-1x1', 'honeycomb-fungus-decayed', 'green-lettuce-lichen-1x1', 'green-lettuce-lichen-3x3', 'green-lettuce-lichen-6x6', 'green-lettuce-lichen-water-1x1', 'green-lettuce-lichen-water-3x3', 'green-lettuce-lichen-water-6x6', 'split-gill-1x1', 'split-gill-2x2', 'split-gill-dying-1x1', 'split-gill-dying-2x2', 'split-gill-red-1x1', 'split-gill-red-2x2', 'fuchsia-pita', 'wispy-lichen', 'coral-land', 'coral-water', 'black-sceptre', 'pink-phalanges', 'green-cup', 'mycelium', 'veins', 'veins-small', 'brambles', 'blood-grape', 'blood-grape-vibrant', 'brown-cup', 'polycephalum-slime', 'polycephalum-balloon', 'grey-cracked-mud-decal', 'yellow-coral', 'solo-barnacle', 'curly-roots-orange', 'curly-roots-grey', 'pale-lettuce-lichen-cups-1x1', 'pale-lettuce-lichen-cups-3x3', 'pale-lettuce-lichen-cups-6x6', 'pale-lettuce-lichen-1x1', 'pale-lettuce-lichen-3x3', 'pale-lettuce-lichen-6x6', 'pale-lettuce-lichen-water-1x1', 'pale-lettuce-lichen-water-3x3', 'pale-lettuce-lichen-water-6x6', 'matches-small', 'nerve-roots-dense', 'nerve-roots-sparse', 'red-nerve-roots-veins-dense', 'red-nerve-roots-veins-sparse', 'purple-nerve-roots-veins-dense', 'purple-nerve-roots-veins-sparse', 'cream-nerve-roots-veins-dense', 'cream-nerve-roots-veins-sparse', 'white-carpet-grass', 'barnacles-decal', 'coral-stunted-grey', 'coral-stunted', 'gleba-spawner-slime', 'knobbly-roots', 'knobbly-roots-orange', 'fulgoran-ruin-tiny', 'fulgoran-gravewort', 'urchin-cactus', 'medium-fulgora-rock', 'small-fulgora-rock', 'tiny-fulgora-rock', 'aqulio-ice-decal-blue', 'aqulio-snowy-decal', 'floating-iceberg-large', 'floating-iceberg-small', 'lithium-iceberg-medium', 'lithium-iceberg-small', 'lithium-iceberg-tiny', 'snow-drift-decal', 'v-green-hairy-grass', 'v-brown-hairy-grass', 'v-brown-carpet-grass', 'v-red-pita', 'vulcanus-rock-decal-large', 'vulcanus-crack-decal', 'vulcanus-crack-decal-large', 'vulcanus-crack-decal-huge-warm', 'vulcanus-crack-decal-warm', 'calcite-stain', 'calcite-stain-small', 'sulfur-stain', 'sulfur-stain-small', 'sulfuric-acid-puddle', 'sulfuric-acid-puddle-small', 'crater-small', 'crater-large', 'pumice-relief-decal', 'vulcanus-sand-decal', 'vulcanus-dune-decal', 'waves-decal', 'medium-volcanic-rock', 'small-volcanic-rock', 'tiny-volcanic-rock', 'tiny-rock-cluster', 'small-sulfur-rock', 'tiny-sulfur-rock', 'sulfur-rock-cluster', 'vulcanus-lava-fire'}) do
-    data.raw['optimized-decorative'][v].autoplace = nil
-end
-
-data.raw['lightning-attractor']['fulgoran-ruin-attractor'].autoplace = nil
+隱藏 Hide
+成就 Achievement
+隱藏 Hide
+提示 Tip and Trick
 
 for _, v in pairs({'gleba-spawner', 'gleba-spawner-small'}) do
     data.raw['unit-spawner'][v].loot = nil
@@ -35,40 +27,4 @@ for _, v in pairs({'yumako-tree', 'jellystem'}) do
 end 
 
 data.raw['simple-entity']['small-stomper-shell'].autoplace = nil
-
-隱藏 Hide
-成就 Achievement
--- GM-VP H 16 SPACE_AGE ACHIEVEMENT
-for k, v in pairs(items['achievement']) do
-    if data.raw[v] and data.raw[v][k] then
-        data.raw[v][k] = nil
-    end
-end
-
-隱藏 Hide
-提示 Tip and Trick
--- GM-VP H 4 QUALITY TIP_AND_TRICK
--- GM-VP H 16 SPACE_AGE TIP_AND_TRICK
-for k, v in pairs(data.raw['tips-and-tricks-item']) do
-    if v.category and items['tips_and_tricks_item'][v.category] then
-        data.raw['tips-and-tricks-item'][k] = nil
-    end
-end
-
--- GM-VP C 6 QUALITY ACHIEVEMENT
--- GM-VP H 4 QUALITY TIPS_AND_TRICKS
-for _, v in pairs({{'produce-achievement', 'crafting-with-quality'}, {'module-transfer-achievement', 'make-it-better'}, {'produce-achievement', 'my-modules-are-legendary'}, {'equip-armor-achievement', 'look-at-my-shiny-rare-armor'}, {'use-item-achievement', 'todays-fish-is-trout-a-la-creme'}, {'place-equipment-achievement', 'no-room-for-more'}}) do
-    if data.raw[v[1] ] and data.raw[v[1] ][v[2] ] then
-        data.raw[v[1] ][v[2] ].hidden = true
-        data.raw[v[1] ][v[2] ].hidden_in_factoriopedia = true
-    end
-end
-
-for _, v in pairs({'quality', 'quality-modules', 'quality-factoriopedia', 'quality-probabilities'}) do
-    if data.raw['tips-and-tricks-item'][v] then
-        data.raw['tips-and-tricks-item'][v].hidden = true
-        data.raw['tips-and-tricks-item'][v].hidden_in_factoriopedia = true
-    end
-end
-
 ]]
