@@ -1,3 +1,4 @@
+local items = require('gm-c')
 
 -- GM C 1 SPACE_AGE ENTITY
 if data.raw['cargo-bay'] and data.raw['cargo-bay']['cargo-bay'] then
@@ -24,13 +25,6 @@ if data.raw['cargo-wagon'] and data.raw['cargo-wagon']['cargo-wagon'] then
     data.raw['cargo-wagon']['cargo-wagon'].inventory_size = math.max(80, data.raw['cargo-wagon']['cargo-wagon'].inventory_size or 0)
 end
 
--- GM C 1 SPACE_AGE RECIPE
-if data.raw.recipe['foundation'] then
-    data.raw.recipe['foundation'].categories = {'crafting'}
-    data.raw.recipe['foundation'].ingredients = {{type = 'item', name = 'landfill', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 10}, {type = 'item', name = 'steel-plate', amount = 10}}
-    data.raw.recipe['foundation'].results = {{type = 'item', name = 'foundation', amount = 1}}
-end
-
 -- GM-SAP C 2 SPACE_AGE RESOURCE
 for _, v in pairs({'lithium-brine', 'fluorine-vent'}) do
     if data.raw.resource[v] then
@@ -41,33 +35,16 @@ for _, v in pairs({'lithium-brine', 'fluorine-vent'}) do
     end
 end
 
--- GM C 1 BASE RECIPE
-if data.raw.recipe['atomic-bomb'] then
-    for _, v in pairs(data.raw.recipe['atomic-bomb'].ingredients) do
-        if v.name == 'uranium-235' then
-            v.amount = math.min(v.amount, 30)
+-- GM C 5 BASE RECIPE
+-- GM C 1 SPACE_AGE RECIPE
+if items['recipe_reform'] then
+    for r, t in pairs(items['recipe_reform']) do
+        if data.raw.recipe[r] then
+            for k, v in pairs(t) do
+                data.raw.recipe[r][k] = v
+            end
         end
     end
-end
-
--- GM C 1 BASE RECIPE
-if data.raw.recipe['cliff-explosives'] then
-    data.raw.recipe['cliff-explosives'].ingredients = {{type = 'item', name = 'explosives', amount = 10}, {type = 'item', name = 'grenade', amount = 1}, {type = 'item', name = 'barrel', amount = 1}}
-end
-
--- GM C 1 BASE RECIPE
-if data.raw.recipe['artillery-turret'] then
-    data.raw.recipe['artillery-turret'].ingredients = {{type = 'item', name = 'steel-plate', amount = 60}, {type = 'item', name = 'concrete', amount = 60}, {type = 'item', name = 'iron-gear-wheel', amount = 40}, {type = 'item', name = 'advanced-circuit', amount = 20}}
-end
-
--- GM C 1 BASE RECIPE
-if data.raw.recipe['artillery-shell'] then
-    data.raw.recipe['artillery-shell'].ingredients = {{type = 'item', name = 'explosive-cannon-shell', amount = 4}, {type = 'item', name = 'radar', amount = 1}, {type = 'item', name = 'explosives', amount = 8}}
-end
-
--- GM C 1 BASE RECIPE
-if data.raw.recipe['artillery-wagon'] then
-    data.raw.recipe['artillery-wagon'].ingredients = {{type = 'item', name = 'engine-unit', amount = 64}, {type = 'item', name = 'iron-gear-wheel', amount = 10}, {type = 'item', name = 'steel-plate', amount = 40}, {type = 'item', name = 'pipe', amount = 16}, {type = 'item', name = 'advanced-circuit', amount = 20}}
 end
 
 -- GM C 1 BASE ITEM
