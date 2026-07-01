@@ -28,7 +28,7 @@ local items = {
         },
         ['chemical-science-pack'] = {
             type = 'item',
-            color = 'cyan'
+            color = 'blue'
         },
         ['production-science-pack'] = {
             type = 'item',
@@ -129,7 +129,7 @@ local items = {
         -- BASE ITEM 30
         ['requester-chest'] = {
             type = 'item',
-            color = 'red'
+            color = 'blue'
         },
         ['buffer-chest'] = {
             type = 'item',
@@ -141,7 +141,7 @@ local items = {
         },
         ['burner-inserter'] = {
             type = 'item',
-            color = 'black'
+            color = 'grey'
         },
         ['inserter'] = {
             type = 'item',
