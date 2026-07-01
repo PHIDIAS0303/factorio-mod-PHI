@@ -45,12 +45,12 @@ end
 -- MI C 1 BASE ENTITY
 if data.raw['lamp'] then
     for _, v in pairs(data.raw['lamp']) do
-        if v.light then
-            v.light.color = {1, 1, 1}
-        end
+        for _, c in pairs({'light', 'light_when_colored'}) do
+            if not v[c] then
+                v[c] = {}
+            end
 
-        if v.light_when_colored then
-            v.light_when_colored.color = {1, 1, 1}
+            v[c].color = {1, 1, 1}
         end
     end
 end
