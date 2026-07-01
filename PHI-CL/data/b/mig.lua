@@ -159,15 +159,6 @@ if data.raw['offshore-pump'] and data.raw['offshore-pump']['offshore-pump'] then
     }})
 end
 
---[[
--- MIG C 3 SPACE_AGE RECIPE
-for _, v in pairs({'metallic-asteroid-reprocessing', 'carbonic-asteroid-reprocessing', 'oxide-asteroid-reprocessing'}) do
-    if data.raw['recipe'][v] then
-        data.raw['recipe'][v].allow_quality = true
-    end
-end
-]]
-
 -- MIG C 1 BASE ENTITY
 -- MIG C 1 SPACE_AGE ENTITY
 if data.raw['mining-drill'] then
@@ -179,11 +170,11 @@ end
 
 -- MIG C 3 BASE MODULE
 if data.raw['module'] then
-    for _, v in pairs({{['n'] = '', ['v'] = 1}, {['n'] = '-2', ['v'] = 2}, {['n'] = '-3', ['v'] = 3}}) do
-        local n = 'efficiency-module' .. v['n']
+    for _, v in pairs({1, 2, 3}) do
+        local n = 'efficiency-module' .. (v == 1 and '' or ('-' .. v['n']))
 
         if data.raw['module'][n] and data.raw['module'][n].effect and data.raw['module'][n].effect.consumption then
-            data.raw['module'][n].effect.consumption = math.min(-0.3 * v['v'], data.raw['module'][n].effect.consumption)
+            data.raw['module'][n].effect.consumption = math.min(-0.3 * v, data.raw['module'][n].effect.consumption)
         end
     end
 end
