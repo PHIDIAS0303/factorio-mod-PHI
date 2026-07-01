@@ -161,7 +161,7 @@ return {
     -- MBE A 2 RECYCLER ENTITY,RECIPE,RESEARCH_EFFECT
     ['recycler'] = {
         mod = 'recycler',
-        type = 'furnace',
+        type = (settings.startup['PHI-GM'].value == 'VP' and 'assembling-machine') or 'furnace',
         name = 'recycler',
         tech = 'recycling'
     },
