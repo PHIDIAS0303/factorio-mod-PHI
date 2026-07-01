@@ -99,6 +99,7 @@ data:extend({
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.setting-category-color', 'SA', {'phi-cl.enable'}, {'mod-setting-name.PHI-SA'}},
+  localised_description = (mods['space-age'] and {'', '[space-age]'}) or nil,
   order = 'C00'
 }, {
   type = 'bool-setting',
@@ -120,23 +121,23 @@ data:extend({
   order = 'C02'
 }, {
   type = 'int-setting',
-  name = 'PHI-SA-QUALITY',
-  setting_type = 'startup',
-  default_value = 10,
-  minimum_value = 1,
-  maximum_value = 100,
-  localised_name = {'phi-cl.setting-class-color', 'SA3', {'phi-cl.ratio'}, {'mod-setting-name.PHI-SA-QUALITY'}},
-  localised_description = (mods['space-age'] and {'', '[item=quality-module-3] x 0.1', {'phi-cl.setting-change-color', '\n[34] C25 H9'}}) or nil,
-  order = 'C03'
-}, {
-  type = 'int-setting',
   name = 'PHI-SA-ROCKET-CAPACITY',
   setting_type = 'startup',
   default_value = 10,
   minimum_value = 1,
   maximum_value = 10000,
-  localised_name = {'phi-cl.setting-class-color', 'SA4', {'phi-cl.ratio'}, {'mod-setting-name.PHI-SA-ROCKET-CAPACITY'}},
+  localised_name = {'phi-cl.setting-class-color', 'SA3', {'phi-cl.ratio'}, {'mod-setting-name.PHI-SA-ROCKET-CAPACITY'}},
   localised_description = {'', '[item=rocket-silo] 000 KG', {'phi-cl.setting-change-color', '\n[1] C1'}},
+  order = 'C03'
+}, {
+  type = 'int-setting',
+  name = 'PHI-SA-QUALITY',
+  setting_type = 'startup',
+  default_value = 10,
+  minimum_value = 1,
+  maximum_value = 100,
+  localised_name = {'phi-cl.setting-class-color', 'SA4', {'phi-cl.ratio'}, {'mod-setting-name.PHI-SA-QUALITY'}},
+  localised_description = (mods['quality'] and {'', '[item=quality-module-3] x 0.1', {'phi-cl.setting-change-color', '\n[34] C25 H9'}}) or nil,
   order = 'C04'
 }, {
   type = 'string-setting',
