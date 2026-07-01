@@ -562,6 +562,10 @@ for _, w in pairs({'roboport', 'roboport-equipment'}) do
     end
 end
 
+if data.raw['roboport-equipment'] and data.raw['roboport-equipment']['personal-roboport-equipment'] then
+    data.raw['roboport-equipment']['personal-roboport-equipment'].charging_energy = tostring(tonumber(string.match(data.raw['roboport-equipment']['personal-roboport-equipment'].charging_energy, '[%d%.]+')) / 2) .. string.match(data.raw['roboport-equipment']['personal-roboport-equipment'].charging_energy, '%a+')
+end
+
 -- MIG C 1 SPAGE_AGE ENTITY
 if data.raw['thruster'] and data.raw['thruster']['thruster'] then
     if data.raw['thruster']['thruster'].fuel_fluid_box then
