@@ -89,11 +89,6 @@ for _, force in pairs(game.forces) do
                 recipes['trash-chest'].enabled = true
                 recipes['trash-chest'].reload()
             end
-
-            if recipes['linked-chest'] then
-                recipes['linked-chest'].enabled = true
-                recipes['linked-chest'].reload()
-            end
         end
 
         if technologies['automation'] and technologies['automation'].researched and recipes['trash-pipe'] then
@@ -106,6 +101,11 @@ for _, force in pairs(game.forces) do
             recipes['electric-heating-tower'].reload()
         end
 
+        if technologies['rocket-silo'] and technologies['rocket-silo'].researched and recipes['proxy-cargo-landing-chest'] then
+            recipes['proxy-cargo-landing-chest'].enabled = true
+            recipes['proxy-cargo-landing-chest'].reload()
+        end
+
         for _, v in pairs({{'logistics', 'loader'}, {'logistics-2', 'fast-loader'}, {'logistics-3', 'express-loader'}, {'turbo-transport-belt', 'turbo-loader'}}) do
             if technologies[v[1]] and technologies[v[1]].researched and recipes[v[2]] then
                 recipes[v[2]].enabled = true
@@ -114,13 +114,10 @@ for _, force in pairs(game.forces) do
         end
     end
 
-    if recipes['electric-boiler'] then
-        recipes['electric-boiler'].enabled = true
-        recipes['electric-boiler'].reload()
-    end
-
-    if recipes['super-pump'] then
-        recipes['super-pump'].enabled = true
-        recipes['super-pump'].reload()
+    if settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value == 'VP' then
+        if technologies['space-science-pack'] and technologies['space-science-pack'].researched and recipes['satellite'] then
+            recipes['satellite'].enabled = true
+            recipes['satellite'].reload()
+        end
     end
 end
