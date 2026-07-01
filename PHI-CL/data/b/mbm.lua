@@ -416,6 +416,7 @@ end
 for _, v in pairs(items) do
     v.mod = v.mod or 'base'
     v.min = v.min or 2
+    v.max = v.max or settings.startup['PHI-MB-MACHINE'].value
     v.ref_name = v.ref_name or v.name
 
     if (v.mod and mods[v.mod]) and (v.max >= v.min) and data.raw[v.type] and data.raw[v.type][v.ref_name] and not data.raw[v.type][v.ref_name].hidden then

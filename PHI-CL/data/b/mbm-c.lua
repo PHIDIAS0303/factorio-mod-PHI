@@ -12,181 +12,157 @@ return {
     ['electric-furnace'] = {
         type = 'furnace',
         name = 'electric-furnace',
-        tech = 'advanced-material-processing-2',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'advanced-material-processing-2'
     },
     -- MBM A 2 BASE ENTITY,RECIPE,RESEARCH_EFFECT
     ['oil-refinery'] = {
         type = 'assembling-machine',
         name = 'oil-refinery',
-        tech = 'oil-processing',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'oil-processing'
     },
     -- MBM A 2 BASE ENTITY,RECIPE,RESEARCH_EFFECT
     ['chemical-plant'] = {
         type = 'assembling-machine',
         name = 'chemical-plant',
-        tech = 'oil-processing',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'oil-processing'
     },
     -- MBM A 2 BASE ENTITY,RECIPE,RESEARCH_EFFECT
     ['centrifuge'] = {
         type = 'assembling-machine',
         name = 'centrifuge',
-        tech = 'uranium-processing',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'uranium-processing'
     },
     -- MBM A 2 BASE ENTITY,RECIPE,RESEARCH_EFFECT
     ['lab'] = {
         type = 'lab',
         name = 'lab',
-        tech = 'automation',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'automation'
     },
     -- MBM A 2 BASE ENTITY,RECIPE,RESEARCH_EFFECT
     ['electric-mining-drill'] = {
         type = 'mining-drill',
         name = 'electric-mining-drill',
-        tech = 'automation',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'automation'
     },
     -- MBM A 2 BASE ENTITY,RECIPE,RESEARCH_EFFECT
     ['pumpjack'] = {
         type = 'mining-drill',
         name = 'pumpjack',
-        tech = 'automation',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'automation'
     },
     -- MBM A 2 BASE ENTITY,RECIPE,RESEARCH_EFFECT
     ['laser-turret'] = {
         type = 'electric-turret',
         name = 'laser-turret',
-        tech = 'laser-turret',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'laser-turret'
     },
     -- MBM A 2 BASE ENTITY,RECIPE,RESEARCH_EFFECT
     ['flamethrower-turret'] = {
         type = 'fluid-turret',
         name = 'flamethrower-turret',
-        tech = 'flamethrower',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'flamethrower'
     },
     -- MBM A 2 BASE ENTITY,RECIPE,RESEARCH_EFFECT
     ['gun-turret'] = {
         type = 'ammo-turret',
         name = 'gun-turret',
-        tech = 'gun-turret',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'gun-turret'
     },
     -- MBM A 2 BASE ENTITY,RECIPE,RESEARCH_EFFECT
     ['radar'] = {
         type = 'radar',
         name = 'radar',
-        tech = 'automation',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'automation'
     },
     -- MBE A 2 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT
     ['railgun-turret'] = {
         mod = 'space-age',
         type = 'ammo-turret',
         name = 'railgun-turret',
-        tech = 'railgun',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'railgun'
     },
     -- MBE A 2 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT
     ['rocket-turret'] = {
         mod = 'space-age',
         type = 'ammo-turret',
         name = 'rocket-turret',
-        tech = 'rocket-turret',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'rocket-turret'
     },
     -- MBE A 2 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT
     ['tesla-turret'] = {
         mod = 'space-age',
         type = 'electric-turret',
         name = 'tesla-turret',
-        tech = 'tesla-weapons',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'tesla-weapons'
     },
     -- MBE A 2 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT
     ['foundry'] = {
         mod = 'space-age',
         type = 'assembling-machine',
         name = 'foundry',
-        tech = 'foundry',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'foundry'
     },
     -- MBE A 2 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT
     ['big-mining-drill'] = {
         mod = 'space-age',
         type = 'mining-drill',
         name = 'big-mining-drill',
-        tech = 'big-mining-drill',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'big-mining-drill'
     },
     -- MBE A 2 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT
     ['biochamber'] = {
         mod = 'space-age',
         type = 'assembling-machine',
         name = 'biochamber',
-        tech = 'biochamber',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'biochamber'
     },
     -- MBE A 2 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT
     ['crusher'] = {
         mod = 'space-age',
         type = 'assembling-machine',
         name = 'crusher',
-        tech = 'space-platform',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'space-platform'
     },
     -- MBE A 2 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT
     ['biolab'] = {
         mod = 'space-age',
         type = 'lab',
         name = 'biolab',
-        tech = 'biolab',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'biolab'
     },
     -- MBE A 2 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT
     ['cryogenic-plant'] = {
         mod = 'space-age',
         type = 'assembling-machine',
         name = 'cryogenic-plant',
-        tech = 'cryogenic-plant',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'cryogenic-plant'
     },
     -- MBE A 2 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT
     ['electromagnetic-plant'] = {
         mod = 'space-age',
         type = 'assembling-machine',
         name = 'electromagnetic-plant',
-        tech = 'electromagnetic-plant',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'electromagnetic-plant'
     },
     -- MBE A 2 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT
     ['thruster'] = {
         mod = 'space-age',
         type = 'thruster',
         name = 'thruster',
-        tech = 'space-platform-thruster',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'space-platform-thruster'
     },
     -- MBE A 2 SPACE_AGE ENTITY,RECIPE,RESEARCH_EFFECT
     ['agricultural-tower'] = {
         mod = 'space-age',
         type = 'agricultural-tower',
         name = 'agricultural-tower',
-        tech = 'agriculture',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'agriculture'
     },
     -- MBE A 2 RECYCLER ENTITY,RECIPE,RESEARCH_EFFECT
     ['recycler'] = {
         mod = 'recycler',
         type = 'furnace',
         name = 'recycler',
-        tech = 'agriculture',
-        max = settings.startup['PHI-MB-MACHINE'].value
+        tech = 'agriculture'
     },
 }

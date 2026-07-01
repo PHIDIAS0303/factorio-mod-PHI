@@ -12,8 +12,7 @@ return {
     ['discharge-defense-equipment'] = {
         type = 'active-defense-equipment',
         name = 'discharge-defense',
-        tech = 'discharge-defense-equipment',
-        max = settings.startup['PHI-MB-EQUIPMENT'].value
+        tech = 'discharge-defense-equipment'
     },
     -- MBQ A 2 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
     ['energy-shield-equipment'] = {
@@ -28,16 +27,14 @@ return {
     ['exoskeleton-equipment'] = {
         type = 'movement-bonus-equipment',
         name = 'exoskeleton',
-        tech = 'exoskeleton-equipment',
-        max = settings.startup['PHI-MB-EQUIPMENT'].value or 1
+        tech = 'exoskeleton-equipment'
     },
     -- MBQ A 2 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
     ['fission-reactor-equipment'] = {
         type = 'generator-equipment',
         name = 'fission-reactor',
         ref_name = 'fission-reactor-equipment',
-        tech = 'fission-reactor-equipment',
-        max = settings.startup['PHI-MB-EQUIPMENT'].value or 1
+        tech = 'fission-reactor-equipment'
     },
     -- MBQ A 1 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
     ['night-vision-equipment'] = {
@@ -50,8 +47,7 @@ return {
     ['personal-laser-defense-equipment'] = {
         type = 'active-defense-equipment',
         name = 'personal-laser-defense',
-        tech = 'personal-laser-defense-equipment',
-        max = settings.startup['PHI-MB-EQUIPMENT'].value
+        tech = 'personal-laser-defense-equipment'
     },
     -- MBQ A 2 BASE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
     ['personal-roboport-equipment'] = {
@@ -67,24 +63,20 @@ return {
         type = 'solar-panel-equipment',
         name = 'solar-panel',
         tech = 'solar-panel-equipment',
-        max = settings.startup['PHI-MB-EQUIPMENT'].value,
         base = 30,
-        graphics_name = 'solar-panel-equipment'
     },
     -- MBQ A 2 SPACE_AGE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
     ['fusion-reactor-equipment'] = {
         mod = 'space-age',
         type = 'generator-equipment',
         name = 'fusion-reactor',
-        tech = 'fusion-reactor-equipment',
-        max = settings.startup['PHI-MB-EQUIPMENT'].value
+        tech = 'fusion-reactor-equipment'
     },
     -- MBQ A 2 SPACE_AGE ARMOR_EQUIPMENT,RECIPE,RESEARCH_EFFECT
     ['toolbelt-equipment'] = {
         mod = 'space-age',
         type = 'inventory-bonus-equipment',
         name = 'toolbelt',
-        tech = 'toolbelt-equipment',
-        max = settings.startup['PHI-MB-EQUIPMENT'].value
+        tech = 'toolbelt-equipment'
     }
 }
