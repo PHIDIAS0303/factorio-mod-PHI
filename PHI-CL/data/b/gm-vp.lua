@@ -6,14 +6,18 @@ local resource_autoplace = require('resource-autoplace')
 
 mc.space_age()
 
--- GM-VP C 31 BASE ENTITY
--- GM-VP C 6 ELEVATED_RAILS ENTITY
--- GM-VP C 19 SPACE_AGE ENTITY
--- entity_surface_conditions
 for c, _ in pairs(defines.prototypes.entity) do
     if data.raw[c] then
         for _, v in pairs(data.raw[c]) do
             v.surface_conditions = nil
+        end
+    end
+end
+
+for c, _ in pairs(defines.prototypes.item) do
+    if data.raw[c] then
+        for _, v in pairs(data.raw[c]) do
+            v.auto_recycle = false
         end
     end
 end
@@ -450,16 +454,6 @@ if items['technology_reform'] then
     end
 end
 
-if items['technology_reform'] then
-    for _, v in pairs(data.raw.technology) do
-        if items['technology_reform'][v.name] then
-            if v.unit then
-
-            end
-        end
-    end
-end
-
 if settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE'].value > 1 and mbm and data.raw.technology and data.raw.recipe then
     for i = 2, settings.startup['PHI-MB-MACHINE'].value do
         for _, v in pairs({'foundry', 'electromagnetic-plant', 'cryogenic-plant'}) do
@@ -470,16 +464,8 @@ if settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE
     end
 end
 
--- GM-VP H 1 QUALITY ITEM
-for c, _ in pairs(defines.prototypes.item) do
-    if data.raw[c] then
-        for _, v in pairs(data.raw[c]) do
-            v.auto_recycle = false
-        end
-    end
-end
-
 -- GM-VP H 24 SPACE_AGE ITEM
+-- GM-VP H 1 QUALITY ITEM
 if items['item'] then
     for i, _ in pairs(items['item']) do
         if data.raw.item[i] then
