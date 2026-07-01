@@ -77,12 +77,20 @@ data:extend({
   order = 'B01'
 }, {
   type = 'bool-setting',
+  name = 'PHI-MI-STATUS',
+  setting_type = 'startup',
+  default_value = false,
+  localised_name = {'phi-cl.setting-class-color', 'MI2', {'phi-cl.enable'}, {'mod-setting-name.PHI-MI-STATUS'}},
+  localised_description = {'', {'phi-cl.setting-change-color', '[18] C18'}},
+  order = 'B02'
+}, {
+  type = 'bool-setting',
   name = 'PHI-MI-ROBOT-ENERGY',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-class-color', 'MI2', {'phi-cl.enable'}, {'mod-setting-name.PHI-MI-ROBOT-ENERGY'}},
+  localised_name = {'phi-cl.setting-class-color', 'MI3', {'phi-cl.enable'}, {'mod-setting-name.PHI-MI-ROBOT-ENERGY'}},
   localised_description = {'', '[item=battery]', {'phi-cl.setting-change-color', '\n[2] C2'}},
-  order = 'B02'
+  order = 'B03'
 }, {
   type = 'int-setting',
   name = 'PHI-MI-PIPE-EXTENT',
@@ -90,9 +98,9 @@ data:extend({
   default_value = 320,
   minimum_value = 80,
   maximum_value = 10240,
-  localised_name = {'phi-cl.setting-class-color', 'MI3', {'phi-cl.ratio'}, {'mod-setting-name.PHI-MI-PIPE-EXTENT'}},
+  localised_name = {'phi-cl.setting-class-color', 'MI4', {'phi-cl.ratio'}, {'mod-setting-name.PHI-MI-PIPE-EXTENT'}},
   localised_description = {'', '[item=pipe-to-ground]', {'phi-cl.setting-change-color', '\n[1] C1'}},
-  order = 'B03'
+  order = 'B04'
 }, {
   type = 'bool-setting',
   name = 'PHI-SA',
@@ -157,29 +165,21 @@ data:extend({
   localised_name = {'phi-cl.setting-category-color', 'CT', {'phi-cl.enable'}, {'mod-setting-name.PHI-CT'}},
   localised_description = {'', {'phi-cl.setting-change-color', '[24] A19 C2 U3'}},
   order = 'E00'
-},  {
-  type = 'bool-setting',
-  name = 'PHI-CT-STATUS',
-  setting_type = 'startup',
-  default_value = false,
-  localised_name = {'phi-cl.setting-class-color', 'CT1', {'phi-cl.enable'}, {'mod-setting-name.PHI-CT-STATUS'}},
-  localised_description = {'', {'phi-cl.setting-change-color', '[18] C18'}},
-  order = 'E01'
 }, {
   type = 'bool-setting',
   name = 'PHI-CT-TILE',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-class-color', 'CT2', {'phi-cl.enable'}, {'mod-setting-name.PHI-CT-TILE'}},
+  localised_name = {'phi-cl.setting-class-color', 'CT1', {'phi-cl.enable'}, {'mod-setting-name.PHI-CT-TILE'}},
   localised_description = {'', {'phi-cl.setting-change-color', '[1] C1'}},
-  order = 'E02'
+  order = 'E01'
 }, {
   type = 'string-setting',
   name = 'PHI-CT-TILE-CHOICE',
   setting_type = 'startup',
   default_value = 'grass-1',
   allowed_values = {'landfill', 'stone-path', 'concrete', 'refined-concrete', 'water', 'water-mud', 'water-shallow', 'deepwater', 'deepwater-green', 'dirt-1', 'dirt-2', 'dirt-3', 'dirt-4', 'dirt-5', 'dirt-6', 'dirt-7', 'dry-dirt', 'grass-1', 'grass-2', 'grass-3', 'grass-4'},
-  localised_name = {'phi-cl.setting-class-color', 'CT3', '', {'mod-setting-name.PHI-CT-TILE-CHOICE'}},
-  order = 'E03'
+  localised_name = {'phi-cl.setting-class-color', 'CT2', '', {'mod-setting-name.PHI-CT-TILE-CHOICE'}},
+  order = 'E02'
 }
 })
