@@ -329,6 +329,7 @@ local items = {
         ['scrap-recycling'] = {
             energy_required = 5,
             allow_productivity = true,
+            allow_decomposition = false,
             ingredients = {{type = 'item', name = 'scrap', amount = 10}},
             results = {{type = 'item', name = 'iron-plate', amount = 3}, {type = 'item', name = 'copper-plate', amount = 3}, {type = 'item', name = 'solid-fuel', amount = 2}, {type = 'item', name = 'ice', amount = 1}, {type = 'item', name = 'holmium-ore', amount = 1}}
         },
@@ -896,6 +897,9 @@ local items = {
             prerequisites = {'mining-productivity-2', 'space-science-pack'},
             unit_ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}}
         },
+        ['rocket-silo'] = {
+            effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}, {type = 'unlock-recipe', recipe = 'cargo-bay'}}
+        },
         -- SPACE_AGE 0
         ['processing-unit-productivity'] = {
             prerequisites = {'electromagnetic-science-pack'},
@@ -1134,6 +1138,13 @@ local items = {
         ['lithium-processing'] = true,
         ['stellar-discovery-solar-system-edge'] = true,
         -- SPACE_AGE 30
+        -- QUALITY 0
+        ['epic-quality'] = true,
+        ['legendary-quality'] = true,
+        ['quality-module'] = true,
+        ['quality-module-2'] = true,
+        ['quality-module-3'] = true
+        -- QUALITY 5
     },
 }
 

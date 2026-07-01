@@ -18,6 +18,12 @@ for c, _ in pairs(defines.prototypes.entity) do
     end
 end
 
+for _, v in pairs(data.raw.recipe) do
+    v.surface_conditions = nil
+    v.maximum_productivity = nil
+    v.auto_recycle = false
+end
+
 -- GM-VP C 1 BASE UTILITY_CONSTANTS
 data.raw['utility-constants'].default.default_pipeline_extent = math.max(settings.startup['PHI-MI-PIPE-EXTENT'].value, 960)
 
@@ -29,11 +35,6 @@ for _, v in pairs(data.raw['inserter']) do
     v.max_belt_stack_size = bss
     v.grab_less_to_match_belt_stack = true
     v.enter_drop_mode_if_held_stack_spoiled = true
-end
-
--- GM-VP C 1 BASE RESEARCH_EFFECT
-if data.raw.technology['rocket-silo'] then
-    data.raw.technology['rocket-silo'].effects = {{type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}, {type = 'unlock-recipe', recipe = 'cargo-landing-pad'}, {type = 'unlock-recipe', recipe = 'cargo-bay'}}
 end
 
 -- GM-VP C 1 BASE TOOL
@@ -401,9 +402,22 @@ if data.raw['lab'] then
     end
 end
 
--- GM-VP C 26 BASE RESEARCH
+-- GM-VP H 30 SPACE_AGE RESEARCH
+-- GM-VP H 5 QUALITY RESEARCH
+if items['technology'] then
+    for t, _ in pairs(items['technology']) do
+        if data.raw.technology[t] then
+            data.raw.technology[t].hidden = true
+            data.raw.technology[t].hidden_in_factoriopedia = true
+            data.raw.technology[t].effects = nil
+            data.raw.technology[t].research_trigger = nil
+            data.raw.technology[t].unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
+        end
+    end
+end
+
+-- GM-VP C 27 BASE RESEARCH
 -- GM-VP C 39 SPACE_AGE RESEARCH
--- GM-VP H 29 SPACE_AGE RESEARCH
 if data.raw.technology and items['technology'] and items['technology_reform'] then
     for _, v in pairs(data.raw.technology) do
         if items['technology_reform'][v.name] then
@@ -421,13 +435,6 @@ if data.raw.technology and items['technology'] and items['technology_reform'] th
                 v.unit.count = (items['technology_reform'][v.name].unit_count and items['technology_reform'][v.name].unit_count) or v.unit.count
                 v.unit.count_formula = (items['technology_reform'][v.name].unit_count_formula and items['technology_reform'][v.name].unit_count_formula) or v.unit.count_formula
             end
-
-        elseif items['technology'][v.name] then
-            v.hidden = true
-            v.hidden_in_factoriopedia = true
-            v.effects = nil
-            v.research_trigger = nil
-            v.unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
 
         elseif v.unit and v.unit.ingredients then
             for i = #v.unit.ingredients, 1, -1 do
@@ -450,55 +457,49 @@ if settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE
 end
 
 -- GM-VP H 1 QUALITY ITEM
--- GM-VP H 24 SPACE_AGE ITEM
 for c, _ in pairs(defines.prototypes.item) do
     if data.raw[c] then
         for _, v in pairs(data.raw[c]) do
             v.auto_recycle = false
+        end
+    end
+end
 
-            if items['item'][v.name] then
-                v.hidden = true
-                v.hidden_in_factoriopedia = true
-            end
+-- GM-VP H 24 SPACE_AGE ITEM
+if items['item'] then
+    for i, _ in pairs(items['item']) do
+        if data.raw.item[i] then
+            data.raw.item[i].hidden = true
+            data.raw.item[i].hidden_in_factoriopedia = true
         end
     end
 end
 
 -- GM-VP C 17 BASE RECIPE
 -- GM-VP C 61 SPACE_AGE RECIPE
--- GM-VP H 1 QUALITY RECIPE
--- GM-VP H 54 SPACE_AGE RECIPE
-for _, v in pairs(data.raw.recipe) do
-    v.surface_conditions = nil
-    v.maximum_productivity = nil
-    v.auto_recycle = false
-
-    if items['recipe_reform'][v.name] then
-        for k, _ in pairs(items['recipe_reform'][v.name]) do
-            v[k] = (items['recipe_reform'][v.name][k] and items['recipe_reform'][v.name][k]) or v[k]
+if items['recipe_reform'] then
+    for r, t in pairs(items['recipe_reform']) do
+        if data.raw.recipe[r] then
+            for k, v in pairs(t) do
+                data.raw.recipe[r][k] = v
+            end
         end
-
-    elseif items['recipe'][v.name] then
-        v.hidden = true
-        v.hidden_in_factoriopedia = true
     end
 end
 
-if data.raw.recipe['scrap-recycling'] then
-    data.raw.recipe['scrap-recycling'].allow_decomposition = false
+-- GM-VP H 54 SPACE_AGE RECIPE
+-- GM-VP H 1 QUALITY RECIPE
+if items['recipe'] then
+    for r, _ in pairs(items['recipe']) do
+        if data.raw.recipe[r] then
+            data.raw.recipe[r].hidden = true
+            data.raw.recipe[r].hidden_in_factoriopedia = true
+        end
+    end
 end
 
 -- GM-VP C 3 QUALITY MODULE,RECIPE
--- GM-VP C 5 QUALITY RESEARCH
--- GM-VP H 4 QUALITY QUALITY
 for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
-    if data.raw.technology[v] then
-        data.raw.technology[v].hidden = true
-        data.raw.technology[v].hidden_in_factoriopedia = true
-        data.raw.technology[v].unit.ingredients = {{'space-science-pack', 1}}
-        data.raw.technology[v].effects = {}
-    end
-
     if data.raw.module[v] then
         data.raw.module[v].hidden = true
         data.raw.module[v].hidden_in_factoriopedia = true
@@ -510,15 +511,7 @@ for _, v in pairs({'quality-module', 'quality-module-2', 'quality-module-3'}) do
     end
 end
 
-for _, v in pairs({'epic-quality', 'legendary-quality'}) do
-    if data.raw.technology[v] then
-        data.raw.technology[v].hidden = true
-        data.raw.technology[v].hidden_in_factoriopedia = true
-        data.raw.technology[v].unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
-        data.raw.technology[v].effects = {}
-    end
-end
-
+-- GM-VP H 4 QUALITY QUALITY
 for _, v in pairs({'uncommon', 'rare', 'epic', 'legendary'}) do
     if data.raw.quality[v] then
         data.raw.quality[v].next = nil
