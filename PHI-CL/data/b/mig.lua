@@ -168,10 +168,10 @@ if data.raw['mining-drill'] then
     end
 end
 
--- MIG C 3 BASE MODULE
+-- MIG C 2 BASE MODULE
 if data.raw['module'] then
-    for v = 1, 3 do
-        local n = 'efficiency-module' .. (v == 1 and '' or ('-' .. v))
+    for v = 2, 3 do
+        local n = 'efficiency-module-' .. v
 
         if data.raw['module'][n] and data.raw['module'][n].effect and data.raw['module'][n].effect.consumption then
             data.raw['module'][n].effect.consumption = math.min(-0.3 * v, data.raw['module'][n].effect.consumption)
