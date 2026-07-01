@@ -764,7 +764,8 @@ end
 if items['tooltip'] and data.raw.item then
     for k, v in pairs(items['tooltip']) do
         if v.type and v.color and data.raw[v.type] and data.raw[v.type][k] then
-            data.raw[v.type][k].localised_name = {'phi-cl.combine', {'item-name.' .. k}, {'phi-cl.combine', '[virtual-signal=signal-' .. v.color .. ']', {'virtual-signal-name.signal-' .. v.color}}}
+            -- {'phi-cl.combine', '[virtual-signal=signal-' .. v.color .. ']', {'virtual-signal-name.signal-' .. v.color}}
+            data.raw[v.type][k].localised_name = {'phi-cl.combine', {'?', {'item-name.' .. k}, {'entity-name.' .. k}}, '[virtual-signal=signal-' .. v.color .. ']'}
         end
     end
 end
