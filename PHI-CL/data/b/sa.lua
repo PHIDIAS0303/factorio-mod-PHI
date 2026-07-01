@@ -16,7 +16,7 @@ local function spoil_freeze_handle(i)
     item.icon = nil
     item.icon_size = nil
     item.icon_mipmaps = nil
-    item.spoil_ticks = (i.spoil_ticks and math.floor(i.spoil_ticks * settings.startup['PHI-SA-SPOIL-FREEZE-MULTIPLIER'].value / 10)) or nil
+    item.spoil_ticks = (i.spoil_ticks and math.floor(i.spoil_ticks * settings.startup['PHI-SA-SPOIL-FREEZE'].value / 10)) or nil
     item.spoil_result = (i.spoil_ticks and i.name) or nil
     item.spoil_to_trigger_result = nil
     item.localised_name = {'item-name.' .. i.name}
@@ -59,7 +59,7 @@ end
 -- SA C 1 SPACE_AGE TOOL
 do
     local spoil_set = (settings.startup['PHI-SA'].value and not settings.startup['PHI-SA-SPOIL'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '')
-    local spoil_freeze_set = settings.startup['PHI-SA'].value and settings.startup['PHI-SA-SPOIL'].value and settings.startup['PHI-SA-SPOIL-FREEZE-MULTIPLIER'].value and settings.startup['PHI-SA-SPOIL-FREEZE-MULTIPLIER'].value > 0
+    local spoil_freeze_set = settings.startup['PHI-SA'].value and settings.startup['PHI-SA-SPOIL'].value and settings.startup['PHI-SA-SPOIL-FREEZE'].value and settings.startup['PHI-SA-SPOIL-FREEZE'].value > 0
 
     for _, v in pairs({'nutrients', 'captive-biter-spawner', 'biter-egg', 'pentapod-egg', 'agricultural-science-pack'}) do
         if spoil_set then

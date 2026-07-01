@@ -119,12 +119,12 @@ data:extend({
   order = 'C01'
 }, {
   type = 'int-setting',
-  name = 'PHI-SA-SPOIL-FREEZE-MULTIPLIER',
+  name = 'PHI-SA-SPOIL-FREEZE',
   setting_type = 'startup',
   default_value = 50,
   minimum_value = 0,
   maximum_value = 1000,
-  localised_name = {'phi-cl.setting-class-color', 'SA2', {'phi-cl.ratio'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE-MULTIPLIER'}},
+  localised_name = {'phi-cl.setting-class-color', 'SA2', {'phi-cl.ratio'}, {'mod-setting-name.PHI-SA-SPOIL-FREEZE'}},
   localised_description = (mods['space-age'] and {'', '[item=ice][virtual-signal=signal-clock] x0.1', {'phi-cl.setting-change-color', '\n[55] A55'}}) or nil,
   order = 'C02'
 }, {
