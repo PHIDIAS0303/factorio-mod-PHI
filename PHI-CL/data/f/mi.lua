@@ -33,6 +33,38 @@ function main_entity_number_position(entity)
     return positions
 end
 
+function main_entity_apply(entity_graphic, positions)
+    entity_graphic.status_colors = items['status']
+
+    if not entity_graphic.working_visualisations then
+        entity_graphic.working_visualisations = {}
+    end
+
+    if not positions then
+        return
+    end
+
+    entity_graphic.working_visualisations[#entity_graphic.working_visualisations + 1] = {
+        always_draw = true,
+        apply_tint = 'status',
+        render_layer = 'light-effect',
+        animation = {
+            filename = '__base__/graphics/icons/signal/signal_white.png',
+            flags = {'icon'},
+            size = 64,
+            scale = 0.15,
+            line_length = 1,
+            frame_count = 1,
+            animation_speed = 1,
+            draw_as_glow = true
+        },
+        north_position = positions[1],
+        east_position = positions[2],
+        south_position = positions[1],
+        west_position = positions[2],
+    }
+end
+
 -- MI C 11 BASE ENTITY
 -- MI C 1 RECYCLER ENTITY
 -- MI C 7 SPACE_AGE ENTITY
@@ -44,33 +76,7 @@ if settings.startup['PHI-MI-STATUS'].value and items['status'] and items['status
 
                 for _, a in pairs({'graphics_set', 'wet_mining_graphics_set', 'graphics_set_flipped'}) do
                     if v[a] then
-                        v[a].status_colors = items['status']
-
-                        if not v[a].working_visualisations then
-                            v[a].working_visualisations = {}
-                        end
-
-                        if pos then
-                            v[a].working_visualisations[#v[a].working_visualisations + 1] = {
-                                always_draw = true,
-                                apply_tint = 'status',
-                                render_layer = 'light-effect',
-                                animation = {
-                                    filename = '__base__/graphics/icons/signal/signal_white.png',
-                                    flags = {'icon'},
-                                    size = 64,
-                                    scale = 0.15,
-                                    line_length = 1,
-                                    frame_count = 1,
-                                    animation_speed = 1,
-                                    draw_as_glow = true
-                                },
-                                north_position = pos[1],
-                                east_position = pos[2],
-                                south_position = pos[1],
-                                west_position = pos[2],
-                            }
-                        end
+                        main_entity_apply(v[a], pos)
                     end
                 end
             end
