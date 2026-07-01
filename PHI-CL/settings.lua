@@ -145,7 +145,7 @@ data:extend({
   minimum_value = 1,
   maximum_value = 100,
   localised_name = {'phi-cl.setting-class-color', 'SA4', {'phi-cl.ratio'}, {'mod-setting-name.PHI-SA-QUALITY'}},
-  localised_description = (mods['quality'] and {'', '[item=quality-module-3] x 0.1', {'phi-cl.setting-change-color', '\n[34] C25 H9'}}) or nil,
+  localised_description = (mods['quality'] and {'', '[item=quality-module-3] x 0.1', {'phi-cl.setting-change-color', '\n[3] C3'}}) or nil,
   order = 'C04'
 }, {
   type = 'string-setting',
@@ -171,7 +171,7 @@ data:extend({
   setting_type = 'startup',
   default_value = 'grass-1',
   allowed_values = {'landfill', 'stone-path', 'concrete', 'refined-concrete', 'water', 'water-mud', 'water-shallow', 'deepwater', 'deepwater-green', 'dirt-1', 'dirt-2', 'dirt-3', 'dirt-4', 'dirt-5', 'dirt-6', 'dirt-7', 'dry-dirt', 'grass-1', 'grass-2', 'grass-3', 'grass-4'},
-  localised_name = {'phi-cl.setting-class-color', 'CT1', '', {'mod-setting-name.PHI-CT-TILE-CHOICE'}},
+  localised_name = {'phi-cl.setting-class-color', 'CT1', '', {'mod-setting-name.PHI-CT-TILE'}},
   localised_description = {'', {'phi-cl.setting-change-color', '[1] A1'}},
   order = 'E01'
 }
