@@ -163,6 +163,6 @@ return {
         mod = 'recycler',
         type = 'furnace',
         name = 'recycler',
-        tech = 'agriculture'
+        tech = 'recycling'
     },
 }
