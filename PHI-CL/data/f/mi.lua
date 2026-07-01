@@ -33,10 +33,6 @@ function main_entity_number_position(entity)
     return positions
 end
 
-function main_entity_apply(entity_graphic, positions)
-
-end
-
 -- MI C 11 BASE ENTITY
 -- MI C 1 RECYCLER ENTITY
 -- MI C 7 SPACE_AGE ENTITY
