@@ -763,17 +763,8 @@ end
 -- GM-VP C 9 SPACE_AGE ITEM
 if items['tooltip'] and data.raw.item then
     for k, v in pairs(items['tooltip']) do
-        local custom_tooltip = {
-            name = '[virtual-signal=signal-info]',
-            value = {'phi-cl.combine', '[virtual-signal=signal-' .. v.color .. ']', {'virtual-signal-name.signal-' .. v.color}}
-        }
-
         if v.type and v.color and data.raw[v.type] and data.raw[v.type][k] then
-            if not data.raw[v.type][k].custom_tooltip_fields then
-                data.raw[v.type][k].custom_tooltip_fields = {}
-            end
-
-            table.insert(data.raw[v.type][k].custom_tooltip_fields, custom_tooltip)
+            data.raw[v.type][k].localised_name = {'phi-cl.combine', {'item-name.' .. k}, {'phi-cl.combine', '[virtual-signal=signal-' .. v.color .. ']', {'virtual-signal-name.signal-' .. v.color}}}
         end
     end
 end
