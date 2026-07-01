@@ -245,7 +245,7 @@ function main_recipe(source, tier)
     recipe.name = source.name .. '-' .. tier
     recipe.icons = table.deepcopy(data.raw.item[source.ref_name].icons)
     recipe.energy_required = 2
-    recipe.enabled = false
+    recipe.enabled = (data.raw.technology[source.tech] and false) or true
     recipe.categories = {'crafting'}
     recipe.ingredients = {{type = 'item', name = (tier > source.min and (source.name .. '-' .. (tier - 1))) or source.ref_name, amount = ((source.tech == 'compound-energy' and (source.type == 'solar-panel' or source.type == 'accumulator')) and tonumber(settings.startup['PHI-MB-ENERGY-SOLAR-RATIO'].value) or 4) or 2}}
     recipe.results = {{type = 'item', name = recipe.name, amount = 1}}
