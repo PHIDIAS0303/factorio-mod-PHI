@@ -10,6 +10,10 @@ local mod_tint = {
     [8] = {r=233, g=63, b=233}
 }
 
+if not (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or not (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
+    return
+end
+
 -- MIG C 1 BASE ARMOR_EQUIPMENT
 if data.raw['active-defense-equipment'] and data.raw['active-defense-equipment']['discharge-defense-equipment'] then
     data.raw['active-defense-equipment']['discharge-defense-equipment'].automatic = true

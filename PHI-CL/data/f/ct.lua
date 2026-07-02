@@ -1,5 +1,9 @@
 local items = require('ct-c')
 
+if not settings.startup['PHI-CT'].value then
+    return
+end
+
 if items['hide'] and (data.raw['infinity-container']['super-infinity-chest'] or data.raw['infinity-cargo-wagon']['super-infinity-cargo-wagon']) then
     local sc = 1
 

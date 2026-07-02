@@ -1,6 +1,7 @@
-local mc = require('mc')
 
-mc.space_age()
+if not settings.startup['PHI-SA'].value or settings.startup['PHI-GM'].value == '' then
+    return
+end
 
 local function spoil_handle(i)
     i.spoil_ticks = nil

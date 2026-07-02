@@ -1,5 +1,9 @@
 local items = require('mi-c')
 
+if not settings.startup['PHI-MI'].value then
+    return
+end
+
 function status_number_position(entity)
     local box = entity.selection_box or entity.collision_box
 

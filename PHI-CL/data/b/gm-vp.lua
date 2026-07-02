@@ -1,10 +1,11 @@
 local items = require('gm-vp-c')
 local mbm = require('mbm-c')
-local mc = require('mc')
 local item_sounds = require('__base__/prototypes/item_sounds')
 local resource_autoplace = require('resource-autoplace')
 
-mc.space_age()
+if settings.startup['PHI-GM'].value ~= 'VP' then
+    return
+end
 
 for c, _ in pairs(defines.prototypes.entity) do
     if data.raw[c] then

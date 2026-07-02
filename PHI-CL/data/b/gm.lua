@@ -1,5 +1,9 @@
 local items = require('gm-c')
 
+if settings.startup['PHI-GM'].value == '' then
+    return
+end
+
 -- GM C 1 SPACE_AGE ENTITY
 if data.raw['cargo-bay'] and data.raw['cargo-bay']['cargo-bay'] then
     data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus = math.max(40, data.raw['cargo-bay']['cargo-bay'].inventory_size_bonus or 0)

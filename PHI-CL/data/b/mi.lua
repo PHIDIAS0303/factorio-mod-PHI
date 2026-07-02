@@ -1,4 +1,8 @@
 
+if not settings.startup['PHI-MI'].value then
+    return
+end
+
 -- MI C 2 BASE ENTITY
 for _, t in pairs({'construction-robot', 'logistic-robot'}) do
     if data.raw[t] then

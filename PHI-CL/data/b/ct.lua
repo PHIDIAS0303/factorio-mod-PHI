@@ -8,6 +8,10 @@ local mod_tint = {
     [8] = {r=233, g=63, b=233}
 }
 
+if not settings.startup['PHI-CT'].value then
+    return
+end
+
 -- CT U 3 BASE ITEM
 -- CT A 3 BASE RECIPE
 for _, v in pairs({'infinity-chest', 'infinity-cargo-wagon', 'infinity-pipe'}) do

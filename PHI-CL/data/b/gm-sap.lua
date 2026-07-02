@@ -1,6 +1,7 @@
-local mc = require('mc')
 
-mc.space_age()
+if settings.startup['PHI-GM'].value ~= 'SAP' then
+    return
+end
 
 -- GM-SAP C 16 SPACE_AGE ENTITY
 if data.raw['asteroid'] then

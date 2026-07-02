@@ -1,5 +1,4 @@
 local items = require('mbe-c')
-
 local mod_tint = {
     [2] = {r=140, g=142, b=200},
     [3] = {r=242, g=161, b=26},
@@ -9,6 +8,14 @@ local mod_tint = {
     [7] = {r=0, g=209, b=102},
     [8] = {r=233, g=63, b=233}
 }
+
+if not settings.startup['PHI-MB'].value then
+    return
+end
+
+if not settings.startup['PHI-MB-ENERGY'].value or settings.startup['PHI-MB-ENERGY'].value <= 1 then
+    return
+end
 
 -- MBE C 1 BASE FLUID
 if data.raw['fluid'] and data.raw['fluid']['steam'] then
