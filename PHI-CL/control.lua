@@ -38,7 +38,7 @@ local function gui_update(player, entity)
 end
 
 script.on_init(function()
-    if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
+    if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
         for _, player in pairs(game.players) do
             gui_create(player)
         end
@@ -46,7 +46,7 @@ script.on_init(function()
 end)
 
 script.on_configuration_changed(function()
-    if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
+    if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
         for _, player in pairs(game.players) do
             gui_create(player)
 
@@ -57,7 +57,7 @@ script.on_configuration_changed(function()
     end
 end)
 
-if settings.startup['PHI-MI'].value or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
+if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
     script.on_event(defines.events.on_player_created, function(event)
         if not event.player_index or not game.players[event.player_index] then
             return
