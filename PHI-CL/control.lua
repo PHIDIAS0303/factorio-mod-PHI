@@ -58,10 +58,6 @@ script.on_configuration_changed(function()
 end)
 
 script.on_event(defines.events.on_player_created, function(event)
-    if not event.player_index or not game.players[event.player_index] then
-        return
-    end
-
     local player = game.players[event.player_index]
 
     if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
@@ -77,15 +73,17 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
     script.on_event(defines.events.on_gui_opened, function(event)
         local player = game.players[event.player_index]
 
-        if event.entity and player.opened and player.opened == event.entity then
-            gui_update(player, event.entity)
+        if not event.entity or not player.opened or player.opened ~= event.entity then
+            return
         end
+
+        gui_update(player, event.entity)
     end)
 
     script.on_event(defines.events.on_player_rotated_entity, function(event)
         local player = game.players[event.player_index]
 
-        if player.opened and player.opened ~= event.entity then
+        if not player.opened or player.opened ~= event.entity then
             return
         end
 
@@ -95,7 +93,7 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
     script.on_event(defines.events.on_player_flipped_entity, function(event)
         local player = game.players[event.player_index]
 
-        if player.opened and player.opened ~= event.entity then
+        if not player.opened or player.opened ~= event.entity then
             return
         end
 
