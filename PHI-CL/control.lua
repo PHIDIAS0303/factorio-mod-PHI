@@ -106,10 +106,6 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
     script.on_event({defines.events.on_entity_died, defines.events.on_player_mined_entity, defines.events.on_robot_pre_mined, defines.events.script_raised_destroy}, entity_destroy)
 
     script.on_event(defines.events.on_entity_cloned, function(event)
-        if not event.destination then
-            return
-        end
-
         entity_build({entity=event.destination})
     end)
 end
@@ -127,10 +123,6 @@ if settings.startup['PHI-CT'].value then
     end)
 
     script.on_event(defines.events.on_permission_group_edited, function(event)
-        if not event.type then
-            return
-        end
-
         if event.type == 'add-player' or event.type == 'add-player' then
             if not event.other_player_index then
                 return

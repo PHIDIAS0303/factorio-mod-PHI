@@ -5,17 +5,7 @@ function main.toggle(event)
         return
     end
 
-    if not event.player_index then
-        return
-    end
-
-    local player = game.players[event.player_index]
-
-    if not player then
-        return
-    end
-
-    player.toggle_map_editor()
+    game.players[event.player_index].toggle_map_editor()
 end
 
 function main.toggle_editor(event)
