@@ -4,6 +4,8 @@ Date: 2026-07-12
 
   Changes:
     - [GM] Generic Code layout restructure.
+    - [MI] Dropped diagonal inserter support.
+    - [MI] Moved heat energy settings to GM.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.1.7
