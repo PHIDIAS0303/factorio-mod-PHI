@@ -57,15 +57,23 @@ script.on_configuration_changed(function()
     end
 end)
 
+script.on_event(defines.events.on_player_created, function(event)
+    if not event.player_index or not game.players[event.player_index] then
+        return
+    end
+
+    local player = game.players[event.player_index]
+
+    if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
+        gui_create(player)
+    end
+
+    if settings.startup['PHI-CT'].value then
+        editor.available(player)
+    end
+end)
+
 if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
-    script.on_event(defines.events.on_player_created, function(event)
-        if not event.player_index or not game.players[event.player_index] then
-            return
-        end
-
-        gui_create(game.players[event.player_index])
-    end)
-
     script.on_event(defines.events.on_gui_opened, function(event)
         if not event.player_index or not game.players[event.player_index] then
             return
@@ -105,4 +113,12 @@ end
 if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.on_lua_shortcut, editor.toggle)
     script.on_event(defines.events.on_player_toggled_map_editor, editor.toggle_editor)
+
+    script.on_event({defines.events.on_player_promoted, defines.events.on_player_demoted}, function(event)
+        if not event.player_index or not game.players[event.player_index] then
+            return
+        end
+
+        editor.available(game.players[event.player_index])
+    end)
 end

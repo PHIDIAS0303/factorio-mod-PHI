@@ -5,13 +5,13 @@ function main.toggle(event)
         return
     end
 
-    local player = game.players[event.player_index]
-
-    if player.permission_group and not player.permission_group.allows_action(defines.input_action.toggle_map_editor) then
+    if not event.player_index then
         return
     end
 
-    if not player.admin then
+    local player = game.players[event.player_index]
+
+    if not player then
         return
     end
 
@@ -22,6 +22,10 @@ function main.toggle_editor(event)
     local player = game.players[event.player_index]
     player.set_shortcut_toggled('phi-cl-toggle-editor', player.physical_controller_type == defines.controllers.editor)
     game.tick_paused = false
+end
+
+function main.available(player)
+    player.set_shortcut_available('phi-cl-toggle-editor', player.admin and player.permission_group and player.permission_group.allows_action(defines.input_action.toggle_map_editor))
 end
 
 return main
