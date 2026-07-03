@@ -9,7 +9,7 @@ local mod_tint = {
     [8] = {r=233, g=63, b=233}
 }
 
-if not (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or not (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
+if not (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) and not (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
     return
 end
 

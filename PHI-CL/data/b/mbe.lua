@@ -13,7 +13,7 @@ if not settings.startup['PHI-MB'].value then
     return
 end
 
-if not settings.startup['PHI-MB-ENERGY'].value or settings.startup['PHI-MB-ENERGY'].value <= 1 then
+if settings.startup['PHI-MB-ENERGY'].value <= 1 then
     return
 end
 

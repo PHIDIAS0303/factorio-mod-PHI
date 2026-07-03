@@ -1,5 +1,5 @@
 
-if not settings.startup['PHI-SA'].value or settings.startup['PHI-GM'].value == '' then
+if not settings.startup['PHI-SA'].value and settings.startup['PHI-GM'].value == '' then
     return
 end
 
@@ -112,10 +112,6 @@ if (settings.startup['PHI-SA'].value and (not settings.startup['PHI-SA-SPOIL'].v
             data.raw['tips-and-tricks-item'][v].hidden_in_factoriopedia = true
         end
     end
-end
-
-if not settings.startup['PHI-SA'].value then
-    return
 end
 
 -- SA C 1 SPACE_AGE CONSTANT
