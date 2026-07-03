@@ -137,6 +137,15 @@ if data.raw['electric-energy-interface'] and data.raw['electric-energy-interface
     end
 end
 
+-- CT C 1 BASE ARMOR_EQUIPMENT
+if data.raw['electric-energy-interface-equipment'] and data.raw['electric-energy-interface-equipment']['electric-energy-interface-equipment'] then
+    data.raw['electric-energy-interface-equipment']['electric-energy-interface-equipment'].energy_source.usage_priority = 'secondary'
+    data.raw['electric-energy-interface-equipment']['electric-energy-interface-equipment'].energy_source.input_flow_limit = '0W'
+    data.raw['electric-energy-interface-equipment']['electric-energy-interface-equipment'].energy_source.output_flow_limit = '1PW'
+    data.raw['electric-energy-interface-equipment']['electric-energy-interface-equipment'].energy_source.buffer_capacity = '1PJ'
+    data.raw['electric-energy-interface-equipment']['electric-energy-interface-equipment'].gui_mode = 'none'
+end
+
 -- CT A 1 BASE ENTITY,ITEM,RECIPE
 if data.raw['infinity-container'] and data.raw['infinity-container']['infinity-chest'] then
     local item = table.deepcopy(data.raw['item']['infinity-chest'])
