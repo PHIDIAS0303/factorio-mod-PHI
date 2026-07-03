@@ -122,7 +122,7 @@ if settings.startup['PHI-CT'].value then
         editor.available(game.players[event.player_index])
     end)
 
-    script.on_event(on_permission_group_edited, function(event)
+    script.on_event(defines.events.on_permission_group_edited, function(event)
         if not event.type then
             return
         end
