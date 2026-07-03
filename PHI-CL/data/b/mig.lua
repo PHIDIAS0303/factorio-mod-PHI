@@ -19,11 +19,12 @@ if data.raw['active-defense-equipment'] and data.raw['active-defense-equipment']
     data.raw['active-defense-equipment']['discharge-defense-equipment'].automatic = true
 end
 
--- MIG C 2 BASE ENTITY
+-- MIG C 1 BASE ENTITY
 if data.raw['programmable-speaker'] and data.raw['programmable-speaker']['programmable-speaker'] then
     data.raw['programmable-speaker']['programmable-speaker'].energy_source.usage_priority = 'primary-input'
 end
 
+-- MIG C 1 BASE ENTITY
 if data.raw['fluid-turret'] and data.raw['fluid-turret']['flamethrower-turret'] then
     table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
 end
