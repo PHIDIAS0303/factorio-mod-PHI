@@ -114,11 +114,11 @@ if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.on_lua_shortcut, editor.toggle)
     script.on_event(defines.events.on_player_toggled_map_editor, editor.toggle_editor)
 
-    script.on_event({defines.events.on_player_promoted, defines.events.on_player_demoted}, function(event)
-        if not event.player_index or not game.players[event.player_index] then
-            return
-        end
+    script.on_event(defines.events.on_player_promoted, function(event)
+        editor.available(game.players[event.player_index])
+    end)
 
+    script.on_event(defines.events.on_player_demoted, function(event)
         editor.available(game.players[event.player_index])
     end)
 
