@@ -73,7 +73,7 @@ data:extend({
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.setting-class-color', 'MI1', {'phi-cl.enable'}, {'mod-setting-name.PHI-MI-GENERIC'}},
-  localised_description = {'', {'phi-cl.setting-change-color', '[205] A117 C79'}},
+  localised_description = {'', {'phi-cl.setting-change-color', '[179] A117 C57'}},
   order = 'B01'
 }, {
   type = 'bool-setting',
@@ -155,7 +155,7 @@ data:extend({
   default_value = '',
   allowed_values = {'', 'SAP', 'VP'},
   localised_name = {'phi-cl.setting-category-color', 'GM', {'phi-cl.enable'}, {'mod-setting-name.PHI-GM'}},
-  localised_description = {'', {'phi-cl.setting-change-color', '[GM] [50] A20 C23 H7\n[SAP] [31] A3 C28\n[VP] [570] A16 C182 H372'}},
+  localised_description = {'', {'phi-cl.setting-change-color', '[GM] [74] A20 C47 H7\n[SAP] [31] A3 C28\n[VP] [570] A16 C182 H372'}},
   order = 'D00'
 },  {
   type = 'bool-setting',

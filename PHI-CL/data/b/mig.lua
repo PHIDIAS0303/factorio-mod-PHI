@@ -525,18 +525,7 @@ if data.raw['proxy-container'] and data.raw['proxy-container']['proxy-container'
     data.raw['proxy-container']['proxy-container'].draw_inventory_content = false
 end
 
--- MIG C 18 BASE ENTITY
--- MIG C 5 SPACE_AGE ENTITY
-for _, w in pairs({'storage-tank', 'generator', 'furnace', 'roboport', 'assembling-machine', 'offshore-pump', 'pump', 'pipe', 'pipe-to-ground', 'infinity-pipe'}) do
-    if data.raw[w] then
-        for _, v in pairs(data.raw[w]) do
-            v.heating_energy = nil
-        end
-    end
-end
-
--- 1 ENTITY FROM ABOVE
--- MIG C 0 BASE ENTITY
+-- MIG C 1 BASE ENTITY
 -- MIG C 1 BASE ARMOR_EQUIPMENT
 for _, w in pairs({'roboport', 'roboport-equipment'}) do
     if data.raw[w] then
