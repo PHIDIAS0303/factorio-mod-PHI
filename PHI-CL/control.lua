@@ -43,6 +43,12 @@ script.on_init(function()
             gui_create(player)
         end
     end
+
+    if settings.startup['PHI-CT'].value then
+        for _, player in pairs(game.players) do
+            player.set_shortcut_available('phi-cl-toggle-editor', settings.global['PHI-CT-EDITOR'].value)
+        end
+    end
 end)
 
 script.on_configuration_changed(function()
@@ -53,6 +59,12 @@ script.on_configuration_changed(function()
             if player.opened and player.opened.valid and player.opened.object_name == 'LuaEntity' then
                 gui_update(player, player.opened.entity)
             end
+        end
+    end
+
+    if settings.startup['PHI-CT'].value then
+        for _, player in pairs(game.players) do
+            player.set_shortcut_available('phi-cl-toggle-editor', settings.global['PHI-CT-EDITOR'].value)
         end
     end
 end)
@@ -105,4 +117,5 @@ end
 if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.on_lua_shortcut, editor.toggle)
     script.on_event(defines.events.on_player_toggled_map_editor, editor.toggle_editor)
+    script.on_event(defines.events.on_runtime_mod_setting_changed, editor.setting_change)
 end

@@ -24,4 +24,18 @@ function main.toggle_editor(event)
     game.tick_paused = false
 end
 
+function main.setting_change(event)
+    if event.setting_type ~= 'runtime-global' then
+        return
+    end
+
+    if event.setting ~= 'PHI-CT-EDITOR' then
+        return
+    end
+
+    for _, p in pairs(game.players) do
+        p.set_shortcut_available('phi-cl-toggle-editor', settings.global['PHI-CT-EDITOR'].value)
+    end
+end
+
 return main

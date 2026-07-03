@@ -174,5 +174,12 @@ data:extend({
   localised_name = {'phi-cl.setting-class-color', 'CT1', '', {'mod-setting-name.PHI-CT-TILE'}},
   localised_description = {'', {'phi-cl.setting-change-color', '[1] A1'}},
   order = 'E01'
+},  {
+  type = 'bool-setting',
+  name = 'PHI-CT-EDITOR',
+  setting_type = 'runtime-global',
+  default_value = true,
+  localised_name = {'phi-cl.setting-category-color', 'CT', {'phi-cl.enable'}, {'gui-permissions-names.ToggleMapEditor'}},
+  order = 'E00'
 }
 })
