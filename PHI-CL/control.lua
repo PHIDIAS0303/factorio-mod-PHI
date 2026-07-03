@@ -86,11 +86,15 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
         end
     end)
 
-    script.on_event({defines.events.on_player_rotated_entity, defines.events.on_player_flipped_entity}, function(event)
-        if not event.player_index or not game.players[event.player_index] then
-            return
-        end
+    script.on_event(defines.events.on_player_rotated_entity, function(event)
+        local player = game.players[event.player_index]
 
+        if event.entity and player.opened == event.entity then
+            gui_update(player, player.opened)
+        end
+    end)
+
+    script.on_event(defines.events.on_player_flipped_entity, function(event)
         local player = game.players[event.player_index]
 
         if event.entity and player.opened == event.entity then
