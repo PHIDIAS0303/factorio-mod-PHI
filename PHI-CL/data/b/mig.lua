@@ -753,13 +753,3 @@ if data.raw['wall'] then
         end
     end
 end
-
--- GM-VP C 38 BASE ITEM
--- GM-VP C 9 SPACE_AGE ITEM
-if items['tooltip'] and data.raw.item then
-    for k, v in pairs(items['tooltip']) do
-        if data.raw[v.type] and data.raw[v.type][k] then
-            data.raw[v.type][k].localised_name = {'phi-cl.combine', {'?', {'item-name.' .. k}, {'entity-name.' .. k}}, {'phi-cl.combine', '[virtual-signal=signal-' .. v.color .. ']', {'virtual-signal-name.signal-' .. v.color}}}
-        end
-    end
-end
