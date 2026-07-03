@@ -227,21 +227,6 @@ if data.raw.fluid['water'] and data.raw.recipe['super-pump-water'] then
     data.raw.recipe['super-pump-water'].enabled = true
 end
 
--- MIG C 5 BASE ENTITY
--- MIG C 1 SPACE_AGE ENTITY
-if data.raw['inserter'] then
-    for _, v in pairs(data.raw['inserter']) do
-        if v.energy_source and v.energy_source.type and (v.energy_source.type == 'electric' or v.energy_source.type == 'void' or v.energy_source.type == 'burner') then
-            v.allow_custom_vectors = true
-            v.flags = {'placeable-neutral', 'placeable-player', 'player-creation', ((v.hand_size and v.hand_size > 0.8) and 'building-direction-16-way') or 'building-direction-8-way'}
-
-            if v.energy_source.type == 'burner' then
-                v.allow_burner_leech = true
-            end
-        end
-    end
-end
-
 -- MIG A 72 BASE VIRTUAL_SIGNAL
 local vir_sig = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 local s = {}
@@ -481,6 +466,54 @@ if data.raw['boiler'] and data.raw['boiler']['boiler'] then
     data.raw['boiler']['electric-boiler'].fast_replaceable_group = data.raw['boiler']['boiler'].fast_replaceable_group
 end
 
+-- MIG A 1 SPACE_AGE ENTITY,ITEM,RECIPE,RESEARCH_EFFECT
+if data.raw['reactor'] and data.raw['reactor']['heating-tower'] then
+    local item = table.deepcopy(data.raw['item']['heating-tower'])
+    item.name = 'electric-heating-tower'
+    item.place_result = item.name
+    item.subgroup = 'environmental-protection'
+    item.order = 'c[heating-tower]-e'
+    item.localised_name = {'', {'name.electric-entity'}, {'entity-name.heating-tower'}}
+    data:extend({item})
+
+    local entity = table.deepcopy(data.raw['reactor']['heating-tower'])
+    entity.name = item.name
+    entity.consumption = '160MW'
+    entity.buffer_capacity = '320MJ'
+    entity.heat_buffer.max_temperature = 500
+    entity.scale_energy_usage = true
+    entity.minable.result = entity.name
+    entity.energy_source = {
+        type = 'electric',
+        usage_priority = 'secondary-input',
+        buffer_capacity = entity.buffer_capacity,
+        light_flicker = {
+            color = {r = 0.5, g = 1, b = 1, a = 0.5},
+            minimum_light_size = 0.1,
+            light_intensity_to_size_coefficient = 1
+        }
+    }
+    entity.localised_name = {'', {'name.electric-entity'}, {'entity-name.heating-tower'}}
+    data:extend({entity})
+
+    data:extend({{
+        type = 'recipe',
+        name = item.name,
+        energy_required = 2,
+        enabled = false,
+        categories = {'crafting'},
+        ingredients = {{type = 'item', name = 'heating-tower', amount = 1}, {type = 'item', name = 'electronic-circuit', amount = 1}},
+        results = {{type = 'item', name = item.name, amount = 1}},
+        main_product = item.name,
+        localised_name = {'', {'name.electric-entity'}, {'entity-name.heating-tower'}}
+    }})
+
+    data.raw['reactor']['heating-tower'].fast_replaceable_group = 'heating-tower'
+    data.raw['reactor']['electric-heating-tower'].fast_replaceable_group = data.raw['reactor']['heating-tower'].fast_replaceable_group
+
+    table.insert(data.raw.technology['heating-tower'].effects, {type = 'unlock-recipe', recipe = item.name})
+end
+
 -- MIG C 3 BASE ENTITY,ITEM,RECIPE
 -- MIG C 1 SPACE_AGE ENTITY,ITEM,RECIPE
 if data.raw['loader'] then
@@ -568,54 +601,6 @@ if data.raw['fusion-generator'] and data.raw['fusion-generator']['fusion-generat
             v.flow_direction = 'input-output'
         end
     end
-end
-
--- MIG A 1 SPACE_AGE ENTITY,ITEM,RECIPE,RESEARCH_EFFECT
-if data.raw['reactor'] and data.raw['reactor']['heating-tower'] then
-    local item = table.deepcopy(data.raw['item']['heating-tower'])
-    item.name = 'electric-heating-tower'
-    item.place_result = item.name
-    item.subgroup = 'environmental-protection'
-    item.order = 'c[heating-tower]-e'
-    item.localised_name = {'', {'name.electric-entity'}, {'entity-name.heating-tower'}}
-    data:extend({item})
-
-    local entity = table.deepcopy(data.raw['reactor']['heating-tower'])
-    entity.name = item.name
-    entity.consumption = '160MW'
-    entity.buffer_capacity = '320MJ'
-    entity.heat_buffer.max_temperature = 500
-    entity.scale_energy_usage = true
-    entity.minable.result = entity.name
-    entity.energy_source = {
-        type = 'electric',
-        usage_priority = 'secondary-input',
-        buffer_capacity = entity.buffer_capacity,
-        light_flicker = {
-            color = {r = 0.5, g = 1, b = 1, a = 0.5},
-            minimum_light_size = 0.1,
-            light_intensity_to_size_coefficient = 1
-        }
-    }
-    entity.localised_name = {'', {'name.electric-entity'}, {'entity-name.heating-tower'}}
-    data:extend({entity})
-
-    data:extend({{
-        type = 'recipe',
-        name = item.name,
-        energy_required = 2,
-        enabled = false,
-        categories = {'crafting'},
-        ingredients = {{type = 'item', name = 'heating-tower', amount = 1}, {type = 'item', name = 'electronic-circuit', amount = 1}},
-        results = {{type = 'item', name = item.name, amount = 1}},
-        main_product = item.name,
-        localised_name = {'', {'name.electric-entity'}, {'entity-name.heating-tower'}}
-    }})
-
-    data.raw['reactor']['heating-tower'].fast_replaceable_group = 'heating-tower'
-    data.raw['reactor']['electric-heating-tower'].fast_replaceable_group = data.raw['reactor']['heating-tower'].fast_replaceable_group
-
-    table.insert(data.raw.technology['heating-tower'].effects, {type = 'unlock-recipe', recipe = item.name})
 end
 
 -- MIG A 2 BASE ITEM,RECIPE
