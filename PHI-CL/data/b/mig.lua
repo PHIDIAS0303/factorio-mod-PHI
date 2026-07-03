@@ -553,12 +553,6 @@ for _, v in pairs({{'logistics', 'loader'}, {'logistics-2', 'fast-loader'}, {'lo
 end
 
 -- MIG C 1 BASE ENTITY
-if data.raw['proxy-container'] and data.raw['proxy-container']['proxy-container'] then
-    data.raw['proxy-container']['proxy-container'].flags = {'not-blueprintable', 'hide-alt-info', 'not-deconstructable', 'not-flammable', 'not-on-map', 'placeable-off-grid', 'placeable-player', 'no-automated-item-insertion', 'no-automated-item-removal'}
-    data.raw['proxy-container']['proxy-container'].draw_inventory_content = false
-end
-
--- MIG C 1 BASE ENTITY
 -- MIG C 1 BASE ARMOR_EQUIPMENT
 for _, w in pairs({'roboport', 'roboport-equipment'}) do
     if data.raw[w] then
@@ -668,6 +662,12 @@ if data.raw.item['depleted-uranium-fuel-cell'] and data.raw.item['nuclear-fuel']
             end
         end
     end
+end
+
+-- MIG C 1 BASE ENTITY
+if data.raw['proxy-container'] and data.raw['proxy-container']['proxy-container'] then
+    data.raw['proxy-container']['proxy-container'].flags = {'not-blueprintable', 'hide-alt-info', 'not-deconstructable', 'not-flammable', 'not-on-map', 'placeable-off-grid', 'placeable-player', 'no-automated-item-insertion', 'no-automated-item-removal'}
+    data.raw['proxy-container']['proxy-container'].draw_inventory_content = false
 end
 
 -- MIG A 1 BASE ITEM,ENTITY,RECIPE,RESEARCH_EFFECT
