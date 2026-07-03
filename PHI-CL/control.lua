@@ -89,17 +89,21 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
     script.on_event(defines.events.on_player_rotated_entity, function(event)
         local player = game.players[event.player_index]
 
-        if event.entity and player.opened == event.entity then
-            gui_update(player, player.opened)
+        if player.opened and player.opened ~= event.entity then
+            return
         end
+
+        gui_update(player, player.opened)
     end)
 
     script.on_event(defines.events.on_player_flipped_entity, function(event)
         local player = game.players[event.player_index]
 
-        if event.entity and player.opened == event.entity then
-            gui_update(player, player.opened)
+        if player.opened and player.opened ~= event.entity then
+            return
         end
+
+        gui_update(player, player.opened)
     end)
 
     script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_entity, defines.events.on_space_platform_built_entity, defines.events.script_raised_built, defines.events.script_raised_revive}, entity_build)
