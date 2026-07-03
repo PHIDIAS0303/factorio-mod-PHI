@@ -527,14 +527,11 @@ if data.raw['loader'] then
         ln.adjustable_belt_stack_size = (data.raw['inserter']['stack-inserter'] and true) or false
         ln.max_belt_stack_size = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
 
-        if data.raw.item[l] then
-            data.raw.item[l].hidden = false
-            data.raw.item[l].hidden_in_factoriopedia = false
-        end
-
-        if data.raw.recipe[l] then
-            data.raw.recipe[l].hidden = false
-            data.raw.recipe[l].hidden_in_factoriopedia = false
+        for _, c in pairs({'item', 'recipe'}) do
+            if data.raw[c][l] then
+                data.raw[c][l].hidden = false
+                data.raw[c][l].hidden_in_factoriopedia = false
+            end
         end
     end
 end
