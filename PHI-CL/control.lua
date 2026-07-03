@@ -121,4 +121,23 @@ if settings.startup['PHI-CT'].value then
 
         editor.available(game.players[event.player_index])
     end)
+
+    script.on_event(on_permission_group_edited, function(event)
+        if not event.type then
+            return
+        end
+
+        if event.type == 'add-player' or event.type == 'add-player' then
+            if not event.other_player_index then
+                return
+            end
+
+            editor.available(game.players[event.other_player_index])
+            return
+        end
+
+        for _, p in pairs(game.players) do
+            editor.available(p)
+        end
+    end)
 end
