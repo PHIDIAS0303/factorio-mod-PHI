@@ -75,10 +75,6 @@ end)
 
 if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
     script.on_event(defines.events.on_gui_opened, function(event)
-        if not event.player_index or not game.players[event.player_index] then
-            return
-        end
-
         local player = game.players[event.player_index]
 
         if event.entity and player.opened and player.opened == event.entity then
