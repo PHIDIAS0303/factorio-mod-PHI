@@ -37,15 +37,6 @@ for _, t in pairs({'container', 'logistic-container'}) do
     end
 end
 
--- MI C 4 BASE ENTITY
-for _, t in pairs({'cargo-wagon', 'fluid-wagon'}) do
-    if data.raw[t] then
-        for _, v in pairs(data.raw[t]) do
-            v.quality_affects_inventory_size = true
-        end
-    end
-end
-
 -- MI C 1 BASE ENTITY
 if data.raw['lamp'] then
     for _, v in pairs(data.raw['lamp']) do
