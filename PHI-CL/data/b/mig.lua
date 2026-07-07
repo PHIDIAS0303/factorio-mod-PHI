@@ -28,15 +28,6 @@ if data.raw['fluid-turret'] and data.raw['fluid-turret']['flamethrower-turret'] 
     table.insert(data.raw['fluid-turret']['flamethrower-turret'].attack_parameters.fluids, {type = 'sulfuric-acid', damage_modifier = 1.2})
 end
 
--- MIG C 8 BASE ENTITY
-for _, t in pairs({'container', 'logistic-container'}) do
-    if data.raw[t] then
-        for _, v in pairs(data.raw[t]) do
-            v.inventory_type = 'with_filters_and_bar'
-        end
-    end
-end
-
 -- MI C 1 BASE ENTITY
 if data.raw['lamp'] then
     for _, v in pairs(data.raw['lamp']) do
@@ -325,7 +316,6 @@ if data.raw['container'] and data.raw['container']['steel-chest'] then
     local entity = table.deepcopy(data.raw['container']['steel-chest'])
     entity.name = item.name
     entity.minable.result = item.name
-    entity.inventory_type = 'with_filters_and_bar'
     entity.inventory_size = 1
     entity.max_logistic_slots = 0
     entity.trash_inventory_size = 0
