@@ -567,13 +567,8 @@ end
 
 -- MIG C 1 SPAGE_AGE ENTITY
 if data.raw['thruster'] and data.raw['thruster']['thruster'] then
-    if data.raw['thruster']['thruster'].fuel_fluid_box then
-        table.insert(data.raw['thruster']['thruster'].fuel_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.west, position = {-1.5, 2}})
-    end
-
-    if data.raw['thruster']['thruster'].oxidizer_fluid_box then
-        table.insert(data.raw['thruster']['thruster'].oxidizer_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.east, position = {1.5, 2}})
-    end
+    table.insert(data.raw['thruster']['thruster'].fuel_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.west, position = {-1.5, 2}})
+    table.insert(data.raw['thruster']['thruster'].oxidizer_fluid_box.pipe_connections, {flow_direction = 'input-output', direction = defines.direction.east, position = {1.5, 2}})
 end
 
 -- MIG C 1 SPAGE_AGE ENTITY
