@@ -73,7 +73,7 @@ data:extend({
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.setting-class-color', 'MI1', {'phi-cl.enable'}, {'mod-setting-name.PHI-MI-GENERIC'}},
-  localised_description = {'', {'phi-cl.setting-change-color', '[164] A117 C47'}},
+  localised_description = {'', {'phi-cl.setting-change-color', '[156] A117 C39'}},
   order = 'B01'
 }, {
   type = 'bool-setting',
