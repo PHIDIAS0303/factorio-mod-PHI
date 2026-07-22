@@ -15,7 +15,7 @@ function main.toggle_editor(event)
 end
 
 function main.available(player)
-    player.set_shortcut_available('phi-cl-toggle-editor', player.admin and player.permission_group and player.permission_group.allows_action(defines.input_action.toggle_map_editor))
+    player.set_shortcut_available('phi-cl-toggle-editor', player.admin and player.permission_group and player.permission_group.allows_action(defines.input_action.toggle_map_editor) or false)
 end
 
 return main
