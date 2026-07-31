@@ -3,7 +3,7 @@ Version: 3.1.11
 Date: 2026-08-05
 
   Changes:
-    - [MI] Removed the limit on agricultral tower modules.
+    - [MI] Changed the limit on agricultral tower modules.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.1.10

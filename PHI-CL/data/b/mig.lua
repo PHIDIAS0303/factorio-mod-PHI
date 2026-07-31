@@ -688,8 +688,8 @@ if data.raw['agricultural-tower'] and data.raw['agricultural-tower']['agricultur
     data.raw['agricultural-tower']['agricultural-tower'].input_inventory_size = math.max(5, data.raw['agricultural-tower']['agricultural-tower'].input_inventory_size or 0)
     data.raw['agricultural-tower']['agricultural-tower'].output_inventory_size = math.max(5, data.raw['agricultural-tower']['agricultural-tower'].output_inventory_size or 0)
     data.raw['agricultural-tower']['agricultural-tower'].module_slots = math.max(2, data.raw['agricultural-tower']['agricultural-tower'].module_slots or 0)
-    data.raw['agricultural-tower']['agricultural-tower'].allowed_effects = {'speed', 'productivity', 'consumption', 'pollution', 'quality'}
-    data.raw['agricultural-tower']['agricultural-tower'].allowed_module_categories = {'speed', 'productivity', 'efficiency', 'quality'}
+    data.raw['agricultural-tower']['agricultural-tower'].allowed_effects = {'speed', 'productivity', 'consumption', 'pollution'}
+    data.raw['agricultural-tower']['agricultural-tower'].allowed_module_categories = {'speed', 'productivity', 'efficiency'}
 end
 
 -- GM-VP C 1 BASE ENTITY
