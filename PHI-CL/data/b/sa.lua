@@ -128,3 +128,38 @@ if mods['quality'] and settings.startup['PHI-SA-QUALITY'].value then
         end
     end
 end
+
+if settings.startup['PHI-SA-QUALITY-TIER'].value then
+    -- SA C 3 QUALITY QUALITY
+    -- SA H 2 QUALITY QUALITY
+    if data.raw.quality['common'] and data.raw.quality['uncommon'] and data.raw.quality['rare'] and data.raw.quality['epic'] and data.raw.quality['legendary'] then
+        data.raw.quality['common'].next = 'rare'
+        data.raw.quality['rare'].next = 'legendary'
+
+        data.raw.quality['uncommon'].next = nil
+        data.raw.quality['uncommon'].hidden = true
+        data.raw.quality['uncommon'].hidden_in_factoriopedia = true
+
+        data.raw.quality['epic'].next = nil
+        data.raw.quality['epic'].hidden = true
+        data.raw.quality['epic'].hidden_in_factoriopedia = true
+    end
+
+    -- SA C 1 QUALITY TECHNOLOGY
+    if data.raw.technology['quality-module'] then
+        data.raw.technology['quality-module'].effects = {{type = 'unlock-recipe', recipe = 'quality-module'}, {type = 'unlock-quality', recipe = 'rare'}}
+    end
+
+    -- SA H 1 QUALITY TECHNOLOGY
+    if data.raw.technology['epic-quality'] then
+        data.raw.technology['epic-quality'].hidden = true
+        data.raw.technology['epic-quality'].hidden_in_factoriopedia = true
+        data.raw.technology['epic-quality'].effects = nil
+        data.raw.technology['epic-quality'].unit = {count = 1000, time = 30, ingredients = {{'automation-science-pack', 1}}}
+    end
+
+    -- SA C 1 QUALITY TECHNOLOGY
+    if data.raw.technology['legendary-quality'] then
+        data.raw.technology['legendary-quality'].prerequisites = {'agricultural-science-pack', 'utility-science-pack', 'quality-module'}
+    end
+end
