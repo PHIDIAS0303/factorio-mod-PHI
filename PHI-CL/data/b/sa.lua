@@ -129,7 +129,7 @@ if mods['quality'] and settings.startup['PHI-SA-QUALITY'].value then
     end
 end
 
-if settings.startup['PHI-SA-QUALITY-TIER'].value then
+if mods['quality'] and settings.startup['PHI-SA-QUALITY-TIER'].value then
     -- SA C 3 QUALITY QUALITY
     -- SA H 2 QUALITY QUALITY
     if data.raw.quality['common'] and data.raw.quality['uncommon'] and data.raw.quality['rare'] and data.raw.quality['epic'] and data.raw.quality['legendary'] then
