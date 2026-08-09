@@ -147,7 +147,7 @@ if mods['quality'] and settings.startup['PHI-SA-QUALITY-TIER'].value then
 
     -- SA C 1 QUALITY TECHNOLOGY
     if data.raw.technology['quality-module'] then
-        data.raw.technology['quality-module'].effects = {{type = 'unlock-recipe', recipe = 'quality-module'}, {type = 'unlock-quality', recipe = 'rare'}}
+        data.raw.technology['quality-module'].effects = {{type = 'unlock-recipe', recipe = 'quality-module'}, {type = 'unlock-quality', quality = 'rare'}}
     end
 
     -- SA H 1 QUALITY TECHNOLOGY
