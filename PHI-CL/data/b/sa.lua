@@ -132,15 +132,17 @@ end
 if mods['quality'] and settings.startup['PHI-SA-QUALITY-TIER'].value then
     -- SA C 3 QUALITY QUALITY
     -- SA H 2 QUALITY QUALITY
-    if data.raw.quality['common'] and data.raw.quality['uncommon'] and data.raw.quality['rare'] and data.raw.quality['epic'] and data.raw.quality['legendary'] then
-        data.raw.quality['common'].next = 'rare'
+    if data.raw.quality['normal'] and data.raw.quality['uncommon'] and data.raw.quality['rare'] and data.raw.quality['epic'] and data.raw.quality['legendary'] then
+        data.raw.quality['normal'].next = 'rare'
         data.raw.quality['rare'].next = 'legendary'
 
         data.raw.quality['uncommon'].next = nil
+        data.raw.quality['uncommon'].next_probability = nil
         data.raw.quality['uncommon'].hidden = true
         data.raw.quality['uncommon'].hidden_in_factoriopedia = true
 
         data.raw.quality['epic'].next = nil
+        data.raw.quality['epic'].next_probability = nil
         data.raw.quality['epic'].hidden = true
         data.raw.quality['epic'].hidden_in_factoriopedia = true
     end
