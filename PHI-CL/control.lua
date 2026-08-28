@@ -109,7 +109,10 @@ if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].valu
 end
 
 if settings.startup['PHI-CT'].value then
-    script.on_event(defines.events.on_lua_shortcut, editor.toggle)
+    script.on_event(defines.events.on_lua_shortcut, function(event)
+        editor.toggle(event)
+    end)
+
     script.on_event(defines.events.on_player_toggled_map_editor, editor.toggle_editor)
 
     script.on_event(defines.events.on_player_promoted, function(event)
