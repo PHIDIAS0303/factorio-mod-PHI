@@ -32,7 +32,13 @@ local function gui_create(player)
     end
 
     inserter.create(player)
+end
 
+local function gui_update(player, entity)
+    inserter.update(player, entity)
+end
+
+local function gui_calc_create(player)
     if player.gui.screen['phi_cl_calc'] then
         player.gui.screen['phi_cl_calc'].destroy()
     end
@@ -41,14 +47,16 @@ local function gui_create(player)
     player.gui.screen['phi_cl_calc'].visible = false
 end
 
-local function gui_update(player, entity)
-    inserter.update(player, entity)
-end
-
 script.on_init(function()
     if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
         for _, player in pairs(game.players) do
             gui_create(player)
+        end
+    end
+
+    if settings.startup['PHI-CT'].value then
+        for _, player in pairs(game.players) do
+            gui_calc_create(player)
         end
     end
 end)
@@ -63,6 +71,12 @@ script.on_configuration_changed(function()
             end
         end
     end
+
+    if settings.startup['PHI-CT'].value then
+        for _, player in pairs(game.players) do
+            gui_calc_create(player)
+        end
+    end
 end)
 
 script.on_event(defines.events.on_player_created, function(event)
@@ -70,6 +84,12 @@ script.on_event(defines.events.on_player_created, function(event)
 
     if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
         gui_create(player)
+    end
+
+    if settings.startup['PHI-CT'].value then
+        for _, player in pairs(game.players) do
+            gui_calc_create(player)
+        end
     end
 
     if settings.startup['PHI-CT'].value then
