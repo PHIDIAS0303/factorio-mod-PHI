@@ -15,7 +15,7 @@ function main.create(player)
     frame.auto_center = true
 
     local main_input = frame.add{type = 'textfield', name = 'phi_cl_calc_textfield', style = 'console_input_textfield'}
-    main_input.style.width = 360
+    main_input.style.width = 320
 
     local result_output = frame.add({type = 'label', name = 'phi_cl_calc_result', caption = '', style = 'heading_2_label'})
     result_output.style.horizontal_align = 'right'
@@ -33,27 +33,24 @@ function main.create(player)
     end
 end
 
-local calc_function = {
-    sqrt = math.sqrt,
-    abs = math.abs,
-    exp = math.exp,
+local calc_function = setmetatable({
     ln = math.log,
     log = function(x) return math.log(x, 10) end,
     log2 = function(x) return math.log(x, 2) end,
-    sin = math.sin,
-    cos = math.cos,
-    tan = math.tan,
-    asin = math.asin,
-    acos = math.acos,
-    atan = math.atan,
-    floor = math.floor,
-    ceil = math.ceil,
     round = function(x) return x >= 0 and math.floor(x + 0.5) or math.ceil(x - 0.5) end,
     trunc = function(x) return (math.modf(x)) end,
     sign = function(x) return x > 0 and 1 or (x < 0 and -1 or 0) end,
-    pi = function(_) return (math.pi) end,
-    rad = math.rad,
-    deg = math.deg,
+    pi = function(_) return math.pi end,
+}, {
+    __index = math
+})
+
+local calc_function_operation = {
+    ['+'] = {1, function(a, b) return a + b end},
+    ['-'] = {1, function(a, b) return a - b end},
+    ['*'] = {2, function(a, b) return a * b end},
+    ['/'] = {2, function(a, b) if b == 0 then error({'phi-cl.combine', {'calc.error'}, {'calc.div_zero'}}, 0) end return a / b end},
+    ['%'] = {2, function(a, b) if b == 0 then error({'phi-cl.combine', {'calc.error'}, {'calc.mod_zero'}}, 0) end return a % b end},
 }
 
 local calc_si_suffix = {
@@ -100,7 +97,7 @@ function main.parse(expression)
         return result
     end
 
-    local parse
+    local parse_expr
 
     local function parse_atom()
         skip_space()
@@ -108,7 +105,7 @@ function main.parse(expression)
 
         if character == '|' then
             cursor = cursor + 1
-            local value = parse()
+            local value = parse_expr(1)
             skip_space()
 
             if expression:sub(cursor, cursor) ~= '|' then
@@ -120,7 +117,7 @@ function main.parse(expression)
 
         elseif character == '(' then
             cursor = cursor + 1
-            local value = parse()
+            local value = parse_expr(1)
             skip_space()
 
             if expression:sub(cursor, cursor) ~= ')' then
@@ -151,7 +148,7 @@ function main.parse(expression)
                 end
 
                 cursor = cursor + 1
-                local argument = parse()
+                local argument = parse_expr(1)
                 skip_space()
 
                 if expression:sub(cursor, cursor) ~= ')' then
@@ -194,32 +191,17 @@ function main.parse(expression)
                 end
             end
 
-            local start = cursor
+            local literal = expression:match('^(%d+%.?%d*[eE][%+%-]?%d+)', cursor) or expression:match('^(%d+%.?%d*)', cursor)
 
-            while expression:sub(cursor, cursor):match('[%d%.eE]') do
-                cursor = cursor + 1
-            end
-
-            if cursor == start then
+            if not literal then
                 return error({'phi-cl.combine', {'calc.error'}, {'calc.expected_num'}}, 0)
             end
 
-            if expression:sub(cursor - 1, cursor - 1):lower() == 'e' then
-                skip_space()
-
-                if expression:sub(cursor, cursor):match('[+-]') then
-                    cursor = cursor + 1
-
-                    while expression:sub(cursor, cursor):match('[%d%.]') do
-                        cursor = cursor + 1
-                    end
-                end
-            end
-
-            local num = tonumber(expression:sub(start, cursor - 1))
+            cursor = cursor + literal:len()
+            local num = tonumber(literal)
 
             if not num then
-                return error({'phi-cl.combine', {'calc.error'}, {'calc.invalid_num', expression:sub(start, cursor - 1)}}, 0)
+                return error({'phi-cl.combine', {'calc.error'}, {'calc.invalid_num', literal}}, 0)
             end
 
             return num
@@ -268,63 +250,26 @@ function main.parse(expression)
         return base
     end
 
-    local function parse_term()
-        local value = parse_factor()
+    parse_expr = function(min_prec)
+        local lhs = parse_factor()
 
         while true do
             skip_space()
-            local character = expression:sub(cursor, cursor)
+            local entry = calc_function_operation[expression:sub(cursor, cursor)]
 
-            if character ~= '*' and character ~= '/' and character ~= '%' then
-                break
-            end
-
-            if character == '*' then
-                value = value * parse_factor()
-
-            elseif character == '/' then
-                local divisor = parse_factor()
-
-                if divisor == 0 then
-                    error({'phi-cl.combine', {'calc.error'}, {'calc.div_zero'}}, 0)
-                end
-
-                value = value / divisor
-
-            elseif character == '%' then
-                local divisor = parse_factor()
-
-                if divisor == 0 then
-                    error({'phi-cl.combine', {'calc.error'}, {'calc.mod_zero'}}, 0)
-                end
-
-                value = value % divisor
-            end
-        end
-
-        return value
-    end
-
-    parse = function()
-        local value = parse_term()
-
-        while true do
-            skip_space()
-            local character = expression:sub(cursor, cursor)
-
-            if character ~= '+' and character ~= '-' then
+            if not entry or entry[1] < min_prec then
                 break
             end
 
             cursor = cursor + 1
-            value = value + (character == '+' and 1 or -1) * parse_term()
+            lhs = entry[2](lhs, parse_expr(entry[1] + 1))
         end
 
-        return value
+        return lhs
     end
 
     local ok, result = pcall(function()
-        local value = parse()
+        local value = parse_expr(1)
         skip_space()
 
         if cursor <= #expression then
@@ -346,15 +291,7 @@ function main.change(event)
         return
     end
 
-    local player = game.players[event.player_index]
-    local gui = player.gui.screen['phi_cl_calc']
-
-    if event.text:len() == 0 then
-        gui['phi_cl_calc_result'].caption = ''
-        return
-    end
-
-    gui['phi_cl_calc_result'].caption = main.parse(event.text:lower())
+    event.element.parent['phi_cl_calc_result'].caption = event.text == '' and '' or main.parse(event.text:lower())
 end
 
 return main
