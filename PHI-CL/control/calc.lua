@@ -279,11 +279,7 @@ function main.parse(expression)
         return value
     end)
 
-    if not ok then
-        return type(result) == 'table' and result or {'calc.error', tostring(result)}
-    end
-
-    return result
+    return ok and result or (type(result) == 'table' and result or {'calc.error', tostring(result)})
 end
 
 function main.change(event)
