@@ -243,3 +243,17 @@ if data.raw['blueprint-book'] and data.raw['blueprint-book']['blueprint-book'] t
         localised_name = {'', {'gui-permissions-names.ToggleMapEditor'}}
     }})
 end
+
+if data.raw['virtual-signal'] and data.raw['virtual-signal']['signal-equal'] then
+    data:extend({{
+        type = 'shortcut',
+        name = 'phi-cl-toggle-calc',
+        action = 'lua',
+        toggleable = true,
+        icon = data.raw['virtual-signal']['signal-equal'].icon,
+        icon_size = data.raw['virtual-signal']['signal-equal'].icon_size,
+        small_icon = data.raw['virtual-signal']['signal-equal'].icon,
+        small_icon_size = data.raw['virtual-signal']['signal-equal'].icon_size,
+        localised_name = {'', {'virtual-signal-name.signal-equal'}}
+    }})
+end
