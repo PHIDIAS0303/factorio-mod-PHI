@@ -317,13 +317,7 @@ function main.parse(expression)
             end
 
             cursor = cursor + 1
-
-            if character == '+' then
-                value = value + parse_term()
-
-            else
-                value = value - parse_term()
-            end
+            value = value + (character == '+' and 1 or -1) * parse_term()
         end
 
         return value
