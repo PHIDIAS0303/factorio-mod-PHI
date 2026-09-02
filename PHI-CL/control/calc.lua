@@ -35,8 +35,7 @@ end
 
 local calc_function = setmetatable({
     ln = math.log,
-    log = function(x) return math.log(x, 10) end,
-    log2 = function(x) return math.log(x, 2) end,
+    log = function(x, b) return math.log(x, b or 10) end,
     round = function(x) return x >= 0 and math.floor(x + 0.5) or math.ceil(x - 0.5) end,
     trunc = function(x) return (math.modf(x)) end,
     sign = function(x) return x > 0 and 1 or (x < 0 and -1 or 0) end,
