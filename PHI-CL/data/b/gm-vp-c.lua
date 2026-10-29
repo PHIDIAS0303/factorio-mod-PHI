@@ -265,7 +265,7 @@ local items = {
             results = {{type = 'fluid', name = 'electrolyte', amount = 20, fluidbox_multiplier = 10}}
         },
         ['scrap-recycling'] = {
-            energy_required = 5,
+            energy_required = 2,
             allow_productivity = true,
             allow_decomposition = false,
             ingredients = {{type = 'item', name = 'scrap', amount = 10}},
