@@ -32,14 +32,10 @@ end
 -- GM-VP C 1 BASE UTILITY_CONSTANTS
 data.raw['utility-constants'].default.default_pipeline_extent = math.max(settings.startup['PHI-MI-PIPE-EXTENT'].value, 960)
 
--- GM-VP C 5 BASE ENTITY
 -- GM-VP C 1 SPACE_AGE ENTITY
-local bss = (data.raw['inserter']['stack-inserter'] and data.raw['inserter']['stack-inserter'].max_belt_stack_size) or 1
-
-for _, v in pairs(data.raw['inserter']) do
-    v.max_belt_stack_size = bss
-    v.grab_less_to_match_belt_stack = true
-    v.enter_drop_mode_if_held_stack_spoiled = true
+if data.raw['inserter']['stack-inserter'] then
+    data.raw['inserter']['stack-inserter'].grab_less_to_match_belt_stack = true
+    data.raw['inserter']['stack-inserter'].enter_drop_mode_if_held_stack_spoiled = true
 end
 
 -- GM-VP C 1 BASE TOOL
