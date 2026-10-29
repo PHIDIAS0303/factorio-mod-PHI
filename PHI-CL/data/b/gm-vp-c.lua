@@ -160,7 +160,7 @@ local items = {
         },
         ['metallurgic-science-pack'] = {
             energy_required = 10,
-            ingredients = {{type = 'item', name = 'tungsten-carbide', amount = 3}, {type = 'item', name = 'tungsten-plate', amount = 2}, {type = 'fluid', name = 'molten-iron', amount = 200, fluidbox_multiplier = 10}, {type = 'fluid', name = 'molten-copper', amount = 200, fluidbox_multiplier = 10}},
+            ingredients = {{type = 'item', name = 'tungsten-carbide', amount = 3}, {type = 'item', name = 'tungsten-plate', amount = 2}, {type = 'fluid', name = 'molten-iron', amount = 100, fluidbox_multiplier = 10}, {type = 'fluid', name = 'molten-copper', amount = 100, fluidbox_multiplier = 10}},
             results = {{type = 'item', name = 'metallurgic-science-pack', amount = 2}}
         },
         ['turbo-transport-belt'] = {
