@@ -142,7 +142,7 @@ data:extend({
   name = 'PHI-SA-QUALITY-TIER',
   setting_type = 'startup',
   default_value = false,
-  localised_name = {'phi-cl.setting-class-color', 'SA5', {'phi-cl.enable'}, {'mod-setting-name.PHI-SA-QUALITY-TIER'}},
+  localised_name = {'phi-cl.setting-class-color', 'SA4', {'phi-cl.enable'}, {'mod-setting-name.PHI-SA-QUALITY-TIER'}},
   localised_description = (mods['quality'] and {'', '[virtual-signal=signal-deny] [quality=uncommon][quality=epic]', {'phi-cl.setting-change-color', '\n[8] C5 H3'}}) or nil,
   order = 'C04'
 }, {
