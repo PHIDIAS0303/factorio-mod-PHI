@@ -117,18 +117,6 @@ end
 -- SA C 1 SPACE_AGE CONSTANT
 data.raw['utility-constants'].default.rocket_lift_weight = settings.startup['PHI-SA-ROCKET-CAPACITY'].value * 1000000
 
--- SA C 3 SPACE_AGE MODULE
-if mods['quality'] and settings.startup['PHI-SA-QUALITY'].value then
-    for _, v in pairs(data.raw.module) do
-        if v.category and v.category == 'quality' then
-            v.effect.quality = v.effect.quality * settings.startup['PHI-SA-QUALITY'].value / 10
-
-        elseif v.category and v.category == 'speed' and settings.startup['PHI-SA-QUALITY'].value ~= 10 then
-            v.effect.quality = nil
-        end
-    end
-end
-
 if mods['quality'] and settings.startup['PHI-SA-QUALITY-TIER'].value then
     -- SA C 3 QUALITY QUALITY
     -- SA H 2 QUALITY QUALITY

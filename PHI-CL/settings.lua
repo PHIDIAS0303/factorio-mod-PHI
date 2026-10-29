@@ -138,23 +138,13 @@ data:extend({
   localised_description = {'', '[item=rocket-silo] 000 KG', {'phi-cl.setting-change-color', '\n[1] C1'}},
   order = 'C03'
 }, {
-  type = 'int-setting',
-  name = 'PHI-SA-QUALITY',
-  setting_type = 'startup',
-  default_value = 10,
-  minimum_value = 1,
-  maximum_value = 100,
-  localised_name = {'phi-cl.setting-class-color', 'SA4', {'phi-cl.ratio'}, {'mod-setting-name.PHI-SA-QUALITY'}},
-  localised_description = (mods['quality'] and {'', '[item=quality-module-3] x 0.1', {'phi-cl.setting-change-color', '\n[3] C3'}}) or nil,
-  order = 'C04'
-}, {
   type = 'bool-setting',
   name = 'PHI-SA-QUALITY-TIER',
   setting_type = 'startup',
   default_value = false,
   localised_name = {'phi-cl.setting-class-color', 'SA5', {'phi-cl.enable'}, {'mod-setting-name.PHI-SA-QUALITY-TIER'}},
   localised_description = (mods['quality'] and {'', '[virtual-signal=signal-deny] [quality=uncommon][quality=epic]', {'phi-cl.setting-change-color', '\n[8] C5 H3'}}) or nil,
-  order = 'C05'
+  order = 'C04'
 }, {
   type = 'string-setting',
   name = 'PHI-GM',
