@@ -29,8 +29,8 @@ if data.raw['cargo-wagon'] and data.raw['cargo-wagon']['cargo-wagon'] then
     data.raw['cargo-wagon']['cargo-wagon'].inventory_size = math.max(80, data.raw['cargo-wagon']['cargo-wagon'].inventory_size or 0)
 end
 
--- MIG C 18 BASE ENTITY
--- MIG C 5 SPACE_AGE ENTITY
+-- GM C 18 BASE ENTITY
+-- GM C 5 SPACE_AGE ENTITY
 for _, w in pairs({'storage-tank', 'generator', 'furnace', 'roboport', 'assembling-machine', 'offshore-pump', 'pump', 'pipe', 'pipe-to-ground', 'infinity-pipe'}) do
     if data.raw[w] then
         for _, v in pairs(data.raw[w]) do
@@ -39,7 +39,7 @@ for _, w in pairs({'storage-tank', 'generator', 'furnace', 'roboport', 'assembli
     end
 end
 
--- GM-SAP C 2 SPACE_AGE RESOURCE
+-- GM C 2 SPACE_AGE RESOURCE
 for _, v in pairs({'lithium-brine', 'fluorine-vent'}) do
     if data.raw.resource[v] then
         data.raw.resource[v].infinite = true
@@ -47,6 +47,11 @@ for _, v in pairs({'lithium-brine', 'fluorine-vent'}) do
         data.raw.resource[v].normal = math.max(300000, data.raw.resource[v].normal or 0)
         data.raw.resource[v].infinite_depletion_amount = math.min(10, data.raw.resource[v].infinite_depletion_amount or 999)
     end
+end
+
+-- GM C 2 BASE ENTITY
+for _, v in pairs(data.raw['unit-spawner']) do
+    v.spawn_blocked_trigger = nil
 end
 
 -- GM C 5 BASE RECIPE
