@@ -1,4 +1,3 @@
-local calc = require('control/calc')
 local cargo_landing = require('control/cargo-landing')
 local chest = require('control/chest')
 local editor = require('control/editor')
@@ -38,25 +37,10 @@ local function gui_update(player, entity)
     inserter.update(player, entity)
 end
 
-local function gui_calc_create(player)
-    if player.gui.screen['phi_cl_calc'] then
-        player.gui.screen['phi_cl_calc'].destroy()
-    end
-
-    calc.create(player)
-    player.gui.screen['phi_cl_calc'].visible = false
-end
-
 script.on_init(function()
     if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
         for _, player in pairs(game.players) do
             gui_create(player)
-        end
-    end
-
-    if settings.startup['PHI-CT'].value then
-        for _, player in pairs(game.players) do
-            gui_calc_create(player)
         end
     end
 end)
@@ -71,12 +55,6 @@ script.on_configuration_changed(function()
             end
         end
     end
-
-    if settings.startup['PHI-CT'].value then
-        for _, player in pairs(game.players) do
-            gui_calc_create(player)
-        end
-    end
 end)
 
 script.on_event(defines.events.on_player_created, function(event)
@@ -84,12 +62,6 @@ script.on_event(defines.events.on_player_created, function(event)
 
     if (settings.startup['PHI-MI'].value and settings.startup['PHI-MI-GENERIC'].value) or (settings.startup['PHI-GM'].value and settings.startup['PHI-GM'].value ~= '') then
         gui_create(player)
-    end
-
-    if settings.startup['PHI-CT'].value then
-        for _, player in pairs(game.players) do
-            gui_calc_create(player)
-        end
     end
 
     if settings.startup['PHI-CT'].value then
@@ -139,7 +111,6 @@ end
 if settings.startup['PHI-CT'].value then
     script.on_event(defines.events.on_lua_shortcut, function(event)
         editor.toggle(event)
-        calc.toggle(event)
     end)
 
     script.on_event(defines.events.on_player_toggled_map_editor, editor.toggle_editor)
@@ -165,9 +136,5 @@ if settings.startup['PHI-CT'].value then
         for _, p in pairs(game.players) do
             editor.available(p)
         end
-    end)
-
-    script.on_event(defines.events.on_gui_text_changed, function(event)
-        calc.change(event)
     end)
 end
