@@ -4,6 +4,7 @@ Date: 2026-11-08
 
   Changes:
     - [CT] Generic Code layout restructure.
+    - [MI] Cropped the used photo spacing to reduce size.
 
 ---------------------------------------------------------------------------------------------------
 Version: 3.1.16
