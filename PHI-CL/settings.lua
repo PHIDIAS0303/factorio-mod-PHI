@@ -63,7 +63,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-MI',
   setting_type = 'startup',
-  default_value = false,
+  default_value = true,
   localised_name = {'phi-cl.setting-category-color', 'MI', {'phi-cl.enable'}, {'mod-setting-name.PHI-MI'}},
   localised_description = {'', ''},
   order = 'B00'
@@ -79,7 +79,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-MI-STATUS',
   setting_type = 'startup',
-  default_value = false,
+  default_value = true,
   localised_name = {'phi-cl.setting-class-color', 'MI2', {'phi-cl.enable'}, {'mod-setting-name.PHI-MI-STATUS'}},
   localised_description = {'', {'phi-cl.setting-change-color', '[20] C20'}},
   order = 'B02'
