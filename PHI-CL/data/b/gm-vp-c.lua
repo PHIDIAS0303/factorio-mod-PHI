@@ -386,10 +386,12 @@ local items = {
             ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 60}, {type = 'item', name = 'quantum-processor', amount = 6}, {type = 'item', name = 'uranium-235', amount = 3}}
         },
         ['artificial-yumako-soil'] = {
-            ingredients = {{type = 'item', name = 'landfill', amount = 1}, {type = 'item', name = 'yumako-seed', amount = 1}}
+            ingredients = {{type = 'item', name = 'landfill', amount = 5}, {type = 'item', name = 'yumako-seed', amount = 1}},
+            results = {{type = 'item', name = 'artificial-yumako-soil', amount = 5}}
         },
         ['artificial-jellynut-soil'] = {
-            ingredients = {{type = 'item', name = 'landfill', amount = 1}, {type = 'item', name = 'jellynut-seed', amount = 1}}
+            ingredients = {{type = 'item', name = 'landfill', amount = 5}, {type = 'item', name = 'jellynut-seed', amount = 1}},
+            results = {{type = 'item', name = 'artificial-jellynut-soil', amount = 5}}
         },
     },
     ['recipe'] = {
