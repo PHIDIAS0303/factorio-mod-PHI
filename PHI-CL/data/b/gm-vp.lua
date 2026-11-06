@@ -156,30 +156,51 @@ if data.raw['agricultural-tower'] and data.raw['agricultural-tower']['agricultur
 end
 
 -- GM-VP C 3 SPACE_AGE ENTITY
-if data.raw['plant'] and data.raw['plant']['tree-plant'] and data.raw['plant']['tree-plant'].autoplace then
-    data.raw['plant']['tree-plant'].autoplace.tile_restriction = nil
+if data.raw['plant'] then
+    if data.raw['plant']['tree-plant'] then
+        if data.raw['plant']['tree-plant'].autoplace then
+            data.raw['plant']['tree-plant'].autoplace.tile_restriction = nil
+        end
 
-    if data.raw['plant']['tree-plant'].minable then
-        data.raw['plant']['tree-plant'].minable.results = {{type = 'item', name = 'wood', amount = 20}}
+        if data.raw['plant']['tree-plant'].minable then
+            data.raw['plant']['tree-plant'].minable.results = {{type = 'item', name = 'wood', amount = 20}}
+        end
     end
 
-    if data.raw['plant']['yumako-tree'] and data.raw['plant']['yumako-tree'] then
-        data.raw['plant']['yumako-tree'].autoplace.tile_restriction = nil
+    if data.raw['plant']['yumako-tree'] then
         data.raw['plant']['yumako-tree'].harvest_emissions = nil
+
+        if data.raw['plant']['yumako-tree'].autoplace then
+            data.raw['plant']['yumako-tree'].autoplace.tile_restriction = {'artificial-yumako-soil'}
+        end
 
         if data.raw['plant']['yumako-tree'].minable then
             data.raw['plant']['yumako-tree'].minable.results = {{type = 'item', name = 'yumako', amount = 100}}
         end
     end
 
-    if data.raw['plant']['jellystem'] and data.raw['plant']['jellystem'] then
-        data.raw['plant']['jellystem'].autoplace.tile_restriction = nil
+    if data.raw['plant']['jellystem'] then
         data.raw['plant']['jellystem'].harvest_emissions = nil
+
+        if data.raw['plant']['jellystem'].autoplace then
+            data.raw['plant']['jellystem'].autoplace.tile_restriction = {'artificial-jellynut-soil'}
+        end
 
         if data.raw['plant']['jellystem'].minable then
             data.raw['plant']['jellystem'].minable.results = {{type = 'item', name = 'jellynut', amount = 100}}
         end
     end
+end
+
+-- GM-VP C 2 SPACE_AGE ITEM
+if data.raw.item['artificial-yumako-soil'] and data.raw.item['artificial-yumako-soil'].place_as_tile then
+    data.raw.item['artificial-yumako-soil'].place_as_tile.condition = {['layers'] = {['water_tile'] = true}}
+    data.raw.item['artificial-yumako-soil'].place_as_tile.tile_condition = nil
+end
+
+if data.raw.item['artificial-jellynut-soil'] and data.raw.item['artificial-jellynut-soil'].place_as_tile then
+    data.raw.item['artificial-jellynut-soil'].place_as_tile.condition = {['layers'] = {['water_tile'] = true}}
+    data.raw.item['artificial-jellynut-soil'].place_as_tile.tile_condition = nil
 end
 
 -- GM-VP C 3 SPACE_AGE ENTITY
@@ -461,7 +482,7 @@ if settings.startup['PHI-MB-MACHINE'].value and settings.startup['PHI-MB-MACHINE
     end
 end
 
--- GM-VP H 24 SPACE_AGE ITEM
+-- GM-VP H 22 SPACE_AGE ITEM
 -- GM-VP H 1 QUALITY ITEM
 if items['item'] then
     for i, _ in pairs(items['item']) do
@@ -473,7 +494,7 @@ if items['item'] then
 end
 
 -- GM-VP C 17 BASE RECIPE
--- GM-VP C 61 SPACE_AGE RECIPE
+-- GM-VP C 63 SPACE_AGE RECIPE
 if items['recipe_reform'] then
     for r, t in pairs(items['recipe_reform']) do
         if data.raw.recipe[r] then
@@ -484,7 +505,7 @@ if items['recipe_reform'] then
     end
 end
 
--- GM-VP H 54 SPACE_AGE RECIPE
+-- GM-VP H 52 SPACE_AGE RECIPE
 -- GM-VP H 1 QUALITY RECIPE
 if items['recipe'] then
     for r, _ in pairs(items['recipe']) do

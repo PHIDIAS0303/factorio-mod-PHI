@@ -385,6 +385,12 @@ local items = {
         ['biolab'] = {
             ingredients = {{type = 'item', name = 'lab', amount = 1}, {type = 'item', name = 'refined-concrete', amount = 60}, {type = 'item', name = 'quantum-processor', amount = 6}, {type = 'item', name = 'uranium-235', amount = 3}}
         },
+        ['artificial-yumako-soil'] = {
+            ingredients = {{type = 'item', name = 'landfill', amount = 1}, {type = 'item', name = 'yumako-seed', amount = 1}}
+        },
+        ['artificial-jellynut-soil'] = {
+            ingredients = {{type = 'item', name = 'landfill', amount = 1}, {type = 'item', name = 'jellynut-seed', amount = 1}}
+        },
     },
     ['recipe'] = {
         -- SPACE_AGE 0
@@ -412,75 +418,71 @@ local items = {
         ['carbonic-asteroid-reprocessing'] = true,
         ['oxide-asteroid-reprocessing'] = true,
         -- SPACE_AGE 20
-        ['artificial-yumako-soil'] = true,
         ['overgrowth-yumako-soil'] = true,
-        ['artificial-jellynut-soil'] = true,
         ['overgrowth-jellynut-soil'] = true,
         ['biochamber'] = true,
-        -- SPACE_AGE 25
         ['captive-biter-spawner'] = true,
         ['capture-robot-rocket'] = true,
+        -- SPACE_AGE 25
         ['biter-egg'] = true,
         ['pentapod-egg'] = true,
         ['coal-synthesis'] = true,
-        -- SPACE_AGE 30
         ['spoilage-recycling'] = true,
         ['asteroid-collector'] = true,
+        -- SPACE_AGE 30
         ['ammoniacal-solution-separation'] = true,
         ['solid-fuel-from-ammonia'] = true,
         ['ammonia-rocket-fuel'] = true,
-        -- SPACE_AGE 35
         ['molten-iron-from-lava'] = true,
         ['molten-copper-from-lava'] = true,
+        -- SPACE_AGE 35
         ['acid-neutralisation'] = true,
         ['simple-coal-liquefaction'] = true,
         ['advanced-thruster-oxidizer'] = true,
-        -- SPACE_AGE 40
         ['crusher'] = true,
         ['bioplastic'] = true,
+        -- SPACE_AGE 40
         ['biosulfur'] = true,
         ['rocket-fuel-from-jelly'] = true,
         ['ice-platform'] = true,
-        -- SPACE_AGE 45
         ['foundation'] = true,
         ['thruster'] = true,
+        -- SPACE_AGE 45
         ['thruster-fuel'] = true,
         ['thruster-oxidizer'] = true,
         ['advanced-thruster-fuel'] = true,
-        -- SPACE_AGE 50
         ['metallic-asteroid-crushing'] = true,
         ['carbonic-asteroid-crushing'] = true,
+        -- SPACE_AGE 50
         ['oxide-asteroid-crushing'] = true,
         ['advanced-metallic-asteroid-crushing'] = true,
     },
     ['item'] = {
         -- SPACE_AGE 0
-        ['artificial-yumako-soil'] = true,
         ['overgrowth-yumako-soil'] = true,
-        ['artificial-jellynut-soil'] = true,
         ['overgrowth-jellynut-soil'] = true,
         ['ice-platform'] = true,
-        -- SPACE_AGE 5
         ['foundation'] = true,
         ['biochamber'] = true,
+        -- SPACE_AGE 5
         ['captive-biter-spawner'] = true,
         ['asteroid-collector'] = true,
         ['crusher'] = true,
-        -- SPACE_AGE 10
         ['space-platform-foundation'] = true,
         ['iron-bacteria'] = true,
+        -- SPACE_AGE 10
         ['copper-bacteria'] = true,
         ['biter-egg'] = true,
         ['pentapod-egg'] = true,
-        -- SPACE_AGE 15
         ['space-platform-hub'] = true,
         ['carbonic-asteroid-chunk'] = true,
+        -- SPACE_AGE 15
         ['metallic-asteroid-chunk'] = true,
         ['promethium-asteroid-chunk'] = true,
         ['oxide-asteroid-chunk'] = true,
-        -- SPACE_AGE 20
         ['spoilage'] = true,
         ['thruster'] = true,
+        -- SPACE_AGE 20
         ['calcite'] = true,
         ['promethium-science-pack'] = true,
     },
@@ -909,7 +911,7 @@ local items = {
         ['agriculture'] = {
             prerequisites = {'chemical-science-pack'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'agricultural-tower'}, {type = 'unlock-recipe', recipe = 'yumako-processing'}, {type = 'unlock-recipe', recipe = 'jellynut-processing'}, {type = 'unlock-recipe', recipe = 'steam-condensation'}, {type = 'give-item', item = 'yumako-seed', count = 2}, {type = 'give-item', item = 'jellynut-seed', count = 2}},
+            effects = {{type = 'unlock-recipe', recipe = 'agricultural-tower'}, {type = 'unlock-recipe', recipe = 'yumako-processing'}, {type = 'unlock-recipe', recipe = 'jellynut-processing'}, {type = 'unlock-recipe', recipe = 'steam-condensation'}, {type = 'give-item', item = 'artificial-yumako-soil', count = 10}, {type = 'give-item', item = 'artificial-jellynut-soil', count = 10}, {type = 'give-item', item = 'yumako-seed', count = 2}, {type = 'give-item', item = 'jellynut-seed', count = 2}},
         },
         ['agricultural-science-pack'] = {
             prerequisites = {'agriculture'},
