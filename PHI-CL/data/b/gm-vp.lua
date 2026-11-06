@@ -377,12 +377,19 @@ if data.raw['resource'] then
     end
 end
 
--- GM-VP H 95 SPACE_AGE TILE
+-- GM-VP H 93 SPACE_AGE TILE
 if data.raw['tile'] then
     for _, v in pairs(data.raw['tile']) do
         if v.subgroup and (v.subgroup == 'vulcanus-tiles' or v.subgroup == 'gleba-tiles' or v.subgroup == 'gleba-water-tiles' or v.subgroup == 'fulgora-tiles' or v.subgroup == 'aquilo-tiles') then
             v.hidden = true
             v.hidden_in_factoriopedia = true
+        end
+    end
+
+    for _, v in pairs({'artificial-yumako-soil', 'artificial-jellynut-soil'}) do
+        if data.raw.tile[v] then
+            data.raw.tile[v].hidden = false
+            data.raw.tile[v].hidden_in_factoriopedia = false
         end
     end
 end
