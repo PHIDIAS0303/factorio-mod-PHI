@@ -911,7 +911,7 @@ local items = {
         ['agriculture'] = {
             prerequisites = {'chemical-science-pack'},
             unit = {count = 1000, time = 60, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}}},
-            effects = {{type = 'unlock-recipe', recipe = 'agricultural-tower'}, {type = 'unlock-recipe', recipe = 'yumako-processing'}, {type = 'unlock-recipe', recipe = 'jellynut-processing'}, {type = 'unlock-recipe', recipe = 'steam-condensation'}, {type = 'give-item', item = 'artificial-yumako-soil', count = 10}, {type = 'give-item', item = 'artificial-jellynut-soil', count = 10}, {type = 'give-item', item = 'yumako-seed', count = 2}, {type = 'give-item', item = 'jellynut-seed', count = 2}},
+            effects = {{type = 'unlock-recipe', recipe = 'agricultural-tower'}, {type = 'unlock-recipe', recipe = 'steam-condensation'}, {type = 'unlock-recipe', recipe = 'yumako-processing'}, {type = 'unlock-recipe', recipe = 'jellynut-processing'}, {type = 'unlock-recipe', recipe = 'artificial-yumako-soil'}, {type = 'unlock-recipe', recipe = 'artificial-jellynut-soil'}, {type = 'give-item', item = 'yumako-seed', count = 2}, {type = 'give-item', item = 'jellynut-seed', count = 2}, {type = 'give-item', item = 'artificial-yumako-soil', count = 10}, {type = 'give-item', item = 'artificial-jellynut-soil', count = 10}},
         },
         ['agricultural-science-pack'] = {
             prerequisites = {'agriculture'},
