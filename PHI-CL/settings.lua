@@ -113,7 +113,7 @@ data:extend({
   type = 'bool-setting',
   name = 'PHI-SA-SPOIL',
   setting_type = 'startup',
-  default_value = false,
+  default_value = true,
   localised_name = {'phi-cl.setting-class-color', 'SA1', {'phi-cl.enable'}, {'mod-setting-name.PHI-SA-SPOIL'}},
   localised_description = (mods['space-age'] and {'', '[item=spoilage]', {'phi-cl.setting-change-color', '\n[16] A2 C11 H3'}}) or nil,
   order = 'C01'
